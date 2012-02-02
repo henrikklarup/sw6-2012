@@ -1,12 +1,12 @@
 #summary Table Of Contents
 #labels Deprecated
 <ul>
-<il>
+<li>
 == Guides and stuff ==
-</il>
-<il>
+</li>
+<li>
     ==== [To_do To do] ====
-</il>
+</li>
 </ul>
 == General knowledge ==
    * ==== [PP_Requirements_specifications Requirements specifications] ====
