@@ -1,6 +1,6 @@
 == Guides and stuff ==
-   * == [ToDO] ==
-* = Project goals =
-   * == [VisionAndReq] ==
+   * === [ToDO] ===
+== Project goals ==
+   * === [VisionAndReq] ===
 
-* = [TableOfContents] =
+== [TableOfContents] ==
