@@ -1,6 +1,6 @@
 #summary Table Of Contents
 #labels Deprecated
-* Guides and stuff
+* [Guides_and_stuff Guides and stuff]
  * [To_do To do]
 * General knowledge
  * [PP_Requirements_specifications Requirements specifications]
