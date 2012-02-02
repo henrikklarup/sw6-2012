@@ -6,6 +6,6 @@
    * ==== [Requirements_specifications] ====
    * ==== [System_definition] ====
 == Project goals ==
-   * ==== [Vision_ and_requirements] =====
+   * ==== [Vision_and_requirements] =====
 == Table Of Contents ==
    * ==== [Table_of_contents] ====
