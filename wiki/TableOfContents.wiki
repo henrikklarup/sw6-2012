@@ -1,4 +1,4 @@
-* == Guides and stuff ==
+== Guides and stuff ==
    * == [ToDO] ==
 * = Project goals =
    * == [VisionAndReq] ==
