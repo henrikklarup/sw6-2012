@@ -1,7 +1,7 @@
 #summary Table Of Contents
 #labels Deprecated
 == Guides and stuff ==
-   * ==== [To_do] =====
+   * ==== [To_do] ====
 == General knowledge ==
    * ==== [PP_Requirements_specifications] ====
    * ==== [PP_System_definition] ====
