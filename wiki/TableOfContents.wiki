@@ -1,2 +1,4 @@
 * Guides and stuff
    * [ToDO]
+* Project goals
+   * [VisionAndReq]
