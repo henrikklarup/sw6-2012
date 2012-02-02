@@ -1,4 +1,4 @@
-#Summary System definition from previous projects
+#summary System definition from previous projects
 ==== Assigned persons ====
 Kristian and Simon.
 
