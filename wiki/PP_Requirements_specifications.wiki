@@ -1,4 +1,5 @@
 #summary Requirements specifications from previous projects
+#labels req,Featured
 =Requirements specifications=
 ==== Assigned persons ====
 Jens and Sebastian.
