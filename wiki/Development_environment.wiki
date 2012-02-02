@@ -1,0 +1,9 @@
+#summary Description of the Android development environment
+=Development environment=
+==== Assigned persons ====
+Rasmus J and Jacob
+
+== Content ==
+<wiki:comment>
+Add the knowledge you have gained
+</wiki:comment>
