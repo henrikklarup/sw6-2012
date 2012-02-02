@@ -1,4 +1,5 @@
 #summary BMI - Proof of concept app from last years "admin" project
+=BMI - Proof of concept app=
 ==== Assigned persons ====
 Magnus and Thomas
 
