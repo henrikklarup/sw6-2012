@@ -15,8 +15,6 @@
     * [Contact_with_previous_students Contact with previous students]
  * Project goals
     * [Vision_and_requirements Vision and requirements]
- * Table Of Contents
-    * [Table_of_contents Table of contents]
  * Links
     *[http://groups.google.com/group/Sw6-2012-dis Sw6 2012 Google Group]
 <g:plusone size="medium"></g:plusone>
