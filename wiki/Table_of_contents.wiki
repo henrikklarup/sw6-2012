@@ -4,11 +4,9 @@
 <il>
 == Guides and stuff ==
 </il>
-<ul>
 <il>
     ==== [To_do To do] ====
 </il>
-</ul>
 </ul>
 == General knowledge ==
    * ==== [PP_Requirements_specifications Requirements specifications] ====
