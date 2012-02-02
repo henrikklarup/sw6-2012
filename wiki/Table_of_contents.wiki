@@ -1,17 +1,17 @@
 #summary Table Of Contents
 #labels Deprecated
 == Guides and stuff ==
-   * ===== [To_do] =====
+   * ==== [To_do] ====
 == General knowledge ==
-   * ==== [PP_Requirements_specifications] =====
-   * ==== [PP_System_definition] =====
-   * ==== [PP_BMI_proof_of_concept_app] =====
-   * ==== [PP_Multiproject_management] =====
-   * ==== [Development_environment] =====
+   * ==== [PP_Requirements_specifications] ====
+   * ==== [PP_System_definition] ====
+   * ==== [PP_BMI_proof_of_concept_app] ====
+   * ==== [PP_Multiproject_management] ====
+   * ==== [Development_environment] ====
 == Project goals ==
-   * ==== [Vision_and_requirements] ======
+   * ==== [Vision_and_requirements] =====
 == Table Of Contents ==
-   * ==== [Table_of_contents] =====
+   * ==== [Table_of_contents] ====
 == Links ==
-   * ==== [http://groups.google.com/group/Sw6-2012-dis Sw6 2012 Google Group] =====
+   * ==== [http://groups.google.com/group/Sw6-2012-dis Sw6 2012 Google Group] ====
 <g:plusone size="medium"></g:plusone>
