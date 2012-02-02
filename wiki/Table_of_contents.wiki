@@ -3,8 +3,8 @@
 == Guides and stuff ==
    * ==== [To_do To do] ====
 == General knowledge ==
-   * ==== [PP_Requirements_specifications] ====
-   * ==== [PP_System_definition] ====
+   * ==== [PP_Requirements_specifications Requirements specifications] ====
+   * ==== [PP_System_definition Systemdefinition] ====
    * ==== [PP_BMI_proof_of_concept_app] ====
    * ==== [PP_Multiproject_management] ====
    * ==== [Development_environment] ====
