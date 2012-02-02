@@ -1,7 +1,7 @@
 #summary Table Of Contents
 #labels Deprecated
 * [Guides_and_stuff Guides and stuff]
- * [To_do To do]
+ * [Guides_and_stuffTo_do To do]
 * General knowledge
  * [PP_Requirements_specifications Requirements specifications]
  * [PP_System_definition System definition]
