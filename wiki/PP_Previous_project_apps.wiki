@@ -1,0 +1,9 @@
+#summary The two apps from previous projects, DigiPECS and aSchedule
+=Development environment=
+==== Assigned persons ====
+Martin and Thorbjørn
+
+== Content ==
+<wiki:comment>
+Add the knowledge you have gained
+</wiki:comment>
