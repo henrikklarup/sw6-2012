@@ -1,9 +1,0 @@
-#summary Multiproject management experience from previous projects
-=Multiproject management=
-==== Assigned persons ====
-Dan and Jesper
-
-== Content ==
-<wiki:comment>
-Add the knowledge you have gained from previous projects
-</wiki:comment>
