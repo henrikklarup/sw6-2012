@@ -1,7 +1,7 @@
 #summary Table Of Contents
 #labels Deprecated
 
-This is the table of contents
+Table of contents
 ----
  * Guides and stuff
     * [To_do To do]
