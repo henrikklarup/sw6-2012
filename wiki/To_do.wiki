@@ -1,0 +1,22 @@
+#summary To do list.
+#labels todo,Featured,Deprecated
+
+= Introduction =
+
+
+This is the to do list.
+
+
+== Details ==
+
+|| *Task* || *Person(s)* ||
+|| Requirements || Jens, Sebastian. ||
+|| System definition || Kristian, Simon. ||
+|| BMI || Magnus, Thomas. ||
+|| Multiproject management || Dan, Jesper. ||
+|| Environment || Rasmus J, Jacob. ||
+|| Contact with previous students || Magnus. ||
+|| Android apps in general || Kristian, Kasper. ||
+|| Two android apps || Martin, Kim. ||
+|| Autism || Rasmus S, Rasmus A. ||
+|| Udviklings || Kim. ||
