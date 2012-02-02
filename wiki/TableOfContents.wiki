@@ -1,5 +1,8 @@
+#labels Deprecated
 == Guides and stuff ==
    * ==== [ToDO] =====
+== General knowledge ==
+
 == Project goals ==
    * ==== [VisionAndReq] =====
 == Table Of Contents ==
