@@ -1,9 +1,9 @@
 #summary Table Of Contents
 #labels Deprecated
 <h2> Guides and stuff </h2>
-   * </h4> [To_do To do] </h4>
+   * <h4> [To_do To do] </h4>
 <h2> General knowledge </h2>
-   * </h4> [PP_Requirements_specifications Requirements specifications] </h4>
+   * <h4> [PP_Requirements_specifications Requirements specifications] </h4>
    * ==== [PP_System_definition System definition] ====
    * ==== [PP_BMI_proof_of_concept_app BMI proof of concept app] ====
    * ==== [PP_Multiproject_management Multiproject management] ====
