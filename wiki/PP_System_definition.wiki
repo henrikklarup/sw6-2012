@@ -1,0 +1,8 @@
+#Summary System definition from previous projects
+==== Assigned persons ====
+Kristian and Simon.
+
+= Content =
+<wiki:comment>
+Add the knowledge you have gained from previous projects
+</wiki:comment>
