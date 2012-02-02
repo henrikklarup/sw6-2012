@@ -3,8 +3,9 @@
 == Guides and stuff ==
    * ==== [To_do] =====
 == General knowledge ==
-   * ==== [Requirements_specifications] ====
-   * ==== [System_definition] ====
+   * ==== [PP_Requirements_specifications] ====
+   * ==== [PP_System_definition] ====
+   * ==== [PP_BMI_proof_of_concept_app] ====
 == Project goals ==
    * ==== [Vision_and_requirements] =====
 == Table Of Contents ==
