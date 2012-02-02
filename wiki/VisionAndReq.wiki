@@ -7,10 +7,10 @@ Here the visions and requirements of the project will be written.
 <wiki:toc />
 
 
-= Vision =
+== Vision ==
 
 What is the vision of the project?
 
-= Requirements =
+== Requirements ==
 
 What are the requirements of the project?
