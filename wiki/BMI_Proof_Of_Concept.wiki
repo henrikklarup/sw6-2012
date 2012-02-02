@@ -1,8 +1,0 @@
-#BMI - Proof of concept app from last years "admin" project
-==== Assigned persons ====
-Magnus and Thomas
-
-= Content =
-<wiki:comment>
-Add the knowledge you have gained from previous projects
-</wiki:comment>
