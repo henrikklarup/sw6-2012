@@ -6,6 +6,8 @@
    * ==== [PP_Requirements_specifications] ====
    * ==== [PP_System_definition] ====
    * ==== [PP_BMI_proof_of_concept_app] ====
+   * ==== [PP_Multiproject_management] ====
+   * ==== [Development_environment] ====
 == Project goals ==
    * ==== [Vision_and_requirements] =====
 == Table Of Contents ==
