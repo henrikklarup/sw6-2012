@@ -3,7 +3,7 @@
 ==== Assigned persons ====
 Jens and Sebastian.
 
-= Content =
+== Content ==
 <wiki:comment>
 Add the knowledge you have gained from previous projects
 </wiki:comment>
