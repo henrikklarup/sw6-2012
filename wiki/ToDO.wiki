@@ -1,5 +1,5 @@
 #labels todo,Featured
-#To do list
+#To do list.
 
 = Introduction =
 
