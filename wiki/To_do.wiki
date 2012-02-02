@@ -5,7 +5,6 @@
 
 
 This is the to do list.
-----
 
 
 == Details ==
