@@ -2,6 +2,7 @@
 #labels Deprecated
  * Guides and stuff
     * [To_do To do]
+----
  * General knowledge
     * [PP_Requirements_specifications Requirements specifications]
     * [PP_System_definition System definition]
@@ -13,8 +14,11 @@
     * [PP_Previous_project_apps Previous project apps]
     * [General_android_knowledge General android knowledge] 
     * [Contact_with_previous_students Contact with previous students]
+----
  * Project goals
     * [Vision_and_requirements Vision and requirements]
+----
  * Links
     * [http://groups.google.com/group/Sw6-2012-dis Sw6 2012 Google Group]
+----
 <g:plusone size="medium"></g:plusone>
