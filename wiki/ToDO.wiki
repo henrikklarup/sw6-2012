@@ -10,13 +10,13 @@ Contact previous students
 == Details ==
 
 || *Task* || *Person(s)* ||
-Req || Jens, Sebastian. ||
-System def || Kristian, Simon. ||
-BMI || Magnus, Thomas. ||
-Multi proj || Dan, Jesper. ||
-Environment || Rasmus J, Jacob. ||
-Contact with previous students || Magnus. ||
-Android apps in general || Kristian, Kasper. ||
-Two android apps || Martin, Kim. ||
-Autism || Rasmus S, Rasmus A. ||
-Udviklings || Kim. ||
+|| Requirements || Jens, Sebastian. ||
+|| System definition || Kristian, Simon. ||
+|| BMI || Magnus, Thomas. ||
+|| Multiproject management || Dan, Jesper. ||
+|| Environment || Rasmus J, Jacob. ||
+|| Contact with previous students || Magnus. ||
+|| Android apps in general || Kristian, Kasper. ||
+|| Two android apps || Martin, Kim. ||
+|| Autism || Rasmus S, Rasmus A. ||
+|| Udviklings || Kim. ||
