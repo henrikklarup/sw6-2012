@@ -1,0 +1,9 @@
+#summary General Android knowledge
+=Development environment=
+==== Assigned persons ====
+Kasper og Kristian
+
+== Content ==
+<wiki:comment>
+Add the knowledge you have gained
+</wiki:comment>
