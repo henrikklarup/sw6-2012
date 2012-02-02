@@ -1,0 +1,9 @@
+#summary Contact with previous students
+=Development environment=
+==== Assigned persons ====
+Magnus
+
+== Content ==
+<wiki:comment>
+Add the knowledge you have gained
+</wiki:comment>
