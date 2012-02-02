@@ -1,5 +1,6 @@
 #summary Table Of Contents
 #labels Deprecated
+#sidebar TableOfContents
 == Guides and stuff ==
    * ==== [To_do To do] ====
 == General knowledge ==
