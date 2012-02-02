@@ -1,4 +1,4 @@
-#Requirements specifications from previous projects  
+#summery Requirements specifications from previous projects  
 ==== Assigned persons ====
 Jens and Sebastian.
 
