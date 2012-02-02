@@ -16,5 +16,5 @@
  * Project goals
     * [Vision_and_requirements Vision and requirements]
  * Links
-    *[http://groups.google.com/group/Sw6-2012-dis Sw6 2012 Google Group]
+    * [http://groups.google.com/group/Sw6-2012-dis Sw6 2012 Google Group]
 <g:plusone size="medium"></g:plusone>
