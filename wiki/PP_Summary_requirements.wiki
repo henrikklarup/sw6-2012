@@ -1,4 +1,4 @@
-#Summary Requirements specifications from previous projects
+#summary Requirements specifications from previous projects
 ==== Assigned persons ====
 Jens and Sebastian.
 
