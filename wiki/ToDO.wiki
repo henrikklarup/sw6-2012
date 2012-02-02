@@ -9,7 +9,7 @@ Contact previous students
 
 = Details =
 
-Req: Jens, Sebastian
+Req: Jens, Sebastian</br>
 System def: Kristian, Simon
 BMI: Magnus, Thomas
 Multi proj: Dan, Jesper
