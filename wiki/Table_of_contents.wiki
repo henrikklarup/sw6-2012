@@ -1,22 +1,22 @@
 #summary Table Of Contents
 #labels Deprecated
-=== Guides and stuff ===
-   * ==== [To_do To do] ====
-=== General knowledge ===
-   * ==== [PP_Requirements_specifications Requirements specifications] ====
-   * ==== [PP_System_definition System definition] ====
-   * ==== [PP_BMI_proof_of_concept_app BMI proof of concept app] ====
-   * ==== [PP_Multiproject_management Multiproject management] ====
-   * ==== [Development_environment Development environment] ====
-   * ==== [Development_methods Development methods] ====
-   * ==== [General_knowledge_about_autism General knowledge about autism] ====
-   * ==== [PP_Previous_project_apps Previous project apps] ====
-   * ==== [General_android_knowledge General android knowledge] ====
-   * ==== [Contact_with_previous_students Contact with previous students] ====
-=== Project goals ===
-   * ==== [Vision_and_requirements Vision and requirements] =====
-=== Table Of Contents ===
-   * ==== [Table_of_contents Table of contents] ====
-=== Links ===
-   * ==== [http://groups.google.com/group/Sw6-2012-dis Sw6 2012 Google Group] ====
+* Guides and stuff 
+   * [To_do To do]
+* General knowledge
+   * [PP_Requirements_specifications Requirements specifications]
+   * [PP_System_definition System definition]
+   * [PP_BMI_proof_of_concept_app BMI proof of concept app]
+   * [PP_Multiproject_management Multiproject management]
+   * [Development_environment Development environment]
+   * [Development_methods Development methods]
+   * [General_knowledge_about_autism General knowledge about autism]
+   * [PP_Previous_project_apps Previous project apps]
+   * [General_android_knowledge General android knowledge] 
+   * [Contact_with_previous_students Contact with previous students]
+* Project goals
+   * [Vision_and_requirements Vision and requirements]
+* Table Of Contents
+   * [Table_of_contents Table of contents]
+* Links ===
+   *[http://groups.google.com/group/Sw6-2012-dis Sw6 2012 Google Group]
 <g:plusone size="medium"></g:plusone>
