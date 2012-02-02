@@ -1,2 +1,3 @@
+#sidebar TableOfContents
 * Guides and stuff
    * [ToDO]
