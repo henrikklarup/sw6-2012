@@ -1,0 +1,27 @@
+#summary One-sentence summary of this page.
+#labels todo
+
+= Introduction =
+
+
+Contact previous students
+
+
+= Details =
+
+Req: Jens, Sebastian
+System def: Kristian, Simon
+BMI: Magnus, Thomas
+Multi proj: Dan, Jesper
+Environment: Rasmus J, Jacob
+Contact with previous students: Magnus
+Android apps in general: Kristian, Kasper
+Two android apps: Martin, Kim
+Autism: Rasmus S, Rasmus A
+Udviklings: kim
+
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
