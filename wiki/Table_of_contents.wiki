@@ -1,19 +1,29 @@
 #summary Table Of Contents
 #labels Deprecated
-<ul>
-<li>
 == Guides and stuff ==
-</li>
+<ul>
 <li>
     ==== [To_do To do] ====
 </li>
 </ul>
 == General knowledge ==
-   * ==== [PP_Requirements_specifications Requirements specifications] ====
-   * ==== [PP_System_definition System definition] ====
-   * ==== [PP_BMI_proof_of_concept_app BMI proof of concept app] ====
-   * ==== [PP_Multiproject_management Multiproject management] ====
-   * ==== [Development_environment Development environment] ====
+<ul>
+<li>
+    ==== [PP_Requirements_specifications Requirements specifications] ====
+</li>
+<li>
+    ==== [PP_System_definition System definition] ====
+</li>
+<li>
+    ==== [PP_BMI_proof_of_concept_app BMI proof of concept app] ====
+</li>
+<li>
+    ==== [PP_Multiproject_management Multiproject management] ====
+</li>
+<li>
+    ==== [Development_environment Development environment] ====
+</li>
+</ul>
 == Project goals ==
    * ==== [Vision_and_requirements Vision and requirements] =====
 == Table Of Contents ==
