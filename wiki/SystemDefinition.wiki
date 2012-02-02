@@ -1,0 +1,8 @@
+#System definition from previous projects  
+==== Assigned persons ====
+Jens and Sebastian.
+
+= Content =
+<wiki:comment>
+Add the knowledge you have gained from previous projects
+</wiki:comment>
