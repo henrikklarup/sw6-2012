@@ -1,0 +1,9 @@
+#summary General knowledge about different kind of development methods
+=Development methods=
+==== Assigned persons ====
+Kim
+
+== Content ==
+<wiki:comment>
+Add the knowledge you have gained
+</wiki:comment>
