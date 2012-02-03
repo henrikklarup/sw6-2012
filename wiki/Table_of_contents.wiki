@@ -5,6 +5,7 @@ Table of contents
 ----
  * Guides and stuff
     * [To_do To do]
+    * [Svn_rules SVN Rules]
  * General knowledge
     * [PP_Source Previous project resource]
     * [PP_Requirements_specifications Requirements specifications]
