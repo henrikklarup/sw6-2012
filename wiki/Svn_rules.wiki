@@ -1,0 +1,7 @@
+#summary This is a set of rules/guidelines which applies to svn
+
+= SVN Rules =
+
+<wiki:comment>
+Add rules
+</wiki:comment>
