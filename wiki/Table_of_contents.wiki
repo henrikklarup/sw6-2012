@@ -20,6 +20,9 @@ Table of contents
     * [Contact_with_previous_students Contact with previous students]
  * Project goals
     * [Vision_and_requirements Vision and requirements]
+ * Meetings
+    * Group Meetings
+       * [AHSF 1/2 2012]
  * Links
     * [http://groups.google.com/group/Sw6-2012-dis Sw6 2012 Google Group]
     * [http://webchat.freenode.net/?channels=sw62012 IRC  #sw62012 @ Freenode]
