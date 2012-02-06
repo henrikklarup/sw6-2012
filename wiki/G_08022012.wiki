@@ -2,8 +2,7 @@
 
 = Introduction =
 
-Meeting is scheduled on the 08/02-2012 @ 8:15 AM [0.2.12]
+Meeting started at 08/02-2012 @ 8:15 AM [0.2.12]. Meeting ended at 08/02-2012 @ --:-- AM [0.2.12]
 
 
 == Details ==
-
