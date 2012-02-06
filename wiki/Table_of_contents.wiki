@@ -21,8 +21,10 @@ Table of contents
  * Project goals
     * [Vision_and_requirements Vision and requirements]
  * Meetings
-    * Group Meetings
+    * Group meetings
        * [G_01022012 Group meeting 01/02-2012]
+    * Supervisor meetings
+    * Customer meetings
  * Links
     * [http://groups.google.com/group/Sw6-2012-dis Sw6 2012 Google Group]
     * [http://webchat.freenode.net/?channels=sw62012 IRC  #sw62012 @ Freenode]
