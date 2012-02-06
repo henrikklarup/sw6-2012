@@ -3,4 +3,8 @@
 
 || *Assignment task:* || Look though the BMI application which were developed for testing the 2011 Admin project ||
 || *Assigned persons:* || Magnus and Thomas ||
-|| *Content:* || _none_ ||
+
+== Content ==
+<wiki:comment>
+Add the knowledge you have gained from previous projects
+</wiki:comment>
