@@ -1,6 +1,6 @@
 #summary BMI - Proof of concept app from last years "admin" project
 =BMI - Proof of concept app=
-<table align="top" border="0" width="100%">
+<table valign="top" border="0" width="100%">
 <tr>
 <td width="15%">*Assignment task:*</td>
 <td>Look though the BMI application which were made to test the Admin project</td>
