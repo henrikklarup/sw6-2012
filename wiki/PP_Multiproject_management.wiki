@@ -9,7 +9,7 @@ Add the knowledge you have gained from previous projects
 </wiki:comment>
 
 
-*Google code
+=== Google code ===
 	* Til deling af alt
 		* Kilde kode 
 		* Wiki Dokumentation
@@ -22,7 +22,7 @@ Add the knowledge you have gained from previous projects
 	* Virkede super godt (Bortset fra en gruppe som ikke var med)
 
 			
-* Møde former
+=== Møde former ===
 	* Gruppeleder møder (Var effektivt til at tage beslutninger)
 		* Definition of target group
 		* FACTORS
@@ -36,7 +36,7 @@ Add the knowledge you have gained from previous projects
 	* Arbejdsgruppe møder (En fra hver gruppe, snakker om et specielt emne - Virkede godt)
 	
 
-*What to learn
+=== What to learn ===
 	* Ingen må stå alene eller isolere sig
 	* Engagement og involvere sig
 	* Alle skal være aktive og forberedte ved gruppe møderne, hvis ikke skal der gøres noget aktivt for at de gør det
