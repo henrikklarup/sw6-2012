@@ -16,24 +16,7 @@ Magnus and Thomas
 <wiki:comment>
 Add the knowledge you have gained from previous projects
 </wiki:comment>
-#summary BMI - Proof of concept app from last years "admin" project
-=BMI - Proof of concept app=
-==== Assigned persons ====
-Magnus and Thomas
 
-== Content ==
-<wiki:comment>
-Add the knowledge you have gained from previous projects
-</wiki:comment>
-#summary BMI - Proof of concept app from last years "admin" project
-=BMI - Proof of concept app=
-==== Assigned persons ====
-Magnus and Thomas
-
-== Content ==
-<wiki:comment>
-Add the knowledge you have gained from previous projects
-</wiki:comment>
 <table border="0" width="100%">
 <tr>
 <td>row 1, cell 1</td>
