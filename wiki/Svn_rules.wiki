@@ -1,6 +1,6 @@
 #summary This is a set of rules/guidelines which applies to svn
 
-* = SVN Rules =
+= SVN Rules =
 
     # When uploading to SVN, make sure that files are updated before committing
     # Make sure files and folders match, don't dump everything into a random folder
