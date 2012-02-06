@@ -19,7 +19,7 @@ Add the knowledge you have gained from previous projects
 
 <table border="0" width="100%">
 <tr>
-<td>row 1, cell 1</td>
+<td width="15%">row 1, cell 1</td>
 <td>row 1, cell 2</td>
 </tr>
 <tr>
