@@ -10,13 +10,13 @@ This is the to do list.
 == Details ==
 
 || *Task* || *Person(s)* ||
-|| Requirements || Jens, Sebastian. ||
+|| [PP_Requirements_specifications Requirements specifications] || Jens, Sebastian. ||
 || System definition || Kristian, Simon. ||
-|| BMI || Magnus, Thomas. ||
+|| BMI proof of concept app || Magnus, Thomas. ||
 || Multiproject management || Dan, Jesper. ||
-|| Environment || Rasmus J, Jacob. ||
+|| Development environment || Rasmus J, Jacob. ||
 || Contact with previous students || Magnus. ||
-|| Android apps in general || Kristian, Kasper. ||
-|| Two android apps || Martin, Kim. ||
-|| Autism || Rasmus S, Rasmus A. ||
-|| Udviklings || Kim. ||
+|| General Android knowledge || Kristian, Kasper. ||
+|| Previous android apps || Martin, Kim. ||
+|| General knowledge about autism || Rasmus S, Rasmus A. ||
+|| Development methods || Kim. ||
