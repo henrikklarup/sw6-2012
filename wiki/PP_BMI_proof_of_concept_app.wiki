@@ -2,15 +2,15 @@
 =BMI - Proof of concept app=
 <table border="0" width="100%">
 <tr>
-<td width="15%">*bold*Assignment task:*bold*</td>
+<td width="15%">*Assignment task:*</td>
 <td>Look though the BMI application which were made to test the Admin project</td>
 </tr>
 <tr>
-<td>*bold*Assigned persons:*bold*</td>
+<td>*Assigned persons:*</td>
 <td>Magnus and Thomas</td>
 </tr>
 <tr>
-<td>*bold*Content:*bold*</td>
+<td>*Content:*</td>
 <td>Add stuff here</td>
 </tr>
 </table>
