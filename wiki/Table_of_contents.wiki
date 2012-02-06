@@ -16,7 +16,7 @@ Table of contents
     * [Development_methods Development methods]
     * [General_knowledge_about_autism General knowledge about autism]
     * [PP_Previous_project_apps Previous project apps]
-    * [General_android_knowledge General android knowledge] 
+    * [General_android_knowledge General Android knowledge] 
     * [Contact_with_previous_students Contact with previous students]
  * Project goals
     * [Vision_and_requirements Vision and requirements]
