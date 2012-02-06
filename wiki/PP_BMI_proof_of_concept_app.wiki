@@ -3,4 +3,4 @@
 
 || *Assignment task:* || Look though the BMI application which were developed for testing the 2011 Admin project ||
 || *Assigned persons:* || Magnus and Thomas ||
-|| *Content:* || _none_ asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd vv||
+|| *Content:* || _none_ ||
