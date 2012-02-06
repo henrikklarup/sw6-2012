@@ -11,3 +11,5 @@ Add the knowledge you have gained
 === Links ===
 Android installation guide:
 http://developer.android.com/sdk/installing.html
+Android Life cycle:
+http://www.youtube.com/watch?v=s8CfVogaTiU
