@@ -6,15 +6,6 @@ Meeting took place at 01/02-2012 @ 9:00 AM - 10:15 AM [0.2.12].
 
 
 == Details ==
-#summary To do list
-
-= Introduction =
-
-
-This is the to do list.
-
-
-== Details ==
 
 || *Task* || *Person(s)* ||
 || [PP_Requirements_specifications Requirements specifications] || Jens, Sebastian. ||
