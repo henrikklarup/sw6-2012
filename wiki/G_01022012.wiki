@@ -2,12 +2,8 @@
 
 = Introduction =
 
-Add your content here.
+Meeting started at 01/02-2012 @ 9:00 AM [0.2.12].
+Meeting ended at 01/02-2012 @ 10:15 AM [0.2.12]
 
 
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+== Details ==
