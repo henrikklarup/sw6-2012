@@ -29,7 +29,7 @@ Add the knowledge you have gained from previous projects
 		* System definition
 		* Source code license
 		* Code conventions
-		* Prefix sw6.* for packages
+		* Prefix sw6.`*` for packages
 		* Arrangement of workgroup meetings
 	* Fælles møder (Alle, for meget på dagsordenen og for mange meninger)
 	* Gruppe til gruppe møder (ad-hoc, små og produktive)
