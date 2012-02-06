@@ -11,12 +11,12 @@ This is the to do list.
 
 || *Task* || *Person(s)* ||
 || [PP_Requirements_specifications Requirements specifications] || Jens, Sebastian. ||
-|| System definition || Kristian, Simon. ||
-|| BMI proof of concept app || Magnus, Thomas. ||
-|| Multiproject management || Dan, Jesper. ||
-|| Development environment || Rasmus J, Jacob. ||
-|| Contact with previous students || Magnus. ||
-|| General Android knowledge || Kristian, Kasper. ||
-|| Previous android apps || Martin, Kim. ||
-|| General knowledge about autism || Rasmus S, Rasmus A. ||
-|| Development methods || Kim. ||
+|| [PP_System_definition System definition] || Kristian, Simon. ||
+|| [PP_BMI_proof_of_concept_app BMI proof of concept app] || Magnus, Thomas. ||
+|| [PP_Multiproject_management Multiproject management] || Dan, Jesper. ||
+|| [Development_environment Development environment] || Rasmus J, Jacob. ||
+|| [Contact_with_previous_students Contact with previous students] || Magnus. ||
+|| [General_android_knowledge General Android knowledge] || Kristian, Kasper. ||
+|| [PP_Previous_project_apps Previous project apps] || Martin, Kim. ||
+|| [General_knowledge_about_autism General knowledge about autism] || Rasmus S, Rasmus A. ||
+|| [Development_methods Development methods] || Kim. ||
