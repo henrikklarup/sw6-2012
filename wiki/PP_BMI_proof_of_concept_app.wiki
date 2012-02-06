@@ -1,16 +1,6 @@
 #summary BMI - Proof of concept app from last years "admin" project
 =BMI - Proof of concept app=
-<table border="0" width="100%">
-<tr>
-<td valign="top" width="15%">*Assignment task:*</td>
-<td valign="top">Look though the BMI application which were made to test the Admin project</td>
-</tr>
-<tr>
-<td valign="top">*Assigned persons:*</td>
-<td valign="top">Magnus and Thomas</td>
-</tr>
-<tr>
-<td valign="top">*Content:*</td>
-<td valign="top">Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here Add stuff here vv</td>
-</tr>
-</table>
+
+|| *Assignment task:* || Look though the BMI application which were developed for testing the 2011 Admin project ||
+|| *Assigned persons:* || Magnus and Thomas ||
+|| *Content:* || _none_ ||
