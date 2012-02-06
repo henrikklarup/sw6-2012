@@ -1,29 +1,16 @@
 #summary BMI - Proof of concept app from last years "admin" project
 =BMI - Proof of concept app=
-==== Assigned persons ====
-Magnus and Thomas
-
-== Content ==
-<wiki:comment>
-Add the knowledge you have gained from previous projects
-</wiki:comment>
-#summary BMI - Proof of concept app from last years "admin" project
-=BMI - Proof of concept app=
-==== Assigned persons ====
-Magnus and Thomas
-
-== Content ==
-<wiki:comment>
-Add the knowledge you have gained from previous projects
-</wiki:comment>
-
 <table border="0" width="100%">
 <tr>
-<td width="15%">row 1, cell 1</td>
-<td>row 1, cell 2</td>
+<td width="15%">Assignment task:</td>
+<td>Look though the BMI application which were made to test the Admin project</td>
 </tr>
 <tr>
-<td>row 2, cell 1</td>
-<td>row 2, cell 2</td>
+<td>Assigned persons:</td>
+<td>Magnus and Thomas</td>
+</tr>
+<tr>
+<td>Content:</td>
+<td>Add stuff here</td>
 </tr>
 </table>
