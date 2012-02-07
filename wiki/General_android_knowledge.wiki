@@ -1,5 +1,5 @@
 #summary General Android knowledge
-=Development environment=
+=General Android knowledge=
 ==== Assigned persons ====
 Kasper og Kristian
 
