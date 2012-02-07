@@ -1,0 +1,9 @@
+#summary Contact with previous students
+=Creating and managing the wiki=
+
+|| *Assignment task:* || Create and manage the google projects wiki  ||
+|| *Assigned persons:* || Henrik ||
+|| *Presentation:* || [https://docs.google.com/present/edit?id=0AVsxn5cLqFEGZGdtYjd6eHZfMmhyOHdmNmNu Link] ||
+
+== Content ==
+You can find more information [xx_Guidesxzandxzstuff_To_do here]
