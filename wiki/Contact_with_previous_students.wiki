@@ -1,7 +1,9 @@
 #summary Contact with previous students
 =Development environment=
-==== Assigned persons ====
-Magnus
+
+|| *Assignment task:* || Contact the students who were apart of the projects from 2011 ||
+|| *Assigned persons:* || Magnus ||
+
 
 == Content ==
 <wiki:comment>
