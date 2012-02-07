@@ -8,6 +8,21 @@
     # Only upload files to your own groups folder or the main folders, don't edit in other groups folders
     # Update files a lot!
 
+
+This is how you add a new page to the wiki:
+Choosing the filename in the current format:
+  x..x^n_1x_2x....<name>
+
+The first x'es define what level you want the page to be, so if it's in General knowledge -> lulz -> Hello wiki page, then it would be 3 x'es.
+
+If it's 3 steps in, there will be 2 parent folders, each split with a '_', like so:
+
+  xxx_Generalxzknowledge_lulz_Hello wiki page.
+
+For making spaces in the parent folders one should use 'xz' instead, for making spaces in the name one should use '_'. So the name for the current folder would be:
+
+  xxx_Generalxzknowledge_lulz_Hello_wiki_page
+
 <wiki:comment>
 Add more rules
 </wiki:comment>
