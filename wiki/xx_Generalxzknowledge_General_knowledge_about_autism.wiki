@@ -1,0 +1,10 @@
+#summary General knowledge about autism
+=General knowledge about autism=
+
+|| *Assignment task:* || Create a presentation about autism ||
+|| *Assigned persons:* || Rasmus S. and Rasmus A. ||
+
+== Content ==
+<wiki:comment>
+Add the knowledge you have gained
+</wiki:comment>
