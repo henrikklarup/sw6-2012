@@ -23,6 +23,10 @@ For making spaces in the parent folders one should use {{{'xz'}}} instead, for m
 
   xxx_Generalxzknowledge_lulz_Hello_wiki_page
 
+
+To update the ToC of the wiki, please use the wiki updater in downloads.
+After this you need to commit the wiki files.
+
 <wiki:comment>
 Add more rules
 </wiki:comment>
