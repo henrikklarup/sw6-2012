@@ -1,6 +1,6 @@
 #summary This is a set of rules/guidelines which applies to svn
 
-= SVN Rules =
+= SVN and Wiki Rules =
 
     # When uploading to SVN, make sure that files are updated before committing
     # Make sure files and folders match, don't dump everything into a random folder
@@ -24,9 +24,12 @@ For making spaces in the parent folders one should use {{{'xz'}}} instead, for m
   xxx_Generalxzknowledge_lulz_Hello_wiki_page
 
 
-To update the ToC of the wiki, please use the wiki updater in downloads.
-After this you need to commit the wiki files.
+When a page has been successfully created, the ToC will have to be update.
+For this the user can use the WikiToCUpdater from downloads.
+This will allow the ToC to be automatically created if the name of the wiki pages are correct.
 
+To use the program the user needs to checkout https://sw6-2012.googlecode.com/svn/wiki/
+The user needs to, after running the program on the wiki folder, commit the Table_of_contents.wiki file. 
 <wiki:comment>
 Add more rules
 </wiki:comment>
