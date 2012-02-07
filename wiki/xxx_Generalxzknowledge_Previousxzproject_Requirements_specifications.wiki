@@ -3,7 +3,7 @@
 
 || *Assignment task:* || Create a presentation about on the requirement specifications based the projects from 2011 ||
 || *Assigned persons:* || Jens and Sebastian ||
-|| *Link to presentation* || https://docs.google.com/presentation/d/1Qq7eP2QV_08aKqABfPQ6SYzkOQyqnLUG9roxuFRD5mU/edit ||
+|| *Link to presentation* || [https://docs.google.com/presentation/d/1Qq7eP2QV_08aKqABfPQ6SYzkOQyqnLUG9roxuFRD5mU/edit Presentation] ||
 
 == Content ==
 <wiki:comment>
