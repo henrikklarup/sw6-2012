@@ -1,5 +1,5 @@
 #summary Contact with previous students
-=Development environment=
+=Contact with previous students=
 
 || *Assignment task:* || Contact the students who were apart of the projects from 2011 ||
 || *Assigned persons:* || Magnus ||
