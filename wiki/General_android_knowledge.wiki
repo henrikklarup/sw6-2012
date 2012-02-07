@@ -1,7 +1,8 @@
 #summary General Android knowledge
 =General Android knowledge=
-==== Assigned persons ====
-Kasper og Kristian
+
+|| *Assignment task:* || Create a presentation about how Android applications are developed ||
+|| *Assigned persons:* || Kristian and Kasper ||
 
 == Content ==
 <wiki:comment>
