@@ -1,7 +1,9 @@
 #summary Description of the Android development environment
 =Development environment=
-==== Assigned persons ====
-Rasmus J and Jacob
+
+|| *Assignment task:* || Create a presentation about the Android development enviroment ||
+|| *Assigned persons:* || Rasmus J and Jacob ||
+
 
 == Content ==
 <wiki:comment>
