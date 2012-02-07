@@ -2,7 +2,7 @@
 #labels Deprecated
 Table of contents
 ----
- * Generalxzknowledge
+ * General knowledge
     * [xx_Generalxzknowledge_Contact_with_previous_students Contact with previous students]
     * [xx_Generalxzknowledge_Development_environment Development environment]
     * [xx_Generalxzknowledge_Development_methods Development methods]
