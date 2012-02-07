@@ -9,3 +9,9 @@
 <wiki:comment>
 Add the knowledge you have gained
 </wiki:comment>
+
+
+DigiPECS - 
+aSchedule & Schedule.test - Jens Kristian Geyti <jkg@jkg.dk>
+Admin - Jacob Bang <julemand101@gmail.com>
+Launcher & marketplace - Anders Frandsen <afrand08@student.aau.dk>
