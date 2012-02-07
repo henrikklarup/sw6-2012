@@ -5,6 +5,7 @@ Table of contents
 ----
  * General knowledge
     * [xx_Generalxzknowledge_Contact_with_previous_students Contact with previous students]
+    * [xx_Generalxzknowledge_Creating_and_manage_the_wiki Creating and manage the wiki]
     * [xx_Generalxzknowledge_Development_environment Development environment]
     * [xx_Generalxzknowledge_Development_methods Development methods]
     * [xx_Generalxzknowledge_General_android_knowledge General android knowledge]
