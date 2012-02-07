@@ -1,7 +1,8 @@
 #summary Multiproject management experience from previous projects
 =Multiproject management=
-==== Assigned persons ====
-Dan and Jesper
+
+|| *Assignment task:* || Create a presentation about multiproject management experience from the projects 2011 ||
+|| *Assigned persons:* || Dan and Jesper ||
 
 == Content ==
 <wiki:comment>
