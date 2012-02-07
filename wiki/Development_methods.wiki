@@ -1,9 +1,0 @@
-#summary General knowledge about different kind of development methods
-=Development methods=
-|| *Assignment task:* || Create a presentation about different kind of development methods ||
-|| *Assigned persons:* || Kim ||
-
-== Content ==
-<wiki:comment>
-Add the knowledge you have gained
-</wiki:comment>
