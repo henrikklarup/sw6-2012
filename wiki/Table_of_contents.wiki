@@ -2,32 +2,32 @@
 #labels Deprecated
 Table of contents
 ----
- * General knowledge
-    * [Contact_with_previous_students Contact with previous students]
-    * [Development_environment Development environment]
-    * [Development_methods Development methods]
-    * [General_android_knowledge General android knowledge]
-    * [General_knowledge_about_autism General knowledge about autism]
+ * Generalxzknowledge
+    * [xx_Generalxzknowledge_Contact_with_previous_students Contact with previous students]
+    * [xx_Generalxzknowledge_Development_environment Development environment]
+    * [xx_Generalxzknowledge_Development_methods Development methods]
+    * [xx_Generalxzknowledge_General_android_knowledge General android knowledge]
+    * [xx_Generalxzknowledge_General_knowledge_about_autism General knowledge about autism]
     * Previous project
-       * [BMI_proof_of_concept_app BMI proof of concept app]
-       * [Multiproject_management Multiproject management]
-       * [Previous_project_apps Previous project apps]
-       * [Requirements_specifications Requirements specifications]
-       * [Source Source]
-       * [System_definition System definition]
+       * [xxx_Generalxzknowledge_Previousxzproject_BMI_proof_of_concept_app BMI proof of concept app]
+       * [xxx_Generalxzknowledge_Previousxzproject_Multiproject_management Multiproject management]
+       * [xxx_Generalxzknowledge_Previousxzproject_Previous_project_apps Previous project apps]
+       * [xxx_Generalxzknowledge_Previousxzproject_Requirements_specifications Requirements specifications]
+       * [xxx_Generalxzknowledge_Previousxzproject_Source Source]
+       * [xxx_Generalxzknowledge_Previousxzproject_System_definition System definition]
  * Guides and stuff
-    * [Svn_rules Svn rules]
-    * [To_do To do]
+    * [xx_Guidesxzandxzstuff_Svn_rules Svn rules]
+    * [xx_Guidesxzandxzstuff_To_do To do]
  * Meetings
     * Customer meetings
-       * [01022012 01/02-2012]
+       * [xxx_Meetings_Customerxzmeetings_01022012 01/02-2012]
     * Group meetings
-       * [01022012 01/02-2012]
-       * [08022012 08/02-2012]
+       * [xxx_Meetings_Groupxzmeetings_01022012 01/02-2012]
+       * [xxx_Meetings_Groupxzmeetings_08022012 08/02-2012]
     * Supervisor meetings
-       * [01022012 01/02-2012]
+       * [xxx_Meetings_Supervisorxzmeetings_01022012 01/02-2012]
  * Project goals
-    * [Vision_and_requirements Vision and requirements]
+    * [xx_Projectxzgoals_Vision_and_requirements Vision and requirements]
  * Links
     * [http://groups.google.com/group/Sw6-2012-dis Sw6 2012 Google Group]
     * [http://webchat.freenode.net/?channels=sw62012 IRC  #sw62012 @ Freenode]
