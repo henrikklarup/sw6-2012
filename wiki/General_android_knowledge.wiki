@@ -10,6 +10,21 @@ Add the knowledge you have gained
 
 === Links ===
 Android installation guide:
+
 http://developer.android.com/sdk/installing.html
+
 Android Life cycle:
+
 http://www.youtube.com/watch?v=s8CfVogaTiU
+
+Resources used for the presentation
+
+http://developer.android.com/guide/topics/fundamentals.html 
+
+http://developer.android.com/guide/topics/fundamentals/tasks-and-back-stack.html 
+
+http://developer.android.com/reference/android/content/Intent.html 
+
+http://developer.android.com/guide/topics/ui/index.html 
+
+http://developer.android.com/resources/tutorials/testing/helloandroid_test.html 
