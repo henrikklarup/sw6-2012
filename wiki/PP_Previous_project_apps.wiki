@@ -1,7 +1,9 @@
 #summary The two apps from previous projects, DigiPECS and aSchedule
 =Development environment=
-==== Assigned persons ====
-Martin and Thorbjørn
+
+|| *Assignment task:* || Create a presentation about the two Android application, DigiPECS and aSchedule, from the 2011 project||
+|| *Assigned persons:* || Martin and Thorbjørn ||
+
 
 == Content ==
 <wiki:comment>
