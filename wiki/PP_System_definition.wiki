@@ -1,7 +1,8 @@
 #summary System definition from previous projects
 =System definition=
-==== Assigned persons ====
-Kristian and Simon.
+
+|| *Assignment task:* || Create a presentation about the system definition based on the projects from 2011 ||
+|| *Assigned persons:* || Kristian and Simon ||
 
 == Content ==
 <wiki:comment>
