@@ -3,8 +3,6 @@
 
 || *Assignment task:* || Create a presentation about the system definition based on the projects from 2011 ||
 || *Assigned persons:* || Kristian and Simon ||
+|| *Presentation:* || [https://docs.google.com/present/edit?id=0AQDRW9mSHYvgZGhiY3ZudnNfN2MzMzRuZ2Ro Link] ||
 
 == Content ==
-<wiki:comment>
-Add the knowledge you have gained from previous projects
-</wiki:comment>
