@@ -5,7 +5,7 @@
 || *Assigned persons:* || Kristian and Kasper ||
 
 == Content ==
-https://docs.google.com/present/edit?id=0AR3v8KC-ouooZGd6NHd6NHBfMjQzZ3hkNGJ2ZmM
+[https://docs.google.com/present/edit?id=0AR3v8KC-ouooZGd6NHd6NHBfMjQzZ3hkNGJ2ZmM Presentation]
 
 === Links ===
 Android installation guide:
