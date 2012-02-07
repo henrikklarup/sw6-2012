@@ -3,6 +3,7 @@
 
 || *Assignment task:* || Create a presentation about multiproject management experience from the projects 2011 ||
 || *Assigned persons:* || Dan and Jesper ||
+|| *Link to presentation:* || [https://docs.google.com/present/edit?id=0AdzDEtl9p9uQZGY3dmt4ODlfM3JqenIyNmhq multiprojekt management] ||
 
 == Content ==
 <wiki:comment>
