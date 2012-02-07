@@ -1,8 +1,5 @@
-#labels Deprecated
-
 #summary Table Of Contents
 #labels Deprecated
-
 Table of contents
 ----
  * General knowledge
