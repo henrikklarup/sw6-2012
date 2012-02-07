@@ -1,6 +1,6 @@
 #summary Group meeting from 01/02-2012
 
-= Introduction =
+= Group meeting 01/02-2012 =
 
 Meeting took place at 01/02-2012 @ 9:00 AM - 10:15 AM [0.2.12].
 
