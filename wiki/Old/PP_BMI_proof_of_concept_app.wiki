@@ -1,0 +1,10 @@
+#summary BMI - Proof of concept app from last years "admin" project
+=BMI - Proof of concept app=
+
+|| *Assignment task:* || Look though the BMI application which were developed for testing the 2011 Admin project ||
+|| *Assigned persons:* || Magnus and Thomas ||
+
+== Content ==
+<wiki:comment>
+Add the knowledge you have gained from previous projects
+</wiki:comment>

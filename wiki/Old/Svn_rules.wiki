@@ -1,0 +1,13 @@
+#summary This is a set of rules/guidelines which applies to svn
+
+= SVN Rules =
+
+    # When uploading to SVN, make sure that files are updated before committing
+    # Make sure files and folders match, don't dump everything into a random folder
+    # Make a log message when committing files, so people can follow what you are doing
+    # Only upload files to your own groups folder or the main folders, don't edit in other groups folders
+    # Update files a lot!
+
+<wiki:comment>
+Add more rules
+</wiki:comment>
