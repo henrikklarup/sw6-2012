@@ -1,7 +1,8 @@
 #summary Requirements specifications from previous projects
 =Requirements specifications=
-==== Assigned persons ====
-Jens and Sebastian.
+
+|| *Assignment task:* || Create a presentation based on the requirement specifications in projects from 2011 ||
+|| *Assigned persons:* || Jens and Sebastian ||
 
 == Content ==
 <wiki:comment>
