@@ -1,31 +1,36 @@
+#labels Deprecated
+
 #summary Table Of Contents
 #labels Deprecated
 
 Table of contents
 ----
- * Guides and stuff
-    * [To_do To do]
-    * [Svn_rules SVN rules]
  * General knowledge
-    * [PP_Source Previous project resource]
-    * [PP_Requirements_specifications Requirements specifications]
-    * [PP_System_definition System definition]
-    * [PP_BMI_proof_of_concept_app BMI proof of concept app]
-    * [PP_Multiproject_management Multiproject management]
+    * [Contact_with_previous_students Contact with previous students]
     * [Development_environment Development environment]
     * [Development_methods Development methods]
+    * [General_android_knowledge General android knowledge]
     * [General_knowledge_about_autism General knowledge about autism]
-    * [PP_Previous_project_apps Previous project apps]
-    * [General_android_knowledge General Android knowledge] 
-    * [Contact_with_previous_students Contact with previous students]
+    * Previous project
+       * [BMI_proof_of_concept_app BMI proof of concept app]
+       * [Multiproject_management Multiproject management]
+       * [Previous_project_apps Previous project apps]
+       * [Requirements_specifications Requirements specifications]
+       * [Source Source]
+       * [System_definition System definition]
+ * Guides and stuff
+    * [Svn_rules Svn rules]
+    * [To_do To do]
+ * Meetings
+    * Customer meetings
+       * [01022012 01/02-2012]
+    * Group meetings
+       * [01022012 01/02-2012]
+       * [08022012 08/02-2012]
+    * Supervisor meetings
+       * [01022012 01/02-2012]
  * Project goals
     * [Vision_and_requirements Vision and requirements]
- * Meetings
-    * Group meetings
-       * [G_01022012 Group meeting 01/02-2012]
-       * [G_08022012 Group meeting 08/02-2012]
-    * Supervisor meetings
-    * Customer meetings
  * Links
     * [http://groups.google.com/group/Sw6-2012-dis Sw6 2012 Google Group]
     * [http://webchat.freenode.net/?channels=sw62012 IRC  #sw62012 @ Freenode]
