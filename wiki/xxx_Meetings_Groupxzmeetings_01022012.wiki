@@ -15,6 +15,6 @@ Meeting took place at 01/02-2012 @ 9:00 AM - 10:15 AM [0.2.12].
 || [xx_Generalxzknowledge_Development_environment Development environment] || Rasmus J, Jacob. ||
 || [xx_Generalxzknowledge_Contact_with_previous_students Contact with previous students] || Magnus. ||
 || [xx_Generalxzknowledge_General_android_knowledge General Android knowledge] || Kristian, Kasper. ||
-|| [xxx_Generalxzknowledge_Previousxzproject_Previous_project_apps Previous project apps] || Martin, Kim. ||
+|| [xxx_Generalxzknowledge_Previousxzproject_Previous_project_apps Previous project apps] || Martin, Thorbjørn. ||
 || [xx_Generalxzknowledge_General_knowledge_about_autism General knowledge about autism] || Rasmus S, Rasmus A. ||
 || [xx_Generalxzknowledge_Development_methods Development methods] || Kim. ||
