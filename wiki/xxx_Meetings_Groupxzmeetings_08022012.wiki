@@ -3,7 +3,7 @@
 = Group meeting 08/02-2012 =
 
 
-Meeting took place at 08/02-2012 @ 8:15 AM - 12:05 AM [0.2.12].
+Meeting took place at 08/02-2012 @ 8:15 AM - 12:05 PM [0.2.12].
 
 == Details ==
 
@@ -78,5 +78,3 @@ Meeting took place at 08/02-2012 @ 8:15 AM - 12:05 AM [0.2.12].
 	* Depends on the result of the meeting form
 
 ==== Contract ====
-
-
