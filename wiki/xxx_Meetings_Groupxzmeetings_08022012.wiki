@@ -50,8 +50,8 @@ Interview groups:
 		* This will be discussed later
 
 ==== Environment ====
-	* Both Eclipse and MotoDev installed = PROBS!
-		* + MotoDev provides extra tools
+	* Both Eclipse and [http://developer.motorola.com/ MotoDev] installed = PROBS!
+		* + [http://developer.motorola.com/ MotoDev] provides extra tools
 		* - Registration
 	* We need to use the same environment
 	* Better support for Eclipse from Google
