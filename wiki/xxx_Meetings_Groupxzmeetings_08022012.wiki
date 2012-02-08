@@ -2,6 +2,7 @@
 
 = Group meeting 08/02-2012 =
 
+
 Meeting took place at 08/02-2012 @ 8:15 AM - --:-- AM [0.2.12].
 
 == Details ==
@@ -11,3 +12,73 @@ Meeting took place at 08/02-2012 @ 8:15 AM - --:-- AM [0.2.12].
 == Grand meeting ==
 
 ==== System definition ====
+	* Only usable in OOAD
+	* Nothing decided yet (Follow up during next meeting)
+
+==== Launcher ====
+	* Should time/location be taken into consideration?
+		* What do we want to do?
+		* What do they (Customers) want to do?
+		* Relevant to limit according to to time/location?
+		* A complex part of the Launcher
+		* Depending on the Customer meeting
+
+==== Home button ====
+	* Change in firmware to block?
+		* No other way to block
+	* One person looks into this (Christian)
+	* A new firmware?
+		* We need to talk to Ulrik about this!
+
+==== Test ====
+	* Ongoing or periodic? 
+		* Depends on development method
+		* This will be discussed later
+
+==== Environment ====
+	* Both Eclipse and MotoDev installed = PROBS!
+		* + MotoDev provides extra tools
+		* - Registration
+	* We need to use the same environment
+	* Better support for Eclipse from Google
+	* Will be looked into before next meeting (Martin, Christian, Rasmus J)
+
+==== Development methods ====
+	* We need to use the same!
+	* Cannot be decided at the moment
+
+==== Demands to / from the groups ====
+	* Make demands to an "admin" group
+	* Google Discussion group
+	* IRC
+
+==== Frequency of meetings ==== 
+	* Once a week is suggested
+	* BIG group meetings
+		* Every 2. week
+	* Group leader meeting
+		* Once a week
+	* Supervisor meeting
+	* Customer meeting
+	* "Small" group meetings
+	* Meeting Discipline
+		* Structured
+		* Efficient
+		* Avoid small talk
+	* Group will examine ways for next meeting (Magnus, Kasper, Kim)
+
+==== Common goals ====
+	* Overall goals (focus group and result) is to be put on Wiki - will be updated after each meeting.
+	* Tested (Study regulation)
+	* High quality (Study regulation)
+	* Other goals will be defined after customer meeting (Sebastian, Henrik, Jens)
+
+==== Deadlines ====
+	* "Small" but many
+	* Depends on the result of the meeting form
+
+==== Contract ====
+
+
+
+
