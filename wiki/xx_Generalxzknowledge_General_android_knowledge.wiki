@@ -10,9 +10,15 @@ Check presentation link
 
 === Links ===
 [http://developer.android.com/sdk/installing.html Android installation guide]
+
 [http://www.youtube.com/watch?v=s8CfVogaTiU Android life cycle]
-[http://developer.android.com/guide/topics/fundamentals.html Android Funamentals] 
-[http://developer.android.com/guide/topics/fundamentals/tasks-and-back-stack.html Tasks and back stack] 
-[http://developer.android.com/reference/android/content/Intent.html Intent] 
+
+[http://developer.android.com/guide/topics/fundamentals.html Android Funamentals]
+ 
+[http://developer.android.com/guide/topics/fundamentals/tasks-and-back-stack.html Tasks and back stack]
+ 
+[http://developer.android.com/reference/android/content/Intent.html Intent]
+ 
 [http://developer.android.com/guide/topics/ui/index.html Layout] 
+
 [http://developer.android.com/resources/tutorials/testing/helloandroid_test.html Hello Android testing example] 
