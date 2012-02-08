@@ -3,27 +3,16 @@
 
 || *Assignment task:* || Create a presentation about how Android applications are developed ||
 || *Assigned persons:* || Kristian and Kasper ||
+|| *Presentation:* || [https://docs.google.com/present/edit?id=0AR3v8KC-ouooZGd6NHd6NHBfMjQzZ3hkNGJ2ZmM Link] ||
 
 == Content ==
-[https://docs.google.com/present/edit?id=0AR3v8KC-ouooZGd6NHd6NHBfMjQzZ3hkNGJ2ZmM Presentation]
+Check presentation link
 
 === Links ===
-Android installation guide:
-
-http://developer.android.com/sdk/installing.html
-
-Android Life cycle:
-
-http://www.youtube.com/watch?v=s8CfVogaTiU
-
-Resources used for the presentation
-
-http://developer.android.com/guide/topics/fundamentals.html 
-
-http://developer.android.com/guide/topics/fundamentals/tasks-and-back-stack.html 
-
-http://developer.android.com/reference/android/content/Intent.html 
-
-http://developer.android.com/guide/topics/ui/index.html 
-
-http://developer.android.com/resources/tutorials/testing/helloandroid_test.html 
+[http://developer.android.com/sdk/installing.html Android installation guide]
+[http://www.youtube.com/watch?v=s8CfVogaTiU Android life cycle]
+[http://developer.android.com/guide/topics/fundamentals.html Android Funamentals] 
+[http://developer.android.com/guide/topics/fundamentals/tasks-and-back-stack.html Tasks and back stack] 
+[http://developer.android.com/reference/android/content/Intent.html Intent] 
+[http://developer.android.com/guide/topics/ui/index.html Layout] 
+[http://developer.android.com/resources/tutorials/testing/helloandroid_test.html Hello Android testing example] 
