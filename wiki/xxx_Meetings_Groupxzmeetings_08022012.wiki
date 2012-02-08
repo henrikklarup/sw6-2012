@@ -78,3 +78,45 @@ Meeting took place at 08/02-2012 @ 8:15 AM - 12:05 PM [0.2.12].
 	* Depends on the result of the meeting form
 
 ==== Contract ====
+	* Depending on other decitions
+	* Suggested:
+		* Rules for presentation
+		* Organized presentation
+		* Be well prepared
+		* Deadlines
+		* Attendance
+		* Different groups can add other rules
+	* Draft of contract for next meeting (Rasmus, Dan)
+
+==== Work from home / Work on uni ====
+	* The different groups own decision
+		* As long it's not in breach with the contract
+	* A group can ask another groups to come, if necessary
+	* One day a week where everybody is on uni (Will be decided on each meeting)
+
+==== Agenda for BIG meeting ====
+	* Structured
+	* The agenda is locked 24 hours before the meeting
+	* At each meeting, a moderator is selected for the next meeting 
+	* Next meetings moderator: Henrik
+
+==== Groups ====
+	* One groups has to fix the launcher or make a new (Maybe talk with Ulrik)
+	* Are we to make 4-5 new apps?
+		* Settled after the customer meeting 
+
+
+
+=== Ulrik's stuff ===
+	*We have 5 contacts (customers).
+		* 4 will attend the meeting 9/2
+		* 1 will attend a meeting 10/2
+	* Two groups will talk with two contacts at the same time
+		* Group 1: Martin, Kasper, Thorbjørn, Thomas
+		* Group 2: Henrik, Dan, Jens, Sebastian
+	* Questions will be send before hand, so the contacts can prepare
+	* *Goal of the meeting*: To get some abstract ideas about what to do and inform the customers we'd like to include them during the process.
+	* Contact meeting 10/2 : Jesper, Martin 
+
+
+
