@@ -12,20 +12,20 @@ Add the knowledge you have gained from previous projects
 
 
 === Google code ===
-	* Til deling af alt
-		* Kilde kode 
+	* Multipurpose use
+		* Sharing source code 
 		* Wiki Dokumentation
-		* Issue tracking (Kan bruges på trævs af grupperne, så alle finder fejl i alles programmer)
-		* Inter-group kommunikation
-		* Projekt planlægning
+		* Issue tracking (Can be used across the groups)
+		* Inter-group communication
+		* Projekt planning
 	* SVN
 		* Branching/dev - stable
 		* Trunk
-	* Virkede super godt (Bortset fra en gruppe som ikke var med)
+	* Worked very well (Accept the group which did not participate)
 
 			
-=== Møde former ===
-	* Gruppeleder møder (Var effektivt til at tage beslutninger)
+=== Meeting types ===
+	* Group leader meetings (Was effective for decision making)
 		* Definition of target group
 		* FACTORS
 		* System definition
@@ -33,23 +33,23 @@ Add the knowledge you have gained from previous projects
 		* Code conventions
 		* Prefix sw6.`*` for packages
 		* Arrangement of workgroup meetings
-	* Fælles møder (Alle, for meget på dagsordenen og for mange meninger)
-	* Gruppe til gruppe møder (ad-hoc, små og produktive)
-	* Arbejdsgruppe møder (En fra hver gruppe, snakker om et specielt emne - Virkede godt)
+	* Grand meetings (Everyone attending, to many topics and opinions)
+	* Group to group meetings (ad-hoc, small and productive)
+	* Workgroup meetings (One from each group, discuss specific technical issues - Worked well)
 	
 
 === What to learn ===
-	* Ingen må stå alene eller isolere sig
-	* Engagement og involvere sig
-	* Alle skal være aktive og forberedte ved gruppe møderne, hvis ikke skal der gøres noget aktivt for at de gør det
-	* En form for gruppekontrakt på tværs af alle grupper, i forhold til samarbejde mellem grupperne
-	* Lav små løfter der altid kan holdes, og lav det der er lovet så hurtigt som muligt
-	* Kvalitet frem for kvantitet
+	* No one may isolate themselves or stand alone
+	* Commitment and involment are needed
+	* Everyone must be prepared and active at the meetings, if not measures to ensure this must be taken
+	* A multiprojekt group contract should be made considering the cooperation of the groups as a whole
+	* Make "small" promises to meet the deadlines
+	* Quality over quantity
 	* You are not you're code
-	* Vælg samme udviklings metode, og følg som udgivelses rytme så vidt muligt
-	* Alle kan være nødt til at gå på kompromi og det er en nødvendighed
-	* Alle skal være enige om målgruppen (alder, evner, osv.)
-	* Det vil være til alles fordel hvis vi følger en fælles arkitektur
-	* Snak sammem om forskellige features hvis der er overlap kan det laves sammen
-	* En deadline er en deadline og må ikke misses
-	* Nogle overordnede krav skal være på plads inden kodningen begynder ellers kan det ende i hver sin retning
+	* Use the same development method, and follow the same release cycle where possible
+	* Everyone may have to make compromises, and it is a necessity
+	* The target group must be agreed on (Age, abilities, ect.)
+	* It would be beneficial to use a common architecture (For further development and understand) 
+	* Discuss common features, there may be a overlap and cooperation may be possible
+	* A deadline is a deadline and it must not be missed
+	* Some general demands must be in place before the coding should begin, otherwise people may end up in different directions
