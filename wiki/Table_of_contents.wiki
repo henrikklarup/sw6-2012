@@ -24,13 +24,11 @@ Table of contents
     * [xx_Guidesxzandxzstuff_To_do To do]
  * Meetings
     * Customer meetings
-       * [xxx_Meetings_Customerxzmeetings_01022012 01/02-2012]
        * [xxx_Meetings_Customerxzmeetings_09022012 09/02-2012]
     * Group meetings
        * [xxx_Meetings_Groupxzmeetings_01022012 01/02-2012]
        * [xxx_Meetings_Groupxzmeetings_08022012 08/02-2012]
     * Supervisor meetings
-       * [xxx_Meetings_Supervisorxzmeetings_01022012 01/02-2012]
        * [xxx_Meetings_Supervisorxzmeetings_09022012 09/02-2012]
  * Project goals
     * [xx_Projectxzgoals_Vision_and_requirements Vision and requirements]
