@@ -16,14 +16,14 @@ The system definition is placed in the beginning of the repport.
  * It should be possible for a third-party developer to provide additional applications to the system/launcher.
  * Pre-installed applications: DigiPECS, aSchedule.
 
-Sub-definitions:
+Sub-definitions: 
 DigiPECS
 The system definition is placed in the beginning of the repport and is identical to the GIRAF system specification.
 
-Launcher
+Launcher 
 The system definition is placed in appendix and is identical to the GIRAF system specification.
 
-aSchedule
+aSchedule 
 The system definition is placed in the beginning of the repport and contains two system definitions: GIRAF general definition and a specific aSchedule definition.
 Specific for aSchedule:
  * Guardians should schedule the child´s activities directly from the device
