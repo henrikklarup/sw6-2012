@@ -20,8 +20,8 @@ The system definition is placed in the beginning of the repport.
 
 DigiPECS
 The system definition is placed in the beginning of the repport and is identical to the GIRAF system specification.
-Launcher 
 
+Launcher
 The system definition is placed in appendix and is identical to the GIRAF system specification.
 
 aSchedule 
