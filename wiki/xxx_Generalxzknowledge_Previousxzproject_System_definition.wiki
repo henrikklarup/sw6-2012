@@ -16,11 +16,12 @@ The system definition is placed in the beginning of the repport.
  * It should be possible for a third-party developer to provide additional applications to the system/launcher.
  * Pre-installed applications: DigiPECS, aSchedule.
 
-Sub-definitions: 
+  Sub-definitions: 
+
 DigiPECS
 The system definition is placed in the beginning of the repport and is identical to the GIRAF system specification.
-
 Launcher 
+
 The system definition is placed in appendix and is identical to the GIRAF system specification.
 
 aSchedule 
