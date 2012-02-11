@@ -2,11 +2,38 @@
 
 = Draft of ideas =
 
- * Workplace, one day a week at uni
  * Group meetings frequency
- * Rules for presentation
- * Organized presentation
- * Be well prepared
+
+*This has not been decided for good!*
+
+== BIG group meetings ==
+
+There will be held a BIG group meeting every second week.
+
+== Group leader meetings ==
+
+There will be held a group leader meeting every week.
+
+== General rules for meetings ==
+
+A template for the content of the meetings should be made. New topics can be proposed, but this must be done 24 hours prior to the meeting if some material are to be read, else it must be presented 12 (random number to be decided) hours prior to the meeting.
+
+Presentations for a meeting must be prepared prior to the meeting, they must be organized, and the presenter must be well prepared.
+
+The attendance for every meeting will be recorded. This means that it must be announced if one is not able to come.
+
+ * Workplace, one day a week at uni
+
+It has been decided that one day of the week we will all be present at uni. The purpose of this day is to ensure that we can go talk to the other groups in case we have questions for them.
+
+The day will be decided in advance on a group meeting. But day may change from week to week.
+
  * Deadlines
- * Attendance
+
+== Deadlines ==
+
+Deadlines will be made across the groups in the multiproject. This means that we will be depending on each other from time to time. Therefore it is of the utmost importance that these deadlines are respected.
+
+If a group or a person is not able to meet a deadline, then this must be announced to the group or person that made the deadline. This must be done at least 24 hours (random number to be decided) before the deadline.
+
  * Different groups can add other rules
