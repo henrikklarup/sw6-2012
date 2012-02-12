@@ -2,7 +2,7 @@
 
 = Introduction =
 
-The following text is highlights from the customer meeting with Tove Søby from taleinstituttet, Friday morning on the 10nth of February.
+The following text is highlights from the customer meeting with Tove Søby from taleinstituttet, Friday morning on the 10,,nth,, of February.
 The meeting/interview was conducted in a semi structured way, primarily with the customer presenting her wishes from new software, based upon the experience from her work. 
 
 == Details ==
