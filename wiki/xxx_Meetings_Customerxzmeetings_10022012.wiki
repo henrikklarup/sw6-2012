@@ -6,6 +6,11 @@ The following text is highlights from the customer meeting with Tove Søby from 
 The meeting/interview was conducted in a semi structured way, primarily with the customer presenting her wishes from new software, based upon the experience from her work. 
 
 = Details =
+The customers was primarily concerned with tools and software with which she had prior knowledge, and the shortcomings of this software.
+While the software she had access to served a purpose and was useful in her work she was missing a level of customization. As was also mentioned by Drazenko(TODO add link to 9/02/12 meeting), autistic people have very different demands, the visual stimuli that makes sense to one kid may not mean anything to another. the software available to the customer is static and only supplies a very limited selection of words or stories.
+<br/> 
+She also asked for more entertaining software, not that it should hurt the intended use of the software, but the software currently available to her have very poor feedback. as an example a police car was often depicted in the software, which, other than being drawn a police car, never showed any of the characteristics that you would expect from a police car( sirens, turning wheels etc.)
+
 
 Add your content here.  Format your content with:
   * Text in *bold* or _italic_
@@ -13,7 +18,8 @@ Add your content here.  Format your content with:
   * Automatic links to other wiki pages
 
 = Requirements =
-
+Customizable software. <br/>
+Proper feedback. <br/>
 = External resources =
 Following is software or tools currently in use, or in development, mentioned by the customer, can be used a source of inspiration.
 
