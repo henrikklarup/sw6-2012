@@ -2,8 +2,8 @@
 
 = Introduction =
 
-Add your content here.
-
+The following text is highlights from the customer meeting with Tove Søby from taleinstituttet, Friday morning on the 10nth of February.
+The meeting/interview was conducted in a semi structured way, primarily with the customer presenting her wishes from new software, based upon the experience from her work. 
 
 = Details =
 
@@ -11,3 +11,10 @@ Add your content here.  Format your content with:
   * Text in *bold* or _italic_
   * Headings, paragraphs, and lists
   * Automatic links to other wiki pages
+
+= Requirements =
+
+= External resources =
+Springboard - http://www.consultspringboard.com/autism-speaks/
+Mindspeak
+Advantes
