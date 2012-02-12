@@ -31,7 +31,7 @@ Table of contents
        * [xxx_Meetings_Groupxzmeetings_08022012 08/02-2012]
        * [xxx_Meetings_Groupxzmeetings_13022012 13/02-2012]
     * Supervisor meetings
-       * [xxx_Meetings_Supervisorxzmeetings_09022012 09/02-2012]
+       * [xxx_Meetings_Supervisorxzmeetings_13022012 13/02-2012]
  * Multiproject contract
     * [xx_Multiprojectxzcontract_Draft_of_ideas Draft of ideas]
  * Project goals
