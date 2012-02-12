@@ -47,6 +47,9 @@ The day will be decided in advance on a group meeting. But day may change from w
 It is important that all groups are represented at all meetings, since groups which aren't attending won't be able to get present their opinions on the tropics at the meeting.
 
 == Coding Rules ==
-_Nothing here yet_
+All software available on SVN must able to run without bugs or errors, such that the software can be used across projects.
+All software must be well documented and commented, such that the software is easy to understand and implement in other projects.
+
+_Incomplete_
 
 `*` = Random number inserted, to be decided
