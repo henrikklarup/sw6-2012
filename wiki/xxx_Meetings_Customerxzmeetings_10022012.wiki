@@ -1,4 +1,4 @@
-#summary Customer meeting, Tove Søby, taleinstituttet.
+#summary Customer meeting, Tove Søby, taleinstituttet. (Incomplete)
 
 = Introduction =
 
@@ -15,6 +15,7 @@ Add your content here.  Format your content with:
 = Requirements =
 
 = External resources =
+Following is software or tools currently in use, or in developtment, mentioned by the customer, can be used a source of inspiration.
+
 Springboard - http://www.consultspringboard.com/autism-speaks/
-Mindspeak
-Advantes
+Minspeak - http://www.minspeak.com/
