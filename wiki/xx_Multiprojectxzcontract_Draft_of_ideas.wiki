@@ -14,7 +14,7 @@
 =NB! This has not been decided for good!=
 
 == Presentations ==
-Whenever a presentation, which is relevant for the project, is being made it is of great importance that the presentation is well made. So the people whom the subject is being presented for will be able to understand the what is being taught.
+Whenever a presentation, which is relevant for the project, is being made it is of great importance that the presentation is well made. So the people whom the subject is being presented for will be able to understand what is being taught.
 
 == Preparation ==
 Everyone must be prepared for group meetings, meaning that everyone can expect that all attendees at a meeting has read the appendix.
@@ -42,9 +42,9 @@ If a group or a person is not able to meet a deadline, then this must be announc
 == Attendance ==
 It has been decided that one day of the week all students will be present at the university (Cassiopeia). The purpose of this day is to ensure that we can go talk to the other groups in case we have questions for them.
 
-The day will be decided in advance on a group meeting. But day may change from week to week.
+The day will be decided in advance on a group meeting. The chosen day may change from week to week.
 
-It is important that all groups are represented at all meetings, since groups which aren't attending won't be able to get present their opinions on the tropics at the meeting.
+It is important that all groups are represented at all meetings, since groups which aren't attending won't be able to present their opinions on the tropics at the meeting.
 
 == Coding Rules ==
 All software available on SVN must able to run without bugs or errors, such that the software can be used across projects.
