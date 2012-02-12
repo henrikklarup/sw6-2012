@@ -17,5 +17,5 @@ Add your content here.  Format your content with:
 = External resources =
 Following is software or tools currently in use, or in development, mentioned by the customer, can be used a source of inspiration.
 
-Springboard - http://www.consultspringboard.com/autism-speaks/ \n
+Springboard - http://www.consultspringboard.com/autism-speaks/
 Minspeak - http://www.minspeak.com/
