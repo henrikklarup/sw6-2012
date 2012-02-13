@@ -22,6 +22,8 @@ Table of contents
     * [xx_Guidesxzandxzstuff_Svn_rules Svn rules]
     * Templates
        * [xxx_Guidesxzandxzstuff_Templates_Meeting_Template Meeting Template]
+    * Project Ideas
+      * [xxx_Guidesxzandxzstuff_ProjectzxIdeas_Idea Template]
     * [xx_Guidesxzandxzstuff_To_do To do]
  * Meetings
     * Customer meetings
