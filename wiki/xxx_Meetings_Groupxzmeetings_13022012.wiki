@@ -14,7 +14,7 @@ Meeting took place at 13/02-2012 @ 12:30 AM - --:-- PM [0.2.12].
     * System definition()
     * Development environment(Kristian)
     * Home button(Kristian)
-    * Aim of the project(Jens)
+    * Aims of the project(Jens)
     * Frequency of meetings(Kasper, Kim, & Magnus)
        * https://docs.google.com/present/edit?id=0AXVYCaxDa3q2ZGhwdHh3MmJfN2dwczJ6dmdr
     * Contract draft(Rasmus A/Dan)
