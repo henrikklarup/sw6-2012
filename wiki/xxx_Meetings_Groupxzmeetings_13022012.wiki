@@ -13,7 +13,8 @@ Meeting took place at 13/02-2012 @ 12:30 AM - --:-- PM [0.2.12].
  * Follow up from last meeting.
     * System definition()
     * Development environment(Kristian)
-    * Frequency of meetings(Kasper)
+    * Frequency of meetings(Kasper, Kim, & Magnus)
+       * https://docs.google.com/present/edit?id=0AXVYCaxDa3q2ZGhwdHh3MmJfN2dwczJ6dmdr
     * Contract draft(Rasmus A/Dan)
  * Etc.
  * Next meeting
