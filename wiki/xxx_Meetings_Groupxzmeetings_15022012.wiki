@@ -8,10 +8,13 @@ Meeting takes place at 15/02-2012 @ 09:00 AM - 10:00 PM [??.??.??].
 == Agenda ==
   * Development Method
     * When can we decide on something?
+
   * Contract
-  * Update contracts with details on Wiki
+
+  * Update contact details on Wiki
+
   * Present project ideas
-    * Upload your ideas to the Wiki-page under "Guides and Stuff" -> "Project Ideas" - there is a template aswell
+
   * Standard meeting agenda
 
   * etc.
