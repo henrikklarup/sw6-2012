@@ -1,6 +1,6 @@
 #summary Supervisor meeting from 13/02-2012
 
-= Introduction =
+= Supervisor meeting at 13/02-2012 =
 
 Meeting took place at 13/02-2012 @ 12:30 PM - --:-- PM [0.2.12]
 
