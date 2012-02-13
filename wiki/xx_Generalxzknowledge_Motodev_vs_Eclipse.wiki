@@ -1,5 +1,6 @@
 #summary Comparison between Motodev and Eclipse
 
+= Motodev vs Eclipse =
 || *Assignment task:* || Compare Motodev and Eclipse ||
 || *Assigned persons:* || Kristian, Rasmus, and Martin ||
 
