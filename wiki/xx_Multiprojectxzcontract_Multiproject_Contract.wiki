@@ -3,12 +3,12 @@
 = Multiproject Contract =
 
  * [#Presentations Presentations]
- * Preparation
- * Group meetings frequency
- * General rules for meetings
- * Deadlines
- * Attendance
- * Coding rules
+ * [#Preparation Preparation]
+ * [#Group_Meeting_frequency Group meetings frequency]
+ * [#General_rules_for_meetings General rules for meetings]
+ * [#Deadlines Deadlines]
+ * [#Attendance Attendance]
+ * [#Coding_rules Coding rules]
 
 ----
 == Presentations ==
