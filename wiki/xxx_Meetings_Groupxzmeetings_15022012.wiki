@@ -5,22 +5,23 @@
 Meeting takes place at 15/02-2012 @ 09:00 AM - 10:00 PM [0.2.12].
 
 Responsible: Rasmus Aaen
+
 Referent:
 
 == Agenda ==
-  * Development Method
+  * Development Method (Rasmus Aaen)
     * When can we decide on something?
+ 
+  * Contract (Rasmus Aaen)
 
-  * Contract
-
-  * Update contact details on Wiki
+  * Update contact details on Wiki (Henrik)
 
   * Present project ideas
     * GIRAF+ (Thomas)
 
-  * General meeting agenda
+  * General meeting agenda (Rasmus Aaen)
 
-  * Group Formation
+  * Group Formation (Rasmus Aaen)
     * How do we do it? suggestions
 
   * etc.
