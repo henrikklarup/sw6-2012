@@ -22,6 +22,7 @@ Referent:
 
   * Present project ideas
     * GIRAF+ (Thomas)
+    * Sensory (Rasmus Aaen)
 
   * Group Formation (Rasmus Aaen)
     * How do we do it? suggestions
