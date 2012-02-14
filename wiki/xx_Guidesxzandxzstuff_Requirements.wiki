@@ -1,0 +1,14 @@
+#Requirements identified from our customer meetings.
+
+= Introduction =
+Following is the requirements identified from our meetings with the customers.
+
+= Details =
+
+[xxx_Meetings_Customerxzmeetings_09022012 Mette and Christina 09/02/12] <br/> 
+
+Requirements:
+   * Flexible Software/Customizable software
+   * Should be easier to use than corresponding physical methods. (scissors and glue)
+   
+  
