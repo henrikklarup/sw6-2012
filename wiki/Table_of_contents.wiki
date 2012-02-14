@@ -1,4 +1,5 @@
 #summary Table Of Contents
+#labels Deprecated
 
 Table of contents
 ----
@@ -18,14 +19,14 @@ Table of contents
        * [xxx_Generalxzknowledge_Previousxzproject_Source Source]
        * [xxx_Generalxzknowledge_Previousxzproject_System_definition System definition]
  * Guides and stuff
+    * [xx_Guidesxzandxzstuff_Contact_List Contact List]
     * ProjectzxIdeas
        * [xxx_Guidesxzandxzstuff_ProjectzxIdeas_Idea Idea]
+    * [xx_Guidesxzandxzstuff_Requirements Requirements]
     * [xx_Guidesxzandxzstuff_Svn_rules Svn rules]
     * Templates
        * [xxx_Guidesxzandxzstuff_Templates_Meeting_Template Meeting Template]
     * [xx_Guidesxzandxzstuff_To_do To do]
-    * Requirements
-       * [xx_Guidesxzandxzstuff_Requirements Requirements]
  * Meetings
     * Customer meetings
        * [xxx_Meetings_Customerxzmeetings_09022012 09/02-2012]
@@ -43,11 +44,6 @@ Table of contents
  * Project goals
     * [xx_Projectxzgoals_Vision_and_requirements Vision and requirements]#labels Deprecated
  * Links
-    * ProjectzxIdeas
-       * [xxx_Guidesxzandxzstuff_ProjectzxIdeas_Idea Idea]
-    * [xx_Guidesxzandxzstuff_Svn_rules Svn rules]
-    * Templates
-       * [xxx_Guidesxzandxzstuff_Templates_Meeting_Template Meeting Template]
     * [http://groups.google.com/group/Sw6-2012-dis Sw6 2012 Google Group]
     * [http://webchat.freenode.net/?channels=sw62012 IRC  #sw62012 @ Freenode]
 ----
