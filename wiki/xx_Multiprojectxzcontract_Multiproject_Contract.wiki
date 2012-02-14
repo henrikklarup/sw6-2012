@@ -44,6 +44,8 @@ It is important that all groups are represented at all meetings, since groups wh
 
 == Coding Rules ==
 All software available in the trunk folder on the public SVN must be able to run without bugs or errors, such that the software can be used across projects.
-Therefore all groups must work in a branch folder to ensure that bugs and/or errors never may reach the trunk.
+Therefore all groups must work in a branch folder to ensure that bugs and/or errors never may reach the trunk. 
 
 All software must be well documented and commented, such that the software is easy to understand and implement in other projects.
+
+The rules from the SVN rules document apply.
