@@ -16,6 +16,7 @@ Referent:
 
   * Development Method (Rasmus Aaen)
     * When can we decide on a method?
+    * Next SWE lecture is SCRUM (XP)
 
   * General meeting agenda (Rasmus Aaen)
 
