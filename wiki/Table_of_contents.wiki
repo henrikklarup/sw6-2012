@@ -25,6 +25,8 @@ Table of contents
     * Templates
        * [xxx_Guidesxzandxzstuff_Templates_Meeting_Template Meeting Template]
     * [xx_Guidesxzandxzstuff_To_do To do]
+       * Requirements
+         * [xxx_Guidesxzandxzstuff_Requirements]
  * Meetings
     * Customer meetings
        * [xxx_Meetings_Customerxzmeetings_09022012 09/02-2012]
