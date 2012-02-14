@@ -16,10 +16,10 @@ Referent:
 
   * Update contact details on Wiki (Henrik)
 
+  * General meeting agenda (Rasmus Aaen)
+
   * Present project ideas
     * GIRAF+ (Thomas)
-
-  * General meeting agenda (Rasmus Aaen)
 
   * Group Formation (Rasmus Aaen)
     * How do we do it? suggestions
