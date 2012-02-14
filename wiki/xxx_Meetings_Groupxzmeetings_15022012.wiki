@@ -2,7 +2,7 @@
 
 = Group meeting 15/02-2012 =
 
-Meeting takes place at 15/02-2012 @ 09:00 AM - 10:00 PM [??.??.??].
+Meeting takes place at 15/02-2012 @ 09:00 AM - 10:00 PM [0.2.12].
 
 
 == Agenda ==
@@ -15,7 +15,7 @@ Meeting takes place at 15/02-2012 @ 09:00 AM - 10:00 PM [??.??.??].
 
   * Present project ideas
 
-  * Standard meeting agenda
+  * General meeting agenda
 
   * Group Formation
     * How do we do it? suggestions
