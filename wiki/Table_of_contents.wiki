@@ -1,5 +1,4 @@
 #summary Table Of Contents
-#labels Deprecated
 
 Table of contents
 ----
@@ -26,7 +25,7 @@ Table of contents
        * [xxx_Guidesxzandxzstuff_Templates_Meeting_Template Meeting Template]
     * [xx_Guidesxzandxzstuff_To_do To do]
     * Requirements
-       * [xx_Guidesxzandxzstuff_Requirements]
+       * [xx_Guidesxzandxzstuff_Requirements Requirements]
  * Meetings
     * Customer meetings
        * [xxx_Meetings_Customerxzmeetings_09022012 09/02-2012]
