@@ -4,8 +4,8 @@
   * For every individual group
     * Where are we?
       * What did we do since last time?
-  	* _Problems_
-  	* _Demonstrations_
+        * _Problems_
+        * _Demonstrations_
     * Where are we going?
       * What are we going to work on until next time?
   * How far are we, with the entire multiproject? (concluded by the responsible group)
