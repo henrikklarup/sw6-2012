@@ -4,11 +4,11 @@
 
  * [#Presentations Presentations]
  * [#Preparation Preparation]
- * [#Group_Meeting_frequency Group meetings frequency]
- * [#General_rules_for_meetings General rules for meetings]
+ * [#Group_Meeting_Frequency Group Meetings Frequency]
+ * [#General_Rules_for_Meetings General Rules for Meetings]
  * [#Deadlines Deadlines]
  * [#Attendance Attendance]
- * [#Coding_rules Coding rules]
+ * [#Coding_Rules Coding Rules]
 
 ----
 == Presentations ==
@@ -21,7 +21,7 @@ This also means that anything which is added to the appendix has been well formu
 == Group Meeting frequency ==
 There will be held a BIG group meeting every week, where the individual groups share their experience from the previous week and present the upcoming weeks work.
 
-== General rules for meetings ==
+== General Rules for Meetings ==
 A template for the content of the meetings should be made. New topics can be proposed, but this must be done 24 hours prior to a meeting if the material is to be read by the audience, else it must be presented at the meeting.
 
 Presentations for a meeting must be prepared prior to the meeting, according to the section about preparation.
