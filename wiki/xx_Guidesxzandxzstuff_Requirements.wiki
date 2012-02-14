@@ -20,11 +20,22 @@ Requirements:
    * Visualize abstract concepts
    * Emphasize visual stimuli.
    * Unambiguous 
+   * Consistency/structure.
 
 [xxx_Meetings_Customerxzmeetings_10022012 Tove Søby 10/02/12] <br/> 
 
 Requirements:
    * Customizable Software.
    * Engaging/entertaining software.
-   * Authentic feedback/behaviour.
-  
+   * Authentic/proper feedback/behavior.
+
+---
+Common requirements identified by all users or requirements we think make sense as a common requirement for the project.
+
+Common requirements:
+  * Customizable Software.
+    # Some way to distinguish unique users on the same tablet is required, since people with autism have very different needs and have very different perceptions of the world.
+    # Customization should trump feature bloat. 
+  * Emphasize visual stimuli.
+    # Autistic people are visually over stimulated.
+  * Authentic/proper feedback/behavior.
