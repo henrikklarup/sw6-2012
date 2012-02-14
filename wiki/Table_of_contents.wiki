@@ -47,7 +47,8 @@ Table of contents
     * [xx_Multiprojectxzcontract_Draft_of_ideas Draft of ideas]
     * [xx_Multiprojectxzcontract_Multiproject_Contract Multiproject Contract]
  * Project goals
-    * [xx_Projectxzgoals_Vision_and_requirements Vision and requirements] * Links
+    * [xx_Projectxzgoals_Vision_and_requirements Vision and requirements]
+ * Links
     * [http://groups.google.com/group/Sw6-2012-dis Sw6 2012 Google Group]
     * [http://webchat.freenode.net/?channels=sw62012 IRC  #sw62012 @ Freenode]
 ----
