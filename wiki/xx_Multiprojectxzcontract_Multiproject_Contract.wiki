@@ -2,7 +2,7 @@
 
 = Multiproject Contract =
 
- * Presentations
+ * [#Presentations Presentations]
  * Preparation
  * Group meetings frequency
  * General rules for meetings
