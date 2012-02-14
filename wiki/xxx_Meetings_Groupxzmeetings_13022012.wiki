@@ -4,6 +4,9 @@
 
 Meeting took place at 13/02-2012 @ 12:30 AM - --:-- PM [0.2.12].
 
+Attending: Henrik Juul Holm Klarup; Rasmus Hoppe Nesgaard Aaen; Kasper Møller Andersen; Rasmus Ditlev Cornelius Dalhoff-Jensen; Martin Fjordvald; Jakob Jørgensen; Sebastian Lybæk; Jens Mohr Mortensen; Dan Stenholt Møller; Thorbjørn Kvist Nielsen; Thomas Kobber Panum; Magnus Stubman Reichenauer; Kim Arnold Thomsen; Kristian ladefoged; Jesper Bromose, Simon Frandsen;
+
+Not attending: Rasmus Steiniche, Dan Stenholt Møller;
 
 == Agenda ==
  * Meetings with customers
