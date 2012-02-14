@@ -9,12 +9,13 @@ Responsible: Rasmus Aaen
 Referent:
 
 == Agenda ==
-  * Development Method (Rasmus Aaen)
-    * When can we decide on something?
  
   * Contract (Rasmus Aaen)
 
   * Update contact details on Wiki (Henrik)
+
+  * Development Method (Rasmus Aaen)
+    * When can we decide on a method?
 
   * General meeting agenda (Rasmus Aaen)
 
