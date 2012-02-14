@@ -19,11 +19,11 @@ Table of contents
        * [xxx_Generalxzknowledge_Previousxzproject_Source Source]
        * [xxx_Generalxzknowledge_Previousxzproject_System_definition System definition]
  * Guides and stuff
+    * ProjectzxIdeas
+       * [xxx_Guidesxzandxzstuff_ProjectzxIdeas_Idea Idea]
     * [xx_Guidesxzandxzstuff_Svn_rules Svn rules]
     * Templates
        * [xxx_Guidesxzandxzstuff_Templates_Meeting_Template Meeting Template]
-    * Project Ideas
-      * [xxx_Guidesxzandxzstuff_ProjectzxIdeas_Idea Template]
     * [xx_Guidesxzandxzstuff_To_do To do]
  * Meetings
     * Customer meetings
@@ -40,7 +40,7 @@ Table of contents
     * [xx_Multiprojectxzcontract_Draft_of_ideas Draft of ideas]
     * [xx_Multiprojectxzcontract_Multiproject_Contract Multiproject Contract]
  * Project goals
-    * [xx_Projectxzgoals_Vision_and_requirements Vision and requirements]
+    * [xx_Projectxzgoals_Vision_and_requirements Vision and requirements]#labels Deprecated
  * Links
     * [http://groups.google.com/group/Sw6-2012-dis Sw6 2012 Google Group]
     * [http://webchat.freenode.net/?channels=sw62012 IRC  #sw62012 @ Freenode]
