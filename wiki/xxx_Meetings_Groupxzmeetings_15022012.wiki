@@ -4,6 +4,8 @@
 
 Meeting takes place at 15/02-2012 @ 09:00 AM - 10:00 PM [0.2.12].
 
+Responsible: Rasmus Aaen
+Referent:
 
 == Agenda ==
   * Development Method
