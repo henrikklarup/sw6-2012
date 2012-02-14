@@ -19,8 +19,8 @@ Table of contents
        * [xxx_Generalxzknowledge_Previousxzproject_Source Source]
        * [xxx_Generalxzknowledge_Previousxzproject_System_definition System definition]
  * Guides and stuff
-    * ProjectzxIdeas
-       * [xxx_Guidesxzandxzstuff_ProjectzxIdeas_Idea Idea]
+    * Project Ideas
+       * [xxx_Guidesxzandxzstuff_ProjectxzIdeas_Idea Idea]
     * [xx_Guidesxzandxzstuff_Svn_rules Svn rules]
     * Templates
        * [xxx_Guidesxzandxzstuff_Templates_Meeting_Template Meeting Template]
