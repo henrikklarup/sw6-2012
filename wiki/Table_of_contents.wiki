@@ -22,6 +22,7 @@ Table of contents
     * [xx_Guidesxzandxzstuff_Contact_List Contact List]
     * Project Ideas
        * [xxx_Guidesxzandxzstuff_ProjectxzIdeas_Idea Idea Template]
+       * [xxx_Guidesxzandxzstuff_ProjectxzIdeas_Sensory Sensory]
     * [xx_Guidesxzandxzstuff_Requirements Requirements]
     * [xx_Guidesxzandxzstuff_Svn_rules Svn rules]
     * Templates
