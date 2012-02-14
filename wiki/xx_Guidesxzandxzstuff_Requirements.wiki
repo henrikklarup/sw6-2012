@@ -10,5 +10,21 @@ Following is the requirements identified from our meetings with the customers.
 Requirements:
    * Flexible Software/Customizable software
    * Should be easier to use than corresponding physical methods. (scissors and glue)
+   * Emphasize visual stimuli.
+   * Continuous stimuli.
    
+[xxx_Meetings_Customerxzmeetings_09022012 Drazenko 09/02/12] <br/> 
+
+Requirements:
+   * Customizable Software.
+   * Visualize abstract concepts
+   * Emphasize visual stimuli.
+   * Unambiguous 
+
+[xxx_Meetings_Customerxzmeetings_10022012 Tove Søby 10/02/12] <br/> 
+
+Requirements:
+   * Customizable Software.
+   * Engaging/entertaining software.
+   * Authentic feedback/behaviour.
   
