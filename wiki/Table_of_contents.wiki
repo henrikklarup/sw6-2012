@@ -20,8 +20,8 @@ Table of contents
        * [xxx_Generalxzknowledge_Previousxzproject_System_definition System definition]
  * Guides and stuff
     * [xx_Guidesxzandxzstuff_Contact_List Contact List]
-    * ProjectzxIdeas
-       * [xxx_Guidesxzandxzstuff_ProjectzxIdeas_Idea Idea]
+    * Project Ideas
+       * [xxx_Guidesxzandxzstuff_ProjectxzIdeas_Idea Idea]
     * [xx_Guidesxzandxzstuff_Requirements Requirements]
     * [xx_Guidesxzandxzstuff_Svn_rules Svn rules]
     * Templates
