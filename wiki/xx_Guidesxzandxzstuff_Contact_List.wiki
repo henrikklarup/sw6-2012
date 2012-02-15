@@ -17,30 +17,30 @@ Add your firstname, lastname and initials of your aaumail
 == Group 2 ==
 
 || *Name* || *AAU user* ||
-|| Rasmus A || ||
+|| Rasmus A || raaen09 ||
 || Simon || ||
 || Kristian || ||
-|| Kasper || ||
 
-== Group 3 ==
+== Group 3 - Launcher ==
 
 || *Name* || *AAU user* ||
 || Thomas || ||
 || Magnus || ||
 || Rasmus S || ||
+|| Kasper || ||
 
 ----
 
 =Backend=
 
-== Group 4 ==
+== Group 4 - Server ==
 
 || *Name* || *AAU user* ||
 || Thorbjørn || ||
 || Jesper || ||
 || Sebastian || ||
 
-== Group 5 ==
+== Group 5 - Admin ==
 
 || *Name* || *AAU user* ||
 || Henrik || ||
