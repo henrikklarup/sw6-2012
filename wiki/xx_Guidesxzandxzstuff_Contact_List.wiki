@@ -37,7 +37,7 @@ Add your firstname, lastname and initials of your aaumail
 
 || *Name* || *AAU user* ||
 || Thorbjørn || ||
-|| Jesper || ||
+|| Jesper || jbromo09||
 || Sebastian || ||
 
 == Group 5 - Admin ==
