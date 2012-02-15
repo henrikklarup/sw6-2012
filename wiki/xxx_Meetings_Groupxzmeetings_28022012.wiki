@@ -18,6 +18,8 @@ Referent:
       * What are we going to work on until next time?
   * How far are we, with the entire multiproject? (concluded by the responsible group)
     * When are we at the next major milestone?
+  * Development Method (Simon)
+  * Group resposibility areas (Kasper)
   * AUB (Eventuelt)
   * Next Meeting
     * Responsible group
