@@ -4,7 +4,7 @@
   * For every individual group
     * Where are we?
       * What did we do since last time?
-        * _Problems_
+        * _Issues_
         * _Demonstrations_
     * Where are we going?
       * What are we going to work on until next time?
