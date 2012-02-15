@@ -9,7 +9,7 @@ Add your firstname, lastname and initials of your aaumail
 == Group 1 ==
 
 || *Name* || *AAU user* ||
-|| Rasmus DJ ||  ||
+|| Rasmus DJ || rdalho09 ||
 || Kim || ||
 || Jakob || ||
 || Christoffer || ||
