@@ -9,15 +9,23 @@ Add your firstname, lastname and initials of your aaumail
 == Group 1 ==
 
 Henrik Klarup - hklaru09
+
 Firstname Lastname - initials
+
 Firstname Lastname - initials
+
 Firstname Lastname - initials
+
 
 == Group 2 ==
 
 Firstname Lastname - initials
+
 Firstname Lastname - initials
+
 Firstname Lastname - initials
+
 Firstname Lastname - initials
+
 
 ...
