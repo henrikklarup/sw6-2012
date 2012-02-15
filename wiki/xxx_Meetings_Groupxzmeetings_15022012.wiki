@@ -30,4 +30,6 @@ Referent:
 
 == Details ==
 
+[https://docs.google.com/document/d/1bERw18AnfedqV5FyG8TgTjrZ_tVR8DnJ6DPoVwsh0R8/edit Minutes]
+
 === Next meeting ===
