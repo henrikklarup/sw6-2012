@@ -18,7 +18,8 @@ Referent:
   * General meeting agenda (Rasmus Aaen)
   * Present project ideas
     * GIRAF+ (Thomas)
-    * Sensory (Rasmus Aaen) [https://docs.google.com/present/edit?id=0Aa_O5s2PiU0oZHJ2ZGNwel83MWYzMmJra3F3 Presentation]
+    * Sensory (Rasmus Aaen) [http://code.google.com/p/sw6-2012/wiki/xxx_Guidesxzandxzstuff_ProjectxzIdeas_Sensory Wiki] | [https://docs.google.com/present/edit?id=0Aa_O5s2PiU0oZHJ2ZGNwel83MWYzMmJra3F3 Presentation]
+    * Transportable day schedule (Henrik) [http://code.google.com/p/sw6-2012/wiki/xxx_Guidesxzandxzstuff_ProjectxzIdeas_Transportable_day_schedule Wiki]
   * Group Formation (Rasmus Aaen)
     * How do we do it? suggestions
   * etc.
