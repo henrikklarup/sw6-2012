@@ -1,9 +1,0 @@
-#Project proposal for the group structure by Thomas.
-
-= Introduction =
-The mini group projects:
-  - Admin v2.0
-  - Launcher v2.0
-  - 'Time' app
-  - DigiPECS v2.0
-  - Savannah (server)
