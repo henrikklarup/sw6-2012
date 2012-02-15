@@ -21,7 +21,14 @@ Add your firstname, lastname and initials of your aaumail
 || Simon || sbfr09 ||
 || Kristian || kfoged09 ||
 
-== Group 3
+== Group 3 ==
+
+|| Name	|| AAU user ||
+|| Thomas || tpanum08 ||
+|| Magnus || mreich09 ||
+|| Rasmus S || rsteim09 ||
+|| Kasper || kman09 ||
+
 
 =Backend=
 
