@@ -23,7 +23,7 @@ Add your firstname, lastname and initials of your aaumail
 
 == Group 3 ==
 
-|| Name	|| AAU user ||
+|| *Name* || *AAU user* ||
 || Thomas || tpanum08 ||
 || Magnus || mreich09 ||
 || Rasmus S || rstein09 ||
@@ -46,4 +46,3 @@ Add your firstname, lastname and initials of your aaumail
 || Henrik || hklaru09 ||
 || Dan || dmoell09 ||
 || Jens || jmmo09 ||
-...
