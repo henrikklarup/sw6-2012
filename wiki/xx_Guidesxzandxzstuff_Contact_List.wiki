@@ -18,8 +18,8 @@ Add your firstname, lastname and initials of your aaumail
 
 || *Name* || *AAU user* ||
 || Rasmus A || raaen09 ||
-|| Simon || ||
-|| Kristian || ||
+|| Simon || sbfr09 ||
+|| Kristian || kfoged09 ||
 
 == Group 3 - Launcher ==
 
