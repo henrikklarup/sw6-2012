@@ -16,6 +16,7 @@ Referent:
     * When can we decide on a method?
     * Next SOE (software engineering) lecture is SCRUM (XP)
   * General meeting agenda (Kim)
+  * Project Requirements (Kasper)
   * Present project ideas
     * GIRAF+ (Thomas)
     * Sensory (Rasmus Aaen) [http://code.google.com/p/sw6-2012/wiki/xxx_Guidesxzandxzstuff_ProjectxzIdeas_Sensory Wiki] | [https://docs.google.com/present/edit?id=0Aa_O5s2PiU0oZHJ2ZGNwel83MWYzMmJra3F3 Presentation]
