@@ -25,7 +25,7 @@ Add your firstname, lastname and initials of your aaumail
 
 || *Name* || *AAU user* ||
 || Thomas || ||
-|| Magnus || ||
+|| Magnus || mreich09 ||
 || Rasmus S || ||
 || Kasper || kman09 ||
 
