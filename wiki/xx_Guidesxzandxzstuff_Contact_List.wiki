@@ -27,7 +27,7 @@ Add your firstname, lastname and initials of your aaumail
 || Thomas || ||
 || Magnus || ||
 || Rasmus S || ||
-|| Kasper || ||
+|| Kasper || kman09 ||
 
 ----
 
@@ -43,7 +43,7 @@ Add your firstname, lastname and initials of your aaumail
 == Group 5 - Admin ==
 
 || *Name* || *AAU user* ||
-|| Henrik || ||
+|| Henrik || hklaru09 ||
 || Dan || ||
 || Jesper || ||
 ...
