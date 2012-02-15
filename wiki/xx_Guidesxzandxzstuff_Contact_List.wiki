@@ -5,27 +5,45 @@
 Add yourself!
 Add your firstname, lastname and initials of your aaumail
 
-
+=Frontend=
 == Group 1 ==
 
-Henrik Klarup - hklaru09
-
-Firstname Lastname - initials
-
-Firstname Lastname - initials
-
-Firstname Lastname - initials
-
+|| *Name* || *AAU user* ||
+|| Rasmus DJ ||  ||
+|| Kim || ||
+|| Jakob || ||
+|| Christoffer || ||
 
 == Group 2 ==
 
-Firstname Lastname - initials
+|| *Name* || *AAU user* ||
+|| Rasmus A || ||
+|| Simon || ||
+|| Kristian || ||
+|| Kasper || ||
 
-Firstname Lastname - initials
+== Group 3 ==
 
-Firstname Lastname - initials
+|| *Name* || *AAU user* ||
+|| Thomas || ||
+|| Magnus || ||
+|| Rasmus S || ||
 
-Firstname Lastname - initials
 
 
+=Backend=
+
+== Group 4 ==
+
+|| *Name* || *AAU user* ||
+|| Thorbjørn || ||
+|| Jesper || ||
+|| Sebastian || ||
+
+== Group 5 ==
+
+|| *Name* || *AAU user* ||
+|| Henrik || ||
+|| Dan || ||
+|| Jesper || ||
 ...
