@@ -6,7 +6,7 @@ Meeting takes place at 15/02-2012 @ 09:00 AM - 10:00 PM [0.2.12].
 
 Responsible: Rasmus Aaen
 
-Referent:
+Referent: Kasper
 
 == Agenda ==
  
@@ -33,3 +33,5 @@ Referent:
 [https://docs.google.com/document/d/1bERw18AnfedqV5FyG8TgTjrZ_tVR8DnJ6DPoVwsh0R8/edit Minutes]
 
 === Next meeting ===
+
+28/02-2012 at 12.30
