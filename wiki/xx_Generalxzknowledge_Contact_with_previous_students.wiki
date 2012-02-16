@@ -6,11 +6,12 @@
 
 
 = OBS =
-Vær opmærksom på, at formulere så specifikke spørgsmål som muligt, således at spørgsmålet er utvetydigt og så let som muligt for modtageren at besvare. Vi har lovet at gøre det så specifikt som muligt, og at KUN kontakte disse kontaktpersoner hvis vi ikke kan få hjælp fra andet sted.
+
+Whenever asking a question, be as precise as possible, and only ask if you cannot find help anywhere else.
 
 == Kontaktpersoner ==
 ----
-DigiPECS - _Har ej fundet en kontaktperson til DigiPECS gruppen endnu. 7/2-2012_
+DigiPECS - _Have not got response from a member of the group yet 7/2-2012_
 ----
 aSchedule & Schedule.test - Jens Kristian Geyti <jkg@jkg.dk>
 ----
