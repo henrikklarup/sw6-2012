@@ -20,7 +20,7 @@ Referent:
     * When are we at the next major milestone?
   * Development Method (Simon)
   * Group resposibility areas (Kasper)
-  * AUB (Eventuelt)
+  * Aub. (Eventuelt)
   * Next Meeting
     * Responsible group
     * Date
