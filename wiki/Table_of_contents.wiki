@@ -26,6 +26,7 @@ Table of contents
        * [xxx_Guidesxzandxzstuff_ProjectxzIdeas_Transportable_day_schedule Transportable day schedule]
     * [xx_Guidesxzandxzstuff_Requirements Requirements]
     * [xx_Guidesxzandxzstuff_Svn_rules Svn rules]
+    * [xx_Guidesxzandxzstuff_Svn_structure Svn structure]
     * Templates
        * [xxx_Guidesxzandxzstuff_Templates_Meeting_Agenda Meeting Agenda]
        * [xxx_Guidesxzandxzstuff_Templates_Meeting_Template Meeting Template]
