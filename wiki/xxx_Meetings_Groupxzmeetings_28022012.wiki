@@ -20,6 +20,9 @@ Referent:
     * When are we at the next major milestone?
   * Development Method (Simon)
   * Group resposibility areas (Kasper)
+  * Suggestions for common paper workform (Magnus)
+  * Android versions (Magnus)
+  * Separate Camera App (Magnus)
   * Aub. (Eventuelt)
   * Next Meeting
     * Responsible group
