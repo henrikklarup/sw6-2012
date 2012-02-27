@@ -19,10 +19,13 @@ Referent:
   * How far are we, with the entire multiproject? (concluded by the responsible group)
     * When are we at the next major milestone?
   * Development Method (Simon)
+    * XP
+    * SCRUM
   * Group resposibility areas (Kasper)
   * Suggestions for common paper workform (Magnus)
   * Android versions (Magnus)
   * Separate Camera App (Magnus)
+  * SVN Structure
   * Aub. (Eventuelt)
   * Next Meeting
     * Responsible group
