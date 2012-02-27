@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Presentation</title>
+    
+    <meta name="description" content="impress.js is a presentation tool based on the power of CSS3 transforms and transitions in modern browsers and inspired by the idea behind prezi.com." />
+    <meta name="author" content="Bartek Szopka" />
+
+    <link href="http<i>://fonts.googleapis.com/css?family=Open+Sans<i>:regular,semibold,italic,italicsemibold|PT+Sans<i>:400,700,400italic,700italic|PT+Serif<i>:400,700,400italic,700italic" rel="stylesheet" />
+
+  
+    <link href="css/impress-demo.css" rel="stylesheet" />
+    
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+</head>
+<body>
+
+<div id="impress" class="impress-not-supported">
+
+    <div class="fallback-message">
+        <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+        <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser. Upcoming version 10 of Internet Explorer <i>should</i> also handle it.</p>
+    </div>
+    <div class="step slide">
+       <h1>Introduction</h1>
+			<ul>
+				<li>Motivation
+					<ul>
+						<li><b>Study regulation</b><i>: Multi-project mangement, testing</i></li>
+					</ul>
+				</li>
+				<li>Target Group
+					<ul>
+						<li><b>Being an autist</b><i>: Experience of time, imagination</i></li>
+						<li><b>Working with autists</b><i>: Example day of structure, equipment (personalization), flexbility, major dificulties</i></li>
+					</ul>
+				</li>
+				<li>Target Platform
+					<ul>
+						<li><b>Android</b><i>: Price efficient, open source, feedback (visual, auditive, kinesthetic)</i></li>
+					</ul>
+				</li>
+				<li>Workform*
+					<ul>
+						<li><b>"Customer"</b></li>
+						<li><b>Development method</b>: <i>Cooperation between us and "customer"</i></li>
+						<li><b>Preliminary problemstatement</b></li>
+						<li><b>Limitations: <i>Time, devices</b></i></li>
+						<li><b>Problem Statement/Reach Question</b></li>
+					</ul>
+				</li>
+			</ul>
+			<p>*Could both be group/customer-specific, but could also be general</p>
+    </div>
+	<div class="step slide">
+       <h1>Android versions</h1>
+			<ul>
+				<li>Hello1</li>
+				<li>Hello2</li>
+				<li>Hello3</li>
+				<li>Hello4</li>
+			</ul>
+    </div>
+	<div class="step slide">
+       <h1>Separate Camera App</h1>
+		<ul>
+			<li>Hello1</li>
+			<li>Hello2</li>
+			<li>Hello3</li>
+			<li>Hello4</li>
+		</ul>
+    </div>
+</div>
+<script>
+if ("ontouchstart" in document.documentElement) { 
+    document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+}
+</script>
+
+<script src="js/impress.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/circlenate.js"></script>
+<script>circlenate();</script>
+<script>impress();</script> 
+</body>
+</html>
+
+
