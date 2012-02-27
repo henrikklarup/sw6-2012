@@ -18,7 +18,7 @@ Referent:
       * What are we going to work on until next time?
   * How far are we, with the entire multiproject? (concluded by the responsible group)
     * When are we at the next major milestone?
-  * Development Method (Simon & Henrik)[https://docs.google.com/document/d/1sC1nO7jzH19H2R0q3MqbRRm4DEZpyVciqJos7C9-WLs/edit?pli=1 link]
+  * Development Method (Simon & Henrik) [https://docs.google.com/document/d/1sC1nO7jzH19H2R0q3MqbRRm4DEZpyVciqJos7C9-WLs/edit?pli=1 link]
     * XP
     * SCRUM
   * Group resposibility areas (Kasper)
