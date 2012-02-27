@@ -22,6 +22,7 @@ Referent:
     * XP
     * SCRUM
   * Group resposibility areas (Kasper)
+    * [https://docs.google.com/presentation/d/12h2nPS4y7aQsuGIZlMj_mX3VpfORtJAh0l4NJPWPPjM/edit Presentation]
   * Customers (Rasmus)
   * Suggestions for common paper workform (Magnus)
   * Android versions (Magnus)
