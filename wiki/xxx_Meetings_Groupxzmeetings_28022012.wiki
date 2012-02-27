@@ -22,7 +22,7 @@ Referent:
     * XP
     * SCRUM
   * Group resposibility areas (Kasper)
-  * Contacts (Rasmus)
+  * Customers (Rasmus)
   * Suggestions for common paper workform (Magnus)
   * Android versions (Magnus)
   * Separate Camera App (Magnus)
