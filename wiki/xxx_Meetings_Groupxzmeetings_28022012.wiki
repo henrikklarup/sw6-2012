@@ -22,12 +22,13 @@ Referent:
     * XP
     * SCRUM
   * Group resposibility areas (Kasper)
+  * Contacts (Rasmus)
   * Suggestions for common paper workform (Magnus)
   * Android versions (Magnus)
   * Separate Camera App (Magnus)
-  * SVN Structure
+  * SVN Structure (Henrik)
   * Aub. (Eventuelt)
-  * Next Meeting
+  * Next Meeting (Rasmus)
     * Responsible group
     * Date
 
