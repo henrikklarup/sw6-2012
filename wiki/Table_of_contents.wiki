@@ -51,5 +51,7 @@ Table of contents
  * Links
     * [http://groups.google.com/group/Sw6-2012-dis Sw6 2012 Google Group]
     * [http://webchat.freenode.net/?channels=sw62012 IRC  #sw62012 @ Freenode]
+ * Extra work
+  * [http://code.google.com/p/sw6-2012/wiki/UnifiedCameraApp?ts=1330435392&updated=UnifiedCameraApp Unified Camera App]
 ----
 <g:plusone size="medium"></g:plusone>
