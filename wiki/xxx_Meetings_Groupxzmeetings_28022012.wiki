@@ -27,7 +27,7 @@ Referent:
   * Suggestions for common paper workform (Magnus)
   * Android versions (Magnus)
   * Separate Camera App (Magnus)
-  * SVN Structure (Henrik)
+  * SVN Structure (Henrik) [xx_Guidesxzandxzstuff_Svn_structure Svn Structure]
   * Aub. (Eventuelt)
   * Next Meeting (Rasmus)
     * Responsible group
