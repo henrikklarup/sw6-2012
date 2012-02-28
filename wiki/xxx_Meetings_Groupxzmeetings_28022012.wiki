@@ -32,5 +32,6 @@ Referent:
   * Next Meeting (Rasmus)
     * Responsible group
     * Date
+    * University day
 
 Issues in _italic_ is optional
