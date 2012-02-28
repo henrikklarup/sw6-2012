@@ -24,7 +24,7 @@ Referent:
   * Group resposibility areas (Kasper)
     * [https://docs.google.com/presentation/d/12h2nPS4y7aQsuGIZlMj_mX3VpfORtJAh0l4NJPWPPjM/edit Presentation]
   * Customers (Rasmus)
-  * Suggestions for common paper workform (Magnus)
+  * Suggestions for common paper workform (Magnus) [https://docs.google.com/document/d/1RpKheUhb6CQBLiBTWbUDeD5eZXFwZ38gC3cluCc6E2I/edit link]
   * Android versions (Magnus)
   * Separate Camera App (Magnus)
   * SVN Structure (Henrik) [xx_Guidesxzandxzstuff_Svn_structure Svn Structure]
