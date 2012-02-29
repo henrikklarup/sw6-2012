@@ -95,11 +95,11 @@ Repræsentative grupper:
 Nedsat Gruppe (ulrik, magnus, henrik, rasmus A, kristian)	
 
 ::CUSTOMERS	
-Digipecs - Tove Søby
-AndenApp - Mette Als Andreasen
-Luncher - Drazenko Banjak
-Server - Mette Frost Jessen 
-Admin - Kristine Niss Henriksen
+ *Digipecs - Tove Søby
+ *AndenApp - Mette Als Andreasen
+ *Luncher - Drazenko Banjak
+ *Server - Mette Frost Jessen 
+ *Admin - Kristine Niss Henriksen
 
 Forslag (Ulrik): Når man har kontakt til kunder repræsentere man HELE multiprojektet og tager kravende med hjem. !!!KRAV SKAL NOTERES!!! (tænk dieb) + spørgsmål/krav fra andre grupper skal tages med. Alle grupper skriver spørgsmål ned og sender det til de andre grupper. Hver gruppe tager så alle spørgsmål med.
 
