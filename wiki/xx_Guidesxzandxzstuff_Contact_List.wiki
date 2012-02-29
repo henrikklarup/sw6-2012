@@ -6,8 +6,9 @@
 Add yourself!
 Add your firstname, lastname and initials of your aaumail
 
+
 =Frontend=
-== Group 1 - digiPECS ==
+== Group: sw601f12 - digiPECS ==
 
 || *Name* || *AAU user* || *Skype* ||
 || Rasmus DJ || rdalho09 || ||
@@ -15,14 +16,14 @@ Add your firstname, lastname and initials of your aaumail
 || Jakob || jjo09 || ||
 || Christoffer || cvinth09 || ||
 
-== Group 2 - App ==
+== Group: sw602f12 - App ==
 
 || *Name* || *AAU user* ||
 || Rasmus A || raaen09 ||
 || Simon || sbfr09 ||
 || Kristian || kfoged09 ||
 
-== Group 3 - Launcher ==
+== Group: sw605f12 - Launcher ==
 
 || *Name* || *AAU user* ||
 || Thomas || tpanum08 ||
@@ -33,7 +34,7 @@ Add your firstname, lastname and initials of your aaumail
 
 =Backend=
 
-== Group 4 - Server ==
+== Group: sw603f12 - Server ==
 
 || *Name* || *AAU user* ||
 || Thorbjørn || tkni09 ||
@@ -41,7 +42,7 @@ Add your firstname, lastname and initials of your aaumail
 || Sebastian || slybae09 ||
 || Martin || mfjord09 ||
 
-== Group 5 - Admin ==
+== Group: sw604f12 - Admin ==
 
 || *Name* || *AAU user* ||
 || Henrik || hklaru09 ||
