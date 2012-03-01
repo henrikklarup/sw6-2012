@@ -24,6 +24,7 @@ Table of contents
        * [xxx_Guidesxzandxzstuff_ProjectxzIdeas_Idea Idea]
        * [xxx_Guidesxzandxzstuff_ProjectxzIdeas_Sensory Sensory]
        * [xxx_Guidesxzandxzstuff_ProjectxzIdeas_Transportable_day_schedule Transportable day schedule]
+       * [xxx_Guidesxzandxzstuff_ProjectxzIdeas_Unified_Camera_App Unified Camera App]
     * [xx_Guidesxzandxzstuff_Requirements Requirements]
     * [xx_Guidesxzandxzstuff_Svn_rules Svn rules]
     * [xx_Guidesxzandxzstuff_Svn_structure Svn structure]
@@ -31,6 +32,7 @@ Table of contents
        * [xxx_Guidesxzandxzstuff_Templates_Meeting_Agenda Meeting Agenda]
        * [xxx_Guidesxzandxzstuff_Templates_Meeting_Template Meeting Template]
     * [xx_Guidesxzandxzstuff_To_do To do]
+    * [xx_Guidesxzandxzstuff_UpdatePage UpdatePage]
  * Meetings
     * Customer meetings
        * [xxx_Meetings_Customerxzmeetings_09022012 09/02-2012]
@@ -38,11 +40,12 @@ Table of contents
     * Group meetings
        * [xxx_Meetings_Groupxzmeetings_01022012 01/02-2012]
        * [xxx_Meetings_Groupxzmeetings_08022012 08/02-2012]
+       * [xxx_Meetings_Groupxzmeetings_08032012 08/03-2012]
        * [xxx_Meetings_Groupxzmeetings_13022012 13/02-2012]
        * [xxx_Meetings_Groupxzmeetings_15022012 15/02-2012]
        * [xxx_Meetings_Groupxzmeetings_28022012 28/02-2012]
-       * [xxx_Meetings_Groupxzmeetings_08032012 08/03-2012]
-    * Supervisor meetings
+       * Supervisor meetings
+          * [xxxx_Meetings_Groupxzmeetings_Supervisorxzmeetings_01032012 01/03-2012]
        * [xxx_Meetings_Supervisorxzmeetings_13022012 13/02-2012]
  * Multiproject contract
     * [xx_Multiprojectxzcontract_Draft_of_ideas Draft of ideas]
@@ -52,7 +55,5 @@ Table of contents
  * Links
     * [http://groups.google.com/group/Sw6-2012-dis Sw6 2012 Google Group]
     * [http://webchat.freenode.net/?channels=sw62012 IRC  #sw62012 @ Freenode]
- * Extra work
-  * [http://code.google.com/p/sw6-2012/wiki/UnifiedCameraApp?ts=1330435392&updated=UnifiedCameraApp Unified Camera App]
 ----
 <g:plusone size="medium"></g:plusone>
