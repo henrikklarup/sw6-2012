@@ -47,6 +47,8 @@ Table of contents
     * Supervisor meetings
        * [xxx_Meetings_Supervisorxzmeetings_02132012 13/02-2012]
        * [xxx_Meetings_Supervisorxzmeetings_03012012 01/03-2012]
+    * Specification meetings
+       * [xxx_Meetings_Specificationxzmeetings_03072012 07/03-2012]
  * Multiproject contract
     * [xx_Multiprojectxzcontract_Draft_of_ideas Draft of ideas]
     * [xx_Multiprojectxzcontract_Multiproject_Contract Multiproject Contract]
