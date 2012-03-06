@@ -19,7 +19,8 @@ Notary:
   * How far are we, with the entire multiproject? (concluded by the responsible group)
     * When are we at the next major milestone?
 
-  * Ansvars Gruppen [https://docs.google.com/document/d/18GOWGhsKbELXIS6ClHcvueUknghB_JctCarCmebUous/edit Link] Tid: 20 min. (Magnus)
+  * Ansvars Gruppen [https://docs.google.com/document/d/18GOWGhsKbELXIS6ClHcvueUknghB_JctCarCmebUous/edit Link] Tid: 20 min. (Magnus) 
+    * Uddelegering af ansvarsområder for at øge overblikket. 
 
-  * Test Outsourcing Tid: 10 min. (Rasmus Aaen)
+  * Test Outsourcing Tid: [http://code.google.com/p/sw6-2012/source/browse/trunk/Group_2/M%C3%B8der/8-3-2012/Test%20Outsourcing.pdf Link] 10 min. (Rasmus Aaen)
     * Project Uge Til Testing.
