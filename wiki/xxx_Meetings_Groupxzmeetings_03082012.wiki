@@ -24,4 +24,4 @@ Notary: SW602
 
   * Test Outsourcing Tid: [http://code.google.com/p/sw6-2012/source/browse/trunk/Group_2/M%C3%B8der/8-3-2012/Test%20Outsourcing.pdf Link] 10 min. (Rasmus Aaen)
     * Project Uge Til Testing.
-    * <font color="red">Postponed to next week.</font>
+    * <font color="red">Postponed for next week.</font>
