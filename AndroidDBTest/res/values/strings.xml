@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World!</string>
+    <string name="app_name">AndroidDBTest</string>
+    <string name="login_username">Username:</string>
+    <string name="login_header">Login Header</string>
+    <string name="login_password">Password:</string>
+    <string name="login_button">Login!</string>
+    <string name="login_register">Register!</string>
+    <string name="register_header">Register Header</string>
+    <string name="register_username">Username:</string>
+    <string name="register_password">Password:</string>
+    <string name="register_repassword">Retype Password:</string>
+    <string name="register_submit">Submit!</string>
+    <string name="register_cancel">Cancel!</string>
+
+</resources>
