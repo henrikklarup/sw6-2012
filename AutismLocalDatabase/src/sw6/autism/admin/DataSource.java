@@ -21,5 +21,27 @@ public class DataSource {
 	}
 
 	//ANDRE METODER SOM DE ANDRE SKAL BRUGE
+	public void inputProfile() {
 
+	}
+
+	public void inputStats() {
+
+	}
+
+	public void inputApps() {
+
+	}
+
+	public void inputSettings() {
+
+	}
+
+	public void inputMedia() {
+
+	}
+	
+	public void inputDepartment() {
+
+	}
 }
