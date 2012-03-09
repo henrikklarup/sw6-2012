@@ -1,0 +1,29 @@
+#summary Meeting Agenda 14/03-2012
+
+= Group meeting 14/03-2012 =
+
+Meeting takes place at 28/02-2012 @ 9:00 AM - 12:00 PM [0.2.13].
+
+Responsible: sw602f12
+
+Referent: sw602f12
+
+== Agenda ==
+  * For every individual group
+    * Where are we?
+      * What did we do since last time?
+        * _Issues_
+        * _Demonstrations_
+    * Where are we going?
+      * What are we going to work on until next time?
+  * How far are we, with the entire multiproject? (concluded by the responsible group)
+    * When are we at the next major milestone?
+  * Iteration Length (Rasmus) (10 min)
+  * Project Coordination (Rasmus) (15 min)
+  * Aub. (Eventuelt)
+  * Next Meeting (Rasmus)
+    * Responsible group
+    * Date
+    * Open Door Day
+
+Issues in _italic_ is optional
