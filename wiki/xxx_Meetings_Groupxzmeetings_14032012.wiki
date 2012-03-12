@@ -18,12 +18,13 @@ Referent: sw602f12
       * What are we going to work on until next time?
   * How far are we, with the entire multiproject? (concluded by the responsible group)
     * When are we at the next major milestone?
-  * Iteration Length (Rasmus) (10 min)
-  * Project Coordination (Rasmus) (15 min)
+  * System Definition (All groups) (5 min each)
+  * Iteration Length (Rasmus A) (10 min)
+  * Project Coordination (Rasmus A) (20 min)
   * Aub. (Eventuelt)
-  * Next Meeting (Rasmus)
-    * Responsible group
-    * Date
-    * Open Door Day
+  * Next Meeting (Rasmus A)
+    * Responsible group (sw603f12)
+    * Date (sw603f12)
+    * Open Door Day (Rasmus A)
 
 Issues in _italic_ is optional
