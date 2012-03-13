@@ -53,6 +53,12 @@ public class DataSource {
 	public void clearStatsTable() {
 		_context.getContentResolver().delete(StatsMetaData.CONTENT_URI, null, null);
 	}
+	
+	public void modifyApp(String appId, String appName) {
+		ContentValues cv = new ContentValues();
+		cv.put(AppsMetaData.AppsTable.COLUMN_NAME, appName);
+		_context.getContentResolver().update(AppsMetaData.CONTENT_URI, cv, appId, null);
+	}
 
 	public void insertApp(String appName) {
 		ContentValues cv = new ContentValues();
