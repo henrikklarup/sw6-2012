@@ -23,6 +23,7 @@ Referent: sw602f12
   * Iteration Length (Rasmus A) (10 min)
   * Project Coordination (Rasmus A) (30 min)
   * Application Execution Environment (Rasmus BJ) (10 min)
+  * GUI Meetings with PhD Student from IS Group Henrik Sørensen (Ulrik) (10 min)
   * Aub. (Eventuelt)
   * Next Meeting
     * Responsible group (sw603f12)
