@@ -18,9 +18,9 @@ Referent: sw602f12
       * What are we going to work on until next time?
   * How far are we, with the entire multiproject? (concluded by the responsible group)
     * When are we at the next major milestone?
-  * System Definition (All groups) (5 min each)
+  * System Description - All groups (5 min each) (previously called system definition)
     * Launcher gruppen: [https://docs.google.com/document/d/1EguRj7PKEHhCozi88aTxw8lX8zUJuNjQIEIwJQNZHpM/edit link]
-  * Multi Project System Definition (Magnus) (10 min)
+  * Multi Project System Description (Magnus) (10 min) [https://docs.google.com/document/d/1RpKheUhb6CQBLiBTWbUDeD5eZXFwZ38gC3cluCc6E2I/edit link]
   * Iteration Length (Rasmus A) (10 min)
   * Project Coordination (Rasmus A) (30 min)
   * Application Execution Environment (Rasmus BJ) (10 min)
