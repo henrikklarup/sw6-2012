@@ -1,0 +1,3 @@
+Questions for an interview:
+
+Should PARROT give the user the ability to store commonly used series of PECS as sentences, or should this feature be omitted?
