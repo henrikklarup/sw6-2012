@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+
+<!-- Xml schema for sw6ml-> is currently under construction -->
+<!-- Created by sw603f12 for the android multiproject -->
+
+<!-- Purpose of this xml language is to facilitate data transfer
+     between the admin and the server group databases -->
+
+<sw6:schema xmlns:sw6="http://localhost">
+
+<sw6:element name="Media">
+  <sw6:complextype>
+    <sw6:sequence> <!-- check if sequence or something else, should be a variable size -->
+	  <sw6:entry name="...">
+	    <sw6:action>
+		  ...   <!-- suggestion action=(add, alter) or remove -->
+		</sw6:action>
+	  </sw6:entry>
+    </sw6:sequence>
+  </sw6:complextype>
+</sw6:element>
+
+<sw6:element name="Department">
+  <sw6:complextype>
+	<sw6:sequence>
+		
+	</sw6:sequence>
+  </sw6:complextype>
+</sw6:element>
+
+<sw6:element name="Profile">
+  <sw6:complextype>
+	<sw6:sequence>
+		
+	</sw6:sequence>
+  </sw6:complextype>
+</sw6:element>
+
+<sw6:element name="Stats">
+  <sw6:complextype>
+	<sw6:sequence>
+		
+	</sw6:sequence>
+  </sw6:complextype>
+</sw6:element>
+
+<sw6:element name="Apps">
+  <sw6:complextype>
+	<sw6:sequence>
+	
+	</sw6:sequence>	
+  </sw6:complextype>
+</sw6:element>
+
+<sw6:element name="Settings">
+  <sw6:complextype>
+	<sw6:sequence>
+	
+	</sw6:sequence>	
+  </sw6:complextype>
+</sw6:element>
+
+</sw6:schema>
+
