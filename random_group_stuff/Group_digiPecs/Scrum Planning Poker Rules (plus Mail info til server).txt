@@ -1,0 +1,10 @@
+server:
+Mappe struktur 
+Synkroniseres server med databasen løbende?
+
+
+SCRUM PLANNING POKER RULES
+Hvis de er meget tæt på hindanden gælder højeste (range of 5)
+Et sprint gælder som 100 point
+Hvis der er en opgave der er over 20 point skal den efter planning poker sessionen deles op i mindre opgaver der hver er mindre end 20
+
