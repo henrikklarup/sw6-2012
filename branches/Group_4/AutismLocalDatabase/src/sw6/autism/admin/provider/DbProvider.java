@@ -332,7 +332,7 @@ public class DbProvider extends ContentProvider {
 			rowId = uri.getPathSegments().get(1);
 			rowsUpdated = db.update(AppsMetaData.AppsTable.TABLE_NAME, 
 					values, 
-					AppsMetaData.AppsTable.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + ")" : ""),
+					AppsMetaData.AppsTable.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""),
 					whereArgs);
 			break;
 		case DEPARTMENTS_TYPE_LIST:
@@ -342,7 +342,7 @@ public class DbProvider extends ContentProvider {
 			rowId = uri.getPathSegments().get(1);
 			rowsUpdated = db.update(DepartmentsMetaData.DepartmentsTable.TABLE_NAME, 
 					values, 
-					DepartmentsMetaData.DepartmentsTable.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + ")" : ""),
+					DepartmentsMetaData.DepartmentsTable.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""),
 					whereArgs);
 			break;
 		case MEDIA_TYPE_LIST:
@@ -352,7 +352,7 @@ public class DbProvider extends ContentProvider {
 			rowId = uri.getPathSegments().get(1);
 			rowsUpdated = db.update(MediaMetaData.MediaTable.TABLE_NAME, 
 					values, 
-					MediaMetaData.MediaTable.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + ")" : ""),
+					MediaMetaData.MediaTable.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""),
 					whereArgs);
 			break;
 		case PROFILES_TYPE_LIST:
@@ -362,7 +362,7 @@ public class DbProvider extends ContentProvider {
 			rowId = uri.getPathSegments().get(1);
 			rowsUpdated = db.update(ProfilesMetaData.ProfilesTable.TABLE_NAME, 
 					values, 
-					ProfilesMetaData.ProfilesTable.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + ")" : ""),
+					ProfilesMetaData.ProfilesTable.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""),
 					whereArgs);
 			break;
 		case SETTINGS_TYPE_LIST:
@@ -372,7 +372,7 @@ public class DbProvider extends ContentProvider {
 			rowId = uri.getPathSegments().get(1);
 			rowsUpdated = db.update(SettingsMetaData.SettingsTable.TABLE_NAME, 
 					values, 
-					SettingsMetaData.SettingsTable.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + ")" : ""),
+					SettingsMetaData.SettingsTable.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""),
 					whereArgs);
 			break;
 		case STATS_TYPE_LIST:
@@ -382,7 +382,7 @@ public class DbProvider extends ContentProvider {
 			rowId = uri.getPathSegments().get(1);
 			rowsUpdated = db.update(StatsMetaData.StatsTable.TABLE_NAME, 
 					values, 
-					StatsMetaData.StatsTable.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + ")" : ""),
+					StatsMetaData.StatsTable.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""),
 					whereArgs);
 			break;
 		default:

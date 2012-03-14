@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="sw6.autism.admin"
+    package="com.controller.get"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -9,16 +9,7 @@
     <application
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
-        <!-- <activity
-        android:name=".MainActivity"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity> -->
-        <!-- <activity
+        <activity
             android:name=".TableList"
             android:label="@string/app_name" >
             <intent-filter>
@@ -28,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Apps"
+            android:name=".AppsView"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="sw6.autism.admin.APPS" />
@@ -37,7 +28,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Departments"
+            android:name=".DepartmentsView"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="sw6.autism.admin.DEPARTMENTS" />
@@ -46,7 +37,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Media"
+            android:name=".MediaView"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="sw6.autism.admin.MEDIA" />
@@ -55,7 +46,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Profiles"
+            android:name=".ProfilesView"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="sw6.autism.admin.PROFILES" />
@@ -64,7 +55,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Settings"
+            android:name=".SettingsView"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="sw6.autism.admin.SETTINGS" />
@@ -73,19 +64,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Stats"
+            android:name=".StatsView"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="sw6.autism.admin.STATS" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity> -->
-
-        <provider
-            android:name="sw6.autism.admin.provider.DbProvider"
-            android:authorities="sw6.autism.admin.provider.AutismProvider" >
-        </provider>
+        </activity>
     </application>
 
 </manifest>
