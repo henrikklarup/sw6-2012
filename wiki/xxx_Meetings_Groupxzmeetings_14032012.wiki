@@ -21,7 +21,7 @@ Referent: sw602f12
   * System Description - All groups (5 min each) (previously called system definition)
     * Launcher gruppen: [https://docs.google.com/document/d/1EguRj7PKEHhCozi88aTxw8lX8zUJuNjQIEIwJQNZHpM/edit link]
     * Admin gruppen: [https://docs.google.com/document/d/1wNUwB9-O3B1Noqp_ka7grwfxxujQTLHhgAFBT_dSZ6U/edit link]
-    * Timer gruppen [https://docs.google.com/presentation/d/1ioRfCQk3TiGeSxew0r9alpMvvx48lTJiFugxCrJ84e8/edit link]
+    * Timer gruppen:  [https://docs.google.com/presentation/d/1ioRfCQk3TiGeSxew0r9alpMvvx48lTJiFugxCrJ84e8/edit link]
   * Multi Project System Description (Magnus) (10 min) [https://docs.google.com/document/d/1RpKheUhb6CQBLiBTWbUDeD5eZXFwZ38gC3cluCc6E2I/edit link]
   * Iteration Length (Rasmus A) (10 min) [http://code.google.com/p/sw6-2012/source/browse/random_group_stuff/Group_timer/M%C3%B8der/14-3-2012/Pr%C3%A6sentation/Sprint%20Length.pdf link]
   * Project Coordination (Rasmus A) (30 min) [http://code.google.com/p/sw6-2012/source/browse/random_group_stuff/Group_timer/M%C3%B8der/14-3-2012/Pr%C3%A6sentation/Project%20Coordination.pdf link]
