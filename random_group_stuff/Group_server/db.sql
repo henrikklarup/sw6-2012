@@ -14,6 +14,56 @@ CREATE  TABLE `test`.`Department` (
 
   UNIQUE INDEX `idDepartment_UNIQUE` (`idDepartment` ASC) );
 
+
+CREATE  TABLE `test`.`Profile` (
+
+  `idProfile` INT NOT NULL ,
+
+  `Name` VARCHAR(45) NOT NULL ,
+
+  `Surname` VARCHAR(45) NOT NULL ,
+
+  `Middlename` VARCHAR(45) NULL ,
+
+  `Role` INT NOT NULL ,
+
+  `Phone` INT NOT NULL ,
+
+  `Picture` VARCHAR(45) NULL ,
+
+  `DepartmentID` INT NOT NULL ,
+
+  FOREIGN KEY (`DepartmentID` )  REFERENCES `test`.`department` (`idDepartment` ),
+
+  PRIMARY KEY (`idProfile`) ,
+
+  INDEX `DepartmentID` (`DepartmentID` ASC) );
+  
+
+CREATE  TABLE `test`.`Apps` (
+
+  `idApps` INT NOT NULL ,
+
+  `Name` VARCHAR(45) NOT NULL ,
+
+  `Version` VARCHAR(45) NOT NULL ,
+
+  PRIMARY KEY (`idApps`) );
+
+CREATE  TABLE `test`.`ListOfApps` (
+
+  `AppID` INT NULL ,
+
+  `ProfileID` INT NOT NULL ,
+
+  `Settings` BLOB NULL ,
+
+  `Stats` BLOB NULL ,
+
+  INDEX `AppID` (`AppID` ASC) ,
+
+  INDEX `ProfileID` (`ProfileID` ASC) );
+
 CREATE  TABLE `test`.`Media` (
 
   `idMedia` INT NOT NULL ,
@@ -30,77 +80,51 @@ CREATE  TABLE `test`.`Media` (
 
   PRIMARY KEY (`idMedia`) ,
 
-  UNIQUE INDEX `idMedia_UNIQUE` (`idMedia` ASC) ,
-  INDEX `ProfileID` (`OwnerID` ASC) );
+  INDEX `OwerID` (`OwnerID` ASC) );
 
-CREATE  TABLE `test`.`Profile` (
 
-  `idProfile` INT NOT NULL ,
+insert into Department values (1,'Uni','Selma',12345678,'dr@dr.dk');
+insert into Department values (2,'Skole','Vejgaard',87654321,'skole@vej.dk');
 
-  `Name` VARCHAR(45) NOT NULL ,
+insert into Profile values (1,'Jesper','Bromose',null,1,12345678,null,1);
+insert into Profile values (2,'Sebste','trololo',null,1,33333333,null,2);
 
-  `Surname` VARCHAR(45) NOT NULL ,
+insert into Media values (1,'http://www.dr.dk','Dr.DK',1,'<url>,<dr>,<dk>',1);
+insert into Media values (2,'http://www.eb.dk','eb.DK',1,'<url>,<eb>,<dk>',2);
 
-  `Middlename` VARCHAR(45) NULL ,
+insert into apps values (1,'TestApp1',1);
+insert into apps values (2,'TestApp2',1);
+insert into apps values (3,'TestApp3',1);
 
-  `Role` TINYINT NOT NULL ,
+insert into ListOfApps values (null,1,null,null);
 
-  `Phone` INT NOT NULL ,
+insert into ListOfApps values(1,1,'stuff','stuff');
+insert into ListOfApps values(3,1,'stuff','stuff');
 
-  `DepartmentID` INT NOT NULL ,
+insert into ListOfApps values(2,2,'stuff','stuff');
 
-  `AppID` INT NOT NULL ,
 
-  PRIMARY KEY (`idProfile`) ,
 
-  UNIQUE INDEX `idProfile_UNIQUE` (`idProfile` ASC) ,
+select Name from Apps
+    where idApps IN (select AppID from ListOfApps where ProfileID =1);
+    
+select Name from Apps
+    where idApps IN (select AppID from ListOfApps where ProfileID =2);
 
-  INDEX `DepartmentID` (`DepartmentID` ASC) );
-
-CREATE  TABLE `test`.`Stats` (
-
-  `idStats` INT NOT NULL ,
-
-  `Stats` BLOB NULL ,
-
-  `ProfileID` INT NOT NULL ,
-
-  PRIMARY KEY (`idStats`) ,
-
-  UNIQUE INDEX `idStats_UNIQUE` (`idStats` ASC) ,
-
-  INDEX `ProfileID` (`ProfileID` ASC) );
-
-CREATE  TABLE `test`.`Apps` (
-
-  `idApps` INT NOT NULL ,
-
-  `Name` VARCHAR(45) NOT NULL ,
-
-  `StatsID` INT NOT NULL ,
-
-  `SettingsID` INT NOT NULL ,
-
-  `ProfileID` INT NOT NULL ,
-
-  PRIMARY KEY (`idApps`) ,
-
-  UNIQUE INDEX `idApps_UNIQUE` (`idApps` ASC) ,
-
-  INDEX `StatsID` (`StatsID` ASC) ,
-
-  INDEX `ProfileID` (`ProfileID` ASC) );
-
-CREATE  TABLE `test`.`Settings` (
-
-  `idSettings` INT NOT NULL ,
-
-  `Settings` BLOB NULL ,
-
-  `AppsID` INT NOT NULL ,
-
-  PRIMARY KEY (`idSettings`) ,
-
-  UNIQUE INDEX `idSettings_UNIQUE` (`idSettings` ASC) ,
-
-  INDEX `AppsID` (`AppsID` ASC) );
+select Settings from ListOfApps
+    where AppID = 1 and ProfileID =1;
+    
+select Settings from ListOfApps
+    where AppID = 2 and ProfileID =2;
+    
+select Stats from ListOfApps
+    where AppID = 1 and ProfileID =1;
+    
+select Stats from ListOfApps
+    where AppID = 2 and ProfileID =2;
+    
+select Path, Name, Tags from Media
+    where OwnerID = 1;
+    
+select Path, Name, Tags from Media
+    where OwnerID = 2;
