@@ -2,7 +2,7 @@
 
 = Group meeting 14/03-2012 =
 
-Meeting takes place at 28/02-2012 @ 9:00 AM - 12:00 PM [0.2.13].
+Meeting takes place at 14/03-2012 @ 9:00 AM - 12:00 PM [0.2.13].
 
 Responsible: sw602f12
 
