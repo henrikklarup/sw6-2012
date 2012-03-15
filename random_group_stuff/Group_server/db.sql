@@ -1,3 +1,14 @@
+drop table `test`.`apps`;
+
+drop table `test`.`listofapps`;
+
+drop table `test`.`media`;
+
+drop table `test`.`profile`;
+
+drop table `test`.`department`;
+
+
 CREATE  TABLE `test`.`Department` (
 
   `idDepartment` INT NOT NULL ,
@@ -55,6 +66,7 @@ CREATE  TABLE `test`.`ListOfApps` (
   `AppID` INT NULL ,
 
   `ProfileID` INT NOT NULL ,
+   FOREIGN KEY (`ProfileID` )  REFERENCES `test`.`profile` (`idProfile` ),
 
   `Settings` BLOB NULL ,
 
@@ -77,6 +89,8 @@ CREATE  TABLE `test`.`Media` (
   `Tags` VARCHAR(45) NOT NULL ,
 
   `OwnerID` INT NOT NULL ,
+  
+  FOREIGN KEY (`OwnerID` )  REFERENCES `test`.`profile` (`idProfile` ),
 
   PRIMARY KEY (`idMedia`) ,
 
