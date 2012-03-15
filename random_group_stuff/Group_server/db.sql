@@ -1,8 +1,9 @@
-drop table `test`.`apps`;
 
 drop table `test`.`listofapps`;
 
 drop table `test`.`media`;
+
+drop table `test`.`apps`;
 
 drop table `test`.`profile`;
 
@@ -64,6 +65,7 @@ CREATE  TABLE `test`.`Apps` (
 CREATE  TABLE `test`.`ListOfApps` (
 
   `AppID` INT NULL ,
+    FOREIGN KEY (`AppID` )  REFERENCES `test`.`apps` (`idApps` ),
 
   `ProfileID` INT NOT NULL ,
    FOREIGN KEY (`ProfileID` )  REFERENCES `test`.`profile` (`idProfile` ),
