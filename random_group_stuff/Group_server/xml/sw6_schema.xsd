@@ -1,13 +1,12 @@
 <?xml version="1.0"?>
  
-<!-- Xml schema for xsml-> is currently under construction -->
-<!-- Created by xs03f12 for the android multiproject -->
+<!-- Xml schema for sw6xml: version 0.2 -->
+<!-- Created by sw603f12 for the android multiproject -->
 
 <!-- Purpose of this xml language is to facilitate data transfer
      between the admin and the server group databases -->
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-
 
 <xs:simpleType name="crud">
   <xs:restriction base="xs:string">
@@ -17,7 +16,6 @@
     <xs:enumeration value="delete"/>
   </xs:restriction>
 </xs:simpleType>
-
 
 <xs:element name="Media">
   <xs:complexType>
