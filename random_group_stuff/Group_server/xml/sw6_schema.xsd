@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+ 
+<!-- Xml schema for xsml-> is currently under construction -->
+<!-- Created by xs03f12 for the android multiproject -->
+
+<!-- Purpose of this xml language is to facilitate data transfer
+     between the admin and the server group databases -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+
+<xs:simpleType name="crud">
+  <xs:restriction base="xs:string">
+    <xs:enumeration value="create"/>
+    <xs:enumeration value="read"/>
+    <xs:enumeration value="update"/>
+    <xs:enumeration value="delete"/>
+  </xs:restriction>
+</xs:simpleType>
+
+
+<xs:element name="Media">
+  <xs:complexType>
+    <xs:sequence> 
+      <xs:element name="entry" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="action" type="crud" use="required"/>
+          <xs:sequence>
+            <xs:element name="idMedia" type="xs:integer"/>
+            <xs:element name="Path" type="xs:string"/>
+            <xs:element name="Name" type="xs:string"/>
+            <xs:element name="Public" type="xs:boolean"/>
+            <xs:element name="Type" type="xs:string"/>
+            <xs:element name="Tags">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="tag" type="xs:string" maxOccurs="unbounded"/>
+                </xs:sequence>
+              </xs:complexType>
+			       </xs:element>
+            <xs:element name="ownerID" type="xs:integer"/>  
+          </xs:sequence>
+        </xs:complexType>
+	    </xs:element>
+	  </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="Department">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="entry" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="action" type="crud" use="required"/>
+          <xs:sequence>
+            <xs:element name="idDepartment" type="xs:integer"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="Address" type="xs:string"/>
+            <xs:element name="Phone" type="xs:integer"/>
+            <xs:element name="Email" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="Profile">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="entry" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="action" type="crud" use="required"/>
+          <xs:sequence>
+            <xs:element name="idProfile" type="xs:integer"/>
+            <xs:element name="Name" type="xs:string"/>
+            <xs:element name="Surname" type="xs:string"/>
+            <xs:element name="Middlename" type="xs:string"/>
+            <xs:element name="Role" type="xs:intger"/> 
+            <xs:element name="Phone" type="xs:integer"/>
+            <xs:element name="Picture" type="string"/>
+            <xs:element name="DepartmentID" type="string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="ListOfApps">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="entry" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="action" type="crud" use="required"/>
+          <xs:sequence>
+            <xs:element name="AppID" type="xs:integer"/>
+            <xs:element name="ProfileID" type="xs:integer"/>
+            <xs:element name="Settings" type="xs:string"/>
+            <xs:element name="Stats" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>  
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="Apps">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="entry" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="action" type="crud" use="required"/>
+          <xs:sequence>
+            <xs:element name="idApps" type="xs:integer"/>
+            <xs:element name="Name" type="xs:string"/>
+            <xs:element name="Version" type="xs:string"/> 
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence> 
+  </xs:complexType>
+</xs:element>
+
+</xs:schema>
