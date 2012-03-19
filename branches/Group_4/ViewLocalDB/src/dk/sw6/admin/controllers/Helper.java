@@ -1,15 +1,22 @@
 package dk.sw6.admin.controllers;
 
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import dk.sw6.admin.controllers.metadata.AppsMetaData;
+import dk.sw6.admin.controllers.metadata.CertificatesMetaData;
+import dk.sw6.admin.controllers.metadata.DepartmentsMetaData;
+import dk.sw6.admin.controllers.metadata.ListOfAppsMetaData;
+import dk.sw6.admin.controllers.metadata.MediaMetaData;
+import dk.sw6.admin.controllers.metadata.ProfilesMetaData;
 import dk.sw6.admin.viewmodels.App;
+import dk.sw6.admin.viewmodels.Certificate;
 import dk.sw6.admin.viewmodels.Department;
+import dk.sw6.admin.viewmodels.ListOfApps;
 import dk.sw6.admin.viewmodels.Media;
 import dk.sw6.admin.viewmodels.Profile;
-import dk.sw6.admin.viewmodels.Setting;
-import dk.sw6.admin.viewmodels.Stat;
 
 /**
  * Helper class, containing all functions you are ever gonna need!! xD
@@ -39,11 +46,16 @@ public class Helper {
 		 * @param profileName Profile name
 		 * @param profileRole Profile role, either autism or guardian
 		 */
-		public void insertProfile(String profileName, int profileRole) {
+		public void insertProfile(Profile _profile) {
 			ContentValues cv = new ContentValues();
-			cv.put(Profile.ProfilesTable.COLUMN_FIRST_NAME, profileName);
-			cv.put(Profile.ProfilesTable.COLUMN_ROLE, profileRole);
-			_context.getContentResolver().insert(Profile.CONTENT_URI, cv);
+			cv.put(ProfilesMetaData.Table.COLUMN_FIRST_NAME, _profile.getFirstname());
+			cv.put(ProfilesMetaData.Table.COLUMN_SUR_NAME, _profile.getSurname());
+			cv.put(ProfilesMetaData.Table.COLUMN_MIDDLE_NAME, _profile.getMiddlename());
+			cv.put(ProfilesMetaData.Table.COLUMN_ROLE, _profile.getRole());
+			cv.put(ProfilesMetaData.Table.COLUMN_PHONE, _profile.getPhone());
+			cv.put(ProfilesMetaData.Table.COLUMN_PICTURE, _profile.getPicture());
+			cv.put(ProfilesMetaData.Table.COLUMN_DEPARTMENTID, _profile.getDepartmentId());
+			_context.getContentResolver().insert(ProfilesMetaData.CONTENT_URI, cv);
 		}
 		
 		/**
@@ -52,19 +64,24 @@ public class Helper {
 		 * @param profileName New profile name for selected item
 		 * @param profileRole New profile role for selected item, either autist or guardian
 		 */
-		public void modifyProfile(long id, String profileName, int profileRole) {
-			String _id = String.valueOf(id);
+		public void modifyProfile(Profile _profile) {
+			Uri uri = ContentUris.withAppendedId(ProfilesMetaData.CONTENT_URI, _profile.getId());
 			ContentValues cv = new ContentValues();
-			cv.put(Profile.ProfilesTable.COLUMN_FIRST_NAME, profileName);
-			cv.put(Profile.ProfilesTable.COLUMN_ROLE, profileRole);
-			_context.getContentResolver().update(Uri.withAppendedPath(Profile.CONTENT_URI, _id), cv, null, null);
+			cv.put(ProfilesMetaData.Table.COLUMN_FIRST_NAME, _profile.getFirstname());
+			cv.put(ProfilesMetaData.Table.COLUMN_SUR_NAME, _profile.getSurname());
+			cv.put(ProfilesMetaData.Table.COLUMN_MIDDLE_NAME, _profile.getMiddlename());
+			cv.put(ProfilesMetaData.Table.COLUMN_ROLE, _profile.getRole());
+			cv.put(ProfilesMetaData.Table.COLUMN_PHONE, _profile.getPhone());
+			cv.put(ProfilesMetaData.Table.COLUMN_PICTURE, _profile.getPicture());
+			cv.put(ProfilesMetaData.Table.COLUMN_DEPARTMENTID, _profile.getDepartmentId());
+			_context.getContentResolver().update(uri, cv, null, null);
 		}
 		
 		/**
 		 * Clear profiles table
 		 */
 		public void clearProfilesTable() {
-			_context.getContentResolver().delete(Profile.CONTENT_URI, null, null);
+			_context.getContentResolver().delete(ProfilesMetaData.CONTENT_URI, null, null);
 		}
 		
 		/**
@@ -72,10 +89,15 @@ public class Helper {
 		 * @return Cursor, containing all profiles
 		 */
 		public Cursor getProfiles() {
-			String[] columns = new String[] { Profile.ProfilesTable.COLUMN_ID, 
-											  Profile.ProfilesTable.COLUMN_FIRST_NAME,
-											  Profile.ProfilesTable.COLUMN_ROLE};
-			Cursor c = _context.getContentResolver().query(Profile.CONTENT_URI, columns, null, null, null);
+			String[] columns = new String[] { ProfilesMetaData.Table.COLUMN_ID, 
+											  ProfilesMetaData.Table.COLUMN_FIRST_NAME,
+											  ProfilesMetaData.Table.COLUMN_SUR_NAME,
+											  ProfilesMetaData.Table.COLUMN_MIDDLE_NAME,
+											  ProfilesMetaData.Table.COLUMN_ROLE,
+											  ProfilesMetaData.Table.COLUMN_PHONE,
+											  ProfilesMetaData.Table.COLUMN_PICTURE,
+											  ProfilesMetaData.Table.COLUMN_DEPARTMENTID};
+			Cursor c = _context.getContentResolver().query(ProfilesMetaData.CONTENT_URI, columns, null, null, null);
 
 			return c;
 		}
@@ -92,10 +114,11 @@ public class Helper {
 		 * Insert app
 		 * @param appName Application name
 		 */
-		public void insertApp(String appName) {
+		public void insertApp(App _app) {
 			ContentValues cv = new ContentValues();
-			cv.put(App.AppsTable.COLUMN_NAME, appName);
-			_context.getContentResolver().insert(App.CONTENT_URI, cv);
+			cv.put(AppsMetaData.Table.COLUMN_NAME, _app.getName());
+			cv.put(AppsMetaData.Table.COLUMN_VERSIONNUMBER, _app.getVersionNumber());
+			_context.getContentResolver().insert(AppsMetaData.CONTENT_URI, cv);
 		}
 		
 		/**
@@ -103,11 +126,12 @@ public class Helper {
 		 * @param id Application id in Database
 		 * @param appName New application name for selected item
 		 */
-		public void modifyApp(long id, String appName) {
-			String _id = String.valueOf(id);
+		public void modifyApp(App _app) {
+			Uri uri = ContentUris.withAppendedId(AppsMetaData.CONTENT_URI, _app.getId());
 			ContentValues cv = new ContentValues();
-			cv.put(App.AppsTable.COLUMN_NAME, appName);
-			_context.getContentResolver().update(Uri.withAppendedPath(App.CONTENT_URI, _id), cv, null, null);
+			cv.put(AppsMetaData.Table.COLUMN_NAME, _app.getName());
+			cv.put(AppsMetaData.Table.COLUMN_VERSIONNUMBER, _app.getVersionNumber());
+			_context.getContentResolver().update(uri, cv, null, null);
 		}
 		
 		/**
@@ -115,9 +139,10 @@ public class Helper {
 		 * @return Cursor, containing all applications
 		 */
 		public Cursor getApps() {
-			String[] columns = new String[] { App.AppsTable.COLUMN_ID, 
-											  App.AppsTable.COLUMN_NAME};
-			Cursor c = _context.getContentResolver().query(App.CONTENT_URI, columns, null, null, null);
+			String[] columns = new String[] { AppsMetaData.Table.COLUMN_ID, 
+											  AppsMetaData.Table.COLUMN_NAME,
+											  AppsMetaData.Table.COLUMN_VERSIONNUMBER};
+			Cursor c = _context.getContentResolver().query(AppsMetaData.CONTENT_URI, columns, null, null, null);
 
 			return c;
 		}
@@ -126,7 +151,7 @@ public class Helper {
 		 * Clear applications table
 		 */
 		public void clearAppsTable() {
-			_context.getContentResolver().delete(App.CONTENT_URI, null, null);
+			_context.getContentResolver().delete(AppsMetaData.CONTENT_URI, null, null);
 		}
 	}
 
@@ -142,11 +167,12 @@ public class Helper {
 		 * @param departmentName Department name
 		 * @param departmentPhone Department phone number
 		 */
-		public void insertDepartment(String departmentName, int departmentPhone) {
+		public void insertDepartment(Department _department) {
 			ContentValues cv = new ContentValues();
-			cv.put(Department.DepartmentsTable.COLUMN_NAME, departmentName);
-			cv.put(Department.DepartmentsTable.COLUMN_PHONE, departmentPhone);
-			_context.getContentResolver().insert(Department.CONTENT_URI, cv);
+			cv.put(DepartmentsMetaData.Table.COLUMN_NAME, _department.getName());
+			cv.put(DepartmentsMetaData.Table.COLUMN_ADDRESS, _department.getAddress());
+			cv.put(DepartmentsMetaData.Table.COLUMN_PHONE, _department.getPhone());
+			_context.getContentResolver().insert(DepartmentsMetaData.CONTENT_URI, cv);
 		}
 		
 		/**
@@ -155,12 +181,13 @@ public class Helper {
 		 * @param departmentName New department name for selected item
 		 * @param departmentPhone New department phone number for selected item
 		 */
-		public void modifyDepartment(long id, String departmentName, int departmentPhone) {
-			String _id = String.valueOf(id);
+		public void modifyDepartment(Department _department) {
+			Uri uri = ContentUris.withAppendedId(DepartmentsMetaData.CONTENT_URI, _department.getId());
 			ContentValues cv = new ContentValues();
-			cv.put(Department.DepartmentsTable.COLUMN_NAME, departmentName);
-			cv.put(Department.DepartmentsTable.COLUMN_PHONE, departmentPhone);
-			_context.getContentResolver().update(Uri.withAppendedPath(Department.CONTENT_URI, _id), cv, null, null);
+			cv.put(DepartmentsMetaData.Table.COLUMN_NAME, _department.getName());
+			cv.put(DepartmentsMetaData.Table.COLUMN_ADDRESS, _department.getAddress());
+			cv.put(DepartmentsMetaData.Table.COLUMN_PHONE, _department.getPhone());
+			_context.getContentResolver().update(uri, cv, null, null);
 		}
 		
 		/**
@@ -168,10 +195,11 @@ public class Helper {
 		 * @return Cursor, containing all departments
 		 */
 		public Cursor getDepartments() {
-			String[] columns = new String[] { Department.DepartmentsTable.COLUMN_ID, 
-											  Department.DepartmentsTable.COLUMN_NAME,
-											  Department.DepartmentsTable.COLUMN_PHONE};
-			Cursor c = _context.getContentResolver().query(Department.CONTENT_URI, columns, null, null, null);
+			String[] columns = new String[] { DepartmentsMetaData.Table.COLUMN_ID, 
+											  DepartmentsMetaData.Table.COLUMN_NAME,
+											  DepartmentsMetaData.Table.COLUMN_PHONE,
+											  DepartmentsMetaData.Table.COLUMN_ADDRESS};
+			Cursor c = _context.getContentResolver().query(DepartmentsMetaData.CONTENT_URI, columns, null, null, null);
 
 			return c;
 		}
@@ -180,7 +208,7 @@ public class Helper {
 		 * Clear department table
 		 */
 		public void clearDepartmentsTable() {
-			_context.getContentResolver().delete(Department.CONTENT_URI, null, null);
+			_context.getContentResolver().delete(DepartmentsMetaData.CONTENT_URI, null, null);
 		}
 	}
 
@@ -195,10 +223,15 @@ public class Helper {
 		 * Insert media
 		 * @param mediaName Media name
 		 */
-		public void insertMedia(String mediaName) {
+		public void insertMedia(Media _media) {
 			ContentValues cv = new ContentValues();
-			cv.put(Media.MediaTable.COLUMN_NAME, mediaName);
-			_context.getContentResolver().insert(Media.CONTENT_URI, cv);
+			cv.put(MediaMetaData.Table.COLUMN_PATH, _media.getPath());
+			cv.put(MediaMetaData.Table.COLUMN_NAME, _media.getName());
+			cv.put(MediaMetaData.Table.COLUMN_PUBLIC, _media.is_public());
+			cv.put(MediaMetaData.Table.COLUMN_TYPE, _media.getType());
+			cv.put(MediaMetaData.Table.COLUMN_TAGS, _media.getTags());
+			cv.put(MediaMetaData.Table.COLUMN_OWNERID, _media.getOwnerId());
+			_context.getContentResolver().insert(MediaMetaData.CONTENT_URI, cv);
 		}
 		
 		/**
@@ -206,11 +239,16 @@ public class Helper {
 		 * @param id Media id in Database
 		 * @param mediaName New media name for selected item
 		 */
-		public void modifyMedia(long id, String mediaName) {
-			String _id = String.valueOf(id);
+		public void modifyMedia(Media _media) {
+			Uri uri = ContentUris.withAppendedId(MediaMetaData.CONTENT_URI, _media.getId());
 			ContentValues cv = new ContentValues();
-			cv.put(Media.MediaTable.COLUMN_NAME, mediaName);
-			_context.getContentResolver().update(Uri.withAppendedPath(Media.CONTENT_URI, _id), cv, null, null);
+			cv.put(MediaMetaData.Table.COLUMN_PATH, _media.getPath());
+			cv.put(MediaMetaData.Table.COLUMN_NAME, _media.getName());
+			cv.put(MediaMetaData.Table.COLUMN_PUBLIC, _media.is_public());
+			cv.put(MediaMetaData.Table.COLUMN_TYPE, _media.getType());
+			cv.put(MediaMetaData.Table.COLUMN_TAGS, _media.getTags());
+			cv.put(MediaMetaData.Table.COLUMN_OWNERID, _media.getOwnerId());
+			_context.getContentResolver().update(uri, cv, null, null);
 		}
 		
 		/**
@@ -218,9 +256,14 @@ public class Helper {
 		 * @return Cursor, containing all media
 		 */
 		public Cursor getMedia() {
-			String[] columns = new String[] { Media.MediaTable.COLUMN_ID, 
-											  Media.MediaTable.COLUMN_NAME};
-			Cursor c = _context.getContentResolver().query(Media.CONTENT_URI, columns, null, null, null);
+			String[] columns = new String[] { MediaMetaData.Table.COLUMN_ID, 
+											  MediaMetaData.Table.COLUMN_PATH,
+											  MediaMetaData.Table.COLUMN_NAME,
+											  MediaMetaData.Table.COLUMN_PUBLIC,
+											  MediaMetaData.Table.COLUMN_TYPE,
+											  MediaMetaData.Table.COLUMN_TAGS,
+											  MediaMetaData.Table.COLUMN_OWNERID};
+			Cursor c = _context.getContentResolver().query(MediaMetaData.CONTENT_URI, columns, null, null, null);
 
 			return c;
 		}
@@ -229,120 +272,116 @@ public class Helper {
 		 * Clear media table
 		 */
 		public void clearMediaTable() {
-			_context.getContentResolver().delete(Media.CONTENT_URI, null, null);
+			_context.getContentResolver().delete(MediaMetaData.CONTENT_URI, null, null);
 		}
 	}
 	
-	
 	/**
-	 * Setting class
+	 * List of apps class
 	 * @author Admin
 	 *
 	 */
-	public class SettingHelper {
+	public class ListOfAppsHelper {
 		
 		/**
-		 * Insert settings
-		 * @param settingName Settings name
-		 * @param settingOwner Settings owner
+		 * Insert list of apps
+		 * @param mediaName list of apps name
 		 */
-		public void insertSetting(String settingName, String settingOwner) {
+		public void insertListOfApps(ListOfApps _listOfApps) {
 			ContentValues cv = new ContentValues();
-			cv.put(Setting.SettingsTable.COLUMN_SETTINGS, settingName);
-			cv.put(Setting.SettingsTable.COLUMN_OWNER, settingOwner);
-			_context.getContentResolver().insert(Setting.CONTENT_URI, cv);
+			cv.put(ListOfAppsMetaData.Table.COLUMN_APPSID, _listOfApps.getAppId());
+			cv.put(ListOfAppsMetaData.Table.COLUMN_PROFILESID, _listOfApps.getProfileId());
+			cv.put(ListOfAppsMetaData.Table.COLUMN_SETTINGS, _listOfApps.getSettings());
+			cv.put(ListOfAppsMetaData.Table.COLUMN_STATS, _listOfApps.getStats());
+			_context.getContentResolver().insert(ListOfAppsMetaData.CONTENT_URI, cv);
 		}
 		
 		/**
-		 * Modify settings
-		 * @param id Setting id in Database
-		 * @param settingName New setting name for selected item
-		 * @param settingOwner New setting owner for selected item
+		 * Modify list of apps
+		 * @param id list of apps id in Database
+		 * @param mediaName New list of apps name for selected item
 		 */
-		public void modifySetting(long id, String settingName, String settingOwner) {
-			String _id = String.valueOf(id);
+		public void modifyListOfApps(ListOfApps _listOfApps) {
+			Uri uri = ContentUris.withAppendedId(ListOfAppsMetaData.CONTENT_URI, _listOfApps.getId());
 			ContentValues cv = new ContentValues();
-			cv.put(Setting.SettingsTable.COLUMN_SETTINGS, settingName);
-			cv.put(Setting.SettingsTable.COLUMN_OWNER, settingOwner);
-			_context.getContentResolver().update(Uri.withAppendedPath(Setting.CONTENT_URI, _id), cv, null, null);
+			cv.put(ListOfAppsMetaData.Table.COLUMN_APPSID, _listOfApps.getAppId());
+			cv.put(ListOfAppsMetaData.Table.COLUMN_PROFILESID, _listOfApps.getProfileId());
+			cv.put(ListOfAppsMetaData.Table.COLUMN_SETTINGS, _listOfApps.getSettings());
+			cv.put(ListOfAppsMetaData.Table.COLUMN_STATS, _listOfApps.getStats());
+			_context.getContentResolver().update(uri, cv, null, null);
 		}
 		
 		/**
-		 * Get all settings
-		 * @return Cursor, containing all settings
+		 * Get all list of apps
+		 * @return Cursor, containing all media
 		 */
-		public Cursor getSettings() {
-			String[] columns = new String[] { Setting.SettingsTable.COLUMN_ID, 
-											  Setting.SettingsTable.COLUMN_SETTINGS,
-											  Setting.SettingsTable.COLUMN_OWNER};
-			Cursor c = _context.getContentResolver().query(Setting.CONTENT_URI, columns, null, null, null);
+		public Cursor getListOfApps() {
+			String[] columns = new String[] { ListOfAppsMetaData.Table.COLUMN_ID, 
+											  ListOfAppsMetaData.Table.COLUMN_APPSID,
+											  ListOfAppsMetaData.Table.COLUMN_PROFILESID,
+											  ListOfAppsMetaData.Table.COLUMN_SETTINGS,
+											  ListOfAppsMetaData.Table.COLUMN_STATS};
+			Cursor c = _context.getContentResolver().query(ListOfAppsMetaData.CONTENT_URI, columns, null, null, null);
 
 			return c;
 		}
 		
 		/**
-		 * Clear settings table
+		 * Clear list of apps table
 		 */
-		public void clearSettingsTable() {
-			_context.getContentResolver().delete(Setting.CONTENT_URI, null, null);
+		public void clearListOfAppsTable() {
+			_context.getContentResolver().delete(ListOfAppsMetaData.CONTENT_URI, null, null);
 		}
 	}
 	
 	
 	/**
-	 * Stat class
+	 * List of apps class
 	 * @author Admin
 	 *
 	 */
-	public class StatHelper {
+	public class CertificatesHelper {
 		
 		/**
-		 * Insert stat
-		 * @param statName Stat name
-		 * @param statOwner Stat owner
+		 * Insert certificate
+		 * @param mediaName list of apps name
 		 */
-		public void insertStat(String statName, String statOwner) {
+		public void insertCertificate(Certificate _certificates) {
 			ContentValues cv = new ContentValues();
-			cv.put(Stat.StatsTable.COLUMN_STATS, statName);
-			cv.put(Stat.StatsTable.COLUMN_OWNER, statOwner);
-			_context.getContentResolver().insert(Stat.CONTENT_URI, cv);
+			cv.put(CertificatesMetaData.Table.COLUMN_AUTHKEY, _certificates.getAuthkey());
+			_context.getContentResolver().insert(CertificatesMetaData.CONTENT_URI, cv);
 		}
 		
 		/**
-		 * Modify stat
-		 * @param id Stat id in Database
-		 * @param statName New stat name for selected item
-		 * @param statOwner New stat owner for selected item
+		 * Modify list of apps
+		 * @param id list of apps id in Database
+		 * @param mediaName New list of apps name for selected item
 		 */
-		public void modifyStat(long id, String statName, String statOwner) {
-			String _id = String.valueOf(id);
+		public void modifyCertificate(Certificate _certificates) {
+			Uri uri = ContentUris.withAppendedId(CertificatesMetaData.CONTENT_URI, _certificates.getId());
 			ContentValues cv = new ContentValues();
-			cv.put(Stat.StatsTable.COLUMN_STATS, statName);
-			cv.put(Stat.StatsTable.COLUMN_OWNER, statOwner);
-			_context.getContentResolver().update(Uri.withAppendedPath(Stat.CONTENT_URI, _id), cv, null, null);
+			cv.put(CertificatesMetaData.Table.COLUMN_AUTHKEY, _certificates.getAuthkey());
+			_context.getContentResolver().update(uri, cv, null, null);
 		}
 		
 		/**
-		 * Get all stats
-		 * @return Cursor, containing all stats
+		 * Get all list of apps
+		 * @return Cursor, containing all media
 		 */
-		public Cursor getStats() {
-			String[] columns = new String[] { Stat.StatsTable.COLUMN_ID, 
-											  Stat.StatsTable.COLUMN_STATS,
-											  Stat.StatsTable.COLUMN_OWNER};
-			Cursor c = _context.getContentResolver().query(Stat.CONTENT_URI, columns, null, null, null);
+		public Cursor getCertificates() {
+			String[] columns = new String[] { CertificatesMetaData.Table.COLUMN_ID, 
+											  CertificatesMetaData.Table.COLUMN_AUTHKEY};
+			Cursor c = _context.getContentResolver().query(CertificatesMetaData.CONTENT_URI, columns, null, null, null);
 
 			return c;
 		}
 		
 		/**
-		 * Clear stats table
+		 * Clear list of apps table
 		 */
-		public void clearStatsTable() {
-			_context.getContentResolver().delete(Stat.CONTENT_URI, null, null);
+		public void clearCertificateTable() {
+			_context.getContentResolver().delete(CertificatesMetaData.CONTENT_URI, null, null);
 		}
 	}
-	
-	
 	
 }
