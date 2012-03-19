@@ -2,17 +2,16 @@ package sw6.autism.admin.provider;
 
 import android.database.sqlite.SQLiteDatabase;
 
-public class AppsTable {
-	
+public class CertificatesTable {
+
 	private static final String TABLE_CREATE = "CREATE TABLE "
-			+ AppsMetaData.Table.TABLE_NAME
+			+ CertificatesMetaData.Table.TABLE_NAME
 			+ "("
-			+ AppsMetaData.Table.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-			+ AppsMetaData.Table.COLUMN_NAME + " TEXT NOT NULL, "
-			+ AppsMetaData.Table.COLUMN_VERSIONNUMBER + " INTEGER NOT NULL"
+			+ CertificatesMetaData.Table.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+			+ CertificatesMetaData.Table.COLUMN_AUTHKEY + " TEXT NOT NULL"
 			+ ");";
-	
-	private static final String TABLE_DROP= "DROP TABLE IF EXISTS " + AppsMetaData.Table.TABLE_NAME + ";";
+
+	private static final String TABLE_DROP= "DROP TABLE IF EXISTS " + CertificatesMetaData.Table.TABLE_NAME + ";";
 
 	public static void onCreate(SQLiteDatabase db) {
 		db.execSQL(TABLE_CREATE);

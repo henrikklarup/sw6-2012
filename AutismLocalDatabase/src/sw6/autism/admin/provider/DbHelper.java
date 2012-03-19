@@ -16,18 +16,18 @@ public class DbHelper extends SQLiteOpenHelper {
 
 	public void onCreate(SQLiteDatabase db) {
 		ProfilesTable.onCreate(db);
-		StatsTable.onCreate(db);
+		CertificatesTable.onCreate(db);
 		AppsTable.onCreate(db);
-		SettingsTable.onCreate(db);
+		ListOfAppsTable.onCreate(db);
 		MediaTable.onCreate(db);
 		DepartmentsTable.onCreate(db);
 	}
 
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		ProfilesTable.onUpgrade(db, oldVersion, newVersion);
-		StatsTable.onUpgrade(db, oldVersion, newVersion);
+		CertificatesTable.onUpgrade(db, oldVersion, newVersion);
 		AppsTable.onUpgrade(db, oldVersion, newVersion);
-		SettingsTable.onUpgrade(db, oldVersion, newVersion);
+		ListOfAppsTable.onUpgrade(db, oldVersion, newVersion);
 		MediaTable.onUpgrade(db, oldVersion, newVersion);
 		DepartmentsTable.onUpgrade(db, oldVersion, newVersion);
 	}
