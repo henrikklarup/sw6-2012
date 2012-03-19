@@ -5,14 +5,15 @@ import android.database.sqlite.SQLiteDatabase;
 public class DepartmentsTable {
 	
 	private static final String TABLE_CREATE = "CREATE TABLE "
-			+ DepartmentsMetaData.DepartmentsTable.TABLE_NAME
+			+ DepartmentsMetaData.Table.TABLE_NAME
 			+ "("
-			+ DepartmentsMetaData.DepartmentsTable.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-			+ DepartmentsMetaData.DepartmentsTable.COLUMN_NAME + " TEXT NOT NULL, "
-			+ DepartmentsMetaData.DepartmentsTable.COLUMN_PHONE + " INTEGER NOT NULL"
+			+ DepartmentsMetaData.Table.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+			+ DepartmentsMetaData.Table.COLUMN_NAME + " TEXT NOT NULL, "
+			+ DepartmentsMetaData.Table.COLUMN_ADDRESS + " TEXT, "
+			+ DepartmentsMetaData.Table.COLUMN_PHONE + " INTEGER"
 			+ ");";
 	
-	private static final String TABLE_DROP= "DROP TABLE IF EXISTS " + DepartmentsMetaData.DepartmentsTable.TABLE_NAME + ";";
+	private static final String TABLE_DROP= "DROP TABLE IF EXISTS " + DepartmentsMetaData.Table.TABLE_NAME + ";";
 
 	public static void onCreate(SQLiteDatabase db) {
 		db.execSQL(TABLE_CREATE);

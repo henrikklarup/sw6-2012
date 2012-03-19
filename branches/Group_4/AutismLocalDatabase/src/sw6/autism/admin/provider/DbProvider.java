@@ -24,10 +24,10 @@ public class DbProvider extends ContentProvider {
 	private static final int MEDIA_TYPE_ONE = 6;
 	private static final int PROFILES_TYPE_LIST = 7;
 	private static final int PROFILES_TYPE_ONE = 8;
-	private static final int SETTINGS_TYPE_LIST = 9;
-	private static final int SETTINGS_TYPE_ONE = 10;
-	private static final int STATS_TYPE_LIST = 11;
-	private static final int STATS_TYPE_ONE = 12;
+	private static final int CERTIFICATES_TYPE_LIST = 9;
+	private static final int CERTIFICATES_TYPE_ONE = 10;
+	private static final int LISTOFAPPS_TYPE_LIST = 11;
+	private static final int LISTOFAPPS_TYPE_ONE = 12;
 	static {
 		sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 		sUriMatcher.addURI(DbHelper.AUTHORITY, "apps", APPS_TYPE_LIST);
@@ -38,56 +38,69 @@ public class DbProvider extends ContentProvider {
 		sUriMatcher.addURI(DbHelper.AUTHORITY, "media/#", MEDIA_TYPE_ONE);
 		sUriMatcher.addURI(DbHelper.AUTHORITY, "profiles", PROFILES_TYPE_LIST);
 		sUriMatcher.addURI(DbHelper.AUTHORITY, "profiles/#", PROFILES_TYPE_ONE);
-		sUriMatcher.addURI(DbHelper.AUTHORITY, "settings", SETTINGS_TYPE_LIST);
-		sUriMatcher.addURI(DbHelper.AUTHORITY, "settings/#", SETTINGS_TYPE_ONE);
-		sUriMatcher.addURI(DbHelper.AUTHORITY, "stats", STATS_TYPE_LIST);
-		sUriMatcher.addURI(DbHelper.AUTHORITY, "stats/#", STATS_TYPE_ONE);
+		sUriMatcher.addURI(DbHelper.AUTHORITY, "certificates", CERTIFICATES_TYPE_LIST);
+		sUriMatcher.addURI(DbHelper.AUTHORITY, "certificates/#", CERTIFICATES_TYPE_ONE);
+		sUriMatcher.addURI(DbHelper.AUTHORITY, "listofapps", LISTOFAPPS_TYPE_LIST);
+		sUriMatcher.addURI(DbHelper.AUTHORITY, "listofapps/#", LISTOFAPPS_TYPE_ONE);
 	}
 
 	private static final HashMap<String, String> appsProjectionMap;
 	static {
 		appsProjectionMap = new HashMap<String, String>();
-		appsProjectionMap.put(AppsMetaData.AppsTable.COLUMN_ID, AppsMetaData.AppsTable.COLUMN_ID);
-		appsProjectionMap.put(AppsMetaData.AppsTable.COLUMN_NAME, AppsMetaData.AppsTable.COLUMN_NAME);
+		appsProjectionMap.put(AppsMetaData.Table.COLUMN_ID, AppsMetaData.Table.COLUMN_ID);
+		appsProjectionMap.put(AppsMetaData.Table.COLUMN_NAME, AppsMetaData.Table.COLUMN_NAME);
+		appsProjectionMap.put(AppsMetaData.Table.COLUMN_VERSIONNUMBER, AppsMetaData.Table.COLUMN_VERSIONNUMBER);
 	}
 
 	private static final HashMap<String, String> departmentsProjectionMap;
 	static {
 		departmentsProjectionMap = new HashMap<String, String>();
-		departmentsProjectionMap.put(DepartmentsMetaData.DepartmentsTable.COLUMN_ID, DepartmentsMetaData.DepartmentsTable.COLUMN_ID);
-		departmentsProjectionMap.put(DepartmentsMetaData.DepartmentsTable.COLUMN_NAME, DepartmentsMetaData.DepartmentsTable.COLUMN_NAME);
-		departmentsProjectionMap.put(DepartmentsMetaData.DepartmentsTable.COLUMN_PHONE, DepartmentsMetaData.DepartmentsTable.COLUMN_PHONE);
+		departmentsProjectionMap.put(DepartmentsMetaData.Table.COLUMN_ID, DepartmentsMetaData.Table.COLUMN_ID);
+		departmentsProjectionMap.put(DepartmentsMetaData.Table.COLUMN_NAME, DepartmentsMetaData.Table.COLUMN_NAME);
+		departmentsProjectionMap.put(DepartmentsMetaData.Table.COLUMN_ADDRESS, DepartmentsMetaData.Table.COLUMN_ADDRESS);
+		departmentsProjectionMap.put(DepartmentsMetaData.Table.COLUMN_PHONE, DepartmentsMetaData.Table.COLUMN_PHONE);
 	}
 
 	private static final HashMap<String, String> mediaProjectionMap;
 	static {
 		mediaProjectionMap = new HashMap<String, String>();
-		mediaProjectionMap.put(MediaMetaData.MediaTable.COLUMN_ID, MediaMetaData.MediaTable.COLUMN_ID);
-		mediaProjectionMap.put(MediaMetaData.MediaTable.COLUMN_NAME, MediaMetaData.MediaTable.COLUMN_NAME);
+		mediaProjectionMap.put(MediaMetaData.Table.COLUMN_ID, MediaMetaData.Table.COLUMN_ID);
+		mediaProjectionMap.put(MediaMetaData.Table.COLUMN_NAME, MediaMetaData.Table.COLUMN_NAME);
+		mediaProjectionMap.put(MediaMetaData.Table.COLUMN_PATH, MediaMetaData.Table.COLUMN_PATH);
+		mediaProjectionMap.put(MediaMetaData.Table.COLUMN_PUBLIC, MediaMetaData.Table.COLUMN_PUBLIC);
+		mediaProjectionMap.put(MediaMetaData.Table.COLUMN_TYPE, MediaMetaData.Table.COLUMN_TYPE);
+		mediaProjectionMap.put(MediaMetaData.Table.COLUMN_TAGS, MediaMetaData.Table.COLUMN_TAGS);
+		mediaProjectionMap.put(MediaMetaData.Table.COLUMN_OWNERID, MediaMetaData.Table.COLUMN_OWNERID);
 	}
 
 	private static final HashMap<String, String> profilesProjectionMap;
 	static {
 		profilesProjectionMap = new HashMap<String, String>();
-		profilesProjectionMap.put(ProfilesMetaData.ProfilesTable.COLUMN_ID, ProfilesMetaData.ProfilesTable.COLUMN_ID);
-		profilesProjectionMap.put(ProfilesMetaData.ProfilesTable.COLUMN_FIRST_NAME, ProfilesMetaData.ProfilesTable.COLUMN_FIRST_NAME);
-		profilesProjectionMap.put(ProfilesMetaData.ProfilesTable.COLUMN_ROLE, ProfilesMetaData.ProfilesTable.COLUMN_ROLE);
+		profilesProjectionMap.put(ProfilesMetaData.Table.COLUMN_ID, ProfilesMetaData.Table.COLUMN_ID);
+		profilesProjectionMap.put(ProfilesMetaData.Table.COLUMN_FIRST_NAME, ProfilesMetaData.Table.COLUMN_FIRST_NAME);
+		profilesProjectionMap.put(ProfilesMetaData.Table.COLUMN_SUR_NAME, ProfilesMetaData.Table.COLUMN_SUR_NAME);
+		profilesProjectionMap.put(ProfilesMetaData.Table.COLUMN_MIDDLE_NAME, ProfilesMetaData.Table.COLUMN_MIDDLE_NAME);
+		profilesProjectionMap.put(ProfilesMetaData.Table.COLUMN_ROLE, ProfilesMetaData.Table.COLUMN_ROLE);
+		profilesProjectionMap.put(ProfilesMetaData.Table.COLUMN_PHONE, ProfilesMetaData.Table.COLUMN_PHONE);
+		profilesProjectionMap.put(ProfilesMetaData.Table.COLUMN_PICTURE, ProfilesMetaData.Table.COLUMN_PICTURE);
+		profilesProjectionMap.put(ProfilesMetaData.Table.COLUMN_DEPARTMENTID, ProfilesMetaData.Table.COLUMN_DEPARTMENTID);
 	}
 
-	private static final HashMap<String, String> settingsProjectionMap;
+	private static final HashMap<String, String> certificatesProjectionMap;
 	static {
-		settingsProjectionMap = new HashMap<String, String>();
-		settingsProjectionMap.put(SettingsMetaData.SettingsTable.COLUMN_ID, SettingsMetaData.SettingsTable.COLUMN_ID);
-		settingsProjectionMap.put(SettingsMetaData.SettingsTable.COLUMN_OWNER, SettingsMetaData.SettingsTable.COLUMN_OWNER);
-		settingsProjectionMap.put(SettingsMetaData.SettingsTable.COLUMN_SETTINGS, SettingsMetaData.SettingsTable.COLUMN_SETTINGS);
+		certificatesProjectionMap = new HashMap<String, String>();
+		certificatesProjectionMap.put(CertificatesMetaData.Table.COLUMN_ID, CertificatesMetaData.Table.COLUMN_ID);
+		certificatesProjectionMap.put(CertificatesMetaData.Table.COLUMN_AUTHKEY, CertificatesMetaData.Table.COLUMN_AUTHKEY);
 	}
 
-	private static final HashMap<String, String> statsProjectionMap;
+	private static final HashMap<String, String> listofappsProjectionMap;
 	static {
-		statsProjectionMap = new HashMap<String, String>();
-		statsProjectionMap.put(StatsMetaData.StatsTable.COLUMN_ID, StatsMetaData.StatsTable.COLUMN_ID);
-		statsProjectionMap.put(StatsMetaData.StatsTable.COLUMN_OWNER, StatsMetaData.StatsTable.COLUMN_OWNER);
-		statsProjectionMap.put(StatsMetaData.StatsTable.COLUMN_STATS, StatsMetaData.StatsTable.COLUMN_STATS);
+		listofappsProjectionMap = new HashMap<String, String>();
+		listofappsProjectionMap.put(ListOfAppsMetaData.Table.COLUMN_ID, ListOfAppsMetaData.Table.COLUMN_ID);
+		listofappsProjectionMap.put(ListOfAppsMetaData.Table.COLUMN_APPSID, ListOfAppsMetaData.Table.COLUMN_APPSID);
+		listofappsProjectionMap.put(ListOfAppsMetaData.Table.COLUMN_PROFILESID, ListOfAppsMetaData.Table.COLUMN_PROFILESID);
+		listofappsProjectionMap.put(ListOfAppsMetaData.Table.COLUMN_SETTINGS, ListOfAppsMetaData.Table.COLUMN_SETTINGS);
+		listofappsProjectionMap.put(ListOfAppsMetaData.Table.COLUMN_SETTINGS, ListOfAppsMetaData.Table.COLUMN_STATS);
 	}
 
 	@Override
@@ -104,57 +117,57 @@ public class DbProvider extends ContentProvider {
 		
 		switch(sUriMatcher.match(uri)) {
 		case APPS_TYPE_LIST:
-			rowsDeleted = db.delete(AppsMetaData.AppsTable.TABLE_NAME, where, whereArgs); 
+			rowsDeleted = db.delete(AppsMetaData.Table.TABLE_NAME, where, whereArgs); 
 			break;
 		case APPS_TYPE_ONE:
 			rowId = uri.getPathSegments().get(1);
-			rowsDeleted = db.delete(AppsMetaData.AppsTable.TABLE_NAME, 
-					AppsMetaData.AppsTable.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""),
+			rowsDeleted = db.delete(AppsMetaData.Table.TABLE_NAME, 
+					AppsMetaData.Table.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""),
 					whereArgs);
 			break;
 		case DEPARTMENTS_TYPE_LIST:
-			rowsDeleted = db.delete(DepartmentsMetaData.DepartmentsTable.TABLE_NAME, where, whereArgs);
+			rowsDeleted = db.delete(DepartmentsMetaData.Table.TABLE_NAME, where, whereArgs);
 			break;
 		case DEPARTMENTS_TYPE_ONE:
 			rowId = uri.getPathSegments().get(1);
-			rowsDeleted = db.delete(DepartmentsMetaData.DepartmentsTable.TABLE_NAME, 
-					DepartmentsMetaData.DepartmentsTable.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""),
+			rowsDeleted = db.delete(DepartmentsMetaData.Table.TABLE_NAME, 
+					DepartmentsMetaData.Table.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""),
 					whereArgs);
 			break;
 		case MEDIA_TYPE_LIST:
-			rowsDeleted = db.delete(MediaMetaData.MediaTable.TABLE_NAME, where, whereArgs);
+			rowsDeleted = db.delete(MediaMetaData.Table.TABLE_NAME, where, whereArgs);
 			break;
 		case MEDIA_TYPE_ONE:
 			rowId = uri.getPathSegments().get(1);
-			rowsDeleted = db.delete(MediaMetaData.MediaTable.TABLE_NAME, 
-					MediaMetaData.MediaTable.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""),
+			rowsDeleted = db.delete(MediaMetaData.Table.TABLE_NAME, 
+					MediaMetaData.Table.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""),
 					whereArgs);
 			break;
 		case PROFILES_TYPE_LIST:
-			rowsDeleted = db.delete(ProfilesMetaData.ProfilesTable.TABLE_NAME, where, whereArgs);
+			rowsDeleted = db.delete(ProfilesMetaData.Table.TABLE_NAME, where, whereArgs);
 			break;
 		case PROFILES_TYPE_ONE:
 			rowId = uri.getPathSegments().get(1);
-			rowsDeleted = db.delete(ProfilesMetaData.ProfilesTable.TABLE_NAME, 
-					ProfilesMetaData.ProfilesTable.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""),
+			rowsDeleted = db.delete(ProfilesMetaData.Table.TABLE_NAME, 
+					ProfilesMetaData.Table.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""),
 					whereArgs);
 			break;
-		case SETTINGS_TYPE_LIST:
-			rowsDeleted = db.delete(SettingsMetaData.SettingsTable.TABLE_NAME, where, whereArgs);
+		case CERTIFICATES_TYPE_LIST:
+			rowsDeleted = db.delete(CertificatesMetaData.Table.TABLE_NAME, where, whereArgs);
 			break;
-		case SETTINGS_TYPE_ONE:
+		case CERTIFICATES_TYPE_ONE:
 			rowId = uri.getPathSegments().get(1);
-			rowsDeleted = db.delete(SettingsMetaData.SettingsTable.TABLE_NAME, 
-					SettingsMetaData.SettingsTable.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""),
+			rowsDeleted = db.delete(CertificatesMetaData.Table.TABLE_NAME, 
+					CertificatesMetaData.Table.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""),
 					whereArgs);
 			break;
-		case STATS_TYPE_LIST:
-			rowsDeleted = db.delete(StatsMetaData.StatsTable.TABLE_NAME, where, whereArgs);
+		case LISTOFAPPS_TYPE_LIST:
+			rowsDeleted = db.delete(ListOfAppsMetaData.Table.TABLE_NAME, where, whereArgs);
 			break;
-		case STATS_TYPE_ONE:
+		case LISTOFAPPS_TYPE_ONE:
 			rowId = uri.getPathSegments().get(1);
-			rowsDeleted = db.delete(StatsMetaData.StatsTable.TABLE_NAME, 
-					StatsMetaData.StatsTable.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""),
+			rowsDeleted = db.delete(ListOfAppsMetaData.Table.TABLE_NAME, 
+					ListOfAppsMetaData.Table.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""),
 					whereArgs);
 			break;
 		default:
@@ -184,14 +197,14 @@ public class DbProvider extends ContentProvider {
 			return ProfilesMetaData.CONTENT_TYPE_PROFILES_LIST;
 		case PROFILES_TYPE_ONE:
 			return ProfilesMetaData.CONTENT_TYPE_PROFILE_ONE;
-		case SETTINGS_TYPE_LIST:
-			return SettingsMetaData.CONTENT_TYPE_SETTINGS_LIST;
-		case SETTINGS_TYPE_ONE:
-			return SettingsMetaData.CONTENT_TYPE_SETTING_ONE;
-		case STATS_TYPE_LIST:
-			return StatsMetaData.CONTENT_TYPE_STATS_LIST;
-		case STATS_TYPE_ONE:
-			return StatsMetaData.CONTENT_TYPE_STAT_ONE;
+		case CERTIFICATES_TYPE_LIST:
+			return CertificatesMetaData.CONTENT_TYPE_CERTIFICATES_LIST;
+		case CERTIFICATES_TYPE_ONE:
+			return CertificatesMetaData.CONTENT_TYPE_CERTIFICATE_ONE;
+		case LISTOFAPPS_TYPE_LIST:
+			return ListOfAppsMetaData.CONTENT_TYPE_LISTOFAPPS_LIST;
+		case LISTOFAPPS_TYPE_ONE:
+			return ListOfAppsMetaData.CONTENT_TYPE_LISTOFAPP_ONE;
 		default:
 			throw new IllegalArgumentException("Unknown URI: " + uri);
 		}
@@ -204,44 +217,44 @@ public class DbProvider extends ContentProvider {
 		
 		switch(sUriMatcher.match(uri)) {
 		case APPS_TYPE_LIST:
-			rowId = db.insert(AppsMetaData.AppsTable.TABLE_NAME, null, values);
+			rowId = db.insert(AppsMetaData.Table.TABLE_NAME, null, values);
 			if (rowId > 0) {
 				_uri = ContentUris.withAppendedId(AppsMetaData.CONTENT_URI, rowId);
 				getContext().getContentResolver().notifyChange(_uri, null);
 				return _uri;
 			}
 		case DEPARTMENTS_TYPE_LIST:
-			rowId = db.insert(DepartmentsMetaData.DepartmentsTable.TABLE_NAME, null, values);
+			rowId = db.insert(DepartmentsMetaData.Table.TABLE_NAME, null, values);
 			if (rowId > 0) {
 				_uri = ContentUris.withAppendedId(DepartmentsMetaData.CONTENT_URI, rowId);
 				getContext().getContentResolver().notifyChange(_uri, null);
 				return _uri;
 			}
 		case MEDIA_TYPE_LIST:
-			rowId = db.insert(MediaMetaData.MediaTable.TABLE_NAME, null, values);
+			rowId = db.insert(MediaMetaData.Table.TABLE_NAME, null, values);
 			if (rowId > 0) {
 				_uri = ContentUris.withAppendedId(MediaMetaData.CONTENT_URI, rowId);
 				getContext().getContentResolver().notifyChange(_uri, null);
 				return _uri;
 			}
 		case PROFILES_TYPE_LIST:
-			rowId = db.insert(ProfilesMetaData.ProfilesTable.TABLE_NAME, null, values);
+			rowId = db.insert(ProfilesMetaData.Table.TABLE_NAME, null, values);
 			if (rowId > 0) {
 				_uri = ContentUris.withAppendedId(ProfilesMetaData.CONTENT_URI, rowId);
 				getContext().getContentResolver().notifyChange(_uri, null);
 				return _uri;
 			}
-		case SETTINGS_TYPE_LIST:
-			rowId = db.insert(SettingsMetaData.SettingsTable.TABLE_NAME, null, values);
+		case CERTIFICATES_TYPE_LIST:
+			rowId = db.insert(CertificatesMetaData.Table.TABLE_NAME, null, values);
 			if (rowId > 0) {
-				_uri = ContentUris.withAppendedId(SettingsMetaData.CONTENT_URI, rowId);
+				_uri = ContentUris.withAppendedId(CertificatesMetaData.CONTENT_URI, rowId);
 				getContext().getContentResolver().notifyChange(_uri, null);
 				return _uri;
 			}
-		case STATS_TYPE_LIST:
-			rowId = db.insert(StatsMetaData.StatsTable.TABLE_NAME, null, values);
+		case LISTOFAPPS_TYPE_LIST:
+			rowId = db.insert(ListOfAppsMetaData.Table.TABLE_NAME, null, values);
 			if (rowId > 0) {
-				_uri = ContentUris.withAppendedId(StatsMetaData.CONTENT_URI, rowId);
+				_uri = ContentUris.withAppendedId(ListOfAppsMetaData.CONTENT_URI, rowId);
 				getContext().getContentResolver().notifyChange(_uri, null);
 				return _uri;
 			}
@@ -256,58 +269,58 @@ public class DbProvider extends ContentProvider {
 		
 		switch(sUriMatcher.match(uri)) {
 		case APPS_TYPE_LIST:
-			builder.setTables(AppsMetaData.AppsTable.TABLE_NAME);
+			builder.setTables(AppsMetaData.Table.TABLE_NAME);
 			builder.setProjectionMap(appsProjectionMap);
 			break;
 		case APPS_TYPE_ONE:
-			builder.setTables(AppsMetaData.AppsTable.TABLE_NAME);
+			builder.setTables(AppsMetaData.Table.TABLE_NAME);
 			builder.setProjectionMap(appsProjectionMap);
-			builder.appendWhere(AppsMetaData.AppsTable.COLUMN_ID + " = " + uri.getPathSegments().get(1));
+			builder.appendWhere(AppsMetaData.Table.COLUMN_ID + " = " + uri.getPathSegments().get(1));
 			break;
 		case DEPARTMENTS_TYPE_LIST:
-			builder.setTables(DepartmentsMetaData.DepartmentsTable.TABLE_NAME);
+			builder.setTables(DepartmentsMetaData.Table.TABLE_NAME);
 			builder.setProjectionMap(departmentsProjectionMap);
 			break;
 		case DEPARTMENTS_TYPE_ONE:
-			builder.setTables(DepartmentsMetaData.DepartmentsTable.TABLE_NAME);
+			builder.setTables(DepartmentsMetaData.Table.TABLE_NAME);
 			builder.setProjectionMap(departmentsProjectionMap);
-			builder.appendWhere(DepartmentsMetaData.DepartmentsTable.COLUMN_ID + " = " + uri.getPathSegments().get(1));
+			builder.appendWhere(DepartmentsMetaData.Table.COLUMN_ID + " = " + uri.getPathSegments().get(1));
 			break;
 		case MEDIA_TYPE_LIST:
-			builder.setTables(MediaMetaData.MediaTable.TABLE_NAME);
+			builder.setTables(MediaMetaData.Table.TABLE_NAME);
 			builder.setProjectionMap(mediaProjectionMap);
 			break;
 		case MEDIA_TYPE_ONE:
-			builder.setTables(MediaMetaData.MediaTable.TABLE_NAME);
+			builder.setTables(MediaMetaData.Table.TABLE_NAME);
 			builder.setProjectionMap(mediaProjectionMap);
-			builder.appendWhere(MediaMetaData.MediaTable.COLUMN_ID + " = " + uri.getPathSegments().get(1));
+			builder.appendWhere(MediaMetaData.Table.COLUMN_ID + " = " + uri.getPathSegments().get(1));
 			break;
 		case PROFILES_TYPE_LIST:
-			builder.setTables(ProfilesMetaData.ProfilesTable.TABLE_NAME);
+			builder.setTables(ProfilesMetaData.Table.TABLE_NAME);
 			builder.setProjectionMap(profilesProjectionMap);
 			break;
 		case PROFILES_TYPE_ONE:
-			builder.setTables(ProfilesMetaData.ProfilesTable.TABLE_NAME);
+			builder.setTables(ProfilesMetaData.Table.TABLE_NAME);
 			builder.setProjectionMap(profilesProjectionMap);
-			builder.appendWhere(ProfilesMetaData.ProfilesTable.COLUMN_ID + " = " + uri.getPathSegments().get(1));
+			builder.appendWhere(ProfilesMetaData.Table.COLUMN_ID + " = " + uri.getPathSegments().get(1));
 			break;
-		case SETTINGS_TYPE_LIST:
-			builder.setTables(SettingsMetaData.SettingsTable.TABLE_NAME);
-			builder.setProjectionMap(settingsProjectionMap);
+		case CERTIFICATES_TYPE_LIST:
+			builder.setTables(CertificatesMetaData.Table.TABLE_NAME);
+			builder.setProjectionMap(certificatesProjectionMap);
 			break;
-		case SETTINGS_TYPE_ONE:
-			builder.setTables(SettingsMetaData.SettingsTable.TABLE_NAME);
-			builder.setProjectionMap(settingsProjectionMap);
-			builder.appendWhere(SettingsMetaData.SettingsTable.COLUMN_ID + " = " + uri.getPathSegments().get(1));
+		case CERTIFICATES_TYPE_ONE:
+			builder.setTables(CertificatesMetaData.Table.TABLE_NAME);
+			builder.setProjectionMap(certificatesProjectionMap);
+			builder.appendWhere(CertificatesMetaData.Table.COLUMN_ID + " = " + uri.getPathSegments().get(1));
 			break;
-		case STATS_TYPE_LIST:
-			builder.setTables(StatsMetaData.StatsTable.TABLE_NAME);
-			builder.setProjectionMap(statsProjectionMap);
+		case LISTOFAPPS_TYPE_LIST:
+			builder.setTables(ListOfAppsMetaData.Table.TABLE_NAME);
+			builder.setProjectionMap(listofappsProjectionMap);
 			break;
-		case STATS_TYPE_ONE:
-			builder.setTables(StatsMetaData.StatsTable.TABLE_NAME);
-			builder.setProjectionMap(statsProjectionMap);
-			builder.appendWhere(StatsMetaData.StatsTable.COLUMN_ID + " = " + uri.getPathSegments().get(1));
+		case LISTOFAPPS_TYPE_ONE:
+			builder.setTables(ListOfAppsMetaData.Table.TABLE_NAME);
+			builder.setProjectionMap(listofappsProjectionMap);
+			builder.appendWhere(ListOfAppsMetaData.Table.COLUMN_ID + " = " + uri.getPathSegments().get(1));
 			break;
 		default:
 			throw new IllegalArgumentException("Unknown URI: " + uri);
@@ -326,63 +339,63 @@ public class DbProvider extends ContentProvider {
 		
 		switch(sUriMatcher.match(uri)) {
 		case APPS_TYPE_LIST:
-			rowsUpdated = db.update(AppsMetaData.AppsTable.TABLE_NAME, values, where, whereArgs);
+			rowsUpdated = db.update(AppsMetaData.Table.TABLE_NAME, values, where, whereArgs);
 			break;
 		case APPS_TYPE_ONE:
 			rowId = uri.getPathSegments().get(1);
-			rowsUpdated = db.update(AppsMetaData.AppsTable.TABLE_NAME, 
+			rowsUpdated = db.update(AppsMetaData.Table.TABLE_NAME, 
 					values, 
-					AppsMetaData.AppsTable.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""),
+					AppsMetaData.Table.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""),
 					whereArgs);
 			break;
 		case DEPARTMENTS_TYPE_LIST:
-			rowsUpdated = db.update(DepartmentsMetaData.DepartmentsTable.TABLE_NAME, values, where, whereArgs);
+			rowsUpdated = db.update(DepartmentsMetaData.Table.TABLE_NAME, values, where, whereArgs);
 			break;
 		case DEPARTMENTS_TYPE_ONE:
 			rowId = uri.getPathSegments().get(1);
-			rowsUpdated = db.update(DepartmentsMetaData.DepartmentsTable.TABLE_NAME, 
+			rowsUpdated = db.update(DepartmentsMetaData.Table.TABLE_NAME, 
 					values, 
-					DepartmentsMetaData.DepartmentsTable.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""),
+					DepartmentsMetaData.Table.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""),
 					whereArgs);
 			break;
 		case MEDIA_TYPE_LIST:
-			rowsUpdated = db.update(MediaMetaData.MediaTable.TABLE_NAME, values, where, whereArgs);
+			rowsUpdated = db.update(MediaMetaData.Table.TABLE_NAME, values, where, whereArgs);
 			break;
 		case MEDIA_TYPE_ONE:
 			rowId = uri.getPathSegments().get(1);
-			rowsUpdated = db.update(MediaMetaData.MediaTable.TABLE_NAME, 
+			rowsUpdated = db.update(MediaMetaData.Table.TABLE_NAME, 
 					values, 
-					MediaMetaData.MediaTable.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""),
+					MediaMetaData.Table.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""),
 					whereArgs);
 			break;
 		case PROFILES_TYPE_LIST:
-			rowsUpdated = db.update(ProfilesMetaData.ProfilesTable.TABLE_NAME, values, where, whereArgs);
+			rowsUpdated = db.update(ProfilesMetaData.Table.TABLE_NAME, values, where, whereArgs);
 			break;
 		case PROFILES_TYPE_ONE:
 			rowId = uri.getPathSegments().get(1);
-			rowsUpdated = db.update(ProfilesMetaData.ProfilesTable.TABLE_NAME, 
+			rowsUpdated = db.update(ProfilesMetaData.Table.TABLE_NAME, 
 					values, 
-					ProfilesMetaData.ProfilesTable.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""),
+					ProfilesMetaData.Table.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""),
 					whereArgs);
 			break;
-		case SETTINGS_TYPE_LIST:
-			rowsUpdated = db.update(SettingsMetaData.SettingsTable.TABLE_NAME, values, where, whereArgs);
+		case CERTIFICATES_TYPE_LIST:
+			rowsUpdated = db.update(CertificatesMetaData.Table.TABLE_NAME, values, where, whereArgs);
 			break;
-		case SETTINGS_TYPE_ONE:
+		case CERTIFICATES_TYPE_ONE:
 			rowId = uri.getPathSegments().get(1);
-			rowsUpdated = db.update(SettingsMetaData.SettingsTable.TABLE_NAME, 
+			rowsUpdated = db.update(CertificatesMetaData.Table.TABLE_NAME, 
 					values, 
-					SettingsMetaData.SettingsTable.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""),
+					CertificatesMetaData.Table.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""),
 					whereArgs);
 			break;
-		case STATS_TYPE_LIST:
-			rowsUpdated = db.update(StatsMetaData.StatsTable.TABLE_NAME, values, where, whereArgs);
+		case LISTOFAPPS_TYPE_LIST:
+			rowsUpdated = db.update(ListOfAppsMetaData.Table.TABLE_NAME, values, where, whereArgs);
 			break;
-		case STATS_TYPE_ONE:
+		case LISTOFAPPS_TYPE_ONE:
 			rowId = uri.getPathSegments().get(1);
-			rowsUpdated = db.update(StatsMetaData.StatsTable.TABLE_NAME, 
+			rowsUpdated = db.update(ListOfAppsMetaData.Table.TABLE_NAME, 
 					values, 
-					StatsMetaData.StatsTable.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""),
+					ListOfAppsMetaData.Table.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""),
 					whereArgs);
 			break;
 		default:
