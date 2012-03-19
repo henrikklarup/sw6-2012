@@ -1,16 +1,96 @@
 package dk.sw6.admin.viewmodels;
 
-import android.net.Uri;
-import android.provider.BaseColumns;
-
 public class Media {
 
-	public static final Uri CONTENT_URI = Uri.parse("content://sw6.autism.admin.provider.AutismProvider/media");
-	
-	public class MediaTable implements BaseColumns {
-		public static final String TABLE_NAME = "tbl_media";
-		
-		public static final String COLUMN_ID = "_id";
-		public static final String COLUMN_NAME = "media_name";
+	private long id;
+	private String path;
+	private String name;
+	private boolean _public;
+	private String type;
+	private String Tags;
+	private long ownerId;
+	/**
+	 * @return the id
+	 */
+	public long getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(long id) {
+		this.id = id;
+	}
+	/**
+	 * @return the path
+	 */
+	public String getPath() {
+		return path;
+	}
+	/**
+	 * @param path the path to set
+	 */
+	public void setPath(String path) {
+		this.path = path;
+	}
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+	/**
+	 * @return the _public
+	 */
+	public boolean is_public() {
+		return _public;
+	}
+	/**
+	 * @param _public the _public to set
+	 */
+	public void set_public(boolean _public) {
+		this._public = _public;
+	}
+	/**
+	 * @return the type
+	 */
+	public String getType() {
+		return type;
+	}
+	/**
+	 * @param type the type to set
+	 */
+	public void setType(String type) {
+		this.type = type;
+	}
+	/**
+	 * @return the tags
+	 */
+	public String getTags() {
+		return Tags;
+	}
+	/**
+	 * @param tags the tags to set
+	 */
+	public void setTags(String tags) {
+		Tags = tags;
+	}
+	/**
+	 * @return the ownerId
+	 */
+	public long getOwnerId() {
+		return ownerId;
+	}
+	/**
+	 * @param ownerId the ownerId to set
+	 */
+	public void setOwnerId(long ownerId) {
+		this.ownerId = ownerId;
 	}
 }
