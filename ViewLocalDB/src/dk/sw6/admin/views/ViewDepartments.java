@@ -11,10 +11,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
-import dk.sw6.admin.controllers.AutismMethods;
+import dk.sw6.admin.controllers.Helper;
 
 public class ViewDepartments extends ListFragment {
-	AutismMethods helper;
+	Helper helper;
 	ArrayAdapter<String> adapter;
 	Button bAdd, bDel;
 	TextView tvHeader;
@@ -38,7 +38,7 @@ public class ViewDepartments extends ListFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		
-		helper = new AutismMethods(getActivity().getApplicationContext());
+		helper = new Helper(getActivity().getApplicationContext());
 		
 		tvHeader = (TextView) getView().findViewById(R.id.table_header);
 		tvHeader.setText("DepartmentsTable");

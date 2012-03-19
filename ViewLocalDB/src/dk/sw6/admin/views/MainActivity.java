@@ -33,8 +33,8 @@ public class MainActivity extends FragmentActivity {
 		fragments.add(Fragment.instantiate(this, ViewDepartments.class.getName()));
 		fragments.add(Fragment.instantiate(this, ViewMedia.class.getName()));
 		fragments.add(Fragment.instantiate(this, ViewProfiles.class.getName()));
-		fragments.add(Fragment.instantiate(this, ViewSettings.class.getName()));
-		fragments.add(Fragment.instantiate(this, ViewStats.class.getName()));
+		fragments.add(Fragment.instantiate(this, ViewCertificates.class.getName()));
+		fragments.add(Fragment.instantiate(this, ViewListOfApps.class.getName()));
 		this.mPagerAdapter = new MyPagerAdapter(super.getSupportFragmentManager(), fragments);
 
 		ViewPager pager = (ViewPager) super.findViewById(R.id.viewpager);

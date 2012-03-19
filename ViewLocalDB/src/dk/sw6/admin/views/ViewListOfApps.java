@@ -11,11 +11,11 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
-import dk.sw6.admin.controllers.AutismMethods;
+import dk.sw6.admin.controllers.Helper;
 
-public class ViewStats extends ListFragment {
+public class ViewListOfApps extends ListFragment {
 
-	AutismMethods helper;
+	Helper helper;
 	ArrayAdapter<String> adapter;
 	Button bAdd, bDel;
 	TextView tvHeader;
@@ -39,16 +39,16 @@ public class ViewStats extends ListFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		
-		helper = new AutismMethods(getActivity().getApplicationContext());
+		helper = new Helper(getActivity().getApplicationContext());
 		
 		tvHeader = (TextView) getView().findViewById(R.id.table_header);
-		tvHeader.setText("StatsTable");
+		tvHeader.setText("AppsTable");
 		bAdd = (Button) getView().findViewById(R.id.add);
 		bAdd.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				helper.insertStat("NewStat", "StatOwner");
+				helper.insertApp("NewApp");
 				mAdapter.notifyDataSetChanged();
 			}
 		});
@@ -57,12 +57,12 @@ public class ViewStats extends ListFragment {
 			
 			@Override
 			public void onClick(View v) {
-				helper.clearStatsTable();
+				helper.clearAppsTable();
 				mAdapter.notifyDataSetChanged();
 			}
 		});
 		
-		Cursor cursor = helper.getStats();
+		Cursor cursor = helper.getApps();
         int[] to = new int[] { R.id.column_one, R.id.column_two};
 
         mAdapter = new SimpleCursorAdapter(getActivity().getApplicationContext(), R.layout.list_example, cursor, cursor.getColumnNames(), to);
@@ -74,7 +74,7 @@ public class ViewStats extends ListFragment {
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		long _id = getListAdapter().getItemId(position);
-		helper.modifyStat(_id, "StatModified", "NewOwner");
+		helper.modifyApp(_id, "AppModified");
 		mAdapter.notifyDataSetChanged();
 	}
 }
