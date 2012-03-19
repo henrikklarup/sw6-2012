@@ -12,10 +12,12 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import dk.sw6.admin.controllers.Helper;
+import dk.sw6.admin.viewmodels.ListOfApps;
 
 public class ViewListOfApps extends ListFragment {
 
 	Helper helper;
+	ListOfApps loa;
 	ArrayAdapter<String> adapter;
 	Button bAdd, bDel;
 	TextView tvHeader;
@@ -40,15 +42,21 @@ public class ViewListOfApps extends ListFragment {
 		super.onActivityCreated(savedInstanceState);
 		
 		helper = new Helper(getActivity().getApplicationContext());
+		loa = new ListOfApps();
 		
 		tvHeader = (TextView) getView().findViewById(R.id.table_header);
-		tvHeader.setText("AppsTable");
+		tvHeader.setText("ListOfAppsTable");
 		bAdd = (Button) getView().findViewById(R.id.add);
 		bAdd.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				helper.insertApp("NewApp");
+				loa.setSettings("Setting");
+				loa.setStats("Stat");
+				loa.setAppId(123);
+				loa.setProfileId(321);
+				
+				helper.insertListOfApps(loa);
 				mAdapter.notifyDataSetChanged();
 			}
 		});
@@ -57,15 +65,15 @@ public class ViewListOfApps extends ListFragment {
 			
 			@Override
 			public void onClick(View v) {
-				helper.clearAppsTable();
+				helper.clearListOfAppsTable();
 				mAdapter.notifyDataSetChanged();
 			}
 		});
 		
-		Cursor cursor = helper.getApps();
-        int[] to = new int[] { R.id.column_one, R.id.column_two};
+		Cursor cursor = helper.getListOfApps();
+        int[] to = new int[] { R.id.listofapp_column_one, R.id.listofapp_column_two, R.id.listofapp_column_three, R.id.listofapp_column_four, R.id.listofapp_column_five};
 
-        mAdapter = new SimpleCursorAdapter(getActivity().getApplicationContext(), R.layout.list_example, cursor, cursor.getColumnNames(), to);
+        mAdapter = new SimpleCursorAdapter(getActivity().getApplicationContext(), R.layout.listofapp_list, cursor, cursor.getColumnNames(), to);
 
         setListAdapter(mAdapter);
 	}
@@ -74,7 +82,10 @@ public class ViewListOfApps extends ListFragment {
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		long _id = getListAdapter().getItemId(position);
-		helper.modifyApp(_id, "AppModified");
+		loa.setId(_id);
+		loa.setSettings("ModifiedSetting");
+		loa.setStats("ModifiedStat");
+		helper.modifyListOfApps(loa);
 		mAdapter.notifyDataSetChanged();
 	}
 }

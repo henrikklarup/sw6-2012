@@ -1,10 +1,24 @@
 package dk.sw6.admin.viewmodels;
 
 public class ListOfApps {
+	private long id;
 	private long appId;
 	private long profileId;
 	private String settings;
 	private String stats;
+	
+	/**
+	 * @return the id
+	 */
+	public long getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(long id) {
+		this.id = id;
+	}
 	/**
 	 * @return the appId
 	 */
@@ -53,6 +67,4 @@ public class ListOfApps {
 	public void setStats(String stats) {
 		this.stats = stats;
 	}
-	
-	
 }

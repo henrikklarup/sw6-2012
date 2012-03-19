@@ -12,10 +12,12 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import dk.sw6.admin.controllers.Helper;
+import dk.sw6.admin.viewmodels.App;
 
 public class ViewApps extends ListFragment {
 
 	Helper helper;
+	App app;
 	ArrayAdapter<String> adapter;
 	Button bAdd, bDel;
 	TextView tvHeader;
@@ -41,6 +43,8 @@ public class ViewApps extends ListFragment {
 		
 		helper = new Helper(getActivity().getApplicationContext());
 		
+		app = new App();
+		
 		tvHeader = (TextView) getView().findViewById(R.id.table_header);
 		tvHeader.setText("AppsTable");
 		bAdd = (Button) getView().findViewById(R.id.add);
@@ -48,7 +52,10 @@ public class ViewApps extends ListFragment {
 			
 			@Override
 			public void onClick(View v) {
-				helper.insertApp("NewApp", );
+				app.setName("AppName");
+				app.setVersionNumber("versionNumber");
+				
+				helper.insertApp(app);
 				mAdapter.notifyDataSetChanged();
 			}
 		});
@@ -63,9 +70,9 @@ public class ViewApps extends ListFragment {
 		});
 		
 		Cursor cursor = helper.getApps();
-        int[] to = new int[] { R.id.column_one, R.id.column_two};
+        int[] to = new int[] { R.id.app_column_one, R.id.app_column_two, R.id.app_column_three};
 
-        mAdapter = new SimpleCursorAdapter(getActivity().getApplicationContext(), R.layout.list_example, cursor, cursor.getColumnNames(), to);
+        mAdapter = new SimpleCursorAdapter(getActivity().getApplicationContext(), R.layout.app_list, cursor, cursor.getColumnNames(), to);
 
         setListAdapter(mAdapter);
 	}
@@ -74,7 +81,9 @@ public class ViewApps extends ListFragment {
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		long _id = getListAdapter().getItemId(position);
-		helper.modifyApp(_id, "AppModified");
+		app.setName("AppModified");
+		app.setId(_id);
+		helper.modifyApp(app);
 		mAdapter.notifyDataSetChanged();
 	}
 }

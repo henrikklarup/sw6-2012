@@ -6,7 +6,6 @@ public class Department {
 	private String name;
 	private String address;
 	private long phone;
-	private String email;
 	/**
 	 * @return the id
 	 */
@@ -54,17 +53,5 @@ public class Department {
 	 */
 	public void setPhone(long phone) {
 		this.phone = phone;
-	}
-	/**
-	 * @return the email
-	 */
-	public String getEmail() {
-		return email;
-	}
-	/**
-	 * @param email the email to set
-	 */
-	public void setEmail(String email) {
-		this.email = email;
 	}
 }
