@@ -100,7 +100,7 @@ public class DbProvider extends ContentProvider {
 		listofappsProjectionMap.put(ListOfAppsMetaData.Table.COLUMN_APPSID, ListOfAppsMetaData.Table.COLUMN_APPSID);
 		listofappsProjectionMap.put(ListOfAppsMetaData.Table.COLUMN_PROFILESID, ListOfAppsMetaData.Table.COLUMN_PROFILESID);
 		listofappsProjectionMap.put(ListOfAppsMetaData.Table.COLUMN_SETTINGS, ListOfAppsMetaData.Table.COLUMN_SETTINGS);
-		listofappsProjectionMap.put(ListOfAppsMetaData.Table.COLUMN_SETTINGS, ListOfAppsMetaData.Table.COLUMN_STATS);
+		listofappsProjectionMap.put(ListOfAppsMetaData.Table.COLUMN_STATS, ListOfAppsMetaData.Table.COLUMN_STATS);
 	}
 
 	@Override

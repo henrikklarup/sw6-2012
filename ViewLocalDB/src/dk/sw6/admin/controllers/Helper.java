@@ -39,7 +39,7 @@ public class Helper {
 	 * @author Admin
 	 *
 	 */
-	public class ProfileHelper {
+//	public class ProfileHelper {
 		
 		/**
 		 * Insert profile
@@ -101,14 +101,14 @@ public class Helper {
 
 			return c;
 		}
-	}
+//	}
 
 	/**
 	 * Application class
 	 * @author Admin
 	 *
 	 */
-	public class AppHelper {
+//	public class AppHelper {
 		
 		/**
 		 * Insert app
@@ -153,14 +153,14 @@ public class Helper {
 		public void clearAppsTable() {
 			_context.getContentResolver().delete(AppsMetaData.CONTENT_URI, null, null);
 		}
-	}
+//	}
 
 	/**
 	 * Department class
 	 * @author Admin
 	 *
 	 */
-	public class DepartmentHelper {
+//	public class DepartmentHelper {
 		
 		/**
 		 * Insert department
@@ -210,14 +210,14 @@ public class Helper {
 		public void clearDepartmentsTable() {
 			_context.getContentResolver().delete(DepartmentsMetaData.CONTENT_URI, null, null);
 		}
-	}
+//	}
 
 	/**
 	 * Media class
 	 * @author Admin
 	 *
 	 */
-	public class MediaHelper {
+//	public class MediaHelper {
 		
 		/**
 		 * Insert media
@@ -274,14 +274,14 @@ public class Helper {
 		public void clearMediaTable() {
 			_context.getContentResolver().delete(MediaMetaData.CONTENT_URI, null, null);
 		}
-	}
+//	}
 	
 	/**
 	 * List of apps class
 	 * @author Admin
 	 *
 	 */
-	public class ListOfAppsHelper {
+//	public class ListOfAppsHelper {
 		
 		/**
 		 * Insert list of apps
@@ -332,7 +332,7 @@ public class Helper {
 		public void clearListOfAppsTable() {
 			_context.getContentResolver().delete(ListOfAppsMetaData.CONTENT_URI, null, null);
 		}
-	}
+//	}
 	
 	
 	/**
@@ -340,7 +340,7 @@ public class Helper {
 	 * @author Admin
 	 *
 	 */
-	public class CertificatesHelper {
+//	public class CertificatesHelper {
 		
 		/**
 		 * Insert certificate
@@ -382,6 +382,6 @@ public class Helper {
 		public void clearCertificateTable() {
 			_context.getContentResolver().delete(CertificatesMetaData.CONTENT_URI, null, null);
 		}
-	}
+//	}
 	
 }

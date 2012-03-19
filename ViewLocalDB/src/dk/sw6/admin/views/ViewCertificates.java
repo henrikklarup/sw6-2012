@@ -12,10 +12,12 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import dk.sw6.admin.controllers.Helper;
+import dk.sw6.admin.viewmodels.Certificate;
 
 public class ViewCertificates extends ListFragment {
 
 	Helper helper;
+	Certificate certificate;
 	ArrayAdapter<String> adapter;
 	Button bAdd, bDel;
 	TextView tvHeader;
@@ -41,14 +43,17 @@ public class ViewCertificates extends ListFragment {
 		
 		helper = new Helper(getActivity().getApplicationContext());
 		
+		certificate = new Certificate();
+		
 		tvHeader = (TextView) getView().findViewById(R.id.table_header);
-		tvHeader.setText("AppsTable");
+		tvHeader.setText("CertificatesTable");
 		bAdd = (Button) getView().findViewById(R.id.add);
 		bAdd.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				helper.insertApp("NewApp");
+				certificate.setAuthkey("CertificateString");
+				helper.insertCertificate(certificate);
 				mAdapter.notifyDataSetChanged();
 			}
 		});
@@ -57,15 +62,15 @@ public class ViewCertificates extends ListFragment {
 			
 			@Override
 			public void onClick(View v) {
-				helper.clearAppsTable();
+				helper.clearCertificateTable();
 				mAdapter.notifyDataSetChanged();
 			}
 		});
 		
-		Cursor cursor = helper.getApps();
-        int[] to = new int[] { R.id.column_one, R.id.column_two};
+		Cursor cursor = helper.getCertificates();
+        int[] to = new int[] { R.id.certificate_column_one, R.id.certificate_column_two};
 
-        mAdapter = new SimpleCursorAdapter(getActivity().getApplicationContext(), R.layout.list_example, cursor, cursor.getColumnNames(), to);
+        mAdapter = new SimpleCursorAdapter(getActivity().getApplicationContext(), R.layout.certificate_list, cursor, cursor.getColumnNames(), to);
 
         setListAdapter(mAdapter);
 	}
@@ -74,7 +79,9 @@ public class ViewCertificates extends ListFragment {
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		long _id = getListAdapter().getItemId(position);
-		helper.modifyApp(_id, "AppModified");
+		certificate.setId(_id);
+		certificate.setAuthkey("ModifiedCertificate");
+		helper.modifyCertificate(certificate);
 		mAdapter.notifyDataSetChanged();
 	}
 }

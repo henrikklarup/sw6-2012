@@ -12,10 +12,12 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import dk.sw6.admin.controllers.Helper;
+import dk.sw6.admin.viewmodels.Profile;
 
 public class ViewProfiles extends ListFragment {
 
 	Helper helper;
+	Profile profile;
 	ArrayAdapter<String> adapter;
 	Button bAdd, bDel;
 	TextView tvHeader;
@@ -41,6 +43,8 @@ public class ViewProfiles extends ListFragment {
 		
 		helper = new Helper(getActivity().getApplicationContext());
 		
+		profile = new Profile();
+		
 		tvHeader = (TextView) getView().findViewById(R.id.table_header);
 		tvHeader.setText("ProfilesTable");
 		bAdd = (Button) getView().findViewById(R.id.add);
@@ -48,7 +52,15 @@ public class ViewProfiles extends ListFragment {
 			
 			@Override
 			public void onClick(View v) {
-				helper.insertProfile("NewProfile", 1);
+				profile.setFirstname("FirstName");
+				profile.setMiddlename("MiddleName");
+				profile.setSurname("SurName");
+				profile.setPicture("Picture");
+				profile.setPhone(123456789);
+				profile.setRole(2);
+				profile.setDepartmentId(321);
+				
+				helper.insertProfile(profile);
 				mAdapter.notifyDataSetChanged();
 			}
 		});
@@ -63,9 +75,9 @@ public class ViewProfiles extends ListFragment {
 		});
 		
 		Cursor cursor = helper.getProfiles();
-        int[] to = new int[] { R.id.column_one, R.id.column_two};
+        int[] to = new int[] { R.id.profile_column_one, R.id.profile_column_two, R.id.profile_column_three, R.id.profile_column_four, R.id.profile_column_five, R.id.profile_column_six, R.id.profile_column_seven, R.id.profile_column_eight};
 
-        mAdapter = new SimpleCursorAdapter(getActivity().getApplicationContext(), R.layout.list_example, cursor, cursor.getColumnNames(), to);
+        mAdapter = new SimpleCursorAdapter(getActivity().getApplicationContext(), R.layout.profile_list, cursor, cursor.getColumnNames(), to);
 
         setListAdapter(mAdapter);
 	}
@@ -74,7 +86,9 @@ public class ViewProfiles extends ListFragment {
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		long _id = getListAdapter().getItemId(position);
-		helper.modifyProfile(_id, "ProfileModified", 0);
+		profile.setId(_id);
+		profile.setFirstname("ModifiedFirstName");
+		helper.modifyProfile(profile);
 		mAdapter.notifyDataSetChanged();
 	}
 }

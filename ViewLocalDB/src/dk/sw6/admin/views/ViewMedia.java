@@ -12,10 +12,12 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import dk.sw6.admin.controllers.Helper;
+import dk.sw6.admin.viewmodels.Media;
 
 public class ViewMedia extends ListFragment {
 
 	Helper helper;
+	Media media;
 	ArrayAdapter<String> adapter;
 	Button bAdd, bDel;
 	TextView tvHeader;
@@ -40,6 +42,8 @@ public class ViewMedia extends ListFragment {
 		super.onActivityCreated(savedInstanceState);
 
 		helper = new Helper(getActivity().getApplicationContext());
+		
+		media = new Media();
 
 		tvHeader = (TextView) getView().findViewById(R.id.table_header);
 		tvHeader.setText("MediaTable");
@@ -48,7 +52,14 @@ public class ViewMedia extends ListFragment {
 
 			@Override
 			public void onClick(View v) {
-				helper.insertMedia("NewMedia");
+				media.setName("Media");
+				media.setPath("Path");
+				media.setTags("Tag");
+				media.setType("Type");
+				media.setOwnerId(123456);
+				media.set_public(true);
+				
+				helper.insertMedia(media);
 				mAdapter.notifyDataSetChanged();
 			}
 		});
@@ -63,9 +74,9 @@ public class ViewMedia extends ListFragment {
 		});
 
 		Cursor cursor = helper.getMedia();
-		int[] to = new int[] { R.id.column_one, R.id.column_two};
+		int[] to = new int[] { R.id.media_column_one, R.id.media_column_two, R.id.media_column_three, R.id.media_column_four, R.id.media_column_five, R.id.media_column_six, R.id.media_column_seven};
 
-		mAdapter = new SimpleCursorAdapter(getActivity().getApplicationContext(), R.layout.list_example, cursor, cursor.getColumnNames(), to);
+		mAdapter = new SimpleCursorAdapter(getActivity().getApplicationContext(), R.layout.media_list, cursor, cursor.getColumnNames(), to);
 
 		setListAdapter(mAdapter);
 	}
@@ -74,7 +85,9 @@ public class ViewMedia extends ListFragment {
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		long _id = getListAdapter().getItemId(position);
-		helper.modifyMedia(_id, "MediaModified");
+		media.setId(_id);
+		media.setName("MediaModified");
+		helper.modifyMedia(media);
 		mAdapter.notifyDataSetChanged();
 	}
 }
