@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.controller.get"
+    package="dk.sw6.admin.views"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -19,38 +19,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".TableList"
+            android:name=".MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
-                <action android:name="com.controller.get.TABLELIST" />
+                <action android:name="dk.sw6.admin.views.MAINACTIVITY" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".AppsView"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
-            android:name=".DepartmentsView"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
-            android:name=".MediaView"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
-            android:name=".ProfilesView"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
-            android:name=".SettingsView"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
-            android:name=".StatsView"
-            android:label="@string/app_name" >
-        </activity>
+        <activity android:name="ViewApps" />
+        <activity android:name="ViewDepartments" />
+        <activity android:name="ViewMedia" />
+        <activity android:name="ViewProfiles" />
+        <activity android:name="ViewSettings" />
+        <activity android:name="ViewStats" />
     </application>
 
 </manifest>

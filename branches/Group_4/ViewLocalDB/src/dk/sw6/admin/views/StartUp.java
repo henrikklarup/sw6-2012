@@ -1,4 +1,4 @@
-package com.controller.get;
+package dk.sw6.admin.views;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,28 +6,23 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 
 public class StartUp extends Activity {
 	
 	MediaPlayer introSound;
 	
-    /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
         // Fullscreen	
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         View main_layout = findViewById(android.R.id.content).getRootView();
         main_layout.setSystemUiVisibility(View.STATUS_BAR_HIDDEN);
         
         setContentView(R.layout.logo);
         
-        //Sets the sound file
         introSound = MediaPlayer.create(StartUp.this, R.raw.dingdingdong);
-        //introSound.seekTo(40500);
         introSound.start();
         
         Thread timer = new Thread(){
@@ -37,7 +32,7 @@ public class StartUp extends Activity {
         		} catch (InterruptedException e){
         			e.printStackTrace();
         		} finally{
-        			Intent direct = new Intent("com.controller.get.TABLELIST");
+        			Intent direct = new Intent("dk.sw6.admin.views.MAINACTIVITY");
         			startActivity(direct);
         		}
         	}
@@ -47,7 +42,6 @@ public class StartUp extends Activity {
 
 	@Override
 	protected void onPause() {
-		// TODO Auto-generated method stub
 		super.onPause();
 		finish();
 		introSound.stop();
