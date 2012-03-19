@@ -31,8 +31,8 @@
         <activity android:name="ViewDepartments" />
         <activity android:name="ViewMedia" />
         <activity android:name="ViewProfiles" />
-        <activity android:name="ViewSettings" />
-        <activity android:name="ViewStats" />
+        <activity android:name="ViewCertificates" />
+        <activity android:name="ViewListOfApps" />
     </application>
 
 </manifest>
