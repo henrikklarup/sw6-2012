@@ -3,7 +3,7 @@ package dk.sw6.admin.viewmodels;
 public class Profile {
 
 	private long id;
-	private String name;
+	private String firstname;
 	private String surname;
 	private String middlename;
 	private long role;
@@ -26,13 +26,13 @@ public class Profile {
 	 * @return the name
 	 */
 	public String getName() {
-		return name;
+		return firstname;
 	}
 	/**
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
-		this.name = name;
+		this.firstname = name;
 	}
 	/**
 	 * @return the surname
