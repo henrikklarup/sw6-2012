@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="hello">Hello World, WOMBATActivity!</string>
     <string name="app_name">WOMBAT</string>
-    <string name="standard">Standard</string>
-    <string name="customized">Tilpasset</string>
+    
+    <string-array name="profiles_array">
+        <item>Ole</item>
+        <item>Bent</item>
+        <item>Kurt</item>
+    </string-array>
+    
+    
+    <string-array name="templates">
+        <item>Timeglas - 15 min</item>
+        <item>Time timer - 10 min</item>
+    </string-array>
 
 </resources>
