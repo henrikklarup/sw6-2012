@@ -48,7 +48,7 @@ public class ViewApps extends ListFragment {
 			
 			@Override
 			public void onClick(View v) {
-				helper.insertApp("NewApp");
+				helper.insertApp("NewApp", );
 				mAdapter.notifyDataSetChanged();
 			}
 		});
