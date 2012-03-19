@@ -25,14 +25,14 @@ public class Profile {
 	/**
 	 * @return the name
 	 */
-	public String getName() {
+	public String getFirstname() {
 		return firstname;
 	}
 	/**
-	 * @param name the name to set
+	 * @param firstname the name to set
 	 */
-	public void setName(String name) {
-		this.firstname = name;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 	/**
 	 * @return the surname
