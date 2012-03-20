@@ -43,8 +43,7 @@ public class Helper {
 		
 		/**
 		 * Insert profile
-		 * @param profileName Profile name
-		 * @param profileRole Profile role, either autism or guardian
+		 * @param _profile Profile containing data
 		 */
 		public void insertProfile(Profile _profile) {
 			ContentValues cv = new ContentValues();
@@ -60,9 +59,7 @@ public class Helper {
 		
 		/**
 		 * Modify profile
-		 * @param id Profile id in Database
-		 * @param profileName New profile name for selected item
-		 * @param profileRole New profile role for selected item, either autist or guardian
+		 * @param _profile Profile containing data to modify
 		 */
 		public void modifyProfile(Profile _profile) {
 			Uri uri = ContentUris.withAppendedId(ProfilesMetaData.CONTENT_URI, _profile.getId());
@@ -112,7 +109,7 @@ public class Helper {
 		
 		/**
 		 * Insert app
-		 * @param appName Application name
+		 * @param _app Application containing data
 		 */
 		public void insertApp(App _app) {
 			ContentValues cv = new ContentValues();
@@ -123,8 +120,7 @@ public class Helper {
 		
 		/**
 		 * Modify app method
-		 * @param id Application id in Database
-		 * @param appName New application name for selected item
+		 * @param _app Application containing data to modify
 		 */
 		public void modifyApp(App _app) {
 			Uri uri = ContentUris.withAppendedId(AppsMetaData.CONTENT_URI, _app.getId());
@@ -164,8 +160,7 @@ public class Helper {
 		
 		/**
 		 * Insert department
-		 * @param departmentName Department name
-		 * @param departmentPhone Department phone number
+		 * @param _department Department containg data
 		 */
 		public void insertDepartment(Department _department) {
 			ContentValues cv = new ContentValues();
@@ -177,9 +172,7 @@ public class Helper {
 		
 		/**
 		 * Modify department
-		 * @param id Department id in Database
-		 * @param departmentName New department name for selected item
-		 * @param departmentPhone New department phone number for selected item
+		 * @param _department Department containing data to modify
 		 */
 		public void modifyDepartment(Department _department) {
 			Uri uri = ContentUris.withAppendedId(DepartmentsMetaData.CONTENT_URI, _department.getId());
@@ -221,7 +214,7 @@ public class Helper {
 		
 		/**
 		 * Insert media
-		 * @param mediaName Media name
+		 * @param _media Media containing data
 		 */
 		public void insertMedia(Media _media) {
 			ContentValues cv = new ContentValues();
@@ -236,8 +229,7 @@ public class Helper {
 		
 		/**
 		 * Modify media
-		 * @param id Media id in Database
-		 * @param mediaName New media name for selected item
+		 * @param _media Media containing data to modify
 		 */
 		public void modifyMedia(Media _media) {
 			Uri uri = ContentUris.withAppendedId(MediaMetaData.CONTENT_URI, _media.getId());
@@ -285,7 +277,7 @@ public class Helper {
 		
 		/**
 		 * Insert list of apps
-		 * @param mediaName list of apps name
+		 * @param _listOfApps List of apps containing data
 		 */
 		public void insertListOfApps(ListOfApps _listOfApps) {
 			ContentValues cv = new ContentValues();
@@ -298,8 +290,7 @@ public class Helper {
 		
 		/**
 		 * Modify list of apps
-		 * @param id list of apps id in Database
-		 * @param mediaName New list of apps name for selected item
+		 * @param _listOfApps List of apps containing data to modify
 		 */
 		public void modifyListOfApps(ListOfApps _listOfApps) {
 			Uri uri = ContentUris.withAppendedId(ListOfAppsMetaData.CONTENT_URI, _listOfApps.getId());
@@ -344,7 +335,7 @@ public class Helper {
 		
 		/**
 		 * Insert certificate
-		 * @param mediaName list of apps name
+		 * @param _certificates Certificate containing data
 		 */
 		public void insertCertificate(Certificate _certificates) {
 			ContentValues cv = new ContentValues();
@@ -353,9 +344,8 @@ public class Helper {
 		}
 		
 		/**
-		 * Modify list of apps
-		 * @param id list of apps id in Database
-		 * @param mediaName New list of apps name for selected item
+		 * Modify Certificate
+		 * @param _certificates Certificate containing data to modify
 		 */
 		public void modifyCertificate(Certificate _certificates) {
 			Uri uri = ContentUris.withAppendedId(CertificatesMetaData.CONTENT_URI, _certificates.getId());
@@ -365,8 +355,8 @@ public class Helper {
 		}
 		
 		/**
-		 * Get all list of apps
-		 * @return Cursor, containing all media
+		 * Get all certificates
+		 * @return Cursor, containing all certificates
 		 */
 		public Cursor getCertificates() {
 			String[] columns = new String[] { CertificatesMetaData.Table.COLUMN_ID, 
@@ -377,7 +367,7 @@ public class Helper {
 		}
 		
 		/**
-		 * Clear list of apps table
+		 * Clear certificates table
 		 */
 		public void clearCertificateTable() {
 			_context.getContentResolver().delete(CertificatesMetaData.CONTENT_URI, null, null);
