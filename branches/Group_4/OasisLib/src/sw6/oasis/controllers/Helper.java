@@ -373,5 +373,68 @@ public class Helper {
 			_context.getContentResolver().delete(CertificatesMetaData.CONTENT_URI, null, null);
 		}
 //	}
+		
+		private App cursorToApp(Cursor cursor) {
+			App app = new App();
+			app.setId(cursor.getLong(cursor.getColumnIndex(AppsMetaData.Table.COLUMN_ID)));
+			app.setName(cursor.getString(cursor.getColumnIndex(AppsMetaData.Table.COLUMN_NAME)));
+			app.setVersionNumber(cursor.getString(cursor.getColumnIndex(AppsMetaData.Table.COLUMN_VERSIONNUMBER)));
+			return app;
+		}
+		
+		private Certificate cursorToCertificate(Cursor cursor) {
+			Certificate certificate = new Certificate();
+			certificate.setId(cursor.getLong(cursor.getColumnIndex(CertificatesMetaData.Table.COLUMN_ID)));
+			certificate.setAuthkey(cursor.getString(cursor.getColumnIndex(CertificatesMetaData.Table.COLUMN_AUTHKEY)));
+			return certificate;
+		}
+		
+		private Department cursorToDepartment(Cursor cursor) {
+			Department department = new Department();
+			department.setId(cursor.getLong(cursor.getColumnIndex(DepartmentsMetaData.Table.COLUMN_ID)));
+			department.setName(cursor.getString(cursor.getColumnIndex(DepartmentsMetaData.Table.COLUMN_NAME)));
+			department.setAddress(cursor.getString(cursor.getColumnIndex(DepartmentsMetaData.Table.COLUMN_ADDRESS)));
+			department.setPhone(cursor.getLong(cursor.getColumnIndex(DepartmentsMetaData.Table.COLUMN_PHONE)));
+			return department;
+		}
+		
+		private ListOfApps cursorToListOfApps(Cursor cursor) {
+			ListOfApps loa = new ListOfApps();
+			loa.setId(cursor.getLong(cursor.getColumnIndex(ListOfAppsMetaData.Table.COLUMN_ID)));
+			loa.setAppId(cursor.getLong(cursor.getColumnIndex(ListOfAppsMetaData.Table.COLUMN_APPSID)));
+			loa.setProfileId(cursor.getLong(cursor.getColumnIndex(ListOfAppsMetaData.Table.COLUMN_PROFILESID)));
+			loa.setSettings(cursor.getString(cursor.getColumnIndex(ListOfAppsMetaData.Table.COLUMN_SETTINGS)));
+			loa.setStats(cursor.getString(cursor.getColumnIndex(ListOfAppsMetaData.Table.COLUMN_STATS)));
+			return loa;
+		}
+		
+		private Media cursorToMedia(Cursor cursor) {
+			Media media = new Media();
+			media.setId(cursor.getLong(cursor.getColumnIndex(MediaMetaData.Table.COLUMN_ID)));
+			media.setName(cursor.getString(cursor.getColumnIndex(MediaMetaData.Table.COLUMN_NAME)));
+			media.setPath(cursor.getString(cursor.getColumnIndex(MediaMetaData.Table.COLUMN_PATH)));
+			media.setTags(cursor.getString(cursor.getColumnIndex(MediaMetaData.Table.COLUMN_TAGS)));
+			media.setType(cursor.getString(cursor.getColumnIndex(MediaMetaData.Table.COLUMN_TYPE)));
+			media.setOwnerId(cursor.getLong(cursor.getColumnIndex(MediaMetaData.Table.COLUMN_OWNERID)));
+			if (cursor.getLong(cursor.getColumnIndex(MediaMetaData.Table.COLUMN_PUBLIC)) == 1) {
+				media.set_public(true);
+			} else {
+				media.set_public(false);
+			}
+			return media;
+		}
+		
+		private Profile cursorToProfile(Cursor cursor) {
+			Profile profile = new Profile();
+			profile.setId(cursor.getLong(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_ID)));
+			profile.setFirstname(cursor.getString(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_FIRST_NAME)));
+			profile.setMiddlename(cursor.getString(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_MIDDLE_NAME)));
+			profile.setSurname(cursor.getString(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_SUR_NAME)));
+			profile.setPicture(cursor.getString(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_PICTURE)));
+			profile.setDepartmentId(cursor.getLong(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_DEPARTMENTID)));
+			profile.setPhone(cursor.getLong(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_PHONE)));
+			profile.setRole(cursor.getLong(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_ROLE)));
+			return profile;
+		}
 	
 }
