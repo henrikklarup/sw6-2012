@@ -10,8 +10,8 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
         <provider
-            android:name="sw6.autism.admin.provider.DbProvider"
-            android:authorities="sw6.autism.admin.provider.AutismProvider" >
+            android:name="sw6.oasis.provider.DbProvider"
+            android:authorities="sw6.oasis.provider.AutismProvider" >
         </provider>
     </application>
 

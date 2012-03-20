@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <string name="hello">Hello World, ViewLocalDBActivity!</string>
-    <string name="app_name">ViewLocalDB</string>
-    <string name="deleteTable">Delete Table Data</string>
-    <string name="addToTable">Add New Dummy</string>
-
-</resources>

@@ -15,16 +15,22 @@ public final class R {
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int add=0x7f060003;
-        public static final int column_one=0x7f060000;
-        public static final int column_two=0x7f060001;
-        public static final int delete=0x7f060004;
-        public static final int group=0x7f060002;
+        public static final int add=0x7f060006;
+        public static final int app_column_one=0x7f060000;
+        public static final int app_column_three=0x7f060002;
+        public static final int app_column_two=0x7f060001;
+        public static final int column_one=0x7f060003;
+        public static final int column_two=0x7f060004;
+        public static final int delete=0x7f060007;
+        public static final int group=0x7f060005;
+        public static final int table_header=0x7f060008;
     }
     public static final class layout {
-        public static final int list_example=0x7f030000;
-        public static final int logo=0x7f030001;
-        public static final int main=0x7f030002;
+        public static final int app_list=0x7f030000;
+        public static final int list_example=0x7f030001;
+        public static final int logo=0x7f030002;
+        public static final int main=0x7f030003;
+        public static final int tableview=0x7f030004;
     }
     public static final class raw {
         public static final int dingdingdong=0x7f040000;
