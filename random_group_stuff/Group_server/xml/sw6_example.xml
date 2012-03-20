@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+
+<sw6ml xmlns="172.25.11.65:8080/sw6ml_ns">
+  <Media>
+    <Entry action="create">
+      <idMedia>1</idMedia>
+      <Path>pictures/public</Path>
+      <Name>Bil.jpg</Name>
+      <Public>true</Public>
+      <Type>biler</Type>
+      <Tags>
+        <tag>Blå</tag>
+        <tag>Hurtig</tag>
+        <tag>mustang</tag>
+      </Tags>
+      <OwnerID>4</OwnerID>
+    </Entry>
+    <Entry action="update">
+      <idMedia>2</idMedia>
+      <Path>Pictures/Public</Path>
+      <Name>hest.jpg</Name>
+      <Public>False</Public>
+      <Type>Dyr</Type>
+      <Tags>
+        <tag>mette</tag>
+        <tag>hvid</tag>
+        <tag>stor</tag>
+      </Tags>
+      <OwnerID>3</OwnerID>
+    </Entry>
+  </Media>
+  <Department>
+    <Entry action="create">
+      <idDepartment>3</idDepartment>
+      <Name>EgeBakken</Name>
+      <Address>Egebakkevej 3</Address>
+      <Phone>12345678</Phone>
+      <Email>egebakken@egebakken.dk</Email>
+    </Entry>
+    <Entry action="update">
+      <idDepartment>2</idDepartment>
+      <Name>Birken</Name>
+      <Address>Birkevej 3</Address>
+      <Phone>87654321</Phone>
+      <Email>birken@birken.dk</Email>
+    </Entry>
+  </Department>
+  <Profile>
+    <Entry action="create">
+      <idProfile>1</idProfile>
+      <Name>Mette</Name>
+      <Surname>Hansen</SurName>
+      <Middlename>b.</Middlename>
+      <Role>0</Role>
+      <Phone>23456781</Phone>
+      <Picture>profile/pictures/mettebhansen.jpg</Picture>
+      <DepartmentID>3</DepartmentID>
+    </Entry>
+    <Entry action="update">
+      <idProfile>102</idProfile>
+      <Name>Dusting</Name>
+      <Surname>Hoffman</SurName>
+      <Middlename></Middlename>
+      <Role>1</Role>
+      <Phone>34567812</Phone>
+      <Picture>profile/pictures/dusting.jpg</Picture>
+      <DepartmentID>2</DepartmentID>
+    </Entry>
+  </Profile>
+  <ListOfApps>
+    <Entry action="update">
+      <AppID>1</AppID>
+      <ProfileID>2</ProfileID>
+      <Settings>somexml</Settings>
+      <Stats>high score: 1000</Stats>
+    </Entry>
+  </ListOfApps>
+  <Apps>
+    <Entry action="create">
+      <idApps>2</idApps>
+      <Name>Angry birds</Name>
+      <Version>0.2</Version>
+  </Apps>
+</sw6ml>
+
