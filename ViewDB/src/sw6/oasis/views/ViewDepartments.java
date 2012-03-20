@@ -84,6 +84,8 @@ public class ViewDepartments extends ListFragment {
 		long _id = getListAdapter().getItemId(position);
 		department.setId(_id);
 		department.setName("DepartmentModified");
+		department.setAddress("ModifiedAddress");
+		department.setPhone(123456789);
 		helper.modifyDepartment(department);
 		mAdapter.notifyDataSetChanged();
 	}
