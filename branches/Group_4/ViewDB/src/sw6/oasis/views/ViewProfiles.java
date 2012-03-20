@@ -89,6 +89,12 @@ public class ViewProfiles extends ListFragment {
 		long _id = getListAdapter().getItemId(position);
 		profile.setId(_id);
 		profile.setFirstname("ModifiedFirstName");
+		profile.setMiddlename("ModifiedMiddleName");
+		profile.setSurname("ModifiedSurName");
+		profile.setPicture("ModifiedPicture");
+		profile.setPhone(987654321);
+		profile.setRole(1);
+		profile.setDepartmentId(123);
 		helper.modifyProfile(profile);
 		mAdapter.notifyDataSetChanged();
 	}

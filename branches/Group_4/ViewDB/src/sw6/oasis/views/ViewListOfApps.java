@@ -86,6 +86,8 @@ public class ViewListOfApps extends ListFragment {
 		loa.setId(_id);
 		loa.setSettings("ModifiedSetting");
 		loa.setStats("ModifiedStat");
+		loa.setAppId(123);
+		loa.setProfileId(321);
 		helper.modifyListOfApps(loa);
 		mAdapter.notifyDataSetChanged();
 	}

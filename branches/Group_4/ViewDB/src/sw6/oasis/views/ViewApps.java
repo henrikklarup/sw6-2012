@@ -2,7 +2,6 @@ package sw6.oasis.views;
 
 import sw6.oasis.controllers.Helper;
 import sw6.oasis.viewmodels.App;
-import sw6.oasis.views.R;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -82,8 +81,9 @@ public class ViewApps extends ListFragment {
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		long _id = getListAdapter().getItemId(position);
-		app.setName("AppModified");
 		app.setId(_id);
+		app.setName("AppModified");
+		app.setVersionNumber("ModifiedVersion");
 		helper.modifyApp(app);
 		mAdapter.notifyDataSetChanged();
 	}

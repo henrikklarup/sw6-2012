@@ -88,6 +88,11 @@ public class ViewMedia extends ListFragment {
 		long _id = getListAdapter().getItemId(position);
 		media.setId(_id);
 		media.setName("MediaModified");
+		media.setPath("ModifiedPath");
+		media.setTags("ModifiedTag");
+		media.setType("ModifiedType");
+		media.setOwnerId(654321);
+		media.set_public(false);
 		helper.modifyMedia(media);
 		mAdapter.notifyDataSetChanged();
 	}

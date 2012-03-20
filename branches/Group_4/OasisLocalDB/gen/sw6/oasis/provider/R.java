@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package sw6.autism.admin;
+package sw6.oasis.provider;
 
 public final class R {
     public static final class attr {
