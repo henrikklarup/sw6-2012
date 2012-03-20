@@ -1,4 +1,4 @@
-package sw6.oasis.controllers.metadata;
+package sw6.oasis.provider;
 
 import android.net.Uri;
 import android.provider.BaseColumns;
@@ -6,6 +6,9 @@ import android.provider.BaseColumns;
 public class DepartmentsMetaData {
 	
 	public static final Uri CONTENT_URI = Uri.parse("content://sw6.oasis.provider.AutismProvider/departments");
+	
+	public static final String CONTENT_TYPE_DEPARTMENTS_LIST = "vnd.android.cursor.dir/vnd.sw6.departments";
+	public static final String CONTENT_TYPE_DEPARTMENT_ONE = "vnd.android.cursor.item/vnd.sw6.departments";
 	
 	public class Table implements BaseColumns {
 		public static final String TABLE_NAME = "tbl_departments";

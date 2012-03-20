@@ -7,49 +7,16 @@
     <uses-sdk android:minSdkVersion="13" />
 
     <application
-        android:icon="@drawable/elephant"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
         <activity
-            android:name=".StartUp"
+            android:name=".AppsView"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".TableList"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="com.controller.get.TABLELIST" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".AppsView"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
-            android:name=".DepartmentsView"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
-            android:name=".MediaView"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
-            android:name=".ProfilesView"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
-            android:name=".SettingsView"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
-            android:name=".StatsView"
-            android:label="@string/app_name" >
         </activity>
     </application>
 

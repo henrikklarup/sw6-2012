@@ -9,7 +9,8 @@ import android.widget.ListView;
 
 public class TableList extends ListActivity {
 	
-	String tables[] = new String[] {"AppsView", "DepartmentsView", "MediaView", "ProfilesView", "SettingsView", "StatsView"};
+	String tables[] = new String[] {"AppsView"};
+//	String tables[] = new String[] {"AppsView", "DepartmentsView", "MediaView", "ProfilesView", "SettingsView", "StatsView"};
 	ArrayAdapter<String> adapter;
 
 	@Override
