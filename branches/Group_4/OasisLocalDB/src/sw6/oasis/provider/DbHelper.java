@@ -14,6 +14,9 @@ public class DbHelper extends SQLiteOpenHelper {
 		super(c, DATABASE_NAME, null, DATABASE_VERSION);
 	}
 
+	/**
+	 * Creates all the tables in the database
+	 */
 	public void onCreate(SQLiteDatabase db) {
 		ProfilesTable.onCreate(db);
 		CertificatesTable.onCreate(db);
@@ -23,6 +26,9 @@ public class DbHelper extends SQLiteOpenHelper {
 		DepartmentsTable.onCreate(db);
 	}
 
+	/**
+	 * Drops the old tables and then creates the tables in the database
+	 */
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		ProfilesTable.onUpgrade(db, oldVersion, newVersion);
 		CertificatesTable.onUpgrade(db, oldVersion, newVersion);
