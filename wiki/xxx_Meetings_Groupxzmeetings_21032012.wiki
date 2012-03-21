@@ -21,4 +21,6 @@ Notary: SW604
 == Other stuff ==
   * Launcher group (20 min)
   * Admin: "Database design and Library" (20 min)[https://docs.google.com/presentation/d/1RHZrbg5ZOM7vSqOAPudOhodJ_EhbypHmYSLI48_jxPE/edit link]
+  *
+  * Fællesdag på uni 
   * aub.
