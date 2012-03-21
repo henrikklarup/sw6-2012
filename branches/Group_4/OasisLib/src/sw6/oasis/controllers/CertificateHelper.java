@@ -26,7 +26,7 @@ public class CertificateHelper {
 	public CertificateHelper(Context context){
 		_context = context;
 	}
-	
+
 	/**
 	 * Insert certificate
 	 * @param _certificates Certificate containing data
@@ -36,7 +36,7 @@ public class CertificateHelper {
 		cv.put(CertificatesMetaData.Table.COLUMN_AUTHKEY, _certificates.getAuthkey());
 		_context.getContentResolver().insert(CertificatesMetaData.CONTENT_URI, cv);
 	}
-	
+
 	/**
 	 * Modify Certificate
 	 * @param _certificates Certificate containing data to modify
@@ -47,36 +47,38 @@ public class CertificateHelper {
 		cv.put(CertificatesMetaData.Table.COLUMN_AUTHKEY, _certificates.getAuthkey());
 		_context.getContentResolver().update(uri, cv, null, null);
 	}
-	
+
 	/**
 	 * Get all certificates
 	 * @return List<Certificate>, containing all certificates
 	 */
 	public List<Certificate> getCertificates() {
-		
+
 		List<Certificate> certificates = new ArrayList<Certificate>();
-		
+
 		String[] columns = new String[] { CertificatesMetaData.Table.COLUMN_ID, 
-										  CertificatesMetaData.Table.COLUMN_AUTHKEY};
+				CertificatesMetaData.Table.COLUMN_AUTHKEY};
 		Cursor c = _context.getContentResolver().query(CertificatesMetaData.CONTENT_URI, columns, null, null, null);
-		
+
 		if(c.isFirst()) {
-		while(c.isAfterLast()) {
-			certificates.add(cursorToCertificate(c));
-			c.moveToNext();
+			while(!c.isAfterLast()) {
+				certificates.add(cursorToCertificate(c));
+				c.moveToNext();
+			}
 		}
-		}
+
+		c.close();
 
 		return certificates;
 	}
-	
+
 	/**
 	 * Clear certificates table
 	 */
 	public void clearCertificateTable() {
 		_context.getContentResolver().delete(CertificatesMetaData.CONTENT_URI, null, null);
 	}
-	
+
 	/**
 	 * Cursor to certificate
 	 * @param cursor Input cursor

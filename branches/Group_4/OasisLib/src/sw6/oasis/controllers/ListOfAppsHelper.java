@@ -26,7 +26,7 @@ public class ListOfAppsHelper {
 	public ListOfAppsHelper(Context context){
 		_context = context;
 	}
-	
+
 	/**
 	 * Insert list of apps
 	 * @param _listOfApps List of apps containing data
@@ -39,7 +39,7 @@ public class ListOfAppsHelper {
 		cv.put(ListOfAppsMetaData.Table.COLUMN_STATS, _listOfApps.getStats());
 		_context.getContentResolver().insert(ListOfAppsMetaData.CONTENT_URI, cv);
 	}
-	
+
 	/**
 	 * Modify list of apps
 	 * @param _listOfApps List of apps containing data to modify
@@ -53,7 +53,7 @@ public class ListOfAppsHelper {
 		cv.put(ListOfAppsMetaData.Table.COLUMN_STATS, _listOfApps.getStats());
 		_context.getContentResolver().update(uri, cv, null, null);
 	}
-	
+
 	/**
 	 * Get all list of apps
 	 * @return List<ListOfApps>, containing all media
@@ -61,29 +61,31 @@ public class ListOfAppsHelper {
 	public List<ListOfApps> getListOfApps() {
 		List<ListOfApps> ListOfListOfApps =  new ArrayList<ListOfApps>();
 		String[] columns = new String[] { ListOfAppsMetaData.Table.COLUMN_ID, 
-										  ListOfAppsMetaData.Table.COLUMN_APPSID,
-										  ListOfAppsMetaData.Table.COLUMN_PROFILESID,
-										  ListOfAppsMetaData.Table.COLUMN_SETTINGS,
-										  ListOfAppsMetaData.Table.COLUMN_STATS};
+				ListOfAppsMetaData.Table.COLUMN_APPSID,
+				ListOfAppsMetaData.Table.COLUMN_PROFILESID,
+				ListOfAppsMetaData.Table.COLUMN_SETTINGS,
+				ListOfAppsMetaData.Table.COLUMN_STATS};
 		Cursor c = _context.getContentResolver().query(ListOfAppsMetaData.CONTENT_URI, columns, null, null, null);
-		
+
 		if(c.isFirst()) {
-		while(c.isAfterLast()) {
-			ListOfListOfApps.add(cursorToListOfApps(c));
-			c.moveToNext();
+			while(!c.isAfterLast()) {
+				ListOfListOfApps.add(cursorToListOfApps(c));
+				c.moveToNext();
+			}
 		}
-		}
+
+		c.close();
 
 		return ListOfListOfApps;
 	}
-	
+
 	/**
 	 * Clear list of apps table
 	 */
 	public void clearListOfAppsTable() {
 		_context.getContentResolver().delete(ListOfAppsMetaData.CONTENT_URI, null, null);
 	}
-	
+
 	/**
 	 * Cursor to List of apps
 	 * @param cursor Input cursor
