@@ -12,6 +12,11 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.text.TextUtils;
 
+/**
+ * DbProvider is a contentprovider which makes it possible for other apps, on the phone, to interact with the database.
+ * @author Admin
+ *
+ */
 public class DbProvider extends ContentProvider {
 
 	private DbHelper dbHelper;
