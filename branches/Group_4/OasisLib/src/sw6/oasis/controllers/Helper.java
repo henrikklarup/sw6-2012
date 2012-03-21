@@ -1,5 +1,8 @@
 package sw6.oasis.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import sw6.oasis.controllers.metadata.AppsMetaData;
 import sw6.oasis.controllers.metadata.CertificatesMetaData;
 import sw6.oasis.controllers.metadata.DepartmentsMetaData;
@@ -83,9 +86,10 @@ public class Helper {
 		
 		/**
 		 * Get all profiles
-		 * @return Cursor, containing all profiles
+		 * @return List<Profile>, containing all profiles
 		 */
-		public Cursor getProfiles() {
+		public List<Profile> getProfiles() {
+			List<Profile> profiles = new ArrayList<Profile>();
 			String[] columns = new String[] { ProfilesMetaData.Table.COLUMN_ID, 
 											  ProfilesMetaData.Table.COLUMN_FIRST_NAME,
 											  ProfilesMetaData.Table.COLUMN_SUR_NAME,
@@ -95,8 +99,15 @@ public class Helper {
 											  ProfilesMetaData.Table.COLUMN_PICTURE,
 											  ProfilesMetaData.Table.COLUMN_DEPARTMENTID};
 			Cursor c = _context.getContentResolver().query(ProfilesMetaData.CONTENT_URI, columns, null, null, null);
+			
+			if(c.isFirst()) {
+			while(c.isAfterLast()) {
+				profiles.add(cursorToProfile(c));
+				c.moveToNext();
+			}
+			}
 
-			return c;
+			return profiles;
 		}
 //	}
 
@@ -132,15 +143,23 @@ public class Helper {
 		
 		/**
 		 * Get all applications
-		 * @return Cursor, containing all applications
+		 * @return List<App>, containing all applications
 		 */
-		public Cursor getApps() {
+		public List<App> getApps() {
+			List<App> apps = new ArrayList<App>();
 			String[] columns = new String[] { AppsMetaData.Table.COLUMN_ID, 
 											  AppsMetaData.Table.COLUMN_NAME,
 											  AppsMetaData.Table.COLUMN_VERSIONNUMBER};
 			Cursor c = _context.getContentResolver().query(AppsMetaData.CONTENT_URI, columns, null, null, null);
 
-			return c;
+			if(c.isFirst()) {
+			while(c.isAfterLast()) {
+				apps.add(cursorToApp(c));
+				c.moveToNext();
+			}
+			}
+			
+			return apps;
 		}
 		
 		/**
@@ -185,16 +204,24 @@ public class Helper {
 		
 		/**
 		 * Get all departments
-		 * @return Cursor, containing all departments
+		 * @return List<Department>, containing all departments
 		 */
-		public Cursor getDepartments() {
+		public List<Department> getDepartments() {
+			List<Department> departments = new ArrayList<Department>();
 			String[] columns = new String[] { DepartmentsMetaData.Table.COLUMN_ID, 
 											  DepartmentsMetaData.Table.COLUMN_NAME,
 											  DepartmentsMetaData.Table.COLUMN_PHONE,
 											  DepartmentsMetaData.Table.COLUMN_ADDRESS};
 			Cursor c = _context.getContentResolver().query(DepartmentsMetaData.CONTENT_URI, columns, null, null, null);
+			
+			if(c.isFirst()) {
+			while(c.isAfterLast()) {
+				departments.add(cursorToDepartment(c));
+				c.moveToNext();
+			}
+			}
 
-			return c;
+			return departments;
 		}
 		
 		/**
@@ -245,9 +272,10 @@ public class Helper {
 		
 		/**
 		 * Get all media
-		 * @return Cursor, containing all media
+		 * @return List<Media>, containing all media
 		 */
-		public Cursor getMedia() {
+		public List<Media> getMedia() {
+			List<Media> media = new ArrayList<Media>();
 			String[] columns = new String[] { MediaMetaData.Table.COLUMN_ID, 
 											  MediaMetaData.Table.COLUMN_PATH,
 											  MediaMetaData.Table.COLUMN_NAME,
@@ -256,8 +284,15 @@ public class Helper {
 											  MediaMetaData.Table.COLUMN_TAGS,
 											  MediaMetaData.Table.COLUMN_OWNERID};
 			Cursor c = _context.getContentResolver().query(MediaMetaData.CONTENT_URI, columns, null, null, null);
+			
+			if(c.isFirst()) {
+			while(c.isAfterLast()) {
+				media.add(cursorToMedia(c));
+				c.moveToNext();
+			}
+			}
 
-			return c;
+			return media;
 		}
 		
 		/**
@@ -304,17 +339,25 @@ public class Helper {
 		
 		/**
 		 * Get all list of apps
-		 * @return Cursor, containing all media
+		 * @return List<ListOfApps>, containing all media
 		 */
-		public Cursor getListOfApps() {
+		public List<ListOfApps> getListOfApps() {
+			List<ListOfApps> ListOfListOfApps =  new ArrayList<ListOfApps>();
 			String[] columns = new String[] { ListOfAppsMetaData.Table.COLUMN_ID, 
 											  ListOfAppsMetaData.Table.COLUMN_APPSID,
 											  ListOfAppsMetaData.Table.COLUMN_PROFILESID,
 											  ListOfAppsMetaData.Table.COLUMN_SETTINGS,
 											  ListOfAppsMetaData.Table.COLUMN_STATS};
 			Cursor c = _context.getContentResolver().query(ListOfAppsMetaData.CONTENT_URI, columns, null, null, null);
+			
+			if(c.isFirst()) {
+			while(c.isAfterLast()) {
+				ListOfListOfApps.add(cursorToListOfApps(c));
+				c.moveToNext();
+			}
+			}
 
-			return c;
+			return ListOfListOfApps;
 		}
 		
 		/**
@@ -356,14 +399,24 @@ public class Helper {
 		
 		/**
 		 * Get all certificates
-		 * @return Cursor, containing all certificates
+		 * @return List<Certificate>, containing all certificates
 		 */
-		public Cursor getCertificates() {
+		public List<Certificate> getCertificates() {
+			
+			List<Certificate> certificates = new ArrayList<Certificate>();
+			
 			String[] columns = new String[] { CertificatesMetaData.Table.COLUMN_ID, 
 											  CertificatesMetaData.Table.COLUMN_AUTHKEY};
 			Cursor c = _context.getContentResolver().query(CertificatesMetaData.CONTENT_URI, columns, null, null, null);
+			
+			if(c.isFirst()) {
+			while(c.isAfterLast()) {
+				certificates.add(cursorToCertificate(c));
+				c.moveToNext();
+			}
+			}
 
-			return c;
+			return certificates;
 		}
 		
 		/**
@@ -374,6 +427,11 @@ public class Helper {
 		}
 //	}
 		
+		/**
+		 * Cursor to app method
+		 * @param cursor Input cursor
+		 * @return Output App
+		 */
 		private App cursorToApp(Cursor cursor) {
 			App app = new App();
 			app.setId(cursor.getLong(cursor.getColumnIndex(AppsMetaData.Table.COLUMN_ID)));
@@ -382,6 +440,11 @@ public class Helper {
 			return app;
 		}
 		
+		/**
+		 * Cursor to certificate
+		 * @param cursor Input cursor
+		 * @return Output Certificate
+		 */
 		private Certificate cursorToCertificate(Cursor cursor) {
 			Certificate certificate = new Certificate();
 			certificate.setId(cursor.getLong(cursor.getColumnIndex(CertificatesMetaData.Table.COLUMN_ID)));
@@ -389,6 +452,11 @@ public class Helper {
 			return certificate;
 		}
 		
+		/**
+		 * Cursor to department
+		 * @param cursor Input cursor
+		 * @return Output department
+		 */
 		private Department cursorToDepartment(Cursor cursor) {
 			Department department = new Department();
 			department.setId(cursor.getLong(cursor.getColumnIndex(DepartmentsMetaData.Table.COLUMN_ID)));
@@ -398,6 +466,11 @@ public class Helper {
 			return department;
 		}
 		
+		/**
+		 * Cursor to List of apps
+		 * @param cursor Input cursor
+		 * @return Output ListOfApps
+		 */
 		private ListOfApps cursorToListOfApps(Cursor cursor) {
 			ListOfApps loa = new ListOfApps();
 			loa.setId(cursor.getLong(cursor.getColumnIndex(ListOfAppsMetaData.Table.COLUMN_ID)));
@@ -408,6 +481,11 @@ public class Helper {
 			return loa;
 		}
 		
+		/**
+		 * Cursor to media
+		 * @param cursor Input cursor
+		 * @return Output Media
+		 */
 		private Media cursorToMedia(Cursor cursor) {
 			Media media = new Media();
 			media.setId(cursor.getLong(cursor.getColumnIndex(MediaMetaData.Table.COLUMN_ID)));
@@ -424,6 +502,11 @@ public class Helper {
 			return media;
 		}
 		
+		/**
+		 * Cursor to profile
+		 * @param cursor Input cursor
+		 * @return Output Profile
+		 */
 		private Profile cursorToProfile(Cursor cursor) {
 			Profile profile = new Profile();
 			profile.setId(cursor.getLong(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_ID)));
