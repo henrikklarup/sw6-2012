@@ -26,7 +26,7 @@ public class AppsHelper {
 	public AppsHelper(Context context){
 		_context = context;
 	}
-	
+
 	/**
 	 * Insert app
 	 * @param _app Application containing data
@@ -37,7 +37,7 @@ public class AppsHelper {
 		cv.put(AppsMetaData.Table.COLUMN_VERSIONNUMBER, _app.getVersionNumber());
 		_context.getContentResolver().insert(AppsMetaData.CONTENT_URI, cv);
 	}
-	
+
 	/**
 	 * Modify app method
 	 * @param _app Application containing data to modify
@@ -49,7 +49,7 @@ public class AppsHelper {
 		cv.put(AppsMetaData.Table.COLUMN_VERSIONNUMBER, _app.getVersionNumber());
 		_context.getContentResolver().update(uri, cv, null, null);
 	}
-	
+
 	/**
 	 * Get all applications
 	 * @return List<App>, containing all applications
@@ -57,27 +57,28 @@ public class AppsHelper {
 	public List<App> getApps() {
 		List<App> apps = new ArrayList<App>();
 		String[] columns = new String[] { AppsMetaData.Table.COLUMN_ID, 
-										  AppsMetaData.Table.COLUMN_NAME,
-										  AppsMetaData.Table.COLUMN_VERSIONNUMBER};
+				AppsMetaData.Table.COLUMN_NAME,
+				AppsMetaData.Table.COLUMN_VERSIONNUMBER};
 		Cursor c = _context.getContentResolver().query(AppsMetaData.CONTENT_URI, columns, null, null, null);
 
 		if(c.isFirst()) {
-		while(c.isAfterLast()) {
-			apps.add(cursorToApp(c));
-			c.moveToNext();
+			while(!c.isAfterLast()) {
+				apps.add(cursorToApp(c));
+				c.moveToNext();
+			}
 		}
-		}
-		
+		c.close();
+
 		return apps;
 	}
-	
+
 	/**
 	 * Clear applications table
 	 */
 	public void clearAppsTable() {
 		_context.getContentResolver().delete(AppsMetaData.CONTENT_URI, null, null);
 	}
-	
+
 	/**
 	 * Cursor to app method
 	 * @param cursor Input cursor
