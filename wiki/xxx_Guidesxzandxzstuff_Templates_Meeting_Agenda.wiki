@@ -11,6 +11,7 @@
   * How far are we, with the entire multiproject? (concluded by the responsible group)
     * When are we at the next major milestone?
   * AUB
+  * Stay on Uni Day!
   * Next Meeting
     * Responsible group
     * Date
