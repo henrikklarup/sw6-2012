@@ -1,6 +1,6 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 
-<sw6ml xmlns="172.25.11.65:8080/sw6ml_ns">
+<sw6ml xmlns="172.25.11.65:8080/sw6_schema">
   <Media>
     <Entry action="create">
       <idMedia>1</idMedia>
@@ -49,7 +49,7 @@
     <Entry action="create">
       <idProfile>1</idProfile>
       <Name>Mette</Name>
-      <Surname>Hansen</SurName>
+      <Surname>Hansen</Surname>
       <Middlename>b.</Middlename>
       <Role>0</Role>
       <Phone>23456781</Phone>
@@ -59,7 +59,7 @@
     <Entry action="update">
       <idProfile>102</idProfile>
       <Name>Dusting</Name>
-      <Surname>Hoffman</SurName>
+      <Surname>Hoffman</Surname>
       <Middlename></Middlename>
       <Role>1</Role>
       <Phone>34567812</Phone>
@@ -80,6 +80,6 @@
       <idApps>2</idApps>
       <Name>Angry birds</Name>
       <Version>0.2</Version>
+	</Entry>
   </Apps>
 </sw6ml>
-
