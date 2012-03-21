@@ -26,7 +26,7 @@ public class MediaHelper {
 	public MediaHelper(Context context){
 		_context = context;
 	}
-	
+
 	/**
 	 * Insert media
 	 * @param _media Media containing data
@@ -41,7 +41,7 @@ public class MediaHelper {
 		cv.put(MediaMetaData.Table.COLUMN_OWNERID, _media.getOwnerId());
 		_context.getContentResolver().insert(MediaMetaData.CONTENT_URI, cv);
 	}
-	
+
 	/**
 	 * Modify media
 	 * @param _media Media containing data to modify
@@ -57,7 +57,7 @@ public class MediaHelper {
 		cv.put(MediaMetaData.Table.COLUMN_OWNERID, _media.getOwnerId());
 		_context.getContentResolver().update(uri, cv, null, null);
 	}
-	
+
 	/**
 	 * Get all media
 	 * @return List<Media>, containing all media
@@ -65,31 +65,33 @@ public class MediaHelper {
 	public List<Media> getMedia() {
 		List<Media> media = new ArrayList<Media>();
 		String[] columns = new String[] { MediaMetaData.Table.COLUMN_ID, 
-										  MediaMetaData.Table.COLUMN_PATH,
-										  MediaMetaData.Table.COLUMN_NAME,
-										  MediaMetaData.Table.COLUMN_PUBLIC,
-										  MediaMetaData.Table.COLUMN_TYPE,
-										  MediaMetaData.Table.COLUMN_TAGS,
-										  MediaMetaData.Table.COLUMN_OWNERID};
+				MediaMetaData.Table.COLUMN_PATH,
+				MediaMetaData.Table.COLUMN_NAME,
+				MediaMetaData.Table.COLUMN_PUBLIC,
+				MediaMetaData.Table.COLUMN_TYPE,
+				MediaMetaData.Table.COLUMN_TAGS,
+				MediaMetaData.Table.COLUMN_OWNERID};
 		Cursor c = _context.getContentResolver().query(MediaMetaData.CONTENT_URI, columns, null, null, null);
-		
+
 		if(c.isFirst()) {
-		while(c.isAfterLast()) {
-			media.add(cursorToMedia(c));
-			c.moveToNext();
+			while(!c.isAfterLast()) {
+				media.add(cursorToMedia(c));
+				c.moveToNext();
+			}
 		}
-		}
+
+		c.close();
 
 		return media;
 	}
-	
+
 	/**
 	 * Clear media table
 	 */
 	public void clearMediaTable() {
 		_context.getContentResolver().delete(MediaMetaData.CONTENT_URI, null, null);
 	}
-	
+
 	/**
 	 * Cursor to media
 	 * @param cursor Input cursor

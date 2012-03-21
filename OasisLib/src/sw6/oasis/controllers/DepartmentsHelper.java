@@ -26,7 +26,7 @@ public class DepartmentsHelper {
 	public DepartmentsHelper(Context context){
 		_context = context;
 	}
-	
+
 	/**
 	 * Insert department
 	 * @param _department Department containg data
@@ -38,7 +38,7 @@ public class DepartmentsHelper {
 		cv.put(DepartmentsMetaData.Table.COLUMN_PHONE, _department.getPhone());
 		_context.getContentResolver().insert(DepartmentsMetaData.CONTENT_URI, cv);
 	}
-	
+
 	/**
 	 * Modify department
 	 * @param _department Department containing data to modify
@@ -51,7 +51,7 @@ public class DepartmentsHelper {
 		cv.put(DepartmentsMetaData.Table.COLUMN_PHONE, _department.getPhone());
 		_context.getContentResolver().update(uri, cv, null, null);
 	}
-	
+
 	/**
 	 * Get all departments
 	 * @return List<Department>, containing all departments
@@ -59,28 +59,30 @@ public class DepartmentsHelper {
 	public List<Department> getDepartments() {
 		List<Department> departments = new ArrayList<Department>();
 		String[] columns = new String[] { DepartmentsMetaData.Table.COLUMN_ID, 
-										  DepartmentsMetaData.Table.COLUMN_NAME,
-										  DepartmentsMetaData.Table.COLUMN_PHONE,
-										  DepartmentsMetaData.Table.COLUMN_ADDRESS};
+				DepartmentsMetaData.Table.COLUMN_NAME,
+				DepartmentsMetaData.Table.COLUMN_PHONE,
+				DepartmentsMetaData.Table.COLUMN_ADDRESS};
 		Cursor c = _context.getContentResolver().query(DepartmentsMetaData.CONTENT_URI, columns, null, null, null);
-		
+
 		if(c.isFirst()) {
-		while(c.isAfterLast()) {
-			departments.add(cursorToDepartment(c));
-			c.moveToNext();
+			while(!c.isAfterLast()) {
+				departments.add(cursorToDepartment(c));
+				c.moveToNext();
+			}
 		}
-		}
+
+		c.close();
 
 		return departments;
 	}
-	
+
 	/**
 	 * Clear department table
 	 */
 	public void clearDepartmentsTable() {
 		_context.getContentResolver().delete(DepartmentsMetaData.CONTENT_URI, null, null);
 	}
-	
+
 	/**
 	 * Cursor to department
 	 * @param cursor Input cursor

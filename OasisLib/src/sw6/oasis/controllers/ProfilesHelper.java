@@ -18,7 +18,7 @@ import android.net.Uri;
  */
 public class ProfilesHelper {
 
-	
+
 	private static Context _context;
 	/**
 	 * Constructor
@@ -27,7 +27,7 @@ public class ProfilesHelper {
 	public ProfilesHelper(Context context){
 		_context = context;
 	}
-	
+
 	/**
 	 * Insert profile
 	 * @param _profile Profile containing data
@@ -43,7 +43,7 @@ public class ProfilesHelper {
 		cv.put(ProfilesMetaData.Table.COLUMN_DEPARTMENTID, _profile.getDepartmentId());
 		_context.getContentResolver().insert(ProfilesMetaData.CONTENT_URI, cv);
 	}
-	
+
 	/**
 	 * Modify profile
 	 * @param _profile Profile containing data to modify
@@ -60,14 +60,14 @@ public class ProfilesHelper {
 		cv.put(ProfilesMetaData.Table.COLUMN_DEPARTMENTID, _profile.getDepartmentId());
 		_context.getContentResolver().update(uri, cv, null, null);
 	}
-	
+
 	/**
 	 * Clear profiles table
 	 */
 	public void clearProfilesTable() {
 		_context.getContentResolver().delete(ProfilesMetaData.CONTENT_URI, null, null);
 	}
-	
+
 	/**
 	 * Get all profiles
 	 * @return List<Profile>, containing all profiles
@@ -75,25 +75,27 @@ public class ProfilesHelper {
 	public List<Profile> getProfiles() {
 		List<Profile> profiles = new ArrayList<Profile>();
 		String[] columns = new String[] { ProfilesMetaData.Table.COLUMN_ID, 
-										  ProfilesMetaData.Table.COLUMN_FIRST_NAME,
-										  ProfilesMetaData.Table.COLUMN_SUR_NAME,
-										  ProfilesMetaData.Table.COLUMN_MIDDLE_NAME,
-										  ProfilesMetaData.Table.COLUMN_ROLE,
-										  ProfilesMetaData.Table.COLUMN_PHONE,
-										  ProfilesMetaData.Table.COLUMN_PICTURE,
-										  ProfilesMetaData.Table.COLUMN_DEPARTMENTID};
+				ProfilesMetaData.Table.COLUMN_FIRST_NAME,
+				ProfilesMetaData.Table.COLUMN_SUR_NAME,
+				ProfilesMetaData.Table.COLUMN_MIDDLE_NAME,
+				ProfilesMetaData.Table.COLUMN_ROLE,
+				ProfilesMetaData.Table.COLUMN_PHONE,
+				ProfilesMetaData.Table.COLUMN_PICTURE,
+				ProfilesMetaData.Table.COLUMN_DEPARTMENTID};
 		Cursor c = _context.getContentResolver().query(ProfilesMetaData.CONTENT_URI, columns, null, null, null);
-		
+
 		if(c.isFirst()) {
-		while(c.isAfterLast()) {
-			profiles.add(cursorToProfile(c));
-			c.moveToNext();
+			while(!c.isAfterLast()) {
+				profiles.add(cursorToProfile(c));
+				c.moveToNext();
+			}
 		}
-		}
+
+		c.close();
 
 		return profiles;
 	}
-	
+
 	/**
 	 * Cursor to profile
 	 * @param cursor Input cursor
