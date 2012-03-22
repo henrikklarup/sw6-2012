@@ -2,14 +2,12 @@ package sw6.oasis.views;
 
 import sw6.oasis.controllers.Helper;
 import sw6.oasis.viewmodels.Department;
-import sw6.oasis.views.R;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -18,7 +16,6 @@ import android.widget.TextView;
 public class ViewDepartments extends ListFragment {
 	Helper helper;
 	Department department;
-	ArrayAdapter<String> adapter;
 	Button bAdd, bDel;
 	TextView tvHeader;
 	int _position;
@@ -56,7 +53,7 @@ public class ViewDepartments extends ListFragment {
 				department.setAddress("DepartmentAddress");
 				department.setPhone(123456789);
 				
-				helper.insertDepartment(department);
+				helper.departmentsHelper.insertDepartment(department);
 				mAdapter.notifyDataSetChanged();
 			}
 		});
@@ -65,12 +62,12 @@ public class ViewDepartments extends ListFragment {
 			
 			@Override
 			public void onClick(View v) {
-				helper.clearDepartmentsTable();
+				helper.departmentsHelper.clearDepartmentsTable();
 				mAdapter.notifyDataSetChanged();
 			}
 		});
 		
-		Cursor cursor = helper.getDepartments();
+		Cursor cursor = helper.departmentsHelper.getDepartments();
         int[] to = new int[] { R.id.department_column_one, R.id.department_column_two, R.id.department_column_three, R.id.department_column_four};
 
         mAdapter = new SimpleCursorAdapter(getActivity().getApplicationContext(), R.layout.department_list, cursor, cursor.getColumnNames(), to);
@@ -86,7 +83,7 @@ public class ViewDepartments extends ListFragment {
 		department.setName("DepartmentModified");
 		department.setAddress("ModifiedAddress");
 		department.setPhone(123456789);
-		helper.modifyDepartment(department);
+		helper.departmentsHelper.modifyDepartment(department);
 		mAdapter.notifyDataSetChanged();
 	}
 }

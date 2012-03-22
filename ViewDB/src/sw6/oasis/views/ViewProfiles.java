@@ -2,14 +2,12 @@ package sw6.oasis.views;
 
 import sw6.oasis.controllers.Helper;
 import sw6.oasis.viewmodels.Profile;
-import sw6.oasis.views.R;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -19,7 +17,6 @@ public class ViewProfiles extends ListFragment {
 
 	Helper helper;
 	Profile profile;
-	ArrayAdapter<String> adapter;
 	Button bAdd, bDel;
 	TextView tvHeader;
 	int _position;
@@ -61,7 +58,7 @@ public class ViewProfiles extends ListFragment {
 				profile.setRole(2);
 				profile.setDepartmentId(321);
 				
-				helper.insertProfile(profile);
+				helper.profilesHelper.insertProfile(profile);
 				mAdapter.notifyDataSetChanged();
 			}
 		});
@@ -70,12 +67,12 @@ public class ViewProfiles extends ListFragment {
 			
 			@Override
 			public void onClick(View v) {
-				helper.clearProfilesTable();
+				helper.profilesHelper.clearProfilesTable();
 				mAdapter.notifyDataSetChanged();
 			}
 		});
 		
-		Cursor cursor = helper.getProfiles();
+		Cursor cursor = helper.profilesHelper.getProfiles();
         int[] to = new int[] { R.id.profile_column_one, R.id.profile_column_two, R.id.profile_column_three, R.id.profile_column_four, R.id.profile_column_five, R.id.profile_column_six, R.id.profile_column_seven, R.id.profile_column_eight};
 
         mAdapter = new SimpleCursorAdapter(getActivity().getApplicationContext(), R.layout.profile_list, cursor, cursor.getColumnNames(), to);
@@ -95,7 +92,7 @@ public class ViewProfiles extends ListFragment {
 		profile.setPhone(987654321);
 		profile.setRole(1);
 		profile.setDepartmentId(123);
-		helper.modifyProfile(profile);
+		helper.profilesHelper.modifyProfile(profile);
 		mAdapter.notifyDataSetChanged();
 	}
 }
