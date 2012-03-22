@@ -28,5 +28,9 @@ public class Certificate {
 		this.authkey = authkey;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "ID: " + id 
+				+ " AuthKey: " + authkey;
+	}
 }

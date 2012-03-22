@@ -47,4 +47,12 @@ public class App {
 	public void setVersionNumber(String versionNumber) {
 		this.versionNumber = versionNumber;
 	}
+	
+	@Override
+	public String toString() {
+		return "ID: " + id 
+				+ " Name: " + name
+				+ " VersionNumber: " + versionNumber
+				;
+	}
 }

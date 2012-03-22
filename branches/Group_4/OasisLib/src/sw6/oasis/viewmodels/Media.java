@@ -7,7 +7,7 @@ public class Media {
 	private String name;
 	private boolean _public;
 	private String type;
-	private String Tags;
+	private String tags;
 	private long ownerId;
 	/**
 	 * @return the id
@@ -73,13 +73,13 @@ public class Media {
 	 * @return the tags
 	 */
 	public String getTags() {
-		return Tags;
+		return tags;
 	}
 	/**
 	 * @param tags the tags to set
 	 */
 	public void setTags(String tags) {
-		Tags = tags;
+		this.tags = tags;
 	}
 	/**
 	 * @return the ownerId
@@ -92,5 +92,17 @@ public class Media {
 	 */
 	public void setOwnerId(long ownerId) {
 		this.ownerId = ownerId;
+	}
+	
+	@Override
+	public String toString() {
+		return "ID: " + id 
+				+ " Path: " + path 
+				+ " Name: " + name 
+				+ " Public: " + _public 
+				+ " Type: " + type 
+				+ " Tags: " + tags 
+				+ " OwnerID: " +ownerId
+				;
 	}
 }

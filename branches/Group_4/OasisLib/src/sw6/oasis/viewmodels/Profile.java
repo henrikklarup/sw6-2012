@@ -106,4 +106,17 @@ public class Profile {
 	public void setDepartmentId(long departmentId) {
 		this.departmentId = departmentId;
 	}
+	
+	@Override
+	public String toString() {
+		return "ID: " + id
+				+ " FirstName: " + firstname
+				+ " MiddleName: " + middlename
+				+ " SurName: " + surname
+				+ " Role: " + role
+				+ " Phone:" + phone
+				+ " Picture: " + picture
+				+ " DepartmentID: " + departmentId
+				;
+	}
 }

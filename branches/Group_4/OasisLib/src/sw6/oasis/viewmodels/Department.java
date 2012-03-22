@@ -54,4 +54,13 @@ public class Department {
 	public void setPhone(long phone) {
 		this.phone = phone;
 	}
+	
+	@Override
+	public String toString() {
+		return "ID: " + id 
+				+ " Name: " + name 
+				+ " Address: " + address 
+				+ " Phone: " + phone
+				;
+	}
 }
