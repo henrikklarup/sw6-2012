@@ -2,14 +2,12 @@ package sw6.oasis.views;
 
 import sw6.oasis.controllers.Helper;
 import sw6.oasis.viewmodels.Media;
-import sw6.oasis.views.R;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -19,7 +17,6 @@ public class ViewMedia extends ListFragment {
 
 	Helper helper;
 	Media media;
-	ArrayAdapter<String> adapter;
 	Button bAdd, bDel;
 	TextView tvHeader;
 	int _position;
@@ -60,7 +57,7 @@ public class ViewMedia extends ListFragment {
 				media.setOwnerId(123456);
 				media.set_public(true);
 				
-				helper.insertMedia(media);
+				helper.mediaHelper.insertMedia(media);
 				mAdapter.notifyDataSetChanged();
 			}
 		});
@@ -69,12 +66,12 @@ public class ViewMedia extends ListFragment {
 
 			@Override
 			public void onClick(View v) {
-				helper.clearMediaTable();
+				helper.mediaHelper.clearMediaTable();
 				mAdapter.notifyDataSetChanged();
 			}
 		});
 
-		Cursor cursor = helper.getMedia();
+		Cursor cursor = helper.mediaHelper.getMedia();
 		int[] to = new int[] { R.id.media_column_one, R.id.media_column_two, R.id.media_column_three, R.id.media_column_four, R.id.media_column_five, R.id.media_column_six, R.id.media_column_seven};
 
 		mAdapter = new SimpleCursorAdapter(getActivity().getApplicationContext(), R.layout.media_list, cursor, cursor.getColumnNames(), to);
@@ -93,7 +90,7 @@ public class ViewMedia extends ListFragment {
 		media.setType("ModifiedType");
 		media.setOwnerId(654321);
 		media.set_public(false);
-		helper.modifyMedia(media);
+		helper.mediaHelper.modifyMedia(media);
 		mAdapter.notifyDataSetChanged();
 	}
 }

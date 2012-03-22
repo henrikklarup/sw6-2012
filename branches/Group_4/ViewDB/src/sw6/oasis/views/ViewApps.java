@@ -8,7 +8,6 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -18,7 +17,6 @@ public class ViewApps extends ListFragment {
 
 	Helper helper;
 	App app;
-	ArrayAdapter<String> adapter;
 	Button bAdd, bDel;
 	TextView tvHeader;
 	int _position;
@@ -55,7 +53,7 @@ public class ViewApps extends ListFragment {
 				app.setName("AppName");
 				app.setVersionNumber("versionNumber");
 				
-				helper.insertApp(app);
+				helper.appsHelper.insertApp(app);
 				mAdapter.notifyDataSetChanged();
 			}
 		});
@@ -64,12 +62,12 @@ public class ViewApps extends ListFragment {
 			
 			@Override
 			public void onClick(View v) {
-				helper.clearAppsTable();
+				helper.appsHelper.clearAppsTable();
 				mAdapter.notifyDataSetChanged();
 			}
 		});
 		
-		Cursor cursor = helper.getApps();
+		Cursor cursor = helper.appsHelper.getApps();
         int[] to = new int[] { R.id.app_column_one, R.id.app_column_two, R.id.app_column_three};
 
         mAdapter = new SimpleCursorAdapter(getActivity().getApplicationContext(), R.layout.app_list, cursor, cursor.getColumnNames(), to);
@@ -84,7 +82,7 @@ public class ViewApps extends ListFragment {
 		app.setId(_id);
 		app.setName("AppModified");
 		app.setVersionNumber("ModifiedVersion");
-		helper.modifyApp(app);
+		helper.appsHelper.modifyApp(app);
 		mAdapter.notifyDataSetChanged();
 	}
 }

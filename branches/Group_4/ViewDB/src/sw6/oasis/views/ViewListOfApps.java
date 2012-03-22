@@ -2,14 +2,12 @@ package sw6.oasis.views;
 
 import sw6.oasis.controllers.Helper;
 import sw6.oasis.viewmodels.ListOfApps;
-import sw6.oasis.views.R;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -19,7 +17,6 @@ public class ViewListOfApps extends ListFragment {
 
 	Helper helper;
 	ListOfApps loa;
-	ArrayAdapter<String> adapter;
 	Button bAdd, bDel;
 	TextView tvHeader;
 	int _position;
@@ -57,7 +54,7 @@ public class ViewListOfApps extends ListFragment {
 				loa.setAppId(123);
 				loa.setProfileId(321);
 				
-				helper.insertListOfApps(loa);
+				helper.listOfAppsHelper.insertListOfApps(loa);
 				mAdapter.notifyDataSetChanged();
 			}
 		});
@@ -66,12 +63,12 @@ public class ViewListOfApps extends ListFragment {
 			
 			@Override
 			public void onClick(View v) {
-				helper.clearListOfAppsTable();
+				helper.listOfAppsHelper.clearListOfAppsTable();
 				mAdapter.notifyDataSetChanged();
 			}
 		});
 		
-		Cursor cursor = helper.getListOfApps();
+		Cursor cursor = helper.listOfAppsHelper.getListOfApps();
         int[] to = new int[] { R.id.listofapp_column_one, R.id.listofapp_column_two, R.id.listofapp_column_three, R.id.listofapp_column_four, R.id.listofapp_column_five};
 
         mAdapter = new SimpleCursorAdapter(getActivity().getApplicationContext(), R.layout.listofapp_list, cursor, cursor.getColumnNames(), to);
@@ -88,7 +85,7 @@ public class ViewListOfApps extends ListFragment {
 		loa.setStats("ModifiedStat");
 		loa.setAppId(123);
 		loa.setProfileId(321);
-		helper.modifyListOfApps(loa);
+		helper.listOfAppsHelper.modifyListOfApps(loa);
 		mAdapter.notifyDataSetChanged();
 	}
 }

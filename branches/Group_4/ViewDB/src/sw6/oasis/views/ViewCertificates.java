@@ -2,14 +2,12 @@ package sw6.oasis.views;
 
 import sw6.oasis.controllers.Helper;
 import sw6.oasis.viewmodels.Certificate;
-import sw6.oasis.views.R;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -19,7 +17,6 @@ public class ViewCertificates extends ListFragment {
 
 	Helper helper;
 	Certificate certificate;
-	ArrayAdapter<String> adapter;
 	Button bAdd, bDel;
 	TextView tvHeader;
 	int _position;
@@ -54,7 +51,7 @@ public class ViewCertificates extends ListFragment {
 			@Override
 			public void onClick(View v) {
 				certificate.setAuthkey("CertificateString");
-				helper.insertCertificate(certificate);
+				helper.certificateHelper.insertCertificate(certificate);
 				mAdapter.notifyDataSetChanged();
 			}
 		});
@@ -63,12 +60,12 @@ public class ViewCertificates extends ListFragment {
 			
 			@Override
 			public void onClick(View v) {
-				helper.clearCertificateTable();
+				helper.certificateHelper.clearCertificateTable();
 				mAdapter.notifyDataSetChanged();
 			}
 		});
 		
-		Cursor cursor = helper.getCertificates();
+		Cursor cursor = helper.certificateHelper.getCertificates();
         int[] to = new int[] { R.id.certificate_column_one, R.id.certificate_column_two};
 
         mAdapter = new SimpleCursorAdapter(getActivity().getApplicationContext(), R.layout.certificate_list, cursor, cursor.getColumnNames(), to);
@@ -82,7 +79,7 @@ public class ViewCertificates extends ListFragment {
 		long _id = getListAdapter().getItemId(position);
 		certificate.setId(_id);
 		certificate.setAuthkey("ModifiedCertificate");
-		helper.modifyCertificate(certificate);
+		helper.certificateHelper.modifyCertificate(certificate);
 		mAdapter.notifyDataSetChanged();
 	}
 }
