@@ -67,4 +67,14 @@ public class ListOfApps {
 	public void setStats(String stats) {
 		this.stats = stats;
 	}
+	
+	@Override
+	public String toString() {
+		return "ID: " + id 
+				+ " AppID: " + appId 
+				+ " ProfileID: " + profileId 
+				+ " Settings: " + settings 
+				+ " Stats: " + stats
+				;
+	}
 }
