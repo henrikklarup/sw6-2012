@@ -4,23 +4,83 @@
     android:layout_height="fill_parent"
     android:orientation="horizontal" >
 
-    <fragment
-        android:id="@+id/listFragment"
+    <LinearLayout
         android:layout_width="300dp"
         android:layout_height="match_parent"
-        android:layout_marginTop="?android:attr/actionBarSize"
-        class="sw6.autism.timer.Wombat.ListFragment" />
+        android:orientation="vertical" >
 
-    <fragment
-        android:id="@+id/detailFragment"
-        android:layout_width="300dp"
+        <TextView
+            android:id="@+id/profileListHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/profile_list_header"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="30dip"
+            android:background="@android:color/darker_gray"
+            android:textColor="@android:color/white" />
+
+        <fragment
+            android:id="@+id/listFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            class="sw6.autism.timer.Wombat.ListFragment" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="1dp"
         android:layout_height="match_parent"
-        class="sw6.autism.timer.Wombat.DetailFragment" />
-    
-    <fragment
-        android:id="@+id/customizeFragment"
+        android:background="#FFFFFF" />
+
+    <LinearLayout
+        android:layout_width="350dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/settingsListHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/template_list_header"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="30dip" 
+            android:background="@android:color/darker_gray"
+            android:textColor="@android:color/white" />
+
+        <fragment
+            android:id="@+id/detailFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            class="sw6.autism.timer.Wombat.DetailFragment" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        class="sw6.autism.timer.Wombat.CustomizeFragment" />
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/customizeHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/customize_header"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="30dip" 
+            android:background="@android:color/darker_gray"
+            android:textColor="@android:color/white" />
+
+        <fragment
+            android:id="@+id/customizeFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            class="sw6.autism.timer.Wombat.CustomizeFragment" />
+    </LinearLayout>
 
 </LinearLayout>
