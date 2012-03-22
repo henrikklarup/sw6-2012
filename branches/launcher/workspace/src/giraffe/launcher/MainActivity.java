@@ -1,6 +1,7 @@
 package giraffe.launcher;
 
 import java.util.ArrayList;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -36,6 +37,7 @@ public class MainActivity extends Activity {
         		
         		app.name = info.loadLabel(manager).toString(); /// TODO FIXME
         		//app.icon = info.activityInfo.loadIcon
+        		// Hlefw gewhiå
         	}
         }
     }
