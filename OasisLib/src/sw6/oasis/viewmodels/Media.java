@@ -10,6 +10,32 @@ public class Media {
 	private String tags;
 	private long ownerId;
 	private String output;
+	
+	/**
+	 * Constructor with arguments
+	 * 
+	 * @param name the name to set
+	 * @param path the path to set
+	 * @param _public the _public to set
+	 * @param type the type to set
+	 * @param tags the tags to set
+	 * @param ownerId the ownerID to set
+	 */
+	public Media(String name, String path, boolean _public, String type, String tags, long ownerId) {
+		this.name = name;
+		this.path = path;
+		this._public = _public;
+		this.type = type;
+		this.tags = tags;
+		this.ownerId = ownerId;
+	}
+	
+	/**
+	 * Empty constructor
+	 */
+	public Media() {
+	}
+	
 	/**
 	 * @return the id
 	 */
@@ -96,12 +122,13 @@ public class Media {
 	}
 	/**
 	 *  Set output
-	 * 	{0} = Path
-	 *  {1} = Name
-	 *  {2} = Public
-	 *  {3} = Type
-	 *  {4} = Tags
-	 *  {5} = OwnerId
+	 *  {0} = ID
+	 * 	{1} = Path
+	 *  {2} = Name
+	 *  {3} = Public
+	 *  {4} = Type
+	 *  {5} = Tags
+	 *  {6} = OwnerId
 	 * @param output
 	 */
 	public void setOutput(String output) {
@@ -114,12 +141,13 @@ public class Media {
 	 */
 	public String toString() {
 		String localOutput = output;
-		localOutput.replace("{0}", getPath());
-		localOutput.replace("{1}", getName());
-		localOutput.replace("{2}", String.valueOf(is_public()));
-		localOutput.replace("{3}", getType());
-		localOutput.replace("{4}", getTags());
-		localOutput.replace("{5}", String.valueOf(getOwnerId())); 
+		localOutput.replace("{0}", String.valueOf(getId()));
+		localOutput.replace("{1}", getPath());
+		localOutput.replace("{2}", getName());
+		localOutput.replace("{3}", String.valueOf(is_public()));
+		localOutput.replace("{4}", getType());
+		localOutput.replace("{5}", getTags());
+		localOutput.replace("{6}", String.valueOf(getOwnerId())); 
 		
 		return localOutput;
 	}

@@ -13,6 +13,34 @@ public class Profile {
 	private String output;
 	
 	/**
+	 * Constructor with parameters
+	 * 
+	 * @param firstname the firstname to set
+	 * @param surname the surname to set
+	 * @param middlename the middlename to set
+	 * @param role the role to set
+	 * @param phone the phone to set
+	 * @param picture the picture to set
+	 * @param departmentId the departmentID to set
+	 */
+	public Profile(String firstname, String surname, String middlename, long role, long phone, String picture, long departmentId) {
+		this.firstname = firstname;
+		this.surname = surname;
+		this.middlename = middlename;
+		this.role = role;
+		this.phone = phone;
+		this.picture = picture;
+		this.departmentId = departmentId;
+	}
+	
+	/**
+	 * Empty constructor
+	 */
+	public Profile() {
+		
+	}
+	
+	/**
 	 * @return the id
 	 */
 	public long getId() {
@@ -110,13 +138,14 @@ public class Profile {
 	}
 	/**
 	 * Set output
-	 * 	{0} = Firstname
-	 *  {1} = Middlename
-	 *  {2} = Surname
-	 *  {3} = Role
-	 *  {4} = Phone
-	 *  {5} = Picture
-	 *  {6} = DepartmentId
+	 *  {0} = ID
+	 * 	{1} = Firstname
+	 *  {2} = Middlename
+	 *  {3} = Surname
+	 *  {4} = Role
+	 *  {5} = Phone
+	 *  {6} = Picture
+	 *  {7} = DepartmentId
 	 * @param output String to set
 	 */
 	public void setOutput(String output) {
@@ -129,13 +158,14 @@ public class Profile {
 	 */
 	public String toString() {
 		String localOutput = output;
-		localOutput.replace("{0}", getFirstname());
-		localOutput.replace("{1}", getMiddlename());
-		localOutput.replace("{2}", getSurname());
-		localOutput.replace("{3}", String.valueOf(getRole()));
-		localOutput.replace("{4}", String.valueOf(getPhone()));
-		localOutput.replace("{5}", getPicture());
-		localOutput.replace("{6}", String.valueOf(getDepartmentId()));
+		localOutput.replace("{0}", String.valueOf(getId()));
+		localOutput.replace("{1}", getFirstname());
+		localOutput.replace("{2}", getMiddlename());
+		localOutput.replace("{3}", getSurname());
+		localOutput.replace("{4}", String.valueOf(getRole()));
+		localOutput.replace("{5}", String.valueOf(getPhone()));
+		localOutput.replace("{6}", getPicture());
+		localOutput.replace("{7}", String.valueOf(getDepartmentId()));
 		
 		return localOutput;
 	}
