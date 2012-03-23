@@ -5,6 +5,25 @@ public class App {
 	private long id; 
 	private String name;
 	private String versionNumber;
+	private String output;
+	
+	/**
+	 * Constructor with arguments
+	 * 
+	 * @param name the name to set
+	 * @param versionNumber the versionNumber to set
+	 */
+	public App(String name, String versionNumber) {
+		this.name = name;
+		this.versionNumber = versionNumber;
+	}
+	
+	/**
+	 * Empty constructor
+	 */
+	public App() {
+		
+	}
 	
 	/**
 	 * @return the id
@@ -48,11 +67,23 @@ public class App {
 		this.versionNumber = versionNumber;
 	}
 	
+	/**
+	 * @param output the output to set
+	 */
+	public void setOutput(String output) {
+		this.output = output;
+	}
+	
+	/**
+	 * toString for app
+	 */
 	@Override
 	public String toString() {
-		return "ID: " + id 
-				+ " Name: " + name
-				+ " VersionNumber: " + versionNumber
-				;
+		String localOutput = output;
+		localOutput.replace("{0}", String.valueOf(getId()));
+		localOutput.replace("{1}", getName());
+		localOutput.replace("{2}", getVersionNumber());
+		
+		return localOutput;
 	}
 }
