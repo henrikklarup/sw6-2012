@@ -7,13 +7,22 @@ public class Department {
 	private String address;
 	private long phone;
 	private String output;
-	
+
+	/**
+	 * Constructor
+	 * @param name Name
+	 * @param address Address
+	 * @param phone Phone
+	 */
 	public Department(String name, String address, long phone) {
 		this.name = name;
 		this.address = address;
 		this.phone = phone;
 	}
 	
+	/**
+	 * Empty constructor
+	 */
 	public Department() {
 		
 	}
@@ -68,6 +77,10 @@ public class Department {
 	}
 	
 	/**
+	 * 	{0} = Id
+	 *  {1} = Name
+	 *  {2} = Address
+	 *  {3} = Phone
 	 * @param output the output to set
 	 */
 	public void setOutput(String output) {
@@ -75,6 +88,9 @@ public class Department {
 	}
 	
 	@Override
+	/**
+	 * toString for Department
+	 */
 	public String toString() {
 		String localOutput = output;
 		localOutput.replace("{0}", String.valueOf(getId()));

@@ -4,11 +4,18 @@ public class Certificate {
 	private long id;
 	private String authkey;
 	private String output;
-	
+
+	/**
+	 * Constructor
+	 * @param authKey AuthKey
+	 */
 	public Certificate(String authKey) {
 		this.authkey = authKey;
 	}
 	
+	/**
+	 * Empty constructor
+	 */
 	public Certificate() {
 	}
 	
@@ -38,6 +45,9 @@ public class Certificate {
 	}
 	
 	/**
+	 * 	{0} = Id
+	 *  {1} = Authkey
+
 	 * @param output the output to set
 	 */
 	public void setOutput(String output) {
@@ -45,6 +55,9 @@ public class Certificate {
 	}
 	
 	@Override
+	/**
+	 * toString for Certificate
+	 */
 	public String toString() {
 		String localOutput = output;
 		localOutput.replace("{0}", String.valueOf(getId()));

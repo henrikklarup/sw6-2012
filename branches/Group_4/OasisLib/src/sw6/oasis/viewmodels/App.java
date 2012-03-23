@@ -68,6 +68,9 @@ public class App {
 	}
 	
 	/**
+	 * 	{0} = Id
+	 *  {1} = Name
+	 *  {2} = Version
 	 * @param output the output to set
 	 */
 	public void setOutput(String output) {
