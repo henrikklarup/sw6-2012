@@ -13,18 +13,19 @@
             android:id="@+id/profileListHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/darker_gray"
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/profile_list_header"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="30dip"
-            android:background="@android:color/darker_gray"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:textSize="30dip" />
 
         <fragment
             android:id="@+id/listFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            class="sw6.autism.timer.Wombat.ListFragment" />
+            class="sw6.autism.timer.Wombat.ListFragment" >
+        </fragment>
     </LinearLayout>
 
     <TextView
@@ -41,12 +42,12 @@
             android:id="@+id/settingsListHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/darker_gray"
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/template_list_header"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="30dip" 
-            android:background="@android:color/darker_gray"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:textSize="30dip" />
 
         <fragment
             android:id="@+id/detailFragment"
@@ -69,12 +70,12 @@
             android:id="@+id/customizeHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/darker_gray"
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/customize_header"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="30dip" 
-            android:background="@android:color/darker_gray"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:textSize="30dip" />
 
         <fragment
             android:id="@+id/customizeFragment"
