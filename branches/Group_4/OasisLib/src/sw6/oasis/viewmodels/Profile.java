@@ -10,6 +10,8 @@ public class Profile {
 	private long phone;
 	private String picture;
 	private long departmentId;
+	private String output;
+	
 	/**
 	 * @return the id
 	 */
@@ -109,7 +111,12 @@ public class Profile {
 	
 	@Override
 	public String toString() {
-		return "ID: " + id
+		String localOutput = output;
+		localOutput.replace("{0}", getFirstname());
+		
+		return localOutput;
+		
+		/*return "ID: " + id
 				+ " FirstName: " + firstname
 				+ " MiddleName: " + middlename
 				+ " SurName: " + surname
@@ -118,5 +125,12 @@ public class Profile {
 				+ " Picture: " + picture
 				+ " DepartmentID: " + departmentId
 				;
+				*/
+	}
+	public String getOutput() {
+		return output;
+	}
+	public void setOutput(String output) {
+		this.output = output;
 	}
 }
