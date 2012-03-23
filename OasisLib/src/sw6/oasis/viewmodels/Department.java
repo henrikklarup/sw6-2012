@@ -6,6 +6,18 @@ public class Department {
 	private String name;
 	private String address;
 	private long phone;
+	private String output;
+	
+	public Department(String name, String address, long phone) {
+		this.name = name;
+		this.address = address;
+		this.phone = phone;
+	}
+	
+	public Department() {
+		
+	}
+	
 	/**
 	 * @return the id
 	 */
@@ -55,12 +67,21 @@ public class Department {
 		this.phone = phone;
 	}
 	
+	/**
+	 * @param output the output to set
+	 */
+	public void setOutput(String output) {
+		this.output = output;
+	}
+	
 	@Override
 	public String toString() {
-		return "ID: " + id 
-				+ " Name: " + name 
-				+ " Address: " + address 
-				+ " Phone: " + phone
-				;
+		String localOutput = output;
+		localOutput.replace("{0}", String.valueOf(getId()));
+		localOutput.replace("{1}", getName());
+		localOutput.replace("{2}", getAddress());
+		localOutput.replace("{3}", String.valueOf(getPhone()));
+		
+		return localOutput;
 	}
 }
