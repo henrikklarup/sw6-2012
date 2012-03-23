@@ -108,29 +108,35 @@ public class Profile {
 	public void setDepartmentId(long departmentId) {
 		this.departmentId = departmentId;
 	}
+	/**
+	 * Set output
+	 * 	{0} = Firstname
+	 *  {1} = Middlename
+	 *  {2} = Surname
+	 *  {3} = Role
+	 *  {4} = Phone
+	 *  {5} = Picture
+	 *  {6} = DepartmentId
+	 * @param output String to set
+	 */
+	public void setOutput(String output) {
+		this.output = output;
+	}
 	
 	@Override
+	/**
+	 * toString for profile
+	 */
 	public String toString() {
 		String localOutput = output;
 		localOutput.replace("{0}", getFirstname());
+		localOutput.replace("{1}", getMiddlename());
+		localOutput.replace("{2}", getSurname());
+		localOutput.replace("{3}", String.valueOf(getRole()));
+		localOutput.replace("{4}", String.valueOf(getPhone()));
+		localOutput.replace("{5}", getPicture());
+		localOutput.replace("{6}", String.valueOf(getDepartmentId()));
 		
 		return localOutput;
-		
-		/*return "ID: " + id
-				+ " FirstName: " + firstname
-				+ " MiddleName: " + middlename
-				+ " SurName: " + surname
-				+ " Role: " + role
-				+ " Phone:" + phone
-				+ " Picture: " + picture
-				+ " DepartmentID: " + departmentId
-				;
-				*/
-	}
-	public String getOutput() {
-		return output;
-	}
-	public void setOutput(String output) {
-		this.output = output;
 	}
 }

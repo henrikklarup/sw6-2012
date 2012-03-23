@@ -9,6 +9,7 @@ public class Media {
 	private String type;
 	private String tags;
 	private long ownerId;
+	private String output;
 	/**
 	 * @return the id
 	 */
@@ -93,16 +94,33 @@ public class Media {
 	public void setOwnerId(long ownerId) {
 		this.ownerId = ownerId;
 	}
+	/**
+	 *  Set output
+	 * 	{0} = Path
+	 *  {1} = Name
+	 *  {2} = Public
+	 *  {3} = Type
+	 *  {4} = Tags
+	 *  {5} = OwnerId
+	 * @param output
+	 */
+	public void setOutput(String output) {
+		this.output = output;
+	}
 	
 	@Override
+	/**
+	 * toString for Media
+	 */
 	public String toString() {
-		return "ID: " + id 
-				+ " Path: " + path 
-				+ " Name: " + name 
-				+ " Public: " + _public 
-				+ " Type: " + type 
-				+ " Tags: " + tags 
-				+ " OwnerID: " +ownerId
-				;
+		String localOutput = output;
+		localOutput.replace("{0}", getPath());
+		localOutput.replace("{1}", getName());
+		localOutput.replace("{2}", String.valueOf(is_public()));
+		localOutput.replace("{3}", getType());
+		localOutput.replace("{4}", getTags());
+		localOutput.replace("{5}", String.valueOf(getOwnerId())); 
+		
+		return localOutput;
 	}
 }
