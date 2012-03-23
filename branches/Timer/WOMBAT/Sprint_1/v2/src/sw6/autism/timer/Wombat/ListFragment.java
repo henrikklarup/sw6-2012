@@ -1,17 +1,24 @@
 package sw6.autism.timer.Wombat;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import sw6.oasis.controllers.Helper;
+import sw6.oasis.viewmodels.App;
+import sw6.oasis.viewmodels.Profile;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class ListFragment extends android.app.ListFragment {
 	Helper helper;
+	List<Profile> profileList;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState){
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		helper = new Helper(getActivity().getApplicationContext());
 	}
@@ -19,9 +26,14 @@ public class ListFragment extends android.app.ListFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		/********** DUMMY DATA **********/
-		// insert correct string array here
-		String[] values = getResources().getStringArray(R.array.profiles);
+		ArrayList<String> values = new ArrayList<String>();
+		values.add("Predefineret");
+
+		profileList = helper.profilesHelper.getProfiles();
+
+		for (Profile profile : profileList) {
+			values.add(StartLoader.getProfileName(profile));
+		}
 
 		// Inputs the data into the listview according to the string array
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
@@ -31,9 +43,17 @@ public class ListFragment extends android.app.ListFragment {
 
 	@Override
 	public void onListItemClick(ListView lv, View view, int position, long id) {
-		/********** DUMMY DATA **********/
-		// Get id from database according to position
-		int profileId = getResources().getIntArray(R.array.ids)[position];
+		long profileId;
+
+		if (position == 0) {
+			// "Predefineret" or "Sidste Brugt" has been selected.
+			profileId = -2; // "Predefineret"
+		} else {
+			// Get id from database according to position (-1 because the first
+			// item is "Predefineret")
+			Profile profile = profileList.get(position);
+			profileId = profile.getId();
+		}
 
 		// Update the detailfragment
 		DetailFragment fragment = (DetailFragment) getFragmentManager()
@@ -44,7 +64,7 @@ public class ListFragment extends android.app.ListFragment {
 			Intent intent = new Intent(getActivity().getApplicationContext(),
 					DetailActivity.class);
 
-			intent.putExtra("value", Integer.toString(profileId));
+			intent.putExtra("value", profileId);
 			startActivity(intent);
 		}
 	}

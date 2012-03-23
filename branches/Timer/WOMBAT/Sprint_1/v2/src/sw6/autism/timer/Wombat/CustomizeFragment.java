@@ -31,13 +31,13 @@ public class CustomizeFragment extends Fragment{
 	}
 	
 	/**
-	 * 
-	 * @param id
+	 * Sets the predefined settings of the chosen template
+	 * @param id identification of the template
 	 */
-	public void setSettings(int id){
+	public void setSettings(Template template){
 		// TODO: Insert logic to load settings and put them into the view
 		TextView view = (TextView)getView().findViewById(R.id.detailsText);
-		view.setText(Integer.toString(id));
+		view.setText(template.getName());
 		Profile profile = new Profile();
 		
 //		helper.profilesHelper.
