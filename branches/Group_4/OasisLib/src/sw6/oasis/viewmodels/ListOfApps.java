@@ -7,6 +7,27 @@ public class ListOfApps {
 	private String settings;
 	private String stats;
 	private String output;
+
+	/**
+	 * Constructor with arguments
+	 * 
+	 * @param appId the appId to set
+	 * @param profileId the profileId to set
+	 * @param settings the settings to set
+	 * @param stats the stats to set
+	 */
+	public ListOfApps(long appId, long profileId, String settings, String stats) {
+		this.appId = appId;
+		this.profileId = profileId;
+		this.settings = settings;
+		this.stats = stats;
+	}
+	
+	/**
+	 * Empty constructor
+	 */
+	public ListOfApps() {
+	}
 	
 	/**
 	 * @return the id
@@ -72,10 +93,11 @@ public class ListOfApps {
 	/**
 	 * 	/**
 	 *  Set output
-	 * 	{0} = AppId
-	 *  {1} = ProfileId
-	 *  {2} = Settings
-	 *  {3} = Stats
+	 *  {0} = ID
+	 * 	{1} = AppId
+	 *  {2} = ProfileId
+	 *  {3} = Settings
+	 *  {4} = Stats
 	 * @param output
 	 */
 	public void setOutput(String output) {
@@ -87,10 +109,11 @@ public class ListOfApps {
 	 */
 	public String toString() {
 		String localOutput = output;
-		localOutput.replace("{0}", String.valueOf(getAppId()));
-		localOutput.replace("{1}", String.valueOf(getProfileId()));
-		localOutput.replace("{2}", String.valueOf(getSettings()));
-		localOutput.replace("{3}", String.valueOf(getStats()));
+		localOutput.replace("{0}", String.valueOf(getId()));
+		localOutput.replace("{1}", String.valueOf(getAppId()));
+		localOutput.replace("{2}", String.valueOf(getProfileId()));
+		localOutput.replace("{3}", getSettings());
+		localOutput.replace("{4}", getStats());
 		
 		return localOutput;
 	}
