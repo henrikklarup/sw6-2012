@@ -6,6 +6,7 @@ public class ListOfApps {
 	private long profileId;
 	private String settings;
 	private String stats;
+	private String output;
 	
 	/**
 	 * @return the id
@@ -68,13 +69,29 @@ public class ListOfApps {
 		this.stats = stats;
 	}
 	
+	/**
+	 * 	/**
+	 *  Set output
+	 * 	{0} = AppId
+	 *  {1} = ProfileId
+	 *  {2} = Settings
+	 *  {3} = Stats
+	 * @param output
+	 */
+	public void setOutput(String output) {
+		this.output = output;
+	}
 	@Override
+	/**
+	 * toString for List Of apps
+	 */
 	public String toString() {
-		return "ID: " + id 
-				+ " AppID: " + appId 
-				+ " ProfileID: " + profileId 
-				+ " Settings: " + settings 
-				+ " Stats: " + stats
-				;
+		String localOutput = output;
+		localOutput.replace("{0}", String.valueOf(getAppId()));
+		localOutput.replace("{1}", String.valueOf(getProfileId()));
+		localOutput.replace("{2}", String.valueOf(getSettings()));
+		localOutput.replace("{3}", String.valueOf(getStats()));
+		
+		return localOutput;
 	}
 }
