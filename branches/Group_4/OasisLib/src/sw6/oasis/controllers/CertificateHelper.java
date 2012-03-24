@@ -60,7 +60,7 @@ public class CertificateHelper {
 				CertificatesMetaData.Table.COLUMN_AUTHKEY};
 		Cursor c = _context.getContentResolver().query(CertificatesMetaData.CONTENT_URI, columns, null, null, null);
 
-		if(c.isFirst()) {
+		if(c.moveToFirst()) {
 			while(!c.isAfterLast()) {
 				certificates.add(cursorToCertificate(c));
 				c.moveToNext();

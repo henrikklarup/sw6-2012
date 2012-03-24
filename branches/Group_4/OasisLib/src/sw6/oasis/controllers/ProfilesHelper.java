@@ -84,7 +84,7 @@ public class ProfilesHelper {
 				ProfilesMetaData.Table.COLUMN_DEPARTMENTID};
 		Cursor c = _context.getContentResolver().query(ProfilesMetaData.CONTENT_URI, columns, null, null, null);
 
-		if(c.isFirst()) {
+		if(c.moveToFirst()) {
 			while(!c.isAfterLast()) {
 				profiles.add(cursorToProfile(c));
 				c.moveToNext();

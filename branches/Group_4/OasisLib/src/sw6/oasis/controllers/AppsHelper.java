@@ -61,7 +61,7 @@ public class AppsHelper {
 				AppsMetaData.Table.COLUMN_VERSIONNUMBER};
 		Cursor c = _context.getContentResolver().query(AppsMetaData.CONTENT_URI, columns, null, null, null);
 
-		if(c.isFirst()) {
+		if(c.moveToFirst()) {
 			while(!c.isAfterLast()) {
 				apps.add(cursorToApp(c));
 				c.moveToNext();

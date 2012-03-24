@@ -64,7 +64,7 @@ public class DepartmentsHelper {
 				DepartmentsMetaData.Table.COLUMN_ADDRESS};
 		Cursor c = _context.getContentResolver().query(DepartmentsMetaData.CONTENT_URI, columns, null, null, null);
 
-		if(c.isFirst()) {
+		if(c.moveToFirst()) {
 			while(!c.isAfterLast()) {
 				departments.add(cursorToDepartment(c));
 				c.moveToNext();

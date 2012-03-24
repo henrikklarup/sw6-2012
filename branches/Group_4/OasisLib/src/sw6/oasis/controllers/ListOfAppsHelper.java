@@ -67,7 +67,7 @@ public class ListOfAppsHelper {
 				ListOfAppsMetaData.Table.COLUMN_STATS};
 		Cursor c = _context.getContentResolver().query(ListOfAppsMetaData.CONTENT_URI, columns, null, null, null);
 
-		if(c.isFirst()) {
+		if(c.moveToFirst()) {
 			while(!c.isAfterLast()) {
 				ListOfListOfApps.add(cursorToListOfApps(c));
 				c.moveToNext();

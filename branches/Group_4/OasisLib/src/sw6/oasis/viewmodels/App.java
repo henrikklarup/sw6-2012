@@ -5,7 +5,7 @@ public class App {
 	private long id; 
 	private String name;
 	private String versionNumber;
-	private String output;
+	private String output = "{0}, {1}, {2}";
 	
 	/**
 	 * Constructor with arguments
@@ -67,7 +67,7 @@ public class App {
 		this.versionNumber = versionNumber;
 	}
 	
-	/**
+	/**Set output
 	 * 	{0} = Id
 	 *  {1} = Name
 	 *  {2} = Version
@@ -82,10 +82,11 @@ public class App {
 	 */
 	@Override
 	public String toString() {
+		
 		String localOutput = output;
-		localOutput.replace("{0}", String.valueOf(getId()));
-		localOutput.replace("{1}", getName());
-		localOutput.replace("{2}", getVersionNumber());
+		localOutput = localOutput.replace("{0}", String.valueOf(getId()));
+		localOutput = localOutput.replace("{1}", getName());
+		localOutput = localOutput.replace("{2}", getVersionNumber());
 		
 		return localOutput;
 	}

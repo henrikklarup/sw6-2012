@@ -6,13 +6,13 @@ public class Department {
 	private String name;
 	private String address;
 	private long phone;
-	private String output;
+	private String output = "{0}, {1}, {2}, {3}";
 
 	/**
-	 * Constructor
-	 * @param name Name
-	 * @param address Address
-	 * @param phone Phone
+	 * Constructor with arguments
+	 * @param name is the name to set
+	 * @param address is the address to set
+	 * @param phone is the phone to set
 	 */
 	public Department(String name, String address, long phone) {
 		this.name = name;
@@ -76,7 +76,7 @@ public class Department {
 		this.phone = phone;
 	}
 	
-	/**
+	/**Set output
 	 * 	{0} = Id
 	 *  {1} = Name
 	 *  {2} = Address
@@ -87,16 +87,19 @@ public class Department {
 		this.output = output;
 	}
 	
+	/**
+	 * toString for certificate
+	 */
 	@Override
 	/**
 	 * toString for Department
 	 */
 	public String toString() {
 		String localOutput = output;
-		localOutput.replace("{0}", String.valueOf(getId()));
-		localOutput.replace("{1}", getName());
-		localOutput.replace("{2}", getAddress());
-		localOutput.replace("{3}", String.valueOf(getPhone()));
+		localOutput = localOutput.replace("{0}", String.valueOf(getId()));
+		localOutput = localOutput.replace("{1}", getName());
+		localOutput = localOutput.replace("{2}", getAddress());
+		localOutput = localOutput.replace("{3}", String.valueOf(getPhone()));
 		
 		return localOutput;
 	}
