@@ -6,7 +6,7 @@ public class ListOfApps {
 	private long profileId;
 	private String settings;
 	private String stats;
-	private String output;
+	private String output = "{0}, {1}, {2}, {3}, {4}";
 
 	/**
 	 * Constructor with arguments
@@ -91,7 +91,6 @@ public class ListOfApps {
 	}
 	
 	/**
-	 * 	/**
 	 *  Set output
 	 *  {0} = ID
 	 * 	{1} = AppId
@@ -103,17 +102,18 @@ public class ListOfApps {
 	public void setOutput(String output) {
 		this.output = output;
 	}
+	
 	@Override
 	/**
 	 * toString for List Of apps
 	 */
 	public String toString() {
 		String localOutput = output;
-		localOutput.replace("{0}", String.valueOf(getId()));
-		localOutput.replace("{1}", String.valueOf(getAppId()));
-		localOutput.replace("{2}", String.valueOf(getProfileId()));
-		localOutput.replace("{3}", getSettings());
-		localOutput.replace("{4}", getStats());
+		localOutput = localOutput.replace("{0}", String.valueOf(getId()));
+		localOutput = localOutput.replace("{1}", String.valueOf(getAppId()));
+		localOutput = localOutput.replace("{2}", String.valueOf(getProfileId()));
+		localOutput = localOutput.replace("{3}", getSettings());
+		localOutput = localOutput.replace("{4}", getStats());
 		
 		return localOutput;
 	}

@@ -3,11 +3,11 @@ package sw6.oasis.viewmodels;
 public class Certificate {
 	private long id;
 	private String authkey;
-	private String output;
+	private String output = "{0}, {1}";
 
 	/**
-	 * Constructor
-	 * @param authKey AuthKey
+	 * Constructor with arguments
+	 * @param authKey is the authkey to set
 	 */
 	public Certificate(String authKey) {
 		this.authkey = authKey;
@@ -44,7 +44,7 @@ public class Certificate {
 		this.authkey = authkey;
 	}
 	
-	/**
+	/**Set output
 	 * 	{0} = Id
 	 *  {1} = Authkey
 
@@ -54,14 +54,17 @@ public class Certificate {
 		this.output = output;
 	}
 	
+	/**
+	 * toString for certificate
+	 */
 	@Override
 	/**
 	 * toString for Certificate
 	 */
 	public String toString() {
 		String localOutput = output;
-		localOutput.replace("{0}", String.valueOf(getId()));
-		localOutput.replace("{1}", getAuthkey());
+		localOutput = localOutput.replace("{0}", String.valueOf(getId()));
+		localOutput = localOutput.replace("{1}", getAuthkey());
 		
 		return localOutput;
 	}

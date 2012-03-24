@@ -73,7 +73,7 @@ public class MediaHelper {
 				MediaMetaData.Table.COLUMN_OWNERID};
 		Cursor c = _context.getContentResolver().query(MediaMetaData.CONTENT_URI, columns, null, null, null);
 
-		if(c.isFirst()) {
+		if(c.moveToFirst()) {
 			while(!c.isAfterLast()) {
 				media.add(cursorToMedia(c));
 				c.moveToNext();

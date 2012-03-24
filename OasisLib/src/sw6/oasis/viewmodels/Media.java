@@ -9,7 +9,7 @@ public class Media {
 	private String type;
 	private String tags;
 	private long ownerId;
-	private String output;
+	private String output = "{0}, {1}, {2}, {3}, {4}, {5}, {6}";
 	
 	/**
 	 * Constructor with arguments
@@ -141,13 +141,13 @@ public class Media {
 	 */
 	public String toString() {
 		String localOutput = output;
-		localOutput.replace("{0}", String.valueOf(getId()));
-		localOutput.replace("{1}", getPath());
-		localOutput.replace("{2}", getName());
-		localOutput.replace("{3}", String.valueOf(is_public()));
-		localOutput.replace("{4}", getType());
-		localOutput.replace("{5}", getTags());
-		localOutput.replace("{6}", String.valueOf(getOwnerId())); 
+		localOutput = localOutput.replace("{0}", String.valueOf(getId()));
+		localOutput = localOutput.replace("{1}", getPath());
+		localOutput = localOutput.replace("{2}", getName());
+		localOutput = localOutput.replace("{3}", String.valueOf(is_public()));
+		localOutput = localOutput.replace("{4}", getType());
+		localOutput = localOutput.replace("{5}", getTags());
+		localOutput = localOutput.replace("{6}", String.valueOf(getOwnerId())); 
 		
 		return localOutput;
 	}

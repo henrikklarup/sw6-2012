@@ -10,7 +10,7 @@ public class Profile {
 	private long phone;
 	private String picture;
 	private long departmentId;
-	private String output;
+	private String output = "{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}";
 	
 	/**
 	 * Constructor with parameters
@@ -158,14 +158,14 @@ public class Profile {
 	 */
 	public String toString() {
 		String localOutput = output;
-		localOutput.replace("{0}", String.valueOf(getId()));
-		localOutput.replace("{1}", getFirstname());
-		localOutput.replace("{2}", getMiddlename());
-		localOutput.replace("{3}", getSurname());
-		localOutput.replace("{4}", String.valueOf(getRole()));
-		localOutput.replace("{5}", String.valueOf(getPhone()));
-		localOutput.replace("{6}", getPicture());
-		localOutput.replace("{7}", String.valueOf(getDepartmentId()));
+		localOutput = localOutput.replace("{0}", String.valueOf(getId()));
+		localOutput = localOutput.replace("{1}", getFirstname());
+		localOutput = localOutput.replace("{2}", getMiddlename());
+		localOutput = localOutput.replace("{3}", getSurname());
+		localOutput = localOutput.replace("{4}", String.valueOf(getRole()));
+		localOutput = localOutput.replace("{5}", String.valueOf(getPhone()));
+		localOutput = localOutput.replace("{6}", getPicture());
+		localOutput = localOutput.replace("{7}", String.valueOf(getDepartmentId()));
 		
 		return localOutput;
 	}
