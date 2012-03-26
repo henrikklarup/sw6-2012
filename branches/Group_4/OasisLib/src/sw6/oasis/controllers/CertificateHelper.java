@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sw6.oasis.controllers.metadata.CertificatesMetaData;
-import sw6.oasis.viewmodels.Certificate;
+import sw6.oasis.models.Certificate;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
