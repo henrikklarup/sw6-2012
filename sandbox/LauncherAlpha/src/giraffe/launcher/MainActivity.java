@@ -57,6 +57,7 @@ public class MainActivity extends Activity {
         		 
         		 Log.i("appInfo", "appInfo.title" + appInfo.title);
         		 Log.i("applications", "applications" + applications);
+        		 Log.i("Intent", "Intent" + appInfo.intent);
         	}
         	IconAdapter iconAdapter = new IconAdapter(this,applications);
             GridView gridview = (GridView) findViewById(R.id.gridview);
