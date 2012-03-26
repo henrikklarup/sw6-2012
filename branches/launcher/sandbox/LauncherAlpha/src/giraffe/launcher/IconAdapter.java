@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class IconAdapter extends BaseAdapter {
 	private Context mContext;
@@ -48,10 +49,19 @@ public class IconAdapter extends BaseAdapter {
             imageView = (ImageView) convertView;
         }
 
-		imageView.setImageDrawable(applications.get(position).icon);
-        return imageView;
-        
+		
+		/*
+			Kasper and Rasmus was here!?!"?"!?#!"?#!"?#!"?¤%!"(%)/!")(#/!)"(#/!)("#/
+		*/
+		
+		
+		//imageView.setImageDrawable(applications.get(position).icon);
+		
+		final TextView textView = (TextView) convertView.findViewById(R.id.gridview);
+        textView.setCompoundDrawablesWithIntrinsicBounds(null, applications.get(position).icon, null, null);
+        textView.setText(applications.get(position).title);
+		
+        return convertView;
         
 	}
-
 }
