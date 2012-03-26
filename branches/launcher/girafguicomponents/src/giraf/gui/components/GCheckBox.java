@@ -20,5 +20,4 @@ public class GCheckBox extends CheckBox {
 		super(context, attrs, defStyle);
 		// TODO Auto-generated constructor stub
 	}
-
 }
