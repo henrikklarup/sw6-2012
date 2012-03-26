@@ -11,6 +11,9 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
+import android.widget.LinearLayout;
+
+import giraf.gui.components.*;
 
 public class MainActivity extends Activity {
     /** Called when the activity is first created. */
@@ -18,6 +21,11 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        
+        GButton gButton = new GButton(this);
+        LinearLayout layout = (LinearLayout) findViewById(R.layout.main);
+        //setContentView(new GraphTemperature(getApplicationContext()));
+        layout.addView(gButton);
         
         
         PackageManager manager = getPackageManager();
