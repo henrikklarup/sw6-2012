@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sw6.oasis.controllers.metadata.ListOfAppsMetaData;
-import sw6.oasis.viewmodels.ListOfApps;
+import sw6.oasis.models.ListOfApps;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;

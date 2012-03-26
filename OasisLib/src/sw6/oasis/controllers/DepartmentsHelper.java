@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sw6.oasis.controllers.metadata.DepartmentsMetaData;
-import sw6.oasis.viewmodels.Department;
+import sw6.oasis.models.Department;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
