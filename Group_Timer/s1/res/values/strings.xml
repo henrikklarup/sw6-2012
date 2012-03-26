@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Wombat</string>
+    <string name="start_activity_default">Tilpas</string>
+    <string name="profile_list_header">Profiler</string>
+    <string name="template_list_header">Gemte Tilpasninger</string>
+    <string name="customize_header">Tilpas</string>
+
+</resources>
