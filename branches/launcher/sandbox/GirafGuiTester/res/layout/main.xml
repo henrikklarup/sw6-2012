@@ -5,7 +5,7 @@
     android:orientation="vertical" >
 
 
-	<giraf.gui.components.GButton
+	<giraf.gui.GButton
 	    android:id="@+id/button1"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
