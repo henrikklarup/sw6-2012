@@ -1,6 +1,7 @@
 package sw6.autism.timer.TimerLib;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -8,9 +9,10 @@ import javax.microedition.khronos.opengles.GL10;
 import android.opengl.GLU;
 import android.opengl.GLSurfaceView.Renderer;
 
-public class Profile implements Renderer{
+public class Profile implements Renderer, Comparable<Profile>{
 
 	public int _id;
+	public String _name;
 	public int _size;
 	public String _bgcolor;
 	public String _timeLeftColor;
@@ -21,6 +23,7 @@ public class Profile implements Renderer{
 	//constructor
 	public Profile(int id, String name, String description, int size, String bgcolor, String timeLeftColor, String timeSpentColor, int totalTime, DigitalClock digital, boolean changeColor){
 		this._id = id;
+		this._name = name;
 		this._size = size;
 		this._bgcolor = bgcolor;
 		this._timeLeftColor = timeLeftColor;
@@ -32,6 +35,7 @@ public class Profile implements Renderer{
 	
 	public Profile(int id, String name, String description, int size, String bgcolor, String timeLeftColor, String timeSpentColor, int totalTime, boolean changeColor){
 		this._id = id;
+		this._name = name;
 		this._size = size;
 		this._bgcolor = bgcolor;
 		this._timeLeftColor = timeLeftColor;
@@ -42,6 +46,7 @@ public class Profile implements Renderer{
 	
 	public Profile(int id, String name, String description, int size, String bgcolor, String timeLeftColor, String timeSpentColor, boolean changeColor){
 		this._id = id;
+		this._name = name;
 		this._size = size;
 		this._bgcolor = bgcolor;
 		this._timeLeftColor = timeLeftColor;
@@ -78,5 +83,24 @@ public class Profile implements Renderer{
 		// TODO Auto-generated method stub
 		
 	}
-	
+
+	 public boolean equals(Object o) {
+	        if (!(o instanceof Profile))
+	            return false;
+	        Profile n = (Profile) o;
+	        return n._name.equals(_name) && n._name.equals(_name);
+	    }
+
+	    public int hashCode() {
+	        return 31*_name.hashCode() + _name.hashCode();
+	    }
+
+	    public String toString() {
+		return _name + " " + _name;
+	    }
+
+	    public int compareTo(Profile n) {
+	        int lastCmp = _name.compareTo(n._name);
+	        return (lastCmp != 0 ? lastCmp : _name.compareTo(n._name));
+	    }
 }

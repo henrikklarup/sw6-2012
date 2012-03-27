@@ -41,13 +41,6 @@ public class Guardian {
 		return instance;
 	}
 	
-	public ArrayList<Child> initChildren(){
-		if(guard == null){
-			guard = new ArrayList<Child>();
-		}
-		return guard;
-	}
-	
 	public ArrayList<Child> Children(){
 		if(guard == null){
 		guard = new ArrayList<Child>();
@@ -99,7 +92,12 @@ public class Guardian {
 		
 		sortedList.add(predefChild);
 		
+		Collections.sort(guard);
+		for(Child p : guard){
+			Collections.sort(p.Profiles());
+		}
 		
+		sortedList.addAll(guard);
 		
 		return sortedList;
 	}
