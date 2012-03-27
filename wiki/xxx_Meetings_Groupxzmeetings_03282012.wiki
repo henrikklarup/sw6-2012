@@ -21,6 +21,5 @@ Referent: sw605f12
   * Scrum planning and evaluation days.
   * Aub. (Eventuelt)
   * Next Meeting
-    * Responsible group (sw603f12)
-    * Date (sw603f12)
-    * Open Door Day (Rasmus A)
+    * Responsible group (sw605f12)
+    * Date (sw605f12)
