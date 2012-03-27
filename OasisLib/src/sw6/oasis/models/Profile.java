@@ -9,7 +9,37 @@ public class Profile {
 	private long role;
 	private long phone;
 	private String picture;
-	private long departmentId;
+	private long idCertificate;
+	private String output = "{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}";
+
+	/**
+	 * Constructor with parameters
+	 * 
+	 * @param firstname the firstname to set
+	 * @param surname the surname to set
+	 * @param middlename the middlename to set
+	 * @param role the role to set
+	 * @param phone the phone to set
+	 * @param picture the picture to set
+	 * @param idCertificate the idCertificate to set
+	 */
+	public Profile(String firstname, String surname, String middlename, long role, long phone, String picture, long idCertificate) {
+		this.firstname = firstname;
+		this.surname = surname;
+		this.middlename = middlename;
+		this.role = role;
+		this.phone = phone;
+		this.picture = picture;
+		this.idCertificate = idCertificate;
+	}
+
+	/**
+	 * Empty constructor
+	 */
+	public Profile() {
+
+	}
+
 	/**
 	 * @return the id
 	 */
@@ -95,15 +125,49 @@ public class Profile {
 		this.picture = picture;
 	}
 	/**
-	 * @return the departmentId
+	 * @return the idCertificate
 	 */
-	public long getDepartmentId() {
-		return departmentId;
+	public long getIdCertificate() {
+		return idCertificate;
 	}
 	/**
-	 * @param departmentId the departmentId to set
+	 * @param idCertificate the idCertificate to set
 	 */
-	public void setDepartmentId(long departmentId) {
-		this.departmentId = departmentId;
+	public void setIdCertificate(long idCertificate) {
+		this.idCertificate = idCertificate;
+	}
+
+	/**
+	 * Set output
+	 *  {0} = ID
+	 *  {1} = Firstname
+	 *  {2} = Middlename
+	 *  {3} = Surname
+	 *  {4} = Role
+	 *  {5} = Phone
+	 *  {6} = Picture
+	 *  {7} = DepartmentId
+	 * @param output String to set
+	 */
+	public void setOutput(String output) {
+		this.output = output;
+	}
+
+	@Override
+	/**
+	 * toString for profile
+	 */
+	public String toString() {
+		String localOutput = output;
+		localOutput = localOutput.replace("{0}", String.valueOf(getId()));
+		localOutput = localOutput.replace("{1}", getFirstname());
+		localOutput = localOutput.replace("{2}", getMiddlename());
+		localOutput = localOutput.replace("{3}", getSurname());
+		localOutput = localOutput.replace("{4}", String.valueOf(getRole()));
+		localOutput = localOutput.replace("{5}", String.valueOf(getPhone()));
+		localOutput = localOutput.replace("{6}", getPicture());
+		localOutput = localOutput.replace("{7}", String.valueOf(getIdCertificate()));
+
+		return localOutput;
 	}
 }

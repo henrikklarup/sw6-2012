@@ -3,7 +3,7 @@ package com.controller.get;
 import java.util.List;
 
 import sw6.oasis.controllers.Helper;
-import sw6.oasis.viewmodels.App;
+import sw6.oasis.models.App;
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AppsView extends ListActivity {
 
@@ -46,10 +47,12 @@ public class AppsView extends ListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		long _id = getListAdapter().getItemId(position);
-		app.setId(_id);
-		app.setName("AppModified");
-		app.setVersionNumber("ModifiedVersion");
-		helper.appsHelper.modifyApp(app);
-		adapter.notifyDataSetChanged();
+		App app1 = helper.appsHelper.getAppById(_id);
+		Toast.makeText(this, app1.toString(), Toast.LENGTH_SHORT).show();
+//		app.setId(_id);
+//		app.setName("AppModified");
+//		app.setVersionNumber("ModifiedVersion");
+//		helper.appsHelper.modifyApp(app);
+//		adapter.notifyDataSetChanged();
 	}
 }

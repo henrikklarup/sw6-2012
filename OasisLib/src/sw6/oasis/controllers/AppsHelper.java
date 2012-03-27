@@ -51,6 +51,40 @@ public class AppsHelper {
 	}
 
 	/**
+	 * Get one application
+	 * @param _id the id of the desired application
+	 * @return null or the application
+	 */
+	public App getAppById(long _id) {
+		Uri uri = ContentUris.withAppendedId(AppsMetaData.CONTENT_URI, _id);
+		String[] columns = new String[] { AppsMetaData.Table.COLUMN_ID, 
+				AppsMetaData.Table.COLUMN_NAME,
+				AppsMetaData.Table.COLUMN_VERSIONNUMBER};
+		Cursor c = _context.getContentResolver().query(uri, columns, null, null, null);
+
+		return cursorToApp(c);
+	}
+	
+	
+	/**
+	 * Gets all application with the specified name
+	 * @param _name the name of the application
+	 * @return a list of applications
+	 */
+	public List<App> getAppsByName(String _name) {
+		List<App> apps = new ArrayList<App>();
+		String[] columns = new String[] { AppsMetaData.Table.COLUMN_ID, 
+				AppsMetaData.Table.COLUMN_NAME,
+				AppsMetaData.Table.COLUMN_VERSIONNUMBER};
+		Cursor c = _context.getContentResolver().query(Uri.withAppendedPath(AppsMetaData.CONTENT_URI, _name) , columns, null, null, null);
+		
+		cursorToAppList(c);
+		c.close();
+		
+		return apps; 
+	}
+	
+	/**
 	 * Get all applications
 	 * @return List<App>, containing all applications
 	 */
@@ -61,12 +95,7 @@ public class AppsHelper {
 				AppsMetaData.Table.COLUMN_VERSIONNUMBER};
 		Cursor c = _context.getContentResolver().query(AppsMetaData.CONTENT_URI, columns, null, null, null);
 
-		if(c.moveToFirst()) {
-			while(!c.isAfterLast()) {
-				apps.add(cursorToApp(c));
-				c.moveToNext();
-			}
-		}
+		cursorToAppList(c);
 		c.close();
 
 		return apps;
@@ -80,9 +109,9 @@ public class AppsHelper {
 	}
 
 	/**
-	 * Cursor to app method
-	 * @param cursor Input cursor
-	 * @return Output App
+	 * Cursor to app
+	 * @param cursor the cursor to convert
+	 * @return the app
 	 */
 	private App cursorToApp(Cursor cursor) {
 		App app = new App();
@@ -90,5 +119,23 @@ public class AppsHelper {
 		app.setName(cursor.getString(cursor.getColumnIndex(AppsMetaData.Table.COLUMN_NAME)));
 		app.setVersionNumber(cursor.getString(cursor.getColumnIndex(AppsMetaData.Table.COLUMN_VERSIONNUMBER)));
 		return app;
+	}
+	
+	/**
+	 * Cursor to List<App>
+	 * @param cursor the cursor to convert
+	 * @return the List<App>
+	 */
+	private List<App> cursorToAppList(Cursor cursor) {
+		List<App> apps = new ArrayList<App>();
+		
+		if(cursor.moveToFirst()) {
+			while(!cursor.isAfterLast()) {
+				apps.add(cursorToApp(cursor));
+				cursor.moveToNext();
+			}
+		}
+		
+		return apps;
 	}
 }
