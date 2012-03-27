@@ -8,7 +8,7 @@ import android.util.AttributeSet;
 import android.widget.Button;
 
 /**
- * @author magnusstubman
+ * @author thomaskobberpanum
  *
  */
 public class GButton extends Button {
@@ -18,7 +18,8 @@ public class GButton extends Button {
 	 */
 	public GButton(Context context) {
 		super(context);
-		// TODO Auto-generated constructor stub
+		// TODO Auto-generated constructor
+		this.setBackgroundResource(R.drawable.gbutton);
 	}
 
 	/**
