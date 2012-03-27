@@ -26,7 +26,7 @@ public class CustomizeFragment extends Fragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// Populate the fragment according to the details layout
-		View view = inflater.inflate(R.layout.details, container, false);
+		View view = inflater.inflate(R.layout.customize, container, false);
 		return view;
 	}
 	
@@ -36,9 +36,9 @@ public class CustomizeFragment extends Fragment{
 	 */
 	public void setSettings(Template template){
 		// TODO: Insert logic to load settings and put them into the view
-		TextView view = (TextView)getView().findViewById(R.id.detailsText);
-		view.setText(template.getName());
-		Profile profile = new Profile();
+//		TextView view = (TextView)getView().findViewById(R.id.customizeHeader);
+//		view.setText(template.getName());
+//		Profile profile = new Profile();
 		
 //		helper.profilesHelper.
 	}
