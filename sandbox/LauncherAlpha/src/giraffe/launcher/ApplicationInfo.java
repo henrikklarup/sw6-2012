@@ -18,11 +18,14 @@ package giraffe.launcher;
 
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.ServiceInfo;
 // Maybe color isnt the right type //check
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 
 class ApplicationInfo {
+	ServiceInfo category;
+	
 	/**
 	 * The application name.
 	 */

@@ -36,6 +36,18 @@ public class MainActivity extends Activity {
 		final List<ResolveInfo> apps = manager.queryIntentActivities(mainIntent, 0);
 		Collections.sort(apps, new ResolveInfo.DisplayNameComparator(manager));
 
+		
+		
+		//
+		// This is a test
+		//
+		List<ResolveInfo> list = getPackageManager().queryIntentActivities(mainIntent, PackageManager.MATCH_DEFAULT_ONLY);
+		if (list.size() > 0){
+			Log.i("list","" + list);
+		}
+
+		
+		
 		if (apps != null) {
 			final int count = apps.size();
 
@@ -52,16 +64,11 @@ public class MainActivity extends Activity {
 						| Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
 
 				applications.add(appInfo);
-
-				Log.i("appInfo", "appInfo.title" + appInfo.title);
-				Log.i("applications", "applications" + applications);
-				Log.i("Intent", "Intent" + appInfo.intent);
 			}
+
 			IconAdapter iconAdapter = new IconAdapter(this,applications);
 			GridView gridview = (GridView) findViewById(R.id.gridview);
 
-
-			//ERROR
 			gridview.setAdapter(iconAdapter);
 
 			//iconAdapter.getView(position, convertView, parent);
