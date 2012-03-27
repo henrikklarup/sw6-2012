@@ -8,12 +8,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ImageView.ScaleType;
 import android.widget.TextView;
 
 public class IconAdapter extends BaseAdapter {
 	private int settingsLayoutParams = 85;
-	private ScaleType settingsScaleType = ImageView.ScaleType.CENTER_CROP;
 	private int settingsPadding = 8;
 	
 	private Context mContext;
@@ -30,13 +28,6 @@ public class IconAdapter extends BaseAdapter {
 	}
 	public int getSettingsLayoutParams(){
 		return settingsLayoutParams;
-	}
-	public void setSettingsScaleType(ScaleType arg0){
-		settingsScaleType = arg0;
-	}
-	public ScaleType getSettingsScaleType(){
-		return settingsScaleType;
-
 	}
 	public void setSettingsPadding(int arg0){
 
@@ -69,22 +60,24 @@ public class IconAdapter extends BaseAdapter {
 		
 		if (convertView == null) {  // if it's not recycled, initialize some attributes
             imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams(settingsLayoutParams, settingsLayoutParams));
-            imageView.setScaleType(settingsScaleType);
-            imageView.setPadding(settingsPadding, settingsPadding, settingsPadding, settingsPadding);
+            imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageView.setPadding(8, 8, 8, 8);
         } else {
             imageView = (ImageView) convertView;
         }
-		
-		//Worked once
-		//imageView.setImageDrawable(applications.get(position).icon);
-		
-		//Bubbletrouble
-		final TextView textView = (TextView) convertView.findViewById(R.id.gridview);
-        textView.setCompoundDrawablesWithIntrinsicBounds(null, applications.get(position).icon, null, null);
-        textView.setText(applications.get(position).title);
-		
-        return convertView;
+
+		imageView.setImageDrawable(applications.get(position).icon);
+        return imageView;
+        
+        
+		//dosnt work!
+//		//Bubbletrouble
+//		final TextView textView = (TextView) convertView.findViewById(R.id.gridview);
+//        textView.setCompoundDrawablesWithIntrinsicBounds(null, applications.get(position).icon, null, null);
+//        textView.setText(applications.get(position).title);
+//		
+//        return convertView;
         
 	}
 }
