@@ -38,6 +38,8 @@ public class MainActivity extends Activity {
         final List<ResolveInfo> apps = manager.queryIntentActivities(mainIntent, 0);
         Collections.sort(apps, new ResolveInfo.DisplayNameComparator(manager));
         
+        //something should go around here
+        
         if (apps != null) {
         	final int count = apps.size();
         	
