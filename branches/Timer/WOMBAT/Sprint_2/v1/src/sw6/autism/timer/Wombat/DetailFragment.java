@@ -34,7 +34,7 @@ public class DetailFragment extends android.app.ListFragment{
 	 * @param id id of the template profile
 	 */
 	public void getTemplates(long id){
-		templates = StartLoader.getTemplatesById(id);
+		templates = TimerLoader.getTemplatesById(id);
 		
 		List<String> values = new ArrayList<String>();
 		
