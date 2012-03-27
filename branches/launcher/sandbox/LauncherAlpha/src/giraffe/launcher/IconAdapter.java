@@ -11,8 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class IconAdapter extends BaseAdapter {
-	private int settingsLayoutParams = 85;
+	private int settingsLayoutParamsHeight = 85;
+	private int settingsLayoutParamsWidth = 85;
 	private int settingsPadding = 8;
+	private int[] settingsLayoutParam;
 	
 	private Context mContext;
 	ArrayList<giraffe.launcher.ApplicationInfo> applications = new ArrayList<giraffe.launcher.ApplicationInfo>();
@@ -23,14 +25,18 @@ public class IconAdapter extends BaseAdapter {
 	    }	
 	
 	//Settings
-	public void setSettingsLayoutParams(int arg0){
-		settingsLayoutParams = arg0;
+	public void setSettingsLayoutParams(int height, int width){
+		settingsLayoutParamsHeight = height;
+		settingsLayoutParamsWidth = width;
 	}
-	public int getSettingsLayoutParams(){
-		return settingsLayoutParams;
+	public int[] getSettingsLayoutParams(){
+		settingsLayoutParam[0] = settingsLayoutParamsHeight;
+		settingsLayoutParam[1] = settingsLayoutParamsWidth;
+		
+		return settingsLayoutParam;
 	}
 	public void setSettingsPadding(int arg0){
-
+		settingsPadding = arg0;
 	}
 	public int getSettingsPadding(){
 		return settingsPadding;
@@ -60,9 +66,9 @@ public class IconAdapter extends BaseAdapter {
 		
 		if (convertView == null) {  // if it's not recycled, initialize some attributes
             imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
+            imageView.setLayoutParams(new GridView.LayoutParams(settingsLayoutParamsHeight, settingsLayoutParamsHeight));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setPadding(8, 8, 8, 8);
+            imageView.setPadding(settingsPadding, settingsPadding, settingsPadding, settingsPadding);
         } else {
             imageView = (ImageView) convertView;
         }
