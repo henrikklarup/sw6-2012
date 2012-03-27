@@ -2,8 +2,8 @@ package sw6.autism.timer.TimerLib;
 
 public class Circle extends Profile {
 	
-	public Circle(int size, String bgcolor, String timeLeftColor, String timeSpentColor, int totalTime, boolean digital, boolean changeColor, String name, String description){
-		super(size, bgcolor, timeLeftColor, timeSpentColor, totalTime,digital,changeColor);
+	public Circle(int id, String name, String description, int size, String bgcolor, String timeLeftColor, String timeSpentColor, int totalTime, DigitalClock digital, boolean changeColor){
+		super(id, name, description, size, bgcolor, timeLeftColor, timeSpentColor, totalTime,digital,changeColor);
 	}
 
 	
