@@ -3,6 +3,22 @@ package sw6.oasis.models;
 public class Certificate {
 	private long id;
 	private String authkey;
+	private String output = "{0}, {1}";
+
+	/**
+	 * Constructor with arguments
+	 * @param authKey is the authkey to set
+	 */
+	public Certificate(String authKey) {
+		this.authkey = authKey;
+	}
+
+	/**
+	 * Empty constructor
+	 */
+	public Certificate() {
+	}
+
 	/**
 	 * @return the id
 	 */
@@ -27,6 +43,29 @@ public class Certificate {
 	public void setAuthkey(String authkey) {
 		this.authkey = authkey;
 	}
-	
-	
+
+	/**Set output
+	 *      {0} = Id
+	 *  {1} = Authkey
+
+	 * @param output the output to set
+	 */
+	public void setOutput(String output) {
+		this.output = output;
+	}
+
+	/**
+	 * toString for certificate
+	 */
+	@Override
+	/**
+	 * toString for Certificate
+	 */
+	public String toString() {
+		String localOutput = output;
+		localOutput = localOutput.replace("{0}", String.valueOf(getId()));
+		localOutput = localOutput.replace("{1}", getAuthkey());
+
+		return localOutput;
+	}
 }

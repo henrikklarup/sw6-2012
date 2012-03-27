@@ -40,7 +40,7 @@ public class ProfilesHelper {
 		cv.put(ProfilesMetaData.Table.COLUMN_ROLE, _profile.getRole());
 		cv.put(ProfilesMetaData.Table.COLUMN_PHONE, _profile.getPhone());
 		cv.put(ProfilesMetaData.Table.COLUMN_PICTURE, _profile.getPicture());
-		cv.put(ProfilesMetaData.Table.COLUMN_DEPARTMENTID, _profile.getDepartmentId());
+		cv.put(ProfilesMetaData.Table.COLUMN_DEPARTMENTID, _profile.getIdCertificate());
 		_context.getContentResolver().insert(ProfilesMetaData.CONTENT_URI, cv);
 	}
 
@@ -57,7 +57,7 @@ public class ProfilesHelper {
 		cv.put(ProfilesMetaData.Table.COLUMN_ROLE, _profile.getRole());
 		cv.put(ProfilesMetaData.Table.COLUMN_PHONE, _profile.getPhone());
 		cv.put(ProfilesMetaData.Table.COLUMN_PICTURE, _profile.getPicture());
-		cv.put(ProfilesMetaData.Table.COLUMN_DEPARTMENTID, _profile.getDepartmentId());
+		cv.put(ProfilesMetaData.Table.COLUMN_DEPARTMENTID, _profile.getIdCertificate());
 		_context.getContentResolver().update(uri, cv, null, null);
 	}
 
@@ -68,6 +68,21 @@ public class ProfilesHelper {
 		_context.getContentResolver().delete(ProfilesMetaData.CONTENT_URI, null, null);
 	}
 
+	public Profile getProfileById(long _id) {
+		Uri uri = ContentUris.withAppendedId(ProfilesMetaData.CONTENT_URI, _id);
+		String[] columns = new String[] { ProfilesMetaData.Table.COLUMN_ID, 
+				ProfilesMetaData.Table.COLUMN_FIRST_NAME,
+				ProfilesMetaData.Table.COLUMN_SUR_NAME,
+				ProfilesMetaData.Table.COLUMN_MIDDLE_NAME,
+				ProfilesMetaData.Table.COLUMN_ROLE,
+				ProfilesMetaData.Table.COLUMN_PHONE,
+				ProfilesMetaData.Table.COLUMN_PICTURE,
+				ProfilesMetaData.Table.COLUMN_DEPARTMENTID};
+		Cursor c = _context.getContentResolver().query(uri, columns, null, null, null);
+		
+		return cursorToProfile(c);
+	}
+	
 	/**
 	 * Get all profiles
 	 * @return List<Profile>, containing all profiles
@@ -108,7 +123,7 @@ public class ProfilesHelper {
 		profile.setMiddlename(cursor.getString(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_MIDDLE_NAME)));
 		profile.setSurname(cursor.getString(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_SUR_NAME)));
 		profile.setPicture(cursor.getString(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_PICTURE)));
-		profile.setDepartmentId(cursor.getLong(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_DEPARTMENTID)));
+		profile.setIdCertificate(cursor.getLong(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_DEPARTMENTID)));
 		profile.setPhone(cursor.getLong(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_PHONE)));
 		profile.setRole(cursor.getLong(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_ROLE)));
 		return profile;
