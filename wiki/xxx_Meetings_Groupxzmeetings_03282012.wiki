@@ -29,3 +29,36 @@ Referent: sw605f12
   * Next Meeting
     * Responsible group (sw605f12)
     * Date (sw605f12)
+
+
+Referat:
+
+
+"Where are we?" & "where are we going?" moved to sprint meeting
+
+Only two meetings:
+
+friday:
+sprint endmeeting/evaluation
+
+monday:
+sprint meeting
+groupmeeting
+
+Alle sender rettelser til dem der har skrevet et common afsnit hvis der er et problem holdes der et møde omkring afsnittet med en repræsentant fra alle grupper
+
+group 4 skriver target platform og workform
+gruop 3 problem definition
+group 1 System description
+
+Ulrik siger:
+Afsnit om andet software hvad findes der der kan dette
+Der skal laves arkitektur diagram
+Målgruppen af denne rapport er de sw6 studerende næste år. 
+
+Folk bedes sende deres TOV aflevering #1 til kim:
+kims mail: kath09@student.aau.dk
+
+Folk bedes skrive datoerne rigtigt på wiki'en
+
+Boolean i settings - skal tabletens rotation låses eller ej.
