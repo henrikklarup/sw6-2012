@@ -25,7 +25,7 @@ Referent: sw605f12
   * Day at university @ wednesday morning.
   * From the responsible persons.
   * Aub. (Eventuelt)
-    * Fact or Fiction? (Launcher 10min) [link]
+    * Fact or Fiction? (Launcher 10min) [http://code.google.com/p/sw6-2012/source/browse/random_group_stuff/Group_launcher/presentations/28_03_12/factorfiction.pdf link]
     * GUI Library (Launcher 8min) [http://code.google.com/p/sw6-2012/source/browse/random_group_stuff/Group_launcher/presentations/28_03_12/GIRAF_components.pdf link]
     * Presentation of the Get controller.
   * Next Meeting
