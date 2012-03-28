@@ -1,5 +1,6 @@
-package parrot.Package;
+package dk.aau.cs.giraf.parrot;
 
+import parrot.Package.R;
 import android.app.Activity;
 import android.os.Bundle;
 
