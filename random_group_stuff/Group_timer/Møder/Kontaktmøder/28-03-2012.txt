@@ -1,0 +1,25 @@
+Referat:
+
+
+SUPER RELEVANT:
+Et billede på skærmen af den aktivitet de er i gang med, mens uret kører. Slåes til og fra.
+
+SUPER RELEVANT:
+Både sand-ur og time timer på samme tid. 
+
+Færdig-skærmen:
+Mulighed for to billeder: færdig + gå-til-skema
+   Kunne være fint hvis der var mulighed for at indspille en lyd/tale når færdig-billedet vises. Defineres nok i vores settings-app.
+
+Farverne på de pre-definerede timere er måske ikke så vigtige.
+10 min - rød
+3 min - gul
+1 min - blå
+5 min - blå
+30 sek - sort
+30 min - sort
+(Timere helt ned på sekund-basis)
+
+Måske mulighed for forskellige størrelser af ure, men det er ikke kritisk.
+
+Progress-bar er ikke så relevant, så vi behøver ikke have den med.
