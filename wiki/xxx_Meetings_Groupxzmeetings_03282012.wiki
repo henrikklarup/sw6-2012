@@ -23,6 +23,8 @@ Referent: sw605f12
   * Common report.
   * Scrum planning and evaluation days.
   * Day at university @ wednesday morning.
+  * Fact or Fiction? (Launcher 10min) [link]
+  * GUI Library (Launcher 15min) [link]
   * From the responsible persons.
   * Aub. (Eventuelt)
   * Next Meeting
