@@ -9,6 +9,8 @@ Responsible: sw604f12
 Referent: sw605f12
 
 == Agenda ==
+  * Knowledge sharing
+
   * For every individual group
     * Where are we?
       * What did we do since last time?
