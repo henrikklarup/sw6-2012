@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Wombat</string>
+    <string name="app_name">Wombat (Timer)</string>
     
     <!-- PROFILE LIST -->
     <string name="profile_list_header">Profiler</string>
@@ -14,7 +14,9 @@
     <string name="start_activity_default">Tilpas</string>
     <string name="customize_header">Tilpas</string>
     <string name="customize_style_description">Stil</string>
-    <string name="customize_hourglass_description">Time Glass</string>
+    <string name="customize_hourglass_description">Timeglas</string>
     <string name="customize_timetimer_description">Time Timer</string>
+    <string name="customize_progressbar_description">Bar</string>
+    <string name="customize_digital_description">Digital Ur</string>
 
 </resources>
