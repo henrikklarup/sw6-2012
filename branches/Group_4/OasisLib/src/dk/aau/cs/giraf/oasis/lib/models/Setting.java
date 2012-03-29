@@ -1,4 +1,4 @@
-package sw6.oasis.models;
+package dk.aau.cs.giraf.oasis.lib.models;
 
 import java.util.HashMap;
 
