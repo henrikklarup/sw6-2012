@@ -45,7 +45,7 @@ public class Certificate {
 	}
 
 	/**Set output
-	 *      {0} = Id
+	 *  {0} = Id
 	 *  {1} = Authkey
 
 	 * @param output the output to set

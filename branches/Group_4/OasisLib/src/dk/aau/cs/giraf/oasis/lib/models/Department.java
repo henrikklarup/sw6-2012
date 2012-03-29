@@ -76,7 +76,7 @@ public class Department {
 		this.phone = phone;
 	}
 	/**Set output
-	 *      {0} = Id
+	 *  {0} = Id
 	 *  {1} = Name
 	 *  {2} = Address
 	 *  {3} = Phone
