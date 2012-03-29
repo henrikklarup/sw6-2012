@@ -3,8 +3,7 @@ package sw6.autism.timer.Wombat;
 import java.util.ArrayList;
 import java.util.List;
 
-import sw6.oasis.controllers.Helper;
-import sw6.oasis.viewmodels.Profile;
+import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
 public class TimerLoader {
 	public static String getProfileName(Profile profile) {

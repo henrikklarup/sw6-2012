@@ -3,13 +3,17 @@ package sw6.autism.timer.Wombat;
 import java.util.ArrayList;
 import java.util.List;
 
-import sw6.oasis.controllers.Helper;
-import sw6.oasis.viewmodels.Profile;
+import sw6.autism.timer.Wombat.R;
+import sw6.autism.timer.Wombat.R.id;
+import sw6.autism.timer.Wombat.R.string;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import dk.aau.cs.giraf.oasis.lib.Helper;
+import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
 public class ListFragment extends android.app.ListFragment {
 	Helper helper;

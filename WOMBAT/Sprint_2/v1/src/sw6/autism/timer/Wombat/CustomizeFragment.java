@@ -1,14 +1,14 @@
 package sw6.autism.timer.Wombat;
 
-import sw6.oasis.controllers.Helper;
-import sw6.oasis.viewmodels.Profile;
+import sw6.autism.timer.Wombat.R;
+import sw6.autism.timer.Wombat.R.layout;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import dk.aau.cs.giraf.oasis.lib.Helper;
 
 public class CustomizeFragment extends Fragment{
 	Helper helper;
