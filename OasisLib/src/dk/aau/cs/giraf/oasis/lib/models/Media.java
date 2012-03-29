@@ -124,7 +124,7 @@ public class Media {
 	/**
 	 *  Set output
 	 *  {0} = ID
-	 *      {1} = Path
+	 *  {1} = Path
 	 *  {2} = Name
 	 *  {3} = Public
 	 *  {4} = Type

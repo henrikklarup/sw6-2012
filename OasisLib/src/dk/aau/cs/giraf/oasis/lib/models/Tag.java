@@ -47,7 +47,7 @@ public class Tag {
 	
 	/**
 	 * {0} = ID
-	 * {1} = caption
+	 * {1} = Caption
 	 * @param output String to set
 	 */
 	public void setOutput(String output) {
