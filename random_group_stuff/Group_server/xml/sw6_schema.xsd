@@ -215,7 +215,7 @@
             <xs:element name="entry" maxOccurs="unbounded">
               <xs:complexType>
                 <xs:sequence>
-                  <xs:element name="idParrent" type="xs:integer"/>
+                  <xs:element name="idParent" type="xs:integer"/>
                   <xs:element name="idChild" type="xs:integer"/>
                 </xs:sequence>
               </xs:complexType>
