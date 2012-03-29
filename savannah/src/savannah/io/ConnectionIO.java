@@ -1,7 +1,6 @@
 package savannah.io;
 
 import java.net.Socket;
-
 import java.io.DataOutputStream;
 
 public class ConnectionIO {

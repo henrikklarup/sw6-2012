@@ -7,7 +7,7 @@ import java.util.Queue;
 import org.jdom.*;
 
 
-public class EventQueue implements Runnable {
+public class EventQueue{
 	private static EventQueue _que = null;
 	
 	private EventQueue() { }
@@ -23,35 +23,18 @@ public class EventQueue implements Runnable {
 	}
 	
 	//TODO Add documents to the event queue.
-	private void add(Event e)
+	public synchronized void add(Event e)
 	{
 		eque.add(e);
 	}
 	
-	private Event remove()
+	public synchronized Event remove()
 	{
 		return eque.remove();
 	}
 	
-	//TODO NOI - stubs, consider refactor to seperate classs?
-	public void EventHandler() {
-		while(eque.isEmpty()) {
-			while(!eque.isEmpty()) {
-				Event e = remove();
-				if (e.getClass().equals(savannah.server.CommitEvent.class))
-				{
-					//Then call commit handler
-				}
-				else if(e.getClass().equals(savannah.server.RequestEvent.class))
-				{
-					//Then call Request handler
-				}
-			}
-		}
-	}
-
-	@Override
-	public void run() {
-		EventHandler();
+	public boolean isEmpty()
+	{
+		return eque.isEmpty();
 	}
 }

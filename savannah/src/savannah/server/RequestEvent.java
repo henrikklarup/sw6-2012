@@ -24,4 +24,9 @@ public class RequestEvent implements Event {
 		return socket;
 	}
 
+	@Override
+	public Event getEventType() {
+		return this;
+	}
+
 }

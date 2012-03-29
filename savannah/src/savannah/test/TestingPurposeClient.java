@@ -1,42 +1,68 @@
 package savannah.test;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+/**
+ * A Client strictly for testing purposes
+ */
+import java.io.*;
 import java.net.Socket;
 
 //Client
 public class TestingPurposeClient implements Runnable
 {
-	static PrintWriter out;
-	static BufferedReader in;
+	//XML fields
+	static PrintWriter out_xml;
+	static BufferedReader in_xml;
 	
+	//JPG fields
+	static OutputStream os;
 	static FileInputStream reader;
+	static FileOutputStream sender;;
+	static BufferedInputStream in_jpg;
+	static BufferedOutputStream out_jpg;
+	static ObjectOutputStream oout;
+	static ObjectInputStream oin;
 	
 	static String msg = "";
 	
-	public static void client()
+	public static void client_xml()
 	{	
 		try {
-		File file = new File("/home/martin/Documents/eadocs/sw6_example.xml");
+		File file = new File("/home/martin/Documents/eadocs/sw6_example.xml"); //Specific path for my computer
 		reader = new FileInputStream(file);
 		
-		in = new BufferedReader(new InputStreamReader(reader));
+		in_xml = new BufferedReader(new InputStreamReader(reader));
 		
-		while(in.ready())
+		while(in_xml.ready())
 		{
-			msg = msg + in.readLine() + System.getProperty("line.separator");
+			msg = msg + in_xml.readLine() + System.getProperty("line.separator");
 			System.out.println(msg);
 		}
 		Socket socket = new Socket("127.0.0.1",50000);
 		
-		out = new PrintWriter(socket.getOutputStream(),true);
-		//in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			out_xml = new PrintWriter(socket.getOutputStream(),true);
+			//in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		
-		out.println(msg);
+		out_xml.println(msg);
+		
+		System.out.println("hopefully send a msg");
+		}
+		catch (Exception e)
+		{ e.printStackTrace();}
+	}
+	
+	public static void client_jpg()
+	{	
+		try {
+		
+		File file = new File("/home/martin/Documents/eadocs/pics/world.jpg"); //Specific path for my computer
+		
+		Socket socket = new Socket("127.0.0.1",50000);
+		oout = new ObjectOutputStream(socket.getOutputStream());
+		
+		System.out.println("Preparing to send");
+		
+		oout.writeObject(file);	
+		oout.close();
 		
 		System.out.println("hopefully send a msg");
 		}
@@ -44,13 +70,15 @@ public class TestingPurposeClient implements Runnable
 		{ e.printStackTrace();}
 	}
 
+
 	public static void main(String args[])
 	{   
-		client();
+		//client_xml();
+		client_jpg();
 	}
 	@Override
 	public void run() {
-		try { client(); }
+		try { client_xml(); }
 		catch (Exception e)
 		{e.printStackTrace();}
 	}

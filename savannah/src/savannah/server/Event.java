@@ -6,5 +6,6 @@ public interface Event {
 	public Socket socket = null;
 	
 	public Socket getEventsocket();
+	public Event getEventType();
 	
 }
