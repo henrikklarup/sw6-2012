@@ -2,9 +2,7 @@ package dk.aau.cs.giraf.parrot;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.provider.MediaStore.Images;
-import android.text.Html.ImageGetter;
+import android.widget.ImageView;
 
 
 /**
@@ -22,19 +20,55 @@ public class Pictogram {
 	//This are the constructor for the Pictogram class
 	public Pictogram(String name, String imagePath, String soundPath, String wordPath)
 	{
-		//FIXME replace these with safer methods
-		this.name=name;
-		this.imagePath=imagePath;
-		this.soundPath=soundPath;
-		this.wordPath=wordPath;
+		this.setName(name);
+		this.setImagePath(imagePath);
+		this.setSoundPath(soundPath);
+		this.setWordPath(wordPath);
 	}
 	
 	//TODO make methods to ensure that the constructor can not put illegal arguments as the path for images, sounds and words
 	
 	//TODO make methods to show images and play sounds and words.
-	public Bitmap getImage()
+	public ImageView getImage()
 	{
-		return BitmapFactory.decodeFile(imagePath);
+		//FIXME this method will throw an exception if the path is invalid
+		ImageView image = null;
+		Bitmap bm = BitmapFactory.decodeFile(imagePath);
+		image.setImageBitmap(bm);
+		return image;
 	}
+	
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getSoundPath() {
+		return soundPath;
+	}
+
+	public void setSoundPath(String soundPath) {
+		this.soundPath = soundPath;
+	}
+
+	public String getWordPath() {
+		return wordPath;
+	}
+
+	public void setWordPath(String wordPath) {
+		this.wordPath = wordPath;
+	}
+	
 	
 }
