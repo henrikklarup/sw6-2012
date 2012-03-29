@@ -23,14 +23,13 @@ public final class R {
         public static final int wombat_icon=0x7f020005;
     }
     public static final class id {
-        public static final int customizeFragment=0x7f060007;
-        public static final int customizeHeader=0x7f060006;
-        public static final int detailFragment=0x7f060005;
-        public static final int detailsText=0x7f060001;
-        public static final int listFragment=0x7f060003;
-        public static final int profileListHeader=0x7f060002;
-        public static final int settingsListHeader=0x7f060004;
-        public static final int timePicker=0x7f060000;
+        public static final int customizeFragment=0x7f060006;
+        public static final int customizeHeader=0x7f060005;
+        public static final int detailFragment=0x7f060004;
+        public static final int detailsText=0x7f060000;
+        public static final int listFragment=0x7f060002;
+        public static final int profileListHeader=0x7f060001;
+        public static final int settingsListHeader=0x7f060003;
     }
     public static final class layout {
         public static final int customize=0x7f030000;
