@@ -80,7 +80,11 @@ public class ProfilesHelper {
 				ProfilesMetaData.Table.COLUMN_DEPARTMENTID};
 		Cursor c = _context.getContentResolver().query(uri, columns, null, null, null);
 		
-		return cursorToProfile(c);
+		if(c.moveToFirst()) {
+			return cursorToProfile(c);
+		}
+		
+		return null;
 	}
 	
 	/**
