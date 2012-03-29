@@ -1,17 +1,18 @@
 package sw6.oasis.views;
 
-import sw6.oasis.controllers.Helper;
-import sw6.oasis.viewmodels.Certificate;
-import android.database.Cursor;
+import java.util.List;
+
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import dk.aau.cs.giraf.oasis.lib.Helper;
+import dk.aau.cs.giraf.oasis.lib.models.Certificate;
 
 public class ViewCertificates extends ListFragment {
 
@@ -19,8 +20,8 @@ public class ViewCertificates extends ListFragment {
 	Certificate certificate;
 	Button bAdd, bDel;
 	TextView tvHeader;
-	int _position;
-	SimpleCursorAdapter mAdapter;
+	ArrayAdapter<Certificate> mAdapter;
+	List<Certificate> valueList;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -65,10 +66,9 @@ public class ViewCertificates extends ListFragment {
 			}
 		});
 		
-		Cursor cursor = helper.certificateHelper.getCertificates();
-        int[] to = new int[] { R.id.certificate_column_one, R.id.certificate_column_two};
+		valueList = helper.certificateHelper.getCertificates();
 
-        mAdapter = new SimpleCursorAdapter(getActivity().getApplicationContext(), R.layout.certificate_list, cursor, cursor.getColumnNames(), to);
+        mAdapter = new ArrayAdapter<Certificate>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, valueList);
 
         setListAdapter(mAdapter);
 	}

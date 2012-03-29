@@ -1,17 +1,18 @@
 package sw6.oasis.views;
 
-import sw6.oasis.controllers.Helper;
-import sw6.oasis.viewmodels.ListOfApps;
-import android.database.Cursor;
+import java.util.List;
+
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import dk.aau.cs.giraf.oasis.lib.Helper;
+import dk.aau.cs.giraf.oasis.lib.models.ListOfApps;
 
 public class ViewListOfApps extends ListFragment {
 
@@ -19,8 +20,8 @@ public class ViewListOfApps extends ListFragment {
 	ListOfApps loa;
 	Button bAdd, bDel;
 	TextView tvHeader;
-	int _position;
-	SimpleCursorAdapter mAdapter;
+	ArrayAdapter<ListOfApps> mAdapter;
+	List<ListOfApps> valueList;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -68,10 +69,9 @@ public class ViewListOfApps extends ListFragment {
 			}
 		});
 		
-		Cursor cursor = helper.listOfAppsHelper.getListOfApps();
-        int[] to = new int[] { R.id.listofapp_column_one, R.id.listofapp_column_two, R.id.listofapp_column_three, R.id.listofapp_column_four, R.id.listofapp_column_five};
+		valueList = helper.listOfAppsHelper.getListOfApps();
 
-        mAdapter = new SimpleCursorAdapter(getActivity().getApplicationContext(), R.layout.listofapp_list, cursor, cursor.getColumnNames(), to);
+        mAdapter = new ArrayAdapter<ListOfApps>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, valueList);
 
         setListAdapter(mAdapter);
 	}

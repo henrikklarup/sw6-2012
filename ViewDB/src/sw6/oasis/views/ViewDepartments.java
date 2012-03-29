@@ -1,25 +1,27 @@
 package sw6.oasis.views;
 
-import sw6.oasis.controllers.Helper;
-import sw6.oasis.viewmodels.Department;
-import android.database.Cursor;
+import java.util.List;
+
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import dk.aau.cs.giraf.oasis.lib.Helper;
+import dk.aau.cs.giraf.oasis.lib.models.Department;
 
 public class ViewDepartments extends ListFragment {
+	
 	Helper helper;
 	Department department;
 	Button bAdd, bDel;
 	TextView tvHeader;
-	int _position;
-	SimpleCursorAdapter mAdapter;
+	ArrayAdapter<Department> mAdapter;
+	List<Department> valueList;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -67,10 +69,9 @@ public class ViewDepartments extends ListFragment {
 			}
 		});
 		
-		Cursor cursor = helper.departmentsHelper.getDepartments();
-        int[] to = new int[] { R.id.department_column_one, R.id.department_column_two, R.id.department_column_three, R.id.department_column_four};
+		valueList = helper.departmentsHelper.getDepartments();
 
-        mAdapter = new SimpleCursorAdapter(getActivity().getApplicationContext(), R.layout.department_list, cursor, cursor.getColumnNames(), to);
+        mAdapter = new ArrayAdapter<Department>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, valueList);
 
         setListAdapter(mAdapter);
 	}

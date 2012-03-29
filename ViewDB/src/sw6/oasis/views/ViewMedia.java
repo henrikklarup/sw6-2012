@@ -1,17 +1,18 @@
 package sw6.oasis.views;
 
-import sw6.oasis.controllers.Helper;
-import sw6.oasis.viewmodels.Media;
-import android.database.Cursor;
+import java.util.List;
+
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import dk.aau.cs.giraf.oasis.lib.Helper;
+import dk.aau.cs.giraf.oasis.lib.models.Media;
 
 public class ViewMedia extends ListFragment {
 
@@ -19,8 +20,8 @@ public class ViewMedia extends ListFragment {
 	Media media;
 	Button bAdd, bDel;
 	TextView tvHeader;
-	int _position;
-	SimpleCursorAdapter mAdapter;
+	ArrayAdapter<Media> mAdapter;
+	List<Media> valueList;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -71,10 +72,9 @@ public class ViewMedia extends ListFragment {
 			}
 		});
 
-		Cursor cursor = helper.mediaHelper.getMedia();
-		int[] to = new int[] { R.id.media_column_one, R.id.media_column_two, R.id.media_column_three, R.id.media_column_four, R.id.media_column_five, R.id.media_column_six, R.id.media_column_seven};
+		valueList = helper.mediaHelper.getMedia();
 
-		mAdapter = new SimpleCursorAdapter(getActivity().getApplicationContext(), R.layout.media_list, cursor, cursor.getColumnNames(), to);
+		mAdapter = new ArrayAdapter<Media>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, valueList);
 
 		setListAdapter(mAdapter);
 	}
