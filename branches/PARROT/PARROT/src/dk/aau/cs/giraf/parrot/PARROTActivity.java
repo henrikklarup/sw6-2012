@@ -1,6 +1,5 @@
 package dk.aau.cs.giraf.parrot;
 
-import com.example.hellogridview.ImageAdapter;
 
 import parrot.Package.R;
 import android.app.Activity;
