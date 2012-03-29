@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sw6.oasis.controllers.Helper;
-import sw6.oasis.viewmodels.App;
 import sw6.oasis.viewmodels.Profile;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
