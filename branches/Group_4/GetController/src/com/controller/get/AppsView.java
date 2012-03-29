@@ -2,16 +2,17 @@ package com.controller.get;
 
 import java.util.List;
 
-import sw6.oasis.controllers.Helper;
-import sw6.oasis.models.App;
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import dk.aau.cs.giraf.oasis.lib.Helper;
+import dk.aau.cs.giraf.oasis.lib.models.App;
 
 public class AppsView extends ListActivity {
 
@@ -26,7 +27,7 @@ public class AppsView extends ListActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.tableview);
+		setContentView(R.layout.main);
 		helper = new Helper(this);
 
 		app = new App();
@@ -41,23 +42,50 @@ public class AppsView extends ListActivity {
 		adapter = new ArrayAdapter<App>(this, android.R.layout.simple_list_item_1, values);
 		setListAdapter(adapter);
 
+		bAdd = (Button) findViewById(R.id.add);
+		bAdd.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				helper.appsHelper.insertApp(app);
+				adapter.notifyDataSetChanged();
+			}
+		});
+		
+		bDel = (Button) findViewById(R.id.delete);
+		bDel.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				helper.appsHelper.clearAppsTable();
+				adapter.notifyDataSetChanged();
+			}
+		});
+		
 	}
 
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 
-		App _app = new App();
-		App fedte = new App();
-		_app = (App) getListAdapter().getItem(position);
-		long _id = _app.getId();
-
-		fedte = helper.appsHelper.getAppById(_id);
-
-		if (fedte != null) {
-			Toast.makeText(this, fedte.toString(), Toast.LENGTH_SHORT).show();
-		} else {
-			//   Toast.makeText(this, String.valueOf(_id), Toast.LENGTH_SHORT).show();
-		}
+		helper.appsHelper.clearAppsTable();
+		adapter.notifyDataSetChanged();
+		
+		
+		
+//		App _app = new App();
+//		App fedte = new App();
+//		_app = (App) getListAdapter().getItem(position);
+//		long _id = _app.getId();
+//
+//		fedte = helper.appsHelper.getAppById(_id);
+//
+//		if (fedte != null) {
+//			Toast.makeText(this, fedte.toString(), Toast.LENGTH_SHORT).show();
+//		} else {
+//			//   Toast.makeText(this, String.valueOf(_id), Toast.LENGTH_SHORT).show();
+//		}
 	}
 }

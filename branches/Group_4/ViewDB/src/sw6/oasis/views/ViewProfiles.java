@@ -1,17 +1,18 @@
 package sw6.oasis.views;
 
-import sw6.oasis.controllers.Helper;
-import sw6.oasis.viewmodels.Profile;
-import android.database.Cursor;
+import java.util.List;
+
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import dk.aau.cs.giraf.oasis.lib.Helper;
+import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
 public class ViewProfiles extends ListFragment {
 
@@ -19,8 +20,8 @@ public class ViewProfiles extends ListFragment {
 	Profile profile;
 	Button bAdd, bDel;
 	TextView tvHeader;
-	int _position;
-	SimpleCursorAdapter mAdapter;
+	ArrayAdapter<Profile> mAdapter;
+	List<Profile> valueList;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class ViewProfiles extends ListFragment {
 				profile.setPicture("Picture");
 				profile.setPhone(123456789);
 				profile.setRole(2);
-				profile.setDepartmentId(321);
+				profile.setIdCertificate(321);
 				
 				helper.profilesHelper.insertProfile(profile);
 				mAdapter.notifyDataSetChanged();
@@ -72,10 +73,9 @@ public class ViewProfiles extends ListFragment {
 			}
 		});
 		
-		Cursor cursor = helper.profilesHelper.getProfiles();
-        int[] to = new int[] { R.id.profile_column_one, R.id.profile_column_two, R.id.profile_column_three, R.id.profile_column_four, R.id.profile_column_five, R.id.profile_column_six, R.id.profile_column_seven, R.id.profile_column_eight};
+		valueList = helper.profilesHelper.getProfiles();
 
-        mAdapter = new SimpleCursorAdapter(getActivity().getApplicationContext(), R.layout.profile_list, cursor, cursor.getColumnNames(), to);
+        mAdapter = new ArrayAdapter<Profile>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, valueList);
 
         setListAdapter(mAdapter);
 	}
@@ -91,7 +91,7 @@ public class ViewProfiles extends ListFragment {
 		profile.setPicture("ModifiedPicture");
 		profile.setPhone(987654321);
 		profile.setRole(1);
-		profile.setDepartmentId(123);
+		profile.setIdCertificate(123);
 		helper.profilesHelper.modifyProfile(profile);
 		mAdapter.notifyDataSetChanged();
 	}

@@ -1,17 +1,19 @@
 package sw6.oasis.views;
 
-import sw6.oasis.controllers.Helper;
-import sw6.oasis.viewmodels.App;
-import android.database.Cursor;
+import java.util.List;
+
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
+import dk.aau.cs.giraf.oasis.lib.Helper;
+import dk.aau.cs.giraf.oasis.lib.models.App;
 
 public class ViewApps extends ListFragment {
 
@@ -19,8 +21,8 @@ public class ViewApps extends ListFragment {
 	App app;
 	Button bAdd, bDel;
 	TextView tvHeader;
-	int _position;
-	SimpleCursorAdapter mAdapter;
+	ArrayAdapter<App> mAdapter;
+	List<App> valueList;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,7 @@ public class ViewApps extends ListFragment {
 			
 			@Override
 			public void onClick(View v) {
+				Toast.makeText(getActivity().getApplicationContext(), "ADD", Toast.LENGTH_SHORT).show();
 				app.setName("AppName");
 				app.setVersionNumber("versionNumber");
 				
@@ -62,23 +65,25 @@ public class ViewApps extends ListFragment {
 			
 			@Override
 			public void onClick(View v) {
+				Toast.makeText(getActivity().getApplicationContext(), "CLEAR", Toast.LENGTH_SHORT).show();
 				helper.appsHelper.clearAppsTable();
 				mAdapter.notifyDataSetChanged();
 			}
 		});
 		
-		Cursor cursor = helper.appsHelper.getApps();
-        int[] to = new int[] { R.id.app_column_one, R.id.app_column_two, R.id.app_column_three};
+		valueList = helper.appsHelper.getApps();
 
-        mAdapter = new SimpleCursorAdapter(getActivity().getApplicationContext(), R.layout.app_list, cursor, cursor.getColumnNames(), to);
+        mAdapter = new ArrayAdapter<App>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, valueList);
 
         setListAdapter(mAdapter);
+
 	}
 	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		long _id = getListAdapter().getItemId(position);
+		Toast.makeText(getActivity().getApplicationContext(), "LIST ITEM CLICK", Toast.LENGTH_SHORT).show();
 		app.setId(_id);
 		app.setName("AppModified");
 		app.setVersionNumber("ModifiedVersion");
