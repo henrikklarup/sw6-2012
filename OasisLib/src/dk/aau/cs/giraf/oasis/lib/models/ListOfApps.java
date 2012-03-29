@@ -6,7 +6,7 @@ public class ListOfApps {
 	private long profileId;
 	private String settings;
 	private String stats;
-	private String output = "{0}, {1}, {2}, {3}, {4}";
+	private static String _output = "{0}, {1}, {2}, {3}, {4}";
 
 	/**
 	 * Constructor with arguments
@@ -100,7 +100,7 @@ public class ListOfApps {
 	 * @param output
 	 */
 	public void setOutput(String output) {
-		this.output = output;
+		_output = output;
 	}
 
 	@Override
@@ -108,7 +108,7 @@ public class ListOfApps {
 	 * toString for List Of apps
 	 */
 	public String toString() {
-		String localOutput = output;
+		String localOutput = _output;
 		localOutput = localOutput.replace("{0}", String.valueOf(getId()));
 		localOutput = localOutput.replace("{1}", String.valueOf(getAppId()));
 		localOutput = localOutput.replace("{2}", String.valueOf(getProfileId()));

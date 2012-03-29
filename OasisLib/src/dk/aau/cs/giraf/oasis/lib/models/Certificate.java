@@ -3,7 +3,7 @@ package dk.aau.cs.giraf.oasis.lib.models;
 public class Certificate {
 	private long id;
 	private String authkey;
-	private String output = "{0}, {1}";
+	private static String _output = "{0}, {1}";
 
 	/**
 	 * Constructor with arguments
@@ -50,8 +50,8 @@ public class Certificate {
 
 	 * @param output the output to set
 	 */
-	public void setOutput(String output) {
-		this.output = output;
+	public static void setOutput(String output) {
+		_output = output;
 	}
 
 	/**
@@ -62,7 +62,7 @@ public class Certificate {
 	 * toString for Certificate
 	 */
 	public String toString() {
-		String localOutput = output;
+		String localOutput = _output;
 		localOutput = localOutput.replace("{0}", String.valueOf(getId()));
 		localOutput = localOutput.replace("{1}", getAuthkey());
 
