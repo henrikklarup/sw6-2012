@@ -3,7 +3,7 @@ package dk.aau.cs.giraf.oasis.lib.models;
 public class Tag {
 	private long id;
 	private String caption;
-	private String output = "{0}, {1}";
+	private static String _output = "{0}, {1}";
 	
 	/**
 	 * Constructor with parameters
@@ -51,11 +51,11 @@ public class Tag {
 	 * @param output String to set
 	 */
 	public void setOutput(String output) {
-		this.output = output;
+		_output = output;
 	}
 	
 	public String toString() {
-		String localOutput = output;
+		String localOutput = _output;
 		localOutput = localOutput.replace("{0}", String.valueOf(getId()));
 		localOutput = localOutput.replace("{1}", getCaption());
 

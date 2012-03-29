@@ -5,7 +5,7 @@ public class App {
 	private long id; 
 	private String name;
 	private String versionNumber;
-	private String output = "{0}, {1}, {2}";
+	private static String _output = "{0}, {1}, {2}";
 
 	/**
 	 * Constructor with arguments
@@ -72,8 +72,8 @@ public class App {
 	 *  {2} = Version
 	 * @param output the output to set
 	 */
-	public void setOutput(String _output) {
-		this.output = _output;
+	public static void setOutput(String output) {
+		_output = output;
 	}
 
 	/**
@@ -82,7 +82,7 @@ public class App {
 	@Override
 	public String toString() {
 
-		String localOutput = output;
+		String localOutput = _output;
 		localOutput = localOutput.replace("{0}", String.valueOf(getId()));
 		localOutput = localOutput.replace("{1}", getName());
 		localOutput = localOutput.replace("{2}", getVersionNumber());

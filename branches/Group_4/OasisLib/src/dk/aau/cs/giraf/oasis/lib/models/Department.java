@@ -6,7 +6,7 @@ public class Department {
 	private String name;
 	private String address;
 	private long phone;
-	private String output = "{0}, {1}, {2}, {3}";
+	private static String _output = "{0}, {1}, {2}, {3}";
 
 	/**
 	 * Constructor with arguments
@@ -83,7 +83,7 @@ public class Department {
 	 * @param output the output to set
 	 */
 	public void setOutput(String output) {
-		this.output = output;
+		_output = output;
 	}
 
 	/**
@@ -94,7 +94,7 @@ public class Department {
 	 * toString for Department
 	 */
 	public String toString() {
-		String localOutput = output;
+		String localOutput = _output;
 		localOutput = localOutput.replace("{0}", String.valueOf(getId()));
 		localOutput = localOutput.replace("{1}", getName());
 		localOutput = localOutput.replace("{2}", getAddress());

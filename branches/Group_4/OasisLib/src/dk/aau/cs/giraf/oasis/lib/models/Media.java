@@ -9,7 +9,7 @@ public class Media {
 	private String type;
 	private String tags;
 	private long ownerId;
-	private String output = "{0}, {1}, {2}, {3}, {4}, {5}, {6}";
+	private static String _output = "{0}, {1}, {2}, {3}, {4}, {5}, {6}";
 
 	/**
 	 * Constructor with arguments
@@ -133,7 +133,7 @@ public class Media {
 	 * @param output
 	 */
 	public void setOutput(String output) {
-		this.output = output;
+		_output = output;
 	}
 
 	@Override
@@ -141,7 +141,7 @@ public class Media {
 	 * toString for Media
 	 */
 	public String toString() {
-		String localOutput = output;
+		String localOutput = _output;
 		localOutput = localOutput.replace("{0}", String.valueOf(getId()));
 		localOutput = localOutput.replace("{1}", getPath());
 		localOutput = localOutput.replace("{2}", getName());
