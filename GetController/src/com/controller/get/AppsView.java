@@ -28,31 +28,36 @@ public class AppsView extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tableview);
 		helper = new Helper(this);
-		
+
 		app = new App();
 		app.setName("GetControllerInsert");
 		app.setVersionNumber("versionNumber");
 		helper.appsHelper.insertApp(app);
 		helper.appsHelper.insertApp(app);
 		helper.appsHelper.insertApp(app);
-		
+
 		values = helper.appsHelper.getApps();
 
 		adapter = new ArrayAdapter<App>(this, android.R.layout.simple_list_item_1, values);
 		setListAdapter(adapter);
-			
+
 	}
 
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
-		long _id = getListAdapter().getItemId(position);
-		App app1 = helper.appsHelper.getAppById(_id);
-		Toast.makeText(this, app1.toString(), Toast.LENGTH_SHORT).show();
-//		app.setId(_id);
-//		app.setName("AppModified");
-//		app.setVersionNumber("ModifiedVersion");
-//		helper.appsHelper.modifyApp(app);
-//		adapter.notifyDataSetChanged();
+
+		App _app = new App();
+		App fedte = new App();
+		_app = (App) getListAdapter().getItem(position);
+		long _id = _app.getId();
+
+		fedte = helper.appsHelper.getAppById(_id);
+
+		if (fedte != null) {
+			Toast.makeText(this, fedte.toString(), Toast.LENGTH_SHORT).show();
+		} else {
+			//   Toast.makeText(this, String.valueOf(_id), Toast.LENGTH_SHORT).show();
+		}
 	}
 }

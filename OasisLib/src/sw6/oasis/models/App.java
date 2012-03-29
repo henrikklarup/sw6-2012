@@ -67,13 +67,13 @@ public class App {
 	}
 
 	/**Set output
-	 *      {0} = Id
+	 *  {0} = Id
 	 *  {1} = Name
 	 *  {2} = Version
 	 * @param output the output to set
 	 */
-	public void setOutput(String output) {
-		this.output = output;
+	public void setOutput(String _output) {
+		this.output = _output;
 	}
 
 	/**

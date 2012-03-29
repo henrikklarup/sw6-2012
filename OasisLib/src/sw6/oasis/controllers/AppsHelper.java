@@ -61,8 +61,12 @@ public class AppsHelper {
 				AppsMetaData.Table.COLUMN_NAME,
 				AppsMetaData.Table.COLUMN_VERSIONNUMBER};
 		Cursor c = _context.getContentResolver().query(uri, columns, null, null, null);
-
-		return cursorToApp(c);
+		
+		if(c.moveToFirst()) {
+			return cursorToApp(c);
+		}
+		
+		return null;
 	}
 	
 	
@@ -78,7 +82,7 @@ public class AppsHelper {
 				AppsMetaData.Table.COLUMN_VERSIONNUMBER};
 		Cursor c = _context.getContentResolver().query(Uri.withAppendedPath(AppsMetaData.CONTENT_URI, _name) , columns, null, null, null);
 		
-		cursorToAppList(c);
+		apps = cursorToAppList(c);
 		c.close();
 		
 		return apps; 
@@ -95,7 +99,7 @@ public class AppsHelper {
 				AppsMetaData.Table.COLUMN_VERSIONNUMBER};
 		Cursor c = _context.getContentResolver().query(AppsMetaData.CONTENT_URI, columns, null, null, null);
 
-		cursorToAppList(c);
+		apps = cursorToAppList(c);
 		c.close();
 
 		return apps;
