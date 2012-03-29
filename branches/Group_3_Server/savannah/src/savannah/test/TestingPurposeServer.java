@@ -3,6 +3,7 @@ package savannah.test;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.io.StringReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -29,22 +30,24 @@ public class TestingPurposeServer implements Runnable
 			out = new PrintWriter(client.getOutputStream(),true);
 			
 			boolean done = false;
-			while(!done)
-			{
-				
-				while(in.ready())
-				{
+			boolean skippedProlog = false;
+			while(!done) {
+				while(in.ready()) {
+					if(!skippedProlog) {
+							in.readLine();
+							skippedProlog = true;
+						}
 					msg = msg + in.readLine();
 					//out.println(msg);
-					if(!(in.ready()))
-					{
+					if(!(in.ready())) {
 						done = true;
 					}
 				}	
 			}	
 			System.out.println(msg);
+			
 			SAXBuilder sax = new SAXBuilder();
-			Document d = sax.build(msg);
+			Document d = sax.build(new StringReader(msg));
 			System.out.println("2");
 			System.out.println(d.toString());
 			

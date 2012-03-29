@@ -3,8 +3,12 @@ package savannah.io.DOMinator;
 // JDOM imports
 import org.jdom.*;
 import org.jdom.input.SAXBuilder;
+import org.jdom.output.XMLOutputter;
 
 // Input/Output imports
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.Socket;
@@ -14,17 +18,19 @@ public class DOMinator {
 	
 	private SAXBuilder sax;
 	private BufferedReader reader;
-	private String xml;
 	
-	public DOMinator(Socket s) throws Exception
+	public DOMinator()
 	{
-		reader = new BufferedReader(new InputStreamReader(s.getInputStream()));
 		sax = new SAXBuilder();	
 	}
 	
-	public Document Dominate(Socket s) throws Exception
+	public Document Dominate(File f) throws IOException, JDOMException
 	{
-		xml = reader.readLine();
-		return sax.build(new StringReader(xml));
+		return sax.build(f);
+	}
+	
+	public Document Dominate(InputStream in) throws IOException, JDOMException
+	{
+		return sax.build(in);
 	}
 }
