@@ -62,3 +62,5 @@ kims mail: kath09@student.aau.dk
 Folk bedes skrive datoerne rigtigt på wiki'en
 
 Boolean i settings - skal tabletens rotation låses eller ej.
+
+Package nave: dk.aau.cs.giraf.x <- hvor x er jeres individuelle app's navn
