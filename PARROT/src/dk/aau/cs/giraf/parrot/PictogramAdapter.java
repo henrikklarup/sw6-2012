@@ -1,6 +1,5 @@
 package dk.aau.cs.giraf.parrot;
 
-import java.util.List;
 
 import android.content.Context;
 import android.view.View;
@@ -16,18 +15,18 @@ import android.widget.ImageView;
  */
 public class PictogramAdapter extends BaseAdapter {
 
-	private List<Pictogram> pics;
+	private Category cat;
 	private Context context;
 	
-	public PictogramAdapter(List<Pictogram> pictograms, Context c)
+	public PictogramAdapter(Category cat, Context c)
 	{
-		pics=pictograms;
+		this.cat=cat;
 		context = c;
 	}
 	
 	public int getCount() {
 		//return the number of pictograms
-		return pics.size();
+		return cat.getPictograms().size();
 	}
 
 	public Object getItem(int arg0) {
@@ -43,7 +42,7 @@ public class PictogramAdapter extends BaseAdapter {
 	//create an image view for each pictogram in the list.
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ImageView imageView;
-		Pictogram pct=pics.get(position);
+		Pictogram pct=cat.getPictograms().get(position);
 		if (convertView == null) {  // if it's not recycled, initialize some attributes
 			imageView = pct.getImage();
             imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
