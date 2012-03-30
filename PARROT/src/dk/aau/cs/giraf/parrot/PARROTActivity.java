@@ -1,6 +1,8 @@
 package dk.aau.cs.giraf.parrot;
 
 
+import java.util.List;
+
 import parrot.Package.R;
 import android.app.Activity;
 import android.os.Bundle;
@@ -17,6 +19,9 @@ public class PARROTActivity extends Activity {
         //Implementing gridview
         setContentView(R.layout.pictogramgrid);
         GridView grid = (GridView)findViewById(R.id.gridview);
-        grid.setAdapter(null);
+        
+        List<Pictogram> pictograms = null;//TODO replace this dummy variable with a database input
+        
+        grid.setAdapter(new PictogramAdapter(pictograms, this));
     }
 }
