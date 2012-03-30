@@ -1,7 +1,7 @@
 package sw6.autism.timer.Wombat;
 
 import sw6.oasis.controllers.Helper;
-import sw6.oasis.viewmodels.Profile;
+import sw6.oasis.models.Profile;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
