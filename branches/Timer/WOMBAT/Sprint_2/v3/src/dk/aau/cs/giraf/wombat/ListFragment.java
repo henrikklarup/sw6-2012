@@ -3,14 +3,13 @@ package dk.aau.cs.giraf.wombat;
 import java.util.ArrayList;
 import java.util.List;
 
+import sw6.oasis.controllers.Helper;
+import sw6.oasis.models.Profile;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import dk.aau.cs.giraf.oasis.lib.Helper;
-import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
 public class ListFragment extends android.app.ListFragment {
 	Helper helper;
@@ -19,28 +18,14 @@ public class ListFragment extends android.app.ListFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Log.e("tt", "ttt");
 		helper = new Helper(getActivity().getApplicationContext());
-		
-//		for(int i = 0; i < 12; i++){
-//			Profile profile = new Profile();
-//			profile.setDepartmentId(1110);
-//			profile.setFirstname("Bjørn");
-//			profile.setPhone(12345678);
-//			profile.setPicture("NONE");
-//			profile.setRole(2);
-//			profile.setSurname("#" + i);
-//			
-//			helper.profilesHelper.insertProfile(profile);
-//		}
 	}
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		ArrayList<String> values = new ArrayList<String>();
-		values.add(getText(R.string.predefined).toString());
-		values.add(getText(R.string.last_used).toString());
+		values.add("Predefineret");
 
 		profileList = helper.profilesHelper.getProfiles();
 
@@ -59,15 +44,12 @@ public class ListFragment extends android.app.ListFragment {
 		long profileId;
 
 		if (position == 0) {
-			// "Predefineret" has been selected.
+			// "Predefineret" or "Sidste Brugt" has been selected.
 			profileId = -2; // "Predefineret"
-		} else if (position == 1){
-			// "Predefineret" has been selected.
-			profileId = -1;
 		} else {
 			// Get id from database according to position (-1 because the first
 			// item is "Predefineret")
-			Profile profile = profileList.get(position-1);
+			Profile profile = profileList.get(position);
 			profileId = profile.getId();
 		}
 
