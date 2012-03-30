@@ -2,6 +2,7 @@
 <resources>
 
     <string name="hello">Hello World, MainActivity!</string>
-    <string name="app_name">LauncherAlpha</string>
+    <string name="app_name">Launcher</string>
+    <string name="icon">icon</string>
 
 </resources>

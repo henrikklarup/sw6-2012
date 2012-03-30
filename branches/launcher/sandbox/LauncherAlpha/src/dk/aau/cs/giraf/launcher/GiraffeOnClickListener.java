@@ -1,4 +1,4 @@
-package giraffe.launcher;
+package dk.aau.cs.giraf.launcher;
 
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;

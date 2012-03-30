@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package giraffe.launcher;
+package dk.aau.cs.giraf.launcher;
 
 import android.content.ComponentName;
 import android.content.Intent;
