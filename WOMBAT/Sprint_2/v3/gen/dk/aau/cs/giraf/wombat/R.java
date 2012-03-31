@@ -16,14 +16,13 @@ public final class R {
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
-        public static final int layout_bg=0x7f020001;
-        public static final int thumbnail_digital=0x7f020002;
-        public static final int thumbnail_hourglass=0x7f020003;
-        public static final int thumbnail_progressbar=0x7f020004;
-        public static final int thumbnail_timetimer=0x7f020005;
-        public static final int wheel_bg=0x7f020006;
-        public static final int wheel_val=0x7f020007;
-        public static final int wombat_icon=0x7f020008;
+        public static final int thumbnail_digital=0x7f020001;
+        public static final int thumbnail_hourglass=0x7f020002;
+        public static final int thumbnail_progressbar=0x7f020003;
+        public static final int thumbnail_timetimer=0x7f020004;
+        public static final int wheel_bg=0x7f020005;
+        public static final int wheel_val=0x7f020006;
+        public static final int wombat_icon=0x7f020007;
     }
     public static final class id {
         public static final int customizeFragment=0x7f060009;
