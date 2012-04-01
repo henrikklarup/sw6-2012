@@ -87,10 +87,10 @@
 
         <TextView
             android:id="@+id/showTime"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:paddingLeft="20dp" />
+            android:gravity="right|center_vertical"
+            android:paddingRight="20dp" />
     </FrameLayout>
 
     <LinearLayout
