@@ -4,17 +4,22 @@ import kankan.wheel.widget.OnWheelChangedListener;
 import kankan.wheel.widget.WheelView;
 import kankan.wheel.widget.adapters.NumericWheelAdapter;
 import sw6.oasis.controllers.Helper;
+import yuku.ambilwarna.AmbilWarnaDialog;
+import yuku.ambilwarna.AmbilWarnaDialog.OnAmbilWarnaListener;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class CustomizeFragment extends Fragment {
 	Helper helper;
+	int chosenColor = 0xffffffff;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -33,7 +38,8 @@ public class CustomizeFragment extends Fragment {
 		Context c = getActivity().getApplicationContext(); // Load Context
 
 		/* Create minute Wheel */
-		final WheelView mins = (WheelView) getActivity().findViewById(R.id.minPicker);
+		final WheelView mins = (WheelView) getActivity().findViewById(
+				R.id.minPicker);
 		mins.setViewAdapter(new NumericWheelAdapter(c, 0, 60));
 		mins.setCurrentItem(30);
 		mins.setCyclic(true);
@@ -51,19 +57,39 @@ public class CustomizeFragment extends Fragment {
 		timeDescription.setText(getTimeDescription(mins.getCurrentItem(),
 				secs.getCurrentItem()));
 
-		
+		/* Add on change listeners for both wheels */
 		mins.addChangingListener(new OnWheelChangedListener() {
 			public void onChanged(WheelView wheel, int oldValue, int newValue) {
-				timeDescription.setText(getTimeDescription(mins.getCurrentItem(),
-						secs.getCurrentItem()));
+				timeDescription.setText(getTimeDescription(
+						mins.getCurrentItem(), secs.getCurrentItem()));
 			}
 		});
-		
+
 		secs.addChangingListener(new OnWheelChangedListener() {
 			public void onChanged(WheelView wheel, int oldValue, int newValue) {
-				timeDescription.setText(getTimeDescription(mins.getCurrentItem(),
-						secs.getCurrentItem()));
+				timeDescription.setText(getTimeDescription(
+						mins.getCurrentItem(), secs.getCurrentItem()));
 			}
+		});
+
+		final Button colorButton = (Button) getActivity().findViewById(
+				R.id.colorPickerButton);
+		colorButton.setOnClickListener(new OnClickListener() {
+
+			public void onClick(View arg0) {
+				AmbilWarnaDialog dialog = new AmbilWarnaDialog(getActivity(), chosenColor,
+						new OnAmbilWarnaListener() {
+							public void onCancel(AmbilWarnaDialog dialog) {
+							}
+
+							public void onOk(AmbilWarnaDialog dialog, int color) {
+								chosenColor = color;
+								colorButton.setBackgroundColor(chosenColor);
+							}
+						});
+				dialog.show();
+			}
+
 		});
 	}
 
