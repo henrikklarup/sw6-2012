@@ -27,13 +27,16 @@ public final class R {
         public static final int ambilwarna_hue=0x7f020003;
         public static final int ambilwarna_target=0x7f020004;
         public static final int ic_launcher=0x7f020005;
-        public static final int thumbnail_digital=0x7f020006;
-        public static final int thumbnail_hourglass=0x7f020007;
-        public static final int thumbnail_progressbar=0x7f020008;
-        public static final int thumbnail_timetimer=0x7f020009;
-        public static final int wheel_bg=0x7f02000a;
-        public static final int wheel_val=0x7f02000b;
-        public static final int wombat_icon=0x7f02000c;
+        public static final int thumbnail_attachment=0x7f020006;
+        public static final int thumbnail_digital=0x7f020007;
+        public static final int thumbnail_hourglass=0x7f020008;
+        public static final int thumbnail_progressbar=0x7f020009;
+        public static final int thumbnail_save=0x7f02000a;
+        public static final int thumbnail_start=0x7f02000b;
+        public static final int thumbnail_timetimer=0x7f02000c;
+        public static final int wheel_bg=0x7f02000d;
+        public static final int wheel_val=0x7f02000e;
+        public static final int wombat_icon=0x7f02000f;
     }
     public static final class id {
         public static final int ambilwarna_cursor=0x7f070003;
@@ -44,21 +47,29 @@ public final class R {
         public static final int ambilwarna_viewSatBri=0x7f070001;
         public static final int ambilwarna_warnaBaru=0x7f070007;
         public static final int ambilwarna_warnaLama=0x7f070006;
-        public static final int colorPickerButton=0x7f07000f;
-        public static final int customizeFragment=0x7f070016;
-        public static final int customizeHeader=0x7f070015;
-        public static final int detailFragment=0x7f070014;
-        public static final int detailsText=0x7f070010;
-        public static final int greenButton=0x7f07000c;
-        public static final int listFragment=0x7f070012;
-        public static final int minPicker=0x7f070008;
-        public static final int profileListHeader=0x7f070011;
-        public static final int redButton=0x7f07000d;
-        public static final int secPicker=0x7f070009;
-        public static final int settingsListHeader=0x7f070013;
-        public static final int showTime=0x7f07000a;
-        public static final int whiteButton=0x7f07000b;
-        public static final int yellowButton=0x7f07000e;
+        public static final int blueButton=0x7f07000f;
+        public static final int colorPickerButton=0x7f070013;
+        public static final int customizeFragment=0x7f07001e;
+        public static final int customizeHeader=0x7f07001d;
+        public static final int customize_attachment=0x7f070014;
+        public static final int customize_attachment_text=0x7f070015;
+        public static final int customize_save=0x7f070017;
+        public static final int customize_start=0x7f070016;
+        public static final int detailFragment=0x7f07001c;
+        public static final int detailsText=0x7f070018;
+        public static final int digitalButton=0x7f07000b;
+        public static final int greenButton=0x7f070010;
+        public static final int houglassButton=0x7f070008;
+        public static final int listFragment=0x7f07001a;
+        public static final int minPicker=0x7f07000c;
+        public static final int profileListHeader=0x7f070019;
+        public static final int progressbarButton=0x7f07000a;
+        public static final int redButton=0x7f070011;
+        public static final int secPicker=0x7f07000d;
+        public static final int settingsListHeader=0x7f07001b;
+        public static final int showTime=0x7f07000e;
+        public static final int timetimerButton=0x7f070009;
+        public static final int yellowButton=0x7f070012;
     }
     public static final class layout {
         public static final int ambilwarna_dialog=0x7f030000;
@@ -71,6 +82,9 @@ public final class R {
         /**  GENERAL 
          */
         public static final int app_name=0x7f060000;
+        public static final int attached=0x7f060015;
+        public static final int attachment_button_description=0x7f060013;
+        public static final int choose_profile=0x7f060016;
         public static final int color_picker_button=0x7f060012;
         public static final int customize_digital_description=0x7f060011;
         public static final int customize_header=0x7f06000c;
@@ -86,11 +100,14 @@ public final class R {
         /**  PROFILE LIST 
          */
         public static final int profile_list_header=0x7f060007;
+        public static final int save_button=0x7f060018;
         public static final int second=0x7f060004;
         public static final int seconds=0x7f060005;
+        public static final int select_attachment_dialog=0x7f060014;
         /**  CUSTOMIZE 
          */
         public static final int start_activity_default=0x7f06000b;
+        public static final int start_button=0x7f060017;
         /**  TEMPLATE LIST 
          */
         public static final int template_list_header=0x7f06000a;

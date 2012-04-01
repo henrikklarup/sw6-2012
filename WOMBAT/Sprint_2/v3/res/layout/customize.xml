@@ -13,6 +13,7 @@
         android:orientation="horizontal" >
 
         <Button
+            android:id="@+id/houglassButton"
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:layout_gravity="center"
@@ -22,6 +23,7 @@
             android:textSize="14dp" />
 
         <Button
+            android:id="@+id/timetimerButton"
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:layout_gravity="center"
@@ -31,6 +33,7 @@
             android:textSize="14dp" />
 
         <Button
+            android:id="@+id/progressbarButton"
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:layout_gravity="center"
@@ -40,6 +43,7 @@
             android:textSize="14dp" />
 
         <Button
+            android:id="@+id/digitalButton"
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:layout_gravity="center"
@@ -99,30 +103,30 @@
         <!-- COLOR PICKER -->
 
         <Button
-            android:id="@+id/whiteButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/blueButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_margin="10dp" />
 
         <Button
             android:id="@+id/greenButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_margin="10dp" />
 
         <Button
             android:id="@+id/redButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_margin="10dp" />
 
         <Button
             android:id="@+id/yellowButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_margin="10dp" />
 
@@ -136,22 +140,59 @@
             android:textSize="14dp" />
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:gravity="center"
         android:orientation="horizontal" >
 
         <!-- ATTACHMENT -->
-    </LinearLayout>
+        <Button 
+            android:id="@+id/customize_attachment"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_gravity="center"
+            android:drawableTop="@drawable/thumbnail_attachment"
+            android:paddingTop="20dp"
+            android:text="@string/attachment_button_description"
+            android:textSize="14dp"/>
+        
+        <TextView 
+            android:id="@+id/customize_attachment_text"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:gravity="center"
+            android:textSize="18dp"/>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:gravity="center"
         android:orientation="horizontal" >
 
         <!-- SAVE/START -->
+        <Button 
+            android:id="@+id/customize_start"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_gravity="center"
+            android:drawableTop="@drawable/thumbnail_start"
+            android:paddingTop="20dp"
+            android:text="@string/start_button"
+            android:textSize="14dp"/>
+        
+        <Button 
+            android:id="@+id/customize_save"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_gravity="center"
+            android:drawableTop="@drawable/thumbnail_save"
+            android:paddingTop="20dp"
+            android:text="@string/save_button"
+            android:textSize="14dp"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -26,6 +26,13 @@
     <string name="customize_progressbar_description">Bar</string>
     <string name="customize_digital_description">Digital Ur</string>
     <string name="color_picker_button">Vælg Farve</string>
+    <string name="attachment_button_description">Vedhæft</string>
+    
+    <string name="select_attachment_dialog">Vælg Vedhæft</string>
+    <string name="attached">Vedhæftet</string>
+    <string name="choose_profile">Vælg en Profil</string>
+    <string name="start_button">Start</string>
+    <string name="save_button">Gem</string>
     
 
 </resources>
