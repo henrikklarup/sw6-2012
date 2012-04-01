@@ -37,7 +37,7 @@ public class CustomizeFragment extends Fragment {
 		super.onActivityCreated(savedInstanceState);
 
 		/********* TIME CHOSER *********/
-		initTimeChoser();
+		initStyleChoser();
 		
 		/********* TIMEPICKER *********/
 		initTimePicker();
@@ -53,7 +53,7 @@ public class CustomizeFragment extends Fragment {
 		initStartButton();
 	}
 
-	private void initTimeChoser() {
+	private void initStyleChoser() {
 		final Button hourglassButton = (Button)getActivity().findViewById(R.id.houglassButton);
 		hourglassButton.setOnClickListener(new OnClickListener() {
 			
@@ -262,6 +262,7 @@ public class CustomizeFragment extends Fragment {
 		colorBlueButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				chosenColor = 0xFF1924B1;
+				updatePaletButton(chosenColor);
 			}
 		});
 
@@ -271,6 +272,7 @@ public class CustomizeFragment extends Fragment {
 		colorGreenButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				chosenColor = 0xFF0ACF00;
+				updatePaletButton(chosenColor);
 			}
 		});
 
@@ -280,6 +282,7 @@ public class CustomizeFragment extends Fragment {
 		colorRedButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				chosenColor = 0xFFFF0000;
+				updatePaletButton(chosenColor);
 			}
 		});
 
@@ -289,12 +292,13 @@ public class CustomizeFragment extends Fragment {
 		colorYellowButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				chosenColor = 0xFFFFDB00;
+				updatePaletButton(chosenColor);
 			}
 		});
 
-		final Button colorPalettButton = (Button) getActivity().findViewById(
+		final Button colorPaletButton = (Button) getActivity().findViewById(
 				R.id.colorPickerButton);
-		colorPalettButton.setOnClickListener(new OnClickListener() {
+		colorPaletButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
 				AmbilWarnaDialog dialog = new AmbilWarnaDialog(getActivity(),
@@ -304,7 +308,7 @@ public class CustomizeFragment extends Fragment {
 
 							public void onOk(AmbilWarnaDialog dialog, int color) {
 								chosenColor = color;
-								colorPalettButton
+								colorPaletButton
 										.setBackgroundColor(chosenColor);
 							}
 						});
@@ -312,6 +316,12 @@ public class CustomizeFragment extends Fragment {
 			}
 
 		});
+	}
+
+	protected void updatePaletButton(int color) {
+		final Button colorPaletButton = (Button)getActivity().findViewById(R.id.colorPickerButton);
+		colorPaletButton
+				.setBackgroundColor(chosenColor);
 	}
 
 	/**
