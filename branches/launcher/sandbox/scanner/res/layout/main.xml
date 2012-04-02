@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@drawable/gbackground" >
+
+    
+    <RelativeLayout
+    android:layout_width="480dip" 
+    android:layout_height="640dip" 
+    android:layout_gravity="center_horizontal"
+    android:padding="10dp"
+    android:background="@drawable/cameraborder">
+	    <include layout="@layout/capture"/>
+	    
+	    <ImageView
+    	    android:id="@+id/scanicon"
+    	    android:layout_width="250dp"
+    	    android:layout_height="250dp"
+    	    android:layout_centerHorizontal="true"
+    	    android:layout_centerVertical="true"
+    	    android:alpha="0.5"
+    	    android:src="@drawable/scanicon" />
+	    
+	</RelativeLayout>
+
+
+</LinearLayout>
