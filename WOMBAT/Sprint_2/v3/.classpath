@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
-	<classpathentry kind="lib" path="C:/Users/Bærbar/Desktop/SW6/trunk/Group_admin/OasisLib v0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Rasmus/Documents/Uni/Projekter/SW6/svn/branches/Timer/WOMBAT/Sprint_2/v3/libs/OasisLib v0.1.jar"/>
+	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
