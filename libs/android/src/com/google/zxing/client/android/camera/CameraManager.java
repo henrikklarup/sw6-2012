@@ -186,14 +186,14 @@ public final class CameraManager {
       if (camera == null) {
         return null;
       }
-      Point screenResolution = configManager.getScreenResolution();
+      Point screenResolution = configManager.getCameraResolution();
       int width = configManager.getScreenResolution().x;
 //      if (width < MIN_FRAME_WIDTH) {
 //        width = MIN_FRAME_WIDTH;
 //      } else if (width > MAX_FRAME_WIDTH) {
 //        width = MAX_FRAME_WIDTH;
 //      }
-      int height = configManager.getScreenResolution().y;
+      int height = configManager.getCameraResolution().y;
 //      if (height < MIN_FRAME_HEIGHT) {
 //        height = MIN_FRAME_HEIGHT;
 //      } else if (height > MAX_FRAME_HEIGHT) {
