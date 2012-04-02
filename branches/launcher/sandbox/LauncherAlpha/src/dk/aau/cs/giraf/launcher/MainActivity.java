@@ -11,14 +11,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.GridView;
 
 public class MainActivity extends Activity {
 
 	private static Context context;
-	ArrayList<dk.aau.cs.giraf.launcher.ApplicationInfo> applications;
+	private static ArrayList<dk.aau.cs.giraf.launcher.ApplicationInfo> mApplications;
 	GridView Grid;
 
 	/** Called when the activity is first created. */
@@ -26,22 +24,30 @@ public class MainActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-
+		
+		loadApplications(true);
+		
+	}
+	private void loadApplications(boolean isLaunching) {
+		if (isLaunching && mApplications != null) {
+			return;
+		}
+		
 		Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
 		mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+		
 		MainActivity.context = getApplicationContext();
 		final List<ResolveInfo> pkgAppsList = context.getPackageManager().queryIntentActivities( mainIntent, 0);
 
 		if(pkgAppsList != null){
 			ArrayList<ApplicationInfo> applications = new ArrayList<ApplicationInfo>();
 			for(ResolveInfo info : pkgAppsList){
-				//giraf app? (dk.aau.cs.giraf)
-				if(info.toString().toLowerCase().contains("giraf") && !info.toString().toLowerCase().contains("launcher")){
+				//Package (dk.aau.cs.giraf)
+				if(!info.toString().toLowerCase().contains("dk.aau.cs.giraf") && !info.toString().toLowerCase().contains("launcher")){
 					ApplicationInfo appInfo = new ApplicationInfo();
 					appInfo.title = info.loadLabel(getPackageManager());
 					appInfo.icon = info.activityInfo.loadIcon(getPackageManager());
 
-					//this should be checked, so that the intents is right etc.
 					appInfo.setActivity(new ComponentName(
 							info.activityInfo.applicationInfo.packageName,
 							info.activityInfo.name),
@@ -50,7 +56,7 @@ public class MainActivity extends Activity {
 					applications.add(appInfo);
 				}
 			}
-			
+
 			Grid = (GridView)findViewById(R.id.GridView01);
 			Grid.setAdapter(new IconAdapter(this,applications));
 		}
