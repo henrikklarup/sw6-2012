@@ -37,10 +37,9 @@ public class AppsView extends ListActivity {
 		helper.appsHelper.insertApp(app);
 		helper.appsHelper.insertApp(app);
 
-		values = helper.appsHelper.getApps();
+//		values = helper.appsHelper.getApps();
 
-		adapter = new ArrayAdapter<App>(this, android.R.layout.simple_list_item_1, values);
-		setListAdapter(adapter);
+		updateList();
 
 		bAdd = (Button) findViewById(R.id.add);
 		bAdd.setOnClickListener(new OnClickListener() {
@@ -49,7 +48,7 @@ public class AppsView extends ListActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				helper.appsHelper.insertApp(app);
-				adapter.notifyDataSetChanged();
+				updateList();
 			}
 		});
 		
@@ -60,7 +59,7 @@ public class AppsView extends ListActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				helper.appsHelper.clearAppsTable();
-				adapter.notifyDataSetChanged();
+				updateList();
 			}
 		});
 		
@@ -70,22 +69,25 @@ public class AppsView extends ListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 
-		helper.appsHelper.clearAppsTable();
-		adapter.notifyDataSetChanged();
+		App _app = new App();
+		App fedte = new App();
+		_app = (App) getListAdapter().getItem(position);
+		long _id = _app.getId();
+
+		fedte = helper.appsHelper.getAppById(_id);
+
+		if (fedte != null) {
+			Toast.makeText(this, fedte.toString(), Toast.LENGTH_SHORT).show();
+		} else {
+			//   Toast.makeText(this, String.valueOf(_id), Toast.LENGTH_SHORT).show();
+		}
 		
-		
-		
-//		App _app = new App();
-//		App fedte = new App();
-//		_app = (App) getListAdapter().getItem(position);
-//		long _id = _app.getId();
-//
-//		fedte = helper.appsHelper.getAppById(_id);
-//
-//		if (fedte != null) {
-//			Toast.makeText(this, fedte.toString(), Toast.LENGTH_SHORT).show();
-//		} else {
-//			//   Toast.makeText(this, String.valueOf(_id), Toast.LENGTH_SHORT).show();
-//		}
+		updateList();
+	}
+	
+	public void updateList() {
+		values = helper.appsHelper.getApps();
+		adapter = new ArrayAdapter<App>(this, android.R.layout.simple_list_item_1, values);
+		setListAdapter(adapter);
 	}
 }
