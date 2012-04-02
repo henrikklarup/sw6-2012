@@ -13,6 +13,8 @@
     <string name="profile_list_header">Profiler</string>
     <string name="predefined">Predefineret</string>
     <string name="last_used">Sidst Brugt</string>
+    <string name="profile_pic_description">Profil Billede</string>
+    <string name="profile_list_time">Tid</string>
     
     <!-- TEMPLATE LIST -->
     <string name="template_list_header">Gemte Tilpasninger</string>
