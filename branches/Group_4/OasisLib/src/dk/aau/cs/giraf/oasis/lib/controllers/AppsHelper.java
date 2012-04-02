@@ -152,7 +152,7 @@ public class AppsHelper {
 	private ContentValues getContentValues(App app) {
 		ContentValues contentValues = new ContentValues();
 		contentValues.put(AppsMetaData.Table.COLUMN_NAME, app.getName());
-		contentValues.put(AppsMetaData.Table.COLUMN_VERSIONNUMBER, app.getVersionNumber());
+		contentValues.put(AppsMetaData.Table.COLUMN_VERSIONNUMBER, app.getVersion());
 		
 		return contentValues;
 	}

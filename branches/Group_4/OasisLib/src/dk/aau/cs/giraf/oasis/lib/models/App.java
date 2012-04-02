@@ -4,18 +4,18 @@ public class App {
 
 	private long id; 
 	private String name;
-	private String versionNumber;
+	private String version;
 	private static String _output = "{0}, {1}, {2}";
 
 	/**
 	 * Constructor with arguments
 	 * 
 	 * @param name the name to set
-	 * @param versionNumber the versionNumber to set
+	 * @param version the version to set
 	 */
-	public App(String name, String versionNumber) {
+	public App(String name, String version) {
 		this.name = name;
-		this.versionNumber = versionNumber;
+		this.version = version;
 	}
 
 	/**
@@ -53,17 +53,17 @@ public class App {
 	}
 
 	/**
-	 * @return the versionNumber
+	 * @return the version
 	 */
-	public String getVersionNumber() {
-		return versionNumber;
+	public String getVersion() {
+		return version;
 	}
 
 	/**
-	 * @param versionNumber the versionNumber to set
+	 * @param version the versionNumber to set
 	 */
-	public void setVersionNumber(String versionNumber) {
-		this.versionNumber = versionNumber;
+	public void setVersion(String version) {
+		this.version = version;
 	}
 
 	/**Set output
@@ -85,7 +85,7 @@ public class App {
 		String localOutput = _output;
 		localOutput = localOutput.replace("{0}", String.valueOf(getId()));
 		localOutput = localOutput.replace("{1}", getName());
-		localOutput = localOutput.replace("{2}", getVersionNumber());
+		localOutput = localOutput.replace("{2}", getVersion());
 
 		return localOutput;
 	}

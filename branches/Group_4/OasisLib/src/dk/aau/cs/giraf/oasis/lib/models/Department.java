@@ -6,18 +6,21 @@ public class Department {
 	private String name;
 	private String address;
 	private long phone;
-	private static String _output = "{0}, {1}, {2}, {3}";
+	private String email;
+	private static String _output = "{0}, {1}, {2}, {3}, {4}";
 
 	/**
 	 * Constructor with arguments
 	 * @param name is the name to set
 	 * @param address is the address to set
 	 * @param phone is the phone to set
+	 * @param email is the email to set
 	 */
-	public Department(String name, String address, long phone) {
+	public Department(String name, String address, long phone, String email) {
 		this.name = name;
 		this.address = address;
 		this.phone = phone;
+		this.email = email;
 	}
 
 	/**
@@ -75,20 +78,32 @@ public class Department {
 	public void setPhone(long phone) {
 		this.phone = phone;
 	}
+	
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+	/**
+	 * @param email the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
 	/**Set output
 	 *  {0} = Id
 	 *  {1} = Name
 	 *  {2} = Address
 	 *  {3} = Phone
+	 *  {4} = Email
 	 * @param output the output to set
 	 */
 	public static void setOutput(String output) {
 		_output = output;
 	}
 
-	/**
-	 * toString for certificate
-	 */
 	@Override
 	/**
 	 * toString for Department
@@ -99,6 +114,7 @@ public class Department {
 		localOutput = localOutput.replace("{1}", getName());
 		localOutput = localOutput.replace("{2}", getAddress());
 		localOutput = localOutput.replace("{3}", String.valueOf(getPhone()));
+		localOutput = localOutput.replace("{4}", getEmail());
 
 		return localOutput;
 	}

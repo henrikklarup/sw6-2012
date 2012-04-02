@@ -1,24 +1,20 @@
 package dk.aau.cs.giraf.oasis.lib.models;
 
 public class ListOfApps {
-	private long id;
-	private long appId;
-	private long profileId;
+
+	private long idApp;
+	private long idProfile;
 	private Setting<String, String, String> settings;
 	private Stat<String, String, String> stats;
-	private static String _output = "{0}, {1}, {2}, {3}, {4}";
+	private static String _output = "{0}, {1}, {2}, {3}";
 
 	/**
 	 * Constructor with arguments
 	 * 
-	 * @param appId the appId to set
-	 * @param profileId the profileId to set
 	 * @param settings the settings to set
 	 * @param stats the stats to set
 	 */
-	public ListOfApps(long appId, long profileId, Setting<String, String, String> settings, Stat<String, String, String> stats) {
-		this.appId = appId;
-		this.profileId = profileId;
+	public ListOfApps(Setting<String, String, String> settings, Stat<String, String, String> stats) {
 		this.settings = settings;
 		this.stats = stats;
 	}
@@ -28,42 +24,30 @@ public class ListOfApps {
 	 */
 	public ListOfApps() {
 	}
-
-	/**
-	 * @return the id
-	 */
-	public long getId() {
-		return id;
-	}
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(long id) {
-		this.id = id;
-	}
+	
 	/**
 	 * @return the appId
 	 */
-	public long getAppId() {
-		return appId;
+	public long getIdApp() {
+		return idApp;
 	}
 	/**
-	 * @param appId the appId to set
+	 * @param idApp the appId to set
 	 */
-	public void setAppId(long appId) {
-		this.appId = appId;
+	public void setIdApp(long idApp) {
+		this.idApp = idApp;
 	}
 	/**
 	 * @return the profileId
 	 */
-	public long getProfileId() {
-		return profileId;
+	public long getIdProfile() {
+		return idProfile;
 	}
 	/**
 	 * @param profileId the profileId to set
 	 */
-	public void setProfileId(long profileId) {
-		this.profileId = profileId;
+	public void setIdProfile(long idProfile) {
+		this.idProfile = idProfile;
 	}
 	/**
 	 * @return the settings
@@ -93,8 +77,8 @@ public class ListOfApps {
 	/**
 	 *  Set output
 	 *  {0} = ID
-	 *  {1} = AppId
-	 *  {2} = ProfileId
+	 *  {1} = IdApp
+	 *  {2} = IdProfile
 	 *  {3} = Settings
 	 *  {4} = Stats
 	 * @param output
@@ -109,11 +93,10 @@ public class ListOfApps {
 	 */
 	public String toString() {
 		String localOutput = _output;
-		localOutput = localOutput.replace("{0}", String.valueOf(getId()));
-		localOutput = localOutput.replace("{1}", String.valueOf(getAppId()));
-		localOutput = localOutput.replace("{2}", String.valueOf(getProfileId()));
-		localOutput = localOutput.replace("{3}", String.valueOf(getSettings()));
-		localOutput = localOutput.replace("{4}", String.valueOf(getStats()));
+		localOutput = localOutput.replace("{0}", String.valueOf(getIdApp()));
+		localOutput = localOutput.replace("{1}", String.valueOf(getIdProfile()));
+		localOutput = localOutput.replace("{2}", String.valueOf(getSettings()));
+		localOutput = localOutput.replace("{3}", String.valueOf(getStats()));
 
 		return localOutput;
 	}
