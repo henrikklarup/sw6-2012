@@ -73,7 +73,7 @@ public class ViewApps extends ListFragment {
 		
 		valueList = helper.appsHelper.getApps();
 
-        mAdapter = new ArrayAdapter<App>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, valueList);
+        mAdapter = new ArrayAdapter<App>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, helper.appsHelper.getApps());
 
         setListAdapter(mAdapter);
 
