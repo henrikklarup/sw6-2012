@@ -18,7 +18,7 @@ public class logoActivity extends Activity {
         final Button button = (Button) findViewById(R.id.button1);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            	Intent intent = new Intent(logoActivity.this, awesomeActivity.class);
+            	Intent intent = new Intent(logoActivity.this, AuthenticationActivity.class);
             	
             	startActivity(intent);
             }
