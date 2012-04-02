@@ -52,9 +52,9 @@ public final class R {
         public static final int customizeFragment=0x7f07001e;
         public static final int customizeHeader=0x7f07001d;
         public static final int customize_attachment=0x7f070014;
-        public static final int customize_attachment_text=0x7f070015;
-        public static final int customize_save=0x7f070017;
-        public static final int customize_start=0x7f070016;
+        public static final int customize_attachment_text=0x7f070016;
+        public static final int customize_save=0x7f070015;
+        public static final int customize_start_button=0x7f070017;
         public static final int detailFragment=0x7f07001c;
         public static final int detailsText=0x7f070018;
         public static final int digitalButton=0x7f07000b;

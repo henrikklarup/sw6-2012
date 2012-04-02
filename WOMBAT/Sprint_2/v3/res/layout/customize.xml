@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="5" >
+    android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -53,6 +52,11 @@
             android:textSize="14dp" />
     </LinearLayout>
 
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#FFFFFF" />
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -92,6 +96,11 @@
             android:gravity="right|center_vertical"
             android:paddingRight="20dp" />
     </FrameLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#FFFFFF" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -140,6 +149,11 @@
             android:textSize="14dp" />
     </LinearLayout>
 
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#FFFFFF" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -147,52 +161,66 @@
         android:gravity="center"
         android:orientation="horizontal" >
 
-        <!-- ATTACHMENT -->
-        <Button 
-            android:id="@+id/customize_attachment"
-            android:layout_width="110dp"
-            android:layout_height="110dp"
-            android:layout_gravity="center"
-            android:drawableTop="@drawable/thumbnail_attachment"
-            android:paddingTop="20dp"
-            android:text="@string/attachment_button_description"
-            android:textSize="14dp"/>
-        
-        <TextView 
-            android:id="@+id/customize_attachment_text"
-            android:layout_width="110dp"
-            android:layout_height="110dp"
-            android:gravity="center"
-            android:textSize="18dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left|center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="20dp" >
+
+            <Button
+                android:id="@+id/customize_attachment"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_gravity="center"
+                android:drawableTop="@drawable/thumbnail_attachment"
+                android:paddingTop="20dp"
+                android:text="@string/attachment_button_description"
+                android:textSize="14dp" />
+
+            <Button
+                android:id="@+id/customize_save"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_gravity="center"
+                android:drawableTop="@drawable/thumbnail_save"
+                android:paddingTop="20dp"
+                android:text="@string/save_button"
+                android:textSize="14dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left|center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="20dp" >
+
+            <TextView
+                android:id="@+id/customize_attachment_text"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:gravity="center"
+                android:textSize="18dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right|center_vertical"
+            android:orientation="horizontal"
+            android:paddingRight="20dp" >
+
+            <Button
+                android:id="@+id/customize_start_button"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_gravity="center"
+                android:drawableTop="@drawable/thumbnail_start"
+                android:paddingTop="20dp"
+                android:text="@string/start_button"
+                android:textSize="14dp" />
+        </LinearLayout>
     </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="horizontal" >
-
-        <!-- SAVE/START -->
-        <Button 
-            android:id="@+id/customize_start"
-            android:layout_width="110dp"
-            android:layout_height="110dp"
-            android:layout_gravity="center"
-            android:drawableTop="@drawable/thumbnail_start"
-            android:paddingTop="20dp"
-            android:text="@string/start_button"
-            android:textSize="14dp"/>
-        
-        <Button 
-            android:id="@+id/customize_save"
-            android:layout_width="110dp"
-            android:layout_height="110dp"
-            android:layout_gravity="center"
-            android:drawableTop="@drawable/thumbnail_save"
-            android:paddingTop="20dp"
-            android:text="@string/save_button"
-            android:textSize="14dp"/>
-    </LinearLayout>
 
 </LinearLayout>

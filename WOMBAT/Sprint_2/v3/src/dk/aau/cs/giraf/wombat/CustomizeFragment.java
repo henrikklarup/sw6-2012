@@ -96,7 +96,7 @@ public class CustomizeFragment extends Fragment {
 	 * Initialize the start button
 	 */
 	private void initStartButton() {
-		final Button startButton = (Button)getActivity().findViewById(R.id.customize_start);
+		final Button startButton = (Button)getActivity().findViewById(R.id.customize_start_button);
 		startButton.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
@@ -172,6 +172,8 @@ public class CustomizeFragment extends Fragment {
 		return inflater.inflate(R.layout.customize, container, false);
 	}
 
+	private int previousMins;
+	private int previousSecs;
 	/**
 	 * Initialize the time picker wheel
 	 */
@@ -189,7 +191,7 @@ public class CustomizeFragment extends Fragment {
 				R.id.secPicker);
 		secs.setViewAdapter(new NumericWheelAdapter(getActivity()
 				.getApplicationContext(), 0, 60));
-		secs.setCurrentItem(20);
+		secs.setCurrentItem(0);
 		secs.setCyclic(true);
 
 		/* Create description of time chosen */
@@ -203,6 +205,19 @@ public class CustomizeFragment extends Fragment {
 			public void onChanged(WheelView wheel, int oldValue, int newValue) {
 				timeDescription.setText(getTimeDescription(
 						mins.getCurrentItem(), secs.getCurrentItem()));
+				if(mins.getCurrentItem() == 60){
+					previousMins = 60;
+					previousSecs = secs.getCurrentItem();
+					secs.setCurrentItem(0);
+					secs.setViewAdapter(new NumericWheelAdapter(getActivity()
+							.getApplicationContext(), 0, 0));
+					secs.setCyclic(false);
+				} else if (previousMins == 60){
+					secs.setViewAdapter(new NumericWheelAdapter(getActivity()
+							.getApplicationContext(), 0, 60));
+					secs.setCurrentItem(previousSecs);
+					secs.setCyclic(true);
+				}
 			}
 		});
 
