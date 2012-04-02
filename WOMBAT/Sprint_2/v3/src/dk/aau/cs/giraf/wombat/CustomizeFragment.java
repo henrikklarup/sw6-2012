@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import dk.aau.cs.giraf.TimerLib.SubProfile;
 
 public class CustomizeFragment extends Fragment {
 	Helper helper;
@@ -368,7 +369,7 @@ public class CustomizeFragment extends Fragment {
 	 * @param id
 	 *            identification of the template
 	 */
-	public void setSettings(Template template) {
+	public void setSettings(SubProfile template) {
 		// TODO: Insert logic to load settings and put them into the view
 	}
 }
