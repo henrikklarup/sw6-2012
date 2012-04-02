@@ -16,11 +16,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 public class CustomizeFragment extends Fragment {
 	Helper helper;
-	int chosenColor = 0xffffffff;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class CustomizeFragment extends Fragment {
 
 		/********* TIME CHOSER *********/
 		initStyleChoser();
-		
+
 		/********* TIMEPICKER *********/
 		initTimePicker();
 
@@ -54,53 +54,58 @@ public class CustomizeFragment extends Fragment {
 	}
 
 	private void initStyleChoser() {
-		final Button hourglassButton = (Button)getActivity().findViewById(R.id.houglassButton);
+		final Button hourglassButton = (Button) getActivity().findViewById(
+				R.id.houglassButton);
 		hourglassButton.setOnClickListener(new OnClickListener() {
-			
+
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
-		
-		final Button timetimerButton = (Button)getActivity().findViewById(R.id.timetimerButton);
+
+		final Button timetimerButton = (Button) getActivity().findViewById(
+				R.id.timetimerButton);
 		timetimerButton.setOnClickListener(new OnClickListener() {
-			
+
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
-		
-		final Button progressbarButton = (Button)getActivity().findViewById(R.id.progressbarButton);
+
+		final Button progressbarButton = (Button) getActivity().findViewById(
+				R.id.progressbarButton);
 		progressbarButton.setOnClickListener(new OnClickListener() {
-			
+
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
-		
-		final Button digitalButton = (Button)getActivity().findViewById(R.id.digitalButton);
+
+		final Button digitalButton = (Button) getActivity().findViewById(
+				R.id.digitalButton);
 		digitalButton.setOnClickListener(new OnClickListener() {
-			
+
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
-		
+
 	}
 
 	/**
 	 * Initialize the start button
 	 */
 	private void initStartButton() {
-		final Button startButton = (Button)getActivity().findViewById(R.id.customize_start_button);
+		final Button startButton = (Button) getActivity().findViewById(
+				R.id.customize_start_button);
 		startButton.setOnClickListener(new OnClickListener() {
-			
+
 			public void onClick(View v) {
-				//TODO: Start "Vis" Activity				
+				// TODO: Start "Vis" Activity
 			}
 		});
 	}
@@ -109,7 +114,9 @@ public class CustomizeFragment extends Fragment {
 	 * Initialize the Save button
 	 */
 	private void initSaveButton() {
-		final CharSequence[] items = { "Foo", "Bar", "Baz" }; //TODO: Insert correct profile list
+		final CharSequence[] items = { "Foo", "Bar", "Baz" }; // TODO: Insert
+																// correct
+																// profile list
 		final Button saveButton = (Button) getActivity().findViewById(
 				R.id.customize_save);
 		saveButton.setOnClickListener(new OnClickListener() {
@@ -122,7 +129,7 @@ public class CustomizeFragment extends Fragment {
 				builder.setItems(items, new DialogInterface.OnClickListener() {
 
 					public void onClick(DialogInterface dialog, int item) {
-						//TODO: Insert profile store functionality
+						// TODO: Insert profile store functionality
 					}
 				});
 				AlertDialog alert = builder.create();
@@ -134,7 +141,10 @@ public class CustomizeFragment extends Fragment {
 	}
 
 	private void initAttachmentButton() {
-		final CharSequence[] items = { "Foo", "Bar", "Baz" }; // Generate correct attachment list
+		final CharSequence[] items = { "Foo", "Bar", "Baz" }; // Generate
+																// correct
+																// attachment
+																// list
 		final Button attachmentButton = (Button) getActivity().findViewById(
 				R.id.customize_attachment);
 		attachmentButton.setOnClickListener(new OnClickListener() {
@@ -147,7 +157,8 @@ public class CustomizeFragment extends Fragment {
 				builder.setItems(items, new DialogInterface.OnClickListener() {
 
 					public void onClick(DialogInterface dialog, int item) {
-						//TODO: Insert logic which inserts correct picture and text
+						// TODO: Insert logic which inserts correct picture and
+						// text
 						attachmentButton
 								.setCompoundDrawablesWithIntrinsicBounds(0,
 										R.drawable.thumbnail_hourglass, 0, 0);
@@ -174,6 +185,7 @@ public class CustomizeFragment extends Fragment {
 
 	private int previousMins;
 	private int previousSecs;
+
 	/**
 	 * Initialize the time picker wheel
 	 */
@@ -205,14 +217,14 @@ public class CustomizeFragment extends Fragment {
 			public void onChanged(WheelView wheel, int oldValue, int newValue) {
 				timeDescription.setText(getTimeDescription(
 						mins.getCurrentItem(), secs.getCurrentItem()));
-				if(mins.getCurrentItem() == 60){
+				if (mins.getCurrentItem() == 60) {
 					previousMins = 60;
 					previousSecs = secs.getCurrentItem();
 					secs.setCurrentItem(0);
 					secs.setViewAdapter(new NumericWheelAdapter(getActivity()
 							.getApplicationContext(), 0, 0));
 					secs.setCyclic(false);
-				} else if (previousMins == 60){
+				} else if (previousMins == 60) {
 					secs.setViewAdapter(new NumericWheelAdapter(getActivity()
 							.getApplicationContext(), 0, 60));
 					secs.setCurrentItem(previousSecs);
@@ -271,72 +283,83 @@ public class CustomizeFragment extends Fragment {
 	 * Initialize the color picker buttons, change colors here etc.
 	 */
 	private void initColorButtons() {
-		final Button colorBlueButton = (Button) getActivity().findViewById(
-				R.id.blueButton);
-		colorBlueButton.setBackgroundColor(0xFF1924B1);
-		colorBlueButton.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				chosenColor = 0xFF1924B1;
-				updatePaletButton(chosenColor);
-			}
-		});
-
-		final Button colorGreenButton = (Button) getActivity().findViewById(
-				R.id.greenButton);
-		colorGreenButton.setBackgroundColor(0xFF0ACF00);
-		colorGreenButton.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				chosenColor = 0xFF0ACF00;
-				updatePaletButton(chosenColor);
-			}
-		});
-
-		final Button colorRedButton = (Button) getActivity().findViewById(
-				R.id.redButton);
-		colorRedButton.setBackgroundColor(0xFFFF0000);
-		colorRedButton.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				chosenColor = 0xFFFF0000;
-				updatePaletButton(chosenColor);
-			}
-		});
-
-		final Button colorYellowButton = (Button) getActivity().findViewById(
-				R.id.yellowButton);
-		colorYellowButton.setBackgroundColor(0xFFFFDB00);
-		colorYellowButton.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				chosenColor = 0xFFFFDB00;
-				updatePaletButton(chosenColor);
-			}
-		});
-
-		final Button colorPaletButton = (Button) getActivity().findViewById(
-				R.id.colorPickerButton);
-		colorPaletButton.setOnClickListener(new OnClickListener() {
-
+		final Button colorGradientButton1 = (Button) getActivity()
+				.findViewById(R.id.gradientButton_1);
+		colorGradientButton1.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				AmbilWarnaDialog dialog = new AmbilWarnaDialog(getActivity(),
-						chosenColor, new OnAmbilWarnaListener() {
+						0xffffffff, new OnAmbilWarnaListener() {
 							public void onCancel(AmbilWarnaDialog dialog) {
 							}
 
 							public void onOk(AmbilWarnaDialog dialog, int color) {
-								chosenColor = color;
-								colorPaletButton
-										.setBackgroundColor(chosenColor);
+								colorGradientButton1.setBackgroundColor(color);
+							}
+						});
+				dialog.show();
+			}
+		});
+
+		final Button colorGradientButton2 = (Button) getActivity()
+				.findViewById(R.id.gradientButton_2);
+		colorGradientButton2.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				CheckBox checkbox = (CheckBox) getActivity().findViewById(
+						R.id.checkbox_gradient);
+				if (!checkbox.isChecked()) {
+					checkbox.setChecked(true);
+				}
+				AmbilWarnaDialog dialog = new AmbilWarnaDialog(
+						getActivity(), 0xffffffff,
+						new OnAmbilWarnaListener() {
+							public void onCancel(AmbilWarnaDialog dialog) {
+							}
+
+							public void onOk(AmbilWarnaDialog dialog,
+									int color) {
+								colorGradientButton2
+										.setBackgroundColor(color);
+							}
+						});
+				dialog.show();
+			}
+		});
+
+		final Button colorFrameButton = (Button) getActivity().findViewById(
+				R.id.frameColorButton);
+		colorFrameButton.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				AmbilWarnaDialog dialog = new AmbilWarnaDialog(getActivity(),
+						0xffffffff, new OnAmbilWarnaListener() {
+							public void onCancel(AmbilWarnaDialog dialog) {
+							}
+
+							public void onOk(AmbilWarnaDialog dialog, int color) {
+								colorFrameButton.setBackgroundColor(color);
+							}
+						});
+				dialog.show();
+			}
+		});
+
+		final Button colorBackgroundButton = (Button) getActivity()
+				.findViewById(R.id.backgroundColorButton);
+		colorBackgroundButton.setOnClickListener(new OnClickListener() {
+
+			public void onClick(View v) {
+				AmbilWarnaDialog dialog = new AmbilWarnaDialog(getActivity(),
+						0xffffffff, new OnAmbilWarnaListener() {
+							public void onCancel(AmbilWarnaDialog dialog) {
+							}
+
+							public void onOk(AmbilWarnaDialog dialog, int color) {
+								colorBackgroundButton.setBackgroundColor(color);
 							}
 						});
 				dialog.show();
 			}
 
 		});
-	}
-
-	protected void updatePaletButton(int color) {
-		final Button colorPaletButton = (Button)getActivity().findViewById(R.id.colorPickerButton);
-		colorPaletButton
-				.setBackgroundColor(chosenColor);
 	}
 
 	/**
