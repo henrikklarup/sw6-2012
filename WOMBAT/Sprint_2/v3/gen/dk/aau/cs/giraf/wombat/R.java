@@ -47,8 +47,8 @@ public final class R {
         public static final int ambilwarna_viewSatBri=0x7f070001;
         public static final int ambilwarna_warnaBaru=0x7f070007;
         public static final int ambilwarna_warnaLama=0x7f070006;
-        public static final int blueButton=0x7f07000f;
-        public static final int colorPickerButton=0x7f070013;
+        public static final int backgroundColorButton=0x7f070013;
+        public static final int checkbox_gradient=0x7f07000f;
         public static final int customizeFragment=0x7f07001e;
         public static final int customizeHeader=0x7f07001d;
         public static final int customize_attachment=0x7f070014;
@@ -58,18 +58,18 @@ public final class R {
         public static final int detailFragment=0x7f07001c;
         public static final int detailsText=0x7f070018;
         public static final int digitalButton=0x7f07000b;
-        public static final int greenButton=0x7f070010;
+        public static final int frameColorButton=0x7f070012;
+        public static final int gradientButton_1=0x7f070010;
+        public static final int gradientButton_2=0x7f070011;
         public static final int houglassButton=0x7f070008;
         public static final int listFragment=0x7f07001a;
         public static final int minPicker=0x7f07000c;
         public static final int profileListHeader=0x7f070019;
         public static final int progressbarButton=0x7f07000a;
-        public static final int redButton=0x7f070011;
         public static final int secPicker=0x7f07000d;
         public static final int settingsListHeader=0x7f07001b;
         public static final int showTime=0x7f07000e;
         public static final int timetimerButton=0x7f070009;
-        public static final int yellowButton=0x7f070012;
     }
     public static final class layout {
         public static final int ambilwarna_dialog=0x7f030000;
@@ -82,16 +82,21 @@ public final class R {
         /**  GENERAL 
          */
         public static final int app_name=0x7f060000;
-        public static final int attached=0x7f060015;
-        public static final int attachment_button_description=0x7f060013;
-        public static final int choose_profile=0x7f060016;
-        public static final int color_picker_button=0x7f060012;
+        public static final int attached=0x7f060017;
+        public static final int attachment_button_description=0x7f060015;
+        public static final int background=0x7f06001d;
+        public static final int choose_profile=0x7f060018;
+        public static final int color_picker_button=0x7f060014;
+        public static final int color_time_left=0x7f060013;
+        public static final int colors=0x7f060012;
         public static final int customize_digital_description=0x7f060011;
         public static final int customize_header=0x7f06000c;
         public static final int customize_hourglass_description=0x7f06000e;
         public static final int customize_progressbar_description=0x7f060010;
         public static final int customize_style_description=0x7f06000d;
         public static final int customize_timetimer_description=0x7f06000f;
+        public static final int frame=0x7f06001c;
+        public static final int gradient=0x7f06001b;
         public static final int last_used=0x7f060009;
         public static final int min_sec_devider=0x7f060001;
         public static final int minut=0x7f060002;
@@ -100,14 +105,14 @@ public final class R {
         /**  PROFILE LIST 
          */
         public static final int profile_list_header=0x7f060007;
-        public static final int save_button=0x7f060018;
+        public static final int save_button=0x7f06001a;
         public static final int second=0x7f060004;
         public static final int seconds=0x7f060005;
-        public static final int select_attachment_dialog=0x7f060014;
+        public static final int select_attachment_dialog=0x7f060016;
         /**  CUSTOMIZE 
          */
         public static final int start_activity_default=0x7f06000b;
-        public static final int start_button=0x7f060017;
+        public static final int start_button=0x7f060019;
         /**  TEMPLATE LIST 
          */
         public static final int template_list_header=0x7f06000a;
