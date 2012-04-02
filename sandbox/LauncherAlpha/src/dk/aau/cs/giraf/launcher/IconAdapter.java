@@ -33,8 +33,7 @@ public class IconAdapter extends BaseAdapter {
 
             tv.setText(appInfo.get(position).title.toString());
             iv.setBackgroundDrawable(appInfo.get(position).icon);
-            
-            //iv.setImageResource(appInfo.get(position).icon);        
+                   
 		}
 			return row;	
 	}
@@ -46,9 +45,8 @@ public class IconAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public Object getItem(int arg0) {
-		// TODO Auto-generated method stub
-		return null;
+	public Object getItem(int position) {
+		return position;
 	}
 
 	@Override
