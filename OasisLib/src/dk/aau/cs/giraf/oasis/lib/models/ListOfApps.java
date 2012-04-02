@@ -4,8 +4,8 @@ public class ListOfApps {
 	private long id;
 	private long appId;
 	private long profileId;
-	private String settings;
-	private String stats;
+	private Setting<String, String, String> settings;
+	private Stat<String, String, String> stats;
 	private static String _output = "{0}, {1}, {2}, {3}, {4}";
 
 	/**
@@ -16,7 +16,7 @@ public class ListOfApps {
 	 * @param settings the settings to set
 	 * @param stats the stats to set
 	 */
-	public ListOfApps(long appId, long profileId, String settings, String stats) {
+	public ListOfApps(long appId, long profileId, Setting<String, String, String> settings, Stat<String, String, String> stats) {
 		this.appId = appId;
 		this.profileId = profileId;
 		this.settings = settings;
@@ -68,25 +68,25 @@ public class ListOfApps {
 	/**
 	 * @return the settings
 	 */
-	public String getSettings() {
+	public Setting<String, String, String> getSettings() {
 		return settings;
 	}
 	/**
 	 * @param settings the settings to set
 	 */
-	public void setSettings(String settings) {
+	public void setSettings(Setting<String, String, String> settings) {
 		this.settings = settings;
 	}
 	/**
 	 * @return the stats
 	 */
-	public String getStats() {
+	public Stat<String, String, String> getStats() {
 		return stats;
 	}
 	/**
 	 * @param stats the stats to set
 	 */
-	public void setStats(String stats) {
+	public void setStats(Stat<String, String, String> stats) {
 		this.stats = stats;
 	}
 
@@ -112,8 +112,8 @@ public class ListOfApps {
 		localOutput = localOutput.replace("{0}", String.valueOf(getId()));
 		localOutput = localOutput.replace("{1}", String.valueOf(getAppId()));
 		localOutput = localOutput.replace("{2}", String.valueOf(getProfileId()));
-		localOutput = localOutput.replace("{3}", getSettings());
-		localOutput = localOutput.replace("{4}", getStats());
+		localOutput = localOutput.replace("{3}", String.valueOf(getSettings()));
+		localOutput = localOutput.replace("{4}", String.valueOf(getStats()));
 
 		return localOutput;
 	}

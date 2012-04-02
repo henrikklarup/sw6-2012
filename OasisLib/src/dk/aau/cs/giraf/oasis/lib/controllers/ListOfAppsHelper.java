@@ -96,8 +96,8 @@ public class ListOfAppsHelper {
 		loa.setId(cursor.getLong(cursor.getColumnIndex(ListOfAppsMetaData.Table.COLUMN_ID)));
 		loa.setAppId(cursor.getLong(cursor.getColumnIndex(ListOfAppsMetaData.Table.COLUMN_APPSID)));
 		loa.setProfileId(cursor.getLong(cursor.getColumnIndex(ListOfAppsMetaData.Table.COLUMN_PROFILESID)));
-		loa.setSettings(cursor.getString(cursor.getColumnIndex(ListOfAppsMetaData.Table.COLUMN_SETTINGS)));
-		loa.setStats(cursor.getString(cursor.getColumnIndex(ListOfAppsMetaData.Table.COLUMN_STATS)));
+		loa.setSettings(cursor.getBlob(cursor.getColumnIndex(ListOfAppsMetaData.Table.COLUMN_SETTINGS)));
+		loa.setStats(cursor.getBlob(cursor.getColumnIndex(ListOfAppsMetaData.Table.COLUMN_STATS)));
 		return loa;
 	}
 }
