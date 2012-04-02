@@ -1,7 +1,5 @@
 package dk.aau.cs.giraf.oasis.lib.models;
 
-import java.util.HashMap;
-
 public class Profile {
 
 	private long id;
@@ -11,7 +9,7 @@ public class Profile {
 	private long pRole;
 	private long phone;
 	private String picture;
-	private Setting setting;
+	private Setting<String, String, String> setting;
 	private static String _output = "{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}";
 
 	/**
@@ -25,7 +23,7 @@ public class Profile {
 	 * @param picture the picture to set
 	 * @param setting the setting to set
 	 */
-	public Profile(String firstname, String surname, String middlename, long pRole, long phone, String picture, Setting setting) {
+	public Profile(String firstname, String surname, String middlename, long pRole, long phone, String picture, Setting<String, String, String> setting) {
 		this.firstname = firstname;
 		this.surname = surname;
 		this.middlename = middlename;
@@ -129,13 +127,13 @@ public class Profile {
 	/**
 	 * @return the idCertificate
 	 */
-	public Setting getSetting() {
+	public Setting<String, String, String> getSetting() {
 		return setting;
 	}
 	/**
 	 * @param idCertificate the idCertificate to set
 	 */
-	public void setSetting(Setting setting) {
+	public void setSetting(Setting<String, String, String> setting) {
 		this.setting = setting;
 	}
 
