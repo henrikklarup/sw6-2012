@@ -10,7 +10,7 @@ public class Profile {
 	private long phone;
 	private String picture;
 	private Setting<String, String, String> setting;
-	private static String _output = "{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}";
+	private static String _output = "{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}";
 
 	/**
 	 * Constructor with parameters
