@@ -1,16 +1,18 @@
 package dk.aau.cs.giraf.oasis.lib.models;
 
+import java.util.HashMap;
+
 public class Profile {
 
 	private long id;
 	private String firstname;
 	private String surname;
 	private String middlename;
-	private long role;
+	private long pRole;
 	private long phone;
 	private String picture;
-	private long idCertificate;
-	private String output = "{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}";
+	private Setting setting;
+	private static String _output = "{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}";
 
 	/**
 	 * Constructor with parameters
@@ -18,19 +20,19 @@ public class Profile {
 	 * @param firstname the firstname to set
 	 * @param surname the surname to set
 	 * @param middlename the middlename to set
-	 * @param role the role to set
+	 * @param pRole the role to set
 	 * @param phone the phone to set
 	 * @param picture the picture to set
-	 * @param idCertificate the idCertificate to set
+	 * @param setting the setting to set
 	 */
-	public Profile(String firstname, String surname, String middlename, long role, long phone, String picture, long idCertificate) {
+	public Profile(String firstname, String surname, String middlename, long pRole, long phone, String picture, Setting setting) {
 		this.firstname = firstname;
 		this.surname = surname;
 		this.middlename = middlename;
-		this.role = role;
+		this.pRole = pRole;
 		this.phone = phone;
 		this.picture = picture;
-		this.idCertificate = idCertificate;
+		this.setting = setting;
 	}
 
 	/**
@@ -89,16 +91,16 @@ public class Profile {
 		this.middlename = middlename;
 	}
 	/**
-	 * @return the role
+	 * @return the pRole
 	 */
-	public long getRole() {
-		return role;
+	public long getPRole() {
+		return pRole;
 	}
 	/**
-	 * @param role the role to set
+	 * @param pRole the role to set
 	 */
-	public void setRole(long role) {
-		this.role = role;
+	public void setPRole(long pRole) {
+		this.pRole = pRole;
 	}
 	/**
 	 * @return the phone
@@ -127,14 +129,14 @@ public class Profile {
 	/**
 	 * @return the idCertificate
 	 */
-	public long getIdCertificate() {
-		return idCertificate;
+	public Setting getSetting() {
+		return setting;
 	}
 	/**
 	 * @param idCertificate the idCertificate to set
 	 */
-	public void setIdCertificate(long idCertificate) {
-		this.idCertificate = idCertificate;
+	public void setSetting(Setting setting) {
+		this.setting = setting;
 	}
 
 	/**
@@ -146,11 +148,11 @@ public class Profile {
 	 *  {4} = Role
 	 *  {5} = Phone
 	 *  {6} = Picture
-	 *  {7} = DepartmentId
+	 *  {7} = Setting
 	 * @param output String to set
 	 */
-	public void setOutput(String output) {
-		this.output = output;
+	public static void setOutput(String output) {
+		_output = output;
 	}
 
 	@Override
@@ -158,15 +160,15 @@ public class Profile {
 	 * toString for profile
 	 */
 	public String toString() {
-		String localOutput = output;
+		String localOutput = _output;
 		localOutput = localOutput.replace("{0}", String.valueOf(getId()));
 		localOutput = localOutput.replace("{1}", getFirstname());
 		localOutput = localOutput.replace("{2}", getMiddlename());
 		localOutput = localOutput.replace("{3}", getSurname());
-		localOutput = localOutput.replace("{4}", String.valueOf(getRole()));
+		localOutput = localOutput.replace("{4}", String.valueOf(getPRole()));
 		localOutput = localOutput.replace("{5}", String.valueOf(getPhone()));
 		localOutput = localOutput.replace("{6}", getPicture());
-		localOutput = localOutput.replace("{7}", String.valueOf(getIdCertificate()));
+		localOutput = localOutput.replace("{7}", getSetting().toString());
 
 		return localOutput;
 	}

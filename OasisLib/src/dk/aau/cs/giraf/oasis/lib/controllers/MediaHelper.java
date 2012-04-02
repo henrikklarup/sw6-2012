@@ -29,59 +29,70 @@ public class MediaHelper {
 
 	/**
 	 * Insert media
-	 * @param _media Media containing data
+	 * @param media Media containing data
 	 */
-	public void insertMedia(Media _media) {
-		ContentValues cv = new ContentValues();
-		cv.put(MediaMetaData.Table.COLUMN_PATH, _media.getPath());
-		cv.put(MediaMetaData.Table.COLUMN_NAME, _media.getName());
-		cv.put(MediaMetaData.Table.COLUMN_PUBLIC, _media.is_public());
-		cv.put(MediaMetaData.Table.COLUMN_TYPE, _media.getType());
-		cv.put(MediaMetaData.Table.COLUMN_TAGS, _media.getTags());
-		cv.put(MediaMetaData.Table.COLUMN_OWNERID, _media.getOwnerId());
+	public void insertMedia(Media media) {
+		ContentValues cv = getContentValues(media);
 		_context.getContentResolver().insert(MediaMetaData.CONTENT_URI, cv);
 	}
 
 	/**
 	 * Modify media
-	 * @param _media Media containing data to modify
+	 * @param media Media containing data to modify
 	 */
-	public void modifyMedia(Media _media) {
-		Uri uri = ContentUris.withAppendedId(MediaMetaData.CONTENT_URI, _media.getId());
-		ContentValues cv = new ContentValues();
-		cv.put(MediaMetaData.Table.COLUMN_PATH, _media.getPath());
-		cv.put(MediaMetaData.Table.COLUMN_NAME, _media.getName());
-		cv.put(MediaMetaData.Table.COLUMN_PUBLIC, _media.is_public());
-		cv.put(MediaMetaData.Table.COLUMN_TYPE, _media.getType());
-		cv.put(MediaMetaData.Table.COLUMN_TAGS, _media.getTags());
-		cv.put(MediaMetaData.Table.COLUMN_OWNERID, _media.getOwnerId());
+	public void modifyMedia(Media media) {
+		Uri uri = ContentUris.withAppendedId(MediaMetaData.CONTENT_URI, media.getId());
+		ContentValues cv = getContentValues(media);
 		_context.getContentResolver().update(uri, cv, null, null);
 	}
+	
+	/**
+	 * Get media by id
+	 * @param id the id of the media
+	 * @return the media or null
+	 */
+	public Media getSingleMediaById(long id) {
+		Uri uri = ContentUris.withAppendedId(MediaMetaData.CONTENT_URI, id);
+		String[] columns = getTableColumns();
+		Cursor c = _context.getContentResolver().query(uri, columns, null, null, null);
+		Media media = null;
+		
+		if(c.moveToFirst()) {
+			media = cursorToSingleMedia(c);			
+		}
+		
+		c.close();
+		return media;
+	}
+	
+	/**
+	 * Get media by name
+	 * @param name the name of the media
+	 * @return List<Media>, containing all media of that name
+	 */
+	public List<Media> getMediaByName(String name) {
+		String[] columns = getTableColumns();
+		Cursor c = _context.getContentResolver().query(Uri.withAppendedPath(MediaMetaData.CONTENT_URI, name), columns, null, null, null);
+		
+		List<Media> media = new ArrayList<Media>();
+		media = cursorToMedia(c);
 
+		c.close();
+		return media;
+	}
+	
 	/**
 	 * Get all media
 	 * @return List<Media>, containing all media
 	 */
 	public List<Media> getMedia() {
-		List<Media> media = new ArrayList<Media>();
-		String[] columns = new String[] { MediaMetaData.Table.COLUMN_ID, 
-				MediaMetaData.Table.COLUMN_PATH,
-				MediaMetaData.Table.COLUMN_NAME,
-				MediaMetaData.Table.COLUMN_PUBLIC,
-				MediaMetaData.Table.COLUMN_TYPE,
-				MediaMetaData.Table.COLUMN_TAGS,
-				MediaMetaData.Table.COLUMN_OWNERID};
+		String[] columns = getTableColumns();
 		Cursor c = _context.getContentResolver().query(MediaMetaData.CONTENT_URI, columns, null, null, null);
-
-		if(c.moveToFirst()) {
-			while(!c.isAfterLast()) {
-				media.add(cursorToMedia(c));
-				c.moveToNext();
-			}
-		}
+		
+		List<Media> media = new ArrayList<Media>();
+		media = cursorToMedia(c);
 
 		c.close();
-
 		return media;
 	}
 
@@ -91,13 +102,31 @@ public class MediaHelper {
 	public void clearMediaTable() {
 		_context.getContentResolver().delete(MediaMetaData.CONTENT_URI, null, null);
 	}
-
+	
 	/**
 	 * Cursor to media
 	 * @param cursor Input cursor
-	 * @return Output Media
+	 * @return List<Media>, containing all the media from the cursor
 	 */
-	private Media cursorToMedia(Cursor cursor) {
+	private List<Media> cursorToMedia(Cursor cursor) {
+		List<Media> media = new ArrayList<Media>();
+		
+		if(cursor.moveToFirst()) {
+			while(!cursor.isAfterLast()) {
+				media.add(cursorToSingleMedia(cursor));
+				cursor.moveToNext();
+			}
+		}
+		
+		return media;
+	}
+
+	/**
+	 * Cursor to single media
+	 * @param cursor Input cursor
+	 * @return Single Media
+	 */
+	private Media cursorToSingleMedia(Cursor cursor) {
 		Media media = new Media();
 		media.setId(cursor.getLong(cursor.getColumnIndex(MediaMetaData.Table.COLUMN_ID)));
 		media.setName(cursor.getString(cursor.getColumnIndex(MediaMetaData.Table.COLUMN_NAME)));
@@ -111,5 +140,39 @@ public class MediaHelper {
 			media.set_public(false);
 		}
 		return media;
+	}
+	
+	/**
+	 * Getter for the content values
+	 * @param media the media which values should be used
+	 * @return the contentValues
+	 */
+	private ContentValues getContentValues(Media media) {
+		ContentValues contentValues = new ContentValues();
+		contentValues.put(MediaMetaData.Table.COLUMN_PATH, media.getPath());
+		contentValues.put(MediaMetaData.Table.COLUMN_NAME, media.getName());
+		contentValues.put(MediaMetaData.Table.COLUMN_PUBLIC, media.isMPublic());
+		contentValues.put(MediaMetaData.Table.COLUMN_TYPE, media.getType());
+		contentValues.put(MediaMetaData.Table.COLUMN_TAGS, media.getTags());
+		contentValues.put(MediaMetaData.Table.COLUMN_OWNERID, media.getOwnerId());
+		
+		return contentValues;
+	}
+	
+	/**
+	 * Getter for table columns
+	 * @return the columns
+	 */
+	private String[] getTableColumns() {
+		String[] columns = new String[] { 
+				MediaMetaData.Table.COLUMN_ID, 
+				MediaMetaData.Table.COLUMN_PATH,
+				MediaMetaData.Table.COLUMN_NAME,
+				MediaMetaData.Table.COLUMN_PUBLIC,
+				MediaMetaData.Table.COLUMN_TYPE,
+				MediaMetaData.Table.COLUMN_TAGS,
+				MediaMetaData.Table.COLUMN_OWNERID};
+		
+		return columns;
 	}
 }

@@ -50,7 +50,7 @@ public class Tag {
 	 * {1} = Caption
 	 * @param output String to set
 	 */
-	public void setOutput(String output) {
+	public static void setOutput(String output) {
 		_output = output;
 	}
 	
