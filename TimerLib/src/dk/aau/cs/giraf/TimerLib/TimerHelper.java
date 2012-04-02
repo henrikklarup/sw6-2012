@@ -51,7 +51,8 @@ public class TimerHelper {
 		Circle circle2 = new Circle(11,"Hourglass 15min", "black background hourglass with 15min 60% size digital clock", 60, "#000000", "#66FF00", "#00FF7F", 900, digital5, true);
 		Circle circle3 = new Circle(12,"Hourglass 20min", "white background hourglass with 20min 30% size no digital clock", 30, "#FFFFFF", "#4B0082", "#00FF7F", 1200, null, false);
 		
-		Guardian guard = Guardian.getInstance("Mette");
+		Guardian guard = Guardian.getInstance();
+		guard.Children().clear();
 		child1.Profiles().add(hourglass1);child1.Profiles().add(circle1);child1.Profiles().add(digital2);
 		child2.Profiles().add(hourglass2);child2.Profiles().add(circle2);
 		child3.Profiles().add(hourglass3);child3.Profiles().add(circle3);

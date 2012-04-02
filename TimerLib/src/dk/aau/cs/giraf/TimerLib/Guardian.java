@@ -92,14 +92,15 @@ public class Guardian {
 		if(sortedList == null){
 			sortedList = new ArrayList<Child>();
 		}
+		
 		sortedList.clear();
 		Child lastUsedChild = new Child("Last Used");
-		lastUsedChild.Profiles().addAll(lastUsed);
+		lastUsedChild.Profiles().addAll(lastUsed());
 		
 		sortedList.add(lastUsedChild);
 		
 		Child predefChild = new Child("Predefined Profiles");
-		predefChild.Profiles().addAll(predef);
+		predefChild.Profiles().addAll(predefined());
 		
 		sortedList.add(predefChild);
 		
