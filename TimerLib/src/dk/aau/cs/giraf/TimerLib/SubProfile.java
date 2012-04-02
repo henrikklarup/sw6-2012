@@ -15,59 +15,41 @@ public class SubProfile implements Renderer, Comparable<SubProfile>{
 	public int _id;
 	public String _name;
 	public int _size;
-	public String _bgcolor;
-	public String _timeLeftColor;
-	public String _timeSpentColor;
+	public int _bgcolor;
+	public int _timeLeftColor;
+	public int _timeSpentColor;
+	public int _frameColor;
 	public int _totalTime;
-	public DigitalClock _digital;
-	public boolean _changeColor;
+	public boolean _gradient;
 	//constructor
-	public SubProfile(int id, String name, String description, int size, String bgcolor, String timeLeftColor, String timeSpentColor, int totalTime, DigitalClock digital, boolean changeColor){
+	public SubProfile(int id, String name, String description, int size, int bgcolor, int timeLeftColor, int timeSpentColor, int frameColor, int totalTime, boolean changeColor){
 		this._id = id;
 		this._name = name;
 		this._size = size;
 		this._bgcolor = bgcolor;
 		this._timeLeftColor = timeLeftColor;
 		this._timeSpentColor = timeSpentColor;
+		this._frameColor = frameColor;
 		this._totalTime = totalTime;
-		this._digital = digital;
-		this._changeColor = changeColor;
+		this._gradient = changeColor;
 	}
-	
-	public SubProfile(int id, String name, String description, int size, String bgcolor, String timeLeftColor, String timeSpentColor, int totalTime, boolean changeColor){
+		
+	public SubProfile(int id, String name, String description, int size, int bgcolor, int timeLeftColor, int timeSpentColor, int frameColor, boolean changeColor){
 		this._id = id;
 		this._name = name;
 		this._size = size;
 		this._bgcolor = bgcolor;
 		this._timeLeftColor = timeLeftColor;
 		this._timeSpentColor = timeSpentColor;
-		this._totalTime = totalTime;
-		this._changeColor = changeColor;
-	}
-	
-	public SubProfile(int id, String name, String description, int size, String bgcolor, String timeLeftColor, String timeSpentColor, boolean changeColor){
-		this._id = id;
-		this._name = name;
-		this._size = size;
-		this._bgcolor = bgcolor;
-		this._timeLeftColor = timeLeftColor;
-		this._timeSpentColor = timeSpentColor;
-		this._changeColor = changeColor;
+		this._frameColor = frameColor;
+		this._gradient = changeColor;
 	}
 	
 	public void load(ArrayList<SubProfile> sett){
 		for (SubProfile s : sett)
 		{
-			s.save();
+			
 		}
-	}
-	
-	public void save(){
-		
-	}
-	
-	public void loadSettigns(){
-		
 	}
 
 	public void onDrawFrame(GL10 arg0) {
@@ -104,4 +86,16 @@ public class SubProfile implements Renderer, Comparable<SubProfile>{
 	        int lastCmp = _name.compareTo(n._name);
 	        return (lastCmp != 0 ? lastCmp : _name.compareTo(n._name));
 	    }
+	    
+	    //convertTo methods
+	    /*
+	    public Hourglass toHourglass(){
+	    	Hourglass glass = new Hourglass();
+	    	return glass;
+	    }
+	    
+	    public Hourglass toHourglass(){
+	    	Hourglass glass = new Hourglass();
+	    	return glass;
+	    }*/
 }

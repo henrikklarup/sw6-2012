@@ -20,6 +20,11 @@ public class Child implements Comparable<Child>{
 		Collections.sort(profileList);
 	}
 	
+	public void save(SubProfile p){
+		//save profile on child
+		//Wait for admin
+	}
+	
 	 public boolean equals(Child o) {
 	        if (!(o instanceof Child))
 	            return false;
