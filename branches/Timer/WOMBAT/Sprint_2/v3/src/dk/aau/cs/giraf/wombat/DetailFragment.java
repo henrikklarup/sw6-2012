@@ -42,17 +42,13 @@ public class DetailFragment extends android.app.ListFragment {
 
 		selectedChild = child;
 		
-		List<String> values = new ArrayList<String>();
-
-		for (SubProfile p : child.Profiles()) {
-			values.add(p._name);
-		}
+		ArrayList<SubProfile> subprofiles = child.Profiles();
 
 		Log.e("Wombat", "Templates loaded");
 		// Create and input adapter with the string array loaded (CHANGE
 		// 'values' to get another input)
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-				android.R.layout.simple_list_item_1, values);
+		SubProfileAdapter adapter = new SubProfileAdapter(getActivity(),
+				android.R.layout.simple_list_item_1, subprofiles);
 		setListAdapter(adapter);
 	}
 
@@ -60,6 +56,6 @@ public class DetailFragment extends android.app.ListFragment {
 
 		CustomizeFragment fragment = (CustomizeFragment) getFragmentManager()
 				.findFragmentById(R.id.customizeFragment);
-		fragment.setSettings(selectedChild.Profiles().get(position));
+		fragment.loadSettings(selectedChild.Profiles().get(position));
 	}
 }
