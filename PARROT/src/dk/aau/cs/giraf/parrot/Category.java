@@ -1,6 +1,6 @@
 package dk.aau.cs.giraf.parrot;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import android.graphics.Color;
 
@@ -10,17 +10,18 @@ import android.graphics.Color;
  *The category class is used to store a number of Pictograms
  */
 public class Category {
-	private List<Pictogram> pictograms;
-	private Color categoryColour;
+	private ArrayList<Pictogram> pictograms; 
+	private int categoryColour;
 	
 	//This is the constructor method.
-	public Category(Color colour)
+	public Category(int colour)
 	{
 		//TODO we might have to add an icon and a name of the category as well.
+		pictograms = new ArrayList<Pictogram>();
 		categoryColour = colour;
 	}
 
-	public List<Pictogram> getPictograms() {
+	public ArrayList<Pictogram> getPictograms() {
 		return pictograms;
 	}
 	
