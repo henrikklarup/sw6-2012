@@ -12,7 +12,7 @@ public class AuthenticationActivity extends CaptureActivity {
 	 @Override
 	    public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
-	        setContentView(R.layout.main);
+	        setContentView(R.layout.authentication);
 	    }
 	    
 	    @Override
