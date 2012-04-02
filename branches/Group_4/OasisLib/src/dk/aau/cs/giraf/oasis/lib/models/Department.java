@@ -82,7 +82,7 @@ public class Department {
 	 *  {3} = Phone
 	 * @param output the output to set
 	 */
-	public void setOutput(String output) {
+	public static void setOutput(String output) {
 		_output = output;
 	}
 

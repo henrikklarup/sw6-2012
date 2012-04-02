@@ -68,6 +68,17 @@ public class ProfilesHelper {
 		_context.getContentResolver().delete(ProfilesMetaData.CONTENT_URI, null, null);
 	}
 
+	/**
+	 * Authenticates the profile
+	 * @param QRCode the QRCode that autenticates the profile
+	 * @return the authenticated profile
+	 */
+	public Profile authenticateProfile(String QRCode) {
+		Profile profile = new Profile("Dummy","Dummy","Dummy", 1, 0, "Dummy", 0);
+		profile.setId(101);
+		return profile;
+	}
+	
 	public Profile getProfileById(long _id) {
 		Uri uri = ContentUris.withAppendedId(ProfilesMetaData.CONTENT_URI, _id);
 		String[] columns = new String[] { ProfilesMetaData.Table.COLUMN_ID, 

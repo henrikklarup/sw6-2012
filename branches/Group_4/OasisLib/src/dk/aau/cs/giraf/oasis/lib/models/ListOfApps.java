@@ -99,7 +99,7 @@ public class ListOfApps {
 	 *  {4} = Stats
 	 * @param output
 	 */
-	public void setOutput(String output) {
+	public static void setOutput(String output) {
 		_output = output;
 	}
 
