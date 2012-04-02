@@ -18,11 +18,11 @@ public class awesomeActivity extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
             	Intent intent = new Intent(awesomeActivity.this, logoActivity.class);
-            	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
-            	intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             	startActivity(intent);
             }
         });
+        
+        
     }
     
 }
