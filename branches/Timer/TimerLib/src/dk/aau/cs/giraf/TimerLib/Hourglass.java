@@ -7,8 +7,8 @@ public class Hourglass extends SubProfile {
 	public int _sand;
 	
 	
-	public Hourglass(int id, String name, String description, int size, String bgcolor, String timeLeftColor, String timeSpentColor, int totalTime, DigitalClock digital, boolean changeColor, int sand){
-		super(id, name, description, size, bgcolor, timeLeftColor, timeSpentColor, totalTime,digital,changeColor);
+	public Hourglass(int id, String name, String description, int size, int bgcolor, int timeLeftColor, int timeSpentColor, int frameColor, int totalTime, boolean changeColor, int sand){
+		super(id, name, description, size, bgcolor, timeLeftColor, timeSpentColor, frameColor, totalTime, changeColor);
 		this._sand = sand;
 	}
 }
