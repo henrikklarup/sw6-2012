@@ -3,7 +3,9 @@ package dk.aau.cs.giraf.parrot;
 
 
 import parrot.Package.R;
+import android.R.color;
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.GridView;
 

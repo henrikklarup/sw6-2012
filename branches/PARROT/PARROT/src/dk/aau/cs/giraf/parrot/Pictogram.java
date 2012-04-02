@@ -38,6 +38,12 @@ public class Pictogram {
 		return image;
 	}
 	
+	public Bitmap getBitmap()
+	{
+		Bitmap bm = BitmapFactory.decodeFile(imagePath);
+		return bm;
+	}
+	
 	public String getImagePath() {
 		return imagePath;
 	}
