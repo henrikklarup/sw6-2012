@@ -13,7 +13,7 @@ public class Guardian {
 	
 	private ArrayList<Child> guard = null;
 	
-	private static Stack<SubProfile> lastUsed = null;
+	private static ArrayList<SubProfile> lastUsed = null;
 	
 	private static ArrayList<SubProfile> predef = null;
 	
@@ -22,6 +22,8 @@ public class Guardian {
 	private Child selectedChild = null;
 	
 	public static String _name = null;
+	
+	private int id = -1;
 
 	
 	private Guardian(){	
@@ -38,6 +40,11 @@ public class Guardian {
 		return instance;
 	}
 	
+	public int getId(){
+		id++;
+		return id;
+	}
+	
 	public static Guardian getInstance(){
 		if(instance == null){
 			instance = new Guardian();
@@ -52,16 +59,16 @@ public class Guardian {
 		return guard;
 	}
 	
-	public Stack<SubProfile> lastUsed(){
+	public ArrayList<SubProfile> lastUsed(){
 		if(lastUsed == null){
-		lastUsed = new Stack<SubProfile>();
+		lastUsed = new ArrayList<SubProfile>();
 		}
 		return lastUsed;
 	}
 	
 	public static void initLastUsedPredef(){
 		if(lastUsed == null){
-			lastUsed = new Stack<SubProfile>();
+			lastUsed = new ArrayList<SubProfile>();
 		}
 		if(predef == null){
 			predef = new ArrayList<SubProfile>();
@@ -83,10 +90,28 @@ public class Guardian {
 		}
 	}
 	
+	private ArrayList reverse(ArrayList list){
+		ArrayList value = new ArrayList();
+		for(int i = list.size()-1; i > -1; i--){
+			value.add(list.get(i));
+		}
+		return value;
+	}
+	
 	public void addLastUsed(SubProfile profile){
-		if(lastUsed.contains(profile)){
-			lastUsed.push(profile);
-		} else {
+		lastUsed();
+		boolean exists = true;
+		
+		for(int i = 0; i < lastUsed.size(); i++){
+			if(lastUsed.get(i).getId() == profile.getId()){
+				lastUsed.add(lastUsed.get(i));
+				lastUsed.remove(i);
+				exists = false;
+				break;
+			}
+		}
+		
+		if(exists){
 			lastUsed.add(profile);
 		}
 	}
@@ -105,11 +130,12 @@ public class Guardian {
 		
 		sortedList.clear();
 		Child lastUsedChild = new Child("Last Used");
-		lastUsedChild.SubProfiles().addAll(lastUsed());
+		lastUsedChild.SubProfiles().addAll(reverse(lastUsed()));
 		
 		sortedList.add(lastUsedChild);
 		
 		Child predefChild = new Child("Predefined Profiles");
+		Collections.sort(predefined());
 		predefChild.SubProfiles().addAll(predefined());
 		
 		sortedList.add(predefChild);
