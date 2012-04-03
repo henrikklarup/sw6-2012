@@ -172,6 +172,7 @@ public class DbProvider extends ContentProvider {
 		profilesProjectionMap.put(ProfilesMetaData.Table.COLUMN_PHONE, ProfilesMetaData.Table.COLUMN_PHONE);
 		profilesProjectionMap.put(ProfilesMetaData.Table.COLUMN_PICTURE, ProfilesMetaData.Table.COLUMN_PICTURE);
 		profilesProjectionMap.put(ProfilesMetaData.Table.COLUMN_DEPARTMENTID, ProfilesMetaData.Table.COLUMN_DEPARTMENTID);
+		profilesProjectionMap.put(ProfilesMetaData.Table.COLUMN_SETTINGs, ProfilesMetaData.Table.COLUMN_DEPARTMENTID);
 	}
 
 	private static final HashMap<String, String> tagsProjectionMap;
