@@ -14,6 +14,7 @@ import dk.aau.cs.giraf.TimerLib.Guardian;
 public class ListFragment extends android.app.ListFragment {
 	List<Profile> profileList;
 	Guardian guard = Guardian.getInstance();
+	ChildAdapter adapter;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -31,19 +32,27 @@ public class ListFragment extends android.app.ListFragment {
 		ArrayList<Child> m_childs = guard.publishList();
 
 		// Inputs the data into the listview according to the string array
-		ChildAdapter adapter = new ChildAdapter(getActivity(),
+		adapter = new ChildAdapter(getActivity(),
 				android.R.layout.simple_list_item_1, m_childs);
 		setListAdapter(adapter);
 	}
 
 	@Override
 	public void onListItemClick(ListView lv, View view, int position, long id) {
+		for(int i = 0; i < lv.getChildCount(); i++){
+			lv.getChildAt(i).setSelected(false);
+		}
+		view.setSelected(true);
+		
 		// Update the detailfragment
 		DetailFragment fragment = (DetailFragment) getFragmentManager()
 				.findFragmentById(R.id.detailFragment);
+		
 		if (fragment != null && fragment.isInLayout()) {
+			// Marks the selected profile in the guard singleton
 			guard.publishList().get(position).select();
 			fragment.loadSubProfiles();
+			
 		}
 	}
 }

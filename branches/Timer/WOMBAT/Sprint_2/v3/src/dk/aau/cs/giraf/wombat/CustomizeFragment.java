@@ -11,6 +11,7 @@ import yuku.ambilwarna.AmbilWarnaDialog.OnAmbilWarnaListener;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -147,6 +148,9 @@ public class CustomizeFragment extends Fragment {
 
 			public void onClick(View v) {
 				guard.addLastUsed(currSubP);
+				Intent i = new Intent(getActivity().getApplicationContext(), OpenGLActivity.class);
+				
+				startActivity(i);
 			}
 		});
 	}

@@ -33,18 +33,12 @@ public class SubProfileAdapter extends ArrayAdapter<SubProfile> {
 		if( sp != null ){
 			ImageView iv = (ImageView)v.findViewById(R.id.subProfilePic);
 			TextView tv = (TextView)v.findViewById(R.id.subProfileName);
-			TextView tv2 = (TextView)v.findViewById(R.id.subProfileTime);
 			
 			if(iv != null){
 				iv.setImageResource(R.drawable.default_profile);
 			}
 			if(tv != null){
 				tv.setText(sp._name);
-			}
-			if(tv2 != null){
-				int secs = sp._totalTime % 60;
-				int mins = (sp._totalTime - secs) / 60;
-				tv2.setText(getContext().getString(R.string.profile_list_time) + " " + mins + " : " + secs);
 			}
 			
 		}
