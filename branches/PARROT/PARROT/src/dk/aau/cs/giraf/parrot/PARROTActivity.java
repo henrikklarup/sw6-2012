@@ -3,10 +3,10 @@ package dk.aau.cs.giraf.parrot;
 
 
 import parrot.Package.R;
-import android.R.color;
 import android.app.ActionBar;
+import android.app.ActionBar.Tab;
 import android.app.Activity;
-import android.graphics.Color;
+import android.content.Context;
 import android.os.Bundle;
 import android.widget.GridView;
 
@@ -17,7 +17,12 @@ public class PARROTActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
- 	       
+ 	    
+        Category temp1; //TODO dummy varialbe. Change this when database is up.
+         
+        GridView superCategory = (GridView) findViewById(R.id.supercategory); //This is to show the supercategories
+		superCategory.setAdapter(new PictogramAdapter(temp1, this)); //FIXME
+        
         ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         actionBar.setDisplayShowTitleEnabled(false);	//TODO figure out what this does
