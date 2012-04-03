@@ -18,7 +18,7 @@ public class PARROTActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
  	    
-        Category temp1; //TODO dummy varialbe. Change this when database is up.
+        Category temp1; //TODO dummy variable. Change this when database is up.
          
         GridView superCategory = (GridView) findViewById(R.id.supercategory); //This is to show the supercategories
 		superCategory.setAdapter(new PictogramAdapter(temp1, this)); //FIXME
