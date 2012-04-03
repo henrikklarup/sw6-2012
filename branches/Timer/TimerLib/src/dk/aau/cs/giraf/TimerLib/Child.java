@@ -5,15 +5,19 @@ import java.util.Collections;
 
 public class Child implements Comparable<Child>{
 	private ArrayList<SubProfile> profileList;
-	
+	Guardian guard = Guardian.getInstance();
 	public String _name;
 	public Child(String name){
 		profileList = new ArrayList<SubProfile>();
 		this._name = name;
 	}
 	
-	public ArrayList<SubProfile> Profiles(){
+	public ArrayList<SubProfile> SubProfiles(){
 		return profileList;
+	}
+	
+	public void select(){
+		guard.setSelected(this);
 	}
 	
 	public void sortChild(){

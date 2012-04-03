@@ -47,15 +47,15 @@ public class TimerHelper {
 		Hourglass hourglass4 = new Hourglass(9,"Hourglass 20min", "white background hourglass with 20min 30% size no digital clock", 30, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 1200, false, 100);
 		
 		
-		TimeTimer circle1 = new TimeTimer(10,"Hourglass 10min", "white background hourglass with 10min 100% size digital clock", 100, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 600, false);
-		TimeTimer circle2 = new TimeTimer(11,"Hourglass 15min", "black background hourglass with 15min 60% size digital clock", 60, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 900, true);
-		TimeTimer circle3 = new TimeTimer(12,"Hourglass 20min", "white background hourglass with 20min 30% size no digital clock", 30, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 1200, false);
+		TimeTimer circle1 = new TimeTimer(10,"TimeTimer 10min", "white background hourglass with 10min 100% size digital clock", 100, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 600, false);
+		TimeTimer circle2 = new TimeTimer(11,"TimeTimer 15min", "black background hourglass with 15min 60% size digital clock", 60, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 900, true);
+		TimeTimer circle3 = new TimeTimer(12,"TimeTimer 20min", "white background hourglass with 20min 30% size no digital clock", 30, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 1200, false);
 		
 		Guardian guard = Guardian.getInstance();
 		guard.Children().clear();
-		child1.Profiles().add(hourglass1);child1.Profiles().add(circle1);child1.Profiles().add(digital2);
-		child2.Profiles().add(hourglass2);child2.Profiles().add(circle2);
-		child3.Profiles().add(hourglass3);child3.Profiles().add(circle3);
+		child1.SubProfiles().add(hourglass1);child1.SubProfiles().add(circle1);child1.SubProfiles().add(digital2);
+		child2.SubProfiles().add(hourglass2);child2.SubProfiles().add(circle2);
+		child3.SubProfiles().add(hourglass3);child3.SubProfiles().add(circle3);
 		
 		guard.Children().add(child1);
 		guard.Children().add(child2);
