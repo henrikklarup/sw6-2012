@@ -8,7 +8,7 @@
 
     <application
         android:icon="@drawable/ic_launcher"
-        android:theme="style/theme.holo"
+        android:theme="@android:style/Theme.Holo"
         android:label="@string/app_name" >
         <activity
             android:name="dk.aau.cs.giraf.parrot.PARROTActivity"
@@ -19,6 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".SpeachBoardFragment"
+            />
     </application>
 
 </manifest>
