@@ -130,14 +130,13 @@ public class MediaHelper {
 		Media media = new Media();
 		media.setId(cursor.getLong(cursor.getColumnIndex(MediaMetaData.Table.COLUMN_ID)));
 		media.setName(cursor.getString(cursor.getColumnIndex(MediaMetaData.Table.COLUMN_NAME)));
-		media.setPath(cursor.getString(cursor.getColumnIndex(MediaMetaData.Table.COLUMN_PATH)));
-		media.setTags(cursor.getString(cursor.getColumnIndex(MediaMetaData.Table.COLUMN_TAGS)));
-		media.setType(cursor.getString(cursor.getColumnIndex(MediaMetaData.Table.COLUMN_TYPE)));
+		media.setMPath(cursor.getString(cursor.getColumnIndex(MediaMetaData.Table.COLUMN_PATH)));
+		media.setMType(cursor.getString(cursor.getColumnIndex(MediaMetaData.Table.COLUMN_TYPE)));
 		media.setOwnerId(cursor.getLong(cursor.getColumnIndex(MediaMetaData.Table.COLUMN_OWNERID)));
 		if (cursor.getLong(cursor.getColumnIndex(MediaMetaData.Table.COLUMN_PUBLIC)) == 1) {
-			media.set_public(true);
+			media.setMPublic(true);
 		} else {
-			media.set_public(false);
+			media.setMPublic(false);
 		}
 		return media;
 	}
@@ -149,11 +148,10 @@ public class MediaHelper {
 	 */
 	private ContentValues getContentValues(Media media) {
 		ContentValues contentValues = new ContentValues();
-		contentValues.put(MediaMetaData.Table.COLUMN_PATH, media.getPath());
+		contentValues.put(MediaMetaData.Table.COLUMN_PATH, media.getMPath());
 		contentValues.put(MediaMetaData.Table.COLUMN_NAME, media.getName());
 		contentValues.put(MediaMetaData.Table.COLUMN_PUBLIC, media.isMPublic());
-		contentValues.put(MediaMetaData.Table.COLUMN_TYPE, media.getType());
-		contentValues.put(MediaMetaData.Table.COLUMN_TAGS, media.getTags());
+		contentValues.put(MediaMetaData.Table.COLUMN_TYPE, media.getMType());
 		contentValues.put(MediaMetaData.Table.COLUMN_OWNERID, media.getOwnerId());
 		
 		return contentValues;
@@ -170,7 +168,6 @@ public class MediaHelper {
 				MediaMetaData.Table.COLUMN_NAME,
 				MediaMetaData.Table.COLUMN_PUBLIC,
 				MediaMetaData.Table.COLUMN_TYPE,
-				MediaMetaData.Table.COLUMN_TAGS,
 				MediaMetaData.Table.COLUMN_OWNERID};
 		
 		return columns;

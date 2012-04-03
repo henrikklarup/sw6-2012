@@ -28,7 +28,7 @@ public class Setting<Key, Type, Value> extends HashMap<Key, HashMap<Type, Value>
 		typeMap.put(type, value);
 	}
 	
-	public byte[] toByteArray (Setting<String, String, String> setting)
+	public static byte[] toByteArray (Setting<String, String, String> setting)
 	{
 	  Object obj = (Object)setting;
 	  byte[] bytes = null;
@@ -47,7 +47,7 @@ public class Setting<Key, Type, Value> extends HashMap<Key, HashMap<Type, Value>
 	  return bytes;
 	}
 	    
-	public Setting<String, String, String> toObject (byte[] bytes)
+	public static Setting<String, String, String> toObject (byte[] bytes)
 	{
 	  Object obj = null;
 	  try {

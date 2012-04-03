@@ -2,7 +2,6 @@ package dk.aau.cs.giraf.oasis.lib;
 
 import android.content.Context;
 import dk.aau.cs.giraf.oasis.lib.controllers.AppsHelper;
-import dk.aau.cs.giraf.oasis.lib.controllers.CertificateHelper;
 import dk.aau.cs.giraf.oasis.lib.controllers.DepartmentsHelper;
 import dk.aau.cs.giraf.oasis.lib.controllers.ListOfAppsHelper;
 import dk.aau.cs.giraf.oasis.lib.controllers.MediaHelper;
@@ -20,7 +19,6 @@ public class Helper {
 	public MediaHelper mediaHelper;
 	public ListOfAppsHelper listOfAppsHelper;
 	public DepartmentsHelper departmentsHelper;
-	public CertificateHelper certificateHelper;
 	public AppsHelper appsHelper;
 	
 	/**
@@ -33,7 +31,6 @@ public class Helper {
 		mediaHelper = new MediaHelper(_context);
 		listOfAppsHelper = new ListOfAppsHelper(_context);
 		departmentsHelper = new DepartmentsHelper(_context);
-		certificateHelper = new CertificateHelper(_context);
 		appsHelper = new AppsHelper(_context);
 	}
 	

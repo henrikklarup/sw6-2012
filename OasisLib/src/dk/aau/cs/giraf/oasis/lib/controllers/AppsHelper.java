@@ -122,7 +122,7 @@ public class AppsHelper {
 		App app = new App();
 		app.setId(cursor.getLong(cursor.getColumnIndex(AppsMetaData.Table.COLUMN_ID)));
 		app.setName(cursor.getString(cursor.getColumnIndex(AppsMetaData.Table.COLUMN_NAME)));
-		app.setVersionNumber(cursor.getString(cursor.getColumnIndex(AppsMetaData.Table.COLUMN_VERSIONNUMBER)));
+		app.setVersion(cursor.getString(cursor.getColumnIndex(AppsMetaData.Table.COLUMN_VERSIONNUMBER)));
 		return app;
 	}
 
@@ -145,8 +145,7 @@ public class AppsHelper {
 	}
 	
 	/**
-	 * Getter for the content values
-	 * @param app the app which values should be used
+	 * @param app the app to put in the database
 	 * @return the contentValues
 	 */
 	private ContentValues getContentValues(App app) {
@@ -158,8 +157,7 @@ public class AppsHelper {
 	}
 	
 	/**
-	 * Getter for table columns
-	 * @return the columns
+	 * @return the columns of the table
 	 */
 	private String[] getTableColumns() {
 		String[] columns = new String[] { 
@@ -171,7 +169,6 @@ public class AppsHelper {
 	}
 	
 	/**
-	 * Getter for the private context of this helper
 	 * @return the context
 	 */
 	private Context getContext() {
