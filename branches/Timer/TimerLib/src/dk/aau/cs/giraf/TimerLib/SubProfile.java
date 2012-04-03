@@ -14,6 +14,7 @@ public class SubProfile implements Renderer, Comparable<SubProfile>{
 	Guardian guard = Guardian.getInstance();
 	private int _id = -1;
 	public String _name;
+	public String _desc;
 	public int _size;
 	public int _bgcolor;
 	public int _timeLeftColor;
@@ -28,6 +29,7 @@ public class SubProfile implements Renderer, Comparable<SubProfile>{
 			this._id = guard.getId();
 		}
 		this._name = name;
+		this._desc = description;
 		this._size = size;
 		this._bgcolor = bgcolor;
 		this._timeLeftColor = timeLeftColor;
@@ -42,6 +44,7 @@ public class SubProfile implements Renderer, Comparable<SubProfile>{
 			this._id = guard.getId();
 		}
 		this._name = name;
+		this._desc = description;
 		this._size = size;
 		this._bgcolor = bgcolor;
 		this._timeLeftColor = timeLeftColor;
@@ -52,6 +55,10 @@ public class SubProfile implements Renderer, Comparable<SubProfile>{
 	
 	public int getId(){
 		return this._id;
+	}
+	
+	public SubProfile copy(){
+		return this;
 	}
 	
 	public void load(ArrayList<SubProfile> sett){
