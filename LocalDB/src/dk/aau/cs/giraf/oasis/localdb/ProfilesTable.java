@@ -7,7 +7,7 @@ public class ProfilesTable {
 	private static final String TABLE_CREATE = "CREATE TABLE "
 			+ ProfilesMetaData.Table.TABLE_NAME
 			+ "("
-			+ ProfilesMetaData.Table.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+			+ ProfilesMetaData.Table.COLUMN_ID + " INTEGER PRIMARY KEY, "
 			+ ProfilesMetaData.Table.COLUMN_FIRST_NAME + " TEXT NOT NULL, "
 			+ ProfilesMetaData.Table.COLUMN_SUR_NAME + " TEXT NOT NULL, "
 			+ ProfilesMetaData.Table.COLUMN_MIDDLE_NAME + " TEXT, "
