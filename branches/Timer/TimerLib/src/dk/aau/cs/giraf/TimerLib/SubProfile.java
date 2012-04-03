@@ -11,8 +11,8 @@ import android.opengl.GLSurfaceView.Renderer;
 import dk.aau.cs.giraf.TimerLib.R;
 
 public class SubProfile implements Renderer, Comparable<SubProfile>{
-
-	public int _id;
+	Guardian guard = Guardian.getInstance();
+	private int _id = -1;
 	public String _name;
 	public int _size;
 	public int _bgcolor;
@@ -23,8 +23,10 @@ public class SubProfile implements Renderer, Comparable<SubProfile>{
 	public boolean _gradient;
 	public SubProfile _attachment;
 	//constructor
-	public SubProfile(int id, String name, String description, int size, int bgcolor, int timeLeftColor, int timeSpentColor, int frameColor, int totalTime, boolean changeColor){
-		this._id = id;
+	public SubProfile(String name, String description, int size, int bgcolor, int timeLeftColor, int timeSpentColor, int frameColor, int totalTime, boolean changeColor){
+		if(_id == -1){
+			this._id = guard.getId();
+		}
 		this._name = name;
 		this._size = size;
 		this._bgcolor = bgcolor;
@@ -35,8 +37,10 @@ public class SubProfile implements Renderer, Comparable<SubProfile>{
 		this._gradient = changeColor;
 	}
 		
-	public SubProfile(int id, String name, String description, int size, int bgcolor, int timeLeftColor, int timeSpentColor, int frameColor, boolean changeColor){
-		this._id = id;
+	public SubProfile(String name, String description, int size, int bgcolor, int timeLeftColor, int timeSpentColor, int frameColor, boolean changeColor){
+		if(_id == -1){
+			this._id = guard.getId();
+		}
 		this._name = name;
 		this._size = size;
 		this._bgcolor = bgcolor;
@@ -44,6 +48,10 @@ public class SubProfile implements Renderer, Comparable<SubProfile>{
 		this._timeSpentColor = timeSpentColor;
 		this._frameColor = frameColor;
 		this._gradient = changeColor;
+	}
+	
+	public int getId(){
+		return this._id;
 	}
 	
 	public void load(ArrayList<SubProfile> sett){

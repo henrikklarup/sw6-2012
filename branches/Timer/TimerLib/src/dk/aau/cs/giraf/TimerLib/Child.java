@@ -27,6 +27,9 @@ public class Child implements Comparable<Child>{
 	public void save(SubProfile p){
 		//save profile on child
 		//Wait for admin
+		
+		//Add to child list
+		this.SubProfiles().add(p);
 	}
 	
 	 public boolean equals(Child o) {
