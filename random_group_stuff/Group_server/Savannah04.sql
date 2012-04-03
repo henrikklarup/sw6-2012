@@ -29,52 +29,54 @@ drop table `04`.`Profile`;
 drop table `04`.`Tags`;
 
 
-
 CREATE  TABLE `04`.`AuthUsers` (
 
-  `idUser` INT NOT NULL ,
+  `certificate` VARCHAR(45) NOT NULL ,
 
-  `QRCode` VARCHAR(45) NOT NULL ,
+  `idUser` INT NOT NULL AUTO_INCREMENT ,
 
-  PRIMARY KEY (`idUser`) );
+  PRIMARY KEY (`certificate`) ,
+
+  UNIQUE INDEX `idUser_UNIQUE` (`idUser` ASC) );
+
 
 CREATE  TABLE `04`.`Apps` (
 
-  `idApps` INT NOT NULL ,
+  `idApp` INT NOT NULL AUTO_INCREMENT,
 
-  `Name` VARCHAR(45) NOT NULL ,
+  `name` VARCHAR(45) NOT NULL ,
 
-  `Version` VARCHAR(45) NOT NULL ,
+  `version` VARCHAR(45) NOT NULL ,
 
-  PRIMARY KEY (`idApps`) );
+  PRIMARY KEY (`idApp`) );
 
 CREATE  TABLE `04`.`Tags` (
 
-  `idTags` INT NOT NULL ,
+  `idTags` INT NOT NULL AUTO_INCREMENT,
 
-  `Caption` VARCHAR(45) NOT NULL ,
+  `caption` VARCHAR(45) NOT NULL ,
 
   PRIMARY KEY (`idTags`) ,
 
-  UNIQUE INDEX `Caption_UNIQUE` (`Caption` ASC) );
+  UNIQUE INDEX `caption_UNIQUE` (`caption` ASC) );
 
 CREATE  TABLE `04`.`Profile` (
 
   `idProfile` INT NOT NULL ,
 
-  `Firstname` VARCHAR(45) NOT NULL ,
+  `firstname` VARCHAR(45) NOT NULL ,
 
-  `Surname` VARCHAR(45) NOT NULL ,
+  `surname` VARCHAR(45) NOT NULL ,
 
-  `Middlename` VARCHAR(45) NULL ,
+  `middlename` VARCHAR(45) NULL ,
 
-  `PRole` INT NOT NULL ,
+  `pRole` INT NOT NULL ,
 
-  `Phone` BIGINT NOT NULL ,
+  `phone` BIGINT NOT NULL ,
 
-  `Picture` VARCHAR(45) NULL ,
+  `picture` VARCHAR(45) NULL ,
 
-  `Settings` BLOB NULL ,
+  `settings` BLOB NULL ,
   
   FOREIGN KEY (`idProfile` )
 
@@ -84,37 +86,37 @@ CREATE  TABLE `04`.`Profile` (
 
 CREATE  TABLE `04`.`ListOfApps` (
 
-  `idApps` INT NOT NULL ,
+  `idApp` INT NOT NULL ,
 
   `idProfile` INT NOT NULL ,
   
-  FOREIGN KEY (`idApps` )
+  FOREIGN KEY (`idApp` )
 
-  REFERENCES `04`.`Apps` (`idApps` ),
+  REFERENCES `04`.`Apps` (`idApp` ),
   
   FOREIGN KEY (`idProfile` )
 
   REFERENCES `04`.`Profile` (`idProfile` ),
 
-  PRIMARY KEY (`idApps`) );
+  PRIMARY KEY (`idApp`,`idProfile`) );
 
 CREATE  TABLE `04`.`Department` (
 
   `idDepartment` INT NOT NULL ,
 
-  `Navn` VARCHAR(45) NOT NULL ,
+  `navn` VARCHAR(45) NOT NULL ,
 
-  `Address` VARCHAR(45) NOT NULL ,
+  `address` VARCHAR(45) NOT NULL ,
 
-  `Phone` BIGINT NOT NULL ,
+  `phone` BIGINT NOT NULL ,
 
-  `Email` VARCHAR(45) NOT NULL ,
+  `email` VARCHAR(45) NOT NULL ,
   
   FOREIGN KEY (`idDepartment` )
 
   REFERENCES `04`.`AuthUsers` (`idUser` ),
 
-  PRIMARY KEY (`idDepartment`, `Navn`) );
+  PRIMARY KEY (`idDepartment`) );
 
 CREATE  TABLE `04`.`HasDepartment` (
 
@@ -131,7 +133,7 @@ CREATE  TABLE `04`.`HasDepartment` (
   REFERENCES `04`.`Department` (`idDepartment` ),
 
 
-  PRIMARY KEY (`idProfile`) );
+  PRIMARY KEY (`idProfile`, `idDepartment`) );
 
 CREATE  TABLE `04`.`HasGuardian` (
 
@@ -147,7 +149,7 @@ CREATE  TABLE `04`.`HasGuardian` (
 
   REFERENCES `04`.`Profile` (`idProfile` ),
 
-  PRIMARY KEY (`idGuardian`) );
+  PRIMARY KEY (`idGuardian`,`idChild`) );
 
 CREATE  TABLE `04`.`HasSubDepartment` (
 
@@ -167,17 +169,17 @@ CREATE  TABLE `04`.`HasSubDepartment` (
 
 CREATE  TABLE `04`.`Media` (
 
-  `idMedia` INT NOT NULL ,
+  `idMedia` INT NOT NULL AUTO_INCREMENT,
 
-  `MPath` VARCHAR(45) NOT NULL ,
+  `mPath` VARCHAR(45) NOT NULL ,
 
-  `Name` VARCHAR(45) NOT NULL ,
+  `name` VARCHAR(45) NOT NULL ,
 
-  `MPublic` TINYINT NOT NULL ,
+  `mPublic` TINYINT NOT NULL ,
 
-  `Type` VARCHAR(45) NOT NULL ,
+  `mType` VARCHAR(45) NOT NULL ,
 
-  `OwnerID` INT NOT NULL ,
+  `ownerID` INT NOT NULL ,
   
   FOREIGN KEY (`OwnerID` )
 
@@ -250,3 +252,22 @@ CREATE  TABLE `04`.`MediaDepartmentAccess` (
   PRIMARY KEY (`idDepartment`, `idMedia`) );
 
 
+insert into AuthUsers values ('abekat',null);
+insert into AuthUsers values ('abekat2',null);
+insert into Apps values(1,'TestAppe1','1.0.0');
+insert into Apps values(2,'TestAppe2','1.0.0');
+insert into Tags values(1,'Bil');
+insert into Profile values(1,'Jesper','Bromose',null,1,12345678,'dr.dk','<XML>STEERINGS</XML>');
+insert into ListOfApps values(1,1);
+insert into ListOfApps values(2,1);
+insert into Media values(1,'c:\test','MyTest',1,'public',1);
+insert into HasTag values(1,1);
+insert into MediaProfileAccess values(1,1);
+
+o
+
+select * from Apps
+    where 1 in (select idProfile from ListOfApps);
+    
+select idProfile, firstname from Profile
+    where (select certificate from AuthUsers) = 'abekat';
