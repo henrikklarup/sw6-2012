@@ -28,12 +28,13 @@ public class PARROTActivity extends Activity {
         actionBar.setDisplayShowTitleEnabled(false);	//TODO figure out what this does
         
         Tab tab = actionBar.newTab()
-        		.setText(R.string.artist)		//TODO rename this tab
-        		.setTabListener(new TabListener<ArtistFragment>(this,"artist",ArtistFragment.class));
+        		.setText(R.string.firstTab)		//TODO rename this tab
+        		.setTabListener(new TabListener<SpeachBoardFragment>(this,"speachboard",SpeachBoardFragment.class));
         actionBar.addTab(tab);
+        
         tab = actionBar.newTab()
-        		.setText(R.string.album)		//TODO rename this tab
-        		.setTabListener(new TabListener<AlbumFragment>(this,"album",AlbumFragment.class));
+        		.setText(R.string.firstTab)		//TODO rename this tab
+        		.setTabListener(new TabListener<SpeachBoardFragment>(this,"speachboard22",SpeachBoardFragment.class));
         actionBar.addTab(tab);
        
     }
