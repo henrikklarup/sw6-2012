@@ -8,8 +8,10 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import dk.aau.cs.giraf.oasis.lib.metadata.AuthUsersMetaData;
 import dk.aau.cs.giraf.oasis.lib.metadata.ProfilesMetaData;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
+import dk.aau.cs.giraf.oasis.lib.models.Setting;
 
 /**
  * Helper class for Profiles 
@@ -30,34 +32,20 @@ public class ProfilesHelper {
 
 	/**
 	 * Insert profile
-	 * @param _profile Profile containing data
+	 * @param profile Profile containing data
 	 */
-	public void insertProfile(Profile _profile) {
-		ContentValues cv = new ContentValues();
-		cv.put(ProfilesMetaData.Table.COLUMN_FIRST_NAME, _profile.getFirstname());
-		cv.put(ProfilesMetaData.Table.COLUMN_SUR_NAME, _profile.getSurname());
-		cv.put(ProfilesMetaData.Table.COLUMN_MIDDLE_NAME, _profile.getMiddlename());
-		cv.put(ProfilesMetaData.Table.COLUMN_ROLE, _profile.getRole());
-		cv.put(ProfilesMetaData.Table.COLUMN_PHONE, _profile.getPhone());
-		cv.put(ProfilesMetaData.Table.COLUMN_PICTURE, _profile.getPicture());
-		cv.put(ProfilesMetaData.Table.COLUMN_DEPARTMENTID, _profile.getIdCertificate());
+	public void insertProfile(Profile profile) {
+		ContentValues cv = getContentValues(profile);
 		_context.getContentResolver().insert(ProfilesMetaData.CONTENT_URI, cv);
 	}
 
 	/**
 	 * Modify profile
-	 * @param _profile Profile containing data to modify
+	 * @param profile Profile containing data to modify
 	 */
-	public void modifyProfile(Profile _profile) {
-		Uri uri = ContentUris.withAppendedId(ProfilesMetaData.CONTENT_URI, _profile.getId());
-		ContentValues cv = new ContentValues();
-		cv.put(ProfilesMetaData.Table.COLUMN_FIRST_NAME, _profile.getFirstname());
-		cv.put(ProfilesMetaData.Table.COLUMN_SUR_NAME, _profile.getSurname());
-		cv.put(ProfilesMetaData.Table.COLUMN_MIDDLE_NAME, _profile.getMiddlename());
-		cv.put(ProfilesMetaData.Table.COLUMN_ROLE, _profile.getRole());
-		cv.put(ProfilesMetaData.Table.COLUMN_PHONE, _profile.getPhone());
-		cv.put(ProfilesMetaData.Table.COLUMN_PICTURE, _profile.getPicture());
-		cv.put(ProfilesMetaData.Table.COLUMN_DEPARTMENTID, _profile.getIdCertificate());
+	public void modifyProfile(Profile profile) {
+		Uri uri = ContentUris.withAppendedId(ProfilesMetaData.CONTENT_URI, profile.getId());
+		ContentValues cv = getContentValues(profile);
 		_context.getContentResolver().update(uri, cv, null, null);
 	}
 
@@ -70,25 +58,32 @@ public class ProfilesHelper {
 
 	/**
 	 * Authenticates the profile
-	 * @param QRCode the QRCode that autenticates the profile
-	 * @return the authenticated profile
+	 * @param certificate the certificate that authenticates the profile
+	 * @return the authenticated profile or null
 	 */
-	public Profile authenticateProfile(String QRCode) {
-		Profile profile = new Profile("Dummy","Dummy","Dummy", 1, 0, "Dummy", 0);
-		profile.setId(101);
+	public Profile authenticateProfile(String certificate) {
+		Profile profile = null;
+		
+		String[] columns = new String[] { 
+				AuthUsersMetaData.Table.COLUMN_ID, 
+				AuthUsersMetaData.Table.COLUMN_CERTIFICATE};
+		Cursor c = _context.getContentResolver().query(AuthUsersMetaData.CONTENT_URI, columns, null, new String[] {certificate}, null);
+		
+		if(c.moveToFirst()) {
+			profile = getProfileById(c.getLong(c.getColumnIndex(AuthUsersMetaData.Table.COLUMN_ID)));
+		}
+		
+		c.close();
+		
+//		Profile profile = new Profile("Dummy", "Dummy","Dummy", 0, 12345678, "Dummy", new Setting<String,String,String>());
+//		profile.setId(101);
+		
 		return profile;
 	}
 	
-	public Profile getProfileById(long _id) {
-		Uri uri = ContentUris.withAppendedId(ProfilesMetaData.CONTENT_URI, _id);
-		String[] columns = new String[] { ProfilesMetaData.Table.COLUMN_ID, 
-				ProfilesMetaData.Table.COLUMN_FIRST_NAME,
-				ProfilesMetaData.Table.COLUMN_SUR_NAME,
-				ProfilesMetaData.Table.COLUMN_MIDDLE_NAME,
-				ProfilesMetaData.Table.COLUMN_ROLE,
-				ProfilesMetaData.Table.COLUMN_PHONE,
-				ProfilesMetaData.Table.COLUMN_PICTURE,
-				ProfilesMetaData.Table.COLUMN_DEPARTMENTID};
+	public Profile getProfileById(long id) {
+		Uri uri = ContentUris.withAppendedId(ProfilesMetaData.CONTENT_URI, id);
+		String[] columns = getTableColumns();
 		Cursor c = _context.getContentResolver().query(uri, columns, null, null, null);
 
 		if(c.moveToFirst()) {
@@ -104,28 +99,34 @@ public class ProfilesHelper {
 	 */
 	public List<Profile> getProfiles() {
 		List<Profile> profiles = new ArrayList<Profile>();
-		String[] columns = new String[] { ProfilesMetaData.Table.COLUMN_ID, 
-				ProfilesMetaData.Table.COLUMN_FIRST_NAME,
-				ProfilesMetaData.Table.COLUMN_SUR_NAME,
-				ProfilesMetaData.Table.COLUMN_MIDDLE_NAME,
-				ProfilesMetaData.Table.COLUMN_ROLE,
-				ProfilesMetaData.Table.COLUMN_PHONE,
-				ProfilesMetaData.Table.COLUMN_PICTURE,
-				ProfilesMetaData.Table.COLUMN_DEPARTMENTID};
+		String[] columns = getTableColumns();
 		Cursor c = _context.getContentResolver().query(ProfilesMetaData.CONTENT_URI, columns, null, null, null);
 
-		if(c.moveToFirst()) {
-			while(!c.isAfterLast()) {
-				profiles.add(cursorToProfile(c));
-				c.moveToNext();
-			}
-		}
+		profiles = cursorToProfiles(c);
 
 		c.close();
 
 		return profiles;
 	}
-
+	
+	/**
+	 * Cursor to profiles
+	 * @param cursor Input cursor
+	 * @return Output Profiles
+	 */
+	private List<Profile> cursorToProfiles(Cursor cursor) {
+		List<Profile> profiles = new ArrayList<Profile>();
+		
+		if(cursor.moveToFirst()) {
+			while(!cursor.isAfterLast()) {
+				profiles.add(cursorToProfile(cursor));
+				cursor.moveToNext();
+			}
+		}
+		
+		return profiles;
+	}
+	
 	/**
 	 * Cursor to profile
 	 * @param cursor Input cursor
@@ -138,10 +139,42 @@ public class ProfilesHelper {
 		profile.setMiddlename(cursor.getString(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_MIDDLE_NAME)));
 		profile.setSurname(cursor.getString(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_SUR_NAME)));
 		profile.setPicture(cursor.getString(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_PICTURE)));
-		profile.setIdCertificate(cursor.getLong(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_DEPARTMENTID)));
 		profile.setPhone(cursor.getLong(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_PHONE)));
-		profile.setRole(cursor.getLong(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_ROLE)));
+		profile.setPRole(cursor.getLong(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_ROLE)));
+		profile.setSetting(Setting.toObject(cursor.getString(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_SETTINGs)).getBytes()));
 		return profile;
 	}
-
+	
+	/**
+	 * @param profile the profile to put in the database
+	 * @return the contentValues
+	 */
+	private ContentValues getContentValues(Profile profile) {
+		ContentValues contentValues = new ContentValues();
+		contentValues.put(ProfilesMetaData.Table.COLUMN_FIRST_NAME, profile.getFirstname());
+		contentValues.put(ProfilesMetaData.Table.COLUMN_SUR_NAME, profile.getSurname());
+		contentValues.put(ProfilesMetaData.Table.COLUMN_MIDDLE_NAME, profile.getMiddlename());
+		contentValues.put(ProfilesMetaData.Table.COLUMN_ROLE, profile.getPRole());
+		contentValues.put(ProfilesMetaData.Table.COLUMN_PHONE, profile.getPhone());
+		contentValues.put(ProfilesMetaData.Table.COLUMN_PICTURE, profile.getPicture());
+		contentValues.put(ProfilesMetaData.Table.COLUMN_SETTINGs, Setting.toByteArray(profile.getSetting()).toString());
+		
+		return contentValues;
+	}
+	
+	/**
+	 * @return the columns of the table
+	 */
+	private String[] getTableColumns() {
+		String[] columns = new String[] { 
+				ProfilesMetaData.Table.COLUMN_ID, 
+				ProfilesMetaData.Table.COLUMN_FIRST_NAME,
+				ProfilesMetaData.Table.COLUMN_SUR_NAME,
+				ProfilesMetaData.Table.COLUMN_MIDDLE_NAME,
+				ProfilesMetaData.Table.COLUMN_ROLE,
+				ProfilesMetaData.Table.COLUMN_PHONE,
+				ProfilesMetaData.Table.COLUMN_PICTURE,
+				ProfilesMetaData.Table.COLUMN_SETTINGs};
+		return columns;
+	}
 }

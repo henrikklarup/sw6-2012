@@ -28,7 +28,7 @@ public class Stat<Key, Type, Value> extends HashMap<Key, HashMap<Type, Value>>{
 		typeMap.put(type, value);
 	}
 	
-	public byte[] toByteArray (Stat<String, String, String> stat)
+	public static byte[] toByteArray (Stat<String, String, String> stat)
 	{
 	  Object obj = (Object)stat;
 	  byte[] bytes = null;
@@ -47,7 +47,7 @@ public class Stat<Key, Type, Value> extends HashMap<Key, HashMap<Type, Value>>{
 	  return bytes;
 	}
 	    
-	public Stat<String, String, String> toObject (byte[] bytes)
+	public static Stat<String, String, String> toObject (byte[] bytes)
 	{
 	  Object obj = null;
 	  try {

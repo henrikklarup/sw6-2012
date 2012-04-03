@@ -3,13 +3,13 @@ package dk.aau.cs.giraf.oasis.lib.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.net.Uri;
 import dk.aau.cs.giraf.oasis.lib.metadata.ListOfAppsMetaData;
 import dk.aau.cs.giraf.oasis.lib.models.ListOfApps;
+import dk.aau.cs.giraf.oasis.lib.models.Setting;
+import dk.aau.cs.giraf.oasis.lib.models.Stat;
 
 /**
  * Helper class for List of Apps
@@ -29,29 +29,24 @@ public class ListOfAppsHelper {
 
 	/**
 	 * Insert list of apps
-	 * @param _listOfApps List of apps containing data
+	 * @param listOfApps List of apps containing data
 	 */
-	public void insertListOfApps(ListOfApps _listOfApps) {
-		ContentValues cv = new ContentValues();
-		cv.put(ListOfAppsMetaData.Table.COLUMN_APPSID, _listOfApps.getAppId());
-		cv.put(ListOfAppsMetaData.Table.COLUMN_PROFILESID, _listOfApps.getProfileId());
-		cv.put(ListOfAppsMetaData.Table.COLUMN_SETTINGS, _listOfApps.getSettings());
-		cv.put(ListOfAppsMetaData.Table.COLUMN_STATS, _listOfApps.getStats());
+	public void insertListOfApps(ListOfApps listOfApps) {
+		ContentValues cv = getContentValues(listOfApps);
 		_context.getContentResolver().insert(ListOfAppsMetaData.CONTENT_URI, cv);
 	}
 
 	/**
 	 * Modify list of apps
-	 * @param _listOfApps List of apps containing data to modify
+	 * @param listOfApps List of apps containing data to modify
 	 */
-	public void modifyListOfApps(ListOfApps _listOfApps) {
-		Uri uri = ContentUris.withAppendedId(ListOfAppsMetaData.CONTENT_URI, _listOfApps.getId());
-		ContentValues cv = new ContentValues();
-		cv.put(ListOfAppsMetaData.Table.COLUMN_APPSID, _listOfApps.getAppId());
-		cv.put(ListOfAppsMetaData.Table.COLUMN_PROFILESID, _listOfApps.getProfileId());
-		cv.put(ListOfAppsMetaData.Table.COLUMN_SETTINGS, _listOfApps.getSettings());
-		cv.put(ListOfAppsMetaData.Table.COLUMN_STATS, _listOfApps.getStats());
-		_context.getContentResolver().update(uri, cv, null, null);
+	public void modifyListOfApps(ListOfApps listOfApps) {
+		ContentValues cv = getContentValues(listOfApps);
+		_context.getContentResolver().update(ListOfAppsMetaData.CONTENT_URI, 
+											 cv, null, 
+											 new String[] {Long.toString(listOfApps.getIdApp()), 
+														   Long.toString(listOfApps.getIdProfile())}
+											);
 	}
 
 	/**
@@ -59,24 +54,15 @@ public class ListOfAppsHelper {
 	 * @return List<ListOfApps>, containing all media
 	 */
 	public List<ListOfApps> getListOfApps() {
-		List<ListOfApps> ListOfListOfApps =  new ArrayList<ListOfApps>();
-		String[] columns = new String[] { ListOfAppsMetaData.Table.COLUMN_ID, 
-				ListOfAppsMetaData.Table.COLUMN_APPSID,
-				ListOfAppsMetaData.Table.COLUMN_PROFILESID,
-				ListOfAppsMetaData.Table.COLUMN_SETTINGS,
-				ListOfAppsMetaData.Table.COLUMN_STATS};
+		List<ListOfApps> listOfListOfApps =  new ArrayList<ListOfApps>();
+		String[] columns = getTableColumns();
 		Cursor c = _context.getContentResolver().query(ListOfAppsMetaData.CONTENT_URI, columns, null, null, null);
 
-		if(c.moveToFirst()) {
-			while(!c.isAfterLast()) {
-				ListOfListOfApps.add(cursorToListOfApps(c));
-				c.moveToNext();
-			}
-		}
+		listOfListOfApps = cursorToListOfListOfApps(c);
 
 		c.close();
 
-		return ListOfListOfApps;
+		return listOfListOfApps;
 	}
 
 	/**
@@ -93,11 +79,44 @@ public class ListOfAppsHelper {
 	 */
 	private ListOfApps cursorToListOfApps(Cursor cursor) {
 		ListOfApps loa = new ListOfApps();
-		loa.setId(cursor.getLong(cursor.getColumnIndex(ListOfAppsMetaData.Table.COLUMN_ID)));
-		loa.setAppId(cursor.getLong(cursor.getColumnIndex(ListOfAppsMetaData.Table.COLUMN_APPSID)));
-		loa.setProfileId(cursor.getLong(cursor.getColumnIndex(ListOfAppsMetaData.Table.COLUMN_PROFILESID)));
-		loa.setSettings(cursor.getBlob(cursor.getColumnIndex(ListOfAppsMetaData.Table.COLUMN_SETTINGS)));
-		loa.setStats(cursor.getBlob(cursor.getColumnIndex(ListOfAppsMetaData.Table.COLUMN_STATS)));
+		loa.setIdApp(cursor.getLong(cursor.getColumnIndex(ListOfAppsMetaData.Table.COLUMN_APPID)));
+		loa.setIdProfile(cursor.getLong(cursor.getColumnIndex(ListOfAppsMetaData.Table.COLUMN_PROFILEID)));
+		loa.setSettings(Setting.toObject(cursor.getString(cursor.getColumnIndex(ListOfAppsMetaData.Table.COLUMN_SETTINGS)).getBytes()));
+		loa.setStats(Stat.toObject(cursor.getString(cursor.getColumnIndex(ListOfAppsMetaData.Table.COLUMN_STATS)).getBytes()));
 		return loa;
+	}
+	
+	private List<ListOfApps> cursorToListOfListOfApps(Cursor cursor) {
+		List<ListOfApps> listOfListOfApps = new ArrayList<ListOfApps>();
+		
+		if(cursor.moveToFirst()) {
+			while(!cursor.isAfterLast()) {
+				listOfListOfApps.add(cursorToListOfApps(cursor));
+				cursor.moveToNext();
+			}
+		}
+		
+		return listOfListOfApps;
+	}
+	
+	private ContentValues getContentValues(ListOfApps listOfApps) {
+		ContentValues contentValues = new ContentValues();
+		
+		contentValues.put(ListOfAppsMetaData.Table.COLUMN_APPID, listOfApps.getIdApp());
+		contentValues.put(ListOfAppsMetaData.Table.COLUMN_PROFILEID, listOfApps.getIdProfile());
+		contentValues.put(ListOfAppsMetaData.Table.COLUMN_SETTINGS, Setting.toByteArray(listOfApps.getSettings()).toString());
+		contentValues.put(ListOfAppsMetaData.Table.COLUMN_STATS, Stat.toByteArray(listOfApps.getStats()).toString());
+		
+		return contentValues;
+	}
+	
+	private String[] getTableColumns() {
+		String[] columns = new String[] { 
+				ListOfAppsMetaData.Table.COLUMN_APPID,
+				ListOfAppsMetaData.Table.COLUMN_PROFILEID,
+				ListOfAppsMetaData.Table.COLUMN_SETTINGS,
+				ListOfAppsMetaData.Table.COLUMN_STATS};
+		
+		return columns;
 	}
 }
