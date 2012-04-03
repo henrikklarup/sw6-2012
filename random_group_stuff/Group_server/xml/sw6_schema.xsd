@@ -20,23 +20,24 @@
 <xs:element name="sw6ml">
   <xs:complexType>
     <xs:sequence>
-	
-	  <xs:element name="Certificate">
-		<xs:complexType>
-		  <xs:sequence>
-			<xs:element name="entry" maxOccurs="unbounded">
-			  <xs:complexType>
-				<xs:sequence>
-				  <xs:element name="idCert" type="xs:integer">
-				  <xs:element name="AuthKey" type="xs:string">
-				</xs:sequence>
-			  </xs:complexType>
-			</xs:element>
-		  </xs:sequence>
-		</xs:complexType>
-	  </xs:element>
-	  
-	  <xs:element name="Profile">
+      
+    <xs:element name="AuthUser">
+      <xs:complexType>
+       <xs:sequence>
+        <xs:element name="entry" maxOccurs="unbounded">
+         <xs:complexType>
+          <xs:sequence>
+            <xs:element name="certificate" type="xs:string"/>
+            <xs:element name="idUser" type="xs:integer"/>
+          </xs:sequence>
+          <xs:attribute name="action" type="crud" use="required"/>
+         </xs:complexType>
+        </xs:element>
+       </xs:sequence>
+      </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="Profile">
         <xs:complexType>
           <xs:sequence>
             <xs:element name="entry" maxOccurs="unbounded">
@@ -46,11 +47,10 @@
                   <xs:element name="Firstname" type="xs:string"/>
                   <xs:element name="Surname" type="xs:string"/>
                   <xs:element name="Middlename" type="xs:string"/>
-                  <xs:element name="Role" type="xs:integer"/> 
+                  <xs:element name="pRole" type="xs:integer"/> 
                   <xs:element name="Phone" type="xs:long"/>
                   <xs:element name="Picture" type="xs:string"/>
-                  <xs:element name="idCert" type="xs:integer"/>
-				  <xs:element name="Settings" type="xs:string"/>
+                  <xs:element name="Settings" type="xs:string"/>
                 </xs:sequence>
                 <xs:attribute name="action" type="crud" use="required"/>
               </xs:complexType>
@@ -58,19 +58,18 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-	  
-	  <xs:element name="Group">
+    
+    <xs:element name="Department">
         <xs:complexType>
           <xs:sequence>
             <xs:element name="entry" maxOccurs="unbounded">
               <xs:complexType> 
                 <xs:sequence>
-                  <xs:element name="idGroup" type="xs:integer"/>
-                  <xs:element name="Name" type="xs:string"/>
-                  <xs:element name="Address" type="xs:string"/>
-                  <xs:element name="Phone" type="xs:long"/>
-                  <xs:element name="Email" type="xs:string"/>
-				  <xs:element name="idCert" type="xs:integer"/>
+                  <xs:element name="idDepartment" type="xs:integer"/>
+                  <xs:element name="name" type="xs:string"/>
+                  <xs:element name="address" type="xs:string"/>
+                  <xs:element name="phone" type="xs:long"/>
+                  <xs:element name="email" type="xs:string"/>
                 </xs:sequence>
                 <xs:attribute name="action" type="crud" use="required"/>
               </xs:complexType>
@@ -78,8 +77,127 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-	  
-	  <xs:element name="HasChildGroup">
+    
+      <xs:element name="HasDepartment">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="entry" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="idProfile" type="xs:integer"/>
+                    <xs:element name="idDepartment" type="xs:integer"/>
+                  </xs:sequence>
+                  <xs:attribute name="action" type="crud" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence> 
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="HasSubDepartment">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="entry" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="idDepartment" type="xs:integer"/>
+                    <xs:element name="idSubDepartment" type="xs:integer"/>
+                  </xs:sequence>
+                  <xs:attribute name="action" type="crud" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence> 
+          </xs:complexType>
+        </xs:element>
+    
+    <xs:element name="Apps">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="entry" maxOccurs="unbounded">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="idApp" type="xs:integer"/>
+                  <xs:element name="name" type="xs:string"/>
+                  <xs:element name="version" type="xs:string"/>
+                </xs:sequence>
+                <xs:attribute name="action" type="crud" use="required"/>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence> 
+        </xs:complexType>
+      </xs:element>
+    
+    <xs:element name="ListOfApps">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="entry" maxOccurs="unbounded">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="idApps" type="xs:integer"/>
+                  <xs:element name="idProfile" type="xs:integer"/>
+                  <xs:element name="settings" type="xs:string"/>
+                  <xs:element name="stats" type="xs:string"/>
+                </xs:sequence>
+                <xs:attribute name="action" type="crud" use="required"/>
+              </xs:complexType>
+            </xs:element>  
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    
+      <xs:element name="Media">
+        <xs:complexType>
+          <xs:sequence> 
+            <xs:element name="entry" maxOccurs="unbounded">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="idMedia" type="xs:integer"/>
+                  <xs:element name="mPath" type="xs:string"/>
+                  <xs:element name="Name" type="xs:string"/>
+                  <xs:element name="mPublic" type="xs:boolean"/>
+                  <xs:element name="mType" type="xs:string"/>
+                  <xs:element name="OwnerID" type="xs:integer"/>   
+                </xs:sequence>
+                <xs:attribute name="action" type="crud" use="required"/>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+
+       <xs:element name="Tags">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="entry" maxOccurs="unbounded">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="idTag" type="xs:integer"/>
+                  <xs:element name="caption" type="xs:String"/>
+                </xs:sequence>
+                <xs:attribute name="action" type="crud" use="required"/>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence> 
+        </xs:complexType>
+      </xs:element>
+
+      <xs:element name="HasTag">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="entry" maxOccurs="unbounded">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="idMedia" type="xs:integer"/>
+                  <xs:element name="idTag" type="xs:integer"/>
+                </xs:sequence>
+                <xs:attribute name="action" type="crud" use="required"/>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence> 
+        </xs:complexType>
+      </xs:element>
+
+      <xs:element name="HasLink">
         <xs:complexType>
           <xs:sequence>
             <xs:element name="entry" maxOccurs="unbounded">
@@ -88,98 +206,30 @@
                   <xs:element name="idParrent" type="xs:integer"/>
                   <xs:element name="idChild" type="xs:integer"/>
                 </xs:sequence>
-              </xs:complexType>
-            </xs:element>
-          </xs:sequence> 
-        </xs:complexType>
-      </xs:element>
-	  
-	  <xs:element name="HasGroup">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="entry" maxOccurs="unbounded">
-              <xs:complexType>
-                <xs:sequence>
-                  <xs:element name="idProfile" type="xs:integer"/>
-                  <xs:element name="idGroup" type="xs:integer"/>
-                </xs:sequence>
-              </xs:complexType>
-            </xs:element>
-          </xs:sequence> 
-        </xs:complexType>
-      </xs:element>
-	  
-	  <xs:element name="Apps">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="entry" maxOccurs="unbounded">
-              <xs:complexType>
-                <xs:sequence>
-                  <xs:element name="idApps" type="xs:integer"/>
-                  <xs:element name="Name" type="xs:string"/>
-                  <xs:element name="Version" type="xs:string"/>
-				  <xs:element name="Settings" type="xs:string"/>
-                  <xs:element name="Stats" type="xs:string"/>
-                </xs:sequence>
                 <xs:attribute name="action" type="crud" use="required"/>
               </xs:complexType>
             </xs:element>
           </xs:sequence> 
         </xs:complexType>
       </xs:element>
-	  
-	  <xs:element name="ListOfApps">
+    
+    <xs:element name="MediaDepartmentAccess">
         <xs:complexType>
           <xs:sequence>
             <xs:element name="entry" maxOccurs="unbounded">
               <xs:complexType>
                 <xs:sequence>
-                  <xs:element name="idApps" type="xs:integer"/>
-                  <xs:element name="idProfile" type="xs:integer"/>
-                </xs:sequence>
-                <xs:attribute name="action" type="crud" use="required"/>
-              </xs:complexType>
-            </xs:element>  
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-	  
-      <xs:element name="Media">
-        <xs:complexType>
-          <xs:sequence> 
-            <xs:element name="entry" maxOccurs="unbounded">
-              <xs:complexType>
-                <xs:sequence>
-                  <xs:element name="idMedia" type="xs:integer"/>
-                  <xs:element name="Path" type="xs:string"/>
-                  <xs:element name="Name" type="xs:string"/>
-                  <xs:element name="Public" type="xs:boolean"/>
-                  <xs:element name="Type" type="xs:string"/>
-				  <xs:element name="OwnerID" type="xs:integer"/>	 
-                </xs:sequence>
-                <xs:attribute name="action" type="crud" use="required"/>
-              </xs:complexType>
-      	    </xs:element>
-      	  </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-	  
-	  <xs:element name="MediaGroupAccess">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="entry" maxOccurs="unbounded">
-              <xs:complexType>
-                <xs:sequence>
-                  <xs:element name="idGroup" type="xs:integer"/>
+                  <xs:element name="idDepartment" type="xs:integer"/>
                   <xs:element name="idMedia" type="xs:String"/>
                 </xs:sequence>
+                <xs:attribute name="action" type="crud" use="required"/>
               </xs:complexType>
             </xs:element>
           </xs:sequence> 
         </xs:complexType>
       </xs:element>
-	  
-	  <xs:element name="MediaProfileAccess">
+    
+    <xs:element name="MediaProfileAccess">
         <xs:complexType>
           <xs:sequence>
             <xs:element name="entry" maxOccurs="unbounded">
@@ -188,13 +238,14 @@
                   <xs:element name="idProfile" type="xs:integer"/>
                   <xs:element name="idMedia" type="xs:integer"/>
                 </xs:sequence>
+                <xs:attribute name="action" type="crud" use="required"/>
               </xs:complexType>
             </xs:element>
           </xs:sequence> 
         </xs:complexType>
       </xs:element>
-	  
-	  <xs:element name="HasGuardian">
+    
+    <xs:element name="HasGuardian">
         <xs:complexType>
           <xs:sequence>
             <xs:element name="entry" maxOccurs="unbounded">
@@ -203,6 +254,7 @@
                   <xs:element name="idGuardian" type="xs:integer"/>
                   <xs:element name="idChild" type="xs:integer"/>
                 </xs:sequence>
+                <xs:attribute name="action" type="crud" use="required"/>
               </xs:complexType>
             </xs:element>
           </xs:sequence> 
@@ -218,43 +270,14 @@
                   <xs:element name="idParent" type="xs:integer"/>
                   <xs:element name="idChild" type="xs:integer"/>
                 </xs:sequence>
+                <xs:attribute name="action" type="crud" use="required"/>
               </xs:complexType>
             </xs:element>
           </xs:sequence> 
         </xs:complexType>
       </xs:element>
-	  
-	  <xs:element name="Tags">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="entry" maxOccurs="unbounded">
-              <xs:complexType>
-                <xs:sequence>
-                  <xs:element name="idTag" type="xs:integer"/>
-                  <xs:element name="Caption" type="xs:String"/>
-                </xs:sequence>
-              </xs:complexType>
-            </xs:element>
-          </xs:sequence> 
-        </xs:complexType>
-      </xs:element>
-	  
-	  <xs:element name="HasTag">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="entry" maxOccurs="unbounded">
-              <xs:complexType>
-                <xs:sequence>
-                  <xs:element name="idMedia" type="xs:integer"/>
-                  <xs:element name="idTag" type="xs:integer"/>
-                </xs:sequence>
-              </xs:complexType>
-            </xs:element>
-          </xs:sequence> 
-        </xs:complexType>
-      </xs:element>
-	
-	</xs:sequence>
+  
+  </xs:sequence>
   </xs:complexType>
 </xs:element>
 
