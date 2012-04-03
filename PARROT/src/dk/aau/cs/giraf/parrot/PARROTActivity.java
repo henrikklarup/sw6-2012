@@ -29,12 +29,12 @@ public class PARROTActivity extends Activity {
         
         Tab tab = actionBar.newTab()
         		.setText(R.string.firstTab)		//TODO rename this tab
-        		.setTabListener(new TabListener<SpeachBoardFragment>(this,"speachboard",SpeachBoardFragment.class));
+        		.setTabListener(new TabListener<SpeechBoardFragment>(this,"speechboard",SpeechBoardFragment.class));
         actionBar.addTab(tab);
         
         tab = actionBar.newTab()
         		.setText(R.string.firstTab)		//TODO rename this tab
-        		.setTabListener(new TabListener<SpeachBoardFragment>(this,"speachboard2",SpeachBoardFragment.class));
+        		.setTabListener(new TabListener<SpeechBoardFragment>(this,"speechboard2",SpeechBoardFragment.class));
         actionBar.addTab(tab);
        
     }
