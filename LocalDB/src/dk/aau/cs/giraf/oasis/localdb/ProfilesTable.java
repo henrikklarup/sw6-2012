@@ -15,7 +15,8 @@ public class ProfilesTable {
 			+ ProfilesMetaData.Table.COLUMN_PHONE + " INTEGER, "
 			+ ProfilesMetaData.Table.COLUMN_PICTURE + " TEXT, "
 			+ ProfilesMetaData.Table.COLUMN_DEPARTMENTID + " INTEGER NOT NULL, "
-			+ ProfilesMetaData.Table.COLUMN_PICTURE + " TEXT"
+			+ ProfilesMetaData.Table.COLUMN_PICTURE + " TEXT,"
+			+ ProfilesMetaData.Table.COLUMN_SETTINGs + "TEXT"
 			+ ");";
 	
 	private static final String TABLE_DROP= "DROP TABLE IF EXISTS " + ProfilesMetaData.Table.TABLE_NAME + ";";
