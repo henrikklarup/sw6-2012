@@ -19,7 +19,10 @@ public class Guardian {
 	
 	private ArrayList<Child> sortedList = null;
 	
+	private Child selectedChild = null;
+	
 	public static String _name = null;
+
 	
 	private Guardian(){	
 	}
@@ -65,6 +68,13 @@ public class Guardian {
 		}
 	}
 	
+	public Child selected(){
+		return selectedChild;
+	}
+	
+	public void setSelected(Child c){
+		selectedChild = c;
+	}
 	
 	//Waiting for admin
 	private void initLastUsed(ArrayList<SubProfile> profile){
@@ -95,18 +105,18 @@ public class Guardian {
 		
 		sortedList.clear();
 		Child lastUsedChild = new Child("Last Used");
-		lastUsedChild.Profiles().addAll(lastUsed());
+		lastUsedChild.SubProfiles().addAll(lastUsed());
 		
 		sortedList.add(lastUsedChild);
 		
 		Child predefChild = new Child("Predefined Profiles");
-		predefChild.Profiles().addAll(predefined());
+		predefChild.SubProfiles().addAll(predefined());
 		
 		sortedList.add(predefChild);
 		
 		Collections.sort(guard);
 		for(Child p : guard){
-			Collections.sort(p.Profiles());
+			Collections.sort(p.SubProfiles());
 		}
 		
 		sortedList.addAll(guard);
