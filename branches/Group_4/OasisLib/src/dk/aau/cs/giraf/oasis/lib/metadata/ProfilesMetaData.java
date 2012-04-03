@@ -5,7 +5,7 @@ import android.provider.BaseColumns;
 
 public class ProfilesMetaData {
 	
-	public static final Uri CONTENT_URI = Uri.parse("content://sw6.oasis.provider.AutismProvider/profiles");
+	public static final Uri CONTENT_URI = Uri.parse("content://dk.aau.cs.giraf.oasis.localdb.AutismProvider/profiles");
 	
 	public class Table implements BaseColumns {
 		public static final String TABLE_NAME = "tbl_profiles";
