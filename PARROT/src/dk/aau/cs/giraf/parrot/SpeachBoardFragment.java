@@ -13,6 +13,6 @@ public class SpeachBoardFragment extends Fragment
 			Bundle savedInstanceState) 
 	{
 		// Inflate the layout for this fragment
-		return inflater.inflate(R.layout.SpeachBoard_Layout, container, false);
+		return inflater.inflate(R.layout.speachboard_layout, container, false);
 	}
 }
