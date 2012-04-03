@@ -47,9 +47,9 @@ public class TimerHelper {
 		Hourglass hourglass4 = new Hourglass(9,"Hourglass 20min", "white background hourglass with 20min 30% size no digital clock", 30, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 1200, false, 100);
 		
 		
-		Circle circle1 = new Circle(10,"Hourglass 10min", "white background hourglass with 10min 100% size digital clock", 100, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 600, false);
-		Circle circle2 = new Circle(11,"Hourglass 15min", "black background hourglass with 15min 60% size digital clock", 60, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 900, true);
-		Circle circle3 = new Circle(12,"Hourglass 20min", "white background hourglass with 20min 30% size no digital clock", 30, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 1200, false);
+		TimeTimer circle1 = new TimeTimer(10,"Hourglass 10min", "white background hourglass with 10min 100% size digital clock", 100, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 600, false);
+		TimeTimer circle2 = new TimeTimer(11,"Hourglass 15min", "black background hourglass with 15min 60% size digital clock", 60, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 900, true);
+		TimeTimer circle3 = new TimeTimer(12,"Hourglass 20min", "white background hourglass with 20min 30% size no digital clock", 30, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 1200, false);
 		
 		Guardian guard = Guardian.getInstance();
 		guard.Children().clear();
