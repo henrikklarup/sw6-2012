@@ -34,9 +34,26 @@ public class ProfilesHelper {
 	 * Insert profile
 	 * @param profile Profile containing data
 	 */
-	public void insertProfile(Profile profile) {
-		ContentValues cv = getContentValues(profile);
-		_context.getContentResolver().insert(ProfilesMetaData.CONTENT_URI, cv);
+	public int insertProfile(Profile profile) {		
+		ContentValues authusersContentValues = new ContentValues();
+		authusersContentValues.put(AuthUsersMetaData.Table.COLUMN_CERTIFICATE, "Certificate");
+		_context.getContentResolver().insert(AuthUsersMetaData.CONTENT_URI, authusersContentValues);
+		
+		String[] columns = new String[] { 
+				AuthUsersMetaData.Table.COLUMN_ID, 
+				AuthUsersMetaData.Table.COLUMN_CERTIFICATE};
+		Cursor c = _context.getContentResolver().query(AuthUsersMetaData.CONTENT_URI, columns, null, new String[] {"Certificate"}, null);
+		
+		if(c.moveToFirst()) {
+			profile.setId(c.getLong(c.getColumnIndex(AuthUsersMetaData.Table.COLUMN_ID)));
+			ContentValues profileContentValues = getContentValues(profile);
+			_context.getContentResolver().insert(ProfilesMetaData.CONTENT_URI, profileContentValues);
+			return 0;
+		}
+		
+		c.close();
+		
+		return -1;
 	}
 
 	/**
@@ -81,6 +98,11 @@ public class ProfilesHelper {
 		return profile;
 	}
 	
+	/**
+	 * Get a profile by its ID
+	 * @param id the id of the profile
+	 * @return profile
+	 */
 	public Profile getProfileById(long id) {
 		Uri uri = ContentUris.withAppendedId(ProfilesMetaData.CONTENT_URI, id);
 		String[] columns = getTableColumns();

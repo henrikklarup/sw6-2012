@@ -5,7 +5,7 @@ import android.provider.BaseColumns;
 
 public class ProfilesMetaData {
 	
-	public static final Uri CONTENT_URI = Uri.parse("content://sw6.oasis.provider.AutismProvider/profiles");
+	public static final Uri CONTENT_URI = Uri.parse("content://dk.aau.cs.giraf.oasis.localdb.AutismProvider/profiles");
 	
 	public static final String CONTENT_TYPE_PROFILES_LIST = "vnd.android.cursor.dir/vnd.sw6.profiles";
 	public static final String CONTENT_TYPE_PROFILE_ONE = "vnd.android.cursor.item/vnd.sw6.profiles";
