@@ -12,8 +12,6 @@ import dk.aau.cs.giraf.TimerLib.R;
 
 public class SubProfile implements Renderer, Comparable<SubProfile>{
 
-	public enum forms{Hourglass, TimeTimer, Progressbar, DigitalClock}
-	
 	public int _id;
 	public String _name;
 	public int _size;
@@ -23,7 +21,7 @@ public class SubProfile implements Renderer, Comparable<SubProfile>{
 	public int _frameColor;
 	public int _totalTime;
 	public boolean _gradient;
-	public SubProfile attachment;
+	public SubProfile _attachment;
 	//constructor
 	public SubProfile(int id, String name, String description, int size, int bgcolor, int timeLeftColor, int timeSpentColor, int frameColor, int totalTime, boolean changeColor){
 		this._id = id;
@@ -88,10 +86,6 @@ public class SubProfile implements Renderer, Comparable<SubProfile>{
 	    public int compareTo(SubProfile n) {
 	        int lastCmp = _name.compareTo(n._name);
 	        return (lastCmp != 0 ? lastCmp : _name.compareTo(n._name));
-	    }
-	    
-	    public String formType(){
-	    	return "sup";
 	    }
 	    
 	    //convertTo methods
