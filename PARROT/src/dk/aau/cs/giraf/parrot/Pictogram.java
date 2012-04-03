@@ -76,5 +76,14 @@ public class Pictogram {
 		this.wordPath = wordPath;
 	}
 	
+	public void playSound()
+	{
+		//TODO complete this function.
+	}
+	
+	public void playWord()
+	{
+		//TODO complete this function.
+	}
 	
 }
