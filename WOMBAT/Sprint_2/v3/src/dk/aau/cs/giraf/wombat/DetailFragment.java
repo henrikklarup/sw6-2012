@@ -49,7 +49,11 @@ public class DetailFragment extends android.app.ListFragment {
 	}
 
 	public void onListItemClick(ListView lv, View view, int position, long id) {
-
+		for(int i = 0; i < lv.getChildCount(); i++){
+			lv.getChildAt(i).setSelected(false);
+		}
+		view.setSelected(true);
+		
 		CustomizeFragment fragment = (CustomizeFragment) getFragmentManager()
 				.findFragmentById(R.id.customizeFragment);
 		fragment.loadSettings(guard.selected().SubProfiles().get(position));

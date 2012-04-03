@@ -27,20 +27,24 @@ public final class R {
         public static final int ambilwarna_hue=0x7f020003;
         public static final int ambilwarna_target=0x7f020004;
         public static final int btn=0x7f020005;
-        public static final int btn_pressed=0x7f020006;
-        public static final int default_profile=0x7f020007;
-        public static final int ic_launcher=0x7f020008;
-        public static final int thumbnail_attachment=0x7f020009;
-        public static final int thumbnail_digital=0x7f02000a;
-        public static final int thumbnail_hourglass=0x7f02000b;
-        public static final int thumbnail_progressbar=0x7f02000c;
-        public static final int thumbnail_save=0x7f02000d;
-        public static final int thumbnail_start=0x7f02000e;
-        public static final int thumbnail_timetimer=0x7f02000f;
-        public static final int timer_button=0x7f020010;
-        public static final int wheel_bg=0x7f020011;
-        public static final int wheel_val=0x7f020012;
-        public static final int wombat_icon=0x7f020013;
+        public static final int btn_normal=0x7f020006;
+        public static final int btn_pressed=0x7f020007;
+        public static final int default_profile=0x7f020008;
+        public static final int ic_launcher=0x7f020009;
+        public static final int list=0x7f02000a;
+        public static final int list_normal=0x7f02000b;
+        public static final int list_pressed=0x7f02000c;
+        public static final int thumbnail_attachment=0x7f02000d;
+        public static final int thumbnail_digital=0x7f02000e;
+        public static final int thumbnail_hourglass=0x7f02000f;
+        public static final int thumbnail_progressbar=0x7f020010;
+        public static final int thumbnail_save=0x7f020011;
+        public static final int thumbnail_start=0x7f020012;
+        public static final int thumbnail_timetimer=0x7f020013;
+        public static final int timer_button=0x7f020014;
+        public static final int wheel_bg=0x7f020015;
+        public static final int wheel_val=0x7f020016;
+        public static final int wombat_icon=0x7f020017;
     }
     public static final class id {
         public static final int ambilwarna_cursor=0x7f070003;
@@ -77,7 +81,6 @@ public final class R {
         public static final int showTime=0x7f07000e;
         public static final int subProfileName=0x7f070022;
         public static final int subProfilePic=0x7f070021;
-        public static final int subProfileTime=0x7f070023;
         public static final int timetimerButton=0x7f070009;
     }
     public static final class layout {
