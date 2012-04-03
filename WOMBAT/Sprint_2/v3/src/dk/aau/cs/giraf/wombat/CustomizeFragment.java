@@ -25,16 +25,8 @@ import dk.aau.cs.giraf.TimerLib.Guardian;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
 
 public class CustomizeFragment extends Fragment {
-	private SubProfile currentSubProfile;
+	private SubProfile currSubP;
 	private Guardian guard = Guardian.getInstance();
-	private Child currentChild;
-
-	private int totalTime;
-
-	private int gradientColor1;
-	private int gradientColor2;
-	private int frameColor;
-	private int backgroundColor;
 
 	private Button hourglassButton;
 	private Button timetimerButton;
@@ -67,6 +59,8 @@ public class CustomizeFragment extends Fragment {
 	// Start the list empty
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		
+		currSubP = new SubProfile(101, "Test", "", 10, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 6000, true);
 
 		/********* TIME CHOSER *********/
 		initStyleChoser();
@@ -91,8 +85,9 @@ public class CustomizeFragment extends Fragment {
 		hourglassButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				// TODO Functionality which highlights button and stores the
-				// choice
+				// TODO Functionality which stores the choice
+				deSelectStyles();
+				hourglassButton.setSelected(true);
 
 			}
 		});
@@ -102,8 +97,9 @@ public class CustomizeFragment extends Fragment {
 		timetimerButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				// TODO Functionality which highlights button and stores the
-				// choice
+				// TODO Functionality which stores the choice
+				deSelectStyles();
+				timetimerButton.setSelected(true);
 
 			}
 		});
@@ -113,8 +109,9 @@ public class CustomizeFragment extends Fragment {
 		progressbarButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				// TODO Functionality which highlights button and stores the
-				// choice
+				// TODO Functionality which stores the choice
+				deSelectStyles();
+				progressbarButton.setSelected(true);
 
 			}
 		});
@@ -123,12 +120,21 @@ public class CustomizeFragment extends Fragment {
 		digitalButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				// TODO Functionality which highlights button and stores the
-				// choice
+				// TODO Functionality which stores the choice
+				deSelectStyles();
+				digitalButton.setSelected(true);
 
 			}
 		});
 
+	}
+
+	protected void deSelectStyles() {
+		hourglassButton.setSelected(false);
+		timetimerButton.setSelected(false);
+		progressbarButton.setSelected(false);
+		digitalButton.setSelected(false);
+		
 	}
 
 	/**
@@ -140,7 +146,7 @@ public class CustomizeFragment extends Fragment {
 		startButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				// TODO: Start "Vis" Activity
+				guard.addLastUsed(currSubP);
 			}
 		});
 	}
@@ -170,8 +176,7 @@ public class CustomizeFragment extends Fragment {
 
 					public void onClick(DialogInterface dialog, int item) {
 						Child c = guard.Children().get(item);
-						c.Profiles().add(currentSubProfile);
-						// TODO: Insert profile store functionality
+						c.save(currSubP);
 					}
 				});
 				AlertDialog alert = builder.create();
@@ -185,15 +190,15 @@ public class CustomizeFragment extends Fragment {
 	private void initAttachmentButton() {
 		final List<String> values = new ArrayList<String>();
 
-		if (currentChild == null) {
+		if (guard.selected() == null) {
 			for (Child c : guard.Children()) {
-				for (SubProfile p : c.Profiles()) {
+				for (SubProfile p : c.SubProfiles()) {
 					values.add(p._name);
 				}
 			}
 
 		} else {
-			for (SubProfile p : currentChild.Profiles()) {
+			for (SubProfile p : guard.selected().SubProfiles()) {
 				values.add(p._name);
 			}
 		}
@@ -214,7 +219,7 @@ public class CustomizeFragment extends Fragment {
 				builder.setItems(items, new DialogInterface.OnClickListener() {
 
 					public void onClick(DialogInterface dialog, int item) {
-						// TODO: Insert logic which inserts correct picture and
+						// TODO: Insert logic which inserts correct picture etc.
 						attachmentButton
 								.setCompoundDrawablesWithIntrinsicBounds(0,
 										R.drawable.thumbnail_hourglass, 0, 0);
@@ -262,24 +267,27 @@ public class CustomizeFragment extends Fragment {
 
 		/* Create description of time chosen */
 		timeDescription = (TextView) getActivity().findViewById(R.id.showTime);
-		timeDescription.setText(getTimeDescription(mins.getCurrentItem(),
-				secs.getCurrentItem()));
+		updateTimeDescription();
 
 		/* Add on change listeners for both wheels */
 		mins.addChangingListener(new OnWheelChangedListener() {
 			public void onChanged(WheelView wheel, int oldValue, int newValue) {
-				timeDescription.setText(getTimeDescription(
-						mins.getCurrentItem(), secs.getCurrentItem()));
+				currSubP._totalTime = (mins.getCurrentItem() * 60) + secs.getCurrentItem();
+				updateTimeDescription();
+				
 				if (mins.getCurrentItem() == 60) {
 					previousMins = 60;
 					previousSecs = secs.getCurrentItem();
+					
 					secs.setCurrentItem(0);
 					secs.setViewAdapter(new NumericWheelAdapter(getActivity()
 							.getApplicationContext(), 0, 0));
 					secs.setCyclic(false);
 				} else if (previousMins == 60) {
+					
 					secs.setViewAdapter(new NumericWheelAdapter(getActivity()
 							.getApplicationContext(), 0, 60));
+				
 					secs.setCurrentItem(previousSecs);
 					secs.setCyclic(true);
 				}
@@ -288,48 +296,45 @@ public class CustomizeFragment extends Fragment {
 
 		secs.addChangingListener(new OnWheelChangedListener() {
 			public void onChanged(WheelView wheel, int oldValue, int newValue) {
-				timeDescription.setText(getTimeDescription(
-						mins.getCurrentItem(), secs.getCurrentItem()));
+				currSubP._totalTime = (mins.getCurrentItem() * 60) + secs.getCurrentItem();
+				updateTimeDescription();
 			}
 		});
 	}
 
 	/**
-	 * Create the correct format of the time description
+	 * Update the correct format of the time description
 	 * 
-	 * @param mins
-	 *            minutes
-	 * @param secs
-	 *            seconds
-	 * @return A string with the time correctly formatted, according to the
-	 *         strings resource
 	 */
-	private String getTimeDescription(int mins, int secs) {
+	private void updateTimeDescription() {
+		int m_minutes = mins.getCurrentItem();
+		int m_seconds = secs.getCurrentItem();
 		String timeText = "";
 		/* Første del med mellemrum */
-		if (mins == 1) {
+		if (m_minutes == 1) {
 			timeText = "1 ";
 			timeText += this.getString(R.string.minut);
 
-		} else if (mins != 0) {
-			timeText = mins + " ";
+		} else if (m_minutes != 0) {
+			timeText = m_minutes + " ";
 			timeText += this.getString(R.string.minutes);
 		}
 
 		/* Insert the devider if its needed */
-		if (mins != 0 && secs != 0) {
+		if (m_minutes != 0 && m_seconds != 0) {
 			timeText += " " + this.getString(R.string.and_devider) + " ";
 		}
 
-		if (secs == 1) {
+		if (m_seconds == 1) {
 			timeText += "1 ";
 			timeText += this.getString(R.string.second);
-		} else if (secs != 0) {
-			timeText += secs + " ";
+		} else if (m_seconds != 0) {
+			timeText += m_seconds + " ";
 			timeText += this.getString(R.string.seconds);
 		}
 
-		return timeText;
+
+		timeDescription.setText(timeText);
 	}
 
 	/**
@@ -349,7 +354,7 @@ public class CustomizeFragment extends Fragment {
 
 							public void onOk(AmbilWarnaDialog dialog, int color) {
 								colorGradientButton1.setBackgroundColor(color);
-								gradientColor1 = color;
+								currSubP._timeLeftColor = color;
 							}
 						});
 				dialog.show();
@@ -367,7 +372,7 @@ public class CustomizeFragment extends Fragment {
 
 							public void onOk(AmbilWarnaDialog dialog, int color) {
 								colorGradientButton2.setBackgroundColor(color);
-								gradientColor1 = color;
+								currSubP._timeSpentColor = color;
 							}
 						});
 				dialog.show();
@@ -385,7 +390,7 @@ public class CustomizeFragment extends Fragment {
 
 							public void onOk(AmbilWarnaDialog dialog, int color) {
 								colorFrameButton.setBackgroundColor(color);
-								frameColor = color;
+								currSubP._frameColor = color;
 							}
 						});
 				dialog.show();
@@ -404,7 +409,7 @@ public class CustomizeFragment extends Fragment {
 
 							public void onOk(AmbilWarnaDialog dialog, int color) {
 								colorBackgroundButton.setBackgroundColor(color);
-								backgroundColor = color;
+								currSubP._bgcolor = color;
 							}
 						});
 				dialog.show();
@@ -419,54 +424,22 @@ public class CustomizeFragment extends Fragment {
 	 * @param subp
 	 *            The Subprofile chosen
 	 */
-	public void loadSettings(SubProfile subp) {
+	public void loadSettings(SubProfile subProfile) {
 		// TODO: Insert logic to load settings and put them into the view
-		setTime(subp._totalTime);
-		setColors(subp._gradient, subp._timeLeftColor, subp._timeSpentColor, subp._frameColor, subp._bgcolor);
-
-	}
-
-	/**
-	 * Sets the current time in the fragment wheels.
-	 * 
-	 * @param _totalTime
-	 *            The total time in seconds
-	 */
-	private void setTime(int _totalTime) {
-		totalTime = _totalTime;
-
-		int seconds = _totalTime % 60;
-		int minutes = (_totalTime - seconds) / 60;
+		currSubP = subProfile;
+		
+		/* Set Time */
+		int seconds = currSubP._totalTime % 60;
+		int minutes = (currSubP._totalTime - seconds) / 60;
 		mins.setCurrentItem(minutes);
 		secs.setCurrentItem(seconds);
 
-	}
+		/* Set Colors */
+		checkboxGradient.setChecked(currSubP._gradient);
+		colorGradientButton1.setBackgroundColor(currSubP._timeLeftColor);
+		colorGradientButton2.setBackgroundColor(currSubP._timeSpentColor);
+		colorFrameButton.setBackgroundColor(currSubP._frameColor);
+		colorBackgroundButton.setBackgroundColor(currSubP._bgcolor);
 
-	/**
-	 * Sets the colors in the fragment in android color ints (fx. 0xFFFFFFFF).
-	 * 
-	 * @param gradient
-	 *            Is gradient checked or not
-	 * @param timeLeft
-	 *            Which color is the time left
-	 * @param timeSpent
-	 *            Which color is the time spent or the gradient to time left
-	 * @param frame
-	 *            Which color is the frame of the timer
-	 * @param background
-	 *            Which color is the background of the timer
-	 */
-	private void setColors(boolean gradient, int timeLeft, int timeSpent,
-			int frame, int background) {
-		gradientColor1 = timeLeft;
-		gradientColor2 = timeLeft;
-		frameColor = frame;
-		backgroundColor = background;
-
-		checkboxGradient.setChecked(gradient);
-		colorGradientButton1.setBackgroundColor(gradientColor1);
-		colorGradientButton2.setBackgroundColor(gradientColor2);
-		colorFrameButton.setBackgroundColor(frameColor);
-		colorBackgroundButton.setBackgroundColor(backgroundColor);
 	}
 }

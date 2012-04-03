@@ -37,12 +37,8 @@ public class DetailFragment extends android.app.ListFragment {
 	 * @param id
 	 *            id of the template profile
 	 */
-	private Child selectedChild;
-	public void loadSubProfiles(Child child) {
-
-		selectedChild = child;
-		
-		ArrayList<SubProfile> subprofiles = child.Profiles();
+	public void loadSubProfiles() {
+		ArrayList<SubProfile> subprofiles = guard.selected().SubProfiles();
 
 		Log.e("Wombat", "Templates loaded");
 		// Create and input adapter with the string array loaded (CHANGE
@@ -56,6 +52,6 @@ public class DetailFragment extends android.app.ListFragment {
 
 		CustomizeFragment fragment = (CustomizeFragment) getFragmentManager()
 				.findFragmentById(R.id.customizeFragment);
-		fragment.loadSettings(selectedChild.Profiles().get(position));
+		fragment.loadSettings(guard.selected().SubProfiles().get(position));
 	}
 }

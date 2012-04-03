@@ -16,6 +16,7 @@
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:layout_gravity="center"
+            android:background="@drawable/timer_button"
             android:drawableTop="@drawable/thumbnail_hourglass"
             android:paddingTop="20dp"
             android:text="@string/customize_hourglass_description"
@@ -26,6 +27,7 @@
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:layout_gravity="center"
+            android:background="@drawable/timer_button"
             android:drawableTop="@drawable/thumbnail_timetimer"
             android:paddingTop="20dp"
             android:text="@string/customize_timetimer_description"
@@ -36,6 +38,7 @@
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:layout_gravity="center"
+            android:background="@drawable/timer_button"
             android:drawableTop="@drawable/thumbnail_progressbar"
             android:paddingTop="20dp"
             android:text="@string/customize_progressbar_description"
@@ -46,6 +49,7 @@
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:layout_gravity="center"
+            android:background="@drawable/timer_button"
             android:drawableTop="@drawable/thumbnail_digital"
             android:paddingTop="20dp"
             android:text="@string/customize_digital_description"
@@ -163,13 +167,15 @@
                     android:id="@+id/gradientButton_1"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_margin="10dp" />
+                    android:layout_margin="10dp"
+                    android:background="@drawable/timer_button" />
 
                 <Button
                     android:id="@+id/gradientButton_2"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_margin="10dp" />
+                    android:layout_margin="10dp"
+                    android:background="@drawable/timer_button" />
             </LinearLayout>
         </RelativeLayout>
 
@@ -191,7 +197,8 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_centerInParent="true"
-                android:layout_margin="10dp" />
+                android:layout_margin="10dp"
+                android:background="@drawable/timer_button" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -212,7 +219,8 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_centerInParent="true"
-                android:layout_margin="10dp" />
+                android:layout_margin="10dp"
+                android:background="@drawable/timer_button" />
         </RelativeLayout>
     </LinearLayout>
 
@@ -239,6 +247,7 @@
                 android:layout_width="110dp"
                 android:layout_height="110dp"
                 android:layout_gravity="center"
+                android:background="@drawable/timer_button"
                 android:drawableTop="@drawable/thumbnail_attachment"
                 android:paddingTop="20dp"
                 android:text="@string/attachment_button_description"
@@ -249,6 +258,7 @@
                 android:layout_width="110dp"
                 android:layout_height="110dp"
                 android:layout_gravity="center"
+                android:background="@drawable/timer_button"
                 android:drawableTop="@drawable/thumbnail_save"
                 android:paddingTop="20dp"
                 android:text="@string/save_button"
@@ -283,6 +293,7 @@
                 android:layout_width="110dp"
                 android:layout_height="110dp"
                 android:layout_gravity="center"
+                android:background="@drawable/timer_button"
                 android:drawableTop="@drawable/thumbnail_start"
                 android:paddingTop="20dp"
                 android:text="@string/start_button"
