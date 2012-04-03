@@ -24,13 +24,12 @@ public class ListFragment extends android.app.ListFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-//		ArrayList<String> values = new ArrayList<String>();
-//		for(Child c : guard.publishList()){
-//			values.add(c._name);
-//		}
+		// ArrayList<String> values = new ArrayList<String>();
+		// for(Child c : guard.publishList()){
+		// values.add(c._name);
+		// }
 		ArrayList<Child> m_childs = guard.publishList();
-		
-		
+
 		// Inputs the data into the listview according to the string array
 		ChildAdapter adapter = new ChildAdapter(getActivity(),
 				android.R.layout.simple_list_item_1, m_childs);
@@ -43,10 +42,8 @@ public class ListFragment extends android.app.ListFragment {
 		DetailFragment fragment = (DetailFragment) getFragmentManager()
 				.findFragmentById(R.id.detailFragment);
 		if (fragment != null && fragment.isInLayout()) {
-			if(position > 1){ 
-				//TODO: Fix this
-				fragment.loadSubProfiles(guard.Children().get(position-2));
-			}
+			guard.publishList().get(position).select();
+			fragment.loadSubProfiles();
 		}
 	}
 }
