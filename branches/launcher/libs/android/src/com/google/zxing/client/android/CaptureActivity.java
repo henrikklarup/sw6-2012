@@ -606,7 +606,7 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback 
     // Since this message will only be shown for a second, just tell the user what kind of
     // barcode was found (e.g. contact info) rather than the full contents, which they won't
     // have time to read.
-    //statusView.setText(getString(resultHandler.getDisplayTitle()));
+    statusView.setText(getString(resultHandler.getDisplayTitle()));
 
     if (copyToClipboard && !resultHandler.areContentsSecure()) {
       ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
@@ -749,10 +749,10 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback 
   }
 
   private void resetStatusView() {
-	  statusView.setVisibility(View.GONE);
-//    statusView.setText(R.string.somethingstring);
-//    statusView.setVisibility(View.VISIBLE);
-//    viewfinderView.setVisibility(View.VISIBLE);
+    resultView.setVisibility(View.GONE);
+    statusView.setText(R.string.msg_default_status);
+    statusView.setVisibility(View.VISIBLE);
+    viewfinderView.setVisibility(View.VISIBLE);
     lastResult = null;
   }
 
