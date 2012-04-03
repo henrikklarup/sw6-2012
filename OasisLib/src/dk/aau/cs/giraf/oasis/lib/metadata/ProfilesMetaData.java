@@ -18,5 +18,6 @@ public class ProfilesMetaData {
 		public static final String COLUMN_PHONE = "profile_phone";
 		public static final String COLUMN_PICTURE = "profile_picture";
 		public static final String COLUMN_DEPARTMENTID = "profile_departmentid";
+		public static final String COLUMN_SETTINGs = "profile_settings";
 	}
 }

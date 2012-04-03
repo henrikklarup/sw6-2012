@@ -5,7 +5,7 @@ import android.provider.BaseColumns;
 
 public class AppsMetaData {
 	
-	public static final Uri CONTENT_URI = Uri.parse("content://sw6.oasis.provider.AutismProvider/apps");
+	public static final Uri CONTENT_URI = Uri.parse("content://dk.aau.cs.giraf.oasis.localdb.AutismProvider/apps");
 	
 	public class Table implements BaseColumns {
 		public static final String TABLE_NAME = "tbl_apps";
