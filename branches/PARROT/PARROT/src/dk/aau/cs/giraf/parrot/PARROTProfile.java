@@ -23,9 +23,21 @@ public class PARROTProfile {
 	public ArrayList<Category> getCategories() {
 		return categories;
 	}
-
-	public void setCategories(ArrayList<Category> categories) {
-		this.categories = categories;
+	
+	
+	public Category getCategoryAt(int i)
+	{
+		return categories.get(i);
+	}
+	
+	public void addCategory(Category cat)
+	{
+		categories.add(cat);
+	}
+	
+	public void removeCaregory(int i)
+	{
+		categories.remove(i);
 	}
 
 	public String getName() {
