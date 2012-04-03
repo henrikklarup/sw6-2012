@@ -1,0 +1,46 @@
+package dk.aau.cs.giraf.parrot;
+
+import java.util.ArrayList;
+
+/**
+ * 
+ * @author Rasmus
+ * This is the PARROT Profile class. It handles the information associated with the current user, such as available pictograms
+ * organized in categories and settings, as well as personal information whenever it is needed.
+ */
+public class PARROTProfile {
+	private String name;
+	private Pictogram icon;
+	private ArrayList<Category> categories;
+	//TODO add settings such as colour specification and others...
+	
+	public PARROTProfile(String newName, Pictogram pic)
+	{
+		this.setName(newName);
+		this.setIcon(pic);
+	}
+
+	public ArrayList<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(ArrayList<Category> categories) {
+		this.categories = categories;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Pictogram getIcon() {
+		return icon;
+	}
+
+	public void setIcon(Pictogram icon) {
+		this.icon = icon;
+	}
+}
