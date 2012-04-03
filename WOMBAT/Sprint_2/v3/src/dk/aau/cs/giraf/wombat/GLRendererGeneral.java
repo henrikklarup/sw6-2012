@@ -7,10 +7,10 @@ import android.opengl.GLU;
 
 public class GLRendererGeneral implements Renderer{
 
-	private GLTimeTimer timet;
+	private GLCube timet;
 	
 	public GLRendererGeneral(){
-		timet = new GLTimeTimer();
+		timet = new GLCube();
 	}
 
 	public void onSurfaceCreated(GL10 gl, EGLConfig eglconfig) {
@@ -30,7 +30,14 @@ public class GLRendererGeneral implements Renderer{
 		gl.glLoadIdentity();
 		GLU.gluLookAt(gl, 0, 0, -5, 0, 0, 0, 0, 2, 0); // hvor langt er vi far objektet og hvor kigger vi hen
 		
+		//Rotate the element
+		long time = SystemClock.uptimeMillis() % 4000L;
+		float angle = .090f * ((int)time);
+		
+		gl.glRotatef(angle, 1, 0, 2);
+		
 		timet.draw(gl);
+
 	}
 
 	public void onSurfaceChanged(GL10 gl, int width, int height) {
