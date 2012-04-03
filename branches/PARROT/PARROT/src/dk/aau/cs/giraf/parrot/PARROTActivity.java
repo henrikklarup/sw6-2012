@@ -34,7 +34,7 @@ public class PARROTActivity extends Activity {
         
         tab = actionBar.newTab()
         		.setText(R.string.firstTab)		//TODO rename this tab
-        		.setTabListener(new TabListener<SpeachBoardFragment>(this,"speachboard22",SpeachBoardFragment.class));
+        		.setTabListener(new TabListener<SpeachBoardFragment>(this,"speachboard2",SpeachBoardFragment.class));
         actionBar.addTab(tab);
        
     }
