@@ -7,8 +7,8 @@ public class AuthUsersTable {
 	private static final String TABLE_CREATE = "CREATE TABLE "
 			+ AuthUsersMetaData.Table.TABLE_NAME
 			+ "("
-			+ AuthUsersMetaData.Table.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-			+ AuthUsersMetaData.Table.COLUMN_CERTIFICATE + " TEXT NOT NULL"
+			+ AuthUsersMetaData.Table.COLUMN_ID + " INTEGER UNIQUE AUTOINCREMENT, "
+			+ AuthUsersMetaData.Table.COLUMN_CERTIFICATE + " TEXT PRIMARY KEY"
 			+ ");";
 
 	private static final String TABLE_DROP= "DROP TABLE IF EXISTS " + AuthUsersMetaData.Table.TABLE_NAME + ";";
