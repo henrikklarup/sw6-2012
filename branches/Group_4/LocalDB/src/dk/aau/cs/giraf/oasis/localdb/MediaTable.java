@@ -12,7 +12,6 @@ public class MediaTable {
 			+ MediaMetaData.Table.COLUMN_PATH + " TEXT NOT NULL, "
 			+ MediaMetaData.Table.COLUMN_PUBLIC + " INTEGER NOT NULL, "
 			+ MediaMetaData.Table.COLUMN_TYPE + " TEXT NOT NULL, "
-			+ MediaMetaData.Table.COLUMN_TAGS + " TEXT NOT NULL, "
 			+ MediaMetaData.Table.COLUMN_OWNERID + " INTEGER NOT NULL"
 			+ ");";
 	

@@ -15,7 +15,6 @@ public class MediaMetaData {
 		public static final String COLUMN_PATH = "media_path";
 		public static final String COLUMN_PUBLIC = "media_public";
 		public static final String COLUMN_TYPE = "media_type";
-		public static final String COLUMN_TAGS = "media_tags";
 		public static final String COLUMN_OWNERID = "media_ownerid";
 	}
 }

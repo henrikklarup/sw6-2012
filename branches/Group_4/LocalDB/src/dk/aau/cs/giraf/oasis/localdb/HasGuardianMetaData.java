@@ -7,8 +7,8 @@ public class HasGuardianMetaData {
 
 	public static final Uri CONTENT_URI = Uri.parse("content://dk.aau.cs.giraf.oasis.localdb.AutismProvider/hasguardian");
 
-	public static final String CONTENT_TYPE_HASGUARDIANS_LIST = "vnd.android.cursor.dir/vnd.sw6.hasguardian";
-	public static final String CONTENT_TYPE_HASGUARDIAN_ONE = "vnd.android.cursor.item/vnd.sw6.hasguardian";
+	public static final String CONTENT_TYPE_HASGUARDIANS_LIST = "vnd.android.cursor.dir/vnd.dk.hasguardian";
+	public static final String CONTENT_TYPE_HASGUARDIAN_ONE = "vnd.android.cursor.item/vnd.dk.hasguardian";
 
 	public class Table implements BaseColumns {
 		public static final String TABLE_NAME = "tbl_hasguardian";

@@ -36,13 +36,13 @@ public class ProfilesHelper {
 	 */
 	public int insertProfile(Profile profile) {		
 		ContentValues authusersContentValues = new ContentValues();
-		authusersContentValues.put(AuthUsersMetaData.Table.COLUMN_CERTIFICATE, "Certificate");
+		authusersContentValues.put(AuthUsersMetaData.Table.COLUMN_CERTIFICATE, "Certificate1");
 		_context.getContentResolver().insert(AuthUsersMetaData.CONTENT_URI, authusersContentValues);
 		
 		String[] columns = new String[] { 
 				AuthUsersMetaData.Table.COLUMN_ID, 
 				AuthUsersMetaData.Table.COLUMN_CERTIFICATE};
-		Cursor c = _context.getContentResolver().query(AuthUsersMetaData.CONTENT_URI, columns, null, new String[] {"Certificate"}, null);
+		Cursor c = _context.getContentResolver().query(AuthUsersMetaData.CONTENT_URI, columns, null, new String[] {"Certificate1"}, null);
 		
 		if(c.moveToFirst()) {
 			profile.setId(c.getLong(c.getColumnIndex(AuthUsersMetaData.Table.COLUMN_ID)));
@@ -84,7 +84,7 @@ public class ProfilesHelper {
 		String[] columns = new String[] { 
 				AuthUsersMetaData.Table.COLUMN_ID, 
 				AuthUsersMetaData.Table.COLUMN_CERTIFICATE};
-		Cursor c = _context.getContentResolver().query(AuthUsersMetaData.CONTENT_URI, columns, null, new String[] {certificate}, null);
+		Cursor c = _context.getContentResolver().query(AuthUsersMetaData.CONTENT_URI, columns, null, new String[] {"Certificate"}, null);
 		
 		if(c.moveToFirst()) {
 			profile = getProfileById(c.getLong(c.getColumnIndex(AuthUsersMetaData.Table.COLUMN_ID)));
@@ -163,7 +163,7 @@ public class ProfilesHelper {
 		profile.setPicture(cursor.getString(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_PICTURE)));
 		profile.setPhone(cursor.getLong(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_PHONE)));
 		profile.setPRole(cursor.getLong(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_ROLE)));
-		profile.setSetting(Setting.toObject(cursor.getString(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_SETTINGs)).getBytes()));
+		profile.setSetting(Setting.toObject(cursor.getString(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_SETTINGS)).getBytes()));
 		return profile;
 	}
 	
@@ -179,7 +179,7 @@ public class ProfilesHelper {
 		contentValues.put(ProfilesMetaData.Table.COLUMN_ROLE, profile.getPRole());
 		contentValues.put(ProfilesMetaData.Table.COLUMN_PHONE, profile.getPhone());
 		contentValues.put(ProfilesMetaData.Table.COLUMN_PICTURE, profile.getPicture());
-		contentValues.put(ProfilesMetaData.Table.COLUMN_SETTINGs, Setting.toByteArray(profile.getSetting()).toString());
+		contentValues.put(ProfilesMetaData.Table.COLUMN_SETTINGS, Setting.toByteArray(profile.getSetting()).toString());
 		
 		return contentValues;
 	}
@@ -196,7 +196,7 @@ public class ProfilesHelper {
 				ProfilesMetaData.Table.COLUMN_ROLE,
 				ProfilesMetaData.Table.COLUMN_PHONE,
 				ProfilesMetaData.Table.COLUMN_PICTURE,
-				ProfilesMetaData.Table.COLUMN_SETTINGs};
+				ProfilesMetaData.Table.COLUMN_SETTINGS};
 		return columns;
 	}
 }
