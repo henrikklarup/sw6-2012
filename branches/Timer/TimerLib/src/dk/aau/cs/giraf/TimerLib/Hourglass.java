@@ -19,4 +19,8 @@ public class Hourglass extends SubProfile {
 		Hourglass copyP = new Hourglass(this);
 		return copyP;
 	}
+	
+	public int formType(){
+		return formFactor.Hourglass.ordinal();
+	}
 }
