@@ -2,16 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/list"
     android:orientation="horizontal"
-    android:padding="6dp"
-    android:background="@drawable/list" >
+    android:padding="6dp" >
 
-    <ImageView
-        android:id="@+id/subProfilePic"
+    <FrameLayout
         android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:layout_marginLeft="6dp"
-        android:contentDescription="@string/profile_pic_description" />
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/subProfilePicBackground"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+			android:layout_gravity="center"
+            android:layout_marginLeft="6dp"
+            android:contentDescription="@string/profile_pic_description" />
+
+        <ImageView
+            android:id="@+id/subProfilePic"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+			android:layout_gravity="center"
+            android:layout_marginLeft="6dp"
+            android:contentDescription="@string/profile_pic_description"/>
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -23,6 +37,7 @@
             android:id="@+id/subProfileName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:gravity="center_vertical" />
     </LinearLayout>
 

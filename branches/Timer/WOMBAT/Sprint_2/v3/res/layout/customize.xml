@@ -263,6 +263,17 @@
                 android:paddingTop="20dp"
                 android:text="@string/save_button"
                 android:textSize="14dp" />
+            
+            <Button
+                android:id="@+id/customize_save_as"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_gravity="center"
+                android:background="@drawable/btn"
+                android:drawableTop="@drawable/thumbnail_saveas"
+                android:paddingTop="20dp"
+                android:text="@string/save_as_button"
+                android:textSize="14dp" />
         </LinearLayout>
 
         <LinearLayout

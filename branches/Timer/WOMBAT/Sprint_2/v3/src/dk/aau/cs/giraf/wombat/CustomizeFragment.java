@@ -26,6 +26,7 @@ import dk.aau.cs.giraf.TimerLib.Guardian;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
 
 public class CustomizeFragment extends Fragment {
+	private SubProfile preSubP;
 	private SubProfile currSubP;
 	private Guardian guard = Guardian.getInstance();
 
@@ -35,6 +36,7 @@ public class CustomizeFragment extends Fragment {
 	private Button digitalButton;
 	private Button startButton;
 	private Button saveButton;
+	private Button saveAsButton;
 	private Button attachmentButton;
 	private Button colorGradientButton1;
 	private Button colorGradientButton2;
@@ -60,8 +62,9 @@ public class CustomizeFragment extends Fragment {
 	// Start the list empty
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		
-		currSubP = new SubProfile(101, "Test", "", 10, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 6000, true);
+
+		currSubP = new SubProfile("Test", "", 10, 0xFFFFFFFF, 0xFFFFFFFF,
+				0xFFFFFFFF, 0xFFFFFFFF, 6000, true);
 
 		/********* TIME CHOSER *********/
 		initStyleChoser();
@@ -77,7 +80,23 @@ public class CustomizeFragment extends Fragment {
 
 		/******** SAVE BUTTON ***********/
 		initSaveButton();
+		initSaveAsButton();
 		initStartButton();
+	}
+
+	private void initSaveButton() {
+		saveAsButton = (Button) getActivity().findViewById(R.id.customize_save);
+		saveAsButton.setOnClickListener(new OnClickListener() {
+
+			public void onClick(View v) {
+				currSubP.save(preSubP);
+
+				DetailFragment df = (DetailFragment) getFragmentManager()
+						.findFragmentById(R.id.detailFragment);
+				df.loadSubProfiles();
+			}
+		});
+
 	}
 
 	private void initStyleChoser() {
@@ -130,12 +149,12 @@ public class CustomizeFragment extends Fragment {
 
 	}
 
-	protected void deSelectStyles() {
+	private void deSelectStyles() {
 		hourglassButton.setSelected(false);
 		timetimerButton.setSelected(false);
 		progressbarButton.setSelected(false);
 		digitalButton.setSelected(false);
-		
+
 	}
 
 	/**
@@ -148,8 +167,10 @@ public class CustomizeFragment extends Fragment {
 
 			public void onClick(View v) {
 				guard.addLastUsed(currSubP);
-				Intent i = new Intent(getActivity().getApplicationContext(), OpenGLActivity.class);
-				
+				Intent i = new Intent(getActivity().getApplicationContext(),
+						OpenGLActivity.class);
+				// TODO: Insert extra data (send serializable object, retrieve
+				// with getSerializableExtra("<extra name>");
 				startActivity(i);
 			}
 		});
@@ -158,7 +179,7 @@ public class CustomizeFragment extends Fragment {
 	/**
 	 * Initialize the Save button
 	 */
-	private void initSaveButton() {
+	private void initSaveAsButton() {
 		final ArrayList<String> values = new ArrayList<String>();
 		for (Child c : guard.Children()) {
 			values.add(c._name);
@@ -168,8 +189,9 @@ public class CustomizeFragment extends Fragment {
 		final CharSequence[] items = values.toArray(new CharSequence[values
 				.size()]);
 
-		saveButton = (Button) getActivity().findViewById(R.id.customize_save);
-		saveButton.setOnClickListener(new OnClickListener() {
+		saveAsButton = (Button) getActivity().findViewById(
+				R.id.customize_save_as);
+		saveAsButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(
@@ -181,11 +203,13 @@ public class CustomizeFragment extends Fragment {
 					public void onClick(DialogInterface dialog, int item) {
 						Child c = guard.Children().get(item);
 						c.save(currSubP);
+						DetailFragment df = (DetailFragment) getFragmentManager()
+								.findFragmentById(R.id.detailFragment);
+						df.loadSubProfiles();
 					}
 				});
 				AlertDialog alert = builder.create();
 				alert.show();
-
 			}
 		});
 
@@ -193,18 +217,22 @@ public class CustomizeFragment extends Fragment {
 
 	private void initAttachmentButton() {
 		final List<String> values = new ArrayList<String>();
+		final List<SubProfile> subProfiles;
 
 		if (guard.selected() == null) {
+			subProfiles = new ArrayList<SubProfile>();
 			for (Child c : guard.Children()) {
 				for (SubProfile p : c.SubProfiles()) {
-					values.add(p._name);
+					subProfiles.add(p);
 				}
 			}
 
 		} else {
-			for (SubProfile p : guard.selected().SubProfiles()) {
-				values.add(p._name);
-			}
+			subProfiles = guard.selected().SubProfiles();
+		}
+
+		for (SubProfile subProfile : subProfiles) {
+			values.add(subProfile._name);
 		}
 
 		// Cast values to CharSequence
@@ -223,15 +251,9 @@ public class CustomizeFragment extends Fragment {
 				builder.setItems(items, new DialogInterface.OnClickListener() {
 
 					public void onClick(DialogInterface dialog, int item) {
-						// TODO: Insert logic which inserts correct picture etc.
-						attachmentButton
-								.setCompoundDrawablesWithIntrinsicBounds(0,
-										R.drawable.thumbnail_hourglass, 0, 0);
-						attachmentButton
-								.setText(R.string.customize_hourglass_description);
-						TextView v = (TextView) getActivity().findViewById(
-								R.id.customize_attachment_text);
-						v.setText(R.string.attached);
+						currSubP.setAttachment(subProfiles.get(item));
+
+						setAttachmentPicture(subProfiles.get(item));
 					}
 				});
 				AlertDialog alert = builder.create();
@@ -239,6 +261,55 @@ public class CustomizeFragment extends Fragment {
 
 			}
 		});
+	}
+
+	private void setAttachmentPicture(SubProfile subProfile) {
+		// TODO Auto-generated method stub
+		int pictureRes;
+		int textRes;
+
+		if (subProfile != null) {
+
+			switch (subProfile.formType()) {
+			case Hourglass:
+				pictureRes = R.drawable.thumbnail_hourglass;
+				textRes = R.string.customize_hourglass_description;
+				break;
+			case DigitalClock:
+				pictureRes = R.drawable.thumbnail_digital;
+				textRes = R.string.customize_digital_description;
+				break;
+			case ProgressBar:
+				pictureRes = R.drawable.thumbnail_progressbar;
+				textRes = R.string.customize_progressbar_description;
+				break;
+			case TimeTimer:
+				pictureRes = R.drawable.thumbnail_timetimer;
+				textRes = R.string.customize_timetimer_description;
+				break;
+			default:
+				pictureRes = R.drawable.thumbnail_attachment;
+				textRes = R.string.attachment_button_description;
+				break;
+			}
+			attachmentButton.setCompoundDrawablesWithIntrinsicBounds(0,
+					pictureRes, 0, 0);
+			attachmentButton.setText(textRes);
+
+			/* Write "Attached" */
+			TextView v = (TextView) getActivity().findViewById(
+					R.id.customize_attachment_text);
+			v.setText(R.string.attached);
+		} else {
+			attachmentButton.setCompoundDrawablesWithIntrinsicBounds(0,
+					R.drawable.thumbnail_attachment, 0, 0);
+			attachmentButton.setText(R.string.attachment_button_description);
+
+			/* Write "Attached" */
+			TextView v = (TextView) getActivity().findViewById(
+					R.id.customize_attachment_text);
+			v.setText("");
+		}
 	}
 
 	@Override
@@ -276,22 +347,23 @@ public class CustomizeFragment extends Fragment {
 		/* Add on change listeners for both wheels */
 		mins.addChangingListener(new OnWheelChangedListener() {
 			public void onChanged(WheelView wheel, int oldValue, int newValue) {
-				currSubP._totalTime = (mins.getCurrentItem() * 60) + secs.getCurrentItem();
+				currSubP._totalTime = (mins.getCurrentItem() * 60)
+						+ secs.getCurrentItem();
 				updateTimeDescription();
-				
+
 				if (mins.getCurrentItem() == 60) {
 					previousMins = 60;
 					previousSecs = secs.getCurrentItem();
-					
+
 					secs.setCurrentItem(0);
 					secs.setViewAdapter(new NumericWheelAdapter(getActivity()
 							.getApplicationContext(), 0, 0));
 					secs.setCyclic(false);
 				} else if (previousMins == 60) {
-					
+
 					secs.setViewAdapter(new NumericWheelAdapter(getActivity()
 							.getApplicationContext(), 0, 60));
-				
+
 					secs.setCurrentItem(previousSecs);
 					secs.setCyclic(true);
 				}
@@ -300,7 +372,8 @@ public class CustomizeFragment extends Fragment {
 
 		secs.addChangingListener(new OnWheelChangedListener() {
 			public void onChanged(WheelView wheel, int oldValue, int newValue) {
-				currSubP._totalTime = (mins.getCurrentItem() * 60) + secs.getCurrentItem();
+				currSubP._totalTime = (mins.getCurrentItem() * 60)
+						+ secs.getCurrentItem();
 				updateTimeDescription();
 			}
 		});
@@ -336,7 +409,6 @@ public class CustomizeFragment extends Fragment {
 			timeText += m_seconds + " ";
 			timeText += this.getString(R.string.seconds);
 		}
-
 
 		timeDescription.setText(timeText);
 	}
@@ -430,8 +502,28 @@ public class CustomizeFragment extends Fragment {
 	 */
 	public void loadSettings(SubProfile subProfile) {
 		// TODO: Insert logic to load settings and put them into the view
-		currSubP = subProfile;
-		
+		currSubP = subProfile.copy();
+		preSubP = subProfile;
+
+		/* Set Style */
+		deSelectStyles();
+		switch (currSubP.formType()) {
+		case Hourglass:
+			hourglassButton.setSelected(true);
+			break;
+		case DigitalClock:
+			digitalButton.setSelected(true);
+			break;
+		case ProgressBar:
+			progressbarButton.setSelected(true);
+			break;
+		case TimeTimer:
+			timetimerButton.setSelected(true);
+			break;
+		default:
+			break;
+		}
+
 		/* Set Time */
 		int seconds = currSubP._totalTime % 60;
 		int minutes = (currSubP._totalTime - seconds) / 60;
@@ -445,5 +537,12 @@ public class CustomizeFragment extends Fragment {
 		colorFrameButton.setBackgroundColor(currSubP._frameColor);
 		colorBackgroundButton.setBackgroundColor(currSubP._bgcolor);
 
+		/* Set Attachment */
+		setAttachmentPicture(subProfile.getAttachment());
+
+	}
+
+	public void reloadCustomize() {
+		// currSubP = new
 	}
 }
