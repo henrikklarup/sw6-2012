@@ -17,7 +17,6 @@ import java.io.BufferedReader;
 public class DOMinator {
 	
 	private SAXBuilder sax;
-	private BufferedReader reader;
 	
 	public DOMinator()
 	{
