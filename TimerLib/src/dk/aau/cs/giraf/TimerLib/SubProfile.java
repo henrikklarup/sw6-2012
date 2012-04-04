@@ -23,7 +23,7 @@ public class SubProfile implements Renderer, Comparable<SubProfile>{
 	public int _frameColor;
 	public int _totalTime;
 	public boolean _gradient;
-	public SubProfile _attachment;
+	protected SubProfile _attachment;
 	//constructor
 	public SubProfile(String name, String description, int size, int bgcolor, int timeLeftColor, int timeSpentColor, int frameColor, int totalTime, boolean changeColor){
 		if(_id == -1){
@@ -56,6 +56,15 @@ public class SubProfile implements Renderer, Comparable<SubProfile>{
 	
 	public int getId(){
 		return this._id;
+	}
+	
+	public SubProfile getAttachment(){
+		return _attachment;
+	}
+	
+	public void setAttachment(SubProfile p){
+		this._attachment = p;
+		this._attachment._totalTime = this._totalTime;
 	}
 	
 	public int formType(){
