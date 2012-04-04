@@ -3,6 +3,6 @@
 
     <string name="hello">Hello World, PARROTActivity!</string>
     <string name="app_name">PARROT</string>
-    <string name="firstTab">Speach Board</string>
+    <string name="firstTab">Speech Board</string>
 
 </resources>
