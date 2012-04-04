@@ -106,6 +106,7 @@ public class CustomizeFragment extends Fragment {
 
 			public void onClick(View v) {
 				// TODO Functionality which stores the choice
+				currSubP = currSubP.toHourglass();
 				deSelectStyles();
 				hourglassButton.setSelected(true);
 
@@ -118,6 +119,7 @@ public class CustomizeFragment extends Fragment {
 
 			public void onClick(View v) {
 				// TODO Functionality which stores the choice
+				currSubP = currSubP.toTimeTimer();
 				deSelectStyles();
 				timetimerButton.setSelected(true);
 
@@ -130,6 +132,7 @@ public class CustomizeFragment extends Fragment {
 
 			public void onClick(View v) {
 				// TODO Functionality which stores the choice
+				currSubP = currSubP.toProgressBar();
 				deSelectStyles();
 				progressbarButton.setSelected(true);
 
@@ -141,6 +144,7 @@ public class CustomizeFragment extends Fragment {
 
 			public void onClick(View v) {
 				// TODO Functionality which stores the choice
+				currSubP = currSubP.toDigitalClock();
 				deSelectStyles();
 				digitalButton.setSelected(true);
 
@@ -538,7 +542,7 @@ public class CustomizeFragment extends Fragment {
 		colorBackgroundButton.setBackgroundColor(currSubP._bgcolor);
 
 		/* Set Attachment */
-		setAttachmentPicture(subProfile.getAttachment());
+		setAttachmentPicture(currSubP.getAttachment());
 
 	}
 
