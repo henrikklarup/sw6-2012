@@ -1,15 +1,10 @@
+04/04-2012 Rasmus Aaen raaen09@student.aau.dk
+	* Wombat
+	Pictures have been added to the lists
+	Customize page is set up
+	Show activity is initialized
+	Save is missing error handling
+
 23/03-2012 Rasmus Aaen raaen09@student.aau.dk
 	* Wombat
 	Three fragments has been made, list of children, list of templates/profiles, customize page.
-	
-	* ListFragment.java - List of children
-	Connects to the database
-
-	* DetailFragment.java - List of templates/profiles
-	Shows the templates
-
-	* CustomizeActivity.java - Customize page
-	No functionality yet
-
-	* StartLoader.java - Load/Save functions
-	Can load templates with getTemplates functionality
