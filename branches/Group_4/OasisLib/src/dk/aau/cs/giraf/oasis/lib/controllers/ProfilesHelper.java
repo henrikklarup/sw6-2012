@@ -2,6 +2,7 @@ package dk.aau.cs.giraf.oasis.lib.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -34,19 +35,23 @@ public class ProfilesHelper {
 	 * Insert profile
 	 * @param profile Profile containing data
 	 */
-	public int insertProfile(Profile profile) {		
+	public int insertProfile(Profile profile) {
+		String certificate = getNewCertificate();
 		ContentValues authusersContentValues = new ContentValues();
-		authusersContentValues.put(AuthUsersMetaData.Table.COLUMN_CERTIFICATE, "Certificate1");
+		authusersContentValues.put(AuthUsersMetaData.Table.COLUMN_CERTIFICATE, certificate);
 		_context.getContentResolver().insert(AuthUsersMetaData.CONTENT_URI, authusersContentValues);
 		
 		String[] columns = new String[] { 
 				AuthUsersMetaData.Table.COLUMN_ID, 
 				AuthUsersMetaData.Table.COLUMN_CERTIFICATE};
-		Cursor c = _context.getContentResolver().query(AuthUsersMetaData.CONTENT_URI, columns, null, new String[] {"Certificate1"}, null);
+		Cursor c = _context.getContentResolver().query(AuthUsersMetaData.CONTENT_URI, columns, null, new String[] {certificate}, null);
 		
 		if(c.moveToFirst()) {
-			profile.setId(c.getLong(c.getColumnIndex(AuthUsersMetaData.Table.COLUMN_ID)));
+			long id = c.getLong(c.getColumnIndex(AuthUsersMetaData.Table.COLUMN_ID));
+			profile.setId(id);
+			
 			ContentValues profileContentValues = getContentValues(profile);
+			profileContentValues.put(ProfilesMetaData.Table.COLUMN_ID, id);
 			_context.getContentResolver().insert(ProfilesMetaData.CONTENT_URI, profileContentValues);
 			return 0;
 		}
@@ -199,4 +204,14 @@ public class ProfilesHelper {
 				ProfilesMetaData.Table.COLUMN_SETTINGS};
 		return columns;
 	}
+	
+	private String getNewCertificate() {
+		Random rnd = new Random();
+        String certificate = "";
+        for (int i = 0; i < 256 + 1; i++)
+        {
+        	certificate += (char)((rnd.nextInt() % 26) + 97);
+        }
+        return certificate;
+    }
 }
