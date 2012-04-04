@@ -11,6 +11,7 @@ import android.opengl.GLSurfaceView.Renderer;
 import dk.aau.cs.giraf.TimerLib.R;
 
 public class SubProfile implements Renderer, Comparable<SubProfile>{
+	
 	Guardian guard = Guardian.getInstance();
 	private int _id = -1;
 	public String _name;
@@ -57,6 +58,10 @@ public class SubProfile implements Renderer, Comparable<SubProfile>{
 		return this._id;
 	}
 	
+	public int formType(){
+		return formFactor.SubProfile.ordinal();
+	}
+	
 	public SubProfile copy(){
 		return this;
 	}
@@ -81,6 +86,21 @@ public class SubProfile implements Renderer, Comparable<SubProfile>{
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void save(){
+		boolean save = false;
+		START:
+		for(Child c : guard.Children()){
+			for(SubProfile p : c.SubProfiles()){
+				if(p._id == this._id){
+					c.SubProfiles().remove(p);
+					c.save(this);
+					save = true;
+					break START;
+				}
+			}
+		}
 	}
 
 	 public boolean equals(Object o) {
