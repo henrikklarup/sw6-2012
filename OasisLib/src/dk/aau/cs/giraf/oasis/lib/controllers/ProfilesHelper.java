@@ -205,6 +205,9 @@ public class ProfilesHelper {
 		return columns;
 	}
 	
+	/**
+	 * @return the certificate
+	 */
 	private String getNewCertificate() {
 		Random rnd = new Random();
         String certificate = "";
