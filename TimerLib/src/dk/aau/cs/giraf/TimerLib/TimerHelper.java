@@ -41,10 +41,10 @@ public class TimerHelper {
 		DigitalClock digital4 = new DigitalClock("Bblue Digital clock", "blue digital 25% size 1min", 25, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 60, true);
 		DigitalClock digital5 = new DigitalClock("Ablue Digital clock", "blue digital 25% size 1min", 25, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 60, true);
 		
-		Hourglass hourglass1 = new Hourglass("DHourglass 10min", "white background hourglass with 10min 100% size digital clock", 100, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 600, false, 25);
-		Hourglass hourglass2 = new Hourglass("CHourglass 15min", "black background hourglass with 15min 60% size digital clock", 60, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 900, true, 50);
-		Hourglass hourglass3 = new Hourglass("BHourglass 20min", "white background hourglass with 20min 30% size no digital clock", 30, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 1200, false, 100);
-		Hourglass hourglass4 = new Hourglass("AHourglass 20min", "white background hourglass with 20min 30% size no digital clock", 30, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 1200, false, 100);
+		Hourglass hourglass1 = new Hourglass("DHourglass 10min", "white background hourglass with 10min 100% size digital clock", 100, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 600, false);
+		Hourglass hourglass2 = new Hourglass("CHourglass 15min", "black background hourglass with 15min 60% size digital clock", 60, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 900, true);
+		Hourglass hourglass3 = new Hourglass("BHourglass 20min", "white background hourglass with 20min 30% size no digital clock", 30, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 1200, false);
+		Hourglass hourglass4 = new Hourglass("AHourglass 20min", "white background hourglass with 20min 30% size no digital clock", 30, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 1200, false);
 		
 		
 		TimeTimer circle1 = new TimeTimer("ATimeTimer 10min", "white background hourglass with 10min 100% size digital clock", 100, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 600, false);
