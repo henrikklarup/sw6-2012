@@ -16,7 +16,7 @@ public class TimeTimer extends SubProfile {
 		return copyP;
 	}
 	
-	public int formType(){
-		return formFactor.TimeTimer.ordinal();
+	public formFactor formType(){
+		return formFactor.TimeTimer;
 	}
 }

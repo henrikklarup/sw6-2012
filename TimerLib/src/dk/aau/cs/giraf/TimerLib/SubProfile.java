@@ -67,8 +67,8 @@ public class SubProfile implements Renderer, Comparable<SubProfile>{
 		this._attachment._totalTime = this._totalTime;
 	}
 	
-	public int formType(){
-		return formFactor.SubProfile.ordinal();
+	public formFactor formType(){
+		return formFactor.SubProfile;
 	}
 	
 	public SubProfile copy(){

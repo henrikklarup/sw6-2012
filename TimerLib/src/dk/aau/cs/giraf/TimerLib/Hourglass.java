@@ -20,7 +20,7 @@ public class Hourglass extends SubProfile {
 		return copyP;
 	}
 	
-	public int formType(){
-		return formFactor.Hourglass.ordinal();
+	public formFactor formType(){
+		return formFactor.Hourglass;
 	}
 }

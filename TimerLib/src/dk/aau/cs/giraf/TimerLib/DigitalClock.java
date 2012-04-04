@@ -15,8 +15,8 @@ public class DigitalClock extends SubProfile {
 		return copyP;
 	}	
 	
-	public int formType(){
-		return formFactor.DigitalClock.ordinal();
+	public formFactor formType(){
+		return formFactor.DigitalClock;
 	}
 	
 }

@@ -21,7 +21,7 @@ public class ProgressBar extends SubProfile {
 		return copyP;
 	}
 	
-	public int formType(){
-		return formFactor.ProgressBar.ordinal();
+	public formFactor formType(){
+		return formFactor.ProgressBar;
 	}
 }
