@@ -122,7 +122,7 @@ public class AppsHelper {
 		App app = new App();
 		app.setId(cursor.getLong(cursor.getColumnIndex(AppsMetaData.Table.COLUMN_ID)));
 		app.setName(cursor.getString(cursor.getColumnIndex(AppsMetaData.Table.COLUMN_NAME)));
-		app.setVersion(cursor.getString(cursor.getColumnIndex(AppsMetaData.Table.COLUMN_VERSIONNUMBER)));
+		app.setVersion(cursor.getString(cursor.getColumnIndex(AppsMetaData.Table.COLUMN_VERSION)));
 		return app;
 	}
 
@@ -151,7 +151,7 @@ public class AppsHelper {
 	private ContentValues getContentValues(App app) {
 		ContentValues contentValues = new ContentValues();
 		contentValues.put(AppsMetaData.Table.COLUMN_NAME, app.getName());
-		contentValues.put(AppsMetaData.Table.COLUMN_VERSIONNUMBER, app.getVersion());
+		contentValues.put(AppsMetaData.Table.COLUMN_VERSION, app.getVersion());
 		
 		return contentValues;
 	}
@@ -163,7 +163,7 @@ public class AppsHelper {
 		String[] columns = new String[] { 
 				AppsMetaData.Table.COLUMN_ID, 
 				AppsMetaData.Table.COLUMN_NAME,
-				AppsMetaData.Table.COLUMN_VERSIONNUMBER};
+				AppsMetaData.Table.COLUMN_VERSION};
 		
 		return columns;
 	}

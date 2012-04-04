@@ -11,6 +11,6 @@ public class MediaDepartmentAccessMetaData {
 		public static final String TABLE_NAME = "tbl_mediadepartmentaccess";
 
 		public static final String COLUMN_DEPARTMENTID = "mediadepartmentaccess_departmentid";
-		public static final String COLUMN_MEDIAID = "hasguardian_mediaid";
+		public static final String COLUMN_MEDIAID = "mediadepartmentaccess_mediaid";
 	}
 }

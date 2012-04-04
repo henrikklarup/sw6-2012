@@ -71,7 +71,7 @@ public class DbProvider extends ContentProvider {
 		appsProjectionMap = new HashMap<String, String>();
 		appsProjectionMap.put(AppsMetaData.Table.COLUMN_ID, AppsMetaData.Table.COLUMN_ID);
 		appsProjectionMap.put(AppsMetaData.Table.COLUMN_NAME, AppsMetaData.Table.COLUMN_NAME);
-		appsProjectionMap.put(AppsMetaData.Table.COLUMN_VERSIONNUMBER, AppsMetaData.Table.COLUMN_VERSIONNUMBER);
+		appsProjectionMap.put(AppsMetaData.Table.COLUMN_VERSION, AppsMetaData.Table.COLUMN_VERSION);
 	}
 
 	private static final HashMap<String, String> authusersProjectionMap;
@@ -143,7 +143,6 @@ public class DbProvider extends ContentProvider {
 		mediaProjectionMap.put(MediaMetaData.Table.COLUMN_PATH, MediaMetaData.Table.COLUMN_PATH);
 		mediaProjectionMap.put(MediaMetaData.Table.COLUMN_PUBLIC, MediaMetaData.Table.COLUMN_PUBLIC);
 		mediaProjectionMap.put(MediaMetaData.Table.COLUMN_TYPE, MediaMetaData.Table.COLUMN_TYPE);
-		mediaProjectionMap.put(MediaMetaData.Table.COLUMN_TAGS, MediaMetaData.Table.COLUMN_TAGS);
 		mediaProjectionMap.put(MediaMetaData.Table.COLUMN_OWNERID, MediaMetaData.Table.COLUMN_OWNERID);
 	}
 	
@@ -171,8 +170,7 @@ public class DbProvider extends ContentProvider {
 		profilesProjectionMap.put(ProfilesMetaData.Table.COLUMN_ROLE, ProfilesMetaData.Table.COLUMN_ROLE);
 		profilesProjectionMap.put(ProfilesMetaData.Table.COLUMN_PHONE, ProfilesMetaData.Table.COLUMN_PHONE);
 		profilesProjectionMap.put(ProfilesMetaData.Table.COLUMN_PICTURE, ProfilesMetaData.Table.COLUMN_PICTURE);
-		profilesProjectionMap.put(ProfilesMetaData.Table.COLUMN_DEPARTMENTID, ProfilesMetaData.Table.COLUMN_DEPARTMENTID);
-		profilesProjectionMap.put(ProfilesMetaData.Table.COLUMN_SETTINGs, ProfilesMetaData.Table.COLUMN_DEPARTMENTID);
+		profilesProjectionMap.put(ProfilesMetaData.Table.COLUMN_SETTINGS, ProfilesMetaData.Table.COLUMN_SETTINGS);
 	}
 
 	private static final HashMap<String, String> tagsProjectionMap;
@@ -288,9 +286,9 @@ public class DbProvider extends ContentProvider {
 		case APPS_TYPE_ONE:
 			return AppsMetaData.CONTENT_TYPE_APP_ONE;
 		case AUTHUSERS_TYPE_LIST:
-			return AuthUsersMetaData.CONTENT_TYPE_CERTIFICATES_LIST;
+			return AuthUsersMetaData.CONTENT_TYPE_AUTHUSERS_LIST;
 		case AUTHUSERS_TYPE_ONE:
-			return AuthUsersMetaData.CONTENT_TYPE_CERTIFICATE_ONE;
+			return AuthUsersMetaData.CONTENT_TYPE_AUTHUSER_ONE;
 		case DEPARTMENTS_TYPE_LIST:
 			return DepartmentsMetaData.CONTENT_TYPE_DEPARTMENTS_LIST;
 		case DEPARTMENTS_TYPE_ONE:
@@ -455,7 +453,7 @@ public class DbProvider extends ContentProvider {
 			builder.setTables(AuthUsersMetaData.Table.TABLE_NAME);
 			builder.setProjectionMap(authusersProjectionMap);
 			if (selectionArgs != null) {
-				builder.appendWhere(AuthUsersMetaData.Table.COLUMN_CERTIFICATE + " = " + selectionArgs[0]);
+				builder.appendWhere(AuthUsersMetaData.Table.COLUMN_CERTIFICATE + " = '" + selectionArgs[0] + "'");
 			}
 			break;
 		case DEPARTMENTS_TYPE_LIST:
@@ -560,9 +558,9 @@ public class DbProvider extends ContentProvider {
 		default:
 			throw new IllegalArgumentException("Unknown URI: " + uri);
 		}
-
+		
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
-		Cursor queryCursor = builder.query(db, projection, selection, selectionArgs, null, null, null);
+		Cursor queryCursor = builder.query(db, projection, selection, null, null, null, null);
 		queryCursor.setNotificationUri(getContext().getContentResolver(), uri);
 		return queryCursor;
 	}

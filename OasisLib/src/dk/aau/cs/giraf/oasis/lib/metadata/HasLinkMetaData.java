@@ -6,7 +6,7 @@ import android.provider.BaseColumns;
 public class HasLinkMetaData {
 
 	public static final Uri CONTENT_URI = Uri.parse("content://dk.aau.cs.giraf.oasis.localdb.AutismProvider/haslink");
-	
+
 	public class Table implements BaseColumns {
 		public static final String TABLE_NAME = "tbl_apps";
 

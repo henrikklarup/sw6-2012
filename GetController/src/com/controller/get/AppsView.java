@@ -21,7 +21,8 @@ public class AppsView extends ListActivity {
 	Helper helper;
 	App app;
 	Profile profile;
-	ArrayAdapter<Profile> adapter;
+	ArrayAdapter<App> adapter;
+	ArrayAdapter<Profile> profileAdapter;
 	Button bAdd, bDel;
 	TextView tvHeader;
 	int _position;
@@ -34,19 +35,27 @@ public class AppsView extends ListActivity {
 		setContentView(R.layout.main);
 		helper = new Helper(this);
 
-		profile = new Profile("Dummy", "Dummy","Dummy", 0, 12345678, "Dummy", new Setting<String,String,String>());
-		helper.profilesHelper.insertProfile(profile);
+		profile = new Profile("Dummy1", "Dummy","Dummy", 0, 12345678, "Dummy", new Setting<String,String,String>());
+		int result = helper.profilesHelper.insertProfile(profile);
 		
+//		if (result == 0) {
+//			profileValues.add(helper.profilesHelper.authenticateProfile("Certificate"));
+//		}
+//		
+//		Profile profile1 = new Profile("Dummy1", "Dummy","Dummy", 0, 12345678, "Dummy", new Setting<String,String,String>());
+//		profile1.setId(504);
+//		
+//		profileValues.add(profile1);
+	
+//		
 //		app = new App();
 //		app.setName("GetControllerInsert");
-//		app.setVersionNumber("versionNumber");
+//		app.setVersion("versionNumber");
 //		helper.appsHelper.insertApp(app);
 //		helper.appsHelper.insertApp(app);
 //		helper.appsHelper.insertApp(app);
-
+//
 //		values = helper.appsHelper.getApps();
-		
-		profileValues.add(helper.profilesHelper.authenticateProfile("Certificate"));
 
 		updateList();
 
@@ -56,6 +65,7 @@ public class AppsView extends ListActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+//				helper.appsHelper.insertApp(app);
 				helper.profilesHelper.insertProfile(profile);
 				updateList();
 			}
@@ -67,6 +77,7 @@ public class AppsView extends ListActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+//				helper.appsHelper.clearAppsTable();
 				helper.profilesHelper.clearProfilesTable();
 				updateList();
 			}
@@ -84,7 +95,7 @@ public class AppsView extends ListActivity {
 //		long _id = _app.getId();
 //
 //		fedte = helper.appsHelper.getAppById(_id);
-
+//
 		Profile fedte = new Profile();
 		fedte = helper.profilesHelper.getProfileById(((Profile)getListAdapter().getItem(position)).getId());
 		
@@ -99,7 +110,11 @@ public class AppsView extends ListActivity {
 	
 	public void updateList() {
 		profileValues = helper.profilesHelper.getProfiles();
-		adapter = new ArrayAdapter<Profile>(this, android.R.layout.simple_list_item_1, profileValues);
-		setListAdapter(adapter);
+		profileAdapter = new ArrayAdapter<Profile>(this, android.R.layout.simple_list_item_1, profileValues);
+		setListAdapter(profileAdapter);
+		
+//		values = helper.appsHelper.getApps();
+//		adapter = new ArrayAdapter<App>(this, android.R.layout.simple_list_item_1, values);
+//		setListAdapter(adapter);
 	}
 }
