@@ -36,7 +36,7 @@ public class AppsView extends ListActivity {
 		helper = new Helper(this);
 
 		profile = new Profile("Dummy1", "Dummy","Dummy", 0, 12345678, "Dummy", new Setting<String,String,String>());
-		int result = helper.profilesHelper.insertProfile(profile);
+//		int result = helper.profilesHelper.insertProfile(profile);
 		
 //		if (result == 0) {
 //			profileValues.add(helper.profilesHelper.authenticateProfile("Certificate"));
