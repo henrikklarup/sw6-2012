@@ -1,4 +1,4 @@
-package giraf.autism.timer.opengl;
+package dk.aau.cs.giraf.wombat;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;

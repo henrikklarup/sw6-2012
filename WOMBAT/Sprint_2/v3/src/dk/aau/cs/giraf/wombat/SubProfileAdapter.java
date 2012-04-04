@@ -3,13 +3,13 @@ package dk.aau.cs.giraf.wombat;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import dk.aau.cs.giraf.TimerLib.Child;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
 
 public class SubProfileAdapter extends ArrayAdapter<SubProfile> {
@@ -32,10 +32,32 @@ public class SubProfileAdapter extends ArrayAdapter<SubProfile> {
 		SubProfile sp = items.get(position);
 		if( sp != null ){
 			ImageView iv = (ImageView)v.findViewById(R.id.subProfilePic);
+			ImageView ivBG = (ImageView)v.findViewById(R.id.subProfilePicBackground);
 			TextView tv = (TextView)v.findViewById(R.id.subProfileName);
 			
 			if(iv != null){
-				iv.setImageResource(R.drawable.default_profile);
+				switch(sp.formType()){
+				case Hourglass:
+					iv.setImageResource(R.drawable.thumbnail_hourglass);
+					break;
+				case DigitalClock:
+					iv.setImageResource(R.drawable.thumbnail_digital);
+					break;
+				case ProgressBar:
+					iv.setImageResource(R.drawable.thumbnail_progressbar);
+					break;
+				case TimeTimer:
+					iv.setImageResource(R.drawable.thumbnail_timetimer);
+					break;
+				default:
+					iv.setImageResource(R.drawable.thumbnail_hourglass);
+					break;
+				}
+			}
+			if(ivBG != null){
+				
+				ivBG.setBackgroundColor(sp._timeLeftColor);
+				
 			}
 			if(tv != null){
 				tv.setText(sp._name);
