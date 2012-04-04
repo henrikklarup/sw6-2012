@@ -264,7 +264,7 @@ insert into Media values(1,'c:\test','MyTest',1,'public',1);
 insert into HasTag values(1,1);
 insert into MediaProfileAccess values(1,1);
 
-o
+
 
 select * from Apps
     where 1 in (select idProfile from ListOfApps);
