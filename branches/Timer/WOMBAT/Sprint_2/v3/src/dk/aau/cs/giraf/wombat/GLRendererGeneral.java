@@ -29,13 +29,13 @@ public class GLRendererGeneral implements Renderer{
 		
 		gl.glMatrixMode(GL10.GL_MODELVIEW);
 		gl.glLoadIdentity();
-		GLU.gluLookAt(gl, 0, 0, -5, 0, 0, 0, 0, 2, 0); // hvor langt er vi far objektet og hvor kigger vi hen
+		GLU.gluLookAt(gl, 0, 0, -120, 0, 0, 0, 0, 2, 0); // hvor langt er vi far objektet og hvor kigger vi hen
 		
 		//Rotate the element
 		long time = SystemClock.uptimeMillis() % 4000L;
 		float angle = .090f * ((int)time);
 		
-		gl.glRotatef(angle, 1, 0, 2);
+		gl.glRotatef(angle, .2f, .2f, .2f);
 		
 		timet.draw(gl);
 
@@ -47,6 +47,6 @@ public class GLRendererGeneral implements Renderer{
 		float ratio = (float) width/height;
 		gl.glMatrixMode(GL10.GL_PROJECTION);
 		gl.glLoadIdentity();
-		gl.glFrustumf(-ratio, ratio, -1, 1, 1, 25); //fortæller fra hvilken afstand trekanten er synlig
+		gl.glFrustumf(-ratio, ratio, -1, 1, 1, 600); //fortæller fra hvilken afstand trekanten er synlig
 	}
 }
