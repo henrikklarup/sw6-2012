@@ -1,6 +1,6 @@
 package savannah.test;
 
-import java.awt.EventQueue;
+import savannah.server.*;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -20,7 +20,9 @@ public class EventHandlerTest {
 			Document d = dom.Dominate(f);
 			
 			CommitEvent com = new CommitEvent(d,null,false);
-			handler.CommitHandler(com);
+			
+			CommitHandler handler = new CommitHandler();
+			handler.HandleIt(com);
 			ArrayList<String> q = handler.getQueries();
 			for(String s: q)
 			{
