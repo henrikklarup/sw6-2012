@@ -22,6 +22,7 @@ import android.content.pm.ServiceInfo;
 // Maybe color isnt the right type //check
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
 class ApplicationInfo{
 	ServiceInfo category;

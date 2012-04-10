@@ -46,12 +46,15 @@ public class IconAdapter extends BaseAdapter {
 
 	@Override
 	public Object getItem(int position) {
-		return position;
+		if(appInfo == null){
+			return null;
+		} else{
+			return appInfo.get(position);
+		}
 	}
 
 	@Override
-	public long getItemId(int arg0) {
-		// TODO Auto-generated method stub
-		return 0;
+	public long getItemId(int postion) {
+		return postion;
 	}
 }
