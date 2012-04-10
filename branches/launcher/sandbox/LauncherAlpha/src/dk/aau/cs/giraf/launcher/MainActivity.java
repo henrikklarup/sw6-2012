@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.GridView;
 
 public class MainActivity extends Activity {
@@ -49,10 +50,10 @@ public class MainActivity extends Activity {
 					appInfo.icon = info.activityInfo.loadIcon(getPackageManager());
 
 					appInfo.setActivity(new ComponentName(
-							info.activityInfo.applicationInfo.packageName,
-							info.activityInfo.name),
-							Intent.FLAG_ACTIVITY_NEW_TASK
-							| Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+	                        info.activityInfo.applicationInfo.packageName,
+	                        info.activityInfo.name),
+	                        Intent.FLAG_ACTIVITY_NEW_TASK
+	                        | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
 					applications.add(appInfo);
 				}
 			}
