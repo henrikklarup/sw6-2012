@@ -20,9 +20,9 @@ public class AuthenticationActivity extends CaptureActivity {
 	    @Override
 	    public void handleDecode(Result rawResult, Bitmap barcode)
 	    {
-
 	    ProgressDialog dialog = ProgressDialog.show(AuthenticationActivity.this, "", rawResult.getText(), true);
 	       //Toast.makeText(this.getApplicationContext(), "Scanned code "+ rawResult.getText(), Toast.LENGTH_LONG).show();
+	    this.getHandler().sendEmptyMessageDelayed(R.id.restart_preview, 500);
 	    }
 
 }
