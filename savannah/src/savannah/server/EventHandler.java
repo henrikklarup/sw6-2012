@@ -1,11 +1,5 @@
 package savannah.server;
 
-//JDOM imports
-import java.util.*;	
-import savannah.server.*;
-
-import org.jdom.*;
-import org.jdom.xpath.*;
 public class EventHandler implements Runnable {
 	private CommitHandler cHandler;
 	private RequestHandler rHandler;
