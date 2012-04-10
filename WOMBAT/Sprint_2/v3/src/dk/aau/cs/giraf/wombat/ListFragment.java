@@ -14,6 +14,7 @@ public class ListFragment extends android.app.ListFragment {
 	List<Profile> profileList;
 	Guardian guard = Guardian.getInstance();
 	ChildAdapter adapter;
+	int mPosition;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -47,9 +48,11 @@ public class ListFragment extends android.app.ListFragment {
 		DetailFragment detf = (DetailFragment) getFragmentManager()
 				.findFragmentById(R.id.detailFragment);
 		CustomizeFragment custF = (CustomizeFragment)getFragmentManager().findFragmentById(R.id.customizeFragment);
+		custF.setDefaultProfile();
 		
 		if (detf != null && detf.isInLayout()) {
 			// Marks the selected profile in the guard singleton
+			mPosition = position; 
 			guard.publishList().get(position).select();
 			detf.loadSubProfiles();
 			

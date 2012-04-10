@@ -163,19 +163,31 @@
                         android:textColor="#FFFFFF" />
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/gradientButton_1"
+                <LinearLayout
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_margin="10dp"
-                    android:background="@drawable/btn" />
+                    android:background="@drawable/color_btn_normal" >
 
-                <Button
-                    android:id="@+id/gradientButton_2"
+                    <Button
+                        android:id="@+id/gradientButton_1"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/color_btn" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_margin="10dp"
-                    android:background="@drawable/btn" />
+                    android:background="@drawable/color_btn_normal" >
+
+                    <Button
+                        android:id="@+id/gradientButton_2"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/color_btn" />
+                </LinearLayout>
             </LinearLayout>
         </RelativeLayout>
 
@@ -192,13 +204,19 @@
                 android:textColor="#FFFFFF"
                 android:textSize="16dp" />
 
-            <Button
-                android:id="@+id/frameColorButton"
+            <LinearLayout
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_centerInParent="true"
                 android:layout_margin="10dp"
-                android:background="@drawable/btn" />
+                android:background="@drawable/color_btn_normal" >
+
+                <Button
+                    android:id="@+id/frameColorButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/color_btn" />
+            </LinearLayout>
         </RelativeLayout>
 
         <RelativeLayout
@@ -214,13 +232,19 @@
                 android:textColor="#FFFFFF"
                 android:textSize="16dp" />
 
-            <Button
-                android:id="@+id/backgroundColorButton"
+            <LinearLayout
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_centerInParent="true"
                 android:layout_margin="10dp"
-                android:background="@drawable/btn" />
+                android:background="@drawable/color_btn_normal" >
+
+                <Button
+                    android:id="@+id/backgroundColorButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/color_btn" />
+            </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
 
@@ -262,8 +286,8 @@
                 android:drawableTop="@drawable/thumbnail_save"
                 android:paddingTop="20dp"
                 android:text="@string/save_button"
-                android:textSize="14dp" />
-            
+                android:textSize="14dp"/>
+
             <Button
                 android:id="@+id/customize_save_as"
                 android:layout_width="110dp"

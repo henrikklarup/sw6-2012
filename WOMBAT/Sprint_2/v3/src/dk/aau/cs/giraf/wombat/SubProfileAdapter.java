@@ -3,7 +3,6 @@ package dk.aau.cs.giraf.wombat;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +32,8 @@ public class SubProfileAdapter extends ArrayAdapter<SubProfile> {
 		if( sp != null ){
 			ImageView iv = (ImageView)v.findViewById(R.id.subProfilePic);
 			ImageView ivBG = (ImageView)v.findViewById(R.id.subProfilePicBackground);
-			TextView tv = (TextView)v.findViewById(R.id.subProfileName);
+			TextView tvName = (TextView)v.findViewById(R.id.subProfileName);
+			TextView tvDesc = (TextView)v.findViewById(R.id.subProfileDesc);
 			
 			if(iv != null){
 				switch(sp.formType()){
@@ -59,11 +59,15 @@ public class SubProfileAdapter extends ArrayAdapter<SubProfile> {
 				ivBG.setBackgroundColor(sp._timeLeftColor);
 				
 			}
-			if(tv != null){
-				tv.setText(sp._name);
+			if(tvName != null){
+				tvName.setText(sp._name);
+			}
+			if(tvDesc != null){
+				tvDesc.setText(sp._desc);
 			}
 			
 		}
+
 		return v;
 	}
 }

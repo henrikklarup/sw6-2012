@@ -11,10 +11,12 @@ import dk.aau.cs.giraf.TimerLib.SubProfile;
 
 public class DetailFragment extends android.app.ListFragment {
 	Guardian guard = Guardian.getInstance("John");
+	ListView thisListView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		getActivity().setContentView(R.layout.profile_list);
 		// Write Tag = Detail and Text = Detail Opened in the LogCat
 		Log.e("Detail", "Detail Opened");
 
@@ -28,29 +30,27 @@ public class DetailFragment extends android.app.ListFragment {
 		setListAdapter(null);
 	}
 
+	public void reloadSubProfiles() {
+		loadSubProfiles();
+	}
+
 	/**
 	 * Inserts the templates on profile id in the details list
 	 * 
-	 * @param id
-	 *            id of the template profile
 	 */
 	public void loadSubProfiles() {
 		ArrayList<SubProfile> subprofiles = guard.selected().SubProfiles();
-
-		Log.e("Wombat", "Templates loaded");
-		// Create and input adapter with the string array loaded (CHANGE
-		// 'values' to get another input)
 		SubProfileAdapter adapter = new SubProfileAdapter(getActivity(),
 				android.R.layout.simple_list_item_1, subprofiles);
 		setListAdapter(adapter);
 	}
 
 	public void onListItemClick(ListView lv, View view, int position, long id) {
-		for(int i = 0; i < lv.getChildCount(); i++){
+		for (int i = 0; i < lv.getChildCount(); i++) {
 			lv.getChildAt(i).setSelected(false);
 		}
 		view.setSelected(true);
-		
+
 		CustomizeFragment fragment = (CustomizeFragment) getFragmentManager()
 				.findFragmentById(R.id.customizeFragment);
 		fragment.loadSettings(guard.selected().SubProfiles().get(position));
