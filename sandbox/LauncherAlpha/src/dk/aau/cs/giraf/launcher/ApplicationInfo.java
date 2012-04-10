@@ -23,7 +23,7 @@ import android.content.pm.ServiceInfo;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 
-class ApplicationInfo {
+class ApplicationInfo{
 	ServiceInfo category;
 	
 	/**

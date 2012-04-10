@@ -16,7 +16,7 @@ import android.widget.GridView;
 public class MainActivity extends Activity {
 
 	private static Context context;
-	private static ArrayList<dk.aau.cs.giraf.launcher.ApplicationInfo> mApplications;
+	private static ArrayList<ApplicationInfo> mApplications;
 	GridView Grid;
 
 	/** Called when the activity is first created. */
@@ -59,6 +59,7 @@ public class MainActivity extends Activity {
 
 			Grid = (GridView)findViewById(R.id.GridView01);
 			Grid.setAdapter(new IconAdapter(this,applications));
+			Grid.setOnItemClickListener(new ApplicationLaunch());
 		}
 	}
 }
