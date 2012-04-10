@@ -48,6 +48,7 @@ Table of contents
        * [xxx_Meetings_Groupxzmeetings_14032012 14/03-2012]
        * [xxx_Meetings_Groupxzmeetings_21032012 21/03-2012]
        * [xxx_Meetings_Groupxzmeetings_04102012 10/04-2012]
+       * [xxx_Meetings_Groupxzmeetings_04232012 23/04-2012]
     * Specification meetings
        * [xxx_Meetings_Specificationxzmeetings_03072012 07/03-2012]
     * Supervisor meetings
