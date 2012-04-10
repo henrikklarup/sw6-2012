@@ -21,6 +21,7 @@ public class AppsView extends ListActivity {
 	Helper helper;
 	App app;
 	Profile profile;
+	Setting<String, String, String> settings;
 	ArrayAdapter<App> adapter;
 	ArrayAdapter<Profile> profileAdapter;
 	Button bAdd, bDel;
@@ -34,8 +35,10 @@ public class AppsView extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		helper = new Helper(this);
+		settings = new Setting<String, String, String>();
+		settings.addValue("Hello", "String", "World!");
 
-		profile = new Profile("Dummy1", "Dummy","Dummy", 0, 12345678, "Dummy", new Setting<String,String,String>());
+		profile = new Profile("Dummy1", "Dummy","Dummy", 0, 12345678, "Dummy", settings);
 //		int result = helper.profilesHelper.insertProfile(profile);
 		
 //		if (result == 0) {
@@ -100,7 +103,7 @@ public class AppsView extends ListActivity {
 		fedte = helper.profilesHelper.getProfileById(((Profile)getListAdapter().getItem(position)).getId());
 		
 		if (fedte != null) {
-			Toast.makeText(this, fedte.toString(), Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, fedte.getSetting().get("Hello").get("String"), Toast.LENGTH_SHORT).show();
 		} else {
 			//   Toast.makeText(this, String.valueOf(_id), Toast.LENGTH_SHORT).show();
 		}
