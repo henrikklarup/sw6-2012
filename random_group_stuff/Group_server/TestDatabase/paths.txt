@@ -1,0 +1,4 @@
+Home: /var/lib/tomcat6/webapps
+ROOT: /var/lib/tomcat6/webapps/ROOT
+CSS: /var/lib/tomcat6/webapps/css
+TestDatabase : /var/lib/tomcat6/webapps/TestDatabase
