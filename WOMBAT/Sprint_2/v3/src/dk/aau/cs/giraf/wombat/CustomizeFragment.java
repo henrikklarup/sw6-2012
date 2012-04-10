@@ -246,8 +246,11 @@ public class CustomizeFragment extends Fragment {
 	 */
 	private void setTime(int totalTime) {
 		int minutes, seconds;
-
-		if (totalTime >= 60 * 60) {
+		Log.e("Time", "" + totalTime);
+		if(totalTime == 60){
+			minutes = 1;
+			seconds = 0;
+		} else if (totalTime >= 60 * 60) {
 			minutes = 60;
 			seconds = 0;
 		} else {
