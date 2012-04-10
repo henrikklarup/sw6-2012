@@ -40,24 +40,24 @@ public class ProfilesHelper {
 		ContentValues authusersContentValues = new ContentValues();
 		authusersContentValues.put(AuthUsersMetaData.Table.COLUMN_CERTIFICATE, certificate);
 		_context.getContentResolver().insert(AuthUsersMetaData.CONTENT_URI, authusersContentValues);
-		
+
 		String[] columns = new String[] { 
 				AuthUsersMetaData.Table.COLUMN_ID, 
 				AuthUsersMetaData.Table.COLUMN_CERTIFICATE};
 		Cursor c = _context.getContentResolver().query(AuthUsersMetaData.CONTENT_URI, columns, null, new String[] {certificate}, null);
-		
+
 		if(c.moveToFirst()) {
 			long id = c.getLong(c.getColumnIndex(AuthUsersMetaData.Table.COLUMN_ID));
 			profile.setId(id);
-			
+
 			ContentValues profileContentValues = getContentValues(profile);
 			profileContentValues.put(ProfilesMetaData.Table.COLUMN_ID, id);
 			_context.getContentResolver().insert(ProfilesMetaData.CONTENT_URI, profileContentValues);
 			return 0;
 		}
-		
+
 		c.close();
-		
+
 		return -1;
 	}
 
@@ -85,24 +85,46 @@ public class ProfilesHelper {
 	 */
 	public Profile authenticateProfile(String certificate) {
 		Profile profile = null;
-		
+
 		String[] columns = new String[] { 
 				AuthUsersMetaData.Table.COLUMN_ID, 
 				AuthUsersMetaData.Table.COLUMN_CERTIFICATE};
 		Cursor c = _context.getContentResolver().query(AuthUsersMetaData.CONTENT_URI, columns, null, new String[] {"Certificate"}, null);
-		
+
 		if(c.moveToFirst()) {
 			profile = getProfileById(c.getLong(c.getColumnIndex(AuthUsersMetaData.Table.COLUMN_ID)));
 		}
-		
+
 		c.close();
-		
-//		Profile profile = new Profile("Dummy", "Dummy","Dummy", 0, 12345678, "Dummy", new Setting<String,String,String>());
-//		profile.setId(101);
-		
+
 		return profile;
 	}
-	
+
+	/**
+	 * Retrieve the certificates for a profile
+	 * @param profile
+	 * @return List<String> or null
+	 */
+	public List<String> getCertificatesByProfile(Profile profile) {
+		List<String> certificate = null;
+		Uri uri = ContentUris.withAppendedId(AuthUsersMetaData.CONTENT_URI, profile.getId());
+
+		String[] columns = new String[] {
+				AuthUsersMetaData.Table.COLUMN_ID,
+				AuthUsersMetaData.Table.COLUMN_CERTIFICATE};
+		Cursor c = _context.getContentResolver().query(uri, columns, null, null, null);
+
+		if (c.moveToFirst()) {
+			certificate = new ArrayList<String>();
+			while (!c.isAfterLast()) {
+				certificate.add(c.getString(c.getColumnIndex(AuthUsersMetaData.Table.COLUMN_CERTIFICATE)));
+				c.moveToNext();
+			}
+		}
+
+		return certificate;
+	}
+
 	/**
 	 * Get a profile by its ID
 	 * @param id the id of the profile
@@ -135,7 +157,7 @@ public class ProfilesHelper {
 
 		return profiles;
 	}
-	
+
 	/**
 	 * Cursor to profiles
 	 * @param cursor Input cursor
@@ -143,17 +165,17 @@ public class ProfilesHelper {
 	 */
 	private List<Profile> cursorToProfiles(Cursor cursor) {
 		List<Profile> profiles = new ArrayList<Profile>();
-		
+
 		if(cursor.moveToFirst()) {
 			while(!cursor.isAfterLast()) {
 				profiles.add(cursorToProfile(cursor));
 				cursor.moveToNext();
 			}
 		}
-		
+
 		return profiles;
 	}
-	
+
 	/**
 	 * Cursor to profile
 	 * @param cursor Input cursor
@@ -171,7 +193,7 @@ public class ProfilesHelper {
 		profile.setSetting(Setting.toObject(cursor.getString(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_SETTINGS)).getBytes()));
 		return profile;
 	}
-	
+
 	/**
 	 * @param profile the profile to put in the database
 	 * @return the contentValues
@@ -185,10 +207,10 @@ public class ProfilesHelper {
 		contentValues.put(ProfilesMetaData.Table.COLUMN_PHONE, profile.getPhone());
 		contentValues.put(ProfilesMetaData.Table.COLUMN_PICTURE, profile.getPicture());
 		contentValues.put(ProfilesMetaData.Table.COLUMN_SETTINGS, Setting.toByteArray(profile.getSetting()).toString());
-		
+
 		return contentValues;
 	}
-	
+
 	/**
 	 * @return the columns of the table
 	 */
@@ -204,17 +226,17 @@ public class ProfilesHelper {
 				ProfilesMetaData.Table.COLUMN_SETTINGS};
 		return columns;
 	}
-	
+
 	/**
 	 * @return the certificate
 	 */
 	private String getNewCertificate() {
 		Random rnd = new Random();
-        String certificate = "";
-        for (int i = 0; i < 256 + 1; i++)
-        {
-        	certificate += (char)((rnd.nextInt() % 26) + 97);
-        }
-        return certificate;
-    }
+		String certificate = "";
+		for (int i = 0; i < 256 + 1; i++)
+		{
+			certificate += (char)((rnd.nextInt() % 26) + 97);
+		}
+		return certificate;
+	}
 }
