@@ -8,11 +8,8 @@ import org.jdom.Document;
 
 import savannah.io.DOMinator.DOMinator;
 import savannah.server.CommitEvent;
-import savannah.server.EventHandler;
 
 public class EventHandlerTest {
-		private static EventHandler handler = new EventHandler();
-		
 		public static void main(String[] args) throws Exception
 		{
 			File f = new File("/home/martin/Documents/eadocs/sw6_example.xml");
