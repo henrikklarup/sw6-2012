@@ -7,9 +7,8 @@ import android.app.Activity;
 
 	class ApplicationLaunch extends Activity implements AdapterView.OnItemClickListener{
         @Override
-        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+        public void onItemClick(AdapterView parent, View v, int position, long id) {
             ApplicationInfo app = (ApplicationInfo) parent.getItemAtPosition(position);
             startActivity(app.intent);
-            Log.i("GIRAF", "hit");
     }
 }
