@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class SpeechBoardFragment extends Fragment
+public class OptionsFragment extends Fragment
 {
 	
 	
@@ -24,6 +24,6 @@ public class SpeechBoardFragment extends Fragment
 			Bundle savedInstanceState) 
 	{        
 		// Inflate the layout for this fragment
-		return inflater.inflate(R.layout.speechboard_layout, container, false);
+		return inflater.inflate(R.layout.options_layout, container, false);
 	}
 }
