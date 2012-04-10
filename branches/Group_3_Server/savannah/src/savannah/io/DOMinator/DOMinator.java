@@ -32,4 +32,10 @@ public class DOMinator {
 	{
 		return sax.build(in);
 	}
+	
+	public Document Dominate(String s) throws JDOMException, IOException
+	{
+		StringReader reader = new StringReader(s);
+		return sax.build(reader);
+	}
 }
