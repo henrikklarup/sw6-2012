@@ -18,7 +18,7 @@ public class AuthenticationActivity extends CaptureActivity {
 	    @Override
 	    public void handleDecode(Result rawResult, Bitmap barcode)
 	    {
-	       Toast.makeText(this.getApplicationContext(), "Scanned code "+ rawResult.getText(), Toast.LENGTH_LONG);
+	       Toast.makeText(this.getApplicationContext(), "Scanned code "+ rawResult.getText(), Toast.LENGTH_LONG).show();
 	    }
 
 }
