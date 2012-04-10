@@ -88,7 +88,7 @@ public class Media {
 		return mType;
 	}
 	/**
-	 * @param type the type to set
+	 * @param mType the type to set
 	 */
 	public void setMType(String mType) {
 		this.mType = mType;

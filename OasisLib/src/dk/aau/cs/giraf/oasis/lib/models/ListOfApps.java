@@ -44,7 +44,7 @@ public class ListOfApps {
 		return idProfile;
 	}
 	/**
-	 * @param profileId the profileId to set
+	 * @param idProfile the profileId to set
 	 */
 	public void setIdProfile(long idProfile) {
 		this.idProfile = idProfile;

@@ -130,8 +130,10 @@ public class Profile {
 	public Setting<String, String, String> getSetting() {
 		return setting;
 	}
-	/**
-	 * @param idCertificate the idCertificate to set
+
+	/***
+	 * Set settings
+	 * @param setting The setting to change
 	 */
 	public void setSetting(Setting<String, String, String> setting) {
 		this.setting = setting;

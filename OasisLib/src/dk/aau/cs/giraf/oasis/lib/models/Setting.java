@@ -28,9 +28,10 @@ public class Setting<Key, Type, Value> extends HashMap<Key, HashMap<Type, Value>
 		typeMap.put(type, value);
 	}
 	
-	public static byte[] toByteArray (Setting<String, String, String> setting)
+	public static String toStringSetting (Setting<String, String, String> setting)
 	{
 	  Object obj = (Object)setting;
+	  String returnString = null;
 	  byte[] bytes = null;
 	  ByteArrayOutputStream bos = new ByteArrayOutputStream();
 	  try {
@@ -40,28 +41,50 @@ public class Setting<Key, Type, Value> extends HashMap<Key, HashMap<Type, Value>
 	    oos.close(); 
 	    bos.close();
 	    bytes = bos.toByteArray ();
+	    
+		StringBuilder sb = new StringBuilder();
+		for (byte b : bytes) {
+			sb.append(b + ",");
+		}
+		 returnString = sb.toString();
+		 
 	  }
 	  catch (IOException ex) {
 	    //TODO: Handle the exception
+		  bytes = new byte[] {0};
 	  }
-	  return bytes;
+	  return returnString;
 	}
 	    
-	public static Setting<String, String, String> toObject (byte[] bytes)
+	public static Setting<String, String, String> toObject (String bytes)
 	{
+
+		String[] stringBytes = bytes.split(",");
+		byte[] newAllBytes = new byte[stringBytes.length];
+		int i = 0;
+		for (String s : stringBytes) {
+			newAllBytes[i] = Byte.parseByte(s);
+			i++;
+		}
+
+      Setting<String, String, String> setting = new Setting<String,String,String>();
 	  Object obj = null;
 	  try {
-	    ByteArrayInputStream bis = new ByteArrayInputStream (bytes);
+	    ByteArrayInputStream bis = new ByteArrayInputStream (newAllBytes);
 	    ObjectInputStream ois = new ObjectInputStream (bis);
 	    obj = ois.readObject();
 	  }
 	  catch (IOException ex) {
 	    //TODO: Handle the exception
+		setting.addValue("IO", "ex", "!!");
 	  }
 	  catch (ClassNotFoundException ex) {
 	    //TODO: Handle the exception
+		  setting.addValue("CL", "ex", "!!");
 	  }
-	  Setting<String, String, String> setting = (Setting<String, String, String>)obj;
+	  if (obj != null)
+		   setting = (Setting<String, String, String>)obj;
+
 	  return setting;
 	}
 }
