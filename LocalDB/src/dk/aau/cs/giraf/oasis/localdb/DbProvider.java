@@ -456,6 +456,11 @@ public class DbProvider extends ContentProvider {
 				builder.appendWhere(AuthUsersMetaData.Table.COLUMN_CERTIFICATE + " = '" + selectionArgs[0] + "'");
 			}
 			break;
+		case AUTHUSERS_TYPE_ONE:
+			builder.setTables(AuthUsersMetaData.Table.TABLE_NAME);
+			builder.setProjectionMap(authusersProjectionMap);
+			builder.appendWhere(AuthUsersMetaData.Table.COLUMN_ID + " = " + uri.getPathSegments().get(1));
+			break;
 		case DEPARTMENTS_TYPE_LIST:
 			builder.setTables(DepartmentsMetaData.Table.TABLE_NAME);
 			builder.setProjectionMap(departmentsProjectionMap);
