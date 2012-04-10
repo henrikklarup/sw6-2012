@@ -1,5 +1,6 @@
 package giraf.launcher;
 
+import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -18,7 +19,9 @@ public class AuthenticationActivity extends CaptureActivity {
 	    @Override
 	    public void handleDecode(Result rawResult, Bitmap barcode)
 	    {
-	       Toast.makeText(this.getApplicationContext(), "Scanned code "+ rawResult.getText(), Toast.LENGTH_LONG).show();
+
+	    ProgressDialog dialog = ProgressDialog.show(AuthenticationActivity.this, "", rawResult.getText(), true);
+	       //Toast.makeText(this.getApplicationContext(), "Scanned code "+ rawResult.getText(), Toast.LENGTH_LONG).show();
 	    }
 
 }
