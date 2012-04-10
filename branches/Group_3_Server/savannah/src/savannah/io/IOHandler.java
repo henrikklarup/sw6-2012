@@ -12,12 +12,16 @@ public class IOHandler {
 	//Field variables
 	private ServerSocket serverSocket;
 	private ArrayList<ConnectionIO> connections = new ArrayList<ConnectionIO>();
-
+	private String folder;
+	private int bufferSize;
+	
 	/**
 	 * Creates a IOHandler that uses the specified port on which it accepts connections.
 	 * @param port - the specified port
 	 */
-	public IOHandler(int port) {
+	public IOHandler(int port, String folder, int bufferSize) {
+		this.folder = folder;
+		this.bufferSize = bufferSize;
 		listen(port);
 	}
 
@@ -48,7 +52,7 @@ public class IOHandler {
 				//DataOutputStream for later use
 				this.connections.add(new ConnectionIO(con, new DataOutputStream(con.getOutputStream())));
 				//Starts a new Thread used for communication
-				new CommunicationThread(this, con);
+				new CommunicationThread(this, con, this.folder, this.bufferSize);
 			}	catch (IOException e) {
 				System.out.println("Could not accept connection !");
 			}
@@ -103,6 +107,39 @@ public class IOHandler {
 			}
 		}
 	}
+	
+	
+	public void respond(Socket socket, String message) {
+		
+		synchronized (this.connections) {
+			DataOutputStream temp = this.findConnectionStream(socket);
+			try {
+				temp.writeUTF(message);
+				temp.flush();
+			}	catch (IOException io) {
+				System.out.println("Could not send respond to Socket! Error: " + io.getMessage());
+			}
+		}
+		
+	}
+	
+	private DataOutputStream findConnectionStream(Socket socket) {
+		DataOutputStream temp = null;
+		
+		for (ConnectionIO elem : this.connections) {
+			if (elem.getSocket() == socket) {
+				temp = elem.getOutputStream();
+				break;	//No need to iterate to much
+			}
+		}
+		if (temp == null) {
+			throw new NullPointerException("Could not find the Socket");
+		}
+		else {
+			return temp;
+		}
+		
+	}
 
 	/**
 	 * Checks if the specified Socket is in the list of connections.
@@ -140,7 +177,7 @@ public class IOHandler {
 	}
 	
 	/**
-	 * Gets the amount of connections that are connected to the IOHandler.
+	 * Gets the amount of connections that are connected to the IOHandler
 	 * @return the amount of connected connections
 	 */
 	private int amountOfConnection() {
@@ -148,7 +185,7 @@ public class IOHandler {
 	}
 
 	/**
-	 * Removes a Socket connection based on the specified.
+	 * Removes a Socket connection based on the specified
 	 * @param socket - the specified Socket
 	 */
 	public void removeConnection(Socket socket) {
@@ -176,15 +213,17 @@ public class IOHandler {
 	}
 
 	/**
-	 * Standard main method.
+	 * Standard main method
 	 * @param args - the specified arguments
 	 */
 	public static void main(String[] args) {
 		//"Hard-Codedededede" port value
 		int port = 50000;
+		int bufferSize = 4096;
+		String folder = "C:\\newfolder";
 		
 		//Starting the IOHandler
-		new IOHandler(port);
+		new IOHandler(port, folder, bufferSize);
 	}
 
 
