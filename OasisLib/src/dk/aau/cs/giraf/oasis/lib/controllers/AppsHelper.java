@@ -47,13 +47,15 @@ public class AppsHelper {
 		ContentValues cv = getContentValues(app);
 		_context.getContentResolver().update(uri, cv, null, null);
 	}
-
+	
+	/*
 	public List<App> getAppsByProfile(Profile profile) {
 		List<App> apps = new ArrayList<App>();
 		
 		
 		return apps;
 	}
+	*/
 	
 	/**
 	 * Get application by id
