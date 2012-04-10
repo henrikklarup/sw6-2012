@@ -72,6 +72,7 @@ public final class ViewfinderView extends View {
     scannerAlpha = 0;
     possibleResultPoints = new ArrayList<ResultPoint>(5);
     lastPossibleResultPoints = null;
+    //this.setCameraManager(new CameraManager(context));
   }
 
   public void setCameraManager(CameraManager cameraManager) {
