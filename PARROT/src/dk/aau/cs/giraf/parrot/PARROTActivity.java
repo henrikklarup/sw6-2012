@@ -30,8 +30,8 @@ public class PARROTActivity extends Activity {
         actionBar.addTab(tab);
         
         tab = actionBar.newTab()
-        		.setText(R.string.firstTab)		//TODO rename this tab
-        		.setTabListener(new TabListener<SpeechBoardFragment>(this,"speechboard2",SpeechBoardFragment.class));
+        		.setText(R.string.secondTab)		//TODO rename this tab
+        		.setTabListener(new TabListener<OptionsFragment>(this,"options",OptionsFragment.class));
         actionBar.addTab(tab);
        
     }
