@@ -81,7 +81,7 @@ import java.util.Set;
  * @author dswitkin@google.com (Daniel Switkin)
  * @author Sean Owen
  */
-public final class CaptureActivity extends Activity implements SurfaceHolder.Callback {
+public class CaptureActivity extends Activity implements SurfaceHolder.Callback {
 
   private static final String TAG = CaptureActivity.class.getSimpleName();
 
@@ -168,7 +168,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
     PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
-    showHelpOnFirstLaunch();
+    //showHelpOnFirstLaunch();
   }
 
   @Override
@@ -182,6 +182,11 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     cameraManager = new CameraManager(getApplication());
 
     viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
+    if (viewfinderView == null) {
+    	Log.i("magnus","viewfinderView is null!");
+    } else {
+    	
+    }
     viewfinderView.setCameraManager(cameraManager);
 
     resultView = findViewById(R.id.result_view);
