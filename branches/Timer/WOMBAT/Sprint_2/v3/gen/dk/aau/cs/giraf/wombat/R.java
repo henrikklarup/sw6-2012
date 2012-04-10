@@ -29,23 +29,26 @@ public final class R {
         public static final int btn=0x7f020005;
         public static final int btn_normal=0x7f020006;
         public static final int btn_pressed=0x7f020007;
-        public static final int default_profile=0x7f020008;
-        public static final int ic_launcher=0x7f020009;
-        public static final int list=0x7f02000a;
-        public static final int list_normal=0x7f02000b;
-        public static final int list_pressed=0x7f02000c;
-        public static final int thumbnail_attachment=0x7f02000d;
-        public static final int thumbnail_digital=0x7f02000e;
-        public static final int thumbnail_hourglass=0x7f02000f;
-        public static final int thumbnail_progressbar=0x7f020010;
-        public static final int thumbnail_save=0x7f020011;
-        public static final int thumbnail_saveas=0x7f020012;
-        public static final int thumbnail_start=0x7f020013;
-        public static final int thumbnail_timetimer=0x7f020014;
-        public static final int timer_button=0x7f020015;
-        public static final int wheel_bg=0x7f020016;
-        public static final int wheel_val=0x7f020017;
-        public static final int wombat_icon=0x7f020018;
+        public static final int btn_unavailable=0x7f020008;
+        public static final int color_btn=0x7f020009;
+        public static final int color_btn_normal=0x7f02000a;
+        public static final int default_profile=0x7f02000b;
+        public static final int ic_launcher=0x7f02000c;
+        public static final int list=0x7f02000d;
+        public static final int list_normal=0x7f02000e;
+        public static final int list_pressed=0x7f02000f;
+        public static final int thumbnail_attachment=0x7f020010;
+        public static final int thumbnail_digital=0x7f020011;
+        public static final int thumbnail_hourglass=0x7f020012;
+        public static final int thumbnail_progressbar=0x7f020013;
+        public static final int thumbnail_save=0x7f020014;
+        public static final int thumbnail_saveas=0x7f020015;
+        public static final int thumbnail_start=0x7f020016;
+        public static final int thumbnail_timetimer=0x7f020017;
+        public static final int timer_button=0x7f020018;
+        public static final int wheel_bg=0x7f020019;
+        public static final int wheel_val=0x7f02001a;
+        public static final int wombat_icon=0x7f02001b;
     }
     public static final class id {
         public static final int ambilwarna_cursor=0x7f070003;
@@ -81,6 +84,7 @@ public final class R {
         public static final int secPicker=0x7f07000d;
         public static final int settingsListHeader=0x7f07001c;
         public static final int showTime=0x7f07000e;
+        public static final int subProfileDesc=0x7f070025;
         public static final int subProfileName=0x7f070024;
         public static final int subProfilePic=0x7f070023;
         public static final int subProfilePicBackground=0x7f070022;
@@ -136,5 +140,6 @@ public final class R {
         /**  TEMPLATE LIST 
          */
         public static final int template_list_header=0x7f06000c;
+        public static final int toast_text=0x7f060021;
     }
 }

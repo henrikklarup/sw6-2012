@@ -8,14 +8,14 @@
 
     <FrameLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="6dp">
 
         <ImageView
             android:id="@+id/subProfilePicBackground"
             android:layout_width="35dp"
             android:layout_height="35dp"
 			android:layout_gravity="center"
-            android:layout_marginLeft="6dp"
             android:contentDescription="@string/profile_pic_description" />
 
         <ImageView
@@ -23,7 +23,6 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
 			android:layout_gravity="center"
-            android:layout_marginLeft="6dp"
             android:contentDescription="@string/profile_pic_description"/>
     </FrameLayout>
 
@@ -37,8 +36,12 @@
             android:id="@+id/subProfileName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:gravity="center_vertical" />
+            android:layout_marginLeft="10dp" />
+        <TextView
+            android:id="@+id/subProfileDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp" />
     </LinearLayout>
 
 </LinearLayout>
