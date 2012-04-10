@@ -8,10 +8,10 @@ import android.os.SystemClock;
 
 public class GLRendererGeneral implements Renderer{
 
-	private GLCube timet;
+	private GLHourglass timet;
 	
 	public GLRendererGeneral(){
-		timet = new GLCube();
+		timet = new GLHourglass();
 	}
 
 	public void onSurfaceCreated(GL10 gl, EGLConfig eglconfig) {
