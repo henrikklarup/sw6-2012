@@ -190,7 +190,7 @@ public class ProfilesHelper {
 		profile.setPicture(cursor.getString(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_PICTURE)));
 		profile.setPhone(cursor.getLong(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_PHONE)));
 		profile.setPRole(cursor.getLong(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_ROLE)));
-		profile.setSetting(Setting.toObject(cursor.getString(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_SETTINGS)).getBytes()));
+		profile.setSetting(Setting.toObject(cursor.getString(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_SETTINGS))));
 		return profile;
 	}
 
@@ -206,7 +206,7 @@ public class ProfilesHelper {
 		contentValues.put(ProfilesMetaData.Table.COLUMN_ROLE, profile.getPRole());
 		contentValues.put(ProfilesMetaData.Table.COLUMN_PHONE, profile.getPhone());
 		contentValues.put(ProfilesMetaData.Table.COLUMN_PICTURE, profile.getPicture());
-		contentValues.put(ProfilesMetaData.Table.COLUMN_SETTINGS, Setting.toByteArray(profile.getSetting()).toString());
+		contentValues.put(ProfilesMetaData.Table.COLUMN_SETTINGS, Setting.toStringSetting(profile.getSetting()));
 
 		return contentValues;
 	}
