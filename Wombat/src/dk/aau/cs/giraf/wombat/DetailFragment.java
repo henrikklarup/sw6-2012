@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
+import android.widget.Toast;
 import dk.aau.cs.giraf.TimerLib.Guardian;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
 
@@ -42,6 +43,8 @@ public class DetailFragment extends android.app.ListFragment {
 					public void onClick(DialogInterface arg0, int arg1) {
 						// TODO Auto-generated method stub
 						
+						Toast t = Toast.makeText(getActivity(), "Profile Deleted", 5000); // TODO: Which profile has been deleted?
+						reloadSubProfiles();						
 					}
 		        });
 		        
