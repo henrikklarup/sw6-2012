@@ -41,16 +41,10 @@ public class AuthenticationActivity extends CaptureActivity {
 	 
 	 	private void changeCamerafeedBorderColor(int color) {
 	 		ViewGroup cameraFeedView = (ViewGroup)this.findViewById(R.id.camerafeed);
-    		//Drawable borderDrawable = cameraFeedView.getBackground();
-    		//ShapeDrawable solid = (ShapeDrawable)this.findViewById(R.id.camerabordersolid);
-    		//ShapeDrawable border = new ShapeDrawable();
-    		//border.setPadding(10,10,10,10);
     		RectF rectf = new RectF(10,10,10,10);
     		RoundRectShape rect = new RoundRectShape( new float[] {15,15, 15,15, 15,15, 15,15}, rectf, null); // 15,15, 15,15, 15,15, 15,15 // 30,30, 30,30, 30,30, 30,30
     		ShapeDrawable bg = new ShapeDrawable(rect);
     		bg.getPaint().setColor(color);
-    		//bg.getPaint().setColor(0x99FFFFFF);
-    		//bg.getPaint().setColor(0xFF2FE449);
     		cameraFeedView.setBackgroundDrawable(bg);
 	 	}
 	    
@@ -59,15 +53,15 @@ public class AuthenticationActivity extends CaptureActivity {
 	    public void handleDecode(Result rawResult, Bitmap barcode)
 	    {
 	    	Helper helper = new Helper(this);
-	    	Profile profile = helper.profilesHelper.authenticateProfile(rawResult.getText());
-	    	if (profile != null) {
-	    		this.changeCamerafeedBorderColor(0x992FE449);
-	    		ProgressDialog dialog = ProgressDialog.show(AuthenticationActivity.this, "", "Hej: " + rawResult.getText(), true, true);
+	    	Profile profile =  null;//helper.profilesHelper.authenticateProfile(rawResult.getText());
+	    	if (rawResult.getText().equals("GIRAFPROFILE")) {
+	    		this.changeCamerafeedBorderColor(0xFF3AAA35);
+	    		//ProgressDialog dialog = ProgressDialog.show(AuthenticationActivity.this, "", "Hej: " + rawResult.getText(), true, true);
 	    	} else {
-	    		this.changeCamerafeedBorderColor(0x99E92A2A);
-	    		ProgressDialog dialog = ProgressDialog.show(AuthenticationActivity.this, "", "INVALID profile: " + rawResult.getText(), true, true);
+	    		this.changeCamerafeedBorderColor(0xFFFF0000);
+	    		//ProgressDialog dialog = ProgressDialog.show(AuthenticationActivity.this, "", "INVALID profile: " + rawResult.getText(), true, true);
 	    	}
-	    	
+	    	//ProgressDialog dialog = ProgressDialog.show(AuthenticationActivity.this, "", "Ø" + rawResult.getText() + "Ø", true, true);
 	    
 	    this.getHandler().sendEmptyMessageDelayed(R.id.restart_preview, 500);
 	    }
