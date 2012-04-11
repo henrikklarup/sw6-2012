@@ -16,6 +16,7 @@ public class logoActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.logo);
         
+    	
         final Button button = (Button) findViewById(R.id.button1);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -25,5 +26,20 @@ public class logoActivity extends Activity {
             }
         });
     }
+    
+    
+    /*@Override
+    public void onResume() {
+    	super.onResume();
+    	
+    	try {Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    	
+    	Intent intent = new Intent(logoActivity.this, AuthenticationActivity.class);
+    	startActivity(intent);
+    }*/
 	
 }

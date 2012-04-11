@@ -63,4 +63,16 @@
         	android:layout_marginTop="770dp"
         	android:layout_marginLeft="45dp"
         	/>
+    
+    <dk.aau.cs.giraf.gui.GButton
+        android:drawableLeft="@drawable/ok_icon"
+        android:id="@+id/button2008768"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="is this you?" 
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="15dp"/>
+    
 </RelativeLayout>
