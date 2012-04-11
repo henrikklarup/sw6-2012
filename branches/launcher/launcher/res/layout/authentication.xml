@@ -75,6 +75,7 @@
     	    android:layout_marginRight="15dp"
     	    android:text="This is me!"/>
     <TextView android:text="@string/welcomedrazenko"
+        	android:id="@+id/loginname"
         	android:textColor="#FFFFFFFF"
         	android:layout_height="wrap_content"
         	android:layout_width="300dp"

@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.zxing.Result;
 import com.google.zxing.client.android.CaptureActivity;
@@ -55,9 +56,13 @@ public class AuthenticationActivity extends CaptureActivity {
 	    {
 	    	Helper helper = new Helper(this);
 	    	Profile profile =  null;//helper.profilesHelper.authenticateProfile(rawResult.getText());
-	    	if (rawResult.getText().equals("GIRAFPROFILE")) {
+	    	Profile drazenko = new Profile("Drazenko","Efternavn","middlename",0,45454545,"",null);
+	    	
+	    	//if (rawResult.getText().equals("GIRAFPROFILE")) {
+	    	if (true) {
 	    		this.changeCamerafeedBorderColor(0xFF3AAA35);
 	    		//ProgressDialog dialog = ProgressDialog.show(AuthenticationActivity.this, "", "Hej: " + rawResult.getText(), true, true);
+	    		((TextView)this.findViewById(R.id.loginname)).setText(drazenko.getFirstname() + " " + drazenko.getSurname());
 	    	} else {
 	    		this.changeCamerafeedBorderColor(0xFFFF0000);
 	    		//ProgressDialog dialog = ProgressDialog.show(AuthenticationActivity.this, "", "INVALID profile: " + rawResult.getText(), true, true);
