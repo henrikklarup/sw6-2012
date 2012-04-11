@@ -49,7 +49,7 @@ public class CommunicationThread extends Thread {
 					}
 					//RequestEvent
 					else if (handle.CR() == 2) {
-						this.ioHandler.displayMessage("RequestEvent created by: " + this.socket)
+						this.ioHandler.displayMessage("RequestEvent created by: " + this.socket);
 						RequestEvent reqEvt = new RequestEvent(handle.XML(), this.socket);
 						EventQueue.getInstance().add(reqEvt);
 					}
