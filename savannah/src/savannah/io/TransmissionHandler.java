@@ -27,6 +27,7 @@ public class TransmissionHandler {
 	private int start 				= 0;
 	private int XMLlength 			= 0;
 	private int FILElength 			= 0;
+	private int FileCount			= 0;
 	private static final int STDBUFFER = 4096;
 
 	
@@ -246,7 +247,8 @@ public class TransmissionHandler {
 		this.cr = this.getCR(vf);
 		this.xml = this.getXML(vf);
 		while (this.start != vf.size()) {
-			this.getFile(vf);	
+			this.getFile(vf);
+			this.FileCount++;
 		}
 		System.out.println("Deconstrcution complete !");
 	}
@@ -267,4 +269,30 @@ public class TransmissionHandler {
 	public String XML() {
 		return this.xml;
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public int CR() {
+		return this.cr;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean anyFiles() {
+		return (this.FileCount == 0) ? false : true;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public int FileCount() {
+		return this.FileCount;
+	}
+	
+	
 }
