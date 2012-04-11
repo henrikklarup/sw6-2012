@@ -1,5 +1,6 @@
-package giraf.launcher;
+package dk.aau.cs.giraf.launcher;
 
+import giraf.launcher.R;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;

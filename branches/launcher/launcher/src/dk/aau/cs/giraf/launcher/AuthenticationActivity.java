@@ -1,5 +1,6 @@
-package giraf.launcher;
+package dk.aau.cs.giraf.launcher;
 
+import giraf.launcher.R;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -47,7 +48,9 @@ public class AuthenticationActivity extends CaptureActivity {
     		bg.getPaint().setColor(color);
     		cameraFeedView.setBackgroundDrawable(bg);
 	 	}
-	    
+	     
+
+	 	
 	    @SuppressWarnings("unused")
 		@Override
 	    public void handleDecode(Result rawResult, Bitmap barcode)
