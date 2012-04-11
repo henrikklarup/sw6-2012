@@ -28,8 +28,8 @@ public class IconAdapter extends BaseAdapter {
 			LayoutInflater li = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			row = li.inflate(R.layout.grid, null);
 			
-			ImageView iv = (ImageView) row.findViewById(R.id.icon_image);
-			TextView tv = (TextView) row.findViewById(R.id.icon_text);
+			ImageView iv = (ImageView) row.findViewById(R.id.app_icon);
+			TextView tv = (TextView) row.findViewById(R.id.app_text);
 
             tv.setText(appInfo.get(position).title.toString());
             iv.setBackgroundDrawable(appInfo.get(position).icon);

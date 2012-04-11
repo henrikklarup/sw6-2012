@@ -59,7 +59,7 @@ public class MainActivity extends Activity {
 			}
 
 			Grid = (GridView)findViewById(R.id.GridView01);
-			Grid.setAdapter(new IconAdapter(this,applications));
+			Grid.setAdapter(new AppAdapter(this,applications));
 			Grid.setOnItemClickListener(new ApplicationLaunch());
 		}
 	}
