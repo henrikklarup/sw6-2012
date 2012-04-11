@@ -7,14 +7,16 @@ public class ProfilesTable {
 	private static final String TABLE_CREATE = "CREATE TABLE "
 			+ ProfilesMetaData.Table.TABLE_NAME
 			+ "("
-			+ ProfilesMetaData.Table.COLUMN_ID + " INTEGER PRIMARY KEY, "
+			+ ProfilesMetaData.Table.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
 			+ ProfilesMetaData.Table.COLUMN_FIRST_NAME + " TEXT NOT NULL, "
 			+ ProfilesMetaData.Table.COLUMN_SUR_NAME + " TEXT NOT NULL, "
 			+ ProfilesMetaData.Table.COLUMN_MIDDLE_NAME + " TEXT, "
 			+ ProfilesMetaData.Table.COLUMN_ROLE + " INTEGER NOT NULL, "
 			+ ProfilesMetaData.Table.COLUMN_PHONE + " INTEGER, "
 			+ ProfilesMetaData.Table.COLUMN_PICTURE + " TEXT, "
-			+ ProfilesMetaData.Table.COLUMN_SETTINGS + " TEXT"
+			+ ProfilesMetaData.Table.COLUMN_SETTINGS + " TEXT, "
+			+ ProfilesMetaData.Table.COLUMN_USERNAME + " TEXT, "
+			+ ProfilesMetaData.Table.COLUMN_PASSWORD + " TEXT"
 			+ ");";
 	
 	private static final String TABLE_DROP= "DROP TABLE IF EXISTS " + ProfilesMetaData.Table.TABLE_NAME + ";";

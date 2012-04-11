@@ -7,8 +7,9 @@ public class AuthUsersTable {
 	private static final String TABLE_CREATE = "CREATE TABLE "
 			+ AuthUsersMetaData.Table.TABLE_NAME
 			+ "("
-			+ AuthUsersMetaData.Table.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-			+ AuthUsersMetaData.Table.COLUMN_CERTIFICATE + " TEXT"
+			+ AuthUsersMetaData.Table.COLUMN_ID + " INTEGER NOT NULL, "
+			+ AuthUsersMetaData.Table.COLUMN_CERTIFICATE + " TEXT NOT NULL, "
+			+ AuthUsersMetaData.Table.COLUMN_ROLE + " INTEGER NOT NULL"
 			+ ");";
 
 	private static final String TABLE_DROP= "DROP TABLE IF EXISTS " + AuthUsersMetaData.Table.TABLE_NAME + ";";
@@ -24,8 +25,8 @@ public class AuthUsersTable {
 	/**
 	 * executes a sql string which drops the old table and then the method calls oncreate, which create a new certificate table
 	 * @param db this is a instance of a sqlite database
-	 * @param oldVersion integer refering to the old version number
-	 * @param newVersion integer refering to the new version number
+	 * @param oldVersion integer referring to the old version number
+	 * @param newVersion integer referring to the new version number
 	 */
 	public static void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		db.execSQL(TABLE_DROP);

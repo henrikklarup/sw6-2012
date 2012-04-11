@@ -11,7 +11,7 @@ public class AppsMetaData {
 	public static final String CONTENT_TYPE_APP_ONE = "vnd.android.cursor.item/vnd.dk.apps";
 	
 	public class Table implements BaseColumns {
-		public static final String TABLE_NAME = "tbl_apps1";
+		public static final String TABLE_NAME = "tbl_apps";
 		
 		public static final String COLUMN_ID = "_id";
 		public static final String COLUMN_NAME = "apps_name";

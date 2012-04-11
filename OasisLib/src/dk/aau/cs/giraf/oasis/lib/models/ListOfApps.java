@@ -95,8 +95,10 @@ public class ListOfApps {
 		String localOutput = _output;
 		localOutput = localOutput.replace("{0}", String.valueOf(getIdApp()));
 		localOutput = localOutput.replace("{1}", String.valueOf(getIdProfile()));
-		localOutput = localOutput.replace("{2}", String.valueOf(getSettings()));
-		localOutput = localOutput.replace("{3}", String.valueOf(getStats()));
+		localOutput = localOutput.replace("{2}", "Setting(Static Setting text)");
+		localOutput = localOutput.replace("{3}", "Stat(Static Stat text)");
+//		localOutput = localOutput.replace("{2}", String.valueOf(getSettings()));
+//		localOutput = localOutput.replace("{3}", String.valueOf(getStats()));
 
 		return localOutput;
 	}
