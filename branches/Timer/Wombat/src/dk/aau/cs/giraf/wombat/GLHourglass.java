@@ -800,8 +800,8 @@ public class GLHourglass {
 //			.25f, 0, .85f, 0,
 //			1, 1, 0, 0,
 //		};
-	
-	private FloatBuffer vertBuff, colorBuff;
+//	private FloatBuffer colorBuff;
+	private FloatBuffer vertBuff;
 	
 	private short[] pIndex = { //fortæller hvordan punkterne skal tegnes sammen
 			0, 1, 2, 
