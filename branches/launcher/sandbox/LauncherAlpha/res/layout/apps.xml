@@ -1,19 +1,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/grid"
+    android:id="@+id/apps"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    
    	>
-
+	<LinearLayout
+        android:id="@+id/app_bg"
+        android:layout_height="200dp"
+        android:layout_width="200dp"
+    	android:gravity="center"
+    	android:orientation="vertical"
+    	android:background="@drawable/appborder"
+        >
+        
     <ImageView
         android:id="@+id/app_icon"
         android:layout_height="120dp"
         android:layout_width="120dp"
-        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
         />
-
     <TextView
         android:id="@+id/app_text"
         android:layout_width="wrap_content"
@@ -22,5 +28,5 @@
         android:textColorHighlight="#656565"
         android:textSize="40dp" 
         />
-
+    </LinearLayout>
 </LinearLayout>
