@@ -13,7 +13,9 @@ public class TimeTimer extends SubProfile {
 	
 	public TimeTimer copy(){
 		TimeTimer copyP = new TimeTimer(this);
-		copyP.setAttachment(this._attachment);
+		if(this._attachment != null){
+			copyP.setAttachment(this._attachment);
+		}
 		return copyP;
 	}
 	

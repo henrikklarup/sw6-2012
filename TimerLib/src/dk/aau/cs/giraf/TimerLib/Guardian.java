@@ -24,6 +24,8 @@ public class Guardian {
 	public static String _name = null;
 	
 	private int id = -1;
+	
+	TimerHelper help = new TimerHelper();
 
 	
 	private Guardian(){	
@@ -36,6 +38,7 @@ public class Guardian {
 		if(_name == null){
 			_name = name;
 		}
+		
 		initLastUsedPredef();
 		return instance;
 	}
@@ -100,12 +103,12 @@ public class Guardian {
 	
 	public void addLastUsed(SubProfile profile){
 		lastUsed();
-		boolean exists = true;
 		
+		boolean exists = true;
 		for(int i = 0; i < lastUsed.size(); i++){
 			if(lastUsed.get(i).getId() == profile.getId()){
-				lastUsed.add(lastUsed.get(i));
 				lastUsed.remove(i);
+				lastUsed.add(profile);
 				exists = false;
 				break;
 			}
@@ -135,6 +138,7 @@ public class Guardian {
 		sortedList.add(lastUsedChild);
 		
 		Child predefChild = new Child("Predefined Profiles");
+		help.loadPredef();
 		Collections.sort(predefined());
 		predefChild.SubProfiles().addAll(predefined());
 		

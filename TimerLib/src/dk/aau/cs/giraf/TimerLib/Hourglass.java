@@ -12,7 +12,9 @@ public class Hourglass extends SubProfile {
 	
 	public Hourglass copy(){
 		Hourglass copyP = new Hourglass(this);
-		copyP.setAttachment(this._attachment);
+		if(this._attachment != null){
+			copyP.setAttachment(this._attachment);
+		}
 		return copyP;
 	}
 	

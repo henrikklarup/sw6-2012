@@ -29,6 +29,7 @@ public class Child implements Comparable<Child>{
 		//Wait for admin
 		
 		//Add to child list
+		p.resetLock();
 		this.SubProfiles().add(p);
 	}
 	

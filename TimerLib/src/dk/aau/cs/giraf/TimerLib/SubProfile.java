@@ -24,6 +24,9 @@ public class SubProfile implements Renderer, formInterface, Comparable<SubProfil
 	public int _totalTime = 100;
 	public boolean _gradient = false;
 	protected SubProfile _attachment = null;
+	private boolean save = true;
+	private boolean saveAs = true;
+	private boolean lock = false;
 	//constructor
 	public SubProfile(String name, String description, int size, int bgcolor, int timeLeftColor, int timeSpentColor, int frameColor, int totalTime, boolean changeColor){
 		if(this._id == -1){
@@ -52,6 +55,35 @@ public class SubProfile implements Renderer, formInterface, Comparable<SubProfil
 		this._timeSpentColor = timeSpentColor;
 		this._frameColor = frameColor;
 		this._gradient = changeColor;
+	}
+	
+	void resetLock(){
+		this.save = true;
+		this.saveAs = true;
+		this.lock = false;
+	}
+	
+	void setLock(){
+		this.lock = true;
+		this.save = false;
+	}
+	
+	public boolean getSave(){
+		return save;
+	}
+	
+	public boolean getSaveAs(){
+		return saveAs;
+	}
+	
+	public void setSave(boolean state){
+		if(!this.lock){
+			save = state;
+		}		
+	}
+	
+	public void setSaveAs(boolean state){
+		saveAs = state;
 	}
 	
 	public SubProfile(){
@@ -118,6 +150,12 @@ public class SubProfile implements Renderer, formInterface, Comparable<SubProfil
 				}
 			}
 		}
+	}
+	
+	public void addLastUsed(SubProfile oldProfile){
+		this._id = oldProfile._id;
+		this.setLock();
+		guard.addLastUsed(this);
 	}
 
 	 public boolean equals(Object o) {
