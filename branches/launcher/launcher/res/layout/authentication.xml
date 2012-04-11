@@ -7,6 +7,7 @@
 
     
     <RelativeLayout
+    android:id="@+id/camerafeed"
     android:layout_width="480dip" 
     android:layout_height="640dip" 
     android:layout_gravity="center_horizontal"
