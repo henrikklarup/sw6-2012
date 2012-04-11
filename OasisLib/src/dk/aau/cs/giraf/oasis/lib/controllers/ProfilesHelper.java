@@ -90,7 +90,7 @@ public class ProfilesHelper {
 		String[] authColumns = new String[] { 
 				AuthUsersMetaData.Table.COLUMN_ID, 
 				AuthUsersMetaData.Table.COLUMN_CERTIFICATE};
-		Cursor c = _context.getContentResolver().query(AuthUsersMetaData.CONTENT_URI, authColumns, null, new String[] {"Certificate"}, null);
+		Cursor c = _context.getContentResolver().query(AuthUsersMetaData.CONTENT_URI, authColumns, null, new String[] {certificate}, null);
 
 		if(c.moveToFirst()) {
 			profile = getProfileById(c.getLong(c.getColumnIndex(AuthUsersMetaData.Table.COLUMN_ID)));
@@ -128,11 +128,11 @@ public class ProfilesHelper {
 	
 	public List<Profile> getChildrenByGuardian(Profile guardian) {
 		List<Profile> profiles = new ArrayList<Profile>();
-		String[] hasGuardianColumns = {HasGuardianMetaData.Table.COLUMN_MEDIAID, HasGuardianMetaData.Table.COLUMN_PROFILEID}; 
-		Cursor c = _context.getContentResolver().query(HasGuardianMetaData.CONTENT_URI, hasGuardianColumns, hasGuardianColumns[1] + " = '" + guardian.getId() + "'", null, null);
+		String[] hasGuardianColumns = {HasGuardianMetaData.Table.COLUMN_IDGUARDIAN, HasGuardianMetaData.Table.COLUMN_IDCHILD}; 
+		Cursor c = _context.getContentResolver().query(HasGuardianMetaData.CONTENT_URI, hasGuardianColumns, hasGuardianColumns[0] + " = '" + guardian.getId() + "'", null, null);
 		if (c.moveToFirst()) {
 			while (!c.isAfterLast()) {
-				Profile profile = getProfileById(c.getLong(c.getColumnIndex(hasGuardianColumns[0])));
+				Profile profile = getProfileById(c.getLong(c.getColumnIndex(hasGuardianColumns[1])));
 				profiles.add(profile);
 				c.moveToNext();
 			}

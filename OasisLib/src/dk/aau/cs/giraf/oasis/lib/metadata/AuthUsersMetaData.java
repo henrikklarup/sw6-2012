@@ -12,5 +12,6 @@ public class AuthUsersMetaData {
 
 		public static final String COLUMN_ID = "_id";
 		public static final String COLUMN_CERTIFICATE = "authusers_certificate";
+		public static final String COLUMN_ROLE = "authusers_role";
 	}
 }

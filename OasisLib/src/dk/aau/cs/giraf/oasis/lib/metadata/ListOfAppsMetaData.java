@@ -10,8 +10,8 @@ public class ListOfAppsMetaData {
 	public class Table implements BaseColumns {
 		public static final String TABLE_NAME = "tbl_listofapps";
 
-		public static final String COLUMN_APPID = "listofapps_appid";
-		public static final String COLUMN_PROFILEID = "listofapps_profileid";
+		public static final String COLUMN_IDAPP = "listofapps_appid";
+		public static final String COLUMN_IDPROFILE = "listofapps_profileid";
 		public static final String COLUMN_SETTINGS = "listofapps_settings";
 		public static final String COLUMN_STATS = "listofapps_stats";
 	}

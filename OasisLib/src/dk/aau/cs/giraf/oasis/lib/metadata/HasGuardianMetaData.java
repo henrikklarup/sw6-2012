@@ -10,7 +10,7 @@ public class HasGuardianMetaData {
 	public class Table implements BaseColumns {
 		public static final String TABLE_NAME = "tbl_hasguardian";
 
-		public static final String COLUMN_PROFILEID = "hasguardian_profileid";
-		public static final String COLUMN_MEDIAID = "hasguardian_mediaid";
+		public static final String COLUMN_IDGUARDIAN = "hasguardian_guardianid";
+		public static final String COLUMN_IDCHILD = "hasguardian_childid";
 	}
 }

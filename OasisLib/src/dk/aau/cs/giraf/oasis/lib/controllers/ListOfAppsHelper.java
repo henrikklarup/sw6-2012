@@ -79,8 +79,8 @@ public class ListOfAppsHelper {
 	 */
 	private ListOfApps cursorToListOfApps(Cursor cursor) {
 		ListOfApps loa = new ListOfApps();
-		loa.setIdApp(cursor.getLong(cursor.getColumnIndex(ListOfAppsMetaData.Table.COLUMN_APPID)));
-		loa.setIdProfile(cursor.getLong(cursor.getColumnIndex(ListOfAppsMetaData.Table.COLUMN_PROFILEID)));
+		loa.setIdApp(cursor.getLong(cursor.getColumnIndex(ListOfAppsMetaData.Table.COLUMN_IDAPP)));
+		loa.setIdProfile(cursor.getLong(cursor.getColumnIndex(ListOfAppsMetaData.Table.COLUMN_IDPROFILE)));
 		loa.setSettings(Setting.toObject(cursor.getString(cursor.getColumnIndex(ListOfAppsMetaData.Table.COLUMN_SETTINGS))));
 		loa.setStats(Stat.toObject(cursor.getString(cursor.getColumnIndex(ListOfAppsMetaData.Table.COLUMN_STATS)).getBytes()));
 		return loa;
@@ -102,8 +102,8 @@ public class ListOfAppsHelper {
 	private ContentValues getContentValues(ListOfApps listOfApps) {
 		ContentValues contentValues = new ContentValues();
 		
-		contentValues.put(ListOfAppsMetaData.Table.COLUMN_APPID, listOfApps.getIdApp());
-		contentValues.put(ListOfAppsMetaData.Table.COLUMN_PROFILEID, listOfApps.getIdProfile());
+		contentValues.put(ListOfAppsMetaData.Table.COLUMN_IDAPP, listOfApps.getIdApp());
+		contentValues.put(ListOfAppsMetaData.Table.COLUMN_IDPROFILE, listOfApps.getIdProfile());
 		contentValues.put(ListOfAppsMetaData.Table.COLUMN_SETTINGS, Setting.toStringSetting(listOfApps.getSettings()));
 		contentValues.put(ListOfAppsMetaData.Table.COLUMN_STATS, Stat.toByteArray(listOfApps.getStats()).toString());
 		
@@ -112,8 +112,8 @@ public class ListOfAppsHelper {
 	
 	private String[] getTableColumns() {
 		String[] columns = new String[] { 
-				ListOfAppsMetaData.Table.COLUMN_APPID,
-				ListOfAppsMetaData.Table.COLUMN_PROFILEID,
+				ListOfAppsMetaData.Table.COLUMN_IDAPP,
+				ListOfAppsMetaData.Table.COLUMN_IDPROFILE,
 				ListOfAppsMetaData.Table.COLUMN_SETTINGS,
 				ListOfAppsMetaData.Table.COLUMN_STATS};
 		

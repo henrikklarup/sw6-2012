@@ -17,7 +17,8 @@ public class ProfilesMetaData {
 		public static final String COLUMN_ROLE = "profile_role";
 		public static final String COLUMN_PHONE = "profile_phone";
 		public static final String COLUMN_PICTURE = "profile_picture";
-		public static final String COLUMN_DEPARTMENTID = "profile_departmentid";
 		public static final String COLUMN_SETTINGS = "profile_settings";
+		public static final String COLUMN_USERNAME = "profile_username";
+		public static final String COLUMN_PASSWORD = "profile_password";
 	}
 }
