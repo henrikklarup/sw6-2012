@@ -212,19 +212,15 @@ public class IOHandler {
 		}
 	}
 
-	/**
-	 * Standard main method
-	 * @param args - the specified arguments
-	 */
-	public static void main(String[] args) {
-		//"Hard-Codedededede" port value
-		int port = 50000;
-		int bufferSize = 4096;
-		String folder = "C:\\newfolder";
-		
-		//Starting the IOHandler
-		new IOHandler(port, folder, bufferSize);
-	}
+//	public static void main(String[] args) {
+//		//"Hard-Codedededede" port value
+//		int port = 50000;
+//		int bufferSize = 4096;
+//		String folder = "C:\\newfolder";
+//		
+//		//Starting the IOHandler
+//		new IOHandler(port, folder, bufferSize);
+//	}
 
 
 
