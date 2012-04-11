@@ -6,15 +6,19 @@ import java.util.ArrayList;
 import org.jdom.Document;
 import org.jdom.JDOMException;
 
+import savannah.io.IOHandler;
+
 public class CommitHandler {
 	private ArrayList<String> queries;
 	private QueryBuilder qbuilder;
 	private QueryHandler qHandler;
+	private IOHandler ihandler;
 	public CommitHandler() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException
 	{
 		qbuilder = new QueryBuilder();
 		queries= new ArrayList<String>();
 		qHandler = new QueryHandler();
+		ihandler = new IOHandler();
 	}
 	
 	public void HandleIt(CommitEvent e)
@@ -35,6 +39,11 @@ public class CommitHandler {
 					 failed++;
 				 }
 			}
+			if(e.getEventsocket() != null)
+			{
+				ihandler.respond(e.getEventsocket(), "message to sender");
+			}
+			
 			
 			//TODO Send result
 			
