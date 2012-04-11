@@ -1,12 +1,13 @@
 /**
  * 
  */
-package giraf.gui;
+package dk.aau.cs.giraf.gui;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.Button;
 import android.graphics.Color;
+import dk.aau.cs.giraf.gui.R;
 
 /**
  * @author thomaskobberpanum aka asshole
