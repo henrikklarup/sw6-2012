@@ -10,6 +10,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import dk.aau.cs.giraf.oasis.lib.metadata.AuthUsersMetaData;
+import dk.aau.cs.giraf.oasis.lib.metadata.HasGuardianMetaData;
 import dk.aau.cs.giraf.oasis.lib.metadata.ProfilesMetaData;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 import dk.aau.cs.giraf.oasis.lib.models.Setting;
@@ -41,10 +42,10 @@ public class ProfilesHelper {
 		authusersContentValues.put(AuthUsersMetaData.Table.COLUMN_CERTIFICATE, certificate);
 		_context.getContentResolver().insert(AuthUsersMetaData.CONTENT_URI, authusersContentValues);
 
-		String[] columns = new String[] { 
+		String[] authColumns = new String[] { 
 				AuthUsersMetaData.Table.COLUMN_ID, 
 				AuthUsersMetaData.Table.COLUMN_CERTIFICATE};
-		Cursor c = _context.getContentResolver().query(AuthUsersMetaData.CONTENT_URI, columns, null, new String[] {certificate}, null);
+		Cursor c = _context.getContentResolver().query(AuthUsersMetaData.CONTENT_URI, authColumns, null, new String[] {certificate}, null);
 
 		if(c.moveToFirst()) {
 			long id = c.getLong(c.getColumnIndex(AuthUsersMetaData.Table.COLUMN_ID));
@@ -86,10 +87,10 @@ public class ProfilesHelper {
 	public Profile authenticateProfile(String certificate) {
 		Profile profile = null;
 
-		String[] columns = new String[] { 
+		String[] authColumns = new String[] { 
 				AuthUsersMetaData.Table.COLUMN_ID, 
 				AuthUsersMetaData.Table.COLUMN_CERTIFICATE};
-		Cursor c = _context.getContentResolver().query(AuthUsersMetaData.CONTENT_URI, columns, null, new String[] {"Certificate"}, null);
+		Cursor c = _context.getContentResolver().query(AuthUsersMetaData.CONTENT_URI, authColumns, null, new String[] {"Certificate"}, null);
 
 		if(c.moveToFirst()) {
 			profile = getProfileById(c.getLong(c.getColumnIndex(AuthUsersMetaData.Table.COLUMN_ID)));
@@ -109,10 +110,10 @@ public class ProfilesHelper {
 		List<String> certificate = null;
 		Uri uri = ContentUris.withAppendedId(AuthUsersMetaData.CONTENT_URI, profile.getId());
 
-		String[] columns = new String[] {
+		String[] authColumns = new String[] {
 				AuthUsersMetaData.Table.COLUMN_ID,
 				AuthUsersMetaData.Table.COLUMN_CERTIFICATE};
-		Cursor c = _context.getContentResolver().query(uri, columns, null, null, null);
+		Cursor c = _context.getContentResolver().query(uri, authColumns, null, null, null);
 
 		if (c.moveToFirst()) {
 			certificate = new ArrayList<String>();
@@ -124,6 +125,20 @@ public class ProfilesHelper {
 
 		return certificate;
 	}
+	
+	public List<Profile> getChildrenByGuardian(Profile guardian) {
+		List<Profile> profiles = new ArrayList<Profile>();
+		String[] hasGuardianColumns = {HasGuardianMetaData.Table.COLUMN_MEDIAID, HasGuardianMetaData.Table.COLUMN_PROFILEID}; 
+		Cursor c = _context.getContentResolver().query(HasGuardianMetaData.CONTENT_URI, hasGuardianColumns, hasGuardianColumns[1] + " = '" + guardian.getId() + "'", null, null);
+		if (c.moveToFirst()) {
+			while (!c.isAfterLast()) {
+				Profile profile = getProfileById(c.getLong(c.getColumnIndex(hasGuardianColumns[0])));
+				profiles.add(profile);
+				c.moveToNext();
+			}
+		}
+		return profiles;
+	}
 
 	/**
 	 * Get a profile by its ID
@@ -132,7 +147,6 @@ public class ProfilesHelper {
 	 */
 	public Profile getProfileById(long id) {
 		Uri uri = ContentUris.withAppendedId(ProfilesMetaData.CONTENT_URI, id);
-		String[] columns = getTableColumns();
 		Cursor c = _context.getContentResolver().query(uri, columns, null, null, null);
 
 		if(c.moveToFirst()) {
@@ -148,7 +162,6 @@ public class ProfilesHelper {
 	 */
 	public List<Profile> getProfiles() {
 		List<Profile> profiles = new ArrayList<Profile>();
-		String[] columns = getTableColumns();
 		Cursor c = _context.getContentResolver().query(ProfilesMetaData.CONTENT_URI, columns, null, null, null);
 
 		profiles = cursorToProfiles(c);
@@ -214,8 +227,7 @@ public class ProfilesHelper {
 	/**
 	 * @return the columns of the table
 	 */
-	private String[] getTableColumns() {
-		String[] columns = new String[] { 
+	private String[] columns = new String[] { 
 				ProfilesMetaData.Table.COLUMN_ID, 
 				ProfilesMetaData.Table.COLUMN_FIRST_NAME,
 				ProfilesMetaData.Table.COLUMN_SUR_NAME,
@@ -224,8 +236,6 @@ public class ProfilesHelper {
 				ProfilesMetaData.Table.COLUMN_PHONE,
 				ProfilesMetaData.Table.COLUMN_PICTURE,
 				ProfilesMetaData.Table.COLUMN_SETTINGS};
-		return columns;
-	}
 
 	/**
 	 * @return the certificate
