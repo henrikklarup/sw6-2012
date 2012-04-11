@@ -18,6 +18,9 @@
     
     <!-- TEMPLATE LIST -->
     <string name="template_list_header">Gemte Tilpasninger</string>
+    <string name="delete_subprofile_message">Vil du slette?</string>
+    <string name="delete_yes">Ja</string>
+    <string name="delete_no">Nej</string>
     
     <!-- CUSTOMIZE -->
     <string name="start_activity_default">Tilpas</string>
@@ -43,6 +46,5 @@
     <string name="background">Baggrund</string>
     
     <string name="toast_text">blev gemt på</string>
-    
 
 </resources>

@@ -2,9 +2,12 @@ package dk.aau.cs.giraf.wombat;
 
 import java.util.ArrayList;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -68,6 +71,30 @@ public class SubProfileAdapter extends ArrayAdapter<SubProfile> {
 			
 		}
 
+		OnLongClickListener myListener = new OnLongClickListener() {
+			
+			public boolean onLongClick(final View v) {
+				AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
+                alertDialog.setTitle(R.string.delete_subprofile_message);
+                alertDialog.setButton(getContext().getText(R.string.delete_yes), new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface arg0, int arg1) {
+						// TODO Auto-generated method stub
+						
+					}
+                });
+                
+                alertDialog.setButton2(getContext().getText(R.string.delete_no), new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface arg0, int arg1) {
+						// TODO Auto-generated method stub
+						
+					}
+                });
+                
+                alertDialog.show();
+				return false;
+			}
+		};
+		v.setOnLongClickListener(myListener);
 		return v;
 	}
 }
