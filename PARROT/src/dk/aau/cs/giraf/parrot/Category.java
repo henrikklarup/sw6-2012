@@ -6,7 +6,7 @@ import android.graphics.Color;
 
 /**
  * 
- * @author Rasmus
+ * @Rasmus
  *The Category class is used to store a number of pictograms
  */
 public class Category {

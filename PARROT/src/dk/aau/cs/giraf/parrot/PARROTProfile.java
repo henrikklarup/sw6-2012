@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * 
- * @author Rasmus
+ * @Rasmus
  * This is the PARROT Profile class. It handles the information associated with the current user, such as available pictograms
  * organized in categories and settings, as well as personal information whenever it is needed.
  */
