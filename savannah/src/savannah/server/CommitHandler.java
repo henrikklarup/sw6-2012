@@ -1,5 +1,6 @@
 package savannah.server;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.jdom.Document;
@@ -9,7 +10,7 @@ public class CommitHandler {
 	private ArrayList<String> queries;
 	private QueryBuilder qbuilder;
 	private QueryHandler qHandler;
-	public CommitHandler()
+	public CommitHandler() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException
 	{
 		qbuilder = new QueryBuilder();
 		queries= new ArrayList<String>();
@@ -28,7 +29,7 @@ public class CommitHandler {
 			
 			for(String s: queries)
 			{
-				 int result = qHandler.SendQuery(s);
+				 int result = qHandler.SendCommit(s);
 				 if(result == 0)
 				 {
 					 failed++;
