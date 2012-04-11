@@ -30,8 +30,7 @@ public class AppAdapter extends ArrayAdapter<ApplicationInfo> {
 		final ApplicationInfo app = apps.get(position);
 		
 		if (convertView == null) {
-            final LayoutInflater inflater = 
-            		(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            final LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.grid, parent, false);
         }
 		
