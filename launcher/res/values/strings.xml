@@ -4,7 +4,7 @@
     <string name="hello">Hello World, MainActivity!</string>
     <string name="app_name">Launcher</string>
     <string name="authentication_headline">Sådan logger du ind:</string>
-    <string name="authentication_step1">Tag dit GIRAF-kort. Scan kortet ved brug af scanneren til højre.</string>
+    <string name="authentication_step1">Scan dit GIRAF-kort, ved brug af scanneren til højre.</string>
     <string name="authentication_step2">Verificer den overnstående identitet, og tryk derefter på login-knappen. </string>
     <integer-array name="appcolors">
         <item>0xFFFFDC4A</item>
