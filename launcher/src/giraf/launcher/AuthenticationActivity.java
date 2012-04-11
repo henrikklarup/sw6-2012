@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import com.google.zxing.Result;
 import com.google.zxing.client.android.CaptureActivity;
 
+import dk.aau.cs.giraf.launcher.R;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
