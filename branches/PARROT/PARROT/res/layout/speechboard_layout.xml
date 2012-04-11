@@ -35,43 +35,6 @@
             
             <!-- STOP COPYING -->
             
-            
-            
-            
-            <!--
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:padding="15dip"
-                android:text="PHOTOS HERE"
-                android:textSize="18dip" />
-
-
-
-            
-
-            <Button
-                android:id="@+id/B1"
-                android:layout_width="90dp"
-                android:layout_height="60dp"
-                android:onClick="selfDestruct"
-                android:text="Test" />
-
-            <Button
-                android:id="@+id/B2"
-                android:layout_width="90dp"
-                android:layout_height="60dp"
-                android:onClick="selfDestruct"
-                android:text="Test2" />
-
-            <Button
-                android:id="@+id/B3"
-                android:layout_width="90dp"
-                android:layout_height="60dp"
-                android:onClick="selfDestruct"
-                android:text="Test3" />
-            -->
-        
         </LinearLayout>
         
         <LinearLayout
@@ -82,8 +45,6 @@
             android:layout_marginRight="10dp">
             
         </LinearLayout>
-
-        
 
     </LinearLayout>
    
