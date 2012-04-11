@@ -68,11 +68,11 @@
         android:drawableLeft="@drawable/ok_icon"
         android:id="@+id/button2008768"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="is this you?" 
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="5dp"
-        android:layout_marginBottom="15dp"/>
+    	    android:layout_height="wrap_content"
+    	    android:layout_alignParentRight="true"
+    	    android:layout_alignParentBottom="true"
+    	    android:layout_marginBottom="50dp"
+    	    android:layout_marginRight="15dp"
+    	    android:text="This is me!"/>
     
 </RelativeLayout>
