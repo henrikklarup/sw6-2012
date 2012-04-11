@@ -138,13 +138,15 @@ public class ProfilesHelper {
 	public List<Profile> getChildrenByDepartment(Department department) {
 		List<Profile> profiles = new ArrayList<Profile>();
 		String[] hasDepartmentColumns = {HasDepartmentMetaData.Table.COLUMN_IDPROFILE, HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT}; 
-		Cursor c = _context.getContentResolver().query(HasGuardianMetaData.CONTENT_URI, hasDepartmentColumns, hasDepartmentColumns[1] + " = '" + department.getId() + "'", null, null);
+		Cursor c = _context.getContentResolver().query(HasDepartmentMetaData.CONTENT_URI, hasDepartmentColumns,	hasDepartmentColumns[1] + " = '" + department.getId() + "'", null, null);
 		
 		if (c != null) {
 			if (c.moveToFirst()) {
 				while (!c.isAfterLast()) {
 					Profile profile = getProfileById(c.getLong(c.getColumnIndex(hasDepartmentColumns[0])));
-					profiles.add(profile);
+					if (profile.getPRole() == 3) {
+						profiles.add(profile);
+					}
 					c.moveToNext();
 				}
 			}
@@ -165,6 +167,28 @@ public class ProfilesHelper {
 				while (!c.isAfterLast()) {
 					Profile profile = getProfileById(c.getLong(c.getColumnIndex(hasGuardianColumns[1])));
 					profiles.add(profile);
+					c.moveToNext();
+				}
+			}
+		}
+		
+		c.close();
+		
+		return profiles;
+	}
+	
+	public List<Profile> getGuardiansByDepartment(Department department) {
+		List<Profile> profiles = new ArrayList<Profile>();
+		String[] hasDepartmentColumns = {HasDepartmentMetaData.Table.COLUMN_IDPROFILE, HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT}; 
+		Cursor c = _context.getContentResolver().query(HasGuardianMetaData.CONTENT_URI, hasDepartmentColumns, hasDepartmentColumns[1] + " = '" + department.getId() + "'", null, null);
+		
+		if (c != null) {
+			if (c.moveToFirst()) {
+				while (!c.isAfterLast()) {
+					Profile profile = getProfileById(c.getLong(c.getColumnIndex(hasDepartmentColumns[0])));
+					if (profile.getPRole() == 1) {
+						profiles.add(profile);
+					}
 					c.moveToNext();
 				}
 			}
@@ -210,8 +234,27 @@ public class ProfilesHelper {
 		return profiles;
 	}
 	
-	public void attachToGuardian(Profile guardian) {
-		null;
+	public int attachChildToGuardian(Profile child, Profile guardian) {
+		if (child.getPRole() != 3 || guardian.getPRole() != 1 || guardian.getPRole() != 2) {
+			return -1;
+		} else {
+			ContentValues values = new ContentValues();
+			values.put(HasGuardianMetaData.Table.COLUMN_IDCHILD, child.getId());
+			values.put(HasGuardianMetaData.Table.COLUMN_IDGUARDIAN, guardian.getId());
+			_context.getContentResolver().insert(HasGuardianMetaData.CONTENT_URI, values);
+			return 0;
+		}
+	}
+	
+	public int removeChildAttachmentToGuardian(Profile child, Profile guardian) {
+		if (child.getPRole() != 3 || guardian.getPRole() != 1 || guardian.getPRole() != 2) {
+			return -1;
+		} else {
+			_context.getContentResolver().delete(HasGuardianMetaData.CONTENT_URI, 
+					HasGuardianMetaData.Table.COLUMN_IDCHILD + " = '" + child.getId() + "'" +
+					HasGuardianMetaData.Table.COLUMN_IDGUARDIAN + " = '" + guardian.getId() + "'", null);
+			return 0;
+		}
 	}
 
 	/**
