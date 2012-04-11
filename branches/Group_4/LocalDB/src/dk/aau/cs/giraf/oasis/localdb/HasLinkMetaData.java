@@ -13,7 +13,7 @@ public class HasLinkMetaData {
 	public class Table implements BaseColumns {
 		public static final String TABLE_NAME = "tbl_apps";
 
-		public static final String COLUMN_IDPARENT = "haslink_parentid";
-		public static final String COLUMN_IDCHILD = "haslink_childid";
+		public static final String COLUMN_IDMEDIA = "haslink_mediaid";
+		public static final String COLUMN_IDSUBMEDIA = "haslink_submediaid";
 	}
 }

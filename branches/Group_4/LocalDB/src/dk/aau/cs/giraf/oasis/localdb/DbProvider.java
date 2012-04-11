@@ -15,7 +15,6 @@ import android.text.TextUtils;
 /**
  * DbProvider is a contentprovider which makes it possible for other apps, on the phone, to interact with the database.
  * @author Admin
- *
  */
 public class DbProvider extends ContentProvider {
 
@@ -79,6 +78,7 @@ public class DbProvider extends ContentProvider {
 		authusersProjectionMap = new HashMap<String, String>();
 		authusersProjectionMap.put(AuthUsersMetaData.Table.COLUMN_ID, AuthUsersMetaData.Table.COLUMN_ID);
 		authusersProjectionMap.put(AuthUsersMetaData.Table.COLUMN_CERTIFICATE, AuthUsersMetaData.Table.COLUMN_CERTIFICATE);
+		authusersProjectionMap.put(AuthUsersMetaData.Table.COLUMN_ROLE, AuthUsersMetaData.Table.COLUMN_ROLE);
 	}
 	
 	private static final HashMap<String, String> departmentsProjectionMap;
@@ -94,22 +94,22 @@ public class DbProvider extends ContentProvider {
 	private static final HashMap<String, String> hasdepartmentProjectionMap;
 	static {
 		hasdepartmentProjectionMap = new HashMap<String, String>();
-		hasdepartmentProjectionMap.put(HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT, HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT);
 		hasdepartmentProjectionMap.put(HasDepartmentMetaData.Table.COLUMN_IDPROFILE, HasDepartmentMetaData.Table.COLUMN_IDPROFILE);
+		hasdepartmentProjectionMap.put(HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT, HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT);
 	}
 	
 	private static final HashMap<String, String> hasguardianProjectionMap;
 	static {
 		hasguardianProjectionMap = new HashMap<String, String>();
-		hasguardianProjectionMap.put(HasGuardianMetaData.Table.COLUMN_MEDIAID, HasGuardianMetaData.Table.COLUMN_MEDIAID);
-		hasguardianProjectionMap.put(HasGuardianMetaData.Table.COLUMN_PROFILEID, HasGuardianMetaData.Table.COLUMN_PROFILEID);
+		hasguardianProjectionMap.put(HasGuardianMetaData.Table.COLUMN_IDGUARDIAN, HasGuardianMetaData.Table.COLUMN_IDGUARDIAN);
+		hasguardianProjectionMap.put(HasGuardianMetaData.Table.COLUMN_IDCHILD, HasGuardianMetaData.Table.COLUMN_IDCHILD);
 	}
 	
 	private static final HashMap<String, String> haslinkProjectionMap;
 	static {
 		haslinkProjectionMap = new HashMap<String, String>();
-		haslinkProjectionMap.put(HasLinkMetaData.Table.COLUMN_IDCHILD, HasLinkMetaData.Table.COLUMN_IDCHILD);
-		haslinkProjectionMap.put(HasLinkMetaData.Table.COLUMN_IDPARENT, HasLinkMetaData.Table.COLUMN_IDPARENT);
+		haslinkProjectionMap.put(HasLinkMetaData.Table.COLUMN_IDMEDIA, HasLinkMetaData.Table.COLUMN_IDMEDIA);
+		haslinkProjectionMap.put(HasLinkMetaData.Table.COLUMN_IDSUBMEDIA, HasLinkMetaData.Table.COLUMN_IDSUBMEDIA);
 	}
 	
 	private static final HashMap<String, String> hassubdepartmentProjectionMap;
@@ -129,8 +129,8 @@ public class DbProvider extends ContentProvider {
 	private static final HashMap<String, String> listofappsProjectionMap;
 	static {
 		listofappsProjectionMap = new HashMap<String, String>();
-		listofappsProjectionMap.put(ListOfAppsMetaData.Table.COLUMN_APPID, ListOfAppsMetaData.Table.COLUMN_APPID);
-		listofappsProjectionMap.put(ListOfAppsMetaData.Table.COLUMN_PROFILEID, ListOfAppsMetaData.Table.COLUMN_PROFILEID);
+		listofappsProjectionMap.put(ListOfAppsMetaData.Table.COLUMN_IDAPP, ListOfAppsMetaData.Table.COLUMN_IDAPP);
+		listofappsProjectionMap.put(ListOfAppsMetaData.Table.COLUMN_IDPROFILE, ListOfAppsMetaData.Table.COLUMN_IDPROFILE);
 		listofappsProjectionMap.put(ListOfAppsMetaData.Table.COLUMN_SETTINGS, ListOfAppsMetaData.Table.COLUMN_SETTINGS);
 		listofappsProjectionMap.put(ListOfAppsMetaData.Table.COLUMN_STATS, ListOfAppsMetaData.Table.COLUMN_STATS);
 	}
@@ -149,15 +149,15 @@ public class DbProvider extends ContentProvider {
 	private static final HashMap<String, String> mediaDepartmentAccessProjectionMap;
 	static {
 		mediaDepartmentAccessProjectionMap = new HashMap<String, String>();
-		mediaDepartmentAccessProjectionMap.put(MediaDepartmentAccessMetaData.Table.COLUMN_DEPARTMENTID, MediaDepartmentAccessMetaData.Table.COLUMN_DEPARTMENTID);
-		mediaDepartmentAccessProjectionMap.put(MediaDepartmentAccessMetaData.Table.COLUMN_MEDIAID, MediaDepartmentAccessMetaData.Table.COLUMN_MEDIAID);
+		mediaDepartmentAccessProjectionMap.put(MediaDepartmentAccessMetaData.Table.COLUMN_IDDEPARTMENT, MediaDepartmentAccessMetaData.Table.COLUMN_IDDEPARTMENT);
+		mediaDepartmentAccessProjectionMap.put(MediaDepartmentAccessMetaData.Table.COLUMN_IDMEDIA, MediaDepartmentAccessMetaData.Table.COLUMN_IDMEDIA);
 	}
 	
 	private static final HashMap<String, String> mediaProfileAccessProjectionMap;
 	static {
 		mediaProfileAccessProjectionMap = new HashMap<String, String>();
-		mediaProfileAccessProjectionMap.put(MediaProfileAccessMetaData.Table.COLUMN_PROFILEID, MediaProfileAccessMetaData.Table.COLUMN_PROFILEID);
-		mediaProfileAccessProjectionMap.put(MediaProfileAccessMetaData.Table.COLUMN_MEDIAID, MediaProfileAccessMetaData.Table.COLUMN_MEDIAID);
+		mediaProfileAccessProjectionMap.put(MediaProfileAccessMetaData.Table.COLUMN_IDPROFILE, MediaProfileAccessMetaData.Table.COLUMN_IDPROFILE);
+		mediaProfileAccessProjectionMap.put(MediaProfileAccessMetaData.Table.COLUMN_IDMEDIA, MediaProfileAccessMetaData.Table.COLUMN_IDMEDIA);
 	}
 
 	private static final HashMap<String, String> profilesProjectionMap;
@@ -171,6 +171,8 @@ public class DbProvider extends ContentProvider {
 		profilesProjectionMap.put(ProfilesMetaData.Table.COLUMN_PHONE, ProfilesMetaData.Table.COLUMN_PHONE);
 		profilesProjectionMap.put(ProfilesMetaData.Table.COLUMN_PICTURE, ProfilesMetaData.Table.COLUMN_PICTURE);
 		profilesProjectionMap.put(ProfilesMetaData.Table.COLUMN_SETTINGS, ProfilesMetaData.Table.COLUMN_SETTINGS);
+		profilesProjectionMap.put(ProfilesMetaData.Table.COLUMN_USERNAME, ProfilesMetaData.Table.COLUMN_USERNAME);
+		profilesProjectionMap.put(ProfilesMetaData.Table.COLUMN_PASSWORD, ProfilesMetaData.Table.COLUMN_PASSWORD);
 	}
 
 	private static final HashMap<String, String> tagsProjectionMap;
@@ -482,16 +484,16 @@ public class DbProvider extends ContentProvider {
 			builder.setTables(HasGuardianMetaData.Table.TABLE_NAME);
 			builder.setProjectionMap(hasguardianProjectionMap);
 			if (selectionArgs != null) {
-				builder.appendWhere(HasGuardianMetaData.Table.COLUMN_MEDIAID + " = " + selectionArgs[0] + " AND "
-					+ HasGuardianMetaData.Table.COLUMN_PROFILEID + " = " + selectionArgs[1]);
+				builder.appendWhere(HasGuardianMetaData.Table.COLUMN_IDGUARDIAN + " = " + selectionArgs[0] + " AND "
+					+ HasGuardianMetaData.Table.COLUMN_IDCHILD + " = " + selectionArgs[1]);
 			}
 			break;
 		case HASLINK_TYPE_LIST:
 			builder.setTables(HasLinkMetaData.Table.TABLE_NAME);
 			builder.setProjectionMap(haslinkProjectionMap);
 			if (selectionArgs != null) {
-				builder.appendWhere(HasLinkMetaData.Table.COLUMN_IDCHILD + " = " + selectionArgs[0] + " AND "
-					+ HasLinkMetaData.Table.COLUMN_IDPARENT + " = " + selectionArgs[1]);
+				builder.appendWhere(HasLinkMetaData.Table.COLUMN_IDSUBMEDIA + " = " + selectionArgs[0] + " AND "
+					+ HasLinkMetaData.Table.COLUMN_IDMEDIA + " = " + selectionArgs[1]);
 			}
 			break;
 		case HASSUBDEPARTMENT_TYPE_LIST:
@@ -514,8 +516,8 @@ public class DbProvider extends ContentProvider {
 			builder.setTables(ListOfAppsMetaData.Table.TABLE_NAME);
 			builder.setProjectionMap(listofappsProjectionMap);
 			if (selectionArgs != null) {
-				builder.appendWhere(ListOfAppsMetaData.Table.COLUMN_APPID + " = " + selectionArgs[0] + " AND "
-						+ ListOfAppsMetaData.Table.COLUMN_PROFILEID + " = " + selectionArgs[1]);
+				builder.appendWhere(ListOfAppsMetaData.Table.COLUMN_IDAPP + " = " + selectionArgs[0] + " AND "
+						+ ListOfAppsMetaData.Table.COLUMN_IDPROFILE + " = " + selectionArgs[1]);
 			}
 			break;
 		case MEDIA_TYPE_LIST:
@@ -531,16 +533,16 @@ public class DbProvider extends ContentProvider {
 			builder.setTables(MediaDepartmentAccessMetaData.Table.TABLE_NAME);
 			builder.setProjectionMap(mediaDepartmentAccessProjectionMap);
 			if (selectionArgs != null) {
-				builder.appendWhere(MediaDepartmentAccessMetaData.Table.COLUMN_DEPARTMENTID + " = " + selectionArgs[0] + " AND " 
-						+ MediaDepartmentAccessMetaData.Table.COLUMN_MEDIAID + " = " + selectionArgs[1]);
+				builder.appendWhere(MediaDepartmentAccessMetaData.Table.COLUMN_IDDEPARTMENT + " = " + selectionArgs[0] + " AND " 
+						+ MediaDepartmentAccessMetaData.Table.COLUMN_IDMEDIA + " = " + selectionArgs[1]);
 			}
 			break;
 		case MEDIAPROFILEACCESS_TYPE_LIST:
 			builder.setTables(MediaProfileAccessMetaData.Table.TABLE_NAME);
 			builder.setProjectionMap(mediaProfileAccessProjectionMap);
 			if (selectionArgs != null) {
-				builder.appendWhere(MediaProfileAccessMetaData.Table.COLUMN_MEDIAID + " = " + selectionArgs[0] + " AND " 
-						+ MediaProfileAccessMetaData.Table.COLUMN_PROFILEID + " = " + selectionArgs[1]);
+				builder.appendWhere(MediaProfileAccessMetaData.Table.COLUMN_IDMEDIA + " = " + selectionArgs[0] + " AND " 
+						+ MediaProfileAccessMetaData.Table.COLUMN_IDPROFILE + " = " + selectionArgs[1]);
 			}
 			break;
 		case PROFILES_TYPE_LIST:

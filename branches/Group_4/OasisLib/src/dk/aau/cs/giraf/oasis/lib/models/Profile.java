@@ -168,7 +168,7 @@ public class Profile {
 		localOutput = localOutput.replace("{4}", String.valueOf(getPRole()));
 		localOutput = localOutput.replace("{5}", String.valueOf(getPhone()));
 		localOutput = localOutput.replace("{6}", getPicture());
-		localOutput = localOutput.replace("{7}", "Setting(Static text)");
+		localOutput = localOutput.replace("{7}", "Setting(Static Setting text)");
 //		localOutput = localOutput.replace("{7}", getSetting().toString());
 
 		return localOutput;

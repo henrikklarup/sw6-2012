@@ -7,11 +7,11 @@ public class ListOfAppsTable {
 	private static final String TABLE_CREATE = "CREATE TABLE "
 			+ ListOfAppsMetaData.Table.TABLE_NAME
 			+ "("
-			+ ListOfAppsMetaData.Table.COLUMN_APPID + " INTEGER NOT NULL, "
-			+ ListOfAppsMetaData.Table.COLUMN_PROFILEID + " INTEGER NOT NULL, "
+			+ ListOfAppsMetaData.Table.COLUMN_IDAPP + " INTEGER NOT NULL, "
+			+ ListOfAppsMetaData.Table.COLUMN_IDPROFILE + " INTEGER NOT NULL, "
 			+ ListOfAppsMetaData.Table.COLUMN_SETTINGS + " TEXT, "
 			+ ListOfAppsMetaData.Table.COLUMN_STATS + " TEXT, "
-			+ "PRIMARY KEY(" + ListOfAppsMetaData.Table.COLUMN_APPID + ", " + ListOfAppsMetaData.Table.COLUMN_PROFILEID + ")"
+			+ "PRIMARY KEY(" + ListOfAppsMetaData.Table.COLUMN_IDAPP + ", " + ListOfAppsMetaData.Table.COLUMN_IDPROFILE + ")"
 			+ ");";
 
 	private static final String TABLE_DROP= "DROP TABLE IF EXISTS " + ListOfAppsMetaData.Table.TABLE_NAME + ";";
@@ -25,10 +25,10 @@ public class ListOfAppsTable {
 	}
 
 	/**
-	 * Executes a sql string, which drop the current table, then the mehod calls the oncreate, which creates a new table
+	 * Executes a sql string, which drop the current table, then the method calls the oncreate, which creates a new table
 	 * @param db this is an instance of a sqlite database
-	 * @param oldVersion integer refering to the old version number
-	 * @param newVersion integer refering to the new version number
+	 * @param oldVersion integer referring to the old version number
+	 * @param newVersion integer referring to the new version number
 	 */
 	public static void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		db.execSQL(TABLE_DROP);
