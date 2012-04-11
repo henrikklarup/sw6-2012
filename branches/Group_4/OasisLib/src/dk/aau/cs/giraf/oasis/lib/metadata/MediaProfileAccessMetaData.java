@@ -10,7 +10,7 @@ public class MediaProfileAccessMetaData {
 	public class Table implements BaseColumns {
 		public static final String TABLE_NAME = "tbl_mediaprofileaccess";
 
-		public static final String COLUMN_PROFILEID = "mediaprofileaccess_profileid";
-		public static final String COLUMN_MEDIAID = "mediaprofileaccess_mediaid";
+		public static final String COLUMN_IDPROFILE = "mediaprofileaccess_profileid";
+		public static final String COLUMN_IDMEDIA = "mediaprofileaccess_mediaid";
 	}
 }
