@@ -8,8 +8,15 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.nfc.Tag;
+import dk.aau.cs.giraf.oasis.lib.metadata.HasTagMetaData;
+import dk.aau.cs.giraf.oasis.lib.metadata.MediaDepartmentAccessMetaData;
 import dk.aau.cs.giraf.oasis.lib.metadata.MediaMetaData;
+import dk.aau.cs.giraf.oasis.lib.metadata.MediaProfileAccessMetaData;
+import dk.aau.cs.giraf.oasis.lib.metadata.TagsMetaData;
+import dk.aau.cs.giraf.oasis.lib.models.Department;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
+import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
 /**
  * Helper class for Media
@@ -53,7 +60,6 @@ public class MediaHelper {
 	 */
 	public Media getSingleMediaById(long id) {
 		Uri uri = ContentUris.withAppendedId(MediaMetaData.CONTENT_URI, id);
-		String[] columns = getTableColumns();
 		Cursor c = _context.getContentResolver().query(uri, columns, null, null, null);
 		Media media = null;
 		
@@ -71,7 +77,6 @@ public class MediaHelper {
 	 * @return List<Media>, containing all media of that name
 	 */
 	public List<Media> getMediaByName(String name) {
-		String[] columns = getTableColumns();
 		Cursor c = _context.getContentResolver().query(Uri.withAppendedPath(MediaMetaData.CONTENT_URI, name), columns, null, null, null);
 		
 		List<Media> media = new ArrayList<Media>();
@@ -86,7 +91,6 @@ public class MediaHelper {
 	 * @return List<Media>, containing all media
 	 */
 	public List<Media> getMedia() {
-		String[] columns = getTableColumns();
 		Cursor c = _context.getContentResolver().query(MediaMetaData.CONTENT_URI, columns, null, null, null);
 		
 		List<Media> media = new ArrayList<Media>();
@@ -95,7 +99,158 @@ public class MediaHelper {
 		c.close();
 		return media;
 	}
-
+	
+	public List<Media> getMediaByTags(String[] tags) {
+		List<Media> mediaList = new ArrayList<Media>();
+		
+		for (String tag : tags) {
+			String[] tagColumns = {TagsMetaData.Table.COLUMN_ID, TagsMetaData.Table.COLUMN_CAPTION};
+			Cursor cTag = _context.getContentResolver().query(TagsMetaData.CONTENT_URI, tagColumns, tagColumns[1] + " = '" + tag + "'", null, null);
+			if (cTag != null) {
+				if (cTag.moveToFirst()) {
+					long tagId = cTag.getLong(cTag.getColumnIndex(tagColumns[0]));
+					List<Long> mediaIdList = new ArrayList<Long>();
+					String[] hasTagColumns = {HasTagMetaData.Table.COLUMN_IDTAG, HasTagMetaData.Table.COLUMN_IDMEDIA};
+					Cursor cHasTag = _context.getContentResolver().query(HasTagMetaData.CONTENT_URI, hasTagColumns, 
+							hasTagColumns[0] + " = '" + tagId + "'", null, null);
+					if (cHasTag != null) {
+						if (cHasTag.moveToFirst()) {
+							while (!cHasTag.isAfterLast()) {
+								long mediaId = cHasTag.getLong(cHasTag.getColumnIndex(hasTagColumns[1]));
+								mediaIdList.add(mediaId);
+							}
+						}
+						for (long mId : mediaIdList) {
+							Cursor cMedia = _context.getContentResolver().query(MediaMetaData.CONTENT_URI, columns, 
+									MediaMetaData.Table.COLUMN_ID + " = '" + mId + "'", null, null);
+							if (cMedia != null) {
+								if (cMedia.moveToFirst()) {
+									while (!cMedia.isAfterLast()) {
+										mediaList.add(cursorToSingleMedia(cMedia));
+									}
+								}
+							}
+							cMedia.close();
+						}
+					}
+					cHasTag.close();
+				}
+			}
+			cTag.close();
+		}
+		
+		return mediaList;
+	}
+	
+	public List<Media> getMediaByDepartment(Department department) {
+		List<Media> mediaList = new ArrayList<Media>();
+		String[] mediaDepColumns = {MediaDepartmentAccessMetaData.Table.COLUMN_IDDEPARTMENT, MediaDepartmentAccessMetaData.Table.COLUMN_IDMEDIA}; 
+		Cursor c = _context.getContentResolver().query(MediaDepartmentAccessMetaData.CONTENT_URI, mediaDepColumns, mediaDepColumns[0] + " = '" + department.getId() + "'", null, null);
+		
+		if (c != null) {
+			if (c.moveToFirst()) {
+				while (!c.isAfterLast()) {
+					Media media = getMediaById(c.getLong(c.getColumnIndex(mediaDepColumns[1])));
+					mediaList.add(media);
+					c.moveToNext();
+				}
+			}
+		}
+		
+		c.close();
+		
+		return mediaList;
+	}
+	
+	public List<Media> getMediaByProfile(Profile profile) {
+		List<Media> mediaList = new ArrayList<Media>();
+		String[] mediaProfileColumns = {MediaProfileAccessMetaData.Table.COLUMN_IDPROFILE, MediaProfileAccessMetaData.Table.COLUMN_IDMEDIA}; 
+		Cursor c = _context.getContentResolver().query(MediaDepartmentAccessMetaData.CONTENT_URI, mediaProfileColumns, mediaProfileColumns[0] + " = '" + profile.getId() + "'", null, null);
+		
+		if (c != null) {
+			if (c.moveToFirst()) {
+				while (!c.isAfterLast()) {
+					Media media = getMediaById(c.getLong(c.getColumnIndex(mediaProfileColumns[1])));
+					mediaList.add(media);
+					c.moveToNext();
+				}
+			}
+		}
+		
+		c.close();
+		
+		return mediaList;
+	}
+	
+	public Media getMediaById(long id) {
+		Cursor c = _context.getContentResolver().query(MediaMetaData.CONTENT_URI, columns, MediaMetaData.Table.COLUMN_ID + " = '" + id + "'", null, null);
+		
+		if (c != null) {
+			if (c.moveToFirst()) {
+				return cursorToSingleMedia(c);
+			}
+		}
+		return null;
+	}
+	
+	public int addTagsToMedia(String[] tags, Media media) {
+		for (String tag : tags) {
+			String[] tagColumns = {TagsMetaData.Table.COLUMN_ID, TagsMetaData.Table.COLUMN_CAPTION};
+			Cursor cTag = _context.getContentResolver().query(TagsMetaData.CONTENT_URI, tagColumns, tagColumns[1] + " = '" + tag + "'", null, null);
+			if (cTag != null) {
+				if (cTag.moveToFirst()) {
+					String caption = cTag.getString(cTag.getColumnIndex(tagColumns[1]));
+					Tag _tag = new Tag(caption); 
+				}
+			}
+		}
+	}
+	
+	private void addHasTag(Tag tag, Media media) {
+		ContentValues values = new ContentValues();
+		values.put(HasTagMetaData.Table.COLUMN_IDTAG, tag.getId());
+		values.put(HasTagMetaData.Table.COLUMN_IDMEDIA, media.getId());
+		_context.getContentResolver().insert(HasTagMetaData.CONTENT_URI, values);
+	}
+	
+	public int attachMediaToProfile(Media media, Profile profile, Profile owner) {
+		if (media.isMPublic() || media.getOwnerId() == owner.getId()) {
+			ContentValues values = new ContentValues();
+			values.put(MediaProfileAccessMetaData.Table.COLUMN_IDMEDIA, media.getId());
+			values.put(MediaProfileAccessMetaData.Table.COLUMN_IDPROFILE, profile.getId());
+			_context.getContentResolver().insert(MediaProfileAccessMetaData.CONTENT_URI, values);
+			return 0;
+		} else {
+			return -1;
+		}
+	}
+	
+	public int attachMediaToDepartment(Media media, Department department, Profile owner) {
+		if (media.isMPublic() || media.getOwnerId() == owner.getId()) {
+			ContentValues values = new ContentValues();
+			values.put(MediaDepartmentAccessMetaData.Table.COLUMN_IDMEDIA, media.getId());
+			values.put(MediaDepartmentAccessMetaData.Table.COLUMN_IDDEPARTMENT, department.getId());
+			_context.getContentResolver().insert(MediaDepartmentAccessMetaData.CONTENT_URI, values);
+			return 0;
+		} else {
+			return -1;
+		}
+	}
+	
+	public int removeMediaAttachmentToProfile(Media media, Profile profile) {
+		_context.getContentResolver().delete(MediaProfileAccessMetaData.CONTENT_URI, 
+				MediaProfileAccessMetaData.Table.COLUMN_IDMEDIA + " = '" + media.getId() + "'" +
+				MediaProfileAccessMetaData.Table.COLUMN_IDPROFILE + " = '" + profile.getId() + "'", null);
+		return 0;
+	}
+	
+	public int removeMediaAttachmentToDepartment(Media media, Department department) {
+		_context.getContentResolver().delete(MediaDepartmentAccessMetaData.CONTENT_URI, 
+				MediaDepartmentAccessMetaData.Table.COLUMN_IDMEDIA + " = '" + media.getId() + "'" +
+				MediaDepartmentAccessMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + department.getId() + "'", null);
+		return 0;
+	}
+	
 	/**
 	 * Clear media table
 	 */
@@ -157,19 +312,12 @@ public class MediaHelper {
 		return contentValues;
 	}
 	
-	/**
-	 * Getter for table columns
-	 * @return the columns
-	 */
-	private String[] getTableColumns() {
-		String[] columns = new String[] { 
-				MediaMetaData.Table.COLUMN_ID, 
-				MediaMetaData.Table.COLUMN_PATH,
-				MediaMetaData.Table.COLUMN_NAME,
-				MediaMetaData.Table.COLUMN_PUBLIC,
-				MediaMetaData.Table.COLUMN_TYPE,
-				MediaMetaData.Table.COLUMN_OWNERID};
-		
-		return columns;
-	}
+	String[] columns = new String[] { 
+			MediaMetaData.Table.COLUMN_ID, 
+			MediaMetaData.Table.COLUMN_PATH,
+			MediaMetaData.Table.COLUMN_NAME,
+			MediaMetaData.Table.COLUMN_PUBLIC,
+			MediaMetaData.Table.COLUMN_TYPE,
+			MediaMetaData.Table.COLUMN_OWNERID};
+
 }
