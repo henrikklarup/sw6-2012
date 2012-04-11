@@ -179,13 +179,13 @@ public final class CameraManager {
       }
       //---- GIRAF MOD
       Point cameraResolution = configManager.getScreenResolution();
-      int width = cameraResolution.x;
+      int width = cameraResolution.y;
 //      if (width < MIN_FRAME_WIDTH) {
 //        width = MIN_FRAME_WIDTH;
 //      } else if (width > MAX_FRAME_WIDTH) {
 //        width = MAX_FRAME_WIDTH;
 //      }
-      int height = cameraResolution.y;
+      int height = cameraResolution.x;
 //      if (height < MIN_FRAME_HEIGHT) {
 //        height = MIN_FRAME_HEIGHT;
 //      } else if (height > MAX_FRAME_HEIGHT) {
@@ -213,6 +213,7 @@ public final class CameraManager {
       Rect rect = new Rect(framingRect);
       Point cameraResolution = configManager.getCameraResolution();
       Point screenResolution = configManager.getScreenResolution();
+      
       rect.left = rect.left * cameraResolution.x / screenResolution.x;
       rect.right = rect.right * cameraResolution.x / screenResolution.x;
       rect.top = rect.top * cameraResolution.y / screenResolution.y;
