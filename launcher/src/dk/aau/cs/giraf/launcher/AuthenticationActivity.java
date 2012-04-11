@@ -1,6 +1,7 @@
 package dk.aau.cs.giraf.launcher;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import com.google.zxing.Result;
 import com.google.zxing.client.android.CaptureActivity;
 
+import dk.aau.cs.giraf.gui.GButton;
 import dk.aau.cs.giraf.launcher.R;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
@@ -38,6 +40,14 @@ public class AuthenticationActivity extends CaptureActivity {
 	        		AnimationDrawable anim = (AnimationDrawable) instruct.getBackground();
 	        		anim.start();
 	        	}
+	        });
+	        
+	        final GButton button = (GButton) findViewById(R.id.loginGButton);
+	        button.setOnClickListener(new View.OnClickListener() {
+	            public void onClick(View v) {
+	            	Intent intent = new Intent(AuthenticationActivity.this, HomeActivity.class);
+	            	startActivity(intent);
+	            }
 	        });
 	    }
 	 
@@ -63,6 +73,7 @@ public class AuthenticationActivity extends CaptureActivity {
 	    		this.changeCamerafeedBorderColor(0xFF3AAA35);
 	    		//ProgressDialog dialog = ProgressDialog.show(AuthenticationActivity.this, "", "Hej: " + rawResult.getText(), true, true);
 	    		((TextView)this.findViewById(R.id.loginname)).setText(drazenko.getFirstname() + " " + drazenko.getSurname());
+	    		((GButton)this.findViewById(R.id.loginGButton)).setVisibility(View.VISIBLE);
 	    	} else {
 	    		this.changeCamerafeedBorderColor(0xFFFF0000);
 	    		//ProgressDialog dialog = ProgressDialog.show(AuthenticationActivity.this, "", "INVALID profile: " + rawResult.getText(), true, true);
