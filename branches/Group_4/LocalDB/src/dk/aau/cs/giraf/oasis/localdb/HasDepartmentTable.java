@@ -7,8 +7,8 @@ public class HasDepartmentTable {
 	private static final String TABLE_CREATE = "CREATE TABLE "
 			+ HasDepartmentMetaData.Table.TABLE_NAME
 			+ "("
-			+ HasDepartmentMetaData.Table.COLUMN_IDPROFILE + " INTEGER, "
-			+ HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT + " INTEGER, "
+			+ HasDepartmentMetaData.Table.COLUMN_IDPROFILE + " INTEGER NOT NULL, "
+			+ HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT + " INTEGER NOT NULL, "
 			+ "PRIMARY KEY(" + HasDepartmentMetaData.Table.COLUMN_IDPROFILE + ", " + HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT + ")"
 			+ ");";
 
