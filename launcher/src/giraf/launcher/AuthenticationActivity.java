@@ -64,9 +64,8 @@ public class AuthenticationActivity extends CaptureActivity {
 	    		this.changeCamerafeedBorderColor(0x992FE449);
 	    		ProgressDialog dialog = ProgressDialog.show(AuthenticationActivity.this, "", "Hej: " + rawResult.getText(), true, true);
 	    	} else {
-	    		ProgressDialog dialog = ProgressDialog.show(AuthenticationActivity.this, "", "INVALID profile: " + rawResult.getText(), true, true);
-
 	    		this.changeCamerafeedBorderColor(0x99E92A2A);
+	    		ProgressDialog dialog = ProgressDialog.show(AuthenticationActivity.this, "", "INVALID profile: " + rawResult.getText(), true, true);
 	    	}
 	    	
 	    
