@@ -65,15 +65,18 @@ final class CameraConfigurationManager {
       width = height;
       height = temp;
     }
-    screenResolution = new Point(width, height);
+    screenResolution = new Point(640, 480);
     Log.i(TAG, "Screen resolution: " + screenResolution);
-    cameraResolution = findBestPreviewSizeValue(parameters, screenResolution);
+    cameraResolution = new Point(640, 480);//findBestPreviewSizeValue(parameters, screenResolution);
     Log.i(TAG, "Camera resolution: " + cameraResolution);
   }
 
   void setDesiredCameraParameters(Camera camera) {
     Camera.Parameters parameters = camera.getParameters();
-
+    //GIRAF MOD !!!!
+    camera.setDisplayOrientation(90);
+    //GIRAF MOD OFF !!!
+    
     if (parameters == null) {
       Log.w(TAG, "Device error: no camera parameters are available. Proceeding without configuration.");
       return;

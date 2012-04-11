@@ -92,7 +92,7 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback 
   private static final int ABOUT_ID = Menu.FIRST + 4;
 
   private static final long DEFAULT_INTENT_RESULT_DURATION_MS = 1500L;
-  private static final long BULK_MODE_SCAN_DELAY_MS = 1000L;
+  public static long BULK_MODE_SCAN_DELAY_MS = 1000L;
 
   private static final String PACKAGE_NAME = "com.google.zxing.client.android";
   private static final String PRODUCT_SEARCH_URL_PREFIX = "http://www.google";
