@@ -91,9 +91,11 @@ public class ProfilesHelper {
 				AuthUsersMetaData.Table.COLUMN_ID, 
 				AuthUsersMetaData.Table.COLUMN_CERTIFICATE};
 		Cursor c = _context.getContentResolver().query(AuthUsersMetaData.CONTENT_URI, authColumns, null, new String[] {certificate}, null);
-
-		if(c.moveToFirst()) {
-			profile = getProfileById(c.getLong(c.getColumnIndex(AuthUsersMetaData.Table.COLUMN_ID)));
+		
+		if(c != null) {
+			if(c.moveToFirst()) {
+				profile = getProfileById(c.getLong(c.getColumnIndex(AuthUsersMetaData.Table.COLUMN_ID)));
+			}
 		}
 
 		c.close();
