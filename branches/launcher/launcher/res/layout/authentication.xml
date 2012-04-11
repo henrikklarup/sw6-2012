@@ -75,4 +75,16 @@
     	    android:layout_marginRight="15dp"
     	    android:text="This is me!"/>
     
+    <TextView android:text="@string/welcomedrazenko"
+        	android:textColor="#FFFFFFFF"
+        	android:layout_height="wrap_content"
+        	android:layout_width="300dp"
+        	android:textSize="30dp"
+        	android:layout_alignParentRight="true"
+    	    android:layout_alignParentBottom="true"
+    	    android:layout_marginBottom="50dp"
+    	    android:layout_marginRight="350dp"
+    	    
+        	/>
+    
 </RelativeLayout>

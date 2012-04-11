@@ -18,5 +18,6 @@
     	<item>0xFFB3DC6C</item>
     	<item>0xFF9FC6E7</item>   
     </integer-array>
+    <string name="welcomedrazenko">Welcome Drazenko!</string>
 
 </resources>
