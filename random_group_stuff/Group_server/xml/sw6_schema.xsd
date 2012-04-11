@@ -17,6 +17,13 @@
   </xs:restriction>
 </xs:simpleType>
 
+<xs:simpleType name="ttype">
+  <xs:restriction base="xs:string">
+    <xs:enumeration value="string"/>
+    <xs:enumeration value="int"/>
+  </xs:restriction>
+</xs:simpleType>
+
 <xs:element name="sw6ml">
   <xs:complexType>
     <xs:sequence>
@@ -27,8 +34,21 @@
         <xs:element name="entry" maxOccurs="unbounded">
          <xs:complexType>
           <xs:sequence>
-            <xs:element name="certificate" type="xs:string"/>
-            <xs:element name="idUser" type="xs:integer"/>
+            <xs:element name="certificate" type="xs:string">
+			<xs:attribute name="type" type="ttype" use="required"/>
+			</xs:element>
+            <xs:element name="idUser" type="xs:integer">
+			<xs:attribute name="type" type="ttype" use="required"/>
+			</xs:element>
+			<xs:element name="aRole" type="xs:integer">
+			<xs:attribute name="type" type="ttype" use="required"/>
+			</xs:element>
+			<xs:element name="username" type="xs:string">
+			<xs:attribute name="type" type="ttype" use="required"/>
+			</xs:element>
+			<xs:element name="password" type="xs:string">
+			<xs:attribute name="type" type="ttype" use="required"/>
+			</xs:element>
           </xs:sequence>
           <xs:attribute name="action" type="crud" use="required"/>
          </xs:complexType>
@@ -43,14 +63,36 @@
             <xs:element name="entry" maxOccurs="unbounded">
               <xs:complexType>
                 <xs:sequence>
-                  <xs:element name="idProfile" type="xs:integer"/>
-                  <xs:element name="Firstname" type="xs:string"/>
-                  <xs:element name="Surname" type="xs:string"/>
-                  <xs:element name="Middlename" type="xs:string"/>
-                  <xs:element name="pRole" type="xs:integer"/> 
-                  <xs:element name="Phone" type="xs:long"/>
-                  <xs:element name="Picture" type="xs:string"/>
-                  <xs:element name="Settings" type="xs:string"/>
+                  <xs:element name="idProfile" type="xs:integer">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
+                  <xs:element name="Firstname" type="xs:string">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
+                  <xs:element name="Surname" type="xs:string">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
+                  <xs:element name="Middlename" type="xs:string">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
+                  <xs:element name="pRole" type="xs:integer">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
+                  <xs:element name="Phone" type="xs:long">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
+                  <xs:element name="Picture" type="xs:string">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
+                  <xs:element name="Settings" type="xs:string">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
+				  <xs:element name="username" type="xs:string">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
+				  <xs:element name="password" type="xs:string">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
                 </xs:sequence>
                 <xs:attribute name="action" type="crud" use="required"/>
               </xs:complexType>
@@ -65,11 +107,21 @@
             <xs:element name="entry" maxOccurs="unbounded">
               <xs:complexType> 
                 <xs:sequence>
-                  <xs:element name="idDepartment" type="xs:integer"/>
-                  <xs:element name="name" type="xs:string"/>
-                  <xs:element name="address" type="xs:string"/>
-                  <xs:element name="phone" type="xs:long"/>
-                  <xs:element name="email" type="xs:string"/>
+                  <xs:element name="idDepartment" type="xs:integer">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
+                  <xs:element name="name" type="xs:string">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
+                  <xs:element name="address" type="xs:string">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
+                  <xs:element name="phone" type="xs:long">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
+                  <xs:element name="email" type="xs:string">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
                 </xs:sequence>
                 <xs:attribute name="action" type="crud" use="required"/>
               </xs:complexType>
@@ -84,8 +136,12 @@
               <xs:element name="entry" maxOccurs="unbounded">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element name="idProfile" type="xs:integer"/>
-                    <xs:element name="idDepartment" type="xs:integer"/>
+                    <xs:element name="idProfile" type="xs:integer">
+					<xs:attribute name="type" type="ttype" use="required"/>
+					</xs:element>
+                    <xs:element name="idDepartment" type="xs:integer">
+					<xs:attribute name="type" type="ttype" use="required"/>
+					</xs:element>
                   </xs:sequence>
                   <xs:attribute name="action" type="crud" use="required"/>
                 </xs:complexType>
@@ -100,8 +156,12 @@
               <xs:element name="entry" maxOccurs="unbounded">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element name="idDepartment" type="xs:integer"/>
-                    <xs:element name="idSubDepartment" type="xs:integer"/>
+                    <xs:element name="idDepartment" type="xs:integer">
+					<xs:attribute name="type" type="ttype" use="required"/>
+					</xs:element>
+                    <xs:element name="idSubDepartment" type="xs:integer">
+					<xs:attribute name="type" type="ttype" use="required"/>
+					</xs:element>
                   </xs:sequence>
                   <xs:attribute name="action" type="crud" use="required"/>
                 </xs:complexType>
@@ -116,9 +176,15 @@
             <xs:element name="entry" maxOccurs="unbounded">
               <xs:complexType>
                 <xs:sequence>
-                  <xs:element name="idApp" type="xs:integer"/>
-                  <xs:element name="name" type="xs:string"/>
-                  <xs:element name="version" type="xs:string"/>
+                  <xs:element name="idApp" type="xs:integer">
+				  <xs:attribute name="type" type="ttype" use="required/">
+				  </xs:element>
+                  <xs:element name="name" type="xs:string">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
+                  <xs:element name="version" type="xs:string">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
                 </xs:sequence>
                 <xs:attribute name="action" type="crud" use="required"/>
               </xs:complexType>
@@ -133,10 +199,18 @@
             <xs:element name="entry" maxOccurs="unbounded">
               <xs:complexType>
                 <xs:sequence>
-                  <xs:element name="idApps" type="xs:integer"/>
-                  <xs:element name="idProfile" type="xs:integer"/>
-                  <xs:element name="settings" type="xs:string"/>
-                  <xs:element name="stats" type="xs:string"/>
+                  <xs:element name="idApps" type="xs:integer">
+					<xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
+                  <xs:element name="idProfile" type="xs:integer">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
+                  <xs:element name="settings" type="xs:string">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
+                  <xs:element name="stats" type="xs:string">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
                 </xs:sequence>
                 <xs:attribute name="action" type="crud" use="required"/>
               </xs:complexType>
@@ -151,12 +225,24 @@
             <xs:element name="entry" maxOccurs="unbounded">
               <xs:complexType>
                 <xs:sequence>
-                  <xs:element name="idMedia" type="xs:integer"/>
-                  <xs:element name="mPath" type="xs:string"/>
-                  <xs:element name="Name" type="xs:string"/>
-                  <xs:element name="mPublic" type="xs:boolean"/>
-                  <xs:element name="mType" type="xs:string"/>
-                  <xs:element name="OwnerID" type="xs:integer"/>   
+                  <xs:element name="idMedia" type="xs:integer">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
+                  <xs:element name="mPath" type="xs:string">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
+                  <xs:element name="Name" type="xs:string">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
+                  <xs:element name="mPublic" type="xs:boolean">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
+                  <xs:element name="mType" type="xs:integer">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
+                  <xs:element name="OwnerID" type="xs:integer">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
                 </xs:sequence>
                 <xs:attribute name="action" type="crud" use="required"/>
               </xs:complexType>
@@ -171,8 +257,12 @@
             <xs:element name="entry" maxOccurs="unbounded">
               <xs:complexType>
                 <xs:sequence>
-                  <xs:element name="idTag" type="xs:integer"/>
-                  <xs:element name="caption" type="xs:String"/>
+                  <xs:element name="idTag" type="xs:integer">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
+                  <xs:element name="caption" type="xs:String">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
                 </xs:sequence>
                 <xs:attribute name="action" type="crud" use="required"/>
               </xs:complexType>
@@ -187,8 +277,12 @@
             <xs:element name="entry" maxOccurs="unbounded">
               <xs:complexType>
                 <xs:sequence>
-                  <xs:element name="idMedia" type="xs:integer"/>
-                  <xs:element name="idTag" type="xs:integer"/>
+                  <xs:element name="idMedia" type="xs:integer">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
+                  <xs:element name="idTag" type="xs:integer">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
                 </xs:sequence>
                 <xs:attribute name="action" type="crud" use="required"/>
               </xs:complexType>
@@ -203,8 +297,12 @@
             <xs:element name="entry" maxOccurs="unbounded">
               <xs:complexType>
                 <xs:sequence>
-                  <xs:element name="idParrent" type="xs:integer"/>
-                  <xs:element name="idChild" type="xs:integer"/>
+                  <xs:element name="idMedia" type="xs:integer">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
+                  <xs:element name="idSubMedia" type="xs:integer">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
                 </xs:sequence>
                 <xs:attribute name="action" type="crud" use="required"/>
               </xs:complexType>
@@ -219,8 +317,12 @@
             <xs:element name="entry" maxOccurs="unbounded">
               <xs:complexType>
                 <xs:sequence>
-                  <xs:element name="idDepartment" type="xs:integer"/>
-                  <xs:element name="idMedia" type="xs:String"/>
+                  <xs:element name="idDepartment" type="xs:integer">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
+                  <xs:element name="idMedia" type="xs:integer">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
                 </xs:sequence>
                 <xs:attribute name="action" type="crud" use="required"/>
               </xs:complexType>
@@ -235,8 +337,12 @@
             <xs:element name="entry" maxOccurs="unbounded">
               <xs:complexType>
                 <xs:sequence>
-                  <xs:element name="idProfile" type="xs:integer"/>
-                  <xs:element name="idMedia" type="xs:integer"/>
+                  <xs:element name="idProfile" type="xs:integer">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
+                  <xs:element name="idMedia" type="xs:integer">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
                 </xs:sequence>
                 <xs:attribute name="action" type="crud" use="required"/>
               </xs:complexType>
@@ -251,8 +357,12 @@
             <xs:element name="entry" maxOccurs="unbounded">
               <xs:complexType>
                 <xs:sequence>
-                  <xs:element name="idGuardian" type="xs:integer"/>
-                  <xs:element name="idChild" type="xs:integer"/>
+                  <xs:element name="idGuardian" type="xs:integer">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
+                  <xs:element name="idChild" type="xs:integer">
+				  <xs:attribute name="type" type="ttype" use="required"/>
+				  </xs:element>
                 </xs:sequence>
                 <xs:attribute name="action" type="crud" use="required"/>
               </xs:complexType>
@@ -261,21 +371,7 @@
         </xs:complexType>
       </xs:element>
 
-      <xs:element name="HasLink">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="entry" maxOccurs="unbounded">
-              <xs:complexType>
-                <xs:sequence>
-                  <xs:element name="idParent" type="xs:integer"/>
-                  <xs:element name="idChild" type="xs:integer"/>
-                </xs:sequence>
-                <xs:attribute name="action" type="crud" use="required"/>
-              </xs:complexType>
-            </xs:element>
-          </xs:sequence> 
-        </xs:complexType>
-      </xs:element>
+ 
   
   </xs:sequence>
   </xs:complexType>
