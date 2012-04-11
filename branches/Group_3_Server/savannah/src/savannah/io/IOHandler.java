@@ -19,6 +19,11 @@ public class IOHandler {
 	 * Creates a IOHandler that uses the specified port on which it accepts connections.
 	 * @param port - the specified port
 	 */
+	
+	public IOHandler()
+	{
+		
+	}
 	public IOHandler(int port, String folder, int bufferSize) {
 		this.folder = folder;
 		this.bufferSize = bufferSize;
