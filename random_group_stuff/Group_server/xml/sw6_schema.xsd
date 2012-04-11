@@ -177,7 +177,7 @@
               <xs:complexType>
                 <xs:sequence>
                   <xs:element name="idApp" type="xs:integer">
-				  <xs:attribute name="type" type="ttype" use="required/">
+				  <xs:attribute name="type" type="ttype" use="required"/>
 				  </xs:element>
                   <xs:element name="name" type="xs:string">
 				  <xs:attribute name="type" type="ttype" use="required"/>
@@ -370,10 +370,8 @@
           </xs:sequence> 
         </xs:complexType>
       </xs:element>
-
- 
-  
-  </xs:sequence>
+    </xs:sequence>
+	
   </xs:complexType>
 </xs:element>
 
