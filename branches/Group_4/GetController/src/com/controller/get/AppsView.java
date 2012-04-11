@@ -38,7 +38,14 @@ public class AppsView extends ListActivity {
 		settings = new Setting<String, String, String>();
 		settings.addValue("Hello", "String", "World!");
 
-		profile = new Profile("Dummy1", "Dummy","Dummy", 0, 12345678, "Dummy", settings);
+		//profile er en forud deklareret profil
+		Bundle extras = getIntent().getExtras();
+		        if (extras != null) {
+		            profile = helper.profilesHelper.getProfileById(extras.getLong("ID"));
+		        } else {
+		        	profile = new Profile("Dummy1", "Dummy","Dummy", 0, 12345678, "Dummy", settings);
+		        }
+//		profile = new Profile("Dummy1", "Dummy","Dummy", 0, 12345678, "Dummy", settings);
 //		int result = helper.profilesHelper.insertProfile(profile);
 		
 //		if (result == 0) {
