@@ -2,6 +2,7 @@ package dk.aau.cs.giraf.wombat;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
+
 import android.opengl.GLSurfaceView.Renderer;
 import android.opengl.GLU;
 import android.os.SystemClock;
