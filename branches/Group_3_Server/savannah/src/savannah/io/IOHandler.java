@@ -1,5 +1,7 @@
 package savannah.io;
 
+import savannah.serverMain.*;
+
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -8,8 +10,9 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 
-public class IOHandler {
+public class IOHandler implements Runnable {
 	//Field variables
+	private static IOHandler _instance = null;
 	private ServerSocket serverSocket;
 	private ArrayList<ConnectionIO> connections = new ArrayList<ConnectionIO>();
 	private String folder;
@@ -20,25 +23,34 @@ public class IOHandler {
 	 * @param port - the specified port
 	 */
 	
-	public IOHandler()
-	{
-		
+
+	@Override
+	public void run() {
+		listen();
 	}
-	public IOHandler(int port, String folder, int bufferSize) {
+	
+	private IOHandler(String folder, int bufferSize) {
 		this.folder = folder;
 		this.bufferSize = bufferSize;
-		listen(port);
+	}
+	
+	public static synchronized IOHandler getInstance() {
+		if (_instance == null) {
+			return new IOHandler(Configuration.FOLDERPATH, Configuration.BUFFERSIZE);
+		} else {
+			return _instance;
+		}
 	}
 
 	/**
 	 * Listens for connections on the specified port.
 	 * @param port - the specified port
 	 */
-	private void listen(int port) {
+	private void listen() {
 		try {
 			//Initiates a ServerSocket
 			System.out.println("Initiating serversocket !");
-			this.serverSocket = new ServerSocket(port);
+			this.serverSocket = new ServerSocket(Configuration.PORT);
 			System.out.println("Initiation complete");
 			
 		}	catch (IOException io) {
@@ -216,6 +228,7 @@ public class IOHandler {
 			}	
 		}
 	}
+	
 
 //	public static void main(String[] args) {
 //		//"Hard-Codedededede" port value
