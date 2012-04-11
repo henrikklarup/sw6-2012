@@ -1,9 +1,11 @@
 package savannah.server;
 
+import java.sql.SQLException;
+
 public class EventHandler implements Runnable {
 	private CommitHandler cHandler;
 	private RequestHandler rHandler;
-	public EventHandler()
+	public EventHandler() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException
 	{
 		cHandler = new CommitHandler();
 		rHandler = new RequestHandler();
