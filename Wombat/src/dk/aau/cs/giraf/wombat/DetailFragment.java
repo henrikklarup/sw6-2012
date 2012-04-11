@@ -44,6 +44,7 @@ public class DetailFragment extends android.app.ListFragment {
 						// TODO Auto-generated method stub
 						
 						Toast t = Toast.makeText(getActivity(), "Profile Deleted", 5000); // TODO: Which profile has been deleted?
+						t.show();
 						reloadSubProfiles();						
 					}
 		        });
