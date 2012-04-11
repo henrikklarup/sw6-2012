@@ -5,12 +5,27 @@ import java.sql.SQLException;
 public class EventHandler implements Runnable {
 	private CommitHandler cHandler;
 	private RequestHandler rHandler;
-	public EventHandler() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException
+	public EventHandler()
 	{
-		cHandler = new CommitHandler();
+		try {
+			cHandler = new CommitHandler();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		rHandler = new RequestHandler();
 	}
 	public void start() {
+		
 		EventQueue eque = EventQueue.getInstance();
 		while(eque.isEmpty()) {
 			while(!eque.isEmpty()) {
@@ -25,6 +40,7 @@ public class EventHandler implements Runnable {
 				}
 			}
 		}
+		
 	}
 
 
