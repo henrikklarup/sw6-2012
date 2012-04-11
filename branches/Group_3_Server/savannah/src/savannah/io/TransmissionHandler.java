@@ -294,5 +294,11 @@ public class TransmissionHandler {
 		return this.FileCount;
 	}
 	
-	
+	/**
+	 * 
+	 * @return
+	 */
+	public File getFolder() {
+		return this.folder;
+	}
 }
