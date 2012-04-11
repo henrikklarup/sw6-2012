@@ -2,6 +2,8 @@ package dk.aau.cs.giraf.wombat;
 
 import java.util.ArrayList;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -54,5 +56,26 @@ public class DetailFragment extends android.app.ListFragment {
 		CustomizeFragment fragment = (CustomizeFragment) getFragmentManager()
 				.findFragmentById(R.id.customizeFragment);
 		fragment.loadSettings(guard.selected().SubProfiles().get(position));
+	}
+	
+	public boolean onLongClick(final View v) {
+		AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
+        alertDialog.setTitle(R.string.delete_subprofile_message);
+        alertDialog.setButton(getText(R.string.delete_yes), new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface arg0, int arg1) {
+				// TODO Auto-generated method stub
+				
+			}
+        });
+        
+        alertDialog.setButton2(getText(R.string.delete_no), new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface arg0, int arg1) {
+				// TODO Auto-generated method stub
+				
+			}
+        });
+        
+        alertDialog.show();
+		return false;
 	}
 }
