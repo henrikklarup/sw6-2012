@@ -40,12 +40,12 @@ public class GLCube {
 //	private FloatBuffer colorBuff;
 	private FloatBuffer vertBuff;
 
-	private short[] pIndex = { 
+	private short[] pIndex = { // angiver hvordan punkterne skal tegnes sammen
 			3,4,0,  0,4,1,  3,0,1,
 			3,7,4,  7,6,4,  7,3,6,
 			3,1,2,  1,6,2,  6,3,2,
 			1,4,5,  5,6,1,  6,5,4
-	}; // holder de specifikke punkter. Der er 3 punkter i en trekant
+	};
 	private ShortBuffer pBuff;
 	
 	public GLCube(){
