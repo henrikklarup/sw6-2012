@@ -10,8 +10,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import dk.aau.cs.giraf.oasis.lib.metadata.AuthUsersMetaData;
+import dk.aau.cs.giraf.oasis.lib.metadata.HasDepartmentMetaData;
 import dk.aau.cs.giraf.oasis.lib.metadata.HasGuardianMetaData;
 import dk.aau.cs.giraf.oasis.lib.metadata.ProfilesMetaData;
+import dk.aau.cs.giraf.oasis.lib.models.Department;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 import dk.aau.cs.giraf.oasis.lib.models.Setting;
 
@@ -47,16 +49,17 @@ public class ProfilesHelper {
 				AuthUsersMetaData.Table.COLUMN_CERTIFICATE};
 		Cursor c = _context.getContentResolver().query(AuthUsersMetaData.CONTENT_URI, authColumns, null, new String[] {certificate}, null);
 
-		if(c.moveToFirst()) {
-			long id = c.getLong(c.getColumnIndex(AuthUsersMetaData.Table.COLUMN_ID));
-			profile.setId(id);
+		if (c != null) {
+			if(c.moveToFirst()) {
+				long id = c.getLong(c.getColumnIndex(AuthUsersMetaData.Table.COLUMN_ID));
+				profile.setId(id);
 
-			ContentValues profileContentValues = getContentValues(profile);
-			profileContentValues.put(ProfilesMetaData.Table.COLUMN_ID, id);
-			_context.getContentResolver().insert(ProfilesMetaData.CONTENT_URI, profileContentValues);
-			return 0;
+				ContentValues profileContentValues = getContentValues(profile);
+				profileContentValues.put(ProfilesMetaData.Table.COLUMN_ID, id);
+				_context.getContentResolver().insert(ProfilesMetaData.CONTENT_URI, profileContentValues);
+				return 0;
+			}
 		}
-
 		c.close();
 
 		return -1;
@@ -117,28 +120,58 @@ public class ProfilesHelper {
 				AuthUsersMetaData.Table.COLUMN_CERTIFICATE};
 		Cursor c = _context.getContentResolver().query(uri, authColumns, null, null, null);
 
-		if (c.moveToFirst()) {
-			certificate = new ArrayList<String>();
-			while (!c.isAfterLast()) {
-				certificate.add(c.getString(c.getColumnIndex(AuthUsersMetaData.Table.COLUMN_CERTIFICATE)));
-				c.moveToNext();
+		if (c != null) {
+			if (c.moveToFirst()) {
+				certificate = new ArrayList<String>();
+				while (!c.isAfterLast()) {
+					certificate.add(c.getString(c.getColumnIndex(AuthUsersMetaData.Table.COLUMN_CERTIFICATE)));
+					c.moveToNext();
+				}
 			}
 		}
 
+		c.close();
+		
 		return certificate;
+	}
+	
+	public List<Profile> getChildrenByDepartment(Department department) {
+		List<Profile> profiles = new ArrayList<Profile>();
+		String[] hasDepartmentColumns = {HasDepartmentMetaData.Table.COLUMN_IDPROFILE, HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT}; 
+		Cursor c = _context.getContentResolver().query(HasGuardianMetaData.CONTENT_URI, hasDepartmentColumns, hasDepartmentColumns[1] + " = '" + department.getId() + "'", null, null);
+		
+		if (c != null) {
+			if (c.moveToFirst()) {
+				while (!c.isAfterLast()) {
+					Profile profile = getProfileById(c.getLong(c.getColumnIndex(hasDepartmentColumns[0])));
+					profiles.add(profile);
+					c.moveToNext();
+				}
+			}
+		}
+		
+		c.close();
+		
+		return profiles;
 	}
 	
 	public List<Profile> getChildrenByGuardian(Profile guardian) {
 		List<Profile> profiles = new ArrayList<Profile>();
 		String[] hasGuardianColumns = {HasGuardianMetaData.Table.COLUMN_IDGUARDIAN, HasGuardianMetaData.Table.COLUMN_IDCHILD}; 
 		Cursor c = _context.getContentResolver().query(HasGuardianMetaData.CONTENT_URI, hasGuardianColumns, hasGuardianColumns[0] + " = '" + guardian.getId() + "'", null, null);
-		if (c.moveToFirst()) {
-			while (!c.isAfterLast()) {
-				Profile profile = getProfileById(c.getLong(c.getColumnIndex(hasGuardianColumns[1])));
-				profiles.add(profile);
-				c.moveToNext();
+		
+		if (c != null) {
+			if (c.moveToFirst()) {
+				while (!c.isAfterLast()) {
+					Profile profile = getProfileById(c.getLong(c.getColumnIndex(hasGuardianColumns[1])));
+					profiles.add(profile);
+					c.moveToNext();
+				}
 			}
 		}
+		
+		c.close();
+		
 		return profiles;
 	}
 
@@ -151,9 +184,13 @@ public class ProfilesHelper {
 		Uri uri = ContentUris.withAppendedId(ProfilesMetaData.CONTENT_URI, id);
 		Cursor c = _context.getContentResolver().query(uri, columns, null, null, null);
 
-		if(c.moveToFirst()) {
-			return cursorToProfile(c);
+		if (c != null) {
+			if(c.moveToFirst()) {
+				return cursorToProfile(c);
+			}
 		}
+		
+		c.close();
 
 		return null;
 	}
@@ -171,6 +208,10 @@ public class ProfilesHelper {
 		c.close();
 
 		return profiles;
+	}
+	
+	public void attachToGuardian(Profile guardian) {
+		null;
 	}
 
 	/**
