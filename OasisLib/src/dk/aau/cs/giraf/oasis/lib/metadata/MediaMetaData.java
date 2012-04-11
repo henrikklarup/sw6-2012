@@ -6,7 +6,7 @@ import android.provider.BaseColumns;
 public class MediaMetaData {
 	
 	public static final Uri CONTENT_URI = Uri.parse("content://dk.aau.cs.giraf.oasis.localdb.AutismProvider/media");
-
+	
 	public class Table implements BaseColumns {
 		public static final String TABLE_NAME = "tbl_media";
 		

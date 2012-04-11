@@ -7,7 +7,7 @@ public class DepartmentsTable {
 	private static final String TABLE_CREATE = "CREATE TABLE "
 			+ DepartmentsMetaData.Table.TABLE_NAME
 			+ "("
-			+ DepartmentsMetaData.Table.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+			+ DepartmentsMetaData.Table.COLUMN_ID + " INTEGER PRIMARY KEY, "
 			+ DepartmentsMetaData.Table.COLUMN_NAME + " TEXT NOT NULL, "
 			+ DepartmentsMetaData.Table.COLUMN_ADDRESS + " TEXT NOT NULL, "
 			+ DepartmentsMetaData.Table.COLUMN_PHONE + " INTEGER NOT NULL, "

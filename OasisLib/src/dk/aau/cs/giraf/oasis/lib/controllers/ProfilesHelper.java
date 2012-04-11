@@ -42,11 +42,13 @@ public class ProfilesHelper {
 		String certificate = getNewCertificate();
 		ContentValues authusersContentValues = new ContentValues();
 		authusersContentValues.put(AuthUsersMetaData.Table.COLUMN_CERTIFICATE, certificate);
+		authusersContentValues.put(AuthUsersMetaData.Table.COLUMN_ROLE, profile.getPRole());
 		_context.getContentResolver().insert(AuthUsersMetaData.CONTENT_URI, authusersContentValues);
 
 		String[] authColumns = new String[] { 
 				AuthUsersMetaData.Table.COLUMN_ID, 
-				AuthUsersMetaData.Table.COLUMN_CERTIFICATE};
+				AuthUsersMetaData.Table.COLUMN_CERTIFICATE,
+				AuthUsersMetaData.Table.COLUMN_ROLE};
 		Cursor c = _context.getContentResolver().query(AuthUsersMetaData.CONTENT_URI, authColumns, null, new String[] {certificate}, null);
 
 		if (c != null) {
