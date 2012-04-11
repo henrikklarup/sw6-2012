@@ -110,7 +110,6 @@ public class DepartmentsHelper {
 			return 0;
 	}
 	
-	//**//*DOEN!
 	public int attachSubDepartmentToDepartment(Department department, Department subDepartment) {
 			ContentValues values = new ContentValues();
 			values.put(HasSubDepartmentMetaData.Table.COLUMN_IDSUBDEPARTMENT, subDepartment.getId());
