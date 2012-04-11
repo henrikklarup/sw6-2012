@@ -36,8 +36,10 @@ public class GLCube {
 //			.25f, 0, .85f, 0,
 //			1, 1, 0, 0,
 //		};
-	
-	private FloatBuffer vertBuff, colorBuff;
+//
+//	private FloatBuffer colorBuff;
+	private FloatBuffer vertBuff;
+
 	private short[] pIndex = { 
 			3,4,0,  0,4,1,  3,0,1,
 			3,7,4,  7,6,4,  7,3,6,
