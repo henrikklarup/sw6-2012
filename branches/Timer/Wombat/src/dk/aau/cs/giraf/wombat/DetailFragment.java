@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import dk.aau.cs.giraf.TimerLib.Guardian;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
@@ -30,6 +32,30 @@ public class DetailFragment extends android.app.ListFragment {
 		super.onActivityCreated(savedInstanceState);
 		// TODO: Implement bind to the profile chosen by launcher
 		setListAdapter(null);
+		ListView lv = getListView();
+		lv.setOnItemLongClickListener(new OnItemLongClickListener() {
+			
+			public boolean onItemLongClick(AdapterView<?> arg0, View v, int row, long arg3){
+				AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
+		        alertDialog.setTitle(R.string.delete_subprofile_message);
+		        alertDialog.setButton(getText(R.string.delete_yes), new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface arg0, int arg1) {
+						// TODO Auto-generated method stub
+						
+					}
+		        });
+		        
+		        alertDialog.setButton2(getText(R.string.delete_no), new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface arg0, int arg1) {
+						// TODO Auto-generated method stub
+						
+					}
+		        });
+		        
+		        alertDialog.show();
+				return true;
+			}
+		});
 	}
 
 	public void reloadSubProfiles() {
@@ -58,24 +84,4 @@ public class DetailFragment extends android.app.ListFragment {
 		fragment.loadSettings(guard.selected().SubProfiles().get(position));
 	}
 	
-	public boolean onLongClick(final View v) {
-		AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
-        alertDialog.setTitle(R.string.delete_subprofile_message);
-        alertDialog.setButton(getText(R.string.delete_yes), new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface arg0, int arg1) {
-				// TODO Auto-generated method stub
-				
-			}
-        });
-        
-        alertDialog.setButton2(getText(R.string.delete_no), new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface arg0, int arg1) {
-				// TODO Auto-generated method stub
-				
-			}
-        });
-        
-        alertDialog.show();
-		return false;
-	}
 }
