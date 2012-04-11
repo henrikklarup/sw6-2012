@@ -803,7 +803,7 @@ public class GLHourglass {
 	
 	private FloatBuffer vertBuff, colorBuff;
 	
-	private short[] pIndex = { // holder de specifikke punkter. Der er 3 punkter i en trekant
+	private short[] pIndex = { //fortæller hvordan punkterne skal tegnes sammen
 			0, 1, 2, 
 			1, 0, 3, 
 			3, 0, 4, 
