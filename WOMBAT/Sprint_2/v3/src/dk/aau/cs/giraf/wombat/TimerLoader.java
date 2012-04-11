@@ -10,6 +10,7 @@ public class TimerLoader {
 		Guardian guard = Guardian.getInstance("John");
 		TimerHelper help = new TimerHelper();
 		help.LoadTestData();
+		help.loadPredef();
 		guard.publishList();
 	}
 	

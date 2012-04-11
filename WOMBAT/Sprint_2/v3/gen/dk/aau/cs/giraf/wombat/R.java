@@ -105,21 +105,24 @@ public final class R {
         /**  GENERAL 
          */
         public static final int app_name=0x7f060000;
-        public static final int attached=0x7f060019;
-        public static final int attachment_button_description=0x7f060017;
-        public static final int background=0x7f060020;
-        public static final int choose_profile=0x7f06001a;
-        public static final int color_picker_button=0x7f060016;
-        public static final int color_time_left=0x7f060015;
-        public static final int colors=0x7f060014;
-        public static final int customize_digital_description=0x7f060013;
-        public static final int customize_header=0x7f06000e;
-        public static final int customize_hourglass_description=0x7f060010;
-        public static final int customize_progressbar_description=0x7f060012;
-        public static final int customize_style_description=0x7f06000f;
-        public static final int customize_timetimer_description=0x7f060011;
-        public static final int frame=0x7f06001f;
-        public static final int gradient=0x7f06001e;
+        public static final int attached=0x7f06001c;
+        public static final int attachment_button_description=0x7f06001a;
+        public static final int background=0x7f060023;
+        public static final int choose_profile=0x7f06001d;
+        public static final int color_picker_button=0x7f060019;
+        public static final int color_time_left=0x7f060018;
+        public static final int colors=0x7f060017;
+        public static final int customize_digital_description=0x7f060016;
+        public static final int customize_header=0x7f060011;
+        public static final int customize_hourglass_description=0x7f060013;
+        public static final int customize_progressbar_description=0x7f060015;
+        public static final int customize_style_description=0x7f060012;
+        public static final int customize_timetimer_description=0x7f060014;
+        public static final int delete_no=0x7f06000f;
+        public static final int delete_subprofile_message=0x7f06000d;
+        public static final int delete_yes=0x7f06000e;
+        public static final int frame=0x7f060022;
+        public static final int gradient=0x7f060021;
         public static final int last_used=0x7f060009;
         public static final int min_sec_devider=0x7f060001;
         public static final int minut=0x7f060002;
@@ -130,18 +133,18 @@ public final class R {
         public static final int profile_list_header=0x7f060007;
         public static final int profile_list_time=0x7f06000b;
         public static final int profile_pic_description=0x7f06000a;
-        public static final int save_as_button=0x7f06001d;
-        public static final int save_button=0x7f06001c;
+        public static final int save_as_button=0x7f060020;
+        public static final int save_button=0x7f06001f;
         public static final int second=0x7f060004;
         public static final int seconds=0x7f060005;
-        public static final int select_attachment_dialog=0x7f060018;
+        public static final int select_attachment_dialog=0x7f06001b;
         /**  CUSTOMIZE 
          */
-        public static final int start_activity_default=0x7f06000d;
-        public static final int start_button=0x7f06001b;
+        public static final int start_activity_default=0x7f060010;
+        public static final int start_button=0x7f06001e;
         /**  TEMPLATE LIST 
          */
         public static final int template_list_header=0x7f06000c;
-        public static final int toast_text=0x7f060021;
+        public static final int toast_text=0x7f060024;
     }
 }

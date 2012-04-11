@@ -3,12 +3,12 @@ package dk.aau.cs.giraf.wombat;
 import java.util.ArrayList;
 import java.util.List;
 
-import sw6.oasis.models.Profile;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 import dk.aau.cs.giraf.TimerLib.Child;
 import dk.aau.cs.giraf.TimerLib.Guardian;
+import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
 public class ListFragment extends android.app.ListFragment {
 	List<Profile> profileList;
