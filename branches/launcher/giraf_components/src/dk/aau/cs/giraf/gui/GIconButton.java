@@ -19,6 +19,7 @@ public class GIconButton extends GButton {
 	private void setStyle() {
 		this.setBackgroundResource(R.drawable.gbutton);
 		this.setTextColor(Color.parseColor("#9E6435"));
+		this.setCompoundDrawablePadding(20);
 
 	}
 	
