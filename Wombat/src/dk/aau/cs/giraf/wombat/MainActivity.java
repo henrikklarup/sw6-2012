@@ -1,8 +1,6 @@
 package dk.aau.cs.giraf.wombat;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 
 public class MainActivity extends Activity {

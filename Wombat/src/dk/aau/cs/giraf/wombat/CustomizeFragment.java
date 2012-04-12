@@ -10,7 +10,6 @@ import yuku.ambilwarna.AmbilWarnaDialog;
 import yuku.ambilwarna.AmbilWarnaDialog.OnAmbilWarnaListener;
 import android.app.AlertDialog;
 import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.PorterDuff;
