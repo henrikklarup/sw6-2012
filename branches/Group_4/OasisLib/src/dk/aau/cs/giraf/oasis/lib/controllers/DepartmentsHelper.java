@@ -138,14 +138,23 @@ public class DepartmentsHelper {
 		return null;
 	}
 	
-	private String[] columns = new String[] { 
-			DepartmentsMetaData.Table.COLUMN_ID,
-			DepartmentsMetaData.Table.COLUMN_NAME,
-			DepartmentsMetaData.Table.COLUMN_ADDRESS,
-			DepartmentsMetaData.Table.COLUMN_PHONE,
-			DepartmentsMetaData.Table.COLUMN_EMAIL};
-			
-			
+	public List<Department> getDepartmentByName(String name) {
+		List<Department> departments = new ArrayList<Department>();
+		Cursor c = _context.getContentResolver().query(DepartmentsMetaData.CONTENT_URI, columns, DepartmentsMetaData.Table.COLUMN_NAME + " = '" + name + "'", null, null);
+		if (c != null) {
+			if (c.moveToFirst()) {
+				while (!c.isAfterLast()) {
+					cursorToDepartment(c);
+					c.moveToNext();
+				}
+			}
+		}
+		
+		c.close();
+		
+		return departments;
+	}
+	
 	public List<Department> getSubDepartments(Department department) {
 		List<Department> departments = new ArrayList<Department>();
 		String[] hasDepartmentsColumns = {
@@ -179,6 +188,13 @@ public class DepartmentsHelper {
 		_context.getContentResolver().delete(DepartmentsMetaData.CONTENT_URI,
 				null, null);
 	}
+	
+	private String[] columns = new String[] { 
+			DepartmentsMetaData.Table.COLUMN_ID,
+			DepartmentsMetaData.Table.COLUMN_NAME,
+			DepartmentsMetaData.Table.COLUMN_ADDRESS,
+			DepartmentsMetaData.Table.COLUMN_PHONE,
+			DepartmentsMetaData.Table.COLUMN_EMAIL};
 
 	/**
 	 * Cursor to department
