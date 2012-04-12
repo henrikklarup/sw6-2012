@@ -35,6 +35,8 @@ class ApplicationInfo{
 	 * The application icon color.
 	 */
 	Color iconcolor;
+	
+	ComponentName className;
 
 	/**
 	 * Creates the application intent based on a component name and various launch flags.
@@ -46,6 +48,7 @@ class ApplicationInfo{
 		intent = new Intent(Intent.ACTION_MAIN);
 		intent.addCategory(Intent.CATEGORY_LAUNCHER);
 		intent.setComponent(className);
+		this.className = className;
 		intent.setFlags(launchFlags);
 	}
 
