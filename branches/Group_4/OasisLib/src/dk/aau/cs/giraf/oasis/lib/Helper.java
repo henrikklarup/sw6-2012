@@ -63,7 +63,7 @@ public class Helper {
 		Department subDep1Loaded = departmentsHelper.getDepartmentByName("subDep1").get(0);
 		Department dep3Loaded = departmentsHelper.getDepartmentByName("Dep3").get(0);
 		/*Add subdepartment*/
-		departmentsHelper.attachSubDepartmentToDepartment(dep1Loaded, subDep1Loaded);
+//		departmentsHelper.attachSubDepartmentToDepartment(dep1Loaded, subDep1Loaded);
 		
 		
 		
