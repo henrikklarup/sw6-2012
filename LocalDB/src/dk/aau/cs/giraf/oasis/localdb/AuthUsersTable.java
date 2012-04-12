@@ -4,20 +4,11 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class AuthUsersTable {
 
-//	private static final String TABLE_CREATE = "CREATE TABLE "
-//			+ AuthUsersMetaData.Table.TABLE_NAME
-//			+ "("
-//			+ AuthUsersMetaData.Table.COLUMN_ID + " INTEGER AUTOINCREMENT, "
-//			+ AuthUsersMetaData.Table.COLUMN_CERTIFICATE + " TEXT NOT NULL, "
-//			+ AuthUsersMetaData.Table.COLUMN_ROLE + " INTEGER NOT NULL, "
-//			+ "PRIMARY KEY(" + AuthUsersMetaData.Table.COLUMN_ID + ", " + AuthUsersMetaData.Table.COLUMN_CERTIFICATE + ")"
-//			+ ");";
-	
 	private static final String TABLE_CREATE = "CREATE TABLE "
 			+ AuthUsersMetaData.Table.TABLE_NAME
 			+ "("
 			+ AuthUsersMetaData.Table.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-			+ AuthUsersMetaData.Table.COLUMN_CERTIFICATE + " TEXT UNIQUE, "
+			+ AuthUsersMetaData.Table.COLUMN_CERTIFICATE + " TEXT PRIMARY KEY, "
 			+ AuthUsersMetaData.Table.COLUMN_ROLE + " INTEGER NOT NULL"
 			+ ");";
 

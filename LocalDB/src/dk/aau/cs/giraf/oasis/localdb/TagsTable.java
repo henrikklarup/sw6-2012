@@ -8,7 +8,7 @@ public class TagsTable {
 			+ TagsMetaData.Table.TABLE_NAME
 			+ "("
 			+ TagsMetaData.Table.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-			+ TagsMetaData.Table.COLUMN_CAPTION + " TEXT NOT NULL"
+			+ TagsMetaData.Table.COLUMN_CAPTION + " TEXT UNIQUE"
 			+ ");";
 	
 	private static final String TABLE_DROP= "DROP TABLE IF EXISTS " + TagsMetaData.Table.TABLE_NAME + ";";
