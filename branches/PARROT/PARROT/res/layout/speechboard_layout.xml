@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/SpeechBoard"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" 
-    android:id="@+id/SpeechBoard">
+    android:orientation="vertical" >
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="1000dp"
-        android:orientation="horizontal" 
-        android:layout_marginBottom="5dp">
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal" >
 
         <!-- Screen Design for Photos -->
 
@@ -22,44 +22,55 @@
             android:orientation="vertical" >
 
             <!-- COPY FROM HERE -->
-            <GridView xmlns:android="http://schemas.android.com/apk/res/android" 
-			    android:id="@+id/supercategory"
-			    android:layout_width="fill_parent" 
-			    android:layout_height="fill_parent"
-			    android:columnWidth="90dp"
-			    android:numColumns="1"
-			    android:verticalSpacing="5dp"
-			    android:horizontalSpacing="5dp"
-			    android:stretchMode="columnWidth"
-			    android:gravity="right"		/>
-            
+
+            <GridView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/supercategory"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:columnWidth="90dp"
+                android:gravity="right"
+                android:horizontalSpacing="5dp"
+                android:numColumns="1"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="5dp" />
+
             <!-- STOP COPYING -->
-            
+
         </LinearLayout>
-        
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:layout_marginRight="10dp"
             android:background="@drawable/gridviewlayout"
-            android:orientation="vertical" 
-            android:layout_marginRight="10dp">
-            
-        </LinearLayout>
+            android:orientation="vertical" >
 
+            <GridView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/pictogramgrid"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:columnWidth="90dp"
+                android:gravity="right"
+                android:horizontalSpacing="5dp"
+                android:numColumns="1"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="5dp" />
+        </LinearLayout>
     </LinearLayout>
-   
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@drawable/sentenceboardlayout">
+        android:background="@drawable/sentenceboardlayout" >
     </LinearLayout>
-    <!-- 
+    <!--
      <ImageView
         android:id="@+id/img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/parrot" />
- -->
-    
+        android:src="@drawable/parrot" />
+    -->
 
 </LinearLayout>
