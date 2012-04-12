@@ -44,7 +44,7 @@ public class MainActivity extends Activity {
 			ArrayList<ApplicationInfo> applications = new ArrayList<ApplicationInfo>();
 			for(ResolveInfo info : pkgAppsList){
 				//Package (dk.aau.cs.giraf)
-				if(info.toString().toLowerCase().contains("dk.aau.cs.giraf") && !info.toString().toLowerCase().contains("launcher")){
+				if(!info.toString().toLowerCase().contains("dk.aau.cs.giraf") && !info.toString().toLowerCase().contains("launcher")){
 					ApplicationInfo appInfo = new ApplicationInfo();
 					appInfo.title = info.loadLabel(getPackageManager());
 					appInfo.icon = info.activityInfo.loadIcon(getPackageManager());
