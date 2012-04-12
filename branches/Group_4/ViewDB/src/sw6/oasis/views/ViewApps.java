@@ -18,7 +18,6 @@ import dk.aau.cs.giraf.oasis.lib.models.App;
 public class ViewApps extends ListFragment {
 
 	Helper helper;
-	App app;
 	Button bAdd, bDel;
 	TextView tvHeader;
 	ArrayAdapter<App> mAdapter;
@@ -43,8 +42,6 @@ public class ViewApps extends ListFragment {
 		
 		helper = new Helper(getActivity().getApplicationContext());
 		
-		app = new App();
-		
 		tvHeader = (TextView) getView().findViewById(R.id.table_header);
 		tvHeader.setText("AppsTable");
 		bAdd = (Button) getView().findViewById(R.id.add);
@@ -53,11 +50,6 @@ public class ViewApps extends ListFragment {
 			@Override
 			public void onClick(View v) {
 				Toast.makeText(getActivity().getApplicationContext(), "ADD", Toast.LENGTH_SHORT).show();
-				app.setName("AppName");
-				app.setVersionNumber("versionNumber");
-				
-				helper.appsHelper.insertApp(app);
-				mAdapter.notifyDataSetChanged();
 			}
 		});
 		bDel = (Button) getView().findViewById(R.id.delete);
@@ -66,14 +58,12 @@ public class ViewApps extends ListFragment {
 			@Override
 			public void onClick(View v) {
 				Toast.makeText(getActivity().getApplicationContext(), "CLEAR", Toast.LENGTH_SHORT).show();
-				helper.appsHelper.clearAppsTable();
-				mAdapter.notifyDataSetChanged();
 			}
 		});
 		
 		valueList = helper.appsHelper.getApps();
 
-        mAdapter = new ArrayAdapter<App>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, helper.appsHelper.getApps());
+        mAdapter = new ArrayAdapter<App>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, valueList);
 
         setListAdapter(mAdapter);
 
@@ -84,10 +74,5 @@ public class ViewApps extends ListFragment {
 		super.onListItemClick(l, v, position, id);
 		long _id = getListAdapter().getItemId(position);
 		Toast.makeText(getActivity().getApplicationContext(), "LIST ITEM CLICK", Toast.LENGTH_SHORT).show();
-		app.setId(_id);
-		app.setName("AppModified");
-		app.setVersionNumber("ModifiedVersion");
-		helper.appsHelper.modifyApp(app);
-		mAdapter.notifyDataSetChanged();
 	}
 }
