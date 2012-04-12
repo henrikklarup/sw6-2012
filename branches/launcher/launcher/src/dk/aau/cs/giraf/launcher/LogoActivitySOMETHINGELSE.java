@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import dk.aau.cs.giraf.launcher.R;
 
-public class logoActivity extends Activity {
+public class LogoActivitySOMETHINGELSE extends Activity {
 
 	//how long until we go to the next activity
 	protected int _splashTime = 400; 
@@ -19,7 +19,7 @@ public class logoActivity extends Activity {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.logo);
 
-	    final logoActivity sPlashScreen = this; 
+	    final LogoActivitySOMETHINGELSE sPlashScreen = this; 
 
 	    // thread for displaying the SplashScreen
 	    splashTread = new Thread() {
