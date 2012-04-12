@@ -37,33 +37,33 @@ public class Helper {
 	public void CreateDummyData()
 	{
 		/*Departments*/
-		Department dep1 = new Department("Dep1", "Hjoernet", 88888888, "dep1@dep.com");
-		Department subdep1 = new Department("subDep1", "Hjoernet", 88888888, "subdep1@dep.com");
-		Department dep3 = new Department("Dep3", "Hjoernet", 88888888, "dep3@dep.com");
+		Department dep1 = new Department("Dep1", "Hjoernet", 88888888, "dep1[at]dep.com");
+		Department subdep1 = new Department("subDep1", "Hjoernet", 88888888, "subdep1[at]dep.com");
+		Department dep3 = new Department("Dep3", "Hjoernet", 88888888, "dep3[at]dep.com");
 		/*Add departments*/
 		departmentsHelper.insertDepartment(dep1);
 		departmentsHelper.insertDepartment(subdep1);
 		departmentsHelper.insertDepartment(dep3);
 		
-		/*Department id's*/
-		long dep1Id = 0, subDep1Id = 0, dep3Id = 0;
-		
-		/*Get departments*/
-		for(Department d : departmentsHelper.getDepartments())
-		{
-			if(d.getName() == "Dep1")
-				dep1Id = d.getId();
-			else if(d.getName() == "subDep1")
-				subDep1Id = d.getId();
-			else if(d.getName() == "Dep3")
-				dep3Id = d.getId();
-		}
+//		/*Department id's*/
+//		long dep1Id = 0, subDep1Id = 0, dep3Id = 0;
+//		
+//		/*Get departments*/
+//		for(Department d : departmentsHelper.getDepartments())
+//		{
+//			if(d.getName() == "Dep1")
+//				dep1Id = d.getId();
+//			else if(d.getName() == "subDep1")
+//				subDep1Id = d.getId();
+//			else if(d.getName() == "Dep3")
+//				dep3Id = d.getId();
+//		}
 		/*Load Departments*/
-		Department dep1Loaded = departmentsHelper.getDepartmentById(dep1Id);
-		Department subDep1Loaded = departmentsHelper.getDepartmentById(subDep1Id);
-		Department dep3Loaded = departmentsHelper.getDepartmentById(dep3Id);
+		Department dep1Loaded = departmentsHelper.getDepartmentByName("Dep1").get(0);
+		Department subDep1Loaded = departmentsHelper.getDepartmentByName("subDep1").get(0);
+		Department dep3Loaded = departmentsHelper.getDepartmentByName("Dep3").get(0);
 		/*Add subdepartment*/
-		departmentsHelper.attachSubDepartmentToDepartment(dep1Loaded, dep3Loaded);
+		departmentsHelper.attachSubDepartmentToDepartment(dep1Loaded, subDep1Loaded);
 		
 		
 		
@@ -83,11 +83,11 @@ public class Helper {
 		/*Get Guardians*/
 		for(Profile g : profilesHelper.getProfiles())
 		{
-			if(g.getFirstname() == "Guardian1")
+			if(g.getFirstname().equals("Guardian1"))
 				guard1Id = g.getId();
-			else if(g.getFirstname() == "Guardian2")
+			else if(g.getFirstname().equals("Guardian2"))
 				guard2Id = g.getId();
-			else if(g.getFirstname() == "Guardian3")
+			else if(g.getFirstname().equals("Guardian3"))
 				guard3Id = g.getId();
 		}
 		
@@ -123,16 +123,16 @@ public class Helper {
 		/*Get children*/
 		for(Profile g : profilesHelper.getProfiles())
 		{
-			if(g.getFirstname() == "Child1")
-				guard1Id = g.getId();
-			else if(g.getFirstname() == "Child2")
-				guard2Id = g.getId();
-			else if(g.getFirstname() == "Child3")
-				guard3Id = g.getId();
-			else if(g.getFirstname() == "Child4")
-				guard3Id = g.getId();
-			else if(g.getFirstname() == "Child5")
-				guard3Id = g.getId();
+			if(g.getFirstname().equals("Child1"))
+				child1Id = g.getId();
+			else if(g.getFirstname().equals("Child2"))
+				child2Id = g.getId();
+			else if(g.getFirstname().equals("Child3"))
+				child3Id = g.getId();
+			else if(g.getFirstname().equals("Child4"))
+				child4Id = g.getId();
+			else if(g.getFirstname().equals("Child5"))
+				child5Id = g.getId();
 		}
 		
 		/*Load children*/
@@ -158,10 +158,14 @@ public class Helper {
 		profilesHelper.attachChildToGuardian(Child5Loaded, Guardian3Loaded);
 		
 		
-		/*Media*/
-		Media media1 = new Media("Media1", "/mnt/sdcard/Pictures/giraf/media1.jpg", false, "Picture", Child1Loaded.getId());
-		Media media2 = new Media("Media2", "/mnt/sdcard/Pictures/giraf/media2.jpg", true, "Picture", Child1Loaded.getId());
-		Media media3 = new Media("Media3", "/mnt/sdcard/Pictures/giraf/media3.jpg", false, "Picture", Child2Loaded.getId());
+//		/*Media*/
+//		Media media1 = new Media("Media1", "/mnt/sdcard/Pictures/giraf/media1.jpg", false, "Picture", Child1Loaded.getId());
+//		Media media2 = new Media("Media2", "/mnt/sdcard/Pictures/giraf/media2.jpg", true, "Picture", Child1Loaded.getId());
+//		Media media3 = new Media("Media3", "/mnt/sdcard/Pictures/giraf/media3.jpg", false, "Picture", Child2Loaded.getId());
+//		
+//		mediaHelper.insertMedia(media1);
+//		mediaHelper.insertMedia(media2);
+//		mediaHelper.insertMedia(media3);
 	}
 	
 }
