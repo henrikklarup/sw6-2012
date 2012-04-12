@@ -758,7 +758,9 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback 
   private void resetStatusView() {
     resultView.setVisibility(View.GONE);
     statusView.setText(R.string.msg_default_status);
-    statusView.setVisibility(View.VISIBLE);
+    // GIRAF MOD
+    //statusView.setVisibility(View.VISIBLE);
+    // GIRAF MOD OFF
     viewfinderView.setVisibility(View.VISIBLE);
     lastResult = null;
   }
