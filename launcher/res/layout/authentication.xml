@@ -74,6 +74,7 @@
     	    android:layout_marginBottom="50dp"
     	    android:layout_marginRight="15dp"
     	    android:visibility="gone"
+    	    android:textSize="25dp"
     	    android:text="This is me!"/>
     
     <TextView android:text="@string/authentication_name"
