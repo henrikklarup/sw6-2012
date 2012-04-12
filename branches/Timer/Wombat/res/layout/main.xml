@@ -49,11 +49,12 @@
             android:textColor="@android:color/white"
             android:textSize="30dip" />
 
-        <fragment
+        <LinearLayout
             android:id="@+id/detailFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            class="dk.aau.cs.giraf.wombat.DetailFragment" />
+            android:orientation="horizontal">
+            </LinearLayout>
     </LinearLayout>
 
     <TextView

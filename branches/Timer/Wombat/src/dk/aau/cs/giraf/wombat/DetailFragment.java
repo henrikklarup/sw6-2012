@@ -29,7 +29,7 @@ public class DetailFragment extends Fragment {
 		Log.e("Detail", "Detail Opened");
 
 	}
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -37,42 +37,58 @@ public class DetailFragment extends Fragment {
 		return inflater.inflate(R.layout.details, container, false);
 	}
 
-
 	@Override
 	// Start the list empty
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+
 		lv = (ListView) getActivity().findViewById(R.id.list);
-		lv.setAdapter(null);
+		if (guard.selected() != null) {
+			ArrayList<SubProfile> subprofiles = guard.selected().SubProfiles();
+			SubProfileAdapter adapter = new SubProfileAdapter(getActivity(),
+					android.R.layout.simple_list_item_1, subprofiles);
+			lv.setAdapter(adapter);
+		} else {
+			lv.setAdapter(null);
+		}
 		lv.setOnItemLongClickListener(new OnItemLongClickListener() {
-			
-			public boolean onItemLongClick(AdapterView<?> arg0, View v, int row, long arg3){
-				AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
-		        alertDialog.setTitle(R.string.delete_subprofile_message);
-		        alertDialog.setButton(getText(R.string.delete_yes), new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface arg0, int arg1) {
-						// TODO Auto-generated method stub
-						
-						Toast t = Toast.makeText(getActivity(), "Profile Deleted", 5000); // TODO: Which profile has been deleted?
-						t.show();
-						reloadSubProfiles();						
-					}
-		        });
-		        
-		        alertDialog.setButton2(getText(R.string.delete_no), new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface arg0, int arg1) {
-						// TODO Auto-generated method stub
-						
-					}
-		        });
-		        
-		        alertDialog.show();
+
+			public boolean onItemLongClick(AdapterView<?> arg0, View v,
+					int row, long arg3) {
+				AlertDialog alertDialog = new AlertDialog.Builder(v
+						.getContext()).create();
+				alertDialog.setTitle(R.string.delete_subprofile_message);
+				alertDialog.setButton(getText(R.string.delete_yes),
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface arg0, int arg1) {
+								// TODO Auto-generated method stub
+
+								Toast t = Toast.makeText(getActivity(),
+										"Profile Deleted", 5000); // TODO: Which
+																	// profile
+																	// has been
+																	// deleted?
+								t.show();
+								reloadSubProfiles();
+							}
+						});
+
+				alertDialog.setButton2(getText(R.string.delete_no),
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface arg0, int arg1) {
+								// TODO Auto-generated method stub
+
+							}
+						});
+
+				alertDialog.show();
 				return true;
 			}
 		});
 		/* Ny Kode */
 		lv.setOnItemClickListener(new OnItemClickListener() {
-			public void onItemClick(AdapterView<?> arg0, View view, int position, long id) {
+			public void onItemClick(AdapterView<?> arg0, View view,
+					int position, long id) {
 				for (int i = 0; i < lv.getChildCount(); i++) {
 					lv.getChildAt(i).setSelected(false);
 				}
@@ -81,7 +97,7 @@ public class DetailFragment extends Fragment {
 				CustomizeFragment cf = (CustomizeFragment) getFragmentManager()
 						.findFragmentById(R.id.customizeFragment);
 				cf.loadSettings(guard.selected().SubProfiles().get(position));
-				
+
 			}
 		});
 		/* Ny Kode slut */
@@ -101,16 +117,13 @@ public class DetailFragment extends Fragment {
 				android.R.layout.simple_list_item_1, subprofiles);
 		lv.setAdapter(adapter);
 	}
-/*
-	public void onListItemClick(ListView lv, View view, int position, long id) {
-		for (int i = 0; i < lv.getChildCount(); i++) {
-			lv.getChildAt(i).setSelected(false);
-		}
-		view.setSelected(true);
-
-		CustomizeFragment fragment = (CustomizeFragment) getFragmentManager()
-				.findFragmentById(R.id.customizeFragment);
-		fragment.loadSettings(guard.selected().SubProfiles().get(position));
-	}
-	*/
+	/*
+	 * public void onListItemClick(ListView lv, View view, int position, long
+	 * id) { for (int i = 0; i < lv.getChildCount(); i++) {
+	 * lv.getChildAt(i).setSelected(false); } view.setSelected(true);
+	 * 
+	 * CustomizeFragment fragment = (CustomizeFragment) getFragmentManager()
+	 * .findFragmentById(R.id.customizeFragment);
+	 * fragment.loadSettings(guard.selected().SubProfiles().get(position)); }
+	 */
 }

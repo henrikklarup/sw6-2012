@@ -545,7 +545,6 @@ public class CustomizeFragment extends Fragment {
 				Fragment detailFragment = new DetailFragment();
 				FragmentTransaction trans = getFragmentManager().beginTransaction();
 				trans.replace(R.id.detailFragment, detailFragment);
-				trans.addToBackStack(null);
 				trans.commit();
 				
 			}
