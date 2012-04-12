@@ -10,6 +10,7 @@ import yuku.ambilwarna.AmbilWarnaDialog;
 import yuku.ambilwarna.AmbilWarnaDialog.OnAmbilWarnaListener;
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.PorterDuff;
@@ -530,16 +531,23 @@ public class CustomizeFragment extends Fragment {
 		attView.setText(attachText);
 	}
 
+	/**
+	 * Initialize the save button
+	 */
 	private void initSaveButton() {
 		saveButton = (Button) getActivity().findViewById(R.id.customize_save);
 		saveButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				currSubP.save(preSubP);
 				ListFragment lf = (ListFragment)getFragmentManager().findFragmentById(R.id.listFragment);
-				DetailFragment df = (DetailFragment) getFragmentManager()
-						.findFragmentById(R.id.detailFragment);
 				guard.publishList().get(lf.mPosition).select();
-				df.reloadSubProfiles();
+				
+				Fragment detailFragment = new DetailFragment();
+				FragmentTransaction trans = getFragmentManager().beginTransaction();
+				trans.replace(R.id.detailFragment, detailFragment);
+				trans.addToBackStack(null);
+				trans.commit();
+				
 			}
 		});
 	}
@@ -582,7 +590,7 @@ public class CustomizeFragment extends Fragment {
 	}
 
 	/**
-	 * Initialize the Save button
+	 * Initialize the Save As button
 	 */
 	private void initSaveAsButton() {
 		final ArrayList<String> values = new ArrayList<String>();
@@ -642,8 +650,6 @@ public class CustomizeFragment extends Fragment {
 				currSubP.addLastUsed(preSubP);
 				Intent i = new Intent(getActivity().getApplicationContext(),
 						OpenGLActivity.class);
-				// TODO: Insert extra data (send serializable object, retrieve
-				// with getSerializableExtra("<extra name>");
 				startActivity(i);
 			}
 		});

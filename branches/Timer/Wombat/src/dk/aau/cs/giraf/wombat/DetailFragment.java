@@ -3,37 +3,47 @@ package dk.aau.cs.giraf.wombat;
 import java.util.ArrayList;
 
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 import dk.aau.cs.giraf.TimerLib.Guardian;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
 
-public class DetailFragment extends android.app.ListFragment {
+public class DetailFragment extends Fragment {
 	Guardian guard = Guardian.getInstance("John");
-	ListView thisListView;
+	ListView lv;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getActivity().setContentView(R.layout.profile_list);
 		// Write Tag = Detail and Text = Detail Opened in the LogCat
 		Log.e("Detail", "Detail Opened");
 
 	}
+	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		// Populate the fragment according to the details layout
+		return inflater.inflate(R.layout.details, container, false);
+	}
+
 
 	@Override
 	// Start the list empty
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		// TODO: Implement bind to the profile chosen by launcher
-		setListAdapter(null);
-		ListView lv = getListView();
+		lv = (ListView) getActivity().findViewById(R.id.list);
+		lv.setAdapter(null);
 		lv.setOnItemLongClickListener(new OnItemLongClickListener() {
 			
 			public boolean onItemLongClick(AdapterView<?> arg0, View v, int row, long arg3){
@@ -60,6 +70,21 @@ public class DetailFragment extends android.app.ListFragment {
 				return true;
 			}
 		});
+		/* Ny Kode */
+		lv.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> arg0, View view, int position, long id) {
+				for (int i = 0; i < lv.getChildCount(); i++) {
+					lv.getChildAt(i).setSelected(false);
+				}
+				view.setSelected(true);
+
+				CustomizeFragment cf = (CustomizeFragment) getFragmentManager()
+						.findFragmentById(R.id.customizeFragment);
+				cf.loadSettings(guard.selected().SubProfiles().get(position));
+				
+			}
+		});
+		/* Ny Kode slut */
 	}
 
 	public void reloadSubProfiles() {
@@ -74,9 +99,9 @@ public class DetailFragment extends android.app.ListFragment {
 		ArrayList<SubProfile> subprofiles = guard.selected().SubProfiles();
 		SubProfileAdapter adapter = new SubProfileAdapter(getActivity(),
 				android.R.layout.simple_list_item_1, subprofiles);
-		setListAdapter(adapter);
+		lv.setAdapter(adapter);
 	}
-
+/*
 	public void onListItemClick(ListView lv, View view, int position, long id) {
 		for (int i = 0; i < lv.getChildCount(); i++) {
 			lv.getChildAt(i).setSelected(false);
@@ -87,5 +112,5 @@ public class DetailFragment extends android.app.ListFragment {
 				.findFragmentById(R.id.customizeFragment);
 		fragment.loadSettings(guard.selected().SubProfiles().get(position));
 	}
-	
+	*/
 }
