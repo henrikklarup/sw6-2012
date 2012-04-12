@@ -107,7 +107,8 @@ public class PARROTActivity extends Activity {
 	{
 		Pictogram pic = null;
 		Media media=help.mediaHelper.getSingleMediaById(id);
-		//TODO figure out how the Media class is organised, and how I can find the sound, word and picture path.
+		//Media files can have a link to a sub-media file.
+		//TODO Make it so that image-Media files have sound-Media files and word-Media files as sub media links.
 		return pic;
 	}
 
