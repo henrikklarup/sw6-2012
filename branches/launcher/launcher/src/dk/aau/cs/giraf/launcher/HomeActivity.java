@@ -57,13 +57,7 @@ public class HomeActivity extends Activity {
 				}
 			}
 
-			Grid = (GridView)this.findViewById(R.id.GridViewHome); // @+id/GridViewHome
-			
-			Log.i("magnus","Log: " + this.getClass().toString());
-			if (Grid == null) {
-				throw new RuntimeException("Grid is null! -CUSTOMERROR");
-			}
-			
+			Grid = (GridView)this.findViewById(R.id.GridViewHome);
 			Grid.setAdapter(new AppAdapter(this,applications));
 			Grid.setOnItemClickListener(new ApplicationLauncher());
 		}
