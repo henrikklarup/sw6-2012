@@ -74,7 +74,7 @@ public class SubProfileFragment extends android.app.ListFragment {
 		SubProfileAdapter adapter = new SubProfileAdapter(getActivity(),
 				android.R.layout.simple_list_item_1, subprofiles);
 		setListAdapter(adapter);  
-	}
+	} 
 
 	public void onListItemClick(ListView lv, View view, int position, long id) {
 		if(TimerLoader.firstClick){
