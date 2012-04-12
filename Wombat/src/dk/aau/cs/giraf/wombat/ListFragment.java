@@ -50,7 +50,7 @@ public class ListFragment extends android.app.ListFragment {
 		CustomizeFragment custF = (CustomizeFragment)getFragmentManager().findFragmentById(R.id.customizeFragment);
 		custF.setDefaultProfile();
 		
-		if (detf != null && detf.isInLayout()) {
+		if (detf != null) {
 			// Marks the selected profile in the guard singleton
 			mPosition = position; 
 			guard.publishList().get(position).select();
