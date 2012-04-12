@@ -22,25 +22,20 @@ public class LogoActivity extends Activity {
 	        @Override
 	        public void run() {
 	            try {
-	            	synchronized(this){
-
+	            	synchronized(this) {
 	            		wait(_splashTime);
 	            	}
-
 	            } catch(InterruptedException e) {}
 	            finally {
 	            	Intent i = new Intent(sPlashScreen, AuthenticationActivity.class);
 	                startActivity(i);
 	                stop();
-	                
 	            }
 	        }
 	    };
-
 	    splashTread.start();
 	}
 
-	//Function that will handle the touch
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 	    if (event.getAction() == MotionEvent.ACTION_DOWN) {
@@ -50,8 +45,6 @@ public class LogoActivity extends Activity {
 	    }
 	    return true;
 	}
-	
-	
 	
 //	/** Called when the activity is first created. */
 //    @Override
