@@ -9,10 +9,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import dk.aau.cs.giraf.oasis.lib.metadata.AppsMetaData;
-import dk.aau.cs.giraf.oasis.lib.metadata.HasGuardianMetaData;
 import dk.aau.cs.giraf.oasis.lib.metadata.ListOfAppsMetaData;
 import dk.aau.cs.giraf.oasis.lib.models.App;
-import dk.aau.cs.giraf.oasis.lib.models.ListOfApps;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
 /**
