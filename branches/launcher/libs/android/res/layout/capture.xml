@@ -231,6 +231,7 @@
             android:background="@color/transparent"
             android:text="@string/msg_default_status"
             android:textColor="@color/status_text"
-            android:textSize="14sp"/>
+            android:textSize="14sp"
+            android:visibility="gone"/>
 
 </FrameLayout>
