@@ -8,7 +8,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.nfc.Tag;
 import dk.aau.cs.giraf.oasis.lib.metadata.HasTagMetaData;
 import dk.aau.cs.giraf.oasis.lib.metadata.MediaDepartmentAccessMetaData;
 import dk.aau.cs.giraf.oasis.lib.metadata.MediaMetaData;
@@ -17,6 +16,7 @@ import dk.aau.cs.giraf.oasis.lib.metadata.TagsMetaData;
 import dk.aau.cs.giraf.oasis.lib.models.Department;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
+import dk.aau.cs.giraf.oasis.lib.models.Tag;
 
 /**
  * Helper class for Media
@@ -194,6 +194,7 @@ public class MediaHelper {
 	}
 	
 	public int addTagsToMedia(String[] tags, Media media) {
+		int result = -1;
 		for (String tag : tags) {
 			String[] tagColumns = {TagsMetaData.Table.COLUMN_ID, TagsMetaData.Table.COLUMN_CAPTION};
 			Cursor cTag = _context.getContentResolver().query(TagsMetaData.CONTENT_URI, tagColumns, tagColumns[1] + " = '" + tag + "'", null, null);
@@ -201,9 +202,46 @@ public class MediaHelper {
 				if (cTag.moveToFirst()) {
 					String caption = cTag.getString(cTag.getColumnIndex(tagColumns[1]));
 					Tag _tag = new Tag(caption); 
+					addHasTag(_tag, media);
+					result = 0;
+				}
+			} else {
+				ContentValues values = new ContentValues();
+				values.put(TagsMetaData.Table.COLUMN_CAPTION, tag);
+				_context.getContentResolver().insert(TagsMetaData.CONTENT_URI, values);
+
+				Cursor cNewTag = _context.getContentResolver().query(TagsMetaData.CONTENT_URI, tagColumns, tagColumns[1] + " = '" + tag + "'", null, null);
+				if (cNewTag != null) {
+					if (cNewTag.moveToFirst()) {
+						String caption = cNewTag.getString(cNewTag.getColumnIndex(tagColumns[1]));
+						Tag _newTag = new Tag(caption); 
+						addHasTag(_newTag, media);
+						result = 0;
+					}
+				} else {
+					result = -1;
 				}
 			}
 		}
+		return result;
+	}
+	
+	public int removeTagsFromMedia(String[] tags, Media media) {
+		int result = 0;
+		for (String t : tags) {
+			String[] tagColumns = {TagsMetaData.Table.COLUMN_ID, TagsMetaData.Table.COLUMN_CAPTION};
+			Cursor cTag = _context.getContentResolver().query(TagsMetaData.CONTENT_URI, tagColumns, tagColumns[1] + " = '" + t + "'", null, null);
+			if (cTag != null) {
+				if (cTag.moveToFirst()) {
+					String caption = cTag.getString(cTag.getColumnIndex(tagColumns[1]));
+					Tag _tag = new Tag(caption);
+					result += _context.getContentResolver().delete(HasTagMetaData.CONTENT_URI, HasTagMetaData.Table.COLUMN_IDTAG + " = '" + _tag.getId() +
+							"' AND " + HasTagMetaData.Table.COLUMN_IDMEDIA + " = '" + media.getId() + "'", null);
+				}
+			}
+			
+		}
+		return result;
 	}
 	
 	private void addHasTag(Tag tag, Media media) {
@@ -238,17 +276,15 @@ public class MediaHelper {
 	}
 	
 	public int removeMediaAttachmentToProfile(Media media, Profile profile) {
-		_context.getContentResolver().delete(MediaProfileAccessMetaData.CONTENT_URI, 
+		return _context.getContentResolver().delete(MediaProfileAccessMetaData.CONTENT_URI, 
 				MediaProfileAccessMetaData.Table.COLUMN_IDMEDIA + " = '" + media.getId() + "'" +
 				MediaProfileAccessMetaData.Table.COLUMN_IDPROFILE + " = '" + profile.getId() + "'", null);
-		return 0;
 	}
 	
 	public int removeMediaAttachmentToDepartment(Media media, Department department) {
-		_context.getContentResolver().delete(MediaDepartmentAccessMetaData.CONTENT_URI, 
+		return _context.getContentResolver().delete(MediaDepartmentAccessMetaData.CONTENT_URI, 
 				MediaDepartmentAccessMetaData.Table.COLUMN_IDMEDIA + " = '" + media.getId() + "'" +
 				MediaDepartmentAccessMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + department.getId() + "'", null);
-		return 0;
 	}
 	
 	/**
