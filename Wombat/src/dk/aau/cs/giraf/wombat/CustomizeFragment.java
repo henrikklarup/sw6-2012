@@ -539,10 +539,9 @@ public class CustomizeFragment extends Fragment {
 		saveButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				currSubP.save(preSubP);
-				ListFragment lf = (ListFragment)getFragmentManager().findFragmentById(R.id.listFragment);
-				guard.publishList().get(lf.mPosition).select();
+				guard.publishList().get(TimerLoader.profilePosition).select();
 				
-				Fragment detailFragment = new DetailFragment();
+				Fragment detailFragment = new SubProfileFragment();
 				FragmentTransaction trans = getFragmentManager().beginTransaction();
 				trans.replace(R.id.detailFragment, detailFragment);
 				trans.commit();
@@ -615,7 +614,7 @@ public class CustomizeFragment extends Fragment {
 					public void onClick(DialogInterface dialog, int item) {
 						Child c = guard.Children().get(item);
 						c.save(currSubP);
-						DetailFragment df = (DetailFragment) getFragmentManager()
+						SubProfileFragment df = (SubProfileFragment) getFragmentManager()
 								.findFragmentById(R.id.detailFragment);
 						df.loadSubProfiles();
 

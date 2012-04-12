@@ -24,7 +24,7 @@
             android:id="@+id/listFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            class="dk.aau.cs.giraf.wombat.ListFragment" >
+            class="dk.aau.cs.giraf.wombat.ChildFragment" >
         </fragment>
     </LinearLayout>
 
