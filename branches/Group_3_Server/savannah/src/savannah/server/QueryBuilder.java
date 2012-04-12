@@ -12,7 +12,8 @@ public class QueryBuilder {
 	public ArrayList<String> buildQueries(Document xml) throws JDOMException
 	{
 		ArrayList<String> out = new ArrayList<String>();
-
+		String[] tables = {"Apps","HasGuardian","HasSubDepartment","ListOfApps","AuthUsers",
+				"Profiles","Departments","HasDepartment","MediaProfileAccess","Media","HasTag","Tags","MediaDepartmentAccess","HasLink"};
 		//Get all entries
 		XPath xp = XPath.newInstance("sw6ml/*/*");
 		List<Object> nodes = xp.selectNodes(xml);
@@ -93,6 +94,49 @@ public class QueryBuilder {
 		return "";	
 	}
 	
+	//Query builder for CRUD:Read
+	public ArrayList<String> buildQueries(String s)
+	{
+		String profiles = null;
+		String cog = null;
+		ArrayList<String> out = new ArrayList<String>();
+		if(s.contains("profiles"))
+		{
+			profiles = s.substring(s.indexOf('=',s.indexOf("profiles="))+1, s.indexOf('&', s.indexOf("profiles=")));
+			String[] sarray = profiles.split(",");
+			for(int i = 0;i < sarray.length-1;i = i+2)
+			{	
+				out.addAll(buildGetProfileQueries(sarray[i],sarray[i+1]));
+			}
+		}
+		String cogs = "childrenOfGuardian";
+		if(s.contains(cogs))
+		{	
+			cog = s.substring(s.indexOf('=',s.indexOf(cogs+"="))+1,s.indexOf('&', s.indexOf(cogs+"=")));
+			String[] sarray = cog.split(",");
+			for(String str : sarray)
+			{
+				out.add(buildGetCogQueries(str));
+			}
+		}	
+		return out;
+	}
+	//TODO TIs is some shizzle, to fix soon
+	//INCOMPLETE 
+	//Query builder continued, for CRUD:Read
+	private ArrayList<String> buildGetProfileQueries(String cert,String id)
+	{
+		ArrayList<String> out = new ArrayList<String>();
+		out.add("SELECT * FROM AuthUsers where certificate='"+cert+"';");
+		out.add("SELECT * from Profile where idProfile=(select idUser from AuthUsers where certificate='"+cert+"';");
+		return out;
+	}
+	
+	private String buildGetCogQueries(String id)
+	{
+		return id;
+	}
+	
 	private String addApos(String str,String type)
 	{
 		//Dirty implementation
@@ -102,5 +146,5 @@ public class QueryBuilder {
 		}
 		else { return str ;}
 	}
-
+	
 }

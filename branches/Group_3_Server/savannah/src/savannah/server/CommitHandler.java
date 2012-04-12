@@ -12,13 +12,12 @@ public class CommitHandler {
 	private ArrayList<String> queries;
 	private QueryBuilder qbuilder;
 	private QueryHandler qHandler;
-	private IOHandler ihandler;
+	
 	public CommitHandler() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException
 	{
 		qbuilder = new QueryBuilder();
 		queries= new ArrayList<String>();
 		qHandler = new QueryHandler();
-		ihandler = new IOHandler();
 	}
 	
 	public void HandleIt(CommitEvent e)
@@ -41,15 +40,9 @@ public class CommitHandler {
 			}
 			if(e.getEventsocket() != null)
 			{
-				ihandler.respond(e.getEventsocket(), "message to sender");
+				IOHandler.getInstance().respond(e.getEventsocket(), queries.size() + " received, of which "+failed);
 			}
-			
-			
-			//TODO Send result
-			
 			failed = 0;
-				
-			
 		}
 	catch (JDOMException f)
 		{ f.printStackTrace(); }

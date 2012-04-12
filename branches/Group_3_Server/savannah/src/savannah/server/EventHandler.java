@@ -39,8 +39,7 @@ public class EventHandler implements Runnable {
 					rHandler.HandleIt((RequestEvent)e);
 				}
 			}
-		}
-		
+		}	
 	}
 
 
