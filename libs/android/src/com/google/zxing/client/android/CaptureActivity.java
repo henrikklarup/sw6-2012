@@ -168,7 +168,10 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback 
 
     PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
+    // GIRAF MOD
+
     //showHelpOnFirstLaunch();
+    // GIRAF MOD OFF
   }
 
   @Override
@@ -184,9 +187,14 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback 
     viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
     viewfinderView.setCameraManager(cameraManager);
 
-    resultView = findViewById(R.id.result_view);
+    resultView = findViewById(R.id.result_view);    
+    
     statusView = (TextView) findViewById(R.id.status_view);
 
+    // GIRAF MOD
+    statusView.setVisibility(View.GONE);
+    // GIRAF MOD OFF
+    
     handler = null;
     lastResult = null;
 
@@ -518,8 +526,9 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback 
   private void handleDecodeInternally(Result rawResult, ResultHandler resultHandler, Bitmap barcode) {
     statusView.setVisibility(View.GONE);
     viewfinderView.setVisibility(View.GONE);
-    resultView.setVisibility(View.VISIBLE);
-
+ // GIRAF MOD
+    //resultView.setVisibility(View.VISIBLE);
+ // GIRAF MOD OFF
     ImageView barcodeImageView = (ImageView) findViewById(R.id.barcode_image_view);
     if (barcode == null) {
       barcodeImageView.setImageBitmap(BitmapFactory.decodeResource(getResources(),
