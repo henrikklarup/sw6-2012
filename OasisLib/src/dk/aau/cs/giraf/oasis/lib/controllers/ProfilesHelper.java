@@ -229,7 +229,9 @@ public class ProfilesHelper {
 		List<Profile> profiles = new ArrayList<Profile>();
 		Cursor c = _context.getContentResolver().query(ProfilesMetaData.CONTENT_URI, columns, null, null, null);
 
+		if (c != null) {
 		profiles = cursorToProfiles(c);
+		}
 
 		c.close();
 
