@@ -60,7 +60,7 @@ public class ProfilesHelper {
 				profileContentValues.put(ProfilesMetaData.Table.COLUMN_ID, id);
 				_context.getContentResolver().insert(ProfilesMetaData.CONTENT_URI, profileContentValues);
 				c.close();
-				return 0;
+				return (int)id;
 			}
 		}
 		c.close();
@@ -107,6 +107,20 @@ public class ProfilesHelper {
 		c.close();
 
 		return profile;
+	}
+	
+	/**
+	 * Set a new certificate
+	 * @param certificate the certificate to set
+	 * @param profile the profile whom the certificate is updated for
+	 * @return the number of row affected
+	 */
+	public int setCertificate(String certificate, Profile profile) {
+		Uri uri = ContentUris.withAppendedId(AuthUsersMetaData.CONTENT_URI, profile.getId());
+		
+		ContentValues cv = new ContentValues();
+		cv.put(AuthUsersMetaData.Table.COLUMN_CERTIFICATE, certificate);
+		return _context.getContentResolver().update(uri, cv, null, null);
 	}
 
 	/**
