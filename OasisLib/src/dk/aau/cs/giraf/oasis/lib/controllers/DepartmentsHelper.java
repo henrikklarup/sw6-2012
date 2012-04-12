@@ -140,7 +140,7 @@ public class DepartmentsHelper {
 			ContentValues values = new ContentValues();
 			values.put(HasSubDepartmentMetaData.Table.COLUMN_IDSUBDEPARTMENT, subDepartment.getId());
 			values.put(HasSubDepartmentMetaData.Table.COLUMN_IDDEPARTMENT, department.getId());
-			_context.getContentResolver().insert(HasDepartmentMetaData.CONTENT_URI, values);
+			_context.getContentResolver().insert(HasSubDepartmentMetaData.CONTENT_URI, values);
 			return 0;
 	}
 	
