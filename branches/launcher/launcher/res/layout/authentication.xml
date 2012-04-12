@@ -14,7 +14,7 @@
     android:padding="10dp"
     android:background="@drawable/cameraborder"
 	android:layout_alignParentRight="true"
-	android:layout_marginRight="35dp"
+	android:layout_marginRight="5dp"
 	android:layout_centerVertical="true">
 	    <include layout="@layout/capture"/>
 	    
@@ -44,7 +44,7 @@
         	android:layout_width="wrap_content"
         	android:textSize="30dp"
         	android:layout_marginTop="300dp"
-        	android:layout_marginLeft="45dp"
+        	android:layout_marginLeft="15dp"
         	/>
     <ImageView android:id="@+id/animation"
         android:contentDescription="Instructions"
@@ -54,7 +54,7 @@
    		android:scaleY="0.8"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="5dp"/>
+        android:layout_marginLeft="0dp"/>
     
     <TextView android:text="@string/authentication_step1"
         	android:textColor="#FFFFFFFF"
@@ -62,7 +62,7 @@
         	android:layout_width="300dp"
         	android:textSize="30dp"
         	android:layout_marginTop="770dp"
-        	android:layout_marginLeft="45dp"
+        	android:layout_marginLeft="15dp"
         	/>
     
     <dk.aau.cs.giraf.gui.GVerifyButton
@@ -74,7 +74,7 @@
     	    android:layout_marginBottom="50dp"
     	    android:layout_marginRight="15dp"
     	    android:visibility="gone"
-    	    android:textSize="25dp"
+    	    android:textSize="40dp"
     	    android:text="This is me!"/>
     
     <TextView android:text="@string/authentication_name"

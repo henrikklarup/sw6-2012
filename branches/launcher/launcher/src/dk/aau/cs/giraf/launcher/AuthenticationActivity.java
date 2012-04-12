@@ -60,18 +60,28 @@ public class AuthenticationActivity extends CaptureActivity {
 	    public void handleDecode(Result rawResult, Bitmap barcode)
 	    {
 	    	Helper helper = new Helper(this);
-	    	Profile profile = helper.profilesHelper.authenticateProfile(rawResult.getText());
-	    	Profile drazenko = new Profile("Drazenko","Banjak","middlename",0,45454545,"",null);
+	    	//Profile profile = helper.profilesHelper.authenticateProfile("GIRAFPROFILE");//rawResult.getText());
+	    	Profile profile = new Profile("Drazenko","Banjak","middlename",2,45454545,null,null);
+	    	
+	    	//drazenko.setId(helper.profilesHelper.insertProfile(drazenko));
+	    	//helper.profilesHelper.setCertificate("GIRAFPROFILE", drazenko);
 	    	
 	    	//if (rawResult.getText().equals("GIRAFPROFILE")) {
-	    	if (true) {
-	    	//if (profile != null) {	
+	    	//if (true) {
+	    	if (profile != null) {	
 	    		this.changeCamerafeedBorderColor(0xFF3AAA35);
-	    		//ProgressDialog dialog = ProgressDialog.show(AuthenticationActivity.this, "", "Hej: " + rawResult.getText(), true, true);
-	    		((TextView)this.findViewById(R.id.loginname)).setText(drazenko.getFirstname() + " " + drazenko.getSurname());
+	    		((TextView)this.findViewById(R.id.loginname)).setText(profile.getFirstname() + " " + profile.getSurname());
+	    		((TextView)this.findViewById(R.id.loginname)).setVisibility(View.VISIBLE);
+	    		
+	    		//((TextView)this.findViewById(R.id.loginname)).setText("DRAZENKO BANJAK");
+	    		
+	    		
 	    		((GButton)this.findViewById(R.id.loginGButton)).setVisibility(View.VISIBLE);
 	    	} else {
 	    		this.changeCamerafeedBorderColor(0xFFFF0000);
+	    		((GButton)this.findViewById(R.id.loginGButton)).setVisibility(View.GONE);
+	    		((TextView)this.findViewById(R.id.loginname)).setVisibility(View.GONE);
+	    		
 	    		//ProgressDialog dialog = ProgressDialog.show(AuthenticationActivity.this, "", "INVALID profile: " + rawResult.getText(), true, true);
 	    	}
 	    	//ProgressDialog dialog = ProgressDialog.show(AuthenticationActivity.this, "", "Ø" + rawResult.getText() + "Ø", true, true);
