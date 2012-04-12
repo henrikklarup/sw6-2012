@@ -65,16 +65,15 @@
         	android:layout_marginLeft="45dp"
         	/>
     
-    <dk.aau.cs.giraf.gui.GButton
-        android:drawableLeft="@drawable/ok_icon"
+    <dk.aau.cs.giraf.gui.GVerifyButton
         android:id="@+id/loginGButton"
         android:layout_width="wrap_content"
-        android:visibility="gone"
     	    android:layout_height="wrap_content"
     	    android:layout_alignParentRight="true"
     	    android:layout_alignParentBottom="true"
     	    android:layout_marginBottom="50dp"
     	    android:layout_marginRight="15dp"
+    	    android:visibility="gone"
     	    android:text="This is me!"/>
     
     <TextView android:text="@string/authentication_name"
