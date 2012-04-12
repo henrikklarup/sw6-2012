@@ -135,7 +135,8 @@ public class ProfilesHelper {
 
 		String[] authColumns = new String[] {
 				AuthUsersMetaData.Table.COLUMN_ID,
-				AuthUsersMetaData.Table.COLUMN_CERTIFICATE};
+				AuthUsersMetaData.Table.COLUMN_CERTIFICATE,
+				AuthUsersMetaData.Table.COLUMN_ROLE};
 		Cursor c = _context.getContentResolver().query(uri, authColumns, null, null, null);
 
 		if (c != null) {
