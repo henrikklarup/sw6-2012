@@ -102,9 +102,8 @@ public class ProfilesHelper {
 			if(c.moveToFirst()) {
 				profile = getProfileById(c.getLong(c.getColumnIndex(AuthUsersMetaData.Table.COLUMN_ID)));
 			}
+			c.close();
 		}
-
-		c.close();
 
 		return profile;
 	}
