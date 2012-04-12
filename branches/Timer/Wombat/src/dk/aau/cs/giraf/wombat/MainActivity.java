@@ -11,10 +11,5 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		// Set content view according to main, which implements two fragments
 		setContentView(R.layout.main);
-
-		Fragment detailFragment = new SubProfileFragment();
-		FragmentTransaction trans = getFragmentManager().beginTransaction();
-		trans.add(R.id.detailFragment, detailFragment, "subprofiles");
-		trans.commit();
 	}
 }

@@ -541,11 +541,9 @@ public class CustomizeFragment extends Fragment {
 				currSubP.save(preSubP);
 				guard.publishList().get(TimerLoader.profilePosition).select();
 				
-				Fragment detailFragment = new SubProfileFragment();
-				FragmentTransaction trans = getFragmentManager().beginTransaction();
-				trans.replace(R.id.detailFragment, detailFragment);
-				trans.commit();
-				
+				TimerLoader.subProfileID = preSubP.getId();
+				SubProfileFragment spf = (SubProfileFragment) getFragmentManager().findFragmentById(R.id.subprofileFragment);
+				spf.reloadSubProfiles();
 			}
 		});
 	}
@@ -615,7 +613,7 @@ public class CustomizeFragment extends Fragment {
 						Child c = guard.Children().get(item);
 						c.save(currSubP);
 						SubProfileFragment df = (SubProfileFragment) getFragmentManager()
-								.findFragmentById(R.id.detailFragment);
+								.findFragmentById(R.id.subprofileFragment);
 						df.loadSubProfiles();
 
 						String toastText = currSubP._name;

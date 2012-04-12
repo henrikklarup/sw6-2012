@@ -3,6 +3,7 @@ package dk.aau.cs.giraf.wombat;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,6 +67,12 @@ public class SubProfileAdapter extends ArrayAdapter<SubProfile> {
 				tvDesc.setText(sp._desc);
 			}
 			
+		}
+		if(sp.getId() >= 10){
+			v.setBackgroundResource(R.drawable.list_pressed);
+			TimerLoader.firstClick = true;
+		} else {
+			v.setBackgroundResource(R.drawable.list);
 		}
 		return v;
 	}

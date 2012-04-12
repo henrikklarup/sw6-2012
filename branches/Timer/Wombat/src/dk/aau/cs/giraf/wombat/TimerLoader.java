@@ -15,4 +15,6 @@ public class TimerLoader {
 	}
 	
 	public static int profilePosition;
+	public static int subProfileID;
+	public static boolean firstClick;
 }
