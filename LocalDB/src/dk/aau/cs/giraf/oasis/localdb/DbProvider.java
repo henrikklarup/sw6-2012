@@ -464,6 +464,9 @@ public class DbProvider extends ContentProvider {
 		case DEPARTMENTS_TYPE_LIST:
 			builder.setTables(DepartmentsMetaData.Table.TABLE_NAME);
 			builder.setProjectionMap(departmentsProjectionMap);
+			if( selectionArgs != null) {
+				builder.appendWhere(selectionArgs[0]);
+			}
 			break;
 		case DEPARTMENTS_TYPE_ONE:
 			builder.setTables(DepartmentsMetaData.Table.TABLE_NAME);
