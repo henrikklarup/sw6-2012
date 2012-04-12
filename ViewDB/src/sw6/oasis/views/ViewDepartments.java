@@ -11,13 +11,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Department;
 
 public class ViewDepartments extends ListFragment {
-	
+
 	Helper helper;
-	Department department;
 	Button bAdd, bDel;
 	TextView tvHeader;
 	ArrayAdapter<Department> mAdapter;
@@ -42,8 +42,6 @@ public class ViewDepartments extends ListFragment {
 		
 		helper = new Helper(getActivity().getApplicationContext());
 		
-		department = new Department();
-		
 		tvHeader = (TextView) getView().findViewById(R.id.table_header);
 		tvHeader.setText("DepartmentsTable");
 		bAdd = (Button) getView().findViewById(R.id.add);
@@ -51,12 +49,7 @@ public class ViewDepartments extends ListFragment {
 			
 			@Override
 			public void onClick(View v) {
-				department.setName("DepartmentName");
-				department.setAddress("DepartmentAddress");
-				department.setPhone(123456789);
-				
-				helper.departmentsHelper.insertDepartment(department);
-				mAdapter.notifyDataSetChanged();
+				Toast.makeText(getActivity().getApplicationContext(), "ADD", Toast.LENGTH_SHORT).show();
 			}
 		});
 		bDel = (Button) getView().findViewById(R.id.delete);
@@ -64,8 +57,7 @@ public class ViewDepartments extends ListFragment {
 			
 			@Override
 			public void onClick(View v) {
-				helper.departmentsHelper.clearDepartmentsTable();
-				mAdapter.notifyDataSetChanged();
+				Toast.makeText(getActivity().getApplicationContext(), "CLEAR", Toast.LENGTH_SHORT).show();
 			}
 		});
 		
@@ -74,17 +66,13 @@ public class ViewDepartments extends ListFragment {
         mAdapter = new ArrayAdapter<Department>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, valueList);
 
         setListAdapter(mAdapter);
+
 	}
 	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		long _id = getListAdapter().getItemId(position);
-		department.setId(_id);
-		department.setName("DepartmentModified");
-		department.setAddress("ModifiedAddress");
-		department.setPhone(123456789);
-		helper.departmentsHelper.modifyDepartment(department);
-		mAdapter.notifyDataSetChanged();
+		Toast.makeText(getActivity().getApplicationContext(), "LIST ITEM CLICK", Toast.LENGTH_SHORT).show();
 	}
 }

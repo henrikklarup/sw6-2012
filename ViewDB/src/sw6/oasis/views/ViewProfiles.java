@@ -11,13 +11,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
 public class ViewProfiles extends ListFragment {
 
 	Helper helper;
-	Profile profile;
 	Button bAdd, bDel;
 	TextView tvHeader;
 	ArrayAdapter<Profile> mAdapter;
@@ -42,8 +42,6 @@ public class ViewProfiles extends ListFragment {
 		
 		helper = new Helper(getActivity().getApplicationContext());
 		
-		profile = new Profile();
-		
 		tvHeader = (TextView) getView().findViewById(R.id.table_header);
 		tvHeader.setText("ProfilesTable");
 		bAdd = (Button) getView().findViewById(R.id.add);
@@ -51,16 +49,7 @@ public class ViewProfiles extends ListFragment {
 			
 			@Override
 			public void onClick(View v) {
-				profile.setFirstname("FirstName");
-				profile.setMiddlename("MiddleName");
-				profile.setSurname("SurName");
-				profile.setPicture("Picture");
-				profile.setPhone(123456789);
-				profile.setRole(2);
-				profile.setIdCertificate(321);
-				
-				helper.profilesHelper.insertProfile(profile);
-				mAdapter.notifyDataSetChanged();
+				Toast.makeText(getActivity().getApplicationContext(), "ADD", Toast.LENGTH_SHORT).show();
 			}
 		});
 		bDel = (Button) getView().findViewById(R.id.delete);
@@ -68,8 +57,7 @@ public class ViewProfiles extends ListFragment {
 			
 			@Override
 			public void onClick(View v) {
-				helper.profilesHelper.clearProfilesTable();
-				mAdapter.notifyDataSetChanged();
+				Toast.makeText(getActivity().getApplicationContext(), "CLEAR", Toast.LENGTH_SHORT).show();
 			}
 		});
 		
@@ -78,21 +66,13 @@ public class ViewProfiles extends ListFragment {
         mAdapter = new ArrayAdapter<Profile>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, valueList);
 
         setListAdapter(mAdapter);
+
 	}
 	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		long _id = getListAdapter().getItemId(position);
-		profile.setId(_id);
-		profile.setFirstname("ModifiedFirstName");
-		profile.setMiddlename("ModifiedMiddleName");
-		profile.setSurname("ModifiedSurName");
-		profile.setPicture("ModifiedPicture");
-		profile.setPhone(987654321);
-		profile.setRole(1);
-		profile.setIdCertificate(123);
-		helper.profilesHelper.modifyProfile(profile);
-		mAdapter.notifyDataSetChanged();
+		Toast.makeText(getActivity().getApplicationContext(), "LIST ITEM CLICK", Toast.LENGTH_SHORT).show();
 	}
 }

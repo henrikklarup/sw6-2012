@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import dk.aau.cs.giraf.oasis.lib.Helper;
 
 public class MainActivity extends FragmentActivity {
 	private PagerAdapter mPagerAdapter;
@@ -21,6 +22,9 @@ public class MainActivity extends FragmentActivity {
         main_layout.setSystemUiVisibility(View.STATUS_BAR_HIDDEN);
 
 		super.setContentView(R.layout.main);
+		
+		Helper helper = new Helper(this);
+//		helper.CreateDummyData();
 		this.initialisePaging();
 	}
 
@@ -33,8 +37,6 @@ public class MainActivity extends FragmentActivity {
 		fragments.add(Fragment.instantiate(this, ViewDepartments.class.getName()));
 		fragments.add(Fragment.instantiate(this, ViewMedia.class.getName()));
 		fragments.add(Fragment.instantiate(this, ViewProfiles.class.getName()));
-		fragments.add(Fragment.instantiate(this, ViewCertificates.class.getName()));
-		fragments.add(Fragment.instantiate(this, ViewListOfApps.class.getName()));
 		this.mPagerAdapter = new MyPagerAdapter(super.getSupportFragmentManager(), fragments);
 
 		ViewPager pager = (ViewPager) super.findViewById(R.id.viewpager);
