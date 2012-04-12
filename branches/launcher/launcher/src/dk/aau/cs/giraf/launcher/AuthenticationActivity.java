@@ -79,8 +79,8 @@ public class AuthenticationActivity extends CaptureActivity {
 	    		((GButton)this.findViewById(R.id.loginGButton)).setVisibility(View.VISIBLE);
 	    	} else {
 	    		this.changeCamerafeedBorderColor(0xFFFF0000);
-	    		((GButton)this.findViewById(R.id.loginGButton)).setVisibility(View.GONE);
-	    		((TextView)this.findViewById(R.id.loginname)).setVisibility(View.GONE);
+	    		((GButton)this.findViewById(R.id.loginGButton)).setVisibility(View.INVISIBLE);
+	    		((TextView)this.findViewById(R.id.loginname)).setVisibility(View.INVISIBLE);
 	    		
 	    		//ProgressDialog dialog = ProgressDialog.show(AuthenticationActivity.this, "", "INVALID profile: " + rawResult.getText(), true, true);
 	    	}
