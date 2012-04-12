@@ -3,7 +3,6 @@ package dk.aau.cs.giraf.wombat;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,14 +60,14 @@ public class SubProfileAdapter extends ArrayAdapter<SubProfile> {
 				
 			}
 			if(tvName != null){
-				tvName.setText(sp._name);
+				tvName.setText(sp.getId() + sp._name);
 			}
 			if(tvDesc != null){
 				tvDesc.setText(sp._desc);
 			}
 			
 		}
-		if(sp.getId() >= 10){
+		if(sp.getId() == TimerLoader.subProfileID){
 			v.setBackgroundResource(R.drawable.list_pressed);
 			TimerLoader.firstClick = true;
 		} else {
