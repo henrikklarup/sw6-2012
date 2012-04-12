@@ -45,7 +45,7 @@ public class ChildFragment extends android.app.ListFragment {
 		
 		// Update the fragments
 		SubProfileFragment detf = (SubProfileFragment) getFragmentManager()
-				.findFragmentById(R.id.detailFragment);
+				.findFragmentById(R.id.subprofileFragment);
 		CustomizeFragment custF = (CustomizeFragment)getFragmentManager().findFragmentById(R.id.customizeFragment);
 		custF.setDefaultProfile();
 		

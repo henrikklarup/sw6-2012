@@ -21,7 +21,7 @@
             android:textSize="30dip" />
 
         <fragment
-            android:id="@+id/listFragment"
+            android:id="@+id/childFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             class="dk.aau.cs.giraf.wombat.ChildFragment" >
@@ -49,12 +49,12 @@
             android:textColor="@android:color/white"
             android:textSize="30dip" />
 
-        <LinearLayout
-            android:id="@+id/detailFragment"
+        <fragment
+            android:id="@+id/subprofileFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
-            </LinearLayout>
+            class="dk.aau.cs.giraf.wombat.SubProfileFragment" >
+        </fragment>
     </LinearLayout>
 
     <TextView
