@@ -18,7 +18,7 @@ import android.widget.Toast;
 import dk.aau.cs.giraf.TimerLib.Guardian;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
 
-public class DetailFragment extends Fragment {
+public class SubProfileFragment extends Fragment {
 	Guardian guard = Guardian.getInstance("John");
 	ListView lv;
 

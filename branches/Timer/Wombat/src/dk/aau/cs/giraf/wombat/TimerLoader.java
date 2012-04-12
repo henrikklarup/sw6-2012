@@ -14,4 +14,5 @@ public class TimerLoader {
 		guard.publishList();
 	}
 	
+	public static int profilePosition;
 }

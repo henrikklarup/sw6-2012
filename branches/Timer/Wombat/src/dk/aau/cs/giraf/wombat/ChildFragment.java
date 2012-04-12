@@ -10,11 +10,10 @@ import dk.aau.cs.giraf.TimerLib.Child;
 import dk.aau.cs.giraf.TimerLib.Guardian;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
-public class ListFragment extends android.app.ListFragment {
+public class ChildFragment extends android.app.ListFragment {
 	List<Profile> profileList;
 	Guardian guard = Guardian.getInstance();
 	ChildAdapter adapter;
-	int mPosition;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -45,14 +44,14 @@ public class ListFragment extends android.app.ListFragment {
 		view.setSelected(true);
 		
 		// Update the fragments
-		DetailFragment detf = (DetailFragment) getFragmentManager()
+		SubProfileFragment detf = (SubProfileFragment) getFragmentManager()
 				.findFragmentById(R.id.detailFragment);
 		CustomizeFragment custF = (CustomizeFragment)getFragmentManager().findFragmentById(R.id.customizeFragment);
 		custF.setDefaultProfile();
 		
 		if (detf != null) {
 			// Marks the selected profile in the guard singleton
-			mPosition = position; 
+			TimerLoader.profilePosition = position; 
 			guard.publishList().get(position).select();
 			detf.loadSubProfiles();
 			
