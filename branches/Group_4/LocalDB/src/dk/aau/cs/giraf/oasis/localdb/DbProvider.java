@@ -185,7 +185,7 @@ public class DbProvider extends ContentProvider {
 		dbHelper = new DbHelper(getContext());
 		return false;
 	}
-
+	
 	@Override
 	public int delete(Uri uri, String where, String[] whereArgs) {
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
