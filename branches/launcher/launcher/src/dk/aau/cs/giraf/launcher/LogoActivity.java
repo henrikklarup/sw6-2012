@@ -8,12 +8,9 @@ import dk.aau.cs.giraf.launcher.R;
 
 public class LogoActivity extends Activity {
 
-	//how long until we go to the next activity
 	protected int _splashTime = 400; 
-
 	private Thread splashTread;
 
-	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
@@ -21,24 +18,21 @@ public class LogoActivity extends Activity {
 
 	    final LogoActivity sPlashScreen = this; 
 
-	    // thread for displaying the SplashScreen
 	    splashTread = new Thread() {
 	        @Override
 	        public void run() {
 	            try {
 	            	synchronized(this){
 
-	            		//wait 5 sec
 	            		wait(_splashTime);
 	            	}
 
 	            } catch(InterruptedException e) {}
 	            finally {
-
-	                Intent i = new Intent(sPlashScreen, AuthenticationActivity.class);
-	        		startActivity(i);
-
+	            	Intent i = new Intent(sPlashScreen, AuthenticationActivity.class);
+	                startActivity(i);
 	                stop();
+	                
 	            }
 	        }
 	    };
