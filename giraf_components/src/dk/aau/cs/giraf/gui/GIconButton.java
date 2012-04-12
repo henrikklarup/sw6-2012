@@ -7,6 +7,7 @@ import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 
 
 public class GIconButton extends GButton {
@@ -27,7 +28,11 @@ public class GIconButton extends GButton {
 		
 		final int oldWidth = tempIcon.getWidth();
 		final int oldHeight = tempIcon.getHeight();
-		float scale = ((float) height) / tempIcon.getHeight();		
+		Log.i("magnus",height + " height");
+		Log.i("magnus",tempIcon.getHeight() + " tempIcon.getHeight()");
+		
+		float scale = ((float) height) / ((float)tempIcon.getHeight());		
+		Log.i("magnus",scale + " =scale");
 		
 		final Matrix matrix = new Matrix();
 		matrix.postScale(scale, scale);
@@ -43,6 +48,8 @@ public class GIconButton extends GButton {
 	  super.onWindowFocusChanged(hasFocus);
 	  int trueHeight = this.getHeight() - (this.getPaddingTop()+this.getPaddingBottom());
 	  this.setCompoundDrawablesWithIntrinsicBounds(resizeIcon(icon, trueHeight), null, null, null);
+	  Log.i("magnus",this.getHeight() + " getHeight()");
+	  Log.i("magnus",this.getTextSize() + " getTextSize()");
 	  
 	 }
 	
