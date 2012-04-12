@@ -60,11 +60,12 @@ public class AuthenticationActivity extends CaptureActivity {
 	    public void handleDecode(Result rawResult, Bitmap barcode)
 	    {
 	    	Helper helper = new Helper(this);
-	    	Profile profile =  null;//helper.profilesHelper.authenticateProfile(rawResult.getText());
-	    	Profile drazenko = new Profile("Drazenko","Efternavn","middlename",0,45454545,"",null);
+	    	Profile profile = helper.profilesHelper.authenticateProfile(rawResult.getText());
+	    	Profile drazenko = new Profile("Drazenko","Banjak","middlename",0,45454545,"",null);
 	    	
 	    	//if (rawResult.getText().equals("GIRAFPROFILE")) {
 	    	if (true) {
+	    	//if (profile != null) {	
 	    		this.changeCamerafeedBorderColor(0xFF3AAA35);
 	    		//ProgressDialog dialog = ProgressDialog.show(AuthenticationActivity.this, "", "Hej: " + rawResult.getText(), true, true);
 	    		((TextView)this.findViewById(R.id.loginname)).setText(drazenko.getFirstname() + " " + drazenko.getSurname());
