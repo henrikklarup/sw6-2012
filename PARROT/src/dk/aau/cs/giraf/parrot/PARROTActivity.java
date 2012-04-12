@@ -144,6 +144,7 @@ public class PARROTActivity extends Activity {
 	public void saveProfile(PARROTProfile user)
 	{
 		//TODO write this method so that it sends the changes to the admin.
+		//Seems easy enough, as the admin functionality will automatically replace the media files.
 
 	}
 }
