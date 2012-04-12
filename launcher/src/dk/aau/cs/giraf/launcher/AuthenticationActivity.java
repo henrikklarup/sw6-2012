@@ -77,10 +77,12 @@ public class AuthenticationActivity extends CaptureActivity {
 	    		
 	    		
 	    		((GButton)this.findViewById(R.id.loginGButton)).setVisibility(View.VISIBLE);
+	    		((TextView)this.findViewById(R.id.authentication_step1)).setText("Sådan! Klik på 'Log in' for at bekræfte.");
 	    	} else {
 	    		this.changeCamerafeedBorderColor(0xFFFF0000);
 	    		((GButton)this.findViewById(R.id.loginGButton)).setVisibility(View.INVISIBLE);
 	    		((TextView)this.findViewById(R.id.loginname)).setVisibility(View.INVISIBLE);
+	    		((TextView)this.findViewById(R.id.authentication_step1)).setText(R.string.authentication_step1);
 	    		
 	    		//ProgressDialog dialog = ProgressDialog.show(AuthenticationActivity.this, "", "INVALID profile: " + rawResult.getText(), true, true);
 	    	}
