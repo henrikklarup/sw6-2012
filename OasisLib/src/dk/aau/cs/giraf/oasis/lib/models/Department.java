@@ -114,7 +114,7 @@ public class Department {
 		localOutput = localOutput.replace("{1}", getName());
 		localOutput = localOutput.replace("{2}", getAddress());
 		localOutput = localOutput.replace("{3}", String.valueOf(getPhone()));
-		localOutput = localOutput.replace("{4}", getEmail());
+		localOutput = localOutput.replace("{4}", String.valueOf(getEmail()));
 
 		return localOutput;
 	}

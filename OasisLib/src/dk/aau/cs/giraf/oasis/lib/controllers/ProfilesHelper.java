@@ -59,6 +59,7 @@ public class ProfilesHelper {
 				ContentValues profileContentValues = getContentValues(profile);
 				profileContentValues.put(ProfilesMetaData.Table.COLUMN_ID, id);
 				_context.getContentResolver().insert(ProfilesMetaData.CONTENT_URI, profileContentValues);
+				c.close();
 				return 0;
 			}
 		}
@@ -275,6 +276,7 @@ public class ProfilesHelper {
 				cursor.moveToNext();
 			}
 		}
+		
 
 		return profiles;
 	}
