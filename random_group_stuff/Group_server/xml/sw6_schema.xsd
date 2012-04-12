@@ -28,7 +28,7 @@
   <xs:complexType>
     <xs:sequence>
       
-    <xs:element name="AuthUser">
+    <xs:element name="AuthUsers">
       <xs:complexType>
        <xs:sequence>
         <xs:element name="entry" maxOccurs="unbounded">
