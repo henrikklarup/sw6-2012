@@ -95,15 +95,17 @@ public class ProfilesHelper {
 
 		String[] authColumns = new String[] { 
 				AuthUsersMetaData.Table.COLUMN_ID, 
-				AuthUsersMetaData.Table.COLUMN_CERTIFICATE};
+				AuthUsersMetaData.Table.COLUMN_CERTIFICATE,
+				AuthUsersMetaData.Table.COLUMN_ROLE};
 		Cursor c = _context.getContentResolver().query(AuthUsersMetaData.CONTENT_URI, authColumns, null, new String[] {certificate}, null);
 		
 		if(c != null) {
 			if(c.moveToFirst()) {
 				profile = getProfileById(c.getLong(c.getColumnIndex(AuthUsersMetaData.Table.COLUMN_ID)));
 			}
-			c.close();
 		}
+		
+		c.close();
 
 		return profile;
 	}
