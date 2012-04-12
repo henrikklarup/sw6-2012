@@ -56,7 +56,9 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="0dp"/>
     
-    <TextView android:text="@string/authentication_step1"
+    <TextView 
+        	android:id="@+id/authentication_step1"
+        	android:text="@string/authentication_step1"
         	android:textColor="#FFFFFFFF"
         	android:layout_height="wrap_content"
         	android:layout_width="300dp"
