@@ -247,7 +247,7 @@ public class ProfilesHelper {
 		Cursor c = _context.getContentResolver().query(ProfilesMetaData.CONTENT_URI, columns, null, null, null);
 
 		if (c != null) {
-		profiles = cursorToProfiles(c);
+			profiles = cursorToProfiles(c);
 		}
 
 		c.close();
