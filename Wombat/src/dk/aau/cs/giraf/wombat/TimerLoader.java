@@ -15,6 +15,7 @@ public class TimerLoader {
 	}
 	
 	public static int profilePosition;
-	public static int subProfileID;
-	public static boolean firstClick;
+	public static int subProfileID; 	// Stores the id of the saved subprofile
+	public static boolean firstClick;	// When a subprofile is saved, this is set to true
+										// When something is clicked in the subprofile list, set to false
 }

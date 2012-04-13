@@ -106,7 +106,7 @@ public class SubProfileFragment extends android.app.ListFragment {
 			lv.getChildAt(i).setSelected(false);
 		}
 		view.setSelected(true);
-
+		
 		CustomizeFragment fragment = (CustomizeFragment) getFragmentManager()
 				.findFragmentById(R.id.customizeFragment);
 		fragment.loadSettings(guard.getChild().SubProfiles().get(position));
