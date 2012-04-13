@@ -9,10 +9,10 @@ import android.os.SystemClock;
 
 public class GLRendererGeneral implements Renderer{
 
-	private GLHourglass timet;
+	private GLProgressBar timet;
 	
 	public GLRendererGeneral(){
-		timet = new GLHourglass();
+		timet = new GLProgressBar();
 	}
 
 	public void onSurfaceCreated(GL10 gl, EGLConfig eglconfig) {
@@ -30,13 +30,13 @@ public class GLRendererGeneral implements Renderer{
 		
 		gl.glMatrixMode(GL10.GL_MODELVIEW);
 		gl.glLoadIdentity();
-		GLU.gluLookAt(gl, 0, 0, -120, 0, 0, 0, 0, 2, 0); // hvor langt er vi far objektet og hvor kigger vi hen
+		GLU.gluLookAt(gl, 0, 0, -20, 0, 0, 0, 0, 2, 0); // hvor langt er vi far objektet og hvor kigger vi hen
 		
 		//Rotate the element
-		long time = SystemClock.uptimeMillis() % 4000L;
-		float angle = .090f * ((int)time);
-		
-		gl.glRotatef(angle, .2f, .2f, .2f);
+//		long time = SystemClock.uptimeMillis() % 4000L;
+//		float angle = .090f * ((int)time);
+//		
+//		gl.glRotatef(angle, .2f, .2f, .2f);
 		
 		timet.draw(gl);
 
