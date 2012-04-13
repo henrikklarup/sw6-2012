@@ -41,7 +41,7 @@ public class ProfileSelectActivity extends Activity{
 		ListView lv = (ListView) findViewById(R.id.profilesList);
 		
 		for(int i = 0; i < mProfiles.size(); i++) {
-			// If profile belongs to guardian:
+			// If profile is not a child:
 			if (mProfiles.get(i).getPRole() != 3L) {
 				mProfiles.remove(i);
 				i--;
@@ -53,7 +53,7 @@ public class ProfileSelectActivity extends Activity{
 		
 		lv.setOnItemClickListener(new OnItemClickListener() {
 		      public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		    	  	final Profile person = (Profile) parent.getItemAtPosition(position);
+		    	  	final long personId = ((Profile) parent.getItemAtPosition(position)).getId();
 		            final String packageName = getIntent().getExtras().getString("appPackageName");
 		            final String activityName = getIntent().getExtras().getString("appActivityName");
 		            
@@ -63,7 +63,7 @@ public class ProfileSelectActivity extends Activity{
 		    		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
 	                        | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
 		    		
-		            intent.putExtra("currentProfileId", person.getId());
+		            intent.putExtra("currentProfileId", personId);
 		            
 					startActivity(intent);
 		          }
