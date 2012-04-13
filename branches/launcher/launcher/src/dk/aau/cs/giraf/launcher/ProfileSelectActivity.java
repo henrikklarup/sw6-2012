@@ -5,6 +5,8 @@ import java.util.List;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
+import dk.aau.cs.giraf.gui.*;
+
 import android.view.View;
 import android.app.Activity;
 import android.content.ComponentName;
@@ -13,7 +15,6 @@ import android.os.Bundle;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 public class ProfileSelectActivity extends Activity{
 
@@ -38,7 +39,7 @@ public class ProfileSelectActivity extends Activity{
 		
 		mProfiles = helper.profilesHelper.getProfiles();
 
-		ListView lv = (ListView) findViewById(R.id.profilesList);
+		GList lv = (GList) findViewById(R.id.profilesList);
 		
 		for(int i = 0; i < mProfiles.size(); i++) {
 			// If profile is not a child:
