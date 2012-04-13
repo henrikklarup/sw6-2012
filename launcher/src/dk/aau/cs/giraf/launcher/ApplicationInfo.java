@@ -36,21 +36,9 @@ class ApplicationInfo{
 	 */
 	Color iconcolor;
 	
-	ComponentName className;
-
-	/**
-	 * Creates the application intent based on a component name and various launch flags.
-	 *
-	 * @param className the class name of the component representing the intent
-	 * @param launchFlags the launch flags
-	 */
-	final void setActivity(ComponentName className, int launchFlags) {
-		intent = new Intent(Intent.ACTION_MAIN);
-		intent.addCategory(Intent.CATEGORY_LAUNCHER);
-		intent.setComponent(className);
-		this.className = className;
-		intent.setFlags(launchFlags);
-	}
+	String packageName;
+	
+	String activityName;
 
 	@Override
 	public boolean equals(Object o) {
