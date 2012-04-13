@@ -34,12 +34,11 @@ public class SubProfileFragment extends android.app.ListFragment {
 		// TODO: Implement bind to the profile chosen by launcher
 		setListAdapter(null);
 		ListView lv = getListView();
-		if (guard.getChild().deleteCheck()) {
+		lv.setOnItemLongClickListener(new OnItemLongClickListener() {
 
-			lv.setOnItemLongClickListener(new OnItemLongClickListener() {
-
-				public boolean onItemLongClick(AdapterView<?> arg0, View v,
-						final int row, long arg3) {
+			public boolean onItemLongClick(AdapterView<?> arg0, View v,
+					final int row, long arg3) {
+				
 					AlertDialog alertDialog = new AlertDialog.Builder(v
 							.getContext()).create();
 					alertDialog.setTitle(R.string.delete_subprofile_message);
@@ -48,7 +47,7 @@ public class SubProfileFragment extends android.app.ListFragment {
 								public void onClick(DialogInterface arg0,
 										int arg1) {
 									// TODO Auto-generated method stub
-
+									if (guard.getChild() != null && guard.getChild().deleteCheck()) {
 									guard.getChild().SubProfiles().get(row)
 											.delete();
 									Toast t = Toast.makeText(getActivity(),
@@ -57,6 +56,12 @@ public class SubProfileFragment extends android.app.ListFragment {
 													// been deleted?
 									t.show();
 									reloadSubProfiles();
+									} else {
+										Toast t = Toast.makeText(getActivity(),
+												R.string.cannot_delete_subprofile_toast, 5000);
+										// TODO: Which profile has been deleted?
+										t.show();
+									}
 								}
 							});
 
@@ -70,10 +75,9 @@ public class SubProfileFragment extends android.app.ListFragment {
 							});
 
 					alertDialog.show();
-					return true;
-				}
-			});
-		}
+				return true;
+			}
+		});
 	}
 
 	public void reloadSubProfiles() {
