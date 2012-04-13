@@ -29,11 +29,17 @@ public class GLProgressBar {
 			12.2f, -2f, //point13
 			12.4f, -2f, //point14
 			12.4f, 2f, //point15
-		//bar time points - change as time progress - 1 minut svarer til 0,2
-			-8f, 1.6f, //point16
-			12f, 1.6f, //point17
-			12f, -1.6f, //point18
-			-8f, -1.6f, //point19
+		//bar time spent points - change as time progress - 
+		//0.2f corresponds to 1 minute if the time is set to 60 minutes
+			-12f, 1.6f, //point16 - change x-coordinate
+			8f, 1.6f, //point17
+			8f, -1.6f, //point18
+			-12f, -1.6f, //point19 - change x-coordinate
+//		//bar time left points 
+//			7.8f, 1.6f, //point20 - change x-coordinate
+//			-12f, 1.6f, //point21
+//			-12f, -1.6f, //point22
+//			7.8f, -1.6f, //point23 - change x-coordinate
 			
 		};
 		
@@ -51,9 +57,12 @@ public class GLProgressBar {
 				//bar frame right
 				12,13,14,
 				14,15,12,
-				//bar time
+				//time spent
 				16,17,18,
 				18,19,16,
+//				//time left
+//				20,21,22,
+//				22,23,10,
 				
 			}; // holder de specifikke punkter. Der er 3 punkter i en trekant
 		private ShortBuffer pBuff;
