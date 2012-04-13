@@ -11,7 +11,6 @@ import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
@@ -103,21 +102,19 @@ public class HomeActivity extends Activity {
 				//Package (dk.aau.cs.giraf)
 				if(info.toString().toLowerCase().contains("dk.aau.cs.giraf") && !info.toString().toLowerCase().contains("launcher")){
 					ApplicationInfo appInfo = new ApplicationInfo();
+					
 					appInfo.title = info.loadLabel(getPackageManager());
 					appInfo.icon = info.activityInfo.loadIcon(getPackageManager());
-
-					appInfo.setActivity(new ComponentName(
-	                        info.activityInfo.applicationInfo.packageName,
-	                        info.activityInfo.name),
-	                        Intent.FLAG_ACTIVITY_NEW_TASK
-	                        | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+					appInfo.packageName = info.activityInfo.applicationInfo.packageName;
+					appInfo.activityName = info.activityInfo.name;
+					
 					applications.add(appInfo);
 				}
 			}
 
 			Grid = (GridView)this.findViewById(R.id.GridViewHome);
 			Grid.setAdapter(new AppAdapter(this,applications));
-			Grid.setOnItemClickListener(new ApplicationLauncher());
+			Grid.setOnItemClickListener(new ProfileLauncher());
 		}
 	}
 }
