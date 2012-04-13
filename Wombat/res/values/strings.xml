@@ -46,5 +46,7 @@
     <string name="background">Baggrund</string>
     
     <string name="toast_text">blev gemt på</string>
+    <string name="new_template_button_text">Ny tilpasning</string>
+    <string name="delete_subprofile_toast">Tilpasning slettet</string>
 
 </resources>

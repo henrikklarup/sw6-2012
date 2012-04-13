@@ -15,7 +15,7 @@ import dk.aau.cs.giraf.TimerLib.Guardian;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
 
 public class SubProfileFragment extends android.app.ListFragment {
-	Guardian guard = Guardian.getInstance("John");
+	Guardian guard = Guardian.getInstance();
 	ListView thisListView;
 
 	@Override
@@ -36,14 +36,15 @@ public class SubProfileFragment extends android.app.ListFragment {
 		ListView lv = getListView();
 		lv.setOnItemLongClickListener(new OnItemLongClickListener() {
 			
-			public boolean onItemLongClick(AdapterView<?> arg0, View v, int row, long arg3){
+			public boolean onItemLongClick(AdapterView<?> arg0, View v, final int row, long arg3){
 				AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
 		        alertDialog.setTitle(R.string.delete_subprofile_message);
 		        alertDialog.setButton(getText(R.string.delete_yes), new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface arg0, int arg1) {
 						// TODO Auto-generated method stub
 						
-						Toast t = Toast.makeText(getActivity(), "Profile Deleted", 5000); // TODO: Which profile has been deleted?
+						guard.getChild().SubProfiles().get(row).delete();
+						Toast t = Toast.makeText(getActivity(), R.string.delete_subprofile_toast, 5000); // TODO: Which profile has been deleted?
 						t.show();
 						reloadSubProfiles();						
 					}
@@ -51,7 +52,7 @@ public class SubProfileFragment extends android.app.ListFragment {
 		        
 		        alertDialog.setButton2(getText(R.string.delete_no), new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface arg0, int arg1) {
-						// TODO Auto-generated method stub
+						// do nothing
 						
 					}
 		        });
@@ -71,7 +72,7 @@ public class SubProfileFragment extends android.app.ListFragment {
 	 * 
 	 */
 	public void loadSubProfiles() {
-		ArrayList<SubProfile> subprofiles = guard.selected().SubProfiles();
+		ArrayList<SubProfile> subprofiles = guard.getChild().SubProfiles();
 		SubProfileAdapter adapter = new SubProfileAdapter(getActivity(),
 				android.R.layout.simple_list_item_1, subprofiles);
 		setListAdapter(adapter);  
@@ -91,7 +92,7 @@ public class SubProfileFragment extends android.app.ListFragment {
 
 		CustomizeFragment fragment = (CustomizeFragment) getFragmentManager()
 				.findFragmentById(R.id.customizeFragment);
-		fragment.loadSettings(guard.selected().SubProfiles().get(position));
+		fragment.loadSettings(guard.getChild().SubProfiles().get(position));
 	}
 	
 }
