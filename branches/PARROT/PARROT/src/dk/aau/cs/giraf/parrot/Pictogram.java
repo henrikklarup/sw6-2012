@@ -1,5 +1,8 @@
 package dk.aau.cs.giraf.parrot;
 
+import sw6.digipecs.exceptions.ImageIsEmptyException;
+import sw6.digipecs.exceptions.SoundNotFoundException;
+import sw6.digipecs.helpers.AudioPlayer;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.widget.ImageView;
@@ -16,7 +19,7 @@ public class Pictogram {
 	private String imagePath;               ///< Corresponding image.
 	private String soundPath;             ///< Corresponding sound effect.
 	private String wordPath; 		///< Corresponding pronounciation.
-	
+
 	//This are the constructor for the Pictogram class
 	public Pictogram(String name, String imagePath, String soundPath, String wordPath)
 	{
@@ -25,9 +28,9 @@ public class Pictogram {
 		this.setSoundPath(soundPath);
 		this.setWordPath(wordPath);
 	}
-	
+
 	//TODO make methods to ensure that the constructor can not put illegal arguments as the path for images, sounds and words
-	
+
 	//TODO make methods to show images and play sounds and words.
 	public ImageView getImage()
 	{
@@ -37,13 +40,13 @@ public class Pictogram {
 		image.setImageBitmap(bm);
 		return image;
 	}
-	
+
 	public Bitmap getBitmap()
 	{
 		Bitmap bm = BitmapFactory.decodeFile(imagePath);
 		return bm;
 	}
-	
+
 	public String getImagePath() {
 		return imagePath;
 	}
@@ -75,15 +78,41 @@ public class Pictogram {
 	public void setWordPath(String wordPath) {
 		this.wordPath = wordPath;
 	}
-	
+
+	private boolean validPath(String path)
+	{
+		//this method checks if a given path is valid
+		//TODO write me...
+		return true; //change me
+	}
+
+	private void playItem(final String path) {
+		// Running this in the background to keep UI reponsive and smooth
+		new Thread(new Runnable() {
+			public void run() {
+				try {
+					AudioPlayer.play(path, null);
+				} catch (Exception e) {
+				}
+			}
+		}).start();
+		//TODO check that the thread is stopped again at some point.
+	}
+
 	public void playSound()
 	{
-		//TODO complete this function.
+		if(soundPath!=null && validPath(soundPath))
+		{
+			playItem(soundPath);
+		}
 	}
-	
+
 	public void playWord()
 	{
-		//TODO complete this function.
+		if(wordPath!=null &&validPath(wordPath))
+		{
+			playItem(wordPath);
+		}
 	}
-	
+
 }
