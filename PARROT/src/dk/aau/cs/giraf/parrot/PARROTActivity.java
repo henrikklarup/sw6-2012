@@ -43,6 +43,19 @@ public class PARROTActivity extends Activity {
 		actionBar.addTab(tab);
 
 	}
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		AudioPlayer.close();
+		super.onPause();
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		AudioPlayer.open();
+		super.onResume();
+	}
 
 	public PARROTProfile loadProfile()
 	{
