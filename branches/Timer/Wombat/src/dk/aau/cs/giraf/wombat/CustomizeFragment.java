@@ -79,6 +79,8 @@ public class CustomizeFragment extends Fragment {
 
 		currSubP = new SubProfile("", "", 10, 0xFF000000, 0xFFFF0000,
 				0xFFFFFFFF, 0xFFFF0000, 600, false);
+		currSubP.setSave(false);
+		currSubP.setSaveAs(false);
 
 		/********* TIME CHOSER *********/
 		initStyleChoser();
@@ -92,17 +94,19 @@ public class CustomizeFragment extends Fragment {
 		/********* ATTACHMENT PICKER *********/
 		initAttachmentButton();
 
-		/******** SAVE BUTTON ***********/
-		initSaveButton();
-		initSaveAsButton();
-		initStartButton();
+		/******** BOTTOM MENU ***********/
+		initBottomMenu();
 	}
 
 	public void setDefaultProfile() {
 		currSubP = new SubProfile("", "", 10, 0xFF000000, 0xFFFF0000,
 				0xFFFFFFFF, 0xFFFF0000, 600, false);
+		currSubP.setSave(false);
+		currSubP.setSaveAs(false);
 		
-		loadSettings(currSubP);
+		preSubP = null;
+
+		reloadCustomize();
 	}
 
 	/**
@@ -159,6 +163,7 @@ public class CustomizeFragment extends Fragment {
 		if (formType == formFactor.Hourglass) {
 			currSubP = currSubP.toHourglass();
 			hourglassButton.setSelected(true);
+			setSave();
 		} else {
 			hourglassButton.setSelected(false);
 		}
@@ -166,23 +171,41 @@ public class CustomizeFragment extends Fragment {
 		if (formType == formFactor.TimeTimer) {
 			currSubP = currSubP.toTimeTimer();
 			timetimerButton.setSelected(true);
+			setSave();
 		} else {
 			timetimerButton.setSelected(false);
 		}
 		if (formType == formFactor.ProgressBar) {
 			currSubP = currSubP.toProgressBar();
 			progressbarButton.setSelected(true);
+			setSave();
 		} else {
 			progressbarButton.setSelected(false);
 		}
 		if (formType == formFactor.DigitalClock) {
 			currSubP = currSubP.toDigitalClock();
 			digitalButton.setSelected(true);
+			setSave();
 		} else {
 			digitalButton.setSelected(false);
 		}
 		genName_Description();
+		initBottomMenu();
 	}
+
+
+	private boolean setSave() {
+		boolean complete = false;
+		if(guard.getChild() != null){
+			currSubP.setSave(true);
+		} else {
+			currSubP.setSave(false);
+		}
+		currSubP.setSaveAs(true);
+		
+		return complete;
+	}
+
 
 	private int previousMins;
 	private int previousSecs;
@@ -247,7 +270,7 @@ public class CustomizeFragment extends Fragment {
 	private void setTime(int totalTime) {
 		int minutes, seconds;
 		Log.e("Time", "" + totalTime);
-		if(totalTime == 60){
+		if (totalTime == 60) {
 			minutes = 1;
 			seconds = 0;
 		} else if (totalTime >= 60 * 60) {
@@ -326,13 +349,15 @@ public class CustomizeFragment extends Fragment {
 				R.id.checkbox_gradient);
 
 		checkboxGradient.setChecked(currSubP._gradient);
-		checkboxGradient.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				currSubP._gradient = isChecked;				
-			}
-		});
-		
+		checkboxGradient
+				.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+					public void onCheckedChanged(CompoundButton buttonView,
+							boolean isChecked) {
+						currSubP._gradient = isChecked;
+					}
+				});
+
 		colorGradientButton1 = (Button) getActivity().findViewById(
 				R.id.gradientButton_1);
 
@@ -530,22 +555,50 @@ public class CustomizeFragment extends Fragment {
 		attView.setText(attachText);
 	}
 
+
+	private void initBottomMenu() {
+		initSaveButton();
+		initSaveAsButton();
+		initStartButton();		
+	}
+	
 	/**
 	 * Initialize the save button
 	 */
 	private void initSaveButton() {
 		saveButton = (Button) getActivity().findViewById(R.id.customize_save);
-		saveButton.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				TimerLoader.subProfileID = currSubP.save(preSubP);
-				guard.publishList().get(TimerLoader.profilePosition).select();
+		Drawable d;
+		if (currSubP.getSave()) {
+			d = getResources().getDrawable(R.drawable.thumbnail_save);
+			saveButton.setOnClickListener(new OnClickListener() {
+				public void onClick(View v) {
+					if(preSubP != null){
+					TimerLoader.subProfileID = currSubP.save(preSubP);
+					} else {
+						TimerLoader.subProfileID = guard.getChild().save(currSubP);
+					}
+					guard.publishList().get(TimerLoader.profilePosition)
+							.select();
+
+					SubProfileFragment spf = (SubProfileFragment) getFragmentManager()
+							.findFragmentById(R.id.subprofileFragment);
+					spf.reloadSubProfiles();
+				}
+			});
+		} else {
+			d = getResources().getDrawable(R.drawable.thumbnail_save_gray);
+			saveButton.setOnClickListener(new OnClickListener() {
 				
-				SubProfileFragment spf = (SubProfileFragment) getFragmentManager().findFragmentById(R.id.subprofileFragment);
-				spf.reloadSubProfiles();
-			}
-		});
+				public void onClick(View v) {
+					Toast t = Toast.makeText(getActivity(), getString(R.string.cant_save), 2000);
+					t.show();
+				}
+			});
+		}
+
+		saveButton
+				.setCompoundDrawablesWithIntrinsicBounds(null, d, null, null);
 	}
-	
 
 	private void genName_Description() {
 		String name = "";
@@ -572,13 +625,13 @@ public class CustomizeFragment extends Fragment {
 			name += "";
 			break;
 		}
-		
+
 		int seconds = currSubP._totalTime % 60;
 		int minutes = (currSubP._totalTime - seconds) / 60;
-		
+
 		desc += name + " - ";
 		desc += "(" + minutes + ":" + seconds + ")";
-		
+
 		currSubP._name = name;
 		currSubP._desc = desc;
 	}
@@ -588,6 +641,7 @@ public class CustomizeFragment extends Fragment {
 	 */
 	private void initSaveAsButton() {
 		final ArrayList<String> values = new ArrayList<String>();
+		Drawable d;
 		for (Child c : guard.Children()) {
 			values.add(c._name);
 		}
@@ -598,37 +652,57 @@ public class CustomizeFragment extends Fragment {
 
 		saveAsButton = (Button) getActivity().findViewById(
 				R.id.customize_save_as);
-		saveAsButton.setOnClickListener(new OnClickListener() {
+		if (currSubP.getSaveAs()) {
+			d = getResources().getDrawable(R.drawable.thumbnail_saveas);
+			saveAsButton.setOnClickListener(new OnClickListener() {
 
-			public void onClick(View v) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(
-						getActivity());
-				builder.setTitle(getActivity().getString(
-						R.string.choose_profile));
-				builder.setItems(items, new DialogInterface.OnClickListener() {
+				public void onClick(View v) {
+					AlertDialog.Builder builder = new AlertDialog.Builder(
+							getActivity());
+					builder.setTitle(getActivity().getString(
+							R.string.choose_profile));
+					builder.setItems(items,
+							new DialogInterface.OnClickListener() {
 
-					public void onClick(DialogInterface dialog, int item) {
-						Child c = guard.Children().get(item);
-						c.save(currSubP);
-						SubProfileFragment df = (SubProfileFragment) getFragmentManager()
-								.findFragmentById(R.id.subprofileFragment);
-						df.loadSubProfiles();
+								public void onClick(DialogInterface dialog,
+										int item) {
+									Child c = guard.Children().get(item);
+									c.save(currSubP);
+									SubProfileFragment df = (SubProfileFragment) getFragmentManager()
+											.findFragmentById(
+													R.id.subprofileFragment);
+									df.loadSubProfiles();
 
-						String toastText = currSubP._name;
-						toastText += " "
-								+ getActivity().getApplicationContext()
-										.getText(R.string.toast_text);
-						toastText += " " + c._name;
+									String toastText = currSubP._name;
+									toastText += " "
+											+ getActivity()
+													.getApplicationContext()
+													.getText(
+															R.string.toast_text);
+									toastText += " " + c._name;
 
-						Toast toast = Toast.makeText(getActivity(), toastText,
-								3000);
-						toast.show();
-					}
-				});
-				AlertDialog alert = builder.create();
-				alert.show();
-			}
-		});
+									Toast toast = Toast.makeText(getActivity(),
+											toastText, 3000);
+									toast.show();
+								}
+							});
+					AlertDialog alert = builder.create();
+					alert.show();
+				}
+			});
+		} else {
+			d = getResources().getDrawable(R.drawable.thumbnail_saveas_gray);
+			saveAsButton.setOnClickListener(new OnClickListener() {
+				
+				public void onClick(View v) {
+					Toast t = Toast.makeText(getActivity(), getString(R.string.cant_save), 2000);
+					t.show();
+				}
+			});
+		}
+
+		saveAsButton.setCompoundDrawablesWithIntrinsicBounds(null, d, null,
+				null);
 
 	}
 
@@ -638,16 +712,33 @@ public class CustomizeFragment extends Fragment {
 	private void initStartButton() {
 		startButton = (Button) getActivity().findViewById(
 				R.id.customize_start_button);
-		startButton.setOnClickListener(new OnClickListener() {
+		Drawable d;
+		if (currSubP.getSaveAs()) {
+			d = getResources().getDrawable(R.drawable.thumbnail_start);
+			startButton.setOnClickListener(new OnClickListener() {
 
-			public void onClick(View v) {
-				currSubP.addLastUsed(preSubP);
-				currSubP.select();
-				Intent i = new Intent(getActivity().getApplicationContext(),
-						OpenGLActivity.class);
-				startActivity(i);
-			}
-		});
+				public void onClick(View v) {
+					currSubP.addLastUsed(preSubP);
+					currSubP.select();
+					Intent i = new Intent(
+							getActivity().getApplicationContext(),
+							OpenGLActivity.class);
+					startActivity(i);
+				}
+			});
+		} else {
+			d = getResources().getDrawable(R.drawable.thumbnail_start_gray);
+			startButton.setOnClickListener(new OnClickListener() {
+				
+				public void onClick(View v) {
+					Toast t = Toast.makeText(getActivity(), getString(R.string.cant_start), 2000);
+					t.show();
+				}
+			});
+		}
+
+		startButton
+				.setCompoundDrawablesWithIntrinsicBounds(null, d, null, null);
 	}
 
 	/**
@@ -660,10 +751,17 @@ public class CustomizeFragment extends Fragment {
 		// TODO: Insert logic to load settings and put them into the view
 		currSubP = subProfile.copy();
 		preSubP = subProfile;
+		
+		if(currSubP.getSave()){
+			Toast.makeText(getActivity(), "AHAHHAAH", 1000).show();
+		}
 
 		/* Set Style */
 		selectStyle(currSubP.formType());
-
+		if(currSubP.getSave()){
+			Toast.makeText(getActivity(), "BITCH", 1000).show();
+			
+		}
 		/* Set Time */
 		setTime(currSubP._totalTime);
 
@@ -676,10 +774,23 @@ public class CustomizeFragment extends Fragment {
 
 		/* Set Attachment */
 		setAttachment(currSubP.getAttachment());
-
 	}
 
 	public void reloadCustomize() {
-		// currSubP = new
+		/* Set Style */
+		selectStyle(currSubP.formType());
+		
+		/* Set Time */
+		setTime(currSubP._totalTime);
+
+		/* Set Colors */
+		checkboxGradient.setChecked(currSubP._gradient);
+		setColor(colorGradientButton1.getBackground(), currSubP._timeLeftColor);
+		setColor(colorGradientButton2.getBackground(), currSubP._timeSpentColor);
+		setColor(colorFrameButton.getBackground(), currSubP._frameColor);
+		setColor(colorBackgroundButton.getBackground(), currSubP._bgcolor);
+
+		/* Set Attachment */
+		setAttachment(currSubP.getAttachment());
 	}
 }

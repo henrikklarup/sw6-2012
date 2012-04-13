@@ -49,5 +49,7 @@
     <string name="new_template_button_text">Ny tilpasning</string>
     <string name="delete_subprofile_toast">Tilpasning slettet</string>
     <string name="cannot_delete_subprofile_toast">Kan ikke slette denne tilpasning</string>
+    <string name="cant_save">Timeren kan ikke gemmes endnu!</string>
+    <string name="cant_start">Timeren kan ikke startes endnu!</string>
 
 </resources>
