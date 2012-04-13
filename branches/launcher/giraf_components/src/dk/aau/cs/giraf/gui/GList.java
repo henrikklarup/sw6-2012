@@ -12,18 +12,20 @@ public class GList extends ListView {
 	}
 	
 	public GList(Context context) {
-		
 		super(context);
+		this.setStyle();
 		// TODO Auto-generated constructor stub
 	}
 
 	public GList(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		this.setStyle();
 		// TODO Auto-generated constructor stub
 	}
 
 	public GList(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
+		this.setStyle();
 		// TODO Auto-generated constructor stub
 	}
 
