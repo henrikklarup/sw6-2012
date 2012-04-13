@@ -178,11 +178,11 @@ public class TestDatabase extends HttpServlet {
 		aOutput.println("<hr>");
 		aOutput.println("Vælg handling");
 		aOutput.println("<p>");
-		aOutput.println("<img src=\"images/i.jpg\" ALT=\"test\">");
+		aOutput.println("<a href=\"#\" onclick=\"testThis('profile');popup('popUpDiv');getFocus();\"><img src=\"images/i.jpg\" ALT=\"test\"></a>");
 		aOutput.println("<br>");
 		aOutput.println("<a href=\"#\" onclick=\"testThis('profile');popup('popUpDiv');getFocus();\">Profiler</a>");
 		aOutput.println("<p>");
-		aOutput.println("Tilføj Rediger Slet");
+		aOutput.println("<a href=\"#\" onclick=\"testThis('profile');popup('popUpPick');getFocus();\">Tilføj</a>  -  Rediger  -  Slet");
 		aOutput.println("</center>");
 		aOutput.println("<hr>");
 		aOutput.println("<footer> Savannah v. 1.0.0 (C)opyright me!</footer> </div>");
@@ -214,7 +214,17 @@ public class TestDatabase extends HttpServlet {
 				//"</tr>"+
 				
 				"</center>"+
-				"</div>" +
+				"</div>");
+		aOutput.println("<div id=\"blanket\" style=\"display:none;\"></div>"+
+		"<div id=\"popUpPick\" style=\"display:none;\">"+
+		"<P align=\"right\"><a href=\"#\" onclick=\"popup('popUpPick')\" ALIGN=RIGHT>[X]</a></p>"+
+		"<form method='POST' action='TestDatabase' name='DasForm'>\n" + 
+		"<center><h3>"+
+		"Tilføj:"+
+		"</h3>"+
+		"Profil  -  Billede  -  Lyd  -  Animation/film"+
+		"</center>"+
+		"</div>" +
 				""+
 				"</body></form></html>" 
 				); 
