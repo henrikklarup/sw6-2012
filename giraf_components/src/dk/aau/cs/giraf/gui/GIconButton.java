@@ -29,11 +29,8 @@ public class GIconButton extends GButton {
 		
 		final int oldWidth = tempIcon.getWidth();
 		final int oldHeight = tempIcon.getHeight();
-		Log.i("magnus",height + " height");
-		Log.i("magnus",tempIcon.getHeight() + " tempIcon.getHeight()");
 		
-		float scale = ((float) height) / ((float)tempIcon.getHeight());		
-		Log.i("magnus",scale + " =scale");
+		float scale = ((float) height) / ((float)tempIcon.getHeight());
 		
 		final Matrix matrix = new Matrix();
 		matrix.postScale(scale, scale);
@@ -49,8 +46,6 @@ public class GIconButton extends GButton {
 	  super.onWindowFocusChanged(hasFocus);
 	  int trueHeight = this.getHeight() - (this.getPaddingTop()+this.getPaddingBottom());
 	  this.setCompoundDrawablesWithIntrinsicBounds(resizeIcon(icon, trueHeight), null, null, null);
-	  Log.i("magnus",this.getHeight() + " getHeight()");
-	  Log.i("magnus",this.getTextSize() + " getTextSize()");
 	  
 	 }
 	
