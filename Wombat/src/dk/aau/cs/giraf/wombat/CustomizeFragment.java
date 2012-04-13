@@ -751,17 +751,9 @@ public class CustomizeFragment extends Fragment {
 		// TODO: Insert logic to load settings and put them into the view
 		currSubP = subProfile.copy();
 		preSubP = subProfile;
-		
-		if(currSubP.getSave()){
-			Toast.makeText(getActivity(), "AHAHHAAH", 1000).show();
-		}
 
 		/* Set Style */
 		selectStyle(currSubP.formType());
-		if(currSubP.getSave()){
-			Toast.makeText(getActivity(), "BITCH", 1000).show();
-			
-		}
 		/* Set Time */
 		setTime(currSubP._totalTime);
 
