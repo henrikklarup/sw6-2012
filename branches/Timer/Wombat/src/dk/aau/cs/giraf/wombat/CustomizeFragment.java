@@ -433,7 +433,7 @@ public class CustomizeFragment extends Fragment {
 		final List<String> values = new ArrayList<String>();
 		final List<SubProfile> subProfiles;
 
-		if (guard.selected() == null) {
+		if (guard.getChild() == null) {
 			subProfiles = new ArrayList<SubProfile>();
 			for (Child c : guard.Children()) {
 				for (SubProfile p : c.SubProfiles()) {
@@ -442,7 +442,7 @@ public class CustomizeFragment extends Fragment {
 			}
 
 		} else {
-			subProfiles = guard.selected().SubProfiles();
+			subProfiles = guard.getChild().SubProfiles();
 		}
 
 		for (SubProfile subProfile : subProfiles) {
@@ -537,10 +537,9 @@ public class CustomizeFragment extends Fragment {
 		saveButton = (Button) getActivity().findViewById(R.id.customize_save);
 		saveButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				currSubP.save(preSubP);
+				TimerLoader.subProfileID = currSubP.save(preSubP);
 				guard.publishList().get(TimerLoader.profilePosition).select();
 				
-				TimerLoader.subProfileID = preSubP.getId();
 				SubProfileFragment spf = (SubProfileFragment) getFragmentManager().findFragmentById(R.id.subprofileFragment);
 				spf.reloadSubProfiles();
 			}
@@ -643,6 +642,7 @@ public class CustomizeFragment extends Fragment {
 
 			public void onClick(View v) {
 				currSubP.addLastUsed(preSubP);
+				currSubP.select();
 				Intent i = new Intent(getActivity().getApplicationContext(),
 						OpenGLActivity.class);
 				startActivity(i);
