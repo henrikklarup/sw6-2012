@@ -60,7 +60,7 @@ public class SubProfileAdapter extends ArrayAdapter<SubProfile> {
 				
 			}
 			if(tvName != null){
-				tvName.setText(sp.getId() + sp._name);
+				tvName.setText(sp._name);
 			}
 			if(tvDesc != null){
 				tvDesc.setText(sp._desc);

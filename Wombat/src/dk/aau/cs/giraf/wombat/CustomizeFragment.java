@@ -568,7 +568,7 @@ public class CustomizeFragment extends Fragment {
 	private void initSaveButton() {
 		saveButton = (Button) getActivity().findViewById(R.id.customize_save);
 		Drawable d;
-		if (currSubP.getSave()) {
+		if (currSubP.getSave() && !currSubP.getLock()) {
 			d = getResources().getDrawable(R.drawable.thumbnail_save);
 			saveButton.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
@@ -722,7 +722,9 @@ public class CustomizeFragment extends Fragment {
 					currSubP.select();
 					Intent i = new Intent(
 							getActivity().getApplicationContext(),
-							OpenGLActivity.class);
+							// TODO: Change according to openGL or canvas
+//							OpenGLActivity.class);
+							DrawActivity.class);
 					startActivity(i);
 				}
 			});
@@ -754,6 +756,7 @@ public class CustomizeFragment extends Fragment {
 
 		/* Set Style */
 		selectStyle(currSubP.formType());
+		
 		/* Set Time */
 		setTime(currSubP._totalTime);
 
