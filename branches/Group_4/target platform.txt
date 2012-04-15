@@ -1,0 +1,18 @@
+\section{Target Platform}
+In this learning project we have been imposed to develop applications for children with autism using the android platform[http://sict.moodle.aau.dk/file.php/628/SW6Android2012.pdf]. 
+
+Android is an open-source platform developed for mobile devices and it is maintained by the \textit{Open Handset Alliance}(OHA), which is led by Google. Many companies are a part of the OHA, these companies contribute to the development with engineering resources. 
+
+The android platform implements the \textit{principle of least privilege}. This means that each application has access only to the components, which is required for it to run.
+This makes the android platform a very secure environment, because an application cannot acces parts of the system, which it is not intended to / given permission to. The permissions are granted at install time.
+Another force of the android platform is that any application can start another application's component. This makes it possible to utilize parts of other applications to for instance take a picture.
+
+
+http://source.android.com/about/philosophy.html
+
+// GLEM DETTE
+The android platform consists of several components which can be seen in figure (http://developer.android.com/images/system-architecture.jpg <-- billede url).
+
+The linux kernel is the abstraction layer between the hardware and the software. The android runtime layer is
+
+The reason android is imposed is that each android application has its own virtual machine, and therefore the application runs isolated from other applications. Although all applications runs isolated, each application can still benefit 
