@@ -27,6 +27,12 @@
             android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen">
         </activity>
         
+        <activity
+            android:name=".DrawActivity"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen">
+        </activity>
+        
     </application>
 
 </manifest>
