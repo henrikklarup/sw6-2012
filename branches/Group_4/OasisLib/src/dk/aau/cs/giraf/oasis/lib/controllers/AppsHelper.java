@@ -21,6 +21,11 @@ import dk.aau.cs.giraf.oasis.lib.models.Profile;
 public class AppsHelper {
 
 	private static Context _context;
+	private String[] columns = new String[] { 
+			AppsMetaData.Table.COLUMN_ID, 
+			AppsMetaData.Table.COLUMN_NAME,
+			AppsMetaData.Table.COLUMN_VERSION};
+
 	/**
 	 * Constructor
 	 * @param context Current context
@@ -29,43 +34,32 @@ public class AppsHelper {
 		_context = context;
 	}
 
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//METHODS TO CALL
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * Clear applications table
+	 */
+	public void clearAppsTable() {
+		_context.getContentResolver().delete(AppsMetaData.CONTENT_URI, null, null);
+	}
+
 	/**
 	 * Insert app
 	 * @param app Application containing data
 	 */
 	public void insertApp(App app) {
 		ContentValues cv = getContentValues(app);
-		getContext().getContentResolver().insert(AppsMetaData.CONTENT_URI, cv);
-//		_context.getContentResolver().insert(AppsMetaData.CONTENT_URI, cv);
+		_context.getContentResolver().insert(AppsMetaData.CONTENT_URI, cv);
 	}
-	
-	
+
 	public int attachAppToProfile(App app, Profile profile) {
-			ContentValues values = new ContentValues();
-			values.put(ListOfAppsMetaData.Table.COLUMN_IDAPP, app.getId());
-			values.put(ListOfAppsMetaData.Table.COLUMN_IDPROFILE, profile.getId());
-			_context.getContentResolver().insert(ListOfAppsMetaData.CONTENT_URI, values);
-			return 0;
-	}
-	
-	public List<App> getAppsByChild(Profile child) {
-		List<App> apps = new ArrayList<App>();
-		String[] ListOfAppsColums = {ListOfAppsMetaData.Table.COLUMN_IDAPP, ListOfAppsMetaData.Table.COLUMN_IDPROFILE}; 
-		Cursor c = _context.getContentResolver().query(ListOfAppsMetaData.CONTENT_URI, ListOfAppsColums, ListOfAppsColums[0] + " = '" + child.getId() + "'", null, null);
-		
-		if (c != null) {
-			if (c.moveToFirst()) {
-				while (!c.isAfterLast()) {
-					App app = getAppById(c.getLong(c.getColumnIndex(ListOfAppsColums[1])));
-					apps.add(app);
-					c.moveToNext();
-				}
-			}
-		}
-		
-		c.close();
-		
-		return apps;
+		ContentValues values = new ContentValues();
+		values.put(ListOfAppsMetaData.Table.COLUMN_IDAPP, app.getId());
+		values.put(ListOfAppsMetaData.Table.COLUMN_IDPROFILE, profile.getId());
+		_context.getContentResolver().insert(ListOfAppsMetaData.CONTENT_URI, values);
+		return 0;
 	}
 
 	/**
@@ -76,49 +70,6 @@ public class AppsHelper {
 		Uri uri = ContentUris.withAppendedId(AppsMetaData.CONTENT_URI, app.getId());
 		ContentValues cv = getContentValues(app);
 		_context.getContentResolver().update(uri, cv, null, null);
-	}
-	
-	/*
-	public List<App> getAppsByProfile(Profile profile) {
-		List<App> apps = new ArrayList<App>();
-		
-		
-		return apps;
-	}
-	*/
-	
-	/**
-	 * Get application by id
-	 * @param id the id of the application
-	 * @return the application or null
-	 */
-	public App getAppById(long id) {
-		Uri uri = ContentUris.withAppendedId(AppsMetaData.CONTENT_URI, id);
-		Cursor c = _context.getContentResolver().query(uri, columns, null, null, null);
-		App app = null;
-		
-		if(c.moveToFirst()) {
-			app = cursorToApp(c); 
-		}
-		
-		c.close();
-		return app;
-	}
-
-
-	/**
-	 * Gets all application with the specified name
-	 * @param name the name of the application
-	 * @return List<App>, containing all apps with the specific name
-	 */
-	public List<App> getAppsByName(String name) {
-		List<App> apps = new ArrayList<App>();
-		Cursor c = _context.getContentResolver().query(Uri.withAppendedPath(AppsMetaData.CONTENT_URI, name) , columns, null, null, null);
-
-		apps = cursorToAppList(c);
-		c.close();
-
-		return apps; 
 	}
 
 	/**
@@ -135,12 +86,62 @@ public class AppsHelper {
 		return apps;
 	}
 
-	/**
-	 * Clear applications table
-	 */
-	public void clearAppsTable() {
-		_context.getContentResolver().delete(AppsMetaData.CONTENT_URI, null, null);
+	public List<App> getAppsByProfile(Profile profile) {
+		List<App> apps = new ArrayList<App>();
+		String[] ListOfAppsColums = {ListOfAppsMetaData.Table.COLUMN_IDAPP, ListOfAppsMetaData.Table.COLUMN_IDPROFILE}; 
+		Cursor c = _context.getContentResolver().query(ListOfAppsMetaData.CONTENT_URI, ListOfAppsColums, ListOfAppsColums[0] + " = '" + profile.getId() + "'", null, null);
+
+		if (c != null) {
+			if (c.moveToFirst()) {
+				while (!c.isAfterLast()) {
+					App app = getAppById(c.getLong(c.getColumnIndex(ListOfAppsColums[1])));
+					apps.add(app);
+					c.moveToNext();
+				}
+			}
+		}
+
+		c.close();
+
+		return apps;
 	}
+
+	/**
+	 * Get application by id
+	 * @param id the id of the application
+	 * @return the application or null
+	 */
+	public App getAppById(long id) {
+		Uri uri = ContentUris.withAppendedId(AppsMetaData.CONTENT_URI, id);
+		Cursor c = _context.getContentResolver().query(uri, columns, null, null, null);
+		App app = null;
+
+		if(c.moveToFirst()) {
+			app = cursorToApp(c); 
+		}
+
+		c.close();
+		return app;
+	}
+
+	/**
+	 * Gets all application with the specified name
+	 * @param name the name of the application
+	 * @return List<App>, containing all apps with the specific name
+	 */
+	public List<App> getAppsByName(String name) {
+		List<App> apps = new ArrayList<App>();
+		Cursor c = _context.getContentResolver().query(Uri.withAppendedPath(AppsMetaData.CONTENT_URI, name) , columns, null, null, null);
+
+		apps = cursorToAppList(c);
+		c.close();
+
+		return apps; 
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//PRIVATE METHODS - Keep out!
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * Cursor to app
@@ -172,7 +173,7 @@ public class AppsHelper {
 
 		return apps;
 	}
-	
+
 	/**
 	 * @param app the app to put in the database
 	 * @return the contentValues
@@ -181,22 +182,7 @@ public class AppsHelper {
 		ContentValues contentValues = new ContentValues();
 		contentValues.put(AppsMetaData.Table.COLUMN_NAME, app.getName());
 		contentValues.put(AppsMetaData.Table.COLUMN_VERSION, app.getVersion());
-		
+
 		return contentValues;
-	}
-	
-	/**
-	 * @return the columns of the table
-	 */
-		String[] columns = new String[] { 
-				AppsMetaData.Table.COLUMN_ID, 
-				AppsMetaData.Table.COLUMN_NAME,
-				AppsMetaData.Table.COLUMN_VERSION};
-	
-	/**
-	 * @return the context
-	 */
-	private Context getContext() {
-		return _context;
 	}
 }

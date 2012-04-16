@@ -36,6 +36,28 @@ public class ProfilesHelper {
 		AuthUsersHelper au = new AuthUsersHelper(_context);
 	}
 
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//METHODS TO CALL
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * Clear profiles table
+	 */
+	public void clearProfilesTable() {
+		_context.getContentResolver().delete(ProfilesMetaData.CONTENT_URI, null, null);
+	}
+	
+	public int removeChildAttachmentToGuardian(Profile child, Profile guardian) {
+		if (child.getPRole() != 3 || guardian.getPRole() != 1 || guardian.getPRole() != 2) {
+			return -1;
+		} else {
+			_context.getContentResolver().delete(HasGuardianMetaData.CONTENT_URI, 
+					HasGuardianMetaData.Table.COLUMN_IDCHILD + " = '" + child.getId() + "'" +
+							HasGuardianMetaData.Table.COLUMN_IDGUARDIAN + " = '" + guardian.getId() + "'", null);
+			return 0;
+		}
+	}
+	
 	/**
 	 * Insert profile
 	 * @param profile Profile containing data
@@ -69,7 +91,19 @@ public class ProfilesHelper {
 
 		return -1;
 	}
-
+	
+	public int attachChildToGuardian(Profile child, Profile guardian) {
+		if (child.getPRole() != 3 || guardian.getPRole() != 1 || guardian.getPRole() != 2) {
+			return -1;
+		} else {
+			ContentValues values = new ContentValues();
+			values.put(HasGuardianMetaData.Table.COLUMN_IDCHILD, child.getId());
+			values.put(HasGuardianMetaData.Table.COLUMN_IDGUARDIAN, guardian.getId());
+			_context.getContentResolver().insert(HasGuardianMetaData.CONTENT_URI, values);
+			return 0;
+		}
+	}
+	
 	/**
 	 * Modify profile
 	 * @param profile Profile containing data to modify
@@ -78,13 +112,6 @@ public class ProfilesHelper {
 		Uri uri = ContentUris.withAppendedId(ProfilesMetaData.CONTENT_URI, profile.getId());
 		ContentValues cv = getContentValues(profile);
 		_context.getContentResolver().update(uri, cv, null, null);
-	}
-
-	/**
-	 * Clear profiles table
-	 */
-	public void clearProfilesTable() {
-		_context.getContentResolver().delete(ProfilesMetaData.CONTENT_URI, null, null);
 	}
 
 	/**
@@ -100,18 +127,18 @@ public class ProfilesHelper {
 				AuthUsersMetaData.Table.COLUMN_CERTIFICATE,
 				AuthUsersMetaData.Table.COLUMN_ROLE};
 		Cursor c = _context.getContentResolver().query(AuthUsersMetaData.CONTENT_URI, authColumns, null, new String[] {certificate}, null);
-		
+
 		if(c != null) {
 			if(c.moveToFirst()) {
 				profile = getProfileById(c.getLong(c.getColumnIndex(AuthUsersMetaData.Table.COLUMN_ID)));
 			}
 		}
-		
+
 		c.close();
 
 		return profile;
 	}
-	
+
 	/**
 	 * Set a new certificate
 	 * @param certificate the certificate to set
@@ -120,10 +147,27 @@ public class ProfilesHelper {
 	 */
 	public int setCertificate(String certificate, Profile profile) {
 		Uri uri = ContentUris.withAppendedId(AuthUsersMetaData.CONTENT_URI, profile.getId());
-		
+
 		ContentValues cv = new ContentValues();
 		cv.put(AuthUsersMetaData.Table.COLUMN_CERTIFICATE, certificate);
 		return _context.getContentResolver().update(uri, cv, null, null);
+	}
+	
+	/**
+	 * Get all profiles
+	 * @return List<Profile>, containing all profiles
+	 */
+	public List<Profile> getProfiles() {
+		List<Profile> profiles = new ArrayList<Profile>();
+		Cursor c = _context.getContentResolver().query(ProfilesMetaData.CONTENT_URI, columns, null, null, null);
+
+		if (c != null) {
+			profiles = cursorToProfiles(c);
+		}
+
+		c.close();
+
+		return profiles;
 	}
 
 	/**
@@ -152,15 +196,15 @@ public class ProfilesHelper {
 		}
 
 		c.close();
-		
+
 		return certificate;
 	}
-	
+
 	public List<Profile> getChildrenByDepartment(Department department) {
 		List<Profile> profiles = new ArrayList<Profile>();
 		String[] hasDepartmentColumns = {HasDepartmentMetaData.Table.COLUMN_IDPROFILE, HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT}; 
 		Cursor c = _context.getContentResolver().query(HasDepartmentMetaData.CONTENT_URI, hasDepartmentColumns,	hasDepartmentColumns[1] + " = '" + department.getId() + "'", null, null);
-		
+
 		if (c != null) {
 			if (c.moveToFirst()) {
 				while (!c.isAfterLast()) {
@@ -172,17 +216,17 @@ public class ProfilesHelper {
 				}
 			}
 		}
-		
+
 		c.close();
-		
+
 		return profiles;
 	}
-	
+
 	public List<Profile> getChildrenByGuardian(Profile guardian) {
 		List<Profile> profiles = new ArrayList<Profile>();
 		String[] hasGuardianColumns = {HasGuardianMetaData.Table.COLUMN_IDGUARDIAN, HasGuardianMetaData.Table.COLUMN_IDCHILD}; 
 		Cursor c = _context.getContentResolver().query(HasGuardianMetaData.CONTENT_URI, hasGuardianColumns, hasGuardianColumns[0] + " = '" + guardian.getId() + "'", null, null);
-		
+
 		if (c != null) {
 			if (c.moveToFirst()) {
 				while (!c.isAfterLast()) {
@@ -192,17 +236,17 @@ public class ProfilesHelper {
 				}
 			}
 		}
-		
+
 		c.close();
-		
+
 		return profiles;
 	}
-	
+
 	public List<Profile> getGuardiansByDepartment(Department department) {
 		List<Profile> profiles = new ArrayList<Profile>();
 		String[] hasDepartmentColumns = {HasDepartmentMetaData.Table.COLUMN_IDPROFILE, HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT}; 
 		Cursor c = _context.getContentResolver().query(HasGuardianMetaData.CONTENT_URI, hasDepartmentColumns, hasDepartmentColumns[1] + " = '" + department.getId() + "'", null, null);
-		
+
 		if (c != null) {
 			if (c.moveToFirst()) {
 				while (!c.isAfterLast()) {
@@ -214,9 +258,9 @@ public class ProfilesHelper {
 				}
 			}
 		}
-		
+
 		c.close();
-		
+
 		return profiles;
 	}
 
@@ -234,51 +278,15 @@ public class ProfilesHelper {
 				return cursorToProfile(c);
 			}
 		}
-		
+
 		c.close();
 
 		return null;
 	}
 
-	/**
-	 * Get all profiles
-	 * @return List<Profile>, containing all profiles
-	 */
-	public List<Profile> getProfiles() {
-		List<Profile> profiles = new ArrayList<Profile>();
-		Cursor c = _context.getContentResolver().query(ProfilesMetaData.CONTENT_URI, columns, null, null, null);
-
-		if (c != null) {
-			profiles = cursorToProfiles(c);
-		}
-
-		c.close();
-
-		return profiles;
-	}
-	
-	public int attachChildToGuardian(Profile child, Profile guardian) {
-		if (child.getPRole() != 3 || guardian.getPRole() != 1 || guardian.getPRole() != 2) {
-			return -1;
-		} else {
-			ContentValues values = new ContentValues();
-			values.put(HasGuardianMetaData.Table.COLUMN_IDCHILD, child.getId());
-			values.put(HasGuardianMetaData.Table.COLUMN_IDGUARDIAN, guardian.getId());
-			_context.getContentResolver().insert(HasGuardianMetaData.CONTENT_URI, values);
-			return 0;
-		}
-	}
-	
-	public int removeChildAttachmentToGuardian(Profile child, Profile guardian) {
-		if (child.getPRole() != 3 || guardian.getPRole() != 1 || guardian.getPRole() != 2) {
-			return -1;
-		} else {
-			_context.getContentResolver().delete(HasGuardianMetaData.CONTENT_URI, 
-					HasGuardianMetaData.Table.COLUMN_IDCHILD + " = '" + child.getId() + "'" +
-					HasGuardianMetaData.Table.COLUMN_IDGUARDIAN + " = '" + guardian.getId() + "'", null);
-			return 0;
-		}
-	}
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//PRIVATE METHODS - Keep out!
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * Cursor to profiles
@@ -294,7 +302,7 @@ public class ProfilesHelper {
 				cursor.moveToNext();
 			}
 		}
-		
+
 
 		return profiles;
 	}
@@ -335,14 +343,14 @@ public class ProfilesHelper {
 	}
 
 	private String[] columns = new String[] { 
-				ProfilesMetaData.Table.COLUMN_ID, 
-				ProfilesMetaData.Table.COLUMN_FIRST_NAME,
-				ProfilesMetaData.Table.COLUMN_SUR_NAME,
-				ProfilesMetaData.Table.COLUMN_MIDDLE_NAME,
-				ProfilesMetaData.Table.COLUMN_ROLE,
-				ProfilesMetaData.Table.COLUMN_PHONE,
-				ProfilesMetaData.Table.COLUMN_PICTURE,
-				ProfilesMetaData.Table.COLUMN_SETTINGS};
+			ProfilesMetaData.Table.COLUMN_ID, 
+			ProfilesMetaData.Table.COLUMN_FIRST_NAME,
+			ProfilesMetaData.Table.COLUMN_SUR_NAME,
+			ProfilesMetaData.Table.COLUMN_MIDDLE_NAME,
+			ProfilesMetaData.Table.COLUMN_ROLE,
+			ProfilesMetaData.Table.COLUMN_PHONE,
+			ProfilesMetaData.Table.COLUMN_PICTURE,
+			ProfilesMetaData.Table.COLUMN_SETTINGS};
 
 	/**
 	 * @return a certificate
