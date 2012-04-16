@@ -2,6 +2,8 @@ package dk.aau.cs.giraf.parrot;
 
 
 
+import java.io.File;
+import java.lang.reflect.Field;
 import java.util.List;
 
 import dk.aau.cs.giraf.oasis.lib.Helper;
@@ -14,16 +16,26 @@ import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.provider.ContactsContract.Directory;
 import android.widget.GridView;
 
 
 public class PARROTActivity extends Activity {
+	
+	private PARROTProfile parrotUser;
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		PARROTProfile parrotUser = loadProfile();
+		//PARROTProfile parrotUser = loadProfile();	
+		
+		//TODO replace the temp lines with the above line
+		Pictogram tempPic= new Pictogram("Koala", getExternalFilesDir(null)+"/Pictures/005.jpg", null, null);//005
+		parrotUser = new PARROTProfile("tempNiels", tempPic);
+		Category tempCat = new Category(0);
+		tempCat.addPictogram(tempPic);
+		tempCat.addPictogram(tempPic);
 
 
 
@@ -55,6 +67,11 @@ public class PARROTActivity extends Activity {
 		// TODO Auto-generated method stub
 		AudioPlayer.open();
 		super.onResume();
+	}
+	
+	public PARROTProfile getUser()
+	{
+		return parrotUser;
 	}
 
 	public PARROTProfile loadProfile()

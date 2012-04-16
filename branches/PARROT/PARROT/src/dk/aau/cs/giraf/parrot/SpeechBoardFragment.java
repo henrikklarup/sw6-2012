@@ -21,8 +21,6 @@ public class SpeechBoardFragment extends Fragment
 	public void onAttach(Activity activity) 
 	{
 		super.onAttach(activity);
-
-
 		Category cat = null; //Dummy TODO FIXME
 		GridView gridview = (GridView) activity.findViewById(R.id.pictogramgrid);
 		gridview.setAdapter(new PictogramAdapter(cat, activity));
