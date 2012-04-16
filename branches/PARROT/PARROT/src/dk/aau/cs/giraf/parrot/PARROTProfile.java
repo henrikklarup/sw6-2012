@@ -14,10 +14,10 @@ public class PARROTProfile {
 	private ArrayList<Category> categories;
 	//TODO add settings such as colour specification and others...
 	
-	public PARROTProfile(String newName, Pictogram pic)
+	public PARROTProfile(String name, Pictogram icon)
 	{
-		this.setName(newName);
-		this.setIcon(pic);
+		this.setName(name);
+		this.setIcon(icon);
 	}
 
 	public ArrayList<Category> getCategories() {
