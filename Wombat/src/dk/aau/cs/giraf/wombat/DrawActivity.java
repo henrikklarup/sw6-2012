@@ -19,6 +19,9 @@ public class DrawActivity extends Activity {
 		case DigitalClock:
 			setContentView(new DrawDigital(getApplicationContext()));
 			break;
+		case Hourglass:
+			setContentView(new DrawHourglass(getApplicationContext()));
+			break;
 		default:
 			break;
 		}
