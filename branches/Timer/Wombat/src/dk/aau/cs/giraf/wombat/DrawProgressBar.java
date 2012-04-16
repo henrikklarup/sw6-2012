@@ -55,7 +55,7 @@ public class DrawProgressBar extends View {
 		/* Draw the frame of the progressbar */
 		paint.setAntiAlias(true);
 		paint.setColor(frame);
-
+		
 		left = (c.getWidth() - width) / 2;
 		top = (c.getHeight() - height) / 2;
 

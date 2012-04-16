@@ -49,6 +49,13 @@
             android:textColor="@android:color/white"
             android:textSize="30dip" />
 
+        <Button 
+        android:id="@+id/new_template_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/new_template_button_text"
+        />
+        
         <fragment
             android:id="@+id/subprofileFragment"
             android:layout_width="match_parent"
