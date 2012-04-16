@@ -69,4 +69,14 @@
     <servlet-name>editProfile3</servlet-name>
     <url-pattern>/editProfile3</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SelectProfile</display-name>
+    <servlet-name>SelectProfile</servlet-name>
+    <servlet-class>SelectProfile</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SelectProfile</servlet-name>
+    <url-pattern>/SelectProfile</url-pattern>
+  </servlet-mapping>
 </web-app>

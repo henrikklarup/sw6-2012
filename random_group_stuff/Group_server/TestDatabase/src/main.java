@@ -25,7 +25,7 @@ import org.apache.catalina.Session;
 public class main extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	HttpSession session;
-	
+
 	String firstname = "";
 	String middlename = "";
 	String lastname = "";
@@ -33,16 +33,16 @@ public class main extends HttpServlet {
 	String deptname = "";
 	String userType = "";
 	String userMessage = "";
-	
+
 	String testString = "";
-	
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public main() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public main() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -50,21 +50,21 @@ public class main extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.setContentType("text/html");
-		
+
 		session = request.getSession();
-		
-		
+
+
 		String user = (String) session.getAttribute("USER");
 		String userId = (String) session.getAttribute("ID");
 		userMessage = (String) session.getAttribute("MESSAGETOUSER");
 		session.removeAttribute("MESSAGETOUSER");
-		
+
 		if (user == null)
 		{
 			response.sendRedirect("TestDatabase");
 		}
-		
-		
+
+
 		// connecting to database
 		Connection con = null;  
 		Statement stmt = null;
@@ -130,21 +130,21 @@ public class main extends HttpServlet {
 
 			}
 		}
-		
+
 		String topText = "";
 		if (userType.equals("0"))
-			topText = firstname + " " + middlename + " " + lastname + "!" + "<br>" + phone + "<br> <b>" + "Admin" + "</b>";
+			topText = "<h3>"+firstname + " " + middlename + " " + lastname + "!" + "<br>" + phone + "<br> <b>" + "Admin" + "</h3></b>";
 		else if (userType.equals("1"))
-			topText = firstname + " " + middlename + " " + lastname + "!" + "<br>" + phone + "<br>" + "Pædagog hos " + deptname;
-		
+			topText = "<h3>"+firstname + " " + middlename + " " + lastname + "!" + "<br>" + phone + "<br>" + "Pædagog hos " + deptname +"</h3>";
+
 		session.setAttribute("topText", topText);
-		
+
 		PrintWriter out = response.getWriter();
 		out.println("<html>");
 		out.println("<head>");
-		out.println("<title>Savannah 1.0  - Logget ind som " + user + "</title>");
+		out.println("<title>Savannah 1.0  - Logget ind som " + userId + "</title>");
 		out.println("<script src=\"javascript/popup.js\">"+
-		"</script>"); 
+				"</script>"); 
 		out.println("<link rel='stylesheet' type='text/css' href='CSS/SavannahStyle.css' />");
 		out.println("</head>");
 		out.println("<body>" + testString);
@@ -152,71 +152,74 @@ public class main extends HttpServlet {
 		out.println("<div id=\"mainsiteTop\">");
 		out.println("<img src=\"images/i.jpg\" width=\"150\" height=\"100\" style=\"float:left;margin:0 5px 0 0;\">");
 		out.println(topText);
+		if(session.getAttribute("LOGGEDINAS")!= null)
+			out.println("<h6>Logged ind som: " +session.getAttribute("LOGGEDINAS")+"</h6>");
+
 		out.println("</div>");
-		
+
 		out.println("<hr color=\"Black\" size=\"2\">");
 		out.println("<img src=\"images/homeicon.png\">Hjem");
 		out.println("<hr color=\"Black\" size=\"2\">");
-		
-		out.println("<div id=\"my_wrapper\">");
-			out.println("<div id=\"mainsiteMain\">");
-		
-				out.println("<img src=\"images/dummypic.jpg\"> <br> <a href=\"#\" onclick=\"popup('popUpDiv');\">Profil</a> <br>");
-				out.println("<img src=\"images/dummypic.jpg\"> <br> Indstillinger <br>");
-				out.println("<img src=\"images/dummypic.jpg\"> <br> Statestik <br>");
-			out.println("</div>");
 
-			// out.println("<div id=\"mainMessage\">");
-			//	out.println(userMessage);
-			// out.println("</div>");
-			
-		
-		
-		
-			out.println("<div id=\"logoutAlign\">");
-			if (userMessage == null) 
-				userMessage = ".";
-			
-				out.println(userMessage + "<a style=\"float:right\"  href=\"#\" onClick=\"document.logoutForm.submit()\" >Logout</a>"); //"<input type='submit' value='Logout'>\n");
-				out.println("</div>");
-			out.println("<hr color=\"Black\" size=\"2\">");
-				out.println("<footer> Savannah v. 1.0.0 (C)opyright me!</footer>");
+		out.println("<div id=\"my_wrapper\">");
+		out.println("<div id=\"mainsiteMain\">");
+
+		out.println("<img src=\"images/dummypic.jpg\"> <br> <a href=\"#\" onclick=\"popup('popUpDiv');\">Profil</a> <br>");
+		out.println("<img src=\"images/dummypic.jpg\"> <br> Indstillinger <br>");
+		out.println("<img src=\"images/dummypic.jpg\"> <br> Statestik <br>");
+		out.println("</div>");
+
+		// out.println("<div id=\"mainMessage\">");
+		//	out.println(userMessage);
+		// out.println("</div>");
+
+
+
+
+		out.println("<div id=\"logoutAlign\">");
+		if (userMessage == null) 
+			userMessage = ".";
+
+		out.println(userMessage + "<a style=\"float:right\"  href=\"#\" onClick=\"document.logoutForm.submit()\" >Logout</a>"); //"<input type='submit' value='Logout'>\n");
+		out.println("</div>");
+		out.println("<hr color=\"Black\" size=\"2\">");
+		out.println("<footer> Savannah v. 1.0.0 (C)opyright me!</footer>");
 		//out.println("<form method='POST' action='main'>\n" +
 		//"<input type='hidden' name='Logout'>"+
 		//"<input type='submit' value='Logout'>\n" + "</form>");
-		
-			out.println("</div>");
+
 		out.println("</div>");
-		
+		out.println("</div>");
+
 		out.println("<form method='POST' action='main' name=\"logoutForm\">\n</form>");
-		
+
 		out.println("<div id=\"blanket\" style=\"display:none;\"></div>"+
-		"<div id=\"popUpDiv\" style=\"display:none;\">"+
-		"<P align=\"right\"><a href=\"#\" onclick=\"popup('popUpDiv')\" ALIGN=RIGHT>[X]</a></p>"+
-		"<form method='POST' action='TestDatabase' name='DasForm'>\n" + 
-		"<center>"+
-		"<h3> Vælg handling: </h3>"+
-		"<br>"+
-		"Tilføj  -  <a href=\"editProfile\">Rediger</a>  -  Slet" +
-		"<br>"+
-		"Tilføj  -  <a href=\"editProfile2\">Rediger2</a>  -  Slet" +
-		"<br>"+
-		"Tilføj  -  <a href=\"editProfile3\">Rediger3</a>  -  Slet" +
-		"</center>"+
-		"</div>");
+				"<div id=\"popUpDiv\" style=\"display:none;\">"+
+				"<P align=\"right\"><a href=\"#\" onclick=\"popup('popUpDiv')\" ALIGN=RIGHT>[X]</a></p>"+
+				"<form method='POST' action='TestDatabase' name='DasForm'>\n" + 
+				"<center>"+
+				"<h3> Vælg handling: </h3>"+
+				"<br>"+
+				"Tilføj  -  <a href=\"editProfile\">Rediger</a>  -  Slet" +
+				"<br>"+
+				"Tilføj  -  <a href=\"editProfile2\">Rediger2</a>  -  Slet" +
+				"<br>"+
+				"Tilføj  -  <a href=\"editProfile3\">Rediger3</a>  -  Slet" +
+				"</center>"+
+				"</div>");
 		out.println("</body>");
 		out.println("</html>");
-		
+
 	}
-	
+
 	protected void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		session = request.getSession();
 		PrintWriter out = response.getWriter();
 		out.println("Logger ud... Vent venligst.");
 		session.removeAttribute("USER");
-		
-		
+
+
 		response.setHeader("Refresh", "1");
 	}
 
@@ -228,9 +231,10 @@ public class main extends HttpServlet {
 		session = request.getSession();
 		PrintWriter out = response.getWriter();
 		out.println("Logger ud... Vent venligst.");
-		session.removeAttribute("USER");
+		session.invalidate();
 		
-		
+
+
 		response.setHeader("Refresh", "1");
 	}
 

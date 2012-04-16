@@ -16,8 +16,8 @@ footer
 	margin-right: 200px;
 	background-color: #00CCFA;
 	border-style: solid;
-	width:  = 300px;
-	height:  = 300px;
+	width:  = 600px;
+	height:  = 600px;
 }
 #blanket {
 position:absolute;
@@ -83,7 +83,7 @@ z-index: 9002;
 #mainsiteTop
 {
 	
-	font-size:x-large;
+
 	font-family: sans-serif;
 	text-align: left;
 	width: 100%;

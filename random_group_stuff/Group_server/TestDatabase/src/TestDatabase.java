@@ -34,6 +34,7 @@ public class TestDatabase extends HttpServlet {
 	HttpSession session;
 	private static final long serialVersionUID = 1L;
 	String nextLocation = "";
+	String openVar;
 
 	public void doGet(HttpServletRequest aRequest, 
 			HttpServletResponse aResponse) 
@@ -45,6 +46,9 @@ public class TestDatabase extends HttpServlet {
 		String DBpassword = null;
 		String DBusername = null;
 
+		openVar = aRequest.getParameter("jsOpenVar");
+		if (openVar == null)
+			openVar = "0";
 
 
 		String DBID = "-1";
@@ -149,7 +153,7 @@ public class TestDatabase extends HttpServlet {
 				" </head>");
 		if (triedLogin.equals("1"))
 		{
-			aOutput.println("<body onLoad=\"testThis('profile');popup('popUpDiv');getFocus();\">");
+			aOutput.println("<body onLoad=\"setOpen("+openVar+"); testThis('profile');popup('popUpDiv');getFocus();\">");
 		}
 		else
 		{
@@ -157,9 +161,15 @@ public class TestDatabase extends HttpServlet {
 
 		}		
 		aOutput.println("<div id=\"mainBackground\">");
-		aOutput.println("<center><h2> Velkommen !</h2>");
+		aOutput.println("<center><h2> Velkommen!</h2>");
 		aOutput.println("<br>");
 		aOutput.println("<SCRIPT language = JavaScript> "+
+				"var open = 0;"+
+				"function setOpen(number)"+
+				"{"+
+				"open = number;"+
+				"document.DasForm.jsOpenVar.value = number;"+
+				"}"+
 				"function testThis(link)"+
 				"{"+
 				"document.DasForm.next.value = link"+
@@ -174,16 +184,31 @@ public class TestDatabase extends HttpServlet {
 				"document.DasForm.username.value =\"\";"+
 				"document.DasForm.password.value= \"\";"+
 				"}"+
+				"document.onkeydown = function(e) {"+
+				" e = e || window.event;" +
+				"var keyCode = e.keyCode || e.which;" +
+				//If in login and esc is pressed
+				"if(keyCode == 27 && open == 1) {setOpen(0); testThis('profile');popup('popUpDiv');  clearForm(); }" +
+				//If in add and esc is pressed
+				"if(keyCode == 27 && open == 2) {setOpen(0); popup('popUpPick'); }" +
+				
+				//MainScreen Key presses
+				"if(keyCode == 80 && open == 0) {window.location = \"SelectProfile\"}" + // P = redirect to SelectProfile
+				"if(keyCode == 84 && open == 0) {setOpen(2); popup('popUpPick')}" + //T = show add window											//Nice little feature for waiting 25 ms		
+				" if(keyCode == 76 && open == 0) {setOpen(1); clearForm(); testThis('profile');popup('popUpDiv'); document.DasForm.username.value =\"\"; setTimeout(function(){getFocus();clearForm();}, 25); }" + // L = Show login
+				"}"+
 				"</SCRIPT>");
 		aOutput.println("<hr>");
 		aOutput.println("Vælg handling");
 		aOutput.println("<p>");
-		aOutput.println("<a href=\"#\" onclick=\"testThis('profile');popup('popUpDiv');getFocus();\"><img src=\"images/i.jpg\" ALT=\"test\"></a>");
+		aOutput.println("<a href=\"SelectProfile\"><img src=\"images/i.jpg\" ALT=\"test\"></a>");
 		aOutput.println("<br>");
-		aOutput.println("<a href=\"#\" onclick=\"testThis('profile');popup('popUpDiv');getFocus();\">Profiler</a>");
+		aOutput.println("<a href=\"#\" onclick=\"testThis('profile');popup('popUpDiv');getFocus();\"><b>P</b>rofiler</a>");
 		aOutput.println("<p>");
-		aOutput.println("<a href=\"#\" onclick=\"testThis('profile');popup('popUpPick');getFocus();\">Tilføj</a>  -  Rediger  -  Slet");
+		aOutput.println("<a href=\"#\" onclick=\"popup('popUpPick');\"><b>T</b>ilføj</a>  -  Rediger  -  Slet");
 		aOutput.println("</center>");
+		aOutput.println("<p>");
+		aOutput.println("<a href=\"#\" onclick=\"testThis('profile');popup('popUpDiv');getFocus();\">Hurtig <b>L</b>ogin</a>");
 		aOutput.println("<hr>");
 		aOutput.println("<footer> Savannah v. 1.0.0 (C)opyright me!</footer> </div>");
 		//out.println("<form method='POST' action='main'>\n" +
@@ -192,7 +217,7 @@ public class TestDatabase extends HttpServlet {
 		aOutput.println("" +
 				"<div id=\"blanket\" style=\"display:none;\"></div>"+
 				"<div id=\"popUpDiv\" style=\"display:none;\">"+
-				"<P align=\"right\"><a href=\"#\" onclick=\"popup('popUpDiv')\" ALIGN=RIGHT>[X]</a></p>"+
+				"<P align=\"right\"><a href=\"#\" onclick=\"setOpen(0); popup('popUpDiv')\" ALIGN=RIGHT>[X]</a></p>"+
 				"<form method='POST' action='TestDatabase' name='DasForm'>\n" + 
 				"<center><h3>"+
 				aCaptionText +
@@ -200,24 +225,24 @@ public class TestDatabase extends HttpServlet {
 				"<br>\n" + 
 				"<table border=\"0\">"+
 				"<tr>"+
-				"<td>Brugernavn:<td><input type='text' name='username'><br>\n" +
+				"<td>Brugernavn:<td><input type='text' name='username' autocomplete='off'><br>\n" +
 				"</tr>"+
 				"<tr>"+
 				"<td>Kodeord:<td><input type='password' name='password'><br>\n" +
 				"</tr>"+
 				"<tr>" +
-				"<td><input type='hidden' name='next'><br>\n"+
+				"<td><input type='hidden' name='next'><input type='hidden' name='jsOpenVar'><br>\n"+
 				"</tr>"+
 				"</table>"+
 				//"<tr>"+
-				"<td><input type='submit' value='Login'><td><input type='button' value='Fortryd' onClick=\"clearForm();popup('popUpDiv')\">\n" +
+				"<td><input type='submit' value='Login'><td><input type='button' value='Fortryd' onClick=\"setOpen(0); clearForm();popup('popUpDiv')\">\n" +
 				//"</tr>"+
 				
 				"</center>"+
 				"</div>");
 		aOutput.println("<div id=\"blanket\" style=\"display:none;\"></div>"+
 		"<div id=\"popUpPick\" style=\"display:none;\">"+
-		"<P align=\"right\"><a href=\"#\" onclick=\"popup('popUpPick')\" ALIGN=RIGHT>[X]</a></p>"+
+		"<P align=\"right\"><a href=\"#\" onclick=\"setOpen(2);popup('popUpPick')\" ALIGN=RIGHT>[X]</a></p>"+
 		"<form method='POST' action='TestDatabase' name='DasForm'>\n" + 
 		"<center><h3>"+
 		"Tilføj:"+
