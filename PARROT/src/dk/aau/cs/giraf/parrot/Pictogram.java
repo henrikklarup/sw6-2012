@@ -1,8 +1,5 @@
 package dk.aau.cs.giraf.parrot;
 
-import sw6.digipecs.exceptions.ImageIsEmptyException;
-import sw6.digipecs.exceptions.SoundNotFoundException;
-import sw6.digipecs.helpers.AudioPlayer;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.widget.ImageView;

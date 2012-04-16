@@ -21,21 +21,31 @@ public class SpeechBoardFragment extends Fragment
 	public void onAttach(Activity activity) 
 	{
 		super.onAttach(activity);
-		Category cat = null; //Dummy TODO FIXME
-		GridView gridview = (GridView) activity.findViewById(R.id.pictogramgrid);
-		gridview.setAdapter(new PictogramAdapter(cat, activity));
 
-		gridview.setOnItemLongClickListener(new OnItemLongClickListener()
+		//FIXME this might be VERY wrong
+		PARROTActivity prt = (PARROTActivity) activity;
+		PARROTProfile user=prt.getUser();
+		if(user.getCategoryAt(0)!=null)
 		{
+			Category cat = user.getCategoryAt(0); //Dummy TODO FIXME
 
-			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,int arg2, long arg3)
+
+
+			GridView gridview = (GridView) activity.findViewById(R.id.pictogramgrid);
+			gridview.setAdapter(new PictogramAdapter(cat, activity));
+
+			gridview.setOnItemLongClickListener(new OnItemLongClickListener()
 			{
-				//Look At DndActivity for inspiration
-				return false;
-			}
+
+				public boolean onItemLongClick(AdapterView<?> arg0, View arg1,int arg2, long arg3)
+				{
+					//Look At DndActivity for inspiration
+					return false;
+				}
 
 
-		});
+			});
+		}
 	}
 
 
