@@ -32,14 +32,14 @@ public class GLProgressBar {
 		//bar time spent points - change as time progress - 
 		//0.2f corresponds to 1 minute if the time is set to 60 minutes
 			-12f, 1.6f, //point16 - change x-coordinate
-			8f, 1.6f, //point17
-			8f, -1.6f, //point18
+			7.8f, 1.6f, //point17
+			7.8f, -1.6f, //point18
 			-12f, -1.6f, //point19 - change x-coordinate
-//		//bar time left points 
-//			7.8f, 1.6f, //point20 - change x-coordinate
-//			-12f, 1.6f, //point21
-//			-12f, -1.6f, //point22
-//			7.8f, -1.6f, //point23 - change x-coordinate
+		//bar time left points 
+			8f, 1.6f, //point20 - change x-coordinate alway 0.2 more than time spent
+			12f, 1.6f, //point21
+			12f, -1.6f, //point22
+			8f, -1.6f, //point23 - change x-coordinate alway 0.2 more than time spent
 			
 		};
 		
@@ -60,11 +60,32 @@ public class GLProgressBar {
 				//time spent
 				16,17,18,
 				18,19,16,
-//				//time left
-//				20,21,22,
-//				22,23,10,
-				
+				//time left
+				20,21,22,
+				22,23,20,
 			}; // holder de specifikke punkter. Der er 3 punkter i en trekant
+		
+		//farver
+		private float rgbaVals[] = {
+				1, 1, 1, 0,
+				1, 1, 1, 0,
+				1, 1, 1, 0,
+				1, 1, 1, 0,
+				1, 1, 1, 0,
+				1, 1, 1, 0,
+				1, 1, 1, 0,
+				1, 1, 1, 0,
+				1, 1, 1, 0,
+				1, 1, 1, 0,
+				1, 1, 1, 0,
+				1, 1, 1, 0,
+				1, 1, 1, 0,
+				1, 1, 1, 0,
+				1, 1, 1, 0,
+				1, 1, 1, 0,
+			};
+	
+		private FloatBuffer colorBuff;
 		private ShortBuffer pBuff;
 		
 		public GLProgressBar(){
@@ -79,13 +100,23 @@ public class GLProgressBar {
 			pBuff = pbBuff.asShortBuffer();
 			pBuff.put(pIndex);
 			pBuff.position(0);
+			
+			// farve-buffer
+			ByteBuffer cBuff = ByteBuffer.allocateDirect(rgbaVals.length * 4);
+			cBuff.order(ByteOrder.nativeOrder());
+			colorBuff = cBuff.asFloatBuffer();
+			colorBuff.put(rgbaVals);
+			colorBuff.position(0);
 		}
 		
 		public void draw(GL10 gl){
 			gl.glFrontFace(GL10.GL_CW); //clock-wise - fronten mod os/mod skærmen
 			gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
+			gl.glEnableClientState(GL10.GL_COLOR_ARRAY); //enable color array
 			gl.glVertexPointer(2, GL10.GL_FLOAT, 0, vertBuff);
+			gl.glColorPointer(4, GL10.GL_FLOAT, 0, colorBuff); //enable color pointer
 			gl.glDrawElements(GL10.GL_TRIANGLES, pIndex.length, GL10.GL_UNSIGNED_SHORT, pBuff);
 			gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);
+			gl.glDisableClientState(GL10.GL_COLOR_ARRAY);
 		};
 }
