@@ -25,6 +25,12 @@ import dk.aau.cs.giraf.oasis.lib.models.Profile;
 public class DepartmentsHelper {
 
 	private static Context _context;
+	private String[] columns = new String[] { 
+			DepartmentsMetaData.Table.COLUMN_ID,
+			DepartmentsMetaData.Table.COLUMN_NAME,
+			DepartmentsMetaData.Table.COLUMN_ADDRESS,
+			DepartmentsMetaData.Table.COLUMN_PHONE,
+			DepartmentsMetaData.Table.COLUMN_EMAIL};
 
 	/**
 	 * Constructor
@@ -32,6 +38,32 @@ public class DepartmentsHelper {
 	 */
 	public DepartmentsHelper(Context context) {
 		_context = context;
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//METHODS TO CALL
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * Clear department table
+	 */
+	public void clearDepartmentsTable() {
+		_context.getContentResolver().delete(DepartmentsMetaData.CONTENT_URI,
+				null, null);
+	}
+
+	public int removeProfileAttachmentToDepartment(Profile profile, Department department) {
+		_context.getContentResolver().delete(HasDepartmentMetaData.CONTENT_URI, 
+				HasDepartmentMetaData.Table.COLUMN_IDPROFILE + " = '" + profile.getId() + "'" +
+						HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + department.getId() + "'", null);
+		return 0;
+	}
+
+	public int removeSubDepartmentAttachmentToDepartment(Department department, Department subDepartment) {
+		_context.getContentResolver().delete(HasSubDepartmentMetaData.CONTENT_URI, 
+				HasSubDepartmentMetaData.Table.COLUMN_IDSUBDEPARTMENT + " = '" + subDepartment.getId() + "'" +
+						HasSubDepartmentMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + department.getId() + "'", null);
+		return 0;
 	}
 
 	/**
@@ -66,7 +98,23 @@ public class DepartmentsHelper {
 		c.close();
 
 		return -1;
-		
+
+	}
+
+	public int attachProfileToDepartment(Profile profile, Department department) {
+		ContentValues values = new ContentValues();
+		values.put(HasDepartmentMetaData.Table.COLUMN_IDPROFILE, profile.getId());
+		values.put(HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT, department.getId());
+		_context.getContentResolver().insert(HasDepartmentMetaData.CONTENT_URI, values);
+		return 0;
+	}
+
+	public int attachSubDepartmentToDepartment(Department department, Department subDepartment) {
+		ContentValues values = new ContentValues();
+		values.put(HasSubDepartmentMetaData.Table.COLUMN_IDSUBDEPARTMENT, subDepartment.getId());
+		values.put(HasSubDepartmentMetaData.Table.COLUMN_IDDEPARTMENT, department.getId());
+		_context.getContentResolver().insert(HasSubDepartmentMetaData.CONTENT_URI, values);
+		return 0;
 	}
 
 	/**
@@ -101,37 +149,7 @@ public class DepartmentsHelper {
 
 		return departments;
 	}
-	
-	public int attachProfileToDepartment(Profile profile, Department department) {
-			ContentValues values = new ContentValues();
-			values.put(HasDepartmentMetaData.Table.COLUMN_IDPROFILE, profile.getId());
-			values.put(HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT, department.getId());
-			_context.getContentResolver().insert(HasDepartmentMetaData.CONTENT_URI, values);
-			return 0;
-	}
-	
-	public int removeProfileAttachmentToDepartment(Profile profile, Department department) {
-			_context.getContentResolver().delete(HasDepartmentMetaData.CONTENT_URI, 
-					HasDepartmentMetaData.Table.COLUMN_IDPROFILE + " = '" + profile.getId() + "'" +
-					HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + department.getId() + "'", null);
-			return 0;
-	}
-	
-	public int attachSubDepartmentToDepartment(Department department, Department subDepartment) {
-			ContentValues values = new ContentValues();
-			values.put(HasSubDepartmentMetaData.Table.COLUMN_IDSUBDEPARTMENT, subDepartment.getId());
-			values.put(HasSubDepartmentMetaData.Table.COLUMN_IDDEPARTMENT, department.getId());
-			_context.getContentResolver().insert(HasSubDepartmentMetaData.CONTENT_URI, values);
-			return 0;
-	}
-	
-	public int removeSubDepartmentAttachmentToDepartment(Department department, Department subDepartment) {
-			_context.getContentResolver().delete(HasSubDepartmentMetaData.CONTENT_URI, 
-					HasSubDepartmentMetaData.Table.COLUMN_IDSUBDEPARTMENT + " = '" + subDepartment.getId() + "'" +
-					HasSubDepartmentMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + department.getId() + "'", null);
-			return 0;
-	}
-	
+
 	public Department getDepartmentById(long id) {
 		Department _department = null;
 		Uri uri = ContentUris.withAppendedId(DepartmentsMetaData.CONTENT_URI, id);
@@ -142,12 +160,12 @@ public class DepartmentsHelper {
 				_department = cursorToDepartment(c);
 			}
 		}
-		
+
 		c.close();
 
 		return _department;
 	}
-	
+
 	public List<Department> getDepartmentByName(String name) {
 		List<Department> departments = new ArrayList<Department>();
 		Cursor c = _context.getContentResolver().query(DepartmentsMetaData.CONTENT_URI, columns, DepartmentsMetaData.Table.COLUMN_NAME + " = '" + name + "'", null, null);
@@ -159,12 +177,12 @@ public class DepartmentsHelper {
 				}
 			}
 		}
-		
+
 		c.close();
-		
+
 		return departments;
 	}
-	
+
 	public List<Department> getSubDepartments(Department department) {
 		List<Department> departments = new ArrayList<Department>();
 		String[] hasDepartmentsColumns = {
@@ -191,20 +209,9 @@ public class DepartmentsHelper {
 		return departments;
 	}
 
-	/**
-	 * Clear department table
-	 */
-	public void clearDepartmentsTable() {
-		_context.getContentResolver().delete(DepartmentsMetaData.CONTENT_URI,
-				null, null);
-	}
-	
-	private String[] columns = new String[] { 
-			DepartmentsMetaData.Table.COLUMN_ID,
-			DepartmentsMetaData.Table.COLUMN_NAME,
-			DepartmentsMetaData.Table.COLUMN_ADDRESS,
-			DepartmentsMetaData.Table.COLUMN_PHONE,
-			DepartmentsMetaData.Table.COLUMN_EMAIL};
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//PRIVATE METHODS - Keep out!
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * Cursor to department
@@ -225,8 +232,8 @@ public class DepartmentsHelper {
 				.getColumnIndex(DepartmentsMetaData.Table.COLUMN_PHONE)));
 		return department;
 	}
-	
-	public ContentValues getContentValues(Department department) {
+
+	private ContentValues getContentValues(Department department) {
 		ContentValues contentValues = new ContentValues();
 		contentValues.put(DepartmentsMetaData.Table.COLUMN_NAME, department.getName());
 		contentValues.put(DepartmentsMetaData.Table.COLUMN_ADDRESS, department.getAddress());
@@ -234,7 +241,7 @@ public class DepartmentsHelper {
 		contentValues.put(DepartmentsMetaData.Table.COLUMN_PHONE, department.getPhone());
 		return contentValues;
 	}
-	
+
 	/**
 	 * @return the certificate
 	 */

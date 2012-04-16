@@ -1,6 +1,7 @@
 package dk.aau.cs.giraf.oasis.lib;
 
 import android.content.Context;
+
 import android.util.Log;
 import dk.aau.cs.giraf.oasis.lib.controllers.AppsHelper;
 import dk.aau.cs.giraf.oasis.lib.controllers.DepartmentsHelper;
