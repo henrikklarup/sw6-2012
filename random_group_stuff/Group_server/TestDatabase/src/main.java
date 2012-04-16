@@ -1,5 +1,8 @@
 
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -60,6 +63,7 @@ public class main extends HttpServlet {
 		{
 			response.sendRedirect("TestDatabase");
 		}
+		
 		
 		// connecting to database
 		Connection con = null;  
@@ -194,6 +198,10 @@ public class main extends HttpServlet {
 		"<h3> Vælg handling: </h3>"+
 		"<br>"+
 		"Tilføj  -  <a href=\"editProfile\">Rediger</a>  -  Slet" +
+		"<br>"+
+		"Tilføj  -  <a href=\"editProfile2\">Rediger2</a>  -  Slet" +
+		"<br>"+
+		"Tilføj  -  <a href=\"editProfile3\">Rediger3</a>  -  Slet" +
 		"</center>"+
 		"</div>");
 		out.println("</body>");

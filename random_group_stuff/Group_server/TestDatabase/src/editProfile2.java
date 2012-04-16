@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class editProfile
  */
-public class editProfile extends HttpServlet {
+public class editProfile2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	HttpSession session;
@@ -37,7 +37,7 @@ public class editProfile extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public editProfile() {
+	public editProfile2() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -268,17 +268,17 @@ public class editProfile extends HttpServlet {
 			out.println("<img src=\"images/smallProfileIcon.png\">Hjem" + " >> ");
 			out.println("<hr color=\"Black\" size=\"2\">");
 
-			out.println("<div id=\"my_wrapper\">");
-			out.println("<div id=\"mainsiteMain\">");
+			//out.println("<div id=\"my_wrapper\">");
+			/*out.println("<div id=\"mainsiteMain\">");
 
 			out.println("<img src=\"images/dummypicSelected.jpg\"> <br>Profil <br>");
 			out.println("<img src=\"images/dummypic.jpg\"> <br> Indstillinger <br>");
 			out.println("<img src=\"images/dummypic.jpg\"> <br> Statestik <br>");
-			out.println("</div>");
-			out.println("<div id=\"profileSite\">");
-			out.println("<center><h2>Rediger profil:</h2></center>");
-			out.println("<hr color=\"Black\" size=\"2\">");
+			out.println("</div>");*/
 			out.println("<center>");
+			out.println("<div id=\"profileSite2\">");
+			out.println("<center><h2>Rediger profil:</h2>");
+			//out.println("<hr color=\"Black\" size=\"2\">");
 			out.println("<p>");
 			out.println("<table border='0'>");
 			out.println("<form method='GET' action='editProfile' name='profileForm'>");
@@ -323,8 +323,10 @@ public class editProfile extends HttpServlet {
 			out.println("</form>");
 			out.println("</center>");
 			out.println("</div>");
+			out.println("</center>");
 
-			out.println("</div>");
+
+
 			out.println("<div id=\"logoutAlign\">");
 			out.println("<form method='POST' action='editProfile' name=\"logoutForm\">\n"+
 					"<P ALIGN=\"right\"> <a  href=\"#\" onClick=\"document.logoutForm.submit()\">Logout</a> <p>"); //"<input type='submit' value='Logout'>\n");
@@ -336,7 +338,7 @@ public class editProfile extends HttpServlet {
 			//"<input type='submit' value='Logout'>\n" + "</form>");
 
 
-			
+			//out.println("</div>");
 			out.println("</body>");
 			out.println("</html>");
 		}

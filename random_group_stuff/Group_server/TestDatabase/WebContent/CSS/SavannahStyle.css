@@ -11,7 +11,9 @@ footer
 }
 
 #mainBackground{
-	margin:50px 50px;
+	border-radius: 15px;
+	margin-left: 200px;
+	margin-right: 200px;
 	background-color: #00CCFA;
 	border-style: solid;
 	width:  = 300px;
@@ -25,7 +27,8 @@ left:0px;
 width:100%;
 }
 #popUpPick {
-position:absolute;
+border-radius: 15px;
+	position:absolute;
 background-color:#eeeeee;
 border-style:solid;
 width:300px;
@@ -35,6 +38,7 @@ z-index: 9002;
 
 }
 #popUpDiv {
+border-radius: 15px;
 position:absolute;
 background-color:#eeeeee;
 border-style:solid;
@@ -63,7 +67,7 @@ z-index: 9002;
 	border:medium;
 	
 	float: left;
-height: 50%;
+    height: 50%;
 	margin-left: 5%;
 	margin-top:  5%;
 	
@@ -91,13 +95,36 @@ height: 50%;
 	
 	margin-top:  2%;
 	float: left;
-	width: 75%;
+	width: 50%;
 	height: 50%;
 	overflow:auto;
-	background-color: red;
+	
 }
 
+#profileSite2
+{	
+	margin-left: 5%;
+	float: none;
+	width: 50%;
+	height: 50%;
+	overflow:auto;
+	
+}
+#profileSite3
+{	
+	border-radius: 15px;
+	border-style:solid;
+	margin-top:  1%;
+	margin-left: 1%;
+	float: left;
+	width: 50%;
+	height: 50%;
+	overflow:auto;
+	
+}
 .rightalign
 {
 	text-align: right;
+}
+
 }

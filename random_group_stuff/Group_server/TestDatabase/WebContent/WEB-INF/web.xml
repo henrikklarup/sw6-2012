@@ -49,4 +49,24 @@
     <servlet-name>editProfile</servlet-name>
     <url-pattern>/editProfile</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>editProfile2</display-name>
+    <servlet-name>editProfile2</servlet-name>
+    <servlet-class>editProfile2</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>editProfile2</servlet-name>
+    <url-pattern>/editProfile2</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>editProfile3</display-name>
+    <servlet-name>editProfile3</servlet-name>
+    <servlet-class>editProfile3</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>editProfile3</servlet-name>
+    <url-pattern>/editProfile3</url-pattern>
+  </servlet-mapping>
 </web-app>
