@@ -27,6 +27,16 @@ public class ProfilesHelper {
 
 
 	private static Context _context;
+	private String[] columns = new String[] { 
+			ProfilesMetaData.Table.COLUMN_ID, 
+			ProfilesMetaData.Table.COLUMN_FIRST_NAME,
+			ProfilesMetaData.Table.COLUMN_SUR_NAME,
+			ProfilesMetaData.Table.COLUMN_MIDDLE_NAME,
+			ProfilesMetaData.Table.COLUMN_ROLE,
+			ProfilesMetaData.Table.COLUMN_PHONE,
+			ProfilesMetaData.Table.COLUMN_PICTURE,
+			ProfilesMetaData.Table.COLUMN_SETTINGS};
+	
 	/**
 	 * Constructor
 	 * @param context Current context
@@ -341,16 +351,6 @@ public class ProfilesHelper {
 
 		return contentValues;
 	}
-
-	private String[] columns = new String[] { 
-			ProfilesMetaData.Table.COLUMN_ID, 
-			ProfilesMetaData.Table.COLUMN_FIRST_NAME,
-			ProfilesMetaData.Table.COLUMN_SUR_NAME,
-			ProfilesMetaData.Table.COLUMN_MIDDLE_NAME,
-			ProfilesMetaData.Table.COLUMN_ROLE,
-			ProfilesMetaData.Table.COLUMN_PHONE,
-			ProfilesMetaData.Table.COLUMN_PICTURE,
-			ProfilesMetaData.Table.COLUMN_SETTINGS};
 
 	/**
 	 * @return a certificate

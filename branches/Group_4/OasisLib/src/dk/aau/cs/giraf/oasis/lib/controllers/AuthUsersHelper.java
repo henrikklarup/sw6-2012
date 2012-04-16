@@ -28,6 +28,10 @@ class AuthUsersHelper {
 	//METHODS TO CALL
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	public int clearAuthUsersTable() {
+		return _context.getContentResolver().delete(AuthUsersMetaData.CONTENT_URI, null, null);
+	}
+	
 	public long insertAuthUser(AuthUser authUser) {
 		ContentValues cv = getContentValues(authUser);
 		_context.getContentResolver().insert(AuthUsersMetaData.CONTENT_URI, cv);
@@ -39,10 +43,6 @@ class AuthUsersHelper {
 		Uri uri = ContentUris.withAppendedId(AuthUsersMetaData.CONTENT_URI, authUser.getId());
 		ContentValues cv = getContentValues(authUser);
 		return _context.getContentResolver().update(uri, cv, null, null);
-	}
-
-	public int clearAuthUsersTable() {
-		return _context.getContentResolver().delete(AuthUsersMetaData.CONTENT_URI, null, null);
 	}
 
 	public List<AuthUser> getAuthUsers() {
