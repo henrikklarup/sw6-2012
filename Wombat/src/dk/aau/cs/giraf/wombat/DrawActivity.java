@@ -16,7 +16,9 @@ public class DrawActivity extends Activity {
 		case ProgressBar:
 			setContentView(new DrawProgressBar(getApplicationContext()));
 			break;
-
+		case DigitalClock:
+			setContentView(new DrawDigital(getApplicationContext()));
+			break;
 		default:
 			break;
 		}
