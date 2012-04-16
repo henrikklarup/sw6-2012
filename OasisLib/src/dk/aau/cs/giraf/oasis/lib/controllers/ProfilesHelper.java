@@ -17,6 +17,7 @@ import dk.aau.cs.giraf.oasis.lib.models.Department;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 import dk.aau.cs.giraf.oasis.lib.models.Setting;
 
+
 /**
  * Helper class for Profiles 
  * @author Admin
@@ -32,17 +33,18 @@ public class ProfilesHelper {
 	 */
 	public ProfilesHelper(Context context){
 		_context = context;
+		AuthUsersHelper au = new AuthUsersHelper(_context);
 	}
 
 	/**
 	 * Insert profile
 	 * @param profile Profile containing data
 	 */
-	public int insertProfile(Profile profile) {
+	public long insertProfile(Profile profile) {
 		String certificate = getNewCertificate();
 		ContentValues authusersContentValues = new ContentValues();
 		authusersContentValues.put(AuthUsersMetaData.Table.COLUMN_CERTIFICATE, certificate);
-		authusersContentValues.put(AuthUsersMetaData.Table.COLUMN_ROLE, profile.getPRole());
+		authusersContentValues.put(AuthUsersMetaData.Table.COLUMN_ROLE, 1);
 		_context.getContentResolver().insert(AuthUsersMetaData.CONTENT_URI, authusersContentValues);
 
 		String[] authColumns = new String[] { 
@@ -57,10 +59,10 @@ public class ProfilesHelper {
 				profile.setId(id);
 
 				ContentValues profileContentValues = getContentValues(profile);
-				profileContentValues.put(ProfilesMetaData.Table.COLUMN_ID, id);
+				profileContentValues.put(ProfilesMetaData.Table.COLUMN_ID, profile.getId());
 				_context.getContentResolver().insert(ProfilesMetaData.CONTENT_URI, profileContentValues);
 				c.close();
-				return (int)id;
+				return id;
 			}
 		}
 		c.close();
@@ -332,9 +334,6 @@ public class ProfilesHelper {
 		return contentValues;
 	}
 
-	/**
-	 * @return the columns of the table
-	 */
 	private String[] columns = new String[] { 
 				ProfilesMetaData.Table.COLUMN_ID, 
 				ProfilesMetaData.Table.COLUMN_FIRST_NAME,
@@ -346,14 +345,14 @@ public class ProfilesHelper {
 				ProfilesMetaData.Table.COLUMN_SETTINGS};
 
 	/**
-	 * @return the certificate
+	 * @return a certificate
 	 */
 	private String getNewCertificate() {
 		Random rnd = new Random();
 		String certificate = "";
 		for (int i = 0; i < 256 + 1; i++)
 		{
-			certificate += (char)((rnd.nextInt() % 26) + 97);
+			certificate += (char)(rnd.nextInt(26) + 97);
 		}
 		return certificate;
 	}

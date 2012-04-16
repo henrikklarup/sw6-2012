@@ -43,26 +43,7 @@ public class Helper {
 	}
 	
 	public void CreateDummyData() {
-		/*Departments*/
-		Department dep1 = new Department("Dep1", "Hjoernet", 88888888, "dep1[at]dep.com");
-		Department subdep1 = new Department("subDep1", "Hjoernet", 88888888, "subdep1[at]dep.com");
-		Department dep3 = new Department("Dep3", "Hjoernet", 88888888, "dep3[at]dep.com");
-		
-		/*Add departments*/
-		departmentsHelper.insertDepartment(dep1);
-		departmentsHelper.insertDepartment(subdep1);
-		departmentsHelper.insertDepartment(dep3);
-
-		/*Load Departments*/
-		Department dep1Loaded = departmentsHelper.getDepartmentByName("Dep1").get(0);
-		Department subDep1Loaded = departmentsHelper.getDepartmentByName("subDep1").get(0);
-		Department dep3Loaded = departmentsHelper.getDepartmentByName("Dep3").get(0);
-		/*Add subdepartment*/
-		Log.e("DEP1", String.valueOf(dep1Loaded.getId()));
-		Log.e("SUBDEP1", String.valueOf(subDep1Loaded.getId()));
-		departmentsHelper.attachSubDepartmentToDepartment(dep1Loaded, subDep1Loaded);
-		
-		
+				
 		/*Guardians*/
 		Profile Guardian1 = new Profile("Guardian1", "First", "LoL1", 1, 88888888, null, null);
 		Profile Guardian2 = new Profile("Guardian2", "Second", "LoL2", 1, 88888888, null, null);
@@ -92,6 +73,25 @@ public class Helper {
 		Profile Guardian2Loaded = profilesHelper.getProfileById(guard2Id);
 		Profile Guardian3Loaded = profilesHelper.getProfileById(guard3Id);
 		
+		/*Departments*/
+		Department dep1 = new Department("Dep1", "Hjoernet", 88888888, "dep1[at]dep.com");
+		Department subdep1 = new Department("subDep1", "Hjoernet", 88888888, "subdep1[at]dep.com");
+		Department dep3 = new Department("Dep3", "Hjoernet", 88888888, "dep3[at]dep.com");
+		
+		/*Add departments*/
+		departmentsHelper.insertDepartment(dep1);
+		departmentsHelper.insertDepartment(subdep1);
+		departmentsHelper.insertDepartment(dep3);
+
+		/*Load Departments*/
+		Department dep1Loaded = departmentsHelper.getDepartmentByName("Dep1").get(0);
+		Department subDep1Loaded = departmentsHelper.getDepartmentByName("subDep1").get(0);
+		Department dep3Loaded = departmentsHelper.getDepartmentByName("Dep3").get(0);
+		/*Add subdepartment*/
+		Log.e("DEP1", String.valueOf(dep1Loaded.getId()));
+		Log.e("SUBDEP1", String.valueOf(subDep1Loaded.getId()));
+		departmentsHelper.attachSubDepartmentToDepartment(dep1Loaded, subDep1Loaded);
+				
 		/*Attach guardians to departments*/
 		departmentsHelper.attachProfileToDepartment(Guardian1Loaded, dep1Loaded);
 		departmentsHelper.attachProfileToDepartment(Guardian2Loaded, subDep1Loaded);

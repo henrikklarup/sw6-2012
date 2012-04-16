@@ -13,7 +13,6 @@ import dk.aau.cs.giraf.oasis.lib.metadata.AuthUsersMetaData;
 import dk.aau.cs.giraf.oasis.lib.metadata.DepartmentsMetaData;
 import dk.aau.cs.giraf.oasis.lib.metadata.HasDepartmentMetaData;
 import dk.aau.cs.giraf.oasis.lib.metadata.HasSubDepartmentMetaData;
-import dk.aau.cs.giraf.oasis.lib.metadata.ProfilesMetaData;
 import dk.aau.cs.giraf.oasis.lib.models.Department;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
@@ -29,9 +28,7 @@ public class DepartmentsHelper {
 
 	/**
 	 * Constructor
-	 * 
-	 * @param context
-	 *            Current context
+	 * @param context Current context
 	 */
 	public DepartmentsHelper(Context context) {
 		_context = context;
@@ -39,15 +36,13 @@ public class DepartmentsHelper {
 
 	/**
 	 * Insert department
-	 * 
-	 * @param _department
-	 *            Department containg data
+	 * @param department Department containg data
 	 */
-	public int insertDepartment(Department _department) {
+	public long insertDepartment(Department department) {
 		String certificate = getNewCertificate();
 		ContentValues authusersContentValues = new ContentValues();
 		authusersContentValues.put(AuthUsersMetaData.Table.COLUMN_CERTIFICATE, certificate);
-		authusersContentValues.put(AuthUsersMetaData.Table.COLUMN_ROLE, (long)0);
+		authusersContentValues.put(AuthUsersMetaData.Table.COLUMN_ROLE, 0);
 		_context.getContentResolver().insert(AuthUsersMetaData.CONTENT_URI, authusersContentValues);
 
 		String[] authColumns = new String[] { 
@@ -59,16 +54,13 @@ public class DepartmentsHelper {
 		if (c != null) {
 			if(c.moveToFirst()) {
 				long id = c.getLong(c.getColumnIndex(AuthUsersMetaData.Table.COLUMN_ID));
-				_department.setId(id);
+				department.setId(id);
 
-				ContentValues cv = new ContentValues();
-				cv.put(DepartmentsMetaData.Table.COLUMN_NAME, _department.getName());
-				cv.put(DepartmentsMetaData.Table.COLUMN_ADDRESS, _department.getAddress());
-				cv.put(DepartmentsMetaData.Table.COLUMN_EMAIL, _department.getEmail());
-				cv.put(DepartmentsMetaData.Table.COLUMN_PHONE, _department.getPhone());
+				ContentValues cv = getContentValues(department);
+				cv.put(DepartmentsMetaData.Table.COLUMN_ID, department.getId());
 				_context.getContentResolver().insert(DepartmentsMetaData.CONTENT_URI, cv);
 				c.close();
-				return 0;
+				return id;
 			}
 		}
 		c.close();
@@ -79,33 +71,22 @@ public class DepartmentsHelper {
 
 	/**
 	 * Modify department
-	 * 
-	 * @param _department
-	 *            Department containing data to modify
+	 * @param department
+	 * Department containing data to modify
 	 */
-	public void modifyDepartment(Department _department) {
+	public void modifyDepartment(Department department) {
 		Uri uri = ContentUris.withAppendedId(DepartmentsMetaData.CONTENT_URI,
-				_department.getId());
-		ContentValues cv = new ContentValues();
-		cv.put(DepartmentsMetaData.Table.COLUMN_NAME, _department.getName());
-		cv.put(DepartmentsMetaData.Table.COLUMN_ADDRESS,
-				_department.getAddress());
-		cv.put(DepartmentsMetaData.Table.COLUMN_PHONE, _department.getPhone());
+				department.getId());
+		ContentValues cv = getContentValues(department);
 		_context.getContentResolver().update(uri, cv, null, null);
 	}
 
 	/**
 	 * Get all departments
-	 * 
 	 * @return List<Department>, containing all departments
 	 */
 	public List<Department> getDepartments() {
 		List<Department> departments = new ArrayList<Department>();
-		String[] columns = new String[] { DepartmentsMetaData.Table.COLUMN_ID,
-				DepartmentsMetaData.Table.COLUMN_NAME,
-				DepartmentsMetaData.Table.COLUMN_PHONE,
-				DepartmentsMetaData.Table.COLUMN_EMAIL,
-				DepartmentsMetaData.Table.COLUMN_ADDRESS };
 		Cursor c = _context.getContentResolver().query(
 				DepartmentsMetaData.CONTENT_URI, columns, null, null, null);
 
@@ -227,9 +208,7 @@ public class DepartmentsHelper {
 
 	/**
 	 * Cursor to department
-	 * 
-	 * @param cursor
-	 *            Input cursor
+	 * @param cursor Input cursor
 	 * @return Output department
 	 */
 	private Department cursorToDepartment(Cursor cursor) {
@@ -245,6 +224,15 @@ public class DepartmentsHelper {
 		department.setPhone(cursor.getLong(cursor
 				.getColumnIndex(DepartmentsMetaData.Table.COLUMN_PHONE)));
 		return department;
+	}
+	
+	public ContentValues getContentValues(Department department) {
+		ContentValues contentValues = new ContentValues();
+		contentValues.put(DepartmentsMetaData.Table.COLUMN_NAME, department.getName());
+		contentValues.put(DepartmentsMetaData.Table.COLUMN_ADDRESS, department.getAddress());
+		contentValues.put(DepartmentsMetaData.Table.COLUMN_EMAIL, department.getEmail());
+		contentValues.put(DepartmentsMetaData.Table.COLUMN_PHONE, department.getPhone());
+		return contentValues;
 	}
 	
 	/**

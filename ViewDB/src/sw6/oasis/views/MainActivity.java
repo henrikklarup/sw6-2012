@@ -24,7 +24,7 @@ public class MainActivity extends FragmentActivity {
 		super.setContentView(R.layout.main);
 		
 		Helper helper = new Helper(this);
-//		helper.CreateDummyData();
+		helper.CreateDummyData();
 		this.initialisePaging();
 	}
 
