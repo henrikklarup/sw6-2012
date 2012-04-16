@@ -30,7 +30,7 @@ public class GLRendererGeneral implements Renderer{
 		
 		gl.glMatrixMode(GL10.GL_MODELVIEW);
 		gl.glLoadIdentity();
-		GLU.gluLookAt(gl, 0, 0, -20, 0, 0, 0, 0, 2, 0); // hvor langt er vi far objektet og hvor kigger vi hen
+		GLU.gluLookAt(gl, 0, 0, 20, 0, 0, 0, 0, 2, 0); // hvor langt er vi far objektet og hvor kigger vi hen
 		
 		//Rotate the element
 //		long time = SystemClock.uptimeMillis() % 4000L;
