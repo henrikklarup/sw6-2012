@@ -86,6 +86,8 @@ public class CustomizeFragment extends Fragment {
 				spf.reloadSubProfiles();
 				CustomizeFragment cf = (CustomizeFragment)getFragmentManager().findFragmentById(R.id.customizeFragment);
 				cf.setDefaultProfile();
+				Toast t = Toast.makeText(getActivity(), getString(R.string.new_template_button_text), Toast.LENGTH_SHORT);
+				t.show();
 			}
 		});
 
@@ -580,7 +582,7 @@ public class CustomizeFragment extends Fragment {
 	private void initSaveButton() {
 		saveButton = (Button) getActivity().findViewById(R.id.customize_save);
 		Drawable d;
-		if (currSubP.getSave() && !currSubP.getLock() && guard.getChild() != null) {
+		if (currSubP.getSave() && !guard.getChild().getLock() && guard.getChild() != null) {
 			d = getResources().getDrawable(R.drawable.thumbnail_save);
 			saveButton.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
