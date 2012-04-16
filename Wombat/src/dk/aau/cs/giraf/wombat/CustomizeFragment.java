@@ -76,6 +76,18 @@ public class CustomizeFragment extends Fragment {
 	// Start the list empty
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		Button  b = (Button) getActivity().findViewById(R.id.new_template_button);
+		b.setOnClickListener(new OnClickListener() {
+			
+			public void onClick(View v) {
+				TimerLoader.subProfileID = -1;
+				SubProfileFragment spf = (SubProfileFragment) getFragmentManager()
+						.findFragmentById(R.id.subprofileFragment);
+				spf.reloadSubProfiles();
+				CustomizeFragment cf = (CustomizeFragment)getFragmentManager().findFragmentById(R.id.customizeFragment);
+				cf.setDefaultProfile();
+			}
+		});
 
 		currSubP = new SubProfile("", "", 10, 0xFF000000, 0xFFFF0000,
 				0xFFFFFFFF, 0xFFFF0000, 600, false);
@@ -568,7 +580,7 @@ public class CustomizeFragment extends Fragment {
 	private void initSaveButton() {
 		saveButton = (Button) getActivity().findViewById(R.id.customize_save);
 		Drawable d;
-		if (currSubP.getSave() && !currSubP.getLock()) {
+		if (currSubP.getSave() && !currSubP.getLock() && guard.getChild() != null) {
 			d = getResources().getDrawable(R.drawable.thumbnail_save);
 			saveButton.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {

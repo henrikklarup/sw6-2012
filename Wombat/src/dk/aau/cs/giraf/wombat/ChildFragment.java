@@ -5,6 +5,8 @@ import java.util.List;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ListView;
 import dk.aau.cs.giraf.TimerLib.Child;
 import dk.aau.cs.giraf.TimerLib.Guardian;
@@ -56,9 +58,5 @@ public class ChildFragment extends android.app.ListFragment {
 			detf.loadSubProfiles();
 			
 		}
-		
-//		if(custF != null && custF.isInLayout()){
-//			custF.
-//		}
 	}
 }
