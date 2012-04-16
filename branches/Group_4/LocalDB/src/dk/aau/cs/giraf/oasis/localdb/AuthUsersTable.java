@@ -8,7 +8,7 @@ public class AuthUsersTable {
 			+ AuthUsersMetaData.Table.TABLE_NAME
 			+ "("
 			+ AuthUsersMetaData.Table.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-			+ AuthUsersMetaData.Table.COLUMN_CERTIFICATE + " TEXT, "
+			+ AuthUsersMetaData.Table.COLUMN_CERTIFICATE + " TEXT NOT NULL, "
 			+ AuthUsersMetaData.Table.COLUMN_ROLE + " INTEGER NOT NULL"
 			+ ");";
 

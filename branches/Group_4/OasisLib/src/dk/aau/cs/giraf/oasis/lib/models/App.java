@@ -91,7 +91,8 @@ public class App {
 	public void setStats(Stat<String, String, String> stats) {
 		this.stats = stats;
 	}
-	/**Set output
+	/**
+	 * Set output
 	 * {0} = Id
 	 * {1} = Name
 	 * {2} = Version
