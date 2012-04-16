@@ -22,7 +22,7 @@ import android.widget.GridView;
 
 public class PARROTActivity extends Activity {
 	
-	private PARROTProfile parrotUser;
+	private static PARROTProfile parrotUser;
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -69,7 +69,7 @@ public class PARROTActivity extends Activity {
 		super.onResume();
 	}
 	
-	public PARROTProfile getUser()
+	public static PARROTProfile getUser()
 	{
 		return parrotUser;
 	}

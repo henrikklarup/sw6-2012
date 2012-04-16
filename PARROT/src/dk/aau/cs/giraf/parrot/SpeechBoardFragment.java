@@ -21,10 +21,8 @@ public class SpeechBoardFragment extends Fragment
 	public void onAttach(Activity activity) 
 	{
 		super.onAttach(activity);
-
-		//FIXME this might be VERY wrong
-		PARROTActivity prt = (PARROTActivity) activity;
-		PARROTProfile user=prt.getUser();
+		
+		PARROTProfile user=PARROTActivity.getUser();
 		if(user.getCategoryAt(0)!=null)
 		{
 			Category cat = user.getCategoryAt(0); //Dummy TODO FIXME
