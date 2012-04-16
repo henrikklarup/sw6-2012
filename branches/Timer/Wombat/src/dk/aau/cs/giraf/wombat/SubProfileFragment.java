@@ -89,10 +89,12 @@ public class SubProfileFragment extends android.app.ListFragment {
 	 * 
 	 */
 	public void loadSubProfiles() {
+		if(guard.getChild() != null){
 		ArrayList<SubProfile> subprofiles = guard.getChild().SubProfiles();
 		SubProfileAdapter adapter = new SubProfileAdapter(getActivity(),
 				android.R.layout.simple_list_item_1, subprofiles);
 		setListAdapter(adapter);
+		}
 	}
 
 	public void onListItemClick(ListView lv, View view, int position, long id) {
