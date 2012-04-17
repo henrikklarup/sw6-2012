@@ -13,14 +13,14 @@ import dk.aau.cs.giraf.TimerLib.SubProfile;
 public class DrawHourglass extends View {
 	private Guardian guard = Guardian.getInstance();
 	SubProfile sp = guard.getSubProfile();
-	int background = sp._bgcolor;
+	int background = sp.bgcolor;
 	int frame = sp.frameColor;
 	int timeleft = sp.timeLeftColor;
 	int timeleft2 = sp.timeLeftColor;
 	int timespent = sp.timeSpentColor;
 	boolean init = true;
 
-	double totalTime = (sp._totalTime - 1) * 1000;
+	double totalTime = (sp.totalTime - 1) * 1000;
 	double endTime = SystemClock.currentThreadTimeMillis() + totalTime;
 	Paint paint = new Paint();
 	Rect rtop, rbot, rleft, rright;
@@ -32,7 +32,7 @@ public class DrawHourglass extends View {
 
 	public DrawHourglass(Context context) {
 		super(context);
-		if(sp._gradient){
+		if(sp.gradient){
 			timeleft2 = timespent;
 			timespent = background;
 		}
