@@ -28,15 +28,60 @@ public class Testservlet extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		out.println(
-		"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 " +
-		"Transitional//EN\">\n" + 
-		"<HTML>\n" +
-		"<HEAD></HEAD>\n" +
-		"<BODY>\n" +
-		"<H1>Hello WWW</H1>\n" +
-		"<FORM METHOD = "POST" ACTION = "http://form.url.com"">"
-		"</BODY>" +
-		"</HTML>");
+		"<html>" +
+		"<head>" +
+		"</head>" +
+		"<body>" +
+		"<h1> Tilføj profil </h1>" +
+		"<table border='0'>" +
+		"<form>" +
+		"<tr>" +
+		"<td>Navn:</td> <td><input type='text' name='name' /><td> <br />" +
+		"</tr>" +
+		"<tr>" +
+		"<td>Mellemnavn(e):</td> <td> <input type='text' name='mellemnavn(e)' /> </td><br />" +
+		"</tr>" +
+		"<tr>" +
+		"<td>Efternavn: </td><td><input type='text' name='efternavn' /> </td><br />" +
+		"</tr>" +
+		"<tr>" +
+		"<td>Telefon nummer: </td> <td> <input type='text' name='tlfnr' /> </td><br />" +
+		"</tr>" +
+		"</form>" +
+		"<form action=''>" +
+		"<tr>" +
+		"<td><select name='Rolle'>" +
+		"<option value='Admin' selected='selected'>Administrator</option>" +
+		"<option value='Guardian'>Pedagog</option>" +
+		"<option value='Parent'>Forældre</option>" +
+		"<option value='Child'>Barn</option>" +
+		"</select></td> <br />" +
+		"</tr>" +
+		"<tr>" +
+		"<td><input type='hidden' name='MAX_FILE_SIZE' value='100' />" +
+		"<input name='file' type='file' /></td> <br />" +
+		"</tr>" +
+		"<tr>" +
+		"<td>Brugernavn: </td><td><input type='text' name='brugernavn' /></td> <br />" +
+		"</tr>" +
+		"<tr>" +
+		"<td>Kodeord:</td><td> <input type='password' name='pwd' /> </td><br />" +
+		"</tr>" +
+		"<tr>" +
+		"<td>Gentag kodeord:</td> <td> <input type='password' name='pwd' /> </td><br />" +
+		"</tr>" +
+		"<form action=''>" +
+		"<tr>" +
+		"<td><input type='button' value='Tilføj></td>" +
+		"<td><input type='button' value='Fortryd'></td>" +
+		"</tr>" +
+		"</form>" +
+		"</form>" +
+		"</table>" + 
+		"</body>" +
+		"</html>"
+				
+		);
 	}
 
 	/**
