@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -476,12 +477,19 @@ public class CustomizeFragment extends Fragment {
 
 		attachmentButton = (Button) getActivity().findViewById(
 				R.id.customize_attachment);
+		attachmentButton.setOnLongClickListener(new OnLongClickListener() {
+			
+			public boolean onLongClick(View v) {
+				setAttachment(null);
+				return false;
+			}
+		});
 		attachmentButton.setOnClickListener( new OnClickListener() {
 
 			public void onClick(View v) {
 				List<String> values = new ArrayList<String>();
 				final List<Child> children;
-				children = guard.Children();
+				children = guard.publishList();
 				
 				for (Child c : children) {
 					values.add(c.name);

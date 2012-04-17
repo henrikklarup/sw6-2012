@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import dk.aau.cs.giraf.TimerLib.Guardian;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
-import dk.aau.cs.giraf.TimerLib.formFactor;
 
 public class DrawActivity extends Activity {
 	private Guardian guard = Guardian.getInstance();
