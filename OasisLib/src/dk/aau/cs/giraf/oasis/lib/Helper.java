@@ -50,24 +50,9 @@ public class Helper {
 		Profile Guardian2 = new Profile("Guardian2", "Second", "LoL2", 1, 88888888, null, null);
 		Profile Guardian3 = new Profile("Guardian3", "Third", "LoL3", 1, 88888888, null, null);
 		/*Add guardians*/
-		profilesHelper.insertProfile(Guardian1);
-		profilesHelper.insertProfile(Guardian2);
-		profilesHelper.insertProfile(Guardian3);
-		
-		
-		/*Guardian id's*/
-		long guard1Id = 0, guard2Id = 0, guard3Id = 0;
-		
-		/*Get Guardians*/
-		for(Profile g : profilesHelper.getProfiles())
-		{
-			if(g.getFirstname().equals("Guardian1"))
-				guard1Id = g.getId();
-			else if(g.getFirstname().equals("Guardian2"))
-				guard2Id = g.getId();
-			else if(g.getFirstname().equals("Guardian3"))
-				guard3Id = g.getId();
-		}
+		long guard1Id = profilesHelper.insertProfile(Guardian1);
+		long guard2Id = profilesHelper.insertProfile(Guardian2);
+		long guard3Id = profilesHelper.insertProfile(Guardian3);
 		
 		/*Load guardians*/
 		Profile Guardian1Loaded = profilesHelper.getProfileById(guard1Id);
@@ -80,17 +65,16 @@ public class Helper {
 		Department dep3 = new Department("Dep3", "Hjoernet", 88888888, "dep3[at]dep.com");
 		
 		/*Add departments*/
-		departmentsHelper.insertDepartment(dep1);
-		departmentsHelper.insertDepartment(subdep1);
-		departmentsHelper.insertDepartment(dep3);
+		long dep1Id = departmentsHelper.insertDepartment(dep1);
+		long dep2Id = departmentsHelper.insertDepartment(subdep1);
+		long dep3Id = departmentsHelper.insertDepartment(dep3);
 
 		/*Load Departments*/
-		Department dep1Loaded = departmentsHelper.getDepartmentByName("Dep1").get(0);
-		Department subDep1Loaded = departmentsHelper.getDepartmentByName("subDep1").get(0);
-		Department dep3Loaded = departmentsHelper.getDepartmentByName("Dep3").get(0);
+		Department dep1Loaded = departmentsHelper.getDepartmentById(dep1Id);
+		Department subDep1Loaded = departmentsHelper.getDepartmentById(dep2Id);
+		Department dep3Loaded = departmentsHelper.getDepartmentById(dep3Id);
+		
 		/*Add subdepartment*/
-		Log.e("DEP1", String.valueOf(dep1Loaded.getId()));
-		Log.e("SUBDEP1", String.valueOf(subDep1Loaded.getId()));
 		departmentsHelper.attachSubDepartmentToDepartment(dep1Loaded, subDep1Loaded);
 				
 		/*Attach guardians to departments*/
@@ -113,29 +97,11 @@ public class Helper {
 		Profile Child4 = new Profile("Child4", "G2", "LoLB", 3, 88888888, null, null);
 		Profile Child5 = new Profile("Child5", "G3", "LoLC", 3, 88888888, null, null);
 		/*Add children*/
-		profilesHelper.insertProfile(Child1);
-		profilesHelper.insertProfile(Child2);
-		profilesHelper.insertProfile(Child3);
-		profilesHelper.insertProfile(Child4);
-		profilesHelper.insertProfile(Child5);
-		
-		/*Children id's*/
-		long child1Id = 0, child2Id = 0, child3Id = 0, child4Id = 0, child5Id = 0;
-		
-		/*Get children*/
-		for(Profile g : profilesHelper.getProfiles())
-		{
-			if(g.getFirstname().equals("Child1"))
-				child1Id = g.getId();
-			else if(g.getFirstname().equals("Child2"))
-				child2Id = g.getId();
-			else if(g.getFirstname().equals("Child3"))
-				child3Id = g.getId();
-			else if(g.getFirstname().equals("Child4"))
-				child4Id = g.getId();
-			else if(g.getFirstname().equals("Child5"))
-				child5Id = g.getId();
-		}
+		long child1Id = profilesHelper.insertProfile(Child1);
+		long child2Id = profilesHelper.insertProfile(Child2);
+		long child3Id = profilesHelper.insertProfile(Child3);
+		long child4Id = profilesHelper.insertProfile(Child4);
+		long child5Id = profilesHelper.insertProfile(Child5);
 		
 		/*Load children*/
 		Profile Child1Loaded = profilesHelper.getProfileById(child1Id);
