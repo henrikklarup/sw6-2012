@@ -1,12 +1,9 @@
 package dk.aau.cs.giraf.launcher;
 
-import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.ServiceInfo;
-// Maybe color isnt the right type //check
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 
 class ApplicationInfo{
 	ServiceInfo category;
@@ -36,8 +33,14 @@ class ApplicationInfo{
 	 */
 	Color iconcolor;
 	
+	/**
+	 * The package name the application belongs to.
+	 */
 	String packageName;
 	
+	/**
+	 * The name of the main activity in the application.
+	 */
 	String activityName;
 
 	@Override
