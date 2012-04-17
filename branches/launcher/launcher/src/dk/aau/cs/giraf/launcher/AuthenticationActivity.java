@@ -29,9 +29,6 @@ public class AuthenticationActivity extends CaptureActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.authentication);
-		
-		Helper h = new Helper(this);
-		h.CreateDummyData();
 
 		final ImageView instruct = (ImageView) findViewById(R.id.animation);
 		instruct.setBackgroundResource(R.animator.instruct_ani);
