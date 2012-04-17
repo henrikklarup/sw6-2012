@@ -38,12 +38,12 @@ public class ChildAdapter extends ArrayAdapter<Child> {
 				iv.setImageResource(R.drawable.default_profile);
 			}
 			if (tv != null) {
-				if (c._name == "Last Used") {
+				if (c.name == "Last Used") {
 					tv.setText(R.string.last_used);
-				} else if (c._name == "Predefined Profiles") {
+				} else if (c.name == "Predefined Profiles") {
 					tv.setText(R.string.predefined);
 				} else {
-					tv.setText(c._name);
+					tv.setText(c.name);
 				}
 			}
 

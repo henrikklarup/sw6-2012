@@ -56,14 +56,14 @@ public class SubProfileAdapter extends ArrayAdapter<SubProfile> {
 			}
 			if(ivBG != null){
 				
-				ivBG.setBackgroundColor(sp._timeLeftColor);
+				ivBG.setBackgroundColor(sp.timeLeftColor);
 				
 			}
 			if(tvName != null){
-				tvName.setText(sp._name);
+				tvName.setText(sp.name);
 			}
 			if(tvDesc != null){
-				tvDesc.setText(sp._desc);
+				tvDesc.setText(sp.desc);
 			}
 			
 		}

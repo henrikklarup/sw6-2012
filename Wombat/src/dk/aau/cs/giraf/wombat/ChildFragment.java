@@ -24,10 +24,6 @@ public class ChildFragment extends android.app.ListFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		// ArrayList<String> values = new ArrayList<String>();
-		// for(Child c : guard.publishList()){
-		// values.add(c._name);
-		// }
 		ArrayList<Child> m_childs = guard.publishList();
 
 		// Inputs the data into the listview according to the string array
