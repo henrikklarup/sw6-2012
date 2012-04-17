@@ -2,8 +2,6 @@ package dk.aau.cs.giraf.parrot;
 
 import java.util.ArrayList;
 
-import android.graphics.Color;
-
 /**
  * 
  * @Rasmus

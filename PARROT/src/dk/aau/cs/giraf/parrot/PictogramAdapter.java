@@ -1,8 +1,11 @@
 package dk.aau.cs.giraf.parrot;
 
 
+import android.content.ClipData;
 import android.content.Context;
 import android.view.View;
+import android.view.View.DragShadowBuilder;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
@@ -52,6 +55,24 @@ public class PictogramAdapter extends BaseAdapter {
             imageView = (ImageView) convertView;
            
         }
+        
+		
+		
+		imageView.setOnLongClickListener(new OnLongClickListener()
+		{
+
+			public boolean onLongClick(View view)
+			{
+				//Look At DndActivity for inspiration
+				ClipData data = ClipData.newPlainText("label", "text"); //TODO Dummy. Pictogram information can be placed here instead.
+				DragShadowBuilder shadowBuilder = new DragShadowBuilder(view);
+				view.startDrag(data, shadowBuilder, view, 0);
+				return true;
+			}
+
+		});
+        
+        
 		imageView.setImageBitmap(pct.getBitmap());
         return imageView;
 	}
