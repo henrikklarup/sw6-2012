@@ -20,40 +20,40 @@ public class AppAdapter extends ArrayAdapter<ApplicationInfo> {
 
 	Context context;
 	ArrayList<ApplicationInfo> apps;
-	
+
 	public AppAdapter(Context context, ArrayList<ApplicationInfo> apps) {
 		super(context, 0, apps);
 
 		this.context = context;
 		this.apps = apps;
 	}
-	
+
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		
+
 		final ApplicationInfo app = apps.get(position);
-		
+
 		if (convertView == null) {
-            final LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.apps, parent, false);
-        }
-		
+			final LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			convertView = inflater.inflate(R.layout.apps, parent, false);
+		}
+
 		ImageView iv = (ImageView) convertView.findViewById(R.id.app_icon);
 		TextView tv = (TextView) convertView.findViewById(R.id.app_text);
-		
-        tv.setText(app.title.toString());
-        iv.setImageDrawable(app.icon);
-        setAppBackgroundColor(convertView);
-        
 
-        return convertView;
+		tv.setText(app.title.toString());
+		iv.setImageDrawable(app.icon);
+		setAppBackgroundColor(convertView);
+
+		return convertView;
 	}
-	   private void setAppBackgroundColor(View convertView) {    
-		   LinearLayout ll = (LinearLayout) convertView.findViewById(R.id.app_bg);
-		   RectF rectf = new RectF();
-		   RoundRectShape rect = new RoundRectShape( new float[] {15,15, 15,15, 15,15, 15,15}, rectf, null); // 15,15, 15,15, 15,15, 15,15 // 30,30, 30,30, 30,30, 30,30
-		   ShapeDrawable bg = new ShapeDrawable(rect);
-		   bg.getPaint().setColor(0xFFFFBB55);
-		   ll.setBackgroundDrawable(bg);
-		   }
+
+	private void setAppBackgroundColor(View convertView) {    
+		LinearLayout ll = (LinearLayout) convertView.findViewById(R.id.app_bg);
+		RectF rectf = new RectF();
+		RoundRectShape rect = new RoundRectShape( new float[] {15,15, 15,15, 15,15, 15,15}, rectf, null); // 15,15, 15,15, 15,15, 15,15 // 30,30, 30,30, 30,30, 30,30
+		ShapeDrawable bg = new ShapeDrawable(rect);
+		bg.getPaint().setColor(0xFFFFBB55);
+		ll.setBackgroundDrawable(bg);
+	}
 }
