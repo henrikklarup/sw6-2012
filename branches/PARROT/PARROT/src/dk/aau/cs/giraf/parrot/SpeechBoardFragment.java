@@ -4,25 +4,26 @@ package dk.aau.cs.giraf.parrot;
 import parrot.Package.R;
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.ClipData;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.DragShadowBuilder;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.GridView;
 
 public class SpeechBoardFragment extends Fragment
 {
+
+	private Activity parrent;
 
 
 	@Override
 	public void onAttach(Activity activity) 
 	{
 		super.onAttach(activity);
-		
+
+		this.parrent = activity;
+
+		/*
 		PARROTProfile user=PARROTActivity.getUser();
 		if(user.getCategoryAt(0)!=null)
 		{
@@ -32,6 +33,9 @@ public class SpeechBoardFragment extends Fragment
 
 			GridView gridview = (GridView) activity.findViewById(R.id.pictogramgrid);
 			gridview.setAdapter(new PictogramAdapter(cat, activity));
+
+			activity.findViewById(R.id.pictogramgrid).setOnDragListener(new BoxDragListener());
+
 
 			gridview.setOnItemLongClickListener(new OnItemLongClickListener()
 			{
@@ -46,14 +50,30 @@ public class SpeechBoardFragment extends Fragment
 				}
 
 			});
-		}
+
+	}*/
 	}
 
+	public void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		parrent.setContentView(R.layout.speechboard_layout);
+		
+		//FIXME These two lines are temporary for testing (kim)
+		GridView gridview = (GridView) parrent.findViewById(R.id.pictogramgrid);
+		gridview.setAdapter(new ImageAdapter(parrent));
+		
+		parrent.findViewById(R.id.pictogramgrid).setOnDragListener(new BoxDragListener());
+		parrent.findViewById(R.id.SpeechBoard).setOnDragListener(new BoxDragListener());
+		parrent.findViewById(R.id.supercategory).setOnDragListener(new BoxDragListener());
+		
+
+	}
 
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) 
-	{        
+	{ 
 		// Inflate the layout for this fragment
 		return inflater.inflate(R.layout.speechboard_layout, container, false);
 	}

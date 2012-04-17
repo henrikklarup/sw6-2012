@@ -2,22 +2,18 @@ package dk.aau.cs.giraf.parrot;
 
 
 
-import java.io.File;
-import java.lang.reflect.Field;
 import java.util.List;
 
-import dk.aau.cs.giraf.oasis.lib.Helper;
-import dk.aau.cs.giraf.oasis.lib.models.Media;
-import dk.aau.cs.giraf.oasis.lib.models.Profile;
-import dk.aau.cs.giraf.oasis.lib.models.Setting;
 import parrot.Package.R;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
-import android.provider.ContactsContract.Directory;
 import android.widget.GridView;
+import dk.aau.cs.giraf.oasis.lib.Helper;
+import dk.aau.cs.giraf.oasis.lib.models.Media;
+import dk.aau.cs.giraf.oasis.lib.models.Profile;
+import dk.aau.cs.giraf.oasis.lib.models.Setting;
 
 
 public class PARROTActivity extends Activity {
@@ -28,15 +24,24 @@ public class PARROTActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		/*//Made by kim
+		GridView gridview = (GridView) findViewById(R.id.pictogramgrid);
+		gridview.setAdapter(new PictogramAdapter(getUser().getCategoryAt(0), this));
+		
+		findViewById(R.id.pictogramgrid).setOnDragListener(new BoxDragListener());
+		*/
+		
 		//PARROTProfile parrotUser = loadProfile();	
 		
+		
+		/*
 		//TODO replace the temp lines with the above line
 		Pictogram tempPic= new Pictogram("Koala", getExternalFilesDir(null)+"/Pictures/005.jpg", null, null);//005
 		parrotUser = new PARROTProfile("tempNiels", tempPic);
 		Category tempCat = new Category(0);
 		tempCat.addPictogram(tempPic);
 		tempCat.addPictogram(tempPic);
-
+		*/
 
 
 
