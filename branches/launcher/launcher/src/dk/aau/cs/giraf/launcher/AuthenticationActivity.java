@@ -7,6 +7,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RoundRectShape;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -28,6 +29,9 @@ public class AuthenticationActivity extends CaptureActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.authentication);
+		
+		Helper h = new Helper(this);
+		h.CreateDummyData();
 
 		final ImageView instruct = (ImageView) findViewById(R.id.animation);
 		instruct.setBackgroundResource(R.animator.instruct_ani);
@@ -39,19 +43,12 @@ public class AuthenticationActivity extends CaptureActivity {
 			}
 		});
 
-		
-
 		final GButton button = (GButton) findViewById(R.id.loginGButton);
 		button.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				startActivity(mHomeIntent);
 			}
 		});
-		
-		Helper helper = new Helper(this);
-		if (helper.profilesHelper.getProfiles().size() <= 0) {
-			helper.CreateDummyData();
-		}
 	}
 
 	private void changeCamerafeedBorderColor(int color) {
@@ -68,7 +65,7 @@ public class AuthenticationActivity extends CaptureActivity {
 	public void handleDecode(Result rawResult, Bitmap barcode)
 	{
 		Helper helper = new Helper(this);
-		Profile profile = helper.profilesHelper.authenticateProfile("abcde");/// TODO add rawResult.getText());
+		Profile profile = helper.profilesHelper.authenticateProfile(rawResult.getText());
 
 		if (profile != null) {	
 			this.changeCamerafeedBorderColor(0xFF3AAA35);
