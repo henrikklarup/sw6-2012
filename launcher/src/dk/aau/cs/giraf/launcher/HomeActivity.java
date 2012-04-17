@@ -103,7 +103,7 @@ public class HomeActivity extends Activity {
 		Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
 		mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
 		
-		final List<ResolveInfo> pkgAppsList = mContext.getPackageManager().queryIntentActivities( mainIntent, 0);
+		final List<ResolveInfo> pkgAppsList = mContext.getPackageManager().queryIntentActivities(mainIntent, 0);
 
 		if(pkgAppsList != null){
 			ArrayList<ApplicationInfo> applications = new ArrayList<ApplicationInfo>();
