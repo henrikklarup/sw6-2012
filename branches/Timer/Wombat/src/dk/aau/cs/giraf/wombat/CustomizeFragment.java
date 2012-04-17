@@ -99,8 +99,8 @@ public class CustomizeFragment extends Fragment {
 
 		currSubP = new SubProfile("", "", 10, 0xFF000000, 0xFFFF0000,
 				0xFFFFFFFF, 0xFFFF0000, 600, false);
-		currSubP.setSave(false);
-		currSubP.setSaveAs(false);
+		currSubP.save = false;
+		currSubP.saveAs = false;
 
 		/********* TIME CHOSER *********/
 		initStyleChoser();
@@ -121,8 +121,8 @@ public class CustomizeFragment extends Fragment {
 	public void setDefaultProfile() {
 		currSubP = new SubProfile("", "", 10, 0xFF000000, 0xFFFF0000,
 				0xFFFFFFFF, 0xFFFF0000, 600, false);
-		currSubP.setSave(false);
-		currSubP.setSaveAs(false);
+		currSubP.save = false;
+		currSubP.saveAs = false;
 
 		preSubP = null;
 
@@ -216,11 +216,11 @@ public class CustomizeFragment extends Fragment {
 	private boolean setSave() {
 		boolean complete = false;
 		if (guard.getChild() != null) {
-			currSubP.setSave(true);
+			currSubP.save = true;
 		} else {
-			currSubP.setSave(false);
+			currSubP.save = false;
 		}
-		currSubP.setSaveAs(true);
+		currSubP.saveAs = true;
 
 		return complete;
 	}
@@ -246,7 +246,7 @@ public class CustomizeFragment extends Fragment {
 
 		/* Create description of time chosen */
 		timeDescription = (TextView) getActivity().findViewById(R.id.showTime);
-		setTime(currSubP._totalTime);
+		setTime(currSubP.totalTime);
 
 		/* Add on change listeners for both wheels */
 		mins.addChangingListener(new OnWheelChangedListener() {
@@ -329,7 +329,7 @@ public class CustomizeFragment extends Fragment {
 	 *            Total time in seconds
 	 */
 	private void updateTime(int m_minutes, int m_seconds) {
-		currSubP._totalTime = (m_minutes * 60) + m_seconds;
+		currSubP.totalTime = (m_minutes * 60) + m_seconds;
 
 		String timeText = "";
 		/* Første del med mellemrum */
@@ -366,33 +366,33 @@ public class CustomizeFragment extends Fragment {
 		checkboxGradient = (CheckBox) getActivity().findViewById(
 				R.id.checkbox_gradient);
 
-		checkboxGradient.setChecked(currSubP._gradient);
+		checkboxGradient.setChecked(currSubP.gradient);
 		checkboxGradient
 				.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 					public void onCheckedChanged(CompoundButton buttonView,
 							boolean isChecked) {
-						currSubP._gradient = isChecked;
+						currSubP.gradient = isChecked;
 					}
 				});
 
 		colorGradientButton1 = (Button) getActivity().findViewById(
 				R.id.gradientButton_1);
 
-		setColor(colorGradientButton1.getBackground(), currSubP._timeLeftColor);
+		setColor(colorGradientButton1.getBackground(), currSubP.timeLeftColor);
 
 		// colorGradientButton1.setBackgroundColor(currSubP._timeLeftColor);
 		colorGradientButton1.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				AmbilWarnaDialog dialog = new AmbilWarnaDialog(getActivity(),
-						currSubP._timeLeftColor, new OnAmbilWarnaListener() {
+						currSubP.timeLeftColor, new OnAmbilWarnaListener() {
 							public void onCancel(AmbilWarnaDialog dialog) {
 							}
 
 							public void onOk(AmbilWarnaDialog dialog, int color) {
-								currSubP._timeLeftColor = color;
+								currSubP.timeLeftColor = color;
 								setColor(colorGradientButton1.getBackground(),
-										currSubP._timeLeftColor);
+										currSubP.timeLeftColor);
 							}
 						});
 				dialog.show();
@@ -401,18 +401,18 @@ public class CustomizeFragment extends Fragment {
 
 		colorGradientButton2 = (Button) getActivity().findViewById(
 				R.id.gradientButton_2);
-		setColor(colorGradientButton2.getBackground(), currSubP._timeSpentColor);
+		setColor(colorGradientButton2.getBackground(), currSubP.timeSpentColor);
 		colorGradientButton2.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				AmbilWarnaDialog dialog = new AmbilWarnaDialog(getActivity(),
-						currSubP._timeSpentColor, new OnAmbilWarnaListener() {
+						currSubP.timeSpentColor, new OnAmbilWarnaListener() {
 							public void onCancel(AmbilWarnaDialog dialog) {
 							}
 
 							public void onOk(AmbilWarnaDialog dialog, int color) {
-								currSubP._timeSpentColor = color;
+								currSubP.timeSpentColor = color;
 								setColor(colorGradientButton2.getBackground(),
-										currSubP._timeSpentColor);
+										currSubP.timeSpentColor);
 							}
 						});
 				dialog.show();
@@ -421,18 +421,18 @@ public class CustomizeFragment extends Fragment {
 
 		colorFrameButton = (Button) getActivity().findViewById(
 				R.id.frameColorButton);
-		setColor(colorFrameButton.getBackground(), currSubP._frameColor);
+		setColor(colorFrameButton.getBackground(), currSubP.frameColor);
 		colorFrameButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				AmbilWarnaDialog dialog = new AmbilWarnaDialog(getActivity(),
-						currSubP._frameColor, new OnAmbilWarnaListener() {
+						currSubP.frameColor, new OnAmbilWarnaListener() {
 							public void onCancel(AmbilWarnaDialog dialog) {
 							}
 
 							public void onOk(AmbilWarnaDialog dialog, int color) {
-								currSubP._frameColor = color;
+								currSubP.frameColor = color;
 								setColor(colorFrameButton.getBackground(),
-										currSubP._frameColor);
+										currSubP.frameColor);
 							}
 						});
 				dialog.show();
@@ -441,19 +441,19 @@ public class CustomizeFragment extends Fragment {
 
 		colorBackgroundButton = (Button) getActivity().findViewById(
 				R.id.backgroundColorButton);
-		setColor(colorBackgroundButton.getBackground(), currSubP._bgcolor);
+		setColor(colorBackgroundButton.getBackground(), currSubP.bgcolor);
 		colorBackgroundButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
 				AmbilWarnaDialog dialog = new AmbilWarnaDialog(getActivity(),
-						currSubP._bgcolor, new OnAmbilWarnaListener() {
+						currSubP.bgcolor, new OnAmbilWarnaListener() {
 							public void onCancel(AmbilWarnaDialog dialog) {
 							}
 
 							public void onOk(AmbilWarnaDialog dialog, int color) {
-								currSubP._bgcolor = color;
+								currSubP.bgcolor = color;
 								setColor(colorBackgroundButton.getBackground(),
-										currSubP._bgcolor);
+										currSubP.bgcolor);
 							}
 						});
 				dialog.show();
@@ -476,45 +476,50 @@ public class CustomizeFragment extends Fragment {
 
 		attachmentButton = (Button) getActivity().findViewById(
 				R.id.customize_attachment);
-		attachmentButton.setOnClickListener(new OnClickListener() {
+		attachmentButton.setOnClickListener( new OnClickListener() {
 
 			public void onClick(View v) {
-				final List<String> values = new ArrayList<String>();
-				final List<SubProfile> subProfiles;
-				if (guard.getChild() == null) {
-					subProfiles = new ArrayList<SubProfile>();
-					for (Child c : guard.Children()) {
-						for (SubProfile p : c.SubProfiles()) {
-							subProfiles.add(p);
+				List<String> values = new ArrayList<String>();
+				final List<Child> children;
+				children = guard.Children();
+				
+				for (Child c : children) {
+					values.add(c.name);
+				}
+				
+				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+				builder.setTitle(getString(R.string.attachment_button_description));
+				builder.setItems(values.toArray(new CharSequence[values.size()]), new DialogInterface.OnClickListener() {
+					
+					public void onClick(DialogInterface dialog, int which) {
+						List<String> values = new ArrayList<String>();
+						final List<SubProfile> subProfiles;
+						subProfiles = children.get(which).SubProfiles();
+						
+						for (SubProfile subProfile : subProfiles) {
+							values.add(subProfile.name);
 						}
-					}
 
-				} else {
-					subProfiles = guard.getChild().SubProfiles();
-				}
+						// Cast values to CharSequence and put it in the builder
+						AlertDialog.Builder builder2 = new AlertDialog.Builder(
+								getActivity());
+						builder2.setTitle(getString(R.string.attachment_button_description));
+						builder2.setItems(values.toArray(new CharSequence[values.size()]), new DialogInterface.OnClickListener() {
 
-				for (SubProfile subProfile : subProfiles) {
-					values.add(subProfile._name);
-				}
-
-				// Cast values to CharSequence
-				final CharSequence[] items = values
-						.toArray(new CharSequence[values.size()]);
-				AlertDialog.Builder builder = new AlertDialog.Builder(
-						getActivity());
-				builder.setTitle(getActivity().getString(
-						R.string.attachment_button_description));
-				builder.setItems(items, new DialogInterface.OnClickListener() {
-
-					public void onClick(DialogInterface dialog, int item) {
-						setAttachment(subProfiles.get(item));
+							public void onClick(DialogInterface dialog, int item) {
+								setAttachment(subProfiles.get(item));
+							}
+						});
+						AlertDialog alert = builder2.create();
+						alert.show();
+						
 					}
 				});
 				AlertDialog alert = builder.create();
 				alert.show();
-
 			}
-		});
+		}
+	);
 	}
 
 	/**
@@ -584,7 +589,7 @@ public class CustomizeFragment extends Fragment {
 	private void initSaveButton() {
 		saveButton = (Button) getActivity().findViewById(R.id.customize_save);
 		Drawable d;
-		if (currSubP.getSave() && !guard.getChild().getLock()
+		if (currSubP.save && !guard.getChild().getLock()
 				&& guard.getChild() != null) {
 			d = getResources().getDrawable(R.drawable.thumbnail_save);
 			saveButton.setOnClickListener(new OnClickListener() {
@@ -621,7 +626,7 @@ public class CustomizeFragment extends Fragment {
 
 	protected void getName() {
 		String name = "";
-		if (currSubP._name == "") {
+		if (currSubP.name == "") {
 
 			switch (currSubP.formType()) {
 			case Hourglass:
@@ -645,7 +650,7 @@ public class CustomizeFragment extends Fragment {
 				break;
 			}
 		} else {
-			name = currSubP._name;
+			name = currSubP.name;
 		}
 		Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setTitle(getActivity().getString(R.string.save_button));
@@ -656,7 +661,7 @@ public class CustomizeFragment extends Fragment {
 				new DialogInterface.OnClickListener() {
 
 					public void onClick(DialogInterface dialog, int which) {
-						currSubP._name = et.getText().toString();
+						currSubP.name = et.getText().toString();
 						guard.publishList().get(TimerLoader.profilePosition)
 								.select();
 
@@ -697,13 +702,13 @@ public class CustomizeFragment extends Fragment {
 			break;
 		}
 
-		int seconds = currSubP._totalTime % 60;
-		int minutes = (currSubP._totalTime - seconds) / 60;
+		int seconds = currSubP.totalTime % 60;
+		int minutes = (currSubP.totalTime - seconds) / 60;
 
 		desc += name + " - ";
 		desc += "(" + minutes + ":" + seconds + ")";
 
-		currSubP._desc = desc;
+		currSubP.desc = desc;
 	}
 
 	/**
@@ -713,7 +718,7 @@ public class CustomizeFragment extends Fragment {
 		final ArrayList<String> values = new ArrayList<String>();
 		Drawable d;
 		for (Child c : guard.Children()) {
-			values.add(c._name);
+			values.add(c.name);
 		}
 
 		// Cast values to CharSequence
@@ -722,7 +727,7 @@ public class CustomizeFragment extends Fragment {
 
 		saveAsButton = (Button) getActivity().findViewById(
 				R.id.customize_save_as);
-		if (currSubP.getSaveAs()) {
+		if (currSubP.saveAs) {
 			d = getResources().getDrawable(R.drawable.thumbnail_saveas);
 			saveAsButton.setOnClickListener(new OnClickListener() {
 
@@ -744,13 +749,13 @@ public class CustomizeFragment extends Fragment {
 													R.id.subprofileFragment);
 									df.loadSubProfiles();
 
-									String toastText = currSubP._name;
+									String toastText = currSubP.name;
 									toastText += " "
 											+ getActivity()
 													.getApplicationContext()
 													.getText(
 															R.string.toast_text);
-									toastText += " " + c._name;
+									toastText += " " + c.name;
 
 									Toast toast = Toast.makeText(getActivity(),
 											toastText, 3000);
@@ -785,7 +790,7 @@ public class CustomizeFragment extends Fragment {
 		startButton = (Button) getActivity().findViewById(
 				R.id.customize_start_button);
 		Drawable d;
-		if (currSubP.getSaveAs()) {
+		if (currSubP.saveAs) {
 			d = getResources().getDrawable(R.drawable.thumbnail_start);
 			startButton.setOnClickListener(new OnClickListener() {
 
@@ -831,14 +836,14 @@ public class CustomizeFragment extends Fragment {
 		selectStyle(currSubP.formType());
 
 		/* Set Time */
-		setTime(currSubP._totalTime);
+		setTime(currSubP.totalTime);
 
 		/* Set Colors */
-		checkboxGradient.setChecked(currSubP._gradient);
-		setColor(colorGradientButton1.getBackground(), currSubP._timeLeftColor);
-		setColor(colorGradientButton2.getBackground(), currSubP._timeSpentColor);
-		setColor(colorFrameButton.getBackground(), currSubP._frameColor);
-		setColor(colorBackgroundButton.getBackground(), currSubP._bgcolor);
+		checkboxGradient.setChecked(currSubP.gradient);
+		setColor(colorGradientButton1.getBackground(), currSubP.timeLeftColor);
+		setColor(colorGradientButton2.getBackground(), currSubP.timeSpentColor);
+		setColor(colorFrameButton.getBackground(), currSubP.frameColor);
+		setColor(colorBackgroundButton.getBackground(), currSubP.bgcolor);
 
 		/* Set Attachment */
 		setAttachment(currSubP.getAttachment());
@@ -849,14 +854,14 @@ public class CustomizeFragment extends Fragment {
 		selectStyle(currSubP.formType());
 
 		/* Set Time */
-		setTime(currSubP._totalTime);
+		setTime(currSubP.totalTime);
 
 		/* Set Colors */
-		checkboxGradient.setChecked(currSubP._gradient);
-		setColor(colorGradientButton1.getBackground(), currSubP._timeLeftColor);
-		setColor(colorGradientButton2.getBackground(), currSubP._timeSpentColor);
-		setColor(colorFrameButton.getBackground(), currSubP._frameColor);
-		setColor(colorBackgroundButton.getBackground(), currSubP._bgcolor);
+		checkboxGradient.setChecked(currSubP.gradient);
+		setColor(colorGradientButton1.getBackground(), currSubP.timeLeftColor);
+		setColor(colorGradientButton2.getBackground(), currSubP.timeSpentColor);
+		setColor(colorFrameButton.getBackground(), currSubP.frameColor);
+		setColor(colorBackgroundButton.getBackground(), currSubP.bgcolor);
 
 		/* Set Attachment */
 		setAttachment(currSubP.getAttachment());

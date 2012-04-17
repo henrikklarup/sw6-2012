@@ -52,15 +52,15 @@ public class DrawProgressBar extends View {
 
 		sp = sub;
 
-		background = sp._bgcolor;
-		frame = sp._frameColor;
-		timeleft = sp._timeLeftColor;
-		timeleft2 = sp._timeLeftColor;
-		timespent = sp._timeSpentColor;
-		totalTime = (sp._totalTime - 1) * 1000;
+		background = sp.bgcolor;
+		frame = sp.frameColor;
+		timeleft = sp.timeLeftColor;
+		timeleft2 = sp.timeLeftColor;
+		timespent = sp.timeSpentColor;
+		totalTime = (sp.totalTime - 1) * 1000;
 		endTime = SystemClock.currentThreadTimeMillis() + totalTime;
 
-		if (sp._gradient) {
+		if (sp.gradient) {
 			timeleft2 = timespent;
 			timespent = background;
 		}

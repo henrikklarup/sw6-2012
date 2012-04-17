@@ -7,7 +7,7 @@ import dk.aau.cs.giraf.TimerLib.TimerHelper;
 public class TimerLoader {
 	
 	public static void load(){
-		Guardian guard = Guardian.getInstance("John");
+		Guardian guard = Guardian.getInstance();
 		TimerHelper help = new TimerHelper();
 		help.LoadTestData();
 		help.loadPredef();

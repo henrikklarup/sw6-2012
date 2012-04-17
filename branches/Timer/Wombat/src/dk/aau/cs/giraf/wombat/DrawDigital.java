@@ -14,14 +14,14 @@ import dk.aau.cs.giraf.TimerLib.SubProfile;
 public class DrawDigital extends View {
 	private Guardian guard = Guardian.getInstance();
 	SubProfile sp = guard.getSubProfile();
-	int background = sp._bgcolor;
-	int frame = sp._frameColor;
-	int timeleft = sp._timeLeftColor;
-	int timeleft2 = sp._timeLeftColor;
-	int timespent = sp._timeSpentColor;
+	int background = sp.bgcolor;
+	int frame = sp.frameColor;
+	int timeleft = sp.timeLeftColor;
+	int timeleft2 = sp.timeLeftColor;
+	int timespent = sp.timeSpentColor;
 	boolean init = true;
 
-	double totalTime = (sp._totalTime - 1) * 1000;
+	double totalTime = (sp.totalTime - 1) * 1000;
 	double endTime = SystemClock.currentThreadTimeMillis() + totalTime;
 	Paint paint = new Paint();
 	Rect r;
@@ -34,7 +34,7 @@ public class DrawDigital extends View {
 
 	public DrawDigital(Context context, SubProfile sub) {
 		super(context);
-		if (sp._gradient) {
+		if (sp.gradient) {
 			timeleft2 = timespent;
 			timespent = background;
 		}
