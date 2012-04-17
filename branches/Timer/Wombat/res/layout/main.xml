@@ -52,7 +52,7 @@
         <Button 
         android:id="@+id/new_template_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="53dp"
         android:text="@string/new_template_button_text"
         />
         
