@@ -170,7 +170,7 @@ public class Profile {
 		if(getPicture() != null) {
 			localOutput = localOutput.replace("{6}", getPicture());
 		}
-		localOutput = localOutput.replace("{7}", "Setting(Static Setting text)");
+//		localOutput = localOutput.replace("{7}", "Setting(Static Setting text)");
 //		localOutput = localOutput.replace("{7}", getSetting().toString());
 
 		return localOutput;

@@ -2,14 +2,12 @@ package dk.aau.cs.giraf.oasis.lib.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import dk.aau.cs.giraf.oasis.lib.metadata.AuthUsersMetaData;
 import dk.aau.cs.giraf.oasis.lib.metadata.HasDepartmentMetaData;
 import dk.aau.cs.giraf.oasis.lib.metadata.HasGuardianMetaData;
 import dk.aau.cs.giraf.oasis.lib.metadata.ProfilesMetaData;
@@ -27,6 +25,7 @@ public class ProfilesHelper {
 
 
 	private static Context _context;
+	private AuthUsersHelper au;
 	private String[] columns = new String[] { 
 			ProfilesMetaData.Table.COLUMN_ID, 
 			ProfilesMetaData.Table.COLUMN_FIRST_NAME,
@@ -43,7 +42,7 @@ public class ProfilesHelper {
 	 */
 	public ProfilesHelper(Context context){
 		_context = context;
-		AuthUsersHelper au = new AuthUsersHelper(_context);
+		au = new AuthUsersHelper(_context);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -72,34 +71,13 @@ public class ProfilesHelper {
 	 * Insert profile
 	 * @param profile Profile containing data
 	 */
-	public long insertProfile(Profile profile) {
-		String certificate = getNewCertificate();
-		ContentValues authusersContentValues = new ContentValues();
-		authusersContentValues.put(AuthUsersMetaData.Table.COLUMN_CERTIFICATE, certificate);
-		authusersContentValues.put(AuthUsersMetaData.Table.COLUMN_ROLE, 1);
-		_context.getContentResolver().insert(AuthUsersMetaData.CONTENT_URI, authusersContentValues);
-
-		String[] authColumns = new String[] { 
-				AuthUsersMetaData.Table.COLUMN_ID, 
-				AuthUsersMetaData.Table.COLUMN_CERTIFICATE,
-				AuthUsersMetaData.Table.COLUMN_ROLE};
-		Cursor c = _context.getContentResolver().query(AuthUsersMetaData.CONTENT_URI, authColumns, null, new String[] {certificate}, null);
-
-		if (c != null) {
-			if(c.moveToFirst()) {
-				long id = c.getLong(c.getColumnIndex(AuthUsersMetaData.Table.COLUMN_ID));
-				profile.setId(id);
-
-				ContentValues profileContentValues = getContentValues(profile);
-				profileContentValues.put(ProfilesMetaData.Table.COLUMN_ID, profile.getId());
-				_context.getContentResolver().insert(ProfilesMetaData.CONTENT_URI, profileContentValues);
-				c.close();
-				return id;
-			}
-		}
-		c.close();
-
-		return -1;
+	public long insertProfile(Profile profile) {		
+		profile.setId(au.insertAuthUser(0));
+		
+		ContentValues profileContentValues = getContentValues(profile);
+		profileContentValues.put(ProfilesMetaData.Table.COLUMN_ID, profile.getId());
+		_context.getContentResolver().insert(ProfilesMetaData.CONTENT_URI, profileContentValues);
+		return profile.getId();
 	}
 	
 	public int attachChildToGuardian(Profile child, Profile guardian) {
@@ -131,20 +109,9 @@ public class ProfilesHelper {
 	 */
 	public Profile authenticateProfile(String certificate) {
 		Profile profile = null;
-
-		String[] authColumns = new String[] { 
-				AuthUsersMetaData.Table.COLUMN_ID, 
-				AuthUsersMetaData.Table.COLUMN_CERTIFICATE,
-				AuthUsersMetaData.Table.COLUMN_ROLE};
-		Cursor c = _context.getContentResolver().query(AuthUsersMetaData.CONTENT_URI, authColumns, null, new String[] {certificate}, null);
-
-		if(c != null) {
-			if(c.moveToFirst()) {
-				profile = getProfileById(c.getLong(c.getColumnIndex(AuthUsersMetaData.Table.COLUMN_ID)));
-			}
-		}
-
-		c.close();
+		long id;
+		id = au.getIdByCertificate(certificate);
+		profile = getProfileById(id);
 
 		return profile;
 	}
@@ -156,11 +123,10 @@ public class ProfilesHelper {
 	 * @return the number of row affected
 	 */
 	public int setCertificate(String certificate, Profile profile) {
-		Uri uri = ContentUris.withAppendedId(AuthUsersMetaData.CONTENT_URI, profile.getId());
-
-		ContentValues cv = new ContentValues();
-		cv.put(AuthUsersMetaData.Table.COLUMN_CERTIFICATE, certificate);
-		return _context.getContentResolver().update(uri, cv, null, null);
+		int result;
+		result = au.setCertificate(certificate, profile.getId());
+		
+		return result;
 	}
 	
 	/**
@@ -186,26 +152,8 @@ public class ProfilesHelper {
 	 * @return List<String> or null
 	 */
 	public List<String> getCertificatesByProfile(Profile profile) {
-		List<String> certificate = null;
-		Uri uri = ContentUris.withAppendedId(AuthUsersMetaData.CONTENT_URI, profile.getId());
-
-		String[] authColumns = new String[] {
-				AuthUsersMetaData.Table.COLUMN_ID,
-				AuthUsersMetaData.Table.COLUMN_CERTIFICATE,
-				AuthUsersMetaData.Table.COLUMN_ROLE};
-		Cursor c = _context.getContentResolver().query(uri, authColumns, null, null, null);
-
-		if (c != null) {
-			if (c.moveToFirst()) {
-				certificate = new ArrayList<String>();
-				while (!c.isAfterLast()) {
-					certificate.add(c.getString(c.getColumnIndex(AuthUsersMetaData.Table.COLUMN_CERTIFICATE)));
-					c.moveToNext();
-				}
-			}
-		}
-
-		c.close();
+		List<String> certificate;
+		certificate = au.getCertificatesById(profile.getId());
 
 		return certificate;
 	}
@@ -284,7 +232,7 @@ public class ProfilesHelper {
 		Cursor c = _context.getContentResolver().query(uri, columns, null, null, null);
 
 		if (c != null) {
-			if(c.moveToFirst()) {
+			if (c.moveToFirst()) {
 				return cursorToProfile(c);
 			}
 		}
@@ -292,6 +240,20 @@ public class ProfilesHelper {
 		c.close();
 
 		return null;
+	}
+	
+	public List<Profile> getProfilesByName(String name) {
+		List<Profile> profiles = new ArrayList<Profile>();
+		Cursor c = _context.getContentResolver().query(ProfilesMetaData.CONTENT_URI, columns, 
+				ProfilesMetaData.Table.COLUMN_FIRST_NAME + " LIKE '%" + name + "%' OR " +
+				ProfilesMetaData.Table.COLUMN_MIDDLE_NAME + " LIKE '%" + name + "%' OR " +
+				ProfilesMetaData.Table.COLUMN_SUR_NAME +  " LIKE '%" + name + "%'", null, null);
+		
+		if (c != null) {
+			profiles = cursorToProfiles(c);
+		}
+		
+		return profiles;
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -306,8 +268,8 @@ public class ProfilesHelper {
 	private List<Profile> cursorToProfiles(Cursor cursor) {
 		List<Profile> profiles = new ArrayList<Profile>();
 
-		if(cursor.moveToFirst()) {
-			while(!cursor.isAfterLast()) {
+		if (cursor.moveToFirst()) {
+			while (!cursor.isAfterLast()) {
 				profiles.add(cursorToProfile(cursor));
 				cursor.moveToNext();
 			}
@@ -350,18 +312,5 @@ public class ProfilesHelper {
 		contentValues.put(ProfilesMetaData.Table.COLUMN_SETTINGS, Setting.toStringSetting(profile.getSetting()));
 
 		return contentValues;
-	}
-
-	/**
-	 * @return a certificate
-	 */
-	private String getNewCertificate() {
-		Random rnd = new Random();
-		String certificate = "";
-		for (int i = 0; i < 256 + 1; i++)
-		{
-			certificate += (char)(rnd.nextInt(26) + 97);
-		}
-		return certificate;
 	}
 }

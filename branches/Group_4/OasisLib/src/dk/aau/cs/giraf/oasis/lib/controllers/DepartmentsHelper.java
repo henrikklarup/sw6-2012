@@ -2,14 +2,12 @@ package dk.aau.cs.giraf.oasis.lib.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import dk.aau.cs.giraf.oasis.lib.metadata.AuthUsersMetaData;
 import dk.aau.cs.giraf.oasis.lib.metadata.DepartmentsMetaData;
 import dk.aau.cs.giraf.oasis.lib.metadata.HasDepartmentMetaData;
 import dk.aau.cs.giraf.oasis.lib.metadata.HasSubDepartmentMetaData;
@@ -25,6 +23,7 @@ import dk.aau.cs.giraf.oasis.lib.models.Profile;
 public class DepartmentsHelper {
 
 	private static Context _context;
+	private AuthUsersHelper au;
 	private String[] columns = new String[] { 
 			DepartmentsMetaData.Table.COLUMN_ID,
 			DepartmentsMetaData.Table.COLUMN_NAME,
@@ -38,6 +37,7 @@ public class DepartmentsHelper {
 	 */
 	public DepartmentsHelper(Context context) {
 		_context = context;
+		au = new AuthUsersHelper(_context);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -71,34 +71,12 @@ public class DepartmentsHelper {
 	 * @param department Department containg data
 	 */
 	public long insertDepartment(Department department) {
-		String certificate = getNewCertificate();
-		ContentValues authusersContentValues = new ContentValues();
-		authusersContentValues.put(AuthUsersMetaData.Table.COLUMN_CERTIFICATE, certificate);
-		authusersContentValues.put(AuthUsersMetaData.Table.COLUMN_ROLE, 0);
-		_context.getContentResolver().insert(AuthUsersMetaData.CONTENT_URI, authusersContentValues);
-
-		String[] authColumns = new String[] { 
-				AuthUsersMetaData.Table.COLUMN_ID, 
-				AuthUsersMetaData.Table.COLUMN_CERTIFICATE,
-				AuthUsersMetaData.Table.COLUMN_ROLE};
-		Cursor c = _context.getContentResolver().query(AuthUsersMetaData.CONTENT_URI, authColumns, null, new String[] {certificate}, null);
-
-		if (c != null) {
-			if(c.moveToFirst()) {
-				long id = c.getLong(c.getColumnIndex(AuthUsersMetaData.Table.COLUMN_ID));
-				department.setId(id);
-
-				ContentValues cv = getContentValues(department);
-				cv.put(DepartmentsMetaData.Table.COLUMN_ID, department.getId());
-				_context.getContentResolver().insert(DepartmentsMetaData.CONTENT_URI, cv);
-				c.close();
-				return id;
-			}
-		}
-		c.close();
-
-		return -1;
-
+		department.setId(au.insertAuthUser(1));
+		
+		ContentValues cv = getContentValues(department);
+		cv.put(DepartmentsMetaData.Table.COLUMN_ID, department.getId());
+		_context.getContentResolver().insert(DepartmentsMetaData.CONTENT_URI, cv);
+		return department.getId();
 	}
 
 	public int attachProfileToDepartment(Profile profile, Department department) {
@@ -128,6 +106,33 @@ public class DepartmentsHelper {
 		ContentValues cv = getContentValues(department);
 		_context.getContentResolver().update(uri, cv, null, null);
 	}
+	
+	/**
+	 * Authenticates the department
+	 * @param certificate the certificate that authenticates the department
+	 * @return the authenticated department or null
+	 */
+	public Department authenticateDepartment(String certificate) {
+		Department dep = null;
+		long id;
+		id = au.getIdByCertificate(certificate);
+		dep = getDepartmentById(id);
+
+		return dep;
+	}
+	
+	/**
+	 * Set a new certificate
+	 * @param certificate the certificate to set
+	 * @param department the department whom the certificate is updated for
+	 * @return the number of row affected
+	 */
+	public int setCertificate(String certificate, Department department) {
+		int result;
+		result = au.setCertificate(certificate, department.getId());
+		
+		return result;
+	}
 
 	/**
 	 * Get all departments
@@ -148,6 +153,18 @@ public class DepartmentsHelper {
 		c.close();
 
 		return departments;
+	}
+	
+	/**
+	 * Retrieve the certificates for a department
+	 * @param department
+	 * @return List<String> or null
+	 */
+	public List<String> getCertificatesByDepartment(Department department) {
+		List<String> certificate;
+		certificate = au.getCertificatesById(department.getId());
+
+		return certificate;
 	}
 
 	public Department getDepartmentById(long id) {
@@ -182,22 +199,46 @@ public class DepartmentsHelper {
 
 		return departments;
 	}
-
-	public List<Department> getSubDepartments(Department department) {
+	
+	public List<Department> getDepartmentsByProfile(Profile profile) {
 		List<Department> departments = new ArrayList<Department>();
-		String[] hasDepartmentsColumns = {
+		String[] hasDepartmentColumns = {
 				HasDepartmentMetaData.Table.COLUMN_IDPROFILE,
 				HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT };
+		
 		Cursor c = _context.getContentResolver().query(
-				HasDepartmentMetaData.CONTENT_URI, hasDepartmentsColumns,
-				hasDepartmentsColumns[0] + " = '" + department.getId() + "'", null,
-				null);
+				HasDepartmentMetaData.CONTENT_URI, hasDepartmentColumns,
+				hasDepartmentColumns[0] + " = '" + profile.getId() + "'", null,	null);
 
 		if (c != null) {
 			if (c.moveToFirst()) {
 				while (!c.isAfterLast()) {
-					Department subDepartment = getDepartmentById(c.getLong(c
-							.getColumnIndex(hasDepartmentsColumns[1])));
+					Department department = getDepartmentById(c.getLong(c.getColumnIndex(hasDepartmentColumns[1])));
+					departments.add(department);
+					c.moveToNext();
+				}
+			}
+		}
+
+		c.close();
+
+		return departments;
+	}
+
+	public List<Department> getSubDepartments(Department department) {
+		List<Department> departments = new ArrayList<Department>();
+		String[] hasSubDepartmentsColumns = {
+				HasSubDepartmentMetaData.Table.COLUMN_IDDEPARTMENT,
+				HasSubDepartmentMetaData.Table.COLUMN_IDSUBDEPARTMENT };
+		
+		Cursor c = _context.getContentResolver().query(
+				HasSubDepartmentMetaData.CONTENT_URI, hasSubDepartmentsColumns,
+				hasSubDepartmentsColumns[0] + " = '" + department.getId() + "'", null,	null);
+
+		if (c != null) {
+			if (c.moveToFirst()) {
+				while (!c.isAfterLast()) {
+					Department subDepartment = getDepartmentById(c.getLong(c.getColumnIndex(hasSubDepartmentsColumns[1])));
 					departments.add(subDepartment);
 					c.moveToNext();
 				}
@@ -240,18 +281,5 @@ public class DepartmentsHelper {
 		contentValues.put(DepartmentsMetaData.Table.COLUMN_EMAIL, department.getEmail());
 		contentValues.put(DepartmentsMetaData.Table.COLUMN_PHONE, department.getPhone());
 		return contentValues;
-	}
-
-	/**
-	 * @return the certificate
-	 */
-	private String getNewCertificate() {
-		Random rnd = new Random();
-		String certificate = "";
-		for (int i = 0; i < 256 + 1; i++)
-		{
-			certificate += (char)((rnd.nextInt() % 26) + 97);
-		}
-		return certificate;
 	}
 }
