@@ -38,7 +38,7 @@ public class HomeActivity extends Activity {
 		HomeActivity.mContext = getApplicationContext();
 		this.mHelper = new Helper(mContext);
 	
-		//this.mCurrentUser = mHelper.profilesHelper.getProfileById(getIntent().getExtras().getLong("currentGuardianID"));
+		this.mCurrentUser = mHelper.profilesHelper.getProfileById(getIntent().getExtras().getLong("currentGuardianID"));
 		
 		
 		
@@ -94,7 +94,10 @@ public class HomeActivity extends Activity {
 			TextView nameView = new TextView(this);
 			TextView institutionView = new TextView(this);
 			
-			nameView.setText(mCurrentUser.getFirstname() + " " + mCurrentUser.getSurname());
+			/// TODO implement mCurrentUser
+			//nameView.setText(mCurrentUser.getFirstname() + " " + mCurrentUser.getSurname());
+			nameView.setText("Drazenko Banjak");
+			
 			/// TODO implement get Department - method should be available 18 april from oasis
 			institutionView.setText("Enebakken"); /// TODO change to dynamic value
 			
@@ -137,7 +140,7 @@ public class HomeActivity extends Activity {
 					appInfo.icon = info.activityInfo.loadIcon(getPackageManager());
 					appInfo.packageName = info.activityInfo.applicationInfo.packageName;
 					appInfo.activityName = info.activityInfo.name;
-					//appInfo.guardian = mCurrentUser.getId();
+					appInfo.guardian = mCurrentUser.getId();
 					
 					applications.add(appInfo);
 				}

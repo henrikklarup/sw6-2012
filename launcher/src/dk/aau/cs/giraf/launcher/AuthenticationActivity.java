@@ -79,6 +79,8 @@ public class AuthenticationActivity extends CaptureActivity {
 			((GButton)this.findViewById(R.id.loginGButton)).setVisibility(View.VISIBLE);
 			((TextView)this.findViewById(R.id.authentication_step1)).setText("Saadan! Klik paa 'Log in' for at bekraefte.");
 			
+			profile.setId(45436);
+			
 			mHomeIntent = new Intent(AuthenticationActivity.this, HomeActivity.class);
 			mHomeIntent.putExtra("currentGuardianID", profile.getId());
 		} else {
