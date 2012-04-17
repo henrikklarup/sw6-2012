@@ -11,7 +11,7 @@ import android.content.Intent;
         @Override
         public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
             final Profile person = (Profile) parent.getItemAtPosition(position);
-            final String appComponentName = getIntent().getExtras().getString("appComponentName");
+            final String appComponentName = this.getIntent().getExtras().getString("appComponentName");
             
             Intent intent = new Intent(appComponentName);
             intent.putExtra("currentProfileId", person.getId());
