@@ -34,7 +34,7 @@ public class HomeActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.home);
 		
-		this.mContext = getApplicationContext();
+		HomeActivity.mContext = getApplicationContext();
 		this.mHelper = new Helper(mContext);
 	
 		this.mCurrentUser = mHelper.profilesHelper.getProfileById(getIntent().getExtras().getLong("currentGuardianID"));
