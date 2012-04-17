@@ -35,20 +35,20 @@
          <xs:complexType>
           <xs:sequence>
             <xs:element name="certificate" type="xs:string">
-			<xs:attribute name="type" type="ttype" use="required"/>
-			</xs:element>
+      			 <xs:attribute name="type" type="ttype" use="required"/>
+      			</xs:element>
             <xs:element name="idUser" type="xs:integer">
-			<xs:attribute name="type" type="ttype" use="required"/>
-			</xs:element>
-			<xs:element name="aRole" type="xs:integer">
-			<xs:attribute name="type" type="ttype" use="required"/>
-			</xs:element>
-			<xs:element name="username" type="xs:string">
-			<xs:attribute name="type" type="ttype" use="required"/>
-			</xs:element>
-			<xs:element name="password" type="xs:string">
-			<xs:attribute name="type" type="ttype" use="required"/>
-			</xs:element>
+      			 <xs:attribute name="type" type="ttype" use="required"/>
+      			</xs:element>
+      			<xs:element name="aRole" type="xs:integer">
+      			 <xs:attribute name="type" type="ttype" use="required"/>
+      			</xs:element>
+      			<xs:element name="username" type="xs:string">
+      			 <xs:attribute name="type" type="ttype" use="required"/>
+      			</xs:element>
+      			<xs:element name="password" type="xs:string">
+      			 <xs:attribute name="type" type="ttype" use="required"/>
+      			</xs:element>
           </xs:sequence>
           <xs:attribute name="action" type="crud" use="required"/>
          </xs:complexType>

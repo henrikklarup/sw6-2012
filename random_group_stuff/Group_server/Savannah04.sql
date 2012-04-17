@@ -95,6 +95,10 @@ CREATE  TABLE `04`.`ListOfApps` (
   `idApp` INT NOT NULL ,
 
   `idProfile` INT NOT NULL ,
+
+  `settings` BLOB NULL ,
+
+  `stats` BLOB NULL ,
   
   FOREIGN KEY (`idApp` )
 
