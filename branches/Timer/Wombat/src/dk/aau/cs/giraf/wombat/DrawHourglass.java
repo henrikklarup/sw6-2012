@@ -3,6 +3,7 @@ package dk.aau.cs.giraf.wombat;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.os.SystemClock;
@@ -28,7 +29,7 @@ public class DrawHourglass extends View {
 
 	int width, height;
 	int top, left;
-	int frameHeight, indent;
+	int frameHeight, indent, glassLeft, glassRight;
 
 	public DrawHourglass(Context context) {
 		super(context);
@@ -71,7 +72,16 @@ public class DrawHourglass extends View {
 		c.drawRect(rright, paint);
 		
 		/* Draw the "glass" */
+		Path p = new Path();
+		p.moveTo(left + indent + frameHeight, top + frameHeight);
+		p.lineTo(left + width - indent - frameHeight, top + frameHeight);
+		p.lineTo(left + width - indent - frameHeight, top + 200);
+		p.lineTo(left + width - indent - frameHeight - 50, top + 225);
+		p.lineTo(left + indent + frameHeight + 50, top + 225);
+		p.lineTo(left + indent + frameHeight, top + 200);
 		
+//		p.close();
+		c.drawPath(p, paint);
 		
 
 		/* Draw the backgroundcolor inside the frame */
