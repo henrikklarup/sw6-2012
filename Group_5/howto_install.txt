@@ -1,0 +1,6 @@
+adb install Launcher.apk 
+
+If you have an older version installed, run:
+
+adb uninstall dk.aau.cs.giraf.launcher
+
