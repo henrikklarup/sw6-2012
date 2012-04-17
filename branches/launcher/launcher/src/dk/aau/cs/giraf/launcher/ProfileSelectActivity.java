@@ -25,11 +25,10 @@ public class ProfileSelectActivity extends Activity{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.profileselect);
-
-		loadProfiles(true);
-
+		loadProfiles();
 	}
-	private void loadProfiles(boolean isLaunching) {
+	
+	private void loadProfiles() {
 		Helper helper = new Helper(this);
 		Profile.setOutput("{1} {2} {3}");
 		
