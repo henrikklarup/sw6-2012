@@ -13,6 +13,7 @@ import android.content.Intent;
             Intent profileSelectIntent = new Intent(v.getContext(),ProfileSelectActivity.class);
             profileSelectIntent.putExtra("appPackageName", app.packageName);
             profileSelectIntent.putExtra("appActivityName", app.activityName);
+            profileSelectIntent.putExtra("currentGuardianID", app.guardian);
             
 			v.getContext().startActivity(profileSelectIntent);
     }  
