@@ -42,6 +42,11 @@ class ApplicationInfo{
 	 * The name of the main activity in the application.
 	 */
 	String activityName;
+	
+	/**
+	 * ID of the guardian who is using the launcher.
+	 */
+	Long guardian;
 
 	@Override
 	public boolean equals(Object o) {
