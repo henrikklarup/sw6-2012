@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class ProfileSelectActivity extends Activity{
 
@@ -35,7 +36,7 @@ public class ProfileSelectActivity extends Activity{
 		
 		mProfiles = helper.profilesHelper.getProfiles();
 
-		GList gList = (GList) findViewById(R.id.profilesList);
+		ListView lv = (ListView) findViewById(R.id.profilesList);
 		
 		for(int i = 0; i < mProfiles.size(); i++) {
 			// If profile is not a child:
@@ -46,9 +47,9 @@ public class ProfileSelectActivity extends Activity{
 		}
 		
 		ArrayAdapter<Profile> adapter = new ArrayAdapter<Profile>(this, android.R.layout.simple_list_item_1, android.R.id.text1, mProfiles);
-		gList.setAdapter(adapter);
+		lv.setAdapter(adapter);
 		
-		gList.setOnItemClickListener(new OnItemClickListener() {
+		lv.setOnItemClickListener(new OnItemClickListener() {
 		      public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		    	  	final long childID = ((Profile) parent.getItemAtPosition(position)).getId();
 		    	  	final long guardianID = getIntent().getExtras().getLong("currentGuardianID");

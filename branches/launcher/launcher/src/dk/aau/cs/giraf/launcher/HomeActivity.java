@@ -37,7 +37,7 @@ public class HomeActivity extends Activity {
 		HomeActivity.mContext = getApplicationContext();
 		this.mHelper = new Helper(mContext);
 	
-		this.mCurrentUser = mHelper.profilesHelper.getProfileById(getIntent().getExtras().getLong("currentGuardianID"));
+		//this.mCurrentUser = mHelper.profilesHelper.getProfileById(getIntent().getExtras().getLong("currentGuardianID"));
 		
 		
 		
@@ -117,7 +117,7 @@ public class HomeActivity extends Activity {
 					appInfo.icon = info.activityInfo.loadIcon(getPackageManager());
 					appInfo.packageName = info.activityInfo.applicationInfo.packageName;
 					appInfo.activityName = info.activityInfo.name;
-					appInfo.guardian = mCurrentUser.getId();
+					//appInfo.guardian = mCurrentUser.getId();
 					
 					applications.add(appInfo);
 				}
