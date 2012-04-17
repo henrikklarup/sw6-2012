@@ -4,6 +4,9 @@ package dk.aau.cs.giraf.launcher;
 import java.util.ArrayList;
 import java.util.List;
 
+import dk.aau.cs.giraf.oasis.lib.Helper;
+import dk.aau.cs.giraf.oasis.lib.models.Profile;
+
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -19,9 +22,12 @@ import android.view.WindowManager;
 
 public class HomeActivity extends Activity {
 
-	private static Context context;
+	private static Context mContext;
 	private static ArrayList<ApplicationInfo> mApplications;
-	GridView Grid;
+	private GridView mGrid;
+	private Profile mCurrentUser; 
+	
+	private Helper mHelper;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -29,8 +35,14 @@ public class HomeActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.home);
 		
-		loadApplications(true);
+		this.mContext = getApplicationContext();
+		this.mHelper = new Helper(mContext);
+	
+		this.mCurrentUser = mHelper.profilesHelper.getProfileById(getIntent().getExtras().getLong("currentGuardianID"));
 		
+		
+		
+		loadApplications(true);
 	}
 	
 	@Override
@@ -38,7 +50,6 @@ public class HomeActivity extends Activity {
 		super.onWindowFocusChanged(hasFocus);
 	  	this.resizeBar();
 	}
-
 	
 	private void resizeBar() {
 		GridView homeGridView = (GridView)this.findViewById(R.id.GridViewHome);
@@ -93,8 +104,7 @@ public class HomeActivity extends Activity {
 		Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
 		mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
 		
-		HomeActivity.context = getApplicationContext();
-		final List<ResolveInfo> pkgAppsList = context.getPackageManager().queryIntentActivities( mainIntent, 0);
+		final List<ResolveInfo> pkgAppsList = mContext.getPackageManager().queryIntentActivities( mainIntent, 0);
 
 		if(pkgAppsList != null){
 			ArrayList<ApplicationInfo> applications = new ArrayList<ApplicationInfo>();
@@ -112,9 +122,11 @@ public class HomeActivity extends Activity {
 				}
 			}
 
-			Grid = (GridView)this.findViewById(R.id.GridViewHome);
-			Grid.setAdapter(new AppAdapter(this,applications));
-			Grid.setOnItemClickListener(new ProfileLauncher());
+			mGrid = (GridView)this.findViewById(R.id.GridViewHome);
+			mGrid.setAdapter(new AppAdapter(this,applications));
+			mGrid.setOnItemClickListener(new ProfileLauncher());
+			
+			
 		}
 	}
 }
