@@ -17,6 +17,7 @@ import android.view.Display;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
+import android.widget.TextView;
 import android.view.WindowManager;
 
 public class HomeActivity extends Activity {
@@ -66,7 +67,9 @@ public class HomeActivity extends Activity {
 		int screenWidth = size.x;
 		int screenHeight = size.y;
 		
-		if (isLandscape()) {
+		final boolean isLandscape = isLandscape();
+		
+		if (isLandscape) {
 			paramsBar.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
 			paramsBar.height = LayoutParams.MATCH_PARENT;
 			paramsBar.width = barHeightLandscape;
@@ -81,9 +84,26 @@ public class HomeActivity extends Activity {
 			paramsGrid.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 			paramsGrid.height = screenHeight - barHeightPortrait;
 		}
+		
 		homeGridView.setLayoutParams(paramsGrid);
 		homebar.setLayoutParams(paramsBar);
 		
+		if (isLandscape) {
+			
+		} else {
+			TextView nameView = new TextView(this);
+			TextView institutionView = new TextView(this);
+			
+			nameView.setText(mCurrentUser.getFirstname() + " " + mCurrentUser.getSurname());
+			/// TODO implement get Department - method should be available 18 april from oasis
+			institutionView.setText("Enebakken"); /// TODO change to dynamic value
+			
+			homebar.addView(nameView);
+			homebar.addView(institutionView);
+		}
+	}
+	
+	private void applySizes() {
 	}
 	
 	private boolean isLandscape() {
