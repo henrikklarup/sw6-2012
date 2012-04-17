@@ -1,6 +1,5 @@
 package dk.aau.cs.giraf.launcher;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
