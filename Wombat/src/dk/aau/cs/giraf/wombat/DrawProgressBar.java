@@ -21,7 +21,7 @@ public class DrawProgressBar extends View {
 	private int timeleft2;
 	private int timespent;
 	private int totalTime;
-	private long endTime;
+	private double endTime;
 
 	Paint paint = new Paint();
 	Rect r;
