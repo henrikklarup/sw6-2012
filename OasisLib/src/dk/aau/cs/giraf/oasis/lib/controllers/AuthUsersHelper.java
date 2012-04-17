@@ -31,14 +31,25 @@ class AuthUsersHelper {
 	public int clearAuthUsersTable() {
 		return _context.getContentResolver().delete(AuthUsersMetaData.CONTENT_URI, null, null);
 	}
-	
-	public long insertAuthUser(AuthUser authUser) {
+
+	public long insertAuthUser(long role) {
+		AuthUser authUser = new AuthUser();
+		authUser.setaRole(role);
+		authUser.setCertificate(getNewCertificate());
 		ContentValues cv = getContentValues(authUser);
 		_context.getContentResolver().insert(AuthUsersMetaData.CONTENT_URI, cv);
 
 		return getIdByCertificate(authUser.getCertificate());
 	}
 
+	public int setCertificate(String certificate, long id) {
+		Uri uri = ContentUris.withAppendedId(AuthUsersMetaData.CONTENT_URI, id);
+
+		ContentValues cv = new ContentValues();
+		cv.put(AuthUsersMetaData.Table.COLUMN_CERTIFICATE, certificate);
+		return _context.getContentResolver().update(uri, cv, null, null);
+	}
+	
 	public int modifyAuthUser(AuthUser authUser) {
 		Uri uri = ContentUris.withAppendedId(AuthUsersMetaData.CONTENT_URI, authUser.getId());
 		ContentValues cv = getContentValues(authUser);
@@ -135,13 +146,7 @@ class AuthUsersHelper {
 	 */
 	private ContentValues getContentValues(AuthUser authUser) {
 		ContentValues contentValues = new ContentValues();
-
-		if (authUser.getCertificate() == null) {
-			contentValues.put(AuthUsersMetaData.Table.COLUMN_CERTIFICATE, getNewCertificate());
-		} else {
-			contentValues.put(AuthUsersMetaData.Table.COLUMN_CERTIFICATE, authUser.getCertificate());
-		}
-
+		contentValues.put(AuthUsersMetaData.Table.COLUMN_CERTIFICATE, authUser.getCertificate());
 		contentValues.put(AuthUsersMetaData.Table.COLUMN_ROLE, authUser.getaRole());
 		return contentValues;
 	}
