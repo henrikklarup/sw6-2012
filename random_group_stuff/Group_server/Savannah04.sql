@@ -34,6 +34,12 @@ CREATE  TABLE `04`.`AuthUsers` (
   `certificate` VARCHAR(45) NOT NULL ,
 
   `idUser` INT NOT NULL AUTO_INCREMENT ,
+  
+  `type` INT NOT NULL,
+    
+  `username` VARCHAR(45) UNIQUE NOT NULL,
+  
+  `password` VARCHAR(45) NOT NULL,
 
   PRIMARY KEY (`certificate`) ,
 
@@ -104,7 +110,7 @@ CREATE  TABLE `04`.`Department` (
 
   `idDepartment` INT NOT NULL ,
 
-  `navn` VARCHAR(45) NOT NULL ,
+  `name` VARCHAR(45) NOT NULL ,
 
   `address` VARCHAR(45) NOT NULL ,
 
@@ -252,22 +258,62 @@ CREATE  TABLE `04`.`MediaDepartmentAccess` (
   PRIMARY KEY (`idDepartment`, `idMedia`) );
 
 
-insert into AuthUsers values ('abekat',null);
-insert into AuthUsers values ('abekat2',null);
+insert into AuthUsers values ('abekat',null,0);
+insert into AuthUsers values ('abekat2',null,0);
+insert into AuthUsers values ('Dep:111',null,1);
+insert into AuthUsers values ('Pæd:',null,1);
+insert into AuthUsers values ('Gaurd',null,0);
+insert into AuthUsers values ('Gaurd2',null,0);
 insert into Apps values(1,'TestAppe1','1.0.0');
 insert into Apps values(2,'TestAppe2','1.0.0');
 insert into Tags values(1,'Bil');
-insert into Profile values(1,'Jesper','Bromose',null,1,12345678,'dr.dk','<XML>STEERINGS</XML>');
+insert into Profile values(1,'Jesper','Bromose',null,1,12345678,'dr.dk','<XML>STEERINGS</XML>','Jesper','tester1');
+insert into Profile values(5,'Foo','Bar',null,1,12212121,'dr.dk','<XML>STEERINGS</XML>','pæd','123');
+insert into Profile values(7,'Guardian1','Guardian2',null,1,12212121,'dr.dk','<XML>STEERINGS</XML>','G','1');
+insert into Profile values(8,'TOKE','TOKEN',null,1,12212121,'dr.dk','<XML>STEERINGS</XML>','Toke','loke');
 insert into ListOfApps values(1,1);
 insert into ListOfApps values(2,1);
 insert into Media values(1,'c:\test','MyTest',1,'public',1);
 insert into HasTag values(1,1);
 insert into MediaProfileAccess values(1,1);
+insert into Department values (3,'Skolebakken','Vejlevej 1',12345678,'vejle@dr.dk');
+insert into HasDepartment values (1,3);
+insert into HasDepartment values (5,3);
+insert into HasGuardian values (7,1);
+insert into HasGuardian values (8,1);
 
+select * from HasGuardian;
 
+insert into HasGuardian values(1,5);
+
+select * from Profile;
+
+select password from Profile where idProfile = 7;
+select idDepartment, name from Department
+    where idDepartment in (select idDepartment from HasDepartment
+                    where idProfile =5);
+
+select type from AuthUsers where idUser = 5;
+
+select * from Profile
+							where idProfile in (select idGuardian from HasGuardian
+							where idChild = 5);
+
+UPDATE `04`.`Profile` SET `firstname`='+newFirstname+'  WHERE `idProfile`=1;
+
+select firstname from Profile
+where idProfile in (select idGuardian from HasGuardian
+    where idChild = 1);
+
+select * from Profile;
+SELECT password from AuthUsers where username = 'Jesper';
+
+select * from AuthUsers; 
+
+SELECT firstname, middlename, surname from Profile where idProfile = 1;
 
 select * from Apps
     where 1 in (select idProfile from ListOfApps);
     
 select idProfile, firstname from Profile
-    where (select certificate from AuthUsers) = 'abekat';
+    where 'abekat' in (select certificate from AuthUsers);
