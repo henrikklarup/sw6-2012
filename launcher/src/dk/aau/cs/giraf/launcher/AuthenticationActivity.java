@@ -77,7 +77,7 @@ public class AuthenticationActivity extends CaptureActivity {
 			((TextView)this.findViewById(R.id.loginname)).setVisibility(View.VISIBLE);
 
 			((GButton)this.findViewById(R.id.loginGButton)).setVisibility(View.VISIBLE);
-			((TextView)this.findViewById(R.id.authentication_step1)).setText("Sådan! Klik på 'Log in' for at bekræfte.");
+			((TextView)this.findViewById(R.id.authentication_step1)).setText("Saadan! Klik paa 'Log in' for at bekraefte.");
 			
 			mHomeIntent.putExtra("currentGuardianID", profile.getId());
 		} else {
