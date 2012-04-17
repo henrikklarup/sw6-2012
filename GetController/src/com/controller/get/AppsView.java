@@ -30,7 +30,6 @@ public class AppsView extends ListActivity {
 	int _position;
 	List<App> values;
 	List<Profile> profileValues;
-	Long testId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +83,6 @@ public class AppsView extends ListActivity {
 
 		Profile fedte = new Profile();
 		fedte = helper.profilesHelper.getProfileById(((Profile)getListAdapter().getItem(position)).getId());
-//		fedte = helper.profilesHelper.getProfileById(testId);
 
 		if (fedte != null) {
 			Log.e("Profile ID", Long.toString(((Profile)getListAdapter().getItem(position)).getId()));
