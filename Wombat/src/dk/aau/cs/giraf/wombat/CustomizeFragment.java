@@ -9,6 +9,7 @@ import kankan.wheel.widget.adapters.NumericWheelAdapter;
 import yuku.ambilwarna.AmbilWarnaDialog;
 import yuku.ambilwarna.AmbilWarnaDialog.OnAmbilWarnaListener;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -25,6 +26,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import dk.aau.cs.giraf.TimerLib.Child;
@@ -76,17 +78,21 @@ public class CustomizeFragment extends Fragment {
 	// Start the list empty
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		Button  b = (Button) getActivity().findViewById(R.id.new_template_button);
+		Button b = (Button) getActivity()
+				.findViewById(R.id.new_template_button);
 		b.setOnClickListener(new OnClickListener() {
-			
+
 			public void onClick(View v) {
 				TimerLoader.subProfileID = -1;
 				SubProfileFragment spf = (SubProfileFragment) getFragmentManager()
 						.findFragmentById(R.id.subprofileFragment);
 				spf.reloadSubProfiles();
-				CustomizeFragment cf = (CustomizeFragment)getFragmentManager().findFragmentById(R.id.customizeFragment);
+				CustomizeFragment cf = (CustomizeFragment) getFragmentManager()
+						.findFragmentById(R.id.customizeFragment);
 				cf.setDefaultProfile();
-				Toast t = Toast.makeText(getActivity(), getString(R.string.new_template_button_text), Toast.LENGTH_SHORT);
+				Toast t = Toast.makeText(getActivity(),
+						getString(R.string.new_template_button_text),
+						Toast.LENGTH_SHORT);
 				t.show();
 			}
 		});
@@ -117,7 +123,7 @@ public class CustomizeFragment extends Fragment {
 				0xFFFFFFFF, 0xFFFF0000, 600, false);
 		currSubP.setSave(false);
 		currSubP.setSaveAs(false);
-		
+
 		preSubP = null;
 
 		reloadCustomize();
@@ -203,23 +209,21 @@ public class CustomizeFragment extends Fragment {
 		} else {
 			digitalButton.setSelected(false);
 		}
-		genName_Description();
+		genDescription();
 		initBottomMenu();
 	}
 
-
 	private boolean setSave() {
 		boolean complete = false;
-		if(guard.getChild() != null){
+		if (guard.getChild() != null) {
 			currSubP.setSave(true);
 		} else {
 			currSubP.setSave(false);
 		}
 		currSubP.setSaveAs(true);
-		
+
 		return complete;
 	}
-
 
 	private int previousMins;
 	private int previousSecs;
@@ -352,7 +356,7 @@ public class CustomizeFragment extends Fragment {
 		}
 
 		timeDescription.setText(timeText);
-		genName_Description();
+		genDescription();
 	}
 
 	/**
@@ -469,34 +473,33 @@ public class CustomizeFragment extends Fragment {
 	 * Initialize the attachment button
 	 */
 	private void initAttachmentButton() {
-		final List<String> values = new ArrayList<String>();
-		final List<SubProfile> subProfiles;
-
-		if (guard.getChild() == null) {
-			subProfiles = new ArrayList<SubProfile>();
-			for (Child c : guard.Children()) {
-				for (SubProfile p : c.SubProfiles()) {
-					subProfiles.add(p);
-				}
-			}
-
-		} else {
-			subProfiles = guard.getChild().SubProfiles();
-		}
-
-		for (SubProfile subProfile : subProfiles) {
-			values.add(subProfile._name);
-		}
-
-		// Cast values to CharSequence
-		final CharSequence[] items = values.toArray(new CharSequence[values
-				.size()]);
 
 		attachmentButton = (Button) getActivity().findViewById(
 				R.id.customize_attachment);
 		attachmentButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
+				final List<String> values = new ArrayList<String>();
+				final List<SubProfile> subProfiles;
+				if (guard.getChild() == null) {
+					subProfiles = new ArrayList<SubProfile>();
+					for (Child c : guard.Children()) {
+						for (SubProfile p : c.SubProfiles()) {
+							subProfiles.add(p);
+						}
+					}
+
+				} else {
+					subProfiles = guard.getChild().SubProfiles();
+				}
+
+				for (SubProfile subProfile : subProfiles) {
+					values.add(subProfile._name);
+				}
+
+				// Cast values to CharSequence
+				final CharSequence[] items = values
+						.toArray(new CharSequence[values.size()]);
 				AlertDialog.Builder builder = new AlertDialog.Builder(
 						getActivity());
 				builder.setTitle(getActivity().getString(
@@ -569,27 +572,29 @@ public class CustomizeFragment extends Fragment {
 		attView.setText(attachText);
 	}
 
-
 	private void initBottomMenu() {
 		initSaveButton();
 		initSaveAsButton();
-		initStartButton();		
+		initStartButton();
 	}
-	
+
 	/**
 	 * Initialize the save button
 	 */
 	private void initSaveButton() {
 		saveButton = (Button) getActivity().findViewById(R.id.customize_save);
 		Drawable d;
-		if (currSubP.getSave() && !guard.getChild().getLock() && guard.getChild() != null) {
+		if (currSubP.getSave() && !guard.getChild().getLock()
+				&& guard.getChild() != null) {
 			d = getResources().getDrawable(R.drawable.thumbnail_save);
 			saveButton.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
-					if(preSubP != null){
-					TimerLoader.subProfileID = currSubP.save(preSubP);
+					getName();
+					if (preSubP != null) {
+						TimerLoader.subProfileID = currSubP.save(preSubP);
 					} else {
-						TimerLoader.subProfileID = guard.getChild().save(currSubP);
+						TimerLoader.subProfileID = guard.getChild().save(
+								currSubP);
 					}
 					guard.publishList().get(TimerLoader.profilePosition)
 							.select();
@@ -602,19 +607,71 @@ public class CustomizeFragment extends Fragment {
 		} else {
 			d = getResources().getDrawable(R.drawable.thumbnail_save_gray);
 			saveButton.setOnClickListener(new OnClickListener() {
-				
+
 				public void onClick(View v) {
-					Toast t = Toast.makeText(getActivity(), getString(R.string.cant_save), 2000);
+					Toast t = Toast.makeText(getActivity(),
+							getString(R.string.cant_save), 2000);
 					t.show();
 				}
 			});
 		}
 
-		saveButton
-				.setCompoundDrawablesWithIntrinsicBounds(null, d, null, null);
+		saveButton.setCompoundDrawablesWithIntrinsicBounds(null, d, null, null);
 	}
 
-	private void genName_Description() {
+	protected void getName() {
+		String name = "";
+		if (currSubP._name == "") {
+
+			switch (currSubP.formType()) {
+			case Hourglass:
+				name += getString(R.string.customize_hourglass_description);
+				break;
+
+			case DigitalClock:
+				name += getString(R.string.customize_digital_description);
+				break;
+
+			case ProgressBar:
+				name += getString(R.string.customize_progressbar_description);
+				break;
+
+			case TimeTimer:
+				name += getString(R.string.customize_timetimer_description);
+				break;
+
+			default:
+				name += "";
+				break;
+			}
+		} else {
+			name = currSubP._name;
+		}
+		Builder builder = new AlertDialog.Builder(getActivity());
+		builder.setTitle(getActivity().getString(R.string.save_button));
+		final EditText et = new EditText(getActivity());
+		et.setText(name);
+		builder.setView(et);
+		builder.setPositiveButton(R.string.save_button,
+				new DialogInterface.OnClickListener() {
+
+					public void onClick(DialogInterface dialog, int which) {
+						currSubP._name = et.getText().toString();
+						guard.publishList().get(TimerLoader.profilePosition)
+								.select();
+
+						SubProfileFragment spf = (SubProfileFragment) getFragmentManager()
+								.findFragmentById(R.id.subprofileFragment);
+						spf.reloadSubProfiles();
+
+					}
+
+				});
+		AlertDialog alert = builder.create();
+		alert.show();
+	}
+
+	private void genDescription() {
 		String name = "";
 		String desc = "";
 
@@ -646,7 +703,6 @@ public class CustomizeFragment extends Fragment {
 		desc += name + " - ";
 		desc += "(" + minutes + ":" + seconds + ")";
 
-		currSubP._name = name;
 		currSubP._desc = desc;
 	}
 
@@ -681,6 +737,7 @@ public class CustomizeFragment extends Fragment {
 								public void onClick(DialogInterface dialog,
 										int item) {
 									Child c = guard.Children().get(item);
+									getName();
 									c.save(currSubP);
 									SubProfileFragment df = (SubProfileFragment) getFragmentManager()
 											.findFragmentById(
@@ -707,9 +764,10 @@ public class CustomizeFragment extends Fragment {
 		} else {
 			d = getResources().getDrawable(R.drawable.thumbnail_saveas_gray);
 			saveAsButton.setOnClickListener(new OnClickListener() {
-				
+
 				public void onClick(View v) {
-					Toast t = Toast.makeText(getActivity(), getString(R.string.cant_save), 2000);
+					Toast t = Toast.makeText(getActivity(),
+							getString(R.string.cant_save), 2000);
 					t.show();
 				}
 			});
@@ -737,7 +795,7 @@ public class CustomizeFragment extends Fragment {
 					Intent i = new Intent(
 							getActivity().getApplicationContext(),
 							// TODO: Change according to openGL or canvas
-//							OpenGLActivity.class);
+							// OpenGLActivity.class);
 							DrawActivity.class);
 					startActivity(i);
 				}
@@ -745,9 +803,10 @@ public class CustomizeFragment extends Fragment {
 		} else {
 			d = getResources().getDrawable(R.drawable.thumbnail_start_gray);
 			startButton.setOnClickListener(new OnClickListener() {
-				
+
 				public void onClick(View v) {
-					Toast t = Toast.makeText(getActivity(), getString(R.string.cant_start), 2000);
+					Toast t = Toast.makeText(getActivity(),
+							getString(R.string.cant_start), 2000);
 					t.show();
 				}
 			});
@@ -770,7 +829,7 @@ public class CustomizeFragment extends Fragment {
 
 		/* Set Style */
 		selectStyle(currSubP.formType());
-		
+
 		/* Set Time */
 		setTime(currSubP._totalTime);
 
@@ -788,7 +847,7 @@ public class CustomizeFragment extends Fragment {
 	public void reloadCustomize() {
 		/* Set Style */
 		selectStyle(currSubP.formType());
-		
+
 		/* Set Time */
 		setTime(currSubP._totalTime);
 

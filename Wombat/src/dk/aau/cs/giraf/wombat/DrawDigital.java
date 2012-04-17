@@ -32,7 +32,7 @@ public class DrawDigital extends View {
 	int left;
 	int top;
 
-	public DrawDigital(Context context) {
+	public DrawDigital(Context context, SubProfile sub) {
 		super(context);
 		if (sp._gradient) {
 			timeleft2 = timespent;
