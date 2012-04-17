@@ -38,9 +38,8 @@ public class AuthenticationActivity extends CaptureActivity {
 				anim.start();
 			}
 		});
+
 		
-		mHomeIntent = new Intent(AuthenticationActivity.this, HomeActivity.class);
-		mHomeIntent.putExtra("currentGuardianID", 0);
 
 		final GButton button = (GButton) findViewById(R.id.loginGButton);
 		button.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +79,8 @@ public class AuthenticationActivity extends CaptureActivity {
 			((GButton)this.findViewById(R.id.loginGButton)).setVisibility(View.VISIBLE);
 			((TextView)this.findViewById(R.id.authentication_step1)).setText("Saadan! Klik paa 'Log in' for at bekraefte.");
 			
-			mHomeIntent.putExtra("currentGuardianID", 0);
+			mHomeIntent = new Intent(AuthenticationActivity.this, HomeActivity.class);
+			mHomeIntent.putExtra("currentGuardianID", profile.getId());
 		} else {
 			this.changeCamerafeedBorderColor(0xFFFF0000);
 			((GButton)this.findViewById(R.id.loginGButton)).setVisibility(View.INVISIBLE);
