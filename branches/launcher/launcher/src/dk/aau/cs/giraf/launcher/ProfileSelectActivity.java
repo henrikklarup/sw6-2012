@@ -34,7 +34,7 @@ public class ProfileSelectActivity extends Activity{
 		
 		mProfiles = helper.profilesHelper.getProfiles();
 
-		GList lv = (GList) findViewById(R.id.profilesList);
+		GList gList = (GList) findViewById(R.id.profilesList);
 		
 		for(int i = 0; i < mProfiles.size(); i++) {
 			// If profile is not a child:
@@ -45,9 +45,9 @@ public class ProfileSelectActivity extends Activity{
 		}
 		
 		ArrayAdapter<Profile> adapter = new ArrayAdapter<Profile>(this, android.R.layout.simple_list_item_1, android.R.id.text1, mProfiles);
-		lv.setAdapter(adapter);
+		gList.setAdapter(adapter);
 		
-		lv.setOnItemClickListener(new OnItemClickListener() {
+		gList.setOnItemClickListener(new OnItemClickListener() {
 		      public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		    	  	final long personId = ((Profile) parent.getItemAtPosition(position)).getId();
 		            final String packageName = getIntent().getExtras().getString("appPackageName");
