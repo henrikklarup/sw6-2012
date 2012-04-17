@@ -25,6 +25,7 @@ public class ProfileSelectActivity extends Activity{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.profileselect);
+		
 		loadProfiles();
 	}
 	
@@ -49,7 +50,9 @@ public class ProfileSelectActivity extends Activity{
 		
 		gList.setOnItemClickListener(new OnItemClickListener() {
 		      public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		    	  	final long personId = ((Profile) parent.getItemAtPosition(position)).getId();
+		    	  	final long childID = ((Profile) parent.getItemAtPosition(position)).getId();
+		    	  	final long guardianID = getIntent().getExtras().getLong("currentGuardianID");
+		    	  	
 		            final String packageName = getIntent().getExtras().getString("appPackageName");
 		            final String activityName = getIntent().getExtras().getString("appActivityName");
 		            
@@ -59,7 +62,8 @@ public class ProfileSelectActivity extends Activity{
 		    		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
 	                        | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
 		    		
-		            intent.putExtra("currentProfileId", personId);
+		            intent.putExtra("currentChildID", childID);
+		            intent.putExtra("currentGuardianID", guardianID);
 		            
 					startActivity(intent);
 		          }
