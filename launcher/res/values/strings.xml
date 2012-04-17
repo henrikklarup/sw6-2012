@@ -2,7 +2,7 @@
 <resources>
 
     <string name="hello">Hello World, MainActivity!</string>
-    <string name="app_name">GIRAF</string>
+    <string name="application_name">GIRAF</string>
     <string name="authentication_headline">Sådan logger du ind:</string>
     <string name="authentication_step1">Scan dit GIRAF-kort, ved brug af scanneren til højre.</string>
     <string name="authentication_step2">Verificer den overnstående identitet, og tryk derefter på login-knappen. </string>
