@@ -43,12 +43,6 @@ public class AppsView extends ListActivity {
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			profile = helper.profilesHelper.getProfileById(extras.getLong("ID"));
-			settings = new Setting<String, String, String>();
-			settings.addValue(Long.toString(profile.getId()), "Settings", "Favorite Color, Favorite Food, Favorite Animal");
-			settings.addValue(Long.toString(profile.getId()), "Favorite Color", "Blue");
-			settings.addValue(Long.toString(profile.getId()), "Favorite Food", "Carrot");
-			settings.addValue(Long.toString(profile.getId()), "Favorite Animal", "Rabbit");
-			profile.setSetting(settings);
 		} else {
 			profile = new Profile("Dummy1", "Dummy","Dummy", 0, 12345678, "Dummy", settings);
 		}
@@ -94,10 +88,14 @@ public class AppsView extends ListActivity {
 
 		if (fedte != null) {
 			Log.e("Profile ID", Long.toString(((Profile)getListAdapter().getItem(position)).getId()));
-			String settings = fedte.getSetting().get(Long.toString(testId)).get("Settings");
+			String settings = fedte.getSetting().get(fedte.getFirstname()).get("Settings");
 			String[] settingsList = settings.split(",");
 			for (String setting : settingsList) {
-				Toast.makeText(this, fedte.getSetting().get(Long.toString(testId)).get(setting), Toast.LENGTH_SHORT).show();
+				try {
+					Toast.makeText(this, fedte.getSetting().get(fedte.getFirstname()).get(setting), Toast.LENGTH_SHORT).show();
+				} catch (NullPointerException e) {
+					Toast.makeText(this, "Hej Henrik", Toast.LENGTH_SHORT).show();
+				}
 			}
 		} else {
 			//   Toast.makeText(this, String.valueOf(_id), Toast.LENGTH_SHORT).show();

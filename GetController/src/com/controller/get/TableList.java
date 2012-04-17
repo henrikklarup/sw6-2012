@@ -11,6 +11,7 @@ import android.widget.ListView;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 import dk.aau.cs.giraf.oasis.lib.models.Setting;
+import java.util.HashMap;
 
 public class TableList extends ListActivity {
 	
@@ -31,7 +32,13 @@ public class TableList extends ListActivity {
 		
 		
 		settings = new Setting<String, String, String>();
-		settings.addValue("Hello", "String", "World!");
+
+		HashMap map = new HashMap();
+		map.put("Settings", "Favorite Color,Favorite Food,Favorite Animal");
+		map.put("Favorite Color", "Blue");
+		map.put("Favorite Food", "Carrot");
+		map.put("Favorite Animal", "Rabbit");
+		settings.put("FEDTE", map);
 		
 		profile = new Profile("FEDTE", "FEDTE","FEDTE", 0, 12345678, "FEDTE", settings);
 		
