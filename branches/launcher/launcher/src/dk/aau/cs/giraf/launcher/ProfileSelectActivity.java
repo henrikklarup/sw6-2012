@@ -30,10 +30,6 @@ public class ProfileSelectActivity extends Activity{
 
 	}
 	private void loadProfiles(boolean isLaunching) {
-		if (isLaunching && mProfiles != null) {
-			return;
-		}
-
 		Helper helper = new Helper(this);
 		Profile.setOutput("{1} {2} {3}");
 		
