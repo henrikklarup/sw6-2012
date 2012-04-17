@@ -47,6 +47,11 @@ public class AuthenticationActivity extends CaptureActivity {
 				startActivity(mHomeIntent);
 			}
 		});
+		
+		Helper helper = new Helper(this);
+		if (helper.profilesHelper.getProfiles().size() <= 0) {
+			helper.CreateDummyData();
+		}
 	}
 
 	private void changeCamerafeedBorderColor(int color) {
@@ -63,23 +68,15 @@ public class AuthenticationActivity extends CaptureActivity {
 	public void handleDecode(Result rawResult, Bitmap barcode)
 	{
 		Helper helper = new Helper(this);
-		//Profile profile = helper.profilesHelper.authenticateProfile("GIRAFPROFILE");//rawResult.getText());
-		Profile profile = new Profile("Drazenko","Banjak","middlename",2,45454545,null,null);
+		Profile profile = helper.profilesHelper.authenticateProfile("abcde");/// TODO add rawResult.getText());
 
-		//drazenko.setId(helper.profilesHelper.insertProfile(drazenko));
-		//helper.profilesHelper.setCertificate("GIRAFPROFILE", drazenko);
-
-		//if (rawResult.getText().equals("GIRAFPROFILE")) {
-		//if (true) {
 		if (profile != null) {	
 			this.changeCamerafeedBorderColor(0xFF3AAA35);
 			((TextView)this.findViewById(R.id.loginname)).setText(profile.getFirstname() + " " + profile.getSurname());
 			((TextView)this.findViewById(R.id.loginname)).setVisibility(View.VISIBLE);
 
 			((GButton)this.findViewById(R.id.loginGButton)).setVisibility(View.VISIBLE);
-			((TextView)this.findViewById(R.id.authentication_step1)).setText("Saadan! Klik paa 'Log in' for at bekraefte.");
-			
-			profile.setId(45436);
+			((TextView)this.findViewById(R.id.authentication_step1)).setText(R.string.saadan);
 			
 			mHomeIntent = new Intent(AuthenticationActivity.this, HomeActivity.class);
 			mHomeIntent.putExtra("currentGuardianID", profile.getId());
@@ -91,7 +88,6 @@ public class AuthenticationActivity extends CaptureActivity {
 
 			//ProgressDialog dialog = ProgressDialog.show(AuthenticationActivity.this, "", "INVALID profile: " + rawResult.getText(), true, true);
 		}
-		//ProgressDialog dialog = ProgressDialog.show(AuthenticationActivity.this, "", "Ø" + rawResult.getText() + "Ø", true, true);
 
 		this.getHandler().sendEmptyMessageDelayed(R.id.restart_preview, 500);
 	}

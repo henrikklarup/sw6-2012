@@ -19,5 +19,6 @@
     	<item>0xFF9FC6E7</item>   
     </integer-array>
     <string name="authentication_name">Firstname Middlename Lastname</string>
+    <string name="saadan">Sådan! Klik på "Log in" for at bekræfte.</string>
 
 </resources>
