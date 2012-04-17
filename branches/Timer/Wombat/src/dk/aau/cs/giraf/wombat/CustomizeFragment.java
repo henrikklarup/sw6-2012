@@ -10,6 +10,7 @@ import yuku.ambilwarna.AmbilWarnaDialog;
 import yuku.ambilwarna.AmbilWarnaDialog.OnAmbilWarnaListener;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.app.Dialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,11 +24,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import dk.aau.cs.giraf.TimerLib.Child;
@@ -481,50 +485,53 @@ public class CustomizeFragment extends Fragment {
 			
 			public boolean onLongClick(View v) {
 				setAttachment(null);
-				return false;
+				return true;
 			}
 		});
 		attachmentButton.setOnClickListener( new OnClickListener() {
 
-			public void onClick(View v) {
-				List<String> values = new ArrayList<String>();
-				final List<Child> children;
-				children = guard.publishList();
+			public void onClick(final View v) {
+				final ArrayList<Child> children = guard.publishList();
 				
-				for (Child c : children) {
-					values.add(c.name);
-				}
+				final AlertDialog builder = new AlertDialog.Builder(v
+						.getContext()).create();
 				
-				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 				builder.setTitle(getString(R.string.attachment_button_description));
-				builder.setItems(values.toArray(new CharSequence[values.size()]), new DialogInterface.OnClickListener() {
+				ListView lv = new ListView(getActivity());
+				ChildAdapter adapter = new ChildAdapter(getActivity(),
+						android.R.layout.simple_list_item_1, children);
+				lv.setAdapter(adapter);
+				lv.setOnItemClickListener(new OnItemClickListener() {
 					
-					public void onClick(DialogInterface dialog, int which) {
+					public void onItemClick(AdapterView<?> parent, View view, int position, long id){
 						List<String> values = new ArrayList<String>();
-						final List<SubProfile> subProfiles;
-						subProfiles = children.get(which).SubProfiles();
+						final ArrayList<SubProfile> subProfiles;
+						subProfiles = children.get(position).SubProfiles();
 						
 						for (SubProfile subProfile : subProfiles) {
 							values.add(subProfile.name);
 						}
 
 						// Cast values to CharSequence and put it in the builder
-						AlertDialog.Builder builder2 = new AlertDialog.Builder(
-								getActivity());
+						final AlertDialog builder2 = new AlertDialog.Builder(v
+								.getContext()).create();
 						builder2.setTitle(getString(R.string.attachment_button_description));
-						builder2.setItems(values.toArray(new CharSequence[values.size()]), new DialogInterface.OnClickListener() {
-
-							public void onClick(DialogInterface dialog, int item) {
-								setAttachment(subProfiles.get(item));
+						ListView lv = new ListView(getActivity());
+						SubProfileAdapter adapter = new SubProfileAdapter(getActivity(), android.R.layout.simple_list_item_1, subProfiles);
+						lv.setAdapter(adapter);
+						lv.setOnItemClickListener(new OnItemClickListener() {
+							public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+								setAttachment(subProfiles.get(position));
+								builder.dismiss();
+								builder2.dismiss();
 							}
 						});
-						AlertDialog alert = builder2.create();
-						alert.show();
-						
+						builder2.setView(lv);
+						builder2.show();
 					}
 				});
-				AlertDialog alert = builder.create();
-				alert.show();
+				builder.setView(lv);
+				builder.show();
 			}
 		}
 	);
