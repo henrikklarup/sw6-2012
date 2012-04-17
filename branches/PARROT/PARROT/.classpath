@@ -4,6 +4,6 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
-	<classpathentry kind="lib" path="C:/Users/ejer/Desktop/SW6/branches/PARROT/PARROT/libs/OasisLib v0.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ejer/Desktop/SW6/branches/PARROT/PARROT/libs/OasisLib v0.4_dev.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

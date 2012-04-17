@@ -4,11 +4,12 @@ package dk.aau.cs.giraf.parrot;
 import parrot.Package.R;
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.ClipData;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.DragShadowBuilder;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.GridView;
@@ -35,12 +36,14 @@ public class SpeechBoardFragment extends Fragment
 			gridview.setOnItemLongClickListener(new OnItemLongClickListener()
 			{
 
-				public boolean onItemLongClick(AdapterView<?> arg0, View arg1,int arg2, long arg3)
+				public boolean onItemLongClick(AdapterView<?> arg0, View view, int position, long id)
 				{
 					//Look At DndActivity for inspiration
-					return false;
+					ClipData data = ClipData.newPlainText("label", "text"); //TODO Dummy. Pictogram information can be placed here instead.
+					DragShadowBuilder shadowBuilder = new DragShadowBuilder(view);
+					view.startDrag(data, shadowBuilder, view, 0);
+					return true;
 				}
-
 
 			});
 		}
