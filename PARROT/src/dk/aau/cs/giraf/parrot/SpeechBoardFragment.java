@@ -4,10 +4,14 @@ package dk.aau.cs.giraf.parrot;
 import parrot.Package.R;
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.ClipData;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.DragShadowBuilder;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.GridView;
 
 public class SpeechBoardFragment extends Fragment
@@ -23,7 +27,7 @@ public class SpeechBoardFragment extends Fragment
 
 		this.parrent = activity;
 
-		/*
+		
 		PARROTProfile user=PARROTActivity.getUser();
 		if(user.getCategoryAt(0)!=null)
 		{
@@ -51,7 +55,7 @@ public class SpeechBoardFragment extends Fragment
 
 			});
 
-	}*/
+		}
 	}
 
 	@Override
@@ -61,8 +65,8 @@ public class SpeechBoardFragment extends Fragment
 		parrent.setContentView(R.layout.speechboard_layout);
 		
 		//FIXME These two lines are temporary for testing (kim)
-		GridView gridview = (GridView) parrent.findViewById(R.id.pictogramgrid);
-		gridview.setAdapter(new ImageAdapter(parrent));
+		//GridView gridview = (GridView) parrent.findViewById(R.id.pictogramgrid);
+		//gridview.setAdapter(new ImageAdapter(parrent));
 		
 		parrent.findViewById(R.id.pictogramgrid).setOnDragListener(new BoxDragListener());
 		parrent.findViewById(R.id.SpeechBoard).setOnDragListener(new BoxDragListener());
