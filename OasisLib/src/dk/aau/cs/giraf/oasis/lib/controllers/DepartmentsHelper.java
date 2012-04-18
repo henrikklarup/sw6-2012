@@ -218,9 +218,10 @@ public class DepartmentsHelper {
 					c.moveToNext();
 				}
 			}
+			c.close();
 		}
 
-		c.close();
+		
 
 		return departments;
 	}
