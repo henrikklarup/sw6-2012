@@ -57,7 +57,7 @@ public class PictogramAdapter extends BaseAdapter {
         }
         
 		
-		
+		/*
 		imageView.setOnLongClickListener(new OnLongClickListener()
 		{
 
@@ -71,7 +71,7 @@ public class PictogramAdapter extends BaseAdapter {
 			}
 
 		});
-        
+        */
         
 		imageView.setImageBitmap(pct.getBitmap());
         return imageView;
