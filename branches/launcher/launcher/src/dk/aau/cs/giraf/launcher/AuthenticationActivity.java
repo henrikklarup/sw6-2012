@@ -82,7 +82,6 @@ public class AuthenticationActivity extends CaptureActivity {
 			this.changeCamerafeedBorderColor(0xFF3AAA35);
 			loginNameView.setText(profile.getFirstname() + " " + profile.getSurname());
 			loginNameView.setVisibility(View.VISIBLE);
-
 			gLoginButton.setVisibility(View.VISIBLE);
 			infoView.setText(R.string.saadan);
 			
