@@ -4,16 +4,15 @@ package dk.aau.cs.giraf.parrot;
 
 import java.util.List;
 
+import dk.aau.cs.giraf.oasis.lib.Helper;
+import dk.aau.cs.giraf.oasis.lib.models.*;
+
 import parrot.Package.R;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.GridView;
-import dk.aau.cs.giraf.oasis.lib.Helper;
-import dk.aau.cs.giraf.oasis.lib.models.Media;
-import dk.aau.cs.giraf.oasis.lib.models.Profile;
-import dk.aau.cs.giraf.oasis.lib.models.Setting;
 
 
 public class PARROTActivity extends Activity {
@@ -50,12 +49,12 @@ public class PARROTActivity extends Activity {
 		actionBar.setDisplayShowTitleEnabled(false);	//TODO figure out what this does
 
 		Tab tab = actionBar.newTab()
-				.setText(R.string.firstTab)		//TODO rename this tab
+				.setText(R.string.firstTab)
 				.setTabListener(new TabListener<SpeechBoardFragment>(this,"speechboard",SpeechBoardFragment.class));
 		actionBar.addTab(tab);
 
 		tab = actionBar.newTab()
-				.setText(R.string.secondTab)		//TODO rename this tab
+				.setText(R.string.secondTab)
 				.setTabListener(new TabListener<OptionsFragment>(this,"options",OptionsFragment.class));
 		actionBar.addTab(tab);
 
