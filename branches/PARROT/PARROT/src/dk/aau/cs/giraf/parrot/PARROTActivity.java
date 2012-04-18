@@ -21,7 +21,8 @@ public class PARROTActivity extends Activity {
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+		super.onCreate(savedInstanceState);		
+		setContentView(R.layout.main);
 
 		/*//Made by kim
 		GridView gridview = (GridView) findViewById(R.id.pictogramgrid);
@@ -33,14 +34,15 @@ public class PARROTActivity extends Activity {
 		//PARROTProfile parrotUser = loadProfile();	
 		
 		
-		/*
+		
 		//TODO replace the temp lines with the above line
 		Pictogram tempPic= new Pictogram("Koala","/sdcard/Pictures/005.jpg", null, null);//005
 		parrotUser = new PARROTProfile("tempNiels", tempPic);
 		Category tempCat = new Category(0);
 		tempCat.addPictogram(tempPic);
 		tempCat.addPictogram(tempPic);
-		*/
+		parrotUser.addCategory(tempCat);
+		
 
 
 
