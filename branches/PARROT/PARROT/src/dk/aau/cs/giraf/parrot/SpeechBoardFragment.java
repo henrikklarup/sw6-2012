@@ -24,22 +24,27 @@ public class SpeechBoardFragment extends Fragment
 	public void onAttach(Activity activity) 
 	{
 		super.onAttach(activity);
-				
+
 		this.parrent = activity;
-		
+
+	}
+
+	@Override
+	public void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
 		parrent.setContentView(R.layout.speechboard_layout);
 
-		
 		PARROTProfile user=PARROTActivity.getUser();
 		if(user.getCategoryAt(0)!=null)
 		{
 			Category cat = user.getCategoryAt(0); //Dummy TODO FIXME
 
-			
-			GridView gridview = (GridView) activity.findViewById(R.id.pictogramgrid); //FIXME Unhandled Nullpointer (gridview);
-			gridview.setAdapter(new PictogramAdapter(cat, activity));
 
-			activity.findViewById(R.id.pictogramgrid).setOnDragListener(new BoxDragListener());
+			GridView gridview = (GridView) parrent.findViewById(R.id.pictogramgrid);
+			gridview.setAdapter(new PictogramAdapter(cat, parrent));
+
+			parrent.findViewById(R.id.pictogramgrid).setOnDragListener(new BoxDragListener());
 
 
 			gridview.setOnItemLongClickListener(new OnItemLongClickListener()
@@ -55,24 +60,18 @@ public class SpeechBoardFragment extends Fragment
 				}
 
 			});
-
 		}
-	}
-
-	@Override
-	public void onCreate(Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
-		parrent.setContentView(R.layout.speechboard_layout);
 		
+
 		//FIXME These two lines are temporary for testing (kim)
 		//GridView gridview = (GridView) parrent.findViewById(R.id.pictogramgrid);
 		//gridview.setAdapter(new ImageAdapter(parrent));
-		
+
 		parrent.findViewById(R.id.pictogramgrid).setOnDragListener(new BoxDragListener());
 		parrent.findViewById(R.id.SpeechBoard).setOnDragListener(new BoxDragListener());
 		parrent.findViewById(R.id.supercategory).setOnDragListener(new BoxDragListener());
-		
+
+
 
 	}
 
