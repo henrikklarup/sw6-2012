@@ -8,13 +8,13 @@
     android:id="@+id/HomeBarLayout"
     android:layout_width="fill_parent"
     android:layout_height="200dp"
-    android:background="@drawable/gbackground" >
+    android:background="@drawable/gbackground" 
+    android:padding="20dp" >
     	<TextView
     	android:visibility="invisible"
 	    android:id="@+id/nameView"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:layout_alignParentLeft="true"
 	    android:layout_toRightOf="@+id/profile_pic"
 	    android:layout_marginLeft="30dp"
 	    android:text="@string/barnameview"
