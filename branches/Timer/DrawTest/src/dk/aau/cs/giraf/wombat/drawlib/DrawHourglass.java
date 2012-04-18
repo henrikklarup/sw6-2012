@@ -8,48 +8,63 @@ import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.os.SystemClock;
 import android.view.View;
-import dk.aau.cs.giraf.TimerLib.Guardian;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
 
 public class DrawHourglass extends View {
-	private Guardian guard = Guardian.getInstance();
-	SubProfile sp = guard.getSubProfile();
-	int background = sp.bgcolor;
-	int frame = sp.frameColor;
-	int timeleft = sp.timeLeftColor;
-	int timeleft2 = sp.timeLeftColor;
-	int timespent = sp.timeSpentColor;
-	boolean init = true;
+	SubProfile sp;
 
-	double totalTime = (sp.totalTime - 1) * 1000;
-	double endTime = SystemClock.currentThreadTimeMillis() + totalTime;
+	private int background;
+	private int frame;
+	private int timeleft;
+	private int timeleft2;
+	private int timespent;
+	private int totalTime;
+	private double endTime;
+
 	Paint paint = new Paint();
 	Rect rtop, rbot, rleft, rright;
 	ColorDrawable col;
 
 	int width, height;
 	int top, left;
-	int frameHeight, indent, glassLeft, glassRight;
+	int frameHeight, indent, glassLeft, glassRight, windowWidth, windowHeight;
 
-	public DrawHourglass(Context context) {
+	public DrawHourglass(Context context, SubProfile sub) {
 		super(context);
-		if(sp.gradient){
+		// Get display size
+		Rect rect = new Rect();
+		getWindowVisibleDisplayFrame(rect);
+		windowHeight = rect.height();
+		if (sub.getAttachment() == null) {
+			windowWidth = rect.width();
+		} else {
+			windowWidth = rect.width() / 2;
+		}
+		
+		sp = sub;
+
+		background = sp.bgcolor;
+		frame = sp.frameColor;
+		timeleft = sp.timeLeftColor;
+		timeleft2 = sp.timeLeftColor;
+		timespent = sp.timeSpentColor;
+		totalTime = (sp.totalTime - 1) * 1000;
+		endTime = SystemClock.currentThreadTimeMillis() + totalTime;
+
+		if (sp.gradient) {
 			timeleft2 = timespent;
 			timespent = background;
 		}
+		width = 300;
+		height = 500;
+		frameHeight = height / 20;
+		indent = frameHeight;
 	}
 
 	@Override
 	protected void onDraw(Canvas c) {
-		super.onDraw(c);
-
-		if(init){
-			width = 300;
-			height = 500;
-			frameHeight = height / 20;
-			indent = frameHeight;
-			init = false;
-		}
+		super.onDraw(c);		
+		
 		/* Fill the canvas with the background color */
 		paint.setColor(background);
 		c.drawPaint(paint);

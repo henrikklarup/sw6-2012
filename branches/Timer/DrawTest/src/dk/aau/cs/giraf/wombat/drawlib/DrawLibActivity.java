@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
 import android.widget.LinearLayout;
+import dk.aau.cs.giraf.TimerLib.Hourglass;
 import dk.aau.cs.giraf.TimerLib.ProgressBar;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
 
@@ -16,7 +17,7 @@ public class DrawLibActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		SubProfile sub = new ProgressBar("", "", 100, 0xff3D3D3D, 0xff000066, 0xffB8B8B8, 0xff000000, 30, true);
+		SubProfile sub = new Hourglass("", "", 100, 0xff3D3D3D, 0xff000066, 0xffB8B8B8, 0xff000000, 30, true);
 		if (sub.getAttachment() == null) {
 			/* Set the drawing class (which extends View) as the content view */
 			View v = genDrawView(sub);
@@ -45,6 +46,8 @@ public class DrawLibActivity extends Activity {
 		switch (sub.formType()) {
 		case ProgressBar:
 			return new DrawProgressBar(getApplicationContext(), sub);
+		case Hourglass:
+			return new DrawHourglass(getApplicationContext(), sub);
 		default:
 			return null;
 		}
