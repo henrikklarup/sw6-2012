@@ -22,7 +22,9 @@
     android:stretchMode="columnWidth"
     android:paddingTop="50dp"
     android:horizontalSpacing="50dp"
-    android:verticalSpacing="50dp" >
+    android:verticalSpacing="50dp" 
+    android:background="@drawable/gbackgroundlight"
+    >
 
 </GridView>
 </RelativeLayout>

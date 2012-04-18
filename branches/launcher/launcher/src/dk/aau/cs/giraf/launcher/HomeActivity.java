@@ -1,6 +1,7 @@
 package dk.aau.cs.giraf.launcher;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import dk.aau.cs.giraf.oasis.lib.Helper;
@@ -12,9 +13,11 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
@@ -29,8 +32,12 @@ public class HomeActivity extends Activity {
 	private GridView mGrid;
 	private Profile mCurrentUser; 
 	private Setting mSettings;
-
 	private Helper mHelper;
+	
+	//Hash keys
+	public final String BACKGROUNDCOLOR = "backgroundColor";
+	public final String APPBACKGROUNDCOLOR = "appBackgroundColor";
+	
 
 	/** Called when the activity is first created. */
 	@Override
@@ -130,9 +137,11 @@ public class HomeActivity extends Activity {
 		mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
 
 		final List<ResolveInfo> pkgAppsList = mContext.getPackageManager().queryIntentActivities(mainIntent, 0);
+		Collections.sort(pkgAppsList, new ResolveInfo.DisplayNameComparator(mContext.getPackageManager()));
 
 		if(pkgAppsList != null){
 			ArrayList<ApplicationInfo> applications = new ArrayList<ApplicationInfo>();
+			int i = 0;
 			for(ResolveInfo info : pkgAppsList){
 				//Package (dk.aau.cs.giraf)
 				if(info.toString().toLowerCase().contains("dk.aau.cs.giraf") && 
@@ -140,29 +149,30 @@ public class HomeActivity extends Activity {
 					ApplicationInfo appInfo = new ApplicationInfo();
 
 					appInfo.title = info.loadLabel(getPackageManager());
+					if(appInfo.title.length() > 6){
+						appInfo.title = appInfo.title.subSequence(0, 5) + "...";
+					}
 					appInfo.icon = info.activityInfo.loadIcon(getPackageManager());
 					appInfo.packageName = info.activityInfo.applicationInfo.packageName;
 					appInfo.activityName = info.activityInfo.name;
 					appInfo.guardian = mCurrentUser.getId();
-					appInfo.color = AppColor(mSettings, appInfo.packageName);
+					appInfo.color = AppColor(i);
 
 					applications.add(appInfo);
+					i++;
+					
 				}
 			}
+			
 
 			mGrid = (GridView)this.findViewById(R.id.GridViewHome);
 			mGrid.setAdapter(new AppAdapter(this,applications));
 			mGrid.setOnItemClickListener(new ProfileLauncher());
-
-
 		}
 	}
-
-	private void SetBackgroundColor(Setting setting) {
-		;
-	}
 	
-	private int AppColor(Setting setting, String appName) {
-		return Color.BLUE;
+	private int AppColor(int position) {
+		int[] c = getResources().getIntArray(R.array.appcolors);
+		return c[position];
 	}
 }
