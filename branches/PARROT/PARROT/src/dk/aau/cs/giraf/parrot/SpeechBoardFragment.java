@@ -33,9 +33,8 @@ public class SpeechBoardFragment extends Fragment
 		{
 			Category cat = user.getCategoryAt(0); //Dummy TODO FIXME
 
-
-
-			GridView gridview = (GridView) activity.findViewById(R.id.pictogramgrid);
+			
+			GridView gridview = (GridView) activity.findViewById(R.id.pictogramgrid); //FIXME Unhandled Nullpointer (gridview);
 			gridview.setAdapter(new PictogramAdapter(cat, activity));
 
 			activity.findViewById(R.id.pictogramgrid).setOnDragListener(new BoxDragListener());
