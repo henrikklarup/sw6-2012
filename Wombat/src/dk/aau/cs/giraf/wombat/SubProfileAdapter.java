@@ -68,7 +68,7 @@ public class SubProfileAdapter extends ArrayAdapter<SubProfile> {
 			
 		}
 		if(sp.getId() == TimerLoader.subProfileID){
-			v.setBackgroundResource(R.drawable.list_pressed);
+			v.setBackgroundResource(R.drawable.list_selected);
 			TimerLoader.firstClick = true;
 			TimerLoader.subProfileID = -1;
 		} else {
