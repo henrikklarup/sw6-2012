@@ -28,6 +28,9 @@ public class DrawWatch extends View {
 	private Rect r;
 	private ColorDrawable col;
 
+	private int frameWidth;
+	private int frameHeight;
+
 	private int width;
 	private int height;
 	private int left;
@@ -38,10 +41,14 @@ public class DrawWatch extends View {
 	public DrawWatch(Context context, SubProfile sub) {
 		super(context);
 
-		if (DrawLibActivity.frameWidth > DrawLibActivity.frameHeight)
-			width = (int) (DrawLibActivity.frameHeight / 1.5);
+		/* Get the window hight assigned by the draw activity */
+		frameWidth = DrawLibActivity.frameWidth;
+		frameHeight = DrawLibActivity.frameHeight;
+
+		if (frameWidth > frameHeight)
+			width = (int) (frameHeight / 1.5);
 		else
-			width = (int) (DrawLibActivity.frameWidth / 1.5);
+			width = (int) (frameWidth / 1.5);
 		height = width;
 
 		sp = sub;
@@ -71,36 +78,62 @@ public class DrawWatch extends View {
 		paint.setAntiAlias(true);
 		paint.setColor(frame);
 
-		left = DrawLibActivity.frameWidth / 2;
-		top = DrawLibActivity.frameHeight / 2;
+		left = frameWidth / 2;
+		top = frameHeight / 2;
 
+		/* Draw the outer circle/border */
 		c.drawCircle(left, top, width / 2, paint);
 
+		/* Draw the inner circle */
 		paint.setColor(timespent);
 		c.drawCircle(left, top, (width / 2) - 3, paint);
 
-		left = ((DrawLibActivity.frameWidth - width) / 2) + 3;
-		right = (((DrawLibActivity.frameWidth - width) / 2) + width) - 3;
-		top = ((DrawLibActivity.frameHeight - height) / 2) + 3;
-		bottom = (((DrawLibActivity.frameHeight - height) / 2) + height) - 3;
+		left = ((frameWidth - width) / 2) + 3;
+		right = (((frameWidth - width) / 2) + width) - 3;
+		top = ((frameHeight - height) / 2) + 3;
+		bottom = (((frameHeight - height) / 2) + height) - 3;
+
+		double timenow = endTime - SystemClock.currentThreadTimeMillis();
+		double percent = (timenow) / totalTime;
+
+		// 0.1 is what 1 second corresponds to in degrees
+		rotation = (0.1 * (endTime - SystemClock.currentThreadTimeMillis()) / 1000) + 0.999;
+		Log.e("Test", rotation + "");
+
+		// Draw the timer
+		paint.setColor(timeleft2);
+		RectF rf = new RectF(left, top, right, bottom);
+		c.drawArc(rf, 270 - (int) rotation, (int) rotation, true, paint);
+
+		// Draw the timer gradient
+		col = new ColorDrawable(timeleft);
+		col.setAlpha((int) (255 * percent));
+		paint.setColor(col.getColor());
+		c.drawArc(rf, 270 - (int) rotation, (int) rotation, true, paint);
+
+		/* Draw the center */
+		paint.setColor(frame);
+		c.drawCircle(frameWidth/2, frameHeight/2, 8, paint);
+		
+		/* Draw the indicators 0, 3, 6, 9 */
+		r = new Rect(frameWidth / 2 - 4, ((frameHeight - height) / 2) + 15,
+				frameWidth / 2 + 4, ((frameHeight - height) / 2) + 15 + 40);
+
+		for (int i = 0; i < 4; i++) {
+			c.rotate(90, frameWidth / 2, frameHeight / 2);
+			c.drawRect(r, paint);
+		}
+
+		/* Draw the small indicators */
+		r = new Rect(frameWidth / 2 - 2, ((frameHeight - height) / 2) + 17,
+				frameWidth / 2 + 2, ((frameHeight - height) / 2) + 15 + 35);
+
+		for (int i = 0; i < 12; i++) {
+			c.rotate(30, frameWidth / 2, frameHeight / 2);
+			c.drawRect(r, paint);
+		}
 
 		if (endTime >= SystemClock.currentThreadTimeMillis()) {
-			double timenow = endTime - SystemClock.currentThreadTimeMillis();
-			double percent = (timenow) / totalTime;
-			
-			// 0.1 is what 1 second corresponds to in degrees
-			rotation = (0.1 * (endTime - SystemClock.currentThreadTimeMillis()) / 1000) + 1;
-			Log.e("Test", rotation + "");
-
-			paint.setColor(timeleft2);
-			RectF rf = new RectF(left, top, right, bottom);
-			c.drawArc(rf, 270 - (int) rotation, (int) rotation, true, paint);
-			
-			col = new ColorDrawable(timeleft);
-			col.setAlpha((int) (255 * percent));
-			paint.setColor(col.getColor());
-			c.drawArc(rf, 270 - (int) rotation, (int) rotation, true, paint);
-
 			/*************** IMPORTANT ***************/
 			/* Recalls Draw! */
 			invalidate();

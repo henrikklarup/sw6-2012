@@ -2,16 +2,13 @@ package dk.aau.cs.giraf.wombat.drawlib;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Point;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
-import dk.aau.cs.giraf.TimerLib.ProgressBar;
+import dk.aau.cs.giraf.TimerLib.DigitalClock;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
-import dk.aau.cs.giraf.TimerLib.TimeTimer;
 
 
 public class DrawLibActivity extends Activity {
@@ -23,9 +20,9 @@ public class DrawLibActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);	
-		SubProfile sub = new TimeTimer("", "", 100, 0xff3D3D3D, 0xff000066, 0xffB8B8B8, 0xff000000, 900, false);
-		SubProfile sub2 = new ProgressBar("", "", 100, 0xff3D3D3D, 0xff000066, 0xffB8B8B8, 0xff000000, 900, true);
-		sub.setAttachment(sub2);
+		SubProfile sub = new DigitalClock("", "", 100, 0xff3D3D3D, 0xff000066, 0xffB8B8B8, 0xff000000, 30, false);
+//		SubProfile sub2 = new ProgressBar("", "", 100, 0xff3D3D3D, 0xff000066, 0xffB8B8B8, 0xff000000, 900, true);
+//		sub.setAttachment(sub2);
 //		Guardian guard = Guardian.getInstance();
 //		SubProfile sub = guard.getSubProfile();
 		
