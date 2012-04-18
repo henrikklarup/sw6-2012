@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:background="@drawable/background" >
 
     <LinearLayout
         android:layout_width="300dp"
@@ -13,7 +14,7 @@
             android:id="@+id/profileListHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/darker_gray"
+            android:background="@drawable/background"
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/profile_list_header"
             android:textAppearance="?android:attr/textAppearanceLarge"
@@ -42,7 +43,7 @@
             android:id="@+id/settingsListHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/darker_gray"
+            android:background="@drawable/background"
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/template_list_header"
             android:textAppearance="?android:attr/textAppearanceLarge"
@@ -52,9 +53,10 @@
         <Button
             android:id="@+id/new_template_button"
             android:layout_width="match_parent"
-            android:layout_height="53dp"
+            android:layout_height="52dp"
             android:background="@drawable/btn"
-            android:text="@string/new_template_button_text" />
+            android:text="@string/new_template_button_text"
+            android:layout_margin="5dp" />
 
         <fragment
             android:id="@+id/subprofileFragment"
@@ -78,7 +80,7 @@
             android:id="@+id/customizeHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/darker_gray"
+            android:background="@drawable/background"
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/customize_header"
             android:textAppearance="?android:attr/textAppearanceLarge"

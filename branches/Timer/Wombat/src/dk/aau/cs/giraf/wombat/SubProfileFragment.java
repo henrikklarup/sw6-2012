@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -21,10 +20,6 @@ public class SubProfileFragment extends android.app.ListFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getActivity().setContentView(R.layout.profile_list);
-		// Write Tag = Detail and Text = Detail Opened in the LogCat
-		Log.e("Detail", "Detail Opened");
-
 	}
 
 	@Override
