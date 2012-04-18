@@ -23,7 +23,7 @@ import dk.aau.cs.giraf.oasis.lib.models.Profile;
 public class DepartmentsHelper {
 
 	private static Context _context;
-	private AuthUsersHelper au;
+	private AuthUsersController au;
 	private String[] columns = new String[] { 
 			DepartmentsMetaData.Table.COLUMN_ID,
 			DepartmentsMetaData.Table.COLUMN_NAME,
@@ -37,7 +37,7 @@ public class DepartmentsHelper {
 	 */
 	public DepartmentsHelper(Context context) {
 		_context = context;
-		au = new AuthUsersHelper(_context);
+		au = new AuthUsersController(_context);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
