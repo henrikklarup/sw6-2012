@@ -81,9 +81,12 @@ public class DrawProgressBar extends View {
 		if (endTime >= SystemClock.currentThreadTimeMillis()) {
 			double timenow = endTime - SystemClock.currentThreadTimeMillis();
 			double percent = (timenow) / totalTime;
+			if(percent > 1){
+				percent = 1;
+			}
 
 			paint.setColor(timeleft2);
-			r.set((left + 3), top + 3, left - 3 + (int) (width * percent), top
+			r.set((left + 3), top + 3, left + (int) (width * percent), top
 					+ height - 3);
 			c.drawRect(r, paint);
 
@@ -91,8 +94,6 @@ public class DrawProgressBar extends View {
 			col = new ColorDrawable(timeleft);
 			col.setAlpha((int) (255 * percent));
 			paint.setColor(col.getColor());
-			r.set((left + 3), top + 3, left - 3 + (int) (width * percent), top
-					+ height - 3);
 			c.drawRect(r, paint);
 
 			/*************** IMPORTANT ***************/
