@@ -38,6 +38,7 @@ import dk.aau.cs.giraf.TimerLib.Child;
 import dk.aau.cs.giraf.TimerLib.Guardian;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
 import dk.aau.cs.giraf.TimerLib.formFactor;
+import dk.aau.cs.giraf.wombat.drawlib.DrawLibActivity;
 
 public class CustomizeFragment extends Fragment {
 	private SubProfile preSubP;
@@ -816,7 +817,7 @@ public class CustomizeFragment extends Fragment {
 							getActivity().getApplicationContext(),
 							// TODO: Change according to openGL or canvas
 							// OpenGLActivity.class);
-							DrawActivity.class);
+							DrawLibActivity.class);
 					startActivity(i);
 				}
 			});
