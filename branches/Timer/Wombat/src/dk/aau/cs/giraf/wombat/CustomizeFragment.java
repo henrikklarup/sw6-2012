@@ -10,7 +10,6 @@ import yuku.ambilwarna.AmbilWarnaDialog;
 import yuku.ambilwarna.AmbilWarnaDialog.OnAmbilWarnaListener;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
-import android.app.Dialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -387,7 +386,6 @@ public class CustomizeFragment extends Fragment {
 
 		setColor(colorGradientButton1.getBackground(), currSubP.timeLeftColor);
 
-		// colorGradientButton1.setBackgroundColor(currSubP._timeLeftColor);
 		colorGradientButton1.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				AmbilWarnaDialog dialog = new AmbilWarnaDialog(getActivity(),
@@ -482,33 +480,28 @@ public class CustomizeFragment extends Fragment {
 
 		attachmentButton = (Button) getActivity().findViewById(
 				R.id.customize_attachment);
-		attachmentButton.setOnLongClickListener(new OnLongClickListener() {
-			
-			public boolean onLongClick(View v) {
-				setAttachment(null);
-				return true;
-			}
-		});
-		attachmentButton.setOnClickListener( new OnClickListener() {
+
+		attachmentButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(final View v) {
 				final ArrayList<Child> children = guard.publishList();
-				
+
 				final AlertDialog builder = new AlertDialog.Builder(v
 						.getContext()).create();
-				
+
 				builder.setTitle(getString(R.string.attachment_button_description));
 				ListView lv = new ListView(getActivity());
 				ChildAdapter adapter = new ChildAdapter(getActivity(),
 						android.R.layout.simple_list_item_1, children);
 				lv.setAdapter(adapter);
 				lv.setOnItemClickListener(new OnItemClickListener() {
-					
-					public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+
+					public void onItemClick(AdapterView<?> parent, View view,
+							int position, long id) {
 						List<String> values = new ArrayList<String>();
 						final ArrayList<SubProfile> subProfiles;
 						subProfiles = children.get(position).SubProfiles();
-						
+
 						for (SubProfile subProfile : subProfiles) {
 							values.add(subProfile.name);
 						}
@@ -518,10 +511,14 @@ public class CustomizeFragment extends Fragment {
 								.getContext()).create();
 						builder2.setTitle(getString(R.string.attachment_button_description));
 						ListView lv = new ListView(getActivity());
-						SubProfileAdapter adapter = new SubProfileAdapter(getActivity(), android.R.layout.simple_list_item_1, subProfiles);
+						SubProfileAdapter adapter = new SubProfileAdapter(
+								getActivity(),
+								android.R.layout.simple_list_item_1,
+								subProfiles);
 						lv.setAdapter(adapter);
 						lv.setOnItemClickListener(new OnItemClickListener() {
-							public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+							public void onItemClick(AdapterView<?> parent,
+									View view, int position, long id) {
 								setAttachment(subProfiles.get(position));
 								builder.dismiss();
 								builder2.dismiss();
@@ -534,8 +531,14 @@ public class CustomizeFragment extends Fragment {
 				builder.setView(lv);
 				builder.show();
 			}
-		}
-	);
+		});
+		attachmentButton.setOnLongClickListener(new OnLongClickListener() {
+
+			public boolean onLongClick(View v) {
+				setAttachment(null);
+				return true;
+			}
+		});
 	}
 
 	/**
@@ -547,8 +550,7 @@ public class CustomizeFragment extends Fragment {
 	private void setAttachment(SubProfile subProfile) {
 		int pictureRes;
 		int textRes;
-		String attachText = getActivity().getApplicationContext().getString(
-				R.string.attached);
+		String attachText = getString(R.string.attached);
 
 		TextView attView = (TextView) getActivity().findViewById(
 				R.id.customize_attachment_text);
@@ -612,10 +614,11 @@ public class CustomizeFragment extends Fragment {
 				public void onClick(View v) {
 					getName();
 					if (preSubP != null) {
-						TimerLoader.subProfileID = currSubP.save(preSubP);
+						TimerLoader.subProfileID = currSubP.save(preSubP)
+								.getId();
 					} else {
-						TimerLoader.subProfileID = guard.getChild().save(
-								currSubP);
+						TimerLoader.subProfileID = guard.getChild()
+								.save(currSubP).getId();
 					}
 					guard.publishList().get(TimerLoader.profilePosition)
 							.select();
