@@ -22,7 +22,6 @@ public class LogoActivity extends Activity {
 	    
 	    Helper helper = new Helper(this);
 	    int size = helper.profilesHelper.getProfiles().size();
-	    Log.i("magnus", "size: " + size);
 	    if (size <= 0) {
 	    	helper.CreateDummyData();
 	    }
