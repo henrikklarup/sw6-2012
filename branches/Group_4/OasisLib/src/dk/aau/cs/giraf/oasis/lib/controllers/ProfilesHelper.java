@@ -25,7 +25,7 @@ public class ProfilesHelper {
 
 
 	private static Context _context;
-	private AuthUsersHelper authUsersHelper;
+	private AuthUsersController au;
 	private String[] columns = new String[] { 
 			ProfilesMetaData.Table.COLUMN_ID, 
 			ProfilesMetaData.Table.COLUMN_FIRST_NAME,
@@ -42,7 +42,7 @@ public class ProfilesHelper {
 	 */
 	public ProfilesHelper(Context context){
 		_context = context;
-		authUsersHelper = new AuthUsersHelper(_context);
+		au = new AuthUsersController(_context);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -72,7 +72,7 @@ public class ProfilesHelper {
 	 * @param profile Profile containing data
 	 */
 	public long insertProfile(Profile profile) {		
-		profile.setId(authUsersHelper.insertAuthUser(0));
+		profile.setId(au.insertAuthUser(0));
 		
 		ContentValues profileContentValues = getContentValues(profile);
 		profileContentValues.put(ProfilesMetaData.Table.COLUMN_ID, profile.getId());
@@ -111,7 +111,7 @@ public class ProfilesHelper {
 		Profile profile = null;
 		long id;
 		
-		id = authUsersHelper.getIdByCertificate(certificate);
+		id = au.getIdByCertificate(certificate);
 		
 		if (id != -1) {
 			profile = getProfileById(id);
@@ -128,7 +128,7 @@ public class ProfilesHelper {
 	 */
 	public int setCertificate(String certificate, Profile profile) {
 		int result;
-		result = authUsersHelper.setCertificate(certificate, profile.getId());
+		result = au.setCertificate(certificate, profile.getId());
 		
 		return result;
 	}
@@ -156,7 +156,7 @@ public class ProfilesHelper {
 	 */
 	public List<String> getCertificatesByProfile(Profile profile) {
 		List<String> certificate;
-		certificate = authUsersHelper.getCertificatesById(profile.getId());
+		certificate = au.getCertificatesById(profile.getId());
 
 		return certificate;
 	}
