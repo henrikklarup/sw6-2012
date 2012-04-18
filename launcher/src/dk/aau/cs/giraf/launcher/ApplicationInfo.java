@@ -2,7 +2,6 @@ package dk.aau.cs.giraf.launcher;
 
 import android.content.Intent;
 import android.content.pm.ServiceInfo;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 
 class ApplicationInfo{
@@ -26,12 +25,12 @@ class ApplicationInfo{
 	/**
 	 * The application icon background color.
 	 */
-	Color bgcolor;
+	int bgcolor;
 	
 	/**
 	 * The application icon color.
 	 */
-	Color iconcolor;
+	int iconcolor;
 	
 	/**
 	 * The package name the application belongs to.
@@ -47,7 +46,7 @@ class ApplicationInfo{
 	 * ID of the guardian who is using the launcher.
 	 */
 	Long guardian;
-
+	
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
