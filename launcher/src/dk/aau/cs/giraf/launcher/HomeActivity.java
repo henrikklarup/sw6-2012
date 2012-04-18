@@ -48,9 +48,9 @@ public class HomeActivity extends Activity {
 		setContentView(R.layout.home);
 
 		HomeActivity.mContext = getApplicationContext();
-		this.mHelper = new Helper(mContext);
+		mHelper = new Helper(mContext);
 
-		this.mCurrentUser = mHelper.profilesHelper.getProfileById(getIntent().getExtras().getLong("currentGuardianID"));
+		mCurrentUser = mHelper.profilesHelper.getProfileById(getIntent().getExtras().getLong("currentGuardianID"));
 
 		mNameView = (TextView)this.findViewById(R.id.nameView);
 
