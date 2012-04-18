@@ -25,7 +25,7 @@ public class ProfilesHelper {
 
 
 	private static Context _context;
-	private AuthUsersHelper au;
+	private AuthUsersHelper authUsersHelper;
 	private String[] columns = new String[] { 
 			ProfilesMetaData.Table.COLUMN_ID, 
 			ProfilesMetaData.Table.COLUMN_FIRST_NAME,
@@ -42,7 +42,7 @@ public class ProfilesHelper {
 	 */
 	public ProfilesHelper(Context context){
 		_context = context;
-		au = new AuthUsersHelper(_context);
+		authUsersHelper = new AuthUsersHelper(_context);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -72,7 +72,7 @@ public class ProfilesHelper {
 	 * @param profile Profile containing data
 	 */
 	public long insertProfile(Profile profile) {		
-		profile.setId(au.insertAuthUser(0));
+		profile.setId(authUsersHelper.insertAuthUser(0));
 		
 		ContentValues profileContentValues = getContentValues(profile);
 		profileContentValues.put(ProfilesMetaData.Table.COLUMN_ID, profile.getId());
@@ -110,8 +110,12 @@ public class ProfilesHelper {
 	public Profile authenticateProfile(String certificate) {
 		Profile profile = null;
 		long id;
-		id = au.getIdByCertificate(certificate);
-		profile = getProfileById(id);
+		
+		id = authUsersHelper.getIdByCertificate(certificate);
+		
+		if (id != -1) {
+			profile = getProfileById(id);
+		}
 
 		return profile;
 	}
@@ -124,7 +128,7 @@ public class ProfilesHelper {
 	 */
 	public int setCertificate(String certificate, Profile profile) {
 		int result;
-		result = au.setCertificate(certificate, profile.getId());
+		result = authUsersHelper.setCertificate(certificate, profile.getId());
 		
 		return result;
 	}
@@ -139,10 +143,9 @@ public class ProfilesHelper {
 
 		if (c != null) {
 			profiles = cursorToProfiles(c);
+			c.close();
 		}
-
-		c.close();
-
+		
 		return profiles;
 	}
 
@@ -153,7 +156,7 @@ public class ProfilesHelper {
 	 */
 	public List<String> getCertificatesByProfile(Profile profile) {
 		List<String> certificate;
-		certificate = au.getCertificatesById(profile.getId());
+		certificate = authUsersHelper.getCertificatesById(profile.getId());
 
 		return certificate;
 	}
@@ -173,9 +176,8 @@ public class ProfilesHelper {
 					c.moveToNext();
 				}
 			}
+			c.close();
 		}
-
-		c.close();
 
 		return profiles;
 	}
@@ -193,9 +195,8 @@ public class ProfilesHelper {
 					c.moveToNext();
 				}
 			}
+			c.close();
 		}
-
-		c.close();
 
 		return profiles;
 	}
@@ -215,9 +216,8 @@ public class ProfilesHelper {
 					c.moveToNext();
 				}
 			}
+			c.close();
 		}
-
-		c.close();
 
 		return profiles;
 	}
@@ -235,9 +235,8 @@ public class ProfilesHelper {
 			if (c.moveToFirst()) {
 				return cursorToProfile(c);
 			}
+			c.close();
 		}
-
-		c.close();
 
 		return null;
 	}
@@ -251,6 +250,7 @@ public class ProfilesHelper {
 		
 		if (c != null) {
 			profiles = cursorToProfiles(c);
+			c.close();
 		}
 		
 		return profiles;
@@ -293,7 +293,7 @@ public class ProfilesHelper {
 		profile.setPicture(cursor.getString(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_PICTURE)));
 		profile.setPhone(cursor.getLong(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_PHONE)));
 		profile.setPRole(cursor.getLong(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_ROLE)));
-		profile.setSetting(Setting.toObject(cursor.getString(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_SETTINGS))));
+		profile.setSetting(Setting.toSetting(cursor.getString(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_SETTINGS))));
 		return profile;
 	}
 

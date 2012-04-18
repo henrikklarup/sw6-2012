@@ -5,8 +5,29 @@ public class ListOfApps {
 	private long idApp;
 	private long idProfile;
 	private Setting<String, String, String> setting;
-	private Setting<String, String, String> stat;
+	private Stat<String, String, String> stat;
 	private static String _output = "{0}, {1}, {2}, {3}";
+	
+	/**
+	 * Constructor with arguments
+	 * @param idApp the app id to set
+	 * @param idProfile the profile id to set
+	 * @param setting the setting to set
+	 * @param stat the stat to set
+	 */
+	public ListOfApps(long idApp, long idProfile, Setting<String, String, String> setting, Stat<String, String, String> stat) {
+		this.idApp = idApp;
+		this.idProfile = idProfile;
+		this.setting = setting;
+		this.stat = stat;
+	}
+	
+	/**
+	 * Empty constructor 
+	 */
+	public ListOfApps() {
+		
+	}
 	
 	/**
 	 * @return the idApp
@@ -53,14 +74,14 @@ public class ListOfApps {
 	/**
 	 * @return the stat
 	 */
-	public Setting<String, String, String> getStat() {
+	public Stat<String, String, String> getStat() {
 		return stat;
 	}
 
 	/**
 	 * @param stat the stat to set
 	 */
-	public void setStat(Setting<String, String, String> stat) {
+	public void setStat(Stat<String, String, String> stat) {
 		this.stat = stat;
 	}
 

@@ -7,11 +7,10 @@ public class App {
 	private String version;
 	private Setting<String, String, String> settings;
 	private Stat<String, String, String> stats;
-	private static String _output = "{0}, {1}, {2}, {3}, {4}";
+	private static String _output = "{0}, {1}, {2}";
 
 	/**
 	 * Constructor with arguments
-	 * 
 	 * @param name the name to set
 	 * @param version the version to set
 	 */
@@ -62,7 +61,7 @@ public class App {
 	}
 
 	/**
-	 * @param version the versionNumber to set
+	 * @param version the version to set
 	 */
 	public void setVersion(String version) {
 		this.version = version;
@@ -96,8 +95,6 @@ public class App {
 	 * {0} = Id
 	 * {1} = Name
 	 * {2} = Version
-	 * {3} = Setting
-	 * {4} = Stat
 	 * @param output the output to set
 	 */
 	public static void setOutput(String output) {
@@ -114,10 +111,7 @@ public class App {
 		localOutput = localOutput.replace("{0}", String.valueOf(getId()));
 		localOutput = localOutput.replace("{1}", getName());
 		localOutput = localOutput.replace("{2}", getVersion());
-		localOutput = localOutput.replace("{3}", "Setting(Static Setting text)");
-		localOutput = localOutput.replace("{4}", "Stat(Static Stat text)");
-//		localOutput = localOutput.replace("{3}", String.valueOf(getSettings()));
-//		localOutput = localOutput.replace("{4}", String.valueOf(getStats()));
+
 		
 		return localOutput;
 	}
