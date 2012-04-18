@@ -25,12 +25,7 @@ class ApplicationInfo{
 	/**
 	 * The application icon background color.
 	 */
-	int bgcolor;
-	
-	/**
-	 * The application icon color.
-	 */
-	int iconcolor;
+	int color;
 	
 	/**
 	 * The package name the application belongs to.
