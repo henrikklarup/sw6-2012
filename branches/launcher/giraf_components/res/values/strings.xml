@@ -3,5 +3,6 @@
 
     <string name="hello">Hello World!</string>
     <string name="app_name">GIRAF_Components</string>
+    <color name="gBrowncolor">#FF9E6435</color>
 
 </resources>
