@@ -1,15 +1,18 @@
 package dk.aau.cs.giraf.oasis.lib;
 
-import android.content.Context;
+import java.util.ArrayList;
+import java.util.List;
 
-import android.util.Log;
+import android.content.Context;
 import dk.aau.cs.giraf.oasis.lib.controllers.AppsHelper;
 import dk.aau.cs.giraf.oasis.lib.controllers.DepartmentsHelper;
 import dk.aau.cs.giraf.oasis.lib.controllers.MediaHelper;
 import dk.aau.cs.giraf.oasis.lib.controllers.ProfilesHelper;
+import dk.aau.cs.giraf.oasis.lib.models.App;
 import dk.aau.cs.giraf.oasis.lib.models.Department;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
+import dk.aau.cs.giraf.oasis.lib.models.Tag;
 
 /**
  * Helper class, instantiating all the helper classes into one
@@ -44,7 +47,7 @@ public class Helper {
 	}
 	
 	public void CreateDummyData() {
-				
+		
 		/*Guardians*/
 		Profile Guardian1 = new Profile("Guardian1", "First", "LoL1", 1, 88888888, null, null);
 		Profile Guardian2 = new Profile("Guardian2", "Second", "LoL2", 1, 88888888, null, null);
@@ -141,6 +144,59 @@ public class Helper {
 		mediaHelper.insertMedia(media1);
 		mediaHelper.insertMedia(media2);
 		mediaHelper.insertMedia(media3);
+		
+//		Media media1Loaded = mediaHelper.getMediaByName("Media1").get(0);
+//		Media media2Loaded = mediaHelper.getMediaByName("Media2").get(0);		
+//		Media media3Loaded = mediaHelper.getMediaByName("Media2").get(0);
+//		
+//		
+//		/*Attach media to department*/
+//		mediaHelper.attachMediaToDepartment(media1Loaded, dep1Loaded, Child1Loaded);
+//		mediaHelper.attachMediaToDepartment(media2Loaded, dep1Loaded, Child1Loaded);
+//		mediaHelper.attachMediaToDepartment(media3Loaded, dep3Loaded, Child2Loaded);
+//		
+		/*Tags*/
+		Tag tag1 = new Tag("Dog1");
+		Tag tag2 = new Tag("Dog2");
+		Tag tag3 = new Tag("Dog3");
+		List<Tag> tags1 = new ArrayList<Tag>();
+		tags1.add(tag1);
+		tags1.add(tag2);
+		List<Tag> tags2 = new ArrayList<Tag>();
+		tags2.add(tag3);
+		
+		
+//		/*Attach tag to media*/
+//		mediaHelper.addTagsToMedia(tags1, media1Loaded);
+//		mediaHelper.addTagsToMedia(tags2, media2Loaded);
+//		mediaHelper.addTagsToMedia(tags1, media3Loaded);
+//		
+		 
+		/*Attach media to media*/
+//		mediaHelper
+		
+		/*Apps*/
+		App app1 = new App("App1", "1");
+		App app2 = new App("App2", "1");
+		App app3 = new App("App3", "1");
+		App app4 = new App("App4", "1");
+		
+		appsHelper.insertApp(app1);
+		appsHelper.insertApp(app2);
+		appsHelper.insertApp(app3);
+		appsHelper.insertApp(app4);
+		
+		/*Get apps*/
+		App app1Loaded = appsHelper.getAppsByName("App1").get(0);
+		App app2Loaded = appsHelper.getAppsByName("App1").get(0);	
+		App app3Loaded = appsHelper.getAppsByName("App1").get(0);
+		App app4Loaded = appsHelper.getAppsByName("App1").get(0);
+		
+		/*Attach app to profile*/
+		appsHelper.attachAppToProfile(app1Loaded, Child1Loaded);
+		appsHelper.attachAppToProfile(app2Loaded, Child1Loaded);
+		appsHelper.attachAppToProfile(app3Loaded, Child2Loaded);
+		appsHelper.attachAppToProfile(app4Loaded, Child3Loaded);
 		
 	}
 	
