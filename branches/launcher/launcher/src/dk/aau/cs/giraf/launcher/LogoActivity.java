@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import dk.aau.cs.giraf.launcher.R;
+import dk.aau.cs.giraf.oasis.lib.Helper;
 
 public class LogoActivity extends Activity {
 
@@ -16,7 +17,13 @@ public class LogoActivity extends Activity {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.logo);
 
-	    final LogoActivity sPlashScreen = this; 
+	    final LogoActivity sPlashScreen = this;
+	    
+	    Helper helper = new Helper(this);
+	    
+	    if (helper.profilesHelper.getProfiles().size() <= 0) {
+	    	helper.CreateDummyData();
+	    }
 
 	    splashTread = new Thread() {
 	        @Override
