@@ -3,6 +3,7 @@ package dk.aau.cs.giraf.launcher;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import dk.aau.cs.giraf.launcher.R;
 import dk.aau.cs.giraf.oasis.lib.Helper;
@@ -20,8 +21,9 @@ public class LogoActivity extends Activity {
 	    final LogoActivity sPlashScreen = this;
 	    
 	    Helper helper = new Helper(this);
-	    
-	    if (helper.profilesHelper.getProfiles().size() <= 0) {
+	    int size = helper.profilesHelper.getProfiles().size();
+	    Log.i("magnus", "size: " + size);
+	    if (size <= 0) {
 	    	helper.CreateDummyData();
 	    }
 
