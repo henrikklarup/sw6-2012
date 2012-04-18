@@ -1,4 +1,4 @@
-package dk.aau.cs.giraf.wombat;
+package dk.aau.cs.giraf.wombat.drawlib;
 
 import android.content.Context;
 import android.graphics.Canvas;
