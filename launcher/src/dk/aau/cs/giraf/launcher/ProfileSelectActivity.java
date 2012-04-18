@@ -14,7 +14,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class ProfileSelectActivity extends Activity{
@@ -46,12 +45,12 @@ public class ProfileSelectActivity extends Activity{
 			}
 		}
 		
-		ArrayAdapter<Profile> adapter = new ArrayAdapter<Profile>(this, android.R.layout.simple_list_item_1, android.R.id.text1, mProfiles);
+		GProfileAdapter adapter = new GProfileAdapter(this, mProfiles);
 		lv.setAdapter(adapter);
 		
 		lv.setOnItemClickListener(new OnItemClickListener() {
-		      public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		    	  	final long childID = ((Profile) parent.getItemAtPosition(position)).getId();
+		      public void onItemClick(AdapterView<?> parent, View view, int position, long id) { 
+		    	  	final long childID = ((Profile) parent.getAdapter().getItem(position)).getId();
 		    	  	final long guardianID = getIntent().getExtras().getLong("currentGuardianID");
 		    	  	
 		            final String packageName = getIntent().getExtras().getString("appPackageName");
