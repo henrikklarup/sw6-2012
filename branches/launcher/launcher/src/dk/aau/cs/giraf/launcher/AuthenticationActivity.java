@@ -55,6 +55,7 @@ public class AuthenticationActivity extends CaptureActivity {
 			public void onClick(View v) {
 				gLoginButton.setVisibility(View.INVISIBLE);
 				loginNameView.setVisibility(View.INVISIBLE);
+				infoView.setText(R.string.authentication_step1);
 				((AuthenticationActivity) authActivity).changeCamerafeedBorderColor(0xFFDD9639);
 				startActivity(mHomeIntent);
 			}
