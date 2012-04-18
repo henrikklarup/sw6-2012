@@ -9,7 +9,36 @@
     android:layout_width="fill_parent"
     android:layout_height="200dp"
     android:background="@drawable/gbackground" >
+    	<TextView
+    	android:visibility="invisible"
+	    android:id="@+id/nameView"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentLeft="true"
+	    android:layout_toRightOf="@+id/profile_pic"
+	    android:layout_marginLeft="30dp"
+	    android:text="@string/barnameview"
+	    android:textSize="30dp"
+	    android:textColor="@color/gBrowncolor"
+	     />
+    	
+    		
+    		<!--  Profile pic -->
+    <LinearLayout android:id="@+id/profile_pic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="3dip"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/gprofile_pic_box"
+        android:layout_marginRight="5dip">
  
+        <ImageView
+            android:id="@+id/imageview_profilepic"
+            android:layout_width="100dip"
+            android:layout_height="130dip"
+            android:src="@drawable/no_profile_pic"/>
+ 
+    </LinearLayout>
 	</RelativeLayout>
     
 	<GridView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -26,5 +55,5 @@
     android:background="@drawable/gbackgroundlight"
     >
 
-</GridView>
+	</GridView>
 </RelativeLayout>

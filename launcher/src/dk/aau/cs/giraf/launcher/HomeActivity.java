@@ -19,6 +19,7 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
+import android.view.View;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
@@ -33,6 +34,7 @@ public class HomeActivity extends Activity {
 	private Profile mCurrentUser; 
 	private Setting mSettings;
 	private Helper mHelper;
+	private TextView mNameView;
 	
 	//Hash keys
 	public final String BACKGROUNDCOLOR = "backgroundColor";
@@ -49,6 +51,8 @@ public class HomeActivity extends Activity {
 		this.mHelper = new Helper(mContext);
 
 		this.mCurrentUser = mHelper.profilesHelper.getProfileById(getIntent().getExtras().getLong("currentGuardianID"));
+
+		mNameView = (TextView)this.findViewById(R.id.nameView);
 
 		loadApplications(true);
 	}
@@ -95,11 +99,15 @@ public class HomeActivity extends Activity {
 
 		homeGridView.setLayoutParams(paramsGrid);
 		homebar.setLayoutParams(paramsBar);
+		
 
 		if (isLandscape) {
-
+			mNameView.setVisibility(View.INVISIBLE);
 		} else {
-			TextView nameView = new TextView(this);
+			mNameView.setVisibility(View.VISIBLE);
+			mNameView.setText(mCurrentUser.getFirstname() + " " + mCurrentUser.getSurname());
+			
+			/*TextView nameView = new TextView(this);
 			TextView institutionView = new TextView(this);
 
 			/// TODO implement mCurrentUser
@@ -112,7 +120,7 @@ public class HomeActivity extends Activity {
 			institutionView.setText("Enebakken"); /// TODO change to dynamic value
 			
 			homebar.addView(nameView);
-			homebar.addView(institutionView);
+			homebar.addView(institutionView);*/
 		}
 	}
 
