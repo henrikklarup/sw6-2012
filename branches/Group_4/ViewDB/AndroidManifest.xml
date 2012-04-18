@@ -33,6 +33,15 @@
         <activity android:name="ViewProfiles" />
         <activity android:name="ViewCertificates" />
         <activity android:name="ViewListOfApps" />
+        <activity android:name="ViewAuthUsers" />
+        <activity android:name="ViewHasDepartment" />
+        <activity android:name="ViewHasGuardian" />
+        <activity android:name="ViewHasLink" />
+        <activity android:name="ViewHasSubDepartment" />
+        <activity android:name="ViewHasTag" />
+        <activity android:name="ViewMediaDepartmentAccess" />
+        <activity android:name="ViewMediaProfileAccess" />
+        <activity android:name="ViewTags" />
     </application>
 
 </manifest>

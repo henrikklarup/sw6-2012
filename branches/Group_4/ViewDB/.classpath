@@ -4,8 +4,8 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
-	<classpathentry kind="lib" path="C:/Users/Dan Moller/Documents/SW6-604/SW6-2012/branches/Group_4/android-support-v13.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Dan Moller/Documents/SW6-604/SW6-2012/branches/Group_4/OasisLib_dev.jar">
+	<classpathentry kind="lib" path="C:/Users/JMohr/Dropbox/Android - Projects/Admin-Projects/android-support-v13.jar"/>
+	<classpathentry kind="lib" path="C:/Users/JMohr/Dropbox/Android - Projects/Admin-Projects/PrivateToPublic.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="jar:file:/C:/Users/Dan Moller/Documents/SW6-604/SW6-2012/branches/Group_4/OasisLib.jar!/doc/"/>
 		</attributes>
