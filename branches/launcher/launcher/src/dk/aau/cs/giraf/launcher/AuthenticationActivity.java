@@ -1,5 +1,6 @@
 package dk.aau.cs.giraf.launcher;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.RectF;
@@ -24,6 +25,10 @@ import dk.aau.cs.giraf.oasis.lib.models.Profile;
 public class AuthenticationActivity extends CaptureActivity {
 	
 	private Intent mHomeIntent;
+	private GButton gLoginButton;
+	private TextView loginNameView;
+	private TextView infoView;
+	private Context authActivity;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -39,10 +44,18 @@ public class AuthenticationActivity extends CaptureActivity {
 				anim.start();
 			}
 		});
+		
+		gLoginButton = (GButton)this.findViewById(R.id.loginGButton);
+		loginNameView = (TextView)this.findViewById(R.id.loginname);
+		infoView = (TextView)this.findViewById(R.id.authentication_step1);
+		authActivity = this;
 
 		final GButton button = (GButton) findViewById(R.id.loginGButton);
 		button.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
+				gLoginButton.setVisibility(View.INVISIBLE);
+				loginNameView.setVisibility(View.INVISIBLE);
+				((AuthenticationActivity) authActivity).changeCamerafeedBorderColor(0xFFDD9639);
 				startActivity(mHomeIntent);
 			}
 		});
@@ -66,19 +79,19 @@ public class AuthenticationActivity extends CaptureActivity {
 
 		if (profile != null) {	
 			this.changeCamerafeedBorderColor(0xFF3AAA35);
-			((TextView)this.findViewById(R.id.loginname)).setText(profile.getFirstname() + " " + profile.getSurname());
-			((TextView)this.findViewById(R.id.loginname)).setVisibility(View.VISIBLE);
+			loginNameView.setText(profile.getFirstname() + " " + profile.getSurname());
+			loginNameView.setVisibility(View.VISIBLE);
 
-			((GButton)this.findViewById(R.id.loginGButton)).setVisibility(View.VISIBLE);
-			((TextView)this.findViewById(R.id.authentication_step1)).setText(R.string.saadan);
+			gLoginButton.setVisibility(View.VISIBLE);
+			infoView.setText(R.string.saadan);
 			
 			mHomeIntent = new Intent(AuthenticationActivity.this, HomeActivity.class);
 			mHomeIntent.putExtra("currentGuardianID", profile.getId());
 		} else {
 			this.changeCamerafeedBorderColor(0xFFFF0000);
-			((GButton)this.findViewById(R.id.loginGButton)).setVisibility(View.INVISIBLE);
-			((TextView)this.findViewById(R.id.loginname)).setVisibility(View.INVISIBLE);
-			((TextView)this.findViewById(R.id.authentication_step1)).setText(R.string.authentication_step1);
+			gLoginButton.setVisibility(View.INVISIBLE);
+			loginNameView.setVisibility(View.INVISIBLE);
+			infoView.setText(R.string.authentication_step1);
 
 			//ProgressDialog dialog = ProgressDialog.show(AuthenticationActivity.this, "", "INVALID profile: " + rawResult.getText(), true, true);
 		}
