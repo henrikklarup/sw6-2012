@@ -6,9 +6,7 @@ import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
 import android.widget.LinearLayout;
-import dk.aau.cs.giraf.TimerLib.Guardian;
 import dk.aau.cs.giraf.TimerLib.Hourglass;
-import dk.aau.cs.giraf.TimerLib.ProgressBar;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
 
 
