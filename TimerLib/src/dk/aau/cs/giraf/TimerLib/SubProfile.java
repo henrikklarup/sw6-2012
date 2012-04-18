@@ -1,89 +1,81 @@
 package dk.aau.cs.giraf.TimerLib;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-import android.opengl.GLU;
 import android.opengl.GLSurfaceView.Renderer;
-import dk.aau.cs.giraf.TimerLib.R;
 
-public class SubProfile implements Renderer, formInterface, Comparable<SubProfile>{
+public class SubProfile implements Comparable<SubProfile>{
 	
 	Guardian guard = Guardian.getInstance();
 	private int _id = -1;
-	public String _name = "Default";
-	public String _desc = "Default desc";
-	public int _size = 100;
-	public int _bgcolor = 0xffffffff;
-	public int _timeLeftColor = 0xffffffff;
-	public int _timeSpentColor = 0xffffffff;
-	public int _frameColor = 0xffffffff;
-	public int _totalTime = 100;
-	public boolean _gradient = false;
+	public String name = "Default";
+	public String desc = "Default desc";
+	public int bgcolor = 0xffffffff;
+	public int timeLeftColor = 0xffffffff;
+	public int timeSpentColor = 0xffffffff;
+	public int frameColor = 0xffffffff;
+	public int totalTime = 100;
+	public boolean gradient = false;
+	public boolean save = true;
+	public boolean saveAs = true;
 	protected SubProfile _attachment = null;
-	private boolean save = true;
-	private boolean saveAs = true;
-	private boolean lock = false;
+	private long _attachmentId = -1;
+	private long _appId = -1;
+
 	//constructor
-	public SubProfile(String name, String description, int size, int bgcolor, int timeLeftColor, int timeSpentColor, int frameColor, int totalTime, boolean changeColor){
+	public SubProfile(String name, String description, int bgcolor, int timeLeftColor, int timeSpentColor, int frameColor, int totalTime, boolean changeColor){
 		if(this._id == -1){
 			this._id = guard.getId();
 		}
-		this._name = name;
-		this._desc = description;
-		this._size = size;
-		this._bgcolor = bgcolor;
-		this._timeLeftColor = timeLeftColor;
-		this._timeSpentColor = timeSpentColor;
-		this._frameColor = frameColor;
-		this._totalTime = totalTime;
-		this._gradient = changeColor;
+		this.name = name;
+		this.desc = description;
+		this.bgcolor = bgcolor;
+		this.timeLeftColor = timeLeftColor;
+		this.timeSpentColor = timeSpentColor;
+		this.frameColor = frameColor;
+		this.totalTime = totalTime;
+		this.gradient = changeColor;
 	}
 		
-	public SubProfile(String name, String description, int size, int bgcolor, int timeLeftColor, int timeSpentColor, int frameColor, boolean changeColor){
+	public SubProfile(String name, String description, int bgcolor, int timeLeftColor, int timeSpentColor, int frameColor, boolean changeColor){
 		if(this._id == -1){
 			this._id = guard.getId();
 		}
-		this._name = name;
-		this._desc = description;
-		this._size = size;
-		this._bgcolor = bgcolor;
-		this._timeLeftColor = timeLeftColor;
-		this._timeSpentColor = timeSpentColor;
-		this._frameColor = frameColor;
-		this._gradient = changeColor;
+		this.name = name;
+		this.desc = description;
+		this.bgcolor = bgcolor;
+		this.timeLeftColor = timeLeftColor;
+		this.timeSpentColor = timeSpentColor;
+		this.frameColor = frameColor;
+		this.gradient = changeColor;
 	}
 	
-	void resetLock(){
-		this.save = true;
-		this.saveAs = true;
-		this.lock = false;
+	
+	void setAppId(long id){
+		this._appId = id;
 	}
 	
-	void setLock(){
-		this.lock = true;
-		this.save = false;
+	long getAppId(){
+		return this._appId;
 	}
 	
-	public boolean getSave(){
-		return save;
+	public void select(){
+		guard.setSubProfile(this);
 	}
 	
-	public boolean getSaveAs(){
-		return saveAs;
-	}
-	
-	public void setSave(boolean state){
-		if(!this.lock){
-			save = state;
-		}		
-	}
-	
-	public void setSaveAs(boolean state){
-		saveAs = state;
+	public void delete(){
+		START:
+			for(Child c : guard.Children()){
+				for(SubProfile p : c.SubProfiles()){
+					if(p._id == this._id){
+						guard.delete(c, this);
+						break START;
+					}
+				}
+			}
 	}
 	
 	public SubProfile(){
@@ -104,9 +96,18 @@ public class SubProfile implements Renderer, formInterface, Comparable<SubProfil
 		return _attachment;
 	}
 	
+	long getAttachmentId(){
+		return this._attachmentId;
+	}
+	
+	void setAttachmentId(long id){
+		this._attachmentId = id; 
+	}
+	
 	public void setAttachment(SubProfile p){
+		this._attachmentId = p.getAppId();
 		this._attachment = p;
-		this._attachment._totalTime = this._totalTime;
+		this._attachment.totalTime = this.totalTime;
 	}
 	
 	public formFactor formType(){
@@ -123,82 +124,87 @@ public class SubProfile implements Renderer, formInterface, Comparable<SubProfil
 			
 		}
 	}
-
-	public void onDrawFrame(GL10 arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void onSurfaceChanged(GL10 gl, int width, int height) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-		// TODO Auto-generated method stub
-		
-	}
 	
-	public void save(SubProfile oldProfile){
+	public SubProfile save(SubProfile oldProfile){
 		START:
 		for(Child c : guard.Children()){
 			for(SubProfile p : c.SubProfiles()){
 				if(p._id == oldProfile._id){
+					if(oldProfile.getAttachment() != null){
+						this.setAttachment(oldProfile.getAttachment());
+					}
 					c.save(this);
 					c.SubProfiles().remove(p);
 					break START;
 				}
 			}
 		}
+		return this;
+		
 	}
 	
 	public void addLastUsed(SubProfile oldProfile){
+		if(oldProfile == null){
+			guard.addLastUsed(this);
+		} else {
 		this._id = oldProfile._id;
-		this.setLock();
 		guard.addLastUsed(this);
-	}
+		}
+}
 
 	 public boolean equals(Object o) {
 	        if (!(o instanceof SubProfile))
 	            return false;
 	        SubProfile n = (SubProfile) o;
-	        return n._name.equals(_name) && n._name.equals(_name);
+	        return n.name.equals(name) && n.name.equals(name);
 	    }
 
 	    public int hashCode() {
-	        return 31*_name.hashCode() + _name.hashCode();
+	        return 31*name.hashCode() + name.hashCode();
 	    }
 
 	    public String toString() {
-		return _name + " " + _name;
+		return name + " " + name;
 	    }
 
 	    public int compareTo(SubProfile n) {
-	        int lastCmp = _name.compareTo(n._name);
-	        return (lastCmp != 0 ? lastCmp : _name.compareTo(n._name));
+	        int lastCmp = name.compareTo(n.name);
+	        return (lastCmp != 0 ? lastCmp : name.compareTo(n.name));
 	    }
 
 		public SubProfile toHourglass() {
-			Hourglass form = new Hourglass(this._name, this._desc, this._size, this._bgcolor, this._timeLeftColor, this._timeSpentColor, this._frameColor, this._totalTime, this._gradient);
-			form.setId(this.getId());
+			Hourglass form = new Hourglass(this.name, this.desc, this.bgcolor, this.timeLeftColor, this.timeSpentColor, this.frameColor, this.totalTime, this.gradient);
+			form.setId(this.getId());		
+			if(this._attachment != null){
+				form.setAttachment(this._attachment);
+			}
 			return form;
 		}
 
 		public SubProfile toProgressBar() {
-			ProgressBar form = new ProgressBar(this._name, this._desc, this._size, this._bgcolor, this._timeLeftColor, this._timeSpentColor, this._frameColor, this._totalTime, this._gradient);
+			ProgressBar form = new ProgressBar(this.name, this.desc, this.bgcolor, this.timeLeftColor, this.timeSpentColor, this.frameColor, this.totalTime, this.gradient);
 			form.setId(this.getId());
+			if(this._attachment != null){
+				form.setAttachment(this._attachment);
+			}
 			return form;
 		}
 
 		public SubProfile toTimeTimer() {
-			TimeTimer form = new TimeTimer(this._name, this._desc, this._size, this._bgcolor, this._timeLeftColor, this._timeSpentColor, this._frameColor, this._totalTime, this._gradient);
+			TimeTimer form = new TimeTimer(this.name, this.desc, this.bgcolor, this.timeLeftColor, this.timeSpentColor, this.frameColor, this.totalTime, this.gradient);
 			form.setId(this.getId());
+			if(this._attachment != null){
+				form.setAttachment(this._attachment);
+			}
 			return form;
 		}
 
 		public SubProfile toDigitalClock() {
-			DigitalClock form = new DigitalClock(this._name, this._desc, this._size, this._bgcolor, this._timeLeftColor, this._timeSpentColor, this._frameColor, this._totalTime, this._gradient);
+			DigitalClock form = new DigitalClock(this.name, this.desc, this.bgcolor, this.timeLeftColor, this.timeSpentColor, this.frameColor, this.totalTime, this.gradient);
 			form.setId(this.getId());
+			if(this._attachment != null){
+				form.setAttachment(this._attachment);
+			}
 			return form;
 		}
 	    
