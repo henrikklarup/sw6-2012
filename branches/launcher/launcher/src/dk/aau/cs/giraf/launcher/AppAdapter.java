@@ -51,7 +51,7 @@ public class AppAdapter extends ArrayAdapter<ApplicationInfo> {
 	private void setAppBackgroundColor(View convertView, int bgColor) {    
 		LinearLayout ll = (LinearLayout) convertView.findViewById(R.id.app_bg);
 		RectF rectf = new RectF();
-		RoundRectShape rect = new RoundRectShape( new float[] {15,15, 15,15, 15,15, 15,15}, rectf, null); // 15,15, 15,15, 15,15, 15,15 // 30,30, 30,30, 30,30, 30,30
+		RoundRectShape rect = new RoundRectShape( new float[] {15,15, 15,15, 15,15, 15,15}, rectf, null);
 		ShapeDrawable bg = new ShapeDrawable(rect);
 		bg.getPaint().setColor(bgColor);
 		ll.setBackgroundDrawable(bg);
