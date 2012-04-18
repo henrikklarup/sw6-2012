@@ -29,9 +29,8 @@ public class TableList extends ListActivity {
 		
 		helper = new Helper(this);
 		
-		
-		
 		settings = new Setting<String, String, String>();
+		
 
 		HashMap map = new HashMap();
 		map.put("Settings", "Favorite Color,Favorite Food,Favorite Animal");

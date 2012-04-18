@@ -49,7 +49,7 @@ class AuthUsersHelper {
 		cv.put(AuthUsersMetaData.Table.COLUMN_CERTIFICATE, certificate);
 		return _context.getContentResolver().update(uri, cv, null, null);
 	}
-	
+
 	public int modifyAuthUser(AuthUser authUser) {
 		Uri uri = ContentUris.withAppendedId(AuthUsersMetaData.CONTENT_URI, authUser.getId());
 		ContentValues cv = getContentValues(authUser);
@@ -83,9 +83,10 @@ class AuthUsersHelper {
 					c.moveToNext();
 				}
 			}
+			c.close();
 		}
 
-		c.close();
+
 
 		return certificates;
 	}
@@ -93,14 +94,12 @@ class AuthUsersHelper {
 	public long getIdByCertificate(String certificate) {
 		long id = -1;
 		Cursor c = _context.getContentResolver().query(AuthUsersMetaData.CONTENT_URI, columns, null, new String[] {certificate}, null);
-
-		if(c != null) {
-			if(c.moveToFirst()) {
+		if (c != null) {
+			if (c.moveToFirst()) {
 				id = c.getLong(c.getColumnIndex(AuthUsersMetaData.Table.COLUMN_ID));
 			}
+			c.close();	
 		}
-
-		c.close();
 		return id;
 	}
 
@@ -122,7 +121,6 @@ class AuthUsersHelper {
 				cursor.moveToNext();
 			}
 		}
-
 
 		return authUsers;
 	}

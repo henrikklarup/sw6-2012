@@ -74,5 +74,10 @@ public class ViewProfiles extends ListFragment {
 		super.onListItemClick(l, v, position, id);
 		long _id = getListAdapter().getItemId(position);
 		Toast.makeText(getActivity().getApplicationContext(), "LIST ITEM CLICK", Toast.LENGTH_SHORT).show();
+		Profile profile = helper.profilesHelper.authenticateProfile("a");
+		if (profile != null)
+			Toast.makeText(getActivity().getApplicationContext(), profile.getFirstname(), Toast.LENGTH_SHORT).show();
+		else 
+			Toast.makeText(getActivity().getApplicationContext(), "Profile == null", Toast.LENGTH_SHORT).show();
 	}
 }
