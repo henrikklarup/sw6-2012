@@ -1,0 +1,86 @@
+<html>
+<head>
+<title>Savannah 1.0</title>
+</head>
+<body>
+<SCRIPT language = JavaScript>
+function listbox_move(fromID, toID) {
+    var from = document.getElementById(fromID);
+    var to = document.getElementById(toID);
+ 
+    for(var count=0; count < from.options.length; count++) {
+ 
+        if(from.options[count].selected == true) {
+                var option = from.options[count];
+ 
+                var newOption = document.createElement("option");
+                newOption.value = option.value;
+                newOption.text = option.text;
+                newOption.selected = true;
+                try {
+                         to.add(newOption, null); //for normal browsers
+                         from.remove(count, null);
+                 }catch(error) {
+                         to.add(newOption); // for Internet Explorer
+                         from.remove(count);
+                 }
+                count--;
+        }
+    }
+}
+</SCRIPT>
+<h1>Rediger profiler</h1>
+<table border = 0>
+<form>
+<tr>
+<td>Navn:</td> <td><input type="text" name="name" value=Sebastian /><td> 
+</tr>
+<tr>
+<td>Mellemnavn(e):</td> <td> <input type="text" name="middlename" /> </td>
+</tr>
+<tr>
+<td>Efternavn: </td><td><input type="text" name="surname" value=Lybæk /> </td>
+</tr>
+<tr>
+<td>Telefon nummer: </td> <td> <input type="text" name="phone" value=28881590 /> </td>
+</tr>
+<tr>
+<td><select name="Rolle">
+<option value="Admin" selected="selected">Administrator</option>
+<option value="Guardian">Pedagog</option>
+<option value="Parent">Forældre</option>
+<option value="Child">Barn</option>
+</select></td> <br />
+</tr>
+<tr>
+<td><select name="AllDep" id="All" size="4" multiple="multiple">
+    <option value="1">Egebakken</option>
+    <option value="2">Birken</option>
+    <option value="3">en anden en</option>
+    <option value="0">All</option>
+</select></td>
+<td> <input type="button" value="Tilføj" onclick="listbox_move('All', 'Selected');"><br />
+<input type="button" value="Fjern" onclick="listbox_move('Selected', 'All');"> <br /> 
+<input type="button" value="Fjern alle"></td>
+<td><select name="SelectedDep" id="Selected" size="4" multiple="multiple">
+</select></td>
+</tr>
+<tr>
+<td>Brugernavn: </td><td><input type="text" name="brugernavn" disabled=true /></td> 
+</tr>
+<tr>
+<td>Gamle kodeord:</td><td><input type="password" name="oldpassword"></td>
+</tr>
+<tr>
+<td>Kodeord:</td><td> <input type="password" name="password" /> </td>
+</tr>
+<tr>
+<td>Gentag kodeord:</td> <td> <input type="password" name="password2" /> </td>
+</tr>
+<tr>
+<td></td><td><input type="button" value="Tilføj">
+<input type="button" value="Fortryd"></td>
+</tr>
+</form>
+</body>
+</html>
