@@ -98,10 +98,12 @@ public class HomeActivity extends Activity {
 			/// TODO implement mCurrentUser
 			//nameView.setText(mCurrentUser.getFirstname() + " " + mCurrentUser.getSurname());
 			nameView.setText("Drazenko Banjak");
+			
+			nameView.setTextSize(30);
 
 			/// TODO implement get Department - method should be available 18 april from oasis
 			institutionView.setText("Enebakken"); /// TODO change to dynamic value
-
+			
 			homebar.addView(nameView);
 			homebar.addView(institutionView);
 		}
