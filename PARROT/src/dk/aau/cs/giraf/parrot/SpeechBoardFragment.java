@@ -24,8 +24,10 @@ public class SpeechBoardFragment extends Fragment
 	public void onAttach(Activity activity) 
 	{
 		super.onAttach(activity);
-
+				
 		this.parrent = activity;
+		
+		parrent.setContentView(R.layout.speechboard_layout);
 
 		
 		PARROTProfile user=PARROTActivity.getUser();
