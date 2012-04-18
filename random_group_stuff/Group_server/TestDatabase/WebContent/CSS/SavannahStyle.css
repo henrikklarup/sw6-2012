@@ -1,3 +1,8 @@
+a:link {color:blue;text-decoration:none;}    /* unvisited link */
+a:visited {color: blue;text-decoration:none;} /* visited link */
+a:hover {text-decoration:underline;}   /* mouse over link */
+a:active {text-decoration:underline;}  /* selected link */
+
 body
 {
 	background-color: #eeeeee
@@ -11,6 +16,7 @@ footer
 }
 
 #mainBackground{
+
 	border-radius: 15px;
 	margin-left: 200px;
 	margin-right: 200px;

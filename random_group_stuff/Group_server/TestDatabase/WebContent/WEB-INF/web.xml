@@ -79,4 +79,14 @@
     <servlet-name>SelectProfile</servlet-name>
     <url-pattern>/SelectProfile</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddProfile</display-name>
+    <servlet-name>AddProfile</servlet-name>
+    <servlet-class>AddProfile</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddProfile</servlet-name>
+    <url-pattern>/AddProfile</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -17,6 +17,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.jasper.tagplugins.jstl.core.ForEach;
 
+import com.sun.corba.se.impl.oa.poa.AOMEntry;
+
 /**
  * Servlet implementation class SelectProfile
  */
@@ -47,17 +49,40 @@ public class SelectProfile extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		HttpSession session = request.getSession();
+		PrintWriter out = response.getWriter();
 		profiles.clear();
 
 		guardians.clear();
 
 		String loginID = request.getParameter("myId");
+
+
+		//Check if not number in id
+		if (loginID != null)
+		{
+			try {
+				Integer.parseInt(request.getParameter("myId"));
+
+			} catch (NumberFormatException e) {
+				// TODO: handle exception
+				loginID = null;
+				session.setAttribute("SelectProfileERROR","Fejl id id (Kun numre er gyldige)");
+
+
+			}
+		}
+
+
 		String triedLogin = request.getParameter("triedLogin");
 		String guardianID = request.getParameter("guardianID");
-		String password = request.getParameter("password");
-		String username = request.getParameter("username");
+		String password1 = request.getParameter("password1");
+		//String username1 = request.getParameter("username");
 		Profile originalProfile;
 		//String originalUsername = request.getParameter("username");
+		String openVar = request.getParameter("jsOpenVar");
+		if (openVar == null)
+			openVar = "0";
+
 
 
 
@@ -69,10 +94,11 @@ public class SelectProfile extends HttpServlet {
 			con =DriverManager.getConnection 
 					("jdbc:mysql://172.25.11.65:3306/04","eder","123456");
 			stmt = con.createStatement();
-			rs = stmt.executeQuery("SELECT * from Profile;");
+			rs = stmt.executeQuery("SELECT idUser, username, idProfile, firstname, middlename, surname from AuthUsers, Profile " +
+					   			 "where idUser = idProfile;");
 			// displaying records
 			while(rs.next()){
-				id = rs.getInt("idProfile");
+				id = rs.getInt("idUser");
 				name = rs.getString("firstname") + " " +rs.getString("middlename") + " " + rs.getString("surname");
 				username = rs.getString("username");
 
@@ -87,8 +113,8 @@ public class SelectProfile extends HttpServlet {
 				if (triedLogin != null && triedLogin.equals("1") && guardianID != null)
 				{
 					stmt = con.createStatement();
-					rs = stmt.executeQuery("select username, password from Profile "+
-							"where idProfile = " + guardianID + ";");
+					rs = stmt.executeQuery("select username, password from AuthUsers "+
+							"where idUser = " + guardianID + ";");
 
 					// displaying records
 					while(rs.next()){
@@ -98,19 +124,23 @@ public class SelectProfile extends HttpServlet {
 
 						session.setAttribute("LOGGEDINAS", correcUsername);
 
-						if (password.equals(correctPass))
+						if (password1.equals(correctPass))
 						{
 							session.setAttribute("ID", loginID);
 							session.setAttribute("USER", correcUsername);
 
 							response.sendRedirect("main");
 						}
+						else
+						{
+							out.println("ERROR");
+						}
 					}
 				}
 				else
 				{
 					stmt = con.createStatement();
-					rs = stmt.executeQuery("select * from Profile "+
+					rs = stmt.executeQuery("select * from Profile, AuthUsers "+
 							"where idProfile = "+loginID+";");
 					originalProfile = null;
 					while(rs.next()){
@@ -161,24 +191,30 @@ public class SelectProfile extends HttpServlet {
 			}
 		}
 
-		PrintWriter out = response.getWriter();
+
 		out.println("<html>");
 		out.println("<head>");
 		out.println("<title>Savannah 1.0</title>");
 		out.println("<link rel='stylesheet' type='text/css' href='CSS/SavannahStyle.css' />");
-		out.println("<script src=\"javascript/popup.js\"></script>"); 
+		out.println("<script src=\"javascript/popup.js\"></script>");
 		out.println("</head>");
 		if (loginID != null)
 		{
-			out.println("<body onLoad=\"setID('"+loginID+"'); popup('popUpDiv'); getFocus();\">");
+			out.println("<body onLoad=\"setOpen("+openVar+"); setID('"+loginID+"'); popup('popUpDiv'); getFocus();\">");
 		}
 		else
 		{
-			out.println("<body>");
+			out.println("<body onLoad=\"getFocusQuick();\">");
 
 		}	
 
 		out.println("<script type='text/javascript'>"+
+				"var open = 0;"+
+				"function setOpen(number)"+
+				"{"+
+				"open = number;"+
+				"document.DasForm.jsOpenVar.value = number;"+
+				"}"+
 				"function ChangeColor(tableRow, highLight)"+
 				"{"+
 				"if (highLight)"+
@@ -202,17 +238,33 @@ public class SelectProfile extends HttpServlet {
 				"{"+
 				"document.DasForm.triedLogin.value = 1;"+
 				"}"+
+				"function clearLogin()"+
+				"{"+
+				"document.DasForm.triedLogin.value = 0;"+
+				"}"+
 				"function submitform()"+
 				"{"+
 				"document.DasForm.submit();"+
 				"}"+
 				"function clearForm()" +
 				"{"+
-				"document.DasForm.password.value= \"\";"+
+				"document.DasForm.password1.value= \"\";"+
 				"}"+
 				"function getFocus()" +
 				"{"+
-				"document.DasForm.password.focus();" +
+				"document.DasForm.password1.focus();" +
+				"}"+
+				"function getFocusQuick()" +
+				"{"+
+				"document.quickForm.quickSelect.focus();" +
+				"}"+
+				"document.onkeydown = function(e) {"+
+				" e = e || window.event;" +
+				"var keyCode = e.keyCode || e.which;" +
+				//If in login and esc is pressed
+				"if(keyCode == 27 && open == 1) {setOpen(0); popup('popUpDiv');  clearForm(); getFocusQuick();}" +
+				//If no active screen and backspace is pressed - go back
+				"if(keyCode == 8 && document.quickForm.quickSelect.value == '') {window.history.go(-1);}" +
 				"}"+
 				"</script>");
 		out.println("<div id=\"mainBackground\">");
@@ -226,39 +278,67 @@ public class SelectProfile extends HttpServlet {
 		//out.println("<th>Pædagog</th>");
 		//out.println("<th>Forældre</th>");
 		out.println("</tr>");
+		String numberScript = "";
 		for (Profile p : profiles) 
 		{
 
 			out.println("<tr onmouseover=\"ChangeColor(this, true);\" onmouseout=\"ChangeColor(this, false);\"" + 
-					"onclick=\"setID('"+p.getId()+"'); submitform();\">");
+					"onclick=\"setOpen(1); setID('"+p.getId()+"'); submitform();\">");
 			out.println("<td>" + p.getId() + "</td><td>"+p.getName()+"</td>");//<td>"+p.getGuardian()+"</td><td>"+p.getParent()+"</td>");
 			out.println("</tr>");
 
 		}
 		out.println("</table>");
+		out.println("<hr>");
+		out.println("<center>");
+		out.println("<form method='POST' action='SelectProfile' name='quickForm'>");
+		out.println("<input type='text' name='quickSelect' onkeypress='if (window.event.keyCode == 13) {setOpen(1); setID(document.quickForm.quickSelect.value); submitform();}'>");
+		out.println("</form>");
+		if (session.getAttribute("SelectProfileERROR") != null)
+		{
+			out.println("<br>");
+			out.println(session.getAttribute("SelectProfileERROR"));
+			out.println("<br>");
+			session.removeAttribute("SelectProfileERROR");
+		}
+		out.println("</center>");
 		out.println("<p>");
 		out.println("</div>");
 
 		out.println("" +
 				"<div id=\"blanket\" style=\"display:none;\"></div>"+
 				"<div id=\"popUpDiv\" style=\"display:none;\">"+
-				"<P align=\"right\"><a href=\"#\" onclick=\"popup('popUpDiv')\" ALIGN=RIGHT>[X]</a></p>"+
+				"<P align=\"right\"><a href=\"#\" onclick=\"setOpen(0); popup('popUpDiv')\" ALIGN=RIGHT>[X]</a></p>"+
 				"<form method='POST' action='SelectProfile' name='DasForm'>\n" + 
 				"<center><h3>");
 		if (!guardians.isEmpty())
 		{
-			out.println("Login påkrævet</h3>");
-			out.println("<br>");
-			out.println("<table border=\"0\">"+
-					"<tr>"+
-					"<td>Bruger:<td>");
+			try {
 
-			out.println("<select name='guardianID'>");
-			for (Profile g : guardians) {
-				out.println("<option value='"+g.getId()+"'>"+g.getName());	
+
+				out.println("Login påkrævet</h3>");
+				out.println("<br>");
+				out.println("<table border=\"0\">"+
+						"<tr>"+
+						"<td>Bruger:<td>");
+
+				out.println("<select name='guardianID'>");
+				for (Profile g : guardians) {
+					out.println("<option value='"+g.getId()+"'>"+g.getName());	
+				}
+				out.println("</select");
+				out.println("</tr>");
 			}
-			out.println("</select");
-			out.println("</tr>");
+			catch (NullPointerException e) {
+				// TODO: handle exception
+				session.setAttribute("SelectProfileERROR", "Ugyldigt id");
+				out.println("<script>");
+				out.println("alert('Ugyldigt id');");
+				out.println("setID(null); clearLogin(); submitform();");
+				out.println("</script>");
+				response.sendRedirect("SelectProfile");
+				
+			}
 
 		}
 		else
@@ -271,15 +351,17 @@ public class SelectProfile extends HttpServlet {
 					"<td>Brugernavn:<td><input type='text' name='username'><br>\n" +
 					"</tr>");
 		}
+
 		out.println("<tr>"+
-				"<td>Kodeord:<td><input type='password' name='password'><br>\n" +
+				"<td>Kodeord:<td><input type='password' onkeypress='if (window.event.keyCode == 13) {setOpen(1); setLogin(); submitform();}' name='password1'><br>\n" +
 				"</tr>"+
 				"<tr>" +
 				"<td><input type='hidden' name='myId' value=''><br><input type='hidden' name='triedLogin' value=0><br><input type='hidden' name='originalUsername'>"+
 				"</tr>"+
 				"</table>"+
+				"<input type='hidden' name=jsOpenVar value='0'>"+
 				//"<tr>"+
-				"<td><input type='button' value='Login' onClick=\"setLogin(); submitform();\"><td><input type='button' value='Fortryd' onClick=\"clearForm();popup('popUpDiv')\">\n" +
+				"<td><input type='button' value='Login' onClick=\"setLogin(); submitform();\"><td><input type='button' value='Fortryd' onClick=\"setOpen(0); clearForm();popup('popUpDiv')\">\n" +
 				//"</tr>"+
 
 				"</center>"+
