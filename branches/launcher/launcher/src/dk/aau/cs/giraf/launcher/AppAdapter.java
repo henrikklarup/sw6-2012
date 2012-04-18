@@ -43,17 +43,18 @@ public class AppAdapter extends ArrayAdapter<ApplicationInfo> {
 
 		tv.setText(app.title.toString());
 		iv.setImageDrawable(app.icon);
-		setAppBackgroundColor(convertView, app.bgcolor);
+		setAppBackgroundColor(convertView, app.color);
 
 		return convertView;
 	}
 
-	private void setAppBackgroundColor(View convertView, int bgColor) {    
+	private void setAppBackgroundColor(View convertView, int color) {    
 		LinearLayout ll = (LinearLayout) convertView.findViewById(R.id.app_bg);
-		RectF rectf = new RectF();
-		RoundRectShape rect = new RoundRectShape( new float[] {15,15, 15,15, 15,15, 15,15}, rectf, null);
+		
+		RoundRectShape rect = new RoundRectShape( new float[] {15,15, 15,15, 15,15, 15,15}, new RectF(), null);
 		ShapeDrawable bg = new ShapeDrawable(rect);
-		bg.getPaint().setColor(bgColor);
+		
+		bg.getPaint().setColor(color);
 		ll.setBackgroundDrawable(bg);
 	}
 }

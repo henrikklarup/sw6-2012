@@ -142,7 +142,7 @@ public class HomeActivity extends Activity {
 					appInfo.packageName = info.activityInfo.applicationInfo.packageName;
 					appInfo.activityName = info.activityInfo.name;
 					appInfo.guardian = mCurrentUser.getId();
-					appInfo.bgcolor = AppColor(mSettings, appInfo.packageName);
+					appInfo.color = AppColor(mSettings, appInfo.packageName);
 
 					applications.add(appInfo);
 				}
@@ -157,7 +157,7 @@ public class HomeActivity extends Activity {
 	}
 
 	private void SetBackgroundColor(Setting setting) {
-		
+		;
 	}
 	
 	private int AppColor(Setting setting, String appName) {
