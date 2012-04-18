@@ -47,7 +47,7 @@ public class DrawHourglass extends View {
 			width = 300;
 			height = 500;
 			frameHeight = height / 20;
-			indent = (int) (frameHeight * 1.5);
+			indent = frameHeight;
 			init = false;
 		}
 		/* Fill the canvas with the background color */
@@ -63,22 +63,28 @@ public class DrawHourglass extends View {
 
 		rtop = new Rect(left, top, left + width, top + frameHeight);
 		rbot = new Rect(left, top + height - frameHeight, left + width, top + height);
-		rleft = new Rect(left + indent, top, left - frameHeight + indent, top + height);
-		rright = new Rect(left + width - indent, top, left + width - indent + frameHeight, top + height);
+		rleft = new Rect(left + indent, top, left - (frameHeight/2) + indent, top + height);
+		rright = new Rect(left + width - indent, top, left + width - indent + (frameHeight/2), top + height);
 		
 		c.drawRect(rtop, paint);
 		c.drawRect(rbot, paint);
 		c.drawRect(rleft, paint);
 		c.drawRect(rright, paint);
 		
-		/* Draw the "glass" */
+		/* Draw the "glass" top*/
 		Path p = new Path();
-		p.moveTo(left + indent + frameHeight, top + frameHeight);
-		p.lineTo(left + width - indent - frameHeight, top + frameHeight);
-		p.lineTo(left + width - indent - frameHeight, top + 200);
-		p.lineTo(left + width - indent - frameHeight - 50, top + 225);
-		p.lineTo(left + indent + frameHeight + 50, top + 225);
-		p.lineTo(left + indent + frameHeight, top + 200);
+		p.moveTo(left + (indent/2) + frameHeight, top + frameHeight);
+		p.lineTo(left + width - (indent/2) - frameHeight, top + frameHeight);
+		p.lineTo(left + width - (indent/2) - frameHeight, top + 150);
+		p.lineTo(left + width - (indent/2) - frameHeight - 105, top + 235);
+		p.lineTo(left + (indent/2) + frameHeight + 105, top + 235);
+		p.lineTo(left + (indent/2) + frameHeight, top + 150);
+		
+		p.moveTo(left + width - (indent/2) - frameHeight - 105, top + 235);
+		p.lineTo(left + width - (indent/2) - frameHeight - 105, top + 250);
+		p.lineTo(left + (indent/2) + frameHeight + 105, top + 250);
+		p.lineTo(left + (indent/2) + frameHeight + 105, top + 235);
+		
 		
 //		p.close();
 		c.drawPath(p, paint);
