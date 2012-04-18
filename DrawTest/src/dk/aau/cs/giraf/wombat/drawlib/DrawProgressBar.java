@@ -6,7 +6,6 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.os.SystemClock;
-import android.util.Log;
 import android.view.View;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
 
@@ -25,9 +24,6 @@ public class DrawProgressBar extends View {
 	Rect r;
 	ColorDrawable col;
 
-	int frameHeight;
-	int frameWidth;
-
 	int width;
 	int height;
 	int left;
@@ -35,17 +31,8 @@ public class DrawProgressBar extends View {
 
 	public DrawProgressBar(Context context, SubProfile sub) {
 		super(context);
-		// Get display size
-		Rect rect = new Rect();
-		getWindowVisibleDisplayFrame(rect);
-		frameHeight = rect.height();
-		if (sub.getAttachment() == null) {
-			frameWidth = rect.width();
-		} else {
-			frameWidth = rect.width() / 2;
-		}
 
-		width = (frameHeight / 8) * 5;
+		width = (DrawLibActivity.frameHeight / 8) * 5;
 		height = (int) (width * 0.2);
 
 		sp = sub;
@@ -75,8 +62,8 @@ public class DrawProgressBar extends View {
 		paint.setAntiAlias(true);
 		paint.setColor(frame);
 
-		left = (frameWidth - width) / 2;
-		top = (frameHeight - height) / 2;
+		left = (DrawLibActivity.frameWidth - width) / 2;
+		top = (DrawLibActivity.frameHeight - height) / 2;
 
 		r = new Rect(left, top, left + width, top + height);
 		c.drawRect(r, paint);
@@ -103,7 +90,6 @@ public class DrawProgressBar extends View {
 			/* Draw the timeleft color (on the left side) */
 			col = new ColorDrawable(timeleft);
 			col.setAlpha((int) (255 * percent));
-			Log.e("Test", percent + "");
 			paint.setColor(col.getColor());
 			r.set((left + 3), top + 3, left - 3 + (int) (width * percent), top
 					+ height - 3);

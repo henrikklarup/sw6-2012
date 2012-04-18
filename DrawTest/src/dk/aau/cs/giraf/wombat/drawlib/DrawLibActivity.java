@@ -1,42 +1,57 @@
 package dk.aau.cs.giraf.wombat.drawlib;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Point;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
-import dk.aau.cs.giraf.TimerLib.Hourglass;
+import dk.aau.cs.giraf.TimerLib.ProgressBar;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
+import dk.aau.cs.giraf.TimerLib.TimeTimer;
 
 
 public class DrawLibActivity extends Activity {
 
+	public static int frameHeight;
+	public static int frameWidth;
+	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		SubProfile sub = new Hourglass("", "", 100, 0xff3D3D3D, 0xff000066, 0xffB8B8B8, 0xff000000, 30, true);
+		super.onCreate(savedInstanceState);	
+		SubProfile sub = new TimeTimer("", "", 100, 0xff3D3D3D, 0xff000066, 0xffB8B8B8, 0xff000000, 3, false);
+		SubProfile sub2 = new ProgressBar("", "", 100, 0xff3D3D3D, 0xff000066, 0xffB8B8B8, 0xff000000, 900, false);
+		sub.setAttachment(sub2);
 //		Guardian guard = Guardian.getInstance();
 //		SubProfile sub = guard.getSubProfile();
+		
+		
+		// Get display size
+		WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
+		Display disp = wm.getDefaultDisplay();
+		frameHeight = disp.getHeight();
+		frameWidth = disp.getWidth();
+				
+		
 		if (sub.getAttachment() == null) {
 			/* Set the drawing class (which extends View) as the content view */
 			View v = genDrawView(sub);
 			setContentView(v);
 		} else {
-			// Get display size
-			Display disp = getWindowManager().getDefaultDisplay();
-			Point size = new Point();
-			disp.getSize(size);
+			frameWidth = frameWidth/2;
 			
 			LinearLayout frame = new LinearLayout(this);
 			View v = genDrawView(sub);
 			v.setTag("main");
-			frame.addView(v, size.x/2, size.y);
+			frame.addView(v, frameWidth, frameHeight);
 			
 			v = genDrawView(sub.getAttachment());
 			v.setTag("attachment");
-			frame.addView(v, size.x/2, size.y);
+			frame.addView(v, frameWidth, frameHeight);
 			
 			setContentView(frame);
 		}

@@ -3,37 +3,57 @@ package dk.aau.cs.giraf.wombat.drawlib;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.drawable.ColorDrawable;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
-import dk.aau.cs.giraf.TimerLib.Guardian;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
 
 public class DrawWatch extends View {
-	private Guardian guard = Guardian.getInstance();
-	SubProfile sp = guard.getSubProfile();
-	int background = sp.bgcolor;
-	int frame = sp.frameColor;
-	int timeleft = sp.timeLeftColor;
-	int timeleft2 = sp.timeLeftColor;
-	int timespent = sp.timeSpentColor;
-	boolean init = true;
+	private SubProfile sp;
 
-	double totalTime = (sp.totalTime - 1) * 1000;
-	double endTime = SystemClock.currentThreadTimeMillis() + totalTime;
-	Paint paint = new Paint();
-	Rect r;
-	ColorDrawable col;
+	private int background;
+	private int frame;
+	private int timeleft;
+	private int timeleft2;
+	private int timespent;
+	private int totalTime;
+	private double endTime;
 
-	int width;
-	int height;
-	int left;
-	int top;
+	private double rotation;
+
+	private Paint paint = new Paint();
+	private Rect r;
+	private ColorDrawable col;
+
+	private int width;
+	private int height;
+	private int left;
+	private int right;
+	private int top;
+	private int bottom;
 
 	public DrawWatch(Context context, SubProfile sub) {
 		super(context);
+
+		if (DrawLibActivity.frameWidth > DrawLibActivity.frameHeight)
+			width = (int) (DrawLibActivity.frameHeight / 1.5);
+		else
+			width = (int) (DrawLibActivity.frameWidth / 1.5);
+		height = width;
+
+		sp = sub;
+
+		background = sp.bgcolor;
+		frame = sp.frameColor;
+		timeleft = sp.timeLeftColor;
+		timeleft2 = sp.timeLeftColor;
+		timespent = sp.timeSpentColor;
+		totalTime = (sp.totalTime - 1) * 1000;
+		endTime = SystemClock.currentThreadTimeMillis() + totalTime;
+
 		if (sp.gradient) {
 			timeleft2 = timespent;
 			timespent = background;
@@ -43,29 +63,47 @@ public class DrawWatch extends View {
 	@Override
 	protected void onDraw(Canvas c) {
 		super.onDraw(c);
-
-		if (init) {
-			width = (c.getWidth() / 8) * 5;
-			height = width;
-			init = false;
-		}
 		/* Fill the canvas with the background color */
 		paint.setColor(background);
 		c.drawPaint(paint);
 
 		/* Draw the frame of the progressbar */
 		paint.setAntiAlias(true);
+		paint.setColor(frame);
+
+		left = DrawLibActivity.frameWidth / 2;
+		top = DrawLibActivity.frameHeight / 2;
+
+		c.drawCircle(left, top, width / 2, paint);
+
 		paint.setColor(timespent);
+		c.drawCircle(left, top, (width / 2) - 3, paint);
 
-		left = (c.getWidth() - width) / 2;
-		top = (c.getHeight() - height) / 2;
-		
-		Path p = new Path();
-		p.moveTo(20, 20);
-		p.lineTo(40, 40);
-		p.lineTo(40, 60);
-		p.close();
-		c.drawPath(p, paint);
+		left = ((DrawLibActivity.frameWidth - width) / 2) + 3;
+		right = (((DrawLibActivity.frameWidth - width) / 2) + width) - 3;
+		top = ((DrawLibActivity.frameHeight - height) / 2) + 3;
+		bottom = (((DrawLibActivity.frameHeight - height) / 2) + height) - 3;
 
+		if (endTime >= SystemClock.currentThreadTimeMillis()) {
+			double timenow = endTime - SystemClock.currentThreadTimeMillis();
+			double percent = (timenow) / totalTime;
+			
+			// 0.1 is what 1 second corresponds to in degrees
+			rotation = (0.1 * (endTime - SystemClock.currentThreadTimeMillis()) / 1000) + 1;
+			Log.e("Test", rotation + "");
+
+			paint.setColor(timeleft2);
+			RectF rf = new RectF(left, top, right, bottom);
+			c.drawArc(rf, 270 - (int) rotation, (int) rotation, true, paint);
+			
+			col = new ColorDrawable(timeleft);
+			col.setAlpha((int) (255 * percent));
+			paint.setColor(col.getColor());
+			c.drawArc(rf, 270 - (int) rotation, (int) rotation, true, paint);
+
+			/*************** IMPORTANT ***************/
+			/* Recalls Draw! */
+			invalidate();
+		}
 	}
 }
