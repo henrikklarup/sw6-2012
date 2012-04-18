@@ -35,7 +35,7 @@ public class PARROTActivity extends Activity {
 		
 		/*
 		//TODO replace the temp lines with the above line
-		Pictogram tempPic= new Pictogram("Koala", getExternalFilesDir(null)+"/Pictures/005.jpg", null, null);//005
+		Pictogram tempPic= new Pictogram("Koala","/sdcard/Pictures/005.jpg", null, null);//005
 		parrotUser = new PARROTProfile("tempNiels", tempPic);
 		Category tempCat = new Category(0);
 		tempCat.addPictogram(tempPic);
@@ -100,6 +100,7 @@ public class PARROTActivity extends Activity {
 			String categoryString=null;
 			while (true)
 			{
+				//Here we read the categories
 				categoryString = specialSettings.get(prof.getFirstname()).get("category"+number);
 				if(categoryString !=null)
 				{
