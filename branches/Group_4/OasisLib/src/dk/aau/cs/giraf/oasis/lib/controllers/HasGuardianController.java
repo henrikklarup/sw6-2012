@@ -6,7 +6,6 @@ import java.util.List;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import dk.aau.cs.giraf.oasis.lib.metadata.AuthUsersMetaData;
 import dk.aau.cs.giraf.oasis.lib.metadata.HasGuardianMetaData;
 import dk.aau.cs.giraf.oasis.lib.models.HasGuardian;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
@@ -27,11 +26,10 @@ class HasGuardianController {
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public int clearHasGuardianTable() {
-		return _context.getContentResolver().delete(AuthUsersMetaData.CONTENT_URI, null, null);
+		return _context.getContentResolver().delete(HasGuardianMetaData.CONTENT_URI, null, null);
 	}
 
-	public long insertHasGuardian(long role) {
-		HasGuardian hg = new HasGuardian();
+	public long insertHasGuardian(HasGuardian hg) {
 		ContentValues cv = getContentValues(hg);
 		_context.getContentResolver().insert(HasGuardianMetaData.CONTENT_URI, cv);
 
@@ -65,6 +63,13 @@ class HasGuardianController {
 		}
 
 		return hgList;
+	}
+	
+	public int modifyHasGuardian(HasGuardian hg) {
+		ContentValues cv = getContentValues(hg);
+		return _context.getContentResolver().update(HasGuardianMetaData.CONTENT_URI, cv, 
+				HasGuardianMetaData.Table.COLUMN_IDGUARDIAN + " = '" + hg.getIdGuardian() + "' AND " +
+						HasGuardianMetaData.Table.COLUMN_IDCHILD + " = '" + hg.getIdChild() + "'", null);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
