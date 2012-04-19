@@ -43,7 +43,7 @@ class ApplicationInfo{
 	Long guardian;
 	
 	/**
-	 * ID of the app.
+	 * ID of the application.
 	 */
 	Long app;
 	
