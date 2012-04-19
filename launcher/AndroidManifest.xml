@@ -42,6 +42,11 @@
             android:label="@string/application_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
+            <intent-filter>
+                <action android:name="dk.aau.cs.giraf.launcher.AUTHENTICATE" />
+                <category android:name="dk.aau.cs.giraf.launcher.GIRAF" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <activity
             android:name="dk.aau.cs.giraf.launcher.HomeActivity"
