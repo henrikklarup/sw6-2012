@@ -61,7 +61,7 @@ public class ViewHasTag extends ListFragment {
 			}
 		});
 		
-		valueList = helper.htc.getHasTags();
+		valueList = helper.ht.getHasTags();
 
         mAdapter = new ArrayAdapter<HasTag>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, valueList);
 

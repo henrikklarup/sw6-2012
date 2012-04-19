@@ -61,7 +61,7 @@ public class ViewHasGuardian extends ListFragment {
 			}
 		});
 		
-		valueList = helper.hgc.getHasGuardians();
+		valueList = helper.hg.getHasGuardians();
 
         mAdapter = new ArrayAdapter<HasGuardian>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, valueList);
 

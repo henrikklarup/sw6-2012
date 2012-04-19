@@ -61,7 +61,7 @@ public class ViewHasLink extends ListFragment {
 			}
 		});
 		
-		valueList = helper.hlc.getHasLinks();
+		valueList = helper.hl.getHasLinks();
 
         mAdapter = new ArrayAdapter<HasLink>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, valueList);
 
