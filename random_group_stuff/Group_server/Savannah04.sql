@@ -95,10 +95,10 @@ CREATE  TABLE `04`.`ListOfApps` (
   `idApp` INT NOT NULL ,
 
   `idProfile` INT NOT NULL ,
-
-  `settings` BLOB NULL ,
-
-  `stats` BLOB NULL ,
+  
+  `setting` BLOB,
+  
+  `stats` BLOB,
   
   FOREIGN KEY (`idApp` )
 
@@ -261,34 +261,95 @@ CREATE  TABLE `04`.`MediaDepartmentAccess` (
 
   PRIMARY KEY (`idDepartment`, `idMedia`) );
 
-
-insert into AuthUsers values ('abekat',null,0);
-insert into AuthUsers values ('abekat2',null,0);
-insert into AuthUsers values ('Dep:111',null,1);
-insert into AuthUsers values ('Pæd:',null,1);
-insert into AuthUsers values ('Gaurd',null,0);
-insert into AuthUsers values ('Gaurd2',null,0);
+select * from Apps;
+select * from ListOfApps;
+select * from Profile;
+select * from AuthUsers;
 insert into Apps values(1,'TestAppe1','1.0.0');
 insert into Apps values(2,'TestAppe2','1.0.0');
+
+insert into AuthUsers values ('abekat',null,0,'Jesper','tester1');
+insert into AuthUsers values ('Dep:111',null,1,'randomString','randomString');
+insert into AuthUsers values ('Pæd:',null,0,'pæd','123');
+insert into AuthUsers values ('Gaurd',null,0,'G','1');
+insert into AuthUsers values ('Gaurd2',null,0,'Toke','Loke');
+insert into AuthUsers values ('Dep2',null,0,'Dep2','Loke');
+insert into AuthUsers values ('Subdep1',null,0,'SD1','SD1');
+insert into AuthUsers values ('SubSubdep1',null,0,'SSD1','SSD1');
 insert into Tags values(1,'Bil');
-insert into Profile values(1,'Jesper','Bromose',null,1,12345678,'dr.dk','<XML>STEERINGS</XML>','Jesper','tester1');
-insert into Profile values(5,'Foo','Bar',null,1,12212121,'dr.dk','<XML>STEERINGS</XML>','pæd','123');
-insert into Profile values(7,'Guardian1','Guardian2',null,1,12212121,'dr.dk','<XML>STEERINGS</XML>','G','1');
-insert into Profile values(8,'TOKE','TOKEN',null,1,12212121,'dr.dk','<XML>STEERINGS</XML>','Toke','loke');
-insert into ListOfApps values(1,1);
-insert into ListOfApps values(2,1);
+insert into Profile values(1,'Jesper','Bromose',null,1,12345678,'dr.dk','<XML>STEERINGS</XML>');
+insert into Profile values(3,'Foo','Bar',null,0,12212121,'dr.dk','<XML>STEERINGS</XML>');
+insert into Profile values(4,'Guardian1','Guardian2',null,1,12212121,'dr.dk','<XML>STEERINGS</XML>');
+insert into Profile values(5,'TOKE','TOKEN',null,1,12212121,'dr.dk','<XML>STEERINGS</XML>');
+
+insert into Department values (2,'Skolebakken','Vejlevej 1',12345678,'vejle@dr.dk');
+insert into Department values (6,'Sebvej','TROLOLOL 1',19857463,'seb@seb.dk');
+insert into Department values (7,'Subdep1','SD1',12345678,'SD1');
+insert into Department values (8,'SubSubdep1','SD1',12345678,'SD1');
+insert into HasDepartment values (1,2);
+insert into HasDepartment values (3,2);
+insert into HasSubDepartment values(2,7);
+insert into HasSubDepartment values(7,8);
+
+insert into ListOfApps values(1,1,null,null);
+insert into ListOfApps values(2,1,null,null);
+
+select * from Profile
+    where idProfile in
+        (select idProfile from HasDepartment
+            where idDepartment = 2)
+            and pRole = 1;
+
+select * from Department;
+
+
 insert into Media values(1,'c:\test','MyTest',1,'public',1);
 insert into HasTag values(1,1);
 insert into MediaProfileAccess values(1,1);
-insert into Department values (3,'Skolebakken','Vejlevej 1',12345678,'vejle@dr.dk');
-insert into HasDepartment values (1,3);
-insert into HasDepartment values (5,3);
-insert into HasGuardian values (7,1);
-insert into HasGuardian values (8,1);
+
+insert into HasDepartment values (1,6);
+insert into HasGuardian values (1,3);
+insert into HasGuardian values (4,3);
+select * from HasGuardian
+
+
+select * from Apps
+    where idApp in (select idApp from ListOfApps
+                    where idProfile = 1);
+
+
+select * from Profile
+    where idProfile in 
+        (select idGuardian from HasGuardian 
+            where idChild=3);
+
+select * from Department
+    where idDepartment in
+        (select idSubdepartment from HasSubDepartment
+            where idDepartment = 2);
+
+select * from Department
+    where idDepartment in
+        (select idDepartment from HasDepartment
+                 where  idProfile = '1');
+
+
+select * from HasDepartment;
 
 select * from HasGuardian;
 
-insert into HasGuardian values(1,5);
+select * from Department;
+
+SELECT * from AuthUsers;
+
+SELECT * from AuthUsers;
+
+SELECT idUser, username, idProfile, firstname, middlename, surname from AuthUsers, Profile
+    where idUser = idProfile;
+
+select * from HasGuardian;
+
+insert into HasGuardian values(1,3);
 
 select * from Profile;
 
@@ -309,10 +370,11 @@ select firstname from Profile
 where idProfile in (select idGuardian from HasGuardian
     where idChild = 1);
 
+select * from AuthUsers where username = '1';
 select * from Profile;
 SELECT password from AuthUsers where username = 'Jesper';
 
-select * from AuthUsers; 
+select * from AuthUsers where username = '10'; 
 
 SELECT firstname, middlename, surname from Profile where idProfile = 1;
 
