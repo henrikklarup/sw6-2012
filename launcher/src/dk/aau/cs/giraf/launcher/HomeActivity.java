@@ -149,7 +149,9 @@ public class HomeActivity extends Activity {
 
 		if(pkgAppsList != null){
 			ArrayList<ApplicationInfo> applications = new ArrayList<ApplicationInfo>();
+			//have to change
 			int i = 0;
+			
 			for(ResolveInfo info : pkgAppsList){
 				//Package (dk.aau.cs.giraf)
 				if(info.toString().toLowerCase().contains("dk.aau.cs.giraf") && 
@@ -167,6 +169,8 @@ public class HomeActivity extends Activity {
 					appInfo.color = AppColor(i);
 
 					applications.add(appInfo);
+					
+					//have to change
 					i++;
 					
 				}
