@@ -3,13 +3,11 @@ package dk.aau.cs.giraf.gui;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.Timer;
-import java.util.TimerTask;
 
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.widget.TextView;
 
 public class GWidgetCalendar extends TextView {
