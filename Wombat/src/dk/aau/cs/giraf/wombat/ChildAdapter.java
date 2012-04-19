@@ -48,6 +48,13 @@ public class ChildAdapter extends ArrayAdapter<Child> {
 			}
 
 		}
+		if(c.getId() == TimerLoader.profileID){
+			v.setBackgroundResource(R.drawable.list_selected);
+			TimerLoader.profileFirstClick = true;
+			TimerLoader.profileID = -1;
+		} else {
+			v.setBackgroundResource(R.drawable.list);
+		}
 		return v;
 	}
 }
