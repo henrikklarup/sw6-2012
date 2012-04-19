@@ -66,8 +66,6 @@ public class AuthenticationActivity extends CaptureActivity {
 				infoView.setText(R.string.authentication_step1);
 				((AuthenticationActivity) authActivity).changeCamerafeedBorderColor(0xFFDD9639);
 				
-				Log.i("GIRAF", "" + getIntent().getPackage());
-				
 				if (!getIntent().hasCategory("dk.aau.cs.giraf.launcher.GIRAF")) {
 					startActivity(mHomeIntent);
 				} else {
