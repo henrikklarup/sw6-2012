@@ -145,19 +145,11 @@ public class HomeActivity extends Activity {
 		homebar.setLayoutParams(paramsBar);
 		
 		ViewGroup.LayoutParams profilePictureViewParams = mProfilePictureView.getLayoutParams();
-		ViewGroup.LayoutParams pictureLayoutParams = mPictureLayout.getLayoutParams();
-		//LayoutParams pictureLayoutParams;
 		if (isLandscape) {
 			mNameView.setVisibility(View.INVISIBLE);
-			//mPictureLayout.setVisibility(View.INVISIBLE);
-			
-			//pictureLayoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-			
 
-			
 			profilePictureViewParams.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, getResources().getDisplayMetrics());
 			profilePictureViewParams.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 90, getResources().getDisplayMetrics());
-			//pictureLayoutParams.setMargins(0, 0, 0, 0);
 			mHomeBarLayout.setPadding(5, 5, 5, 5);
 		} else {
 			profilePictureViewParams.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics());
@@ -165,26 +157,10 @@ public class HomeActivity extends Activity {
 			
 			mHomeBarLayout.setPadding(20, 20, 20, 20);
 			mNameView.setVisibility(View.VISIBLE);
-			
-			
-			/*
-			android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:padding="3dip"
-	        android:layout_alignParentLeft="true"
-	        android:background="@drawable/gprofile_pic_box"
-	        android:layout_marginRight="5dip">
-				 */
-				
-			//pictureLayoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-			//pictureLayoutParams.setMargins(3, 3, 5, 3);
 		}
 		mProfilePictureView.setLayoutParams(profilePictureViewParams);	
-		//mPictureLayout.setLayoutParams(pictureLayoutParams);
 	}
 
-	private void applySizes() {
-	}
 
 	private boolean isLandscape() {
 		int rotation = ((WindowManager) getSystemService(WINDOW_SERVICE)).getDefaultDisplay().getRotation();
