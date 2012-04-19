@@ -4,56 +4,69 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" >
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/HomeBarLayout"
-    android:layout_width="fill_parent"
-    android:layout_height="200dp"
-    android:background="@drawable/gbackground" 
-    android:padding="20dp" >
-    	<TextView
-    	android:visibility="invisible"
-	    android:id="@+id/nameView"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_toRightOf="@+id/profile_pic"
-	    android:layout_marginLeft="30dp"
-	    android:text="@string/barnameview"
-	    android:textSize="30dp"
-	    android:textColor="@color/gBrowncolor"
-	     />
-    	
-    		
-    		<!--  Profile pic -->
-    <LinearLayout android:id="@+id/profile_pic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="3dip"
-        android:layout_alignParentLeft="true"
-        android:background="@drawable/gprofile_pic_box"
-        android:layout_marginRight="5dip">
- 
-        <ImageView
-            android:id="@+id/imageview_profilepic"
-            android:layout_width="100dip"
-            android:layout_height="130dip"
-            android:src="@drawable/no_profile_pic"/>
- 
-    </LinearLayout>
-	</RelativeLayout>
-    
-	<GridView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/GridViewHome"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:columnWidth="250dp"
-    android:gravity="center"
-    android:numColumns="auto_fit"
-    android:stretchMode="columnWidth"
-    android:paddingTop="50dp"
-    android:horizontalSpacing="50dp"
-    android:verticalSpacing="50dp" 
-    android:background="@drawable/gbackgroundlight"
-    >
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/HomeBarLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/gbackground"
+        android:padding="20dp" >
 
-	</GridView>
+        <!-- <dk.aau.cs.giraf.gui.GVerifyButton
+            android:id="@+id/logoutGButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="115dp"
+            android:layout_marginRight="20dp"
+            android:text="Log ud"
+            android:textSize="40dp" />  -->
+
+        <TextView
+            android:id="@+id/nameView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_toRightOf="@+id/profile_pic"
+            android:text="@string/barnameview"
+            android:textColor="@color/gBrowncolor"
+            android:textSize="30dp"
+            android:visibility="invisible" />
+
+        <!-- Profile pic -->
+
+        <LinearLayout
+            android:id="@+id/profile_pic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="5dip"
+            android:background="@drawable/gprofile_pic_box"
+            android:padding="3dip" >
+
+            <ImageView
+                android:id="@+id/imageview_profilepic"
+                android:layout_width="100dip"
+                android:layout_height="130dip"
+                android:src="@drawable/no_profile_pic" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <GridView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/GridViewHome"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/gbackgroundlight"
+        android:columnWidth="250dp"
+        android:gravity="center"
+        android:horizontalSpacing="50dp"
+        android:numColumns="auto_fit"
+        android:paddingTop="50dp"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="50dp" 
+        android:listSelector="#00000000" >
+    </GridView>
+
 </RelativeLayout>
