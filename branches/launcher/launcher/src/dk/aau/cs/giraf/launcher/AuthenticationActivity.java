@@ -11,6 +11,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RoundRectShape;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -64,7 +65,14 @@ public class AuthenticationActivity extends CaptureActivity {
 				loginNameView.setVisibility(View.INVISIBLE);
 				infoView.setText(R.string.authentication_step1);
 				((AuthenticationActivity) authActivity).changeCamerafeedBorderColor(0xFFDD9639);
-				startActivity(mHomeIntent);
+				
+				Log.i("GIRAF", "" + getIntent().getPackage());
+				
+				if (!getIntent().hasCategory("dk.aau.cs.giraf.launcher.GIRAF")) {
+					startActivity(mHomeIntent);
+				} else {
+					finish();
+				}
 			}
 		});
 	}
