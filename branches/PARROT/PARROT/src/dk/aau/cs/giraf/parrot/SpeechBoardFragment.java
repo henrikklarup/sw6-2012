@@ -20,27 +20,29 @@ public class SpeechBoardFragment extends Fragment
 	private Activity parrent;
 
 
-	@Override
-	public void onAttach(Activity activity) 
-	{
+	public void onAttach(Activity activity) {
+		// TODO Auto-generated method stub
 		super.onAttach(activity);
-
 		this.parrent = activity;
-
 	}
-
-	@Override
-	public void onCreate(Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
-		parrent.setContentView(R.layout.speechboard_layout);
-
+		@Override
+		public void onCreate(Bundle savedInstanceState) {
+			// TODO Auto-generated method stub
+			super.onCreate(savedInstanceState);
+			parrent.setContentView(R.layout.speechboard_layout);
+			
+//			 GridView gridview = (GridView) parrent.findViewById(R.id.pictogramgrid);
+//		        gridview.setAdapter(new ImageAdapter(parrent));
+//	
+		
 		PARROTProfile user=PARROTActivity.getUser();
 		if(user.getCategoryAt(0)!=null)
 		{
-			Category cat = user.getCategoryAt(0); //Dummy TODO FIXME
+			Category cat = user.getCategoryAt(0); //TODO we might have to replace this.
 
-
+			
+			
+			
 			GridView gridview = (GridView) parrent.findViewById(R.id.pictogramgrid);
 			gridview.setAdapter(new PictogramAdapter(cat, parrent));
 
@@ -60,27 +62,20 @@ public class SpeechBoardFragment extends Fragment
 				}
 
 			});
+			
 		}
 		
 
 		//FIXME These two lines are temporary for testing (kim)
 		//GridView gridview = (GridView) parrent.findViewById(R.id.pictogramgrid);
 		//gridview.setAdapter(new ImageAdapter(parrent));
-
-		parrent.findViewById(R.id.pictogramgrid).setOnDragListener(new BoxDragListener());
-		parrent.findViewById(R.id.SpeechBoard).setOnDragListener(new BoxDragListener());
-		parrent.findViewById(R.id.supercategory).setOnDragListener(new BoxDragListener());
-
-
-
-	}
+//
+//		parrent.findViewById(R.id.pictogramgrid).setOnDragListener(new BoxDragListener());
+//		parrent.findViewById(R.id.SpeechBoard).setOnDragListener(new BoxDragListener());
+//		parrent.findViewById(R.id.supercategory).setOnDragListener(new BoxDragListener());
+//
 
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) 
-	{ 
-		// Inflate the layout for this fragment
-		return inflater.inflate(R.layout.speechboard_layout, container, false);
 	}
 }
+

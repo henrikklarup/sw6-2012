@@ -45,7 +45,7 @@ public class PictogramAdapter extends BaseAdapter {
 	//create an image view for each pictogram in the list.
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ImageView imageView;
-		Pictogram pct=cat.getPictograms().get(position);
+		Pictogram pct=cat.getPictogramAtIndex(position);
 		if (convertView == null) {  // if it's not recycled, initialize some attributes
 			imageView = new ImageView(context);
             imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
