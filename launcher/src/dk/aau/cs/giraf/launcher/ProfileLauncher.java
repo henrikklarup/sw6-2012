@@ -14,6 +14,7 @@ import android.content.Intent;
             profileSelectIntent.putExtra("appPackageName", app.packageName);
             profileSelectIntent.putExtra("appActivityName", app.activityName);
             profileSelectIntent.putExtra("currentGuardianID", app.guardian);
+            profileSelectIntent.putExtra("currentApID", app.app);
             
 			v.getContext().startActivity(profileSelectIntent);
     }  
