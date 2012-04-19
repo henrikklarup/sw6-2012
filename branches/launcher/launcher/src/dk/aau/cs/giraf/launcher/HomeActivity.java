@@ -39,6 +39,7 @@ public class HomeActivity extends Activity {
 	private TextView mNameView;
 	private LinearLayout mPictureLayout;
 	
+	
 	private GButton mLogoutButton;
 	
 	//Hash keys
@@ -132,7 +133,8 @@ public class HomeActivity extends Activity {
 			//mPictureLayout.setVisibility(View.INVISIBLE);
 			
 			//pictureLayoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-			pictureLayoutParams.setMargins(3, 3, 3, 3);
+			pictureLayoutParams.setMargins(0, 0, 0, 0);
+			mPictureLayout.setPadding(0, 0, 0, 0);
 		} else {
 			mNameView.setVisibility(View.VISIBLE);
 			
@@ -147,6 +149,7 @@ public class HomeActivity extends Activity {
 				
 			//pictureLayoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 			pictureLayoutParams.setMargins(3, 3, 5, 3);
+			mPictureLayout.setPadding(3, 3, 3, 3);
 		}
 
 		mPictureLayout.setLayoutParams(pictureLayoutParams);
