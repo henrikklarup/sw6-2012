@@ -138,6 +138,7 @@ public class HomeActivity extends Activity {
 			pictureLayoutParams.setMargins(0, 0, 0, 0);
 		} else {
 			mNameView.setVisibility(View.VISIBLE);
+		}
 			
 			/*
 			android:layout_width="wrap_content"
@@ -150,7 +151,6 @@ public class HomeActivity extends Activity {
 				
 			//pictureLayoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 			pictureLayoutParams.setMargins(3, 3, 5, 3);
-		}
 
 		mPictureLayout.setLayoutParams(pictureLayoutParams);
 	}
@@ -183,10 +183,12 @@ public class HomeActivity extends Activity {
 			//have to change
 			int i = 0;
 			
+			mHelper.profilesHelper.getProfileById(0).getSetting();
+			
+			
 			for(ResolveInfo info : pkgAppsList){
 				//Package (dk.aau.cs.giraf)
-				if(info.toString().toLowerCase().contains("dk.aau.cs.giraf") && 
-						!info.toString().toLowerCase().contains("launcher")) {
+				if(info.toString().toLowerCase().contains("dk.aau.cs.giraf") && !info.toString().toLowerCase().contains("launcher")) {
 					ApplicationInfo appInfo = new ApplicationInfo();
 
 					appInfo.title = info.loadLabel(getPackageManager());

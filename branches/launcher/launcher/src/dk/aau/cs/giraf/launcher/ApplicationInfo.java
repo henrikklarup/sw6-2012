@@ -42,6 +42,11 @@ class ApplicationInfo{
 	 */
 	Long guardian;
 	
+	/**
+	 * ID of the app.
+	 */
+	Long app;
+	
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
