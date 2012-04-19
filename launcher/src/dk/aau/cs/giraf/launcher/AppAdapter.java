@@ -21,6 +21,11 @@ public class AppAdapter extends ArrayAdapter<ApplicationInfo> {
 	Context context;
 	ArrayList<ApplicationInfo> apps;
 
+	/**
+	 * Constructs a new adapter to handle the presentation of apps in the launcher.
+	 * @param context Context the adapter is created in.
+	 * @param apps The apps to show.
+	 */
 	public AppAdapter(Context context, ArrayList<ApplicationInfo> apps) {
 		super(context, 0, apps);
 
@@ -48,6 +53,11 @@ public class AppAdapter extends ArrayAdapter<ApplicationInfo> {
 		return convertView;
 	}
 
+	/**
+	 * Sets the background of the app.
+	 * @param convertView The view the app is located inside.
+	 * @param color The color to use for the background.
+	 */
 	private void setAppBackgroundColor(View convertView, int color) {    
 		LinearLayout ll = (LinearLayout) convertView.findViewById(R.id.app_bg);
 		
