@@ -35,7 +35,7 @@ public class HomeActivity extends Activity {
 	private static ArrayList<ApplicationInfo> mApplications;
 	private GridView mGrid;
 	private Profile mCurrentUser; 
-	private Setting mSettings;
+	private Setting<String,String,String> mSettings;
 	private Helper mHelper;
 	private TextView mNameView;
 	private LinearLayout mPictureLayout;
@@ -183,12 +183,8 @@ public class HomeActivity extends Activity {
 
 		if(pkgAppsList != null){
 			ArrayList<ApplicationInfo> applications = new ArrayList<ApplicationInfo>();
-			//have to change
+			
 			int i = 0;
-			
-			
-			
-			
 			for(ResolveInfo info : pkgAppsList){
 				//Package (dk.aau.cs.giraf)
 				if(info.toString().toLowerCase().contains("dk.aau.cs.giraf") && !info.toString().toLowerCase().contains("launcher")) {
@@ -202,7 +198,13 @@ public class HomeActivity extends Activity {
 					appInfo.packageName = info.activityInfo.applicationInfo.packageName;
 					appInfo.activityName = info.activityInfo.name;
 					appInfo.guardian = mCurrentUser.getId();
-					appInfo.color = AppColor(i);
+					
+					if(mHelper.appsHelper.getApps().size() > 0) {
+						mSettings = mHelper.appsHelper.getAppsByProfile(mCurrentUser).get(i).getSettings();
+						appInfo.color = AppColor(i, mSettings);
+					} else {
+						appInfo.color = TEMPAppColor(i);
+					}
 
 					applications.add(appInfo);
 					
@@ -217,8 +219,22 @@ public class HomeActivity extends Activity {
 		}
 	}
 	
-	private int AppColor(int position) {
+	private int TEMPAppColor(int position) {
 		int[] c = getResources().getIntArray(R.array.appcolors);
 		return c[position];
+	}
+	
+	private int AppColor(int position, Setting<String,String,String> settings) {
+		final String COLOR = "Color";
+		final String BACKGROUND = "Background";
+		int[] c = getResources().getIntArray(R.array.appcolors);
+		
+		if(settings.containsKey(COLOR)) {
+			int color = Integer.parseInt(settings.get(COLOR).get(BACKGROUND));
+			return c[color];
+		} else {
+			settings.addValue(COLOR, BACKGROUND, String.valueOf(c[position]));
+			return c[position];
+		}
 	}
 }
