@@ -33,12 +33,13 @@ public class PARROTActivity extends Activity {
 		findViewById(R.id.pictogramgrid).setOnDragListener(new BoxDragListener());
 		*/
 		
-		//PARROTProfile parrotUser = loadProfile();	
 		
 		
 		
+		//PARROTProfile parrotUser = loadProfile();			
 		//TODO replace the temp lines with the above line
-		Pictogram tempPic= new Pictogram("Koala","/sdcard/Pictures/005.jpg", null, null);//005
+		//START TEMP LINES
+		Pictogram tempPic= new Pictogram("Koala","/sdcard/Pictures/005.jpg", null, null);
 		parrotUser = new PARROTProfile("tempNiels", tempPic);
 		Category tempCat = new Category(0);
 		tempCat.addPictogram(tempPic);
@@ -52,13 +53,8 @@ public class PARROTActivity extends Activity {
 			tempCat.addPictogram(tempPic2);
 		}
 		parrotUser.addCategory(tempCat);
+		//END TEMP LINES
 		
-
-//		 Fragment newFragment = new SpeechBoardFragment();
-//	        FragmentTransaction ft = getFragmentManager().beginTransaction();
-//	        ft.add(android.R.id.content, newFragment).commit();
-
-		//TODO reimplement these lines
 		ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		actionBar.setDisplayShowTitleEnabled(false);	//TODO figure out what this does
