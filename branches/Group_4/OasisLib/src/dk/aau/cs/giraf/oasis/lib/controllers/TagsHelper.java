@@ -11,7 +11,7 @@ import android.net.Uri;
 import dk.aau.cs.giraf.oasis.lib.metadata.TagsMetaData;
 import dk.aau.cs.giraf.oasis.lib.models.Tag;
 
-class TagsHelper {
+public class TagsHelper {
 
 	private Context _context;
 	private String[] columns = new String[] { 
