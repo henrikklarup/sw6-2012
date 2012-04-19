@@ -114,6 +114,10 @@ public class AuthenticationActivity extends CaptureActivity {
 		this.getHandler().sendEmptyMessageDelayed(R.id.restart_preview, 500);
 	}
 	
+	/**
+	 * Saves the date and time of an authentication, and the user that was authenticated.
+	 * @param ID Profile ID of the authenticated user.
+	 */
 	private void SaveDate(Long ID) {
 		SharedPreferences sp = getSharedPreferences(TIMERKEY, 0);
 		SharedPreferences.Editor editor = sp.edit();
@@ -126,6 +130,9 @@ public class AuthenticationActivity extends CaptureActivity {
 		editor.commit();
 	}
 	
+	/**
+	 * Logs the current user out of the system.
+	 */
 	private void ResetAuthData() {
 		SharedPreferences sp = getSharedPreferences(TIMERKEY, 0);
 		SharedPreferences.Editor editor = sp.edit();
