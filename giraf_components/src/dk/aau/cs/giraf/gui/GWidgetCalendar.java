@@ -7,6 +7,7 @@ import java.util.TimerTask;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.TextView;
@@ -16,12 +17,12 @@ public class GWidgetCalendar extends TextView {
 	private Timer timer;
 	
 	private void setStyle(){
-		this.setBackgroundDrawable(getResources().getDrawable(R.drawable.cal_icon));
+		this.setBackgroundDrawable(getResources().getDrawable(R.drawable.gcal_icon));
 		this.setGravity(android.view.Gravity.CENTER_HORIZONTAL);
-		this.setText("te");
-		this.setTextSize(30);
+		this.setTextSize(35);
+		this.setTypeface(null, Typeface.BOLD);
 		this.setTextColor(Color.rgb(102, 102, 102));
-		this.setPadding(0, 10, 0, 0);
+		this.setPadding(0, 16, 0, 0);
 	}
 	
 	public GWidgetCalendar(Context context) {
