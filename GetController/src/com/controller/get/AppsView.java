@@ -21,33 +21,26 @@ public class AppsView extends ListActivity {
 
 	Helper helper;
 	App app;
-	Profile profile;
-	Setting<String, String, String> settings;
 	ArrayAdapter<App> adapter;
-	ArrayAdapter<Profile> profileAdapter;
 	Button bAdd, bDel;
 	TextView tvHeader;
 	int _position;
 	List<App> values;
-	List<Profile> profileValues;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		helper = new Helper(this);
-		
-		
+
+
 		//profile er en forud deklareret profil
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
-			profile = helper.profilesHelper.getProfileById(extras.getLong("ID"));
+			app = helper.appsHelper.getAppById(extras.getLong("ID"));
 		} else {
-			profile = new Profile("Dummy1", "Dummy","Dummy", 0, 12345678, "Dummy", settings);
+			app = new App("Should not be added","0.1");
 		}
-
-		
-
 
 		updateList();
 
@@ -56,9 +49,12 @@ public class AppsView extends ListActivity {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				// helper.appsHelper.insertApp(app);
-				helper.profilesHelper.insertProfile(profile);
+				helper.appsHelper.insertApp(app);
+				List<App> apps = helper.appsHelper.getApps();
+				app = apps.get(apps.size() - 1);
+				List<Profile> profiles = helper.profilesHelper.getProfiles();
+				Profile profile = profiles.get(profiles.size() - 1);
+				helper.appsHelper.attachAppToProfile(app, profile);
 				updateList();
 			}
 		});
@@ -68,9 +64,7 @@ public class AppsView extends ListActivity {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				// helper.appsHelper.clearAppsTable();
-				helper.profilesHelper.clearProfilesTable();
+				helper.appsHelper.clearAppsTable();
 				updateList();
 			}
 		});
@@ -81,34 +75,47 @@ public class AppsView extends ListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 
-		Profile fedte = new Profile();
-		fedte = helper.profilesHelper.getProfileById(((Profile)getListAdapter().getItem(position)).getId());
+//		App clickedApp = new App();
+//		clickedApp = helper.appsHelper.getAppById(((App)getListAdapter().getItem(position)).getId());
 
-		if (fedte != null) {
-			Log.e("Profile ID", Long.toString(((Profile)getListAdapter().getItem(position)).getId()));
-			String settings = fedte.getSetting().get(fedte.getFirstname()).get("Settings");
-			String[] settingsList = settings.split(",");
-			for (String setting : settingsList) {
-				try {
-					Toast.makeText(this, fedte.getSetting().get(fedte.getFirstname()).get(setting), Toast.LENGTH_SHORT).show();
-				} catch (NullPointerException e) {
-					Toast.makeText(this, "Hej Henrik", Toast.LENGTH_SHORT).show();
+		List<Profile> profiles = helper.profilesHelper.getProfiles();
+		Profile profile = profiles.get(profiles.size() - 1);
+		
+		List<App> apps;
+		apps = helper.appsHelper.getAppsByProfile(profile);
+		Log.e("Size of apps", Integer.toString(apps.size()));
+		
+
+
+		App clickedAppWithSettings = apps.get(apps.size() - 1);
+
+		if (clickedAppWithSettings != null) {
+			Log.e("clickedAppWithSetting", "clickedAppWithSetting not null");
+			Log.e("App Id: ", Long.toString(clickedAppWithSettings.getId()));
+			Log.e("Profile Id: ", Long.toString(profile.getId()));
+			Setting<String, String, String> setting = clickedAppWithSettings.getSettings();
+
+			if (setting != null) {
+				Log.e("Setting", "Setting not null");
+				String settings = setting.get("Profile1").get("Settings");
+				String[] settingsList = settings.split(",");
+				for (String s : settingsList) {
+					try {
+						Toast.makeText(this, clickedAppWithSettings.getSettings().get("Profile1").get(s), Toast.LENGTH_SHORT).show();
+					} catch (NullPointerException e) {
+						Toast.makeText(this, "Null Pointer Exception - Must not occur", Toast.LENGTH_SHORT).show();
+					}
 				}
+			} else {
+				Log.e("Setting", "Setting is null");
 			}
-		} else {
-			//   Toast.makeText(this, String.valueOf(_id), Toast.LENGTH_SHORT).show();
 		}
-
 		updateList();
 	}
 
 	public void updateList() {
-		profileValues = helper.profilesHelper.getProfiles();
-		profileAdapter = new ArrayAdapter<Profile>(this, android.R.layout.simple_list_item_1, profileValues);
-		setListAdapter(profileAdapter);
-
-		//		values = helper.appsHelper.getApps();
-		//		adapter = new ArrayAdapter<App>(this, android.R.layout.simple_list_item_1, values);
-		//		setListAdapter(adapter);
+		values = helper.appsHelper.getApps();
+		adapter = new ArrayAdapter<App>(this, android.R.layout.simple_list_item_1, values);
+		setListAdapter(adapter);
 	}
 }

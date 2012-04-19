@@ -11,6 +11,7 @@ import android.net.Uri;
 import dk.aau.cs.giraf.oasis.lib.metadata.AppsMetaData;
 import dk.aau.cs.giraf.oasis.lib.metadata.ListOfAppsMetaData;
 import dk.aau.cs.giraf.oasis.lib.models.App;
+import dk.aau.cs.giraf.oasis.lib.models.ListOfApps;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
 /**
@@ -21,6 +22,7 @@ import dk.aau.cs.giraf.oasis.lib.models.Profile;
 public class AppsHelper {
 
 	private static Context _context;
+	private ListOfAppsHelper listOfAppsHelper;
 	private String[] columns = new String[] { 
 			AppsMetaData.Table.COLUMN_ID, 
 			AppsMetaData.Table.COLUMN_NAME,
@@ -32,6 +34,7 @@ public class AppsHelper {
 	 */
 	public AppsHelper(Context context){
 		_context = context;
+		listOfAppsHelper = new ListOfAppsHelper(context);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -49,9 +52,16 @@ public class AppsHelper {
 	 * Insert app
 	 * @param app Application containing data
 	 */
-	public void insertApp(App app) {
+	public int insertApp(App app) {
+		int result = 0;
 		ContentValues cv = getContentValues(app);
-		_context.getContentResolver().insert(AppsMetaData.CONTENT_URI, cv);
+		try {
+			_context.getContentResolver().insert(AppsMetaData.CONTENT_URI, cv);
+		} catch (Exception e) {
+			result = -1;
+		}
+		
+		return result;
 	}
 
 	public int attachAppToProfile(App app, Profile profile) {
@@ -66,10 +76,20 @@ public class AppsHelper {
 	 * Modify app method
 	 * @param app Application containing data to modify
 	 */
-	public void modifyApp(App app) {
+	public int modifyApp(App app) {
 		Uri uri = ContentUris.withAppendedId(AppsMetaData.CONTENT_URI, app.getId());
 		ContentValues cv = getContentValues(app);
-		_context.getContentResolver().update(uri, cv, null, null);
+		return _context.getContentResolver().update(uri, cv, null, null);
+	}
+	
+	/**
+	 * Modify app settings by profile method
+	 * @param app the application containing the data to modify
+	 * @param profile the profile the settings belong to
+	 */
+	public int modifyAppSettingsByProfile(App app, Profile profile) {
+		ListOfApps listOfApps = new ListOfApps(app.getId(), profile.getId(), app.getSettings(), null);
+		return listOfAppsHelper.modifyListOfApps(listOfApps);
 	}
 
 	/**
@@ -79,29 +99,29 @@ public class AppsHelper {
 	public List<App> getApps() {
 		List<App> apps = new ArrayList<App>();
 		Cursor c = _context.getContentResolver().query(AppsMetaData.CONTENT_URI, columns, null, null, null);
-
-		apps = cursorToAppList(c);
-		c.close();
+		
+		if (c != null) {
+			apps = cursorToAppList(c);
+			c.close();
+		}
 
 		return apps;
 	}
 
 	public List<App> getAppsByProfile(Profile profile) {
 		List<App> apps = new ArrayList<App>();
-		String[] ListOfAppsColums = {ListOfAppsMetaData.Table.COLUMN_IDAPP, ListOfAppsMetaData.Table.COLUMN_IDPROFILE}; 
-		Cursor c = _context.getContentResolver().query(ListOfAppsMetaData.CONTENT_URI, ListOfAppsColums, ListOfAppsColums[0] + " = '" + profile.getId() + "'", null, null);
+		List<ListOfApps> listOfApps = new ArrayList<ListOfApps>();
 
-		if (c != null) {
-			if (c.moveToFirst()) {
-				while (!c.isAfterLast()) {
-					App app = getAppById(c.getLong(c.getColumnIndex(ListOfAppsColums[1])));
-					apps.add(app);
-					c.moveToNext();
-				}
+		listOfApps = listOfAppsHelper.getListOfAppsByProfile(profile);
+
+		for (ListOfApps item : listOfApps) {
+			App app = getAppById(item.getIdApp());
+			if (app != null) {
+				app.setSettings(item.getSetting());
+				app.setStats(item.getStat());
+				apps.add(app);
 			}
 		}
-
-		c.close();
 
 		return apps;
 	}
@@ -112,15 +132,16 @@ public class AppsHelper {
 	 * @return the application or null
 	 */
 	public App getAppById(long id) {
+		App app = null;
 		Uri uri = ContentUris.withAppendedId(AppsMetaData.CONTENT_URI, id);
 		Cursor c = _context.getContentResolver().query(uri, columns, null, null, null);
-		App app = null;
 
-		if(c.moveToFirst()) {
-			app = cursorToApp(c); 
+		if (c != null) {
+			if(c.moveToFirst()) {
+				app = cursorToApp(c); 
+			}
+			c.close();
 		}
-
-		c.close();
 		return app;
 	}
 
@@ -132,9 +153,11 @@ public class AppsHelper {
 	public List<App> getAppsByName(String name) {
 		List<App> apps = new ArrayList<App>();
 		Cursor c = _context.getContentResolver().query(Uri.withAppendedPath(AppsMetaData.CONTENT_URI, name) , columns, null, null, null);
-
-		apps = cursorToAppList(c);
-		c.close();
+		
+		if (c != null) {
+			apps = cursorToAppList(c);
+			c.close();
+		}
 
 		return apps; 
 	}

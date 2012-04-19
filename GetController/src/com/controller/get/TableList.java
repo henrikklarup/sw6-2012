@@ -1,5 +1,6 @@
 package com.controller.get;
 
+import java.util.HashMap;
 import java.util.List;
 
 import android.app.ListActivity;
@@ -9,9 +10,9 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import dk.aau.cs.giraf.oasis.lib.Helper;
+import dk.aau.cs.giraf.oasis.lib.models.App;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 import dk.aau.cs.giraf.oasis.lib.models.Setting;
-import java.util.HashMap;
 
 public class TableList extends ListActivity {
 	
@@ -19,8 +20,9 @@ public class TableList extends ListActivity {
 //	String tables[] = new String[] {"AppsView", "DepartmentsView", "MediaView", "ProfilesView", "SettingsView", "StatsView"};
 	ArrayAdapter<String> adapter;
 	Helper helper;
-	List<Profile> values;
-	Profile profile, test;
+	List<App> values;
+	App app;
+	Profile profile;
 	Setting settings;
 
 	@Override
@@ -28,7 +30,6 @@ public class TableList extends ListActivity {
 		super.onCreate(savedInstanceState);
 		
 		helper = new Helper(this);
-		
 		settings = new Setting<String, String, String>();
 		
 
@@ -37,13 +38,22 @@ public class TableList extends ListActivity {
 		map.put("Favorite Color", "Blue");
 		map.put("Favorite Food", "Carrot");
 		map.put("Favorite Animal", "Rabbit");
-		settings.put("FEDTE", map);
+		settings.put("Profile1", map);
 		
-		profile = new Profile("FEDTE", "FEDTE","FEDTE", 0, 12345678, "FEDTE", settings);
+		profile = new Profile("Dummy", "Dummy", "Dummy", 0, 1234567890, "Dummy", null);
+		long profileId = helper.profilesHelper.insertProfile(profile);
+		profile.setId(profileId);
 		
-		helper.profilesHelper.insertProfile(profile);
+		app = new App("TestApp", "0.2");
+		helper.appsHelper.insertApp(app);
+		List<App> apps = helper.appsHelper.getApps();
+		app = apps.get(apps.size() - 1);
+		app.setSettings(settings);
 		
-		values = helper.profilesHelper.getProfiles();
+		helper.appsHelper.attachAppToProfile(app, profile);
+		helper.appsHelper.modifyAppSettingsByProfile(app, profile);
+		
+		values = helper.appsHelper.getApps();
 		
 		adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, tables);
 		setListAdapter(adapter);
