@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 import dk.aau.cs.giraf.gui.GButton;
+import dk.aau.cs.giraf.gui.GWidgetCalendar;
+import dk.aau.cs.giraf.gui.GWidgetCalendarUpdater;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 import dk.aau.cs.giraf.oasis.lib.models.Setting;
@@ -48,6 +50,7 @@ public class HomeActivity extends Activity {
 	private int mProfilePictureHeightLandscape;
 	private int mProfilePictureWidthPortrait;
 	private int mProfilePictureHeightPortrait;
+	private GWidgetCalendarUpdater widgetTimer;
 	
 	
 	private GButton mLogoutButton;
@@ -80,6 +83,8 @@ public class HomeActivity extends Activity {
 		mProfilePictureWidthPortrait = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics());
 		mProfilePictureHeightPortrait = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics());
 		
+		GWidgetCalendar calendarWidget = (GWidgetCalendar) findViewById(R.id.calendarwidget);
+		widgetTimer = new GWidgetCalendarUpdater(calendarWidget);
 		
 		// Log ud knap:
 		/*mLogoutButton = (GButton) findViewById(R.id.logoutGButton);
@@ -99,6 +104,8 @@ public class HomeActivity extends Activity {
 		});*/
 		
 		loadApplications(true);
+		
+		
 	}
 
 	@Override
@@ -106,6 +113,20 @@ public class HomeActivity extends Activity {
 		super.onWindowFocusChanged(hasFocus);
 		this.resizeBar();
 	}
+	
+	@Override
+    protected void onPause()
+    {
+        super.onPause();
+        widgetTimer.sendEmptyMessage(GWidgetCalendarUpdater.MSG_STOP);
+    }
+	
+	@Override
+    protected void onResume()
+    {
+        super.onResume();
+        widgetTimer.sendEmptyMessage(GWidgetCalendarUpdater.MSG_START);
+    }
 
 	private void resizeBar() {
 		GridView homeGridView = (GridView)this.findViewById(R.id.GridViewHome);
