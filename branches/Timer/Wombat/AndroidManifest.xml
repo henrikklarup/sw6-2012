@@ -13,20 +13,13 @@
             android:name=".MainActivity"
             android:label="@string/app_name" 
             android:screenOrientation="landscape"
-            android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen">
+            android:theme="@style/WombatStyle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        
-        <activity
-            android:name=".OpenGLActivity"
-            android:screenOrientation="landscape"
-            android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen">
-        </activity>
-        
+        </activity>        
         <activity
             android:name="dk.aau.cs.giraf.wombat.drawlib.DrawLibActivity"
             android:screenOrientation="landscape"

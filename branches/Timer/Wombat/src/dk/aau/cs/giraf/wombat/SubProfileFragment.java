@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import dk.aau.cs.giraf.TimerLib.Guardian;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
+import dk.aau.cs.giraf.oasis.lib.Helper;
 
 public class SubProfileFragment extends android.app.ListFragment {
 	Guardian guard = Guardian.getInstance();
@@ -27,7 +28,20 @@ public class SubProfileFragment extends android.app.ListFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		// TODO: Implement bind to the profile chosen by launcher
-		setListAdapter(null);
+		if(TimerLoader.profileID != -1){
+			Helper helper = new Helper(getActivity());
+			int position;
+			// Marks the selected profile in the guard singleton
+			position = guard.publishList().indexOf(helper.profilesHelper.getProfileById(TimerLoader.profileID));
+			guard.publishList().get(position).select();
+			
+			ArrayList<SubProfile> subprofiles = guard.getChild().SubProfiles();
+			SubProfileAdapter adapter = new SubProfileAdapter(getActivity(),
+					android.R.layout.simple_list_item_1, subprofiles);
+			setListAdapter(adapter);
+		}else {
+			setListAdapter(null);
+		}
 		ListView lv = getListView();
 		lv.setOnItemLongClickListener(new OnItemLongClickListener() {
 
@@ -93,11 +107,11 @@ public class SubProfileFragment extends android.app.ListFragment {
 	}
 
 	public void onListItemClick(ListView lv, View view, int position, long id) {
-		if (TimerLoader.firstClick) {
+		if (TimerLoader.subProfileFirstClick) {
 			for (int i = 0; i < lv.getChildCount(); i++) {
 				lv.getChildAt(i).setBackgroundResource(R.drawable.list);
 			}
-			TimerLoader.firstClick = false;
+			TimerLoader.subProfileFirstClick = false;
 		}
 		for (int i = 0; i < lv.getChildCount(); i++) {
 			lv.getChildAt(i).setSelected(false);

@@ -14,9 +14,11 @@ public class TimerLoader {
 		guard.publishList();
 	}
 	
+	public static long profileID;
+	
 	public static int profilePosition;
 	public static int subProfileID; 	// Stores the id of the saved subprofile
-	public static boolean firstClick;	// When a subprofile is saved, this is set to true
+	public static boolean subProfileFirstClick;	// When a subprofile is saved, this is set to true
 										// When something is clicked in the subprofile list, set to false
-	public static boolean mainDrawn;	// True if the main drawing has been drawn
+	public static boolean profileFirstClick;
 }

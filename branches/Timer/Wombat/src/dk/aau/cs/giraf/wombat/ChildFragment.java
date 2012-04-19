@@ -34,6 +34,12 @@ public class ChildFragment extends android.app.ListFragment {
 
 	@Override
 	public void onListItemClick(ListView lv, View view, int position, long id) {
+		if (TimerLoader.profileFirstClick) {
+			for (int i = 0; i < lv.getChildCount(); i++) {
+				lv.getChildAt(i).setBackgroundResource(R.drawable.list);
+			}
+			TimerLoader.profileFirstClick = false;
+		}
 		for(int i = 0; i < lv.getChildCount(); i++){
 			lv.getChildAt(i).setSelected(false);
 		}

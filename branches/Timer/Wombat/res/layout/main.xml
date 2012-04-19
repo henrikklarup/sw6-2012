@@ -53,10 +53,10 @@
         <Button
             android:id="@+id/new_template_button"
             android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:background="@drawable/btn"
+            android:layout_height="62dp"
+            android:background="@drawable/list"
             android:text="@string/new_template_button_text"
-            android:layout_margin="5dp" />
+            android:textColor="#FF000000"/>
 
         <fragment
             android:id="@+id/subprofileFragment"
