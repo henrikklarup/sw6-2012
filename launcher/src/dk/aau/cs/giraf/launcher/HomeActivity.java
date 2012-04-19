@@ -148,8 +148,8 @@ public class HomeActivity extends Activity {
 		if (isLandscape) {
 			mNameView.setVisibility(View.INVISIBLE);
 
-			profilePictureViewParams.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, getResources().getDisplayMetrics());
-			profilePictureViewParams.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 90, getResources().getDisplayMetrics());
+			profilePictureViewParams.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 76, getResources().getDisplayMetrics());
+			profilePictureViewParams.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 99, getResources().getDisplayMetrics());
 			mHomeBarLayout.setPadding(5, 5, 5, 5);
 		} else {
 			profilePictureViewParams.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics());
