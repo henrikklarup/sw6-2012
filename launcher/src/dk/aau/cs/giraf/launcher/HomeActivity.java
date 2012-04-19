@@ -20,9 +20,12 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Display;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
@@ -39,7 +42,13 @@ public class HomeActivity extends Activity {
 	private Helper mHelper;
 	private TextView mNameView;
 	private LinearLayout mPictureLayout;
+	private ImageView mProfilePictureView;
 	private RelativeLayout mHomeBarLayout;
+	private int mProfilePictureWidthLandscape;
+	private int mProfilePictureHeightLandscape;
+	private int mProfilePictureWidthPortrait;
+	private int mProfilePictureHeightPortrait;
+	
 	
 	private GButton mLogoutButton;
 	
@@ -63,7 +72,13 @@ public class HomeActivity extends Activity {
 		mNameView.setText(mCurrentUser.getFirstname() + " " + mCurrentUser.getSurname());
 		
 		mPictureLayout = (LinearLayout)this.findViewById(R.id.profile_pic);
+		mProfilePictureView = (ImageView)this.findViewById(R.id.imageview_profilepic);
 		mHomeBarLayout = (RelativeLayout)this.findViewById(R.id.HomeBarLayout);
+		
+		mProfilePictureWidthLandscape = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics());
+		mProfilePictureHeightLandscape = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics());
+		mProfilePictureWidthPortrait = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics());
+		mProfilePictureHeightPortrait = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics());
 		
 		
 		// Log ud knap:
@@ -129,18 +144,28 @@ public class HomeActivity extends Activity {
 		homeGridView.setLayoutParams(paramsGrid);
 		homebar.setLayoutParams(paramsBar);
 		
-		RelativeLayout.LayoutParams pictureLayoutParams = (LayoutParams) mPictureLayout.getLayoutParams();
+		ViewGroup.LayoutParams profilePictureViewParams = mProfilePictureView.getLayoutParams();
+		ViewGroup.LayoutParams pictureLayoutParams = mPictureLayout.getLayoutParams();
 		//LayoutParams pictureLayoutParams;
 		if (isLandscape) {
 			mNameView.setVisibility(View.INVISIBLE);
 			//mPictureLayout.setVisibility(View.INVISIBLE);
 			
 			//pictureLayoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-			pictureLayoutParams.setMargins(0, 0, 0, 0);
+			
+
+			
+			profilePictureViewParams.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, getResources().getDisplayMetrics());
+			profilePictureViewParams.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 90, getResources().getDisplayMetrics());
+			//pictureLayoutParams.setMargins(0, 0, 0, 0);
 			mHomeBarLayout.setPadding(5, 5, 5, 5);
 		} else {
+			profilePictureViewParams.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics());
+			profilePictureViewParams.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 130, getResources().getDisplayMetrics());
+			
 			mHomeBarLayout.setPadding(20, 20, 20, 20);
 			mNameView.setVisibility(View.VISIBLE);
+			
 			
 			/*
 			android:layout_width="wrap_content"
@@ -152,10 +177,10 @@ public class HomeActivity extends Activity {
 				 */
 				
 			//pictureLayoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-			pictureLayoutParams.setMargins(3, 3, 5, 3);
+			//pictureLayoutParams.setMargins(3, 3, 5, 3);
 		}
-			
-		mPictureLayout.setLayoutParams(pictureLayoutParams);
+		mProfilePictureView.setLayoutParams(profilePictureViewParams);	
+		//mPictureLayout.setLayoutParams(pictureLayoutParams);
 	}
 
 	private void applySizes() {
