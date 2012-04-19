@@ -22,7 +22,7 @@ import dk.aau.cs.giraf.oasis.lib.models.Profile;
 public class AppsHelper {
 
 	private static Context _context;
-	private ListOfAppsHelper listOfAppsHelper;
+	private ListOfAppsController listOfAppsHelper;
 	private String[] columns = new String[] { 
 			AppsMetaData.Table.COLUMN_ID, 
 			AppsMetaData.Table.COLUMN_NAME,
@@ -34,7 +34,7 @@ public class AppsHelper {
 	 */
 	public AppsHelper(Context context){
 		_context = context;
-		listOfAppsHelper = new ListOfAppsHelper(context);
+		listOfAppsHelper = new ListOfAppsController(context);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

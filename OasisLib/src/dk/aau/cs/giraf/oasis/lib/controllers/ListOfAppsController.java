@@ -15,7 +15,7 @@ import dk.aau.cs.giraf.oasis.lib.models.Profile;
 import dk.aau.cs.giraf.oasis.lib.models.Setting;
 import dk.aau.cs.giraf.oasis.lib.models.Stat;
 
-class ListOfAppsHelper {
+class ListOfAppsController {
 
 	private Context _context;
 	private String[] columns = { 
@@ -24,7 +24,7 @@ class ListOfAppsHelper {
 			ListOfAppsMetaData.Table.COLUMN_SETTINGS,
 			ListOfAppsMetaData.Table.COLUMN_STATS};
 
-	public ListOfAppsHelper(Context context) {
+	public ListOfAppsController(Context context) {
 		_context = context;
 	}
 
