@@ -2,43 +2,88 @@
 public class Profile {
 
 	private int id;
-	private String name;
-	private String guardian;
-	private String parent;
+	private String firstname;
+	private String surname;
+	private String middlename;
+	private int role;
+	private int phone;
+	private String picture;
 	private String username;
+	private String password;
 
-	public Profile(int id2, String name, String guardian, String parent, String username)
+
+	public Profile(int id, String firstname, String surname, String middlename, int role, int phone, String picture)
 	{
-		this.id = id2;
-		this.name = name;
-		this.guardian = guardian;
-		this.parent = parent;
+		this.id = id;
+		this.firstname = firstname;
+		this.surname = surname;
+		this.middlename = middlename;
+		this.role = role;
+		this.phone = phone;
+		this.picture = picture;
+	}
+
+	public Profile(int id, String firstname, String surname, String middlename, int role, int phone, String picture, String username)
+	{
+		this.id = id;
+		this.firstname = firstname;
+		this.surname = surname;
+		this.middlename = middlename;
+		this.role = role;
+		this.phone = phone;
+		this.picture = picture;
 		this.username = username;
 	}
-
-	public String getUsername()
+	
+	public Profile(int id, String firstname, String surname, String middlename, int role, int phone, String picture,String password, String username)
 	{
-		return username;
+		this.id = id;
+		this.firstname = firstname;
+		this.surname = surname;
+		this.middlename = middlename;
+		this.role = role;
+		this.phone = phone;
+		this.picture = picture;
+		this.username = username;
+		this.password = password;
 	}
+
+
+	/*public String getUsername()
+	{
+		return this.username;
+	}*/
 
 	public int getId()
 	{
 		return this.id;
 	}
 
+	public String getFirstname()
+	{
+		return this.firstname;
+	}
+
+
+	public String getSurname()
+	{
+		return this.surname;
+	}
+
+	public String getMiddlename()
+	{
+		if (this.middlename == null)
+			return "";
+		else
+			return this.middlename;
+	}
+
 	public String getName()
 	{
-		return this.name;
-	}
+		if (middlename == null)
+			return this.firstname + " " + this.surname;
+		else
+			return this.firstname + " " + this.middlename + " " + this.surname;
 
-	public String getGuardian()
-	{
-		return this.guardian;
 	}
-
-	public String getParent()
-	{
-		return this.parent;
-	}
-
 }

@@ -22,7 +22,7 @@ import com.sun.corba.se.impl.oa.poa.AOMEntry;
 /**
  * Servlet implementation class SelectProfile
  */
-public class SelectProfile extends HttpServlet {
+public class SelectProfileToEdit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	int id;
@@ -37,7 +37,7 @@ public class SelectProfile extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public SelectProfile() {
+	public SelectProfileToEdit() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -95,14 +95,14 @@ public class SelectProfile extends HttpServlet {
 					("jdbc:mysql://172.25.11.65:3306/04","eder","123456");
 			stmt = con.createStatement();
 			rs = stmt.executeQuery("SELECT idUser, username, idProfile, firstname, middlename, surname from AuthUsers, Profile " +
-					   			 "where idUser = idProfile;");
+					"where idUser = idProfile;");
 			// displaying records
 			while(rs.next()){
 				id = rs.getInt("idUser");
 				name = rs.getString("firstname") + " " +rs.getString("middlename") + " " + rs.getString("surname");
 				username = rs.getString("username");
 
-				Profile p = new Profile(id,rs.getString("firstname"),rs.getString("middlename"),rs.getString("surname"),1,-1,null);
+				Profile p = new Profile(rs.getInt("idProfile"),rs.getString("firstname"),rs.getString("surname"), rs.getString("middlename"),  1, -1, null, username);
 
 				profiles.add(p);
 			}
@@ -110,7 +110,28 @@ public class SelectProfile extends HttpServlet {
 			if (loginID != null)
 			{
 
-				if (triedLogin != null && triedLogin.equals("1") && guardianID != null)
+				stmt = con.createStatement();
+				rs = stmt.executeQuery("select firstname from Profile "+
+						"where idProfile = " + loginID + ";");
+
+				String user = null;
+				// displaying records
+				while(rs.next()){
+					user = rs.getString("firstname");
+				}
+
+				if(user == null)
+				{
+					session.setAttribute("SelectProfileERROR", "Ugyldigt id");
+					response.sendRedirect("SelectProfileToEdit");
+					return;
+				}
+				else
+				{
+					session.setAttribute("PROFILEIDTOEDIT", loginID);
+					response.sendRedirect("EditProfileNotLoggedin");
+				}
+				/*if (triedLogin != null && triedLogin.equals("1") && guardianID != null)
 				{
 					stmt = con.createStatement();
 					rs = stmt.executeQuery("select username, password from AuthUsers "+
@@ -129,37 +150,37 @@ public class SelectProfile extends HttpServlet {
 							session.setAttribute("ID", loginID);
 							session.setAttribute("USER", correcUsername);
 
-							response.sendRedirect("main");
+							response.sendRedirect("EditProfileNotLoggedin");
 						}
 						else
 						{
 							out.println("ERROR");
 						}
-					}
-				}
-				else
-				{
-					stmt = con.createStatement();
-					rs = stmt.executeQuery("select * from Profile, AuthUsers "+
-							"where idProfile = "+loginID+";");
-					originalProfile = null;
-					while(rs.next()){
-						originalProfile = new Profile(rs.getInt("idProfile"),rs.getString("firstname"),rs.getString("surname"), rs.getString("middlename"),  1, -1, null);
-					}
-					rs = stmt.executeQuery("select * from Profile "+
-							"where idProfile in (select idGuardian from HasGuardian " +
-							"where idChild = "+loginID+");");
-					guardians.add(originalProfile);
-					// displaying records
-					while(rs.next()){
-						id = rs.getInt("idProfile");
-						name = rs.getString("firstname") + " " +rs.getString("middlename") + " " + rs.getString("surname");
-						Profile g = new Profile(rs.getInt("idProfile"),rs.getString("firstname"),rs.getString("surname"), rs.getString("middlename"),  1, -1, null,username);
-						guardians.add(g);
-					}
-				}
-
+					}*/
 			}
+			else
+			{
+				stmt = con.createStatement();
+				rs = stmt.executeQuery("select * from Profile, AuthUsers "+
+						"where idProfile = "+loginID+";");
+				originalProfile = null;
+				while(rs.next()){
+					originalProfile = new Profile(rs.getInt("idProfile"), rs.getString("firstname"),rs.getString("surname"), rs.getString("middlename"),1,-1, null, rs.getString("password"), rs.getString("username"));
+				}
+				rs = stmt.executeQuery("select * from Profile "+
+						"where idProfile in (select idGuardian from HasGuardian " +
+						"where idChild = "+loginID+");");
+				guardians.add(originalProfile);
+				// displaying records
+				while(rs.next()){
+					id = rs.getInt("idProfile");
+					name = rs.getString("firstname") + " " +rs.getString("middlename") + " " + rs.getString("surname");
+					Profile g = new Profile(rs.getInt("idProfile"), rs.getString("firstname"),rs.getString("surname"), rs.getString("middlename"),1,-1, null, username);
+					guardians.add(g);
+				}
+			}
+
+
 
 		} catch (SQLException e) {
 			throw new ServletException("Servlet Could not display records. id=" + guardianID, e);
@@ -198,15 +219,15 @@ public class SelectProfile extends HttpServlet {
 		out.println("<link rel='stylesheet' type='text/css' href='CSS/SavannahStyle.css' />");
 		out.println("<script src=\"javascript/popup.js\"></script>");
 		out.println("</head>");
-		if (loginID != null)
+		/*if (loginID != null)
 		{
 			out.println("<body onLoad=\"setOpen("+openVar+"); setID('"+loginID+"'); popup('popUpDiv'); getFocus();\">");
 		}
 		else
-		{
-			out.println("<body onLoad=\"getFocusQuick();\">");
+		{*/
+		out.println("<body onLoad=\"getFocusQuick();\">");
 
-		}	
+		//}	
 
 		out.println("<script type='text/javascript'>"+
 				"var open = 0;"+
@@ -283,7 +304,7 @@ public class SelectProfile extends HttpServlet {
 		{
 
 			out.println("<tr onmouseover=\"ChangeColor(this, true);\" onmouseout=\"ChangeColor(this, false);\"" + 
-					"onclick=\"setOpen(1); setID('"+p.getId()+"'); submitform();\">");
+					"onclick=\"setID('"+p.getId()+"'); submitform();\">");
 			out.println("<td>" + p.getId() + "</td><td>"+p.getName()+"</td>");//<td>"+p.getGuardian()+"</td><td>"+p.getParent()+"</td>");
 			out.println("</tr>");
 
@@ -291,8 +312,8 @@ public class SelectProfile extends HttpServlet {
 		out.println("</table>");
 		out.println("<hr>");
 		out.println("<center>");
-		out.println("<form method='POST' action='SelectProfile' name='quickForm'>");
-		out.println("<input type='text' name='quickSelect' onkeypress='if (window.event.keyCode == 13) {setOpen(1); setID(document.quickForm.quickSelect.value); submitform();}'>");
+		out.println("<form method='POST' action='SelectProfileToEdit' name='quickForm'>");
+		out.println("<input type='text' name='quickSelect' onkeypress='if (window.event.keyCode == 13) {setLogin(); setID(document.quickForm.quickSelect.value); submitform();}'>");
 		out.println("</form>");
 		if (session.getAttribute("SelectProfileERROR") != null)
 		{
@@ -305,12 +326,18 @@ public class SelectProfile extends HttpServlet {
 		out.println("<p>");
 		out.println("</div>");
 
+		/*
 		out.println("" +
 				"<div id=\"blanket\" style=\"display:none;\"></div>"+
 				"<div id=\"popUpDiv\" style=\"display:none;\">"+
 				"<P align=\"right\"><a href=\"#\" onclick=\"setOpen(0); popup('popUpDiv')\" ALIGN=RIGHT>[X]</a></p>"+
-				"<form method='POST' action='SelectProfile' name='DasForm'>\n" + 
-				"<center><h3>");
+		 */
+		out.println("<form method='POST' action='SelectProfileToEdit' name='DasForm'>\n" +
+				"<input type='hidden' name='myId' value=''>"+
+				"<input type='hidden' name='triedLogin' value=0>"+
+				"</form>");
+		/*"<center><h3>");
+
 		if (!guardians.isEmpty())
 		{
 			try {
@@ -337,7 +364,7 @@ public class SelectProfile extends HttpServlet {
 				out.println("setID(null); clearLogin(); submitform();");
 				out.println("</script>");
 				response.sendRedirect("SelectProfile");
-				
+
 			}
 
 		}
@@ -365,7 +392,7 @@ public class SelectProfile extends HttpServlet {
 				//"</tr>"+
 
 				"</center>"+
-				"</div>");
+				"</div>");*/
 
 		out.println("</body>");
 		out.println("</html>");
@@ -383,4 +410,3 @@ public class SelectProfile extends HttpServlet {
 
 
 }
-

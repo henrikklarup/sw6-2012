@@ -89,4 +89,24 @@
     <servlet-name>AddProfile</servlet-name>
     <url-pattern>/AddProfile</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EditProfileNotLoggedin</display-name>
+    <servlet-name>EditProfileNotLoggedin</servlet-name>
+    <servlet-class>EditProfileNotLoggedin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditProfileNotLoggedin</servlet-name>
+    <url-pattern>/EditProfileNotLoggedin</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SelectProfileToEdit</display-name>
+    <servlet-name>SelectProfileToEdit</servlet-name>
+    <servlet-class>SelectProfileToEdit</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SelectProfileToEdit</servlet-name>
+    <url-pattern>/SelectProfileToEdit</url-pattern>
+  </servlet-mapping>
 </web-app>

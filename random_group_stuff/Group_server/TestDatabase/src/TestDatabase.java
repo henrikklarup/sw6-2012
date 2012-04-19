@@ -193,10 +193,15 @@ public class TestDatabase extends HttpServlet {
 				//If in add and esc is pressed
 				"if(keyCode == 27 && open == 2) {setOpen(0); popup('popUpPick'); }" +
 				"if(keyCode == 80 && open == 2) {window.location = \"AddProfile\"}" +
-
+				
+				//if in edit
+				"if(keyCode == 27 && open == 2) {setOpen(0); popup('popUpEdit'); }" +
+				"if(keyCode == 80 && open == 3) {window.location = \"SelectProfileToEdit\"}" +
+				
 				//MainScreen Key presses
 				"if(keyCode == 80 && open == 0) {window.location = \"SelectProfile\"}" + // P = redirect to SelectProfile
-				"if(keyCode == 84 && open == 0) {setOpen(2); popup('popUpPick')}" + //T = show add window											//Nice little feature for waiting 25 ms		
+				"if(keyCode == 84 && open == 0) {setOpen(2); popup('popUpPick')}" + //T = show add window										
+				"if(keyCode == 82 && open == 0) {setOpen(3); popup('popUpEdit')}" + //T = edit add window											//Nice little feature for waiting 25 ms
 				" if(keyCode == 76 && open == 0) {setOpen(1); clearForm(); testThis('profile');popup('popUpDiv'); document.DasForm.username.value =\"\"; setTimeout(function(){getFocus();clearForm();}, 25); }" + // L = Show login
 				"}"+
 				"</SCRIPT>");
@@ -207,7 +212,7 @@ public class TestDatabase extends HttpServlet {
 		aOutput.println("<br>");
 		aOutput.println("<u>P</u>rofiler</a>");
 		aOutput.println("<p>");
-		aOutput.println("<a href=\"#\" onclick=\"setOpen(2); popup('popUpPick');\"><u>T</u>ilføj</a>  -  Rediger  -  Slet");
+		aOutput.println("<a href=\"#\" onclick=\"setOpen(2); popup('popUpPick');\"><u>T</u>ilføj</a>  -  <a href=\"#\" onclick=\"setOpen(2); popup('popUpEdit');\"><u>R</u>ediger</a>  -  Slet");
 		aOutput.println("</center>");
 		aOutput.println("<p>");
 		aOutput.println("<a href=\"#\" onclick=\"setOpen(1); testThis('profile');popup('popUpDiv');getFocus();\">Hurtig <u>L</u>ogin</a>");
@@ -242,6 +247,7 @@ public class TestDatabase extends HttpServlet {
 
 				"</center>"+
 				"</div>");
+		
 		aOutput.println("<div id=\"blanket\" style=\"display:none;\"></div>"+
 				"<div id=\"popUpPick\" style=\"display:none;\">"+
 				"<P align=\"right\"><a href=\"#\" onclick=\"setOpen(0);popup('popUpPick')\" ALIGN=RIGHT>[X]</a></p>"+
@@ -251,10 +257,21 @@ public class TestDatabase extends HttpServlet {
 				"</h3>"+
 				"<a href=\"AddProfile\"><u>P</u>rofil</a>  -  Billede  -  Lyd  -  Animation/film"+
 				"</center>"+
-				"</div>" +
-				""+
-				"</body></form></html>" 
-				); 
+				"</div>");
+		
+		aOutput.println("<div id=\"blanket\" style=\"display:none;\"></div>"+
+				"<div id=\"popUpEdit\" style=\"display:none;\">"+
+				"<P align=\"right\"><a href=\"#\" onclick=\"setOpen(0);popup('popUpEdit')\" ALIGN=RIGHT>[X]</a></p>"+
+				"<form method='POST' action='TestDatabase' name='DasForm'>\n" + 
+				"<center><h3>"+
+				"Rediger:"+
+				"</h3>"+
+				"<a href=\"SelectProfileToEdit\"><u>P</u>rofil</a>  -  Billede  -  Lyd  -  Animation/film"+
+				"</center>"+
+				"</div>");
+		
+				
+				aOutput.println("</body></form></html>");
 	}
 
 }
