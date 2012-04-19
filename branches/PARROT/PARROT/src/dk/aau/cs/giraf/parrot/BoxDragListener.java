@@ -27,6 +27,9 @@ public class BoxDragListener implements OnDragListener
 				} else {
 					container.addView(view);
 				}
+				
+				
+				
 			}
 		} else if (event.getAction() == DragEvent.ACTION_DRAG_ENDED){
 			//Dummy				

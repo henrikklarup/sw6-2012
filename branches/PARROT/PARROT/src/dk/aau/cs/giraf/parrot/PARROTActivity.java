@@ -43,8 +43,14 @@ public class PARROTActivity extends Activity {
 		Category tempCat = new Category(0);
 		tempCat.addPictogram(tempPic);
 		tempCat.addPictogram(tempPic);
-		tempPic = new Pictogram("Meg", "/sdcard/Pictures/meg.png", null, null);
-		tempCat.addPictogram(tempPic);
+		Pictogram tempPic2 = new Pictogram("Meg", "/sdcard/Pictures/meg.png", null, null);
+		tempCat.addPictogram(tempPic2);
+		
+		for (int i=0;i<6;i++)
+		{
+			tempCat.addPictogram(tempPic);
+			tempCat.addPictogram(tempPic2);
+		}
 		parrotUser.addCategory(tempCat);
 		
 

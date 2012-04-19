@@ -5,7 +5,9 @@ import parrot.Package.R;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.ClipData;
+import android.drm.DrmManagerClient.OnEventListener;
 import android.os.Bundle;
+import android.provider.ContactsContract.CommonDataKinds.Event;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.DragShadowBuilder;
@@ -47,6 +49,8 @@ public class SpeechBoardFragment extends Fragment
 			gridview.setAdapter(new PictogramAdapter(cat, parrent));
 
 			parrent.findViewById(R.id.pictogramgrid).setOnDragListener(new BoxDragListener());
+			parrent.findViewById(R.id.SpeechBoard).setOnDragListener(new BoxDragListener());
+			parrent.findViewById(R.id.supercategory).setOnDragListener(new BoxDragListener());
 
 
 			gridview.setOnItemLongClickListener(new OnItemLongClickListener()
@@ -63,17 +67,9 @@ public class SpeechBoardFragment extends Fragment
 
 			});
 			
+			
 		}
 		
-
-		//FIXME These two lines are temporary for testing (kim)
-		//GridView gridview = (GridView) parrent.findViewById(R.id.pictogramgrid);
-		//gridview.setAdapter(new ImageAdapter(parrent));
-//
-//		parrent.findViewById(R.id.pictogramgrid).setOnDragListener(new BoxDragListener());
-//		parrent.findViewById(R.id.SpeechBoard).setOnDragListener(new BoxDragListener());
-//		parrent.findViewById(R.id.supercategory).setOnDragListener(new BoxDragListener());
-//
 
 
 	}

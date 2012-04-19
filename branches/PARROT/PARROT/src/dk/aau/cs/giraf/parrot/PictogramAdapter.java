@@ -41,7 +41,6 @@ public class PictogramAdapter extends BaseAdapter {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
 	//create an image view for each pictogram in the list.
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ImageView imageView;
