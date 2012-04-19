@@ -152,7 +152,7 @@ public class AppsHelper {
 	 */
 	public List<App> getAppsByName(String name) {
 		List<App> apps = new ArrayList<App>();
-		Cursor c = _context.getContentResolver().query(Uri.withAppendedPath(AppsMetaData.CONTENT_URI, name) , columns, null, null, null);
+		Cursor c = _context.getContentResolver().query(AppsMetaData.CONTENT_URI, columns, AppsMetaData.Table.COLUMN_NAME + " LIKE '%" + name + "%'", null, null);
 		
 		if (c != null) {
 			apps = cursorToAppList(c);

@@ -8,12 +8,25 @@ import dk.aau.cs.giraf.oasis.lib.controllers.AppsHelper;
 import dk.aau.cs.giraf.oasis.lib.controllers.DepartmentsHelper;
 import dk.aau.cs.giraf.oasis.lib.controllers.MediaHelper;
 import dk.aau.cs.giraf.oasis.lib.controllers.ProfilesHelper;
+import dk.aau.cs.giraf.oasis.lib.controllers.TagsHelper;
 import dk.aau.cs.giraf.oasis.lib.models.App;
 import dk.aau.cs.giraf.oasis.lib.models.Department;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 import dk.aau.cs.giraf.oasis.lib.models.Tag;
 
+// Imports for private controllers
+/*
+import dk.aau.cs.giraf.oasis.lib.controllers.AuthUsersController;
+import dk.aau.cs.giraf.oasis.lib.controllers.HasDepartmentController;
+import dk.aau.cs.giraf.oasis.lib.controllers.HasGuardianController;
+import dk.aau.cs.giraf.oasis.lib.controllers.HasLinkController;
+import dk.aau.cs.giraf.oasis.lib.controllers.HasSubDepartmentController;
+import dk.aau.cs.giraf.oasis.lib.controllers.HasTagController;
+import dk.aau.cs.giraf.oasis.lib.controllers.ListOfAppsController;
+import dk.aau.cs.giraf.oasis.lib.controllers.MediaDepartmentAccessController;
+import dk.aau.cs.giraf.oasis.lib.controllers.MediaProfileAccessController;
+*/
 /**
  * Helper class, instantiating all the helper classes into one
  * @author Admin
@@ -26,7 +39,20 @@ public class Helper {
 	public MediaHelper mediaHelper;
 	public DepartmentsHelper departmentsHelper;
 	public AppsHelper appsHelper;
+	public TagsHelper tagsHelper;
 	
+	//Controllers only for viewDB
+	/*
+	public AuthUsersController au;
+	public HasDepartmentController hd;
+	public HasGuardianController hg;
+	public HasLinkController hl;
+	public HasSubDepartmentController hsd;
+	public HasTagController ht;
+	public ListOfAppsController loa;
+	public MediaDepartmentAccessController mda;
+	public MediaProfileAccessController mpa;
+	*/
 	/**
 	 * Constructor
 	 * @param context Current context
@@ -37,6 +63,20 @@ public class Helper {
 		mediaHelper = new MediaHelper(_context);
 		departmentsHelper = new DepartmentsHelper(_context);
 		appsHelper = new AppsHelper(_context);
+		tagsHelper = new TagsHelper(_context);
+		
+		//Controller only for viewDB
+		/*
+		au = new AuthUsersController(_context);
+		hd = new HasDepartmentController(_context);
+		hg = new HasGuardianController(_context);
+		hl = new HasLinkController(_context);
+		hsd = new HasSubDepartmentController(_context);
+		ht = new HasTagController(_context);
+		loa = new ListOfAppsController(_context);
+		mda = new MediaDepartmentAccessController(_context);
+		mpa = new MediaProfileAccessController(_context);
+		*/
 	}
 	
 	public void ClearAll() {
@@ -44,6 +84,20 @@ public class Helper {
 		mediaHelper.clearMediaTable();
 		departmentsHelper.clearDepartmentsTable();
 		appsHelper.clearAppsTable();
+		tagsHelper.clearTagsTable();
+		
+		//Controller only for viewDB
+		/*
+		au.clearAuthUsersTable();
+		hd.clearHasDepartmentTable();
+		hg.clearHasGuardianTable();
+		hl.clearHasLinkTable();
+		hsd.clearHasSubDepartmentTable();
+		ht.clearHasTagTable();
+		loa.clearListOfAppsTable();
+		mda.clearMediaDepartmentAccessTable();
+		mpa.clearMediaProfileAccessTable();
+		*/
 	}
 	
 	public void CreateDummyData() {
@@ -159,6 +213,11 @@ public class Helper {
 		Tag tag1 = new Tag("Dog1");
 		Tag tag2 = new Tag("Dog2");
 		Tag tag3 = new Tag("Dog3");
+		
+		tagsHelper.insertTag(tag1);
+		tagsHelper.insertTag(tag2);
+		tagsHelper.insertTag(tag3);
+		
 		List<Tag> tags1 = new ArrayList<Tag>();
 		tags1.add(tag1);
 		tags1.add(tag2);
@@ -188,9 +247,9 @@ public class Helper {
 		
 		/*Get apps*/
 		App app1Loaded = appsHelper.getAppsByName("App1").get(0);
-		App app2Loaded = appsHelper.getAppsByName("App1").get(0);	
-		App app3Loaded = appsHelper.getAppsByName("App1").get(0);
-		App app4Loaded = appsHelper.getAppsByName("App1").get(0);
+		App app2Loaded = appsHelper.getAppsByName("App2").get(0);	
+		App app3Loaded = appsHelper.getAppsByName("App3").get(0);
+		App app4Loaded = appsHelper.getAppsByName("App4").get(0);
 		
 		/*Attach app to profile*/
 		appsHelper.attachAppToProfile(app1Loaded, Child1Loaded);
