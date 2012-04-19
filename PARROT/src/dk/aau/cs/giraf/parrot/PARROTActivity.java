@@ -9,6 +9,8 @@ import dk.aau.cs.giraf.oasis.lib.models.*;
 
 import parrot.Package.R;
 import android.app.ActionBar;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.os.Bundle;
@@ -41,11 +43,16 @@ public class PARROTActivity extends Activity {
 		Category tempCat = new Category(0);
 		tempCat.addPictogram(tempPic);
 		tempCat.addPictogram(tempPic);
+		tempPic = new Pictogram("Meg", "/sdcard/Pictures/meg.png", null, null);
+		tempCat.addPictogram(tempPic);
 		parrotUser.addCategory(tempCat);
 		
 
+//		 Fragment newFragment = new SpeechBoardFragment();
+//	        FragmentTransaction ft = getFragmentManager().beginTransaction();
+//	        ft.add(android.R.id.content, newFragment).commit();
 
-
+		//TODO reimplement these lines
 		ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		actionBar.setDisplayShowTitleEnabled(false);	//TODO figure out what this does
