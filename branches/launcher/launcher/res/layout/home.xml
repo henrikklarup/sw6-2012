@@ -65,6 +65,7 @@
     android:horizontalSpacing="50dp"
     android:verticalSpacing="50dp" 
     android:background="@drawable/gbackgroundlight"
+    android:listSelector="#00000000"
     >
 
 	</GridView>
