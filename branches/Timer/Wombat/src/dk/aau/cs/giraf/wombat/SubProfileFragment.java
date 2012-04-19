@@ -33,12 +33,19 @@ public class SubProfileFragment extends android.app.ListFragment {
 			int position;
 			// Marks the selected profile in the guard singleton
 			position = guard.publishList().indexOf(helper.profilesHelper.getProfileById(TimerLoader.profileID));
-			guard.publishList().get(position).select();
+			if(position != -1){
+				guard.publishList().get(position).select();
+				ArrayList<SubProfile> subprofiles = guard.getChild().SubProfiles();
+				SubProfileAdapter adapter = new SubProfileAdapter(getActivity(),
+						android.R.layout.simple_list_item_1, subprofiles);
+				setListAdapter(adapter);
+			}	
+			else {
+				Toast.makeText(getActivity(), getString(R.string.no_child), Toast.LENGTH_SHORT).show();
+				setListAdapter(null);
+			}
 			
-			ArrayList<SubProfile> subprofiles = guard.getChild().SubProfiles();
-			SubProfileAdapter adapter = new SubProfileAdapter(getActivity(),
-					android.R.layout.simple_list_item_1, subprofiles);
-			setListAdapter(adapter);
+			
 		}else {
 			setListAdapter(null);
 		}

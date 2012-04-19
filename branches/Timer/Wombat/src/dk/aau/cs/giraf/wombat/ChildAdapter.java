@@ -48,7 +48,7 @@ public class ChildAdapter extends ArrayAdapter<Child> {
 			}
 
 		}
-		if(c.getId() == TimerLoader.profileID){
+		if(1 == TimerLoader.profileID){
 			v.setBackgroundResource(R.drawable.list_selected);
 			TimerLoader.profileFirstClick = true;
 			TimerLoader.profileID = -1;
