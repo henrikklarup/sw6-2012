@@ -38,7 +38,7 @@ public class HomeActivity extends Activity {
 	private Helper mHelper;
 	private TextView mNameView;
 	private LinearLayout mPictureLayout;
-	
+	private RelativeLayout mHomeBarLayout;
 	
 	private GButton mLogoutButton;
 	
@@ -62,6 +62,8 @@ public class HomeActivity extends Activity {
 		mNameView.setText(mCurrentUser.getFirstname() + " " + mCurrentUser.getSurname());
 		
 		mPictureLayout = (LinearLayout)this.findViewById(R.id.profile_pic);
+		mHomeBarLayout = (RelativeLayout)this.findViewById(R.id.HomeBarLayout);
+		
 		
 		// Log ud knap:
 		/*mLogoutButton = (GButton) findViewById(R.id.logoutGButton);
