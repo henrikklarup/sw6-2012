@@ -35,6 +35,7 @@ public class HomeActivity extends Activity {
 	private static ArrayList<ApplicationInfo> mApplications;
 	private GridView mGrid;
 	private Profile mCurrentUser; 
+	private Setting mSettings;
 	private Helper mHelper;
 	private TextView mNameView;
 	private LinearLayout mPictureLayout;
@@ -185,7 +186,7 @@ public class HomeActivity extends Activity {
 			//have to change
 			int i = 0;
 			
-			mHelper.profilesHelper.getProfileById(0).getSetting();
+			
 			
 			
 			for(ResolveInfo info : pkgAppsList){
