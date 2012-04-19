@@ -16,8 +16,8 @@ public class LogoActivity extends Activity {
 	protected int _splashTime = 400; 
 	private Thread splashTread;
 	
-	private final String TIMERKEY = "TIMING";
-	private final String DATEKEY = "DATE";
+	private static final String TIMERKEY = "TIMING";
+	private static final String DATEKEY = "DATE";
 	
 	// 24 hours in milliseconds
 	//private final long mAuthSpan = 86400000;

@@ -1,6 +1,5 @@
 package dk.aau.cs.giraf.launcher;
 
-import java.util.Calendar;
 import java.util.Date;
 
 import android.content.Context;
@@ -12,7 +11,6 @@ import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RoundRectShape;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
