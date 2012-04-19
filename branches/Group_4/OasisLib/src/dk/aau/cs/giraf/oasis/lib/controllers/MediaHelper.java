@@ -203,15 +203,16 @@ public class MediaHelper {
 	 * @param name the name of the media
 	 * @return List<Media>, containing all media of that name
 	 */
-//	public List<Media> getMediaByName(String name) {
-//		Cursor c = _context.getContentResolver().query(Uri.withAppendedPath(MediaMetaData.CONTENT_URI, name), columns, null, null, null);
-//
-//		List<Media> media = new ArrayList<Media>();
-//		media = cursorToMedia(c);
-//
-//		c.close();
-//		return media;
-//	}
+	public List<Media> getMediaByName(String name) {
+		List<Media> media = new ArrayList<Media>();
+		Cursor c = _context.getContentResolver().query(MediaMetaData.CONTENT_URI, columns, MediaMetaData.Table.COLUMN_NAME + " LIKE '%" + name + "%'", null, null);
+		
+		if (c != null) {
+			media = cursorToMedia(c);
+			c.close();
+		}
+		return media;
+	}
 
 	public List<Media> getMediaByTags(String[] tags) {
 		List<Media> mediaList = new ArrayList<Media>();

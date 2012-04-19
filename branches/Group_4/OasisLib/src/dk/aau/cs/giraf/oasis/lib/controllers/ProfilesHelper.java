@@ -35,7 +35,7 @@ public class ProfilesHelper {
 			ProfilesMetaData.Table.COLUMN_PHONE,
 			ProfilesMetaData.Table.COLUMN_PICTURE,
 			ProfilesMetaData.Table.COLUMN_SETTINGS};
-	
+
 	/**
 	 * Constructor
 	 * @param context Current context
@@ -55,7 +55,7 @@ public class ProfilesHelper {
 	public void clearProfilesTable() {
 		_context.getContentResolver().delete(ProfilesMetaData.CONTENT_URI, null, null);
 	}
-	
+
 	public int removeChildAttachmentToGuardian(Profile child, Profile guardian) {
 		if (child.getPRole() != 3 || guardian.getPRole() != 1 || guardian.getPRole() != 2) {
 			return -1;
@@ -66,32 +66,32 @@ public class ProfilesHelper {
 			return 0;
 		}
 	}
-	
+
 	/**
 	 * Insert profile
 	 * @param profile Profile containing data
 	 */
 	public long insertProfile(Profile profile) {		
 		profile.setId(au.insertAuthUser(0));
-		
+
 		ContentValues profileContentValues = getContentValues(profile);
 		profileContentValues.put(ProfilesMetaData.Table.COLUMN_ID, profile.getId());
 		_context.getContentResolver().insert(ProfilesMetaData.CONTENT_URI, profileContentValues);
 		return profile.getId();
 	}
-	
+
 	public int attachChildToGuardian(Profile child, Profile guardian) {
-		if (child.getPRole() != 3 || guardian.getPRole() != 1 || guardian.getPRole() != 2) {
-			return -1;
-		} else {
+		if (child.getPRole() == 3 && (guardian.getPRole() == 1 || guardian.getPRole() == 2)) {
 			ContentValues values = new ContentValues();
 			values.put(HasGuardianMetaData.Table.COLUMN_IDCHILD, child.getId());
 			values.put(HasGuardianMetaData.Table.COLUMN_IDGUARDIAN, guardian.getId());
 			_context.getContentResolver().insert(HasGuardianMetaData.CONTENT_URI, values);
 			return 0;
-		}
+		} else {
+			return -1;
+		}	
 	}
-	
+
 	/**
 	 * Modify profile
 	 * @param profile Profile containing data to modify
@@ -110,9 +110,9 @@ public class ProfilesHelper {
 	public Profile authenticateProfile(String certificate) {
 		Profile profile = null;
 		long id;
-		
+
 		id = au.getIdByCertificate(certificate);
-		
+
 		if (id != -1) {
 			profile = getProfileById(id);
 		}
@@ -129,10 +129,10 @@ public class ProfilesHelper {
 	public int setCertificate(String certificate, Profile profile) {
 		int result;
 		result = au.setCertificate(certificate, profile.getId());
-		
+
 		return result;
 	}
-	
+
 	/**
 	 * Get all profiles
 	 * @return List<Profile>, containing all profiles
@@ -145,7 +145,7 @@ public class ProfilesHelper {
 			profiles = cursorToProfiles(c);
 			c.close();
 		}
-		
+
 		return profiles;
 	}
 
@@ -240,19 +240,19 @@ public class ProfilesHelper {
 
 		return null;
 	}
-	
+
 	public List<Profile> getProfilesByName(String name) {
 		List<Profile> profiles = new ArrayList<Profile>();
 		Cursor c = _context.getContentResolver().query(ProfilesMetaData.CONTENT_URI, columns, 
 				ProfilesMetaData.Table.COLUMN_FIRST_NAME + " LIKE '%" + name + "%' OR " +
-				ProfilesMetaData.Table.COLUMN_MIDDLE_NAME + " LIKE '%" + name + "%' OR " +
-				ProfilesMetaData.Table.COLUMN_SUR_NAME +  " LIKE '%" + name + "%'", null, null);
-		
+						ProfilesMetaData.Table.COLUMN_MIDDLE_NAME + " LIKE '%" + name + "%' OR " +
+						ProfilesMetaData.Table.COLUMN_SUR_NAME +  " LIKE '%" + name + "%'", null, null);
+
 		if (c != null) {
 			profiles = cursorToProfiles(c);
 			c.close();
 		}
-		
+
 		return profiles;
 	}
 

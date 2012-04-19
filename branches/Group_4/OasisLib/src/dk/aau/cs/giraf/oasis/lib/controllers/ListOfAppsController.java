@@ -3,11 +3,9 @@ package dk.aau.cs.giraf.oasis.lib.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.net.Uri;
 import dk.aau.cs.giraf.oasis.lib.metadata.ListOfAppsMetaData;
 import dk.aau.cs.giraf.oasis.lib.models.App;
 import dk.aau.cs.giraf.oasis.lib.models.ListOfApps;
