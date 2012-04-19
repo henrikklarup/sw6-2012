@@ -6,7 +6,8 @@ import java.util.List;
 
 import dk.aau.cs.giraf.gui.GButton;
 import dk.aau.cs.giraf.gui.GWidgetCalendar;
-import dk.aau.cs.giraf.gui.GWidgetCalendarUpdater;
+import dk.aau.cs.giraf.gui.GWidgetConnectivity;
+import dk.aau.cs.giraf.gui.GWidgetUpdater;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 import dk.aau.cs.giraf.oasis.lib.models.Setting;
@@ -50,7 +51,9 @@ public class HomeActivity extends Activity {
 	private int mProfilePictureHeightLandscape;
 	private int mProfilePictureWidthPortrait;
 	private int mProfilePictureHeightPortrait;
-	private GWidgetCalendarUpdater widgetTimer;
+	private GWidgetUpdater mWidgetTimer;
+	private GWidgetCalendar mCalendarWidget;
+	private GWidgetConnectivity mConnectivityWidget;
 	
 	
 	private GButton mLogoutButton;
@@ -83,8 +86,12 @@ public class HomeActivity extends Activity {
 		mProfilePictureWidthPortrait = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics());
 		mProfilePictureHeightPortrait = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics());
 		
-		GWidgetCalendar calendarWidget = (GWidgetCalendar) findViewById(R.id.calendarwidget);
-		widgetTimer = new GWidgetCalendarUpdater(calendarWidget);
+		mCalendarWidget = (GWidgetCalendar) findViewById(R.id.calendarwidget);
+		mConnectivityWidget = (GWidgetConnectivity) findViewById(R.id.connectivitywidget);
+		
+		mWidgetTimer = new GWidgetUpdater();
+		mWidgetTimer.addWidget(mCalendarWidget);
+		mWidgetTimer.addWidget(mConnectivityWidget);
 		
 		// Log ud knap:
 		/*mLogoutButton = (GButton) findViewById(R.id.logoutGButton);
@@ -118,14 +125,14 @@ public class HomeActivity extends Activity {
     protected void onPause()
     {
         super.onPause();
-        widgetTimer.sendEmptyMessage(GWidgetCalendarUpdater.MSG_STOP);
+        mWidgetTimer.sendEmptyMessage(GWidgetUpdater.MSG_STOP);
     }
 	
 	@Override
     protected void onResume()
     {
         super.onResume();
-        widgetTimer.sendEmptyMessage(GWidgetCalendarUpdater.MSG_START);
+        mWidgetTimer.sendEmptyMessage(GWidgetUpdater.MSG_START);
     }
 
 	private void resizeBar() {
@@ -135,8 +142,8 @@ public class HomeActivity extends Activity {
 		LayoutParams paramsGrid = (RelativeLayout.LayoutParams)homeGridView.getLayoutParams();
 		LayoutParams paramsBar = (RelativeLayout.LayoutParams)homebar.getLayoutParams();
 
-		int barHeightLandscape = 100;
-		int barHeightPortrait = 200;
+		int barHeightLandscape = intToDP(100);
+		int barHeightPortrait = intToDP(200);
 
 		Display display = getWindowManager().getDefaultDisplay();
 		Point size = new Point();
@@ -166,22 +173,28 @@ public class HomeActivity extends Activity {
 		homebar.setLayoutParams(paramsBar);
 		
 		ViewGroup.LayoutParams profilePictureViewParams = mProfilePictureView.getLayoutParams();
+		ViewGroup.LayoutParams connectivityWidgetParams = mConnectivityWidget.getLayoutParams();
 		if (isLandscape) {
 			mNameView.setVisibility(View.INVISIBLE);
 
-			profilePictureViewParams.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 76, getResources().getDisplayMetrics());
-			profilePictureViewParams.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 99, getResources().getDisplayMetrics());
-			mHomeBarLayout.setPadding(5, 5, 5, 5);
+			profilePictureViewParams.width = intToDP(70);
+			profilePictureViewParams.height = intToDP(91);
+			mHomeBarLayout.setPadding(intToDP(15), intToDP(15), intToDP(15), intToDP(15));
+			//connectivityWidgetParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
 		} else {
-			profilePictureViewParams.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics());
-			profilePictureViewParams.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 130, getResources().getDisplayMetrics());
+			profilePictureViewParams.width = intToDP(100);
+			profilePictureViewParams.height = intToDP(130);
 			
-			mHomeBarLayout.setPadding(20, 20, 20, 20);
+			mHomeBarLayout.setPadding(intToDP(15), intToDP(15), intToDP(15), intToDP(15));
 			mNameView.setVisibility(View.VISIBLE);
 		}
 		mProfilePictureView.setLayoutParams(profilePictureViewParams);	
+		mConnectivityWidget.setLayoutParams(connectivityWidgetParams);
 	}
-
+	
+	private int intToDP(int i) {
+		return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, i, getResources().getDisplayMetrics());
+	}
 
 	private boolean isLandscape() {
 		int rotation = ((WindowManager) getSystemService(WINDOW_SERVICE)).getDefaultDisplay().getRotation();
