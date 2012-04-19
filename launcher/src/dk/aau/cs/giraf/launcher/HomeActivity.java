@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import dk.aau.cs.giraf.gui.GButton;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 import dk.aau.cs.giraf.oasis.lib.models.Setting;
@@ -12,6 +13,7 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -32,9 +34,10 @@ public class HomeActivity extends Activity {
 	private static ArrayList<ApplicationInfo> mApplications;
 	private GridView mGrid;
 	private Profile mCurrentUser; 
-	private Setting mSettings;
 	private Helper mHelper;
 	private TextView mNameView;
+	
+	private GButton mLogoutButton;
 	
 	//Hash keys
 	public final String BACKGROUNDCOLOR = "backgroundColor";
@@ -54,6 +57,23 @@ public class HomeActivity extends Activity {
 
 		mNameView = (TextView)this.findViewById(R.id.nameView);
 
+		// Log ud knap:
+		/*mLogoutButton = (GButton) findViewById(R.id.logoutGButton);
+		mLogoutButton.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				SharedPreferences sp = getSharedPreferences("TIMING", 0);
+				SharedPreferences.Editor editor = sp.edit();
+				
+				editor.putLong("DATE", 1);
+				editor.putLong("currentGuardianID", -1);
+				
+				editor.commit();
+				
+				Intent i = new Intent(mContext, AuthenticationActivity.class);
+				startActivity(i);
+			}
+		});*/
+		
 		loadApplications(true);
 	}
 
@@ -172,11 +192,9 @@ public class HomeActivity extends Activity {
 					
 					//have to change
 					i++;
-					
 				}
 			}
 			
-
 			mGrid = (GridView)this.findViewById(R.id.GridViewHome);
 			mGrid.setAdapter(new AppAdapter(this,applications));
 			mGrid.setOnItemClickListener(new ProfileLauncher());
