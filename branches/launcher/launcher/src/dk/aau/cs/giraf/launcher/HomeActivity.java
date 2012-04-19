@@ -23,6 +23,7 @@ import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
@@ -36,6 +37,7 @@ public class HomeActivity extends Activity {
 	private Profile mCurrentUser; 
 	private Helper mHelper;
 	private TextView mNameView;
+	private LinearLayout mPictureLayout;
 	
 	private GButton mLogoutButton;
 	
@@ -56,7 +58,10 @@ public class HomeActivity extends Activity {
 		mCurrentUser = mHelper.profilesHelper.getProfileById(getIntent().getExtras().getLong("currentGuardianID"));
 
 		mNameView = (TextView)this.findViewById(R.id.nameView);
-
+		mNameView.setText(mCurrentUser.getFirstname() + " " + mCurrentUser.getSurname());
+		
+		mPictureLayout = (LinearLayout)this.findViewById(R.id.profile_pic);
+		
 		// Log ud knap:
 		/*mLogoutButton = (GButton) findViewById(R.id.logoutGButton);
 		mLogoutButton.setOnClickListener(new View.OnClickListener() {
@@ -120,28 +125,31 @@ public class HomeActivity extends Activity {
 		homeGridView.setLayoutParams(paramsGrid);
 		homebar.setLayoutParams(paramsBar);
 		
-
+		RelativeLayout.LayoutParams pictureLayoutParams = (LayoutParams) mPictureLayout.getLayoutParams();
+		//LayoutParams pictureLayoutParams;
 		if (isLandscape) {
 			mNameView.setVisibility(View.INVISIBLE);
+			//mPictureLayout.setVisibility(View.INVISIBLE);
+			
+			//pictureLayoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+			pictureLayoutParams.setMargins(3, 3, 3, 3);
 		} else {
 			mNameView.setVisibility(View.VISIBLE);
-			mNameView.setText(mCurrentUser.getFirstname() + " " + mCurrentUser.getSurname());
 			
-			/*TextView nameView = new TextView(this);
-			TextView institutionView = new TextView(this);
-
-			/// TODO implement mCurrentUser
-			//nameView.setText(mCurrentUser.getFirstname() + " " + mCurrentUser.getSurname());
-			nameView.setText("Drazenko Banjak");
-			
-			nameView.setTextSize(30);
-
-			/// TODO implement get Department - method should be available 18 april from oasis
-			institutionView.setText("Enebakken"); /// TODO change to dynamic value
-			
-			homebar.addView(nameView);
-			homebar.addView(institutionView);*/
+			/*
+			android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:padding="3dip"
+	        android:layout_alignParentLeft="true"
+	        android:background="@drawable/gprofile_pic_box"
+	        android:layout_marginRight="5dip">
+				 */
+				
+			//pictureLayoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+			pictureLayoutParams.setMargins(3, 3, 5, 3);
 		}
+
+		mPictureLayout.setLayoutParams(pictureLayoutParams);
 	}
 
 	private void applySizes() {
