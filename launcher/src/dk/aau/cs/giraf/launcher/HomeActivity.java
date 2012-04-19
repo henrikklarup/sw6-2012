@@ -136,9 +136,10 @@ public class HomeActivity extends Activity {
 			
 			//pictureLayoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 			pictureLayoutParams.setMargins(0, 0, 0, 0);
+			mHomeBarLayout.setPadding(5, 5, 5, 5);
 		} else {
+			mHomeBarLayout.setPadding(20, 20, 20, 20);
 			mNameView.setVisibility(View.VISIBLE);
-		}
 			
 			/*
 			android:layout_width="wrap_content"
@@ -151,7 +152,8 @@ public class HomeActivity extends Activity {
 				
 			//pictureLayoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 			pictureLayoutParams.setMargins(3, 3, 5, 3);
-
+		}
+			
 		mPictureLayout.setLayoutParams(pictureLayoutParams);
 	}
 
