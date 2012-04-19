@@ -61,7 +61,7 @@ public class ViewListOfApps extends ListFragment {
 			}
 		});
 		
-		valueList = helper.loah.getListOfApps();
+		valueList = helper.loa.getListOfApps();
 
         mAdapter = new ArrayAdapter<ListOfApps>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, valueList);
 

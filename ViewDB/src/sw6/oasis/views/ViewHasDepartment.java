@@ -61,7 +61,7 @@ public class ViewHasDepartment extends ListFragment {
 			}
 		});
 		
-		valueList = helper.hdc.getHasDepartments();
+		valueList = helper.hd.getHasDepartments();
 
         mAdapter = new ArrayAdapter<HasDepartment>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, valueList);
 

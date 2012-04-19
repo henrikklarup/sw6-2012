@@ -61,7 +61,7 @@ public class ViewMediaDepartmentAccess extends ListFragment {
 			}
 		});
 		
-		valueList = helper.mdac.getMediaDepartmentAccesses();
+		valueList = helper.mda.getMediaDepartmentAccesses();
 
         mAdapter = new ArrayAdapter<MediaDepartmentAccess>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, valueList);
 

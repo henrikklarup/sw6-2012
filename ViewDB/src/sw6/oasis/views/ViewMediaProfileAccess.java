@@ -61,7 +61,7 @@ public class ViewMediaProfileAccess extends ListFragment {
 			}
 		});
 		
-		valueList = helper.mpac.getMediaProfileAccesses();
+		valueList = helper.mpa.getMediaProfileAccesses();
 
         mAdapter = new ArrayAdapter<MediaProfileAccess>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, valueList);
 
