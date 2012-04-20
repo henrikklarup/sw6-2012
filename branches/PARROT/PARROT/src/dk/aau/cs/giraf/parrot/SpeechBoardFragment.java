@@ -27,24 +27,24 @@ public class SpeechBoardFragment extends Fragment
 		super.onAttach(activity);
 		this.parrent = activity;
 	}
-		@Override
-		public void onCreate(Bundle savedInstanceState) {
-			// TODO Auto-generated method stub
-			super.onCreate(savedInstanceState);
-			parrent.setContentView(R.layout.speechboard_layout);
-			
-//			 GridView gridview = (GridView) parrent.findViewById(R.id.pictogramgrid);
-//		        gridview.setAdapter(new ImageAdapter(parrent));
-//	
-		
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		parrent.setContentView(R.layout.speechboard_layout);
+
+		//			 GridView gridview = (GridView) parrent.findViewById(R.id.pictogramgrid);
+		//		        gridview.setAdapter(new ImageAdapter(parrent));
+		//	
+
 		PARROTProfile user=PARROTActivity.getUser();
 		if(user.getCategoryAt(0)!=null)
 		{
 			Category cat = user.getCategoryAt(0); //TODO we might have to replace this.
 
-			
-			
-			
+
+
+
 			GridView gridview = (GridView) parrent.findViewById(R.id.pictogramgrid);
 			gridview.setAdapter(new PictogramAdapter(cat, parrent));
 
@@ -66,10 +66,10 @@ public class SpeechBoardFragment extends Fragment
 				}
 
 			});
-			
-			
+
+
 		}
-		
+
 
 
 	}
