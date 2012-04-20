@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'><nta><declaration>// Place global declarations here.
+const int boardLength = 6;
+const int boardHeight = 6;
+
+const int OCCUPIED = 1;
+const int FREE = 0;
+
+typedef int[FREE,OCCUPIED] bit_t;
+typedef int[0, boardLength - 1] xCoord_t;
+typedef int[0, boardHeight - 1] yCoord_t;
+
+bit_t board[boardLength][boardHeight];</declaration><template><name x="5" y="5">VCar</name><parameter>int id, int length, xCoord_t x, yCoord_t y</parameter><declaration>// Place local declarations here.
+
+void MoveNorth() {
+	if (board[x][y - 1] == FREE) {
+		board[x][y + length - 1] = FREE;
+		board[x][y - 1] = OCCUPIED;
+		y--;
+	}
+}
+
+void MoveSouth() {
+	if (board[x][y + length] == FREE) {
+		board[x][y] = FREE;
+		board[x][y + length] = OCCUPIED;
+		y++;
+	}
+}</declaration><location id="id0" x="-272" y="40"></location><location id="id1" x="-264" y="-144"></location><location id="id2" x="-480" y="-64"></location><init ref="id2"/><transition><source ref="id0"/><target ref="id2"/><nail x="-568" y="80"/></transition><transition><source ref="id1"/><target ref="id2"/><nail x="-432" y="-176"/></transition><transition><source ref="id2"/><target ref="id0"/><label kind="guard" x="-448" y="-8">y &lt; boardHeight - length - 1</label><label kind="assignment" x="-392" y="-40">MoveSouth()</label></transition><transition><source ref="id2"/><target ref="id1"/><label kind="guard" x="-416" y="-128">y &gt; 0</label><label kind="assignment" x="-400" y="-96">MoveNorth()</label></transition></template><template><name>HCar</name><parameter>int id, int length, xCoord_t x, yCoord_t y</parameter><declaration>// Place local declarations here.
+
+void MoveEast() {
+	if (board[x + length][y] == FREE) {
+		board[x][y] = FREE;
+		board[x + length][y] = OCCUPIED;
+		x++;
+	}
+}
+
+void MoveWest() {
+	if (board[x - 1][y] == FREE) {
+		board[x + length - 1][y] = FREE;
+		board[x - 1][y] = OCCUPIED;
+		x--;
+	}
+}</declaration><location id="id3" x="72" y="88"></location><location id="id4" x="64" y="-112"></location><location id="id5" x="-184" y="-16"></location><init ref="id5"/><transition><source ref="id3"/><target ref="id5"/><nail x="-160" y="216"/><nail x="-184" y="152"/></transition><transition><source ref="id4"/><target ref="id5"/><nail x="-136" y="-224"/></transition><transition><source ref="id5"/><target ref="id3"/><label kind="guard" x="-48" y="8">x &gt; 0</label><label kind="assignment" x="-116" y="36">MoveWest()</label></transition><transition><source ref="id5"/><target ref="id4"/><label kind="guard" x="-80" y="-56">x &lt; boardLength - length - 1</label><label kind="assignment" x="-128" y="-88">MoveEast()</label></transition></template><system>// Place template instantiations here.
+red = HCar(0, 2, 3, 2);
+h1 = HCar(1, 2, 0, 0);
+h2 = HCar(2, 2, 0, 2);
+h3 = HCar(3, 2, 3, 3);
+h4 = HCar(4, 2, 4, 4);
+h5 = HCar(5, 2, 4, 5);
+h6 = HCar(6, 2, 1, 5);
+v7 = VCar(7, 2, 3, 0);
+v8 = VCar(8, 2, 2, 1);
+v9 = VCar(9, 3, 5, 1);
+v10 = VCar(10, 2, 1, 2);
+v11 = VCar(11, 3, 0, 3);
+v12 = VCar(12, 2, 3, 4);
+
+// List one or more processes to be composed into a system.
+/*for (int outer = 0; outer &lt; boardLength; outer++) {
+	for (int inner = 0; inner &lt; boardWidth; inner++) {
+		board[outer][inner] = FREE;
+	}
+}*/
+
+system red, h1, h2, h3, h4, h5, h6, v7, v8, v9, v10, v11, v12;</system></nta>
