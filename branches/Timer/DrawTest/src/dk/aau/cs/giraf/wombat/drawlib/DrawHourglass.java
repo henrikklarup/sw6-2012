@@ -77,16 +77,14 @@ public class DrawHourglass extends View {
 			
 			if(percent>0.4){
 				sandTopHeight = (int) (120*percent)-40;
-				triBotMidY = (int) (0 - (40*percent));
+				triBotMidY = (frameHeight*5) -(int) (130*percent);
 			}
 			if(percent<=0.4){
-				sandBotHeight = (int) (0 - (percent*100));
-				triTopX = (int) (106 - (100*percent));
+				sandBotHeight = (int) (82 - frameHeight -(percent*150));
+				triTopX = (int) (106 - ((280*percent)));
 				triTopY = triTopX;
 				triBotY = sandBotHeight;
 			}
-			
-			 // Do not change!
 		}
 		
 		/* Fill the canvas with the background color */
@@ -175,8 +173,8 @@ public class DrawHourglass extends View {
 		/* Draw the "sand" in the hourglass */
 		timeTop = new Rect(left + (indent/2) + frameHeight + glassThickness, top + glassBendHeight - glassThicknessTop,
 				left + width - (indent/2) - frameHeight - glassThickness ,top + glassBendHeight - glassThicknessTop - sandTopHeight + 8); //+8 to get it to fit
-		timeBot = new Rect(left + (indent/2) + frameHeight + glassThickness, top + height - frameHeight,
-				left + width - (indent/2) - frameHeight - glassThickness, top + height - frameHeight - sandBotHeight);
+		timeBot = new Rect(left + (indent/2) + frameHeight + glassThickness, top + height - frameHeight - sandBotHeight,
+				left + width - (indent/2) - frameHeight - glassThickness, top + height - frameHeight);
 		
 		paint.setColor(timeleft);
 		c.drawRect(timeTop, paint);
