@@ -10,7 +10,7 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-public class GWidgetCalendar extends TextView {
+public class GWidgetCalendar extends TextView implements IGWidget {
 
 	private Timer timer;
 	

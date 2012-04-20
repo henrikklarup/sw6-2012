@@ -1,11 +1,13 @@
 package dk.aau.cs.giraf.gui;
 
+import java.util.Random;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-public class GWidgetConnectivity extends ImageView {
+public class GWidgetConnectivity extends ImageView implements IGWidget {
 	
 	private void setStyle(int d) {
 		this.setBackgroundDrawable(getResources().getDrawable(d));
@@ -40,6 +42,22 @@ public class GWidgetConnectivity extends ImageView {
 	public GWidgetConnectivity(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		this.setInitialStyle();
+	}
+
+	@Override
+	public void updateDisplay() {
+		/// TODO implement library "ping" methods... talk to magnus
+		switch ((new Random()).nextInt(3)) {
+		case 0:
+			setStyleOffline();
+			break;
+		case 1:
+			setStyleOnline();
+			break;
+		case 2:
+			setStyleSyncing();
+			break;
+		}
 	}
 
 }

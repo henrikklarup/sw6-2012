@@ -1,11 +1,12 @@
 package dk.aau.cs.giraf.gui;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import android.os.Handler;
 import android.os.Message;
 
-public class GWidgetCalendarUpdater extends Handler
+public class GWidgetUpdater extends Handler
 {
     public final static int MSG_START = 0;
     public final static int MSG_STOP = 1;
@@ -14,15 +15,21 @@ public class GWidgetCalendarUpdater extends Handler
     public final static int SPIN_PERIOD = 100; // in ms 
  
     // pointer to the user interface adapter
-    private GWidgetCalendar mUI;
+    private ArrayList<IGWidget> widgets;
     // remember the last time the UI was updated
     private long mLastTime;
  
-    public GWidgetCalendarUpdater(GWidgetCalendar theUI)
+    public GWidgetUpdater()
     {
         super();
-        mUI = theUI;
+        widgets = new ArrayList<IGWidget>();
         mLastTime = 0;
+    }
+    
+    public void addWidget(IGWidget widget) {
+    	if (!widgets.contains(widget)) {
+    		widgets.add(widget);
+    	}	
     }
  
     // handle messages to implement the screen refresh timer
@@ -68,7 +75,9 @@ public class GWidgetCalendarUpdater extends Handler
         // if it is more than the refresh period, update the UI
         if (dt > REFRESH_PERIOD)
 	{
-	    mUI.updateDisplay();
+        	for (IGWidget widget : widgets) {
+        		widget.updateDisplay();
+        	}
 	    mLastTime = currTime;
 	}
     }
