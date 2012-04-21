@@ -19,7 +19,7 @@ Notary: SW602
     * When are we at the next major milestone?
 
 == Other stuff ==
- * *Service definationer* (Thomas)
+ * *Service definitioner* (Thomas)
   _Peter Axel's forslag om at definere hvilke services hver gruppe's software tilbyder_
  * *Usability tests* (Launcher)
   _Launcher-gruppen har tænkt sig at udføre usability test. Forslag om hvor vidt andre grupper har interesse i at deltage._
