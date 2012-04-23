@@ -79,7 +79,7 @@ public class DrawHourglass extends View {
 				sandTopHeight = (int) (120*percent)-40;
 				triBotMidY = (frameHeight*5) -(int) (130*percent);
 			}
-			if(percent<=0.4){
+			if(percent<0.4){
 				sandBotHeight = (int) (82 - frameHeight -(percent*150));
 				triTopX = (int) (106 - ((280*percent)));
 				triTopY = triTopX;
@@ -170,7 +170,7 @@ public class DrawHourglass extends View {
 		p.lineTo(left + (indent/2) + frameHeight + 105 + glassThickness, top + 240 - glassThickness);
 		c.drawPath(p, paint);
 		
-		/* Draw the "sand" in the hourglass */
+		/* Draw the "sand" in the top and bottom of the hourglass */
 		timeTop = new Rect(left + (indent/2) + frameHeight + glassThickness, top + glassBendHeight - glassThicknessTop,
 				left + width - (indent/2) - frameHeight - glassThickness ,top + glassBendHeight - glassThicknessTop - sandTopHeight + 8); //+8 to get it to fit
 		timeBot = new Rect(left + (indent/2) + frameHeight + glassThickness, top + height - frameHeight - sandBotHeight,
