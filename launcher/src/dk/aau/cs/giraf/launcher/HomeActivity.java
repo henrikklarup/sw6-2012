@@ -92,20 +92,11 @@ public class HomeActivity extends Activity {
 		/*mLogoutButton = (GButton) findViewById(R.id.logoutGButton);
 		mLogoutButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				SharedPreferences sp = getSharedPreferences("TIMING", 0);
-				SharedPreferences.Editor editor = sp.edit();
-				
-				editor.putLong("DATE", 1);
-				editor.putLong("currentGuardianID", -1);
-				
-				editor.commit();
-				
-				Intent i = new Intent(mContext, AuthenticationActivity.class);
-				startActivity(i);
+				Tools.logOut(mContext);
 			}
 		});*/
 		
-		loadApplications(true);
+		loadApplications();
 		
 		
 	}
@@ -200,11 +191,7 @@ public class HomeActivity extends Activity {
 		}
 	}
 
-	private void loadApplications(boolean isLaunching) {
-		if (isLaunching && mApplications != null) {
-			return;
-		}
-
+	private void loadApplications() {
 		Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
 		mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
 
