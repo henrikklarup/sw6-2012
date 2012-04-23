@@ -99,7 +99,6 @@ public class AuthenticationActivity extends CaptureActivity {
 			loginNameView.setVisibility(View.INVISIBLE);
 			infoView.setText(R.string.authentication_step1);
 
-			//ProgressDialog dialog = ProgressDialog.show(AuthenticationActivity.this, "", "INVALID profile: " + rawResult.getText(), true, true);
 		}
 
 		this.getHandler().sendEmptyMessageDelayed(R.id.restart_preview, 500);
