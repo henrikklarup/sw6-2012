@@ -159,15 +159,35 @@ public class HomeActivity extends Activity {
 		homebar.setLayoutParams(paramsBar);
 		
 		ViewGroup.LayoutParams profilePictureViewParams = mProfilePictureView.getLayoutParams();
-		ViewGroup.LayoutParams connectivityWidgetParams = mConnectivityWidget.getLayoutParams();
+		RelativeLayout.LayoutParams connectivityWidgetParams = (LayoutParams) mConnectivityWidget.getLayoutParams();
+		RelativeLayout.LayoutParams calendarWidgetParams = (LayoutParams) mCalendarWidget.getLayoutParams();
+		
+		
+		// remove me later - start
+		mConnectivityWidget.setVisibility(View.VISIBLE);
+		mCalendarWidget.setVisibility(View.VISIBLE);
+		// stop
+		
 		if (isLandscape) {
 			mNameView.setVisibility(View.INVISIBLE);
 
 			profilePictureViewParams.width = intToDP(70);
 			profilePictureViewParams.height = intToDP(91);
 			mHomeBarLayout.setPadding(intToDP(15), intToDP(15), intToDP(15), intToDP(15));
-			//connectivityWidgetParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+			
+			connectivityWidgetParams.setMargins(0, intToDP(106), 0, 0);
+			calendarWidgetParams.setMargins(0,intToDP(15), 0,0);
+			calendarWidgetParams.addRule(RelativeLayout.BELOW, mConnectivityWidget.getId());
+			calendarWidgetParams.addRule(RelativeLayout.LEFT_OF, 0);
+			
+			
 		} else {
+			
+			connectivityWidgetParams.setMargins(0, 0, 0, 0);
+			calendarWidgetParams.setMargins(0, 0, intToDP(25),0);
+			calendarWidgetParams.addRule(RelativeLayout.BELOW, 0);
+			calendarWidgetParams.addRule(RelativeLayout.LEFT_OF, mConnectivityWidget.getId());
+			
 			profilePictureViewParams.width = intToDP(100);
 			profilePictureViewParams.height = intToDP(130);
 			
@@ -176,6 +196,7 @@ public class HomeActivity extends Activity {
 		}
 		mProfilePictureView.setLayoutParams(profilePictureViewParams);	
 		mConnectivityWidget.setLayoutParams(connectivityWidgetParams);
+		mCalendarWidget.setLayoutParams(calendarWidgetParams);
 	}
 	
 	private int intToDP(int i) {
