@@ -22,7 +22,7 @@ import dk.aau.cs.giraf.oasis.lib.models.Profile;
 public class AppsHelper {
 
 	private static Context _context;
-	private ListOfAppsController listOfAppsHelper;
+	private ListOfAppsController loa;
 	private String[] columns = new String[] { 
 			AppsMetaData.Table.COLUMN_ID, 
 			AppsMetaData.Table.COLUMN_NAME,
@@ -37,7 +37,7 @@ public class AppsHelper {
 	 */
 	public AppsHelper(Context context){
 		_context = context;
-		listOfAppsHelper = new ListOfAppsController(context);
+		loa = new ListOfAppsController(context);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -50,7 +50,11 @@ public class AppsHelper {
 	public void clearAppsTable() {
 		_context.getContentResolver().delete(AppsMetaData.CONTENT_URI, null, null);
 	}
-
+	
+	public int removeAppAttachmentToProfile(App app, Profile profile) {
+		return loa.deleteItem(app.getId(), profile.getId());
+	}
+	
 	/**
 	 * Insert app
 	 * @param app Application containing data
@@ -79,7 +83,7 @@ public class AppsHelper {
 	}
 
 	/**
-	 * Modify app method
+	 * Modify app
 	 * @param app Application containing data to modify
 	 */
 	public int modifyApp(App app) {
@@ -89,13 +93,23 @@ public class AppsHelper {
 	}
 	
 	/**
-	 * Modify app settings by profile method
+	 * Modify app by profile
 	 * @param app the application containing the data to modify
 	 * @param profile the profile the settings belong to
 	 */
-	public int modifyAppSettingsByProfile(App app, Profile profile) {
-		ListOfApps listOfApps = new ListOfApps(app.getId(), profile.getId(), app.getSettings(), null);
-		return listOfAppsHelper.modifyListOfApps(listOfApps);
+	public int modifyAppByProfile(App app, Profile profile) {
+		modifyApp(app);
+		
+		ListOfApps listOfApps = new ListOfApps(app.getId(), profile.getId(), null, null);
+		try {
+			listOfApps.setSetting(app.getSettings());
+		} catch (NullPointerException e) { }
+		
+		try {
+			listOfApps.setStat(app.getStats());
+		} catch (NullPointerException e) { }
+		
+		return loa.modifyListOfApps(listOfApps);
 	}
 
 	/**
@@ -114,11 +128,22 @@ public class AppsHelper {
 		return apps;
 	}
 
+	public App getAppByIds(long appId, long profileId) {
+		App app;
+		
+		ListOfApps listOfApps = loa.getListOfAppByIds(appId, profileId);
+		app = getAppById(appId);
+		app.setSettings(listOfApps.getSetting());
+		app.setStats(listOfApps.getStat());
+		
+		return app;
+	}
+	
 	public List<App> getAppsByProfile(Profile profile) {
 		List<App> apps = new ArrayList<App>();
 		List<ListOfApps> listOfApps = new ArrayList<ListOfApps>();
 
-		listOfApps = listOfAppsHelper.getListOfAppsByProfile(profile);
+		listOfApps = loa.getListOfAppsByProfileId(profile.getId());
 
 		for (ListOfApps item : listOfApps) {
 			App app = getAppById(item.getIdApp());

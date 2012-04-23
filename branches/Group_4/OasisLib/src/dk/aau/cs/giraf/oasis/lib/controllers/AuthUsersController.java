@@ -36,10 +36,18 @@ class AuthUsersController {
 		AuthUser authUser = new AuthUser();
 		authUser.setaRole(role);
 		authUser.setCertificate(getNewCertificate());
+		long id;
+		List<AuthUser> authUsers = getAuthUsers();
+		if (authUsers.size() != 0) {
+			id = authUsers.get(authUsers.size() - 1).getId();
+		} else {
+			id = 0;
+		}
+		authUser.setId(id);
 		ContentValues cv = getContentValues(authUser);
 		_context.getContentResolver().insert(AuthUsersMetaData.CONTENT_URI, cv);
 
-		return getIdByCertificate(authUser.getCertificate());
+		return id;
 	}
 
 	public int setCertificate(String certificate, long id) {
@@ -93,7 +101,7 @@ class AuthUsersController {
 
 	public long getIdByCertificate(String certificate) {
 		long id = -1;
-		Cursor c = _context.getContentResolver().query(AuthUsersMetaData.CONTENT_URI, columns, null, new String[] {certificate}, null);
+		Cursor c = _context.getContentResolver().query(AuthUsersMetaData.CONTENT_URI, columns, AuthUsersMetaData.Table.COLUMN_CERTIFICATE + " = '" + certificate + "'", null, null);
 		if (c != null) {
 			if (c.moveToFirst()) {
 				id = c.getLong(c.getColumnIndex(AuthUsersMetaData.Table.COLUMN_ID));
@@ -144,6 +152,7 @@ class AuthUsersController {
 	 */
 	private ContentValues getContentValues(AuthUser authUser) {
 		ContentValues contentValues = new ContentValues();
+		contentValues.put(AuthUsersMetaData.Table.COLUMN_ID, authUser.getId());
 		contentValues.put(AuthUsersMetaData.Table.COLUMN_CERTIFICATE, authUser.getCertificate());
 		contentValues.put(AuthUsersMetaData.Table.COLUMN_ROLE, authUser.getaRole());
 		return contentValues;

@@ -51,7 +51,7 @@ public class TableList extends ListActivity {
 		app.setSettings(settings);
 		
 		helper.appsHelper.attachAppToProfile(app, profile);
-		helper.appsHelper.modifyAppSettingsByProfile(app, profile);
+		helper.appsHelper.modifyAppByProfile(app, profile);
 		
 		values = helper.appsHelper.getApps();
 		

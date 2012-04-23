@@ -34,6 +34,10 @@ class ListOfAppsController {
 		return _context.getContentResolver().delete(ListOfAppsMetaData.CONTENT_URI, null, null);
 	}
 
+	public int deleteItem(long appId, long profileId) {
+		return _context.getContentResolver().delete(ListOfAppsMetaData.CONTENT_URI, ListOfAppsMetaData.Table.COLUMN_IDAPP + " = '" + appId + "' AND " + ListOfAppsMetaData.Table.COLUMN_IDPROFILE + " = '" + profileId + "'", null);
+	}
+	
 	public int insertListOfApps(ListOfApps listOfApps) {
 		ContentValues cv = new ContentValues();
 		cv.put(ListOfAppsMetaData.Table.COLUMN_IDAPP, listOfApps.getIdApp());
@@ -65,10 +69,10 @@ class ListOfAppsController {
 		return listOfApps;
 	}
 
-	public ListOfApps getListOfAppByAppIdAndByChildId(App app, Profile child) {
+	public ListOfApps getListOfAppByIds(long appId, long profileId) {
 		ListOfApps listOfApp = null;
 		
-		Cursor c = _context.getContentResolver().query(ListOfAppsMetaData.CONTENT_URI, columns, ListOfAppsMetaData.Table.COLUMN_IDAPP + " = '" + app.getId() + "'" + ListOfAppsMetaData.Table.COLUMN_IDPROFILE + " = '" + child.getId() + "'", null, null);
+		Cursor c = _context.getContentResolver().query(ListOfAppsMetaData.CONTENT_URI, columns, ListOfAppsMetaData.Table.COLUMN_IDAPP + " = '" + appId + "'" + ListOfAppsMetaData.Table.COLUMN_IDPROFILE + " = '" + profileId + "'", null, null);
 		if (c != null) {
 			if (c.moveToFirst()) {
 				listOfApp = cursorToListOfApp(c);
@@ -79,11 +83,10 @@ class ListOfAppsController {
 		return listOfApp;
 	}
 	
-	public List<ListOfApps> getListOfAppsByProfile(Profile profile) {
+	public List<ListOfApps> getListOfAppsByProfileId(long profileId) {
 		List<ListOfApps> listOfApps = new ArrayList<ListOfApps>();
-		//Uri uri = ContentUris.withAppendedId(ListOfAppsMetaData.CONTENT_URI, profile.getId());
 		
-		Cursor c = _context.getContentResolver().query(ListOfAppsMetaData.CONTENT_URI, columns, ListOfAppsMetaData.Table.COLUMN_IDPROFILE + " = '" + profile.getId() + "'", null, null);
+		Cursor c = _context.getContentResolver().query(ListOfAppsMetaData.CONTENT_URI, columns, ListOfAppsMetaData.Table.COLUMN_IDPROFILE + " = '" + profileId + "'", null, null);
 		if (c != null) {
 			if (c.moveToFirst()) {
 				listOfApps = cursorToListOfApps(c);
