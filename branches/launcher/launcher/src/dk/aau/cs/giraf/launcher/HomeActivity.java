@@ -130,6 +130,7 @@ public class HomeActivity extends Activity {
 		final boolean isLandscape = isLandscape();
 
 		if (isLandscape) {
+			homebar.setBackgroundDrawable(getResources().getDrawable(R.drawable.homebar_back_land));
 			paramsBar.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
 			paramsBar.height = LayoutParams.MATCH_PARENT;
 			paramsBar.width = barHeightLandscape;
@@ -137,6 +138,7 @@ public class HomeActivity extends Activity {
 			paramsGrid.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
 			paramsGrid.width = screenWidth - barHeightLandscape;
 		} else {
+			homebar.setBackgroundDrawable(getResources().getDrawable(R.drawable.homebar_back_port));
 			paramsBar.addRule(RelativeLayout.ALIGN_PARENT_TOP);
 			paramsBar.height = barHeightPortrait;
 			paramsBar.width = LayoutParams.MATCH_PARENT;
