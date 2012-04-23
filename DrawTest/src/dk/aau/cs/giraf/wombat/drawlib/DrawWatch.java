@@ -6,7 +6,6 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.ColorDrawable;
-import android.os.SystemClock;
 import android.view.View;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
 
@@ -36,8 +35,6 @@ public class DrawWatch extends View {
 	private int right;
 	private int top;
 	private int bottom;
-
-	private int mtimenow;
 
 	public DrawWatch(Context context, SubProfile sub) {
 		super(context);

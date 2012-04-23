@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
-import android.os.SystemClock;
 import android.view.View;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
 
@@ -28,8 +27,6 @@ public class DrawProgressBar extends View {
 	int height;
 	int left;
 	int top;
-
-	private int mtimenow;
 
 	public DrawProgressBar(Context context, SubProfile sub) {
 		super(context);

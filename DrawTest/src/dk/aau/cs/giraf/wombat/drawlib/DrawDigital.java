@@ -9,8 +9,6 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
-import android.os.SystemClock;
-import android.util.Log;
 import android.view.View;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
 
@@ -33,8 +31,6 @@ public class DrawDigital extends View {
 	int frameWidth;
 
 	private int numHeight, numWidth, numSpace, lineSpace, lineWidth, halfLineWidt, halfNumHeight;
-
-	private int mtimenow;
 	
 	Bitmap bitmap;
 	
@@ -74,6 +70,7 @@ public class DrawDigital extends View {
 		halfLineWidt = lineWidth/2;
 		halfNumHeight = numHeight / 2;
 
+		/* Initialize a bitmap with the "standard" drawings */
 		bitmap = Bitmap.createBitmap(frameWidth, frameHeight, Bitmap.Config.ARGB_8888);
 		Canvas c = new Canvas(bitmap);
 		
@@ -122,6 +119,7 @@ public class DrawDigital extends View {
 		double percent = (timenow) / (totalTime/1000);
 		paint.setColor(background);
 
+		/* Set the second colors aplha */
 		col = new ColorDrawable(timeleft2);
 		col.setAlpha((int) (255 * (1-percent)));
 		paint2.setColor(col.getColor());
