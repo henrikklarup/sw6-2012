@@ -18,10 +18,6 @@ public class Tools {
 	// Keys for inserting and retrieving data in Intents.
 	public static final String GUARDIANID = "currentGuardianID";
 	
-	// Hash keys for settings.
-	public static final String BACKGROUNDCOLOR = "backgroundColor";
-	public static final String APPBACKGROUNDCOLOR = "appBackgroundColor";
-	
 	// 24 hours in milliseconds = 86400000;
 	// 4 hours in milliseconds:
 	private static final long mAuthSpan = 14400000;
