@@ -83,11 +83,9 @@ public class HomeActivity extends Activity {
 		mWidgetTimer.addWidget(mCalendarWidget);
 		mWidgetTimer.addWidget(mConnectivityWidget);
 		
-		// Log ud knap:
-		//mLogoutButton = (GButton) findViewById(R.id.logoutGButton);
 		mLogoutWidget.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				Tools.logOut(mContext);
+				startActivity(Tools.logOutIntent(mContext));
 			}
 		});
 		
