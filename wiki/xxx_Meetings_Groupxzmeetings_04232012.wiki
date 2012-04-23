@@ -27,7 +27,7 @@ Notary: SW602
   _Launcher-gruppen har udarbejdet et fælles GUI Library, hvor der kan indhentes nuværendes komponenter, og der kan tilføjes efter behov. Muligvis en kort demo af librariet._
  * *Design af authentication kort* (Thomas)
   _Midler til authentication kort er blevet tildelt. Kort input omkring design forslag lavet af Thomas_
- * *Oasis -- to integrate, or not to integrate?* (Launcher)
+ * *Oasis -- to integrate, or not to integrate?* (Launcher) 10 min discussion.
   _Under sidste sprint opstod der en misforståelse mellem Oasis-gruppen og Launcher-gruppen, om hvor vidt at Oasis er en integreret del af systemet eller en eksteren komponent som giver ekstra funktionalitet. Et lille debat "indslag", om hvad den generelle holdning til dette._
 
 
