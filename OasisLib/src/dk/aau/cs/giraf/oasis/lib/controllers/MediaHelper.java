@@ -8,6 +8,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import dk.aau.cs.giraf.oasis.lib.metadata.HasLinkMetaData;
 import dk.aau.cs.giraf.oasis.lib.metadata.HasTagMetaData;
 import dk.aau.cs.giraf.oasis.lib.metadata.MediaDepartmentAccessMetaData;
 import dk.aau.cs.giraf.oasis.lib.metadata.MediaMetaData;
@@ -81,6 +82,12 @@ public class MediaHelper {
 
 		}
 		return result;
+	}
+	
+	public int removeSubMediaAttachmentToMedia(Media subMedia, Media media) {
+		return _context.getContentResolver().delete(HasLinkMetaData.CONTENT_URI, 
+				HasLinkMetaData.Table.COLUMN_IDMEDIA + " = '" + media.getId() + "'" +
+				HasLinkMetaData.Table.COLUMN_IDSUBMEDIA + " = '" + subMedia.getId() + "'", null);
 	}
 
 	/**
@@ -160,6 +167,14 @@ public class MediaHelper {
 		} else {
 			return -1;
 		}
+	}
+	
+	public int attachSubMediaToMedia(Media subMedia, Media media) {
+		ContentValues values = new ContentValues();
+		values.put(HasLinkMetaData.Table.COLUMN_IDMEDIA, media.getId());
+		values.put(HasLinkMetaData.Table.COLUMN_IDSUBMEDIA, subMedia.getId());
+		_context.getContentResolver().insert(HasLinkMetaData.CONTENT_URI, values);
+		return 0;
 	}
 
 	/**
