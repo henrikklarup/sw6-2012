@@ -29,6 +29,8 @@ public class DrawProgressBar extends View {
 	int left;
 	int top;
 
+	private int mtimenow;
+
 	public DrawProgressBar(Context context, SubProfile sub) {
 		super(context);
 
@@ -54,6 +56,16 @@ public class DrawProgressBar extends View {
 	@Override
 	protected void onDraw(Canvas c) {
 		super.onDraw(c);
+		
+		double timenow = (endTime - SystemClock.currentThreadTimeMillis());
+		if(mtimenow == (int)timenow){
+			timenow = (endTime - SystemClock.currentThreadTimeMillis());
+			return;
+		}
+		mtimenow = (int) timenow;
+		timenow = (endTime - SystemClock.currentThreadTimeMillis());
+
+		
 		/* Fill the canvas with the background color */
 		paint.setColor(background);
 		c.drawPaint(paint);
@@ -79,7 +91,7 @@ public class DrawProgressBar extends View {
 		c.drawRect(r, paint);
 
 		if (endTime >= SystemClock.currentThreadTimeMillis()) {
-			double timenow = endTime - SystemClock.currentThreadTimeMillis();
+			timenow = endTime - SystemClock.currentThreadTimeMillis();
 			double percent = (timenow) / totalTime;
 
 			paint.setColor(timeleft2);

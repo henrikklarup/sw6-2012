@@ -14,7 +14,7 @@ public class DigitalClock extends SubProfile {
  * @param changeColor Whatever you want the time to change color as gradient
  */
 	public DigitalClock(String name, String description, int bgcolor, int timeLeftColor, int timeSpentColor, int frameColor, int totalTime, boolean changeColor){
-		super(name, description, bgcolor, timeLeftColor, timeSpentColor, totalTime,frameColor,changeColor);
+		super(name, description, bgcolor, timeLeftColor, timeSpentColor, frameColor,totalTime,changeColor);
 	}
 	/**
 	 * Copy constructor

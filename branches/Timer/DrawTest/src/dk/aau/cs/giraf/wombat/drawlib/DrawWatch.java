@@ -7,7 +7,6 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.ColorDrawable;
 import android.os.SystemClock;
-import android.util.Log;
 import android.view.View;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
 
@@ -37,6 +36,8 @@ public class DrawWatch extends View {
 	private int right;
 	private int top;
 	private int bottom;
+
+	private int mtimenow;
 
 	public DrawWatch(Context context, SubProfile sub) {
 		super(context);
@@ -70,6 +71,16 @@ public class DrawWatch extends View {
 	@Override
 	protected void onDraw(Canvas c) {
 		super.onDraw(c);
+		
+		double timenow = (endTime - SystemClock.currentThreadTimeMillis());
+		if(mtimenow == (int)timenow / 1000){
+			timenow = (endTime - SystemClock.currentThreadTimeMillis());
+			return;
+		}
+		mtimenow = (int) timenow;
+		timenow = (endTime - SystemClock.currentThreadTimeMillis());
+
+		
 		/* Fill the canvas with the background color */
 		paint.setColor(background);
 		c.drawPaint(paint);
@@ -93,12 +104,11 @@ public class DrawWatch extends View {
 		top = ((frameHeight - height) / 2) + 3;
 		bottom = (((frameHeight - height) / 2) + height) - 3;
 
-		double timenow = endTime - SystemClock.currentThreadTimeMillis();
-		double percent = (timenow) / totalTime;
 
+		double percent = timenow / (totalTime/1000);
+		
 		// 0.1 is what 1 second corresponds to in degrees
 		rotation = (0.1 * (endTime - SystemClock.currentThreadTimeMillis()) / 1000) + 0.999;
-		Log.e("Test", rotation + "");
 
 		// Draw the timer
 		paint.setColor(timeleft2);

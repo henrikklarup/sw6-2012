@@ -8,7 +8,9 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import dk.aau.cs.giraf.TimerLib.DigitalClock;
+import dk.aau.cs.giraf.TimerLib.ProgressBar;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
+import dk.aau.cs.giraf.TimerLib.TimeTimer;
 
 
 public class DrawLibActivity extends Activity {
@@ -20,9 +22,9 @@ public class DrawLibActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);	
-		SubProfile sub = new DigitalClock("", "", 100, 0xff3D3D3D, 0xff000066, 0xffB8B8B8, 0xff000000, 30, false);
-//		SubProfile sub2 = new ProgressBar("", "", 100, 0xff3D3D3D, 0xff000066, 0xffB8B8B8, 0xff000000, 900, true);
-//		sub.setAttachment(sub2);
+		SubProfile sub = new DigitalClock("", "", 0xff3D3D3D, 0xff000066, 0xffB8B8B8, 0xff000000, 30, true);
+		SubProfile sub2 = new ProgressBar("", "", 0xff3D3D3D, 0xff000066, 0xffB8B8B8, 0xff000000, 900, true);
+		sub.setAttachment(sub2);
 //		Guardian guard = Guardian.getInstance();
 //		SubProfile sub = guard.getSubProfile();
 		
@@ -43,12 +45,10 @@ public class DrawLibActivity extends Activity {
 			
 			LinearLayout frame = new LinearLayout(this);
 			View v = genDrawView(sub);
-			v.setTag("main");
 			frame.addView(v, frameWidth, frameHeight);
 			
-			v = genDrawView(sub.getAttachment());
-			v.setTag("attachment");
-			frame.addView(v, frameWidth, frameHeight);
+			View v2 = genDrawView(sub.getAttachment());
+			frame.addView(v2, frameWidth, frameHeight);
 			
 			setContentView(frame);
 		}
