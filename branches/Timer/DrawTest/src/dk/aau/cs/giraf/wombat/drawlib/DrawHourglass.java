@@ -81,14 +81,17 @@ public class DrawHourglass extends View {
 			if(percent>0.4){
 				sandTopHeight = (int) (120*percent)-40;
 				triBotMidY = (frameHeight*5) + 4 -(int) (130*percent);
+			}else{
+				sandTopHeight = 8;
 			}
+			
 			if(percent<0.4){
 				sandBotHeight = (int) (86 - frameHeight -(percent*150));
 				triTopX = (int) (111 - ((280*percent)));
 				triTopY = triTopX;
 				triBotY = sandBotHeight;
-				
 			}
+			
 			if(percent<0.01){
 				midFallSandY = (int) startTime * 100;
 			}else{
