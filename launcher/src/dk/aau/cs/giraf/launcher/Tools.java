@@ -22,6 +22,10 @@ public class Tools {
 	public static final String BACKGROUNDCOLOR = "backgroundColor";
 	public static final String APPBACKGROUNDCOLOR = "appBackgroundColor";
 	
+	// 24 hours in milliseconds = 86400000;
+	// 4 hours in milliseconds:
+	private static final long mAuthSpan = 14400000;
+	
 	/**
 	 * Saves data for the currently authorized log in.
 	 * @param context Context of the current activity.
@@ -40,21 +44,21 @@ public class Tools {
 	}
 	
 	/**
-	 * Logs the current guardian out and launches the authentication activity.
+	 Logs the current guardian out and launches the authentication activity.
 	 * @param context Context of the current activity.
+	 * @return The intent required to launch authentication.
 	 */
-	public static void logOut(Context context) {
-		clearLogOutData(context);
+	public static Intent logOutIntent(Context context) {
+		clearAuthData(context);
 		
-		Intent i = new Intent(context, AuthenticationActivity.class);
-		context.startActivity(i);
+		return new Intent(context, AuthenticationActivity.class);
 	}
 	
 	/**
 	 * Clears the current data on who is logged in and when they logged in.
 	 * @param context Context of the current activity.
 	 */
-	public static void clearLogOutData(Context context) {
+	public static void clearAuthData(Context context) {
 		SharedPreferences sp = context.getSharedPreferences(TIMERKEY, 0);
 		SharedPreferences.Editor editor = sp.edit();
 		
@@ -62,5 +66,18 @@ public class Tools {
 		editor.putLong(GUARDIANID, -1);
 		
 		editor.commit();
+	}
+	
+	/**
+	 * Checks whether the current user session has expired.
+	 * @param context Context of the current activity.
+	 * @return True if a log in is required; otherwise false.
+	 */
+	public static boolean AuthRequired(Context context) {
+		Date d = new Date();
+		SharedPreferences sp = context.getSharedPreferences(TIMERKEY, 0);
+		Long lastAuthTime = sp.getLong(DATEKEY, 1);
+		
+		return d.getTime() > lastAuthTime + mAuthSpan;
 	}
 }
