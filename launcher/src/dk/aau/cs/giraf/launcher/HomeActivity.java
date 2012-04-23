@@ -34,7 +34,6 @@ import android.view.WindowManager;
 public class HomeActivity extends Activity {
 
 	private static Context mContext;
-	private static ArrayList<ApplicationInfo> mApplications;
 	private GridView mGrid;
 	private Profile mCurrentUser; 
 	private Setting<String,String,String> mSettings;
@@ -53,8 +52,6 @@ public class HomeActivity extends Activity {
 	private GWidgetLogout mLogoutWidget;
 	
 	
-	private GButton mLogoutButton;	
-
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -87,12 +84,12 @@ public class HomeActivity extends Activity {
 		mWidgetTimer.addWidget(mConnectivityWidget);
 		
 		// Log ud knap:
-		/*mLogoutButton = (GButton) findViewById(R.id.logoutGButton);
-		mLogoutButton.setOnClickListener(new View.OnClickListener() {
+		//mLogoutButton = (GButton) findViewById(R.id.logoutGButton);
+		mLogoutWidget.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				Tools.logOut(mContext);
 			}
-		});*/
+		});
 		
 		loadApplications();
 	}
@@ -186,7 +183,7 @@ public class HomeActivity extends Activity {
 			calendarWidgetParams.addRule(RelativeLayout.BELOW, 0);
 			calendarWidgetParams.addRule(RelativeLayout.LEFT_OF, mConnectivityWidget.getId());
 			
-			logoutWidgetParams.setMargins(0, 0, intToDP(15), 0);
+			logoutWidgetParams.setMargins(0, 0, intToDP(25), 0);
 			logoutWidgetParams.addRule(RelativeLayout.BELOW, 0);
 			logoutWidgetParams.addRule(RelativeLayout.LEFT_OF, mCalendarWidget.getId());
 			
