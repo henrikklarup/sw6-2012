@@ -1,7 +1,7 @@
 #summary Meeting Agenda 23/04-2012
 = Group meeting 23/04-2012 =
 
-Meeting takes place on 10/04-2012 @ 09:00 AM - 12:00 PM [0.2.12].
+Meeting takes place on 23/04-2012 @ 09:00 AM - 12:00 PM [0.2.90].
 
 Responsible: SW601
 
