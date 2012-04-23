@@ -33,6 +33,11 @@ public class Category {
 		pictograms.add(pic);
 	}
 	
+	public void addPictogramAtIndex(Pictogram pic, int index)
+	{
+		pictograms.add(index, pic);
+	}
+	
 	public void removePictogram(int i)
 	{
 		pictograms.remove(i);

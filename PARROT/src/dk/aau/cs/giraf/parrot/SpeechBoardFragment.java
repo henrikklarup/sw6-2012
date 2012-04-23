@@ -84,6 +84,7 @@ public class SpeechBoardFragment extends Fragment
 				{
 					draggedPictogramIndex = position; //TODO make sure that position is the index of the pictogram
 					dragOwnerID = R.id.sentenceboard;
+//					speechBoardCategory.removePictogram(draggedPictogramIndex);					
 					ClipData data = ClipData.newPlainText("label", "text"); //TODO Dummy. Pictogram information can be placed here instead.
 					DragShadowBuilder shadowBuilder = new DragShadowBuilder(view);
 					view.startDrag(data, shadowBuilder, view, 0);
