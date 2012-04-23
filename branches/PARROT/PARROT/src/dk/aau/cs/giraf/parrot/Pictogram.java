@@ -29,14 +29,15 @@ public class Pictogram {
 	//TODO make methods to ensure that the constructor can not put illegal arguments as the path for images, sounds and words
 
 	//TODO make methods to show images and play sounds and words.
-	public ImageView getImage()
-	{
-		//FIXME this method will throw an exception if the path is invalid
-		ImageView image = null;
-		Bitmap bm = BitmapFactory.decodeFile(imagePath);
-		image.setImageBitmap(bm);
-		return image;
-	}
+	
+	
+//	public ImageView getImage()
+//	{
+//		//FIXME this method will throw an exception if the path is invalid
+//		ImageView image = new ImageView(context);
+//		image.setImageBitmap(getBitmap());
+//		return image;
+//	}
 
 	public Bitmap getBitmap()
 	{

@@ -59,14 +59,19 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@drawable/sentenceboardlayout" >
+        android:background="@drawable/sentenceboardlayout" 
+        android:id ="@+id/sentenceboardlinearhelper">
+              <GridView
+                android:id="@+id/sentenceboard"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:columnWidth="90dp"
+                android:gravity="center"
+                android:horizontalSpacing="5dp"
+                android:numColumns="auto_fit"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="5dp" />
     </LinearLayout>
-    <!--
-     <ImageView
-        android:id="@+id/img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/parrot" />
-    -->
+
 
 </LinearLayout>
