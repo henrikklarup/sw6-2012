@@ -51,12 +51,7 @@ public class HomeActivity extends Activity {
 	private GWidgetConnectivity mConnectivityWidget;
 	
 	
-	private GButton mLogoutButton;
-	
-	//Hash keys
-	public final String BACKGROUNDCOLOR = "backgroundColor";
-	public final String APPBACKGROUNDCOLOR = "appBackgroundColor";
-	
+	private GButton mLogoutButton;	
 
 	/** Called when the activity is first created. */
 	@Override
@@ -97,8 +92,6 @@ public class HomeActivity extends Activity {
 		});*/
 		
 		loadApplications();
-		
-		
 	}
 
 	@Override

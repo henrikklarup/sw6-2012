@@ -11,10 +11,16 @@ import android.content.SharedPreferences;
  */
 public class Tools {
 	
+	// SharedPreferences keys for log in data.
 	public static final String TIMERKEY = "TIMING";
 	public static final String DATEKEY = "DATE";
 	
+	// Keys for inserting and retrieving data in Intents.
 	public static final String GUARDIANID = "currentGuardianID";
+	
+	// Hash keys for settings.
+	public static final String BACKGROUNDCOLOR = "backgroundColor";
+	public static final String APPBACKGROUNDCOLOR = "appBackgroundColor";
 	
 	/**
 	 * Saves data for the currently authorized log in.
