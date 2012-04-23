@@ -112,43 +112,47 @@ public class DrawDigital extends View {
 	protected void onDraw(Canvas c) {
 		super.onDraw(c);
 		
-		double timenow = (endTime - System.currentTimeMillis());
-		if(mtimenow == (int)timenow / 100){
-			timenow = (endTime - System.currentTimeMillis());
-			invalidate();
-		}
-		mtimenow = (int) timenow;
-		timenow = (endTime - System.currentTimeMillis())/1000;
+		double timenow = (endTime - System.currentTimeMillis())/1000;
 		c.drawBitmap(bitmap, 0, 0, null);
 		
 		if(timenow <= 0) timenow = 0;
 		
-		int num;
+		int num, x, y;
+		Paint paint2 = new Paint();
+		double percent = (timenow) / (totalTime/1000);
 		paint.setColor(background);
+
+		col = new ColorDrawable(timeleft2);
+		col.setAlpha((int) (255 * (1-percent)));
+		paint2.setColor(col.getColor());
 		
-		int x, y;
 		
 		y = (frameHeight - numHeight) / 2;
 		
 		/* Draw first number */
 		num = (int) (timenow / 60 / 10);
 		x = numWidth/2 + numWidth;
+		paint.setColor(background);
 		c.drawPath(drawInvertNumberPath(num, x, y), paint);
+		c.drawPath(drawNumberPath(num, x, y), paint2);
 		
 		/* Draw second number */
 		num = (int) (timenow / 60) - num * 10;
 		x = numWidth/2 + numWidth * 2 + (numSpace);
 		c.drawPath(drawInvertNumberPath(num, x, y), paint);
+		c.drawPath(drawNumberPath(num, x, y), paint2);
 		
 		/* Draw third number */
 		num = (int) (timenow % 60)/10;
 		x =  numWidth/2 + numWidth * 3 + (numSpace * 3);
 		c.drawPath(drawInvertNumberPath(num, x, y), paint);
+		c.drawPath(drawNumberPath(num, x, y), paint2);
 		
 		/* Draw second number */
 		num = (int) (timenow % 10);
 		x = numWidth/2 + numWidth * 4 + (numSpace * 4);
 		c.drawPath(drawInvertNumberPath(num, x, y), paint);
+		c.drawPath(drawNumberPath(num, x, y), paint2);
 
 		
 		/*************** IMPORTANT ***************/

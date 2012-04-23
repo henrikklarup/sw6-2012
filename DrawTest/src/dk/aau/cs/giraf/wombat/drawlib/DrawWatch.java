@@ -73,12 +73,6 @@ public class DrawWatch extends View {
 		super.onDraw(c);
 		
 		double timenow = (endTime - System.currentTimeMillis());
-		if(mtimenow == (int)timenow / 1000){
-			timenow = (endTime - System.currentTimeMillis());
-			return;
-		}
-		mtimenow = (int) timenow;
-		timenow = (endTime - System.currentTimeMillis());
 
 		
 		/* Fill the canvas with the background color */
