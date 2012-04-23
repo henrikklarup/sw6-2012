@@ -34,3 +34,106 @@ Notary: SW602
 * Next Meeting
     * Responsible group SW602
     * Date
+
+
+_Referat_
+Afslutning af næste sprint onsdag d. 2. maj
+
+*Planlægnings resume*
+G1: 
+Arbejder med børnedel
+Implementerer options
+
+G2:
+Laver produktet færdigt
+Bugs
+
+G3:
+Webdesign
+Småting (måske næste sprint)
+Detaljer
+
+G4:
+Funktionalitet
+Småting
+
+G5:
+Apps
+Usability testing
+Sidste sprint med kodning
+Settings fra admin
+
+_Alle grupper har noget præsenterbart_
+
+===Service definitioner (Thomas)===
+Peter Axel, hvad kan man tilbyde til andre apps!
+Skriv det ned så de andre grupper har mulighed for at se det
+
+===Usability Tests (Launcher)===
+Testing delen i Launcheren er hovedsageligt GUI/kosmetisk, derfor interesse for usability
+Server, Wombat, Parrot - usability testing
+Eventuelt: Næste uge
+
+
+
+===giraf.gui: Et GUI Library til GIRAF (Launcher)===
+Import i Eclipse -> Import fra SVN Checkout
+Klasser/widget man kan bruge
+Farveskemaer, knapper osv.
+
+===Design af authentication kort (Thomas)===
+Bagside med logo
+Forside med authentication
+Igen ændringer
+
+===Oasis - to integrate, or not to integrate? (Launcher)===
+Skal vi have implementeret launcheren i OasisDB
+*Use Case1:*
+Måske OasisDB for at kunne bruge en app
+
+*Use Case2:*
+OasisDB skal være installeret for at kunne bruge launcheren
+
+Man kan ikke bruge launcher uden OasisDB
+
+For stand-alone OasisLocalDB:
+Det er muligt at installere apps med OasisLocalDB uden launcher.
+
+Enten skal vi lave et samlet system, eller et system hvor vi kan give mulighed for at vælge egne komponenter.
+
+Vi kommer ikke til at udgive systemet alligevel, og derfor er det kun os selv der skal installerer systemet.
+
+_Afstemning:_
+Skal vi beslutte det eller ej?
+*6 - Basispakke - med komponenter*
+0 - Basispakke - Launcher + OasisDB
+5 - Delt - Alle komponenter for sig
+
+
+==Eventuelt==
+Forslag: Lav en præsentation af nuværende produkt
+
+===Fra vejleder===
+Fælles rapport:
+Admin er færdige med deres del af fælles rapport
+Server næste del!
+
+_Krav til projektet, den ansvarlige har ikke modtaget noget endnu!_
+Overordnede krav: Usability, fleksibilitet
+3-5 vigtigste design parametre
+Arkitektur design: der er en arkitektur, den er bare ikke skrevet ned.
+GUI ws 2.0 - lader det sig gøre og hvornår? Man kan bare gå ned til Henrik hvis det er man har brug for kommentarer.
+
+*Integrations test:*
+Hvordan kan man genere systemet mest muligt?
+Tænk i Use Cases
+
+*Logoer:*
+Ingen svar fra kontaktpersonen
+Folk skal nok selv begynde at lave deres egne logoer
+
+*Kommenter alt kode:*
+Sørg for det er let forståeligt, javadoc
+
+*Eventuelt:*
+Ændring af eksamens rækkefølge
