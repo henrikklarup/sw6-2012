@@ -71,7 +71,7 @@ public class SubProfileFragment extends android.app.ListFragment {
 											5000); // TODO: Which profile has
 													// been deleted?
 									t.show();
-									reloadSubProfiles();
+									loadSubProfiles();
 									} else {
 										Toast t = Toast.makeText(getActivity(),
 												R.string.cannot_delete_subprofile_toast, 5000);
@@ -94,10 +94,6 @@ public class SubProfileFragment extends android.app.ListFragment {
 				return true;
 			}
 		});
-	}
-
-	public void reloadSubProfiles() {
-		loadSubProfiles();
 	}
 
 	/**

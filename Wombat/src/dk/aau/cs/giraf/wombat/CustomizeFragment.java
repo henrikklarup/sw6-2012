@@ -91,7 +91,7 @@ public class CustomizeFragment extends Fragment {
 				TimerLoader.subProfileID = -1;
 				SubProfileFragment spf = (SubProfileFragment) getFragmentManager()
 						.findFragmentById(R.id.subprofileFragment);
-				spf.reloadSubProfiles();
+				spf.loadSubProfiles();
 				CustomizeFragment cf = (CustomizeFragment) getFragmentManager()
 						.findFragmentById(R.id.customizeFragment);
 				cf.setDefaultProfile();
@@ -102,8 +102,7 @@ public class CustomizeFragment extends Fragment {
 			}
 		});
 
-		currSubP = new SubProfile("", "", 0xFF000000, 0xFFFF0000,
-				0xFFFFFFFF, 0xFFFF0000, 600, false);
+		currSubP = new SubProfile("", "", 0xff3D3D3D, 0xffFF0000, 0xffB8B8B8, 0xff000000, 600, false);
 		currSubP.save = false;
 		currSubP.saveAs = false;
 
@@ -124,8 +123,7 @@ public class CustomizeFragment extends Fragment {
 	}
 
 	public void setDefaultProfile() {
-		currSubP = new SubProfile("", "", 0xFF000000, 0xFFFF0000,
-				0xFFFFFFFF, 0xFFFF0000, 600, false);
+		currSubP = new SubProfile("", "", 0xff3D3D3D, 0xffFF0000, 0xffB8B8B8, 0xff000000, 600, false);
 		currSubP.save = false;
 		currSubP.saveAs = false;
 
@@ -620,12 +618,6 @@ public class CustomizeFragment extends Fragment {
 						TimerLoader.subProfileID = guard.getChild()
 								.save(currSubP).getId();
 					}
-					guard.publishList().get(TimerLoader.profilePosition)
-							.select();
-
-					SubProfileFragment spf = (SubProfileFragment) getFragmentManager()
-							.findFragmentById(R.id.subprofileFragment);
-					spf.reloadSubProfiles();
 				}
 			});
 		} else {
@@ -643,6 +635,10 @@ public class CustomizeFragment extends Fragment {
 		saveButton.setCompoundDrawablesWithIntrinsicBounds(null, d, null, null);
 	}
 
+	/**
+	 * Sets the name of the profile if there is non
+	 * And asks the user which name to save as
+	 */
 	protected void getName() {
 		String name = "";
 		if (currSubP.name == "") {
@@ -684,9 +680,13 @@ public class CustomizeFragment extends Fragment {
 						guard.publishList().get(TimerLoader.profilePosition)
 								.select();
 
+						ChildFragment cf = (ChildFragment)getFragmentManager().findFragmentById(R.id.childFragment);
 						SubProfileFragment spf = (SubProfileFragment) getFragmentManager()
 								.findFragmentById(R.id.subprofileFragment);
-						spf.reloadSubProfiles();
+						TimerLoader.profileID = 2; //TODO: Change this
+						cf.loadSubProfiles();
+						spf.loadSubProfiles();
+						
 
 					}
 
