@@ -59,7 +59,7 @@ public class SpeechBoardFragment extends Fragment
 			
 			parrent.findViewById(R.id.pictogramgrid).setOnDragListener(new BoxDragListener(parrent));
 			parrent.findViewById(R.id.sentenceboard).setOnDragListener(new BoxDragListener(parrent));
-			//parrent.findViewById(R.id.supercategory).setOnDragListener(new BoxDragListener(parrent));
+			parrent.findViewById(R.id.supercategory).setOnDragListener(new BoxDragListener(parrent));
 
 
 			pictogramGrid.setOnItemLongClickListener(new OnItemLongClickListener()

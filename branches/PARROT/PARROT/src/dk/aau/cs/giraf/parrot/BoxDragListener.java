@@ -27,21 +27,28 @@ public class BoxDragListener implements OnDragListener
 			insideOfMe = false;
 		} else if (event.getAction() == DragEvent.ACTION_DROP){
 			if (insideOfMe){
-				//View view = (View) event.getLocalState();
 				
 				
-				if(R.id.sentenceboard == self.getId() && SpeechBoardFragment.dragOwnerID != R.id.sentenceboard)	//We are about to drop a view into the speechboard
+				if( self.getId() == R.id.sentenceboard && SpeechBoardFragment.dragOwnerID != R.id.sentenceboard)	//We are about to drop a view into the speechboard
 				{
 					GridView speech = (GridView) parrent.findViewById(R.id.sentenceboard);
 					int index = speech.getChildCount();	//TODO replace this with the actual position
-					//speech.addView(view, index);
 					int categoryIndex=0;//TODO make sure that this refers to the current category
 					Pictogram pic = PARROTActivity.getUser().getCategoryAt(categoryIndex).getPictogramAtIndex(SpeechBoardFragment.draggedPictogramIndex);	
-					//ImageView img = new ImageView(parrent);
-					//img.setImageBitmap(pic.getBitmap());
-					//speech.addView(img);
-					//SpeechBoardFragment.speechboardPictograms.add(index, pic);	//Add the references pictogram to the back-end list
-					SpeechBoardFragment.speechBoardCategory.addPictogram(pic);
+
+					SpeechBoardFragment.speechBoardCategory.addPictogram(pic);//Add the references pictogram to the back-end list
+					speech.setAdapter(new PictogramAdapter(SpeechBoardFragment.speechBoardCategory, parrent));
+					speech.invalidate();
+				}
+				if(self.getId() == R.id.sentenceboard && SpeechBoardFragment.dragOwnerID == R.id.sentenceboard)
+				{
+					
+				}
+				if(self.getId() != R.id.sentenceboard && SpeechBoardFragment.dragOwnerID == R.id.sentenceboard) //If we drag something from the sentenceboard to somewhere else
+				{
+					GridView speech = (GridView) parrent.findViewById(R.id.sentenceboard);
+					int index = SpeechBoardFragment.draggedPictogramIndex;
+					SpeechBoardFragment.speechBoardCategory.removePictogram(index);
 					speech.setAdapter(new PictogramAdapter(SpeechBoardFragment.speechBoardCategory, parrent));
 					speech.invalidate();
 				}
