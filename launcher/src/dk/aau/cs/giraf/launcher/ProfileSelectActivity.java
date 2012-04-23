@@ -16,7 +16,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-public class ProfileSelectActivity extends Activity{
+public class ProfileSelectActivity extends Activity {
 
 	private static List<Profile> mProfiles;
 	
