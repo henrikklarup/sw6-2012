@@ -58,11 +58,6 @@ public class DrawProgressBar extends View {
 		super.onDraw(c);
 		
 		double timenow = (endTime - System.currentTimeMillis());
-		if(mtimenow == (int)timenow){
-			timenow = (endTime - System.currentTimeMillis());
-			return;
-		}
-		mtimenow = (int) timenow;
 		timenow = (endTime - System.currentTimeMillis());
 
 		
