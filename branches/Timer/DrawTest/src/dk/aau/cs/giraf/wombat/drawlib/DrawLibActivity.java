@@ -37,11 +37,13 @@ public class DrawLibActivity extends Activity {
 		if (sub.getAttachment() == null) {
 			/* Set the drawing class (which extends View) as the content view */
 			View v = genDrawView(sub);
+			v.setKeepScreenOn(true);
 			setContentView(v);
 		} else {
 			frameWidth = frameWidth/2;
 			
 			LinearLayout frame = new LinearLayout(this);
+			frame.setKeepScreenOn(true);
 			View v = genDrawView(sub);
 			frame.addView(v, frameWidth, frameHeight);
 			
