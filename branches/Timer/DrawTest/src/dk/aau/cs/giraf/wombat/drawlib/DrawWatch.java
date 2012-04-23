@@ -60,7 +60,7 @@ public class DrawWatch extends View {
 		timeleft2 = sp.timeLeftColor;
 		timespent = sp.timeSpentColor;
 		totalTime = (sp.totalTime - 1) * 1000;
-		endTime = SystemClock.currentThreadTimeMillis() + totalTime;
+		endTime = System.currentTimeMillis() + totalTime;
 
 		if (sp.gradient) {
 			timeleft2 = timespent;
@@ -72,13 +72,13 @@ public class DrawWatch extends View {
 	protected void onDraw(Canvas c) {
 		super.onDraw(c);
 		
-		double timenow = (endTime - SystemClock.currentThreadTimeMillis());
+		double timenow = (endTime - System.currentTimeMillis());
 		if(mtimenow == (int)timenow / 1000){
-			timenow = (endTime - SystemClock.currentThreadTimeMillis());
+			timenow = (endTime - System.currentTimeMillis());
 			return;
 		}
 		mtimenow = (int) timenow;
-		timenow = (endTime - SystemClock.currentThreadTimeMillis());
+		timenow = (endTime - System.currentTimeMillis());
 
 		
 		/* Fill the canvas with the background color */
@@ -108,7 +108,7 @@ public class DrawWatch extends View {
 		double percent = timenow / (totalTime/1000);
 		
 		// 0.1 is what 1 second corresponds to in degrees
-		rotation = (0.1 * (endTime - SystemClock.currentThreadTimeMillis()) / 1000) + 0.999;
+		rotation = (0.1 * (endTime - System.currentTimeMillis()) / 1000) + 0.999;
 
 		// Draw the timer
 		paint.setColor(timeleft2);
@@ -143,7 +143,7 @@ public class DrawWatch extends View {
 			c.drawRect(r, paint);
 		}
 
-		if (endTime >= SystemClock.currentThreadTimeMillis()) {
+		if (endTime >= System.currentTimeMillis()) {
 			/*************** IMPORTANT ***************/
 			/* Recalls Draw! */
 			invalidate();

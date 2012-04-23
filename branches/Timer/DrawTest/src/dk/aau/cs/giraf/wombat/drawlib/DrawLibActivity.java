@@ -7,10 +7,8 @@ import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
-import dk.aau.cs.giraf.TimerLib.DigitalClock;
-import dk.aau.cs.giraf.TimerLib.ProgressBar;
+import dk.aau.cs.giraf.TimerLib.Guardian;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
-import dk.aau.cs.giraf.TimerLib.TimeTimer;
 
 
 public class DrawLibActivity extends Activity {
@@ -22,11 +20,11 @@ public class DrawLibActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);	
-		SubProfile sub = new DigitalClock("", "", 0xff3D3D3D, 0xff000066, 0xffB8B8B8, 0xff000000, 30, true);
-		SubProfile sub2 = new ProgressBar("", "", 0xff3D3D3D, 0xff000066, 0xffB8B8B8, 0xff000000, 900, true);
-		sub.setAttachment(sub2);
-//		Guardian guard = Guardian.getInstance();
-//		SubProfile sub = guard.getSubProfile();
+//		SubProfile sub = new DigitalClock("", "", 0xff3D3D3D, 0xff000066, 0xffB8B8B8, 0xff000000, 30, true);
+//		SubProfile sub2 = new ProgressBar("", "", 0xff3D3D3D, 0xff000066, 0xffB8B8B8, 0xff000000, 900, true);
+//		sub.setAttachment(sub2);
+		Guardian guard = Guardian.getInstance();
+		SubProfile sub = guard.getSubProfile();
 		
 		
 		// Get display size
