@@ -77,7 +77,6 @@ public class DrawHourglass extends View {
 		if (endTime >= System.currentTimeMillis()) {
 			double timenow = endTime - System.currentTimeMillis();
 			double percent = timenow / totalTime;
-			double timeLeft = System.currentTimeMillis();
 			
 			if(percent>0.4){
 				sandTopHeight = (int) (120*percent)-40;
@@ -88,11 +87,14 @@ public class DrawHourglass extends View {
 				triTopX = (int) (111 - ((280*percent)));
 				triTopY = triTopX;
 				triBotY = sandBotHeight;
+				
 			}
-			if(percent<0.005){
+			if(percent<0.01){
 				midFallSandY = (int) startTime * 100;
+			}else{
+				midFallSandY = 0;
 			}
-		}
+			
 		
 		/* Fill the canvas with the background color */
 		paint.setColor(background);
@@ -185,8 +187,6 @@ public class DrawHourglass extends View {
 		/* setting paint2 to gradient color on the sand */
 		Paint paint2 = new Paint();
 		col = new ColorDrawable(timeleft2);
-			double timenow = endTime - System.currentTimeMillis();
-			double percent = (timenow) / totalTime;
 		col.setAlpha((int) (255 * (1-percent)));
 		paint2.setColor(col.getColor());
 		
@@ -229,6 +229,7 @@ public class DrawHourglass extends View {
 		tp.lineTo(left + (indent/2) + frameHeight + 109 + glassThickness, top + height - frameHeight - triBotMidY);
 		c.drawPath(tp, paint);
 		c.drawPath(tp, paint2);
+	}
 		
 		invalidate();
 	}
