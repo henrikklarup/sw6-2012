@@ -8,6 +8,7 @@ import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
 
@@ -32,7 +33,8 @@ public class DrawHourglass extends View {
 	int frameHeight, indent, glassLeft, glassRight, windowWidth, 
 		windowHeight, glassThickness, glassThicknessBot, glassThicknessTop, glassBendHeight;
 	int sandTopHeight, sandBotHeight;
-	int triTopX, triTopY, triBotMidY, triBotX, triBotY;
+	int triTopX, triTopY, triBotMidY, triBotX, triBotY, midFallSandY;
+	double startTime;
 	
 
 	public DrawHourglass(Context context, SubProfile sub) {
@@ -48,7 +50,8 @@ public class DrawHourglass extends View {
 		timeleft2 = sp.timeLeftColor;
 		timespent = sp.timeSpentColor;
 		totalTime = (sp.totalTime - 1) * 1000;
-		endTime = SystemClock.currentThreadTimeMillis() + totalTime;
+		endTime = System.currentTimeMillis() + totalTime;
+		startTime = System.currentTimeMillis();
 
 		if (sp.gradient) {
 			timeleft2 = timespent;
@@ -71,19 +74,23 @@ public class DrawHourglass extends View {
 		super.onDraw(c);
 		
 		/* Function to calculate percentage */
-		if (endTime >= SystemClock.currentThreadTimeMillis()) {
-			double timenow = endTime - SystemClock.currentThreadTimeMillis();
+		if (endTime >= System.currentTimeMillis()) {
+			double timenow = endTime - System.currentTimeMillis();
 			double percent = timenow / totalTime;
+			double timeLeft = System.currentTimeMillis();
 			
 			if(percent>0.4){
 				sandTopHeight = (int) (120*percent)-40;
-				triBotMidY = (frameHeight*5) -(int) (130*percent);
+				triBotMidY = (frameHeight*5) + 4 -(int) (130*percent);
 			}
 			if(percent<0.4){
-				sandBotHeight = (int) (82 - frameHeight -(percent*150));
-				triTopX = (int) (106 - ((280*percent)));
+				sandBotHeight = (int) (86 - frameHeight -(percent*150));
+				triTopX = (int) (111 - ((280*percent)));
 				triTopY = triTopX;
 				triBotY = sandBotHeight;
+			}
+			if(percent<0.005){
+				midFallSandY = (int) startTime * 100;
 			}
 		}
 		
@@ -170,7 +177,20 @@ public class DrawHourglass extends View {
 		p.lineTo(left + (indent/2) + frameHeight + 105 + glassThickness, top + 240 - glassThickness);
 		c.drawPath(p, paint);
 		
-		/* Draw the "sand" in the top and bottom of the hourglass */
+		
+		//
+		/* Draw the "sand" in the hourglass */
+		//
+		
+		/* setting paint2 to gradient color on the sand */
+		Paint paint2 = new Paint();
+		col = new ColorDrawable(timeleft2);
+			double timenow = endTime - System.currentTimeMillis();
+			double percent = (timenow) / totalTime;
+		col.setAlpha((int) (255 * (1-percent)));
+		paint2.setColor(col.getColor());
+		
+		/* Draw the "sand" in the top and bottom rectangles of the hourglass*/
 		timeTop = new Rect(left + (indent/2) + frameHeight + glassThickness, top + glassBendHeight - glassThicknessTop,
 				left + width - (indent/2) - frameHeight - glassThickness ,top + glassBendHeight - glassThicknessTop - sandTopHeight + 8); //+8 to get it to fit
 		timeBot = new Rect(left + (indent/2) + frameHeight + glassThickness, top + height - frameHeight - sandBotHeight,
@@ -179,16 +199,17 @@ public class DrawHourglass extends View {
 		paint.setColor(timeleft);
 		c.drawRect(timeTop, paint);
 		c.drawRect(timeBot, paint);
-		
+		c.drawRect(timeTop, paint2);
+		c.drawRect(timeBot, paint2);
+	
 		/* Draw the the sand in the triangle in the top of the glass*/
-		Path tp = new Path();
+		Path tp = new Path();		
 		paint.setColor(timeleft);
 		tp.moveTo((left + (indent/2) + frameHeight + glassThickness + triTopX), top + glassBendHeight - glassThicknessTop + triTopY); // change as time progress: + on bot x and y
-		tp.lineTo(left + (indent/2) + frameHeight + 105 + glassThickness, top + 240 - glassThicknessTop);
-		tp.lineTo(left + width - (indent/2) - frameHeight - 105 - glassThickness, top + 240 - glassThicknessTop);
+		tp.lineTo(left + (indent/2) + frameHeight + 110 + glassThickness, top + 245 - glassThicknessTop);
 		tp.lineTo((left + width - (indent/2) - frameHeight - glassThickness - triTopX), top + glassBendHeight - glassThicknessTop + triTopY); // change as time progress: - on x, + on y
 		c.drawPath(tp, paint);
-		
+		c.drawPath(tp, paint2);
 		
 		/* Draw the the sand in the triangle in the bottom of the glass*/
 		tp = new Path();
@@ -197,6 +218,17 @@ public class DrawHourglass extends View {
 		tp.lineTo(left + width - (indent/2) - frameHeight - glassThickness, top + height - frameHeight - sandBotHeight);
 		tp.lineTo(left + (width/2), top + height - frameHeight - sandBotHeight - triBotMidY);
 		c.drawPath(tp, paint);
+		c.drawPath(tp, paint2);
+		
+		/* Draw the falling sand in the middle*/
+		tp = new Path();
+		paint.setColor(timeleft);
+		tp.moveTo(left + (indent/2) + frameHeight + 109 + glassThickness, top - glassThicknessTop + 245 - midFallSandY);
+		tp.lineTo(left + (indent/2) + frameHeight + 111 + glassThickness, top - glassThicknessTop + 245 - midFallSandY);
+		tp.lineTo(left + (indent/2) + frameHeight + 111 + glassThickness, top + height - frameHeight - triBotMidY);
+		tp.lineTo(left + (indent/2) + frameHeight + 109 + glassThickness, top + height - frameHeight - triBotMidY);
+		c.drawPath(tp, paint);
+		c.drawPath(tp, paint2);
 		
 		invalidate();
 	}
