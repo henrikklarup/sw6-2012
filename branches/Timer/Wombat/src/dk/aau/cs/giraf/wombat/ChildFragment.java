@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ListView;
 import dk.aau.cs.giraf.TimerLib.Child;
 import dk.aau.cs.giraf.TimerLib.Guardian;
+import dk.aau.cs.giraf.TimerLib.SubProfile;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
 public class ChildFragment extends android.app.ListFragment {
@@ -58,5 +59,18 @@ public class ChildFragment extends android.app.ListFragment {
 			detf.loadSubProfiles();
 			
 		}
+	}
+	
+	/**
+	 * Inserts the templates on profile id in the details list
+	 * 
+	 */
+	public void loadSubProfiles() {
+		ArrayList<Child> m_childs = guard.publishList();
+
+		// Inputs the data into the listview according to the string array
+		adapter = new ChildAdapter(getActivity(),
+				android.R.layout.simple_list_item_1, m_childs);
+		setListAdapter(adapter);
 	}
 }
