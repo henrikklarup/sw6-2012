@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 /**
- * Class for holding static methods and field, to minimize code duplication.
+ * Class for holding static methods and fields, to minimize code duplication.
  */
 public class Tools {
 	
@@ -73,9 +73,9 @@ public class Tools {
 	 * @return True if a log in is required; otherwise false.
 	 */
 	public static boolean AuthRequired(Context context) {
-		Date d = new Date();
 		SharedPreferences sp = context.getSharedPreferences(TIMERKEY, 0);
 		Long lastAuthTime = sp.getLong(DATEKEY, 1);
+		Date d = new Date();
 		
 		return d.getTime() > lastAuthTime + mAuthSpan;
 	}
