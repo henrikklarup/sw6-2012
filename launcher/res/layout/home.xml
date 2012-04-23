@@ -49,6 +49,13 @@
 	        android:layout_toLeftOf="@id/connectivitywidget"
 	        android:layout_marginRight="25dp" />
     	
+    	<dk.aau.cs.giraf.gui.GWidgetLogout
+	        android:id="@+id/logoutwidget"
+	        android:layout_width="70dp"
+	        android:layout_height="70dp"
+	        android:layout_toLeftOf="@id/calendarwidget"
+	        android:layout_marginRight="25dp" />
+    	
     	<LinearLayout
     	android:visibility="visible"
     	android:id="@+id/profile_pic"

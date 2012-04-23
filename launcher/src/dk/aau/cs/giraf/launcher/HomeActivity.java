@@ -7,6 +7,7 @@ import java.util.List;
 import dk.aau.cs.giraf.gui.GButton;
 import dk.aau.cs.giraf.gui.GWidgetCalendar;
 import dk.aau.cs.giraf.gui.GWidgetConnectivity;
+import dk.aau.cs.giraf.gui.GWidgetLogout;
 import dk.aau.cs.giraf.gui.GWidgetUpdater;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
@@ -49,6 +50,7 @@ public class HomeActivity extends Activity {
 	private GWidgetUpdater mWidgetTimer;
 	private GWidgetCalendar mCalendarWidget;
 	private GWidgetConnectivity mConnectivityWidget;
+	private GWidgetLogout mLogoutWidget;
 	
 	
 	private GButton mLogoutButton;	
@@ -78,6 +80,7 @@ public class HomeActivity extends Activity {
 		
 		mCalendarWidget = (GWidgetCalendar) findViewById(R.id.calendarwidget);
 		mConnectivityWidget = (GWidgetConnectivity) findViewById(R.id.connectivitywidget);
+		mLogoutWidget = (GWidgetLogout) findViewById(R.id.logoutwidget);
 		
 		mWidgetTimer = new GWidgetUpdater();
 		mWidgetTimer.addWidget(mCalendarWidget);
@@ -154,11 +157,11 @@ public class HomeActivity extends Activity {
 		ViewGroup.LayoutParams profilePictureViewParams = mProfilePictureView.getLayoutParams();
 		RelativeLayout.LayoutParams connectivityWidgetParams = (LayoutParams) mConnectivityWidget.getLayoutParams();
 		RelativeLayout.LayoutParams calendarWidgetParams = (LayoutParams) mCalendarWidget.getLayoutParams();
-		
+		RelativeLayout.LayoutParams logoutWidgetParams = (LayoutParams) mLogoutWidget.getLayoutParams();
 		
 		// remove me later - start
-		mConnectivityWidget.setVisibility(View.VISIBLE);
-		mCalendarWidget.setVisibility(View.VISIBLE);
+		//mConnectivityWidget.setVisibility(View.VISIBLE);
+		//mCalendarWidget.setVisibility(View.VISIBLE);
 		// stop
 		
 		if (isLandscape) {
@@ -173,13 +176,19 @@ public class HomeActivity extends Activity {
 			calendarWidgetParams.addRule(RelativeLayout.BELOW, mConnectivityWidget.getId());
 			calendarWidgetParams.addRule(RelativeLayout.LEFT_OF, 0);
 			
-			
+			logoutWidgetParams.setMargins(0, intToDP(15), 0, 0);
+			logoutWidgetParams.addRule(RelativeLayout.BELOW, mCalendarWidget.getId());
+			logoutWidgetParams.addRule(RelativeLayout.LEFT_OF, 0);
 		} else {
 			
 			connectivityWidgetParams.setMargins(0, 0, 0, 0);
 			calendarWidgetParams.setMargins(0, 0, intToDP(25),0);
 			calendarWidgetParams.addRule(RelativeLayout.BELOW, 0);
 			calendarWidgetParams.addRule(RelativeLayout.LEFT_OF, mConnectivityWidget.getId());
+			
+			logoutWidgetParams.setMargins(0, 0, intToDP(15), 0);
+			logoutWidgetParams.addRule(RelativeLayout.BELOW, 0);
+			logoutWidgetParams.addRule(RelativeLayout.LEFT_OF, mCalendarWidget.getId());
 			
 			profilePictureViewParams.width = intToDP(100);
 			profilePictureViewParams.height = intToDP(130);
@@ -190,6 +199,7 @@ public class HomeActivity extends Activity {
 		mProfilePictureView.setLayoutParams(profilePictureViewParams);	
 		mConnectivityWidget.setLayoutParams(connectivityWidgetParams);
 		mCalendarWidget.setLayoutParams(calendarWidgetParams);
+		mLogoutWidget.setLayoutParams(logoutWidgetParams);
 	}
 	
 	private int intToDP(int i) {
