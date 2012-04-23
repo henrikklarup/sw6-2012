@@ -20,7 +20,7 @@ public class DrawLibActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);	
-//		SubProfile sub = new DigitalClock("", "", 0xff3D3D3D, 0xff000066, 0xffB8B8B8, 0xff000000, 30, true);
+//		SubProfile sub = new ProgressBar("", "", 0xff3D3D3D, 0xff000066, 0xffB8B8B8, 0xff000000, 5, true);
 //		SubProfile sub2 = new ProgressBar("", "", 0xff3D3D3D, 0xff000066, 0xffB8B8B8, 0xff000000, 900, true);
 //		sub.setAttachment(sub2);
 		Guardian guard = Guardian.getInstance();
