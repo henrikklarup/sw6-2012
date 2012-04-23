@@ -26,7 +26,10 @@ public class AppsHelper {
 	private String[] columns = new String[] { 
 			AppsMetaData.Table.COLUMN_ID, 
 			AppsMetaData.Table.COLUMN_NAME,
-			AppsMetaData.Table.COLUMN_VERSION};
+			AppsMetaData.Table.COLUMN_VERSION,
+			AppsMetaData.Table.COLUMN_ICON,
+			AppsMetaData.Table.COLUMN_PACKAGE,
+			AppsMetaData.Table.COLUMN_ACTIVITY};
 
 	/**
 	 * Constructor
@@ -51,12 +54,15 @@ public class AppsHelper {
 	/**
 	 * Insert app
 	 * @param app Application containing data
+	 * @return the app id
 	 */
-	public int insertApp(App app) {
+	public long insertApp(App app) {
 		int result = 0;
+		Uri uri;
 		ContentValues cv = getContentValues(app);
 		try {
-			_context.getContentResolver().insert(AppsMetaData.CONTENT_URI, cv);
+			uri = _context.getContentResolver().insert(AppsMetaData.CONTENT_URI, cv);
+			result = Integer.parseInt(uri.getPathSegments().get(1));
 		} catch (Exception e) {
 			result = -1;
 		}
@@ -176,6 +182,9 @@ public class AppsHelper {
 		app.setId(cursor.getLong(cursor.getColumnIndex(AppsMetaData.Table.COLUMN_ID)));
 		app.setName(cursor.getString(cursor.getColumnIndex(AppsMetaData.Table.COLUMN_NAME)));
 		app.setVersion(cursor.getString(cursor.getColumnIndex(AppsMetaData.Table.COLUMN_VERSION)));
+		app.setIcon(cursor.getString(cursor.getColumnIndex(AppsMetaData.Table.COLUMN_ICON)));
+		app.setaPackage(cursor.getString(cursor.getColumnIndex(AppsMetaData.Table.COLUMN_PACKAGE)));
+		app.setActivity(cursor.getString(cursor.getColumnIndex(AppsMetaData.Table.COLUMN_ACTIVITY)));
 		return app;
 	}
 
@@ -205,6 +214,9 @@ public class AppsHelper {
 		ContentValues contentValues = new ContentValues();
 		contentValues.put(AppsMetaData.Table.COLUMN_NAME, app.getName());
 		contentValues.put(AppsMetaData.Table.COLUMN_VERSION, app.getVersion());
+		contentValues.put(AppsMetaData.Table.COLUMN_ICON, app.getIcon());
+		contentValues.put(AppsMetaData.Table.COLUMN_PACKAGE, app.getaPackage());
+		contentValues.put(AppsMetaData.Table.COLUMN_ACTIVITY, app.getActivity());
 
 		return contentValues;
 	}

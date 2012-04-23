@@ -9,7 +9,7 @@ public class Profile {
 	private long pRole;
 	private long phone;
 	private String picture;
-	private Setting<String, String, String> setting;
+	private Setting<String, String, String> settings;
 	private static String _output = "{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}";
 
 	/**
@@ -21,16 +21,16 @@ public class Profile {
 	 * @param pRole the role to set
 	 * @param phone the phone to set
 	 * @param picture the picture to set
-	 * @param setting the setting to set
+	 * @param settings the settings to set
 	 */
-	public Profile(String firstname, String surname, String middlename, long pRole, long phone, String picture, Setting<String, String, String> setting) {
+	public Profile(String firstname, String surname, String middlename, long pRole, long phone, String picture, Setting<String, String, String> settings) {
 		this.firstname = firstname;
 		this.surname = surname;
 		this.middlename = middlename;
 		this.pRole = pRole;
 		this.phone = phone;
 		this.picture = picture;
-		this.setting = setting;
+		this.settings = settings;
 	}
 
 	/**
@@ -113,7 +113,7 @@ public class Profile {
 		this.phone = phone;
 	}
 	/**
-	 * @return the picture
+	 * @return the picture path
 	 */
 	public String getPicture() {
 		return picture;
@@ -125,18 +125,18 @@ public class Profile {
 		this.picture = picture;
 	}
 	/**
-	 * @return the idCertificate
+	 * @return the settings
 	 */
-	public Setting<String, String, String> getSetting() {
-		return setting;
+	public Setting<String, String, String> getSettings() {
+		return settings;
 	}
 
 	/***
 	 * Set settings
-	 * @param setting The setting to change
+	 * @param settings The settings to change
 	 */
-	public void setSetting(Setting<String, String, String> setting) {
-		this.setting = setting;
+	public void setSettings(Setting<String, String, String> settings) {
+		this.settings = settings;
 	}
 
 	/**
@@ -148,7 +148,7 @@ public class Profile {
 	 *  {4} = Role
 	 *  {5} = Phone
 	 *  {6} = Picture
-	 *  {7} = Setting
+	 *  {7} = Settings
 	 * @param output String to set
 	 */
 	public static void setOutput(String output) {

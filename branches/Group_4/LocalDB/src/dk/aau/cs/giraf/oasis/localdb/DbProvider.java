@@ -71,6 +71,9 @@ public class DbProvider extends ContentProvider {
 		appsProjectionMap.put(AppsMetaData.Table.COLUMN_ID, AppsMetaData.Table.COLUMN_ID);
 		appsProjectionMap.put(AppsMetaData.Table.COLUMN_NAME, AppsMetaData.Table.COLUMN_NAME);
 		appsProjectionMap.put(AppsMetaData.Table.COLUMN_VERSION, AppsMetaData.Table.COLUMN_VERSION);
+		appsProjectionMap.put(AppsMetaData.Table.COLUMN_ICON, AppsMetaData.Table.COLUMN_ICON);
+		appsProjectionMap.put(AppsMetaData.Table.COLUMN_PACKAGE, AppsMetaData.Table.COLUMN_PACKAGE);
+		appsProjectionMap.put(AppsMetaData.Table.COLUMN_ACTIVITY, AppsMetaData.Table.COLUMN_ACTIVITY);
 	}
 
 	private static final HashMap<String, String> authusersProjectionMap;
@@ -452,9 +455,6 @@ public class DbProvider extends ContentProvider {
 		case AUTHUSERS_TYPE_LIST:
 			builder.setTables(AuthUsersMetaData.Table.TABLE_NAME);
 			builder.setProjectionMap(authusersProjectionMap);
-			if (selectionArgs != null) {
-				builder.appendWhere(AuthUsersMetaData.Table.COLUMN_CERTIFICATE + " = '" + selectionArgs[0] + "'");
-			}
 			break;
 		case AUTHUSERS_TYPE_ONE:
 			builder.setTables(AuthUsersMetaData.Table.TABLE_NAME);
@@ -464,9 +464,6 @@ public class DbProvider extends ContentProvider {
 		case DEPARTMENTS_TYPE_LIST:
 			builder.setTables(DepartmentsMetaData.Table.TABLE_NAME);
 			builder.setProjectionMap(departmentsProjectionMap);
-			if( selectionArgs != null) {
-				builder.appendWhere(selectionArgs[0]);
-			}
 			break;
 		case DEPARTMENTS_TYPE_ONE:
 			builder.setTables(DepartmentsMetaData.Table.TABLE_NAME);
@@ -476,50 +473,26 @@ public class DbProvider extends ContentProvider {
 		case HASDEPARTMENT_TYPE_LIST:
 			builder.setTables(HasDepartmentMetaData.Table.TABLE_NAME);
 			builder.setProjectionMap(hasdepartmentProjectionMap);
-			if (selectionArgs != null) {
-				builder.appendWhere(HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT + " = " + selectionArgs[0] + " AND "
-					+ HasDepartmentMetaData.Table.COLUMN_IDPROFILE + " = " + selectionArgs[1]);
-			}
 			break;
 		case HASGUARDIAN_TYPE_LIST:
 			builder.setTables(HasGuardianMetaData.Table.TABLE_NAME);
 			builder.setProjectionMap(hasguardianProjectionMap);
-			if (selectionArgs != null) {
-				builder.appendWhere(HasGuardianMetaData.Table.COLUMN_IDGUARDIAN + " = " + selectionArgs[0] + " AND "
-					+ HasGuardianMetaData.Table.COLUMN_IDCHILD + " = " + selectionArgs[1]);
-			}
 			break;
 		case HASLINK_TYPE_LIST:
 			builder.setTables(HasLinkMetaData.Table.TABLE_NAME);
 			builder.setProjectionMap(haslinkProjectionMap);
-			if (selectionArgs != null) {
-				builder.appendWhere(HasLinkMetaData.Table.COLUMN_IDSUBMEDIA + " = " + selectionArgs[0] + " AND "
-					+ HasLinkMetaData.Table.COLUMN_IDMEDIA + " = " + selectionArgs[1]);
-			}
 			break;
 		case HASSUBDEPARTMENT_TYPE_LIST:
 			builder.setTables(HasSubDepartmentMetaData.Table.TABLE_NAME);
 			builder.setProjectionMap(hassubdepartmentProjectionMap);
-			if (selectionArgs != null) {
-				builder.appendWhere(HasSubDepartmentMetaData.Table.COLUMN_IDDEPARTMENT + " = " + selectionArgs[0] + " AND "
-					+ HasSubDepartmentMetaData.Table.COLUMN_IDSUBDEPARTMENT + " = " + selectionArgs[1]);
-			}
 			break;
 		case HASTAG_TYPE_LIST:
 			builder.setTables(HasTagMetaData.Table.TABLE_NAME);
 			builder.setProjectionMap(hastagProjectionMap);
-			if (selectionArgs != null) {
-				builder.appendWhere(HasTagMetaData.Table.COLUMN_IDMEDIA + " = " + selectionArgs[0] + " AND "
-					+ HasTagMetaData.Table.COLUMN_IDTAG + " = " + selectionArgs[1]);
-			}
 			break;
 		case LISTOFAPPS_TYPE_LIST:
 			builder.setTables(ListOfAppsMetaData.Table.TABLE_NAME);
 			builder.setProjectionMap(listofappsProjectionMap);
-			if (selectionArgs != null) {
-				builder.appendWhere(ListOfAppsMetaData.Table.COLUMN_IDAPP + " = " + selectionArgs[0] + " AND "
-						+ ListOfAppsMetaData.Table.COLUMN_IDPROFILE + " = " + selectionArgs[1]);
-			}
 			break;
 		case MEDIA_TYPE_LIST:
 			builder.setTables(MediaMetaData.Table.TABLE_NAME);
@@ -533,18 +506,10 @@ public class DbProvider extends ContentProvider {
 		case MEDIADEPARTMENTACCESS_TYPE_LIST:
 			builder.setTables(MediaDepartmentAccessMetaData.Table.TABLE_NAME);
 			builder.setProjectionMap(mediaDepartmentAccessProjectionMap);
-			if (selectionArgs != null) {
-				builder.appendWhere(MediaDepartmentAccessMetaData.Table.COLUMN_IDDEPARTMENT + " = " + selectionArgs[0] + " AND " 
-						+ MediaDepartmentAccessMetaData.Table.COLUMN_IDMEDIA + " = " + selectionArgs[1]);
-			}
 			break;
 		case MEDIAPROFILEACCESS_TYPE_LIST:
 			builder.setTables(MediaProfileAccessMetaData.Table.TABLE_NAME);
 			builder.setProjectionMap(mediaProfileAccessProjectionMap);
-			if (selectionArgs != null) {
-				builder.appendWhere(MediaProfileAccessMetaData.Table.COLUMN_IDMEDIA + " = " + selectionArgs[0] + " AND " 
-						+ MediaProfileAccessMetaData.Table.COLUMN_IDPROFILE + " = " + selectionArgs[1]);
-			}
 			break;
 		case PROFILES_TYPE_LIST:
 			builder.setTables(ProfilesMetaData.Table.TABLE_NAME);
@@ -568,7 +533,7 @@ public class DbProvider extends ContentProvider {
 		}
 		
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
-		Cursor queryCursor = builder.query(db, projection, selection, null, null, null, null);
+		Cursor queryCursor = builder.query(db, projection, selection, selectionArgs, null, null, null);
 		queryCursor.setNotificationUri(getContext().getContentResolver(), uri);
 		return queryCursor;
 	}
