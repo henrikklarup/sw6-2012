@@ -19,7 +19,8 @@
     
     <!-- TEMPLATE LIST -->
     <string name="template_list_header">Gemte Tilpasninger</string>
-    <string name="delete_subprofile_message">Vil du slette?</string>
+    <string name="delete_subprofile_message">Vil du slette denne tilpasning?</string>
+    <string name="delete_description">Er du sikker på du vil slette</string>
     <string name="delete_yes">Ja</string>
     <string name="delete_no">Nej</string>
     

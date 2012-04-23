@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import dk.aau.cs.giraf.TimerLib.Guardian;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
@@ -27,7 +28,6 @@ public class SubProfileFragment extends android.app.ListFragment {
 	// Start the list empty
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		// TODO: Implement bind to the profile chosen by launcher
 		if(TimerLoader.profileID != -1){
 			Helper helper = new Helper(getActivity());
 			int position;
@@ -55,27 +55,29 @@ public class SubProfileFragment extends android.app.ListFragment {
 			public boolean onItemLongClick(AdapterView<?> arg0, View v,
 					final int row, long arg3) {
 				
+					TextView tv = new TextView(getActivity());
+					tv.setText(getString(R.string.delete_description) + " " + guard.getChild().SubProfiles().get(row).name + "?");
+					tv.setTextColor(0xFFFFFFFF);
+				
 					AlertDialog alertDialog = new AlertDialog.Builder(v
 							.getContext()).create();
 					alertDialog.setTitle(R.string.delete_subprofile_message);
+					alertDialog.setView(tv);
 					alertDialog.setButton(getText(R.string.delete_yes),
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface arg0,
 										int arg1) {
-									// TODO Auto-generated method stub
 									if (guard.getChild() != null && guard.getChild().deleteCheck()) {
 									guard.getChild().SubProfiles().get(row)
 											.delete();
 									Toast t = Toast.makeText(getActivity(),
 											R.string.delete_subprofile_toast,
-											5000); // TODO: Which profile has
-													// been deleted?
+											5000);
 									t.show();
 									loadSubProfiles();
 									} else {
 										Toast t = Toast.makeText(getActivity(),
 												R.string.cannot_delete_subprofile_toast, 5000);
-										// TODO: Which profile has been deleted?
 										t.show();
 									}
 								}
