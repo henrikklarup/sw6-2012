@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.ListView;
 import dk.aau.cs.giraf.TimerLib.Child;
 import dk.aau.cs.giraf.TimerLib.Guardian;
-import dk.aau.cs.giraf.TimerLib.SubProfile;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
 public class ChildFragment extends android.app.ListFragment {
