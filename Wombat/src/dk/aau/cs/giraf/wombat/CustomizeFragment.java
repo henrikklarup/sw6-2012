@@ -102,7 +102,7 @@ public class CustomizeFragment extends Fragment {
 			}
 		});
 
-		currSubP = new SubProfile("", "", 10, 0xFF000000, 0xFFFF0000,
+		currSubP = new SubProfile("", "", 0xFF000000, 0xFFFF0000,
 				0xFFFFFFFF, 0xFFFF0000, 600, false);
 		currSubP.save = false;
 		currSubP.saveAs = false;
@@ -124,7 +124,7 @@ public class CustomizeFragment extends Fragment {
 	}
 
 	public void setDefaultProfile() {
-		currSubP = new SubProfile("", "", 10, 0xFF000000, 0xFFFF0000,
+		currSubP = new SubProfile("", "", 0xFF000000, 0xFFFF0000,
 				0xFFFFFFFF, 0xFFFF0000, 600, false);
 		currSubP.save = false;
 		currSubP.saveAs = false;
