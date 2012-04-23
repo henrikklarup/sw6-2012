@@ -94,15 +94,17 @@ public class PARROTActivity extends Activity {
 		//This part of the code is supposed to get a profile from the launcher, and read it from the admin.
 		Bundle extras = getIntent().getExtras();
 		Profile prof;
+		App app;
 		Helper help = new Helper(this);
 		if(extras !=null)
 		{
 			prof = help.profilesHelper.getProfileById(extras.getLong("currentProfileId"));
+			app = help.appsHelper.getAppById(extras.getLong("currentAppId"));
 			Pictogram pic = new Pictogram(prof.getFirstname(), prof.getPicture(), null, null);
 			PARROTProfile parrotUser = new PARROTProfile(prof.getFirstname(), pic);
 
 			//TODO read categories from settings
-			Setting<String, String, String> specialSettings = null;
+			Setting<String, String, String> specialSettings = app.getSettings();
 
 			//TODO load medias into pictogram categories using settings.
 
