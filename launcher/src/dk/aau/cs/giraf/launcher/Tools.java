@@ -17,6 +17,9 @@ public class Tools {
 	
 	// Keys for inserting and retrieving data in Intents.
 	public static final String GUARDIANID = "currentGuardianID";
+	public static final String CHILDID = "currentChildID";
+	public static final String APP_PACKAGENAME = "appPackageName";
+	public static final String APP_ACTIVITYNAME = "appActivityName";
 	
 	// 24 hours in milliseconds = 86400000;
 	// 4 hours in milliseconds:

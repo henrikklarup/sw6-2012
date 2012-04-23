@@ -1,11 +1,9 @@
 package dk.aau.cs.giraf.launcher;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
-import dk.aau.cs.giraf.oasis.lib.models.Department;
 
 import dk.aau.cs.giraf.gui.*;
 
@@ -16,7 +14,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class ProfileSelectActivity extends Activity{
@@ -35,9 +32,9 @@ public class ProfileSelectActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.profileselect);
 		
-	  	guardianID = getIntent().getExtras().getLong("currentGuardianID");
-        packageName = getIntent().getExtras().getString("appPackageName");
-        activityName = getIntent().getExtras().getString("appActivityName");
+	  	guardianID = getIntent().getExtras().getLong(Tools.GUARDIANID);
+        packageName = getIntent().getExtras().getString(Tools.APP_PACKAGENAME);
+        activityName = getIntent().getExtras().getString(Tools.APP_ACTIVITYNAME);
 		
 		loadProfiles();
 	}
@@ -82,8 +79,8 @@ public class ProfileSelectActivity extends Activity{
 		    		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
 	                        | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
 		    		
-		            intent.putExtra("currentChildID", childID);
-		            intent.putExtra("currentGuardianID", guardianID);
+		            intent.putExtra(Tools.CHILDID, childID);
+		            intent.putExtra(Tools.GUARDIANID, guardianID);
 		            
 					startActivity(intent);
 		          }

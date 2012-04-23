@@ -11,10 +11,10 @@ import android.content.Intent;
             ApplicationInfo app = (ApplicationInfo) parent.getItemAtPosition(position);
             
             Intent profileSelectIntent = new Intent(v.getContext(),ProfileSelectActivity.class);
-            profileSelectIntent.putExtra("appPackageName", app.packageName);
-            profileSelectIntent.putExtra("appActivityName", app.activityName);
-            profileSelectIntent.putExtra("currentGuardianID", app.guardian);
-            profileSelectIntent.putExtra("currentApID", app.app);
+            profileSelectIntent.putExtra(Tools.APP_PACKAGENAME, app.packageName);
+            profileSelectIntent.putExtra(Tools.APP_ACTIVITYNAME, app.activityName);
+            profileSelectIntent.putExtra(Tools.GUARDIANID, app.guardian);
+            profileSelectIntent.putExtra(Tools.CHILDID, app.app);
             
 			v.getContext().startActivity(profileSelectIntent);
     }  
