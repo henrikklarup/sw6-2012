@@ -137,3 +137,5 @@ Sørg for det er let forståeligt, javadoc
 
 *Eventuelt:*
 Ændring af eksamens rækkefølge
+
+Mødet afsluttet kl 10.05
