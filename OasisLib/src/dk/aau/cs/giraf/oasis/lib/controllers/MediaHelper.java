@@ -87,9 +87,15 @@ public class MediaHelper {
 	 * Insert media
 	 * @param media Media containing data
 	 */
-	public void insertMedia(Media media) {
+	
+	public long insertMedia(Media media) {
+		long result = 0;
+		Uri uri;
 		ContentValues cv = getContentValues(media);
-		_context.getContentResolver().insert(MediaMetaData.CONTENT_URI, cv);
+		uri = _context.getContentResolver().insert(MediaMetaData.CONTENT_URI, cv);
+		result = Integer.parseInt(uri.getPathSegments().get(1));
+		
+		return result;
 	}
 
 	public int addTagsToMedia(String[] tags, Media media) {

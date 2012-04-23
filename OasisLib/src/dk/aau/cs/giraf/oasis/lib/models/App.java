@@ -7,7 +7,10 @@ public class App {
 	private String version;
 	private Setting<String, String, String> settings;
 	private Stat<String, String, String> stats;
-	private static String _output = "{0}, {1}, {2}";
+	private String icon;
+	private String aPackage;
+	private String activity;
+	private static String _output = "{0}, {1}, {2}, {3}, {4}, {5}";
 
 	/**
 	 * Constructor with arguments
@@ -91,10 +94,55 @@ public class App {
 		this.stats = stats;
 	}
 	/**
+	 * @return the icon
+	 */
+	public String getIcon() {
+		return icon;
+	}
+
+	/**
+	 * @param icon the icon to set
+	 */
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+
+	/**
+	 * @return the aPackage
+	 */
+	public String getaPackage() {
+		return aPackage;
+	}
+
+	/**
+	 * @param aPackage the aPackage to set
+	 */
+	public void setaPackage(String aPackage) {
+		this.aPackage = aPackage;
+	}
+
+	/**
+	 * @return the activity
+	 */
+	public String getActivity() {
+		return activity;
+	}
+
+	/**
+	 * @param activity the activity to set
+	 */
+	public void setActivity(String activity) {
+		this.activity = activity;
+	}
+
+	/**
 	 * Set output
 	 * {0} = Id
 	 * {1} = Name
 	 * {2} = Version
+	 * {3} = Icon path
+	 * {4} = package
+	 * {5} = activity
 	 * @param output the output to set
 	 */
 	public static void setOutput(String output) {
@@ -111,6 +159,9 @@ public class App {
 		localOutput = localOutput.replace("{0}", String.valueOf(getId()));
 		localOutput = localOutput.replace("{1}", getName());
 		localOutput = localOutput.replace("{2}", getVersion());
+		localOutput = localOutput.replace("{3}", getIcon());
+		localOutput = localOutput.replace("{4}", getaPackage());
+		localOutput = localOutput.replace("{5}", getActivity());
 
 		
 		return localOutput;

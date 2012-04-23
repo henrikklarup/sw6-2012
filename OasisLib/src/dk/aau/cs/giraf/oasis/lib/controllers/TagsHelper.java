@@ -31,10 +31,13 @@ public class TagsHelper {
 	}
 	
 	public long insertTag(Tag tag) {
+		long result = 0;
+		Uri uri;
 		ContentValues cv = getContentValues(tag);
-		_context.getContentResolver().insert(TagsMetaData.CONTENT_URI, cv);
+		uri = _context.getContentResolver().insert(TagsMetaData.CONTENT_URI, cv);
+		result = Integer.parseInt(uri.getPathSegments().get(1));
 
-		return 0;
+		return result;
 	}
 
 	public int modifyTag(Tag tag) {

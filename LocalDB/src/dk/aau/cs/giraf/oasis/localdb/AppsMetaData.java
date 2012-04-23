@@ -16,5 +16,8 @@ public class AppsMetaData {
 		public static final String COLUMN_ID = "_id";
 		public static final String COLUMN_NAME = "apps_name";
 		public static final String COLUMN_VERSION = "apps_version";
+		public static final String COLUMN_ICON = "apps_icon";
+		public static final String COLUMN_PACKAGE = "apps_package";
+		public static final String COLUMN_ACTIVITY = "apps_activity";
 	}
 }
