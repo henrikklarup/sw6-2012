@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import dk.aau.cs.giraf.launcher.R;
 import dk.aau.cs.giraf.oasis.lib.Helper;
+import dk.aau.cs.giraf.oasis.lib.models.App;
 
 public class LogoActivity extends Activity {
 
