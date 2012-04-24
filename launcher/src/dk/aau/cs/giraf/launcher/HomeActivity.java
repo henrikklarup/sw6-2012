@@ -240,7 +240,7 @@ public class HomeActivity extends Activity {
 					appInfo.guardian = mCurrentUser.getId();
 					
 
-			    	App app = new App(appInfo.title.toString(), "random", "", appInfo.packageName,appInfo.activityName);
+			    	//App app = new App(appInfo.title.toString(), "random", "", appInfo.packageName,appInfo.activityName);
 					
 					Log.i("magnus","icon: " + appInfo.icon);
 					Log.i("magnus","packageName: " + appInfo.packageName);
