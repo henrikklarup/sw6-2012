@@ -7,7 +7,7 @@ public class Hourglass extends SubProfile {
 	}
 
 	public Hourglass(Hourglass obj){
-		super(obj.name, obj.desc,obj.bgcolor, obj.timeLeftColor,obj.timeSpentColor,obj.frameColor,obj.totalTime,obj.gradient);
+		super(obj.name, obj.desc,obj.bgcolor, obj.timeLeftColor,obj.timeSpentColor,obj.frameColor,obj.get_totalTime(),obj.gradient);
 	}
 	
 	public Hourglass copy(){

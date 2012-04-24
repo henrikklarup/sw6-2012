@@ -49,7 +49,7 @@ public class ChildAdapter extends ArrayAdapter<Child> {
 
 		}
 		
-			if(2 == TimerLoader.profileID){ //TODO:Change this
+			if(c.getProfileId() == TimerLoader.profileID){ //TODO:Change this
 				v.setBackgroundResource(R.drawable.list_selected);
 				TimerLoader.profileFirstClick = true;
 				TimerLoader.profileID = -1;

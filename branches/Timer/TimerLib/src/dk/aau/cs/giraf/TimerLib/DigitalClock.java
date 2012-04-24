@@ -21,7 +21,7 @@ public class DigitalClock extends SubProfile {
 	 * @param obj DigitalClock you wish to copy
 	 */
 	public DigitalClock(DigitalClock obj){
-		super(obj.name, obj.desc,obj.bgcolor, obj.timeLeftColor,obj.timeSpentColor,obj.frameColor,obj.totalTime,obj.gradient);
+		super(obj.name, obj.desc,obj.bgcolor, obj.timeLeftColor,obj.timeSpentColor,obj.frameColor,obj.get_totalTime(),obj.gradient);
 	}
 	
 	/**

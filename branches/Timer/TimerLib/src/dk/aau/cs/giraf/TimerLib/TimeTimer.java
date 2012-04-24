@@ -8,7 +8,7 @@ public class TimeTimer extends SubProfile {
 	}
 	
 	public TimeTimer(TimeTimer obj){
-		super(obj.name, obj.desc,obj.bgcolor, obj.timeLeftColor,obj.timeSpentColor,obj.frameColor,obj.totalTime,obj.gradient);
+		super(obj.name, obj.desc,obj.bgcolor, obj.timeLeftColor,obj.timeSpentColor,obj.frameColor,obj.get_totalTime(),obj.gradient);
 	}
 	
 	public TimeTimer copy(){
