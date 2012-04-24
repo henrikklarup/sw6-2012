@@ -139,12 +139,12 @@ public class QueryBuilder {
 		out.add("SELECT * FROM HasSubDepartment "+
 				"WHERE HasSubDepartment.idDepartment=(SELECT idUser FROM AuthUsers WHERE certificate='"+cert+"');");
 		
-		out.add("SELECT * FROM ListOfApps " +
-				"WHERE idProfile=(SELECT idUser FROM AuthUsers WHERE certificate='"+cert+"');");
+//		out.add("SELECT * FROM ListOfApps " +
+//				"WHERE idProfile=(SELECT idUser FROM AuthUsers WHERE certificate='"+cert+"');");
 		
 		out.add("SELECT * FROM Apps,ListOfApps " +
-				"WHERE Apps.idApp=ListOfApps.idApp AND" +
-				" ListOfApps.idProfile=(SELECT idUser FROM AuthUsers WHERE certificate='"+cert+"');");
+				"WHERE Apps.idApp=ListOfApps.idApp AND " +
+				"ListOfApps.idProfile=(SELECT idUser FROM AuthUsers WHERE certificate='"+cert+"');");
 		
 		out.add("SELECT * FROM Media WHERE ownerID=(SELECT idUser FROM AuthUsers WHERE certificate='"+cert+"');");
 		
@@ -159,9 +159,9 @@ public class QueryBuilder {
 				"WHERE HasTag.idMedia=Media.idMedia AND Media.OwnerID=(SELECT idUser "+
 											                          "FROM AuthUsers "+
 											                          "WHERE certificate='"+cert+"');");
-		out.add("SELECT distinct idParent,idChild " +
+		out.add("SELECT distinct HasLink.idMedia,HasLink.idSubMedia " +
 				"FROM HasLink,Media " +
-				"WHERE (HasLink.idParent=Media.idMedia AND Media.OwnerID=(SELECT idUser " +
+				"WHERE (HasLink.idMedia=Media.idMedia AND Media.OwnerID=(SELECT idUser " +
 				                                                         "FROM AuthUsers " +
 				                                                         "WHERE certificate='"+cert+"'));");
 		out.add("SELECT M.idDepartment,M.idMedia " +
@@ -171,11 +171,18 @@ public class QueryBuilder {
 				                "FROM AuthUsers " +
 				                "WHERE certificate='"+cert+"');");
 		
-		out.add("SELECT M.idDepartment,M.idMedia " +
-				"FROM MediaDepartmentAccess M,Department D " +
-				"WHERE M.idDepartment=D.idDepartment AND D.idDepartment=(SELECT idUser " +
-				                                                        "FROM AuthUsers " +
-				                                                        "WHERE certificate='"+cert+"');");
+//		out.add("SELECT M.idDepartment,M.idMedia " +
+//				"FROM MediaDepartmentAccess M,Department D " +
+//				"WHERE M.idDepartment=D.idDepartment AND D.idDepartment=(SELECT idUser " +
+//				                                                        "FROM AuthUsers " +
+//				                                                        "WHERE certificate='"+cert+"');");
+		out.add("SELECT M.idProfile,M.idMedia "+
+				"FROM MediaProfileAccess M,Profile P "+
+                "WHERE M.idProfile=P.idProfile AND "+
+                      "P.idProfile=(SELECT idUser "+ 
+                                   "FROM AuthUsers "+
+                                   "WHERE certificate='"+cert+"');");
+				
 		out.add("SELECT idGuardian,idChild " +
 				"FROM HasGuardian,Profile " +
 				"WHERE idGuardian=idProfile AND " +
