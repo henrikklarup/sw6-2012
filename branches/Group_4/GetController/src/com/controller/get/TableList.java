@@ -30,7 +30,7 @@ public class TableList extends ListActivity {
 		super.onCreate(savedInstanceState);
 		
 		helper = new Helper(this);
-		settings = new Setting<String, String, String>();
+		settings = new Setting();
 		
 
 		HashMap map = new HashMap();
@@ -44,7 +44,7 @@ public class TableList extends ListActivity {
 		long profileId = helper.profilesHelper.insertProfile(profile);
 		profile.setId(profileId);
 		
-		app = new App("TestApp", "0.2");
+		app = new App("TestApp", "0.2", "/mnt/sdcard/?", "FakePackage", "FakeActivity");
 		helper.appsHelper.insertApp(app);
 		List<App> apps = helper.appsHelper.getApps();
 		app = apps.get(apps.size() - 1);

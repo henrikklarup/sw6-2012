@@ -58,7 +58,7 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
 		super.setContentView(R.layout.main);
 		
 		Helper helper = new Helper(this);
-//		helper.CreateDummyData();
+		helper.CreateDummyData();
 		
 		this.initialiseTabHost(savedInstanceState);
 		if (savedInstanceState != null) {

@@ -39,7 +39,7 @@ public class AppsView extends ListActivity {
 		if (extras != null) {
 			app = helper.appsHelper.getAppById(extras.getLong("ID"));
 		} else {
-			app = new App("Should not be added","0.1");
+			app = new App("Should not be added","0.1", "/mnt/sdcard/?", "FakePackage", "FakeActivity");
 		}
 
 		updateList();
