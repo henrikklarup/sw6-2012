@@ -92,7 +92,7 @@ public class Tools {
 	 * @param i The integer which should be used for convertion
 	 * @return i converted to density pixels (dp)
 	 */
-	private int intToDP(Context context, int i) {
+	private static int intToDP(Context context, int i) {
 		return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, i, context.getResources().getDisplayMetrics());
 	}
 	
@@ -101,7 +101,7 @@ public class Tools {
 	 * @param context Context of the current activity
 	 * @return true if the device currently is held in landscape orientation by the user.
 	 */
-	private boolean isLandscape(Context context) {
+	private static boolean isLandscape(Context context) {
 		int rotation = ((WindowManager) context.getSystemService(context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
 		if ((rotation % 2) == 0) {
 			return true;
