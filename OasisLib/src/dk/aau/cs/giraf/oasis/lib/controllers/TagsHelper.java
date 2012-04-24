@@ -63,9 +63,8 @@ public class TagsHelper {
 
 		if (c != null) {
 			tags = cursorToTagList(c);
+			c.close();
 		}
-
-		c.close();
 
 		return tags;
 	}
@@ -73,29 +72,31 @@ public class TagsHelper {
 	public List<Tag> getTagsByCaption(String name) {
 		List<Tag> tags = new ArrayList<Tag>();
 
-		Cursor c = _context.getContentResolver().query(TagsMetaData.CONTENT_URI, columns, TagsMetaData.Table.COLUMN_CAPTION + " = '" + name + "'", null, null);
+		Cursor c = _context.getContentResolver().query(TagsMetaData.CONTENT_URI, columns, TagsMetaData.Table.COLUMN_CAPTION + " LIKE '%" + name + "%'", null, null);
 
 		if (c != null) {
 			tags = cursorToTagList(c);
+			c.close();
 		}
-
-		c.close();
 
 		return tags;
 	}
 	
-	public List<Tag> getTagsById(Long id) {
-		List<Tag> tags = new ArrayList<Tag>();
-
-		Cursor c = _context.getContentResolver().query(TagsMetaData.CONTENT_URI, columns, TagsMetaData.Table.COLUMN_ID + " = '" + id + "'", null, null);
+	public Tag getTagById(Long id) {
+		Tag tag = null;
+		
+		Uri uri = ContentUris.withAppendedId(TagsMetaData.CONTENT_URI, id);
+		
+		Cursor c = _context.getContentResolver().query(uri, columns, null, null, null);
 
 		if (c != null) {
-			tags = cursorToTagList(c);
+			tag = cursorToTag(c);
+			c.close();
 		}
 
-		c.close();
+		
 
-		return tags;
+		return tag;
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
