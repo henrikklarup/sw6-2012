@@ -249,7 +249,7 @@ public class CustomizeFragment extends Fragment {
 
 		/* Create description of time chosen */
 		timeDescription = (TextView) getActivity().findViewById(R.id.showTime);
-		setTime(currSubP.totalTime);
+		setTime(currSubP.get_totalTime());
 
 		/* Add on change listeners for both wheels */
 		mins.addChangingListener(new OnWheelChangedListener() {
@@ -285,21 +285,21 @@ public class CustomizeFragment extends Fragment {
 	/**
 	 * Sets the time on the time picker wheels
 	 * 
-	 * @param totalTime
+	 * @param get_totalTime()
 	 *            Total time in seconds
 	 */
-	private void setTime(int totalTime) {
+	private void setTime(int _totalTime) {
 		int minutes, seconds;
-		Log.e("Time", "" + totalTime);
-		if (totalTime == 60) {
+		Log.e("Time", "" + _totalTime);
+		if (_totalTime == 60) {
 			minutes = 1;
 			seconds = 0;
-		} else if (totalTime >= 60 * 60) {
+		} else if (_totalTime >= 60 * 60) {
 			minutes = 60;
 			seconds = 0;
 		} else {
-			minutes = totalTime / 60;
-			seconds = totalTime % 60;
+			minutes = _totalTime / 60;
+			seconds = _totalTime % 60;
 		}
 
 		mins.setCurrentItem(minutes);
@@ -332,7 +332,7 @@ public class CustomizeFragment extends Fragment {
 	 *            Total time in seconds
 	 */
 	private void updateTime(int m_minutes, int m_seconds) {
-		currSubP.totalTime = (m_minutes * 60) + m_seconds;
+		currSubP.set_totalTime((m_minutes * 60) + m_seconds);
 
 		String timeText = "";
 		/* Første del med mellemrum */
@@ -683,7 +683,7 @@ public class CustomizeFragment extends Fragment {
 						ChildFragment cf = (ChildFragment)getFragmentManager().findFragmentById(R.id.childFragment);
 						SubProfileFragment spf = (SubProfileFragment) getFragmentManager()
 								.findFragmentById(R.id.subprofileFragment);
-						TimerLoader.profileID = 2; //TODO: Change this
+						TimerLoader.profileID = guard.getChild().getProfileId();
 						cf.loadSubProfiles();
 						spf.loadSubProfiles();
 						
@@ -721,8 +721,8 @@ public class CustomizeFragment extends Fragment {
 			break;
 		}
 
-		int seconds = currSubP.totalTime % 60;
-		int minutes = (currSubP.totalTime - seconds) / 60;
+		int seconds = currSubP.get_totalTime() % 60;
+		int minutes = (currSubP.get_totalTime() - seconds) / 60;
 
 		desc += name + " - ";
 		desc += "(" + minutes + ":" + seconds + ")";
@@ -855,7 +855,7 @@ public class CustomizeFragment extends Fragment {
 		selectStyle(currSubP.formType());
 
 		/* Set Time */
-		setTime(currSubP.totalTime);
+		setTime(currSubP.get_totalTime());
 
 		/* Set Colors */
 		checkboxGradient.setChecked(currSubP.gradient);
@@ -866,6 +866,8 @@ public class CustomizeFragment extends Fragment {
 
 		/* Set Attachment */
 		setAttachment(currSubP.getAttachment());
+		
+		/* Set Done picture */
 	}
 
 	public void reloadCustomize() {
@@ -873,7 +875,7 @@ public class CustomizeFragment extends Fragment {
 		selectStyle(currSubP.formType());
 
 		/* Set Time */
-		setTime(currSubP.totalTime);
+		setTime(currSubP.get_totalTime());
 
 		/* Set Colors */
 		checkboxGradient.setChecked(currSubP.gradient);

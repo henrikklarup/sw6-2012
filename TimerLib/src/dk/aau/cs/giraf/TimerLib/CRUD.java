@@ -157,7 +157,7 @@ public class CRUD {
 		
 		map.put("frameColor", String.valueOf(p.frameColor));
 		
-		map.put("totalTime", String.valueOf(p.totalTime));
+		map.put("totalTime", String.valueOf(p.get_totalTime()));
 		
 		map.put("gradient", String.valueOf(p.gradient));
 		

@@ -10,7 +10,7 @@ public class ProgressBar extends SubProfile {
 	}
 	
 	public ProgressBar(ProgressBar obj){
-		super(obj.name, obj.desc,obj.bgcolor, obj.timeLeftColor,obj.timeSpentColor,obj.frameColor,obj.totalTime,obj.gradient);
+		super(obj.name, obj.desc,obj.bgcolor, obj.timeLeftColor,obj.timeSpentColor,obj.frameColor,obj.get_totalTime(),obj.gradient);
 	}
 	
 	public ProgressBar copy(){

@@ -2,11 +2,6 @@ package dk.aau.cs.giraf.TimerLib;
 
 import java.util.ArrayList;
 
-import javax.microedition.khronos.egl.EGLConfig;
-import javax.microedition.khronos.opengles.GL10;
-
-import android.opengl.GLSurfaceView.Renderer;
-
 public class SubProfile implements Comparable<SubProfile>{
 	
 	Guardian guard = Guardian.getInstance();
@@ -17,7 +12,7 @@ public class SubProfile implements Comparable<SubProfile>{
 	public int timeLeftColor = 0xffffffff;
 	public int timeSpentColor = 0xffffffff;
 	public int frameColor = 0xffffffff;
-	public int totalTime = 100;
+	private int _totalTime = 100;
 	public boolean gradient = false;
 	public boolean save = true;
 	public boolean saveAs = true;
@@ -36,7 +31,7 @@ public class SubProfile implements Comparable<SubProfile>{
 		this.timeLeftColor = timeLeftColor;
 		this.timeSpentColor = timeSpentColor;
 		this.frameColor = frameColor;
-		this.totalTime = totalTime;
+		this._totalTime = totalTime;
 		this.gradient = changeColor;
 	}
 		
@@ -53,6 +48,22 @@ public class SubProfile implements Comparable<SubProfile>{
 		this.gradient = changeColor;
 	}
 	
+	public int get_totalTime() {
+		return _totalTime;
+	}
+	
+	/**
+	 * Sets the time of the subprofile and its attachment
+	 * @param time
+	 * 		Total runtime of the subprofile (in seconds)
+	 */
+	public void set_totalTime(int _totalTime) {
+		this._totalTime = _totalTime;
+		// Syncronizes the time of the profile and its attachment
+		if(this._attachment != null){
+			this._attachment._totalTime = _totalTime;
+		}
+	}
 	
 	void setAppId(long id){
 		this._appId = id;
@@ -107,7 +118,7 @@ public class SubProfile implements Comparable<SubProfile>{
 	public void setAttachment(SubProfile p){
 		this._attachmentId = p.getAppId();
 		this._attachment = p;
-		this._attachment.totalTime = this.totalTime;
+		this._attachment._totalTime = this._totalTime;
 	}
 	
 	public formFactor formType(){
@@ -152,7 +163,7 @@ public class SubProfile implements Comparable<SubProfile>{
 		}
 }
 
-	 public boolean equals(Object o) {
+	public boolean equals(Object o) {
 	        if (!(o instanceof SubProfile))
 	            return false;
 	        SubProfile n = (SubProfile) o;
@@ -173,7 +184,7 @@ public class SubProfile implements Comparable<SubProfile>{
 	    }
 
 		public SubProfile toHourglass() {
-			Hourglass form = new Hourglass(this.name, this.desc, this.bgcolor, this.timeLeftColor, this.timeSpentColor, this.frameColor, this.totalTime, this.gradient);
+			Hourglass form = new Hourglass(this.name, this.desc, this.bgcolor, this.timeLeftColor, this.timeSpentColor, this.frameColor, this._totalTime, this.gradient);
 			form.setId(this.getId());		
 			if(this._attachment != null){
 				form.setAttachment(this._attachment);
@@ -182,7 +193,7 @@ public class SubProfile implements Comparable<SubProfile>{
 		}
 
 		public SubProfile toProgressBar() {
-			ProgressBar form = new ProgressBar(this.name, this.desc, this.bgcolor, this.timeLeftColor, this.timeSpentColor, this.frameColor, this.totalTime, this.gradient);
+			ProgressBar form = new ProgressBar(this.name, this.desc, this.bgcolor, this.timeLeftColor, this.timeSpentColor, this.frameColor, this._totalTime, this.gradient);
 			form.setId(this.getId());
 			if(this._attachment != null){
 				form.setAttachment(this._attachment);
@@ -191,7 +202,7 @@ public class SubProfile implements Comparable<SubProfile>{
 		}
 
 		public SubProfile toTimeTimer() {
-			TimeTimer form = new TimeTimer(this.name, this.desc, this.bgcolor, this.timeLeftColor, this.timeSpentColor, this.frameColor, this.totalTime, this.gradient);
+			TimeTimer form = new TimeTimer(this.name, this.desc, this.bgcolor, this.timeLeftColor, this.timeSpentColor, this.frameColor, this._totalTime, this.gradient);
 			form.setId(this.getId());
 			if(this._attachment != null){
 				form.setAttachment(this._attachment);
@@ -200,7 +211,7 @@ public class SubProfile implements Comparable<SubProfile>{
 		}
 
 		public SubProfile toDigitalClock() {
-			DigitalClock form = new DigitalClock(this.name, this.desc, this.bgcolor, this.timeLeftColor, this.timeSpentColor, this.frameColor, this.totalTime, this.gradient);
+			DigitalClock form = new DigitalClock(this.name, this.desc, this.bgcolor, this.timeLeftColor, this.timeSpentColor, this.frameColor, this._totalTime, this.gradient);
 			form.setId(this.getId());
 			if(this._attachment != null){
 				form.setAttachment(this._attachment);

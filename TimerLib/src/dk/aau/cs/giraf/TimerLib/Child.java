@@ -25,7 +25,7 @@ public class Child implements Comparable<Child>{
 		this._ProfileId = id;
 	}
 	
-	int getProfileId(){
+	public int getProfileId(){
 		return this._ProfileId;
 	}
 	
