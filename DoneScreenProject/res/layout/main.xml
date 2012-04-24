@@ -2,8 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:weightSum="1" >
     
+    <ImageView 
+        android:contentDescription="@string/done_picture"
+		android:src="@android:drawable/btn_star"
+		android:minWidth="100dp"
+		android:maxWidth="200dp"
+		android:minHeight="100dp"
+		android:maxHeight="200dp"
+		android:layout_gravity="center"
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:layout_weight="0.8"/>
     
     <TextView 
         android:layout_height="wrap_content"
@@ -12,6 +24,7 @@
         android:textStyle="bold"
         android:textSize="80dp"
         android:text="@string/done_message"
+        android:layout_weight="0.2"
         />
 
 </LinearLayout>
