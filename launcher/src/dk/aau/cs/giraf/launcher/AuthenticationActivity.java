@@ -49,8 +49,7 @@ public class AuthenticationActivity extends CaptureActivity {
 		infoView = (TextView)this.findViewById(R.id.authentication_step1);
 		mContext = this;
 
-		final GButton button = (GButton) findViewById(R.id.loginGButton);
-		button.setOnClickListener(new View.OnClickListener() {
+		gLoginButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				gLoginButton.setVisibility(View.INVISIBLE);
 				loginNameView.setVisibility(View.INVISIBLE);
