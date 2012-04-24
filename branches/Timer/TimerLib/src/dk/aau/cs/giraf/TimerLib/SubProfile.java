@@ -48,6 +48,20 @@ public class SubProfile implements Comparable<SubProfile>{
 		this.gradient = changeColor;
 	}
 	
+	public SubProfile(SubProfile obj){
+		if(this._id == -1){
+			this._id = guard.getId();
+		}
+		this.name = obj.name;
+		this.desc = obj.desc;
+		this.bgcolor = obj.bgcolor;
+		this.timeLeftColor = obj.timeLeftColor;
+		this.timeSpentColor = obj.timeSpentColor;
+		this.frameColor = obj.frameColor;
+		this._totalTime = obj._totalTime;
+		this.gradient = obj.gradient;
+	}
+	
 	public int get_totalTime() {
 		return _totalTime;
 	}

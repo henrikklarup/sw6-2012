@@ -18,7 +18,6 @@ public class ChildFragment extends android.app.ListFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		TimerLoader.load();
 	}
 
 	@Override

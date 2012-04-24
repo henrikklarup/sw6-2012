@@ -12,10 +12,16 @@ public class MainActivity extends Activity {
 		
 		Bundle extras = getIntent().getExtras();
         if (extras != null) {
-        	TimerLoader.profileID = extras.getLong("currentProfileId");
+        	TimerLoader.appID = 928;
+        	TimerLoader.guardianID = extras.getLong("currentGuardianID");
+        	TimerLoader.profileID = extras.getLong("currentChildId");
         } else {
+        	TimerLoader.appID = -1;
+        	TimerLoader.guardianID = -1;
         	TimerLoader.profileID = -1;
         }
+        
+		TimerLoader.load();
 
 	}
 }
