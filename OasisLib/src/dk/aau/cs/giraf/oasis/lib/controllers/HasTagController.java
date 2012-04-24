@@ -30,6 +30,21 @@ class HasTagController {
 		return _context.getContentResolver().delete(HasTagMetaData.CONTENT_URI, null, null);
 	}
 
+	public int removeHasTag(Tag tag, Media media) {
+		return _context.getContentResolver().delete(HasTagMetaData.CONTENT_URI, HasTagMetaData.Table.COLUMN_IDTAG + " = '" + tag.getId() +
+				"' AND " + HasTagMetaData.Table.COLUMN_IDMEDIA + " = '" + media.getId() + "'", null);
+	}
+	
+	public int removeHasTagList(List<Tag> tags, Media media) {
+		int result = 0;
+		for (Tag t : tags) {
+			result += _context.getContentResolver().delete(HasTagMetaData.CONTENT_URI, HasTagMetaData.Table.COLUMN_IDTAG + " = '" + t.getId() +
+					"' AND " + HasTagMetaData.Table.COLUMN_IDMEDIA + " = '" + media.getId() + "'", null);
+		}
+
+		return result;
+	}
+
 	public long insertHasTag(HasTag ht) {
 		ContentValues cv = getContentValues(ht);
 		_context.getContentResolver().insert(HasTagMetaData.CONTENT_URI, cv);
@@ -51,7 +66,7 @@ class HasTagController {
 		return list;
 	}
 
-	public List<HasTag> getTagsByMedia(Media media) {
+	public List<HasTag> getHasTagsByMedia(Media media) {
 		List<HasTag> list= new ArrayList<HasTag>();
 
 		Cursor c = _context.getContentResolver().query(HasTagMetaData.CONTENT_URI, columns, 
@@ -65,8 +80,8 @@ class HasTagController {
 
 		return list;
 	}
-	
-	public List<HasTag> getMediaByTag(Tag tag) {
+
+	public List<HasTag> getHasTagsByTag(Tag tag) {
 		List<HasTag> list= new ArrayList<HasTag>();
 
 		Cursor c = _context.getContentResolver().query(HasTagMetaData.CONTENT_URI, columns, 
@@ -80,12 +95,12 @@ class HasTagController {
 
 		return list;
 	}
-	
+
 	public int modifyHasTag(HasTag ht) {
 		ContentValues cv = getContentValues(ht);
 		return _context.getContentResolver().update(HasTagMetaData.CONTENT_URI, cv, 
 				HasTagMetaData.Table.COLUMN_IDMEDIA + " = '" + ht.getIdMedia() + "' AND " +
-				HasTagMetaData.Table.COLUMN_IDTAG + " = '" + ht.getIdTag() + "'", null);
+						HasTagMetaData.Table.COLUMN_IDTAG + " = '" + ht.getIdTag() + "'", null);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
