@@ -304,8 +304,8 @@ public class SelectProfileToEdit extends HttpServlet {
 		{
 
 			out.println("<tr onmouseover=\"ChangeColor(this, true);\" onmouseout=\"ChangeColor(this, false);\"" + 
-					"onclick=\"setID('"+p.getId()+"'); submitform();\">");
-			out.println("<td>" + p.getId() + "</td><td>"+p.getName()+"</td>");//<td>"+p.getGuardian()+"</td><td>"+p.getParent()+"</td>");
+					"onclick=\"setID('"+p.getID()+"'); submitform();\">");
+			out.println("<td>" + p.getID() + "</td><td>"+p.getName()+"</td>");//<td>"+p.getGuardian()+"</td><td>"+p.getParent()+"</td>");
 			out.println("</tr>");
 
 		}

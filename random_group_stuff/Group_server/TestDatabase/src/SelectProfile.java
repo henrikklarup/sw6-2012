@@ -283,8 +283,8 @@ public class SelectProfile extends HttpServlet {
 		{
 
 			out.println("<tr onmouseover=\"ChangeColor(this, true);\" onmouseout=\"ChangeColor(this, false);\"" + 
-					"onclick=\"setOpen(1); setID('"+p.getId()+"'); submitform();\">");
-			out.println("<td>" + p.getId() + "</td><td>"+p.getName()+"</td>");//<td>"+p.getGuardian()+"</td><td>"+p.getParent()+"</td>");
+					"onclick=\"setOpen(1); setID('"+p.getID()+"'); submitform();\">");
+			out.println("<td>" + p.getID() + "</td><td>"+p.getName()+"</td>");//<td>"+p.getGuardian()+"</td><td>"+p.getParent()+"</td>");
 			out.println("</tr>");
 
 		}
@@ -324,7 +324,7 @@ public class SelectProfile extends HttpServlet {
 
 				out.println("<select name='guardianID'>");
 				for (Profile g : guardians) {
-					out.println("<option value='"+g.getId()+"'>"+g.getName());	
+					out.println("<option value='"+g.getID()+"'>"+g.getName());	
 				}
 				out.println("</select");
 				out.println("</tr>");

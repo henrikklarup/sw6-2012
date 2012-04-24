@@ -54,7 +54,7 @@ public class Profile {
 		return this.username;
 	}*/
 
-	public int getId()
+	public int getID()
 	{
 		return this.id;
 	}
@@ -80,7 +80,7 @@ public class Profile {
 
 	public String getName()
 	{
-		if (middlename == null)
+		if (middlename == null || middlename.equals("null"))
 			return this.firstname + " " + this.surname;
 		else
 			return this.firstname + " " + this.middlename + " " + this.surname;

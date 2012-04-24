@@ -35,6 +35,7 @@ public class TestDatabase extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	String nextLocation = "";
 	String openVar;
+	String systemMessage = null;
 
 	public void doGet(HttpServletRequest aRequest, 
 			HttpServletResponse aResponse) 
@@ -46,6 +47,7 @@ public class TestDatabase extends HttpServlet {
 		String DBpassword = null;
 		String DBusername = null;
 		session.setAttribute("COMINGFROM", "TestDatabase");
+		systemMessage = (String) session.getAttribute("SYSTEMMESSAGE");
 
 		openVar = aRequest.getParameter("jsOpenVar");
 		if (openVar == null)
@@ -163,7 +165,8 @@ public class TestDatabase extends HttpServlet {
 		}		
 		aOutput.println("<div id=\"mainBackground\">");
 		aOutput.println("<center><h2> Velkommen!</h2>");
-		aOutput.println("<br>");
+		if (systemMessage != null)
+		aOutput.println("<br>"+systemMessage);
 		aOutput.println("<SCRIPT language = JavaScript> "+
 				"var open = 0;"+
 				"function setOpen(number)"+
