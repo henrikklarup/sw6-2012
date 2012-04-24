@@ -116,9 +116,14 @@ public class SubProfile implements Comparable<SubProfile>{
 	}
 	
 	public void setAttachment(SubProfile p){
-		this._attachmentId = p.getAppId();
-		this._attachment = p;
-		this._attachment._totalTime = this._totalTime;
+		if(p != null){
+			this._attachmentId = p.getAppId();
+			this._attachment = p;
+			this._attachment._totalTime = this._totalTime;
+		} else {
+			this._attachment = null;
+			this._attachmentId = -1;
+		}
 	}
 	
 	public formFactor formType(){
