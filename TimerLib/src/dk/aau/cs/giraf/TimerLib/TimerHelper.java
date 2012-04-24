@@ -1,8 +1,5 @@
 package dk.aau.cs.giraf.TimerLib;
 
-import java.util.List;
-
-
 import android.content.Context;
 
 
@@ -116,7 +113,7 @@ public class TimerHelper {
 		guard.predefined().add(TimeTimer30min);
 	}
 	
-	public void LoadTestData(){
+	public void LoadTestDatas(){
 		//Data
 		
 		Child child1 = new Child("Kristian");

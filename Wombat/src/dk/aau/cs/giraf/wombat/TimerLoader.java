@@ -1,6 +1,7 @@
 package dk.aau.cs.giraf.wombat;
 
 
+import dk.aau.cs.giraf.TimerLib.CRUD;
 import dk.aau.cs.giraf.TimerLib.Guardian;
 import dk.aau.cs.giraf.TimerLib.TimerHelper;
 
@@ -8,12 +9,16 @@ public class TimerLoader {
 	
 	public static void load(){
 		Guardian guard = Guardian.getInstance();
+		crud = new CRUD(guardianID, appID);
 		TimerHelper help = new TimerHelper();
-		help.LoadTestData();
 		help.loadPredef();
 		guard.publishList();
 	}
 	
+	public static CRUD crud;
+	
+	public static long appID;
+	public static long guardianID;
 	public static long profileID;
 	
 	public static int profilePosition;

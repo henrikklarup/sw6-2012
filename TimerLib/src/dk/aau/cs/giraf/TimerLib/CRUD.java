@@ -1,8 +1,9 @@
 package dk.aau.cs.giraf.TimerLib;
 
-import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import android.content.Context;
 import dk.aau.cs.giraf.oasis.lib.Helper;
@@ -11,211 +12,162 @@ import dk.aau.cs.giraf.oasis.lib.models.Profile;
 import dk.aau.cs.giraf.oasis.lib.models.Setting;
 
 public class CRUD {
-	private String _mainHashKey = "WOMBATHASHKEY";
-	private String _lastUsedKey = "WOMBATLASTUSEDKEY";
-	Context p;
-	Helper helper = new Helper(p);
+	Context context;
+	Helper helper = new Helper(context);
 	Guardian guard = Guardian.getInstance();
+	private long appId; 
 	
-	void create(SubProfile p , Child c){
+	public CRUD(long guardianID, long appID){
+		this.appId = appID;
+		// Load the guardian form Oasis
+		Profile mGuardian = helper.profilesHelper.getProfileById(guardianID);
 		
-	}
-	
-	void retrieve(long guardianId){
-		Profile guardian = helper.profilesHelper.getProfileById(guardianId);
-
-		List<Profile> children = helper.profilesHelper.getChildrenByGuardian(guardian);
-		
-		for(Profile c : children){
-			List<App> cApp = helper.appsHelper.getAppsByProfile(c);
-			Child child = new Child(c.getFirstname());
-			for(App a : cApp){
-				child.SubProfiles().add(getSubProfile(a));
+		// Load the children from Oasis of the guardian
+		List<Profile> mChildren = helper.profilesHelper.getChildrenByGuardian(mGuardian);
+		for (Profile c : mChildren) {
+			Child mC;
+			String mName;
+			
+			// Generate the name of the child
+			String[] midNames = c.getMiddlename().split(" ");
+			mName = c.getFirstname();
+			for (String s : midNames) {
+				mName += " " + s.charAt(0) + ".";
 			}
-			guard.Children().add(child);
-		}
-		lastUsed(guardian);
-	}
-	
-	void update(SubProfile p){
-		save(p);
-	}
-	
-	void delete(SubProfile p){
-		App subP = helper.appsHelper.getAppById(p.getAppId());
-		subP.getSettings().remove(_mainHashKey);
-		
-		helper.appsHelper.modifyApp(subP);
-	} 
-	
-	private HashMap lastUsed(Profile guardian){
-		HashMap lastUsed = null;
-		List<App> listOfLastUsed = helper.appsHelper.getAppsByProfile(guardian);
-		boolean noLastUsed = true;
-		
-		//Check if there already exists an lastused app setting on guardian
-		for(App a: listOfLastUsed){
-			if(a.getSettings().containsKey(_lastUsedKey)){
-				lastUsed = a.getSettings().get(_lastUsedKey);
-				noLastUsed = false;
+			mName = " " + c.getSurname();
+			mC = new Child(mName);
+			mC.setProfileId(c.getId());
+			
+			// Find all subprofiles of the child and save it on the child
+			List<SubProfile> mSubPs = findProfileSettings(c.getId());
+			for (SubProfile subProfile : mSubPs) {
+				mC.save(subProfile);
 			}
+			
+			guard.Children().add(mC);
 		}
-		
-		if(noLastUsed){
-			App newLastUsed = new App();
-			Setting settings = new Setting<String, String, String>();
-			HashMap map = new HashMap();
-			settings.put(_lastUsedKey, map);
-			newLastUsed.setSettings(settings);
-			helper.appsHelper.attachAppToProfile(newLastUsed, guardian);
-			lastUsed(guardian);
-		}
-		//Add profiles to LastUsed
-
-		for(Object asd : lastUsed.keySet()){
-			Object value = lastUsed.get(asd);
-			String attacment = String.valueOf(value);
-			String[] att = attacment.split(";");
-			SubProfile setA = null;
-//KÆFT DET HER ER NOGET LORTE KODE :D:D:D:D::D:D:D:D GG ADMIN
-		}
-		
-		HashMap asd = new HashMap();
-		return asd;
 	}
 	
-	private void save(SubProfile p){
-		App subP = helper.appsHelper.getAppById(p.getAppId());
-		subP.getSettings().remove(_mainHashKey);
-
-		Setting<String,String,String> set = new Setting<String,String,String>();
-		set.put(_mainHashKey, setHashMap(p, subP.getId()));
-		subP.setSettings(set);
+	/**
+	 * Stores the subprofile on the child in Oasis
+	 * @param c
+	 * 		The Child where the subprofile is supposed to be stored
+	 * @param sp
+	 * 		The subprofiel which is to be stored
+	 * @return
+	 * 		Returns true if it completed, else returns false
+	 */
+	public boolean saveProfile(Child c, SubProfile sp){
+		// Convert the subprofile to a hashmap
+		HashMap<String, String> hm = setHashMap(sp);
 		
-		helper.appsHelper.modifyApp(subP);
-	}
-	
-	private SubProfile getSubProfile(App a){
+		// Find the app settings on the profileID
+		App app = helper.appsHelper.getAppByIds(appId, c.getProfileId());
+		Setting<String, String, String> settings = app.getSettings();
 		
-		HashMap subHash = a.getSettings().get(_mainHashKey);
-		
-		long appId = Long.valueOf((String) subHash.get("appId"));
-		formFactor type = formFactor.convert(subHash.get("type"));
-		long attachmentId = Long.valueOf((String) subHash.get("Attachment"));
-		String name = String.valueOf(subHash.get("Name"));
-		String desc = String.valueOf(subHash.get("desc"));	
-		int bgcolor = Integer.valueOf((String)subHash.get("bgcolor"));
-		int timeLeftColor = Integer.valueOf((String)subHash.get("timeLeftColor"));
-		int timeSpentColor = Integer.valueOf((String)subHash.get("timeSpentColor"));
-		int frameColor = Integer.valueOf((String)subHash.get("frameColor"));
-		int totalTime = Integer.valueOf((String)subHash.get("totalTime"));
-		boolean gradient = Boolean.valueOf((String)subHash.get("gradient"));
-		boolean save = Boolean.valueOf((String)subHash.get("save"));
-		boolean saveAs = Boolean.valueOf((String)subHash.get("saveAs"));
-		
-		SubProfile rProfile = null;
-		
-		if(type == formFactor.Hourglass){
-			rProfile = new Hourglass(name,desc,bgcolor,timeLeftColor,timeSpentColor,frameColor, totalTime,gradient);
-		} else if(type == formFactor.TimeTimer){
-			rProfile = new TimeTimer(name,desc,bgcolor,timeLeftColor,timeSpentColor,frameColor, totalTime,gradient);
-		} else if(type == formFactor.ProgressBar){
-			rProfile = new ProgressBar(name,desc,bgcolor,timeLeftColor,timeSpentColor,frameColor, totalTime,gradient);
-		} else if(type == formFactor.DigitalClock){
-			rProfile = new DigitalClock(name,desc,bgcolor,timeLeftColor,timeSpentColor,frameColor, totalTime,gradient);
-		} else {
-			rProfile = new SubProfile(name,desc,bgcolor,timeLeftColor,timeSpentColor,frameColor, totalTime,gradient);
+		try {
+			// Insert the hashmap with the subprofile ID as key
+			settings.put(String.valueOf(sp.getId()), hm);
+			app.setSettings(settings);
+		} catch (Exception e) {
+			return false;
 		}
 		
-		rProfile.setAppId(appId);
-		rProfile.setAttachmentId(attachmentId);
-		rProfile.save = save;
-		rProfile.saveAs = saveAs;
-
-		return rProfile;
+		return true;	
 	}
 	
-	private HashMap setHashMap(SubProfile p, long appId){
+	
+	/**
+	 * Loads all subprofiles on the specific ID
+	 * @param id
+	 * 		The id of the profile holding subprofiles
+	 * @return
+	 * 		A list of subprofiles extracted from the settings
+	 */
+	private List<SubProfile> findProfileSettings(long id) {
+		List<SubProfile> mSubs = new ArrayList<SubProfile>();
 		
-		HashMap map = new HashMap();
+		App app = helper.appsHelper.getAppByIds(appId, id);
+		Setting<String, String, String> settings = app.getSettings();
+		Set<String> keys = settings.keySet();
+
+		for (String key : keys) {
+			mSubs.add(getSubProfile(settings.get(key)));
+		}	
 		
-		map.put("appId", String.valueOf(appId));
+		return mSubs;
+	}
+
+	/**
+	 * Loads a subprofile from the hashmap
+	 * @param hm
+	 * 		The hashmap which holds the subprofile
+	 * @return
+	 * 		The subprofile extracted from the hashmap
+	 */
+	private SubProfile getSubProfile(HashMap<String, String> hm){		
+		SubProfile p = null;
+		/* Load all settings from the hash table */
+		p.setAppId(Long.valueOf((String) hm.get("appId")));
+		p.setAttachmentId(Long.valueOf((String) hm.get("Attachment")));
+		p.name = String.valueOf(hm.get("Name"));
+		p.desc = String.valueOf(hm.get("desc"));	
+		p.bgcolor = Integer.valueOf((String)hm.get("bgcolor"));
+		p.timeLeftColor = Integer.valueOf((String)hm.get("timeLeftColor"));
+		p.timeSpentColor = Integer.valueOf((String)hm.get("timeSpentColor"));
+		p.frameColor = Integer.valueOf((String)hm.get("frameColor"));
+		p.set_totalTime(Integer.valueOf((String)hm.get("totalTime")));
+		p.gradient = Boolean.valueOf((String)hm.get("gradient"));
+		p.save = Boolean.valueOf((String)hm.get("save"));
+		p.saveAs = Boolean.valueOf((String)hm.get("saveAs"));
 		
-		map.put("type", p.formType().toString());
+
+		/* Change the subprofile to the correct type */
+		switch (formFactor.convert(hm.get("type"))) {
+		case Hourglass:
+			p = new Hourglass((Hourglass) p);
+			break;
+		case TimeTimer:
+			p = new TimeTimer((TimeTimer) p);
+			break;
+		case ProgressBar:
+			p = new ProgressBar((ProgressBar) p);
+			break;
+		case DigitalClock:
+			p = new DigitalClock((DigitalClock) p);
+			break;
+		default:
+			p = new SubProfile();
+			break;
+		}
+
+		return p;
+	}
+	
+	/**
+	 * Generates a hashmap with settings of the subprofile
+	 * @param p
+	 * 		The subprofile which is supposed to be stored to the hashmap
+	 * @return
+	 * 		A hashmap with the settings stored in
+	 */
+	private HashMap<String, String> setHashMap(SubProfile p){
 		
-		map.put("Attachment", String.valueOf(p.getAttachmentId()));
-		
-		map.put("Name", p.name);
-		
-		map.put("desc", p.desc);
-		
-		map.put("bgcolor", String.valueOf(p.bgcolor));
-		
-		map.put("timeLeftColor", String.valueOf(p.timeLeftColor));
-		
-		map.put("timeSpentColor", String.valueOf(p.timeSpentColor));
-		
+		HashMap<String, String> map = new HashMap<String, String>();		
+		map.put("type", p.formType().toString());		
+		map.put("Attachment", String.valueOf(p.getAttachmentId()));		
+		map.put("Name", p.name);		
+		map.put("desc", p.desc);		
+		map.put("bgcolor", String.valueOf(p.bgcolor));		
+		map.put("timeLeftColor", String.valueOf(p.timeLeftColor));		
+		map.put("timeSpentColor", String.valueOf(p.timeSpentColor));		
 		map.put("frameColor", String.valueOf(p.frameColor));
-		
-		map.put("totalTime", String.valueOf(p.get_totalTime()));
-		
-		map.put("gradient", String.valueOf(p.gradient));
-		
-		map.put("save", String.valueOf(p.save));
-		
+		map.put("totalTime", String.valueOf(p.get_totalTime()));		
+		map.put("gradient", String.valueOf(p.gradient));		
+		map.put("save", String.valueOf(p.save));		
 		map.put("saveAs", String.valueOf(p.saveAs));
-
+		
 		return map;
-	}
-	
-	void test(){
-		
-		Setting settings = new Setting<String, String, String>();
-		
-		Setting settings1 = new Setting<String, String, String>();
-
-		HashMap map = new HashMap();
-		map.put("Settings", "Favorite Color,Favorite Food,Favorite Animal");
-		map.put("Favorite Color", "Blue");
-		map.put("Favorite Food", "Carrot");
-		map.put("Favorite Animal", "Rabbit");
-		settings.put("asdas", map);
-		
-		HashMap map1 = new HashMap();
-		map1.put("Settings", "Favorite Color,Favorite Food,Favorite Animal");
-		map1.put("Favorite Color", "Blue");
-		map1.put("Favorite Food", "Carrot");
-		map1.put("Favorite Animal", "Rabbit");
-		settings1.put("supbro", map1);
-		
-
-		
-		Profile profile = new Profile("FEDTE", "FEDTE","FEDTE", 0, 12345678, "FEDTE", null);
-		
-		
-		App app = new App();
-		
-		app.setSettings(settings);
-		
-		App app1 = new App();
-		app1.setSettings(settings1);
-		
-	
-		
-		
-		helper.appsHelper.attachAppToProfile(app, profile);
-		helper.appsHelper.attachAppToProfile(app1, profile);
-		
-		List<App> asd = helper.appsHelper.getAppsByProfile(profile);
-		asd.get(0).getId();
-		asd.get(0).getSettings().get("asdas").remove("Favore cOlor");
-		asd.get(0).getSettings().get("asdad").put("asd", "sad");
-		
-		
-		
-		helper.profilesHelper.insertProfile(profile);
-		
-		List<Profile>values = helper.profilesHelper.getProfiles();
 	}
 
 }
