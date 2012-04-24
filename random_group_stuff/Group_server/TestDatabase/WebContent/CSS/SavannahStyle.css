@@ -44,6 +44,12 @@ z-index: 9002;
 
 }
 
+
+.button {
+    border: 1px solid #006;
+    background: #9cf;
+}
+
 #popUpEdit {
 border-radius: 15px;
 	position:absolute;

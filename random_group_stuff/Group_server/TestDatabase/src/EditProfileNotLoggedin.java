@@ -703,7 +703,7 @@ public class EditProfileNotLoggedin extends HttpServlet{
 				"<td>Gentag kodeord:</td> <td> <input type=\"password\" name=\"password2\" /> </td>"+
 				"</tr>"+
 				"<tr>"+
-				"<td></td><td><input type=\"button\" onClick=\"SelectAll(); doSubmit();\" value=\"Gem\">"+
+				"<td></td><td><input type=\"button\" onClick=\"SelectAll(); doSubmit();\" value=\"Gem\"/>"+
 				"<input type=\"button\" value=\"Fortryd\"></td>"+
 				"</tr>"+
 				"</form>"+
