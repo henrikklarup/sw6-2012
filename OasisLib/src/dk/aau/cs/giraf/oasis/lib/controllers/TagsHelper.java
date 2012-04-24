@@ -37,6 +37,7 @@ public class TagsHelper {
 		
 		if (c != null) {
 			id = c.getLong(c.getColumnIndex(TagsMetaData.Table.COLUMN_ID));
+			c.close();
 		} else {
 			Uri uri;
 			ContentValues cv = getContentValues(tag);
