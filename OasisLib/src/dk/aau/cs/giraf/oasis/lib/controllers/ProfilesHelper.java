@@ -72,12 +72,12 @@ public class ProfilesHelper {
 	 * @param profile Profile containing data
 	 */
 	public long insertProfile(Profile profile) {		
-		profile.setId(au.insertAuthUser(0));
+		long id = au.insertAuthUser(0);
 
 		ContentValues profileContentValues = getContentValues(profile);
-		profileContentValues.put(ProfilesMetaData.Table.COLUMN_ID, profile.getId());
+		profileContentValues.put(ProfilesMetaData.Table.COLUMN_ID, id);
 		_context.getContentResolver().insert(ProfilesMetaData.CONTENT_URI, profileContentValues);
-		return profile.getId();
+		return id;
 	}
 
 	public int attachChildToGuardian(Profile child, Profile guardian) {

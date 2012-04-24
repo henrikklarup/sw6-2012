@@ -27,6 +27,7 @@ import dk.aau.cs.giraf.oasis.lib.controllers.ListOfAppsController;
 import dk.aau.cs.giraf.oasis.lib.controllers.MediaDepartmentAccessController;
 import dk.aau.cs.giraf.oasis.lib.controllers.MediaProfileAccessController;
 */
+
 /**
  * Helper class, instantiating all the helper classes into one
  * @author Admin
@@ -53,6 +54,7 @@ public class Helper {
 	public MediaDepartmentAccessController mda;
 	public MediaProfileAccessController mpa;
 	*/
+	
 	/**
 	 * Constructor
 	 * @param context Current context
@@ -144,15 +146,13 @@ public class Helper {
 		profilesHelper.setCertificate("fghij", Guardian2Loaded);
 		profilesHelper.setCertificate("klmno", Guardian3Loaded);
 		
-		
-		
-		
 		/*Children*/
 		Profile Child1 = new Profile("Child1", "G1", "LoLA", 3, 88888888, null, null);
 		Profile Child2 = new Profile("Child2", "G1", "LoLA", 3, 88888888, null, null);
 		Profile Child3 = new Profile("Child3", "G2", "LoLB", 3, 88888888, null, null);
 		Profile Child4 = new Profile("Child4", "G2", "LoLB", 3, 88888888, null, null);
 		Profile Child5 = new Profile("Child5", "G3", "LoLC", 3, 88888888, null, null);
+
 		/*Add children*/
 		long child1Id = profilesHelper.insertProfile(Child1);
 		long child2Id = profilesHelper.insertProfile(Child2);
@@ -195,20 +195,22 @@ public class Helper {
 		Media media2 = new Media("Media2", "/mnt/sdcard/Pictures/giraf/media2.jpg", true, "Picture", Child1Loaded.getId());
 		Media media3 = new Media("Media3", "/mnt/sdcard/Pictures/giraf/media3.jpg", false, "Picture", Child2Loaded.getId());
 		
-		mediaHelper.insertMedia(media1);
-		mediaHelper.insertMedia(media2);
-		mediaHelper.insertMedia(media3);
+		long media1Id = mediaHelper.insertMedia(media1);
+		long media2Id = mediaHelper.insertMedia(media2);
+		long media3Id = mediaHelper.insertMedia(media3);
 		
-//		Media media1Loaded = mediaHelper.getMediaByName("Media1").get(0);
-//		Media media2Loaded = mediaHelper.getMediaByName("Media2").get(0);		
-//		Media media3Loaded = mediaHelper.getMediaByName("Media2").get(0);
-//		
-//		
-//		/*Attach media to department*/
-//		mediaHelper.attachMediaToDepartment(media1Loaded, dep1Loaded, Child1Loaded);
-//		mediaHelper.attachMediaToDepartment(media2Loaded, dep1Loaded, Child1Loaded);
-//		mediaHelper.attachMediaToDepartment(media3Loaded, dep3Loaded, Child2Loaded);
-//		
+		Media media1Loaded = mediaHelper.getMediaById(media1Id);
+		Media media2Loaded = mediaHelper.getMediaById(media2Id);
+		Media media3Loaded = mediaHelper.getMediaById(media3Id);
+		
+		/*Attach submedia to media*/
+		mediaHelper.attachSubMediaToMedia(media2Loaded, media2Loaded);
+		
+		/*Attach media to department*/
+		mediaHelper.attachMediaToDepartment(media1Loaded, dep1Loaded, Child1Loaded);
+		mediaHelper.attachMediaToDepartment(media2Loaded, dep1Loaded, Child1Loaded);
+		mediaHelper.attachMediaToDepartment(media3Loaded, dep3Loaded, Child2Loaded);
+		
 		/*Tags*/
 		Tag tag1 = new Tag("Dog1");
 		Tag tag2 = new Tag("Dog2");
@@ -225,31 +227,27 @@ public class Helper {
 		tags2.add(tag3);
 		
 		
-//		/*Attach tag to media*/
+		/*Attach tag to media*/
 //		mediaHelper.addTagsToMedia(tags1, media1Loaded);
 //		mediaHelper.addTagsToMedia(tags2, media2Loaded);
 //		mediaHelper.addTagsToMedia(tags1, media3Loaded);
-//		
-		 
-		/*Attach media to media*/
-//		mediaHelper
 		
 		/*Apps*/
-		App app1 = new App("App1", "1");
-		App app2 = new App("App2", "1");
-		App app3 = new App("App3", "1");
-		App app4 = new App("App4", "1");
+		App app1 = new App("App1", "1", "/mnt/sdcard/?", "FakePackage", "FakeActivity");
+		App app2 = new App("App2", "1", "/mnt/sdcard/?", "FakePackage", "FakeActivity");
+		App app3 = new App("App3", "1", "/mnt/sdcard/?", "FakePackage", "FakeActivity");
+		App app4 = new App("App4", "1", "/mnt/sdcard/?", "FakePackage", "FakeActivity");
 		
-		appsHelper.insertApp(app1);
-		appsHelper.insertApp(app2);
-		appsHelper.insertApp(app3);
-		appsHelper.insertApp(app4);
+		long app1Id = appsHelper.insertApp(app1);
+		long app2Id = appsHelper.insertApp(app2);
+		long app3Id = appsHelper.insertApp(app3);
+		long app4Id = appsHelper.insertApp(app4);
 		
 		/*Get apps*/
-		App app1Loaded = appsHelper.getAppsByName("App1").get(0);
-		App app2Loaded = appsHelper.getAppsByName("App2").get(0);	
-		App app3Loaded = appsHelper.getAppsByName("App3").get(0);
-		App app4Loaded = appsHelper.getAppsByName("App4").get(0);
+		App app1Loaded = appsHelper.getAppById(app1Id);
+		App app2Loaded = appsHelper.getAppById(app2Id);	
+		App app3Loaded = appsHelper.getAppById(app3Id);
+		App app4Loaded = appsHelper.getAppById(app4Id);
 		
 		/*Attach app to profile*/
 		appsHelper.attachAppToProfile(app1Loaded, Child1Loaded);

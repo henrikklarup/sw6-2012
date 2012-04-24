@@ -31,13 +31,20 @@ public class TagsHelper {
 	}
 	
 	public long insertTag(Tag tag) {
-		long result = 0;
-		Uri uri;
-		ContentValues cv = getContentValues(tag);
-		uri = _context.getContentResolver().insert(TagsMetaData.CONTENT_URI, cv);
-		result = Integer.parseInt(uri.getPathSegments().get(1));
-
-		return result;
+		long id = 0;
+		
+		Cursor c = _context.getContentResolver().query(TagsMetaData.CONTENT_URI, columns, TagsMetaData.Table.COLUMN_CAPTION + " = '" + tag.getCaption() + "'", null, null);
+		
+		if (c != null) {
+			id = c.getLong(c.getColumnIndex(TagsMetaData.Table.COLUMN_ID));
+		} else {
+			Uri uri;
+			ContentValues cv = getContentValues(tag);
+			uri = _context.getContentResolver().insert(TagsMetaData.CONTENT_URI, cv);
+			id = Integer.parseInt(uri.getPathSegments().get(1));
+		}
+		
+		return id;
 	}
 
 	public int modifyTag(Tag tag) {

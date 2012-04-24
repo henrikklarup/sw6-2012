@@ -5,11 +5,11 @@ public class App {
 	private long id; 
 	private String name;
 	private String version;
-	private Setting<String, String, String> settings;
-	private Stat<String, String, String> stats;
 	private String icon;
 	private String aPackage;
 	private String activity;
+	private Setting<String, String, String> settings;
+	private Stat<String, String, String> stats;
 	private static String _output = "{0}, {1}, {2}, {3}, {4}, {5}";
 
 	/**
@@ -17,9 +17,12 @@ public class App {
 	 * @param name the name to set
 	 * @param version the version to set
 	 */
-	public App(String name, String version) {
+	public App(String name, String version, String icon, String aPackage, String activity) {
 		this.name = name;
 		this.version = version;
+		this.icon = icon;
+		this.aPackage = aPackage;
+		this.activity = activity;
 	}
 
 	/**
@@ -72,27 +75,6 @@ public class App {
 	/**
 	 * @return the settings
 	 */
-	public Setting<String, String, String> getSettings() {
-		return settings;
-	}
-	/**
-	 * @param settings the settings to set
-	 */
-	public void setSettings(Setting<String, String, String> settings) {
-		this.settings = settings;
-	}
-	/**
-	 * @return the stats
-	 */
-	public Stat<String, String, String> getStats() {
-		return stats;
-	}
-	/**
-	 * @param stats the stats to set
-	 */
-	public void setStats(Stat<String, String, String> stats) {
-		this.stats = stats;
-	}
 	/**
 	 * @return the icon
 	 */
@@ -134,7 +116,27 @@ public class App {
 	public void setActivity(String activity) {
 		this.activity = activity;
 	}
-
+	public Setting<String, String, String> getSettings() {
+		return settings;
+	}
+	/**
+	 * @param settings the settings to set
+	 */
+	public void setSettings(Setting<String, String, String> settings) {
+		this.settings = settings;
+	}
+	/**
+	 * @return the stats
+	 */
+	public Stat<String, String, String> getStats() {
+		return stats;
+	}
+	/**
+	 * @param stats the stats to set
+	 */
+	public void setStats(Stat<String, String, String> stats) {
+		this.stats = stats;
+	}
 	/**
 	 * Set output
 	 * {0} = Id

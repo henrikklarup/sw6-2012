@@ -39,9 +39,9 @@ class AuthUsersController {
 		long id;
 		List<AuthUser> authUsers = getAuthUsers();
 		if (authUsers.size() != 0) {
-			id = authUsers.get(authUsers.size() - 1).getId();
+			id = authUsers.get(authUsers.size() - 1).getId() + 1;
 		} else {
-			id = 0;
+			id = 1;
 		}
 		authUser.setId(id);
 		ContentValues cv = getContentValues(authUser);
