@@ -4,6 +4,5 @@
     <string name="hello">Hello World, DoneScreenActivity!</string>
     <string name="app_name">DoneScreen</string>
     <string name="done_message">Færdig</string>
-    <string name="done_picture">done_picture</string>
     
 </resources>

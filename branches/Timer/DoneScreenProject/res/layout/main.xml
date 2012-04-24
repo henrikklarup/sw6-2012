@@ -5,17 +5,13 @@
     android:orientation="vertical"
     android:weightSum="1" >
     
-    <ImageView 
-        android:contentDescription="@string/done_picture"
-		android:src="@android:drawable/btn_star"
-		android:minWidth="100dp"
-		android:maxWidth="200dp"
-		android:minHeight="100dp"
-		android:maxHeight="200dp"
+   <ImageView 
+        android:id="@+id/done_pict"
 		android:layout_gravity="center"
-		android:layout_height="wrap_content"
-		android:layout_width="wrap_content"
-		android:layout_weight="0.8"/>
+		android:layout_height="500dp"
+		android:layout_width="500dp"
+		android:scaleType="centerInside"
+		android:layout_weight="0.6"/>
     
     <TextView 
         android:layout_height="wrap_content"
@@ -24,7 +20,7 @@
         android:textStyle="bold"
         android:textSize="80dp"
         android:text="@string/done_message"
-        android:layout_weight="0.2"
+        android:layout_weight="0.4"
         />
 
 </LinearLayout>
