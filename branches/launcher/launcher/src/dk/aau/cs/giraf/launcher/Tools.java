@@ -5,6 +5,7 @@ import java.util.Date;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.TypedValue;
 
 /**
  * Class for holding static methods and fields, to minimize code duplication.
@@ -82,5 +83,15 @@ public class Tools {
 		Date d = new Date();
 		
 		return d.getTime() > lastAuthTime + mAuthSpan;
+	}
+	
+	/**
+	 * Converts integer to density pixels (dp)
+	 * @param context Context of the current activity
+	 * @param i The integer which should be used for convertion
+	 * @return i converted to density pixels (dp)
+	 */
+	private int intToDP(Context context, int i) {
+		return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, i, context.getResources().getDisplayMetrics());
 	}
 }
