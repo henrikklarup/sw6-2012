@@ -127,8 +127,61 @@ public class QueryBuilder {
 	private ArrayList<String> buildGetProfileQueries(String cert,String id)
 	{
 		ArrayList<String> out = new ArrayList<String>();
-		out.add("SELECT * FROM AuthUsers where certificate='"+cert+"';");
-		out.add("SELECT * from Profile where idProfile=(select idUser from AuthUsers where certificate='"+cert+"';");
+		out.add("SELECT * FROM AuthUsers,Profile,Department "+
+				"WHERE AuthUsers.certificate='"+cert+"' AND "+
+		              "Profile.idProfile=(SELECT idUser FROM AuthUsers WHERE certificate='"+cert+"') AND "+
+		              "Department.idDepartment=(SELECT idUser FROM AuthUsers WHERE certificate='"+cert+"')"+
+        ";");
+		
+		out.add("SELECT * FROM HasDepartment "+
+				"WHERE HasDepartment.idProfile=(SELECT idUser FROM AuthUsers WHERE certificate='"+cert+"');");
+		
+		out.add("SELECT * FROM HasSubDepartment "+
+				"WHERE HasSubDepartment.idDepartment=(SELECT idUser FROM AuthUsers WHERE certificate='"+cert+"');");
+		
+		out.add("SELECT * FROM ListOfApps " +
+				"WHERE idProfile=(SELECT idUser FROM AuthUsers WHERE certificate='"+cert+"');");
+		
+		out.add("SELECT * FROM Apps,ListOfApps " +
+				"WHERE Apps.idApp=ListOfApps.idApp AND" +
+				" ListOfApps.idProfile=(SELECT idUser FROM AuthUsers WHERE certificate='"+cert+"');");
+		
+		out.add("SELECT * FROM Media WHERE ownerID=(SELECT idUser FROM AuthUsers WHERE certificate='"+cert+"');");
+		
+		out.add("SELECT distinct Tags.idTags,Tags.caption " +
+				"FROM Tags,HasTag,Media " +
+				"WHERE Tags.idTags=HasTag.idTag AND " +
+				"(HasTag.idMedia=Media.idMedia AND ownerID=(SELECT idUser "+ 
+                                                            "FROM AuthUsers "+ 
+                                                            "WHERE certificate='"+cert+"'));");
+		out.add("SELECT distinct HasTag.idMedia,HasTag.idTag " +
+				"FROM HasTag,Media " +
+				"WHERE HasTag.idMedia=Media.idMedia AND Media.OwnerID=(SELECT idUser "+
+											                          "FROM AuthUsers "+
+											                          "WHERE certificate='"+cert+"');");
+		out.add("SELECT distinct idParent,idChild " +
+				"FROM HasLink,Media " +
+				"WHERE (HasLink.idParent=Media.idMedia AND Media.OwnerID=(SELECT idUser " +
+				                                                         "FROM AuthUsers " +
+				                                                         "WHERE certificate='"+cert+"'));");
+		out.add("SELECT M.idDepartment,M.idMedia " +
+				"FROM MediaDepartmentAccess M,Department D " +
+				"WHERE M.idDepartment=D.idDepartment AND " +
+				"D.idDepartment=(SELECT idUser " +
+				                "FROM AuthUsers " +
+				                "WHERE certificate='"+cert+"');");
+		
+		out.add("SELECT M.idDepartment,M.idMedia " +
+				"FROM MediaDepartmentAccess M,Department D " +
+				"WHERE M.idDepartment=D.idDepartment AND D.idDepartment=(SELECT idUser " +
+				                                                        "FROM AuthUsers " +
+				                                                        "WHERE certificate='"+cert+"');");
+		out.add("SELECT idGuardian,idChild " +
+				"FROM HasGuardian,Profile " +
+				"WHERE idGuardian=idProfile AND " +
+				"idProfile=(SELECT idUser " +
+				           "FROM AuthUsers " +
+				           "WHERE certificate='"+cert+"');");
 		return out;
 	}
 	

@@ -15,8 +15,6 @@ public class QueryHandler {
 	public int SendCommit(String s)
 	{
 		try {
-			
-		
 		pStat = con.prepareStatement(s);
 		pStat.execute();
 		

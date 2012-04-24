@@ -11,7 +11,7 @@ import savannah.server.CommitEvent;
 
 public class EventHandlerTest {
 		public static void main(String[] args) throws Exception
-		{
+		{			
 			File f = new File("/home/martin/Documents/eadocs/sw6_example.xml");
 			DOMinator dom = new DOMinator();
 			Document d = dom.Dominate(f);
