@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.TypedValue;
+import android.view.WindowManager;
 
 /**
  * Class for holding static methods and fields, to minimize code duplication.
@@ -93,5 +94,19 @@ public class Tools {
 	 */
 	private int intToDP(Context context, int i) {
 		return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, i, context.getResources().getDisplayMetrics());
+	}
+	
+	/**
+	 * Returns true if the device currently is held in landscape orientation by the user.
+	 * @param context Context of the current activity
+	 * @return true if the device currently is held in landscape orientation by the user.
+	 */
+	private boolean isLandscape(Context context) {
+		int rotation = ((WindowManager) context.getSystemService(context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
+		if ((rotation % 2) == 0) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
