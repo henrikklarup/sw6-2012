@@ -12,17 +12,6 @@
     android:background="@drawable/homebar_back_port" 
     android:padding="20dp" >
     
-    <!-- <dk.aau.cs.giraf.gui.GVerifyButton
-            android:id="@+id/logoutGButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="115dp"
-            android:layout_marginRight="20dp"
-            android:text="Log ud"
-            android:textSize="40dp" />  -->
-    
     	<TextView
     	android:visibility="invisible"
 	    android:id="@+id/nameView"
