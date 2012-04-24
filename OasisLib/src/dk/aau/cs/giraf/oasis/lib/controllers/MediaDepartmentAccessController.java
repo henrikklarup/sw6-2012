@@ -9,6 +9,7 @@ import android.database.Cursor;
 import dk.aau.cs.giraf.oasis.lib.metadata.MediaDepartmentAccessMetaData;
 import dk.aau.cs.giraf.oasis.lib.metadata.MediaProfileAccessMetaData;
 import dk.aau.cs.giraf.oasis.lib.models.Department;
+import dk.aau.cs.giraf.oasis.lib.models.Media;
 import dk.aau.cs.giraf.oasis.lib.models.MediaDepartmentAccess;
 
 class MediaDepartmentAccessController {
@@ -28,6 +29,12 @@ class MediaDepartmentAccessController {
 
 	public int clearMediaDepartmentAccessTable() {
 		return _context.getContentResolver().delete(MediaDepartmentAccessMetaData.CONTENT_URI, null, null);
+	}
+	
+	public int removeMediaProfileAccess(Media media, Department department) {
+		return _context.getContentResolver().delete(MediaDepartmentAccessMetaData.CONTENT_URI, 
+				MediaDepartmentAccessMetaData.Table.COLUMN_IDMEDIA + " = '" + media.getId() + "'" +
+						MediaDepartmentAccessMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + department.getId() + "'", null);
 	}
 
 	public long insertMediaDepartmentAccess(MediaDepartmentAccess mda) {

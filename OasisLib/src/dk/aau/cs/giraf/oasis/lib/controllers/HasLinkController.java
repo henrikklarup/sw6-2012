@@ -29,6 +29,12 @@ class HasLinkController {
 		return _context.getContentResolver().delete(HasLinkMetaData.CONTENT_URI, null, null);
 	}
 
+	public int removeHasLink(Media subMedia, Media media) {
+		return _context.getContentResolver().delete(HasLinkMetaData.CONTENT_URI, 
+				HasLinkMetaData.Table.COLUMN_IDMEDIA + " = '" + media.getId() + "'" +
+						HasLinkMetaData.Table.COLUMN_IDSUBMEDIA + " = '" + subMedia.getId() + "'", null);
+	}
+
 	public long insertHasLink(HasLink hl) {
 		ContentValues cv = getContentValues(hl);
 		_context.getContentResolver().insert(HasLinkMetaData.CONTENT_URI, cv);
@@ -64,12 +70,12 @@ class HasLinkController {
 
 		return list;
 	}
-	
+
 	public int modifyHasLink(HasLink hl) {
 		ContentValues cv = getContentValues(hl);
 		return _context.getContentResolver().update(HasLinkMetaData.CONTENT_URI, cv, 
 				HasLinkMetaData.Table.COLUMN_IDMEDIA + " = '" + hl.getIdMedia() + "' AND " +
-				HasLinkMetaData.Table.COLUMN_IDSUBMEDIA + " = '" + hl.getIdSubMedia() + "'", null);
+						HasLinkMetaData.Table.COLUMN_IDSUBMEDIA + " = '" + hl.getIdSubMedia() + "'", null);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

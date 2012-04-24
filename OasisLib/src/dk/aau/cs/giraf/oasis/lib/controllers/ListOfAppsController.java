@@ -34,7 +34,7 @@ class ListOfAppsController {
 		return _context.getContentResolver().delete(ListOfAppsMetaData.CONTENT_URI, null, null);
 	}
 
-	public int deleteItem(long appId, long profileId) {
+	public int removeListOfApps(long appId, long profileId) {
 		return _context.getContentResolver().delete(ListOfAppsMetaData.CONTENT_URI, ListOfAppsMetaData.Table.COLUMN_IDAPP + " = '" + appId + "' AND " + ListOfAppsMetaData.Table.COLUMN_IDPROFILE + " = '" + profileId + "'", null);
 	}
 	

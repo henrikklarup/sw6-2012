@@ -9,7 +9,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import dk.aau.cs.giraf.oasis.lib.metadata.AppsMetaData;
-import dk.aau.cs.giraf.oasis.lib.metadata.ListOfAppsMetaData;
 import dk.aau.cs.giraf.oasis.lib.models.App;
 import dk.aau.cs.giraf.oasis.lib.models.ListOfApps;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
@@ -52,7 +51,7 @@ public class AppsHelper {
 	}
 	
 	public int removeAppAttachmentToProfile(App app, Profile profile) {
-		return loa.deleteItem(app.getId(), profile.getId());
+		return loa.removeListOfApps(app.getId(), profile.getId());
 	}
 	
 	/**
@@ -74,12 +73,13 @@ public class AppsHelper {
 		return result;
 	}
 
-	public int attachAppToProfile(App app, Profile profile) {
-		ContentValues values = new ContentValues();
-		values.put(ListOfAppsMetaData.Table.COLUMN_IDAPP, app.getId());
-		values.put(ListOfAppsMetaData.Table.COLUMN_IDPROFILE, profile.getId());
-		_context.getContentResolver().insert(ListOfAppsMetaData.CONTENT_URI, values);
-		return 0;
+	public long attachAppToProfile(App app, Profile profile) {
+		ListOfApps loaModel = new ListOfApps();
+		loaModel.setIdApp(app.getId());
+		loaModel.setIdProfile(profile.getId());
+		loaModel.setSetting(app.getSettings());
+		loaModel.setStat(app.getStats());
+		return loa.insertListOfApps(loaModel);
 	}
 
 	/**

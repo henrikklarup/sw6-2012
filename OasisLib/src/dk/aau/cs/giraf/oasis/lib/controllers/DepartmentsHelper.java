@@ -9,9 +9,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import dk.aau.cs.giraf.oasis.lib.metadata.DepartmentsMetaData;
-import dk.aau.cs.giraf.oasis.lib.metadata.HasDepartmentMetaData;
-import dk.aau.cs.giraf.oasis.lib.metadata.HasSubDepartmentMetaData;
 import dk.aau.cs.giraf.oasis.lib.models.Department;
+import dk.aau.cs.giraf.oasis.lib.models.HasDepartment;
+import dk.aau.cs.giraf.oasis.lib.models.HasSubDepartment;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
 /**
@@ -24,6 +24,8 @@ public class DepartmentsHelper {
 
 	private static Context _context;
 	private AuthUsersController au;
+	private HasDepartmentController hd;
+	private HasSubDepartmentController hsd;
 	private String[] columns = new String[] { 
 			DepartmentsMetaData.Table.COLUMN_ID,
 			DepartmentsMetaData.Table.COLUMN_NAME,
@@ -38,6 +40,8 @@ public class DepartmentsHelper {
 	public DepartmentsHelper(Context context) {
 		_context = context;
 		au = new AuthUsersController(_context);
+		hd = new HasDepartmentController(_context);
+		hsd = new HasSubDepartmentController(_context);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -53,17 +57,11 @@ public class DepartmentsHelper {
 	}
 
 	public int removeProfileAttachmentToDepartment(Profile profile, Department department) {
-		_context.getContentResolver().delete(HasDepartmentMetaData.CONTENT_URI, 
-				HasDepartmentMetaData.Table.COLUMN_IDPROFILE + " = '" + profile.getId() + "'" +
-						HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + department.getId() + "'", null);
-		return 0;
+		return hd.removeHasDepartment(profile, department);
 	}
 
 	public int removeSubDepartmentAttachmentToDepartment(Department department, Department subDepartment) {
-		_context.getContentResolver().delete(HasSubDepartmentMetaData.CONTENT_URI, 
-				HasSubDepartmentMetaData.Table.COLUMN_IDSUBDEPARTMENT + " = '" + subDepartment.getId() + "'" +
-						HasSubDepartmentMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + department.getId() + "'", null);
-		return 0;
+		return hsd.removeHasSubDepartment(subDepartment, department);
 	}
 
 	/**
@@ -79,20 +77,18 @@ public class DepartmentsHelper {
 		return department.getId();
 	}
 
-	public int attachProfileToDepartment(Profile profile, Department department) {
-		ContentValues values = new ContentValues();
-		values.put(HasDepartmentMetaData.Table.COLUMN_IDPROFILE, profile.getId());
-		values.put(HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT, department.getId());
-		_context.getContentResolver().insert(HasDepartmentMetaData.CONTENT_URI, values);
-		return 0;
+	public long attachProfileToDepartment(Profile profile, Department department) {
+		HasDepartment hdModel = new HasDepartment();
+		hdModel.setIdDepartment(department.getId());
+		hdModel.setIdProfile(profile.getId());
+		return hd.insertHasDepartment(hdModel);
 	}
 
-	public int attachSubDepartmentToDepartment(Department department, Department subDepartment) {
-		ContentValues values = new ContentValues();
-		values.put(HasSubDepartmentMetaData.Table.COLUMN_IDSUBDEPARTMENT, subDepartment.getId());
-		values.put(HasSubDepartmentMetaData.Table.COLUMN_IDDEPARTMENT, department.getId());
-		_context.getContentResolver().insert(HasSubDepartmentMetaData.CONTENT_URI, values);
-		return 0;
+	public long attachSubDepartmentToDepartment(Department department, Department subDepartment) {
+		HasSubDepartment hsdModel = new HasSubDepartment();
+		hsdModel.setIdDepartment(department.getId());
+		hsdModel.setIdSubDepartment(subDepartment.getId());
+		return hsd.insertHasSubDepartment(hsdModel);
 	}
 
 	/**
@@ -101,8 +97,7 @@ public class DepartmentsHelper {
 	 * Department containing data to modify
 	 */
 	public void modifyDepartment(Department department) {
-		Uri uri = ContentUris.withAppendedId(DepartmentsMetaData.CONTENT_URI,
-				department.getId());
+		Uri uri = ContentUris.withAppendedId(DepartmentsMetaData.CONTENT_URI, department.getId());
 		ContentValues cv = getContentValues(department);
 		_context.getContentResolver().update(uri, cv, null, null);
 	}
@@ -202,51 +197,26 @@ public class DepartmentsHelper {
 	
 	public List<Department> getDepartmentsByProfile(Profile profile) {
 		List<Department> departments = new ArrayList<Department>();
-		String[] hasDepartmentColumns = {
-				HasDepartmentMetaData.Table.COLUMN_IDPROFILE,
-				HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT };
 		
-		Cursor c = _context.getContentResolver().query(
-				HasDepartmentMetaData.CONTENT_URI, hasDepartmentColumns,
-				hasDepartmentColumns[0] + " = '" + profile.getId() + "'", null,	null);
-
-		if (c != null) {
-			if (c.moveToFirst()) {
-				while (!c.isAfterLast()) {
-					Department department = getDepartmentById(c.getLong(c.getColumnIndex(hasDepartmentColumns[1])));
-					departments.add(department);
-					c.moveToNext();
-				}
-			}
-			c.close();
+		List<HasDepartment> list = hd.getDepartmentsByProfile(profile);
+		
+		for (HasDepartment hdModel : list) {
+			Department department = getDepartmentById(hdModel.getIdDepartment());
+			departments.add(department);
 		}
-
 		
-
 		return departments;
 	}
 
 	public List<Department> getSubDepartments(Department department) {
 		List<Department> departments = new ArrayList<Department>();
-		String[] hasSubDepartmentsColumns = {
-				HasSubDepartmentMetaData.Table.COLUMN_IDDEPARTMENT,
-				HasSubDepartmentMetaData.Table.COLUMN_IDSUBDEPARTMENT };
 		
-		Cursor c = _context.getContentResolver().query(
-				HasSubDepartmentMetaData.CONTENT_URI, hasSubDepartmentsColumns,
-				hasSubDepartmentsColumns[0] + " = '" + department.getId() + "'", null,	null);
-
-		if (c != null) {
-			if (c.moveToFirst()) {
-				while (!c.isAfterLast()) {
-					Department subDepartment = getDepartmentById(c.getLong(c.getColumnIndex(hasSubDepartmentsColumns[1])));
-					departments.add(subDepartment);
-					c.moveToNext();
-				}
-			}
+		List<HasSubDepartment> list = hsd.getSubDepartmentsByDepartment(department);
+		
+		for (HasSubDepartment hsdModel : list) {
+			Department subDepartment = getDepartmentById(hsdModel.getIdSubDepartment());
+			departments.add(subDepartment);
 		}
-
-		c.close();
 
 		return departments;
 	}

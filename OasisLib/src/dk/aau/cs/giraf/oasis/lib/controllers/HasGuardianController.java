@@ -28,6 +28,12 @@ class HasGuardianController {
 	public int clearHasGuardianTable() {
 		return _context.getContentResolver().delete(HasGuardianMetaData.CONTENT_URI, null, null);
 	}
+	
+	public int removeHasGuardian(Profile child, Profile guardian) {
+		return _context.getContentResolver().delete(HasGuardianMetaData.CONTENT_URI, 
+				HasGuardianMetaData.Table.COLUMN_IDCHILD + " = '" + child.getId() + "'" +
+						HasGuardianMetaData.Table.COLUMN_IDGUARDIAN + " = '" + guardian.getId() + "'", null);
+	}
 
 	public long insertHasGuardian(HasGuardian hg) {
 		ContentValues cv = getContentValues(hg);
@@ -50,7 +56,7 @@ class HasGuardianController {
 		return hgList;
 	}
 	
-	public List<HasGuardian> getCHildrenByGuardian(Profile guardian) {
+	public List<HasGuardian> getChildrenByGuardian(Profile guardian) {
 		List<HasGuardian> hgList = new ArrayList<HasGuardian>();
 		
 		Cursor c = _context.getContentResolver().query(HasGuardianMetaData.CONTENT_URI, columns, 

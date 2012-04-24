@@ -9,9 +9,9 @@ public class AppsTable {
 			+ "("
 			+ AppsMetaData.Table.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
 			+ AppsMetaData.Table.COLUMN_NAME + " TEXT NOT NULL, "
-			+ AppsMetaData.Table.COLUMN_VERSION + " TEXT NOT NULL, "
-			+ AppsMetaData.Table.COLUMN_ICON + " TEXT NOT NULL, "
-			+ AppsMetaData.Table.COLUMN_PACKAGE + " TEXT NOT NULL, "
+			+ AppsMetaData.Table.COLUMN_VERSION + " TEXT, "
+			+ AppsMetaData.Table.COLUMN_ICON + " TEXT, "
+			+ AppsMetaData.Table.COLUMN_PACKAGE + " TEXT UNIQUE, "
 			+ AppsMetaData.Table.COLUMN_ACTIVITY + " TEXT NOT NULL"
 			+ ");";
 	
