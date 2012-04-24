@@ -17,7 +17,7 @@
 	    android:id="@+id/nameView"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:layout_toRightOf="@+id/profile_pic"
+	    android:layout_toRightOf="@id/profile_pic"
 	    android:layout_marginLeft="30dp"
 	    android:text="@string/barnameview"
 	    android:textSize="30dp"
