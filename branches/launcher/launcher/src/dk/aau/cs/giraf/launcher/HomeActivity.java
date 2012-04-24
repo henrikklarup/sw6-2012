@@ -9,6 +9,7 @@ import dk.aau.cs.giraf.gui.GWidgetConnectivity;
 import dk.aau.cs.giraf.gui.GWidgetLogout;
 import dk.aau.cs.giraf.gui.GWidgetUpdater;
 import dk.aau.cs.giraf.oasis.lib.Helper;
+import dk.aau.cs.giraf.oasis.lib.models.App;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 import dk.aau.cs.giraf.oasis.lib.models.Setting;
 
@@ -18,6 +19,7 @@ import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.View;
@@ -232,9 +234,17 @@ public class HomeActivity extends Activity {
 						appInfo.title = appInfo.title.subSequence(0, 5) + "...";
 					}
 					appInfo.icon = info.activityInfo.loadIcon(getPackageManager());
+					
 					appInfo.packageName = info.activityInfo.applicationInfo.packageName;
 					appInfo.activityName = info.activityInfo.name;
 					appInfo.guardian = mCurrentUser.getId();
+					
+
+			    	App app = new App(appInfo.title.toString(), "random", "", appInfo.packageName,appInfo.activityName);
+					
+					Log.i("magnus","icon: " + appInfo.icon);
+					Log.i("magnus","packageName: " + appInfo.packageName);
+					
 					
 					if(mHelper.appsHelper.getApps().size() > 0) {
 						mSettings = mHelper.appsHelper.getAppsByProfile(mCurrentUser).get(i).getSettings();
