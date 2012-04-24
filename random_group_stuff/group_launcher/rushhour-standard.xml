@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'><nta><declaration>// Place global declarations here.
+const int boardLength = 6;
+const int boardHeight = 6;
+
+int counter = 0;
+
+const int OCCUPIED = 1;
+const int FREE = 0;
+
+typedef int[FREE,OCCUPIED] bit_t;
+typedef int[0, boardLength - 1] xCoord_t;
+typedef int[0, boardHeight - 1] yCoord_t;
+
+bit_t board[boardLength][boardHeight];</declaration><template><name x="5" y="5">VCar</name><parameter>const int length, const xCoord_t x, yCoord_t y</parameter><declaration>// Place local declarations here.
+
+void Mark() {
+	int i;
+	for (i = y; i &lt; y + length; i++) {
+		board[x][i] = OCCUPIED;
+	}
+}
+
+void MoveNorth() {
+	board[x][y + length - 1] = FREE;
+	y--;
+	Mark();
+	counter++;
+}
+
+void MoveSouth() {
+	board[x][y] = FREE;
+	y++;
+	Mark();
+	counter++;
+}</declaration><location id="id0" x="-440" y="-48"><committed/></location><location id="id1" x="-440" y="-88"><committed/></location><location id="id2" x="-608" y="-56"></location><location id="id3" x="-680" y="-56"><committed/></location><init ref="id3"/><transition><source ref="id0"/><target ref="id2"/></transition><transition><source ref="id2"/><target ref="id0"/><label kind="guard" x="-616" y="-16">y + length &lt; boardHeight &amp;&amp; 
+board[x][y + length] == FREE</label><label kind="assignment" x="-600" y="-40">MoveSouth()</label><nail x="-632" y="24"/><nail x="-424" y="24"/></transition><transition><source ref="id1"/><target ref="id2"/></transition><transition><source ref="id2"/><target ref="id1"/><label kind="guard" x="-600" y="-136">y &gt; 0 &amp;&amp; 
+board[x][y - 1] == FREE</label><label kind="assignment" x="-600" y="-96">MoveNorth()</label><nail x="-608" y="-136"/><nail x="-456" y="-136"/></transition><transition><source ref="id3"/><target ref="id2"/><label kind="assignment" x="-672" y="-48">Mark()</label></transition></template><template><name>HCar</name><parameter>const int length, xCoord_t x, const yCoord_t y</parameter><declaration>// Place local declarations here.
+
+void Mark() {
+	int i;
+	for (i = x; i &lt; x + length; i++) {
+		board[i][y] = OCCUPIED;
+	}
+}
+
+void MoveEast() {
+	board[x][y] = FREE;
+	x++;
+	Mark();
+	counter++;
+}
+
+void MoveWest() {
+	board[x + length - 1][y] = FREE;
+	x--;
+	Mark();
+	counter++;
+}</declaration><location id="id4" x="-24" y="-8"><committed/></location><location id="id5" x="-24" y="-48"><committed/></location><location id="id6" x="-200" y="-16"></location><location id="id7" x="-280" y="-16"><committed/></location><init ref="id7"/><transition><source ref="id4"/><target ref="id6"/></transition><transition><source ref="id6"/><target ref="id4"/><label kind="guard" x="-208" y="8">x + length &lt; boardLength &amp;&amp; 
+board[x + length][y] == FREE</label><label kind="assignment" x="-192" y="-8">MoveEast()</label><nail x="-224" y="48"/><nail x="-24" y="48"/></transition><transition><source ref="id5"/><target ref="id6"/></transition><transition><source ref="id6"/><target ref="id5"/><label kind="guard" x="-192" y="-88">x &gt; 0 &amp;&amp; 
+board[x - 1][y] == FREE</label><label kind="assignment" x="-192" y="-56">MoveWest()</label><nail x="-200" y="-88"/><nail x="-40" y="-80"/></transition><transition><source ref="id7"/><target ref="id6"/><label kind="assignment" x="-264" y="-16">Mark()</label></transition></template><system>// Place template instantiations here.
+red = HCar(2, 3, 2);
+tyrkis = HCar(2, 0, 0);
+orange = HCar(2, 2, 0);
+green = HCar(2, 3, 3);
+beige = HCar(2, 4, 4);
+darkgreen = HCar(2, 4, 4);
+lysgul = HCar(2, 1, 5);
+blue = VCar(2, 4, 0);
+pink = VCar(2, 2, 1);
+YellowTruck = VCar(3, 5, 1);
+purple = VCar(2, 1, 2);
+PurpleTruck = VCar(3, 0, 3);
+black = VCar(2, 3, 4);
+
+system red, tyrkis, orange, green, beige, darkgreen, lysgul, blue, pink, YellowTruck, purple, PurpleTruck, black;</system></nta>

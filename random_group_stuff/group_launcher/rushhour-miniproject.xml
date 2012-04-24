@@ -9,58 +9,65 @@ typedef int[FREE,OCCUPIED] bit_t;
 typedef int[0, boardLength - 1] xCoord_t;
 typedef int[0, boardHeight - 1] yCoord_t;
 
-bit_t board[boardLength][boardHeight];</declaration><template><name x="5" y="5">VCar</name><parameter>int id, int length, xCoord_t x, yCoord_t y</parameter><declaration>// Place local declarations here.
+bit_t board[boardLength][boardHeight];</declaration><template><name x="5" y="5">VCar</name><parameter>const int length, const xCoord_t x, yCoord_t y</parameter><declaration>// Place local declarations here.
+
+void Mark() {
+	int i;
+	for (i = y; i &lt; y + length; i++) {
+		board[x][i] = OCCUPIED;
+	}
+}
 
 void MoveNorth() {
 	if (board[x][y - 1] == FREE) {
 		board[x][y + length - 1] = FREE;
-		board[x][y - 1] = OCCUPIED;
 		y--;
+		Mark();
 	}
 }
 
 void MoveSouth() {
 	if (board[x][y + length] == FREE) {
 		board[x][y] = FREE;
-		board[x][y + length] = OCCUPIED;
 		y++;
+		Mark();
 	}
-}</declaration><location id="id0" x="-272" y="40"></location><location id="id1" x="-264" y="-144"></location><location id="id2" x="-480" y="-64"></location><init ref="id2"/><transition><source ref="id0"/><target ref="id2"/><nail x="-568" y="80"/></transition><transition><source ref="id1"/><target ref="id2"/><nail x="-432" y="-176"/></transition><transition><source ref="id2"/><target ref="id0"/><label kind="guard" x="-448" y="-8">y &lt; boardHeight - length - 1</label><label kind="assignment" x="-392" y="-40">MoveSouth()</label></transition><transition><source ref="id2"/><target ref="id1"/><label kind="guard" x="-416" y="-128">y &gt; 0</label><label kind="assignment" x="-400" y="-96">MoveNorth()</label></transition></template><template><name>HCar</name><parameter>int id, int length, xCoord_t x, yCoord_t y</parameter><declaration>// Place local declarations here.
+}</declaration><location id="id0" x="-608" y="-56"></location><location id="id1" x="-272" y="40"></location><location id="id2" x="-264" y="-144"></location><location id="id3" x="-832" y="-56"></location><init ref="id3"/><transition><source ref="id2"/><target ref="id0"/><nail x="-512" y="-200"/></transition><transition><source ref="id1"/><target ref="id0"/><nail x="-488" y="104"/></transition><transition><source ref="id0"/><target ref="id1"/><label kind="guard" x="-416" y="-24">y + length &lt; boardHeight</label><label kind="assignment" x="-448" y="16">MoveSouth()</label></transition><transition><source ref="id0"/><target ref="id2"/><label kind="guard" x="-480" y="-120">y &gt; 0</label><label kind="assignment" x="-472" y="-88">MoveNorth()</label></transition><transition><source ref="id3"/><target ref="id0"/><label kind="assignment" x="-780" y="-56">Mark()</label></transition></template><template><name>HCar</name><parameter>const int length, xCoord_t x, const yCoord_t y</parameter><declaration>// Place local declarations here.
+
+void Mark() {
+	int i;
+	for (i = x; i &lt; x + length; i++) {
+		board[i][y] = OCCUPIED;
+	}
+}
 
 void MoveEast() {
 	if (board[x + length][y] == FREE) {
 		board[x][y] = FREE;
-		board[x + length][y] = OCCUPIED;
 		x++;
+		Mark();
 	}
 }
 
 void MoveWest() {
 	if (board[x - 1][y] == FREE) {
 		board[x + length - 1][y] = FREE;
-		board[x - 1][y] = OCCUPIED;
 		x--;
+		Mark();
 	}
-}</declaration><location id="id3" x="72" y="88"></location><location id="id4" x="64" y="-112"></location><location id="id5" x="-184" y="-16"></location><init ref="id5"/><transition><source ref="id3"/><target ref="id5"/><nail x="-160" y="216"/><nail x="-184" y="152"/></transition><transition><source ref="id4"/><target ref="id5"/><nail x="-136" y="-224"/></transition><transition><source ref="id5"/><target ref="id3"/><label kind="guard" x="-48" y="8">x &gt; 0</label><label kind="assignment" x="-116" y="36">MoveWest()</label></transition><transition><source ref="id5"/><target ref="id4"/><label kind="guard" x="-80" y="-56">x &lt; boardLength - length - 1</label><label kind="assignment" x="-128" y="-88">MoveEast()</label></transition></template><system>// Place template instantiations here.
-red = HCar(0, 2, 3, 2);
-h1 = HCar(1, 2, 0, 0);
-h2 = HCar(2, 2, 0, 2);
-h3 = HCar(3, 2, 3, 3);
-h4 = HCar(4, 2, 4, 4);
-h5 = HCar(5, 2, 4, 5);
-h6 = HCar(6, 2, 1, 5);
-v7 = VCar(7, 2, 3, 0);
-v8 = VCar(8, 2, 2, 1);
-v9 = VCar(9, 3, 5, 1);
-v10 = VCar(10, 2, 1, 2);
-v11 = VCar(11, 3, 0, 3);
-v12 = VCar(12, 2, 3, 4);
+}</declaration><location id="id4" x="-200" y="-16"></location><location id="id5" x="72" y="88"></location><location id="id6" x="64" y="-112"></location><location id="id7" x="-424" y="-16"></location><init ref="id7"/><transition><source ref="id5"/><target ref="id4"/><nail x="-160" y="160"/></transition><transition><source ref="id6"/><target ref="id4"/><nail x="-144" y="-152"/></transition><transition><source ref="id4"/><target ref="id5"/><label kind="guard" x="-64" y="16">x + length &lt; boardLength</label><label kind="assignment" x="-104" y="48">MoveEast()</label></transition><transition><source ref="id4"/><target ref="id6"/><label kind="guard" x="-120" y="-80">x &gt; 0</label><label kind="assignment" x="-80" y="-56">MoveWest()</label></transition><transition><source ref="id7"/><target ref="id4"/><label kind="assignment" x="-372" y="-16">Mark()</label></transition></template><system>// Place template instantiations here.
+red = HCar(2, 3, 2);
+tyrkis = HCar(2, 0, 0);
+orange = HCar(2, 2, 0);
+green = HCar(2, 3, 3);
+beige = HCar(2, 4, 4);
+darkgreen = HCar(2, 4, 4);
+lysgul = HCar(2, 1, 5);
+blue = VCar(2, 4, 0);
+pink = VCar(2, 2, 1);
+YellowTruck = VCar(3, 5, 1);
+purple = VCar(2, 1, 2);
+PurpleTruck = VCar(3, 0, 3);
+black = VCar(2, 3, 4);
 
-// List one or more processes to be composed into a system.
-/*for (int outer = 0; outer &lt; boardLength; outer++) {
-	for (int inner = 0; inner &lt; boardWidth; inner++) {
-		board[outer][inner] = FREE;
-	}
-}*/
-
-system red, h1, h2, h3, h4, h5, h6, v7, v8, v9, v10, v11, v12;</system></nta>
+system red, tyrkis, orange, green, beige, darkgreen, lysgul, blue, pink, YellowTruck, purple, PurpleTruck, black;</system></nta>
