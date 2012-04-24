@@ -21,7 +21,7 @@ public class QueryTest {
 		QueryHandler qhandler = new QueryHandler();
 		
 		String delete = "DELETE FROM AuthUsers where certificate='cert3';";
-		String insert = "INSERT INTO AuthUsers values('cert3',null);";
+		String insert = "INSERT INTO AuthUsers values('cert3',null,1,'user3','pass');";
 		String select = "SELECT * FROM AuthUsers;";
 		String update = "UPDATE AuthUsers set idUser=4 where certificate='cert3';";
 		queries.add(delete);
