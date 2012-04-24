@@ -8,6 +8,7 @@ import dk.aau.cs.giraf.gui.GWidgetCalendar;
 import dk.aau.cs.giraf.gui.GWidgetConnectivity;
 import dk.aau.cs.giraf.gui.GWidgetLogout;
 import dk.aau.cs.giraf.gui.GWidgetUpdater;
+import dk.aau.cs.giraf.gui.GDialog;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.App;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
@@ -31,6 +32,7 @@ import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 import android.view.WindowManager;
+
 
 public class HomeActivity extends Activity {
 
@@ -59,7 +61,7 @@ public class HomeActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.home);
 
-		HomeActivity.mContext = getApplicationContext();
+		HomeActivity.mContext = this; //getApplicationContext();
 		mHelper = new Helper(mContext);
 
 		mCurrentUser = mHelper.profilesHelper.getProfileById(getIntent().getExtras().getLong("currentGuardianID"));
@@ -86,7 +88,14 @@ public class HomeActivity extends Activity {
 		
 		mLogoutWidget.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				startActivity(Tools.logOutIntent(mContext));
+				//startActivity(Tools.logOutIntent(mContext));
+				View.OnClickListener task = new View.OnClickListener() {
+					public void onClick(View v) {
+						startActivity(Tools.logOutIntent(mContext));;	
+					}
+				};
+				GDialog g = new GDialog(mContext, R.drawable.large_switch_profile, "Log out", "You're about to log out", task);
+				g.show();
 			}
 		});
 		
@@ -274,11 +283,11 @@ public class HomeActivity extends Activity {
 	private int AppColor(int position, Setting<String,String,String> settings) {
 		int[] c = getResources().getIntArray(R.array.appcolors);
 		
-		if(settings.containsKey(Tools.COLORSETTINGS)) {
-			int color = Integer.parseInt(settings.get(Tools.COLORSETTINGS).get(Tools.COLOR_BG));
+		if(settings.containsKey(Tools.COLORS)) {
+			int color = Integer.parseInt(settings.get(Tools.COLORS).get(Tools.COLOR_BG));
 			return c[color];
 		} else {
-			settings.addValue(Tools.COLORSETTINGS, Tools.COLOR_BG, String.valueOf(c[position]));
+			settings.addValue(Tools.COLORS, Tools.COLOR_BG, String.valueOf(c[position]));
 			return c[position];
 		}
 	}
