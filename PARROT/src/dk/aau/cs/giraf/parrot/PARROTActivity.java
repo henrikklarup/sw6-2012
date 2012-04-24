@@ -4,17 +4,16 @@ package dk.aau.cs.giraf.parrot;
 
 import java.util.List;
 
-import dk.aau.cs.giraf.oasis.lib.Helper;
-import dk.aau.cs.giraf.oasis.lib.models.*;
-
 import parrot.Package.R;
 import android.app.ActionBar;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.GridView;
+import dk.aau.cs.giraf.oasis.lib.Helper;
+import dk.aau.cs.giraf.oasis.lib.models.App;
+import dk.aau.cs.giraf.oasis.lib.models.Media;
+import dk.aau.cs.giraf.oasis.lib.models.Profile;
+import dk.aau.cs.giraf.oasis.lib.models.Setting;
 
 
 public class PARROTActivity extends Activity {
@@ -99,12 +98,12 @@ public class PARROTActivity extends Activity {
 		if(extras !=null)
 		{
 			prof = help.profilesHelper.getProfileById(extras.getLong("currentProfileId"));
-			app = help.appsHelper.getAppById(extras.getLong("currentAppId"));
+			app = help.appsHelper.getAppByIds(extras.getLong("currentAppId"), extras.getLong("currentProfileId"));
 			Pictogram pic = new Pictogram(prof.getFirstname(), prof.getPicture(), null, null);
 			PARROTProfile parrotUser = new PARROTProfile(prof.getFirstname(), pic);
 
 			//TODO read categories from settings
-			Setting<String, String, String> specialSettings = app.getSettings();
+			Setting<String, String, String> specialSettings = app.getSettings();//This object might be null //FIXME handle eventual null pointer exception
 
 			//TODO load medias into pictogram categories using settings.
 
@@ -154,7 +153,7 @@ public class PARROTActivity extends Activity {
 	public Pictogram loadPictogram(int id,Helper help)
 	{
 		Pictogram pic = null;
-		Media media=help.mediaHelper.getSingleMediaById(id);
+		Media media=help.mediaHelper.getSingleMediaById(id); //This is the image media //TODO check type
 		//Media files can have a link to a sub-media file.
 		//TODO Make it so that image-Media files have sound-Media files and word-Media files as sub media links.
 		return pic;
