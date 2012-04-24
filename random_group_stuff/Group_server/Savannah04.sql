@@ -35,7 +35,7 @@ CREATE  TABLE `04`.`AuthUsers` (
 
   `idUser` INT NOT NULL AUTO_INCREMENT ,
   
-  `type` INT NOT NULL,
+  `aRole` INT NOT NULL,
     
   `username` VARCHAR(45) UNIQUE NOT NULL,
   
@@ -53,6 +53,12 @@ CREATE  TABLE `04`.`Apps` (
   `name` VARCHAR(45) NOT NULL ,
 
   `version` VARCHAR(45) NOT NULL ,
+  
+  `icon` VARCHAR(45) NOT NULL,
+  
+  `package` VARCHAR(45) NOT NULL,
+  
+  `activity` VARCHAR(45) NOT NULL,
 
   PRIMARY KEY (`idApp`) );
 
@@ -215,19 +221,19 @@ CREATE  TABLE `04`.`HasTag` (
 
 CREATE  TABLE `04`.`HasLink` (
 
-  `idParent` INT NOT NULL ,
+  `idMedia` INT NOT NULL ,
 
-  `idChild` INT NOT NULL ,
+  `idSubMedia` INT NOT NULL ,
   
-  FOREIGN KEY (`idParent` )
+  FOREIGN KEY (`idMedia` )
 
   REFERENCES `04`.`Media` (`idMedia` ),
   
-  FOREIGN KEY (`idChild` )
+  FOREIGN KEY (`idSubMedia` )
 
   REFERENCES `04`.`Media` (`idMedia` ),
 
-  PRIMARY KEY (`idParent`, `idChild`) );
+  PRIMARY KEY (`idMedia`, `idSubMedia`) );
 
 CREATE  TABLE `04`.`MediaProfileAccess` (
 
@@ -265,8 +271,8 @@ select * from Apps;
 select * from ListOfApps;
 select * from Profile;
 select * from AuthUsers;
-insert into Apps values(1,'TestAppe1','1.0.0');
-insert into Apps values(2,'TestAppe2','1.0.0');
+insert into Apps values(1,'TestAppe1','1.0.0', 'null', 'null', 'null');
+insert into Apps values(2,'TestAppe2','1.0.0', 'null', 'null', 'null');
 
 insert into AuthUsers values ('abekat',null,0,'Jesper','tester1');
 insert into AuthUsers values ('Dep:111',null,1,'randomString','randomString');
@@ -294,6 +300,17 @@ insert into HasSubDepartment values(7,8);
 insert into ListOfApps values(1,1,null,null);
 insert into ListOfApps values(2,1,null,null);
 
+select * from Department 
+						where idDepartment not in 
+						(select idSubDepartment from HasSubDepartment);
+                        
+Select * from Profile
+						where 
+            pRole = 3 and
+            idProfile in 
+						(select idChild from HasGuardian  
+						where idGuardian= 4);
+
 select * from Profile
     where idProfile in
         (select idProfile from HasDepartment
@@ -302,6 +319,9 @@ select * from Profile
 
 select * from Department;
 
+select * from HasDepartment;
+
+UPDATE Profile SET pRole = 1 WHERE idProfile = 10 ;
 
 insert into Media values(1,'c:\test','MyTest',1,'public',1);
 insert into HasTag values(1,1);
@@ -310,14 +330,16 @@ insert into MediaProfileAccess values(1,1);
 insert into HasDepartment values (1,6);
 insert into HasGuardian values (1,3);
 insert into HasGuardian values (4,3);
-select * from HasGuardian
+select * from HasGuardian;
 
+select * from ListOfApps
+where idProfile =1;
 
 select * from Apps
     where idApp in (select idApp from ListOfApps
                     where idProfile = 1);
 
-
+DELETE FROM HasDepartment WHERE 'idProfile'=1 and 'idDepartment'="+dep.getID()+");
 select * from Profile
     where idProfile in 
         (select idGuardian from HasGuardian 
@@ -329,10 +351,19 @@ select * from Department
             where idDepartment = 2);
 
 select * from Department
+    where idDepartment not in (select idSubDepartment from HasSubDepartment);
+
+
+select * from HasDepartment
+    where idDepartment not in (select idSubDepartment from HasSubDepartment);
+
+select * from Department
     where idDepartment in
         (select idDepartment from HasDepartment
                  where  idProfile = '1');
 
+UPDATE Profile SET firstname='Tester'
+    where idProfile =1;
 
 select * from HasDepartment;
 
@@ -344,11 +375,24 @@ SELECT * from AuthUsers;
 
 SELECT * from AuthUsers;
 
+update HasDepartment set idProfile=10, idDepartment=2; 
+
 SELECT idUser, username, idProfile, firstname, middlename, surname from AuthUsers, Profile
     where idUser = idProfile;
 
-select * from HasGuardian;
+select * from HasDepartment;
 
+select * from Department 										
+where idDepartment not in (select idSubDepartment from HasSubDepartment);
+
+select * from Department
+					where idDepartment in
+					(select idSubdepartment from HasSubDepartment
+					where idDepartment = 6);
+
+
+ 
+                        
 insert into HasGuardian values(1,3);
 
 select * from Profile;
@@ -359,6 +403,8 @@ select idDepartment, name from Department
                     where idProfile =5);
 
 select type from AuthUsers where idUser = 5;
+
+select * from AuthUsers;
 
 select * from Profile
 							where idProfile in (select idGuardian from HasGuardian
@@ -374,6 +420,8 @@ select * from AuthUsers where username = '1';
 select * from Profile;
 SELECT password from AuthUsers where username = 'Jesper';
 
+select * from HasGuardian;
+
 select * from AuthUsers where username = '10'; 
 
 SELECT firstname, middlename, surname from Profile where idProfile = 1;
@@ -381,5 +429,8 @@ SELECT firstname, middlename, surname from Profile where idProfile = 1;
 select * from Apps
     where 1 in (select idProfile from ListOfApps);
     
+select * from Profile
+							where pRole = 3;
+
 select idProfile, firstname from Profile
     where 'abekat' in (select certificate from AuthUsers);
