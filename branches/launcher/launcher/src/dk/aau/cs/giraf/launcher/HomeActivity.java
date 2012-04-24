@@ -262,15 +262,13 @@ public class HomeActivity extends Activity {
 	}
 	
 	private int AppColor(int position, Setting<String,String,String> settings) {
-		final String COLOR = "Color";
-		final String BACKGROUND = "Background";
 		int[] c = getResources().getIntArray(R.array.appcolors);
 		
-		if(settings.containsKey(COLOR)) {
-			int color = Integer.parseInt(settings.get(COLOR).get(BACKGROUND));
+		if(settings.containsKey(Tools.COLORSETTINGS)) {
+			int color = Integer.parseInt(settings.get(Tools.COLORSETTINGS).get(Tools.COLOR_BG));
 			return c[color];
 		} else {
-			settings.addValue(COLOR, BACKGROUND, String.valueOf(c[position]));
+			settings.addValue(Tools.COLORSETTINGS, Tools.COLOR_BG, String.valueOf(c[position]));
 			return c[position];
 		}
 	}
