@@ -54,6 +54,11 @@
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
+            android:name="dk.aau.cs.giraf.launcher.Home2Activity"
+            android:label="@string/application_name"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
             android:name="dk.aau.cs.giraf.launcher.ProfileSelectActivity"
             android:label="@string/application_name"
             android:noHistory="true"
