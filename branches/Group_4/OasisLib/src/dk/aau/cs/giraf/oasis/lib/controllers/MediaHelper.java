@@ -8,11 +8,10 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import dk.aau.cs.giraf.oasis.lib.metadata.HasTagMetaData;
 import dk.aau.cs.giraf.oasis.lib.metadata.MediaMetaData;
-import dk.aau.cs.giraf.oasis.lib.metadata.TagsMetaData;
 import dk.aau.cs.giraf.oasis.lib.models.Department;
 import dk.aau.cs.giraf.oasis.lib.models.HasLink;
+import dk.aau.cs.giraf.oasis.lib.models.HasTag;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
 import dk.aau.cs.giraf.oasis.lib.models.MediaDepartmentAccess;
 import dk.aau.cs.giraf.oasis.lib.models.MediaProfileAccess;
@@ -30,6 +29,7 @@ public class MediaHelper {
 	private HasLinkController hl;
 	private MediaDepartmentAccessController mda;
 	private MediaProfileAccessController mpa;
+	private HasTagController ht;
 	private String[] columns = new String[] { 
 			MediaMetaData.Table.COLUMN_ID, 
 			MediaMetaData.Table.COLUMN_PATH,
@@ -47,6 +47,7 @@ public class MediaHelper {
 		hl = new HasLinkController(_context);
 		mda = new MediaDepartmentAccessController(_context);
 		mpa = new MediaProfileAccessController(_context);
+		ht = new HasTagController(_context);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -68,24 +69,14 @@ public class MediaHelper {
 		return mda.removeMediaProfileAccess(media, department);
 	}
 
-	public int removeTagsFromMedia(String[] tags, Media media) {
-		int result = 0;
-		for (String t : tags) {
-			String[] tagColumns = {TagsMetaData.Table.COLUMN_ID, TagsMetaData.Table.COLUMN_CAPTION};
-			Cursor cTag = _context.getContentResolver().query(TagsMetaData.CONTENT_URI, tagColumns, tagColumns[1] + " = '" + t + "'", null, null);
-			if (cTag != null) {
-				if (cTag.moveToFirst()) {
-					String caption = cTag.getString(cTag.getColumnIndex(tagColumns[1]));
-					Tag _tag = new Tag(caption);
-					result += _context.getContentResolver().delete(HasTagMetaData.CONTENT_URI, HasTagMetaData.Table.COLUMN_IDTAG + " = '" + _tag.getId() +
-							"' AND " + HasTagMetaData.Table.COLUMN_IDMEDIA + " = '" + media.getId() + "'", null);
-				}
-			}
-
-		}
-		return result;
+	public int removeTagListFromMedia(List<Tag> tags, Media media) {
+		return ht.removeHasTagList(tags, media);
 	}
-	
+
+	public int removeTagFromMedia(Tag tag, Media media) {
+		return ht.removeHasTag(tag, media);
+	}
+
 	public int removeSubMediaAttachmentToMedia(Media subMedia, Media media) {
 		return hl.removeHasLink(subMedia, media);
 	}
@@ -94,55 +85,28 @@ public class MediaHelper {
 	 * Insert media
 	 * @param media Media containing data
 	 */
-	
+
 	public long insertMedia(Media media) {
 		long result = 0;
 		Uri uri;
 		ContentValues cv = getContentValues(media);
 		uri = _context.getContentResolver().insert(MediaMetaData.CONTENT_URI, cv);
 		result = Integer.parseInt(uri.getPathSegments().get(1));
-		
+
 		return result;
 	}
 
-	public int addTagsToMedia(String[] tags, Media media) {
-		int result = -1;
-		for (String tag : tags) {
-			String[] tagColumns = {TagsMetaData.Table.COLUMN_ID, TagsMetaData.Table.COLUMN_CAPTION};
-			Cursor cTag = _context.getContentResolver().query(TagsMetaData.CONTENT_URI, tagColumns, tagColumns[1] + " = '" + tag + "'", null, null);
-			if (cTag != null) {
-				if (cTag.moveToFirst()) {
-					String caption = cTag.getString(cTag.getColumnIndex(tagColumns[1]));
-					Tag _tag = new Tag(caption); 
-					addHasTag(_tag, media);
-					result = 0;
-				}
-			} else {
-				ContentValues values = new ContentValues();
-				values.put(TagsMetaData.Table.COLUMN_CAPTION, tag);
-				_context.getContentResolver().insert(TagsMetaData.CONTENT_URI, values);
-
-				Cursor cNewTag = _context.getContentResolver().query(TagsMetaData.CONTENT_URI, tagColumns, tagColumns[1] + " = '" + tag + "'", null, null);
-				if (cNewTag != null) {
-					if (cNewTag.moveToFirst()) {
-						String caption = cNewTag.getString(cNewTag.getColumnIndex(tagColumns[1]));
-						Tag _newTag = new Tag(caption); 
-						addHasTag(_newTag, media);
-						result = 0;
-					}
-				} else {
-					result = -1;
-				}
-			}
+	public long addTagsToMedia(List<Tag> tags, Media media) {
+		long result = -1;
+		for (Tag t : tags) {
+			HasTag htModel = new HasTag();
+			htModel.setIdMedia(media.getId());
+			htModel.setIdTag(t.getId());
+			ht.insertHasTag(htModel);
+			result = 0;
 		}
-		return result;
-	}
 
-	private void addHasTag(Tag tag, Media media) {
-		ContentValues values = new ContentValues();
-		values.put(HasTagMetaData.Table.COLUMN_IDTAG, tag.getId());
-		values.put(HasTagMetaData.Table.COLUMN_IDMEDIA, media.getId());
-		_context.getContentResolver().insert(HasTagMetaData.CONTENT_URI, values);
+		return result;
 	}
 
 	public long attachMediaToProfile(Media media, Profile profile, Profile owner) {
@@ -166,12 +130,12 @@ public class MediaHelper {
 			return -1;
 		}
 	}
-	
+
 	public long attachSubMediaToMedia(Media subMedia, Media media) {
 		HasLink hlModel = new HasLink();
 		hlModel.setIdMedia(media.getId());
 		hlModel.setIdSubMedia(subMedia.getId());
-		
+
 		return hl.insertHasLink(hlModel);
 	}
 
@@ -198,14 +162,14 @@ public class MediaHelper {
 		c.close();
 		return media;
 	}
-	
+
 	public List<Media> getSubMediaByMedia(Media media) {
 		List<Media> medias = new ArrayList<Media>();
-		
+
 		for (HasLink link : hl.getSubMediaByMedia(media)) {
 			medias.add(getSingleMediaById(link.getIdSubMedia()));
 		}
-		
+
 		return medias;
 	}
 
@@ -235,7 +199,7 @@ public class MediaHelper {
 	public List<Media> getMediaByName(String name) {
 		List<Media> media = new ArrayList<Media>();
 		Cursor c = _context.getContentResolver().query(MediaMetaData.CONTENT_URI, columns, MediaMetaData.Table.COLUMN_NAME + " LIKE '%" + name + "%'", null, null);
-		
+
 		if (c != null) {
 			media = cursorToMedia(c);
 			c.close();
@@ -243,46 +207,16 @@ public class MediaHelper {
 		return media;
 	}
 
-	public List<Media> getMediaByTags(String[] tags) {
-		List<Media> mediaList = new ArrayList<Media>();
+	public List<Media> getMediaByTags(List<Tag> tags) {
+		List<Media> resultList = new ArrayList<Media>();
 
-		for (String tag : tags) {
-			String[] tagColumns = {TagsMetaData.Table.COLUMN_ID, TagsMetaData.Table.COLUMN_CAPTION};
-			Cursor cTag = _context.getContentResolver().query(TagsMetaData.CONTENT_URI, tagColumns, tagColumns[1] + " = '" + tag + "'", null, null);
-			if (cTag != null) {
-				if (cTag.moveToFirst()) {
-					long tagId = cTag.getLong(cTag.getColumnIndex(tagColumns[0]));
-					List<Long> mediaIdList = new ArrayList<Long>();
-					String[] hasTagColumns = {HasTagMetaData.Table.COLUMN_IDTAG, HasTagMetaData.Table.COLUMN_IDMEDIA};
-					Cursor cHasTag = _context.getContentResolver().query(HasTagMetaData.CONTENT_URI, hasTagColumns, 
-							hasTagColumns[0] + " = '" + tagId + "'", null, null);
-					if (cHasTag != null) {
-						if (cHasTag.moveToFirst()) {
-							while (!cHasTag.isAfterLast()) {
-								long mediaId = cHasTag.getLong(cHasTag.getColumnIndex(hasTagColumns[1]));
-								mediaIdList.add(mediaId);
-							}
-						}
-						for (long mId : mediaIdList) {
-							Cursor cMedia = _context.getContentResolver().query(MediaMetaData.CONTENT_URI, columns, 
-									MediaMetaData.Table.COLUMN_ID + " = '" + mId + "'", null, null);
-							if (cMedia != null) {
-								if (cMedia.moveToFirst()) {
-									while (!cMedia.isAfterLast()) {
-										mediaList.add(cursorToSingleMedia(cMedia));
-									}
-								}
-							}
-							cMedia.close();
-						}
-					}
-					cHasTag.close();
-				}
+		for (Tag t : tags) {
+			for (HasTag htModel : ht.getHasTagsByTag(t)) {
+				resultList.add(getMediaById(htModel.getIdMedia()));
 			}
-			cTag.close();
 		}
 
-		return mediaList;
+		return resultList;
 	}
 
 	public List<Media> getMediaByDepartment(Department department) {
@@ -291,7 +225,7 @@ public class MediaHelper {
 		for (MediaDepartmentAccess mdaModel : mda.getMediaByDepartment(department)) {
 			mediaList.add(getMediaById(mdaModel.getIdMedia()));
 		}
-		
+
 		return mediaList;
 	}
 
@@ -301,7 +235,7 @@ public class MediaHelper {
 		for (MediaProfileAccess mpaModel : mpa.getMediaByProfile(profile)) {
 			mediaList.add(getMediaById(mpaModel.getIdMedia()));
 		}
-		
+
 		return mediaList;
 	}
 
