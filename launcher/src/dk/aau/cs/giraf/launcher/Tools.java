@@ -21,6 +21,10 @@ public class Tools {
 	public static final String APP_PACKAGENAME = "appPackageName";
 	public static final String APP_ACTIVITYNAME = "appActivityName";
 	
+	// Keys for settings
+	public static final String COLORSETTINGS = "colorSettings";
+	public static final String COLOR_BG = "backgroundColor";
+	
 	// 24 hours in milliseconds = 86400000;
 	// 4 hours in milliseconds:
 	private static final long mAuthSpan = 14400000;
