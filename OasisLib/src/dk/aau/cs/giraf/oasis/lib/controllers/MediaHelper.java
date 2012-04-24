@@ -15,6 +15,7 @@ import dk.aau.cs.giraf.oasis.lib.metadata.MediaMetaData;
 import dk.aau.cs.giraf.oasis.lib.metadata.MediaProfileAccessMetaData;
 import dk.aau.cs.giraf.oasis.lib.metadata.TagsMetaData;
 import dk.aau.cs.giraf.oasis.lib.models.Department;
+import dk.aau.cs.giraf.oasis.lib.models.HasLink;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 import dk.aau.cs.giraf.oasis.lib.models.Tag;
@@ -27,6 +28,7 @@ import dk.aau.cs.giraf.oasis.lib.models.Tag;
 public class MediaHelper {
 
 	private static Context _context;
+	private HasLinkController ha;
 	private String[] columns = new String[] { 
 			MediaMetaData.Table.COLUMN_ID, 
 			MediaMetaData.Table.COLUMN_PATH,
@@ -41,6 +43,7 @@ public class MediaHelper {
 	 */
 	public MediaHelper(Context context){
 		_context = context;
+		ha = new HasLinkController(_context);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -199,6 +202,16 @@ public class MediaHelper {
 
 		c.close();
 		return media;
+	}
+	
+	public List<Media> getSubMediaByMedia(Media media) {
+		List<Media> medias = new ArrayList<Media>();
+		
+		for (HasLink link : ha.getSubMediaByMedia(media)) {
+			medias.add(getSingleMediaById(link.getIdSubMedia()));
+		}
+		
+		return medias;
 	}
 
 	/**
