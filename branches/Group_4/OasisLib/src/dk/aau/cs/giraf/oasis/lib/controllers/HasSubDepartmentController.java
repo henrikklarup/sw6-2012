@@ -28,6 +28,12 @@ class HasSubDepartmentController {
 	public int clearHasSubDepartmentTable() {
 		return _context.getContentResolver().delete(HasSubDepartmentMetaData.CONTENT_URI, null, null);
 	}
+	
+	public int removeHasSubDepartment(Department department, Department subDepartment) {
+		return _context.getContentResolver().delete(HasSubDepartmentMetaData.CONTENT_URI, 
+				HasSubDepartmentMetaData.Table.COLUMN_IDSUBDEPARTMENT + " = '" + subDepartment.getId() + "'" +
+						HasSubDepartmentMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + department.getId() + "'", null);
+	}
 
 	public long insertHasSubDepartment(HasSubDepartment hsd) {
 		ContentValues cv = getContentValues(hsd);

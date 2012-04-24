@@ -24,6 +24,14 @@ public class App {
 		this.aPackage = aPackage;
 		this.activity = activity;
 	}
+	
+	public App(String name, String aPackage, String activity) {
+		this.name = name;
+		this.version = null;
+		this.icon = null;
+		this.aPackage = aPackage;
+		this.activity = activity;
+	}
 
 	/**
 	 * Empty constructor

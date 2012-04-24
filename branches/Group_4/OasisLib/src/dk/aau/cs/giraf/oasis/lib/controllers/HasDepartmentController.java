@@ -29,6 +29,12 @@ class HasDepartmentController {
 	public int clearHasDepartmentTable() {
 		return _context.getContentResolver().delete(HasDepartmentMetaData.CONTENT_URI, null, null);
 	}
+	
+	public int removeHasDepartment(Profile profile, Department department) {
+		return _context.getContentResolver().delete(HasDepartmentMetaData.CONTENT_URI, 
+				HasDepartmentMetaData.Table.COLUMN_IDPROFILE + " = '" + profile.getId() + "'" +
+						HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + department.getId() + "'", null);
+	}
 
 	public long insertHasDepartment(HasDepartment hd) {
 		ContentValues cv = getContentValues(hd);

@@ -7,6 +7,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import dk.aau.cs.giraf.oasis.lib.metadata.MediaProfileAccessMetaData;
+import dk.aau.cs.giraf.oasis.lib.models.Media;
 import dk.aau.cs.giraf.oasis.lib.models.MediaProfileAccess;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
@@ -27,6 +28,12 @@ class MediaProfileAccessController {
 
 	public int clearMediaProfileAccessTable() {
 		return _context.getContentResolver().delete(MediaProfileAccessMetaData.CONTENT_URI, null, null);
+	}
+	
+	public int removeMediaProfileAccess(Media media, Profile profile) {
+		return _context.getContentResolver().delete(MediaProfileAccessMetaData.CONTENT_URI, 
+				MediaProfileAccessMetaData.Table.COLUMN_IDMEDIA + " = '" + media.getId() + "'" +
+						MediaProfileAccessMetaData.Table.COLUMN_IDPROFILE + " = '" + profile.getId() + "'", null);
 	}
 
 	public long insertMediaProfileAccess(MediaProfileAccess mpa) {

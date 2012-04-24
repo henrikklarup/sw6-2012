@@ -8,10 +8,10 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import dk.aau.cs.giraf.oasis.lib.metadata.HasDepartmentMetaData;
-import dk.aau.cs.giraf.oasis.lib.metadata.HasGuardianMetaData;
 import dk.aau.cs.giraf.oasis.lib.metadata.ProfilesMetaData;
 import dk.aau.cs.giraf.oasis.lib.models.Department;
+import dk.aau.cs.giraf.oasis.lib.models.HasDepartment;
+import dk.aau.cs.giraf.oasis.lib.models.HasGuardian;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 import dk.aau.cs.giraf.oasis.lib.models.Setting;
 
@@ -26,6 +26,8 @@ public class ProfilesHelper {
 
 	private static Context _context;
 	private AuthUsersController au;
+	private HasGuardianController hg;
+	private HasDepartmentController hd;
 	private String[] columns = new String[] { 
 			ProfilesMetaData.Table.COLUMN_ID, 
 			ProfilesMetaData.Table.COLUMN_FIRST_NAME,
@@ -43,6 +45,8 @@ public class ProfilesHelper {
 	public ProfilesHelper(Context context){
 		_context = context;
 		au = new AuthUsersController(_context);
+		hg = new HasGuardianController(_context);
+		hd = new HasDepartmentController(_context);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -60,10 +64,7 @@ public class ProfilesHelper {
 		if (child.getPRole() != 3 || guardian.getPRole() != 1 || guardian.getPRole() != 2) {
 			return -1;
 		} else {
-			_context.getContentResolver().delete(HasGuardianMetaData.CONTENT_URI, 
-					HasGuardianMetaData.Table.COLUMN_IDCHILD + " = '" + child.getId() + "'" +
-							HasGuardianMetaData.Table.COLUMN_IDGUARDIAN + " = '" + guardian.getId() + "'", null);
-			return 0;
+			return hg.removeHasGuardian(child, guardian);
 		}
 	}
 
@@ -80,13 +81,12 @@ public class ProfilesHelper {
 		return id;
 	}
 
-	public int attachChildToGuardian(Profile child, Profile guardian) {
+	public long attachChildToGuardian(Profile child, Profile guardian) {
 		if (child.getPRole() == 3 && (guardian.getPRole() == 1 || guardian.getPRole() == 2)) {
-			ContentValues values = new ContentValues();
-			values.put(HasGuardianMetaData.Table.COLUMN_IDCHILD, child.getId());
-			values.put(HasGuardianMetaData.Table.COLUMN_IDGUARDIAN, guardian.getId());
-			_context.getContentResolver().insert(HasGuardianMetaData.CONTENT_URI, values);
-			return 0;
+			HasGuardian hgModel = new HasGuardian();
+			hgModel.setIdChild(child.getId());
+			hgModel.setIdGuardian(guardian.getId());
+			return hg.insertHasGuardian(hgModel);
 		} else {
 			return -1;
 		}	
@@ -163,39 +163,27 @@ public class ProfilesHelper {
 
 	public List<Profile> getChildrenByDepartment(Department department) {
 		List<Profile> profiles = new ArrayList<Profile>();
-		String[] hasDepartmentColumns = {HasDepartmentMetaData.Table.COLUMN_IDPROFILE, HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT}; 
-		Cursor c = _context.getContentResolver().query(HasDepartmentMetaData.CONTENT_URI, hasDepartmentColumns,	hasDepartmentColumns[1] + " = '" + department.getId() + "'", null, null);
+		
+		List<HasDepartment> list = hd.getProfilesByDepartment(department);
 
-		if (c != null) {
-			if (c.moveToFirst()) {
-				while (!c.isAfterLast()) {
-					Profile profile = getProfileById(c.getLong(c.getColumnIndex(hasDepartmentColumns[0])));
-					if (profile.getPRole() == 3) {
-						profiles.add(profile);
-					}
-					c.moveToNext();
-				}
+		for (HasDepartment hdModel : list) {
+			Profile profile = getProfileById(hdModel.getIdProfile());
+			if (profile.getPRole() == 3) {
+				profiles.add(profile);
 			}
-			c.close();
 		}
-
+		
 		return profiles;
 	}
 
 	public List<Profile> getChildrenByGuardian(Profile guardian) {
 		List<Profile> profiles = new ArrayList<Profile>();
-		String[] hasGuardianColumns = {HasGuardianMetaData.Table.COLUMN_IDGUARDIAN, HasGuardianMetaData.Table.COLUMN_IDCHILD}; 
-		Cursor c = _context.getContentResolver().query(HasGuardianMetaData.CONTENT_URI, hasGuardianColumns, hasGuardianColumns[0] + " = '" + guardian.getId() + "'", null, null);
-
-		if (c != null) {
-			if (c.moveToFirst()) {
-				while (!c.isAfterLast()) {
-					Profile profile = getProfileById(c.getLong(c.getColumnIndex(hasGuardianColumns[1])));
-					profiles.add(profile);
-					c.moveToNext();
-				}
-			}
-			c.close();
+		
+		List<HasGuardian> list = hg.getChildrenByGuardian(guardian);
+		
+		for (HasGuardian hgModel : list) {
+			Profile profile = getProfileById(hgModel.getIdChild());
+			profiles.add(profile);
 		}
 
 		return profiles;
@@ -203,22 +191,16 @@ public class ProfilesHelper {
 
 	public List<Profile> getGuardiansByDepartment(Department department) {
 		List<Profile> profiles = new ArrayList<Profile>();
-		String[] hasDepartmentColumns = {HasDepartmentMetaData.Table.COLUMN_IDPROFILE, HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT}; 
-		Cursor c = _context.getContentResolver().query(HasGuardianMetaData.CONTENT_URI, hasDepartmentColumns, hasDepartmentColumns[1] + " = '" + department.getId() + "'", null, null);
+		
+		List<HasDepartment> list = hd.getProfilesByDepartment(department);
 
-		if (c != null) {
-			if (c.moveToFirst()) {
-				while (!c.isAfterLast()) {
-					Profile profile = getProfileById(c.getLong(c.getColumnIndex(hasDepartmentColumns[0])));
-					if (profile.getPRole() == 1) {
-						profiles.add(profile);
-					}
-					c.moveToNext();
-				}
+		for (HasDepartment hd : list) {
+			Profile profile = getProfileById(hd.getIdProfile());
+			if (profile.getPRole() == 1) {
+				profiles.add(profile);
 			}
-			c.close();
 		}
-
+		
 		return profiles;
 	}
 
