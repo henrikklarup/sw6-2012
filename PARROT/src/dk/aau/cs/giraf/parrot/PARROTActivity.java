@@ -40,7 +40,7 @@ public class PARROTActivity extends Activity {
 		//START TEMP LINES
 		Pictogram tempPic= new Pictogram("Koala","/sdcard/Pictures/005.jpg", null, null);
 		parrotUser = new PARROTProfile("tempNiels", tempPic);
-		Category tempCat = new Category(0);
+		Category tempCat = new Category(0,tempPic);
 		tempCat.addPictogram(tempPic);
 		tempCat.addPictogram(tempPic);
 		Pictogram tempPic2 = new Pictogram("Meg", "/sdcard/Pictures/meg.png", null, null);
@@ -52,6 +52,17 @@ public class PARROTActivity extends Activity {
 			tempCat.addPictogram(tempPic2);
 		}
 		parrotUser.addCategory(tempCat);
+		
+		Category tempCat2 = new Category(2, tempPic2);
+		tempPic = new Pictogram("Bob", "/sdcard/Pictures/007.jpg", null, null);
+		tempPic2= new Pictogram("Madeline", "/sdcard/Pictures/003.jpg", null, null);
+		
+		for (int i=0;i<6;i++)
+		{
+			tempCat2.addPictogram(tempPic);
+			tempCat2.addPictogram(tempPic2);
+		}
+		parrotUser.addCategory(tempCat2);
 		//END TEMP LINES
 		
 		ActionBar actionBar = getActionBar();
@@ -141,7 +152,7 @@ public class PARROTActivity extends Activity {
 
 	public Category loadCategory(String pictureIDs,int colour,Helper help)
 	{
-		Category cat = new Category(colour);
+		Category cat = new Category(colour,null);//FIXME
 		List<Integer> listIDs = getIDsFromString(pictureIDs);
 		for(int i = 0; i<listIDs.size();i++)
 		{

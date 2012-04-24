@@ -10,13 +10,15 @@ import java.util.ArrayList;
 public class Category {
 	private ArrayList<Pictogram> pictograms; 
 	private int categoryColour;
+	private Pictogram icon;
 	
 	//This is the constructor method.
-	public Category(int colour)
+	public Category(int colour, Pictogram icon)
 	{
 		//TODO we might have to add an icon and a name of the category as well.
 		pictograms = new ArrayList<Pictogram>();
 		setCategoryColour(colour);
+		setIcon(icon);
 	}
 
 	public ArrayList<Pictogram> getPictograms() {
@@ -49,6 +51,14 @@ public class Category {
 
 	public void setCategoryColour(int categoryColour) {
 		this.categoryColour = categoryColour;
+	}
+
+	public Pictogram getIcon() {
+		return icon;
+	}
+
+	public void setIcon(Pictogram icon) {
+		this.icon = icon;
 	}
 
 }

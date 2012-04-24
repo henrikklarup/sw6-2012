@@ -48,8 +48,8 @@ public class BoxDragListener implements OnDragListener
 					int y = (int)event.getY();
 					int index = speech.pointToPosition(x, y);
 
-					int categoryIndex=0;//TODO make sure that this refers to the current category
-					Pictogram pic = PARROTActivity.getUser().getCategoryAt(categoryIndex).getPictogramAtIndex(SpeechBoardFragment.draggedPictogramIndex);	
+					Pictogram pic =SpeechBoardFragment.displayedCat.getPictogramAtIndex(SpeechBoardFragment.draggedPictogramIndex);
+					
 					if(index <0)
 					{
 						SpeechBoardFragment.speechBoardCategory.addPictogram(pic);//Add the references pictogram to the back-end list
