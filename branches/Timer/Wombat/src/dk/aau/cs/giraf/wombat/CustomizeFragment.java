@@ -581,6 +581,7 @@ public class CustomizeFragment extends Fragment {
 				break;
 			}
 		} else {
+			currSubP.setAttachment(null);
 			pictureRes = R.drawable.thumbnail_attachment;
 			textRes = R.string.attachment_button_description;
 
