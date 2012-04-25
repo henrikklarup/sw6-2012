@@ -63,12 +63,8 @@ public class AppsHelper {
 		int result = 0;
 		Uri uri;
 		ContentValues cv = getContentValues(app);
-		try {
-			uri = _context.getContentResolver().insert(AppsMetaData.CONTENT_URI, cv);
-			result = Integer.parseInt(uri.getPathSegments().get(1));
-		} catch (Exception e) {
-			result = -1;
-		}
+		uri = _context.getContentResolver().insert(AppsMetaData.CONTENT_URI, cv);
+		result = Integer.parseInt(uri.getPathSegments().get(1));
 		
 		return result;
 	}
