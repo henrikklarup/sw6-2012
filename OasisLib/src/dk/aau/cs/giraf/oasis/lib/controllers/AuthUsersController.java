@@ -12,7 +12,7 @@ import android.net.Uri;
 import dk.aau.cs.giraf.oasis.lib.metadata.AuthUsersMetaData;
 import dk.aau.cs.giraf.oasis.lib.models.AuthUser;
 
-public class AuthUsersController {
+class AuthUsersController {
 
 	private Context _context;
 	private String[] columns = new String[] { 
