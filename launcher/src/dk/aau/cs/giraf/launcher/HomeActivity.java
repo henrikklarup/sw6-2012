@@ -106,20 +106,29 @@ public class HomeActivity extends Activity {
 			@Override
 			public boolean onTouch(View v, MotionEvent e) {
 				int offset = 0;
-				boolean result = false;
+				boolean result = true;
 				
 				switch(e.getAction()){
 				case MotionEvent.ACTION_DOWN:
-					offset = (int) e.getRawX();
-					result = true;
-				case MotionEvent.ACTION_MOVE:
+					offset = (int) e.getX();
 					mHomeBarParams = (LinearLayout.LayoutParams) v.getLayoutParams();
+					Log.i("thomas", "START DRAG");
+					result = true;
+					break;
+				case MotionEvent.ACTION_MOVE:
 					mHomeBarParams.setMargins(((int) e.getRawX())-offset, 0, 0, 0);
 					v.setLayoutParams(mHomeBarParams);
+					Log.i("thomas", offset+"");
 					result = true;
+					break;
 				case MotionEvent.ACTION_UP:
+					Log.i("thomas", "STOP DRAG");
 					result = false;
+					break;
 				}
+				
+				
+				
 				
 				//dwfegw
 				
@@ -285,13 +294,8 @@ public class HomeActivity extends Activity {
 					Log.i("magnus","packageName: " + appInfo.packageName);
 					
 					
-					if(mHelper.appsHelper.getApps().size() > 0) {
-						mSettings = mHelper.appsHelper.getAppsByProfile(mCurrentUser).get(i).getSettings();
-						appInfo.color = AppColor(i, mSettings);
-					} else {
-						appInfo.color = TEMPAppColor(i);
-					}
-
+					appInfo.color = TEMPAppColor(i);
+					
 					applications.add(appInfo);
 					
 					//have to change
