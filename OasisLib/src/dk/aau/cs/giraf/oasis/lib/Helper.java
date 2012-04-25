@@ -8,6 +8,7 @@ import dk.aau.cs.giraf.oasis.lib.controllers.AppsHelper;
 import dk.aau.cs.giraf.oasis.lib.controllers.DepartmentsHelper;
 import dk.aau.cs.giraf.oasis.lib.controllers.MediaHelper;
 import dk.aau.cs.giraf.oasis.lib.controllers.ProfilesHelper;
+import dk.aau.cs.giraf.oasis.lib.controllers.ServerHelper;
 import dk.aau.cs.giraf.oasis.lib.controllers.TagsHelper;
 import dk.aau.cs.giraf.oasis.lib.models.App;
 import dk.aau.cs.giraf.oasis.lib.models.Department;
@@ -41,6 +42,7 @@ public class Helper {
 	public DepartmentsHelper departmentsHelper;
 	public AppsHelper appsHelper;
 	public TagsHelper tagsHelper;
+	public ServerHelper serverHelper;
 	
 	//Controllers only for viewDB
 	/*
@@ -66,6 +68,7 @@ public class Helper {
 		departmentsHelper = new DepartmentsHelper(_context);
 		appsHelper = new AppsHelper(_context);
 		tagsHelper = new TagsHelper(_context);
+		serverHelper = new ServerHelper();
 		
 		//Controller only for viewDB
 		/*
