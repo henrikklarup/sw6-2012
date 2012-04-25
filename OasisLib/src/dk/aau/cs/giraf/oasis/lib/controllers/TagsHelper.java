@@ -41,9 +41,8 @@ public class TagsHelper {
 			}
 			c.close();
 		} else {
-			Uri uri;
 			ContentValues cv = getContentValues(tag);
-			uri = _context.getContentResolver().insert(TagsMetaData.CONTENT_URI, cv);
+			Uri uri = _context.getContentResolver().insert(TagsMetaData.CONTENT_URI, cv);
 			id = Integer.parseInt(uri.getPathSegments().get(1));
 		}
 		
@@ -104,7 +103,7 @@ public class TagsHelper {
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * Cursor to Tagss
+	 * Cursor to Tags
 	 * @param cursor Input cursor
 	 * @return Output List of Tags
 	 */
@@ -122,11 +121,6 @@ public class TagsHelper {
 		return tags;
 	}
 
-	/**
-	 * Cursor to AuthUser
-	 * @param cursor Input cursor
-	 * @return Output AuthUser
-	 */
 	private Tag cursorToTag(Cursor cursor) {
 		Tag tag = new Tag();
 		tag.setId(cursor.getLong(cursor.getColumnIndex(TagsMetaData.Table.COLUMN_ID)));
@@ -134,10 +128,6 @@ public class TagsHelper {
 		return tag;
 	}
 
-	/**
-	 * @param authUser the authUser to put in the database
-	 * @return the contentValues
-	 */
 	private ContentValues getContentValues(Tag tag) {
 		ContentValues contentValues = new ContentValues();
 		contentValues.put(TagsMetaData.Table.COLUMN_CAPTION, tag.getCaption());
