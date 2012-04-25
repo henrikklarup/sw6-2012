@@ -57,12 +57,16 @@ public class HomeActivity extends Activity {
 	private GWidgetLogout mLogoutWidget;
 	private LinearLayout.LayoutParams mHomeBarParams;
 	
+	private int mLandscapeBarWidth;
+	
 	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.home);
+		
+		mLandscapeBarWidth = Tools.intToDP(this, 200);
 
 		HomeActivity.mContext = this; //getApplicationContext();
 		mHelper = new Helper(mContext);
@@ -135,7 +139,7 @@ public class HomeActivity extends Activity {
 				//dwfegw
 				GridView GridView = (android.widget.GridView) findViewById(R.id.GridViewWrapper);
 				RelativeLayout.LayoutParams GridViewParams = (RelativeLayout.LayoutParams) GridView.getLayoutParams();
-				//GridViewParams.setMargins(mHomeBarParams, 0, 0, 0);
+				GridViewParams.setMargins(margin + mLandscapeBarWidth, 0, 0, 0);
 				GridView.setLayoutParams(GridViewParams);
 				//fewfew
 				
