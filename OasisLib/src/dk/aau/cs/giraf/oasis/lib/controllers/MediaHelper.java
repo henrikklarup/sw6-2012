@@ -154,12 +154,15 @@ public class MediaHelper {
 	 * @return List<Media>, containing all media
 	 */
 	public List<Media> getMedia() {
+		List<Media> media = new ArrayList<Media>();
+		
 		Cursor c = _context.getContentResolver().query(MediaMetaData.CONTENT_URI, columns, null, null, null);
 
-		List<Media> media = new ArrayList<Media>();
-		media = cursorToMedia(c);
-
-		c.close();
+		if (c != null) {
+			media = cursorToMedia(c);
+			c.close();
+		}
+		
 		return media;
 	}
 
@@ -179,15 +182,18 @@ public class MediaHelper {
 	 * @return the media or null
 	 */
 	public Media getSingleMediaById(long id) {
+		Media media = null;
 		Uri uri = ContentUris.withAppendedId(MediaMetaData.CONTENT_URI, id);
 		Cursor c = _context.getContentResolver().query(uri, columns, null, null, null);
-		Media media = null;
 
-		if(c.moveToFirst()) {
-			media = cursorToSingleMedia(c);			
+		if (c != null) {
+			if(c.moveToFirst()) {
+				media = cursorToSingleMedia(c);
+			}
+
+			c.close();
 		}
 
-		c.close();
 		return media;
 	}
 
@@ -240,14 +246,18 @@ public class MediaHelper {
 	}
 
 	public Media getMediaById(long id) {
+		Media media = null;
 		Cursor c = _context.getContentResolver().query(MediaMetaData.CONTENT_URI, columns, MediaMetaData.Table.COLUMN_ID + " = '" + id + "'", null, null);
 
 		if (c != null) {
 			if (c.moveToFirst()) {
-				return cursorToSingleMedia(c);
+				media = cursorToSingleMedia(c);
 			}
+			
+			c.close();
 		}
-		return null;
+		
+		return media;
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

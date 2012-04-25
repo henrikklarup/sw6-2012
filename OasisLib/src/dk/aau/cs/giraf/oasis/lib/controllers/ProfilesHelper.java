@@ -61,10 +61,10 @@ public class ProfilesHelper {
 	}
 
 	public int removeChildAttachmentToGuardian(Profile child, Profile guardian) {
-		if (child.getPRole() != 3 || guardian.getPRole() != 1 || guardian.getPRole() != 2) {
-			return -1;
-		} else {
+		if (child.getPRole() == 3 && (guardian.getPRole() == 1 || guardian.getPRole() == 2)) {
 			return hg.removeHasGuardian(child, guardian);
+		} else {
+			return -1;
 		}
 	}
 

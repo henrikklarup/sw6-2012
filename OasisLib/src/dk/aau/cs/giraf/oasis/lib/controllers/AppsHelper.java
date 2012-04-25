@@ -177,9 +177,10 @@ public class AppsHelper {
 		Cursor c = _context.getContentResolver().query(AppsMetaData.CONTENT_URI, columns, AppsMetaData.Table.COLUMN_PACKAGE + " = '" + packageName + "'", null, null);
 		
 		if (c != null) {
-			if (c.moveToNext()) {
+			if (c.moveToFirst()) {
 				app = cursorToApp(c);
 			}
+			c.close();
 		}
 		
 		return app;
