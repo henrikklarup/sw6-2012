@@ -37,6 +37,7 @@ public class ProfilesHelper {
 			ProfilesMetaData.Table.COLUMN_PHONE,
 			ProfilesMetaData.Table.COLUMN_PICTURE,
 			ProfilesMetaData.Table.COLUMN_SETTINGS};
+	public enum pRoles {ADMIN, CHILD, PARENT, GUARDIAN};
 
 	/**
 	 * Constructor
