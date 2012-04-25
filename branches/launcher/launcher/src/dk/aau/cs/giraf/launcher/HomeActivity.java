@@ -120,16 +120,16 @@ public class HomeActivity extends Activity {
 				case MotionEvent.ACTION_UP:
 					result = false;
 				}
-				return result;
 				
+				//dwfegw
+				
+				//fewfew
+				
+				return result;
 			}
 		});
 		
 		loadApplications();
-	}
-	
-	private void resizeGridView() {
-		
 	}
 
 	@Override
