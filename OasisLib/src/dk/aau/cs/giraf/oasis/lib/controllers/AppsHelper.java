@@ -128,6 +128,25 @@ public class AppsHelper {
 		return apps;
 	}
 
+	/**
+	 * Get application by id
+	 * @param id the id of the application
+	 * @return the application or null
+	 */
+	public App getAppById(long id) {
+		App app = null;
+		Uri uri = ContentUris.withAppendedId(AppsMetaData.CONTENT_URI, id);
+		Cursor c = _context.getContentResolver().query(uri, columns, null, null, null);
+
+		if (c != null) {
+			if(c.moveToFirst()) {
+				app = cursorToApp(c); 
+			}
+			c.close();
+		}
+		return app;
+	}
+	
 	public App getAppByIds(long appId, long profileId) {
 		App app;
 		
@@ -135,6 +154,37 @@ public class AppsHelper {
 		app = getAppById(appId);
 		app.setSettings(listOfApps.getSetting());
 		app.setStats(listOfApps.getStat());
+		
+		return app;
+	}
+
+	/**
+	 * Gets all application with the specified name
+	 * @param name the name of the application
+	 * @return List<App>, containing all apps with the specific name
+	 */
+	public List<App> getAppsByName(String name) {
+		List<App> apps = new ArrayList<App>();
+		Cursor c = _context.getContentResolver().query(AppsMetaData.CONTENT_URI, columns, AppsMetaData.Table.COLUMN_NAME + " LIKE '%" + name + "%'", null, null);
+		
+		if (c != null) {
+			apps = cursorToAppList(c);
+			c.close();
+		}
+
+		return apps; 
+	}
+	
+	public App getAppByPackageName(String packageName) {
+		App app = null;
+		
+		Cursor c = _context.getContentResolver().query(AppsMetaData.CONTENT_URI, columns, AppsMetaData.Table.COLUMN_PACKAGE + " = '" + packageName + "'", null, null);
+		
+		if (c != null) {
+			if (c.moveToNext()) {
+				app = cursorToApp(c);
+			}
+		}
 		
 		return app;
 	}
@@ -155,42 +205,6 @@ public class AppsHelper {
 		}
 
 		return apps;
-	}
-
-	/**
-	 * Get application by id
-	 * @param id the id of the application
-	 * @return the application or null
-	 */
-	public App getAppById(long id) {
-		App app = null;
-		Uri uri = ContentUris.withAppendedId(AppsMetaData.CONTENT_URI, id);
-		Cursor c = _context.getContentResolver().query(uri, columns, null, null, null);
-
-		if (c != null) {
-			if(c.moveToFirst()) {
-				app = cursorToApp(c); 
-			}
-			c.close();
-		}
-		return app;
-	}
-
-	/**
-	 * Gets all application with the specified name
-	 * @param name the name of the application
-	 * @return List<App>, containing all apps with the specific name
-	 */
-	public List<App> getAppsByName(String name) {
-		List<App> apps = new ArrayList<App>();
-		Cursor c = _context.getContentResolver().query(AppsMetaData.CONTENT_URI, columns, AppsMetaData.Table.COLUMN_NAME + " LIKE '%" + name + "%'", null, null);
-		
-		if (c != null) {
-			apps = cursorToAppList(c);
-			c.close();
-		}
-
-		return apps; 
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
