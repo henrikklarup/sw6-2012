@@ -1,5 +1,8 @@
 package savannah.io;
 
+import savannah.device.ConnectionConfiguration;
+import savannah.device.Connection;
+
 import java.io.DataInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -25,8 +28,19 @@ public class TransmissionHandler {
 	private String xml 			= "";
 	private boolean iHaveFile	= false;
 	private boolean accepted	= false;
+	private ArrayWrapper overflow = null;
 
-
+ 	public TransmissionHandler(Connection con) throws FileNotFoundException, IOException {
+		if (con == null) {
+			throw new NullPointerException("con: Cannot be null !");
+		}	else { 
+			this.bufferSize = con.getBufferSize();
+			this.files = new ArrayList<File>();
+			this.folder = con.getFolder();
+			//Invoking the deconstruction !
+			this.deconstruct(con.getConnectionInputStream());
+		}
+	}
 	public TransmissionHandler(Socket socket, String folder) throws FileNotFoundException, IOException {
 		this.bufferSize = 4096;
 		this.files = new ArrayList<File>();
@@ -56,14 +70,14 @@ public class TransmissionHandler {
 	
 	private final void deconstruct(InputStream is) throws FileNotFoundException, IOException {
 		this.cr = this.CR(is);
-		this.xml = this.XML(is);
+		this.xml = this.XML(is, this.overflow);
 
 		if (iHaveFile == true) {
 			while (this.working == true) {
 				this.FILE(is);
 			}
 		}	else {
-			this.accepted = this.ACCEPT(is);
+			this.accepted = this.ACCEPT(is, this.overflow);
 		}
 	}
 
@@ -151,8 +165,11 @@ public class TransmissionHandler {
 	}
 	private String bytesToString(byte[] buf) {
 		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < buf.length; i++) {
-			sb.append((char)buf[i]);
+//		for (int i = 0; i < buf.length; i++) {
+//			sb.append((char)buf[i]);
+//		}
+		for (byte b : buf) {
+			sb.append((char)b);
 		}
 		return sb.toString();
 	}
@@ -195,7 +212,7 @@ public class TransmissionHandler {
 			return CRUD.ERROR;
 		}
 	}
-	private final String XML(InputStream is) throws IOException {
+	private final String XML(InputStream is, ArrayWrapper aw) throws IOException {
 		//Reading "MXML[length,int]" - the size is minimum: 9  &  max: 18
 		//The maxmimum cells/spaces an int can be is 10
 		byte[] buf = new byte[18];
@@ -204,94 +221,58 @@ public class TransmissionHandler {
 		StringBuilder sb = new StringBuilder();
 		int bufCalc = -1;
 
-		if (wrap.getRemaining() == 0) {
-			//Used the entire buffer, make new buffer and 
-			//do a standard read + buffer
+		//If this is the case, then we know that all of the XML data is 
+		//in the buffer
+		if ( (wrap.getStoredIndex() + wrap.getLength()) < buf.length ) {
+			System.out.println("Entered IF !");
 			bufCalc = wrap.getLength();
-			while (bufCalc > 0) {
-				if (bufCalc > this.bufferSize) {
-					buf = new byte[this.bufferSize];
-					int len = is.read(buf);
-					sb.append(this.bytesToString(buf));
-					bufCalc -= len;
-				}
-				else {
-					buf = new byte[bufCalc];
-					int len = is.read(buf);
-					sb.append(this.bytesToString(buf));
-					bufCalc = 0;
-				}
-			}
-			//Dump the last char... ( " )
-			int dump = is.read();
-		}
-		else if ((wrap.getRemaining() - 2) == 0) {
-			//Just in case that there is 2 remaining chars ( =" )
-			//We don't want to do a lot of work just for these 2 chars
-			int dump = is.read();
-			dump = is.read();
+			for (int i = wrap.getStoredIndex(); i < bufCalc + wrap.getStoredIndex(); i++) {
+				sb.append((char)buf[i]);
 
-			bufCalc = wrap.getLength();
-			while (bufCalc > 0) {
-				if (bufCalc > this.bufferSize) {
-					buf = new byte[this.bufferSize];
-					int len = is.read(buf);
-					sb.append(this.bytesToString(buf));
-					bufCalc -= len;
-				}
-				else {
-					buf = new byte[bufCalc];
-					int len = is.read(buf);
-					sb.append(this.bytesToString(buf));
-					bufCalc = 0;
-				}
 			}
-			//Dump the last char... ( " )
-			dump = is.read();
+			//Increasing by the length of that which has been processed
+			wrap.increaseStoredIndex(wrap.getLength());
+			//Increasing by 1, because of the offset at the end of the XML data
+			wrap.increaseStoredIndex(1);
+			byte[] overflow = new byte[buf.length - wrap.getStoredIndex()];
+			int tempJ = 0;
+			for (int i = wrap.getStoredIndex(); i < buf.length; i++) {
+				overflow[tempJ] = buf[i];
+				tempJ ++;
+			}
+			aw = new ArrayWrapper(overflow);
+			System.out.println("Overflow: " + bytesToString(overflow));
+			System.out.println("IF - sb: " + sb.toString());
 		}
+		//If this is the case, then we know that all of the XML data is NOT
+		//in the buffer, and we need to read multiple times.
 		else {
-			//We have remaining data and we need do to some
-			//black magic to get this to work.
-			byte[] overflow = new byte[wrap.getRemaining() - 2];
-			wrap.increaseStoredIndex(2);
-			this.moveData(buf, wrap.getStoredIndex(), overflow);
-			sb.append(this.bytesToString(overflow));
+			System.out.println("Entered ELSE !");
+			bufCalc = wrap.getLength();
+			//Appended the data left in the buffer
+			sb.append(this.bytesToString(buf, wrap.getStoredIndex(), buf.length));
+			bufCalc -= (buf.length - wrap.getStoredIndex());
 
-			if (wrap.getLength() < this.bufferSize) {
-				//The xml is small enough to handle easily
-				buf = null;
-				buf = new byte[wrap.getLength() + 1];
-
-				//Reading the data and appending it to the current data
-				lenTemp = is.read(buf);
-				sb.append(this.bytesToString(buf, buf.length - 1));
-				wrap.increaseStoredIndex(wrap.getLength() + 1);
-			}	else {
-				//The xml is very large and we will take it
-				//in multiple iterations
-				buf = null;
-				bufCalc = wrap.getLength();
-
-				while (bufCalc > 0) {
-					if (bufCalc > this.bufferSize) {
-						buf = new byte[this.bufferSize];
-						int len = is.read(buf);
-						sb.append(this.bytesToString(buf));
-						bufCalc -= len;
-					}
-					else {
-						buf = new byte[bufCalc];
-						int len = is.read(buf);
-						sb.append(this.bytesToString(buf));
-						bufCalc = 0;
-					}
+			while (bufCalc > 0) {
+				if (bufCalc > this.bufferSize) {
+					buf = new byte[this.bufferSize];
+					int len = is.read(buf);
+					sb.append(this.bytesToString(buf));
+					bufCalc -= len;
 				}
-				//Dump the last char...  ( " )
-				int dump = is.read();
+				else {
+					buf = new byte[bufCalc];
+					int len = is.read(buf);
+					sb.append(this.bytesToString(buf));
+					bufCalc = 0;
+				}
 			}
+			//Dumping the unneeded package data
+//			int dump = is.read();
+			System.out.println("ELSE - sb: " + sb.toString());
 		}
 		this.iHaveFile = wrap.areThereFiles();
-		System.out.println(sb.toString());
+		System.out.println("StringBuilder: " + sb.toString());
 		return sb.toString();
 	}
 	private final void FILE(InputStream is) throws FileNotFoundException, IOException {
@@ -319,8 +300,8 @@ public class TransmissionHandler {
 			//do a standard read + buffer
 			bufCalc = wrap.getLength();
 			while (bufCalc > 0) {
-				if (bufCalc > Configuration.BUFFERSIZE) {
-					buf = new byte[Configuration.BUFFERSIZE];
+				if (bufCalc > ConnectionConfiguration.BUFFERSIZE) {
+					buf = new byte[ConnectionConfiguration.BUFFERSIZE];
 					int len = is.read(buf);
 					os.write(buf);
 					bufCalc -= len;
@@ -343,8 +324,8 @@ public class TransmissionHandler {
 
 			bufCalc = wrap.getLength();
 			while (bufCalc > 0) {
-				if (bufCalc > Configuration.BUFFERSIZE) {
-					buf = new byte[Configuration.BUFFERSIZE];
+				if (bufCalc > ConnectionConfiguration.BUFFERSIZE) {
+					buf = new byte[ConnectionConfiguration.BUFFERSIZE];
 					int len = is.read(buf);
 					os.write(buf);
 					bufCalc -= len;
@@ -410,14 +391,16 @@ public class TransmissionHandler {
 		os.flush();
 		os.close();
 	}
-	public boolean ACCEPT(InputStream is) throws IOException {
+	public boolean ACCEPT(InputStream is, ArrayWrapper aw) throws IOException {
 		//Reading "[ACCEPT] - the size is 7
 		//The index of ACCEPT is n+1 to n-1
+		StringBuilder sb = new StringBuilder();
+		sb.append(this.bytesToString(aw.getData()));
 		byte[] buf = new byte[7];
 		int len = is.read(buf);
-		
-		String temp = this.bytesToString(buf, 1, buf.length);
-		return (temp.equals("ACCEPT") == true) ? true : false;
+		sb.append(this.bytesToString(buf, 0, buf.length));
+		System.out.println("ACCEPT: " + sb.toString());
+		return (sb.toString().equals("ACCEPT") == true) ? true : false;
 	}
 
 	public CRUD CR() {
@@ -491,5 +474,21 @@ public class TransmissionHandler {
 			this._remaining += increase;
 		}
 	}
-
+	class ArrayWrapper {
+		private byte[] _data;
+		
+		ArrayWrapper(byte[] data) {
+			this._data = data;
+		}
+		
+		public byte[] getData() {
+			return this._data;
+		}
+	}
+	
+	
+	
+	
+	
+	
 }
