@@ -173,10 +173,10 @@ public class AppsHelper {
 		return apps; 
 	}
 	
-	public App getAppByPackageName(String packageName) {
+	public App getAppByPackageName() {
 		App app = null;
 		
-		Cursor c = _context.getContentResolver().query(AppsMetaData.CONTENT_URI, columns, AppsMetaData.Table.COLUMN_PACKAGE + " = '" + packageName + "'", null, null);
+		Cursor c = _context.getContentResolver().query(AppsMetaData.CONTENT_URI, columns, AppsMetaData.Table.COLUMN_PACKAGE + " = '" + _context.getPackageName() + "'", null, null);
 		
 		if (c != null) {
 			if (c.moveToFirst()) {
