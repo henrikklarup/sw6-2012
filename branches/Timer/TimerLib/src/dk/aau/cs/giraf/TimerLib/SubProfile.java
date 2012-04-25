@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class SubProfile implements Comparable<SubProfile>{
 	
 	Guardian guard = Guardian.getInstance();
-	private int _id = -1;
+	private long _id = -1;
 	public String name = "Default";
 	public String desc = "Default desc";
 	public int bgcolor = 0xffffffff;
@@ -109,12 +109,12 @@ public class SubProfile implements Comparable<SubProfile>{
 		}
 	}
 	
-	public int getId(){
+	public long getId(){
 		return this._id;
 	}
 	
-	protected void setId(int tempId){
-		this._id = tempId;
+	protected void setId(long l){
+		this._id = l;
 	}
 	
 	public SubProfile getAttachment(){

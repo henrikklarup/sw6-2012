@@ -88,7 +88,7 @@ public class CustomizeFragment extends Fragment {
 		b.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				TimerLoader.subProfileID = -1;
+				Guardian.subProfileID = -1;
 				SubProfileFragment spf = (SubProfileFragment) getFragmentManager()
 						.findFragmentById(R.id.subprofileFragment);
 				spf.loadSubProfiles();
@@ -613,12 +613,14 @@ public class CustomizeFragment extends Fragment {
 				public void onClick(View v) {
 					getName();
 					if (preSubP != null) {
-						TimerLoader.subProfileID = currSubP.save(preSubP)
+						Guardian.subProfileID = currSubP.save(preSubP)
 								.getId();
 					} else {
-						TimerLoader.subProfileID = guard.getChild()
+						Guardian.subProfileID = guard.getChild()
 								.save(currSubP).getId();
 					}
+					
+					Guardian.saveChild(guard.getChild(), currSubP);
 				}
 			});
 		} else {
@@ -678,13 +680,13 @@ public class CustomizeFragment extends Fragment {
 
 					public void onClick(DialogInterface dialog, int which) {
 						currSubP.name = et.getText().toString();
-						guard.publishList().get(TimerLoader.profilePosition)
+						guard.publishList().get(Guardian.profilePosition)
 								.select();
 
 						ChildFragment cf = (ChildFragment)getFragmentManager().findFragmentById(R.id.childFragment);
 						SubProfileFragment spf = (SubProfileFragment) getFragmentManager()
 								.findFragmentById(R.id.subprofileFragment);
-						TimerLoader.profileID = guard.getChild().getProfileId();
+						Guardian.profileID = guard.getChild().getProfileId();
 						cf.loadSubProfiles();
 						spf.loadSubProfiles();
 						
@@ -764,7 +766,7 @@ public class CustomizeFragment extends Fragment {
 									Child c = guard.Children().get(item);
 									getName();
 									c.save(currSubP);
-									TimerLoader.saveChild(c, currSubP);
+									Guardian.saveChild(c, currSubP);
 									SubProfileFragment df = (SubProfileFragment) getFragmentManager()
 											.findFragmentById(
 													R.id.subprofileFragment);
@@ -817,7 +819,7 @@ public class CustomizeFragment extends Fragment {
 
 				public void onClick(View v) {
 					currSubP.addLastUsed(preSubP);
-					TimerLoader.saveGuardian(currSubP);
+					Guardian.saveGuardian(currSubP);
 					currSubP.select();
 					Intent i = new Intent(
 							getActivity().getApplicationContext(),
