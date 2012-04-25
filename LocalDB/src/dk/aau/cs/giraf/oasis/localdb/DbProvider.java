@@ -570,6 +570,7 @@ public class DbProvider extends ContentProvider {
 			builder.setTables(TagsMetaData.Table.TABLE_NAME);
 			builder.setProjectionMap(tagsProjectionMap);
 			builder.appendWhere(TagsMetaData.Table.COLUMN_ID + " = " + uri.getPathSegments().get(1));
+			break;
 		default:
 			throw new IllegalArgumentException("Unknown URI: " + uri);
 		}
