@@ -148,9 +148,11 @@ public class AppsHelper {
 		
 		ListOfApps listOfApps = loa.getListOfAppByIds(appId, profileId);
 		app = getAppById(appId);
-		app.setSettings(listOfApps.getSetting());
-		app.setStats(listOfApps.getStat());
-		
+		if(listOfApps != null){
+			app.setSettings(listOfApps.getSetting());
+			app.setStats(listOfApps.getStat());
+		}
+			
 		return app;
 	}
 
