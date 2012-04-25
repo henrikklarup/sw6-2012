@@ -72,7 +72,7 @@ class ListOfAppsController {
 	public ListOfApps getListOfAppByIds(long appId, long profileId) {
 		ListOfApps listOfApp = null;
 		
-		Cursor c = _context.getContentResolver().query(ListOfAppsMetaData.CONTENT_URI, columns, ListOfAppsMetaData.Table.COLUMN_IDAPP + " = '" + appId + "'" + ListOfAppsMetaData.Table.COLUMN_IDPROFILE + " = '" + profileId + "'", null, null);
+		Cursor c = _context.getContentResolver().query(ListOfAppsMetaData.CONTENT_URI, columns, ListOfAppsMetaData.Table.COLUMN_IDAPP + " = '" + appId + "' AND " + ListOfAppsMetaData.Table.COLUMN_IDPROFILE + " = '" + profileId + "'", null, null);
 		if (c != null) {
 			if (c.moveToFirst()) {
 				listOfApp = cursorToListOfApp(c);

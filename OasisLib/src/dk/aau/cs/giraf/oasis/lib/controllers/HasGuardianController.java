@@ -105,7 +105,7 @@ class HasGuardianController {
 	private ContentValues getContentValues(HasGuardian hg) {
 		ContentValues contentValues = new ContentValues();
 		contentValues.put(HasGuardianMetaData.Table.COLUMN_IDGUARDIAN, hg.getIdGuardian());
-		contentValues.put(HasGuardianMetaData.Table.COLUMN_IDGUARDIAN, hg.getIdChild());
+		contentValues.put(HasGuardianMetaData.Table.COLUMN_IDCHILD, hg.getIdChild());
 		return contentValues;
 	}
 }
