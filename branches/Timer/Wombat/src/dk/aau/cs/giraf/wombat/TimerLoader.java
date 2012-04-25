@@ -53,7 +53,8 @@ public class TimerLoader {
 	}
 
 	private static void createChildren() {
-		//TODO: Skal ændres til getChildrenbyGuardian i stedet for getprofiles
+		
+		
 		if(oHelp.profilesHelper.getChildrenByGuardian(m_oGuard).isEmpty()){
 			List<String> names = new ArrayList<String>();
 			names.add("Sigurd");
@@ -67,6 +68,7 @@ public class TimerLoader {
 				Profile newProf = new Profile(s, " ", null, 3, 99999999, null, null);
 				newProf.setId(oHelp.profilesHelper.insertProfile(newProf));
 				oHelp.profilesHelper.attachChildToGuardian(newProf, m_oGuard);
+				oHelp.appsHelper.attachAppToProfile(m_App, newProf);
 			}
 		}
 	}
