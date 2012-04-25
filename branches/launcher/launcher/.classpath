@@ -5,6 +5,6 @@
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="lib" path="/android/libs/core.jar"/>
-	<classpathentry exported="true" kind="lib" path="assets/OasisLib_25_04_2012.jar"/>
+	<classpathentry exported="true" kind="lib" path="assets/OasisLib_dev.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
