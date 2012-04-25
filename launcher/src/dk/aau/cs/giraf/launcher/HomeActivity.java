@@ -133,7 +133,10 @@ public class HomeActivity extends Activity {
 				
 				
 				//dwfegw
-				
+				GridView GridView = (android.widget.GridView) findViewById(R.id.GridViewWrapper);
+				RelativeLayout.LayoutParams GridViewParams = (RelativeLayout.LayoutParams) GridView.getLayoutParams();
+				//GridViewParams.setMargins(mHomeBarParams, 0, 0, 0);
+				GridView.setLayoutParams(GridViewParams);
 				//fewfew
 				
 				return result;
