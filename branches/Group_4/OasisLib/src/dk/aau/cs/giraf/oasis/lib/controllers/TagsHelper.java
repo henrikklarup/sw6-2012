@@ -38,14 +38,13 @@ public class TagsHelper {
 		if (c != null) {
 			if (c.moveToFirst()) {
 				id = c.getLong(c.getColumnIndex(TagsMetaData.Table.COLUMN_ID));
+			} else {
+				ContentValues cv = getContentValues(tag);
+				Uri uri = _context.getContentResolver().insert(TagsMetaData.CONTENT_URI, cv);
+				id = Integer.parseInt(uri.getPathSegments().get(1));
 			}
 			c.close();
-		} else {
-			ContentValues cv = getContentValues(tag);
-			Uri uri = _context.getContentResolver().insert(TagsMetaData.CONTENT_URI, cv);
-			id = Integer.parseInt(uri.getPathSegments().get(1));
-		}
-		
+		} 
 		return id;
 	}
 
