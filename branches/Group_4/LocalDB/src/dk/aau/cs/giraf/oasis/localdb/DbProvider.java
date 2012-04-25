@@ -341,12 +341,18 @@ public class DbProvider extends ContentProvider {
 				_uri = ContentUris.withAppendedId(AppsMetaData.CONTENT_URI, rowId);
 				getContext().getContentResolver().notifyChange(_uri, null);
 				return _uri;
+			} else {
+				_uri = ContentUris.withAppendedId(AppsMetaData.CONTENT_URI, -1);
+				return _uri;
 			}
 		case AUTHUSERS_TYPE_LIST:
 			rowId = db.insert(AuthUsersMetaData.Table.TABLE_NAME, null, values);
 			if (rowId > 0) {
 				_uri = ContentUris.withAppendedId(AuthUsersMetaData.CONTENT_URI, rowId);
 				getContext().getContentResolver().notifyChange(_uri, null);
+				return _uri;
+			} else {
+				_uri = ContentUris.withAppendedId(AuthUsersMetaData.CONTENT_URI, -1);
 				return _uri;
 			}
 		case DEPARTMENTS_TYPE_LIST:
@@ -355,12 +361,18 @@ public class DbProvider extends ContentProvider {
 				_uri = ContentUris.withAppendedId(DepartmentsMetaData.CONTENT_URI, rowId);
 				getContext().getContentResolver().notifyChange(_uri, null);
 				return _uri;
+			} else {
+				_uri = ContentUris.withAppendedId(DepartmentsMetaData.CONTENT_URI, -1);
+				return _uri;
 			}
 		case HASDEPARTMENT_TYPE_LIST:
 			rowId = db.insert(HasDepartmentMetaData.Table.TABLE_NAME, null, values);
 			if (rowId > 0) {
 				_uri = ContentUris.withAppendedId(HasDepartmentMetaData.CONTENT_URI, rowId);
 				getContext().getContentResolver().notifyChange(_uri, null);
+				return _uri;
+			} else {
+				_uri = ContentUris.withAppendedId(HasDepartmentMetaData.CONTENT_URI, -1);
 				return _uri;
 			}
 		case HASGUARDIAN_TYPE_LIST:
@@ -369,12 +381,18 @@ public class DbProvider extends ContentProvider {
 				_uri = ContentUris.withAppendedId(HasGuardianMetaData.CONTENT_URI, rowId);
 				getContext().getContentResolver().notifyChange(_uri, null);
 				return _uri;
+			} else {
+				_uri = ContentUris.withAppendedId(HasGuardianMetaData.CONTENT_URI, -1);
+				return _uri;
 			}
 		case HASLINK_TYPE_LIST:
 			rowId = db.insert(HasLinkMetaData.Table.TABLE_NAME, null, values);
 			if (rowId > 0) {
 				_uri = ContentUris.withAppendedId(HasLinkMetaData.CONTENT_URI, rowId);
 				getContext().getContentResolver().notifyChange(_uri, null);
+				return _uri;
+			} else {
+				_uri = ContentUris.withAppendedId(HasLinkMetaData.CONTENT_URI, -1);
 				return _uri;
 			}
 		case HASSUBDEPARTMENT_TYPE_LIST:
@@ -383,12 +401,18 @@ public class DbProvider extends ContentProvider {
 				_uri = ContentUris.withAppendedId(HasSubDepartmentMetaData.CONTENT_URI, rowId);
 				getContext().getContentResolver().notifyChange(_uri, null);
 				return _uri;
+			} else {
+				_uri = ContentUris.withAppendedId(HasSubDepartmentMetaData.CONTENT_URI, -1);
+				return _uri;
 			}
 		case HASTAG_TYPE_LIST:
 			rowId = db.insert(HasTagMetaData.Table.TABLE_NAME, null, values);
 			if (rowId > 0) {
 				_uri = ContentUris.withAppendedId(HasTagMetaData.CONTENT_URI, rowId);
 				getContext().getContentResolver().notifyChange(_uri, null);
+				return _uri;
+			} else {
+				_uri = ContentUris.withAppendedId(HasTagMetaData.CONTENT_URI, -1);
 				return _uri;
 			}
 		case LISTOFAPPS_TYPE_LIST:
@@ -397,12 +421,18 @@ public class DbProvider extends ContentProvider {
 				_uri = ContentUris.withAppendedId(ListOfAppsMetaData.CONTENT_URI, rowId);
 				getContext().getContentResolver().notifyChange(_uri, null);
 				return _uri;
+			} else {
+				_uri = ContentUris.withAppendedId(ListOfAppsMetaData.CONTENT_URI, -1);
+				return _uri;
 			}
 		case MEDIA_TYPE_LIST:
 			rowId = db.insert(MediaMetaData.Table.TABLE_NAME, null, values);
 			if (rowId > 0) {
 				_uri = ContentUris.withAppendedId(MediaMetaData.CONTENT_URI, rowId);
 				getContext().getContentResolver().notifyChange(_uri, null);
+				return _uri;
+			} else {
+				_uri = ContentUris.withAppendedId(MediaMetaData.CONTENT_URI, -1);
 				return _uri;
 			}
 		case MEDIADEPARTMENTACCESS_TYPE_LIST:
@@ -411,12 +441,18 @@ public class DbProvider extends ContentProvider {
 				_uri = ContentUris.withAppendedId(MediaDepartmentAccessMetaData.CONTENT_URI, rowId);
 				getContext().getContentResolver().notifyChange(_uri, null);
 				return _uri;
+			} else {
+				_uri = ContentUris.withAppendedId(MediaDepartmentAccessMetaData.CONTENT_URI, -1);
+				return _uri;
 			}
 		case MEDIAPROFILEACCESS_TYPE_LIST:
 			rowId = db.insert(MediaProfileAccessMetaData.Table.TABLE_NAME, null, values);
 			if (rowId > 0) {
 				_uri = ContentUris.withAppendedId(MediaProfileAccessMetaData.CONTENT_URI, rowId);
 				getContext().getContentResolver().notifyChange(_uri, null);
+				return _uri;
+			} else {
+				_uri = ContentUris.withAppendedId(MediaProfileAccessMetaData.CONTENT_URI, -1);
 				return _uri;
 			}
 		case PROFILES_TYPE_LIST:
@@ -425,12 +461,17 @@ public class DbProvider extends ContentProvider {
 				_uri = ContentUris.withAppendedId(ProfilesMetaData.CONTENT_URI, rowId);
 				getContext().getContentResolver().notifyChange(_uri, null);
 				return _uri;
+			} else {
+				_uri = ContentUris.withAppendedId(ProfilesMetaData.CONTENT_URI, -1);
+				return _uri;
 			}
 		case TAGS_TYPE_LIST:
 			rowId = db.insert(TagsMetaData.Table.TABLE_NAME, null, values);
 			if (rowId > 0) {
 				_uri = ContentUris.withAppendedId(TagsMetaData.CONTENT_URI, rowId);
 				getContext().getContentResolver().notifyChange(_uri, null);
+			} else {
+				_uri = ContentUris.withAppendedId(TagsMetaData.CONTENT_URI, -1);
 				return _uri;
 			}
 		default:
