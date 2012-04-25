@@ -28,11 +28,11 @@ public class SubProfileFragment extends android.app.ListFragment {
 	// Start the list empty
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		if(TimerLoader.profileID != -1){
+		if(Guardian.profileID != -1){
 			Helper helper = new Helper(getActivity());
 			int position;
 			// Marks the selected profile in the guard singleton
-			position = guard.publishList().indexOf(helper.profilesHelper.getProfileById(TimerLoader.profileID));
+			position = guard.publishList().indexOf(helper.profilesHelper.getProfileById(Guardian.profileID));
 			if(position != -1){
 				guard.publishList().get(position).select();
 				ArrayList<SubProfile> subprofiles = guard.getChild().SubProfiles();
@@ -112,11 +112,11 @@ public class SubProfileFragment extends android.app.ListFragment {
 	}
 
 	public void onListItemClick(ListView lv, View view, int position, long id) {
-		if (TimerLoader.subProfileFirstClick) {
+		if (Guardian.subProfileFirstClick) {
 			for (int i = 0; i < lv.getChildCount(); i++) {
 				lv.getChildAt(i).setBackgroundResource(R.drawable.list);
 			}
-			TimerLoader.subProfileFirstClick = false;
+			Guardian.subProfileFirstClick = false;
 		}
 		for (int i = 0; i < lv.getChildCount(); i++) {
 			lv.getChildAt(i).setSelected(false);

@@ -2,6 +2,13 @@ package dk.aau.cs.giraf.TimerLib;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+
+import dk.aau.cs.giraf.oasis.lib.Helper;
+import dk.aau.cs.giraf.oasis.lib.models.App;
+import dk.aau.cs.giraf.oasis.lib.models.Profile;
+
+import android.content.Context;
 
 public class Guardian {
 	
@@ -20,8 +27,24 @@ public class Guardian {
 	private SubProfile _selectedSubProfile = null;
 	
 	public static String _name = null;
+	public static CRUD crud;
 	
 	private int id = -1;
+	
+	private static App m_app;
+	private static Helper oHelp;
+	private static Profile m_oGuard;
+	
+	private static long childId;
+	private static long guardianId;
+	private static Context m_context;
+	
+	public static int profilePosition;
+	public static long profileID;
+	public static long subProfileID; 			// Stores the id of the saved subprofile
+	public static boolean subProfileFirstClick;	// When a subprofile is saved, this is set to true
+												// When something is clicked in the subprofile list, set to false
+	public static boolean profileFirstClick;
 	
 	/**
 	 * Default constructor for Guardian
@@ -46,11 +69,131 @@ public class Guardian {
 	 * Guardian guard = Guadian.getInstance();
 	 * @return Guardian instance
 	 */
-	public static Guardian getInstance(){
+	public static Guardian getInstance(long m_childId, long m_guardianId, Context c){
 		if(_instance == null){
 			_instance = new Guardian();
+			TimerHelper help = new TimerHelper();
+			childId = m_childId;
+			guardianId = m_guardianId;
+			m_context = c;
+			
+			oHelp = new Helper(c);
+			
+			long appId = findAppId();
+			guardianId = findGuardianId();
+			createChildren();
+			
+			crud = new CRUD(guardianId, appId, c);
+			
+			help.loadPredef();
+			_instance.publishList();
 		}
 		return _instance;
+	}
+	
+	public static Guardian getInstance(){
+		return _instance;
+	}
+	
+	/**
+	 * Find the app specified by the mainActivity, if non is avalible a default one is created
+	 * @return
+	 */
+	private static long findAppId() {
+		// Find the app which has the same package name as this one
+		for (App a : oHelp.appsHelper.getApps()) {
+			String cname = m_context.getPackageName();
+			if(a.getaPackage().equalsIgnoreCase(cname)){
+				m_app = a;
+				break;
+			}
+		}
+			
+		if(m_app == null){
+			// If no app has been found, generate one and insert it in Oasis
+			m_app = new App("Wombat", "1", "", m_context.getPackageName(), "MainActivity");
+			m_app.setId(oHelp.appsHelper.insertApp(m_app));
+		}
+		
+		return m_app.getId();
+	}
+	
+	/**
+	 * Search for the guard specified by the mainActivity, if non is existing a default one is created
+	 * @return
+	 */
+	private static long findGuardianId() {
+		
+		if(guardianId != -1){
+			// Does the original guard exist
+			m_oGuard = oHelp.profilesHelper.getProfileById(guardianId);
+		} else {
+			m_oGuard = null;
+		}
+	
+		// If not, try the default guard
+		if(m_oGuard == null){
+			for (Profile p : oHelp.profilesHelper.getProfiles()) {
+				if(p.getFirstname().equals("John") && p.getSurname().equals("Doe")){
+					m_oGuard = p;
+					break;
+				}
+			}
+			
+			// If thats not valid either, make the default guard
+			if(m_oGuard == null){
+				m_oGuard = new Profile("John", "Doe", null, 1, 88888888, null, null);				
+				m_oGuard.setId(oHelp.profilesHelper.insertProfile(m_oGuard));
+				oHelp.appsHelper.attachAppToProfile(m_app, m_oGuard);
+			}
+		} 
+		
+		return m_oGuard.getId();
+	}
+	
+	
+	private static void createChildren() {		
+		if(oHelp.profilesHelper.getChildrenByGuardian(m_oGuard).isEmpty()){
+			List<String> names = new ArrayList<String>();
+			names.add("Sigurd");
+			names.add("Marcus");
+			names.add("Emil");
+			names.add("Lukas");
+			names.add("Mads");
+			names.add("Nikolaj");
+			
+			for (String s : names) {
+				Profile newProf = new Profile(s, " ", null, 3, 99999999, null, null);
+				newProf.setId(oHelp.profilesHelper.insertProfile(newProf));
+				oHelp.profilesHelper.attachChildToGuardian(newProf, m_oGuard);
+				oHelp.appsHelper.attachAppToProfile(m_app, newProf);
+			}
+		}
+	}
+	
+	
+	/**
+	 * Stores the subprofile on the guardian in Oasis
+	 * @param sp
+	 * 		The subprofile which is to be stored
+	 * @return
+	 * 		Returns true if it completed, else returns false
+	 */
+	public static void saveGuardian(SubProfile currSubP) {
+		crud.saveGuardian(guardianId, currSubP);
+	}	
+	
+	/**
+	 * Stores the subprofile on the child in Oasis
+	 * @param c
+	 * 		The Child where the subprofile is supposed to be stored
+	 * @param sp
+	 * 		The subprofiel which is to be stored
+	 * @return
+	 * 		Returns true if it completed, else returns false
+	 */
+	public static void saveChild(Child c, SubProfile sp){
+		crud.saveChild(c, sp);
 	}
 	
 	/**
@@ -161,6 +304,13 @@ public class Guardian {
 		if(exists){
 			_lastUsed.add(profile);
 		}
+	}
+	
+	/**
+	 * Clears last
+	 */
+	public void clearLastUsed(){
+		_lastUsed = new ArrayList<SubProfile>();
 	}
 	
 	/**

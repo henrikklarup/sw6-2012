@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import dk.aau.cs.giraf.TimerLib.Child;
+import dk.aau.cs.giraf.TimerLib.Guardian;
 
 public class ChildAdapter extends ArrayAdapter<Child> {
 
@@ -49,10 +50,10 @@ public class ChildAdapter extends ArrayAdapter<Child> {
 
 		}
 		
-			if(c.getProfileId() == TimerLoader.profileID){ //TODO:Change this
+			if(c.getProfileId() == Guardian.profileID){
 				v.setBackgroundResource(R.drawable.list_selected);
-				TimerLoader.profileFirstClick = true;
-				TimerLoader.profileID = -1;
+				Guardian.profileFirstClick = true;
+				Guardian.profileID = -1;
 			}
 		return v;
 	}

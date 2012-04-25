@@ -24,6 +24,13 @@ public class CRUD {
 		// Load the guardian form Oasis
 		Profile mGuardian = helper.profilesHelper.getProfileById(guardianID);
 		
+		// Find all subprofiles of the child and save it on the child
+		List<SubProfile> mGuardSubPs = findProfileSettings(mGuardian.getId());
+		guard.clearLastUsed();
+		for (SubProfile subProfile : mGuardSubPs) {
+			guard.addLastUsed(subProfile);
+		}
+		
 		// Load the children from Oasis of the guardian
 		List<Profile> mChildren = helper.profilesHelper.getChildrenByGuardian(mGuardian);
 		guard.Children().clear();
@@ -45,10 +52,10 @@ public class CRUD {
 			mC.setProfileId(c.getId());
 		
 			// Find all subprofiles of the child and save it on the child
-				List<SubProfile> mSubPs = findProfileSettings(c.getId());
-				for (SubProfile subProfile : mSubPs) {
-					mC.save(subProfile);
-				}
+			List<SubProfile> mSubPs = findProfileSettings(c.getId());
+			for (SubProfile subProfile : mSubPs) {
+				mC.SubProfiles().add(subProfile);
+			}
 			
 			guard.Children().add(mC);
 		}
@@ -59,7 +66,7 @@ public class CRUD {
 	 * @param c
 	 * 		The Child where the subprofile is supposed to be stored
 	 * @param sp
-	 * 		The subprofiel which is to be stored
+	 * 		The subprofile which is to be stored
 	 * @return
 	 * 		Returns true if it completed, else returns false
 	 */
@@ -76,6 +83,8 @@ public class CRUD {
 		// Insert the hashmap with the subprofile ID as key
 		settings.put(String.valueOf(sp.getId()), hm);
 		app.setSettings(settings);
+		Profile newProf = helper.profilesHelper.getProfileById(c.getProfileId());
+		helper.appsHelper.modifyAppByProfile(app, newProf);
 		
 		return true;	
 	}
@@ -100,13 +109,11 @@ public class CRUD {
 			settings = new Setting<String, String, String>();
 		}
 		
-		try {
-			// Insert the hashmap with the subprofile ID as key
-			settings.put(String.valueOf(sp.getId()), hm);
-			app.setSettings(settings);
-		} catch (Exception e) {
-			return false;
-		}
+		// Insert the hashmap with the subprofile ID as key
+		settings.put(String.valueOf(sp.getId()), hm);
+		app.setSettings(settings);
+		Profile newProf = helper.profilesHelper.getProfileById(guardianId);
+		helper.appsHelper.modifyAppByProfile(app, newProf);
 		
 		return true;	
 	}
@@ -128,7 +135,8 @@ public class CRUD {
 			Set<String> keys = settings.keySet();
 	
 			for (String key : keys) {
-				mSubs.add(getSubProfile(settings.get(key)));
+				SubProfile sub = getSubProfile(settings.get(key));
+				mSubs.add(sub);
 			}	
 		}
 		
@@ -145,7 +153,6 @@ public class CRUD {
 	private SubProfile getSubProfile(HashMap<String, String> hm){		
 		SubProfile p = new SubProfile();
 		/* Load all settings from the hash table */
-		p.setAppId(Long.valueOf((String) hm.get("appId")));
 		p.setAttachmentId(Long.valueOf((String) hm.get("Attachment")));
 		p.name = String.valueOf(hm.get("Name"));
 		p.desc = String.valueOf(hm.get("desc"));	
@@ -162,16 +169,16 @@ public class CRUD {
 		/* Change the subprofile to the correct type */
 		switch (formFactor.convert(hm.get("type"))) {
 		case Hourglass:
-			p = new Hourglass((Hourglass) p);
+			p = new Hourglass(p.name, p.desc, p.bgcolor, p.timeLeftColor, p.timeSpentColor, p.frameColor, p.get_totalTime(), p.gradient);
 			break;
 		case TimeTimer:
-			p = new TimeTimer((TimeTimer) p);
+			p = new TimeTimer(p.name, p.desc, p.bgcolor, p.timeLeftColor, p.timeSpentColor, p.frameColor, p.get_totalTime(), p.gradient);
 			break;
 		case ProgressBar:
-			p = new ProgressBar((ProgressBar) p);
+			p = new ProgressBar(p.name, p.desc, p.bgcolor, p.timeLeftColor, p.timeSpentColor, p.frameColor, p.get_totalTime(), p.gradient);
 			break;
 		case DigitalClock:
-			p = new DigitalClock((DigitalClock) p);
+			p = new DigitalClock(p.name, p.desc, p.bgcolor, p.timeLeftColor, p.timeSpentColor, p.frameColor, p.get_totalTime(), p.gradient);
 			break;
 		default:
 			p = new SubProfile();

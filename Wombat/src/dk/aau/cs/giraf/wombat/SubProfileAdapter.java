@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import dk.aau.cs.giraf.TimerLib.Guardian;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
 
 public class SubProfileAdapter extends ArrayAdapter<SubProfile> {
@@ -67,10 +68,10 @@ public class SubProfileAdapter extends ArrayAdapter<SubProfile> {
 			}
 			
 		}
-		if(sp.getId() == TimerLoader.subProfileID){
+		if(sp.getId() == Guardian.subProfileID){
 			v.setBackgroundResource(R.drawable.list_selected);
-			TimerLoader.subProfileFirstClick = true;
-			TimerLoader.subProfileID = -1;
+			Guardian.subProfileFirstClick = true;
+			Guardian.subProfileID = -1;
 		} else {
 			v.setBackgroundResource(R.drawable.list);
 		}

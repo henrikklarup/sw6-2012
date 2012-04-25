@@ -33,11 +33,11 @@ public class ChildFragment extends android.app.ListFragment {
 
 	@Override
 	public void onListItemClick(ListView lv, View view, int position, long id) {
-		if (TimerLoader.profileFirstClick) {
+		if (Guardian.profileFirstClick) {
 			for (int i = 0; i < lv.getChildCount(); i++) {
 				lv.getChildAt(i).setBackgroundResource(R.drawable.list);
 			}
-			TimerLoader.profileFirstClick = false;
+			Guardian.profileFirstClick = false;
 		}
 		for(int i = 0; i < lv.getChildCount(); i++){
 			lv.getChildAt(i).setSelected(false);
@@ -52,7 +52,7 @@ public class ChildFragment extends android.app.ListFragment {
 		
 		if (detf != null) {
 			// Marks the selected profile in the guard singleton
-			TimerLoader.profilePosition = position; 
+			Guardian.profilePosition = position; 
 			guard.publishList().get(position).select();
 			detf.loadSubProfiles();
 			

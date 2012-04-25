@@ -1,5 +1,6 @@
 package dk.aau.cs.giraf.wombat;
 
+import dk.aau.cs.giraf.TimerLib.Guardian;
 import android.app.Activity;
 import android.os.Bundle;
 
@@ -7,21 +8,22 @@ public class MainActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
-		// Set content view according to main, which implements two fragments
-		setContentView(R.layout.main);
+		
+		long guardianId;
+		long childId;
 		
 		Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-        	TimerLoader.appID = -1;
-        	TimerLoader.guardianID = extras.getLong("currentGuardianID");
-        	TimerLoader.profileID = extras.getLong("currentChildId");
+        if (extras != null) {        	
+        	guardianId = extras.getLong("currentGuardianID");
+        	childId = extras.getLong("currentChildId");
         } else {
-        	TimerLoader.appID = 1;
-        	TimerLoader.guardianID = -1;
-        	TimerLoader.profileID = -1;
+        	guardianId = -1;
+        	childId = -1;
         }
-        
-		TimerLoader.load(this);
 
+    	Guardian.getInstance(childId, guardianId, getApplicationContext());
+    	
+		// Set content view according to main, which implements two fragments
+		setContentView(R.layout.main);
 	}
 }
