@@ -73,14 +73,9 @@ public class CRUD {
 		if(settings == null){
 			settings = new Setting<String, String, String>();
 		}
-		
-		try {
-			// Insert the hashmap with the subprofile ID as key
-			settings.put(String.valueOf(sp.getId()), hm);
-			app.setSettings(settings);
-		} catch (Exception e) {
-			return false;
-		}
+		// Insert the hashmap with the subprofile ID as key
+		settings.put(String.valueOf(sp.getId()), hm);
+		app.setSettings(settings);
 		
 		return true;	
 	}
