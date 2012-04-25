@@ -2,15 +2,15 @@ package dk.aau.cs.giraf.oasis.lib.models;
 
 public class App {
 
-	private long id; 
-	private String name;
-	private String version;
-	private String icon;
-	private String aPackage;
-	private String activity;
-	private Setting<String, String, String> settings;
-	private Stat<String, String, String> stats;
-	private static String _output = "{0}, {1}, {2}, {3}, {4}, {5}";
+	protected long id; 
+	protected String name;
+	protected String version;
+	protected String icon;
+	protected String aPackage;
+	protected String activity;
+	protected Setting<String, String, String> settings;
+	protected Stat<String, String, String> stats;
+	protected static String _output = "{0}, {1}, {2}, {3}, {4}, {5}";
 
 	/**
 	 * Constructor with arguments
