@@ -39,8 +39,12 @@ public class RequestHandler {
 		ArrayList<String> que = qbuilder.buildQueries(s);
 		rset = RunQueries(que);
 		xml = xBuilder.build(rset);
+		ArrayList<String> files = xBuilder.getFiles();
+		
+		savannah.io.IOHandler.getInstance().respond(e.getEventsocket(),xml);
 		
 		}
+		
 		catch (SQLException exc)
 		{
 			exc.printStackTrace();
