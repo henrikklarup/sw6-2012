@@ -50,6 +50,12 @@ public class AppsHelper {
 		_context.getContentResolver().delete(AppsMetaData.CONTENT_URI, null, null);
 	}
 	
+	/**
+	 * Remove app attachment to profile
+	 * @param app App to remove
+	 * @param profile Profile to remove attachment from
+	 * @return True/False
+	 */
 	public int removeAppAttachmentToProfile(App app, Profile profile) {
 		return loa.removeListOfApps(app.getId(), profile.getId());
 	}
@@ -69,6 +75,12 @@ public class AppsHelper {
 		return result;
 	}
 
+	/**
+	 * Attach app to Profile
+	 * @param app App to attach
+	 * @param profile Profile to attach to
+	 * @return True/false
+	 */
 	public long attachAppToProfile(App app, Profile profile) {
 		ListOfApps loaModel = new ListOfApps();
 		loaModel.setIdApp(app.getId());
@@ -143,6 +155,12 @@ public class AppsHelper {
 		return app;
 	}
 	
+	/**
+	 * Get apps by ids
+	 * @param appId App id
+	 * @param profileId Profile id
+	 * @return App
+	 */
 	public App getAppByIds(long appId, long profileId) {
 		App app;
 		
@@ -173,6 +191,10 @@ public class AppsHelper {
 		return apps; 
 	}
 	
+	/**
+	 * Get apps by packagename
+	 * @return App
+	 */
 	public App getAppByPackageName() {
 		App app = null;
 		
@@ -188,6 +210,11 @@ public class AppsHelper {
 		return app;
 	}
 	
+	/**
+	 * Get apps by profile
+	 * @param profile Profile
+	 * @return List of apps
+	 */
 	public List<App> getAppsByProfile(Profile profile) {
 		List<App> apps = new ArrayList<App>();
 		List<ListOfApps> listOfApps = new ArrayList<ListOfApps>();

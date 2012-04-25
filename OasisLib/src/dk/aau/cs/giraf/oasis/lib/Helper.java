@@ -84,6 +84,9 @@ public class Helper {
 		*/
 	}
 	
+	/**
+	 * Clear all method
+	 */
 	public void ClearAll() {
 		profilesHelper.clearProfilesTable();
 		mediaHelper.clearMediaTable();
@@ -105,6 +108,9 @@ public class Helper {
 		*/
 	}
 	
+	/**
+	 * Dummy data method
+	 */
 	public void CreateDummyData() {
 		
 		/*Guardians*/

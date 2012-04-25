@@ -61,22 +61,52 @@ public class MediaHelper {
 		_context.getContentResolver().delete(MediaMetaData.CONTENT_URI, null, null);
 	}
 
+	/**
+	 * Remove media attachment to profile
+	 * @param media Media to remove
+	 * @param profile Profile
+	 * @return True/false
+	 */
 	public int removeMediaAttachmentToProfile(Media media, Profile profile) {
 		return mpa.removeMediaProfileAccess(media, profile); 
 	}
 
+	/**
+	 * Remove media attachment to department
+	 * @param media Media to remove
+	 * @param department Department
+	 * @return True/false
+	 */
 	public int removeMediaAttachmentToDepartment(Media media, Department department) {
 		return mda.removeMediaProfileAccess(media, department);
 	}
 
+	/**
+	 * Remove tag list from media
+	 * @param tags Tags to remove
+	 * @param media Media to remove from
+	 * @return True/false
+	 */
 	public int removeTagListFromMedia(List<Tag> tags, Media media) {
 		return ht.removeHasTagList(tags, media);
 	}
 
+	/**
+	 * Remove Tag from media
+	 * @param tag Tag to remove
+	 * @param media Media to remove from
+	 * @return True/false
+	 */
 	public int removeTagFromMedia(Tag tag, Media media) {
 		return ht.removeHasTag(tag, media);
 	}
 
+	/**
+	 * Remove sub media attachment to media
+	 * @param subMedia Sub media to remove
+	 * @param media Media to remove from
+	 * @return True/false
+	 */
 	public int removeSubMediaAttachmentToMedia(Media subMedia, Media media) {
 		return hl.removeHasLink(subMedia, media);
 	}
@@ -96,6 +126,12 @@ public class MediaHelper {
 		return result;
 	}
 
+	/**
+	 * Add tags to media
+	 * @param tags List of tags to add
+	 * @param media Media to add to
+	 * @return True/false
+	 */
 	public long addTagsToMedia(List<Tag> tags, Media media) {
 		long result = -1;
 		for (Tag t : tags) {
@@ -109,6 +145,13 @@ public class MediaHelper {
 		return result;
 	}
 
+	/**
+	 * Attach media to profile
+	 * @param media Media to attach to profile
+	 * @param profile Profile to attach to
+	 * @param owner Owner profile
+	 * @return True/false
+	 */
 	public long attachMediaToProfile(Media media, Profile profile, Profile owner) {
 		if (media.isMPublic() || media.getOwnerId() == owner.getId()) {
 			MediaProfileAccess mpaModel  = new MediaProfileAccess();
@@ -120,6 +163,13 @@ public class MediaHelper {
 		}
 	}
 
+	/**
+	 * Attach media to department
+	 * @param media Media to attach
+	 * @param department Department to attach to
+	 * @param owner Profile owner
+	 * @return True/false
+	 */
 	public long attachMediaToDepartment(Media media, Department department, Profile owner) {
 		if (media.isMPublic() || media.getOwnerId() == owner.getId()) {
 			MediaDepartmentAccess mdaModel = new MediaDepartmentAccess();
@@ -131,6 +181,12 @@ public class MediaHelper {
 		}
 	}
 
+	/**
+	 * Attach sub media to media
+	 * @param subMedia Sub media to attach
+	 * @param media Media to attach to
+	 * @return True/false
+	 */
 	public long attachSubMediaToMedia(Media subMedia, Media media) {
 		HasLink hlModel = new HasLink();
 		hlModel.setIdMedia(media.getId());
@@ -166,6 +222,11 @@ public class MediaHelper {
 		return media;
 	}
 
+	/**
+	 * Get sub media by media
+	 * @param media Media
+	 * @return List of sub medias
+	 */
 	public List<Media> getSubMediaByMedia(Media media) {
 		List<Media> medias = new ArrayList<Media>();
 
@@ -213,6 +274,11 @@ public class MediaHelper {
 		return media;
 	}
 
+	/**
+	 * Get media by tags
+	 * @param tags List of tags
+	 * @return List of media
+	 */
 	public List<Media> getMediaByTags(List<Tag> tags) {
 		List<Media> resultList = new ArrayList<Media>();
 
@@ -225,6 +291,11 @@ public class MediaHelper {
 		return resultList;
 	}
 
+	/**
+	 * Get media by department
+	 * @param department Department
+	 * @return List fo media
+	 */
 	public List<Media> getMediaByDepartment(Department department) {
 		List<Media> mediaList = new ArrayList<Media>();
 
@@ -235,6 +306,11 @@ public class MediaHelper {
 		return mediaList;
 	}
 
+	/**
+	 * Get media by profile
+	 * @param profile Profile
+	 * @return List of medias
+	 */
 	public List<Media> getMediaByProfile(Profile profile) {
 		List<Media> mediaList = new ArrayList<Media>();
 
@@ -245,6 +321,11 @@ public class MediaHelper {
 		return mediaList;
 	}
 
+	/**
+	 * Get media by id
+	 * @param id Id 
+	 * @return Media
+	 */
 	public Media getMediaById(long id) {
 		Media media = null;
 		Cursor c = _context.getContentResolver().query(MediaMetaData.CONTENT_URI, columns, MediaMetaData.Table.COLUMN_ID + " = '" + id + "'", null, null);

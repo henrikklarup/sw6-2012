@@ -56,10 +56,22 @@ public class DepartmentsHelper {
 				null, null);
 	}
 
+	/**
+	 * Remove profile attachment to department
+	 * @param profile Profile to remove
+	 * @param department Department to remove from
+	 * @return True/false
+	 */
 	public int removeProfileAttachmentToDepartment(Profile profile, Department department) {
 		return hd.removeHasDepartment(profile, department);
 	}
 
+	/**
+	 * Remove sub department attachment to department
+	 * @param department Department
+	 * @param subDepartment Subdepartment
+	 * @return True/false
+	 */
 	public int removeSubDepartmentAttachmentToDepartment(Department department, Department subDepartment) {
 		return hsd.removeHasSubDepartment(subDepartment, department);
 	}
@@ -77,6 +89,12 @@ public class DepartmentsHelper {
 		return department.getId();
 	}
 
+	/**
+	 * Attach profile to department
+	 * @param profile Profile to attach
+	 * @param department Department to attach to
+	 * @return True/false
+	 */
 	public long attachProfileToDepartment(Profile profile, Department department) {
 		HasDepartment hdModel = new HasDepartment();
 		hdModel.setIdDepartment(department.getId());
@@ -84,6 +102,12 @@ public class DepartmentsHelper {
 		return hd.insertHasDepartment(hdModel);
 	}
 
+	/**
+	 * Attach sub department to department
+	 * @param department Department to attach to
+	 * @param subDepartment Subdepartment to attach
+	 * @return True/false
+	 */
 	public long attachSubDepartmentToDepartment(Department department, Department subDepartment) {
 		HasSubDepartment hsdModel = new HasSubDepartment();
 		hsdModel.setIdDepartment(department.getId());
@@ -164,6 +188,11 @@ public class DepartmentsHelper {
 		return certificate;
 	}
 
+	/**
+	 * Get departments by id
+	 * @param id ID
+	 * @return Department
+	 */
 	public Department getDepartmentById(long id) {
 		Department _department = null;
 		Uri uri = ContentUris.withAppendedId(DepartmentsMetaData.CONTENT_URI, id);
@@ -179,6 +208,11 @@ public class DepartmentsHelper {
 		return _department;
 	}
 
+	/**
+	 * Get departments by name
+	 * @param name Department name
+	 * @return List of departments
+	 */
 	public List<Department> getDepartmentByName(String name) {
 		List<Department> departments = new ArrayList<Department>();
 		Cursor c = _context.getContentResolver().query(DepartmentsMetaData.CONTENT_URI, columns, DepartmentsMetaData.Table.COLUMN_NAME + " = '" + name + "'", null, null);
@@ -195,6 +229,11 @@ public class DepartmentsHelper {
 		return departments;
 	}
 	
+	/**
+	 * Get departments by profile
+	 * @param profile Profile
+	 * @return List of departments
+	 */
 	public List<Department> getDepartmentsByProfile(Profile profile) {
 		List<Department> departments = new ArrayList<Department>();
 		
@@ -208,6 +247,11 @@ public class DepartmentsHelper {
 		return departments;
 	}
 
+	/**
+	 * Get sub departments
+	 * @param department Department
+	 * @return List of sub departments
+	 */
 	public List<Department> getSubDepartments(Department department) {
 		List<Department> departments = new ArrayList<Department>();
 		
