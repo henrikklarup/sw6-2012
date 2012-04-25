@@ -64,6 +64,12 @@ public class ProfilesHelper {
 		_context.getContentResolver().delete(ProfilesMetaData.CONTENT_URI, null, null);
 	}
 
+	/**
+	 * Remove child attachment to guardian
+	 * @param child Child profile
+	 * @param guardian Guardian profile
+	 * @return True/false
+	 */
 	public int removeChildAttachmentToGuardian(Profile child, Profile guardian) {
 		if (child.getPRole() == 3 && (guardian.getPRole() == 1 || guardian.getPRole() == 2)) {
 			return hg.removeHasGuardian(child, guardian);
@@ -85,6 +91,12 @@ public class ProfilesHelper {
 		return id;
 	}
 
+	/**
+	 * Attach child to guardian
+	 * @param child Child profile
+	 * @param guardian Guardian profile
+	 * @return
+	 */
 	public long attachChildToGuardian(Profile child, Profile guardian) {
 		if (child.getPRole() == 3 && (guardian.getPRole() == 1 || guardian.getPRole() == 2)) {
 			HasGuardian hgModel = new HasGuardian();
@@ -165,6 +177,11 @@ public class ProfilesHelper {
 		return certificate;
 	}
 
+	/**
+	 * Get children by department
+	 * @param department Department
+	 * @return List of profiles
+	 */
 	public List<Profile> getChildrenByDepartment(Department department) {
 		List<Profile> profiles = new ArrayList<Profile>();
 		
@@ -180,6 +197,11 @@ public class ProfilesHelper {
 		return profiles;
 	}
 	
+	/**
+	 * Get children by department and sub departments
+	 * @param department Department
+	 * @return List of profiles
+	 */
 	public List<Profile> getChildrenByDepartmentAndSubDepartments(Department department) {
 		List<Profile> profiles = new ArrayList<Profile>();
 		
@@ -196,6 +218,11 @@ public class ProfilesHelper {
 		return profiles;
 	}
 
+	/**
+	 * Get children by guardian
+	 * @param guardian Guardian profile
+	 * @return List of profiles
+	 */
 	public List<Profile> getChildrenByGuardian(Profile guardian) {
 		List<Profile> profiles = new ArrayList<Profile>();
 		
@@ -209,6 +236,11 @@ public class ProfilesHelper {
 		return profiles;
 	}
 
+	/**
+	 * Get guardian by department
+	 * @param department Department
+	 * @return List of profiles
+	 */
 	public List<Profile> getGuardiansByDepartment(Department department) {
 		List<Profile> profiles = new ArrayList<Profile>();
 		
@@ -243,6 +275,11 @@ public class ProfilesHelper {
 		return null;
 	}
 
+	/**
+	 * Get profiles by name
+	 * @param name Profile name
+	 * @return List of profiles
+	 */
 	public List<Profile> getProfilesByName(String name) {
 		List<Profile> profiles = new ArrayList<Profile>();
 		Cursor c = _context.getContentResolver().query(ProfilesMetaData.CONTENT_URI, columns, 

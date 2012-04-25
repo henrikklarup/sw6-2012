@@ -30,14 +30,29 @@ class ListOfAppsController {
 	//METHODS TO CALL
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * Clear list of apps table
+	 * @return True/false
+	 */
 	public int clearListOfAppsTable() {
 		return _context.getContentResolver().delete(ListOfAppsMetaData.CONTENT_URI, null, null);
 	}
 
+	/**
+	 * Remove list of apps
+	 * @param appId App id
+	 * @param profileId Profile Id
+	 * @return True/false
+	 */
 	public int removeListOfApps(long appId, long profileId) {
 		return _context.getContentResolver().delete(ListOfAppsMetaData.CONTENT_URI, ListOfAppsMetaData.Table.COLUMN_IDAPP + " = '" + appId + "' AND " + ListOfAppsMetaData.Table.COLUMN_IDPROFILE + " = '" + profileId + "'", null);
 	}
 	
+	/**
+	 * Insert list of apps
+	 * @param listOfApps List of apps
+	 * @return True/false
+	 */
 	public int insertListOfApps(ListOfApps listOfApps) {
 		ContentValues cv = new ContentValues();
 		cv.put(ListOfAppsMetaData.Table.COLUMN_IDAPP, listOfApps.getIdApp());
@@ -48,6 +63,11 @@ class ListOfAppsController {
 		return 0;
 	}
 
+	/**
+	 * Modify list of apps
+	 * @param listOfApps List of apps
+	 * @return True/false
+	 */
 	public int modifyListOfApps(ListOfApps listOfApps) {
 		ContentValues cv = new ContentValues();
 		cv.put(ListOfAppsMetaData.Table.COLUMN_IDAPP, listOfApps.getIdApp());
@@ -57,6 +77,10 @@ class ListOfAppsController {
 		return _context.getContentResolver().update(ListOfAppsMetaData.CONTENT_URI, cv, ListOfAppsMetaData.Table.COLUMN_IDAPP + " = '" + listOfApps.getIdApp() + "'" + " AND " + ListOfAppsMetaData.Table.COLUMN_IDPROFILE + " = '" + listOfApps.getIdProfile() + "'", null);
 	}
 	
+	/**
+	 * Get list of apps
+	 * @return List of list of apps
+	 */
 	public List<ListOfApps> getListOfApps() {
 		List<ListOfApps> listOfApps = new ArrayList<ListOfApps>();
 		Cursor c = _context.getContentResolver().query(ListOfAppsMetaData.CONTENT_URI, columns, null, null, null);
@@ -69,6 +93,12 @@ class ListOfAppsController {
 		return listOfApps;
 	}
 
+	/**
+	 * Get list of apps by ids
+	 * @param appId App id
+	 * @param profileId Profile id
+	 * @return List of apps
+	 */
 	public ListOfApps getListOfAppByIds(long appId, long profileId) {
 		ListOfApps listOfApp = null;
 		
@@ -83,6 +113,11 @@ class ListOfAppsController {
 		return listOfApp;
 	}
 	
+	/**
+	 * Get list of apps by profile id
+	 * @param profileId Profile id
+	 * @return List of list of apps
+	 */
 	public List<ListOfApps> getListOfAppsByProfileId(long profileId) {
 		List<ListOfApps> listOfApps = new ArrayList<ListOfApps>();
 		
@@ -97,6 +132,12 @@ class ListOfAppsController {
 		return listOfApps;
 	}
 	
+	/**
+	 * Get setting by app and child id
+	 * @param app App
+	 * @param child profile
+	 * @return Setting
+	 */
 	public Setting<String, String, String> getSettingByAppIdAndByChildId(App app, Profile child) {
 		Setting<String, String, String> setting = null;
 		
@@ -111,6 +152,12 @@ class ListOfAppsController {
 		return setting;
 	}
 
+	/**
+	 * Get stat by app id and by child id
+	 * @param app app
+	 * @param child profile
+	 * @return stat
+	 */
 	public Stat<String, String, String> getStatByAppIdAndByChildId(App app, Profile child) {
 		Stat<String, String, String> stat = null;
 		
@@ -129,6 +176,11 @@ class ListOfAppsController {
 	//PRIVATE METHODS - Keep out!
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * Cursor to list of apps
+	 * @param cursor Cursor
+	 * @return List of list of apps
+	 */
 	private List<ListOfApps> cursorToListOfApps(Cursor cursor) {
 		List<ListOfApps> listOfApps = new ArrayList<ListOfApps>();
 
@@ -142,6 +194,11 @@ class ListOfAppsController {
 		return listOfApps;
 	}
 
+	/**
+	 * Cursor to list of apps
+	 * @param cursor Cursor
+	 * @return List of apps
+	 */
 	private ListOfApps cursorToListOfApp(Cursor cursor) {
 		String temp;
 		ListOfApps listOfApp = new ListOfApps();
