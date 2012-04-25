@@ -10,7 +10,7 @@ public class DoneScreenActivity extends Activity {
     /** Called when the activity is first created. */
 	
 	/* path to the picture on the sdcard on the tablet*/
-	private final String imageInSD = "/sdcard/Pictures/donescreen.png";
+	private final String imageInSD = "/sdcard/Pictures/faerdig.png";
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
