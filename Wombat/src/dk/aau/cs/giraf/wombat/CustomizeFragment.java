@@ -764,6 +764,7 @@ public class CustomizeFragment extends Fragment {
 									Child c = guard.Children().get(item);
 									getName();
 									c.save(currSubP);
+									TimerLoader.saveChild(c, currSubP);
 									SubProfileFragment df = (SubProfileFragment) getFragmentManager()
 											.findFragmentById(
 													R.id.subprofileFragment);
@@ -816,6 +817,7 @@ public class CustomizeFragment extends Fragment {
 
 				public void onClick(View v) {
 					currSubP.addLastUsed(preSubP);
+					TimerLoader.saveGuardian(currSubP);
 					currSubP.select();
 					Intent i = new Intent(
 							getActivity().getApplicationContext(),

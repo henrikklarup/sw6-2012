@@ -180,7 +180,7 @@ public class SubProfile implements Comparable<SubProfile>{
 		this._id = oldProfile._id;
 		guard.addLastUsed(this);
 		}
-}
+	}
 
 	public boolean equals(Object o) {
 	        if (!(o instanceof SubProfile))
