@@ -118,6 +118,10 @@ public class HomeActivity extends Activity {
 		
 		loadApplications();
 	}
+	
+	private void resizeGridView() {
+		
+	}
 
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
