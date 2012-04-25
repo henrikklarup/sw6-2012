@@ -12,6 +12,7 @@ import dk.aau.cs.giraf.oasis.lib.metadata.ProfilesMetaData;
 import dk.aau.cs.giraf.oasis.lib.models.Department;
 import dk.aau.cs.giraf.oasis.lib.models.HasDepartment;
 import dk.aau.cs.giraf.oasis.lib.models.HasGuardian;
+import dk.aau.cs.giraf.oasis.lib.models.HasSubDepartment;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 import dk.aau.cs.giraf.oasis.lib.models.Setting;
 
@@ -28,6 +29,7 @@ public class ProfilesHelper {
 	private AuthUsersController au;
 	private HasGuardianController hg;
 	private HasDepartmentController hd;
+	private HasSubDepartmentController hsd;
 	private String[] columns = new String[] { 
 			ProfilesMetaData.Table.COLUMN_ID, 
 			ProfilesMetaData.Table.COLUMN_FIRST_NAME,
@@ -48,6 +50,7 @@ public class ProfilesHelper {
 		au = new AuthUsersController(_context);
 		hg = new HasGuardianController(_context);
 		hd = new HasDepartmentController(_context);
+		hsd = new HasSubDepartmentController(_context);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -172,6 +175,22 @@ public class ProfilesHelper {
 			if (profile.getPRole() == 3) {
 				profiles.add(profile);
 			}
+		}
+		
+		return profiles;
+	}
+	
+	public List<Profile> getChildrenByDepartmentAndSubDepartments(Department department) {
+		List<Profile> profiles = new ArrayList<Profile>();
+		
+		profiles.addAll(getChildrenByDepartment(department));
+		
+		List<HasSubDepartment> list = hsd.getSubDepartmentsByDepartment(department);
+
+		for (HasSubDepartment hsdModel : list) {
+			Department _department = new Department();
+			department.setId(hsdModel.getIdSubDepartment());
+			profiles.addAll(getChildrenByDepartmentAndSubDepartments(_department));
 		}
 		
 		return profiles;
