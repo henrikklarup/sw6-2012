@@ -17,7 +17,7 @@ import dk.aau.cs.giraf.oasis.lib.models.Setting;
 
 
 public class PARROTActivity extends Activity {
-	
+
 	private static PARROTProfile parrotUser;
 	/** Called when the activity is first created. */
 	@Override
@@ -28,13 +28,13 @@ public class PARROTActivity extends Activity {
 		/*//Made by kim
 		GridView gridview = (GridView) findViewById(R.id.pictogramgrid);
 		gridview.setAdapter(new PictogramAdapter(getUser().getCategoryAt(0), this));
-		
+
 		findViewById(R.id.pictogramgrid).setOnDragListener(new BoxDragListener());
-		*/
-		
-		
-		
-		
+		 */
+
+
+
+
 		//PARROTProfile parrotUser = loadProfile();			
 		//TODO replace the temp lines with the above line
 		//START TEMP LINES
@@ -45,18 +45,18 @@ public class PARROTActivity extends Activity {
 		tempCat.addPictogram(tempPic);
 		Pictogram tempPic2 = new Pictogram("Meg", "/sdcard/Pictures/meg.png", null, null);
 		tempCat.addPictogram(tempPic2);
-		
+
 		for (int i=0;i<6;i++)
 		{
 			tempCat.addPictogram(tempPic);
 			tempCat.addPictogram(tempPic2);
 		}
 		parrotUser.addCategory(tempCat);
-		
+
 		Category tempCat2 = new Category(2, tempPic2);
 		tempPic = new Pictogram("Bob", "/sdcard/Pictures/007.jpg", null, null);
 		tempPic2= new Pictogram("Madeline", "/sdcard/Pictures/003.jpg", null, null);
-		
+
 		for (int i=0;i<6;i++)
 		{
 			tempCat2.addPictogram(tempPic);
@@ -64,7 +64,7 @@ public class PARROTActivity extends Activity {
 		}
 		parrotUser.addCategory(tempCat2);
 		//END TEMP LINES
-		
+
 		ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		actionBar.setDisplayShowTitleEnabled(false);	//TODO figure out what this does
@@ -86,14 +86,14 @@ public class PARROTActivity extends Activity {
 		AudioPlayer.close();
 		super.onPause();
 	}
-	
+
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		AudioPlayer.open();
 		super.onResume();
 	}
-	
+
 	public static PARROTProfile getUser()
 	{
 		return parrotUser;
@@ -108,8 +108,8 @@ public class PARROTActivity extends Activity {
 		Helper help = new Helper(this);
 		if(extras !=null)
 		{
-			prof = help.profilesHelper.getProfileById(extras.getLong("currentProfileId"));
-			app = help.appsHelper.getAppByIds(extras.getLong("currentAppId"), extras.getLong("currentProfileId"));
+			prof = help.profilesHelper.getProfileById(extras.getLong("currentChildID"));	//It used to be "currentProfileId"
+			app = help.appsHelper.getAppByIds(extras.getLong("currentAppId"), extras.getLong("currentChildID"));
 			Pictogram pic = new Pictogram(prof.getFirstname(), prof.getPicture(), null, null);
 			PARROTProfile parrotUser = new PARROTProfile(prof.getFirstname(), pic);
 
@@ -125,11 +125,10 @@ public class PARROTActivity extends Activity {
 			{
 				//Here we read the categories
 				categoryString = specialSettings.get(prof.getFirstname()).get("category"+number);
-				if(categoryString !=null)
+				if(categoryString !=null)		//If the category of that number exists
 				{
 					String colourString = specialSettings.get(prof.getFirstname()).get("category"+number+"colour");
 					int col=Integer.valueOf(colourString);
-					//If the category of that number exists
 					parrotUser.addCategory(loadCategory(categoryString,col,help));
 				}
 				else
@@ -145,6 +144,7 @@ public class PARROTActivity extends Activity {
 		{
 			//If no profile is found, return null.
 			//TODO find out if this means that a Guardian is using the PARROT app.
+			//It doesn't, it means the launcher has not provided a profile, either due to an error, or because PARROT has been launched outside of GIRAF.
 			return null;
 		}
 
@@ -165,8 +165,26 @@ public class PARROTActivity extends Activity {
 	{
 		Pictogram pic = null;
 		Media media=help.mediaHelper.getSingleMediaById(id); //This is the image media //TODO check type
-		//Media files can have a link to a sub-media file.
-		//TODO Make it so that image-Media files have sound-Media files and word-Media files as sub media links.
+		List<Media> subMedias =		help.mediaHelper.getSubMediaByMedia(media); //TODO find out if this is ok, or if it needs to be an ArrayList
+		Media investigatedMedia;
+		String soundPath = null;
+		String wordPath = null;
+		if(subMedias != null)	//Media files can have a link to a sub-media file, check if this one does.
+		{
+			for(int i = 0;i<subMedias.size();i++) 		
+			{
+				investigatedMedia =subMedias.get(i);
+				if(investigatedMedia.getMType().equals("SOUND"))
+				{
+					soundPath = investigatedMedia.getMPath();
+				}
+				else if(investigatedMedia.getMType().equals("WORD"))
+				{
+					wordPath = investigatedMedia.getMPath();
+				}
+			}
+		}
+		pic = new Pictogram(media.getName(), media.getMPath(), soundPath, wordPath);
 		return pic;
 	}
 
@@ -174,7 +192,7 @@ public class PARROTActivity extends Activity {
 	public List<Integer> getIDsFromString(String IDstring)
 	{
 		List<Integer> listOfID = null;
-		
+
 		if(IDstring !=null || IDstring.charAt(0)!='$'||IDstring.charAt(0)!='#')
 		{
 			String temp = String.valueOf(IDstring.charAt(0));
