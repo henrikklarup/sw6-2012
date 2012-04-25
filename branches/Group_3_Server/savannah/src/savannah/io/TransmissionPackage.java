@@ -27,7 +27,7 @@ public class TransmissionPackage {
 	 * Creates a TransmissionPackage from the specified arguments.
 	 * @param cr - the specified enum representing transmission type
 	 * @param XML - the specified String representing the XML
-	 * @param files - the specified Files to send to the IOHandler
+	 * @param files - the specified Files to send
 	 */
 	public TransmissionPackage(CRUD cr, String XML, File... files) {
 		this.files = new ArrayList<File>();
@@ -35,8 +35,32 @@ public class TransmissionPackage {
 		this.xml = XML;
 		this.addFiles(files);
 	}
+	
+	/**
+	 * Creates a TransmissionPackage from the specified arguments.
+	 * @param cr - the specified enum representing transmission type
+	 * @param XML - the specified String representing the XML
+	 * @param f - the specified File to send
+	 */
+	public TransmissionPackage(CRUD cr, String XML, File f) {
+		this.files = new ArrayList<File>();
+		this.cr = cr.getValue();
+		this.xml = XML;
+		this.files.add(f);
+	}
+	
+	/**
+	 * Creates a TransmissionPackage from the specified arguments.
+	 * @param cr - the specified enum representing transmission type
+	 * @param XML - the specified String representing the XML
+	 */
+	public TransmissionPackage(CRUD cr, String XML) {
+		this.files = new ArrayList<File>();
+		this.cr = cr.getValue();
+		this.xml = XML;
+	}
 
-	private void addFiles(File... files) {
+	private final void addFiles(File... files) {
 		if (files != null) {
 			for (File f : files) {
 				this.files.add(f);
