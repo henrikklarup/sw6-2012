@@ -165,13 +165,18 @@ public class Profile {
 		localOutput = localOutput.replace("{1}", getFirstname());
 		if (getMiddlename() != null) {
 			localOutput = localOutput.replace("{2}", getMiddlename());
+		} else {
+			localOutput = localOutput.replace("{2}, ", "");
 		}
 		localOutput = localOutput.replace("{3}", getSurname());
 		localOutput = localOutput.replace("{4}", String.valueOf(getPRole()));
 		localOutput = localOutput.replace("{5}", String.valueOf(getPhone()));
 		if (getPicture() != null) {
 			localOutput = localOutput.replace("{6}", getPicture());
+		} else {
+			localOutput = localOutput.replace("{6}, ", "");
 		}
+		
 //		localOutput = localOutput.replace("{7}", "Setting(Static Setting text)");
 //		localOutput = localOutput.replace("{7}", getSetting().toString());
 
