@@ -470,6 +470,7 @@ public class DbProvider extends ContentProvider {
 			if (rowId > 0) {
 				_uri = ContentUris.withAppendedId(TagsMetaData.CONTENT_URI, rowId);
 				getContext().getContentResolver().notifyChange(_uri, null);
+				return _uri;
 			} else {
 				_uri = ContentUris.withAppendedId(TagsMetaData.CONTENT_URI, -1);
 				return _uri;
