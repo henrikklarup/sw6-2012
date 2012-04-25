@@ -53,8 +53,7 @@ public class GWidgetConnectivity extends ImageView implements IGWidget {
 
 	@Override
 	public void updateDisplay() {
-		/*/// TODO implement library "ping" methods... talk to magnus
-		switch ((new Random()).nextInt(3)) {
+		switch (helper.serverHelper.getStatus()) {
 		case 0:
 			setStyleOffline();
 			break;
@@ -64,8 +63,7 @@ public class GWidgetConnectivity extends ImageView implements IGWidget {
 		case 2:
 			setStyleSyncing();
 			break;
-		}*/
-		
+		}
 	}
 
 }
