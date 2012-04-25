@@ -138,14 +138,16 @@ public class DepartmentsHelper {
 		Cursor c = _context.getContentResolver().query(
 				DepartmentsMetaData.CONTENT_URI, columns, null, null, null);
 
-		if (c.moveToFirst()) {
-			while (!c.isAfterLast()) {
-				departments.add(cursorToDepartment(c));
-				c.moveToNext();
+		if (c != null) {
+			if (c.moveToFirst()) {
+				while (!c.isAfterLast()) {
+					departments.add(cursorToDepartment(c));
+					c.moveToNext();
+				}
 			}
-		}
 
-		c.close();
+			c.close();
+		}
 
 		return departments;
 	}
@@ -171,9 +173,8 @@ public class DepartmentsHelper {
 			if(c.moveToFirst()) {
 				_department = cursorToDepartment(c);
 			}
+			c.close();
 		}
-
-		c.close();
 
 		return _department;
 	}
@@ -188,9 +189,8 @@ public class DepartmentsHelper {
 					c.moveToNext();
 				}
 			}
+			c.close();
 		}
-
-		c.close();
 
 		return departments;
 	}
