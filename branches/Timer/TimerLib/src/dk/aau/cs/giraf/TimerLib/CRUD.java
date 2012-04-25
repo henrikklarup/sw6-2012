@@ -13,36 +13,42 @@ import dk.aau.cs.giraf.oasis.lib.models.Setting;
 
 public class CRUD {
 	Context context;
-	Helper helper = new Helper(context);
+	Helper helper;
 	Guardian guard = Guardian.getInstance();
 	private long appId; 
 	
-	public CRUD(long guardianID, long appID){
+	public CRUD(long guardianID, long appID, Context context){
+		this.context = context;
+		helper = new Helper(context);
 		this.appId = appID;
 		// Load the guardian form Oasis
 		Profile mGuardian = helper.profilesHelper.getProfileById(guardianID);
 		
 		// Load the children from Oasis of the guardian
 		List<Profile> mChildren = helper.profilesHelper.getChildrenByGuardian(mGuardian);
+		guard.Children().clear();
+		
 		for (Profile c : mChildren) {
 			Child mC;
 			String mName;
-			
 			// Generate the name of the child
-			String[] midNames = c.getMiddlename().split(" ");
 			mName = c.getFirstname();
-			for (String s : midNames) {
-				mName += " " + s.charAt(0) + ".";
+			
+			if(c.getMiddlename() != null){
+				String[] midNames = c.getMiddlename().split(" ");
+				for (String s : midNames) {
+					mName += " " + s.charAt(0) + ".";
+				}
 			}
-			mName = " " + c.getSurname();
+			mName += " " + c.getSurname();
 			mC = new Child(mName);
 			mC.setProfileId(c.getId());
-			
+		
 			// Find all subprofiles of the child and save it on the child
-			List<SubProfile> mSubPs = findProfileSettings(c.getId());
-			for (SubProfile subProfile : mSubPs) {
-				mC.save(subProfile);
-			}
+				List<SubProfile> mSubPs = findProfileSettings(c.getId());
+				for (SubProfile subProfile : mSubPs) {
+					mC.save(subProfile);
+				}
 			
 			guard.Children().add(mC);
 		}
@@ -57,13 +63,47 @@ public class CRUD {
 	 * @return
 	 * 		Returns true if it completed, else returns false
 	 */
-	public boolean saveProfile(Child c, SubProfile sp){
+	public boolean saveChild(Child c, SubProfile sp){
 		// Convert the subprofile to a hashmap
 		HashMap<String, String> hm = setHashMap(sp);
 		
 		// Find the app settings on the profileID
 		App app = helper.appsHelper.getAppByIds(appId, c.getProfileId());
 		Setting<String, String, String> settings = app.getSettings();
+		if(settings == null){
+			settings = new Setting<String, String, String>();
+		}
+		
+		try {
+			// Insert the hashmap with the subprofile ID as key
+			settings.put(String.valueOf(sp.getId()), hm);
+			app.setSettings(settings);
+		} catch (Exception e) {
+			return false;
+		}
+		
+		return true;	
+	}
+	
+	/**
+	 * Stores the subprofile on the guardian in Oasis
+	 * @param guardianId
+	 * 		The guardian ID found in the TimerLoader.guardianID
+	 * @param sp
+	 * 		The subprofile which is to be stored
+	 * @return
+	 * 		Returns true if it completed, else returns false
+	 */
+	public boolean saveGuardian(long guardianId, SubProfile sp){
+		// Convert the subprofile to a hashmap
+		HashMap<String, String> hm = setHashMap(sp);
+		
+		// Find the app settings on the profileID
+		App app = helper.appsHelper.getAppByIds(appId, guardianId);
+		Setting<String, String, String> settings = app.getSettings();
+		if(settings == null){
+			settings = new Setting<String, String, String>();
+		}
 		
 		try {
 			// Insert the hashmap with the subprofile ID as key
@@ -88,12 +128,14 @@ public class CRUD {
 		List<SubProfile> mSubs = new ArrayList<SubProfile>();
 		
 		App app = helper.appsHelper.getAppByIds(appId, id);
-		Setting<String, String, String> settings = app.getSettings();
-		Set<String> keys = settings.keySet();
-
-		for (String key : keys) {
-			mSubs.add(getSubProfile(settings.get(key)));
-		}	
+		if(app.getSettings() != null){
+			Setting<String, String, String> settings = app.getSettings();
+			Set<String> keys = settings.keySet();
+	
+			for (String key : keys) {
+				mSubs.add(getSubProfile(settings.get(key)));
+			}	
+		}
 		
 		return mSubs;
 	}
@@ -106,7 +148,7 @@ public class CRUD {
 	 * 		The subprofile extracted from the hashmap
 	 */
 	private SubProfile getSubProfile(HashMap<String, String> hm){		
-		SubProfile p = null;
+		SubProfile p = new SubProfile();
 		/* Load all settings from the hash table */
 		p.setAppId(Long.valueOf((String) hm.get("appId")));
 		p.setAttachmentId(Long.valueOf((String) hm.get("Attachment")));

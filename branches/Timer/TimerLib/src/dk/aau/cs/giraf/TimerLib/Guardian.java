@@ -197,12 +197,13 @@ public class Guardian {
 		predefChild.lockDelete();
 		_sortedList.add(predefChild);
 		
-		Collections.sort(_guard);
-		for(Child p : _guard){
-			Collections.sort(p.SubProfiles());
+		if(_guard != null){
+			Collections.sort(_guard);
+			for(Child p : _guard){
+				Collections.sort(p.SubProfiles());
+			}
+			_sortedList.addAll(_guard);
 		}
-		
-		_sortedList.addAll(_guard);
 		
 		return _sortedList;
 	}
