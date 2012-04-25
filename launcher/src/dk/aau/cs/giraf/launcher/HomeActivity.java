@@ -55,6 +55,7 @@ public class HomeActivity extends Activity {
 	private GWidgetCalendar mCalendarWidget;
 	private GWidgetConnectivity mConnectivityWidget;
 	private GWidgetLogout mLogoutWidget;
+	private LinearLayout.LayoutParams mHomeBarParams;
 	
 	
 	/** Called when the activity is first created. */
@@ -102,16 +103,24 @@ public class HomeActivity extends Activity {
 		});
 		
 		findViewById(R.id.HomeBarLayout).setOnTouchListener(new View.OnTouchListener() {
-			
-			private int _x = 0;
 			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				if(event.getAction() == MotionEvent.ACTION_MOVE){
-				LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) v.getLayoutParams();
-				params.setMargins((int) event.getRawX(), 0, 0, 0);
-				v.setLayoutParams(params);
+			public boolean onTouch(View v, MotionEvent e) {
+				int offset = 0;
+				boolean result = false;
+				
+				switch(e.getAction()){
+				case MotionEvent.ACTION_DOWN:
+					offset = (int) e.getRawX();
+					result = true;
+				case MotionEvent.ACTION_MOVE:
+					mHomeBarParams = (LinearLayout.LayoutParams) v.getLayoutParams();
+					mHomeBarParams.setMargins(((int) e.getRawX())-offset, 0, 0, 0);
+					v.setLayoutParams(mHomeBarParams);
+					result = true;
+				case MotionEvent.ACTION_UP:
+					result = false;
 				}
-				return true;
+				return result;
 				
 			}
 		});
