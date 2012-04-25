@@ -49,12 +49,30 @@ public class AppsView extends ListActivity {
 
 			@Override
 			public void onClick(View v) {
-				helper.appsHelper.insertApp(app);
-				List<App> apps = helper.appsHelper.getApps();
-				app = apps.get(apps.size() - 1);
-				List<Profile> profiles = helper.profilesHelper.getProfiles();
-				Profile profile = profiles.get(profiles.size() - 1);
-				helper.appsHelper.attachAppToProfile(app, profile);
+//				helper.appsHelper.insertApp(app);
+//				List<App> apps = helper.appsHelper.getApps();
+//				app = apps.get(apps.size() - 1);
+//				List<Profile> profiles = helper.profilesHelper.getProfiles();
+//				Profile profile = profiles.get(profiles.size() - 1);
+//				helper.appsHelper.attachAppToProfile(app, profile);
+							
+				App m_App = null;
+				
+				// Find the app which has the same package name as this one
+                for (App a : helper.appsHelper.getApps()) {
+                        String cname = AppsView.this.getPackageName();
+                        if(a.getaPackage().equalsIgnoreCase(cname)){
+                                m_App = a;
+                                break;
+                        }
+                }
+                        
+                if(m_App == null){
+                        // If no app has been found, generate one and insert it in Oasis
+                        m_App = new App("Wombat", "1", "", AppsView.this.getPackageName(), "MainActivity");
+                        m_App.setId(helper.appsHelper.insertApp(m_App));
+                }
+                                
 				updateList();
 			}
 		});
