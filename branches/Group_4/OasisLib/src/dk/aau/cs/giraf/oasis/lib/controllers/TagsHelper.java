@@ -88,7 +88,9 @@ public class TagsHelper {
 		Cursor c = _context.getContentResolver().query(uri, columns, null, null, null);
 
 		if (c != null) {
-			tag = cursorToTag(c);
+			if (c.moveToFirst()) {
+				tag = cursorToTag(c);
+			}
 			c.close();
 		}
 
