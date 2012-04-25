@@ -23,6 +23,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
+import android.view.DragEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
@@ -99,6 +101,21 @@ public class HomeActivity extends Activity {
 			}
 		});
 		
+		findViewById(R.id.HomeBarLayout).setOnTouchListener(new View.OnTouchListener() {
+			
+			private int _x = 0;
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if(event.getAction() == MotionEvent.ACTION_MOVE){
+				LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) v.getLayoutParams();
+				params.setMargins((int) event.getRawX(), 0, 0, 0);
+				v.setLayoutParams(params);
+				}
+				return true;
+				
+			}
+		});
+		
 		loadApplications();
 	}
 
@@ -127,7 +144,7 @@ public class HomeActivity extends Activity {
 		RelativeLayout homebar = (RelativeLayout)this.findViewById(R.id.HomeBarLayout);
 
 		LayoutParams paramsGrid = (RelativeLayout.LayoutParams)homeGridView.getLayoutParams();
-		LayoutParams paramsBar = (RelativeLayout.LayoutParams)homebar.getLayoutParams();
+		LinearLayout.LayoutParams paramsBar = (LinearLayout.LayoutParams)homebar.getLayoutParams();
 
 		int barHeightLandscape = intToDP(100);
 		int barHeightPortrait = intToDP(200);
@@ -142,7 +159,7 @@ public class HomeActivity extends Activity {
 
 		if (isLandscape) {
 			homebar.setBackgroundDrawable(getResources().getDrawable(R.drawable.homebar_back_land));
-			paramsBar.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+			//paramsBar.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
 			paramsBar.height = LayoutParams.MATCH_PARENT;
 			paramsBar.width = barHeightLandscape;
 
@@ -150,7 +167,7 @@ public class HomeActivity extends Activity {
 			paramsGrid.width = screenWidth - barHeightLandscape;
 		} else {
 			homebar.setBackgroundDrawable(getResources().getDrawable(R.drawable.homebar_back_port));
-			paramsBar.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+			//paramsBar.addRule(RelativeLayout.ALIGN_PARENT_TOP);
 			paramsBar.height = barHeightPortrait;
 			paramsBar.width = LayoutParams.MATCH_PARENT;
 
