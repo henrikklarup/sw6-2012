@@ -9,6 +9,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Hashtable;
 import java.util.List;
 
 import java.util.Arrays;
@@ -16,13 +18,14 @@ import java.util.Arrays;
 public class TestModule {
 
 	public static void main(String[] args) throws IOException {
+		/*
 		File src = new File("C:\\temp\\2292.jpg");
 		File dst = new File("C:\\temp\\30767.jpg");
 		System.out.println(dst.toURI());
 		File tre = new File("C:\\temp\\rand.txt");
 		File snd = new File("C:\\temp\\temp.mp3");
 
-		TransmissionPackage tp = new TransmissionPackage(CRUD.COMMIT, "lol - XML - xD @!?0", src, dst,tre,snd);
+		TransmissionPackage tp = new TransmissionPackage(CRUD.PING, " ");
 		long t1 = System.currentTimeMillis();
 		StringBuilder sb = tp.getPackage();
 		long t2 = System.currentTimeMillis();
@@ -34,6 +37,8 @@ public class TestModule {
 		fm.writeCharToByte(sb, tre);
 		
 		TransmissionHandler th = new TransmissionHandler(new FileInputStream(tre), 4096, "C:\\newFolder");
+		System.out.println("CR: " + th.CR());
+		System.out.println("MXML: " + th.XML());
 //		th.write();
 		
 //		StringBuilder sb = new StringBuilder();
@@ -41,6 +46,26 @@ public class TestModule {
 //		System.out.println("Result: " + calcBuff(tre));
 		
 //		Test1(src, tre, 4096);
+		 */
+		
+		//Determine a "suitable" capacity for the Server, before it has to perform a rehash
+//		Hashtable<Integer,Integer> ht = new Hashtable<Integer,Integer>(50);
+//		for (int i = 0; i < 100; i++) {
+//			ht.put(i, i*2);
+//		}
+//		StringBuilder sb = new StringBuilder();
+//		Enumeration keys = ht.keys();
+//		while (keys.hasMoreElements()) {
+//			Object key = keys.nextElement();
+//			Object val = ht.get(key);
+//			sb.append(val + ", ");
+//		}
+//		System.out.println(sb.toString());
+
+		String s = Integer.toString(4096);
+		System.out.println("S: " + s);
+		System.out.println("S.length: " + s.length());
+		
 	}
 	public static void Test1(File src, File tre, int bufferSize) throws IOException {
 		FileModule fm = new FileModule(bufferSize);

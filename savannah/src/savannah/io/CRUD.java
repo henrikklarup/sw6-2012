@@ -1,7 +1,7 @@
 package savannah.io;
 
 public enum CRUD {
-	COMMIT(1, "COMMIT"), READ(2, "READ");
+	COMMIT(1, "COMMIT"), REQUEST(2, "REQUEST"), PING(3, "PING"), ERROR(4, "ERROR");
 	
 	private int value;
 	private String toString;
@@ -15,9 +15,9 @@ public enum CRUD {
 		return this.value;
 	}
 	public String getValueString() {
-		String s = "";
-		s += this.value;
-		return s;
+//		String s = String.valueOf(this.value);
+//		s += this.value;
+		return Integer.toString(this.value);
 		
 	}
 	public String toString() {

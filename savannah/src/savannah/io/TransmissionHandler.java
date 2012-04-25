@@ -1,61 +1,40 @@
 package savannah.io;
 
-import java.io.File;
+import java.io.DataInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.FileOutputStream;
+
+import java.io.File;
 import java.io.IOException;
 
-import java.lang.StringBuilder;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
 
-/**
- * This class is used to handle a TransmissionPackage, in the form of an InputStream.
- * Upon instantiating this class, the class will begin deconstructing the InputStream data,
- * and turning it into an XML String and Files.
- * The Files are created in the specified folder path. These Files will be created, even though
- * the entire package may not be received. 
- * @author Sir.Thundar
- *
- */
+import java.net.Socket;
+
 public class TransmissionHandler {
-	//Field Variables
-	private String xml				= "";
-	private File folder				= null;
-	private int bufferSize			= -1;
-	private int cr					= -1;
-	private int start 				= 0;
-	private int XMLlength 			= 0;
-	private int FILElength 			= 0;
-	private int FileCount			= 0;
-	private static final int STDBUFFER = 4096;
+	private List<File> files 	= null;
+	private File folder			= null;
+	private int bufferSize 		= -1;
+	private boolean working 	= true;
 
-	
-	/**
-	 * 
-	 * @param is
-	 * @param bufferSize
-	 * @param folderPath
-	 * @throws FileNotFoundException
-	 */
-	public TransmissionHandler(InputStream is, int bufferSize, String folderPath) throws FileNotFoundException {
-		if (folderPath.equals("") == true || this.makeFolder(folderPath) == false) {
-			throw new IllegalArgumentException("folderPath: Cannot be null !");
+	private CRUD cr 			= CRUD.ERROR;
+	private String xml 			= "";
+	private boolean iHaveFile	= false;
+	private boolean accepted	= false;
+
+
+	public TransmissionHandler(Socket socket, String folder) throws FileNotFoundException, IOException {
+		this.bufferSize = 4096;
+		this.files = new ArrayList<File>();
+		if (this.makeFolder(folder) == false) {
+			throw new IllegalArgumentException("Noooooes !");
 		}
-		if (this.bufferSize <= 0) {
-			this.bufferSize = STDBUFFER;
-		}
-		else {
-			this.bufferSize = bufferSize;
-		}
-		this.deconstruct(is);
+		this.deconstruct(socket.getInputStream());
 	}
-
-	/**
-	 * 
-	 * @param folderPath
-	 * @return
-	 */
 	private final boolean makeFolder(String folderPath) {
 		File dir = new File(folderPath);
 		boolean success = false;
@@ -74,231 +53,443 @@ public class TransmissionHandler {
 		}
 		return success;
 	}
+	
+	private final void deconstruct(InputStream is) throws FileNotFoundException, IOException {
+		this.cr = this.CR(is);
+		this.xml = this.XML(is);
 
-	/**
-	 * 
-	 * @param s
-	 * @param vf
-	 * @return
-	 */
-	private final String readUntil(String s, VirtualFile vf) {
-		String temp = "";
-		while (true) {
-			if (temp.contains(s) == true) {
+		if (iHaveFile == true) {
+			while (this.working == true) {
+				this.FILE(is);
+			}
+		}	else {
+			this.accepted = this.ACCEPT(is);
+		}
+	}
+
+	private void moveData(byte[] input, int index, byte[] output) {
+		int iter = 0;
+		for (int i = index; i < input.length; i++) {
+			output[iter] = input[i];
+			iter++;
+		}
+	}
+	private XMLWrapper findXMLlength(byte[] buf) {
+		String delimClafR = "]";
+		String delimComma = ",";
+		String length = "";
+		String anyFiles = "";
+
+		int storedIndex = -1;
+		//int i = 4 should be the  " MXML[ " offset
+		for (int i = 5; i < buf.length; i++) {
+			if (length.contains(delimComma) == true) {
+				storedIndex = i;
 				break;
 			}
-			temp += (char)vf.getData(this.start);
-			this.start++;
+			length += (char)buf[i];
 		}
-		return temp;
-	}
-	
-	/**
-	 * 
-	 * @param len
-	 * @param vf
-	 * @return
-	 */
-	private final StringBuilder readUntil(int len, VirtualFile vf) {
-		StringBuilder sb = new StringBuilder();
-
-		for (int i = 0; i < len; i++) {
-			sb.append((char)vf.getData(this.start));
-			this.start++;
-		}
-		return sb;
-	}
-	
-	/**
-	 * 
-	 * @param len
-	 * @param vf
-	 * @return
-	 */
-	private final byte[] readUntil2(int len, VirtualFile vf) {
-		byte[] buf = new byte[len];
-		for (int i = 0; i < len; i++) {
-			buf[i] = vf.getData(this.start);
-			this.start++;
-		}
-		return buf;
-	}
-
-	/**
-	 * 
-	 * @param vf
-	 * @return
-	 */
-	private final int getCR(VirtualFile vf) {
-		this.start += 5;
-		String temp = readUntil("]", vf);
-		temp = temp.substring(0, temp.length() -1);
-
-		return Integer.parseInt(temp); 
-	}
-	
-	/**
-	 * 
-	 * @param vf
-	 * @return
-	 */
-	private final String getXML(VirtualFile vf) {
-		this.start += 5;
-
-		String temp = this.readUntil("]", vf);
-		temp = temp.substring(0, temp.length() -1);
-		this.XMLlength = Integer.parseInt(temp);
-		this.start += 2;
-
-		StringBuilder xmlData = this.readUntil(this.XMLlength, vf);
-		return xmlData.toString();
-	}
-
-	/**
-	 * 
-	 * @param vf
-	 */
-	private final void getFile(VirtualFile vf) {
-		//We use this check to prevent looping when creating the files
-		if (this.start + 1 != vf.size()) {
-			this.start += 6;
-
-			//Setting File length
-			String temp = this.readUntil(",", vf);
-			temp = temp.substring(0, temp.length() -1);
-			this.FILElength = Integer.parseInt(temp);
-
-			//Setting File name and File path
-			temp = this.readUntil("]", vf);
-			temp = temp.substring(0, temp.length() -1);
-			String path = this.folder.getAbsolutePath() + "\\" + temp;
-			System.out.println("Read: path -- " + path);
-
-			this.start += 2;
-			byte[] buf = this.readUntil2(this.FILElength, vf);
-
-			try {
-				File dst = new File(path);
-				if (dst.exists() == false) {
-					boolean success = dst.createNewFile();
-					if (success == false) {
-						throw new IllegalArgumentException("Could not create File !");
-					}
-				}
-
-				OutputStream os = new FileOutputStream(path);
-				os.write(buf);
-				os.flush();
-				os.close();
-				System.out.println("Done - File: " + dst.getName());
-			}	catch (FileNotFoundException e) {
-				System.err.println("Could not find the File on Server HDD !");
-			}	catch (IOException e) {
-				System.err.println("Could not write data to File on Server HDD !");
-			}	catch (IllegalArgumentException e) {
-				System.err.println(e.getMessage());
+		length = length.substring(0, length.length() -1);
+		
+		//Setting storedIndex to point at the first part of
+		//the name, instead of at a  " , "
+//		storedIndex++;
+		
+		for (int i = storedIndex; i < buf.length; i++) {
+			if (anyFiles.contains(delimClafR) == true) {
+				storedIndex = i;
+				break;
 			}
+			anyFiles += (char)buf[i];
+		}
+		//Subtract 1, since this is the delimiter !
+		anyFiles = anyFiles.substring(0, anyFiles.length() -1);
+		boolean result = (anyFiles.contains("1") == true) ? true : false;
+		
+		//Setting the storedIndex to point at the index of the first XML char
+		storedIndex += 2;
+		
+		System.out.println("StoredIndex: " + storedIndex);
+		System.out.println(Arrays.toString(buf));
+		System.out.println(bytesToString(buf));
+		System.out.println("Remaining data - in bytes: " + (buf.length - storedIndex));
+		return new XMLWrapper(Integer.parseInt(length), storedIndex, (buf.length - storedIndex), result);
+	}
+	private FileWrapper findFilelength(byte[] buf) {
+		String delimComma	= ",";
+		String delimClafL	= "]";
+		String name			= "";
+		String length 		= "";
+
+		int storedIndex = -1;
+		for (int i = 5; i < buf.length; i++) {
+			if (length.contains(delimComma) == true) {
+				storedIndex = i;
+				break;
+			}
+			length += (char)buf[i];
+		}
+		//Subtract 1, since this is the delimiter !
+		length = length.substring(0, length.length() -1);
+
+		//Setting storedIndex to point at the first part of
+		//the name, instead of at a  " , "
+		storedIndex++;
+
+		for (int i = storedIndex; i < buf.length; i++) {
+			if (name.contains(delimClafL)) {
+				storedIndex = i;
+				break;
+			}
+			name += (char)buf[i];
+		}
+		//Subtract 1, since this is the delimiter !
+		name = name.substring(0, name.length() -1);
+		System.out.println("Name: " + name);
+		System.out.println("Length: "+ length);
+		return new FileWrapper(Long.parseLong(length), name, storedIndex, (buf.length - storedIndex));
+	}
+	private String bytesToString(byte[] buf) {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < buf.length; i++) {
+			sb.append((char)buf[i]);
+		}
+		return sb.toString();
+	}
+	private String bytesToString(byte[] buf, int upTo) {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < upTo; i++) {
+			sb.append((char)buf[i]);
+		}
+		return sb.toString();
+	}
+	private String bytesToString(byte[] buf, int from, int upTo) {
+		StringBuilder sb = new StringBuilder();
+		for (int i = from; i < upTo; i++) {
+			sb.append((char)buf[i]);
+		}
+		return sb.toString();
+	}
+
+	private final CRUD CR(InputStream is) throws IOException {
+		//Reading  "TYPE[int]" - the size is 7
+		//The index of the int is 6
+		byte[] buf = new byte[7];
+		//int len = this.reader.read(buf);
+		is = new DataInputStream(is);
+		int len = is.read(buf);
+
+		//Converting the byte data to int
+		//Maybe find a better way that is less crude...
+		String temp = "";
+		temp += (char)buf[5];	//Maybe it is buf[5] and not buf[6]
+		
+		switch(Integer.parseInt(temp)) {
+		case 1:
+			return CRUD.COMMIT;
+		case 2:
+			return CRUD.REQUEST;
+		case 3:
+			return CRUD.PING;
+		default:
+			return CRUD.ERROR;
+		}
+	}
+	private final String XML(InputStream is) throws IOException {
+		//Reading "MXML[length,int]" - the size is minimum: 9  &  max: 18
+		//The maxmimum cells/spaces an int can be is 10
+		byte[] buf = new byte[18];
+		int lenTemp = is.read(buf);
+		XMLWrapper wrap = this.findXMLlength(buf);
+		StringBuilder sb = new StringBuilder();
+		int bufCalc = -1;
+
+		if (wrap.getRemaining() == 0) {
+			//Used the entire buffer, make new buffer and 
+			//do a standard read + buffer
+			bufCalc = wrap.getLength();
+			while (bufCalc > 0) {
+				if (bufCalc > this.bufferSize) {
+					buf = new byte[this.bufferSize];
+					int len = is.read(buf);
+					sb.append(this.bytesToString(buf));
+					bufCalc -= len;
+				}
+				else {
+					buf = new byte[bufCalc];
+					int len = is.read(buf);
+					sb.append(this.bytesToString(buf));
+					bufCalc = 0;
+				}
+			}
+			//Dump the last char... ( " )
+			int dump = is.read();
+		}
+		else if ((wrap.getRemaining() - 2) == 0) {
+			//Just in case that there is 2 remaining chars ( =" )
+			//We don't want to do a lot of work just for these 2 chars
+			int dump = is.read();
+			dump = is.read();
+
+			bufCalc = wrap.getLength();
+			while (bufCalc > 0) {
+				if (bufCalc > this.bufferSize) {
+					buf = new byte[this.bufferSize];
+					int len = is.read(buf);
+					sb.append(this.bytesToString(buf));
+					bufCalc -= len;
+				}
+				else {
+					buf = new byte[bufCalc];
+					int len = is.read(buf);
+					sb.append(this.bytesToString(buf));
+					bufCalc = 0;
+				}
+			}
+			//Dump the last char... ( " )
+			dump = is.read();
 		}
 		else {
-			//We increment start  so we don't loop !
-			this.start++;
-			System.out.println("All Files have been read !");
+			//We have remaining data and we need do to some
+			//black magic to get this to work.
+			byte[] overflow = new byte[wrap.getRemaining() - 2];
+			wrap.increaseStoredIndex(2);
+			this.moveData(buf, wrap.getStoredIndex(), overflow);
+			sb.append(this.bytesToString(overflow));
+
+			if (wrap.getLength() < this.bufferSize) {
+				//The xml is small enough to handle easily
+				buf = null;
+				buf = new byte[wrap.getLength() + 1];
+
+				//Reading the data and appending it to the current data
+				lenTemp = is.read(buf);
+				sb.append(this.bytesToString(buf, buf.length - 1));
+				wrap.increaseStoredIndex(wrap.getLength() + 1);
+			}	else {
+				//The xml is very large and we will take it
+				//in multiple iterations
+				buf = null;
+				bufCalc = wrap.getLength();
+
+				while (bufCalc > 0) {
+					if (bufCalc > this.bufferSize) {
+						buf = new byte[this.bufferSize];
+						int len = is.read(buf);
+						sb.append(this.bytesToString(buf));
+						bufCalc -= len;
+					}
+					else {
+						buf = new byte[bufCalc];
+						int len = is.read(buf);
+						sb.append(this.bytesToString(buf));
+						bufCalc = 0;
+					}
+				}
+				//Dump the last char...  ( " )
+				int dump = is.read();
+			}
 		}
+		this.iHaveFile = wrap.areThereFiles();
+		System.out.println(sb.toString());
+		return sb.toString();
 	}
-	/*
-	 * Make a readUntil(int upToSomeNumber, String upToSomeChar)
-	 * This method should be able to find the number of bytes
-	 * more precisely.
-	 * 
-	 * Also re-make the format of the TransmissionPackage
-	 * Format: TYPE[int]MXML[length]="---data---"FILE[length,name.extension]="---data---"FILE...
-	 * 		   off: 5  off 6     off 3          off 6                     off 3         off 6 ...
-	 * This format should make it more easy to keep track
-	 * of the offset of the different things in the String(InputStream)
-	 * 
-	 *  Maybe the entire Virtual File class should
-	 *  somehow be replace by a StringBuilder ?
-	 *  Since this would reduce the amount of memory required
-	 *  by the Server.
-	 *  
-	 *  Also fix the buffer problem, make it more dynamic
-	 *  like done in the Virtual File class's read method !
-	 *  This is to optimize transfer-rates, since the current
-	 *  method too often gives a "too low" buffer - aka
-	 *  buffer size 4096 bytes - transfer-rate 386 bytes.
-	 *  Example of buffer to implement:
-	 *  Data: 4096 bytes
-	 *  Buffer: 1500 bytes
-	 *  Read 1500 bytes (1500 bytes read)
-	 *  Read 1500 bytes	(3000 bytes read)
-	 *  Read 1096 bytes	(4096 bytes read)
-	 *  
-	 */
+	private final void FILE(InputStream is) throws FileNotFoundException, IOException {
+		//Reading "FILE[length,name.extension]" - the size is minimum: 9  &  max: 283
+		//The maxmimum cells/spaces a long can be is 19
+		//The maxmimum cells/spaces a File name can be is 256 - so sayeth I !
+		byte[] buf = new byte[283];
+		int lenTemp = is.read(buf);
+		FileWrapper wrap = this.findFilelength(buf);
 
-	/**
-	 * 
-	 * @param is
-	 * @throws FileNotFoundException
-	 */
-	private final void deconstruct(InputStream is) throws FileNotFoundException {
-		System.out.println("Starting to deconstruct !");
-		VirtualFile vf = new VirtualFile(this.bufferSize);
-		vf.addData(is);
-		this.cr = this.getCR(vf);
-		this.xml = this.getXML(vf);
-		while (this.start != vf.size()) {
-			this.getFile(vf);
-			this.FileCount++;
+		File dst = new File(this.folder.getAbsolutePath() + File.pathSeparator + wrap.getName());
+		if (dst.exists() == false) {
+			boolean success = dst.createNewFile();
+			if (success == false) {
+				throw new IllegalArgumentException("Could not create File !");
+			}
 		}
-		System.out.println("Deconstrcution complete !");
+		OutputStream os = new FileOutputStream(this.folder.getAbsolutePath() + File.pathSeparator + wrap.getName());
+
+		StringBuilder sb = new StringBuilder();
+		long bufCalc = -1;
+		int dump = -1;
+		if (wrap.getRemaining() == 0) {
+			//Used the entire buffer, make new buffer and 
+			//do a standard read + buffer
+			bufCalc = wrap.getLength();
+			while (bufCalc > 0) {
+				if (bufCalc > Configuration.BUFFERSIZE) {
+					buf = new byte[Configuration.BUFFERSIZE];
+					int len = is.read(buf);
+					os.write(buf);
+					bufCalc -= len;
+				}
+				else {
+					buf = new byte[(int)bufCalc];
+					int len = is.read(buf);
+					os.write(buf);
+					bufCalc = 0;
+				}
+			}
+			//Dump the last char... ( " )
+			dump = is.read();
+		}
+		else if ((wrap.getRemaining() - 2) == 0) {
+			//Just in case that there is 2 remaining chars ( =" )
+			//We don't want to do a lot of work just for these 2 chars
+			dump = is.read();
+			dump = is.read();
+
+			bufCalc = wrap.getLength();
+			while (bufCalc > 0) {
+				if (bufCalc > Configuration.BUFFERSIZE) {
+					buf = new byte[Configuration.BUFFERSIZE];
+					int len = is.read(buf);
+					os.write(buf);
+					bufCalc -= len;
+				}
+				else {
+					buf = new byte[(int)bufCalc];
+					int len = is.read(buf);
+					os.write(buf);
+					bufCalc = 0;
+				}
+			}
+			//Dump the last char... ( " )
+			dump = is.read();
+		}
+		else {
+			//We have remaining data and we need do to some
+			//black magic to get this to work.
+			byte[] overflow = new byte[wrap.getRemaining() - 2];
+			wrap.increaseStoredIndex(2);
+			this.moveData(buf, wrap.getStoredIndex(), overflow);
+			os.write(overflow);
+
+			if (wrap.getLength() < this.bufferSize) {
+				//The xml is small enough to handle easily
+				buf = null;
+				buf = new byte[(int)wrap.getLength() + 1];
+
+				//Reading the data and appending it to the current data
+				lenTemp = is.read(buf);
+				os.write(buf, 0, buf.length -1);
+				wrap.increaseStoredIndex((int)wrap.getLength() + 1);
+			}	else {
+				//The xml is very large and we will take it
+				//in multiple iterations
+				buf = null;
+				bufCalc = wrap.getLength();
+
+				while (bufCalc > 0) {
+					if (bufCalc > this.bufferSize) {
+						buf = new byte[this.bufferSize];
+						int len = is.read(buf);
+						os.write(buf);
+						bufCalc -= len;
+					}
+					else {
+						buf = new byte[(int)bufCalc];
+						int len = is.read(buf);
+						os.write(buf);
+						bufCalc = 0;
+					}
+				}
+				//Dump the last char...  ( " )
+				dump = is.read();
+			}
+		}
+
+		//If the InputStream is not yet empty
+		//Then true, because there is still data to process
+		//Else false, becuase there is not more data to process
+		this.working = (dump > 0) ? true : false;
+
+		this.files.add(dst);
+		os.flush();
+		os.close();
+	}
+	public boolean ACCEPT(InputStream is) throws IOException {
+		//Reading "[ACCEPT] - the size is 7
+		//The index of ACCEPT is n+1 to n-1
+		byte[] buf = new byte[7];
+		int len = is.read(buf);
+		
+		String temp = this.bytesToString(buf, 1, buf.length);
+		return (temp.equals("ACCEPT") == true) ? true : false;
 	}
 
-	/**
-	 * 
-	 */
-	public final void cleanup() {
-		this.xml = null;
-		this.folder = null;
-
+	public CRUD CR() {
+		return this.cr;
 	}
-
-	/**
-	 * 
-	 * @return
-	 */
 	public String XML() {
 		return this.xml;
 	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public int CR() {
-		return this.cr;
+	public List<File> FILES() {
+		return this.files;
 	}
-	
-	/**
-	 * 
-	 * @return
-	 */
 	public boolean anyFiles() {
-		return (this.FileCount == 0) ? false : true;
+		return this.files.isEmpty();
 	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public int FileCount() {
-		return this.FileCount;
+
+	class XMLWrapper {
+		private int _length;
+		private int _storedIndex;
+		private int _remaining;
+		private boolean _anyFiles;
+
+		XMLWrapper(int length, int storedIndex, int remaining, boolean anyFiles) {
+			this._length = length;
+			this._storedIndex = storedIndex;
+			this._remaining = remaining;
+			this._anyFiles = anyFiles;
+		}
+
+		public int getLength() {
+			return this._length;
+		}
+		public int getStoredIndex() {
+			return this._storedIndex;
+		}
+		public int getRemaining() {
+			return this._remaining;
+		}
+		public boolean areThereFiles() {
+			return this._anyFiles;
+		}
+		public void increaseStoredIndex(int increase) {
+			this._storedIndex += increase;
+		}
 	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public File getFolder() {
-		return this.folder;
+	class FileWrapper {
+		private long _length;
+		private int  _storedIndex;
+		private int  _remaining;
+		private String _name;
+
+		FileWrapper(long length, String name, int storedIndex, int remaining) {
+			this._length = length;
+			this._name = name;
+			this._storedIndex = storedIndex;
+			this._remaining = remaining;
+		}
+
+		public long getLength() {
+			return this._length;
+		}
+		public String getName() {
+			return this._name;
+		}
+		public int getStoredIndex() {
+			return this._storedIndex;
+		}
+		public int getRemaining() {
+			return this._remaining;
+		}
+		public void increaseStoredIndex(int increase) {
+			this._remaining += increase;
+		}
 	}
+
 }
