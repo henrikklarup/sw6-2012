@@ -163,11 +163,13 @@ public class Profile {
 		String localOutput = _output;
 		localOutput = localOutput.replace("{0}", String.valueOf(getId()));
 		localOutput = localOutput.replace("{1}", getFirstname());
-		localOutput = localOutput.replace("{2}", getMiddlename());
+		if (getMiddlename() != null) {
+			localOutput = localOutput.replace("{2}", getMiddlename());
+		}
 		localOutput = localOutput.replace("{3}", getSurname());
 		localOutput = localOutput.replace("{4}", String.valueOf(getPRole()));
 		localOutput = localOutput.replace("{5}", String.valueOf(getPhone()));
-		if(getPicture() != null) {
+		if (getPicture() != null) {
 			localOutput = localOutput.replace("{6}", getPicture());
 		}
 //		localOutput = localOutput.replace("{7}", "Setting(Static Setting text)");
