@@ -2,13 +2,16 @@ package dk.aau.cs.giraf.parrot;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import parrot.Package.R;
+import android.R.integer;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.ListView;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.App;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
@@ -99,7 +102,7 @@ public class PARROTActivity extends Activity {
 		return parrotUser;
 	}
 
-	public PARROTProfile loadProfile()
+	public PARROTProfile loadProfile()	//TODO we might want to update the settings reader to this format : category +number | cat_property | value
 	{
 		//This part of the code is supposed to get a profile from the launcher, and read it from the admin.
 		Bundle extras = getIntent().getExtras();
@@ -113,10 +116,7 @@ public class PARROTActivity extends Activity {
 			Pictogram pic = new Pictogram(prof.getFirstname(), prof.getPicture(), null, null);
 			PARROTProfile parrotUser = new PARROTProfile(prof.getFirstname(), pic);
 
-			//TODO read categories from settings
 			Setting<String, String, String> specialSettings = app.getSettings();//This object might be null //FIXME handle eventual null pointer exception
-
-			//TODO load medias into pictogram categories using settings.
 
 			//Add all of the categories to the profile
 			int number = 0;
@@ -129,7 +129,9 @@ public class PARROTActivity extends Activity {
 				{
 					String colourString = specialSettings.get(prof.getFirstname()).get("category"+number+"colour");
 					int col=Integer.valueOf(colourString);
-					parrotUser.addCategory(loadCategory(categoryString,col,help));
+					String iconString = specialSettings.get(prof.getFirstname()).get("category"+number+"icon");
+					parrotUser.addCategory(loadCategory(categoryString,col,iconString,help));
+					number++;
 				}
 				else
 				{
@@ -150,10 +152,11 @@ public class PARROTActivity extends Activity {
 
 	}
 
-	public Category loadCategory(String pictureIDs,int colour,Helper help)
+	public Category loadCategory(String pictureIDs,int colour,String iconString, Helper help)
 	{
-		Category cat = new Category(colour,null);//FIXME
-		List<Integer> listIDs = getIDsFromString(pictureIDs);
+		int iconId = Integer.valueOf(iconString);
+		Category cat = new Category(colour,loadPictogram(iconId, help));
+		ArrayList<Integer> listIDs = getIDsFromString(pictureIDs);
 		for(int i = 0; i<listIDs.size();i++)
 		{
 			cat.addPictogram(loadPictogram(listIDs.get(i),help));
@@ -165,7 +168,7 @@ public class PARROTActivity extends Activity {
 	{
 		Pictogram pic = null;
 		Media media=help.mediaHelper.getSingleMediaById(id); //This is the image media //TODO check type
-		List<Media> subMedias =		help.mediaHelper.getSubMediaByMedia(media); //TODO find out if this is ok, or if it needs to be an ArrayList
+		List<Media> subMedias =	help.mediaHelper.getSubMediaByMedia(media); //TODO find out if this is ok, or if it needs to be an ArrayList
 		Media investigatedMedia;
 		String soundPath = null;
 		String wordPath = null;
@@ -189,11 +192,11 @@ public class PARROTActivity extends Activity {
 	}
 
 	//This function takes a string consisting of IDs, and returns a list of integer IDs instead
-	public List<Integer> getIDsFromString(String IDstring)
+	public ArrayList<Integer> getIDsFromString(String IDstring)
 	{
-		List<Integer> listOfID = null;
+		ArrayList<Integer> listOfID = new ArrayList<Integer>();
 
-		if(IDstring !=null || IDstring.charAt(0)!='$'||IDstring.charAt(0)!='#')
+		if(IDstring !=null && IDstring.charAt(0)!='$' && IDstring.charAt(0)!='#')
 		{
 			String temp = String.valueOf(IDstring.charAt(0));
 			int w = 0;
@@ -204,13 +207,16 @@ public class PARROTActivity extends Activity {
 				{
 					temp = temp+ IDstring.charAt(w);
 				}
+				else if(IDstring.charAt(w)=='$')
+				{
+					break;
+				}
 				else
 				{
 					listOfID.add(Integer.valueOf(temp));
 					w++;
 					temp = String.valueOf(IDstring.charAt(w));
 				}
-
 			}
 		}
 
