@@ -109,22 +109,21 @@ public class HomeActivity extends Activity {
 		findViewById(R.id.HomeBarLayout).setOnTouchListener(new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent e) {
-				int offset = 0;
 				int margin = 0;
+				
 				boolean result = true;
 				
 				switch(e.getActionMasked()){
 				case MotionEvent.ACTION_DOWN:
-					//offset = (int) e.
-					mHomeBarParams = (LinearLayout.LayoutParams) v.getLayoutParams();
 					Log.i("thomas", "START DRAG");
 					result = true;
 					break;
 				case MotionEvent.ACTION_MOVE:
-					margin = (int) e.getRawX();
+					mHomeBarParams = (LinearLayout.LayoutParams) v.getLayoutParams();
+					margin = mHomeBarParams.leftMargin + (int) e.getX();
 					mHomeBarParams.setMargins(margin, 0, 0, 0);
 					v.setLayoutParams(mHomeBarParams);
-					Log.i("thomas", offset+"");
+					Log.i("thomas", margin+"");
 					result = true;
 					break;
 				case MotionEvent.ACTION_UP:
