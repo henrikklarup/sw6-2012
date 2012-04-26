@@ -200,9 +200,9 @@ public class Helper {
 		
 		
 		/*Media*/
-		Media media1 = new Media("Media1", "/mnt/sdcard/Pictures/giraf/media1.jpg", false, "Picture", Child1Loaded.getId());
-		Media media2 = new Media("Media2", "/mnt/sdcard/Pictures/giraf/media2.jpg", true, "Picture", Child1Loaded.getId());
-		Media media3 = new Media("Media3", "/mnt/sdcard/Pictures/giraf/media3.jpg", false, "Picture", Child2Loaded.getId());
+		Media media1 = new Media("Media1", "/mnt/sdcard/Pictures/giraf/private/media1.jpg", false, "Picture", Child1Loaded.getId());
+		Media media2 = new Media("Media2", "/mnt/sdcard/Pictures/giraf/public/media2.jpg", true, "Picture", Child1Loaded.getId());
+		Media media3 = new Media("Media3", "/mnt/sdcard/Pictures/giraf/private/media3.jpg", false, "Picture", Child2Loaded.getId());
 		
 		long media1Id = mediaHelper.insertMedia(media1);
 		long media2Id = mediaHelper.insertMedia(media2);
@@ -225,27 +225,41 @@ public class Helper {
 		Tag tag2 = new Tag("Dog2");
 		Tag tag3 = new Tag("Dog3");
 		
-		tagsHelper.insertTag(tag1);
-		tagsHelper.insertTag(tag2);
-		tagsHelper.insertTag(tag3);
+		long tag1Id = tagsHelper.insertTag(tag1);
+		long tag2Id = tagsHelper.insertTag(tag2);
+		long tag3Id = tagsHelper.insertTag(tag3);
+		
+		Tag tag1Loaded = tagsHelper.getTagById(tag1Id);
+		Tag tag2Loaded = tagsHelper.getTagById(tag2Id);
+		Tag tag3Loaded = tagsHelper.getTagById(tag3Id);
 		
 		List<Tag> tags1 = new ArrayList<Tag>();
-		tags1.add(tag1);
-		tags1.add(tag2);
+		tags1.add(tag1Loaded);
+		tags1.add(tag2Loaded);
 		List<Tag> tags2 = new ArrayList<Tag>();
-		tags2.add(tag3);
+		tags2.add(tag3Loaded);
+		tags2.add(tag2Loaded);
 		
 		
 		/*Attach tag to media*/
-//		mediaHelper.addTagsToMedia(tags1, media1Loaded);
-//		mediaHelper.addTagsToMedia(tags2, media2Loaded);
-//		mediaHelper.addTagsToMedia(tags1, media3Loaded);
+		mediaHelper.addTagsToMedia(tags1, media1Loaded);
+		mediaHelper.addTagsToMedia(tags2, media2Loaded);
+		mediaHelper.addTagsToMedia(tags1, media3Loaded);
 		
 		/*Apps*/
-		App app1 = new App("App1", "1", "/mnt/sdcard/?", "FakePackage", "FakeActivity");
-		App app2 = new App("App2", "1", "/mnt/sdcard/?", "FakePackage", "FakeActivity");
-		App app3 = new App("App3", "1", "/mnt/sdcard/?", "FakePackage", "FakeActivity");
-		App app4 = new App("App4", "1", "/mnt/sdcard/?", "FakePackage", "FakeActivity");
+		long appId;
+		List<App> apps = appsHelper.getApps();
+		
+		if (!apps.isEmpty()) {
+			appId = apps.get(apps.size() - 1).getId();
+		} else {
+			appId = 0;
+		}
+		
+		App app1 = new App("App1", "1", "/mnt/sdcard/?", Long.toString(appId + 1), "FakeActivity");
+		App app2 = new App("App2", "1", "/mnt/sdcard/?", Long.toString(appId + 2), "FakeActivity");
+		App app3 = new App("App3", "1", "/mnt/sdcard/?", Long.toString(appId + 3), "FakeActivity");
+		App app4 = new App("App4", "1", "/mnt/sdcard/?", Long.toString(appId + 4), "FakeActivity");
 		
 		long app1Id = appsHelper.insertApp(app1);
 		long app2Id = appsHelper.insertApp(app2);
