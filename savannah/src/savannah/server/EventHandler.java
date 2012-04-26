@@ -35,10 +35,12 @@ public class EventHandler implements Runnable {
 				if (e.getClass().equals(savannah.server.CommitEvent.class))
 				{
 					cHandler.HandleIt((CommitEvent)e);
+					((CommitEvent)e).getCom().lockDisengage();
 				}
 				else if(e.getClass().equals(savannah.server.RequestEvent.class))
 				{
 					rHandler.HandleIt((RequestEvent)e);
+					((RequestEvent)e).getCom().lockDisengage();
 				}
 			}
 		}	

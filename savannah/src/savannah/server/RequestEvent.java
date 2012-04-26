@@ -4,14 +4,23 @@ import java.net.Socket;
 
 import org.jdom.*;
 
+import savannah.io.CommunicationThread;
+
 public class RequestEvent implements Event {
 	
 	private String event;
 	private Socket socket;
-	public RequestEvent(String s,Socket sock)
+	public CommunicationThread com1 = null;
+	public RequestEvent(String s,Socket sock,CommunicationThread com)
 	{
 		this.event = s;
 		this.socket = sock;
+		if(!(com.equals(null)))
+		{
+			this.com1 = com;
+			com1.lockEngage();
+		}
+		
 	}
 	
 	public String getEventContent()
@@ -28,5 +37,11 @@ public class RequestEvent implements Event {
 	public Event getEventType() {
 		return this;
 	}
+
+	@Override
+	public CommunicationThread getCom() {
+		return com1;
+	}
+	
 
 }
