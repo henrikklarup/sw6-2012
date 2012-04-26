@@ -20,7 +20,7 @@ public class GAppDragger implements OnDragListener {
 			//dehighlight
 			break;
 		case DragEvent.ACTION_DROP:
-			Log.i("thomas", v.getClass()+"");
+			AppAdapter.setAppBackground(v, (int) Integer.parseInt(e.getClipData().getItemAt(0).getText().toString()));
 			break;
 		case DragEvent.ACTION_DRAG_ENDED:
 			//dehighligth
