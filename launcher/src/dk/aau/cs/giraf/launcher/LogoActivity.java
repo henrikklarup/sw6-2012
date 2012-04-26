@@ -1,17 +1,13 @@
 package dk.aau.cs.giraf.launcher;
 
-import java.util.Date;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import dk.aau.cs.giraf.launcher.R;
 import dk.aau.cs.giraf.oasis.lib.Helper;
-import dk.aau.cs.giraf.oasis.lib.models.App;
 
 public class LogoActivity extends Activity {
 
@@ -25,7 +21,6 @@ public class LogoActivity extends Activity {
 	    setContentView(R.layout.logo);
 
 	    mContext = this.getApplicationContext();
-	    final LogoActivity sPlashScreen = this;
 	    
 	    Helper helper = new Helper(this);
 	    int size = helper.profilesHelper.getProfiles().size();
