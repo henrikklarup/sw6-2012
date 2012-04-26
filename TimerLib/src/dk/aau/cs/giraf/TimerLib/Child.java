@@ -26,7 +26,7 @@ public class Child implements Comparable<Child>{
 		this._subProfileId = id;
 	}
 	
-	private long getNewId(){
+	long getNewId(){
 		this._subProfileId++;
 		return this._subProfileId;
 	}
