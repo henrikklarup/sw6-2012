@@ -109,12 +109,15 @@ public class Child implements Comparable<Child>{
 		//save profile on child
 		//Wait for admin
 			//Add to child list
-			p.setDB_id(getNewId());
+			if(p.getDB_id() <= -1){
+				p.setDB_id(getNewId());
+			}
 			this.SubProfiles().add(p);
 			Guardian.saveChild(this, p);
-		
 		return p;
 	}
+	
+	
 	 private boolean equals(Child o) {
 	        if (!(o instanceof Child))
 	            return false;
