@@ -185,7 +185,7 @@ public class TransmissionHandler {
 		//Converting the byte data to int
 		//Maybe find a better way that is less crude...
 		String temp = "";
-		temp += (char)buf[5];	//Maybe it is buf[5] and not buf[6]
+		temp += (char)buf[buf.length -1];	//Maybe it is buf[5] and not buf[6]
 
 		switch(Integer.parseInt(temp)) {
 		case 1:
@@ -254,12 +254,8 @@ public class TransmissionHandler {
 					bufCalc = 0;
 				}
 			}
-			//Dumping the unneeded package data
-			//			int dump = is.read();
-			System.out.println("ELSE - sb: " + sb.toString());
 		}
 		this.iHaveFile = wrap.areThereFiles();
-		System.out.println("StringBuilder: " + sb.toString());
 		return sb.toString();
 	}
 	private final void FILE(InputStream is) throws FileNotFoundException, IOException {
@@ -382,19 +378,23 @@ public class TransmissionHandler {
 		//Reading "[ACCEPT] - the size is 7
 		//The index of ACCEPT is n+1 to n-1
 		StringBuilder sb = new StringBuilder();
+		System.out.println("----- ACCEPT METHOD -----");
 		if (aw != null) {
 			sb.append(this.bytesToString(aw.getData()));
 		
 		byte[] buf = new byte[8];
 		int len = is.read(buf);
+		System.out.println("buf: " + this.bytesToString(buf));
 		sb.append(this.bytesToString(buf, 0, buf.length));
 		}	else if (aw == null) {
 		
 			int len = is.read();	//dump
 			byte[] buf = new byte[8];
 			len = is.read(buf);
+			System.out.println("buf: " + this.bytesToString(buf));
 			sb.append(this.bytesToString(buf, 0, buf.length));
 		}
+		System.out.println("sb: " + sb.toString());
 		return (sb.toString().equals("ACCEPT") == true) ? true : false;
 	}
 
