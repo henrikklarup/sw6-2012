@@ -123,7 +123,9 @@ public class SelectProfileToDelete extends HttpServlet {
 					}
 					else
 					{
+						//sets the attribute PROFILEIDTODELETE that is used in DeleteProfileNotLoggedin to delete on the ID
 						session.setAttribute("PROFILEIDTODELETE", loginID);
+						//redirects to the DeleteProfilNotLoggedin page
 						response.sendRedirect("DeleteProfileNotLoggedin");
 					}
 					

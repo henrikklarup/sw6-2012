@@ -40,10 +40,12 @@ public class DeleteProfileNotLoggedin extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		ArrayList<Profile> profilelist = new ArrayList<Profile>();
+		//this line will get the PROFILEIDTODELETE that was set in SelectProfileToDelete and puts it in userID for use in the delete query
 		String userID = (String) session.getAttribute("PROFILEIDTODELETE");
+		//session.removeAttribute("PROFILEIDTODELETE");
 		//out.println(userID);
 		
-		
+		//establishing a connection
 		Connection con = null;  
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -53,8 +55,9 @@ public class DeleteProfileNotLoggedin extends HttpServlet {
 					("jdbc:mysql://172.25.11.65:3306/04","eder","123456");
 
 			stmt = con.createStatement();
-			rs = stmt.executeQuery("select * from Profile where idProfile = 3;");
-			// displaying records
+			rs = stmt.executeQuery("select * from Profile where idProfile = "+userID+";");
+			// Creates profiles, retrieves the fields from the database and put them into a list
+			//Not all fields are used to display the profile so maybe not necessary to include all fields
 			while(rs.next()){
 				int idProfile = rs.getInt("idProfile");
 				String firstname = rs.getString("firstname");
@@ -100,30 +103,55 @@ public class DeleteProfileNotLoggedin extends HttpServlet {
 		out.println("<html>" +
 					"<head>" +
 					"<title>Savannah 1.0 - Slet profil</title>" +
+					//implements stylesheet
 					"<link rel='stylesheet' type='text/css' href='CSS/SavannahStyle.css' />" +
 					"<script src=\"javascript/popup.js\"></script>" +
 					"</head>" +
 					"<body onLoad=\"getFocusQuick();\">" +
 					"<div id=\"mainBackground\">" +
 					"<script type='text/javascript'>"+
-						
+						//used to delete profiles from the database
 						"function deleteContent() {" +
 						"document.DasForm.submit();" +
 						"}" +
+						"function submitform()"+
+						"{"+
+						"document.DasForm.submit();"+
+						"}"+
+						"function ChangeColor(tableRow, highLight)"+
+						"{"+
+						"if (highLight)"+
+						"{"+
+						"tableRow.style.backgroundColor = '#dcfac9';"+
+						"}"+
+						"else"+
+						"{"+
+						"tableRow.style.backgroundColor = '#00CCFA';"+
+						"}"+
+						"}"+
+						"function setID(id)"+
+						"{"+
+						"document.DasForm.myId.value = id;"+
+						"}"+
 						"</script>");
 				out.println("<body>");
-				out.println("Er du sikker på at du vil slette:");
+				out.println("<center><h2>Er du sikker på at du vil slette: </h2>");
+				out.println("<br>");
+				out.println("<hr>");
 				out.println("<form method='POST' name='DasForm' action='DeleteProfileNotLoggedin'>");
 				out.println("<table borders='0'>");
 				out.println("<tr>");
+				// The list is unnecessary because it only contains 1 element
+				//FIXME
 				for (Profile p : profilelist){
 				
-					//out.println("<td onmouseover=\"ChangeColor(this, true);\" onmouseout=\"ChangeColor(this, false);\"" + 
-					out.println("onclick=\"setID('"+p.getID()+"'); submitform();\">");
+					out.println("<tr onmouseover=\"ChangeColor(this, true);\" onmouseout=\"ChangeColor(this, false);\"" + 
+					"onclick=\"setID('"+p.getID()+"'); submitform();\">");
 					out.println("<td>" + p.getID() + "</td><td>"+p.getName()+"</td>");
 					out.println("</tr>");
 				}
-				out.println("<tr><td></td><td><input type='button' onClick=\"deleteContent();\" value='Slet'/><input type='button' onClick=\"\" value='Fortryd'/></tr>");
+				//creates two buttons, one to delete that utilizes deleteContent() and one that takes you back to the selection screen
+				out.println("<tr><td></td><td><input type='button' onClick=\"deleteContent();\" value='Slet'/><input type='button' onClick=\"history.go(-1)\" value='Fortryd'/></tr>");
 				out.println("</table>");
 				out.println("<hr>");
 				out.println("</form>");
@@ -143,68 +171,28 @@ public class DeleteProfileNotLoggedin extends HttpServlet {
 		String userID = (String) session.getAttribute("PROFILEIDTODELETE");
 		//out.println(userID);
 		
-		/*Connection con = null;  
-		Statement stmt = null;
-		ResultSet rs = null;
-		try
-		{
-			Class.forName("com.mysql.jdbc.Driver");
-			con =DriverManager.getConnection 
-					("jdbc:mysql://172.25.11.65:3306/04","eder","123456");
-
-			stmt = con.createStatement();
-			rs = stmt.executeQuery("delete from AuthUsers where idUser = 3;");
-			
-		}
-			catch (SQLException e) {
-				throw new ServletException("Servlet Could not display records.", e);
-			} 	catch (ClassNotFoundException e) {
-				throw new ServletException("JDBC Driver not found.", e);
-			} finally 
-			{
-				try 
-				{
-					if(rs != null) 
-					{
-						rs.close();
-						rs = null;
-					}
-					if(stmt != null) 
-					{
-						stmt.close();
-						stmt = null;
-					}
-					if(con != null) 
-					{
-						con.close();
-						con = null;
-					}
-				} 
-				catch (SQLException e) 
-				{
-
-				}
-			}
-		//out.println("Hello der sker altså noget");*/
-		
+		//creating a connection
 		Connection con;
 		try{
 			Class.forName("org.gjt.mm.mysql.Driver");
+			//connects to our server with user: eder and password: 123456
 			con = DriverManager.getConnection("jdbc:mysql://172.25.11.65:3306/04","eder","123456");
+			//This line executes the query to delete from Authusers table where idUser matches the userID that we get from the selected profile
 			PreparedStatement ps = (PreparedStatement) con.prepareStatement("delete from AuthUsers where idUser = " + userID +";");
-			//this if-statement is not working properly 
 			int i = ps.executeUpdate();
+			//this if-statement is not working properly 
 			if (i == 0){
 				out.println(userID + " has been deleted");
 				
 			}
 			else{
 				//out.println(userID + " has been deleted");
-				response.sendRedirect("SelectProfileToDelete");
+				//response.sendRedirect("SelectProfileToDelete");
+				out.println(i);
 			}
 		}
 		catch(Exception e){
 			out.println("The execution is " + e);
 		}
-		}
+	}
 }
