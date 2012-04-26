@@ -43,14 +43,14 @@ public class CommunicationThread extends Thread {
 			if (handle.CR() == CRUD.COMMIT) {
 				DOMinator domI = new DOMinator();
 				IOHandler.getInstance().displayMessage("CommitEvent created by: " + this.socket);
-				CommitEvent comEvt = new CommitEvent(domI.Dominate(handle.XML()), this.socket, this);
+				CommitEvent comEvt = new CommitEvent(domI.Dominate(handle.XML()), this.socket);
 				EventQueue.getInstance().add(comEvt);
 				IOHandler.getInstance().logIt(true);
 			}
 			//RequestEvent
 			else if (handle.CR() == CRUD.REQUEST) {
 				IOHandler.getInstance().displayMessage("RequestEvent created by: " + this.socket);
-				RequestEvent reqEvt = new RequestEvent(handle.XML(), this.socket, this);
+				RequestEvent reqEvt = new RequestEvent(handle.XML(), this.socket);
 				EventQueue.getInstance().add(reqEvt);
 				IOHandler.getInstance().respond(this.socket, CRUD.REQUEST, "I so hope that this is going to work !!!");
 				IOHandler.getInstance().logIt(true);
