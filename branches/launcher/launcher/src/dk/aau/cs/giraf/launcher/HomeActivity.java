@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import dk.aau.cs.giraf.gui.GColorAdapter;
 import dk.aau.cs.giraf.gui.GWidgetCalendar;
 import dk.aau.cs.giraf.gui.GWidgetConnectivity;
 import dk.aau.cs.giraf.gui.GWidgetLogout;
@@ -18,6 +19,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
+import android.graphics.Canvas;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
@@ -55,7 +57,9 @@ public class HomeActivity extends Activity {
 	private GWidgetCalendar mCalendarWidget;
 	private GWidgetConnectivity mConnectivityWidget;
 	private GWidgetLogout mLogoutWidget;
-	private LinearLayout.LayoutParams mHomeBarParams;
+	private RelativeLayout.LayoutParams mHomeBarParams;
+	private RelativeLayout mHomeDrawer;
+	private final int DRAWER_WIDTH = 400;
 	
 	private int mLandscapeBarWidth;
 	
@@ -93,6 +97,9 @@ public class HomeActivity extends Activity {
 		mWidgetTimer.addWidget(mCalendarWidget);
 		mWidgetTimer.addWidget(mConnectivityWidget);
 		
+		mHomeDrawer = (RelativeLayout) findViewById(R.id.HomeDrawer);
+		
+		
 		mLogoutWidget.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				//startActivity(Tools.logOutIntent(mContext));
@@ -105,6 +112,10 @@ public class HomeActivity extends Activity {
 				g.show();
 			}
 		});
+		
+		View main = findViewById(R.id.HomeWrapperLayout);
+		
+		main.layout(-600, 0, main.getWidth(), main.getHeight());
 		
 		findViewById(R.id.HomeBarLayout).setOnTouchListener(new View.OnTouchListener() {
 			int offset = 0;
@@ -121,13 +132,27 @@ public class HomeActivity extends Activity {
 					result = true;
 					break;
 				case MotionEvent.ACTION_MOVE:
-					mHomeBarParams = (LinearLayout.LayoutParams) v.getLayoutParams();
+					
+					mHomeBarParams = (RelativeLayout.LayoutParams) v.getLayoutParams();
+					
 					margin = mHomeBarParams.leftMargin + ((int) e.getX() - offset);
-
+					
+					if(margin < 0){
+						margin = 0;
+					} else if(margin > DRAWER_WIDTH){
+						margin = DRAWER_WIDTH;
+					}
 					
 					mHomeBarParams.setMargins(margin, 0, 0, 0);
 					v.setLayoutParams(mHomeBarParams);
-					Log.i("thomas", margin+"");
+					Log.i("thomas", "MARGIN: "+margin+"");
+					
+					View v2 = findViewById(R.id.HomeDrawer);
+					RelativeLayout.LayoutParams v2Params = (RelativeLayout.LayoutParams) v2.getLayoutParams();
+					v2Params.setMargins((margin-800), 0, 0, 0);
+					v2.setLayoutParams(v2Params);
+					
+					
 					result = true;
 					break;
 				case MotionEvent.ACTION_UP:
@@ -141,15 +166,22 @@ public class HomeActivity extends Activity {
 				
 				
 				//dwfegw
-				RelativeLayout GridViewWrapper = (RelativeLayout) findViewById(R.id.GridViewWrapper);
-				RelativeLayout.LayoutParams GridViewParams = (RelativeLayout.LayoutParams) GridViewWrapper.getLayoutParams();
-				GridViewParams.setMargins(margin + mLandscapeBarWidth, 0, 0, 0);
-				GridViewWrapper.setLayoutParams(GridViewParams);
+//				RelativeLayout GridViewWrapper = (RelativeLayout) findViewById(R.id.GridViewWrapper);
+//				RelativeLayout.LayoutParams GridViewParams = (RelativeLayout.LayoutParams) GridViewWrapper.getLayoutParams();
+//				GridViewParams.setMargins(margin + mLandscapeBarWidth, 0, 0, 0);
+//				GridViewWrapper.setLayoutParams(GridViewParams);
 				//fewfew
 				
 				return result;
 			}
 		});
+		
+		
+		GridView AppColors = (GridView) findViewById(R.id.appcolors);
+		
+		AppColors.setAdapter(new GColorAdapter(this));
+		
+		
 		
 		loadApplications();
 	}
@@ -179,7 +211,7 @@ public class HomeActivity extends Activity {
 		RelativeLayout homebar = (RelativeLayout)this.findViewById(R.id.HomeBarLayout);
 
 		LayoutParams paramsGrid = (RelativeLayout.LayoutParams)homeGridView.getLayoutParams();
-		LinearLayout.LayoutParams paramsBar = (LinearLayout.LayoutParams)homebar.getLayoutParams();
+		RelativeLayout.LayoutParams paramsBar = (RelativeLayout.LayoutParams)homebar.getLayoutParams();
 
 		int barHeightLandscape = intToDP(100);
 		int barHeightPortrait = intToDP(200);
