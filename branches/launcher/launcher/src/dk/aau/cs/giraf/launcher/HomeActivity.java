@@ -84,10 +84,10 @@ public class HomeActivity extends Activity {
 		mProfilePictureView = (ImageView)this.findViewById(R.id.imageview_profilepic);
 		mHomeBarLayout = (RelativeLayout)this.findViewById(R.id.HomeBarLayout);
 		
-		mProfilePictureWidthLandscape = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics());
-		mProfilePictureHeightLandscape = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics());
-		mProfilePictureWidthPortrait = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics());
-		mProfilePictureHeightPortrait = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics());
+		mProfilePictureWidthLandscape = Tools.intToDP(mContext, 100);
+		mProfilePictureHeightLandscape = Tools.intToDP(mContext, 100);
+		mProfilePictureWidthPortrait = Tools.intToDP(mContext, 100);
+		mProfilePictureHeightPortrait = Tools.intToDP(mContext, 100);
 		
 		mCalendarWidget = (GWidgetCalendar) findViewById(R.id.calendarwidget);
 		mConnectivityWidget = (GWidgetConnectivity) findViewById(R.id.connectivitywidget);
@@ -102,7 +102,6 @@ public class HomeActivity extends Activity {
 		
 		mLogoutWidget.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				//startActivity(Tools.logOutIntent(mContext));
 				View.OnClickListener task = new View.OnClickListener() {
 					public void onClick(View v) {
 						startActivity(Tools.logOutIntent(mContext));;	
@@ -213,8 +212,8 @@ public class HomeActivity extends Activity {
 		LayoutParams paramsGrid = (RelativeLayout.LayoutParams)homeGridView.getLayoutParams();
 		RelativeLayout.LayoutParams paramsBar = (RelativeLayout.LayoutParams)homebar.getLayoutParams();
 
-		int barHeightLandscape = intToDP(100);
-		int barHeightPortrait = intToDP(200);
+		int barHeightLandscape = Tools.intToDP(mContext, 100);
+		int barHeightPortrait = Tools.intToDP(mContext, 200);
 
 		Display display = getWindowManager().getDefaultDisplay();
 		Point size = new Point();
@@ -222,7 +221,7 @@ public class HomeActivity extends Activity {
 		int screenWidth = size.x;
 		int screenHeight = size.y;
 
-		final boolean isLandscape = isLandscape();
+		final boolean isLandscape = Tools.isLandscape(mContext);
 
 		if (isLandscape) {
 			homebar.setBackgroundDrawable(getResources().getDrawable(R.drawable.homebar_back_land));
@@ -258,52 +257,39 @@ public class HomeActivity extends Activity {
 		if (isLandscape) {
 			mNameView.setVisibility(View.INVISIBLE);
 
-			profilePictureViewParams.width = intToDP(70);
-			profilePictureViewParams.height = intToDP(91);
-			mHomeBarLayout.setPadding(intToDP(15), intToDP(15), intToDP(15), intToDP(15));
+			profilePictureViewParams.width = Tools.intToDP(mContext, 70);
+			profilePictureViewParams.height = Tools.intToDP(mContext, 91);
+			mHomeBarLayout.setPadding(Tools.intToDP(mContext, 15), Tools.intToDP(mContext, 15), Tools.intToDP(mContext, 15), Tools.intToDP(mContext, 15));
 			
-			connectivityWidgetParams.setMargins(0, intToDP(106), 0, 0);
-			calendarWidgetParams.setMargins(0,intToDP(15), 0,0);
+			connectivityWidgetParams.setMargins(0, Tools.intToDP(mContext, 106), 0, 0);
+			calendarWidgetParams.setMargins(0, Tools.intToDP(mContext, 15), 0,0);
 			calendarWidgetParams.addRule(RelativeLayout.BELOW, mConnectivityWidget.getId());
 			calendarWidgetParams.addRule(RelativeLayout.LEFT_OF, 0);
 			
-			logoutWidgetParams.setMargins(0, intToDP(15), 0, 0);
+			logoutWidgetParams.setMargins(0, Tools.intToDP(mContext, 15), 0, 0);
 			logoutWidgetParams.addRule(RelativeLayout.BELOW, mCalendarWidget.getId());
 			logoutWidgetParams.addRule(RelativeLayout.LEFT_OF, 0);
 		} else {
 			
 			connectivityWidgetParams.setMargins(0, 0, 0, 0);
-			calendarWidgetParams.setMargins(0, 0, intToDP(25),0);
+			calendarWidgetParams.setMargins(0, 0, Tools.intToDP(mContext, 25),0);
 			calendarWidgetParams.addRule(RelativeLayout.BELOW, 0);
 			calendarWidgetParams.addRule(RelativeLayout.LEFT_OF, mConnectivityWidget.getId());
 			
-			logoutWidgetParams.setMargins(0, 0, intToDP(25), 0);
+			logoutWidgetParams.setMargins(0, 0, Tools.intToDP(mContext, 25), 0);
 			logoutWidgetParams.addRule(RelativeLayout.BELOW, 0);
 			logoutWidgetParams.addRule(RelativeLayout.LEFT_OF, mCalendarWidget.getId());
 			
-			profilePictureViewParams.width = intToDP(100);
-			profilePictureViewParams.height = intToDP(130);
+			profilePictureViewParams.width = Tools.intToDP(mContext, 100);
+			profilePictureViewParams.height = Tools.intToDP(mContext, 130);
 			
-			mHomeBarLayout.setPadding(intToDP(15), intToDP(15), intToDP(15), intToDP(15));
+			mHomeBarLayout.setPadding(Tools.intToDP(mContext, 15), Tools.intToDP(mContext, 15), Tools.intToDP(mContext, 15), Tools.intToDP(mContext, 15));
 			mNameView.setVisibility(View.VISIBLE);
 		}
 		mProfilePictureView.setLayoutParams(profilePictureViewParams);	
 		mConnectivityWidget.setLayoutParams(connectivityWidgetParams);
 		mCalendarWidget.setLayoutParams(calendarWidgetParams);
 		mLogoutWidget.setLayoutParams(logoutWidgetParams);
-	}
-	
-	private int intToDP(int i) {
-		return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, i, getResources().getDisplayMetrics());
-	}
-
-	private boolean isLandscape() {
-		int rotation = ((WindowManager) getSystemService(WINDOW_SERVICE)).getDefaultDisplay().getRotation();
-		if ((rotation % 2) == 0) {
-			return true;
-		} else {
-			return false;
-		}
 	}
 
 	/**
