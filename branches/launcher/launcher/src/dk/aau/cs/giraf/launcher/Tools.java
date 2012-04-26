@@ -132,16 +132,20 @@ public class Tools {
 
 		List<App> userApps = helper.appsHelper.getAppsByProfile(currentUser);
 		List<App> deviceApps = getAllAvailableGirafApps(context);
+		
+		if (userApps.isEmpty() || deviceApps.isEmpty()) {
+			return new ArrayList<App>();
+		}
 
 		// Remove all apps from user's list of apps that are not installed on the device.
 		for (int i = 0; i < deviceApps.size(); i++) {
 			if (!userApps.contains(deviceApps.get(i))) {
-				userApps.remove(i);
+				deviceApps.remove(i);
 				i--;
 			}
 		}
 
-		return userApps;
+		return deviceApps;
 	}
 	
 	/**
@@ -154,6 +158,10 @@ public class Tools {
 		
 		List<App> dbApps = helper.appsHelper.getApps();
 		List<ResolveInfo> deviceApps = getDeviceGirafApps(context);
+		
+		if (dbApps.isEmpty() || deviceApps.isEmpty()) {
+			return new ArrayList<App>();
+		}
 		
 		for (int i = 0; i < dbApps.size(); i++) {
 			if (!appsContain_RI(deviceApps, dbApps.get(i).getaPackage())) {
@@ -205,6 +213,10 @@ public class Tools {
 		List<App> userApps = helper.appsHelper.getAppsByProfile(currentUser);
 		List<App> deviceApps = getAllAvailableGirafApps(context);
 		
+		if (userApps.isEmpty() || deviceApps.isEmpty()) {
+			return new ArrayList<App>();
+		}
+		
 		for (int i = 0; i < deviceApps.size(); i++) {
 			if (userApps.contains(deviceApps.get(i))) {
 				deviceApps.remove(i);
@@ -224,6 +236,10 @@ public class Tools {
 		mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
 
 		List<ResolveInfo> systemApps = context.getPackageManager().queryIntentActivities(mainIntent, 0);
+		
+		if (systemApps.isEmpty()) {
+			return systemApps;
+		}
 
 		// Remove all non-GIRAF apps from the list of apps in the system.
 		for (int i = 0; i < systemApps.size(); i++) {
@@ -247,6 +263,10 @@ public class Tools {
 		mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
 
 		List<ResolveInfo> systemApps = context.getPackageManager().queryIntentActivities(mainIntent, 0);
+		
+		if (systemApps.isEmpty()) {
+			return systemApps;
+		}
 
 		// Remove all GIRAF apps from the list of apps in the system.
 		for (int i = 0; i < systemApps.size(); i++) {
