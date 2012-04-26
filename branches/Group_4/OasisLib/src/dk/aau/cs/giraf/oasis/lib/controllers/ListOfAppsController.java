@@ -14,6 +14,11 @@ import dk.aau.cs.giraf.oasis.lib.models.Profile;
 import dk.aau.cs.giraf.oasis.lib.models.Setting;
 import dk.aau.cs.giraf.oasis.lib.models.Stat;
 
+/**
+ * List of apps controller
+ * @author Admin
+ *
+ */
 class ListOfAppsController {
 
 	private Context _context;
@@ -23,6 +28,10 @@ class ListOfAppsController {
 			ListOfAppsMetaData.Table.COLUMN_SETTINGS,
 			ListOfAppsMetaData.Table.COLUMN_STATS};
 
+	/**
+	 * Constructor
+	 * @param context
+	 */
 	public ListOfAppsController(Context context) {
 		_context = context;
 	}
@@ -33,7 +42,7 @@ class ListOfAppsController {
 
 	/**
 	 * Clear list of apps table
-	 * @return True/false
+	 * @return Rows
 	 */
 	public int clearListOfAppsTable() {
 		return _context.getContentResolver().delete(ListOfAppsMetaData.CONTENT_URI, null, null);
@@ -43,7 +52,7 @@ class ListOfAppsController {
 	 * Remove list of apps
 	 * @param appId App id
 	 * @param profileId Profile Id
-	 * @return True/false
+	 * @return Rows
 	 */
 	public int removeListOfApps(long appId, long profileId) {
 		return _context.getContentResolver().delete(ListOfAppsMetaData.CONTENT_URI, ListOfAppsMetaData.Table.COLUMN_IDAPP + " = '" + appId + "' AND " + ListOfAppsMetaData.Table.COLUMN_IDPROFILE + " = '" + profileId + "'", null);
@@ -52,7 +61,7 @@ class ListOfAppsController {
 	/**
 	 * Insert list of apps
 	 * @param listOfApps List of apps
-	 * @return True/false
+	 * @return Rows
 	 */
 	public int insertListOfApps(ListOfApps listOfApps) {
 		ContentValues cv = new ContentValues();
@@ -67,7 +76,7 @@ class ListOfAppsController {
 	/**
 	 * Modify list of apps
 	 * @param listOfApps List of apps
-	 * @return True/false
+	 * @return Rows
 	 */
 	public int modifyListOfApps(ListOfApps listOfApps) {
 		ContentValues cv = new ContentValues();

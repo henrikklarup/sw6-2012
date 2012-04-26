@@ -60,7 +60,7 @@ public class DepartmentsHelper {
 	 * Remove profile attachment to department
 	 * @param profile Profile to remove
 	 * @param department Department to remove from
-	 * @return True/false
+	 * @return Rows
 	 */
 	public int removeProfileAttachmentToDepartment(Profile profile, Department department) {
 		return hd.removeHasDepartment(profile, department);
@@ -70,7 +70,7 @@ public class DepartmentsHelper {
 	 * Remove sub department attachment to department
 	 * @param department Department
 	 * @param subDepartment Subdepartment
-	 * @return True/false
+	 * @return Rows
 	 */
 	public int removeSubDepartmentAttachmentToDepartment(Department department, Department subDepartment) {
 		return hsd.removeHasSubDepartment(subDepartment, department);
@@ -93,7 +93,7 @@ public class DepartmentsHelper {
 	 * Attach profile to department
 	 * @param profile Profile to attach
 	 * @param department Department to attach to
-	 * @return True/false
+	 * @return Rows
 	 */
 	public long attachProfileToDepartment(Profile profile, Department department) {
 		HasDepartment hdModel = new HasDepartment();
@@ -106,7 +106,7 @@ public class DepartmentsHelper {
 	 * Attach sub department to department
 	 * @param department Department to attach to
 	 * @param subDepartment Subdepartment to attach
-	 * @return True/false
+	 * @return Rows
 	 */
 	public long attachSubDepartmentToDepartment(Department department, Department subDepartment) {
 		HasSubDepartment hsdModel = new HasSubDepartment();

@@ -68,7 +68,7 @@ public class ProfilesHelper {
 	 * Remove child attachment to guardian
 	 * @param child Child profile
 	 * @param guardian Guardian profile
-	 * @return True/false
+	 * @return Rows
 	 */
 	public int removeChildAttachmentToGuardian(Profile child, Profile guardian) {
 		if (child.getPRole() == 3 && (guardian.getPRole() == 1 || guardian.getPRole() == 2)) {

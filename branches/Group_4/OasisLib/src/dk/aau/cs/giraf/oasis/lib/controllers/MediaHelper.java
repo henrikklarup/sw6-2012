@@ -65,7 +65,7 @@ public class MediaHelper {
 	 * Remove media attachment to profile
 	 * @param media Media to remove
 	 * @param profile Profile
-	 * @return True/false
+	 * @return Rows
 	 */
 	public int removeMediaAttachmentToProfile(Media media, Profile profile) {
 		return mpa.removeMediaProfileAccess(media, profile); 
@@ -75,7 +75,7 @@ public class MediaHelper {
 	 * Remove media attachment to department
 	 * @param media Media to remove
 	 * @param department Department
-	 * @return True/false
+	 * @return Rows
 	 */
 	public int removeMediaAttachmentToDepartment(Media media, Department department) {
 		return mda.removeMediaProfileAccess(media, department);
@@ -85,7 +85,7 @@ public class MediaHelper {
 	 * Remove tag list from media
 	 * @param tags Tags to remove
 	 * @param media Media to remove from
-	 * @return True/false
+	 * @return Rows
 	 */
 	public int removeTagListFromMedia(List<Tag> tags, Media media) {
 		return ht.removeHasTagList(tags, media);
@@ -95,7 +95,7 @@ public class MediaHelper {
 	 * Remove Tag from media
 	 * @param tag Tag to remove
 	 * @param media Media to remove from
-	 * @return True/false
+	 * @return Rows
 	 */
 	public int removeTagFromMedia(Tag tag, Media media) {
 		return ht.removeHasTag(tag, media);
@@ -105,7 +105,7 @@ public class MediaHelper {
 	 * Remove sub media attachment to media
 	 * @param subMedia Sub media to remove
 	 * @param media Media to remove from
-	 * @return True/false
+	 * @return Rows
 	 */
 	public int removeSubMediaAttachmentToMedia(Media subMedia, Media media) {
 		return hl.removeHasLink(subMedia, media);
@@ -130,7 +130,7 @@ public class MediaHelper {
 	 * Add tags to media
 	 * @param tags List of tags to add
 	 * @param media Media to add to
-	 * @return True/false
+	 * @return Rows
 	 */
 	public long addTagsToMedia(List<Tag> tags, Media media) {
 		long result = -1;
@@ -150,7 +150,7 @@ public class MediaHelper {
 	 * @param media Media to attach to profile
 	 * @param profile Profile to attach to
 	 * @param owner Owner profile
-	 * @return True/false
+	 * @return Rows
 	 */
 	public long attachMediaToProfile(Media media, Profile profile, Profile owner) {
 		if (media.isMPublic() || media.getOwnerId() == owner.getId()) {
@@ -168,7 +168,7 @@ public class MediaHelper {
 	 * @param media Media to attach
 	 * @param department Department to attach to
 	 * @param owner Profile owner
-	 * @return True/false
+	 * @return Rows
 	 */
 	public long attachMediaToDepartment(Media media, Department department, Profile owner) {
 		if (media.isMPublic() || media.getOwnerId() == owner.getId()) {
@@ -185,7 +185,7 @@ public class MediaHelper {
 	 * Attach sub media to media
 	 * @param subMedia Sub media to attach
 	 * @param media Media to attach to
-	 * @return True/false
+	 * @return Rows
 	 */
 	public long attachSubMediaToMedia(Media subMedia, Media media) {
 		HasLink hlModel = new HasLink();

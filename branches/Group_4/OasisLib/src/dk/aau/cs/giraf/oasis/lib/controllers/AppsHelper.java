@@ -54,7 +54,7 @@ public class AppsHelper {
 	 * Remove app attachment to profile
 	 * @param app App to remove
 	 * @param profile Profile to remove attachment from
-	 * @return True/False
+	 * @return Rows
 	 */
 	public int removeAppAttachmentToProfile(App app, Profile profile) {
 		return loa.removeListOfApps(app.getId(), profile.getId());
@@ -79,7 +79,7 @@ public class AppsHelper {
 	 * Attach app to Profile
 	 * @param app App to attach
 	 * @param profile Profile to attach to
-	 * @return True/false
+	 * @return Rows
 	 */
 	public long attachAppToProfile(App app, Profile profile) {
 		ListOfApps loaModel = new ListOfApps();

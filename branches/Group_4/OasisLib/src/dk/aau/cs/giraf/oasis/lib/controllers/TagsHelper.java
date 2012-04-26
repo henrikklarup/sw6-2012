@@ -11,6 +11,11 @@ import android.net.Uri;
 import dk.aau.cs.giraf.oasis.lib.metadata.TagsMetaData;
 import dk.aau.cs.giraf.oasis.lib.models.Tag;
 
+/**
+ * Tags helper
+ * @author Admin
+ *
+ */
 public class TagsHelper {
 
 	private Context _context;
@@ -18,6 +23,10 @@ public class TagsHelper {
 			TagsMetaData.Table.COLUMN_ID, 
 			TagsMetaData.Table.COLUMN_CAPTION};
 
+	/**
+	 * Constructor
+	 * @param context
+	 */
 	public TagsHelper(Context context) {
 		_context = context;
 	}
@@ -26,10 +35,19 @@ public class TagsHelper {
 	//METHODS TO CALL
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * Clear tags
+	 * @return Rows
+	 */
 	public int clearTagsTable() {
 		return _context.getContentResolver().delete(TagsMetaData.CONTENT_URI, null, null);
 	}
 	
+	/**
+	 * Insert tag
+	 * @param tag Tag
+	 * @return Tag id
+	 */
 	public long insertTag(Tag tag) {
 		long id = 0;
 		
@@ -48,12 +66,21 @@ public class TagsHelper {
 		return id;
 	}
 
+	/**
+	 * Modify tag
+	 * @param tag Tag
+	 * @return Rows
+	 */
 	public int modifyTag(Tag tag) {
 		Uri uri = ContentUris.withAppendedId(TagsMetaData.CONTENT_URI, tag.getId());
 		ContentValues cv = getContentValues(tag);
 		return _context.getContentResolver().update(uri, cv, null, null);
 	}
 
+	/**
+	 * Get tags
+	 * @return List of tags
+	 */
 	public List<Tag> getTags() {
 		List<Tag> tags = new ArrayList<Tag>();
 
@@ -67,6 +94,11 @@ public class TagsHelper {
 		return tags;
 	}
 	
+	/**
+	 * Get tags by caption
+	 * @param name Caption
+	 * @return List of tags
+	 */
 	public List<Tag> getTagsByCaption(String name) {
 		List<Tag> tags = new ArrayList<Tag>();
 
@@ -80,6 +112,11 @@ public class TagsHelper {
 		return tags;
 	}
 	
+	/**
+	 * Get tag by id
+	 * @param id Id
+	 * @return Tag
+	 */
 	public Tag getTagById(Long id) {
 		Tag tag = null;
 		
@@ -122,6 +159,11 @@ public class TagsHelper {
 		return tags;
 	}
 
+	/**
+	 * Cursor to tag
+	 * @param cursor Cursor
+	 * @return Tag
+	 */
 	private Tag cursorToTag(Cursor cursor) {
 		Tag tag = new Tag();
 		tag.setId(cursor.getLong(cursor.getColumnIndex(TagsMetaData.Table.COLUMN_ID)));
@@ -129,6 +171,11 @@ public class TagsHelper {
 		return tag;
 	}
 
+	/**
+	 * Content values
+	 * @param tag Tag
+	 * @return Content values
+	 */
 	private ContentValues getContentValues(Tag tag) {
 		ContentValues contentValues = new ContentValues();
 		contentValues.put(TagsMetaData.Table.COLUMN_CAPTION, tag.getCaption());
