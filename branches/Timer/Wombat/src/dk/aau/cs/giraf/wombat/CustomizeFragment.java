@@ -619,8 +619,6 @@ public class CustomizeFragment extends Fragment {
 						Guardian.subProfileID = guard.getChild()
 								.save(currSubP).getId();
 					}
-					
-					Guardian.saveChild(guard.getChild(), currSubP);
 				}
 			});
 		} else {

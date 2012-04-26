@@ -81,9 +81,11 @@ public class Guardian {
 			
 			long appId = findAppId();
 			guardianId = findGuardianId();
+			
 			createChildren();
 			
-			crud = new CRUD(guardianId, appId, c);
+			crud = new CRUD(appId, c);
+			crud.loadGuardian(guardianId);
 			
 			help.loadPredef();
 			_instance.publishList();
@@ -270,7 +272,7 @@ public class Guardian {
 	}
 	
 	//Waiting for admin
-	private void initLastUsed(ArrayList<SubProfile> profile){
+	void initLastUsed(ArrayList<SubProfile> profile){
 		for(SubProfile p : profile){
 			_lastUsed.add(p);
 		}
@@ -295,6 +297,8 @@ public class Guardian {
 			//Checks if the SubProfile is already on the list.
 			if(_lastUsed.get(i).getId() == profile.getId()){
 				_lastUsed.remove(i);
+				crud.removeSubprofileFromProfileId(profile, guardianId);
+				crud.saveGuardian(guardianId, profile);
 				_lastUsed.add(profile);
 				exists = false;
 				break;
@@ -303,6 +307,7 @@ public class Guardian {
 		
 		if(exists){
 			_lastUsed.add(profile);
+			crud.saveGuardian(guardianId, profile);
 		}
 	}
 	

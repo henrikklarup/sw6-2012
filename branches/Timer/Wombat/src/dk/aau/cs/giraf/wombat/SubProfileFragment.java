@@ -41,7 +41,6 @@ public class SubProfileFragment extends android.app.ListFragment {
 				setListAdapter(adapter);
 			}	
 			else {
-				Toast.makeText(getActivity(), getString(R.string.no_child), Toast.LENGTH_SHORT).show();
 				setListAdapter(null);
 			}
 			

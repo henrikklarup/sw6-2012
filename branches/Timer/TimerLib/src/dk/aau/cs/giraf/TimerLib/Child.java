@@ -100,6 +100,7 @@ public class Child implements Comparable<Child>{
 		//Wait for admin
 			//Add to child list
 			this.SubProfiles().add(p);
+			Guardian.crud.saveChild(this, p);
 		
 		return p;
 	}
@@ -122,4 +123,9 @@ public class Child implements Comparable<Child>{
 	        int lastCmp = name.compareTo(n.name);
 	        return (lastCmp != 0 ? lastCmp : name.compareTo(n.name));
 	    }
+
+		public void remove(SubProfile p) {
+			_profileList.remove(p);
+			Guardian.crud.removeSubprofileFromProfileId(p, this.getProfileId());
+		}
 }
