@@ -14,6 +14,7 @@
 		android:layout_weight="0.6"/>
     
     <TextView 
+        android:id="@+id/done_message_id"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_gravity="center"
