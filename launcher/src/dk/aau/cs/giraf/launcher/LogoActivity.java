@@ -27,6 +27,8 @@ public class LogoActivity extends Activity {
 	    if (size <= 0) {
 	    	helper.CreateDummyData();
 	    }
+	    
+	    Tools.updateGirafApps_DB(mContext);
 
 	    splashTread = new Thread() {
 	        @Override
