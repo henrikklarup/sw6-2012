@@ -1,5 +1,6 @@
 package dk.aau.cs.giraf.launcher;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class Tools {
 	// Keys for settings.
 	public static final String COLORS = "colorSettings";
 	public static final String COLOR_BG = "backgroundColor";
-	
+
 	// Constants denoting user roles.
 	public static final long ROLE_GUARDIAN = 1L;
 	public static final long ROLE_CHILD = 3L;
@@ -51,9 +52,8 @@ public class Tools {
 		SharedPreferences sp = context.getSharedPreferences(TIMERKEY, 0);
 		SharedPreferences.Editor editor = sp.edit();
 		Date d = new Date();
-		
-		editor.putLong(DATEKEY, d.getTime());
 
+		editor.putLong(DATEKEY, d.getTime());
 		editor.putLong(GUARDIANID, id);
 
 		editor.commit();
@@ -127,11 +127,99 @@ public class Tools {
 	 * @param currentUser The user to find apps for.
 	 * @return List of apps that are usable by this user on this device.
 	 */
-	public static List<App> getUsableApps(Context context, Profile currentUser) {
+	public static List<App> getVisibleApps(Context context, Profile currentUser) {
 		Helper helper = new Helper(context);
 
 		List<App> userApps = helper.appsHelper.getAppsByProfile(currentUser);
+		List<App> deviceApps = getAllAvailableGirafApps(context);
 
+		// Remove all apps from user's list of apps that are not installed on the device.
+		for (int i = 0; i < deviceApps.size(); i++) {
+			if (!userApps.contains(deviceApps.get(i))) {
+				userApps.remove(i);
+				i--;
+			}
+		}
+
+		return userApps;
+	}
+	
+	/**
+	 * Finds all GIRAF apps installed on the device that are also registered in the database.
+	 * @param context Context of the current activity.
+	 * @return List of apps available for use on the device.
+	 */
+	public static List<App> getAllAvailableGirafApps(Context context) {
+		Helper helper = new Helper(context);
+		
+		List<App> dbApps = helper.appsHelper.getApps();
+		List<ResolveInfo> deviceApps = getDeviceGirafApps(context);
+		
+		for (int i = 0; i < dbApps.size(); i++) {
+			if (!appsContain_RI(deviceApps, dbApps.get(i).getaPackage())) {
+				dbApps.remove(i);
+				i--;
+			}
+		}
+		
+		return dbApps;
+	}
+
+	/**
+	 * Updates the database with all installed GIRAF apps on the device, but does not attach them to any profile.
+	 * @param context Context of the current activity.
+	 */
+	public static void updateGirafApps_DB(Context context) {
+		Helper helper = new Helper(context);
+		
+		List<ResolveInfo> systemApps = getDeviceGirafApps(context);
+
+		for (ResolveInfo installedApp : systemApps) {
+			if (!appRegistered(helper, installedApp)) {
+				insertAppInDB(context, installedApp);
+			}
+		}
+	}
+	
+	/**
+	 * Transforms a ResolveInfo into an App and inserts into the database.
+	 * @param context Context of the current activity.
+	 * @param info The ResolveInfo to insert.
+	 */
+	public static void insertAppInDB(Context context, ResolveInfo info) {
+		Helper helper = new Helper(context);
+		
+		App app = new App(info.loadLabel(context.getPackageManager()).toString(), info.activityInfo.packageName, info.activityInfo.name);
+		app.setId(helper.appsHelper.insertApp(app));
+	}
+
+	/**
+	 * Finds all GIRAF apps not attached to a given profile.
+	 * @param context Context of the current activity.
+	 * @param currentUser Profile to find apps for.
+	 * @return List of apps not attached to the given profile.
+	 */
+	public static List<App> getHiddenGirafApps(Context context, Profile currentUser) {
+		Helper helper = new Helper(context);
+
+		List<App> userApps = helper.appsHelper.getAppsByProfile(currentUser);
+		List<App> deviceApps = getAllAvailableGirafApps(context);
+		
+		for (int i = 0; i < deviceApps.size(); i++) {
+			if (userApps.contains(deviceApps.get(i))) {
+				deviceApps.remove(i);
+			}
+		}
+		
+		return deviceApps;
+	}
+
+	/**
+	 * Finds all GIRAF apps (as ResolveInfos) installed on the device.
+	 * @param context Context of the current activity.
+	 * @return List of GIRAF apps.
+	 */
+	public static List<ResolveInfo> getDeviceGirafApps(Context context) {
 		Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
 		mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
 
@@ -146,26 +234,53 @@ public class Tools {
 			}
 		}
 
-		// Remove all apps from user's list of apps that are not installed on the current device.
-		for (int i = 0; i < userApps.size(); i++) {
-			if (!containsPackage(systemApps, userApps.get(i).getaPackage())) {
-				userApps.remove(i);
+		return systemApps;
+	}
+	
+	/**
+	 * Finds all Android apps installed on the device that are not GIRAF apps.
+	 * @param context Context of the current activity.
+	 * @return List of Android apps.
+	 */
+	public static List<ResolveInfo> getDeviceAndroidApps(Context context) {
+		Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
+		mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+
+		List<ResolveInfo> systemApps = context.getPackageManager().queryIntentActivities(mainIntent, 0);
+
+		// Remove all GIRAF apps from the list of apps in the system.
+		for (int i = 0; i < systemApps.size(); i++) {
+			if (systemApps.get(i).toString().toLowerCase().contains("dk.aau.cs.giraf") && 
+					!systemApps.get(i).toString().toLowerCase().contains("launcher")) {
+				systemApps.remove(i); 
 				i--;
 			}
 		}
 
-		return userApps;
+		return systemApps;
+	}
+	
+	/**
+	 * Finds all apps installed on the device.
+	 * @param context Context of the current activity.
+	 * @return List of apps.
+	 */
+	public static List<ResolveInfo> getDeviceApps(Context context) {
+		Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
+		mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+
+		return context.getPackageManager().queryIntentActivities(mainIntent, 0);
 	}
 
 	/**
 	 * Checks whether a list of GIRAF apps installed on the system contains a specified app.
-	 * @param systemApps List of apps to check.
+	 * @param systemApps List of apps (as ResolveInfos) to check.
 	 * @param packageName Package name of the app to check for.
 	 * @return True if the app is contained in the list; otherwise false.
 	 */
-	public static boolean containsPackage(List<ResolveInfo> systemApps, String packageName) {
+	public static boolean appsContain_RI(List<ResolveInfo> systemApps, String packageName) {
 		for (ResolveInfo app : systemApps) {
-			if (app.activityInfo.packageName == packageName) {
+			if (app.activityInfo.packageName.equals(packageName)) {
 				return true;
 			}
 		}
@@ -174,37 +289,69 @@ public class Tools {
 	}
 
 	/**
+	 * Checks whether a list of GIRAF apps installed on the system contains a specified app.
+	 * @param systemApps List of apps (as Apps) to check.
+	 * @param packageName Package name of the app to check for.
+	 * @return True if the app is contained in the list; otherwise false.
+	 */
+	public static boolean appsContain_A(List<App> systemApps, String packageName) {
+		for (App app : systemApps) {
+			if (app.getaPackage().equals(packageName)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+	
+	/**
+	 * Checks whether a given GIRAF package is registered in the database.
+	 * @param helper Database-helper to use.
+	 * @param packageName Name of the package to check for.
+	 * @return True if the package exists in the database already; otherwise false.
+	 */
+	public static boolean packageRegistered(Helper helper, String packageName) {
+		for (App app : helper.appsHelper.getApps()) {
+			if (app.getaPackage().equals(packageName)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	/**
+	 * Checks whether a given GIRAF app is registered in the database.
+	 * @param helper Database-helper to use.
+	 * @param app App to check for.
+	 * @return True if the app exists in the database already; otherwise false.
+	 */
+	public static boolean appRegistered(Helper helper, ResolveInfo app) {
+		return packageRegistered(helper, app.activityInfo.packageName);
+	}
+	
+	/**
+	 * Checks whether a given GIRAF app is registered in the database.
+	 * @param helper Database-helper to use.
+	 * @param app App to check for.
+	 * @return True if the app exists in the database already; otherwise false.
+	 */
+	public static boolean appRegistered(Helper helper, App app) {
+		return packageRegistered(helper, app.getaPackage());
+	}
+
+	/**
 	 * Attaches all GIRAF apps currently installed on a device to a given user.
 	 * @param context Context of the current activity.
 	 * @param currentUser The user to attach apps to.
 	 */
-	public static void attachAllSystemAppsToUser(Context context, Profile currentUser) {
+	public static void attachAllDeviceAppsToUser(Context context, Profile currentUser) {
 		Helper helper = new Helper(context);
-
-		Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
-		mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-
-		List<ResolveInfo> systemApps = context.getPackageManager().queryIntentActivities(mainIntent, 0);
-
-		// Remove all non-GIRAF apps from the list of apps in the system.
-		for (int i = 0; i < systemApps.size(); i++) {
-			if (!(systemApps.get(i).toString().toLowerCase().contains("dk.aau.cs.giraf") && 
-					!systemApps.get(i).toString().toLowerCase().contains("launcher"))) {
-				systemApps.remove(i); 
-				i--;
-			}
-		}
 		
-		Log.i("GIRAF_APP", "GIRAF apps currently installed on device: " + systemApps.size());
-
-		int i = 0;
+		List<App> deviceApps = getAllAvailableGirafApps(context);
 		
-		for (ResolveInfo app : systemApps) {
-			App userApp = new App(app.loadLabel(context.getPackageManager()).toString(), app.activityInfo.packageName, app.activityInfo.name);
-			helper.appsHelper.attachAppToProfile(userApp, currentUser);
-			//Log.i("GIRAF_APP", "App " + i + " attach result: " + result);
-			i++;
-			Log.i("GIRAF_APP", "Attachment run.");
+		for (App app : deviceApps) {
+			helper.appsHelper.attachAppToProfile(app, currentUser);
 		}
 	}
 }
