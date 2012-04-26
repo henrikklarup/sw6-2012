@@ -100,7 +100,7 @@ public class Child implements Comparable<Child>{
 		//Wait for admin
 			//Add to child list
 			this.SubProfiles().add(p);
-			Guardian.crud.saveChild(this, p);
+			Guardian.saveChild(this, p);
 		
 		return p;
 	}
