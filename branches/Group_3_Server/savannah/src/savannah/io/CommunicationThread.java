@@ -20,7 +20,6 @@ public class CommunicationThread extends Thread {
 	private TransmissionHandler handle = null;
 	private String folder;
 	private int bufferSize;
-	private volatile boolean lock = false;
 
 	public CommunicationThread(Socket _socket, String _folder, int _bufferSize) {
 		//		this.ioHandler = IOHandler.getInstance();
@@ -28,13 +27,6 @@ public class CommunicationThread extends Thread {
 		this.folder = _folder;
 		this.bufferSize = _bufferSize;
 		//		start();
-	}
-
-	public final synchronized void lockEngage() {
-		this.lock = true;
-	}
-	public final synchronized void lockDisengage() {
-		this.lock = false;
 	}
 	
 	public void run() {
@@ -53,9 +45,6 @@ public class CommunicationThread extends Thread {
 				IOHandler.getInstance().displayMessage("CommitEvent created by: " + this.socket);
 				CommitEvent comEvt = new CommitEvent(domI.Dominate(handle.XML()), this.socket, this);
 				EventQueue.getInstance().add(comEvt);
-				while (lock == true) {
-					//Do nothing and keep the thread alive
-				}
 				IOHandler.getInstance().logIt(true);
 			}
 			//RequestEvent
@@ -64,9 +53,6 @@ public class CommunicationThread extends Thread {
 				RequestEvent reqEvt = new RequestEvent(handle.XML(), this.socket, this);
 				EventQueue.getInstance().add(reqEvt);
 //				IOHandler.getInstance().respond(this.socket, CRUD.REQUEST, "I so hope that this is going to work !!!");
-				while (lock == true) {
-					//Do nothing and keep the thread alive
-				}
 				IOHandler.getInstance().logIt(true);
 			}
 			//Ping
