@@ -18,7 +18,7 @@ public class LogFile {
 		this.path = filePath;
 	}
 	
-	public void logIt(Socket socket, String performedAction) {
+	public synchronized void logIt(Socket socket, String performedAction) {
 		FileWriter write = null;
 		PrintWriter print = null;
 		DateFormat dateFormat = new SimpleDateFormat("[dd-MM-yyyy - HH:mm:ss]");
@@ -27,10 +27,9 @@ public class LogFile {
 			print = new PrintWriter(write);
 			
 			//Writing messages to the log file
-//			print.printf(dateFormat.format(Calendar.getInstance().getTime()) + "\t Connecting from: %s \t --- \t Performed Action: %s --- \t %s %n", socket, performedAction, complete);
 			print.printf(dateFormat.format(Calendar.getInstance().getTime()) + "\t Connecting from: %s %n", socket);
 			print.printf("\t Performed Action: %s %n", performedAction);
-//			print.printf("\t Completed: %s %n %n", complete);
+
 			//Flushing
 			print.flush();
 			write.flush();
@@ -41,7 +40,7 @@ public class LogFile {
 			System.err.println("Could not find file: " + this.path + " !");
 		}
 	}
-	public void logIt(boolean completed) {
+	public synchronized void logIt(boolean completed) {
 		FileWriter write = null;
 		PrintWriter print = null;
 		String complete = (completed == true) ? "SUCCESS" : "FAILED";
