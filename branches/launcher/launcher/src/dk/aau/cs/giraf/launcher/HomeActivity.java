@@ -284,6 +284,8 @@ public class HomeActivity extends Activity {
 		if(pkgAppsList != null){
 			ArrayList<ApplicationInfo> applications = new ArrayList<ApplicationInfo>();
 			
+			
+			//FIXME ændre til at kører med oasis lib
 			int i = 0;
 			for(ResolveInfo info : pkgAppsList){
 				//Package (dk.aau.cs.giraf)
@@ -302,9 +304,6 @@ public class HomeActivity extends Activity {
 					
 
 			    	//App app = new App(appInfo.title.toString(), "random", "", appInfo.packageName,appInfo.activityName);
-					
-					Log.i("magnus","icon: " + appInfo.icon);
-					Log.i("magnus","packageName: " + appInfo.packageName);
 					
 					
 					appInfo.color = TEMPAppColor(i);
