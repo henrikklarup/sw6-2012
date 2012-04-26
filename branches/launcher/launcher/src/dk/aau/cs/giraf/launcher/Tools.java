@@ -100,7 +100,7 @@ public class Tools {
 	/**
 	 * Converts integer to density pixels (dp)
 	 * @param context Context of the current activity
-	 * @param i The integer which should be used for convertion
+	 * @param i The integer which should be used for conversion
 	 * @return i converted to density pixels (dp)
 	 */
 	public static int intToDP(Context context, int i) {
@@ -127,7 +127,7 @@ public class Tools {
 	 * @param currentUser The user to find apps for.
 	 * @return List of apps that are usable by this user on this device.
 	 */
-	public static List<App> getVisibleApps(Context context, Profile currentUser) {
+	public static List<App> getVisibleGirafApps(Context context, Profile currentUser) {
 		Helper helper = new Helper(context);
 
 		List<App> userApps = helper.appsHelper.getAppsByProfile(currentUser);
@@ -139,7 +139,7 @@ public class Tools {
 
 		// Remove all apps from user's list of apps that are not installed on the device.
 		for (int i = 0; i < deviceApps.size(); i++) {
-			if (!appsContain_A(userApps, deviceApps.get(i).getaPackage())) {
+			if (!appsContain_A(userApps, deviceApps.get(i))) {
 				deviceApps.remove(i);
 				i--;
 			}
@@ -164,7 +164,7 @@ public class Tools {
 		}
 		
 		for (int i = 0; i < dbApps.size(); i++) {
-			if (!appsContain_RI(deviceApps, dbApps.get(i).getaPackage())) {
+			if (!appsContain_RI(deviceApps, dbApps.get(i))) {
 				dbApps.remove(i);
 				i--;
 			}
@@ -218,7 +218,7 @@ public class Tools {
 		}
 		
 		for (int i = 0; i < deviceApps.size(); i++) {
-			if (appsContain_A(userApps, deviceApps.get(i).getaPackage())) {
+			if (appsContain_A(userApps, deviceApps.get(i))) {
 				deviceApps.remove(i);
 				i--;
 			}
@@ -292,6 +292,26 @@ public class Tools {
 
 		return context.getPackageManager().queryIntentActivities(mainIntent, 0);
 	}
+	
+	/**
+	 * Checks whether a list of GIRAF apps installed on the system contains a specified app.
+	 * @param systemApps List of apps (as ResolveInfos) to check.
+	 * @param app The app to check for.
+	 * @return True if the app is contained in the list; otherwise false.
+	 */
+	public static boolean appsContain_RI(List<ResolveInfo> systemApps, App app) {
+		return appsContain_RI(systemApps, app.getaPackage());
+	}
+	
+	/**
+	 * Checks whether a list of GIRAF apps installed on the system contains a specified app.
+	 * @param systemApps List of apps (as ResolveInfos) to check.
+	 * @param app The app to check for.
+	 * @return True if the app is contained in the list; otherwise false.
+	 */
+	public static boolean appsContain_RI(List<ResolveInfo> systemApps, ResolveInfo app) {
+		return appsContain_RI(systemApps, app.activityInfo.packageName);
+	}
 
 	/**
 	 * Checks whether a list of GIRAF apps installed on the system contains a specified app.
@@ -307,6 +327,26 @@ public class Tools {
 		}
 
 		return false;
+	}
+	
+	/**
+	 * Checks whether a list of GIRAF apps installed on the system contains a specified app.
+	 * @param systemApps List of apps (as Apps) to check.
+	 * @param app The app to check for.
+	 * @return True if the app is contained in the list; otherwise false.
+	 */
+	public static boolean appsContain_A(List<App> systemApps, App app) {
+		 return appsContain_A(systemApps, app.getaPackage());
+	}
+	
+	/**
+	 * Checks whether a list of GIRAF apps installed on the system contains a specified app.
+	 * @param systemApps List of apps (as Apps) to check.
+	 * @param app The app to check for.
+	 * @return True if the app is contained in the list; otherwise false.
+	 */
+	public static boolean appsContain_A(List<App> systemApps, ResolveInfo app) {
+		 return appsContain_A(systemApps, app.activityInfo.packageName);
 	}
 
 	/**
@@ -366,7 +406,7 @@ public class Tools {
 	 * @param context Context of the current activity.
 	 * @param currentUser The user to attach apps to.
 	 */
-	public static void attachAllDeviceAppsToUser(Context context, Profile currentUser) {
+	public static void attachAllDeviceGirafAppsToUser(Context context, Profile currentUser) {
 		Helper helper = new Helper(context);
 		
 		List<App> deviceApps = getAllAvailableGirafApps(context);
