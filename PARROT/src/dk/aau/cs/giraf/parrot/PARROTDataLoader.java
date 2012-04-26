@@ -18,7 +18,9 @@ import dk.aau.cs.giraf.oasis.lib.models.Setting;
  *
  */
 public class PARROTDataLoader {
+	
 	private Activity parrent;
+	Helper help;
 	public PARROTDataLoader(Activity activity)
 	{
 		this.parrent = activity;
@@ -29,7 +31,7 @@ public class PARROTDataLoader {
 		Bundle extras = parrent.getIntent().getExtras();
 		Profile prof;
 		App app;
-		Helper help = new Helper(parrent);
+		help = new Helper(parrent);
 		if(extras !=null)
 		{
 			prof = help.profilesHelper.getProfileById(extras.getLong("currentChildID"));	//It used to be "currentProfileId"
@@ -51,7 +53,7 @@ public class PARROTDataLoader {
 					String colourString = specialSettings.get(prof.getFirstname()).get("category"+number+"colour");
 					int col=Integer.valueOf(colourString);
 					String iconString = specialSettings.get(prof.getFirstname()).get("category"+number+"icon");
-					parrotUser.addCategory(loadCategory(categoryString,col,iconString,help));
+					parrotUser.addCategory(loadCategory(categoryString,col,iconString));
 					number++;
 				}
 				else
@@ -73,19 +75,19 @@ public class PARROTDataLoader {
 
 	}
 
-	public Category loadCategory(String pictureIDs,int colour,String iconString, Helper help)
+	public Category loadCategory(String pictureIDs,int colour,String iconString)
 	{
 		int iconId = Integer.valueOf(iconString);
-		Category cat = new Category(colour,loadPictogram(iconId, help));
+		Category cat = new Category(colour,loadPictogram(iconId));
 		ArrayList<Integer> listIDs = getIDsFromString(pictureIDs);
 		for(int i = 0; i<listIDs.size();i++)
 		{
-			cat.addPictogram(loadPictogram(listIDs.get(i),help));
+			cat.addPictogram(loadPictogram(listIDs.get(i)));
 		}
 		return cat;
 	}
 
-	public Pictogram loadPictogram(int id,Helper help)
+	public Pictogram loadPictogram(int id)
 	{
 		Pictogram pic = null;
 		Media media=help.mediaHelper.getSingleMediaById(id); //This is the image media //TODO check type
