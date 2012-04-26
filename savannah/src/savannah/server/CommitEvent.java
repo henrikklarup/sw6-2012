@@ -22,7 +22,6 @@ public class CommitEvent implements Event {
 		if(!(com.equals(null)))
 		{
 			this.com1 = com;
-			com.lockEngage();
 		}
 	
 	}
