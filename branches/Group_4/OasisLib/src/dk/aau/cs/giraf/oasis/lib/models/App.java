@@ -168,8 +168,12 @@ public class App {
 		String localOutput = _output;
 		localOutput = localOutput.replace("{0}", String.valueOf(getId()));
 		localOutput = localOutput.replace("{1}", getName());
-		localOutput = localOutput.replace("{2}", getVersion());
-		localOutput = localOutput.replace("{3}", getIcon());
+		if (getVersion() != null) {
+			localOutput = localOutput.replace("{2}", getVersion());
+		}
+		if (getIcon() != null) {
+			localOutput = localOutput.replace("{3}", getIcon());
+		}
 		localOutput = localOutput.replace("{4}", getaPackage());
 		localOutput = localOutput.replace("{5}", getActivity());
 
