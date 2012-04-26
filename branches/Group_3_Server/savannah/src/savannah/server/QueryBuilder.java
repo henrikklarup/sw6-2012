@@ -12,8 +12,8 @@ public class QueryBuilder {
 	public ArrayList<String> buildQueries(Document xml) throws JDOMException
 	{
 		ArrayList<String> out = new ArrayList<String>();
-		String[] tables = {"Apps","HasGuardian","HasSubDepartment","ListOfApps","AuthUsers",
-				"Profiles","Departments","HasDepartment","MediaProfileAccess","Media","HasTag","Tags","MediaDepartmentAccess","HasLink"};
+		
+		
 		//Get all entries
 		XPath xp = XPath.newInstance("sw6ml/*/*");
 		List<Object> nodes = xp.selectNodes(xml);
@@ -59,7 +59,7 @@ public class QueryBuilder {
 		 * These are the different crud types, create,delete and update, The way this is implemented
 		 * will require certain preconditions on how the xml is formed.
 		 * Current implementation only supports simple create, delete and update queries.
-		 * READ: NYI
+		 * READ: below
 		 */
 
 		//Create require all tags or some values will be placed wrong in the sql query.
