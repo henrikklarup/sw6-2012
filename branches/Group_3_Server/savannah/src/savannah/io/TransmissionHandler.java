@@ -1,8 +1,5 @@
 package savannah.io;
 
-import savannah.device.ConnectionConfiguration;
-import savannah.device.Connection;
-
 import java.io.DataInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -30,17 +27,6 @@ public class TransmissionHandler {
 	private boolean accepted	= false;
 	private ArrayWrapper overflow = null;
 
- 	public TransmissionHandler(Connection con) throws FileNotFoundException, IOException {
-		if (con == null) {
-			throw new NullPointerException("con: Cannot be null !");
-		}	else { 
-			this.bufferSize = con.getBufferSize();
-			this.files = new ArrayList<File>();
-			this.folder = con.getFolder();
-			//Invoking the deconstruction !
-			this.deconstruct(con.getConnectionInputStream());
-		}
-	}
 	public TransmissionHandler(Socket socket, String folder) throws FileNotFoundException, IOException {
 		this.bufferSize = 4096;
 		this.files = new ArrayList<File>();
@@ -67,7 +53,7 @@ public class TransmissionHandler {
 		}
 		return success;
 	}
-	
+
 	private final void deconstruct(InputStream is) throws FileNotFoundException, IOException {
 		this.cr = this.CR(is);
 		this.xml = this.XML(is, this.overflow);
@@ -104,11 +90,11 @@ public class TransmissionHandler {
 			length += (char)buf[i];
 		}
 		length = length.substring(0, length.length() -1);
-		
+
 		//Setting storedIndex to point at the first part of
 		//the name, instead of at a  " , "
-//		storedIndex++;
-		
+		//		storedIndex++;
+
 		for (int i = storedIndex; i < buf.length; i++) {
 			if (anyFiles.contains(delimClafR) == true) {
 				storedIndex = i;
@@ -119,10 +105,10 @@ public class TransmissionHandler {
 		//Subtract 1, since this is the delimiter !
 		anyFiles = anyFiles.substring(0, anyFiles.length() -1);
 		boolean result = (anyFiles.contains("1") == true) ? true : false;
-		
+
 		//Setting the storedIndex to point at the index of the first XML char
 		storedIndex += 2;
-		
+
 		System.out.println("StoredIndex: " + storedIndex);
 		System.out.println(Arrays.toString(buf));
 		System.out.println(bytesToString(buf));
@@ -165,9 +151,9 @@ public class TransmissionHandler {
 	}
 	private String bytesToString(byte[] buf) {
 		StringBuilder sb = new StringBuilder();
-//		for (int i = 0; i < buf.length; i++) {
-//			sb.append((char)buf[i]);
-//		}
+		//		for (int i = 0; i < buf.length; i++) {
+		//			sb.append((char)buf[i]);
+		//		}
 		for (byte b : buf) {
 			sb.append((char)b);
 		}
@@ -200,7 +186,7 @@ public class TransmissionHandler {
 		//Maybe find a better way that is less crude...
 		String temp = "";
 		temp += (char)buf[5];	//Maybe it is buf[5] and not buf[6]
-		
+
 		switch(Integer.parseInt(temp)) {
 		case 1:
 			return CRUD.COMMIT;
@@ -241,6 +227,7 @@ public class TransmissionHandler {
 				tempJ ++;
 			}
 			aw = new ArrayWrapper(overflow);
+			this.overflow = aw;
 			System.out.println("Overflow: " + bytesToString(overflow));
 			System.out.println("IF - sb: " + sb.toString());
 		}
@@ -268,7 +255,7 @@ public class TransmissionHandler {
 				}
 			}
 			//Dumping the unneeded package data
-//			int dump = is.read();
+			//			int dump = is.read();
 			System.out.println("ELSE - sb: " + sb.toString());
 		}
 		this.iHaveFile = wrap.areThereFiles();
@@ -300,8 +287,8 @@ public class TransmissionHandler {
 			//do a standard read + buffer
 			bufCalc = wrap.getLength();
 			while (bufCalc > 0) {
-				if (bufCalc > ConnectionConfiguration.BUFFERSIZE) {
-					buf = new byte[ConnectionConfiguration.BUFFERSIZE];
+				if (bufCalc > Configuration.BUFFERSIZE) {
+					buf = new byte[Configuration.BUFFERSIZE];
 					int len = is.read(buf);
 					os.write(buf);
 					bufCalc -= len;
@@ -324,8 +311,8 @@ public class TransmissionHandler {
 
 			bufCalc = wrap.getLength();
 			while (bufCalc > 0) {
-				if (bufCalc > ConnectionConfiguration.BUFFERSIZE) {
-					buf = new byte[ConnectionConfiguration.BUFFERSIZE];
+				if (bufCalc > Configuration.BUFFERSIZE) {
+					buf = new byte[Configuration.BUFFERSIZE];
 					int len = is.read(buf);
 					os.write(buf);
 					bufCalc -= len;
@@ -395,11 +382,19 @@ public class TransmissionHandler {
 		//Reading "[ACCEPT] - the size is 7
 		//The index of ACCEPT is n+1 to n-1
 		StringBuilder sb = new StringBuilder();
-		sb.append(this.bytesToString(aw.getData()));
-		byte[] buf = new byte[7];
+		if (aw != null) {
+			sb.append(this.bytesToString(aw.getData()));
+		
+		byte[] buf = new byte[8];
 		int len = is.read(buf);
 		sb.append(this.bytesToString(buf, 0, buf.length));
-		System.out.println("ACCEPT: " + sb.toString());
+		}	else if (aw == null) {
+		
+			int len = is.read();	//dump
+			byte[] buf = new byte[8];
+			len = is.read(buf);
+			sb.append(this.bytesToString(buf, 0, buf.length));
+		}
 		return (sb.toString().equals("ACCEPT") == true) ? true : false;
 	}
 
@@ -476,19 +471,19 @@ public class TransmissionHandler {
 	}
 	class ArrayWrapper {
 		private byte[] _data;
-		
+
 		ArrayWrapper(byte[] data) {
 			this._data = data;
 		}
-		
+
 		public byte[] getData() {
 			return this._data;
 		}
 	}
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 }
