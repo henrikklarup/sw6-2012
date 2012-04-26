@@ -306,67 +306,32 @@ public class HomeActivity extends Activity {
 		}
 	}
 
-	private void loadApplications() {
-		Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
-		mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+	/**
+	 * Loads the user's applications into the grid.
+	 */
+	private void loadApplications() {		
+		List<App> userApps = Tools.getVisibleApps(mContext, mCurrentUser);
 
-		final List<ResolveInfo> pkgAppsList = mContext.getPackageManager().queryIntentActivities(mainIntent, 0);
-		Collections.sort(pkgAppsList, new ResolveInfo.DisplayNameComparator(mContext.getPackageManager()));
-
-		if(pkgAppsList != null){
-			ArrayList<ApplicationInfo> applications = new ArrayList<ApplicationInfo>();
-			
-			
-			//FIXME ændre til at kører med oasis lib
-			int i = 0;
-			for(ResolveInfo info : pkgAppsList){
-				//Package (dk.aau.cs.giraf)
-				if(info.toString().toLowerCase().contains("dk.aau.cs.giraf") && !info.toString().toLowerCase().contains("launcher")) {
-					ApplicationInfo appInfo = new ApplicationInfo();
-
-					appInfo.title = info.loadLabel(getPackageManager());
-					if(appInfo.title.length() > 6){
-						appInfo.title = appInfo.title.subSequence(0, 5) + "...";
-					}
-					appInfo.icon = info.activityInfo.loadIcon(getPackageManager());
-					
-					appInfo.packageName = info.activityInfo.applicationInfo.packageName;
-					appInfo.activityName = info.activityInfo.name;
-					appInfo.guardian = mCurrentUser.getId();
-					
-
-			    	//App app = new App(appInfo.title.toString(), "random", "", appInfo.packageName,appInfo.activityName);
-					
-					
-					appInfo.color = TEMPAppColor(i);
-					
-					applications.add(appInfo);
-					
-					//have to change
-					i++;
-				}
-			}
-			
-			mGrid = (GridView)this.findViewById(R.id.GridViewHome);
-			mGrid.setAdapter(new AppAdapter(this,applications));
-			mGrid.setOnItemClickListener(new ProfileLauncher());
+		// If a guardian does not have any apps available, give them all on the device:
+		if (userApps.size() == 0 && mCurrentUser.getPRole() == Tools.ROLE_GUARDIAN) {
+			Tools.attachAllDeviceAppsToUser(mContext, mCurrentUser);
+			userApps = Tools.getVisibleApps(mContext, mCurrentUser);
 		}
-	}
-	
-	private int TEMPAppColor(int position) {
-		int[] c = getResources().getIntArray(R.array.appcolors);
-		return c[position];
-	}
-	
-	private int AppColor(int position, Setting<String,String,String> settings) {
-		int[] c = getResources().getIntArray(R.array.appcolors);
-		
-		if(settings.containsKey(Tools.COLORS)) {
-			int color = Integer.parseInt(settings.get(Tools.COLORS).get(Tools.COLOR_BG));
-			return c[color];
-		} else {
-			settings.addValue(Tools.COLORS, Tools.COLOR_BG, String.valueOf(c[position]));
-			return c[position];
+
+		if (userApps != null) {
+			ArrayList<AppInfo> appInfos = new ArrayList<AppInfo>();
+
+			for (App app : userApps) {
+				AppInfo appInfo = new AppInfo(app);
+
+				appInfo.load(mContext, mCurrentUser);
+
+				appInfos.add(appInfo);
+			}
+
+			mGrid = (GridView)this.findViewById(R.id.GridViewHome);
+			mGrid.setAdapter(new AppAdapter(this, appInfos));
+			mGrid.setOnItemClickListener(new ProfileLauncher());
 		}
 	}
 }

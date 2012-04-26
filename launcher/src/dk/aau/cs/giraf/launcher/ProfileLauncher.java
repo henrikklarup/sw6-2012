@@ -8,13 +8,13 @@ import android.content.Intent;
 	class ProfileLauncher extends Activity implements AdapterView.OnItemClickListener{
         @Override
         public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-            ApplicationInfo app = (ApplicationInfo) parent.getItemAtPosition(position);
+            AppInfo app = (AppInfo) parent.getItemAtPosition(position);
             
             Intent profileSelectIntent = new Intent(v.getContext(),ProfileSelectActivity.class);
-            profileSelectIntent.putExtra(Tools.APP_PACKAGENAME, app.packageName);
-            profileSelectIntent.putExtra(Tools.APP_ACTIVITYNAME, app.activityName);
-            profileSelectIntent.putExtra(Tools.GUARDIANID, app.guardian);
-            profileSelectIntent.putExtra(Tools.CHILDID, app.app);
+            // FIX!
+            //profileSelectIntent.putExtra(Tools.APP_PACKAGENAME, app.getPackageName());
+            //profileSelectIntent.putExtra(Tools.APP_ACTIVITYNAME, app.getActivityName());
+            profileSelectIntent.putExtra(Tools.GUARDIANID, app.getGuardianID());
             
 			v.getContext().startActivity(profileSelectIntent);
     }  
