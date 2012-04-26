@@ -6,19 +6,25 @@ import java.util.ArrayList;
 
 import org.jdom.Document;
 
+import savannah.io.CommunicationThread;
+
 public class CommitEvent implements Event {
 	
 	private Document event;
 	private Socket socket;
+	private CommunicationThread com1;
 	public ArrayList<File> files = null;
 	
-	public CommitEvent(Document d,Socket s,Boolean any_files)
+	public CommitEvent(Document d,Socket s,CommunicationThread com)
 	{
 		this.event = d;
 		this.socket = s;
-		if(any_files) {
-			this.files = new ArrayList<File>();
+		if(!(com.equals(null)))
+		{
+			this.com1 = com;
+			com.lockEngage();
 		}
+	
 	}
 	
 	public Document getEventContent()
@@ -55,5 +61,10 @@ public class CommitEvent implements Event {
 	@Override
 	public Event getEventType() {
 		return this;
+	}
+
+	@Override
+	public CommunicationThread getCom() {
+		return com1;
 	}
 }
