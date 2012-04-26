@@ -82,7 +82,7 @@ public class CRUD {
 			settings = new Setting<String, String, String>();
 		}
 		// Insert the hashmap with the subprofile ID as key
-		settings.put(String.valueOf(sp.getId()), hm);
+		settings.put(String.valueOf(sp.getDB_id()), hm);
 		app.setSettings(settings);
 		Profile newProf = oHelp.profilesHelper.getProfileById(c.getProfileId());
 		oHelp.appsHelper.modifyAppByProfile(app, newProf);
@@ -111,7 +111,7 @@ public class CRUD {
 		}
 		
 		// Insert the hashmap with the subprofile ID as key
-		settings.put(String.valueOf(sp.getId()), hm);
+		settings.put(String.valueOf(sp.getDB_id()), hm);
 		app.setSettings(settings);
 		Profile newProf = oHelp.profilesHelper.getProfileById(guardianId);
 		oHelp.appsHelper.modifyAppByProfile(app, newProf);
@@ -153,6 +153,7 @@ public class CRUD {
 	private SubProfile getSubProfile(HashMap<String, String> hm){		
 		SubProfile p = new SubProfile();
 		/* Load all settings from the hash table */
+		p.setDB_id(Long.valueOf(hm.get("db_id")));
 		p.setAttachmentId(Long.valueOf((String) hm.get("Attachment")));
 		p.name = String.valueOf(hm.get("Name"));
 		p.desc = String.valueOf(hm.get("desc"));	
@@ -200,12 +201,12 @@ public class CRUD {
 		Profile prof = oHelp.profilesHelper.getProfileById(profileId);
 		
 		// Find the Wombat App
-		App app = oHelp.appsHelper.getAppById(appId);
+		App app = oHelp.appsHelper.getAppByIds(appId, profileId);
 		
 		// Get the settings from the profile and update
-		Setting<String, String, String> settings = prof.getSettings();
-		settings.remove(Long.valueOf(p.getId()));
-		prof.setSettings(settings);
+		Setting<String, String, String> settings = app.getSettings();
+		settings.remove(Long.valueOf(p.getDB_id()));
+		app.setSettings(settings);
 		
 		// Update the app
 		oHelp.appsHelper.modifyAppByProfile(app, prof);
