@@ -13,6 +13,7 @@ public class PARROTProfile {
 	private Pictogram icon;
 	private ArrayList<Category> categories = new ArrayList<Category>();
 	private long profileID;
+	private int NumberOfSentencePictograms = 4;
 	
 	//TODO add settings such as colour specification and others...
 	
@@ -64,5 +65,13 @@ public class PARROTProfile {
 
 	public void setProfileID(long l) {
 		this.profileID = l;
+	}
+
+	public int getNumberOfSentencePictograms() {
+		return NumberOfSentencePictograms;
+	}
+
+	public void setNumberOfSentencePictograms(int numberOfSentencePictograms) {
+		NumberOfSentencePictograms = numberOfSentencePictograms;
 	}
 }
