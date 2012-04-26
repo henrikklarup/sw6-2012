@@ -20,7 +20,8 @@ import dk.aau.cs.giraf.oasis.lib.models.Setting;
 public class PARROTDataLoader {
 	
 	private Activity parrent;
-	Helper help;
+	private Helper help;
+	
 	public PARROTDataLoader(Activity activity)
 	{
 		this.parrent = activity;
@@ -36,9 +37,9 @@ public class PARROTDataLoader {
 		{
 			prof = help.profilesHelper.getProfileById(extras.getLong("currentChildID"));	//It used to be "currentProfileId"
 			app = help.appsHelper.getAppByIds(extras.getLong("currentAppId"), extras.getLong("currentChildID"));
-			Pictogram pic = new Pictogram(prof.getFirstname(), prof.getPicture(), null, null);
+			Pictogram pic = new Pictogram(prof.getFirstname(), prof.getPicture(), null, null);	//TODO discuss whether this image might be changed
 			PARROTProfile parrotUser = new PARROTProfile(prof.getFirstname(), pic);
-
+			parrotUser.setProfileID(prof.getId());
 			Setting<String, String, String> specialSettings = app.getSettings();//This object might be null //FIXME handle eventual null pointer exception
 
 			//Add all of the categories to the profile
@@ -77,9 +78,9 @@ public class PARROTDataLoader {
 
 	public Category loadCategory(String pictureIDs,int colour,String iconString)
 	{
-		int iconId = Integer.valueOf(iconString);
+		Long iconId = Long.valueOf(iconString);
 		Category cat = new Category(colour,loadPictogram(iconId));
-		ArrayList<Integer> listIDs = getIDsFromString(pictureIDs);
+		ArrayList<Long> listIDs = getIDsFromString(pictureIDs);
 		for(int i = 0; i<listIDs.size();i++)
 		{
 			cat.addPictogram(loadPictogram(listIDs.get(i)));
@@ -87,14 +88,18 @@ public class PARROTDataLoader {
 		return cat;
 	}
 
-	public Pictogram loadPictogram(int id)
+	public Pictogram loadPictogram(long id)	//FIXME make sure that all ID references are of the type long
 	{
 		Pictogram pic = null;
 		Media media=help.mediaHelper.getSingleMediaById(id); //This is the image media //TODO check type
+		
 		List<Media> subMedias =	help.mediaHelper.getSubMediaByMedia(media); //TODO find out if this is ok, or if it needs to be an ArrayList
 		Media investigatedMedia;
 		String soundPath = null;
 		String wordPath = null;
+		long soundID = -1;
+		long wordID = -1;
+		
 		if(subMedias != null)	//Media files can have a link to a sub-media file, check if this one does.
 		{
 			for(int i = 0;i<subMedias.size();i++) 		
@@ -103,21 +108,28 @@ public class PARROTDataLoader {
 				if(investigatedMedia.getMType().equals("SOUND"))
 				{
 					soundPath = investigatedMedia.getMPath();
+					soundID= investigatedMedia.getId();
 				}
 				else if(investigatedMedia.getMType().equals("WORD"))
 				{
 					wordPath = investigatedMedia.getMPath();
+					wordID = investigatedMedia.getId();
 				}
 			}
 		}
 		pic = new Pictogram(media.getName(), media.getMPath(), soundPath, wordPath);
+		//set the different ID's
+		pic.setImageID(id);
+		pic.setSoundID(soundID);
+		pic.setWordID(wordID);
+		
 		return pic;
 	}
 
 	//This function takes a string consisting of IDs, and returns a list of integer IDs instead
-	public ArrayList<Integer> getIDsFromString(String IDstring)
+	public ArrayList<Long> getIDsFromString(String IDstring)
 	{
-		ArrayList<Integer> listOfID = new ArrayList<Integer>();
+		ArrayList<Long> listOfID = new ArrayList<Long>();
 
 		if(IDstring !=null && IDstring.charAt(0)!='$' && IDstring.charAt(0)!='#')
 		{
@@ -136,7 +148,7 @@ public class PARROTDataLoader {
 				}
 				else
 				{
-					listOfID.add(Integer.valueOf(temp));
+					listOfID.add(Long.valueOf(temp));
 					w++;
 					temp = String.valueOf(IDstring.charAt(w));
 				}
@@ -148,6 +160,9 @@ public class PARROTDataLoader {
 
 	public void saveProfile(PARROTProfile user)
 	{
+		Profile prof = new Profile();
+		
+		help.mediaHelper.modifyMedia(media).profilesHelper.modifyProfile(prof);
 		//TODO write this method so that it sends the changes to the admin.
 		//Seems easy enough, as the admin functionality will automatically replace the media files.
 

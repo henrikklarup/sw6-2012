@@ -12,6 +12,8 @@ public class PARROTProfile {
 	private String name;
 	private Pictogram icon;
 	private ArrayList<Category> categories = new ArrayList<Category>();
+	private long profileID;
+	
 	//TODO add settings such as colour specification and others...
 	
 	public PARROTProfile(String name, Pictogram icon)
@@ -54,5 +56,13 @@ public class PARROTProfile {
 
 	public void setIcon(Pictogram icon) {
 		this.icon = icon;
+	}
+
+	public long getProfileID() {
+		return profileID;
+	}
+
+	public void setProfileID(long l) {
+		this.profileID = l;
 	}
 }

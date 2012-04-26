@@ -17,6 +17,12 @@ public class Pictogram {
 	private String soundPath;             ///< Corresponding sound effect.
 	private String wordPath; 		///< Corresponding pronounciation.
 
+	private long imageID;
+	private long soundID;
+	private long wordID;
+	private boolean newPictogram =false;
+	private boolean changed = false;
+	
 	//This are the constructor for the Pictogram class
 	public Pictogram(String name, String imagePath, String soundPath, String wordPath)
 	{
@@ -28,16 +34,6 @@ public class Pictogram {
 
 	//TODO make methods to ensure that the constructor can not put illegal arguments as the path for images, sounds and words
 
-	//TODO make methods to show images and play sounds and words.
-	
-	
-//	public ImageView getImage()
-//	{
-//		//FIXME this method will throw an exception if the path is invalid
-//		ImageView image = new ImageView(context);
-//		image.setImageBitmap(getBitmap());
-//		return image;
-//	}
 
 	public Bitmap getBitmap()
 	{
@@ -111,6 +107,46 @@ public class Pictogram {
 		{
 			playItem(wordPath);
 		}
+	}
+
+	public long getImageID() {
+		return imageID;
+	}
+
+	public void setImageID(long id) {
+		this.imageID = id;
+	}
+
+	public long getSoundID() {
+		return soundID;
+	}
+
+	public void setSoundID(long soundID) {
+		this.soundID = soundID;
+	}
+
+	public long getWordID() {
+		return wordID;
+	}
+
+	public void setWordID(long wordID) {
+		this.wordID = wordID;
+	}
+
+	public boolean isNewPictogram() {
+		return newPictogram;
+	}
+
+	public void setNewPictogram(boolean newPictogram) {
+		this.newPictogram = newPictogram;
+	}
+
+	public boolean isChanged() {
+		return changed;
+	}
+
+	public void setChanged(boolean changed) {
+		this.changed = changed;
 	}
 
 }
