@@ -6,6 +6,7 @@ import java.util.List;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.net.Uri;
 import dk.aau.cs.giraf.oasis.lib.metadata.ListOfAppsMetaData;
 import dk.aau.cs.giraf.oasis.lib.models.App;
 import dk.aau.cs.giraf.oasis.lib.models.ListOfApps;
@@ -59,8 +60,8 @@ class ListOfAppsController {
 		cv.put(ListOfAppsMetaData.Table.COLUMN_IDPROFILE, listOfApps.getIdProfile());
 		cv.put(ListOfAppsMetaData.Table.COLUMN_SETTINGS, Setting.toStringSetting(listOfApps.getSetting()));
 		cv.put(ListOfAppsMetaData.Table.COLUMN_STATS, Stat.toStringStat(listOfApps.getStat()));
-		_context.getContentResolver().insert(ListOfAppsMetaData.CONTENT_URI, cv);
-		return 0;
+		Uri uri = _context.getContentResolver().insert(ListOfAppsMetaData.CONTENT_URI, cv);
+		return Integer.parseInt(uri.getPathSegments().get(1));
 	}
 
 	/**
