@@ -1,11 +1,8 @@
 package dk.aau.cs.giraf.parrot;
 
 
-import android.content.ClipData;
 import android.content.Context;
 import android.view.View;
-import android.view.View.DragShadowBuilder;
-import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
