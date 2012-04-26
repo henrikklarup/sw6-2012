@@ -68,7 +68,9 @@ public class IOHandler implements Runnable {
 				this.connections.put(con, new DataOutputStream(con.getOutputStream()));
 				//				this.connections.add(new ConnectionIO(con, new DataOutputStream(con.getOutputStream())));
 				//Starts a new Thread used for communication
-				new CommunicationThread(con, this.folder, this.bufferSize).run();
+				Thread comThread = new CommunicationThread(con, this.folder, this.bufferSize);
+				comThread.start();
+				
 			}	catch (IOException e) {
 				System.out.println("Could not accept connection !");
 			}
