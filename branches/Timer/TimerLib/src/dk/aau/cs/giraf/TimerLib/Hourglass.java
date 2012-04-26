@@ -14,15 +14,6 @@ public class Hourglass extends SubProfile {
 	
 	public Hourglass copy(){
 		Hourglass copyP = new Hourglass(this);
-		Breakhere:
-		for (Child c : guard.Children()) {
-			for (SubProfile sp : c.SubProfiles()) {
-				if(this.getId() == sp.getId()){
-					copyP.setDB_id(c.getNewId());
-					break Breakhere;
-				}
-			}
-		}
 		
 		if(this._attachment != null){
 			copyP.setAttachment(this._attachment);

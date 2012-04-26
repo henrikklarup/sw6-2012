@@ -162,15 +162,6 @@ public class SubProfile implements Comparable<SubProfile>{
 	}
 	
 	public SubProfile copy(){
-		Breakhere:
-		for (Child c : guard.Children()) {
-			for (SubProfile sp : c.SubProfiles()) {
-				if(this.getId() == sp.getId()){
-					this.setDB_id(c.getNewId());
-					break Breakhere;
-				}
-			}
-		}
 		return this;
 	}
 	

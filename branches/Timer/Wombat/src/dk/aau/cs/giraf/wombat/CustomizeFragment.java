@@ -37,7 +37,6 @@ import dk.aau.cs.giraf.TimerLib.Child;
 import dk.aau.cs.giraf.TimerLib.Guardian;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
 import dk.aau.cs.giraf.TimerLib.formFactor;
-import dk.aau.cs.giraf.wombat.drawlib.DrawLibActivity;
 
 public class CustomizeFragment extends Fragment {
 	private SubProfile preSubP;
@@ -597,7 +596,7 @@ public class CustomizeFragment extends Fragment {
 	private void initBottomMenu() {
 		initSaveButton();
 		initSaveAsButton();
-		initStartButton();
+		//initStartButton();
 	}
 
 	/**
@@ -807,41 +806,41 @@ public class CustomizeFragment extends Fragment {
 	/**
 	 * Initialize the start button
 	 */
-	private void initStartButton() {
-		startButton = (Button) getActivity().findViewById(
-				R.id.customize_start_button);
-		Drawable d;
-		if (currSubP.saveAs) {
-			d = getResources().getDrawable(R.drawable.thumbnail_start);
-			startButton.setOnClickListener(new OnClickListener() {
-
-				public void onClick(View v) {
-					currSubP.addLastUsed(preSubP);
-					Guardian.saveGuardian(currSubP);
-					currSubP.select();
-					Intent i = new Intent(
-							getActivity().getApplicationContext(),
-							// TODO: Change according to openGL or canvas
-							// OpenGLActivity.class);
-							DrawLibActivity.class);
-					startActivity(i);
-				}
-			});
-		} else {
-			d = getResources().getDrawable(R.drawable.thumbnail_start_gray);
-			startButton.setOnClickListener(new OnClickListener() {
-
-				public void onClick(View v) {
-					Toast t = Toast.makeText(getActivity(),
-							getString(R.string.cant_start), 2000);
-					t.show();
-				}
-			});
-		}
-
-		startButton
-				.setCompoundDrawablesWithIntrinsicBounds(null, d, null, null);
-	}
+//	private void initStartButton() {
+//		startButton = (Button) getActivity().findViewById(
+//				R.id.customize_start_button);
+//		Drawable d;
+//		if (currSubP.saveAs) {
+//			d = getResources().getDrawable(R.drawable.thumbnail_start);
+//			startButton.setOnClickListener(new OnClickListener() {
+//
+//				public void onClick(View v) {
+//					currSubP.addLastUsed(preSubP);
+//					Guardian.saveGuardian(currSubP);
+//					currSubP.select();
+//					Intent i = new Intent(
+//							getActivity().getApplicationContext(),
+//							// TODO: Change according to openGL or canvas
+//							// OpenGLActivity.class);
+//							DrawLibActivity.class);
+//					startActivity(i);
+//				}
+//			});
+//		} else {
+//			d = getResources().getDrawable(R.drawable.thumbnail_start_gray);
+//			startButton.setOnClickListener(new OnClickListener() {
+//
+//				public void onClick(View v) {
+//					Toast t = Toast.makeText(getActivity(),
+//							getString(R.string.cant_start), 2000);
+//					t.show();
+//				}
+//			});
+//		}
+//
+//		startButton
+//				.setCompoundDrawablesWithIntrinsicBounds(null, d, null, null);
+//	}
 
 	/**
 	 * Sets the predefined settings of the chosen subprofile
