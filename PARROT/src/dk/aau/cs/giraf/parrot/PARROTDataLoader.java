@@ -11,6 +11,12 @@ import dk.aau.cs.giraf.oasis.lib.models.Media;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 import dk.aau.cs.giraf.oasis.lib.models.Setting;
 
+/**
+ * 
+ * @Rasmus
+ * The PARROT Data Loader is used for interacting with the admin functionality of the GIRAF Project.
+ *
+ */
 public class PARROTDataLoader {
 	private Activity parrent;
 	public PARROTDataLoader(Activity activity)
