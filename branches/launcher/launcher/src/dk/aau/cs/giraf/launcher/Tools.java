@@ -139,7 +139,7 @@ public class Tools {
 
 		// Remove all apps from user's list of apps that are not installed on the device.
 		for (int i = 0; i < deviceApps.size(); i++) {
-			if (!userApps.contains(deviceApps.get(i))) {
+			if (!appsContain_A(userApps, deviceApps.get(i).getaPackage())) {
 				deviceApps.remove(i);
 				i--;
 			}
@@ -218,8 +218,9 @@ public class Tools {
 		}
 		
 		for (int i = 0; i < deviceApps.size(); i++) {
-			if (userApps.contains(deviceApps.get(i))) {
+			if (appsContain_A(userApps, deviceApps.get(i).getaPackage())) {
 				deviceApps.remove(i);
+				i--;
 			}
 		}
 		

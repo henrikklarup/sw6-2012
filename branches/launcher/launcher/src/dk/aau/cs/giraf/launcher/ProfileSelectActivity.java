@@ -59,7 +59,7 @@ public class ProfileSelectActivity extends Activity {
 
 		// Remove profiles which are not children
 		for(int i = 0; i < mProfiles.size(); i++) {
-			if (mProfiles.get(i).getPRole() != 3L) {
+			if (mProfiles.get(i).getPRole() != Tools.ROLE_CHILD) {
 				mProfiles.remove(i);
 				i--;
 			}
