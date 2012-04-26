@@ -1,7 +1,10 @@
 package savannah.server;
 
+import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
+
+import savannah.io.CRUD;
 
 public class RequestHandler {
 	
@@ -35,13 +38,15 @@ public class RequestHandler {
 	public void HandleIt(RequestEvent e)
 	{
 		try{
+			
 		String s = e.getEventContent();
 		ArrayList<String> que = qbuilder.buildQueries(s);
 		rset = RunQueries(que);
 		xml = xBuilder.build(rset);
-		ArrayList<String> files = xBuilder.getFiles();
-		
-		savannah.io.IOHandler.getInstance().respond(e.getEventsocket(),xml);
+		ArrayList<File> files = xBuilder.getFiles();
+		File[] afiles = new File[files.size()];
+		files.toArray(afiles);
+		savannah.io.IOHandler.getInstance().respond(e.getEventsocket(),CRUD.REQUEST,xml,afiles);
 		
 		}
 		
