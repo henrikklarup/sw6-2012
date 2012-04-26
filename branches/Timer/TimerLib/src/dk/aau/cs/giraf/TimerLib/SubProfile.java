@@ -105,14 +105,6 @@ public class SubProfile implements Comparable<SubProfile>{
 		}
 	}
 	
-	void setAppId(long id){
-		this._appId = id;
-	}
-	
-	long getAppId(){
-		return this._appId;
-	}
-	
 	public void select(){
 		guard.setSubProfile(this);
 	}
@@ -123,7 +115,6 @@ public class SubProfile implements Comparable<SubProfile>{
 				for(SubProfile p : c.SubProfiles()){
 					if(p._id == this._id){
 						guard.delete(c, this);
-						Guardian.crud.removeSubprofileFromProfileId(this, c.getProfileId());
 						break START;
 					}
 				}
@@ -158,7 +149,6 @@ public class SubProfile implements Comparable<SubProfile>{
 	
 	public void setAttachment(SubProfile p){
 		if(p != null){
-			this._attachmentId = p.getAppId();
 			this._attachment = p;
 			this._attachment._totalTime = this._totalTime;
 		} else {
@@ -172,6 +162,15 @@ public class SubProfile implements Comparable<SubProfile>{
 	}
 	
 	public SubProfile copy(){
+		Breakhere:
+		for (Child c : guard.Children()) {
+			for (SubProfile sp : c.SubProfiles()) {
+				if(this.getId() == sp.getId()){
+					this.setDB_id(c.getNewId());
+					break Breakhere;
+				}
+			}
+		}
 		return this;
 	}
 	
@@ -264,7 +263,7 @@ public class SubProfile implements Comparable<SubProfile>{
 	}
 
 	public void setDB_id(long dB_id) {
-		if(this.DB_id == -1){
+		if(this.DB_id < 0){
 			this.DB_id = dB_id;
 		}
 	}

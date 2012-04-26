@@ -58,7 +58,22 @@ public class CRUD {
 			for (SubProfile subProfile : mSubPs) {
 				mC.SubProfiles().add(subProfile);
 			}
+			
+			// Get the biggest ID from the database
+			long id = -1;
+			App app = oHelp.appsHelper.getAppByIds(appId, c.getId());
+			if(app.getSettings() != null){
+				Setting<String, String, String> settings = app.getSettings();
+				Set<String> keys = settings.keySet();
+		
+				for (String key : keys) {
+					if(id < Long.valueOf(key)){
+						id = Long.valueOf(key);
+					}					
+				}	
+			}			
 			mC.setSubProfileId(id);
+			
 			guard.Children().add(mC);
 		}
 	}

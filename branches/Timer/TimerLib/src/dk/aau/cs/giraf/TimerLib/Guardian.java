@@ -9,6 +9,7 @@ import dk.aau.cs.giraf.oasis.lib.models.App;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
 import android.content.Context;
+import android.widget.Toast;
 
 public class Guardian {
 	
@@ -268,6 +269,7 @@ public class Guardian {
 
 	//Waiting for admin
 	void initLastUsed(ArrayList<SubProfile> profile){
+		_lastUsed = new ArrayList<SubProfile>();
 		for(SubProfile p : profile){
 			_lastUsed.add(p);
 		}
@@ -316,7 +318,9 @@ public class Guardian {
 	 * Clears last
 	 */
 	public void clearLastUsed(){
-		_lastUsed.clear();
+		if(_lastUsed != null){
+			_lastUsed.clear();
+		}
 	}
 	
 	/**
@@ -363,23 +367,12 @@ public class Guardian {
 		
 		return _sortedList;
 	}
-	
-	SubProfile findSubProfileByAppId(long id){
-		SubProfile rP = null;
-		ArrayList<Child> allLists = new ArrayList<Child>();
-		allLists.addAll(Children());
-		Child temp = new Child("predef");
-		temp.SubProfiles().addAll(predefined());
-		allLists.add(temp);
-		for(Child c : allLists){
-			for(SubProfile p : c.SubProfiles()){
-				if(id == p.getAppId()){
-					rP = p;
-				}
-			}
-		}
-		
-		return rP;
+
+	public void delete(Child c, SubProfile subProfile) {
+		c.SubProfiles().remove(subProfile);
+		crud.removeSubprofileFromProfileId(subProfile, c.getProfileId());
+		//TODO: DELETE THIS
+		Toast.makeText(m_context, subProfile.getDB_id() + " ", Toast.LENGTH_SHORT).show();
 	}
 
 

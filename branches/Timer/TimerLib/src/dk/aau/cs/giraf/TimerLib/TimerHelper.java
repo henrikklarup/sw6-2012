@@ -24,7 +24,7 @@ public class TimerHelper {
 
 	public void loadPredef(){
 		
-		long appId = -2;
+		long profileId = -2;
 		
 		Guardian guard = Guardian.getInstance();
 		guard.predefined().clear();
@@ -35,12 +35,12 @@ public class TimerHelper {
 		Hourglass hourglass10min = new Hourglass("Timeglas - 10 min", "Timeglas - (10:0)", 0xff3D3D3D, 0xffFF0000, 0xffB8B8B8, 0xff000000, 600, false);
 		Hourglass hourglass30min = new Hourglass("Timeglas - 30 min", "Timeglas - (30:0)", 0xff3D3D3D, 0xff000000, 0xffB8B8B8, 0xff000000, 1800, false);
 					
-		hourglass30sec.setAppId(appId--);
-		hourglass1min.setAppId(appId--);
-		hourglass3min.setAppId(appId--);
-		hourglass5min.setAppId(appId--);
-		hourglass10min.setAppId(appId--);
-		hourglass30min.setAppId(appId--);
+		hourglass30sec.setId(profileId--);
+		hourglass1min.setId(profileId--);
+		hourglass3min.setId(profileId--);
+		hourglass5min.setId(profileId--);
+		hourglass10min.setId(profileId--);
+		hourglass30min.setId(profileId--);
 		
 		ProgressBar ProgressBar30sec = new ProgressBar("ProgressBar - 30 sek", "ProgressBar - (0:30)", 0xff3D3D3D, 0xffffffff, 0xffB8B8B8, 0xff000000, 30, false);
 		ProgressBar ProgressBar1min = new ProgressBar("ProgressBar - 1 min", "ProgressBar - (1:0)", 0xff3D3D3D, 0xff000066, 0xffB8B8B8, 0xff000000, 60, false);
@@ -49,12 +49,12 @@ public class TimerHelper {
 		ProgressBar ProgressBar10min = new ProgressBar("ProgressBar - 10 min", "ProgressBar - (10:0)", 0xff3D3D3D, 0xffFF0000, 0xffB8B8B8, 0xff000000, 600, false);
 		ProgressBar ProgressBar30min = new ProgressBar("ProgressBar - 30 min", "ProgressBar - (30:0)", 0xff3D3D3D, 0xff000000, 0xffB8B8B8, 0xff000000, 1800, false);
 		
-		ProgressBar30sec.setAppId(appId--);
-		ProgressBar1min.setAppId(appId--);
-		ProgressBar3min.setAppId(appId--);
-		ProgressBar5min.setAppId(appId--);
-		ProgressBar10min.setAppId(appId--);
-		ProgressBar30min.setAppId(appId--);
+		ProgressBar30sec.setId(profileId--);
+		ProgressBar1min.setId(profileId--);
+		ProgressBar3min.setId(profileId--);
+		ProgressBar5min.setId(profileId--);
+		ProgressBar10min.setId(profileId--);
+		ProgressBar30min.setId(profileId--);
 		
 		DigitalClock DigitalClock30sec = new DigitalClock("DigitalClock - 30 sek", "DigitalClock - (0:30)", 0xff3D3D3D, 0xffffffff, 0xffB8B8B8, 0xff000000, 30, false);
 		DigitalClock DigitalClock1min = new DigitalClock("DigitalClock - 1 min", "DigitalClock - (1:0)", 0xff3D3D3D, 0xff000066, 0xffB8B8B8, 0xff000000, 60, false);
@@ -63,12 +63,12 @@ public class TimerHelper {
 		DigitalClock DigitalClock10min = new DigitalClock("DigitalClock - 10 min", "DigitalClock - (10:0)", 0xff3D3D3D, 0xffFF0000, 0xffB8B8B8, 0xff000000, 600, false);
 		DigitalClock DigitalClock30min = new DigitalClock("DigitalClock - 30 min", "DigitalClock - (30:0)", 0xff3D3D3D, 0xff000000, 0xffB8B8B8, 0xff000000, 1800, false);
 				
-		DigitalClock30sec.setAppId(appId--);
-		DigitalClock1min.setAppId(appId--);
-		DigitalClock3min.setAppId(appId--);
-		DigitalClock5min.setAppId(appId--);
-		DigitalClock10min.setAppId(appId--);
-		DigitalClock30min.setAppId(appId--);
+		DigitalClock30sec.setId(profileId--);
+		DigitalClock1min.setId(profileId--);
+		DigitalClock3min.setId(profileId--);
+		DigitalClock5min.setId(profileId--);
+		DigitalClock10min.setId(profileId--);
+		DigitalClock30min.setId(profileId--);
 		
 		TimeTimer TimeTimer30sec = new TimeTimer("Ur - 30 sek", "Ur - (0:30)", 0xff3D3D3D, 0xffffffff, 0xffB8B8B8, 0xff000000, 30, false);
 		TimeTimer TimeTimer1min = new TimeTimer("Ur - 1 min", "Ur - (1:0)", 0xff3D3D3D, 0xff000066, 0xffB8B8B8, 0xff000000, 60, false);
@@ -77,12 +77,12 @@ public class TimerHelper {
 		TimeTimer TimeTimer10min = new TimeTimer("Ur - 10 min", "Ur - (10:0)", 0xff3D3D3D, 0xffFF0000, 0xffB8B8B8, 0xff000000, 600, false);
 		TimeTimer TimeTimer30min = new TimeTimer("Ur - 30 min", "Ur - (30:0)", 0xff3D3D3D, 0xff000000, 0xffB8B8B8, 0xff000000, 1800, false);
 		
-		TimeTimer30sec.setAppId(appId--);
-		TimeTimer1min.setAppId(appId--);
-		TimeTimer3min.setAppId(appId--);
-		TimeTimer5min.setAppId(appId--);
-		TimeTimer10min.setAppId(appId--);
-		TimeTimer30min.setAppId(appId--);
+		TimeTimer30sec.setId(profileId--);
+		TimeTimer1min.setId(profileId--);
+		TimeTimer3min.setId(profileId--);
+		TimeTimer5min.setId(profileId--);
+		TimeTimer10min.setId(profileId--);
+		TimeTimer30min.setId(profileId--);
 		
 		guard.predefined().add(hourglass30sec);
 		guard.predefined().add(hourglass1min);
