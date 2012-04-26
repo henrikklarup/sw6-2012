@@ -19,13 +19,13 @@ public class SubProfile implements Comparable<SubProfile>{
 	protected SubProfile _attachment = null;
 	private long _attachmentId = -1;
 	private long _appId = -1;
+	private long DB_id = -1;
 
 	//constructor
 	public SubProfile(String name, String description, int bgcolor, int timeLeftColor, int timeSpentColor, int frameColor, int totalTime, boolean changeColor){
 		if(this._id == -1){
 			this._id = guard.getId();
-		}
-		this.name = name;
+		}		this.name = name;
 		this.desc = description;
 		this.bgcolor = bgcolor;
 		this.timeLeftColor = timeLeftColor;
@@ -71,7 +71,8 @@ public class SubProfile implements Comparable<SubProfile>{
 	 */
 	public HashMap<String, String> getHashMap(){
 		
-		HashMap<String, String> map = new HashMap<String, String>();		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("db_id", String.valueOf(this.getDB_id()));
 		map.put("type", this.formType().toString());		
 		map.put("Attachment", String.valueOf(this.getAttachmentId()));		
 		map.put("Name", this.name);		
@@ -204,70 +205,68 @@ public class SubProfile implements Comparable<SubProfile>{
 	}
 
 	public boolean equals(Object o) {
-	        if (!(o instanceof SubProfile))
-	            return false;
-	        SubProfile n = (SubProfile) o;
-	        return n.name.equals(name) && n.name.equals(name);
-	    }
+        if (!(o instanceof SubProfile))
+            return false;
+        SubProfile n = (SubProfile) o;
+        return n.name.equals(name) && n.name.equals(name);
+    }
 
-	    public int hashCode() {
-	        return 31*name.hashCode() + name.hashCode();
-	    }
+    public int hashCode() {
+        return 31*name.hashCode() + name.hashCode();
+    }
 
-	    public String toString() {
-		return name + " " + name;
-	    }
+    public String toString() {
+	return name + " " + name;
+    }
 
-	    public int compareTo(SubProfile n) {
-	        int lastCmp = name.compareTo(n.name);
-	        return (lastCmp != 0 ? lastCmp : name.compareTo(n.name));
-	    }
+    public int compareTo(SubProfile n) {
+        int lastCmp = name.compareTo(n.name);
+        return (lastCmp != 0 ? lastCmp : name.compareTo(n.name));
+    }
 
-		public SubProfile toHourglass() {
-			Hourglass form = new Hourglass(this.name, this.desc, this.bgcolor, this.timeLeftColor, this.timeSpentColor, this.frameColor, this._totalTime, this.gradient);
-			form.setId(this.getId());		
-			if(this._attachment != null){
-				form.setAttachment(this._attachment);
-			}
-			return form;
+	public SubProfile toHourglass() {
+		Hourglass form = new Hourglass(this.name, this.desc, this.bgcolor, this.timeLeftColor, this.timeSpentColor, this.frameColor, this._totalTime, this.gradient);
+		form.setId(this.getId());		
+		if(this._attachment != null){
+			form.setAttachment(this._attachment);
 		}
+		return form;
+	}
 
-		public SubProfile toProgressBar() {
-			ProgressBar form = new ProgressBar(this.name, this.desc, this.bgcolor, this.timeLeftColor, this.timeSpentColor, this.frameColor, this._totalTime, this.gradient);
-			form.setId(this.getId());
-			if(this._attachment != null){
-				form.setAttachment(this._attachment);
-			}
-			return form;
+	public SubProfile toProgressBar() {
+		ProgressBar form = new ProgressBar(this.name, this.desc, this.bgcolor, this.timeLeftColor, this.timeSpentColor, this.frameColor, this._totalTime, this.gradient);
+		form.setId(this.getId());
+		if(this._attachment != null){
+			form.setAttachment(this._attachment);
 		}
+		return form;
+	}
 
-		public SubProfile toTimeTimer() {
-			TimeTimer form = new TimeTimer(this.name, this.desc, this.bgcolor, this.timeLeftColor, this.timeSpentColor, this.frameColor, this._totalTime, this.gradient);
-			form.setId(this.getId());
-			if(this._attachment != null){
-				form.setAttachment(this._attachment);
-			}
-			return form;
+	public SubProfile toTimeTimer() {
+		TimeTimer form = new TimeTimer(this.name, this.desc, this.bgcolor, this.timeLeftColor, this.timeSpentColor, this.frameColor, this._totalTime, this.gradient);
+		form.setId(this.getId());
+		if(this._attachment != null){
+			form.setAttachment(this._attachment);
 		}
+		return form;
+	}
 
-		public SubProfile toDigitalClock() {
-			DigitalClock form = new DigitalClock(this.name, this.desc, this.bgcolor, this.timeLeftColor, this.timeSpentColor, this.frameColor, this._totalTime, this.gradient);
-			form.setId(this.getId());
-			if(this._attachment != null){
-				form.setAttachment(this._attachment);
-			}
-			return form;
+	public SubProfile toDigitalClock() {
+		DigitalClock form = new DigitalClock(this.name, this.desc, this.bgcolor, this.timeLeftColor, this.timeSpentColor, this.frameColor, this._totalTime, this.gradient);
+		form.setId(this.getId());
+		if(this._attachment != null){
+			form.setAttachment(this._attachment);
 		}
-	    
-	    //convertTo methods
-	    /*
-	    public Hourglass toHourglass(){
-	    	Hourglass glass = new Hourglass();
-	    	return glass;
-	    }
-	    
-	    public Hourglass toHourglass(){
-	    	Hourglass glass = new Hourglass();
-	    	return glass;
-	    }*/
+		return form;
+	}
+
+	public long getDB_id() {
+		return DB_id;
+	}
+
+	public void setDB_id(long dB_id) {
+		if(this.DB_id == -1){
+			this.DB_id = dB_id;
+		}
+	}
 }
