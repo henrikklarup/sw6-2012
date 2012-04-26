@@ -1,5 +1,4 @@
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -8,8 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,10 +19,16 @@ import javax.servlet.http.HttpSession;
 import org.apache.jasper.tagplugins.jstl.core.ForEach;
 
 import com.sun.corba.se.impl.oa.poa.AOMEntry;
+import com.sun.net.httpserver.HttpContext;
 
 /**
  * Servlet implementation class SelectProfile
  */
+
+@WebServlet(
+		name = "SelectProfile", 
+		urlPatterns = {"/SelectProfile"}
+		)
 public class SelectProfile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -30,10 +37,12 @@ public class SelectProfile extends HttpServlet {
 	String guardian;
 	String parent;
 	String username;
-
+	String loginID;
+	String context;
 
 	ArrayList<Profile> profiles = new ArrayList<Profile>();
 	ArrayList<Profile> guardians = new ArrayList<Profile>();
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -43,9 +52,11 @@ public class SelectProfile extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
 		HttpSession session = request.getSession();
@@ -54,143 +65,140 @@ public class SelectProfile extends HttpServlet {
 
 		guardians.clear();
 
-		String loginID = request.getParameter("myId");
+		context = request.getContextPath();
 
+		loginID = request.getParameter("myId");
 
-		//Check if not number in id
-		if (loginID != null)
-		{
+		// Check if not number in id
+		if (loginID != null) {
 			try {
 				Integer.parseInt(request.getParameter("myId"));
 
 			} catch (NumberFormatException e) {
 				// TODO: handle exception
 				loginID = null;
-				session.setAttribute("SelectProfileERROR","Fejl id id (Kun numre er gyldige)");
-
+				session.setAttribute("SelectProfileERROR",
+						"Fejl id id (Kun numre er gyldige)");
 
 			}
 		}
 
 
 		String triedLogin = request.getParameter("triedLogin");
-		String guardianID = request.getParameter("guardianID");
+		String	guardianID = request.getParameter("guardianID");
 		String password1 = request.getParameter("password1");
-		//String username1 = request.getParameter("username");
+		// String username1 = request.getParameter("username");
 		Profile originalProfile;
-		//String originalUsername = request.getParameter("username");
+		// String originalUsername = request.getParameter("username");
 		String openVar = request.getParameter("jsOpenVar");
 		if (openVar == null)
 			openVar = "0";
 
-
-
-
-		Connection con = null;  
+		Connection con = null;
 		Statement stmt = null;
 		ResultSet rs = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			con =DriverManager.getConnection 
-					("jdbc:mysql://172.25.11.65:3306/04","eder","123456");
+			con = DriverManager.getConnection(
+					"jdbc:mysql://172.25.11.65:3306/04", "eder", "123456");
 			stmt = con.createStatement();
-			rs = stmt.executeQuery("SELECT idUser, username, idProfile, firstname, middlename, surname from AuthUsers, Profile " +
-					   			 "where idUser = idProfile;");
+			rs = stmt
+					.executeQuery("SELECT idUser, username, idProfile, firstname, middlename, surname, picture from AuthUsers, Profile "
+							+ "where idUser = idProfile;");
 			// displaying records
-			while(rs.next()){
+			while (rs.next()) {
 				id = rs.getInt("idUser");
-				name = rs.getString("firstname") + " " +rs.getString("middlename") + " " + rs.getString("surname");
+				name = rs.getString("firstname") + " "
+						+ rs.getString("middlename") + " "
+						+ rs.getString("surname");
 				username = rs.getString("username");
 
-				Profile p = new Profile(id,rs.getString("firstname"),rs.getString("middlename"),rs.getString("surname"),1,-1,null);
+				String picture = rs.getString("picture");
+				if (picture == null || picture.equals("null"))
+					picture = context + "/images/i.jpg";
+				else
+					picture = context + picture;
+
+				Profile p = new Profile(id, rs.getString("firstname"),
+						rs.getString("middlename"), rs.getString("surname"), 1,
+						-1, picture);
 
 				profiles.add(p);
 			}
 
-			if (loginID != null)
-			{
+			if (loginID != null) {
 
-				if (triedLogin != null && triedLogin.equals("1") && guardianID != null)
+				rs = stmt.executeQuery("select * from Profile, AuthUsers "
+						+ "where idProfile = " + loginID + ";");
+				originalProfile = null;
+				while (rs.next()) {
+					String picture = rs.getString("picture");
+
+					originalProfile = new Profile(rs.getInt("idProfile"),
+							rs.getString("firstname"),
+							rs.getString("surname"),
+							rs.getString("middlename"), 1, -1, picture);
+
+				}
+
+				guardians.add(originalProfile);
+
+				if (triedLogin != null && triedLogin.equals("1")
+						&& guardianID != null) 
 				{
 					stmt = con.createStatement();
-					rs = stmt.executeQuery("select username, password from AuthUsers "+
-							"where idUser = " + guardianID + ";");
+					rs = stmt
+							.executeQuery("select username, password from AuthUsers "
+									+ "where idUser = " + guardianID + ";");
 
 					// displaying records
-					while(rs.next()){
-						String correctPass= rs.getString("password");
+					while (rs.next()) {
+						String correctPass = rs.getString("password");
 						String correcUsername = rs.getString("username");
-
 
 						session.setAttribute("LOGGEDINAS", correcUsername);
 
-						if (password1.equals(correctPass))
-						{
+						if (password1.equals(correctPass)) {
 							session.setAttribute("ID", loginID);
 							session.setAttribute("USER", correcUsername);
 
-							response.sendRedirect("main");
-						}
-						else
-						{
-							out.println("ERROR");
-						}
-					}
-				}
-				else
-				{
-					stmt = con.createStatement();
-					rs = stmt.executeQuery("select * from Profile, AuthUsers "+
-							"where idProfile = "+loginID+";");
-					originalProfile = null;
-					while(rs.next()){
-						originalProfile = new Profile(rs.getInt("idProfile"),rs.getString("firstname"),rs.getString("surname"), rs.getString("middlename"),  1, -1, null);
-					}
-					rs = stmt.executeQuery("select * from Profile "+
-							"where idProfile in (select idGuardian from HasGuardian " +
-							"where idChild = "+loginID+");");
-					guardians.add(originalProfile);
-					// displaying records
-					while(rs.next()){
-						id = rs.getInt("idProfile");
-						name = rs.getString("firstname") + " " +rs.getString("middlename") + " " + rs.getString("surname");
-						Profile g = new Profile(rs.getInt("idProfile"),rs.getString("firstname"),rs.getString("surname"), rs.getString("middlename"),  1, -1, null,username);
-						guardians.add(g);
-					}
-				}
+							response.sendRedirect("/TestDatabase/main");
+						} else {
+							session.setAttribute("LOGINMESSAGE", "<font color='red'>Forkert login</font><br>");
 
+						}
+					}
+				} 
+				else {
+					getGuardians();
+				}
 			}
 
+
+
 		} catch (SQLException e) {
-			throw new ServletException("Servlet Could not display records. id=" + guardianID, e);
-		} 	catch (ClassNotFoundException e) {
+			throw new ServletException("Servlet Could not display records. id="
+					+ guardianID, e);
+		} catch (ClassNotFoundException e) {
 			throw new ServletException("JDBC Driver not found.", e);
-		} finally 
-		{
-			try 
-			{
-				if(rs != null) 
-				{
+		} finally {
+			try {
+				if (rs != null) {
 					rs.close();
 					rs = null;
 				}
-				if(stmt != null) 
-				{
+				if (stmt != null) {
 					stmt.close();
 					stmt = null;
 				}
-				if(con != null) 
-				{
+				if (con != null) {
 					con.close();
 					con = null;
 				}
-			} 
-			catch (SQLException e) 
-			{
+			} catch (SQLException e) {
 
 			}
 		}
-
 
 		out.println("<html>");
 		out.println("<head>");
@@ -198,93 +206,96 @@ public class SelectProfile extends HttpServlet {
 		out.println("<link rel='stylesheet' type='text/css' href='CSS/SavannahStyle.css' />");
 		out.println("<script src=\"javascript/popup.js\"></script>");
 		out.println("</head>");
-		if (loginID != null)
-		{
-			out.println("<body onLoad=\"setOpen("+openVar+"); setID('"+loginID+"'); popup('popUpDiv'); getFocus();\">");
-		}
-		else
-		{
+		if (loginID != null) {
+			getGuardians();
+			out.println("<body onLoad=\"setOpen(" + openVar + "); setID('"
+					+ loginID + "'); popup('popUpDiv'); getFocus();\">");
+		} else {
 			out.println("<body onLoad=\"getFocusQuick();\">");
 
-		}	
-
-		out.println("<script type='text/javascript'>"+
-				"var open = 0;"+
-				"function setOpen(number)"+
-				"{"+
-				"open = number;"+
-				"document.DasForm.jsOpenVar.value = number;"+
-				"}"+
-				"function ChangeColor(tableRow, highLight)"+
-				"{"+
-				"if (highLight)"+
-				"{"+
-				"tableRow.style.backgroundColor = '#dcfac9';"+
-				"}"+
-				"else"+
-				"{"+
-				"tableRow.style.backgroundColor = '#00CCFA';"+
-				"}"+
-				"}"+
-				"function DoNav(theUrl)"+
-				"{"+
-				"document.location.href = theUrl;"+
-				"}"+
-				"function setID(id)"+
-				"{"+
-				"document.DasForm.myId.value = id;"+
-				"}"+
-				"function setLogin()"+
-				"{"+
-				"document.DasForm.triedLogin.value = 1;"+
-				"}"+
-				"function clearLogin()"+
-				"{"+
-				"document.DasForm.triedLogin.value = 0;"+
-				"}"+
-				"function submitform()"+
-				"{"+
-				"document.DasForm.submit();"+
-				"}"+
-				"function clearForm()" +
-				"{"+
-				"document.DasForm.password1.value= \"\";"+
-				"}"+
-				"function getFocus()" +
-				"{"+
-				"document.DasForm.password1.focus();" +
-				"}"+
-				"function getFocusQuick()" +
-				"{"+
-				"document.quickForm.quickSelect.focus();" +
-				"}"+
-				"document.onkeydown = function(e) {"+
-				" e = e || window.event;" +
-				"var keyCode = e.keyCode || e.which;" +
-				//If in login and esc is pressed
-				"if(keyCode == 27 && open == 1) {setOpen(0); popup('popUpDiv');  clearForm(); getFocusQuick();}" +
-				//If no active screen and backspace is pressed - go back
-				"if(keyCode == 8 && document.quickForm.quickSelect.value == '') {window.history.go(-1);}" +
-				"}"+
-				"</script>");
+		}
+		out.println("<script type='text/javascript'>"
+				+ "var open = 0;"
+				+ "function setOpen(number)"
+				+ "{"
+				+ "open = number;"
+				+ "document.DasForm.jsOpenVar.value = number;"
+				+ "}"
+				+ "function ChangeColor(tableRow, highLight)"
+				+ "{"
+				+ "if (highLight)"
+				+ "{"
+				+ "tableRow.style.backgroundColor = '#dcfac9';"
+				+ "}"
+				+ "else"
+				+ "{"
+				+ "tableRow.style.backgroundColor = '#00CCFA';"
+				+ "}"
+				+ "}"
+				+ "function DoNav(theUrl)"
+				+ "{"
+				+ "document.location.href = theUrl;"
+				+ "}"
+				+ "function setID(id)"
+				+ "{"
+				+ "document.DasForm.myId.value = id;"
+				+ "}"
+				+ "function setLogin()"
+				+ "{"
+				+ "document.DasForm.triedLogin.value = 1;"
+				+ "}"
+				+ "function clearLogin()"
+				+ "{"
+				+ "document.DasForm.triedLogin.value = 0;"
+				+ "}"
+				+ "function submitform()"
+				+ "{"
+				+ "document.DasForm.submit();"
+				+ "}"
+				+ "function clearForm()"
+				+ "{"
+				+ "document.DasForm.password1.value= \"\";"
+				+ "}"
+				+ "function getFocus()"
+				+ "{"
+				+ "document.DasForm.password1.focus();"
+				+ "}"
+				+ "function getFocusQuick()"
+				+ "{"
+				+ "document.quickForm.quickSelect.focus();"
+				+ "}"
+				+ "document.onkeydown = function(e) {"
+				+ " e = e || window.event;"
+				+ "var keyCode = e.keyCode || e.which;"
+				+
+				// If in login and esc is pressed
+				"if(keyCode == 27 && open == 1) {setOpen(0); popup('popUpDiv');  clearForm(); getFocusQuick();}"
+				+
+				// If no active screen and backspace is pressed - go back
+				"if(keyCode == 8 && document.quickForm.quickSelect.value == '') {window.history.go(-1);}"
+				+ "}" + "</script>");
 		out.println("<div id=\"mainBackground\">");
 		out.println("<center><h2> Vælg profil:</h2>");
 		out.println("<br>");
 		out.println("<hr>");
 		out.println("<table>");
 		out.println("<tr>");
+		out.println("<th>Billede</th>");
 		out.println("<th>ID</th>");
 		out.println("<th>Navn</th>");
-		//out.println("<th>Pædagog</th>");
-		//out.println("<th>Forældre</th>");
+		// out.println("<th>Pædagog</th>");
+		// out.println("<th>Forældre</th>");
 		out.println("</tr>");
 		String numberScript = "";
-		for (Profile p : profiles) 
-		{
+		for (Profile p : profiles) {
 
-			out.println("<tr onmouseover=\"ChangeColor(this, true);\" onmouseout=\"ChangeColor(this, false);\"" + 
-					"onclick=\"setOpen(1); setID('"+p.getID()+"'); submitform();\">");
-			out.println("<td>" + p.getID() + "</td><td>"+p.getName()+"</td>");//<td>"+p.getGuardian()+"</td><td>"+p.getParent()+"</td>");
+			out.println("<tr onmouseover=\"ChangeColor(this, true);\" onmouseout=\"ChangeColor(this, false);\""
+					+ "onclick=\"setOpen(1); setID('"
+					+ p.getID()
+					+ "'); submitform();\">");
+			out.println("<td><img src='" + p.getPicture()
+					+ "' width=50 height=50'></td><td>" + p.getID()
+					+ "</td><td>" + p.getName() + "</td>");// <td>"+p.getGuardian()+"</td><td>"+p.getParent()+"</td>");
 			out.println("</tr>");
 
 		}
@@ -294,8 +305,7 @@ public class SelectProfile extends HttpServlet {
 		out.println("<form method='POST' action='SelectProfile' name='quickForm'>");
 		out.println("<input type='text' name='quickSelect' onkeypress='if (window.event.keyCode == 13) {setOpen(1); setID(document.quickForm.quickSelect.value); submitform();}'>");
 		out.println("</form>");
-		if (session.getAttribute("SelectProfileERROR") != null)
-		{
+		if (session.getAttribute("SelectProfileERROR") != null) {
 			out.println("<br>");
 			out.println(session.getAttribute("SelectProfileERROR"));
 			out.println("<br>");
@@ -305,31 +315,30 @@ public class SelectProfile extends HttpServlet {
 		out.println("<p>");
 		out.println("</div>");
 
-		out.println("" +
-				"<div id=\"blanket\" style=\"display:none;\"></div>"+
-				"<div id=\"popUpDiv\" style=\"display:none;\">"+
-				"<P align=\"right\"><a href=\"#\" onclick=\"setOpen(0); popup('popUpDiv')\" ALIGN=RIGHT>[X]</a></p>"+
-				"<form method='POST' action='SelectProfile' name='DasForm'>\n" + 
-				"<center><h3>");
-		if (!guardians.isEmpty())
-		{
+		out.println(""
+				+ "<div id=\"blanket\" style=\"display:none;\"></div>"
+				+ "<div id=\"popUpDiv\" style=\"display:none;\">"
+				+ "<P align=\"right\"><a href=\"#\" onclick=\"setOpen(0); popup('popUpDiv')\" ALIGN=RIGHT>[X]</a></p>"
+				+ "<form method='POST' action='SelectProfile' name='DasForm'>\n"
+				+ "<center><h3>");
+		if (!guardians.isEmpty()) {
 			try {
-
 
 				out.println("Login påkrævet</h3>");
 				out.println("<br>");
-				out.println("<table border=\"0\">"+
-						"<tr>"+
-						"<td>Bruger:<td>");
+				if (session.getAttribute("LOGINMESSAGE") != null)
+					out.println(session.getAttribute("LOGINMESSAGE"));
+
+				out.println("<table border=\"0\">" + "<tr>" + "<td>Bruger:<td>");
 
 				out.println("<select name='guardianID'>");
 				for (Profile g : guardians) {
-					out.println("<option value='"+g.getID()+"'>"+g.getName());	
+					out.println("<option value='" + g.getID() + "'>"
+							+ g.getName());
 				}
 				out.println("</select");
 				out.println("</tr>");
-			}
-			catch (NullPointerException e) {
+			} catch (NullPointerException e) {
 				// TODO: handle exception
 				session.setAttribute("SelectProfileERROR", "Ugyldigt id");
 				out.println("<script>");
@@ -337,35 +346,36 @@ public class SelectProfile extends HttpServlet {
 				out.println("setID(null); clearLogin(); submitform();");
 				out.println("</script>");
 				response.sendRedirect("SelectProfile");
-				
+
 			}
 
-		}
-		else
-		{
+		} else {
 			out.println("Login påkrævet");
-			out.println("</h3>"+
-					"<br>\n" + 
-					"<table border=\"0\">"+
-					"<tr>"+
-					"<td>Brugernavn:<td><input type='text' name='username'><br>\n" +
-					"</tr>");
+			out.println("</h3>"
+					+ "<br>\n");
+			if (session.getAttribute("LOGINMESSAGE") != null)
+				out.println(session.getAttribute("LOGINMESSAGE"));
+			out.println("<table border=\"0\">"
+					+ "<tr>"
+					+ "<td>Brugernavn:<td><input type='text' name='username'><br>\n"
+					+ "</tr>");
 		}
 
-		out.println("<tr>"+
-				"<td>Kodeord:<td><input type='password' onkeypress='if (window.event.keyCode == 13) {setOpen(1); setLogin(); submitform();}' name='password1'><br>\n" +
-				"</tr>"+
-				"<tr>" +
-				"<td><input type='hidden' name='myId' value=''><br><input type='hidden' name='triedLogin' value=0><br><input type='hidden' name='originalUsername'>"+
-				"</tr>"+
-				"</table>"+
-				"<input type='hidden' name=jsOpenVar value='0'>"+
-				//"<tr>"+
-				"<td><input type='button' value='Login' onClick=\"setLogin(); submitform();\"><td><input type='button' value='Fortryd' onClick=\"setOpen(0); clearForm();popup('popUpDiv')\">\n" +
-				//"</tr>"+
+		out.println("<tr>"
+				+ "<td>Kodeord:<td><input type='password' onkeypress='if (window.event.keyCode == 13) {setOpen(1); setLogin(); submitform();}' name='password1'><br>\n"
+				+ "</tr>"
+				+ "<tr>"
+				+ "<td><input type='hidden' name='myId' value=''><br><input type='hidden' name='triedLogin' value=0><br><input type='hidden' name='originalUsername'>"
+				+ "</tr>"
+				+ "</table>"
+				+ "<input type='hidden' name=jsOpenVar value='0'>"
+				+
+				// "<tr>"+
+				"<td><input type='button' value='Login' onClick=\"setLogin(); submitform();\"><td><input type='button' value='Fortryd' onClick=\"setOpen(0); clearForm();popup('popUpDiv')\">\n"
+				+
+				// "</tr>"+
 
-				"</center>"+
-				"</div>");
+				"</center>" + "</div>");
 
 		out.println("</body>");
 		out.println("</html>");
@@ -373,14 +383,81 @@ public class SelectProfile extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	public void doPost(HttpServletRequest aRequest, 
-			HttpServletResponse aResponse) 
-					throws IOException, ServletException { 
-		doGet(aRequest, aResponse); 
-	} 
+	public void doPost(HttpServletRequest aRequest,
+			HttpServletResponse aResponse) throws IOException, ServletException {
+		doGet(aRequest, aResponse);
+	}
 
+	public void getGuardians() throws ServletException
+	{
+
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection(
+					"jdbc:mysql://172.25.11.65:3306/04", "eder", "123456");
+			stmt = con.createStatement();
+
+			rs = stmt
+					.executeQuery("select * from Profile "
+							+ "where idProfile in (select idGuardian from HasGuardian "
+							+ "where idChild = " + loginID + ");");
+
+			// displaying records
+			while (rs.next()) {
+				id = rs.getInt("idProfile");
+				name = rs.getString("firstname") + " "
+						+ rs.getString("middlename") + " "
+						+ rs.getString("surname");
+				String picture = rs.getString("picture");
+				if (picture == null || picture.equals("null"))
+					picture = context + "/images/i.jpg";
+				else
+					picture = context + picture;
+
+				Profile g = new Profile(rs.getInt("idProfile"),
+						rs.getString("firstname"),
+						rs.getString("surname"),
+						rs.getString("middlename"), 1, -1, picture,
+						username);
+				boolean toAdd = true;
+				for (Profile p : guardians) {
+					if (p.getName().equals(g.getName()))
+						toAdd = false;
+				}
+				if (toAdd)
+					guardians.add(g);
+			}
+
+		} catch (SQLException e) {
+			throw new ServletException("Servlet Could not display records.", e);
+		} catch (ClassNotFoundException e) {
+			throw new ServletException("JDBC Driver not found.", e);
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+					rs = null;
+				}
+				if (stmt != null) {
+					stmt.close();
+					stmt = null;
+				}
+				if (con != null) {
+					con.close();
+					con = null;
+				}
+			} catch (SQLException e) {
+
+			}
+		}
+	}
 
 }
 

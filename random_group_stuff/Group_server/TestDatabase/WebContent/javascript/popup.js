@@ -43,9 +43,10 @@ function window_pos(popUpDivVar) {
 	window_width=window_width/2-150;//150 is half popup's width
 	popUpDiv.style.left = window_width + 'px';
 }
-function popup(windowname) {
+function popup(windowname) {	
+	toggle('blanket');
 	blanket_size(windowname);
 	window_pos(windowname);
-	toggle('blanket');
+
 	toggle(windowname);		
 }

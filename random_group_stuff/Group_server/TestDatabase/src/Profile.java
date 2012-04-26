@@ -1,4 +1,3 @@
-
 public class Profile {
 
 	private int id;
@@ -11,9 +10,8 @@ public class Profile {
 	private String username;
 	private String password;
 
-
-	public Profile(int id, String firstname, String surname, String middlename, int role, int phone, String picture)
-	{
+	public Profile(int id, String firstname, String surname, String middlename,
+			int role, int phone, String picture) {
 		this.id = id;
 		this.firstname = firstname;
 		this.surname = surname;
@@ -23,8 +21,8 @@ public class Profile {
 		this.picture = picture;
 	}
 
-	public Profile(int id, String firstname, String surname, String middlename, int role, int phone, String picture, String username)
-	{
+	public Profile(int id, String firstname, String surname, String middlename,
+			int role, int phone, String picture, String username) {
 		this.id = id;
 		this.firstname = firstname;
 		this.surname = surname;
@@ -34,9 +32,10 @@ public class Profile {
 		this.picture = picture;
 		this.username = username;
 	}
-	
-	public Profile(int id, String firstname, String surname, String middlename, int role, int phone, String picture,String password, String username)
-	{
+
+	public Profile(int id, String firstname, String surname, String middlename,
+			int role, int phone, String picture, String password,
+			String username) {
 		this.id = id;
 		this.firstname = firstname;
 		this.surname = surname;
@@ -48,38 +47,34 @@ public class Profile {
 		this.password = password;
 	}
 
+	/*
+	 * public String getUsername() { return this.username; }
+	 */
 
-	/*public String getUsername()
-	{
-		return this.username;
-	}*/
-
-	public int getID()
-	{
+	public int getID() {
 		return this.id;
 	}
 
-	public String getFirstname()
-	{
+	public String getFirstname() {
 		return this.firstname;
 	}
 
+	public String getPicture() {
+		return this.picture;
+	}
 
-	public String getSurname()
-	{
+	public String getSurname() {
 		return this.surname;
 	}
 
-	public String getMiddlename()
-	{
+	public String getMiddlename() {
 		if (this.middlename == null)
 			return "";
 		else
 			return this.middlename;
 	}
 
-	public String getName()
-	{
+	public String getName() {
 		if (middlename == null || middlename.equals("null"))
 			return this.firstname + " " + this.surname;
 		else
