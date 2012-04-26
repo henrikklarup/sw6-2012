@@ -11,6 +11,11 @@ import dk.aau.cs.giraf.oasis.lib.models.Department;
 import dk.aau.cs.giraf.oasis.lib.models.HasDepartment;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
+/**
+ * Has department controller
+ * @author Admin
+ *
+ */
 class HasDepartmentController {
 
 	private Context _context;
@@ -18,6 +23,10 @@ class HasDepartmentController {
 			HasDepartmentMetaData.Table.COLUMN_IDPROFILE, 
 			HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT};
 
+	/**
+	 * Constructor
+	 * @param context
+	 */
 	public HasDepartmentController(Context context) {
 		_context = context;
 	}
@@ -26,16 +35,31 @@ class HasDepartmentController {
 	//METHODS TO CALL
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * Clear has department
+	 * @return Rows
+	 */
 	public int clearHasDepartmentTable() {
 		return _context.getContentResolver().delete(HasDepartmentMetaData.CONTENT_URI, null, null);
 	}
 	
+	/**
+	 * Remove had department
+	 * @param profile Profile to remove from
+	 * @param department department to remove
+	 * @return Rows
+	 */
 	public int removeHasDepartment(Profile profile, Department department) {
 		return _context.getContentResolver().delete(HasDepartmentMetaData.CONTENT_URI, 
 				HasDepartmentMetaData.Table.COLUMN_IDPROFILE + " = '" + profile.getId() + "'" +
 						HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + department.getId() + "'", null);
 	}
 
+	/**
+	 * Insert has department
+	 * @param hd department to insert
+	 * @return 0
+	 */
 	public long insertHasDepartment(HasDepartment hd) {
 		ContentValues cv = getContentValues(hd);
 		_context.getContentResolver().insert(HasDepartmentMetaData.CONTENT_URI, cv);
@@ -43,6 +67,10 @@ class HasDepartmentController {
 		return 0;
 	}
 
+	/**
+	 * Get had department
+	 * @return List of Has departments
+	 */
 	public List<HasDepartment> getHasDepartments() {
 		List<HasDepartment> list = new ArrayList<HasDepartment>();
 
@@ -57,6 +85,11 @@ class HasDepartmentController {
 		return list;
 	}
 
+	/**
+	 * Get profiles by department
+	 * @param dep Department
+	 * @return List of Has departments
+	 */
 	public List<HasDepartment> getProfilesByDepartment(Department dep) {
 		List<HasDepartment> list= new ArrayList<HasDepartment>();
 
@@ -72,6 +105,11 @@ class HasDepartmentController {
 		return list;
 	}
 	
+	/**
+	 * Get departments by profile
+	 * @param profile Profile
+	 * @return List of Has departments
+	 */
 	public List<HasDepartment> getDepartmentsByProfile(Profile profile) {
 		List<HasDepartment> list= new ArrayList<HasDepartment>();
 
@@ -87,6 +125,11 @@ class HasDepartmentController {
 		return list;
 	}
 	
+	/**
+	 * Modify has department
+	 * @param hd Has department
+	 * @return Rows
+	 */
 	public int modifyHasDepartment(HasDepartment hd) {
 		ContentValues cv = getContentValues(hd);
 		return _context.getContentResolver().update(HasDepartmentMetaData.CONTENT_URI, cv, 
@@ -98,6 +141,11 @@ class HasDepartmentController {
 	//PRIVATE METHODS - keep out!
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * Cyrsor to has department list
+	 * @param cursor Cursor
+	 * @return List of has departments
+	 */
 	private List<HasDepartment> cursorToHasDepartmentList(Cursor cursor) {
 		List<HasDepartment> list = new ArrayList<HasDepartment>();
 
@@ -111,6 +159,11 @@ class HasDepartmentController {
 		return  list;
 	}
 
+	/**
+	 * Cursor to has department
+	 * @param cursor Cursor
+	 * @return Has department
+	 */
 	private HasDepartment cursorToHasDepartment(Cursor cursor) {
 		HasDepartment hd = new HasDepartment();
 		hd.setIdDepartment(cursor.getLong(cursor.getColumnIndex(HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT)));
@@ -118,6 +171,11 @@ class HasDepartmentController {
 		return hd;
 	}
 
+	/**
+	 * Content values
+	 * @param hd Has department
+	 * @return Content values
+	 */
 	private ContentValues getContentValues(HasDepartment hd) {
 		ContentValues contentValues = new ContentValues();
 		contentValues.put(HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT, hd.getIdDepartment());

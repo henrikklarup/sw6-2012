@@ -12,6 +12,11 @@ import android.net.Uri;
 import dk.aau.cs.giraf.oasis.lib.metadata.AuthUsersMetaData;
 import dk.aau.cs.giraf.oasis.lib.models.AuthUser;
 
+/**
+ * Auth users controller
+ * @author Admin
+ *
+ */
 class AuthUsersController {
 
 	private Context _context;
@@ -20,6 +25,10 @@ class AuthUsersController {
 			AuthUsersMetaData.Table.COLUMN_CERTIFICATE,
 			AuthUsersMetaData.Table.COLUMN_ROLE};
 
+	/**
+	 * Constructor
+	 * @param context Current context
+	 */
 	public AuthUsersController(Context context) {
 		_context = context;
 	}
@@ -28,10 +37,19 @@ class AuthUsersController {
 	//METHODS TO CALL
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * Clear auth users table
+	 * @return Rows
+	 */
 	public int clearAuthUsersTable() {
 		return _context.getContentResolver().delete(AuthUsersMetaData.CONTENT_URI, null, null);
 	}
 
+	/**
+	 * Insert auth user
+	 * @param role User role
+	 * @return Profile id
+	 */
 	public long insertAuthUser(long role) {
 		AuthUser authUser = new AuthUser();
 		authUser.setaRole(role);
@@ -50,6 +68,12 @@ class AuthUsersController {
 		return id;
 	}
 
+	/**
+	 * Set certificate
+	 * @param certificate Certificate
+	 * @param id Profile id
+	 * @return Rows
+	 */
 	public int setCertificate(String certificate, long id) {
 		Uri uri = ContentUris.withAppendedId(AuthUsersMetaData.CONTENT_URI, id);
 
@@ -58,12 +82,21 @@ class AuthUsersController {
 		return _context.getContentResolver().update(uri, cv, null, null);
 	}
 
+	/**
+	 * Modify auth user
+	 * @param authUser Auth user
+	 * @return Rows
+	 */
 	public int modifyAuthUser(AuthUser authUser) {
 		Uri uri = ContentUris.withAppendedId(AuthUsersMetaData.CONTENT_URI, authUser.getId());
 		ContentValues cv = getContentValues(authUser);
 		return _context.getContentResolver().update(uri, cv, null, null);
 	}
 
+	/**
+	 * Get auth users
+	 * @return List of auth users
+	 */
 	public List<AuthUser> getAuthUsers() {
 		List<AuthUser> authUsers = new ArrayList<AuthUser>();
 
@@ -77,6 +110,11 @@ class AuthUsersController {
 		return authUsers;
 	}
 
+	/**
+	 * Get certificates by id
+	 * @param id Profile id
+	 * @return List of strings
+	 */
 	public List<String> getCertificatesById(long id) {
 		List<String> certificates = new ArrayList<String>();
 		Uri uri = ContentUris.withAppendedId(AuthUsersMetaData.CONTENT_URI, id);
@@ -98,6 +136,11 @@ class AuthUsersController {
 		return certificates;
 	}
 
+	/**
+	 * Get id by certificate
+	 * @param certificate Certificate
+	 * @return Profile id
+	 */
 	public long getIdByCertificate(String certificate) {
 		long id = -1;
 		Cursor c = _context.getContentResolver().query(AuthUsersMetaData.CONTENT_URI, columns, AuthUsersMetaData.Table.COLUMN_CERTIFICATE + " = '" + certificate + "'", null, null);

@@ -12,6 +12,11 @@ import dk.aau.cs.giraf.oasis.lib.models.Department;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
 import dk.aau.cs.giraf.oasis.lib.models.MediaDepartmentAccess;
 
+/**
+ * Media department access controller
+ * @author Admin
+ *
+ */
 class MediaDepartmentAccessController {
 
 	private Context _context;
@@ -19,6 +24,10 @@ class MediaDepartmentAccessController {
 			MediaDepartmentAccessMetaData.Table.COLUMN_IDMEDIA, 
 			MediaDepartmentAccessMetaData.Table.COLUMN_IDDEPARTMENT};
 
+	/**
+	 * Constructor
+	 * @param context
+	 */
 	public MediaDepartmentAccessController(Context context) {
 		_context = context;
 	}
@@ -27,16 +36,31 @@ class MediaDepartmentAccessController {
 	//METHODS TO CALL
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * Clear media department access
+	 * @return Rows
+	 */
 	public int clearMediaDepartmentAccessTable() {
 		return _context.getContentResolver().delete(MediaDepartmentAccessMetaData.CONTENT_URI, null, null);
 	}
 	
+	/**
+	 * Remove media profiles access
+	 * @param media Media to remove
+	 * @param department Department to remove from
+	 * @return Rows
+	 */
 	public int removeMediaProfileAccess(Media media, Department department) {
 		return _context.getContentResolver().delete(MediaDepartmentAccessMetaData.CONTENT_URI, 
 				MediaDepartmentAccessMetaData.Table.COLUMN_IDMEDIA + " = '" + media.getId() + "'" +
 						MediaDepartmentAccessMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + department.getId() + "'", null);
 	}
 
+	/**
+	 * Insert media department access
+	 * @param mda Media department access
+	 * @return 0
+	 */
 	public long insertMediaDepartmentAccess(MediaDepartmentAccess mda) {
 		ContentValues cv = getContentValues(mda);
 		_context.getContentResolver().insert(MediaDepartmentAccessMetaData.CONTENT_URI, cv);
@@ -44,6 +68,10 @@ class MediaDepartmentAccessController {
 		return 0;
 	}
 
+	/**
+	 * Get media department accesses
+	 * @return List of media department access
+	 */
 	public List<MediaDepartmentAccess> getMediaDepartmentAccesses() {
 		List<MediaDepartmentAccess> list = new ArrayList<MediaDepartmentAccess>();
 
@@ -58,6 +86,11 @@ class MediaDepartmentAccessController {
 		return list;
 	}
 
+	/**
+	 * Get media by department
+	 * @param department Department
+	 * @return List of media department access
+	 */
 	public List<MediaDepartmentAccess> getMediaByDepartment(Department department) {
 		List<MediaDepartmentAccess> list= new ArrayList<MediaDepartmentAccess>();
 
@@ -73,6 +106,11 @@ class MediaDepartmentAccessController {
 		return list;
 	}
 	
+	/**
+	 * Modify media department access
+	 * @param mda Media department access
+	 * @return Rows
+	 */
 	public int modifyMediaDepartmentAccess(MediaDepartmentAccess mda) {
 		ContentValues cv = getContentValues(mda);
 		return _context.getContentResolver().update(MediaProfileAccessMetaData.CONTENT_URI, cv, 
@@ -84,6 +122,11 @@ class MediaDepartmentAccessController {
 	//PRIVATE METHODS - keep out!
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * Cursor to media department access list
+	 * @param cursor Cursor
+	 * @return List of media department acceses
+	 */
 	private List<MediaDepartmentAccess> cursorToMediaDepartmentAccessList(Cursor cursor) {
 		List<MediaDepartmentAccess> list = new ArrayList<MediaDepartmentAccess>();
 
@@ -97,6 +140,11 @@ class MediaDepartmentAccessController {
 		return  list;
 	}
 
+	/**
+	 * Cursor to media department access
+	 * @param cursor Cursor
+	 * @return Media department access
+	 */
 	private MediaDepartmentAccess cursorToMediaDepartmentAccess(Cursor cursor) {
 		MediaDepartmentAccess mda = new MediaDepartmentAccess();
 		mda.setIdMedia(cursor.getLong(cursor.getColumnIndex(MediaDepartmentAccessMetaData.Table.COLUMN_IDMEDIA)));
@@ -104,6 +152,11 @@ class MediaDepartmentAccessController {
 		return mda;
 	}
 
+	/**
+	 * Content values
+	 * @param mda Media department access
+	 * @return Content values
+	 */
 	private ContentValues getContentValues(MediaDepartmentAccess mda) {
 		ContentValues contentValues = new ContentValues();
 		contentValues.put(MediaDepartmentAccessMetaData.Table.COLUMN_IDMEDIA, mda.getIdMedia());
