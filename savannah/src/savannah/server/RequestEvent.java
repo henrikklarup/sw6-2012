@@ -11,15 +11,10 @@ public class RequestEvent implements Event {
 	private String event;
 	private Socket socket;
 	public CommunicationThread com1 = null;
-	public RequestEvent(String s,Socket sock,CommunicationThread com)
+	public RequestEvent(String s,Socket sock)
 	{
 		this.event = s;
-		this.socket = sock;
-		if(!(com.equals(null)))
-		{
-			this.com1 = com;
-		}
-		
+		this.socket = sock;		
 	}
 	
 	public String getEventContent()

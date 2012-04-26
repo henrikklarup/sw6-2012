@@ -52,7 +52,7 @@ public class CommunicationThread extends Thread {
 				IOHandler.getInstance().displayMessage("RequestEvent created by: " + this.socket);
 				RequestEvent reqEvt = new RequestEvent(handle.XML(), this.socket, this);
 				EventQueue.getInstance().add(reqEvt);
-//				IOHandler.getInstance().respond(this.socket, CRUD.REQUEST, "I so hope that this is going to work !!!");
+				IOHandler.getInstance().respond(this.socket, CRUD.REQUEST, "I so hope that this is going to work !!!");
 				IOHandler.getInstance().logIt(true);
 			}
 			//Ping
