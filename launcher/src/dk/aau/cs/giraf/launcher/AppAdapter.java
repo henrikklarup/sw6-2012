@@ -50,6 +50,8 @@ public class AppAdapter extends ArrayAdapter<ApplicationInfo> {
 		iv.setImageDrawable(app.icon);
 		setAppBackgroundColor(convertView, app.color);
 
+		convertView.setOnDragListener(new GAppDragger());
+		
 		return convertView;
 	}
 
