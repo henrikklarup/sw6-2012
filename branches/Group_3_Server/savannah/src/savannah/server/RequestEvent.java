@@ -18,7 +18,6 @@ public class RequestEvent implements Event {
 		if(!(com.equals(null)))
 		{
 			this.com1 = com;
-			com1.lockEngage();
 		}
 		
 	}
