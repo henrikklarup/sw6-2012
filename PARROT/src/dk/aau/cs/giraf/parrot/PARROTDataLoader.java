@@ -18,20 +18,21 @@ import dk.aau.cs.giraf.oasis.lib.models.Setting;
  *
  */
 public class PARROTDataLoader {
-	
+
 	private Activity parrent;
 	private Helper help;
-	
+	private App app;
+
 	public PARROTDataLoader(Activity activity)
 	{
 		this.parrent = activity;
 	}
-	public PARROTProfile loadProfile()	//TODO we might want to update the settings reader to this format : category +number | cat_property | value
+	public PARROTProfile loadProfile()	
 	{
 		//This part of the code is supposed to get a profile from the launcher, and read it from the admin.
 		Bundle extras = parrent.getIntent().getExtras();
 		Profile prof;
-		App app;
+
 		help = new Helper(parrent);
 		if(extras !=null)
 		{
@@ -47,13 +48,14 @@ public class PARROTDataLoader {
 			String categoryString=null;
 			while (true)
 			{
-				//Here we read the categories
-				categoryString = specialSettings.get(prof.getFirstname()).get("category"+number);
+				//Here we read the pictograms of the categories
+				//The settings reader uses this format : category +number | cat_property | value
+				categoryString = specialSettings.get("category"+number).get("pictograms");	
 				if(categoryString !=null)		//If the category of that number exists
 				{
-					String colourString = specialSettings.get(prof.getFirstname()).get("category"+number+"colour");
+					String colourString = specialSettings.get("category"+number).get("colour");
 					int col=Integer.valueOf(colourString);
-					String iconString = specialSettings.get(prof.getFirstname()).get("category"+number+"icon");
+					String iconString = specialSettings.get("category"+number).get("icon");
 					parrotUser.addCategory(loadCategory(categoryString,col,iconString));
 					number++;
 				}
@@ -92,14 +94,14 @@ public class PARROTDataLoader {
 	{
 		Pictogram pic = null;
 		Media media=help.mediaHelper.getSingleMediaById(id); //This is the image media //TODO check type
-		
+
 		List<Media> subMedias =	help.mediaHelper.getSubMediaByMedia(media); //TODO find out if this is ok, or if it needs to be an ArrayList
 		Media investigatedMedia;
 		String soundPath = null;
 		String wordPath = null;
 		long soundID = -1; //If this value is still -1 when we save a media, it is because the pictogram has no sound.
 		long wordID = -1;
-		
+
 		if(subMedias != null)	//Media files can have a link to a sub-media file, check if this one does.
 		{
 			for(int i = 0;i<subMedias.size();i++) 		
@@ -122,7 +124,7 @@ public class PARROTDataLoader {
 		pic.setImageID(id);
 		pic.setSoundID(soundID);
 		pic.setWordID(wordID);
-		
+
 		return pic;
 	}
 
@@ -161,11 +163,55 @@ public class PARROTDataLoader {
 	public void saveProfile(PARROTProfile user)
 	{
 		Profile prof = new Profile();
+		Setting<String, String, String> profileSetting = new Setting<String, String, String>();
+		//TODO save profile settings
 
-		//TODO save profil settings
-		//TODO save categories
-		//TODO save pictograms
+		for(int i=0;i<user.getCategories().size();i++)
+		{
+			profileSetting = saveCategory(user.getCategoryAt(i), i, profileSetting);
+		}
+		//after all the changes are made, we save the settings to the database
+		app.setSettings(profileSetting);
+	}
+	private Setting<String, String, String> saveCategory(Category category, int categoryNumber, Setting<String, String, String> profileSetting ) {
+		//first, we save the pictograms
+		String pictogramString = "";
+		for(int i=1;i<category.getPictograms().size();i++)
+		{
+			Pictogram pic = category.getPictogramAtIndex(i);
+			if(pic.isNewPictogram() == true)
+			{
+				//TODO save new pictogram
+			}
+			else if (pic.isChanged() == true)
+			{
+				//TODO save changes to pictogram
+			}
+			//Otherwise, don't make changes to the pictograms, just save the references
+			pictogramString += pic.getImageID()+'#';
+			
+		}
+		pictogramString += "$";
+		pictogramString.replace("#$", "$");	//Here we make sure that the end is $, and not #$
+		profileSetting.addValue("category"+categoryNumber, "pictograms", pictogramString);
+		//then we save the colour
+		profileSetting.addValue("category"+categoryNumber, "colour", String.valueOf(category.getCategoryColour()));
+		//and then we save the icon
+		Pictogram icon = category.getIcon();
+		if(icon.isNewPictogram() == true)
+		{
+			//TODO save new pictogram
+		}
+		else if (icon.isChanged() == true)
+		{
+			//TODO save changes to pictogram
+		}
+		profileSetting.addValue("category"+categoryNumber, "icon", String.valueOf(icon.getImageID()));
 
+		return profileSetting;
+	}
+	private void saveNewCategory(Category categoryAt) {	//FIXME this method is not needed anyway, since ALL categories will have to be saved if changes are made
+		// TODO Auto-generated method stub
 
 	}
 }
