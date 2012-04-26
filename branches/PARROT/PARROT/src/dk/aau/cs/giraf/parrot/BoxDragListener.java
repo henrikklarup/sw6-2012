@@ -69,7 +69,7 @@ public class BoxDragListener implements OnDragListener
 					int index = speech.pointToPosition(x, y);
 					if(index < 0)
 					{
-						SpeechBoardFragment.speechBoardCategory.addPictogram(draggedPictogram);//FIXME the program breaks down right about here!!!!!
+						SpeechBoardFragment.speechBoardCategory.addPictogram(draggedPictogram);//TODO test if this ACTUALLY works as intended
 					}
 					else
 					{
