@@ -30,13 +30,13 @@ public class Tools {
 	public static final String APP_PACKAGENAME = "appPackageName";
 	public static final String APP_ACTIVITYNAME = "appActivityName";
 
-	// Keys for settings
+	// Keys for settings.
 	public static final String COLORS = "colorSettings";
 	public static final String COLOR_BG = "backgroundColor";
 	
-	// Constants denoting user roles:
-	public static final Long ROLE_GUARDIAN = 1L;
-	public static final Long ROLE_CHILD = 3L;
+	// Constants denoting user roles.
+	public static final long ROLE_GUARDIAN = 1L;
+	public static final long ROLE_CHILD = 3L;
 
 	// 24 hours in milliseconds = 86400000;
 	// 4 hours in milliseconds:
@@ -50,8 +50,8 @@ public class Tools {
 	public static void saveLogInData(Context context, Long id) {
 		SharedPreferences sp = context.getSharedPreferences(TIMERKEY, 0);
 		SharedPreferences.Editor editor = sp.edit();
-
 		Date d = new Date();
+		
 		editor.putLong(DATEKEY, d.getTime());
 
 		editor.putLong(GUARDIANID, id);
