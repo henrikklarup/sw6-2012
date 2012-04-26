@@ -97,7 +97,7 @@ public class PARROTDataLoader {
 		Media investigatedMedia;
 		String soundPath = null;
 		String wordPath = null;
-		long soundID = -1;
+		long soundID = -1; //If this value is still -1 when we save a media, it is because the pictogram has no sound.
 		long wordID = -1;
 		
 		if(subMedias != null)	//Media files can have a link to a sub-media file, check if this one does.
@@ -161,10 +161,11 @@ public class PARROTDataLoader {
 	public void saveProfile(PARROTProfile user)
 	{
 		Profile prof = new Profile();
-		
-		help.mediaHelper.modifyMedia(media).profilesHelper.modifyProfile(prof);
-		//TODO write this method so that it sends the changes to the admin.
-		//Seems easy enough, as the admin functionality will automatically replace the media files.
+
+		//TODO save profil settings
+		//TODO save categories
+		//TODO save pictograms
+
 
 	}
 }
