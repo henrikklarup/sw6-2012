@@ -1,6 +1,6 @@
 package dk.aau.cs.giraf.TimerLib;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SubProfile implements Comparable<SubProfile>{
 	
@@ -62,6 +62,32 @@ public class SubProfile implements Comparable<SubProfile>{
 		this.gradient = obj.gradient;
 	}
 	
+	/**
+	 * Generates a hashmap with settings of the subprofile
+	 * @param p
+	 * 		The subprofile which is supposed to be stored to the hashmap
+	 * @return
+	 * 		A hashmap with the settings stored in
+	 */
+	public HashMap<String, String> getHashMap(){
+		
+		HashMap<String, String> map = new HashMap<String, String>();		
+		map.put("type", this.formType().toString());		
+		map.put("Attachment", String.valueOf(this.getAttachmentId()));		
+		map.put("Name", this.name);		
+		map.put("desc", this.desc);		
+		map.put("bgcolor", String.valueOf(this.bgcolor));		
+		map.put("timeLeftColor", String.valueOf(this.timeLeftColor));		
+		map.put("timeSpentColor", String.valueOf(this.timeSpentColor));		
+		map.put("frameColor", String.valueOf(this.frameColor));
+		map.put("totalTime", String.valueOf(this.get_totalTime()));		
+		map.put("gradient", String.valueOf(this.gradient));		
+		map.put("save", String.valueOf(this.save));		
+		map.put("saveAs", String.valueOf(this.saveAs));
+		
+		return map;
+	}
+	
 	public int get_totalTime() {
 		return _totalTime;
 	}
@@ -97,6 +123,7 @@ public class SubProfile implements Comparable<SubProfile>{
 				for(SubProfile p : c.SubProfiles()){
 					if(p._id == this._id){
 						guard.delete(c, this);
+						Guardian.crud.removeSubprofileFromProfileId(this, c.getProfileId());
 						break START;
 					}
 				}
@@ -148,13 +175,6 @@ public class SubProfile implements Comparable<SubProfile>{
 		return this;
 	}
 	
-	public void load(ArrayList<SubProfile> sett){
-		for (SubProfile s : sett)
-		{
-			
-		}
-	}
-	
 	public SubProfile save(SubProfile oldProfile){
 		START:
 		for(Child c : guard.Children()){
@@ -163,12 +183,13 @@ public class SubProfile implements Comparable<SubProfile>{
 					if(oldProfile.getAttachment() != null){
 						this.setAttachment(oldProfile.getAttachment());
 					}
+					c.remove(p);
 					c.save(this);
-					c.SubProfiles().remove(p);
 					break START;
 				}
 			}
 		}
+		
 		return this;
 		
 	}

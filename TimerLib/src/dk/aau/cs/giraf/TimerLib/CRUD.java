@@ -13,26 +13,28 @@ import dk.aau.cs.giraf.oasis.lib.models.Setting;
 
 public class CRUD {
 	Context context;
-	Helper helper;
+	Helper oHelp;
 	Guardian guard = Guardian.getInstance();
 	private long appId; 
 	
-	public CRUD(long guardianID, long appID, Context context){
+	public CRUD(long appID, Context context){
 		this.context = context;
-		helper = new Helper(context);
+		oHelp = new Helper(context);
 		this.appId = appID;
+	}
+	
+	
+	public void loadGuardian(long guardianID){
 		// Load the guardian form Oasis
-		Profile mGuardian = helper.profilesHelper.getProfileById(guardianID);
+		Profile mGuardian = oHelp.profilesHelper.getProfileById(guardianID);
 		
 		// Find all subprofiles of the child and save it on the child
-		List<SubProfile> mGuardSubPs = findProfileSettings(mGuardian.getId());
+		ArrayList<SubProfile> mGuardSubPs = findProfileSettings(mGuardian.getId());
 		guard.clearLastUsed();
-		for (SubProfile subProfile : mGuardSubPs) {
-			guard.addLastUsed(subProfile);
-		}
+		guard.initLastUsed(mGuardSubPs);
 		
 		// Load the children from Oasis of the guardian
-		List<Profile> mChildren = helper.profilesHelper.getChildrenByGuardian(mGuardian);
+		List<Profile> mChildren = oHelp.profilesHelper.getChildrenByGuardian(mGuardian);
 		guard.Children().clear();
 		
 		for (Profile c : mChildren) {
@@ -60,7 +62,6 @@ public class CRUD {
 			guard.Children().add(mC);
 		}
 	}
-	
 	/**
 	 * Stores the subprofile on the child in Oasis
 	 * @param c
@@ -72,10 +73,10 @@ public class CRUD {
 	 */
 	public boolean saveChild(Child c, SubProfile sp){
 		// Convert the subprofile to a hashmap
-		HashMap<String, String> hm = setHashMap(sp);
+		HashMap<String, String> hm = sp.getHashMap();
 		
 		// Find the app settings on the profileID
-		App app = helper.appsHelper.getAppByIds(appId, c.getProfileId());
+		App app = oHelp.appsHelper.getAppByIds(appId, c.getProfileId());
 		Setting<String, String, String> settings = app.getSettings();
 		if(settings == null){
 			settings = new Setting<String, String, String>();
@@ -83,8 +84,8 @@ public class CRUD {
 		// Insert the hashmap with the subprofile ID as key
 		settings.put(String.valueOf(sp.getId()), hm);
 		app.setSettings(settings);
-		Profile newProf = helper.profilesHelper.getProfileById(c.getProfileId());
-		helper.appsHelper.modifyAppByProfile(app, newProf);
+		Profile newProf = oHelp.profilesHelper.getProfileById(c.getProfileId());
+		oHelp.appsHelper.modifyAppByProfile(app, newProf);
 		
 		return true;	
 	}
@@ -100,10 +101,10 @@ public class CRUD {
 	 */
 	public boolean saveGuardian(long guardianId, SubProfile sp){
 		// Convert the subprofile to a hashmap
-		HashMap<String, String> hm = setHashMap(sp);
+		HashMap<String, String> hm = sp.getHashMap();
 		
 		// Find the app settings on the profileID
-		App app = helper.appsHelper.getAppByIds(appId, guardianId);
+		App app = oHelp.appsHelper.getAppByIds(appId, guardianId);
 		Setting<String, String, String> settings = app.getSettings();
 		if(settings == null){
 			settings = new Setting<String, String, String>();
@@ -112,8 +113,8 @@ public class CRUD {
 		// Insert the hashmap with the subprofile ID as key
 		settings.put(String.valueOf(sp.getId()), hm);
 		app.setSettings(settings);
-		Profile newProf = helper.profilesHelper.getProfileById(guardianId);
-		helper.appsHelper.modifyAppByProfile(app, newProf);
+		Profile newProf = oHelp.profilesHelper.getProfileById(guardianId);
+		oHelp.appsHelper.modifyAppByProfile(app, newProf);
 		
 		return true;	
 	}
@@ -126,10 +127,10 @@ public class CRUD {
 	 * @return
 	 * 		A list of subprofiles extracted from the settings
 	 */
-	private List<SubProfile> findProfileSettings(long id) {
-		List<SubProfile> mSubs = new ArrayList<SubProfile>();
+	private ArrayList<SubProfile> findProfileSettings(long id) {
+		ArrayList<SubProfile> mSubs = new ArrayList<SubProfile>();
 		
-		App app = helper.appsHelper.getAppByIds(appId, id);
+		App app = oHelp.appsHelper.getAppByIds(appId, id);
 		if(app.getSettings() != null){
 			Setting<String, String, String> settings = app.getSettings();
 			Set<String> keys = settings.keySet();
@@ -139,7 +140,6 @@ public class CRUD {
 				mSubs.add(sub);
 			}	
 		}
-		
 		return mSubs;
 	}
 
@@ -187,31 +187,29 @@ public class CRUD {
 
 		return p;
 	}
-	
+
 	/**
-	 * Generates a hashmap with settings of the subprofile
+	 * Remove the specific subprofile from the profile (Child/Guardian)
 	 * @param p
-	 * 		The subprofile which is supposed to be stored to the hashmap
-	 * @return
-	 * 		A hashmap with the settings stored in
+	 * 		The subprofile which is supposed to be removed
+	 * @param profileId
+	 * 		The profile which the subprofile is going to be removed from
 	 */
-	private HashMap<String, String> setHashMap(SubProfile p){
+	public void removeSubprofileFromProfileId(SubProfile p, long profileId) {
+		// Find the profile by Id
+		Profile prof = oHelp.profilesHelper.getProfileById(profileId);
 		
-		HashMap<String, String> map = new HashMap<String, String>();		
-		map.put("type", p.formType().toString());		
-		map.put("Attachment", String.valueOf(p.getAttachmentId()));		
-		map.put("Name", p.name);		
-		map.put("desc", p.desc);		
-		map.put("bgcolor", String.valueOf(p.bgcolor));		
-		map.put("timeLeftColor", String.valueOf(p.timeLeftColor));		
-		map.put("timeSpentColor", String.valueOf(p.timeSpentColor));		
-		map.put("frameColor", String.valueOf(p.frameColor));
-		map.put("totalTime", String.valueOf(p.get_totalTime()));		
-		map.put("gradient", String.valueOf(p.gradient));		
-		map.put("save", String.valueOf(p.save));		
-		map.put("saveAs", String.valueOf(p.saveAs));
+		// Find the Wombat App
+		App app = oHelp.appsHelper.getAppById(appId);
 		
-		return map;
+		// Get the settings from the profile and update
+		Setting<String, String, String> settings = prof.getSettings();
+		settings.remove(Long.valueOf(p.getId()));
+		prof.setSettings(settings);
+		
+		// Update the app
+		oHelp.appsHelper.modifyAppByProfile(app, prof);
+		
 	}
 
 }
