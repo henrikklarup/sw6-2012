@@ -30,10 +30,10 @@ public class CommunicationThread extends Thread {
 		//		start();
 	}
 
-	public void lockEngage() {
+	public final synchronized void lockEngage() {
 		this.lock = true;
 	}
-	public void lockDisengage() {
+	public final synchronized void lockDisengage() {
 		this.lock = false;
 	}
 	
@@ -51,7 +51,7 @@ public class CommunicationThread extends Thread {
 			if (handle.CR() == CRUD.COMMIT) {
 				DOMinator domI = new DOMinator();
 				IOHandler.getInstance().displayMessage("CommitEvent created by: " + this.socket);
-				CommitEvent comEvt = new CommitEvent(domI.Dominate(handle.XML()), this.socket, handle.anyFiles());
+				CommitEvent comEvt = new CommitEvent(domI.Dominate(handle.XML()), this.socket, this);
 				EventQueue.getInstance().add(comEvt);
 				while (lock == true) {
 					//Do nothing and keep the thread alive
@@ -61,7 +61,7 @@ public class CommunicationThread extends Thread {
 			//RequestEvent
 			else if (handle.CR() == CRUD.REQUEST) {
 				IOHandler.getInstance().displayMessage("RequestEvent created by: " + this.socket);
-				RequestEvent reqEvt = new RequestEvent(handle.XML(), this.socket);
+				RequestEvent reqEvt = new RequestEvent(handle.XML(), this.socket, this);
 				EventQueue.getInstance().add(reqEvt);
 //				IOHandler.getInstance().respond(this.socket, CRUD.REQUEST, "I so hope that this is going to work !!!");
 				while (lock == true) {
