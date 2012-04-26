@@ -6,8 +6,6 @@ import android.content.Context;
 import android.graphics.RectF;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RoundRectShape;
-import android.graphics.drawable.shapes.Shape;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,17 +14,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class AppAdapter extends ArrayAdapter<ApplicationInfo> {
+public class AppAdapter extends ArrayAdapter<AppInfo> {
 
 	Context context;
-	ArrayList<ApplicationInfo> apps;
+	ArrayList<AppInfo> apps;
 
 	/**
 	 * Constructs a new adapter to handle the presentation of apps in the launcher.
 	 * @param context Context the adapter is created in.
 	 * @param apps The apps to show.
 	 */
-	public AppAdapter(Context context, ArrayList<ApplicationInfo> apps) {
+	public AppAdapter(Context context, ArrayList<AppInfo> apps) {
 		super(context, 0, apps);
 
 		this.context = context;
@@ -36,7 +34,7 @@ public class AppAdapter extends ArrayAdapter<ApplicationInfo> {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
-		final ApplicationInfo app = apps.get(position);
+		final AppInfo app = apps.get(position);
 
 		if (convertView == null) {
 			final LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -46,9 +44,9 @@ public class AppAdapter extends ArrayAdapter<ApplicationInfo> {
 		ImageView iv = (ImageView) convertView.findViewById(R.id.app_icon);
 		TextView tv = (TextView) convertView.findViewById(R.id.app_text);
 
-		tv.setText(app.title.toString());
-		iv.setImageDrawable(app.icon);
-		setAppBackgroundColor(convertView, app.color);
+		tv.setText(app.getShortenedName());
+		iv.setImageDrawable(app.getIcon());
+		setAppBackgroundColor(convertView, app.getBgColor());
 
 		convertView.setOnDragListener(new GAppDragger());
 		
