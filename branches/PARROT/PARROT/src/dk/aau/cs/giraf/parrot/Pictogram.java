@@ -1,5 +1,6 @@
 package dk.aau.cs.giraf.parrot;
 
+import parrot.Package.R;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.widget.ImageView;
@@ -22,7 +23,8 @@ public class Pictogram {
 	private long wordID;
 	private boolean newPictogram =false;
 	private boolean changed = false;
-	
+	private boolean isEmpty = false;
+
 	//This are the constructor for the Pictogram class
 	public Pictogram(String name, String imagePath, String soundPath, String wordPath)
 	{
@@ -37,9 +39,18 @@ public class Pictogram {
 
 	public Bitmap getBitmap()
 	{
-		Bitmap bm = BitmapFactory.decodeFile(imagePath);
-		return bm;
+		if(isEmpty == true)
+		{
+			Bitmap bm = BitmapFactory.decodeResource(res, R.drawable.usynlig);
+			return bm;
+		}
+		else
+		{
+			Bitmap bm = BitmapFactory.decodeFile(imagePath);
+			return bm;
+		}
 	}
+
 
 	public String getImagePath() {
 		return imagePath;
@@ -147,6 +158,14 @@ public class Pictogram {
 
 	public void setChanged(boolean changed) {
 		this.changed = changed;
+	}
+
+	public boolean isEmpty() {
+		return isEmpty;
+	}
+
+	public void setEmpty(boolean isEmpty) {
+		this.isEmpty = isEmpty;
 	}
 
 }

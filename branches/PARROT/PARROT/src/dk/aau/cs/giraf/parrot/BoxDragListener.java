@@ -1,4 +1,4 @@
-package dk.aau.cs.giraf.parrot;
+	package dk.aau.cs.giraf.parrot;
 
 import parrot.Package.R;
 import android.R.integer;
@@ -16,6 +16,9 @@ public class BoxDragListener implements OnDragListener
 {
 	private Activity parrent;
 	private Pictogram draggedPictogram = null;
+	private PARROTProfile profile = PARROTActivity.getUser();
+	int numberOfSentencePictograms = profile.getNumberOfSentencePictograms();
+
 
 	public BoxDragListener(Activity active) {
 		parrent = active;
@@ -23,7 +26,6 @@ public class BoxDragListener implements OnDragListener
 
 	boolean insideOfMe = false;
 	public boolean onDrag(View self, DragEvent event) {
-
 		if (event.getAction() == DragEvent.ACTION_DRAG_STARTED){
 			if(self.getId() == R.id.sentenceboard && SpeechBoardFragment.dragOwnerID == R.id.sentenceboard)
 			{
@@ -49,15 +51,41 @@ public class BoxDragListener implements OnDragListener
 					int index = speech.pointToPosition(x, y);
 
 					Pictogram pic =SpeechBoardFragment.displayedCat.getPictogramAtIndex(SpeechBoardFragment.draggedPictogramIndex);
-					
+
+
+
+					if(SpeechBoardFragment.speechBoardCategory.getPictogramAtIndex(index).getName()!="usynlig") //Replaces a pictogram already in the sentencebord
+					{
+						SpeechBoardFragment.speechBoardCategory.removePictogram(index); //Removes the pictogram at the specific index
+						SpeechBoardFragment.speechBoardCategory.addPictogramAtIndex(pic, index); //add the pictogram at the specific position
+					}
+					else 
+					{
+						int count = 0;
+						while (count <= numberOfSentencePictograms) 
+
+							if (SpeechBoardFragment.speechBoardCategory.getPictogramAtIndex(count).getName()=="usynlig") 
+							{
+								SpeechBoardFragment.speechBoardCategory.removePictogram(index); //Removes the pictogram at the specific index
+								SpeechBoardFragment.speechBoardCategory.addPictogramAtIndex(pic, index); //add the pictogram at the specific position
+							} 
+						count++;
+					}
+
+
+
+					/*//old code by Dalhoff
 					if(index <0)
 					{
 						SpeechBoardFragment.speechBoardCategory.addPictogram(pic);//Add the references pictogram to the back-end list
 					}
 					else
 					{
+						SpeechBoardFragment.speechBoardCategory.removePictogram(index); //Removes the pictogram at the specific index
 						SpeechBoardFragment.speechBoardCategory.addPictogramAtIndex(pic, index); //add the pictogram at the specific position
 					}
+					 */
+
 					speech.setAdapter(new PictogramAdapter(SpeechBoardFragment.speechBoardCategory, parrent));
 					speech.invalidate();
 				}

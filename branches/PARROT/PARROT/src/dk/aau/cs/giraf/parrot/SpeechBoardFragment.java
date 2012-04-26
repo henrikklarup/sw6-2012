@@ -1,22 +1,19 @@
 package dk.aau.cs.giraf.parrot;
 
 
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import parrot.Package.R;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.ClipData;
-import android.drm.DrmManagerClient.OnEventListener;
+import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.provider.ContactsContract.CommonDataKinds.Event;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.DragShadowBuilder;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ImageView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.GridView;
 
@@ -33,7 +30,17 @@ public class SpeechBoardFragment extends Fragment
 	public static Category speechBoardCategory = new Category(0x00ff00,null);	//This category contains the pictograms on the sentenceboard
 	public static Category displayedCat = new Category(0x00ff00,null);			//This category contains the pictograms displayed on the big board
 	private PARROTProfile user = null;
-
+	
+	/*//Not in use anymore
+	//Use asset manager to convert resource path into string path.
+	AssetManager asset = parrent.getResources().getAssets();
+	InputStream pictureBuffer =asset.open("drawable/usynlige.png");
+	String picturePath = pictureBuffer.toString();
+	*/
+	
+	private Pictogram empty = new Pictogram("empty", null, null, null); //FIXME find the right path to the picture "usynlig", or find a way to use the picture directly
+	
+	
 	public void onAttach(Activity activity) {
 		// TODO Auto-generated method stub
 		super.onAttach(activity);
@@ -50,14 +57,17 @@ public class SpeechBoardFragment extends Fragment
 		{
 			displayedCat = user.getCategoryAt(0); //TODO we might have to replace this.
 
-
-
+			//Fills the sentenceboard with emty pictograms
+			speechBoardCategory.addPictogram(empty);
+			speechBoardCategory.addPictogram(empty);
+			speechBoardCategory.addPictogram(empty);
+			speechBoardCategory.addPictogram(empty);
 
 			GridView pictogramGrid = (GridView) parrent.findViewById(R.id.pictogramgrid);
 			pictogramGrid.setAdapter(new PictogramAdapter(displayedCat, parrent));
-
 			
 			GridView sentenceBoardGrid = (GridView) parrent.findViewById(R.id.sentenceboard);
+			sentenceBoardGrid.setAdapter(new PictogramAdapter(speechBoardCategory, parrent));
 			
 			GridView superCategoryGrid = (GridView) parrent.findViewById(R.id.supercategory);
 			superCategoryGrid.setAdapter(new CategoryAdapter(user.getCategories(), parrent));
