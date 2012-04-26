@@ -25,16 +25,18 @@ public class EventQueue{
 	//TODO Add documents to the event queue.
 	public synchronized void add(Event e)
 	{
+		System.out.println("event added to que");
 		eque.add(e);
 	}
 	
 	public synchronized Event remove()
 	{
+		System.out.println("event removed from que");
 		return eque.remove();
 	}
 	
 	public boolean isEmpty()
-	{
+	{	
 		return eque.isEmpty();
 	}
 }

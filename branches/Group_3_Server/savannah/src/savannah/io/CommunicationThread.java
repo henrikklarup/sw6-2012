@@ -15,7 +15,7 @@ import java.lang.Thread;
 import org.jdom.JDOMException;
 
 public class CommunicationThread extends Thread {
-//	private IOHandler ioHandler;
+	//	private IOHandler ioHandler;
 	private Socket socket;
 	private TransmissionHandler handle = null;
 	private String folder;
@@ -30,7 +30,7 @@ public class CommunicationThread extends Thread {
 	}
 
 	public void run() {
-//		this.ioHandler = IOHandler.getInstance();
+		//		this.ioHandler = IOHandler.getInstance();
 		try {
 			InputStream inputStream = new DataInputStream(this.socket.getInputStream());
 
@@ -41,17 +41,17 @@ public class CommunicationThread extends Thread {
 
 			//CommitEvent
 			if (handle.CR() == CRUD.COMMIT) {
-									DOMinator domI = new DOMinator();
+				DOMinator domI = new DOMinator();
 				IOHandler.getInstance().displayMessage("CommitEvent created by: " + this.socket);
-									CommitEvent comEvt = new CommitEvent(domI.Dominate(handle.XML()), this.socket, handle.anyFiles());
-									EventQueue.getInstance().add(comEvt);
+				CommitEvent comEvt = new CommitEvent(domI.Dominate(handle.XML()), this.socket, handle.anyFiles());
+				EventQueue.getInstance().add(comEvt);
 				IOHandler.getInstance().logIt(true);
 			}
 			//RequestEvent
 			else if (handle.CR() == CRUD.REQUEST) {
 				IOHandler.getInstance().displayMessage("RequestEvent created by: " + this.socket);
-									RequestEvent reqEvt = new RequestEvent(handle.XML(), this.socket);
-									EventQueue.getInstance().add(reqEvt);
+				RequestEvent reqEvt = new RequestEvent(handle.XML(), this.socket);
+				EventQueue.getInstance().add(reqEvt);
 				IOHandler.getInstance().logIt(true);
 			}
 			//Ping

@@ -16,7 +16,7 @@ public class TestingPurposeClient implements Runnable
 	//JPG fields
 	static OutputStream os;
 	static FileInputStream reader;
-	static FileOutputStream sender;;
+	static FileOutputStream sender;
 	static BufferedInputStream in_jpg;
 	static BufferedOutputStream out_jpg;
 	static ObjectOutputStream oout;
