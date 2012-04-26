@@ -15,15 +15,10 @@ public class CommitEvent implements Event {
 	private CommunicationThread com1;
 	public ArrayList<File> files = null;
 	
-	public CommitEvent(Document d,Socket s,CommunicationThread com)
+	public CommitEvent(Document d,Socket s)
 	{
 		this.event = d;
 		this.socket = s;
-		if(!(com.equals(null)))
-		{
-			this.com1 = com;
-		}
-	
 	}
 	
 	public Document getEventContent()
