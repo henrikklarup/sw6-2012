@@ -58,7 +58,7 @@ public class AppAdapter extends ArrayAdapter<AppInfo> {
 	 * @param convertView The view the app is located inside.
 	 * @param color The color to use for the background.
 	 */
-	private void setAppBackground(View convertView, int color) {    
+	public static void setAppBackground(View convertView, int color) {    
 		LinearLayout ll = (LinearLayout) convertView.findViewById(R.id.app_bg);
 		
 		RoundRectShape rect = new RoundRectShape( new float[] {15,15, 15,15, 15,15, 15,15}, new RectF(), null);
