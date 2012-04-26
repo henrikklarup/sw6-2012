@@ -33,30 +33,25 @@ public class CommunicationThread extends Thread {
 //		this.ioHandler = IOHandler.getInstance();
 		try {
 			InputStream inputStream = new DataInputStream(this.socket.getInputStream());
-			//			boolean hasRead = false;
-			//			while (this.isAlive() == true) {
-			//				String message = inputStream.readUTF();
-			//				if (hasRead == false) {
+
 			IOHandler.getInstance().displayMessage("Connecting from: " + this.socket);
-//			savannah.device.Connection con = new Connection(folder); 
-//			handle = new TransmissionHandler(con);
 			handle = new TransmissionHandler(this.socket, this.folder);
 			IOHandler.getInstance().logIt(this.socket, handle.CR().toString());
 			//TransmissionHandler now has a DEBUG statement implemented ...
 
 			//CommitEvent
 			if (handle.CR() == CRUD.COMMIT) {
-				//					DOMinator domI = new DOMinator();
+									DOMinator domI = new DOMinator();
 				IOHandler.getInstance().displayMessage("CommitEvent created by: " + this.socket);
-				//					CommitEvent comEvt = new CommitEvent(domI.Dominate(handle.XML()), this.socket, handle.anyFiles());
-				//					EventQueue.getInstance().add(comEvt);
+									CommitEvent comEvt = new CommitEvent(domI.Dominate(handle.XML()), this.socket, handle.anyFiles());
+									EventQueue.getInstance().add(comEvt);
 				IOHandler.getInstance().logIt(true);
 			}
 			//RequestEvent
 			else if (handle.CR() == CRUD.REQUEST) {
 				IOHandler.getInstance().displayMessage("RequestEvent created by: " + this.socket);
-				//					RequestEvent reqEvt = new RequestEvent(handle.XML(), this.socket);
-				//					EventQueue.getInstance().add(reqEvt);
+									RequestEvent reqEvt = new RequestEvent(handle.XML(), this.socket);
+									EventQueue.getInstance().add(reqEvt);
 				IOHandler.getInstance().logIt(true);
 			}
 			//Ping
@@ -72,18 +67,11 @@ public class CommunicationThread extends Thread {
 			else {
 				IOHandler.getInstance().displayMessage("TransmissionHandler could not resolve to a known package");
 			}
-			//					hasRead = true;
-			//				}
-			//				handle = new TransmissionHandler(inputStream, this.bufferSize);
-			//				this.ioHandler.displayMessage(message);
-			//				
-			//				this.ioHandler.sendToConncted(message);
-			//			}
 		}	catch (IOException e) {
 			System.out.println("CommunicationThread: Could not initiate inputStream for the connection");
-		} 	/*catch (JDOMException e) {
+		} 	catch (JDOMException e) {
 			System.err.println("CommunicationThread: Could not DOMinate");
-		}*/	finally {
+		}	finally {
 			IOHandler.getInstance().removeConnection(this.socket);
 		}
 	}
