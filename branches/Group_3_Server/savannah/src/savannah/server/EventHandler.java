@@ -26,10 +26,11 @@ public class EventHandler implements Runnable {
 	}
 	public void start() {
 		EventQueue eque = EventQueue.getInstance();
+		System.out.println("not whileing any true in the eventhandler");
 		while(true) {
+			System.out.println("whileing some true in eventhandler");
 			while(!eque.isEmpty()) {
 				System.out.println("Que is not Empty!");
-				
 				Event e = eque.remove();
 				if (e.getClass().equals(savannah.server.CommitEvent.class))
 				{

@@ -46,8 +46,9 @@ public class RequestHandler {
 		ArrayList<File> files = xBuilder.getFiles();
 		File[] afiles = new File[files.size()];
 		files.toArray(afiles);
+		System.out.println("Check 1");
 		System.out.println(xml);
-		//savannah.io.IOHandler.getInstance().respond(e.getEventsocket(),CRUD.REQUEST,xml,afiles);
+		savannah.io.IOHandler.getInstance().respond(e.getEventsocket(),CRUD.REQUEST,xml,afiles);
 		
 		}
 		
