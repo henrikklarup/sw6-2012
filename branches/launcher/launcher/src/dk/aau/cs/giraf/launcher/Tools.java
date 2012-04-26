@@ -139,7 +139,6 @@ public class Tools {
 
 		// Remove all non-GIRAF apps from the list of apps in the system.
 		for (int i = 0; i < systemApps.size(); i++) {
-			// If app is not a GIRAF app:
 			if (!(systemApps.get(i).toString().toLowerCase().contains("dk.aau.cs.giraf") && 
 					!systemApps.get(i).toString().toLowerCase().contains("launcher"))) {
 				systemApps.remove(i); 
@@ -189,7 +188,6 @@ public class Tools {
 
 		// Remove all non-GIRAF apps from the list of apps in the system.
 		for (int i = 0; i < systemApps.size(); i++) {
-			// If app is not a GIRAF app:
 			if (!(systemApps.get(i).toString().toLowerCase().contains("dk.aau.cs.giraf") && 
 					!systemApps.get(i).toString().toLowerCase().contains("launcher"))) {
 				systemApps.remove(i); 
