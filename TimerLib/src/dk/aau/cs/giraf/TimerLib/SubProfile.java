@@ -18,7 +18,6 @@ public class SubProfile implements Comparable<SubProfile>{
 	public boolean saveAs = true;
 	protected SubProfile _attachment = null;
 	private long _attachmentId = -1;
-	private long _appId = -1;
 	private long DB_id = -1;
 
 	//constructor

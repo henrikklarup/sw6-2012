@@ -94,7 +94,11 @@ public class Guardian {
 	}
 	
 	public static Guardian getInstance(){
-		return _instance;
+		if(_instance == null){
+			return _instance = new Guardian();
+		} else {
+			return _instance;
+		}
 	}
 	
 	/**
@@ -261,16 +265,7 @@ public class Guardian {
 	void setSubProfile(SubProfile p){
 		_selectedSubProfile = p;
 	}
-	/**
-	 * Used to delete a specific SubProfile on a specific Child
-	 * @param c Child who own the SubProfile
-	 * @param p SubProfile you wish to delete
-	 */
-	void delete(Child c, SubProfile p){
-		//Add admin delete
-		c.SubProfiles().remove(p);
-	}
-	
+
 	//Waiting for admin
 	void initLastUsed(ArrayList<SubProfile> profile){
 		for(SubProfile p : profile){
@@ -309,13 +304,19 @@ public class Guardian {
 			_lastUsed.add(profile);
 			crud.saveGuardian(guardianId, profile);
 		}
+		
+		if(_lastUsed.size() > 10){
+			crud.removeSubprofileFromProfileId(_lastUsed.get(0), guardianId);
+			_lastUsed.remove(_lastUsed.remove(0));
+		}
+		
 	}
 	
 	/**
 	 * Clears last
 	 */
 	public void clearLastUsed(){
-		_lastUsed = new ArrayList<SubProfile>();
+		_lastUsed.clear();
 	}
 	
 	/**
