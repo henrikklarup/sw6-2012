@@ -30,7 +30,7 @@ public class Connection {
 
 	//Default for bufferSize is ConnectionConfiguration.BUFFERSIZE
 	public Connection(String folderPath, int bufferSize) throws UnknownHostException, IOException {
-		if (folderPath.equals("") == true || this.makeFolder(folderPath) == false) {
+		if (folderPath.equals("") == true) {
 			throw new IllegalArgumentException("folderPath: Cannot be null !");
 		}
 		if (this.bufferSize <= 0) {
@@ -43,32 +43,33 @@ public class Connection {
 		this.socket = new Socket(ConnectionConfiguration.HOSTNAME, ConnectionConfiguration.PORT);
 	}
 	public Connection(String folderPath) throws UnknownHostException, IOException {
-		if (folderPath.equals("") == true || this.makeFolder(folderPath) == false) {
+		if (folderPath.equals("") == true) {
 			throw new IllegalArgumentException("folderPath: Cannot be null !");
 		}
+		this.folderPath = folderPath;
 		this.bufferSize = ConnectionConfiguration.BUFFERSIZE;
 		this.socket = new Socket(ConnectionConfiguration.HOSTNAME, ConnectionConfiguration.PORT);
 	}
 
 	
-	private final boolean makeFolder(String folderPath) {
-		File dir = new File(folderPath);
-		boolean success = false;
-		try {
-			if (dir.exists() == false) {
-				success = dir.mkdir();
-				if (success == false) {
-					throw new IOException("folderPath: Could not create folder !");
-				}
-			}	else {
-				this.folder = dir;
-				success = true;
-			}
-		}	catch (IOException e) {
-			System.err.println(e.getMessage());
-		}
-		return success;
-	}
+//	private final boolean makeFolder(String folderPath) {
+//		File dir = new File(folderPath);
+//		boolean success = false;
+//		try {
+//			if (dir.exists() == false) {
+//				success = dir.mkdir();
+//				if (success == false) {
+//					throw new IOException("folderPath: Could not create folder !");
+//				}
+//			}	else {
+//				this.folder = dir;
+//				success = true;
+//			}
+//		}	catch (IOException e) {
+//			System.err.println(e.getMessage());
+//		}
+//		return success;
+//	}
 	private byte[] stringBuilderToBytes(StringBuilder sb) {
 		char[] buf = new char[sb.length()];
 		sb.getChars(0, sb.length(), buf, 0);

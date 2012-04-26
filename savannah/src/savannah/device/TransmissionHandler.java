@@ -28,6 +28,7 @@ public class TransmissionHandler {
 	private ArrayWrapper overflow = null;
 
 	public TransmissionHandler(Socket socket, String folder) throws FileNotFoundException, IOException {
+		System.out.println(folder);
 		this.bufferSize = 4096;
 		this.files = new ArrayList<File>();
 		if (this.makeFolder(folder) == false) {
@@ -36,21 +37,26 @@ public class TransmissionHandler {
 		this.deconstruct(socket.getInputStream());
 	}
 	private final boolean makeFolder(String folderPath) {
+		System.out.println(folderPath);
 		File dir = new File(folderPath);
 		boolean success = false;
 		try {
+			System.out.println(dir.getPath());
 			if (dir.exists() == false) {
 				success = dir.mkdir();
+				System.out.println("if? "+success);
 				if (success == false) {
 					throw new IOException("folderPath: Could not create folder !");
 				}
 			}	else {
+				System.out.println("else?" + success);
 				this.folder = dir;
 				success = true;
 			}
 		}	catch (IOException e) {
 			System.err.println(e.getMessage());
 		}
+		System.out.println("return?" +success);
 		return success;
 	}
 

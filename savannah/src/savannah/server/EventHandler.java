@@ -25,10 +25,11 @@ public class EventHandler implements Runnable {
 		rHandler = new RequestHandler();
 	}
 	public void start() {
-		
 		EventQueue eque = EventQueue.getInstance();
-		while(eque.isEmpty()) {
+		while(true) {
 			while(!eque.isEmpty()) {
+				System.out.println("Que is not Empty!");
+				
 				Event e = eque.remove();
 				if (e.getClass().equals(savannah.server.CommitEvent.class))
 				{
@@ -45,6 +46,7 @@ public class EventHandler implements Runnable {
 
 	@Override
 	public void run() {
+		System.out.println("Starting the eventhandler");
 		start();
 	}
 }
