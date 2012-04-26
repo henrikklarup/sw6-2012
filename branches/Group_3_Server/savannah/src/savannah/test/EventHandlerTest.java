@@ -16,7 +16,7 @@ public class EventHandlerTest {
 			DOMinator dom = new DOMinator();
 			Document d = dom.Dominate(f);
 			
-			CommitEvent com = new CommitEvent(d,null,null);
+			CommitEvent com = new CommitEvent(d,null);
 			
 			CommitHandler handler = new CommitHandler();
 			handler.HandleIt(com);
