@@ -191,7 +191,7 @@ public class TransmissionHandler {
 		//Converting the byte data to int
 		//Maybe find a better way that is less crude...
 		String temp = "";
-		temp += (char)buf[buf.length -1];	//Maybe it is buf[5] and not buf[6]
+		temp += (char)buf[buf.length -2];	//Maybe it is buf[5] and not buf[6]
 
 		switch(Integer.parseInt(temp)) {
 		case 1:
