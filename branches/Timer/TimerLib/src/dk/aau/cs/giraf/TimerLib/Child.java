@@ -11,6 +11,7 @@ public class Child implements Comparable<Child>{
 	private boolean _deleteCheck = true;
 	private boolean _lock = false;
 	private long _ProfileId = -2;
+	private long _subProfileId = -1;
 	
 	/**
 	 * Default constructor for Child
@@ -19,6 +20,15 @@ public class Child implements Comparable<Child>{
 	public Child(String name){
 		this._profileList = new ArrayList<SubProfile>();
 		this.name = name;
+	}
+	
+	void setSubProfileId(long id){
+		this._subProfileId = id;
+	}
+	
+	private long getNewId(){
+		this._subProfileId++;
+		return this._subProfileId;
 	}
 	
 	void setProfileId(long id){
@@ -99,6 +109,7 @@ public class Child implements Comparable<Child>{
 		//save profile on child
 		//Wait for admin
 			//Add to child list
+			p.setDB_id(getNewId());
 			this.SubProfiles().add(p);
 			Guardian.saveChild(this, p);
 		

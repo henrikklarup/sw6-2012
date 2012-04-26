@@ -58,7 +58,7 @@ public class CRUD {
 			for (SubProfile subProfile : mSubPs) {
 				mC.SubProfiles().add(subProfile);
 			}
-			
+			mC.setSubProfileId(id);
 			guard.Children().add(mC);
 		}
 	}
