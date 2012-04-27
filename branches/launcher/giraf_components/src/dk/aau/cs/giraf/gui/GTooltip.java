@@ -25,10 +25,6 @@ public class GTooltip extends Dialog {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void setOwner(Activity activity) {
-		setOwnerActivity(activity);
-	}
-	
 	public void setStyle(View view, LayoutParams params) {
 		this.addContentView(view, params);
 	}
