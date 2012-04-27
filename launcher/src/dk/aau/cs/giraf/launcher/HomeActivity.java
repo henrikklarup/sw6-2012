@@ -177,6 +177,8 @@ public class HomeActivity extends Activity {
 		
 		
 		GridView AppColors = (GridView) findViewById(R.id.appcolors);
+		// Remove blue highlight and scroll
+		AppColors.setEnabled(false);
 		
 		AppColors.setAdapter(new GColorAdapter(this));
 		
@@ -208,6 +210,9 @@ public class HomeActivity extends Activity {
 	private void resizeBar() {
 		GridView homeGridView = (GridView)this.findViewById(R.id.GridViewHome);
 		RelativeLayout homebar = (RelativeLayout)this.findViewById(R.id.HomeBarLayout);
+		
+		// Remove blue highlight and scroll
+		homeGridView.setEnabled(false);
 
 		LayoutParams paramsGrid = (RelativeLayout.LayoutParams)homeGridView.getLayoutParams();
 		RelativeLayout.LayoutParams paramsBar = (RelativeLayout.LayoutParams)homebar.getLayoutParams();
