@@ -6,6 +6,7 @@ import android.view.View.DragShadowBuilder;
 import android.view.View.OnTouchListener;
 import android.content.ClipData;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.RectF;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.ShapeDrawable;
@@ -20,12 +21,21 @@ import android.view.LayoutInflater;
 
 public class GColorAdapter extends BaseAdapter {
 	
-	private Integer[] mAppColors = {0xFFFFDC4A, 0xFFA47AE2, 0xFF4986E7, 0xFFFFDC4A, 0xFFA47AE2, 0xFF4986E7, 0xFFFFDC4A, 0xFFA47AE2, 0xFF4986E7};
+	private Integer[] mAppColors; // = {0xFFFFDC4A, 0xFFA47AE2, 0xFF4986E7, 0xFFFFDC4A, 0xFFA47AE2, 0xFF4986E7, 0xFFFFDC4A, 0xFFA47AE2, 0xFF4986E7};
 	private Context mContext;
 	private static LayoutInflater inflater=null;
 	
 	public GColorAdapter(Context context) {
 		super();
+		
+		Resources r = context.getResources();
+		int[] mAppColorsRaw = r.getIntArray(R.array.appcolors);
+		mAppColors = new Integer[mAppColorsRaw.length];
+		
+		for (int i = 0; i < mAppColorsRaw.length; i++) {	
+			mAppColors[i] = mAppColorsRaw[i];
+		}
+		
 		mContext = context;
 		inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		// TODO Auto-generated constructor stub
