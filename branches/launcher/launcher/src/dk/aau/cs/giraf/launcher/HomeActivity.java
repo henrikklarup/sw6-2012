@@ -136,9 +136,13 @@ public class HomeActivity extends Activity {
 					
 					margin = mHomeBarParams.leftMargin + ((int) e.getX() - offset);
 					
-					if(margin < 0){
+					int snaplength = 40;
+					
+					if (margin < snaplength) {
 						margin = 0;
-					} else if(margin > DRAWER_WIDTH){
+					//} else if (margin > (DRAWER_WIDTH - snaplength)) {
+					//	margin = DRAWER_WIDTH;
+					} else if (margin > DRAWER_WIDTH) {
 						margin = DRAWER_WIDTH;
 					}
 					
