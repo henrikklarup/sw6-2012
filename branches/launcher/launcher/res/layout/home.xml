@@ -82,7 +82,7 @@
     		android:padding="20dp"
     		android:columnWidth="90dp"
     		android:verticalSpacing="20dp"
-    		 />"
+    		 />
     </RelativeLayout>
 
 
