@@ -87,7 +87,7 @@ public class DrawProgressBar extends View {
 			double percent = (timenow) / totalTime;
 
 			paint.setColor(timeleft2);
-			r.set((left + 3), top + 3, (left + 3) + (int) ((width-5) * percent), top
+			r.set((int) ((left + 3) + ((width - 5) * (1-percent))), top + 3, (left + 3) + width - 5, top
 					+ height - 3);
 			c.drawRect(r, paint);
 
