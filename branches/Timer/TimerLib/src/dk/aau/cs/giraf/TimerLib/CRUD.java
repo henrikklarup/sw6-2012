@@ -16,6 +16,7 @@ public class CRUD {
 	Helper oHelp;
 	Guardian guard = Guardian.getInstance();
 	private long appId; 
+	private String _lastUsed = "lastUsed";
 	
 	public CRUD(long appID, Context context){
 		this.context = context;
@@ -23,6 +24,25 @@ public class CRUD {
 		this.appId = appID;
 	}
 	
+	void removeLastUsed(SubProfile p, long profileId){
+		// Find the profile by Id
+		Profile prof = oHelp.profilesHelper.getProfileById(profileId);
+		
+		// Find the Wombat App
+		App app = oHelp.appsHelper.getAppByIds(appId, profileId);
+		
+		// Get the settings from the profile and update
+		Setting<String, String, String> settings = app.getSettings();
+		settings.remove(String.valueOf(p.getDB_id()));
+		app.setSettings(settings);
+		
+		// Update the app
+		oHelp.appsHelper.modifyAppByProfile(app, prof);
+	}
+	
+	void addLastUsed(){
+		
+	}
 	
 	public void loadGuardian(long guardianID){
 		// Load the guardian form Oasis
@@ -176,10 +196,39 @@ public class CRUD {
 		p.frameColor = Integer.valueOf((String)hm.get("frameColor"));
 		p.set_totalTime(Integer.valueOf((String)hm.get("totalTime")));
 		p.gradient = Boolean.valueOf((String)hm.get("gradient"));
-		
+		formFactor factor = formFactor.convert(hm.get("type"));
 
 		/* Change the subprofile to the correct type */
-		switch (formFactor.convert(hm.get("type"))) {
+		p = convertType(p,factor);
+		
+		p.setDB_id(Long.valueOf(hm.get("db_id")));
+		p.save = Boolean.valueOf((String)hm.get("save"));
+		p.saveAs = Boolean.valueOf((String)hm.get("saveAs"));
+		
+		p._AttaBool = (Boolean.valueOf((String) hm.get("Attachment")));
+		
+		if(p._AttaBool){
+			SubProfile attachP = new SubProfile();
+			formFactor aFactor = formFactor.convert(hm.get("Atype"));
+			
+			attachP.bgcolor = Integer.valueOf((String)hm.get("Abgcolor"));
+			attachP.timeLeftColor = Integer.valueOf((String)hm.get("AtimeLeftColor"));
+			attachP.timeSpentColor = Integer.valueOf((String)hm.get("AtimeSpentColor"));
+			attachP.frameColor = Integer.valueOf((String)hm.get("AframeColor"));
+			attachP.set_totalTime(0);
+			attachP.gradient = Boolean.valueOf((String)hm.get("Agradient"));
+			
+			attachP = convertType(attachP, aFactor);
+			
+			p.setAttachment(attachP);
+			
+		}	
+		
+		return p;
+	}
+	
+	SubProfile convertType(SubProfile p, formFactor factor){
+		switch (factor) {
 		case Hourglass:
 			p = new Hourglass(p.name, p.desc, p.bgcolor, p.timeLeftColor, p.timeSpentColor, p.frameColor, p.get_totalTime(), p.gradient);
 			break;
@@ -197,12 +246,8 @@ public class CRUD {
 			break;
 		}
 		
-		p.setDB_id(Long.valueOf(hm.get("db_id")));
-		p.setAttachmentId(Long.valueOf((String) hm.get("Attachment")));
-		p.save = Boolean.valueOf((String)hm.get("save"));
-		p.saveAs = Boolean.valueOf((String)hm.get("saveAs"));
-		
 		return p;
+		
 	}
 
 	/**

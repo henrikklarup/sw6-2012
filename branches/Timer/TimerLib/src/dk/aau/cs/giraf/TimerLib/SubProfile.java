@@ -17,7 +17,7 @@ public class SubProfile implements Comparable<SubProfile>{
 	public boolean save = true;
 	public boolean saveAs = true;
 	protected SubProfile _attachment = null;
-	private long _attachmentId = -1;
+	boolean _AttaBool = false;
 	private long DB_id = -1;
 
 	//constructor
@@ -73,7 +73,7 @@ public class SubProfile implements Comparable<SubProfile>{
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("db_id", String.valueOf(this.getDB_id()));
 		map.put("type", this.formType().toString());		
-		map.put("Attachment", String.valueOf(this.getAttachmentId()));		
+		map.put("Attachment", String.valueOf(this._AttaBool));		
 		map.put("Name", this.name);		
 		map.put("desc", this.desc);		
 		map.put("bgcolor", String.valueOf(this.bgcolor));		
@@ -84,6 +84,23 @@ public class SubProfile implements Comparable<SubProfile>{
 		map.put("gradient", String.valueOf(this.gradient));		
 		map.put("save", String.valueOf(this.save));		
 		map.put("saveAs", String.valueOf(this.saveAs));
+		
+		//Attachment
+		if(this._AttaBool){
+			map.put("Atype", this._attachment.formType().toString());		
+			map.put("Abgcolor", String.valueOf(this._attachment.bgcolor));		
+			map.put("AtimeLeftColor", String.valueOf(this._attachment.timeLeftColor));		
+			map.put("AtimeSpentColor", String.valueOf(this._attachment.timeSpentColor));		
+			map.put("AframeColor", String.valueOf(this._attachment.frameColor));
+			map.put("Agradient", String.valueOf(this._attachment.gradient));	
+		}	else {
+			map.put("Atype", this.formType().toString());		
+			map.put("Abgcolor", String.valueOf(-1));		
+			map.put("AtimeLeftColor", String.valueOf(-1));		
+			map.put("AtimeSpentColor", String.valueOf(-1));		
+			map.put("AframeColor", String.valueOf(-1));
+			map.put("Agradient", String.valueOf(-1));	
+		}
 		
 		return map;
 	}
@@ -139,21 +156,15 @@ public class SubProfile implements Comparable<SubProfile>{
 		return _attachment;
 	}
 	
-	long getAttachmentId(){
-		return this._attachmentId;
-	}
-	
-	void setAttachmentId(long id){
-		this._attachmentId = id; 
-	}
 	
 	public void setAttachment(SubProfile p){
 		if(p != null){
+			this._AttaBool = true;
 			this._attachment = p;
 			this._attachment._totalTime = this._totalTime;
 		} else {
 			this._attachment = null;
-			this._attachmentId = -1;
+			this._AttaBool = false;
 		}
 	}
 	
