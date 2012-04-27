@@ -84,7 +84,6 @@ public class GColorAdapter extends BaseAdapter {
 			ClipData data = ClipData.newPlainText("color", Integer.toString(color));
 			DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(v);
 			v.startDrag(data, shadowBuilder, v, 0);
-			v.setVisibility(View.INVISIBLE);
 			result = true;
 			break;
 		default:
