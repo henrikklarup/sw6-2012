@@ -94,7 +94,7 @@ public class SubProfile implements Comparable<SubProfile>{
 			map.put("AframeColor", String.valueOf(this._attachment.frameColor));
 			map.put("Agradient", String.valueOf(this._attachment.gradient));	
 		}	else {
-			map.put("Atype", this.formType().toString());		
+			map.put("Atype", "-1");		
 			map.put("Abgcolor", String.valueOf(-1));		
 			map.put("AtimeLeftColor", String.valueOf(-1));		
 			map.put("AtimeSpentColor", String.valueOf(-1));		

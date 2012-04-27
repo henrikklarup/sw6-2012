@@ -294,9 +294,21 @@ public class Guardian {
 			//Checks if the SubProfile is already on the list.
 			if(_lastUsed.get(i).getId() == profile.getId()){
 				_lastUsed.remove(i);
-				crud.removeSubprofileFromProfileId(profile, guardianId);
-				crud.saveGuardian(guardianId, profile);
+				
+				Child child = null;
+				GETOUTOFHERE:
+				for(Child c : publishList()){
+					for(SubProfile p : c.SubProfiles()){
+						if(profile.getId() == p.getId()){
+							child = c;
+							break GETOUTOFHERE;
+						}
+					}
+				}
+				
 				_lastUsed.add(profile);
+				crud.removeLastUsed(child, profile, guardianId);
+				crud.addLastUsed(child,profile,guardianId);
 				exists = false;
 				break;
 			}

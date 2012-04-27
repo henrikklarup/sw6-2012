@@ -1,6 +1,7 @@
 package dk.aau.cs.giraf.TimerLib;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -24,7 +25,7 @@ public class CRUD {
 		this.appId = appID;
 	}
 	
-	void removeLastUsed(SubProfile p, long profileId){
+	void removeLastUsed(Child c, SubProfile p, long profileId){
 		// Find the profile by Id
 		Profile prof = oHelp.profilesHelper.getProfileById(profileId);
 		
@@ -33,15 +34,53 @@ public class CRUD {
 		
 		// Get the settings from the profile and update
 		Setting<String, String, String> settings = app.getSettings();
-		settings.remove(String.valueOf(p.getDB_id()));
+		
+		settings.get(_lastUsed).remove(String.valueOf(c.getProfileId() + ";" + p.getDB_id()));
 		app.setSettings(settings);
 		
 		// Update the app
 		oHelp.appsHelper.modifyAppByProfile(app, prof);
 	}
 	
-	void addLastUsed(){
+	void addLastUsed(Child c, SubProfile p, long profileId){
+		// Find the profile by Id
+		Profile prof = oHelp.profilesHelper.getProfileById(profileId);
+			
+		// Find the Wombat App
+		App app = oHelp.appsHelper.getAppByIds(appId, profileId);
+				
+		// Get the settings from the profile and update
+		Setting<String, String, String> settings = app.getSettings();
+		Calendar cal = Calendar.getInstance();
+		int sec = cal.get(Calendar.SECOND);
+		int min = cal.get(Calendar.MINUTE);
+		int hour = cal.get(Calendar.SECOND);
+		int day = cal.get(Calendar.DAY_OF_YEAR);
+		int year = cal.get(Calendar.YEAR);
 		
+		String timeKey = String.valueOf(year+day+hour+min+sec);
+		
+		settings.get(_lastUsed).put(String.valueOf(c.getProfileId() + ";" + p.getDB_id()),timeKey);
+		app.setSettings(settings);
+		
+		// Update the app
+		oHelp.appsHelper.modifyAppByProfile(app, prof);
+		
+	}
+	
+	void retrieveLastUsed(long profileId){
+		// Find the profile by Id
+		Profile prof = oHelp.profilesHelper.getProfileById(profileId);
+					
+		// Find the Wombat App
+		App app = oHelp.appsHelper.getAppByIds(appId, profileId);
+					
+		// Get the settings from the profile and update
+		Setting<String, String, String> settings = app.getSettings();
+		//retrieve all last used :D:D:
+		if(settings == null){
+			
+		}
 	}
 	
 	public void loadGuardian(long guardianID){
