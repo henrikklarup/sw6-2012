@@ -608,7 +608,7 @@ public class CustomizeFragment extends Fragment {
 				final AlertDialog builder = new AlertDialog.Builder(v
 						.getContext()).create();
 
-				builder.setTitle(getString(R.string.donescreen_button_description));
+				builder.setTitle(getString(R.string.donescreen_dialog_title));
 				ListView lv = new ListView(getActivity());
 				
 				
