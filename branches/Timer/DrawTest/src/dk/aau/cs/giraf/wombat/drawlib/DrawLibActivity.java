@@ -2,16 +2,23 @@ package dk.aau.cs.giraf.wombat.drawlib;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import dk.aau.cs.giraf.TimerLib.Guardian;
+import dk.aau.cs.giraf.TimerLib.ProgressBar;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
+import dk.aau.cs.giraf.TimerLib.TimeTimer;
 
 
 public class DrawLibActivity extends Activity {
+
 
 	public static int frameHeight;
 	public static int frameWidth;
@@ -20,7 +27,7 @@ public class DrawLibActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);	
-//		SubProfile sub = new Hourglass("", "", 0xff3D3D3D, 0xff000066, 0xffB8B8B8, 0xff000000, 5, false);
+//		SubProfile sub = new ProgressBar("", "", 0xff3D3D3D, 0xff000066, 0xffB8B8B8, 0xff000000, 3, false);
 //		SubProfile sub2 = new ProgressBar("", "", 0xff3D3D3D, 0xff000066, 0xffB8B8B8, 0xff000000, 900, true);
 //		sub.setAttachment(sub2);
 		Guardian guard = Guardian.getInstance();
@@ -50,11 +57,19 @@ public class DrawLibActivity extends Activity {
 			View v2 = genDrawView(sub.getAttachment());
 			frame.addView(v2, frameWidth, frameHeight);
 			
-			setContentView(frame);
+			setContentView(frame);	
 		}
-
+		
+		new Handler().postDelayed(new Runnable() {
+            public void run() {
+                final Intent mainIntent = new Intent(DrawLibActivity.this, DoneScreenActivity.class);
+                //TODO: putExtra data with picture and text information
+                DrawLibActivity.this.startActivity(mainIntent);
+                DrawLibActivity.this.finish();
+            }
+        }, sub.get_totalTime()*1000);
 	}
-
+	
 	private View genDrawView(SubProfile sub) {
 		switch (sub.formType()) {
 		case ProgressBar:
