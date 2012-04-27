@@ -69,7 +69,7 @@
 	    android:layout_width="800dp"
         android:layout_height="match_parent"
         android:id="@+id/HomeDrawer"
-        android:background="#FF000000"
+        android:background="@drawable/drawerbackground"
         android:layout_marginLeft="-800dp" >
     	<GridView
     	    android:id="@+id/appcolors"
