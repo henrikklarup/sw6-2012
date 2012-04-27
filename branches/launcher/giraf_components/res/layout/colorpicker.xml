@@ -9,6 +9,6 @@
         android:layout_width="70dp"
     	android:gravity="center"
     	android:orientation="vertical"
-    	android:background="@drawable/colorborder"
+    	android:background="@drawable/colorborder"    	
        />
 </RelativeLayout>
