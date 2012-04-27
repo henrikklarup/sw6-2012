@@ -168,8 +168,6 @@ public class CRUD {
 	private SubProfile getSubProfile(HashMap<String, String> hm){		
 		SubProfile p = new SubProfile();
 		/* Load all settings from the hash table */
-		p.setDB_id(Long.valueOf(hm.get("db_id")));
-		p.setAttachmentId(Long.valueOf((String) hm.get("Attachment")));
 		p.name = String.valueOf(hm.get("Name"));
 		p.desc = String.valueOf(hm.get("desc"));	
 		p.bgcolor = Integer.valueOf((String)hm.get("bgcolor"));
@@ -178,8 +176,6 @@ public class CRUD {
 		p.frameColor = Integer.valueOf((String)hm.get("frameColor"));
 		p.set_totalTime(Integer.valueOf((String)hm.get("totalTime")));
 		p.gradient = Boolean.valueOf((String)hm.get("gradient"));
-		p.save = Boolean.valueOf((String)hm.get("save"));
-		p.saveAs = Boolean.valueOf((String)hm.get("saveAs"));
 		
 
 		/* Change the subprofile to the correct type */
@@ -200,7 +196,12 @@ public class CRUD {
 			p = new SubProfile();
 			break;
 		}
-
+		
+		p.setDB_id(Long.valueOf(hm.get("db_id")));
+		p.setAttachmentId(Long.valueOf((String) hm.get("Attachment")));
+		p.save = Boolean.valueOf((String)hm.get("save"));
+		p.saveAs = Boolean.valueOf((String)hm.get("saveAs"));
+		
 		return p;
 	}
 
@@ -220,7 +221,7 @@ public class CRUD {
 		
 		// Get the settings from the profile and update
 		Setting<String, String, String> settings = app.getSettings();
-		settings.remove(Long.valueOf(p.getDB_id()));
+		settings.remove(String.valueOf(p.getDB_id()));
 		app.setSettings(settings);
 		
 		// Update the app
