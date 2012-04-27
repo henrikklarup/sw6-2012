@@ -138,14 +138,14 @@ public class Tools {
 		}
 
 		// Remove all apps from user's list of apps that are not installed on the device.
-		for (int i = 0; i < deviceApps.size(); i++) {
-			if (!appsContain_A(userApps, deviceApps.get(i))) {
-				deviceApps.remove(i);
+		for (int i = 0; i < userApps.size(); i++) {
+			if (!appsContain_A(deviceApps, userApps.get(i))) {
+				userApps.remove(i);
 				i--;
 			}
 		}
 
-		return deviceApps;
+		return userApps;
 	}
 	
 	/**
