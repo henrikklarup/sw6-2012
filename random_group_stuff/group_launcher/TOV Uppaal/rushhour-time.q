@@ -3,9 +3,4 @@
 /*
 
 */
-A[] not deadlock
-
-/*
-
-*/
 E<> red.x == 4
