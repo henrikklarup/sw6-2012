@@ -301,10 +301,10 @@ public class HomeActivity extends Activity {
 		List<App> userApps = Tools.getVisibleGirafApps(mContext, mCurrentUser);
 
 		// If a guardian does not have any apps available, give them all on the device:
-		if (userApps.size() == 0 && mCurrentUser.getPRole() == Tools.ROLE_GUARDIAN) {
+		//if (userApps.size() == 0 && mCurrentUser.getPRole() == Tools.ROLE_GUARDIAN) {
 			Tools.attachAllDeviceGirafAppsToUser(mContext, mCurrentUser);
 			userApps = Tools.getVisibleGirafApps(mContext, mCurrentUser);
-		}
+		//}
 
 		if (userApps != null) {
 			ArrayList<AppInfo> appInfos = new ArrayList<AppInfo>();
