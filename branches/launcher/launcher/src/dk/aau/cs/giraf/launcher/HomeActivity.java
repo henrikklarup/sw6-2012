@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import dk.aau.cs.giraf.gui.GColorAdapter;
+import dk.aau.cs.giraf.gui.GTooltip;
 import dk.aau.cs.giraf.gui.GWidgetCalendar;
 import dk.aau.cs.giraf.gui.GWidgetConnectivity;
 import dk.aau.cs.giraf.gui.GWidgetLogout;
@@ -29,6 +30,7 @@ import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -60,6 +62,7 @@ public class HomeActivity extends Activity {
 	private RelativeLayout.LayoutParams mHomeBarParams;
 	private RelativeLayout mHomeDrawer;
 	private final int DRAWER_WIDTH = 400;
+	private Activity mActivity;
 	
 	private int mLandscapeBarWidth;
 	
@@ -69,6 +72,8 @@ public class HomeActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.home);
+		
+		mActivity = this;
 		
 		mLandscapeBarWidth = Tools.intToDP(this, 200);
 
@@ -109,6 +114,21 @@ public class HomeActivity extends Activity {
 				};
 				GDialog g = new GDialog(mContext, R.drawable.large_switch_profile, "Log out", "You're about to log out", task);
 				g.show();
+			}
+		});
+		
+		mConnectivityWidget.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				GTooltip gTooltip = new GTooltip(mContext);
+				gTooltip.setOwnerActivity(mActivity);
+				
+				Button button = new Button(mContext);
+				
+				LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+				button.setLayoutParams(lp);
+				
+				gTooltip.addContentView(button,button.getLayoutParams());
+				gTooltip.show();
 			}
 		});
 		
