@@ -41,7 +41,7 @@ public class generateQR extends HttpServlet {
 	private static final String DESTINATION_DIR_PATH = "/generateQR";
 	private File destinationDir;
 	String imageName;
-
+	String qrname;
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -71,13 +71,15 @@ public class generateQR extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		String qrToken = (String) session.getAttribute("QRTOKEN");
+		session.removeAttribute("QRTOKEN");
+		qrname = (String) session.getAttribute("QRNAME");
 
 		generateCode(qrToken);
-		
-	    
-	    
-	    response.sendRedirect("showQR");
-		
+
+
+
+		response.sendRedirect("showQR");
+
 	}
 
 	/**
@@ -86,13 +88,14 @@ public class generateQR extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
-	
+
 	private void generateCode(String qrToken) throws IOException
 	{
-		QRCode test = QRCode.from(qrToken);
 		
+		QRCode test = QRCode.from(qrToken);
+
 		test.withSize(300, 300);
-		File file = new File(destinationDir, "qr.gif");
+		File file = new File(destinationDir, qrname+"qr.gif");
 		FileOutputStream f;
 		try {
 			f = new FileOutputStream(file);
@@ -103,8 +106,8 @@ public class generateQR extends HttpServlet {
 		}  
 
 
-		
-		
+
+
 
 	}
 

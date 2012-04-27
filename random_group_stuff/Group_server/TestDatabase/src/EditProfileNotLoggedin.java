@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import javax.print.attribute.HashAttributeSet;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sun.net.httpserver.HttpContext;
 import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 import com.sun.xml.internal.ws.api.pipe.NextAction;
 
@@ -25,9 +27,9 @@ import com.sun.xml.internal.ws.api.pipe.NextAction;
  */
 
 @WebServlet(
-	    name = "EditProfileNotLoggedin", 
-	    urlPatterns = {"/EditProfileNotLoggedin"}
-	)
+		name = "EditProfileNotLoggedin", 
+		urlPatterns = {"/EditProfileNotLoggedin"}
+		)
 public class EditProfileNotLoggedin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	ArrayList<Department> possibleDepartments = new ArrayList<Department>();
@@ -58,6 +60,8 @@ public class EditProfileNotLoggedin extends HttpServlet {
 	String[] unselectedGuards;
 	String[] selectedParents;
 	String[] unselectedParents;
+	String[] selectedApps;
+	String[] ubselectedApps;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -75,6 +79,8 @@ public class EditProfileNotLoggedin extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String context = request.getContextPath();
+
 		possibleDepartments.clear();
 		currentDepartments.clear();
 		possibleChild.clear();
@@ -130,6 +136,11 @@ public class EditProfileNotLoggedin extends HttpServlet {
 				pRole = rs.getInt("pRole");
 				phone = (int) rs.getLong("phone");
 				picture = rs.getString("picture");
+
+				if (picture == null || picture.equals("null"))
+					picture = context + "/images/i.jpg";
+				else
+					picture = context + picture;
 
 				switch (pRole) {
 				case 1: {
@@ -424,10 +435,8 @@ public class EditProfileNotLoggedin extends HttpServlet {
 				+ "<head>"
 				+ "<title>Savannah 1.0</title>"
 				+ "<link rel='stylesheet' type='text/css' href='CSS/SavannahStyle.css' />"
-				+ "</head>"
-				+ "<body>"
-				+ "<center>"
-				+ "<div id=\"mainBackground\">"
+				+ "<script src=\"javascript/popup.js\">"
+				+ "</script>"
 				+ "<SCRIPT language = JavaScript>"
 				+ "function listbox_move(fromID, toID) "
 				+ "{"
@@ -476,6 +485,21 @@ public class EditProfileNotLoggedin extends HttpServlet {
 
 				"}" +
 
+"var reader = new FileReader();"+
+"reader.onload = function(e) {"+
+  "document.billedet.src  = e.target.result;"+ 
+"};"+
+
+"function readURL(input){"+ 
+   "if(input.files && input.files[0]){"+
+      "reader.readAsDataURL(input.files[0]);"+
+   "}"+
+   "else {"+
+     "document.billedet.src = input.value || \"No file selected\";"+
+     "alert(input.value);"+
+   "}"+
+"}"+
+
 				"function SelectedParSelectAll()" + "{" +
 
 				"var select = document.getElementById('SelectedParents');"
@@ -496,34 +520,49 @@ public class EditProfileNotLoggedin extends HttpServlet {
 				+ "for(var count=0; count < select.options.length; count++) "
 				+ "{" + "select.options[count].selected = 'true';" + "}" +
 
-				"}" +
+				"}");
 
-				"</SCRIPT>" + "<h1>Rediger profiler</h1>");
+		if (session.getAttribute("EDITPICTUREMESSAGE") != null)
+		{
+			out.println("alert('Billede ændret');");
+			session.removeAttribute("EDITPICTUREMESSAGE");
+		}
+		out.println("</SCRIPT>"
+				+ "</head>"
+				+ "<body>"
+				+ "<center>"
+				+ "<div id=\"mainBackground\">"
+				+ "<h2>Rediger profiler</h2>"
+				+"<hr>");
+		out.println("<div id=\"generic_wrapper\">");
 		if (errorMessage != null)
 			out.println("<br><font color='red'>" + errorMessage + "</font>");
 
-		out.println("<hr>"
-				+ "<table border = 0>"
+		out.println("<center>"
+				+"<table border = 0>"
 				+ "<form method='POST' name='editForm' action='EditProfileNotLoggedin'>"
 				+ "<tr>"
-				+ "<td>Navn:</td> <td><input type=\"text\" name=\"firstname\" value='"
-				+ firstname
-				+ "' /><td>"
+				+ "<td align='center' colspan='3'><img src='"+picture+"' width=100 height=100><br><a href='#', onClick=\"popup('popUpDiv')\">Skift<a></td>"
 				+ "</tr>"
 				+ "<tr>"
-				+ "<td>Mellemnavn(e):</td> <td> <input type=\"text\" name=\"middlename\" value='"
+				+ "<td>Navn:</td> <td colspan='3'><input type=\"text\" name=\"firstname\" value='"
+				+ firstname
+				+ "' /></td>"
+				+ "</tr>"
+				+ "<tr>"
+				+ "<td>Mellemnavn(e):</td> <td colspan='3'><input type=\"text\" name=\"middlename\" value='"
 				+ middlename
 				+ "' /> </td>"
 				+ "</tr>"
 				+ "<tr>"
-				+ "<td>Efternavn: </td><td><input type=\"text\" name=\"surname\" value='"
+				+ "<td>Efternavn: </td><td colspan='3'><input type=\"text\" name=\"surname\" value='"
 				+ surname
 				+ "' /> </td>"
 				+ "</tr>"
 				+ "<tr>"
-				+ "<td>Telefon nummer: </td> <td> <input type=\"text\" name=\"phone\" value='"
+				+ "<td>Telefon nummer: </td> <td colspan='3'> <input type=\"text\" name=\"phone\" value='"
 				+ phone + "'  /> </td>" + "</tr>" + "<tr>"
-				+ "<td><select name=\"prole\">" + "<option value=\"0\"");
+				+ "<td></td><td><select name=\"prole\">" + "<option value=\"0\"");
 		if (pRole == 0) {
 			out.println("selected=\"selected\"");
 		}
@@ -539,12 +578,11 @@ public class EditProfileNotLoggedin extends HttpServlet {
 		if (pRole == 3) {
 			out.println("selected=\"selected\"");
 		}
-		out.println(">Barn</option>" + "</select></td> <br />" + "</tr>"
-				+ "<tr>" + "</tr>" + "</table>" + "<table>");
-		out.println("<tr>" + "<td><hr></td><td><hr></td><td><hr></td>"
+		out.println(">Barn</option>" + "</select></td>" +"</tr>");
+		out.println("<tr>" + "<td colspan='3'><hr></td>"
 				+ "</tr>");
 		if (!isParent) {
-			out.println("<tr><td>Mulige afdelinger:<br><select name=\"AllDep\" id=\"AllDeps\" size=\"4\" multiple=\"multiple\">");
+			out.println("<tr><td>Mulige afdelinger:<br><select name=\"AllDep\" style='width:150px' id=\"AllDeps\" size=\"4\" multiple=\"multiple\">");
 
 			for (Department d : possibleDepartments) {
 				out.println("<option value=\"" + d.getID() + "\">"
@@ -552,10 +590,14 @@ public class EditProfileNotLoggedin extends HttpServlet {
 
 			}
 			out.println("</select></td>"
-					+ "<td> <input type=\"button\" value=\"Tilføj\" onclick=\"listbox_move('AllDeps', 'SelectedDep');\"><br />"
-					+ "<input type=\"button\" value=\"Fjern\" onclick=\"listbox_move('SelectedDep', 'AllDeps');\"> <br />"
-					+ "<input type=\"button\" value=\"Fjern alle\"></td>"
-					+ "<td>Med i afdelinger:<br><select name=\"SelectedDep\" id=\"SelectedDep\" size=\"4\" multiple=\"multiple\">");
+					+ "<td> " +
+					"<center><br>" +
+					"<input type=\"button\" style='width:100px' value=\"Tilføj\" onclick=\"listbox_move('AllDeps', 'SelectedDep');\"><br />"
+					+ "<input type=\"button\" style='width:100px' value=\"Fjern\" onclick=\"listbox_move('SelectedDep', 'AllDeps');\"><br />"
+					+ "<input type=\"button\" style='width:100px' value=\"Fjern alle\">" +
+					"</center>" +
+					"</td>"
+					+ "<td>Med i afdelinger:<br><select name=\"SelectedDep\" style='width:150px' id=\"SelectedDep\" size=\"4\" multiple=\"multiple\">");
 
 			for (Department d : currentDepartments) {
 				out.println("<option value=\"" + d.getID() + "\">"
@@ -567,23 +609,26 @@ public class EditProfileNotLoggedin extends HttpServlet {
 
 		if (isGuardian || isParent) {
 			out.println("<tr>"
-					+ "<td> Mulige Børn:<br><select name=\"AllKids\" id=\"AllKids\" size=\"4\" multiple=\"multiple\">");
+					+ "<td>Mulige Børn:<br><select name=\"AllKids\" style='width:150px' id=\"AllKids\" size=\"4\" multiple=\"multiple\">");
 			for (Profile p : possibleChild) {
 				out.println("<option value=\"" + p.getID() + "\">"
 						+ p.getName() + "</option>");
 
 			}
 			out.println("</select></td>"
-					+ "<td> <input type=\"button\" value=\"Tilføj\" onclick=\"listbox_move('AllKids', 'Selected1');\"><br />"
-					+ "<input type=\"button\" value=\"Fjern\" onclick=\"listbox_move('Selected1', 'AllKids');\"> <br />"
-					+ "<input type=\"button\" value=\"Fjern alle\"></td>"
+					+"<td>"
+					+ "<center><br><input type=\"button\" style='width:100px' value=\"Tilføj\" onclick=\"listbox_move('AllKids', 'Selected1');\"><br />"
+					+ "<input type=\"button\" style='width:100px' value=\"Fjern\" onclick=\"listbox_move('Selected1', 'AllKids');\"><br />"
+					+ "<input type=\"button\" style='width:100px' value=\"Fjern alle\">" +
+					"</center>" +
+					"</td>"
 					+ "<td>");
 			if (isGuardian)
 				out.println("Pædagog for:");
 			if (isParent)
 				out.println("Forældre for:");
 
-			out.println("<br><select name=\"SelectedKids\" id=\"Selected1\" size=\"4\" multiple=\"multiple\">");
+			out.println("<br><select name=\"SelectedKids\" style='width:150px' id=\"Selected1\" size=\"4\" multiple=\"multiple\">");
 
 			for (Profile p : currentChild) {
 				out.println("<option value=\"" + p.getID() + "\">"
@@ -595,17 +640,20 @@ public class EditProfileNotLoggedin extends HttpServlet {
 
 		if (isChild) {
 			out.println("<tr>"
-					+ "<td>Mulige pædagoger:<br><select name=\"AllGuards\" id=\"AllGuards\" size=\"4\" multiple=\"multiple\">");
+					+ "<td>Mulige pædagoger:<br><select name=\"AllGuards\" style='width:150px' id=\"AllGuards\" size=\"4\" multiple=\"multiple\">");
 			for (Profile p : possibleGuardian) {
 				out.println("<option value=\"" + p.getID() + "\">"
 						+ p.getName() + "</option>");
 
 			}
 			out.println("</select></td>"
-					+ "<td> <input type=\"button\" value=\"Tilføj\" onclick=\"listbox_move('AllGuards', 'SelectedGuards');\"><br />"
-					+ "<input type=\"button\" value=\"Fjern\" onclick=\"listbox_move('SelectedGuards', 'AllGuards');\"> <br />"
-					+ "<input type=\"button\" value=\"Fjern alle\"></td>"
-					+ "<td>Barn ved:<br><select name=\"SelectedGuards\" id=\"SelectedGuards\" size=\"4\" multiple=\"multiple\">");
+					+ "<td> " +
+					"<center><br><input type=\"button\" value=\"Tilføj\" style='width:100px' onclick=\"listbox_move('AllGuards', 'SelectedGuards');\"><br />"
+					+ "<input type=\"button\" value=\"Fjern\" style='width:100px' onclick=\"listbox_move('SelectedGuards', 'AllGuards');\"><br />"
+					+ "<input type=\"button\" style='width:100px' value=\"Fjern alle\">"
+					+"</center>"
+					+"</td>" 
+					+ "<td>Barn ved:<br><select name=\"SelectedGuards\" style='width:150px' id=\"SelectedGuards\" size=\"4\" multiple=\"multiple\">");
 
 			for (Profile p : currentGuardian) {
 				out.println("<option value=\"" + p.getID() + "\">"
@@ -613,17 +661,17 @@ public class EditProfileNotLoggedin extends HttpServlet {
 			}
 
 			out.println("<tr>"
-					+ "<td>Mulige forældre:<br><select name=\"AllParents\" id=\"AllParents\" size=\"4\" multiple=\"multiple\">");
+					+ "<td>Mulige forældre:<br><select name=\"AllParents\" style='width:150px' id=\"AllParents\" size=\"4\" multiple=\"multiple\">");
 			for (Profile p : possibleParents) {
 				out.println("<option value=\"" + p.getID() + "\">"
 						+ p.getName() + "</option>");
 
 			}
 			out.println("</select></td>"
-					+ "<td> <input type=\"button\" value=\"Tilføj\" onclick=\"listbox_move('AllParents', 'SelectedParents');\"><br />"
-					+ "<input type=\"button\" value=\"Fjern\" onclick=\"listbox_move('SelectedParents', 'AllParents');\"> <br />"
-					+ "<input type=\"button\" value=\"Fjern alle\"></td>"
-					+ "<td>Barn ved:<br><select name=\"SelectedParents\" id=\"SelectedParents\" size=\"4\" multiple=\"multiple\">");
+					+ "<td><center><br> <input type=\"button\" value=\"Tilføj\" style='width:100px' onclick=\"listbox_move('AllParents', 'SelectedParents');\"><br />"
+					+ "<input type=\"button\" value=\"Fjern\" style='width:100px'  onclick=\"listbox_move('SelectedParents', 'AllParents');\"><br />"
+					+ "<input type=\"button\" style='width:100px' value=\"Fjern alle\"></td>"
+					+ "<td>Barn ved:<br><select name=\"SelectedParents\" style='width:150px' id=\"SelectedParents\" size=\"4\" multiple=\"multiple\"></center>");
 
 			for (Profile p : currentParents) {
 				out.println("<option value=\"" + p.getID() + "\">"
@@ -653,9 +701,9 @@ public class EditProfileNotLoggedin extends HttpServlet {
 		 * out.println("</select></td>"+ "</tr>"); }
 		 */
 
-		out.println("<tr>" + "<td><hr></td><td><hr></td><td><hr></td>"
+		out.println("<tr>" + "<td colspan='3'><hr></td>"
 				+ "</tr>");
-		out.println("</table>" + "<table>" + "<tr>"
+		out.println("<tr>"
 				+ "<td>Adgang til apps:</td><td>");
 		// This section needs optimization!
 		for (App app : possibleApps) {
@@ -678,7 +726,7 @@ public class EditProfileNotLoggedin extends HttpServlet {
 		}
 		// /The above section needs optimization
 
-		out.println("<tr>"
+		out.println("</td></tr><tr>"
 				+ "<td>Brugernavn: </td><td><input type=\"text\" name=\"brugernavn\" disabled=true value='"
 				+ username
 				+ "' /></td>"
@@ -694,8 +742,31 @@ public class EditProfileNotLoggedin extends HttpServlet {
 				+ "</tr>"
 				+ "<tr>"
 				+ "<td></td><td><input type=\"button\" onClick=\"SelectAll(); doSubmit();\" value=\"Gem\"/>"
-				+ "<input type=\"button\" value=\"Fortryd\"></td>" + "</tr>"
-				+ "</form>" + "</div>" + "</body>" + "</html>");
+				+ "<input type=\"button\" value=\"Fortryd\" onClick=\"javascript:history.go(-1)\"></td>" + "</tr>"
+				+ "</form>"
+				+"</table>"
+				+"</center>"
+				+"</div>"
+				+"<hr>");
+		out.println("<footer>Savannah v. 1.0.0 <a href='http://en.wikipedia.org/wiki/Copyleft'>(C)opyleft</a> under Freedom 3 me!</footer> </div>");
+
+		out.println(""
+				+ "<div id=\"blanket\" style=\"display:none;\"></div>"
+				+ "<div id=\"popUpDiv\" style=\"display:none;\">"
+				+ "<P align=\"right\"><a href=\"#\" onclick=\"popup('popUpDiv')\" ALIGN=RIGHT>[X]</a></p>"
+				+ "<center>"
+				+"<form method='POST' name='newPic' enctype='multipart/form-data' action='newProfilePicture'>"
+				+"Nyt billede:"
+				+"<br>"
+				+"<img src='test.jpg' name='billedet' width=100 height=100><br>"
+				+"<input name='file1' type='file' accept='image/*' onChange=\"readURL(this);\"/>"
+				+"<input type='hidden' name='userID' value='"+userID+"'>"
+				+"<input type='hidden' name='oldPic' value='"+picture+"'>"
+				+"<br>"
+				+"<input type='submit' value='Tilføj'> <input type=button onclick=\"popup('popUpDiv')\" value='Fortryd'>"
+				+"</form>"
+				+"</center>" + "</div>");
+		out.println("</body>" + "</html>");
 
 	}
 
@@ -803,7 +874,7 @@ public class EditProfileNotLoggedin extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
+		String tempMessage = "";
 		// Husk: SelectedDep
 		HttpSession session = request.getSession();
 		PrintWriter out = response.getWriter();
@@ -815,6 +886,9 @@ public class EditProfileNotLoggedin extends HttpServlet {
 		unselectedGuards = request.getParameterValues("AllGuards");
 		selectedParents = request.getParameterValues("SelectedParents");
 		unselectedParents = request.getParameterValues("AllParents");
+		selectedApps = request.getParameterValues("apps");
+
+
 
 		String oldPass = request.getParameter("oldpassword");
 		boolean oldPassCorrect = false;
@@ -907,6 +981,34 @@ public class EditProfileNotLoggedin extends HttpServlet {
 						+ userID + ";");
 			}
 
+
+
+			// Add new Apps
+			if (selectedApps != null) {
+				ArrayList<App> appToDelete = findAppsList();
+				//ArrayList<Department> depToDelte = findDepLists();
+				for (int i = 0; i < selectedApps.length; i++) {
+					if (!selectedApps[i].equals("0") && !selectedApps[i].equals("-1"))
+					{
+						tempMessage = selectedApps[i];
+						stmt.executeUpdate("INSERT into ListOfApps values("+
+								selectedApps[i] +"," + userID + ",null,null);");
+					}
+				}
+				// Delete kid relation
+				out.println("To delete");
+
+				for (App app : appToDelete) {
+					stmt.executeUpdate("DELETE FROM ListOfApps WHERE idProfile="
+							+ userID + " and idApp=" + app.getID() + ";");
+				}
+			} else {
+				stmt.executeUpdate("DELETE FROM ListOfApps WHERE idProfile="
+						+ userID + ";");
+			}
+
+
+
 			// Add new Kid relation
 			if (selectedKids != null) {
 				ArrayList<Profile> kidToDelete = findKidLists();
@@ -974,10 +1076,11 @@ public class EditProfileNotLoggedin extends HttpServlet {
 			if (middlename == null || middlename.equals(""))
 				middlename = "";
 			session.setAttribute("SYSTEMMESSAGE", "<font color=green>"+firstname + " "+ middlename + " " + surname + " redigeret korrekt</font>");
-			response.sendRedirect("TestDatabase");
+
+			//response.sendRedirect("TestDatabase");
 
 		} catch (SQLException e) {
-			throw new ServletException("Servlet Could not display records. ", e);
+			throw new ServletException("Servlet Could not display records. " + tempMessage, e);
 		} catch (ClassNotFoundException e) {
 			throw new ServletException("JDBC Driver not found.", e);
 		} finally {
@@ -989,8 +1092,14 @@ public class EditProfileNotLoggedin extends HttpServlet {
 			}
 		}
 
-		// session.setAttribute("SYSTEMMESSAGE", "Bruger redigeret!");
-		// response.sendRedirect("TestDatabase");
+		session.setAttribute("SYSTEMMESSAGE", "Bruger redigeret!");
+		response.sendRedirect("TestDatabase");
+		//out.println("Selected: ");
+		//for (int i = 0; i< selectedApps.length; i++)
+		//{
+		//	out.println(selectedApps[i]);
+		//}
+
 	}
 
 	// doGet(request, response);
@@ -1028,6 +1137,54 @@ public class EditProfileNotLoggedin extends HttpServlet {
 
 		return depToDelte;
 	}
+
+	public ArrayList<App> findAppsList()
+	{
+
+		ArrayList<App> appToDelete = new ArrayList<App>();
+
+		if (selectedApps != null) {
+			// To delete:
+
+			for (int j = 0; j< possibleApps.size(); j++)
+			{
+				boolean found = false;
+				for (int i = 0; i<selectedApps.length;i++)
+				{
+					//out.println("Looking at: " + possibleApps.get(j).getID() + " vs " + selectedApps[i] +"<br>");
+					if (Integer.parseInt(selectedApps[i]) == possibleApps.get(j).getID())
+					{
+						found = true;
+						break;
+					}
+					else
+						found = false;
+				}
+				if (!found)
+				{
+					//out.println("Adding " + possibleApps.get(j).getName() + " to delete <br>");
+					appToDelete.add(possibleApps.get(j));
+				}
+			}
+
+			// To add:
+
+			for (int j = 0; j < selectedApps.length; j++) {
+				for (int i = 0; i < currentApps.size(); i++) {
+					if (currentApps.get(i).getID() == Integer
+							.parseInt(selectedApps[j])) {
+
+						selectedApps[j] = "-1";
+					}
+				}
+			}
+
+
+
+		}
+		return appToDelete;
+	}
+
 
 	/**
 	 * Clean lists, to confirm which departments to add or delete Note: Monday

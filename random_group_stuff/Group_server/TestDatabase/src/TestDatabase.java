@@ -6,6 +6,7 @@
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,6 +23,8 @@ import javax.servlet.http.*;
 import org.apache.catalina.connector.Request;
 import org.apache.tomcat.dbcp.dbcp.DbcpException;
 
+import com.sun.xml.internal.bind.CycleRecoverable.Context;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -30,9 +33,9 @@ import java.sql.Statement;
 
 
 @WebServlet(
-	    name = "TestDatabase", 
-	    urlPatterns = {"/TestDatabase"}
-	)
+		name = "TestDatabase", 
+		urlPatterns = {"/TestDatabase"}
+		)
 public class TestDatabase extends HttpServlet {
 	/**
 	 * 
@@ -45,6 +48,7 @@ public class TestDatabase extends HttpServlet {
 
 	public void doGet(HttpServletRequest aRequest, HttpServletResponse aResponse)
 			throws IOException, ServletException {
+
 		session = aRequest.getSession();
 		String username = aRequest.getParameter("username");
 		String password = aRequest.getParameter("password");
@@ -143,13 +147,11 @@ public class TestDatabase extends HttpServlet {
 		//	aOutput.println("<body onLoad=\"setOpen(" + openVar
 		//			+ "); testThis('profile');popup('popUpDiv');getFocus();\">");
 		//} else {
-			aOutput.println("<body>");
+		aOutput.println("<body>");
 
 		//}
 		aOutput.println("<div id=\"mainBackground\">");
-		aOutput.println("<center><h2> Velkommen!</h2>");
-		if (systemMessage != null)
-			aOutput.println("<br>" + systemMessage);
+		aOutput.println("<center><h2> Velkommen!</h2></center>");
 		aOutput.println("<SCRIPT language = JavaScript> "
 				+ "var open = 0;"
 				+ "function setOpen(number)"
@@ -193,15 +195,19 @@ public class TestDatabase extends HttpServlet {
 				"if(keyCode == 80 && open == 0) {window.location = \"SelectProfile\"}"
 				+ // P = redirect to SelectProfile
 				"if(keyCode == 84 && open == 0) {setOpen(2); popup('popUpPick')}"
-				
+
 				+ // R = show edit window
 				"if(keyCode == 82 && open == 0) {setOpen(3); popup('popUpEdit')}"
-				
+
 				+ // T = edit add window //Nice little feature for waiting 25 ms
 				" if(keyCode == 76 && open == 0) {setOpen(1); clearForm(); testThis('profile');popup('popUpDiv'); document.DasForm.username.value =\"\"; setTimeout(function(){getFocus();clearForm();}, 25); }"
 				+ // L = Show login
 				"}" + "</SCRIPT>");
 		aOutput.println("<hr>");
+		aOutput.println("<div id=\"generic_wrapper\">");
+		aOutput.println("<center>");
+		if (systemMessage != null)
+			aOutput.println(systemMessage + "<br>");
 		aOutput.println("Vælg handling");
 		aOutput.println("<p>");
 		aOutput.println("<a href=\"SelectProfile\"><img src=\"images/i.jpg\" ALT=\"test\">");
@@ -212,11 +218,15 @@ public class TestDatabase extends HttpServlet {
 		aOutput.println("<a href=\"#\" onclick=\"setOpen(2); popup('popUpPick');\"><u>T</u>ilføj</a>  -  <a href=\"#\" onclick=\"setOpen(3); popup('popUpEdit');\"><u>R</u>ediger</a>  -  <a href=\"#\" onclick=\"setOpen(4); popup('popUpDelete');\"><u>S</u>let");
 		aOutput.println("</p>");
 		aOutput.println("</center>");
-		aOutput.println("<p>");
+		aOutput.println("<br>");
+		aOutput.println("<br>");
 		aOutput.println("<a href=\"#\" onclick=\"setOpen(1); testThis('profile');popup('popUpDiv');getFocus();\">Hurtig <u>L</u>ogin</a>");
-		aOutput.println("</p>");
+
+		
+		aOutput.println("</div>");
 		aOutput.println("<hr>");
-		aOutput.println("<footer> Savannah v. 1.0.0 (C)opyright me!</footer> </div>");
+		aOutput.println("<footer>Savannah v. 1.0.0 <a href='http://en.wikipedia.org/wiki/Copyleft'>(C)opyleft</a> under Freedom 3 me!</footer> </div>");
+
 		// out.println("<form method='POST' action='main'>\n" +
 		// "<input type='hidden' name='Logout'>"+
 		// "<input type='submit' value='Logout'>\n" + "</form>");
@@ -247,7 +257,7 @@ public class TestDatabase extends HttpServlet {
 				// "</tr>"+
 
 				"</center>" + "</div>");
-		
+
 		aOutput.println("<div id=\"blanket\" style=\"display:none;\"></div>"
 				+ "<div id=\"popUpEdit\" style=\"display:none;\">"
 				+ "<P align=\"right\"><a href=\"#\" onclick=\"setOpen(0);popup('popUpEdit')\" ALIGN=RIGHT>[X]</a></p>"
@@ -256,7 +266,7 @@ public class TestDatabase extends HttpServlet {
 				+ "</h3>"
 				+ "<a href=\"SelectProfileToEdit\"><u>P</u>rofil</a>  -  Billede  -  Lyd  -  Animation/film"
 				+ "</center>" + "</div>");
-		
+
 
 		aOutput.println("<div id=\"blanket\" style=\"display:none;\"></div>"
 				+ "<div id=\"popUpPick\" style=\"display:none;\">"
@@ -266,7 +276,7 @@ public class TestDatabase extends HttpServlet {
 				+ "</h3>"
 				+ "<a href=\"AddProfile\"><u>P</u>rofil</a>  -  Billede  -  Lyd  -  Animation/film"
 				+ "</center>" + "</div>");
-		
+
 		aOutput.println("<div id=\"blanket\" style=\"display:none;\"></div>"
 				+ "<div id=\"popUpDelete\" style=\"display:none;\">"
 				+ "<P align=\"right\"><a href=\"#\" onclick=\"setOpen(0);popup('popUpDelete')\" ALIGN=RIGHT>[X]</a></p>"
@@ -277,7 +287,7 @@ public class TestDatabase extends HttpServlet {
 				+ "</center>" + "</div>");
 
 
-		
+
 
 		aOutput.println("</body></form></html>");
 	}

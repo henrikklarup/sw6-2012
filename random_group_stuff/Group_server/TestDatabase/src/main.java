@@ -19,6 +19,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.Session;
 
+import sun.java2d.Surface;
+
 /**
  * Servlet implementation class main
  */
@@ -64,6 +66,7 @@ public class main extends HttpServlet {
 		String userId = (String) session.getAttribute("ID");
 		userMessage = (String) session.getAttribute("MESSAGETOUSER");
 		session.removeAttribute("MESSAGETOUSER");
+		String cert = null;
 
 		if (user == null) {
 			response.sendRedirect("TestDatabase");
@@ -85,7 +88,8 @@ public class main extends HttpServlet {
 				userType = rs.getString("aRole");
 			}
 			rs = stmt
-					.executeQuery("SELECT firstname, middlename, surname, phone from Profile where idProfile = '"
+					.executeQuery("SELECT firstname, middlename, surname, phone, certificate from Profile, AuthUsers" +
+							" where idProfile = '"
 							+ userId + "'");
 			// displaying records
 			while (rs.next()) {
@@ -95,6 +99,7 @@ public class main extends HttpServlet {
 					middlename = "";
 				lastname = rs.getString("surname");
 				phone = rs.getString("phone");
+				cert = rs.getString("certificate");
 				// out.print("\t\t\t");
 
 				// out.print("<br>");
@@ -135,6 +140,8 @@ public class main extends HttpServlet {
 		}
 
 		String topText = "";
+		session.setAttribute("QRTOKEN", cert);
+		session.setAttribute("QRNAME", firstname + " " + middlename + " " + lastname);
 		if (userType.equals("0"))
 			topText = "<h3>" + firstname + " " + middlename + " " + lastname
 					+ "!" + "<br>" + phone + "<br> <b>" + "Admin" + "</h3></b>";
@@ -188,7 +195,7 @@ public class main extends HttpServlet {
 				+ "<a style=\"float:right\"  href=\"#\" onClick=\"document.logoutForm.submit()\" >Logout</a>"); // "<input type='submit' value='Logout'>\n");
 		out.println("</div>");
 		out.println("<hr color=\"Black\" size=\"2\">");
-		out.println("<footer> Savannah v. 1.0.0 (C)opyright me!</footer>");
+		out.println("<footer>Savannah v. 1.0.0 <a href='http://en.wikipedia.org/wiki/Copyleft'>(C)opyleft</a> under Freedom 3 me!</footer> </div>");
 		// out.println("<form method='POST' action='main'>\n" +
 		// "<input type='hidden' name='Logout'>"+
 		// "<input type='submit' value='Logout'>\n" + "</form>");
@@ -208,6 +215,13 @@ public class main extends HttpServlet {
 				+ "Tilføj  -  <a href=\"editProfile2\">Rediger2</a>  -  Slet"
 				+ "<br>"
 				+ "Tilføj  -  <a href=\"editProfile3\">Rediger3</a>  -  Slet"
+				+"</form>"
+				+ "<br>"
+				+ "<form method='GET' name='getQR' action='generateQR'>"
+				+"<input type=hidden name='token' value='"+cert+"'>"
+				+"<input type='submit' value='Vis min QR kode'>"
+				+"<br>"
+				+"</form>"
 				+ "</center>" + "</div>");
 		out.println("</body>");
 		out.println("</html>");

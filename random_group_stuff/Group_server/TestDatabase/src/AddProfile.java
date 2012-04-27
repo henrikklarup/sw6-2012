@@ -1,4 +1,6 @@
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -28,6 +30,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import javax.sql.rowset.serial.SerialBlob;
+
+import net.glxn.qrgen.QRCode;
+import net.glxn.qrgen.image.ImageType;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
@@ -86,7 +91,7 @@ public class AddProfile extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		ServletContext context = getServletContext();
+
 		response.setContentType("text/html");
 		HttpSession session = request.getSession();
 		PrintWriter out = response.getWriter();
@@ -150,7 +155,7 @@ public class AddProfile extends HttpServlet {
 
 			}
 		}
-  
+
 
 		out.println(""
 				+ "<html>"
@@ -163,12 +168,12 @@ public class AddProfile extends HttpServlet {
 				+ "function submitform()" + "{" + "document.addForm1.submit();"
 				+ "}" + "</script>" + "<div id=\"mainBackground\">"
 				+ "<script>" + "fillOutForm();" + "</script>"
-				+ "<center><h2> Tilføj profil</h2><br>");
+				+ "<center><h2> Tilføj profil</h2><hr></center>");
+		out.println("<div id=\"generic_wrapper\">");
 		String userOutput = (String) session.getAttribute("ADDPROFILERESPONSE");
 
 		if (userOutput != null && !userOutput.equals(""))
 			out.print(userOutput + "<br>");
-		out.println("</center>" + "<br>");
 
 		/*
 		 * if(appList != null) { for (int i=0;i<appList.length; i++) {
@@ -270,7 +275,11 @@ public class AddProfile extends HttpServlet {
 				// +
 				"<input type='button' value='Fortryd'></td>" + "</tr>"
 				+ "<input type='hidden' name='tryToAdd' value='0'>" + "</form>"
-				+ "</table>" + "</div>" + "</body>" + "</html>");
+
+				+ "</table>" + "<br><br><br></div><hr>");
+				out.println("<footer>Savannah v. 1.0.0 <a href='http://en.wikipedia.org/wiki/Copyleft'>(C)opyleft</a> under Freedom 3 me!</footer> </div>");
+
+				out.println( "</div></body>" + "</html>");
 	}
 
 
@@ -282,8 +291,9 @@ public class AddProfile extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
+		ServletContext context = getServletContext();
 		PrintWriter out = response.getWriter();
-
+		String qrToken = getNewCertificate();
 		HttpSession session = request.getSession();
 
 		String firstname = request.getParameter("firstname");
@@ -348,8 +358,7 @@ public class AddProfile extends HttpServlet {
 				 * Handle Form Fields.
 				 */
 				if (item.isFormField()) {
-					out.println("File Name = " + item.getFieldName()
-							+ ", Value = " + item.getString());
+
 					if (item.getFieldName().equals("firstname"))
 						firstname = item.getString();
 					if (item.getFieldName().equals("middlename"))
@@ -373,13 +382,7 @@ public class AddProfile extends HttpServlet {
 
 				} else {
 
-					if (item.getFieldName().equals("dept"))
-						// Handle Uploaded files.
-						out.println("Field Name = '" + item.getFieldName()
-								+ "'" + ", File Name = '" + item.getName()
-								+ "'" + ", Content type = '"
-								+ item.getContentType() + "'"
-								+ ", File Size = " + item.getSize());
+
 					/*
 					 * Write file to the ultimate location.
 					 */
@@ -432,7 +435,7 @@ public class AddProfile extends HttpServlet {
 				phone = "";
 			} else {
 
-				String qrToken = getNewCertificate();
+
 				PreparedStatement pst = con
 						.prepareStatement("insert into AuthUsers values(?,?,?,?,?)");
 				pst.setString(1, qrToken);
@@ -440,8 +443,8 @@ public class AddProfile extends HttpServlet {
 				pst.setString(3, role);
 				pst.setString(4, username);
 				pst.setString(5, password);
+
 				int i = pst.executeUpdate();
-				
 				session.setAttribute("QRTOKEN",qrToken );
 
 				con = DriverManager.getConnection(
@@ -471,12 +474,14 @@ public class AddProfile extends HttpServlet {
 				pst1.setString(7, "/images/" + token);
 				pst1.setString(8, null);
 
+				session.setAttribute("QRNAME", firstname + " " + middlename + " " + surname);
+				
 				int i1 = pst1.executeUpdate();
 
 				PreparedStatement pst2 = con
 						.prepareStatement("insert into ListOfApps values(?,?,?,?)");
 				for (int appId = 0; appId < appList.size(); appId++) {
-					if (appList.get(i) != null) {
+					if (appList.get(appId) != null) {
 						byte[] byteArray = { 1, 2, 3, 4, 5 };
 						Blob myBlob = new SerialBlob(byteArray);
 
@@ -529,22 +534,22 @@ public class AddProfile extends HttpServlet {
 			}
 		}
 
+
 		response.sendRedirect("generateQR");
-		
 
 	}
-	
-	 /**
-	  * @return a certificate
-	  */
-	 private String getNewCertificate() {
-	  Random rnd = new Random();
-	  String certificate = "";
-	  for (int i = 0; i < 256 + 1; i++)
-	  {
-	   certificate += (char)(rnd.nextInt(26) + 97);
-	  }
-	  return certificate;
-	 }
+
+	/**
+	 * @return a certificate
+	 */
+	private String getNewCertificate() {
+		Random rnd = new Random();
+		String certificate = "";
+		for (int i = 0; i < 256 + 1; i++)
+		{
+			certificate += (char)(rnd.nextInt(26) + 97);
+		}
+		return certificate;
+	}
 
 }
