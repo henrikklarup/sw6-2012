@@ -53,11 +53,12 @@ public class DrawHourglass extends View {
 		endTime = System.currentTimeMillis() + totalTime;
 		startTime = System.currentTimeMillis();
 
+		
 		if (sp.gradient) {
 			timeleft2 = timespent;
-			timespent = background;
-
+			timespent = timeleft;
 		}
+		
 		width = 300;
 		height = 500;
 		frameHeight = height / 20;
@@ -125,7 +126,7 @@ public class DrawHourglass extends View {
 				+ 240 - glassThicknessTop);
 		p.lineTo(left + (indent / 2) + frameHeight + glassThickness, top
 				+ glassBendHeight - glassThicknessTop);
-		paint.setColor(timespent);
+		paint.setColor(background);
 		c.drawPath(p, paint);
 
 		/* Draw the "glass" bottom */
@@ -145,7 +146,7 @@ public class DrawHourglass extends View {
 
 		/* Color the "glass" bottom */
 		p = new Path();
-		paint.setColor(timespent);
+		paint.setColor(background);
 		p.moveTo(left + (indent / 2) + frameHeight + glassThickness, top
 				- frameHeight + height);
 		p.lineTo(left + width - (indent / 2) - frameHeight - glassThickness,
@@ -171,7 +172,7 @@ public class DrawHourglass extends View {
 
 		/* Color the "glass" middle piece */
 		p = new Path();
-		paint.setColor(timespent);
+		paint.setColor(background);
 		p.moveTo(left + width - (indent / 2) - frameHeight - 105
 				- glassThickness, top + 240 - glassThickness);
 		p.lineTo(left + width - (indent / 2) - frameHeight - 105
@@ -217,13 +218,7 @@ public class DrawHourglass extends View {
 
 		//
 		/* Draw the "sand" in the hourglass */
-		//
-
-		/* setting paint2 to gradient color on the sand */
-		Paint paint2 = new Paint();
-		col = new ColorDrawable(timeleft2);
-		col.setAlpha((int) (255 * (1 - percent)));
-		paint2.setColor(col.getColor());
+		//	
 
 		/* Draw the "sand" in the top and bottom rectangles of the hourglass */
 		timeTop = new Rect(left + (indent / 2) + frameHeight + glassThickness,
@@ -236,50 +231,46 @@ public class DrawHourglass extends View {
 						- (indent / 2) - frameHeight - glassThickness, top
 						+ height - frameHeight);
 
-		paint.setColor(timeleft);
-		c.drawRect(timeTop, paint);
-		c.drawRect(timeBot, paint);
-		c.drawRect(timeTop, paint2);
-		c.drawRect(timeBot, paint2);
+		/* setting paint2 to gradient color on the sand */	
+		Paint paint2 = new Paint();
+		
+		if (sp.gradient) {
+			col = new ColorDrawable(timeleft2);
+			col.setAlpha((int) (255 * (1 - percent)));
+			paint2.setColor(col.getColor());
+			
+			c.drawRect(timeTop, paint);
+			c.drawRect(timeBot, paint);
+			c.drawRect(timeTop, paint2);
+			c.drawRect(timeBot, paint2);
+		}else {
+			paint2 = paint;
+		
+			paint.setColor(timeleft);
+			c.drawRect(timeTop, paint);
+			paint.setColor(timespent);
+			c.drawRect(timeBot, paint);
+			paint2.setColor(timeleft);
+			c.drawRect(timeTop, paint2);
+			paint2.setColor(timespent);
+			c.drawRect(timeBot, paint2);
+		}
+		
 
 		/* Draw the the sand in the triangle in the top of the glass */
 		Path tp = new Path();
-		paint.setColor(timeleft);
-		tp.moveTo(
-				(left + (indent / 2) + frameHeight + glassThickness + triTopX),
-				top + glassBendHeight - glassThicknessTop + triTopY); // change
-																		// as
-																		// time
-																		// progress:
-																		// + on
-																		// bot x
-																		// and y
+			paint.setColor(timeleft);
+		
+		tp.moveTo((left + (indent / 2) + frameHeight + glassThickness + triTopX),
+				top + glassBendHeight - glassThicknessTop + triTopY); // change as time progress + on both x & y
 		tp.lineTo(left + (indent / 2) + frameHeight + 110 + glassThickness, top
 				+ 245 - glassThicknessTop);
-		tp.lineTo(
-				(left + width - (indent / 2) - frameHeight - glassThickness - triTopX),
-				top + glassBendHeight - glassThicknessTop + triTopY); // change
-																		// as
-																		// time
-																		// progress:
-																		// - on
-																		// x, +
-																		// on y
+		tp.lineTo((left + width - (indent / 2) - frameHeight - glassThickness - triTopX),
+				top + glassBendHeight - glassThicknessTop + triTopY); // change as time progress - on x, + on y
+
 		c.drawPath(tp, paint);
 		c.drawPath(tp, paint2);
-
-		/* Draw the the sand in the triangle in the bottom of the glass */
-		tp = new Path();
-		paint.setColor(timeleft);
-		tp.moveTo(left + (indent / 2) + frameHeight + glassThickness, top
-				+ height - frameHeight - sandBotHeight);
-		tp.lineTo(left + width - (indent / 2) - frameHeight - glassThickness,
-				top + height - frameHeight - sandBotHeight);
-		tp.lineTo(left + (width / 2), top + height - frameHeight
-				- sandBotHeight - triBotMidY);
-		c.drawPath(tp, paint);
-		c.drawPath(tp, paint2);
-
+		
 		/* Draw the falling sand in the middle */
 		tp = new Path();
 		paint.setColor(timeleft);
@@ -293,6 +284,19 @@ public class DrawHourglass extends View {
 				+ height - frameHeight - triBotMidY);
 		c.drawPath(tp, paint);
 		c.drawPath(tp, paint2);
+
+		/* Draw the the sand in the triangle in the bottom of the glass */
+		tp = new Path();
+		paint.setColor(timespent);
+		tp.moveTo(left + (indent / 2) + frameHeight + glassThickness, top
+				+ height - frameHeight - sandBotHeight);
+		tp.lineTo(left + width - (indent / 2) - frameHeight - glassThickness,
+				top + height - frameHeight - sandBotHeight);
+		tp.lineTo(left + (width / 2), top + height - frameHeight
+				- sandBotHeight - triBotMidY);
+		c.drawPath(tp, paint);
+		c.drawPath(tp, paint2);
+
 
 		if (endTime >= System.currentTimeMillis()) {
 			invalidate();
