@@ -610,77 +610,78 @@ public class CustomizeFragment extends Fragment {
 		attView.setText(attachText);
 	}
 	
-	private void initDonePictureButton() {
-
-		donePictureButton = (Button) getActivity().findViewById(
-				R.id.customize_donescreen);
-
-		donePictureButton.setOnClickListener(new OnClickListener() {
-
-			public void onClick(final View v) {
-				final ArrayList<Child> children = guard.publishList();
-
-				final AlertDialog builder = new AlertDialog.Builder(v
-						.getContext()).create();
-
-				builder.setTitle(getString(R.string.donescreen_dialog_title));
-				ListView lv = new ListView(getActivity());
-				
-				
-				ChildAdapter adapter = new ChildAdapter(getActivity(),
-						android.R.layout.simple_list_item_1, children);
-				lv.setAdapter(adapter);
-				
-				
-				lv.setOnItemClickListener(new OnItemClickListener() {
-
-					public void onItemClick(AdapterView<?> parent, View view,
-							int position, long id) {
-						List<String> values = new ArrayList<String>();
-						final ArrayList<SubProfile> subProfiles;
-						subProfiles = children.get(position).SubProfiles();
-
-						for (SubProfile subProfile : subProfiles) {
-							values.add(subProfile.name);
-						}
-
-						// Cast values to CharSequence and put it in the builder
-						final AlertDialog builder2 = new AlertDialog.Builder(v
-								.getContext()).create();
-						builder2.setTitle(getString(R.string.donescreen_button_description));
-						ListView lv = new ListView(getActivity());
-						SubProfileAdapter adapter = new SubProfileAdapter(
-								getActivity(),
-								android.R.layout.simple_list_item_1,
-								subProfiles);
-						lv.setAdapter(adapter);
-						lv.setOnItemClickListener(new OnItemClickListener() {
-							public void onItemClick(AdapterView<?> parent,
-									View view, int position, long id) {
-								setAttachment(subProfiles.get(position));
-								builder.dismiss();
-								builder2.dismiss();
-							}
-						});
-						builder2.setView(lv);
-						builder2.show();
-					}
-				});
-				builder.setView(lv);
-				builder.show();
-			}
-		});
-		donePictureButton.setOnLongClickListener(new OnLongClickListener() {
-
-			public boolean onLongClick(View v) {
-				setAttachment(null);
-				return true;
-			}
-		});
-	}
+	
+//	private void initDonePictureButton() {
+//
+//		donePictureButton = (Button) getActivity().findViewById(
+//				R.id.customize_donescreen);
+//
+//		donePictureButton.setOnClickListener(new OnClickListener() {
+//
+//			public void onClick(final View v) {
+//				final ArrayList<Child> children = guard.publishList();
+//
+//				final AlertDialog builder = new AlertDialog.Builder(v
+//						.getContext()).create();
+//
+//				builder.setTitle(getString(R.string.donescreen_dialog_title));
+//				ListView lv = new ListView(getActivity());
+//				
+//				
+//				ChildAdapter adapter = new ChildAdapter(getActivity(),
+//						android.R.layout.simple_list_item_1, children);
+//				lv.setAdapter(adapter);
+//				
+//				
+//				lv.setOnItemClickListener(new OnItemClickListener() {
+//
+//					public void onItemClick(AdapterView<?> parent, View view,
+//							int position, long id) {
+//						List<String> values = new ArrayList<String>();
+//						final ArrayList<SubProfile> subProfiles;
+//						subProfiles = children.get(position).SubProfiles();
+//
+//						for (SubProfile subProfile : subProfiles) {
+//							values.add(subProfile.name);
+//						}
+//
+//						// Cast values to CharSequence and put it in the builder
+//						final AlertDialog builder2 = new AlertDialog.Builder(v
+//								.getContext()).create();
+//						builder2.setTitle(getString(R.string.donescreen_button_description));
+//						ListView lv = new ListView(getActivity());
+//						SubProfileAdapter adapter = new SubProfileAdapter(
+//								getActivity(),
+//								android.R.layout.simple_list_item_1,
+//								subProfiles);
+//						lv.setAdapter(adapter);
+//						lv.setOnItemClickListener(new OnItemClickListener() {
+//							public void onItemClick(AdapterView<?> parent,
+//									View view, int position, long id) {
+//								setAttachment(subProfiles.get(position));
+//								builder.dismiss();
+//								builder2.dismiss();
+//							}
+//						});
+//						builder2.setView(lv);
+//						builder2.show();
+//					}
+//				});
+//				builder.setView(lv);
+//				builder.show();
+//			}
+//		});
+//		donePictureButton.setOnLongClickListener(new OnLongClickListener() {
+//
+//			public boolean onLongClick(View v) {
+//				setAttachment(null);
+//				return true;
+//			}
+//		});
+//	}
 
 	private void initBottomMenu() {
-		initDonePictureButton();
+//		initDonePictureButton();
 		initSaveButton();
 		initSaveAsButton();
 		initStartButton();
