@@ -276,8 +276,9 @@ public class SelectProfile extends HttpServlet {
 				+ "}" + "</script>");
 		out.println("<div id=\"mainBackground\">");
 		out.println("<center><h2> Vælg profil:</h2>");
-		out.println("<br>");
 		out.println("<hr>");
+		out.println("<div id=\"simple_wrapper\">");
+		out.println("<div id=\"edit_wrapper\">");
 		out.println("<table>");
 		out.println("<tr>");
 		out.println("<th>Billede</th>");
@@ -300,20 +301,27 @@ public class SelectProfile extends HttpServlet {
 
 		}
 		out.println("</table>");
+		out.println("</div>");
 		out.println("<hr>");
+		out.println("<div id=\"select_wrapper\">");
+
 		out.println("<center>");
 		out.println("<form method='POST' action='SelectProfile' name='quickForm'>");
-		out.println("<input type='text' name='quickSelect' onkeypress='if (window.event.keyCode == 13) {setOpen(1); setID(document.quickForm.quickSelect.value); submitform();}'>");
+		out.println("<input type='text' name='quickSelect' onkeypress='if (window.event.keyCode == 13) {setOpen(1); setID(document.quickForm.quickSelect.value); submitform();}'><img src='images/question1.png' width=20 height=20 alt='For hurtig adgang:\nIndtast id nummer, efterfulgt af <enter>' onClick=\"javascript:alert('For hurtig adgang: Indtast id nummer, efterfulgt af enter');\" Title='For hurtig adgang:\nIndtast id nummer, efterfulgt af <enter>'>");
 		out.println("</form>");
-		if (session.getAttribute("SelectProfileERROR") != null) {
+		/*if (session.getAttribute("SelectProfileERROR") != null) {
 			out.println("<br>");
 			out.println(session.getAttribute("SelectProfileERROR"));
 			out.println("<br>");
 			session.removeAttribute("SelectProfileERROR");
-		}
+		}*/
 		out.println("</center>");
-		out.println("<p>");
 		out.println("</div>");
+		out.println("</div>");
+out.println("<hr>");
+		out.println("<footer>Savannah v. 1.0.0 <a href='http://en.wikipedia.org/wiki/Copyleft'>(C)opyleft</a> under Freedom 3 me!</footer> " +
+				"</div>");
+		
 
 		out.println(""
 				+ "<div id=\"blanket\" style=\"display:none;\"></div>"

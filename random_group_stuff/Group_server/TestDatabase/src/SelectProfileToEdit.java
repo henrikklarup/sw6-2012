@@ -334,7 +334,8 @@ public class SelectProfileToEdit extends HttpServlet {
 	
 		out.println("</div>");
 		out.println("<hr>");
-		out.println("<footer>Savannah v. 1.0.0 <a href='http://en.wikipedia.org/wiki/Copyleft'>(C)opyleft</a> under Freedom 3 me!</footer> </div>");
+		out.println("<footer>Savannah v. 1.0.0 <a href='http://en.wikipedia.org/wiki/Copyleft'>(C)opyleft</a> under Freedom 3 me!</footer> " +
+				"</div>");
 		
 
 		/*
