@@ -140,8 +140,8 @@ public class HomeActivity extends Activity {
 					
 					if (margin < snaplength) {
 						margin = 0;
-					//} else if (margin > (DRAWER_WIDTH - snaplength)) {
-					//	margin = DRAWER_WIDTH;
+					} else if (margin > (DRAWER_WIDTH - snaplength)) {
+						margin = DRAWER_WIDTH;
 					} else if (margin > DRAWER_WIDTH) {
 						margin = DRAWER_WIDTH;
 					}
