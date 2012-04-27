@@ -155,8 +155,13 @@ public class HomeActivity extends Activity {
 					v2Params.setMargins((margin-800), 0, 0, 0);
 					v2.setLayoutParams(v2Params);
 					
-					
 					result = true;
+					
+					//RelativeLayout GridViewWrapper = (RelativeLayout) findViewById(R.id.GridViewWrapper);
+					//RelativeLayout.LayoutParams GridViewParams = (RelativeLayout.LayoutParams) GridViewWrapper.getLayoutParams();
+					//GridViewParams.setMargins(margin + mLandscapeBarWidth, 0, 0, 0);
+					//GridViewWrapper.setLayoutParams(GridViewParams);
+					
 					break;
 				case MotionEvent.ACTION_UP:
 					Log.i("thomas", "STOP DRAG");
@@ -165,16 +170,7 @@ public class HomeActivity extends Activity {
 					
 				}
 				
-				
-				
-				
-				//dwfegw
-//				RelativeLayout GridViewWrapper = (RelativeLayout) findViewById(R.id.GridViewWrapper);
-//				RelativeLayout.LayoutParams GridViewParams = (RelativeLayout.LayoutParams) GridViewWrapper.getLayoutParams();
-//				GridViewParams.setMargins(margin + mLandscapeBarWidth, 0, 0, 0);
-//				GridViewWrapper.setLayoutParams(GridViewParams);
-				//fewfew
-				
+
 				return result;
 			}
 		});
