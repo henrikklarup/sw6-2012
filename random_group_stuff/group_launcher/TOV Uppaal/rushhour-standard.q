@@ -3,14 +3,4 @@
 /*
 
 */
-A[] not deadlock
-
-/*
-
-*/
-E<> counter == 1 and red.x == 4
-
-/*
-
-*/
 E<> red.x == 4

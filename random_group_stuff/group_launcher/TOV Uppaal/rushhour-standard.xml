@@ -58,6 +58,7 @@ void MoveWest() {
 }</declaration><location id="id4" x="-24" y="-8"><committed/></location><location id="id5" x="-24" y="-48"><committed/></location><location id="id6" x="-200" y="-16"></location><location id="id7" x="-280" y="-16"><committed/></location><init ref="id7"/><transition><source ref="id4"/><target ref="id6"/></transition><transition><source ref="id6"/><target ref="id4"/><label kind="guard" x="-208" y="8">x + length &lt; boardLength &amp;&amp; 
 board[x + length][y] == FREE</label><label kind="assignment" x="-192" y="-8">MoveEast()</label><nail x="-224" y="48"/><nail x="-24" y="48"/></transition><transition><source ref="id5"/><target ref="id6"/></transition><transition><source ref="id6"/><target ref="id5"/><label kind="guard" x="-192" y="-88">x &gt; 0 &amp;&amp; 
 board[x - 1][y] == FREE</label><label kind="assignment" x="-192" y="-56">MoveWest()</label><nail x="-200" y="-88"/><nail x="-40" y="-80"/></transition><transition><source ref="id7"/><target ref="id6"/><label kind="assignment" x="-264" y="-16">Mark()</label></transition></template><system>// Place template instantiations here.
+/*
 red = HCar(2, 3, 2);
 tyrkis = HCar(2, 0, 0);
 orange = HCar(2, 2, 0);
@@ -72,4 +73,15 @@ purple = VCar(2, 1, 2);
 PurpleTruck = VCar(3, 0, 3);
 black = VCar(2, 3, 4);
 
-system red, tyrkis, orange, green, beige, darkgreen, lysgul, blue, pink, YellowTruck, purple, PurpleTruck, black;</system></nta>
+system red, tyrkis, orange, green, beige, darkgreen, lysgul, blue, pink, YellowTruck, purple, PurpleTruck, black;*/
+
+
+green = HCar(2, 0, 0);
+red = HCar(2, 1, 2);
+bluetruck = HCar(3, 1, 3);
+tyrkistruck = HCar(3, 3, 5);
+purpletruck = VCar(3, 0, 1);
+yellow = VCar(2, 2, 0);
+yellowtruck = VCar(3, 3, 0);
+
+system green, red, bluetruck, tyrkistruck, purpletruck, yellow, yellowtruck;</system></nta>
