@@ -13,9 +13,11 @@ import android.app.AlertDialog.Builder;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -508,7 +510,7 @@ public class CustomizeFragment extends Fragment {
 						// Cast values to CharSequence and put it in the builder
 						final AlertDialog builder2 = new AlertDialog.Builder(v
 								.getContext()).create();
-						builder2.setTitle(getString(R.string.attachment_button_description));
+						builder2.setTitle(getString(R.string.attachment_dialog_description));
 						ListView lv = new ListView(getActivity());
 						SubProfileAdapter adapter = new SubProfileAdapter(
 								getActivity(),
@@ -518,7 +520,7 @@ public class CustomizeFragment extends Fragment {
 						lv.setOnItemClickListener(new OnItemClickListener() {
 							public void onItemClick(AdapterView<?> parent,
 									View view, int position, long id) {
-								setAttachment(subProfiles.get(position));
+								setAttachment(subProfiles.get(position));								
 								builder.dismiss();
 								builder2.dismiss();
 							}
@@ -549,6 +551,8 @@ public class CustomizeFragment extends Fragment {
 	private void setAttachment(SubProfile subProfile) {
 		int pictureRes;
 		int textRes;
+		int color = 0x00000000;
+		int alpha = 255;
 		String attachText = getString(R.string.attached);
 
 		TextView attView = (TextView) getActivity().findViewById(
@@ -557,6 +561,7 @@ public class CustomizeFragment extends Fragment {
 		if (subProfile != null) {
 
 			currSubP.setAttachment(subProfile);
+			color = subProfile.timeLeftColor;
 
 			switch (subProfile.formType()) {
 			case Hourglass:
@@ -579,18 +584,28 @@ public class CustomizeFragment extends Fragment {
 				pictureRes = R.drawable.thumbnail_attachment;
 				textRes = R.string.attachment_button_description;
 				attachText = "";
+				alpha = 0;
 				break;
 			}
 		} else {
 			currSubP.setAttachment(null);
 			pictureRes = R.drawable.thumbnail_attachment;
 			textRes = R.string.attachment_button_description;
-
 			attachText = "";
+			alpha = 0;
 		}
 
-		attachmentButton.setCompoundDrawablesWithIntrinsicBounds(0, pictureRes,
-				0, 0);
+		LayerDrawable ld = (LayerDrawable) getResources().getDrawable(R.drawable.attachment_layer);
+		PorterDuffColorFilter filter = new PorterDuffColorFilter(color,
+				PorterDuff.Mode.SRC_ATOP);
+		Drawable d = getResources().getDrawable(R.drawable.attachment_background);
+		d.setAlpha(alpha);
+		d.setColorFilter(filter);
+		ld.setDrawableByLayerId(R.id.first_attachment_layer, d);
+		ld.setDrawableByLayerId(R.id.second_attachment_layer, getResources().getDrawable(pictureRes));
+
+		attachmentButton.setCompoundDrawablesWithIntrinsicBounds(null, ld,
+				null, null);
 		attachmentButton.setText(textRes);
 		attView.setText(attachText);
 	}
@@ -682,14 +697,42 @@ public class CustomizeFragment extends Fragment {
 			d = getResources().getDrawable(R.drawable.thumbnail_save);
 			saveButton.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
-					getName();
-					if (preSubP != null) {
-						Guardian.subProfileID = currSubP.save(preSubP)
-								.getId();
-					} else {
-						Guardian.subProfileID = guard.getChild()
-								.save(currSubP).getId();
-					}
+					Builder builder = new AlertDialog.Builder(getActivity());
+					builder.setTitle(getActivity().getString(R.string.save_button));
+					final EditText et = new EditText(getActivity());
+					et.setText(getName());
+					builder.setView(et);
+					builder.setPositiveButton(R.string.save_button,
+							new DialogInterface.OnClickListener() {
+
+								public void onClick(DialogInterface dialog, int which) {
+									currSubP.name = et.getText().toString();
+									guard.publishList().get(Guardian.profilePosition)
+											.select();
+
+									SubProfile m_savedSubprofile;
+									if (preSubP != null) {
+										m_savedSubprofile = currSubP.save(preSubP);
+									} else {
+										m_savedSubprofile = guard.getChild()
+												.save(currSubP);
+									}
+									Guardian.subProfileID = m_savedSubprofile.getId();
+									loadSettings(m_savedSubprofile);
+									
+									ChildFragment cf = (ChildFragment)getFragmentManager().findFragmentById(R.id.childFragment);
+									SubProfileFragment spf = (SubProfileFragment) getFragmentManager()
+											.findFragmentById(R.id.subprofileFragment);
+									Guardian.profileID = guard.getChild().getProfileId();
+									cf.loadSubProfiles();
+									spf.loadSubProfiles();
+									
+
+								}
+
+							});
+					AlertDialog alert = builder.create();
+					alert.show();
 				}
 			});
 		} else {
@@ -711,7 +754,7 @@ public class CustomizeFragment extends Fragment {
 	 * Sets the name of the profile if there is non
 	 * And asks the user which name to save as
 	 */
-	protected void getName() {
+	protected String getName() {
 		String name = "";
 		if (currSubP.name == "") {
 
@@ -739,32 +782,7 @@ public class CustomizeFragment extends Fragment {
 		} else {
 			name = currSubP.name;
 		}
-		Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setTitle(getActivity().getString(R.string.save_button));
-		final EditText et = new EditText(getActivity());
-		et.setText(name);
-		builder.setView(et);
-		builder.setPositiveButton(R.string.save_button,
-				new DialogInterface.OnClickListener() {
-
-					public void onClick(DialogInterface dialog, int which) {
-						currSubP.name = et.getText().toString();
-						guard.publishList().get(Guardian.profilePosition)
-								.select();
-
-						ChildFragment cf = (ChildFragment)getFragmentManager().findFragmentById(R.id.childFragment);
-						SubProfileFragment spf = (SubProfileFragment) getFragmentManager()
-								.findFragmentById(R.id.subprofileFragment);
-						Guardian.profileID = guard.getChild().getProfileId();
-						cf.loadSubProfiles();
-						spf.loadSubProfiles();
-						
-
-					}
-
-				});
-		AlertDialog alert = builder.create();
-		alert.show();
+		return name;
 	}
 
 	private void genDescription() {
@@ -818,11 +836,13 @@ public class CustomizeFragment extends Fragment {
 
 		saveAsButton = (Button) getActivity().findViewById(
 				R.id.customize_save_as);
+		// If this is a profile which is "saveable", enable the save functionality
 		if (currSubP.saveAs) {
 			d = getResources().getDrawable(R.drawable.thumbnail_saveas);
 			saveAsButton.setOnClickListener(new OnClickListener() {
 
 				public void onClick(View v) {
+					// Profile and pictogram loader
 					AlertDialog.Builder builder = new AlertDialog.Builder(
 							getActivity());
 					builder.setTitle(getActivity().getString(
@@ -831,27 +851,57 @@ public class CustomizeFragment extends Fragment {
 							new DialogInterface.OnClickListener() {
 
 								public void onClick(DialogInterface dialog,
-										int item) {
-									Child c = guard.Children().get(item);
-									getName();
-									c.save(currSubP);
-									Guardian.saveChild(c, currSubP);
-									SubProfileFragment df = (SubProfileFragment) getFragmentManager()
-											.findFragmentById(
-													R.id.subprofileFragment);
-									df.loadSubProfiles();
+										final int item) {
+									// Name picker
+									Builder builder = new AlertDialog.Builder(getActivity());
+									builder.setTitle(getActivity().getString(R.string.save_button));
+									final EditText et = new EditText(getActivity());
+									et.setText(getName());
+									builder.setView(et);
+									builder.setPositiveButton(R.string.save_button,
+											new DialogInterface.OnClickListener() {
 
-									String toastText = currSubP.name;
-									toastText += " "
-											+ getActivity()
-													.getApplicationContext()
-													.getText(
-															R.string.toast_text);
-									toastText += " " + c.name;
+												public void onClick(DialogInterface dialog, int which) {
+													// saving!
+													currSubP.name = et.getText().toString();
+													guard.publishList().get(Guardian.profilePosition)
+															.select();
 
-									Toast toast = Toast.makeText(getActivity(),
-											toastText, 3000);
-									toast.show();
+
+													Child c = guard.Children().get(item);
+													getName();
+													c.save(currSubP);
+													Guardian.saveChild(c, currSubP);
+													SubProfileFragment df = (SubProfileFragment) getFragmentManager()
+															.findFragmentById(
+																	R.id.subprofileFragment);
+													df.loadSubProfiles();
+
+													String toastText = currSubP.name;
+													toastText += " "
+															+ getActivity()
+																	.getApplicationContext()
+																	.getText(
+																			R.string.toast_text);
+													toastText += " " + c.name;
+
+													Toast toast = Toast.makeText(getActivity(),
+															toastText, 3000);
+													toast.show();
+													
+													ChildFragment cf = (ChildFragment)getFragmentManager().findFragmentById(R.id.childFragment);
+													SubProfileFragment spf = (SubProfileFragment) getFragmentManager()
+															.findFragmentById(R.id.subprofileFragment);
+													Guardian.profileID = guard.getChild().getProfileId();
+													cf.loadSubProfiles();
+													spf.loadSubProfiles();
+													
+
+												}
+
+											});
+									AlertDialog alert = builder.create();
+									alert.show();
 								}
 							});
 					AlertDialog alert = builder.create();
@@ -891,10 +941,7 @@ public class CustomizeFragment extends Fragment {
 					Guardian.saveGuardian(currSubP);
 					currSubP.select();
 					Intent i = new Intent(
-							getActivity().getApplicationContext(),
-							// TODO: Change according to openGL or canvas
-							// OpenGLActivity.class);
-							DrawLibActivity.class);
+							getActivity().getApplicationContext(), DrawLibActivity.class);
 					startActivity(i);
 				}
 			});
@@ -921,7 +968,6 @@ public class CustomizeFragment extends Fragment {
 	 *            The Subprofile chosen
 	 */
 	public void loadSettings(SubProfile subProfile) {
-		// TODO: Insert logic to load settings and put them into the view
 		currSubP = subProfile.copy();
 		preSubP = subProfile;
 
