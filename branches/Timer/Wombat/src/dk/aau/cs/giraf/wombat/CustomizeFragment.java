@@ -37,6 +37,7 @@ import dk.aau.cs.giraf.TimerLib.Child;
 import dk.aau.cs.giraf.TimerLib.Guardian;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
 import dk.aau.cs.giraf.TimerLib.formFactor;
+import dk.aau.cs.giraf.wombat.drawlib.DrawLibActivity;
 
 public class CustomizeFragment extends Fragment {
 	private SubProfile preSubP;
@@ -51,6 +52,7 @@ public class CustomizeFragment extends Fragment {
 	private Button saveButton;
 	private Button saveAsButton;
 	private Button attachmentButton;
+	private Button donePictureButton;
 	private Button colorGradientButton1;
 	private Button colorGradientButton2;
 	private Button colorFrameButton;
@@ -592,11 +594,81 @@ public class CustomizeFragment extends Fragment {
 		attachmentButton.setText(textRes);
 		attView.setText(attachText);
 	}
+	
+	private void initDonePictureButton() {
+
+		donePictureButton = (Button) getActivity().findViewById(
+				R.id.customize_donescreen);
+
+		donePictureButton.setOnClickListener(new OnClickListener() {
+
+			public void onClick(final View v) {
+				final ArrayList<Child> children = guard.publishList();
+
+				final AlertDialog builder = new AlertDialog.Builder(v
+						.getContext()).create();
+
+				builder.setTitle(getString(R.string.donescreen_button_description));
+				ListView lv = new ListView(getActivity());
+				
+				
+				ChildAdapter adapter = new ChildAdapter(getActivity(),
+						android.R.layout.simple_list_item_1, children);
+				lv.setAdapter(adapter);
+				
+				
+				lv.setOnItemClickListener(new OnItemClickListener() {
+
+					public void onItemClick(AdapterView<?> parent, View view,
+							int position, long id) {
+						List<String> values = new ArrayList<String>();
+						final ArrayList<SubProfile> subProfiles;
+						subProfiles = children.get(position).SubProfiles();
+
+						for (SubProfile subProfile : subProfiles) {
+							values.add(subProfile.name);
+						}
+
+						// Cast values to CharSequence and put it in the builder
+						final AlertDialog builder2 = new AlertDialog.Builder(v
+								.getContext()).create();
+						builder2.setTitle(getString(R.string.donescreen_button_description));
+						ListView lv = new ListView(getActivity());
+						SubProfileAdapter adapter = new SubProfileAdapter(
+								getActivity(),
+								android.R.layout.simple_list_item_1,
+								subProfiles);
+						lv.setAdapter(adapter);
+						lv.setOnItemClickListener(new OnItemClickListener() {
+							public void onItemClick(AdapterView<?> parent,
+									View view, int position, long id) {
+								setAttachment(subProfiles.get(position));
+								builder.dismiss();
+								builder2.dismiss();
+							}
+						});
+						builder2.setView(lv);
+						builder2.show();
+					}
+				});
+				builder.setView(lv);
+				builder.show();
+			}
+		});
+		donePictureButton.setOnLongClickListener(new OnLongClickListener() {
+
+			public boolean onLongClick(View v) {
+				setAttachment(null);
+				return true;
+			}
+		});
+	}
 
 	private void initBottomMenu() {
+		initDonePictureButton();
 		initSaveButton();
 		initSaveAsButton();
-		//initStartButton();
+		initStartButton();
 	}
 
 	/**
@@ -806,41 +878,41 @@ public class CustomizeFragment extends Fragment {
 	/**
 	 * Initialize the start button
 	 */
-//	private void initStartButton() {
-//		startButton = (Button) getActivity().findViewById(
-//				R.id.customize_start_button);
-//		Drawable d;
-//		if (currSubP.saveAs) {
-//			d = getResources().getDrawable(R.drawable.thumbnail_start);
-//			startButton.setOnClickListener(new OnClickListener() {
-//
-//				public void onClick(View v) {
-//					currSubP.addLastUsed(preSubP);
-//					Guardian.saveGuardian(currSubP);
-//					currSubP.select();
-//					Intent i = new Intent(
-//							getActivity().getApplicationContext(),
-//							// TODO: Change according to openGL or canvas
-//							// OpenGLActivity.class);
-//							DrawLibActivity.class);
-//					startActivity(i);
-//				}
-//			});
-//		} else {
-//			d = getResources().getDrawable(R.drawable.thumbnail_start_gray);
-//			startButton.setOnClickListener(new OnClickListener() {
-//
-//				public void onClick(View v) {
-//					Toast t = Toast.makeText(getActivity(),
-//							getString(R.string.cant_start), 2000);
-//					t.show();
-//				}
-//			});
-//		}
-//
-//		startButton
-//				.setCompoundDrawablesWithIntrinsicBounds(null, d, null, null);
-//	}
+	private void initStartButton() {
+		startButton = (Button) getActivity().findViewById(
+				R.id.customize_start_button);
+		Drawable d;
+		if (currSubP.saveAs) {
+			d = getResources().getDrawable(R.drawable.thumbnail_start);
+			startButton.setOnClickListener(new OnClickListener() {
+
+				public void onClick(View v) {
+					currSubP.addLastUsed(preSubP);
+					Guardian.saveGuardian(currSubP);
+					currSubP.select();
+					Intent i = new Intent(
+							getActivity().getApplicationContext(),
+							// TODO: Change according to openGL or canvas
+							// OpenGLActivity.class);
+							DrawLibActivity.class);
+					startActivity(i);
+				}
+			});
+		} else {
+			d = getResources().getDrawable(R.drawable.thumbnail_start_gray);
+			startButton.setOnClickListener(new OnClickListener() {
+
+				public void onClick(View v) {
+					Toast t = Toast.makeText(getActivity(),
+							getString(R.string.cant_start), 2000);
+					t.show();
+				}
+			});
+		}
+
+		startButton
+				.setCompoundDrawablesWithIntrinsicBounds(null, d, null, null);
+	}
 
 	/**
 	 * Sets the predefined settings of the chosen subprofile
