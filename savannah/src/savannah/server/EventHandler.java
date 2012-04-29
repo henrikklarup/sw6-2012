@@ -2,6 +2,8 @@ package savannah.server;
 
 import java.sql.SQLException;
 
+import savannah.io.IOHandler;
+
 public class EventHandler implements Runnable {
 	private CommitHandler cHandler;
 	private RequestHandler rHandler;
@@ -33,16 +35,16 @@ public class EventHandler implements Runnable {
 				if (e.getClass().equals(savannah.server.CommitEvent.class))
 				{
 					cHandler.HandleIt((CommitEvent)e);
-					
+					IOHandler.getInstance().removeConnection(e.getEventsocket());
 				}
 				else if(e.getClass().equals(savannah.server.RequestEvent.class))
 				{
 					rHandler.HandleIt((RequestEvent)e);
-				}
+					IOHandler.getInstance().removeConnection(e.getEventsocket());
+				}	
 			}
 		}	
 	}
-
 
 	@Override
 	public void run() {

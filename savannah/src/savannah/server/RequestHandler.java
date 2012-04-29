@@ -46,12 +46,10 @@ public class RequestHandler {
 		ArrayList<File> files = xBuilder.getFiles();
 		File[] afiles = new File[files.size()];
 		files.toArray(afiles);
-		System.out.println("Check 1");
-		System.out.println(xml);
-		savannah.io.IOHandler.getInstance().respond(e.getEventsocket(),CRUD.REQUEST,xml,afiles);
-		
+		//line 2 for no files, line 1 for plenty files
+//		savannah.io.IOHandler.getInstance().respond(e.getEventsocket(),CRUD.REQUEST,xml,afiles);
+		savannah.io.IOHandler.getInstance().respond(e.getEventsocket(),CRUD.REQUEST,xml);
 		}
-		
 		catch (SQLException exc)
 		{
 			exc.printStackTrace();
