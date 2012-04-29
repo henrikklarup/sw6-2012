@@ -10,7 +10,6 @@ public class ServerMain {
 		Thread t2 = new Thread(new EventHandler());
 		t1.start();
 		t2.start();
-		
 	}
 
 }

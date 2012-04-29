@@ -52,7 +52,7 @@ public class CommunicationThread extends Thread {
 				IOHandler.getInstance().displayMessage("RequestEvent created by: " + this.socket);
 				RequestEvent reqEvt = new RequestEvent(handle.XML(), this.socket);
 				EventQueue.getInstance().add(reqEvt);
-				IOHandler.getInstance().respond(this.socket, CRUD.REQUEST, "I so hope that this is going to work !!!");
+				//IOHandler.getInstance().respond(this.socket, CRUD.REQUEST, "I so hope that this is going to work !!!");
 				IOHandler.getInstance().logIt(true);
 			}
 			//Ping
@@ -72,8 +72,8 @@ public class CommunicationThread extends Thread {
 			System.out.println("CommunicationThread: Could not initiate inputStream for the connection");
 		} 	catch (JDOMException e) {
 			System.err.println("CommunicationThread: Could not DOMinate");
-		}	finally {
-			IOHandler.getInstance().removeConnection(this.socket);
+//		}	finally {
+//			IOHandler.getInstance().removeConnection(this.socket);
 		}
 	}
 
