@@ -25,11 +25,12 @@
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
-            android:name=".LogoActivity"
+            android:name="dk.aau.cs.giraf.launcher.LogoActivity"
             android:label="@string/application_name"
             android:noHistory="true"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar" >
+            android:theme="@android:style/Theme.NoTitleBar" 
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -52,7 +53,8 @@
         <activity
             android:name="dk.aau.cs.giraf.launcher.HomeActivity"
             android:label="@string/application_name"
-            android:theme="@android:style/Theme.NoTitleBar" >
+            android:theme="@android:style/Theme.NoTitleBar" 
+            >
         </activity>
         <activity
             android:name="dk.aau.cs.giraf.launcher.Home2Activity"

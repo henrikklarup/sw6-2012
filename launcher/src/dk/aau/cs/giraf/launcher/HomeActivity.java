@@ -2,7 +2,9 @@ package dk.aau.cs.giraf.launcher;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import dk.aau.cs.giraf.gui.GColorAdapter;
 import dk.aau.cs.giraf.gui.GTooltip;
@@ -80,7 +82,7 @@ public class HomeActivity extends Activity {
 		HomeActivity.mContext = this; //getApplicationContext();
 		mHelper = new Helper(mContext);
 
-		mCurrentUser = mHelper.profilesHelper.getProfileById(getIntent().getExtras().getLong("currentGuardianID"));
+		mCurrentUser = mHelper.profilesHelper.getProfileById(getIntent().getExtras().getLong(Tools.GUARDIANID));
 
 		mNameView = (TextView)this.findViewById(R.id.nameView);
 		mNameView.setText(mCurrentUser.getFirstname() + " " + mCurrentUser.getSurname());
@@ -104,15 +106,16 @@ public class HomeActivity extends Activity {
 		
 		mHomeDrawer = (RelativeLayout) findViewById(R.id.HomeDrawer);
 		
-		
 		mLogoutWidget.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				View.OnClickListener task = new View.OnClickListener() {
 					public void onClick(View v) {
-						startActivity(Tools.logOutIntent(mContext));;	
+						startActivity(Tools.logOutIntent(mContext));
+						mActivity.finish();
 					}
 				};
 				GDialog g = new GDialog(mContext, R.drawable.large_switch_profile, "Log out", "You're about to log out", task);
+				g.setOwnerActivity(mActivity);
 				g.show();
 			}
 		});
@@ -198,9 +201,14 @@ public class HomeActivity extends Activity {
 		AppColors.setEnabled(false);
 		AppColors.setAdapter(new GColorAdapter(this));
 		
-		
-		
 		loadApplications();
+	}
+	
+	@Override
+	public void onBackPressed() {
+		if (!getIntent().getBooleanExtra(Tools.SKIP, false)) {
+			super.onBackPressed();
+		}
 	}
 
 	@Override
@@ -327,6 +335,7 @@ public class HomeActivity extends Activity {
 				AppInfo appInfo = new AppInfo(app);
 
 				appInfo.load(mContext, mCurrentUser);
+				//appInfo.setBgColor(appBgColor(appInfo.getId()));
 
 				appInfos.add(appInfo);
 			}
@@ -335,5 +344,41 @@ public class HomeActivity extends Activity {
 			mGrid.setAdapter(new AppAdapter(this, appInfos));
 			mGrid.setOnItemClickListener(new ProfileLauncher());
 		}
+	}
+	
+	/**
+	 * Finds the background color of a given app, and if no color exists for the app, it is given one.
+	 * @param appID ID of the app to find the background color for.
+	 * @return The background color of the app.
+	 */
+	private int appBgColor(Long appID) {
+		int[] colors = getResources().getIntArray(R.array.appcolors);
+		App launcher = mHelper.appsHelper.getAppByPackageName();
+		Setting<String, String, String> launchSetting = launcher.getSettings();
+		boolean saveNew = false;
+		
+		if (launchSetting != null && launchSetting.containsKey(appID)) {
+			HashMap<String, String> appSetting = launchSetting.get(appID);
+			
+			if (appSetting != null && appSetting.containsKey(Tools.COLOR_BG)) {
+				return Integer.parseInt(appSetting.get(Tools.COLOR_BG));
+			} else {
+				saveNew = true;
+			}
+		} else {
+			saveNew = true;
+		}
+		
+		Random rand = new Random();
+		int position = rand.nextInt(colors.length);
+		
+		if (saveNew) {
+			launchSetting.addValue(String.valueOf(appID), Tools.COLOR_BG, String.valueOf(colors[position]));
+			
+			launcher.setSettings(launchSetting);
+			mHelper.appsHelper.modifyAppByProfile(launcher, mCurrentUser);
+		}
+		
+		return colors[position];
 	}
 }

@@ -30,6 +30,7 @@ public class Tools {
 	public static final String CHILDID = "currentChildID";
 	public static final String APP_PACKAGENAME = "appPackageName";
 	public static final String APP_ACTIVITYNAME = "appActivityName";
+	public static final String SKIP = "skipActivity";
 
 	// Keys for settings.
 	public static final String COLORS = "colorSettings";
@@ -175,6 +176,7 @@ public class Tools {
 
 	/**
 	 * Updates the database with all installed GIRAF apps on the device, but does not attach them to any profile.
+	 * Is run every time the launcher starts, so any GIRAF app on the device will be in the database.
 	 * @param context Context of the current activity.
 	 */
 	public static void updateGirafApps_DB(Context context) {
@@ -244,8 +246,7 @@ public class Tools {
 
 		// Remove all non-GIRAF apps from the list of apps in the system.
 		/*for (int i = 0; i < systemApps.size(); i++) {
-			if (!(systemApps.get(i).toString().toLowerCase().contains("dk.aau.cs.giraf") && 
-					!systemApps.get(i).toString().toLowerCase().contains("launcher"))) {
+			if (!systemApps.get(i).toString().toLowerCase().contains("dk.aau.cs.giraf")) {
 				systemApps.remove(i); 
 				i--;
 			}
