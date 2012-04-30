@@ -124,7 +124,7 @@ public class HomeActivity extends Activity {
 			public void onClick(View v) {
 				
 				GTooltip gTooltip = new GTooltip(mContext);
-				gTooltip.setRightOf(v, 20);
+				gTooltip.setRightOf(v);
 
 				gTooltip.setOwnerActivity(mActivity);
 				
