@@ -38,6 +38,10 @@ class AppInfo extends App {
 	 * The application icon background color.
 	 */
 	private int mBgColor;
+	
+	public void setBgColor(int color) {
+		this.mBgColor = color;
+	}
 
 	/**
 	 * 
@@ -104,11 +108,18 @@ class AppInfo extends App {
 		int[] c = context.getResources().getIntArray(R.array.appcolors);
 		boolean saveNew = false;
 		
+		for (String s : settings.keySet()) {
+			Log.i("GIRAF_KEYS", "" + s);
+		}
+		
 		if (settings != null && settings.containsKey(Tools.COLORS)) {
 			HashMap<String, String> colorSettings = settings.get(Tools.COLORS);
 			
-			if(colorSettings != null && colorSettings.containsKey(Tools.COLORS)) {
+			Log.i("GIRAF", "settings != null");
+			
+			if(colorSettings != null && colorSettings.containsKey(Tools.COLOR_BG)) {
 				mBgColor = Integer.parseInt(colorSettings.get(Tools.COLOR_BG));
+				Log.i("GIRAF", "bgColor set " + mBgColor);
 			} else {
 				saveNew = true;
 			}
@@ -118,8 +129,11 @@ class AppInfo extends App {
 		
 		if (saveNew) {
 			if (settings == null) {
+				Log.i("GIRAF", "Settings == null, creating new");
 				settings = new Setting<String, String, String>();
 			}
+			
+			Log.i("GIRAF", "Inserting color");
 			
 			Random rand = new Random();
 			int position = rand.nextInt(c.length);
@@ -127,10 +141,16 @@ class AppInfo extends App {
 			settings.addValue(Tools.COLORS, Tools.COLOR_BG, String.valueOf(c[position]));
 			
 			Helper h = new Helper(context);
-			this.setSettings(settings);
-			h.appsHelper.modifyAppByProfile(this, mGuardian);
+			setSettings(settings);
+			h.appsHelper.modifyAppByProfile((App)this, mGuardian);
 			
 			mBgColor = c[position];
+		}
+		
+		settings = new Setting<String, String, String>();
+		
+		for (String s : settings.keySet()) {
+			Log.i("GIRAF_KEYS", "(POST) " + s);
 		}
 	}
 	
