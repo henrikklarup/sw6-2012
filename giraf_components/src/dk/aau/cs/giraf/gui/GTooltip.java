@@ -11,21 +11,24 @@ public class GTooltip extends Dialog {
 
 	public GTooltip(Context context) {
 		super(context);
+		this.setStyle();
 		// TODO Auto-generated constructor stub
 	}
 
 	public GTooltip(Context context, int theme) {
 		super(context, theme);
+		this.setStyle();
 		// TODO Auto-generated constructor stub
 	}
 
 	public GTooltip(Context context, boolean cancelable,
 			OnCancelListener cancelListener) {
 		super(context, cancelable, cancelListener);
+		this.setStyle();
 		// TODO Auto-generated constructor stub
 	}
 	
 	public void setStyle() {
-		this.setContentView(R.layout.colorpicker);
+		this.setContentView(R.layout.gtooltip_layout);
 	}
 }
