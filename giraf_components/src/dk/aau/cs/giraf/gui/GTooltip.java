@@ -17,6 +17,7 @@ public class GTooltip extends Dialog {
 	
 	private GTooltip mTip;
 	private Context mContext;
+	private final int padding = 5;
 
 	public GTooltip(Context context) {
 		super(context, android.R.style.Theme_Translucent_NoTitleBar);
@@ -28,11 +29,9 @@ public class GTooltip extends Dialog {
 			@Override
 			public void onClick(View v) {
 				mTip.cancel();
-				
 			}
 		});
-		
-		// TODO Auto-generated constructor stub
+
 	}
 
 	private GTooltip(Context context, int theme) {
@@ -54,20 +53,19 @@ public class GTooltip extends Dialog {
 		this.setContentView(R.layout.gtooltip_layout);
 	}
 	
-	public void setRightOf(View v, int padding) {
+	public void setRightOf(View v) {
+		View target = this.findViewById(R.id.gtooltip_arrow_view);	
 		int newLeft = intToDP(v.getLeft() + v.getWidth() + padding);
-		int newTop = intToDP(v.getTop());
-
-		ViewGroup target = (ViewGroup) this.findViewById(R.id.tooltip_wrapper);		
-		android.widget.FrameLayout.LayoutParams p = (android.widget.FrameLayout.LayoutParams) target.getLayoutParams();
+		int newTop = intToDP(v.getTop() + (v.getHeight()/2) - 12);
+	
+		android.widget.RelativeLayout.LayoutParams p = (android.widget.RelativeLayout.LayoutParams) target.getLayoutParams();
 		p.setMargins(newLeft, newTop, 0, 0);
 		target.setLayoutParams(p);
 		
-		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		params.addRule(RelativeLayout.RIGHT_OF, R.id.tooltip_arrow);
-		
-		RelativeLayout contentLayout = (RelativeLayout)this.findViewById(R.id.tooltip_content);
-		contentLayout.setLayoutParams(params);
+//		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+//		
+//		RelativeLayout contentLayout = (RelativeLayout)this.findViewById(R.id.tooltip_content);
+//		contentLayout.setLayoutParams(params);
 	}
 	
 	private int intToDP(int i) {
@@ -77,5 +75,9 @@ public class GTooltip extends Dialog {
 	public void addView(View v){
 		ViewGroup target = (ViewGroup) this.findViewById(R.id.tooltip_content);
 		target.addView(v);
+		
+		RelativeLayout.LayoutParams lp = (LayoutParams) target.findViewById(R.id.tooltip_content).getLayoutParams();
+		int y = -(12 - (target.getHeight()/2)); 
+		lp.setMargins(0, y, 0, 0);
 	}
 }
