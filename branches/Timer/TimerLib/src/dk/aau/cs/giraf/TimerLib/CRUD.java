@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import android.content.Context;
@@ -18,6 +20,8 @@ public class CRUD {
 	Guardian guard = Guardian.getInstance();
 	private long appId; 
 	private String _lastUsed = "lastUsed";
+	private String _subprofile = "SUBPROFILE";
+	private ArrayList<String> lastUsedList;
 	
 	public CRUD(long appID, Context context){
 		this.context = context;
@@ -52,13 +56,13 @@ public class CRUD {
 		// Get the settings from the profile and update
 		Setting<String, String, String> settings = app.getSettings();
 		Calendar cal = Calendar.getInstance();
-		int sec = cal.get(Calendar.SECOND);
-		int min = cal.get(Calendar.MINUTE);
-		int hour = cal.get(Calendar.SECOND);
-		int day = cal.get(Calendar.DAY_OF_YEAR);
-		int year = cal.get(Calendar.YEAR);
+		String sec = String.valueOf(cal.get(Calendar.SECOND));
+		String min = String.valueOf(cal.get(Calendar.MINUTE));
+		String hour = String.valueOf(cal.get(Calendar.SECOND));
+		String day = String.valueOf(cal.get(Calendar.DAY_OF_YEAR));
+		String year = String.valueOf(cal.get(Calendar.YEAR));
 		
-		String timeKey = String.valueOf(year+day+hour+min+sec);
+		String timeKey = year+""+day+""+hour+""+min+""+sec;
 		
 		settings.get(_lastUsed).put(String.valueOf(c.getProfileId() + ";" + p.getDB_id()),timeKey);
 		app.setSettings(settings);
@@ -71,15 +75,24 @@ public class CRUD {
 	void retrieveLastUsed(long profileId){
 		// Find the profile by Id
 		Profile prof = oHelp.profilesHelper.getProfileById(profileId);
-					
-		// Find the Wombat App
-		App app = oHelp.appsHelper.getAppByIds(appId, profileId);
-					
-		// Get the settings from the profile and update
-		Setting<String, String, String> settings = app.getSettings();
-		//retrieve all last used :D:D:
-		if(settings == null){
 			
+		//retrieve all last used :D:D:
+		App app = oHelp.appsHelper.getAppByIds(appId, profileId);
+		
+		if(app.getSettings() != null){
+			lastUsedList = new ArrayList<String>();
+			Setting<String, String, String> settings = app.getSettings();
+			
+			Set<Entry<String, String>> keys = settings.get(_lastUsed).entrySet();
+	
+			for (Map.Entry<String, String> key : keys) {
+				lastUsedList.add(key.getKey()+";"+key.getValue());
+			}
+		} else {
+			Setting<String,String,String> newSet = new Setting<String,String,String>();
+			newSet.put(_lastUsed, null);
+			app.setSettings(newSet);
+			oHelp.appsHelper.modifyAppByProfile(app, prof);
 		}
 	}
 	
@@ -89,8 +102,6 @@ public class CRUD {
 		
 		// Find all subprofiles of the child and save it on the child
 		ArrayList<SubProfile> mGuardSubPs = findProfileSettings(mGuardian.getId());
-		guard.clearLastUsed();
-		guard.initLastUsed(mGuardSubPs);
 		
 		// Load the children from Oasis of the guardian
 		List<Profile> mChildren = oHelp.profilesHelper.getChildrenByGuardian(mGuardian);
@@ -135,6 +146,10 @@ public class CRUD {
 			
 			guard.Children().add(mC);
 		}
+		
+		//Init lastUsed skal laves 
+		//guard.clearLastUsed();
+		//guard.initLastUsed(mGuardSubPs);
 	}
 	/**
 	 * Stores the subprofile on the child in Oasis
@@ -208,7 +223,7 @@ public class CRUD {
 		if(app.getSettings() != null){
 			Setting<String, String, String> settings = app.getSettings();
 			Set<String> keys = settings.keySet();
-	
+			
 			for (String key : keys) {
 				SubProfile sub = getSubProfile(settings.get(key));
 				mSubs.add(sub);

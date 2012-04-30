@@ -29,9 +29,7 @@ public class DigitalClock extends SubProfile {
 	 */
 	public DigitalClock copy(){
 		DigitalClock copyP = new DigitalClock(this);
-		if(this._attachment != null){
-			copyP.setAttachment(this._attachment);
-		}
+		copyP.setAttachment(this._attachment);
 		return copyP;
 	}	
 	
