@@ -25,7 +25,11 @@
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen">
         </activity>
-        
+        <activity
+            android:name="dk.aau.cs.giraf.wombat.drawlib.DoneScreenActivity"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen">
+        </activity>
     </application>
 
 </manifest>

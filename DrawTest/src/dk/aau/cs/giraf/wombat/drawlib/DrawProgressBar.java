@@ -1,10 +1,12 @@
 package dk.aau.cs.giraf.wombat.drawlib;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Handler;
 import android.view.View;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
 
@@ -41,7 +43,7 @@ public class DrawProgressBar extends View {
 		timeleft = sp.timeLeftColor;
 		timeleft2 = sp.timeLeftColor;
 		timespent = sp.timeSpentColor;
-		totalTime = (sp.get_totalTime() - 1) * 1000;
+		totalTime = ((sp.get_totalTime() - 1) + 2) * 1000;
 		endTime = System.currentTimeMillis() + totalTime;
 
 		if (sp.gradient) {

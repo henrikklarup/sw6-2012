@@ -49,7 +49,7 @@ public class DrawHourglass extends View {
 		timeleft = sp.timeLeftColor;
 		timeleft2 = sp.timeLeftColor;
 		timespent = sp.timeSpentColor;
-		totalTime = (sp.get_totalTime() - 1) * 1000;
+		totalTime = ((sp.get_totalTime() - 1) + 2) * 1000;
 		endTime = System.currentTimeMillis() + totalTime;
 		startTime = System.currentTimeMillis();
 
