@@ -13,12 +13,23 @@ import android.widget.RelativeLayout.LayoutParams;
 
 public class GTooltip extends Dialog {
 	
+	private GTooltip mTip;
 	private Context mContext;
 
 	public GTooltip(Context context) {
 		super(context, android.R.style.Theme_Translucent_NoTitleBar);
 		mContext = context;
 		this.setStyle();
+		mTip = this;
+		this.findViewById(R.id.tooltip_hitarea).setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				mTip.cancel();
+				
+			}
+		});
+		
 		// TODO Auto-generated constructor stub
 	}
 
