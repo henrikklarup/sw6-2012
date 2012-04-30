@@ -11,20 +11,20 @@ import android.widget.RelativeLayout.LayoutParams;
 public class GTooltip extends Dialog {
 
 	public GTooltip(Context context, View v) {
-		super(context);
+		super(context, android.R.style.Theme_Translucent_NoTitleBar);
 		this.setStyle();
 		this.setPosition(v);
 		// TODO Auto-generated constructor stub
 	}
 
-	public GTooltip(Context context, int theme, View v) {
+	private GTooltip(Context context, int theme, View v) {
 		super(context, theme);
 		this.setStyle();
 		this.setPosition(v);
 		// TODO Auto-generated constructor stub
 	}
 
-	public GTooltip(Context context, boolean cancelable,
+	private GTooltip(Context context, boolean cancelable,
 			OnCancelListener cancelListener, View v) {
 		super(context, cancelable, cancelListener);
 		this.setStyle();
@@ -43,5 +43,10 @@ public class GTooltip extends Dialog {
 		params.x = centerLeft - (params.width / 2);
 		params.y = centerTop - (params.height / 2);
 		this.getWindow().setAttributes(params);
+	}
+
+	public void addView(View v){
+		ViewGroup target = (ViewGroup) this.findViewById(R.id.tooltip_content);
+		target.addView(v);
 	}
 }
