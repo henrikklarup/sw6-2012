@@ -42,5 +42,6 @@ public class GTooltip extends Dialog {
 		int centerLeft = v.getLeft() + (v.getWidth() / 2);
 		params.x = centerLeft - (params.width / 2);
 		params.y = centerTop - (params.height / 2);
+		this.getWindow().setAttributes(params);
 	}
 }
