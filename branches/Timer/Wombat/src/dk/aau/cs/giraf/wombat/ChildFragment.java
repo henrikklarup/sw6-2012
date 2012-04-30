@@ -3,6 +3,8 @@ package dk.aau.cs.giraf.wombat;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
@@ -16,11 +18,6 @@ public class ChildFragment extends android.app.ListFragment {
 	ChildAdapter adapter;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-	}
-
-	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		ArrayList<Child> m_childs = guard.publishList();
@@ -28,7 +25,7 @@ public class ChildFragment extends android.app.ListFragment {
 		// Inputs the data into the listview according to the string array
 		adapter = new ChildAdapter(getActivity(),
 				android.R.layout.simple_list_item_1, m_childs);
-		setListAdapter(adapter);
+		setListAdapter(adapter);		
 	}
 
 	@Override

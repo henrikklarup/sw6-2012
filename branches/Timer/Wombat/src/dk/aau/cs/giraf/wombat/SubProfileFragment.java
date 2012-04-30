@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,11 +20,6 @@ import dk.aau.cs.giraf.oasis.lib.Helper;
 public class SubProfileFragment extends android.app.ListFragment {
 	Guardian guard = Guardian.getInstance();
 	ListView thisListView;
-
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-	}
 
 	@Override
 	// Start the list empty
