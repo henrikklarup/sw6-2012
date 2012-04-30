@@ -69,6 +69,9 @@ public class SubProfileFragment extends android.app.ListFragment {
 									if (guard.getChild() != null && guard.getChild().deleteCheck()) {
 									guard.getChild().SubProfiles().get(row)
 											.delete();
+									CustomizeFragment cf = (CustomizeFragment) getFragmentManager()
+											.findFragmentById(R.id.customizeFragment);
+									cf.setDefaultProfile();
 									Toast t = Toast.makeText(getActivity(),
 											R.string.delete_subprofile_toast,
 											5000);
