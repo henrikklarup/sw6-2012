@@ -8,6 +8,8 @@ import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RoundRectShape;
 import android.os.Bundle;
+import android.os.Vibrator;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -28,11 +30,16 @@ public class AuthenticationActivity extends CaptureActivity {
 	private TextView loginNameView;
 	private TextView infoView;
 	private Context mContext;
+	private Vibrator mVibrator;
+	private Profile mPreviousProfile;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.authentication);
+		
+		mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
 
 		final ImageView instruct = (ImageView) findViewById(R.id.animation);
 		instruct.setBackgroundResource(R.animator.instruct_ani);
@@ -83,6 +90,13 @@ public class AuthenticationActivity extends CaptureActivity {
 		Profile profile = helper.profilesHelper.authenticateProfile(rawResult.getText());
 
 		if (profile != null) {	
+			
+			if (mPreviousProfile == null || !profile.toString().equals(mPreviousProfile.toString())) {
+				mVibrator.vibrate(400);
+			}
+			
+			mPreviousProfile = profile;
+			
 			this.changeCamerafeedBorderColor(0xFF3AAA35);
 			loginNameView.setText(profile.getFirstname() + " " + profile.getSurname());
 			loginNameView.setVisibility(View.VISIBLE);
