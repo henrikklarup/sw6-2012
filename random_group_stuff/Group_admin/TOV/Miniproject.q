@@ -8,4 +8,9 @@ A[] not Person(0).Angry
 /*
 
 */
+A[] not Person(1).Angry
+
+/*
+
+*/
 A[] not deadlock
