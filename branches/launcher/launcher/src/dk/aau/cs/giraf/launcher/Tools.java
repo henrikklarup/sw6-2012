@@ -149,10 +149,10 @@ public class Tools {
 	 * @param currentUser The user to find apps for.
 	 * @return List of apps that are usable by this user on this device.
 	 */
-	public static List<App> getVisibleGirafApps(Context context, Profile currentUser) {
+	public static List<App> getVisibleGirafApps(Context context, Profile user) {
 		Helper helper = new Helper(context);
 
-		List<App> userApps = helper.appsHelper.getAppsByProfile(currentUser);
+		List<App> userApps = helper.appsHelper.getAppsByProfile(user);
 		List<App> deviceApps = getAllAvailableGirafApps(context);
 		
 		if (userApps.isEmpty() || deviceApps.isEmpty()) {
@@ -230,10 +230,10 @@ public class Tools {
 	 * @param currentUser Profile to find apps for.
 	 * @return List of apps not attached to the given profile.
 	 */
-	public static List<App> getHiddenGirafApps(Context context, Profile currentUser) {
+	public static List<App> getHiddenGirafApps(Context context, Profile user) {
 		Helper helper = new Helper(context);
 
-		List<App> userApps = helper.appsHelper.getAppsByProfile(currentUser);
+		List<App> userApps = helper.appsHelper.getAppsByProfile(user);
 		List<App> deviceApps = getAllAvailableGirafApps(context);
 		
 		if (userApps.isEmpty() || deviceApps.isEmpty()) {
@@ -428,8 +428,9 @@ public class Tools {
 	 * @param context Context of the current activity.
 	 * @param currentUser The user to attach apps to.
 	 */
-	public static void attachAllDeviceGirafAppsToUser(Context context, Profile currentUser) {
+	public static void attachAllDeviceGirafAppsToUser(Context context) {
 		Helper helper = new Helper(context);
+		Profile currentUser = findCurrentUser(context);
 		
 		List<App> deviceApps = getAllAvailableGirafApps(context);
 		
