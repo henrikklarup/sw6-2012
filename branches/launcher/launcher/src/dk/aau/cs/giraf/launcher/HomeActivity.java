@@ -147,15 +147,11 @@ public class HomeActivity extends Activity {
 				switch(e.getActionMasked()){
 				case MotionEvent.ACTION_DOWN:
 					offset = (int) e.getX();
-					Log.i("thomas", "START DRAG");
 					result = true;
 					break;
 				case MotionEvent.ACTION_MOVE:
-					
 					mHomeBarParams = (RelativeLayout.LayoutParams) v.getLayoutParams();
-					
 					margin = mHomeBarParams.leftMargin + ((int) e.getX() - offset);
-					
 					int snaplength = 40;
 					
 					if (margin < snaplength) {
@@ -168,7 +164,6 @@ public class HomeActivity extends Activity {
 					
 					mHomeBarParams.setMargins(margin, 0, 0, 0);
 					v.setLayoutParams(mHomeBarParams);
-					Log.i("thomas", "MARGIN: "+margin+"");
 					
 					View v2 = findViewById(R.id.HomeDrawer);
 					RelativeLayout.LayoutParams v2Params = (RelativeLayout.LayoutParams) v2.getLayoutParams();
@@ -197,9 +192,8 @@ public class HomeActivity extends Activity {
 		
 		
 		GridView AppColors = (GridView) findViewById(R.id.appcolors);
-		// Remove blue highlight and scroll
+		// Removes blue highlight and scroll
 		AppColors.setEnabled(false);
-		
 		AppColors.setAdapter(new GColorAdapter(this));
 		
 		
@@ -247,7 +241,6 @@ public class HomeActivity extends Activity {
 
 		if (isLandscape) {
 			homebar.setBackgroundDrawable(getResources().getDrawable(R.drawable.homebar_back_land));
-			//paramsBar.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
 			paramsBar.height = LayoutParams.MATCH_PARENT;
 			paramsBar.width = barHeightLandscape;
 
@@ -255,7 +248,6 @@ public class HomeActivity extends Activity {
 			paramsGrid.width = screenWidth - barHeightLandscape;
 		} else {
 			homebar.setBackgroundDrawable(getResources().getDrawable(R.drawable.homebar_back_port));
-			//paramsBar.addRule(RelativeLayout.ALIGN_PARENT_TOP);
 			paramsBar.height = barHeightPortrait;
 			paramsBar.width = LayoutParams.MATCH_PARENT;
 
