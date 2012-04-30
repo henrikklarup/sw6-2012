@@ -119,7 +119,7 @@ public class HomeActivity extends Activity {
 		
 		mConnectivityWidget.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				GTooltip gTooltip = new GTooltip(mContext);
+				GTooltip gTooltip = new GTooltip(mContext,v);
 				gTooltip.setOwnerActivity(mActivity);
 				
 				Button button = new Button(mContext);
