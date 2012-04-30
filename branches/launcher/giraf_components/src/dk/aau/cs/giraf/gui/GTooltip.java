@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.RelativeLayout.LayoutParams;
 
 public class GTooltip extends Dialog {
@@ -36,6 +37,10 @@ public class GTooltip extends Dialog {
 	}
 	
 	public void setPosition(View v) {
-		
+		WindowManager.LayoutParams params = this.getWindow().getAttributes();
+		int centerTop = v.getTop() + (v.getHeight() / 2);
+		int centerLeft = v.getLeft() + (v.getWidth() / 2);
+		params.x = centerLeft - (params.width / 2);
+		params.y = centerTop - (params.height / 2);
 	}
 }
