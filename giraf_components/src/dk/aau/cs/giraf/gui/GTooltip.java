@@ -41,23 +41,18 @@ public class GTooltip extends Dialog {
 		this.setContentView(R.layout.gtooltip_layout);
 	}
 	
-	public void setLeftOf(View v) {
-		WindowManager.LayoutParams params = this.getWindow().getAttributes();
-		int centerTop = v.getTop() + (v.getHeight() / 2);
-		int centerLeft = v.getLeft() + (v.getWidth() / 2);
-		
-		
-		int newLeft = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, (centerLeft - (params.width / 2)), mContext.getResources().getDisplayMetrics());
-		int newTop = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, (centerTop - (params.height / 2)), mContext.getResources().getDisplayMetrics());
-		
-		Log.i("magnus", "x : " + (centerLeft - (params.width / 2)));
-		Log.i("magnus", "y : " + (centerTop - (params.height / 2)));
-		
-		ViewGroup target = (ViewGroup) this.findViewById(R.id.tooltip_content);
-		
+	public void setRightOf(View v, int padding) {
+		int newLeft = intToDP(v.getLeft() + v.getWidth() + padding);
+		int newTop = intToDP(v.getTop());
+
+		ViewGroup target = (ViewGroup) this.findViewById(R.id.tooltip_content);		
 		android.widget.FrameLayout.LayoutParams p = (android.widget.FrameLayout.LayoutParams) target.getLayoutParams();
 		p.setMargins(newLeft, newTop, 0, 0);
 		target.setLayoutParams(p);
+	}
+	
+	private int intToDP(int i) {
+		return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, i, mContext.getResources().getDisplayMetrics());
 	}
 
 	public void addView(View v){
