@@ -126,7 +126,6 @@ public class HomeActivity extends Activity {
 				GTooltip gTooltip = new GTooltip(mContext);
 				gTooltip.setRightOf(v, 20);
 
-				
 				gTooltip.setOwnerActivity(mActivity);
 				
 				Button button = new Button(mContext);
@@ -208,6 +207,7 @@ public class HomeActivity extends Activity {
 	
 	@Override
 	public void onBackPressed() {
+		// To stop the device from going back to the logo activity on back press.
 		if (!getIntent().getBooleanExtra(Tools.SKIP, false)) {
 			super.onBackPressed();
 		}
@@ -326,7 +326,7 @@ public class HomeActivity extends Activity {
 
 		// If a guardian does not have any apps available, give them all on the device:
 		//if (userApps.size() == 0 && mCurrentUser.getPRole() == Tools.ROLE_GUARDIAN) {
-			Tools.attachAllDeviceGirafAppsToUser(mContext, mCurrentUser);
+			Tools.attachAllDeviceGirafAppsToUser(mContext);
 			userApps = Tools.getVisibleGirafApps(mContext, mCurrentUser);
 		//}
 
