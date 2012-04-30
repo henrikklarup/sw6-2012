@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'><nta><declaration>// Place global declarations here.
+chan board, unboard, captain, uncaptain;
+int L, M = 0, D = 0, B1 = 0, B2 = 0, G1 = 0, G2 = 0, P = 0, T = 0;
+clock time;</declaration><template><name>mBoat</name><location id="id0" x="-56" y="104"><name x="-80" y="120">one_left</name></location><location id="id1" x="-64" y="0"><name x="-90" y="-38">one</name></location><location id="id2" x="-64" y="-88"><name x="-88" y="-120">one_free</name><urgent/></location><location id="id3" x="216" y="-8"><name x="206" y="-38">two</name></location><location id="id4" x="-296" y="0"><name x="-306" y="-30">bay</name></location><init ref="id4"/><transition><source ref="id0"/><target ref="id4"/><label kind="synchronisation" x="-240" y="48">unboard?</label><label kind="assignment" x="-240" y="64">L:=-L+1</label></transition><transition><source ref="id3"/><target ref="id0"/><label kind="synchronisation" x="64" y="56">uncaptain?</label></transition><transition><source ref="id2"/><target ref="id1"/></transition><transition><source ref="id1"/><target ref="id4"/><label kind="synchronisation" x="-216" y="0">uncaptain?</label><label kind="assignment" x="-216" y="-24">L:=-L+1</label></transition><transition><source ref="id2"/><target ref="id3"/><label kind="synchronisation" x="56" y="-72">board?</label></transition><transition><source ref="id4"/><target ref="id2"/><label kind="synchronisation" x="-232" y="-64">captain?</label></transition></template><template><name>mDad</name><declaration>bool boarding_check(){
+	if(B1 == M &amp;&amp; B2 == M)
+		return false;
+	return true;
+}
+
+bool r_unboarder(){
+	bool accept = true;
+
+	// Unboarding check, dad cant unboard if
+	// Girl without his mom
+	if(G1 == D + 1 &amp;&amp; G1 != M)
+		accept = false;
+	if(G2 == D + 1 &amp;&amp; G2 != M)
+		accept = false;
+	
+	// Thief without Police
+	if(T == D + 1 &amp;&amp; T != P)
+		accept = false;
+
+	// Girl alone with father
+	if(B1 == M)
+		accept = false;
+	if(B2 == M)
+		accept = false;
+
+	return accept;
+}
+
+bool l_unboarder(){
+	bool accept = true;
+
+	// Unboarding check, dad cant unboard if
+	// Girl without his mom
+	if(G1 == 0 &amp;&amp; G1 != M)
+		accept = false;
+	if(G2 == 0 &amp;&amp; G2 != M)
+		accept = false;
+	
+	// Thief without Police
+	if(T == 0 &amp;&amp; T != P)
+		accept = false;
+
+	// Girl alone with father
+	if(B1 == M)
+		accept = false;
+	if(B2 == M)
+		accept = false;
+
+	return accept;
+}</declaration><location id="id5" x="360" y="216"><name x="318" y="226">r_boat_captain</name></location><location id="id6" x="-88" y="-144"><name x="-120" y="-176">l_boat_captain</name></location><location id="id7" x="192" y="112"><name x="184" y="120">r_boat</name></location><location id="id8" x="360" y="-32"><name x="376" y="-40">rightbay</name></location><location id="id9" x="80" y="-32"><name x="72" y="-64">l_boat</name></location><location id="id10" x="-88" y="112"><name x="-120" y="80">leftbay</name></location><init ref="id10"/><transition><source ref="id8"/><target ref="id5"/><label kind="guard" x="368" y="72">L == 1 &amp;&amp;
+boarding_check()</label><label kind="synchronisation" x="368" y="104">captain!</label><label kind="assignment" x="368" y="120">D = D + 1</label></transition><transition><source ref="id5"/><target ref="id10"/><label kind="guard" x="112" y="216">l_unboarder()</label><label kind="synchronisation" x="112" y="232">uncaptain!</label><label kind="assignment" x="112" y="248">D = 0</label><nail x="-88" y="216"/></transition><transition><source ref="id6"/><target ref="id8"/><label kind="guard" x="72" y="-144">r_unboarder()</label><label kind="synchronisation" x="72" y="-128">uncaptain!</label><label kind="assignment" x="72" y="-112">D = D + 1</label><nail x="360" y="-144"/></transition><transition><source ref="id10"/><target ref="id6"/><label kind="guard" x="-200" y="-64">L == 0 &amp;&amp;
+boarding_check()</label><label kind="synchronisation" x="-200" y="-32">captain!</label><label kind="assignment" x="-200" y="-16">D = D + 1</label></transition><transition><source ref="id8"/><target ref="id7"/><label kind="guard" x="200" y="-8">L == 1 &amp;&amp;
+boarding_check()</label><label kind="synchronisation" x="200" y="24">board!</label><label kind="assignment" x="200" y="40">D = D + 1</label></transition><transition><source ref="id7"/><target ref="id10"/><label kind="guard" x="8" y="112">l_unboarder()</label><label kind="synchronisation" x="8" y="128">unboard!</label><label kind="assignment" x="8" y="144">D = 0</label></transition><transition><source ref="id9"/><target ref="id8"/><label kind="guard" x="200" y="-88">r_unboarder()</label><label kind="synchronisation" x="200" y="-72">unboard!</label><label kind="assignment" x="200" y="-56">D = D + 1</label></transition><transition><source ref="id10"/><target ref="id9"/><label kind="guard" x="-32" y="-56">L == 0 &amp;&amp;
+boarding_check()</label><label kind="synchronisation" x="-32" y="-24">board!</label><label kind="assignment" x="-32" y="-8">D = D + 1</label></transition></template><template><name>mMom</name><declaration>bool boarding_check(){
+	
+	if(G1 == D &amp;&amp; G2 == D)
+		return false;	
+
+	return true;
+}
+
+bool r_unboarder(){
+	bool accept = true;
+
+	// Unboarding check, mom cant unboard if
+	// Boy without his father
+	if(B1 == M + 1 &amp;&amp; B1 != D)
+		accept = false;
+	if(B2 == M + 1 &amp;&amp; B2 != D)
+		accept = false;
+	
+	// Thief without Police
+	if(T == M + 1 &amp;&amp; T != P)
+		accept = false;
+
+	// Girl alone with father
+	if(G1 == D)
+		accept = false;
+	if(G2 == D)
+		accept = false;
+
+	return accept;
+}
+
+bool l_unboarder(){
+	bool accept = true;
+
+	// Unboarding check, mom cant unboard if
+	// Boy without his father
+	if(B1 == 0 &amp;&amp; B1 != D)
+		accept = false;
+	if(B2 == 0 &amp;&amp; B2 != D)
+		accept = false;
+	
+	// Thief without Police
+	if(T == 0 &amp;&amp; T != P)
+		accept = false;
+
+	// Girl alone with father
+	if(G1 == D)
+		accept = false;
+	if(G2 == D)
+		accept = false;
+
+	return accept;
+}</declaration><location id="id11" x="362" y="214"><name x="320" y="224">r_boat_captain</name></location><location id="id12" x="-88" y="-144"><name x="-120" y="-176">l_boat_captain</name></location><location id="id13" x="192" y="112"><name x="184" y="120">r_boat</name></location><location id="id14" x="360" y="-32"><name x="376" y="-40">rightbay</name></location><location id="id15" x="80" y="-32"><name x="72" y="-64">l_boat</name></location><location id="id16" x="-88" y="112"><name x="-120" y="80">leftbay</name></location><init ref="id16"/><transition><source ref="id14"/><target ref="id11"/><label kind="guard" x="368" y="72">L == 1 &amp;&amp;
+boarding_check()</label><label kind="synchronisation" x="368" y="104">captain!</label><label kind="assignment" x="368" y="120">M = M + 1</label></transition><transition><source ref="id11"/><target ref="id16"/><label kind="guard" x="104" y="216">l_unboarder()</label><label kind="synchronisation" x="104" y="232">uncaptain!</label><label kind="assignment" x="104" y="248">M = 0</label><nail x="-88" y="216"/></transition><transition><source ref="id12"/><target ref="id14"/><label kind="guard" x="72" y="-144">r_unboarder()</label><label kind="synchronisation" x="72" y="-128">uncaptain!</label><label kind="assignment" x="72" y="-112">M = M + 1</label><nail x="360" y="-144"/></transition><transition><source ref="id16"/><target ref="id12"/><label kind="guard" x="-152" y="-64">L == 0 &amp;&amp;
+boarding_check()</label><label kind="synchronisation" x="-152" y="-32">captain!</label><label kind="assignment" x="-152" y="-16">M = M + 1</label></transition><transition><source ref="id14"/><target ref="id13"/><label kind="guard" x="200" y="-8">L == 1 &amp;&amp;
+boarding_check()</label><label kind="synchronisation" x="200" y="24">board!</label><label kind="assignment" x="200" y="40">M = M + 1</label></transition><transition><source ref="id13"/><target ref="id16"/><label kind="guard" x="8" y="112">l_unboarder()</label><label kind="synchronisation" x="8" y="128">unboard!</label><label kind="assignment" x="8" y="144">M = 0</label></transition><transition><source ref="id15"/><target ref="id14"/><label kind="guard" x="200" y="-88">r_unboarder()</label><label kind="synchronisation" x="200" y="-72">unboard!</label><label kind="assignment" x="200" y="-56">M = M + 1</label></transition><transition><source ref="id16"/><target ref="id15"/><label kind="guard" x="-32" y="-56">L == 0 &amp;&amp;
+boarding_check()</label><label kind="synchronisation" x="-32" y="-24">board!</label><label kind="assignment" x="-32" y="-8">M = M + 1</label></transition></template><template><name>mPolice</name><declaration>bool unboarder(){
+	bool accept = true;
+	
+	// Boarding check, thief cant be alone with anyone
+	if(T != P){
+		if(T == M || T == D || T == G1 || T == G2 || T == B1 || T == B2)
+			accept = false;
+	}
+
+	// Unboarding check, I DONT CARE!
+
+	return accept;
+}</declaration><location id="id17" x="360" y="216"><name x="318" y="226">r_boat_captain</name></location><location id="id18" x="-88" y="-144"><name x="-120" y="-176">l_boat_captain</name></location><location id="id19" x="192" y="112"><name x="184" y="120">r_boat</name></location><location id="id20" x="360" y="-32"><name x="376" y="-40">rightbay</name></location><location id="id21" x="80" y="-32"><name x="72" y="-64">l_boat</name></location><location id="id22" x="-88" y="112"><name x="-120" y="80">leftbay</name></location><init ref="id22"/><transition><source ref="id20"/><target ref="id17"/><label kind="guard" x="368" y="88">L == 1</label><label kind="synchronisation" x="368" y="104">captain!</label><label kind="assignment" x="368" y="120">P = P + 1</label></transition><transition><source ref="id17"/><target ref="id22"/><label kind="guard" x="112" y="216">unboarder()</label><label kind="synchronisation" x="112" y="232">uncaptain!</label><label kind="assignment" x="112" y="248">P = 0</label><nail x="-88" y="216"/></transition><transition><source ref="id18"/><target ref="id20"/><label kind="guard" x="72" y="-144">unboarder()</label><label kind="synchronisation" x="72" y="-128">uncaptain!</label><label kind="assignment" x="72" y="-112">P = P + 1</label><nail x="360" y="-144"/></transition><transition><source ref="id22"/><target ref="id18"/><label kind="guard" x="-148" y="-46">L == 0</label><label kind="synchronisation" x="-148" y="-31">captain!</label><label kind="assignment" x="-148" y="-16">P = P + 1</label></transition><transition><source ref="id20"/><target ref="id19"/><label kind="guard" x="200" y="8">L == 1</label><label kind="synchronisation" x="200" y="24">board!</label><label kind="assignment" x="200" y="40">P = P + 1</label></transition><transition><source ref="id19"/><target ref="id22"/><label kind="guard" x="8" y="112">unboarder()</label><label kind="synchronisation" x="8" y="128">unboard!</label><label kind="assignment" x="8" y="144">P = 0</label></transition><transition><source ref="id21"/><target ref="id20"/><label kind="guard" x="200" y="-88">unboarder()</label><label kind="synchronisation" x="200" y="-72">unboard!</label><label kind="assignment" x="200" y="-56">P = P + 1</label></transition><transition><source ref="id22"/><target ref="id21"/><label kind="guard" x="-32" y="-40">L == 0</label><label kind="synchronisation" x="-32" y="-24">board!</label><label kind="assignment" x="-32" y="-8">P = P + 1</label></transition></template><template><name>mThief</name><declaration>bool boarding_check(){
+	bool accept = true;
+
+	// Boarding check, cant be onboard with anyone but the Police
+	if(T + 1 != P)
+		accept = false;
+
+	return accept;
+}</declaration><location id="id23" x="192" y="112"><name x="184" y="120">r_boat</name></location><location id="id24" x="360" y="-32"><name x="350" y="-62">rightbay</name></location><location id="id25" x="80" y="-32"><name x="72" y="-64">l_boat</name></location><location id="id26" x="-88" y="112"><name x="-120" y="80">leftbay</name></location><init ref="id26"/><transition><source ref="id24"/><target ref="id23"/><label kind="guard" x="280" y="32">L == 1 &amp;&amp;
+boarding_check()</label><label kind="synchronisation" x="280" y="80">board!</label><label kind="assignment" x="280" y="64">T = T + 1</label></transition><transition><source ref="id23"/><target ref="id26"/><label kind="synchronisation" x="16" y="112">unboard!</label><label kind="assignment" x="16" y="128">T = 0</label></transition><transition><source ref="id25"/><target ref="id24"/><label kind="synchronisation" x="176" y="-56">unboard!</label><label kind="assignment" x="176" y="-72">T = T + 1</label></transition><transition><source ref="id26"/><target ref="id25"/><label kind="guard" x="-64" y="-24">L == 0 &amp;&amp;
+boarding_check()</label><label kind="synchronisation" x="-64" y="24">board!</label><label kind="assignment" x="-64" y="8">T = T + 1</label></transition></template><template><name>mGirl1</name><declaration>bool boarding_check(){
+	// Boarding check, girls cant board if dad is onboard
+	if(G1 + 1 == D)
+		return false;
+	return true;
+}
+
+bool r_unboarding(){
+	bool accept = true;
+
+	// Unboarding check, girls cant unboard if
+	// Thief without Police
+	if(G1 + 1 == T &amp;&amp; T != P)
+		accept = false;
+
+	//  Dad without Mom
+	if(G1 + 1 == D &amp;&amp; D != M)
+		accept = false;
+
+	return accept;
+}
+
+bool l_unboarding(){
+	bool accept = true;
+
+	// Unboarding check, girls cant unboard if
+	// Thief without Police
+	if(T == 0 &amp;&amp; T != P)
+		accept = false;
+
+	//  Dad without Mom
+	if(D == 0 &amp;&amp; D != M)
+		accept = false;
+
+	return accept;
+}</declaration><location id="id27" x="192" y="112"><name x="184" y="120">r_boat</name></location><location id="id28" x="360" y="-32"><name x="350" y="-62">rightbay</name></location><location id="id29" x="80" y="-32"><name x="72" y="-64">l_boat</name></location><location id="id30" x="-88" y="112"><name x="-120" y="80">leftbay</name></location><init ref="id30"/><transition><source ref="id28"/><target ref="id27"/><label kind="guard" x="280" y="40">L == 1 &amp;&amp;
+boarding_check()</label><label kind="synchronisation" x="280" y="88">board!</label><label kind="assignment" x="280" y="72">G1 = G1 + 1</label></transition><transition><source ref="id27"/><target ref="id30"/><label kind="guard" x="-16" y="120">l_unboarding()</label><label kind="synchronisation" x="-16" y="136">unboard!</label><label kind="assignment" x="-16" y="152">G1 = 0</label></transition><transition><source ref="id29"/><target ref="id28"/><label kind="guard" x="176" y="-88">r_unboarding()</label><label kind="synchronisation" x="176" y="-56">unboard!</label><label kind="assignment" x="176" y="-72">G1 = G1 + 1</label></transition><transition><source ref="id30"/><target ref="id29"/><label kind="guard" x="-64" y="-24">L == 0 &amp;&amp;
+boarding_check()</label><label kind="synchronisation" x="-64" y="24">board!</label><label kind="assignment" x="-64" y="8">G1 = G1 + 1</label></transition></template><template><name>mGirl2</name><declaration>bool boarding_check(){
+	// Boarding check, girls cant board if dad is onboard
+	if(G2 + 1 == D)
+		return false;
+
+	return true;
+}
+
+bool r_unboarding(){
+	bool accept = true;
+
+	// Boarding check, girls cant board if dad is onboard
+	if(G2 == D)
+		accept = false;
+
+	// Unboarding check, girls cant unboard if
+	// Thief without Police
+	if(G2 + 1 == T &amp;&amp; T != P)
+		accept = false;
+
+	//  Dad without Mom
+	if(G2 + 1 == D &amp;&amp; D != M)
+		accept = false;
+
+	return accept;
+}
+
+bool l_unboarding(){
+	bool accept = true;
+
+	// Unboarding check, girls cant unboard if
+	// Thief without Police
+	if(T == 0 &amp;&amp; T != P)
+		accept = false;
+
+	//  Dad without Mom
+	if(D == 0 &amp;&amp; D != M)
+		accept = false;
+
+	return accept;
+}</declaration><location id="id31" x="192" y="112"><name x="184" y="120">r_boat</name></location><location id="id32" x="360" y="-32"><name x="350" y="-62">rightbay</name></location><location id="id33" x="80" y="-32"><name x="72" y="-64">l_boat</name></location><location id="id34" x="-88" y="112"><name x="-120" y="80">leftbay</name></location><init ref="id34"/><transition><source ref="id32"/><target ref="id31"/><label kind="guard" x="280" y="40">L == 1 &amp;&amp;
+boarding_check()</label><label kind="synchronisation" x="280" y="88">board!</label><label kind="assignment" x="280" y="72">G2 = G2 + 1</label></transition><transition><source ref="id31"/><target ref="id34"/><label kind="guard" x="-16" y="120">l_unboarding()</label><label kind="synchronisation" x="-16" y="136">unboard!</label><label kind="assignment" x="-16" y="152">G2 = 0</label></transition><transition><source ref="id33"/><target ref="id32"/><label kind="guard" x="176" y="-88">r_unboarding()</label><label kind="synchronisation" x="176" y="-56">unboard!</label><label kind="assignment" x="176" y="-72">G2 = G2 + 1</label></transition><transition><source ref="id34"/><target ref="id33"/><label kind="guard" x="-64" y="-24">L == 0 &amp;&amp;
+boarding_check()</label><label kind="synchronisation" x="-64" y="24">board!</label><label kind="assignment" x="-64" y="8">G2 = G2 + 1</label></transition></template><template><name>mBoy1</name><declaration>bool boarding_check(){
+	// Boarding check, boys cant board if mom is onboard
+	if(B1 + 1 == M)
+		return false;
+
+	return true;
+}
+
+bool r_unboarding(){
+	bool accept = true;
+
+	// Unboarding check, boys cant unboard if
+	// Thief without Police
+	if(B1 + 1 == T &amp;&amp; T != P)
+		accept = false;
+
+	//  Mom without Dad
+	if(B1 + 1 == M &amp;&amp; D != M)
+		accept = false;
+
+	return accept;
+}
+
+bool l_unboarding(){
+	bool accept = true;
+
+	// Unboarding check, boys cant unboard if
+	// Thief without Police
+	if(T == 0 &amp;&amp; T != P)
+		accept = false;
+
+	//  Mom without Dad
+	if(M == 0 &amp;&amp; D != M)
+		accept = false;
+
+	return accept;
+}</declaration><location id="id35" x="192" y="112"><name x="184" y="120">r_boat</name></location><location id="id36" x="360" y="-32"><name x="350" y="-62">rightbay</name></location><location id="id37" x="80" y="-32"><name x="72" y="-64">l_boat</name></location><location id="id38" x="-88" y="112"><name x="-120" y="80">leftbay</name></location><init ref="id38"/><transition><source ref="id36"/><target ref="id35"/><label kind="guard" x="280" y="40">L == 1 &amp;&amp;
+boarding_check()</label><label kind="synchronisation" x="280" y="88">board!</label><label kind="assignment" x="280" y="72">B1 = B1 + 1</label></transition><transition><source ref="id35"/><target ref="id38"/><label kind="guard" x="-16" y="120">l_unboarding()</label><label kind="synchronisation" x="-16" y="136">unboard!</label><label kind="assignment" x="-16" y="152">B1 = 0</label></transition><transition><source ref="id37"/><target ref="id36"/><label kind="guard" x="176" y="-88">r_unboarding()</label><label kind="synchronisation" x="176" y="-56">unboard!</label><label kind="assignment" x="176" y="-72">B1 = B1 + 1</label></transition><transition><source ref="id38"/><target ref="id37"/><label kind="guard" x="-88" y="-24">L == 0 &amp;&amp;
+boarding_check()</label><label kind="synchronisation" x="-88" y="24">board!</label><label kind="assignment" x="-88" y="8">B1 = B1 + 1</label></transition></template><template><name>mBoy2</name><declaration>bool boarding_check(){
+	// Boarding check, boys cant board if mom is onboard
+	if(B2 + 1 == M)
+		return false;
+	
+	return true;
+}
+
+bool r_unboarding(){
+	bool accept = true;
+
+	// Unboarding check, boys cant unboard if
+	// Thief without Police
+	if(B2 + 1 == T &amp;&amp; T != P)
+		accept = false;
+
+	//  Mom without Dad
+	if(B2 + 1 == M &amp;&amp; D != M)
+		accept = false;
+
+	return accept;
+}
+
+bool l_unboarding(){
+	bool accept = true;
+
+	// Unboarding check, boys cant unboard if
+	// Thief without Police
+	if(T == 0 &amp;&amp; T != P)
+		accept = false;
+
+	//  Mom without Dad
+	if(M == 0 &amp;&amp; D != M)
+		accept = false;
+
+	return accept;
+}</declaration><location id="id39" x="192" y="112"><name x="184" y="120">r_boat</name></location><location id="id40" x="360" y="-32"><name x="350" y="-62">rightbay</name></location><location id="id41" x="80" y="-32"><name x="72" y="-64">l_boat</name></location><location id="id42" x="-88" y="112"><name x="-120" y="80">leftbay</name></location><init ref="id42"/><transition><source ref="id40"/><target ref="id39"/><label kind="guard" x="280" y="40">L == 1 &amp;&amp;
+boarding_check()</label><label kind="synchronisation" x="280" y="88">board!</label><label kind="assignment" x="280" y="72">B2 = B2 + 1</label></transition><transition><source ref="id39"/><target ref="id42"/><label kind="guard" x="-16" y="120">l_unboarding()</label><label kind="synchronisation" x="-16" y="136">unboard!</label><label kind="assignment" x="-16" y="152">B2 = 0</label></transition><transition><source ref="id41"/><target ref="id40"/><label kind="guard" x="176" y="-88">r_unboarding()</label><label kind="synchronisation" x="176" y="-56">unboard!</label><label kind="assignment" x="176" y="-72">B2 = B2 + 1</label></transition><transition><source ref="id42"/><target ref="id41"/><label kind="guard" x="-88" y="-24">L == 0 &amp;&amp;
+boarding_check()</label><label kind="synchronisation" x="-88" y="24">board!</label><label kind="assignment" x="-88" y="8">B2 = B2 + 1</label></transition></template><system>// Place template instantiations here.
+Boat = mBoat();
+Mom = mMom();
+Dad = mDad();
+Girl1 = mGirl1();
+Girl2 = mGirl2();
+Boy1 = mBoy1();
+Boy2 = mBoy2();
+Police = mPolice();
+Thief = mThief();
+
+
+// List one or more processes to be composed into a system.
+system Boat, Mom, Dad, Girl1, Girl2, Boy1, Boy2, Police, Thief;</system></nta>
