@@ -25,7 +25,7 @@ public class GTooltip extends Dialog {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void setStyle(View view, LayoutParams params) {
-		this.addContentView(view, params);
+	public void setStyle() {
+		this.setContentView(R.layout.colorpicker);
 	}
 }
