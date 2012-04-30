@@ -106,19 +106,21 @@ public class Child implements Comparable<Child>{
 	 * @return return Id
 	 */
 	public SubProfile save(SubProfile p){
-		//save profile on child
-		//Wait for admin
-			//Add to child list
-		for(SubProfile sp : this.SubProfiles()){
-			if(sp.getId() == p.getId()){
-				this.SubProfiles().remove(sp);
-				break;
+
+		//Check if there exists an old profile
+		for(SubProfile oldProfile : this.SubProfiles()){
+			if(p.getId() == oldProfile.getId()){
+				//Set same DB id
+				p.setId(oldProfile.getId());
+				p.setDB_id(oldProfile.getDB_id());
+				this.remove(oldProfile);
 			}
 		}
 			if(p.getDB_id() <= -1){
 				p.setDB_id(getNewId());
 			}
 			
+			p.name = "id: " + p.getId() + " db id: " + p.getDB_id();
 			this.SubProfiles().add(p);
 			Guardian.saveChild(this, p);
 			

@@ -181,9 +181,8 @@ public class SubProfile implements Comparable<SubProfile>{
 		for(Child c : guard.Children()){
 			for(SubProfile p : c.SubProfiles()){
 				if(p._id == oldProfile._id){
-					if(oldProfile.getAttachment() != null){
-						this.setAttachment(oldProfile.getAttachment());
-					}
+					this.setDB_id(oldProfile.getDB_id());
+					this.setId(oldProfile.getId());
 					c.remove(p);
 					c.save(this);
 					break START;
@@ -227,36 +226,28 @@ public class SubProfile implements Comparable<SubProfile>{
 	public SubProfile toHourglass() {
 		Hourglass form = new Hourglass(this.name, this.desc, this.bgcolor, this.timeLeftColor, this.timeSpentColor, this.frameColor, this._totalTime, this.gradient);
 		form.setId(this.getId());		
-		if(this._attachment != null){
 			form.setAttachment(this._attachment);
-		}
 		return form;
 	}
 
 	public SubProfile toProgressBar() {
 		ProgressBar form = new ProgressBar(this.name, this.desc, this.bgcolor, this.timeLeftColor, this.timeSpentColor, this.frameColor, this._totalTime, this.gradient);
 		form.setId(this.getId());
-		if(this._attachment != null){
 			form.setAttachment(this._attachment);
-		}
 		return form;
 	}
 
 	public SubProfile toTimeTimer() {
 		TimeTimer form = new TimeTimer(this.name, this.desc, this.bgcolor, this.timeLeftColor, this.timeSpentColor, this.frameColor, this._totalTime, this.gradient);
 		form.setId(this.getId());
-		if(this._attachment != null){
 			form.setAttachment(this._attachment);
-		}
 		return form;
 	}
 
 	public SubProfile toDigitalClock() {
 		DigitalClock form = new DigitalClock(this.name, this.desc, this.bgcolor, this.timeLeftColor, this.timeSpentColor, this.frameColor, this._totalTime, this.gradient);
 		form.setId(this.getId());
-		if(this._attachment != null){
 			form.setAttachment(this._attachment);
-		}
 		return form;
 	}
 

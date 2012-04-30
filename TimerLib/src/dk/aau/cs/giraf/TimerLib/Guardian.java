@@ -289,38 +289,39 @@ public class Guardian {
 	 */
 	public void addLastUsed(SubProfile profile){
 		lastUsed();
-		boolean exists = true;
+		crud.retrieveLastUsed(guardianId);
+		boolean exists = false;
+		
+		Child child = null;
+		GETOUTOFHERE:
+		for(Child c : publishList()){
+			for(SubProfile p : c.SubProfiles()){
+				if(profile.getId() == p.getId()){
+					child = c;
+					break GETOUTOFHERE;
+				}
+			}
+		}
+		
 		for(int i = 0; i < _lastUsed.size(); i++){
 			//Checks if the SubProfile is already on the list.
 			if(_lastUsed.get(i).getId() == profile.getId()){
-				_lastUsed.remove(i);
-				
-				Child child = null;
-				GETOUTOFHERE:
-				for(Child c : publishList()){
-					for(SubProfile p : c.SubProfiles()){
-						if(profile.getId() == p.getId()){
-							child = c;
-							break GETOUTOFHERE;
-						}
-					}
-				}
-				
+				_lastUsed.remove(i);				
 				_lastUsed.add(profile);
 				crud.removeLastUsed(child, profile, guardianId);
 				crud.addLastUsed(child,profile,guardianId);
-				exists = false;
+				exists = true;
 				break;
 			}
 		}
 		
-		if(exists){
+		if(!exists){
 			_lastUsed.add(profile);
-			crud.saveGuardian(guardianId, profile);
+			crud.addLastUsed(child,profile,guardianId);
 		}
 		
 		if(_lastUsed.size() > 10){
-			crud.removeSubprofileFromProfileId(_lastUsed.get(0), guardianId);
+			crud.removeLastUsed(child, profile, guardianId);
 			_lastUsed.remove(_lastUsed.remove(0));
 		}
 		

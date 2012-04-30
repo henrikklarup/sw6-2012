@@ -17,9 +17,9 @@ public class ProgressBar extends SubProfile {
 		ProgressBar copyP = new ProgressBar(this);
 		
 		
-		if(this._attachment != null){
+		
 			copyP.setAttachment(this._attachment);
-		}
+		
 		return copyP;
 	}
 	
