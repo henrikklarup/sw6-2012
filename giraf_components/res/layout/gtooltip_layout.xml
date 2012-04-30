@@ -8,13 +8,31 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:id="@+id/tooltip_hitarea"     />
+    <FrameLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:id="@+id/tooltip_wrapper" >
+        
+    	<ImageView
+        android:id="@+id/tooltip_arrow"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+    	android:gravity="center"
+    	android:orientation="vertical"
+    	android:background="@drawable/tooltip_arrow" 
+    	android:layout_gravity="left" />
     
-    <RelativeLayout
+    	<RelativeLayout
         android:layout_width="wrap_content"
     	android:layout_height="wrap_content"
-    	android:background="@drawable/gtooltip"
-    	android:id="@+id/tooltip_content"
-    />
-	
+    	android:layout_toRightOf="@id/tooltip_arrow" >
+    		<RelativeLayout
+        	android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:background="@drawable/gtooltip"
+    		android:id="@+id/tooltip_content" />
+    	</RelativeLayout>
+    
+    </FrameLayout>
 </FrameLayout>
 
