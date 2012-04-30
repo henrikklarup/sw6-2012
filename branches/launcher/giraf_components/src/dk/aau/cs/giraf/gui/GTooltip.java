@@ -9,6 +9,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 
 public class GTooltip extends Dialog {
@@ -56,10 +58,16 @@ public class GTooltip extends Dialog {
 		int newLeft = intToDP(v.getLeft() + v.getWidth() + padding);
 		int newTop = intToDP(v.getTop());
 
-		ViewGroup target = (ViewGroup) this.findViewById(R.id.tooltip_content);		
+		ViewGroup target = (ViewGroup) this.findViewById(R.id.tooltip_wrapper);		
 		android.widget.FrameLayout.LayoutParams p = (android.widget.FrameLayout.LayoutParams) target.getLayoutParams();
 		p.setMargins(newLeft, newTop, 0, 0);
 		target.setLayoutParams(p);
+		
+		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		params.addRule(RelativeLayout.RIGHT_OF, R.id.tooltip_arrow);
+		
+		RelativeLayout contentLayout = (RelativeLayout)this.findViewById(R.id.tooltip_content);
+		contentLayout.setLayoutParams(params);
 	}
 	
 	private int intToDP(int i) {
