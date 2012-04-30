@@ -9,26 +9,33 @@ import android.widget.RelativeLayout.LayoutParams;
 
 public class GTooltip extends Dialog {
 
-	public GTooltip(Context context) {
+	public GTooltip(Context context, View v) {
 		super(context);
 		this.setStyle();
+		this.setPosition(v);
 		// TODO Auto-generated constructor stub
 	}
 
-	public GTooltip(Context context, int theme) {
+	public GTooltip(Context context, int theme, View v) {
 		super(context, theme);
 		this.setStyle();
+		this.setPosition(v);
 		// TODO Auto-generated constructor stub
 	}
 
 	public GTooltip(Context context, boolean cancelable,
-			OnCancelListener cancelListener) {
+			OnCancelListener cancelListener, View v) {
 		super(context, cancelable, cancelListener);
 		this.setStyle();
+		this.setPosition(v);
 		// TODO Auto-generated constructor stub
 	}
 	
 	public void setStyle() {
 		this.setContentView(R.layout.gtooltip_layout);
+	}
+	
+	public void setPosition(View v) {
+		
 	}
 }
