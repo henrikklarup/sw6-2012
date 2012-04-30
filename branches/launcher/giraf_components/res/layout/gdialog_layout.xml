@@ -4,7 +4,7 @@
     android:layout_height="match_parent" >
 
 
-<RelativeLayout
+	<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/gdialog_background"
         android:padding="25dp"
-        >
+        > 
         <ImageView android:id="@+id/content_thumb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
