@@ -1,4 +1,9 @@
-//This file was generated from (Academic) UPPAAL 4.0.13 (rev. 4577), September 2010
+//This file was generated from (Academic) UPPAAL 4.1.9 (rev. 5027), March 2012
+
+/*
+
+*/
+E<> forall(p : PersID_T) People(p).Fin==People(p).destination
 
 /*
 

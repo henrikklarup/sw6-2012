@@ -1,4 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?><!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'><nta><declaration>// Place global declarations here.
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
 const int highestFloor = 4;
 const int lowestFloor = 1;
 const int nrElevators = 2;
@@ -11,33 +14,271 @@ typedef int [1, nrPeople] PersID_T; // Insert as 1, Nr of people]
 chan getTarget [FloorID_T][PersID_T][ElevID_T];
 chan pressButton[FloorID_T][PersID_T][ElevID_T];
 chan doorOpen[FloorID_T][PersID_T];
-chan whereElev[FloorID_T][ElevID_T];</declaration><template><name x="8" y="8">Elevator</name><parameter>const  ElevID_T e_id</parameter><declaration>// Place local declarations here.
-FloorID_T currentFloor = 4;
+chan whereElev[FloorID_T][ElevID_T];</declaration>
+	<template>
+		<name x="8" y="8">Elevator</name>
+		<parameter>const  ElevID_T e_id</parameter>
+		<declaration>// Place local declarations here.
+FloorID_T currentFloor = 1;
 FloorID_T targetFloor = 1;
 PersID_T p_id;
 int taken = 0;
 
-clock x;</declaration><location id="id0" x="192" y="96"><name x="200" y="56">Moving</name><label kind="invariant" x="184" y="112">x &lt;= 10</label></location><location id="id1" x="32" y="-64"><urgent/></location><location id="id2" x="512" y="96"><name x="544" y="80">People_Entering_Exiting</name></location><location id="id3" x="512" y="-192"><name x="544" y="-216">Door_Open</name></location><init ref="id3"/><transition><source ref="id3"/><target ref="id2"/><label kind="guard" x="440" y="-136">taken == 1</label><label kind="assignment" x="440" y="-106">taken = 0</label></transition><transition><source ref="id3"/><target ref="id2"/><label kind="guard" x="576" y="-88">taken == 0</label><label kind="synchronisation" x="576" y="-72">whereElev[currentFloor][e_id]!</label><nail x="576" y="-64"/></transition><transition><source ref="id2"/><target ref="id0"/><label kind="select" x="280" y="-56">IsFloor : FloorID_T,
-IsPerson : PersID_T</label><label kind="synchronisation" x="280" y="-24">pressButton[IsFloor][IsPerson][e_id]?</label><label kind="assignment" x="280" y="-8">targetFloor = IsFloor,
+clock x;</declaration>
+		<location id="id0" x="192" y="96">
+			<name x="200" y="56">Moving</name>
+			<label kind="invariant" x="184" y="112">x &lt;= 10</label>
+		</location>
+		<location id="id1" x="32" y="-64">
+			<urgent/>
+		</location>
+		<location id="id2" x="512" y="96">
+			<name x="544" y="80">People_Entering_Exiting</name>
+		</location>
+		<location id="id3" x="512" y="-192">
+			<name x="544" y="-216">Door_Open</name>
+		</location>
+		<init ref="id3"/>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id2"/>
+			<label kind="guard" x="440" y="-136">taken == 1</label>
+			<label kind="assignment" x="440" y="-106">taken = 0</label>
+		</transition>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id2"/>
+			<label kind="guard" x="576" y="-88">taken == 0</label>
+			<label kind="synchronisation" x="576" y="-72">whereElev[currentFloor][e_id]!</label>
+			<nail x="576" y="-64"/>
+		</transition>
+		<transition>
+			<source ref="id2"/>
+			<target ref="id0"/>
+			<label kind="select" x="280" y="-56">IsFloor : FloorID_T,
+IsPerson : PersID_T</label>
+			<label kind="synchronisation" x="280" y="-24">pressButton[IsFloor][IsPerson][e_id]?</label>
+			<label kind="assignment" x="280" y="-8">targetFloor = IsFloor,
 p_id = IsPerson,
 x = 0,
-taken = 1</label><nail x="352" y="32"/></transition><transition><source ref="id2"/><target ref="id0"/><label kind="select" x="280" y="160">IsFloor : FloorID_T,
-IsPerson : PersID_T</label><label kind="synchronisation" x="280" y="192">getTarget[IsFloor][IsPerson][e_id]?</label><label kind="assignment" x="280" y="208">targetFloor = IsFloor,
+taken = 1</label>
+			<nail x="352" y="32"/>
+		</transition>
+		<transition>
+			<source ref="id2"/>
+			<target ref="id0"/>
+			<label kind="select" x="280" y="160">IsFloor : FloorID_T,
+IsPerson : PersID_T</label>
+			<label kind="synchronisation" x="280" y="192">getTarget[IsFloor][IsPerson][e_id]?</label>
+			<label kind="assignment" x="280" y="208">targetFloor = IsFloor,
 p_id = IsPerson,
-x = 0</label><nail x="352" y="160"/></transition><transition><source ref="id1"/><target ref="id3"/><label kind="guard" x="32" y="-240">currentFloor == targetFloor</label><label kind="synchronisation" x="32" y="-224">doorOpen[currentFloor][p_id]!</label><nail x="32" y="-192"/></transition><transition><source ref="id0"/><target ref="id1"/><label kind="guard" x="-64" y="96">targetFloor &lt; currentFloor &amp;&amp;
-x == 10</label><label kind="assignment" x="-64" y="136">currentFloor--,
-x = 0</label><nail x="32" y="96"/></transition><transition><source ref="id1"/><target ref="id0"/><label kind="guard" x="32" y="8">currentFloor != targetFloor</label></transition><transition><source ref="id0"/><target ref="id1"/><label kind="guard" x="72" y="-144">targetFloor &gt; currentFloor &amp;&amp;
-x == 10</label><label kind="assignment" x="72" y="-112">currentFloor++,
-x = 0</label><nail x="192" y="-64"/></transition></template><template><name></name><location id="id4" x="-80" y="-192"></location><location id="id5" x="128" y="-160"></location><location id="id6" x="-288" y="-160"></location><location id="id7" x="0" y="-256"></location><location id="id8" x="-160" y="-256"></location><location id="id9" x="0" y="-160"></location><location id="id10" x="-160" y="-160"></location><location id="id11" x="-80" y="-64"><urgent/></location><location id="id12" x="-80" y="64"></location><init ref="id12"/><transition><source ref="id7"/><target ref="id4"/></transition><transition><source ref="id8"/><target ref="id4"/></transition><transition><source ref="id5"/><target ref="id9"/><nail x="64" y="-128"/></transition><transition><source ref="id9"/><target ref="id5"/><nail x="64" y="-192"/></transition><transition><source ref="id6"/><target ref="id10"/><nail x="-224" y="-128"/></transition><transition><source ref="id10"/><target ref="id6"/><nail x="-224" y="-192"/></transition><transition><source ref="id9"/><target ref="id7"/></transition><transition><source ref="id10"/><target ref="id8"/></transition><transition><source ref="id11"/><target ref="id9"/></transition><transition><source ref="id11"/><target ref="id10"/></transition><transition><source ref="id12"/><target ref="id11"/></transition></template><template><name x="5" y="5">People</name><parameter>const  PersID_T p_id</parameter><declaration>// Place local declarations here.
+x = 0</label>
+			<nail x="352" y="160"/>
+		</transition>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id3"/>
+			<label kind="guard" x="32" y="-240">currentFloor == targetFloor</label>
+			<label kind="synchronisation" x="32" y="-224">doorOpen[currentFloor][p_id]!</label>
+			<nail x="32" y="-192"/>
+		</transition>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id1"/>
+			<label kind="guard" x="-64" y="96">targetFloor &lt; currentFloor &amp;&amp;
+x == 10</label>
+			<label kind="assignment" x="-64" y="136">currentFloor--,
+x = 0</label>
+			<nail x="32" y="96"/>
+		</transition>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id0"/>
+			<label kind="guard" x="32" y="8">currentFloor != targetFloor</label>
+		</transition>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id1"/>
+			<label kind="guard" x="72" y="-144">targetFloor &gt; currentFloor &amp;&amp;
+x == 10</label>
+			<label kind="assignment" x="72" y="-112">currentFloor++,
+x = 0</label>
+			<nail x="192" y="-64"/>
+		</transition>
+	</template>
+	<template>
+		<name></name>
+		<location id="id4" x="-80" y="-192">
+		</location>
+		<location id="id5" x="128" y="-160">
+		</location>
+		<location id="id6" x="-288" y="-160">
+		</location>
+		<location id="id7" x="0" y="-256">
+		</location>
+		<location id="id8" x="-160" y="-256">
+		</location>
+		<location id="id9" x="0" y="-160">
+		</location>
+		<location id="id10" x="-160" y="-160">
+		</location>
+		<location id="id11" x="-80" y="-64">
+			<urgent/>
+		</location>
+		<location id="id12" x="-80" y="64">
+		</location>
+		<init ref="id12"/>
+		<transition>
+			<source ref="id7"/>
+			<target ref="id4"/>
+		</transition>
+		<transition>
+			<source ref="id8"/>
+			<target ref="id4"/>
+		</transition>
+		<transition>
+			<source ref="id5"/>
+			<target ref="id9"/>
+			<nail x="64" y="-128"/>
+		</transition>
+		<transition>
+			<source ref="id9"/>
+			<target ref="id5"/>
+			<nail x="64" y="-192"/>
+		</transition>
+		<transition>
+			<source ref="id6"/>
+			<target ref="id10"/>
+			<nail x="-224" y="-128"/>
+		</transition>
+		<transition>
+			<source ref="id10"/>
+			<target ref="id6"/>
+			<nail x="-224" y="-192"/>
+		</transition>
+		<transition>
+			<source ref="id9"/>
+			<target ref="id7"/>
+		</transition>
+		<transition>
+			<source ref="id10"/>
+			<target ref="id8"/>
+		</transition>
+		<transition>
+			<source ref="id11"/>
+			<target ref="id9"/>
+		</transition>
+		<transition>
+			<source ref="id11"/>
+			<target ref="id10"/>
+		</transition>
+		<transition>
+			<source ref="id12"/>
+			<target ref="id11"/>
+		</transition>
+	</template>
+	<template>
+		<name x="5" y="5">People</name>
+		<parameter>const  PersID_T p_id</parameter>
+		<declaration>// Place local declarations here.
 
 FloorID_T floor;
 FloorID_T f_id;
 FloorID_T destination;
 ElevID_T e_id;
-FloorID_T whereIs;</declaration><location id="id13" x="-96" y="-288"></location><location id="id14" x="-192" y="-384"><name x="-202" y="-414">Fin</name></location><location id="id15" x="-192" y="-192"></location><location id="id16" x="-384" y="-192"></location><location id="id17" x="-384" y="-384"></location><location id="id18" x="-488" y="-288"></location><location id="id19" x="-704" y="-288"></location><location id="id20" x="-896" y="-288"></location><location id="id21" x="-1088" y="-288"><name x="-1104" y="-328">Start</name></location><init ref="id21"/><transition><source ref="id13"/><target ref="id14"/><label kind="select" x="-120" y="-376">IsFloor : FloorID_T</label><label kind="synchronisation" x="-120" y="-360">doorOpen[IsFloor][p_id]?</label><label kind="assignment" x="-120" y="-344">f_id = IsFloor</label></transition><transition><source ref="id15"/><target ref="id13"/><label kind="synchronisation" x="-112" y="-248">getTarget[destination][p_id][e_id]!</label></transition><transition><source ref="id17"/><target ref="id14"/><label kind="select" x="-360" y="-448">IsFloor : FloorID_T</label><label kind="synchronisation" x="-360" y="-432">doorOpen[IsFloor][p_id]?</label><label kind="assignment" x="-360" y="-416">f_id = IsFloor</label></transition><transition><source ref="id16"/><target ref="id15"/><label kind="select" x="-352" y="-248">IsFloor : FloorID_T</label><label kind="synchronisation" x="-352" y="-232">doorOpen[IsFloor][p_id]?</label><label kind="assignment" x="-352" y="-216">f_id = IsFloor</label></transition><transition><source ref="id18"/><target ref="id16"/><label kind="guard" x="-608" y="-239">floor != whereIs</label><label kind="synchronisation" x="-608" y="-224">pressButton[floor][p_id][e_id]!</label></transition><transition><source ref="id18"/><target ref="id17"/><label kind="guard" x="-424" y="-344">floor == whereIs</label><label kind="synchronisation" x="-440" y="-328">getTarget[destination][p_id][e_id]!</label></transition><transition><source ref="id19"/><target ref="id20"/><label kind="guard" x="-856" y="-224">floor == destination</label><nail x="-800" y="-224"/></transition><transition><source ref="id19"/><target ref="id18"/><label kind="select" x="-680" y="-392">IsFloor : FloorID_T,
-IsID : ElevID_T</label><label kind="guard" x="-680" y="-360">floor != destination</label><label kind="synchronisation" x="-680" y="-344">whereElev[IsFloor][IsID]?</label><label kind="assignment" x="-680" y="-328">whereIs = IsFloor,
-e_id = IsID</label></transition><transition><source ref="id20"/><target ref="id19"/><label kind="select" x="-840" y="-312">i: int[1, 4]</label><label kind="assignment" x="-852" y="-288">destination = i</label><label kind="comments">wait for elevator</label></transition><transition><source ref="id21"/><target ref="id20"/><label kind="select" x="-1048" y="-312">i: int[1, 4]</label><label kind="assignment" x="-1016" y="-288">floor = i</label></transition></template><system>// Place template instantiations here.
+FloorID_T whereIs;</declaration>
+		<location id="id13" x="-96" y="-288">
+		</location>
+		<location id="id14" x="-192" y="-384">
+			<name x="-202" y="-414">Fin</name>
+		</location>
+		<location id="id15" x="-192" y="-192">
+		</location>
+		<location id="id16" x="-384" y="-192">
+		</location>
+		<location id="id17" x="-384" y="-384">
+		</location>
+		<location id="id18" x="-488" y="-288">
+		</location>
+		<location id="id19" x="-704" y="-288">
+		</location>
+		<location id="id20" x="-896" y="-288">
+		</location>
+		<location id="id21" x="-1088" y="-288">
+			<name x="-1104" y="-328">Start</name>
+		</location>
+		<init ref="id21"/>
+		<transition>
+			<source ref="id13"/>
+			<target ref="id14"/>
+			<label kind="select" x="-120" y="-376">IsFloor : FloorID_T</label>
+			<label kind="synchronisation" x="-120" y="-360">doorOpen[IsFloor][p_id]?</label>
+			<label kind="assignment" x="-120" y="-344">f_id = IsFloor</label>
+		</transition>
+		<transition>
+			<source ref="id15"/>
+			<target ref="id13"/>
+			<label kind="synchronisation" x="-112" y="-248">getTarget[destination][p_id][e_id]!</label>
+		</transition>
+		<transition>
+			<source ref="id17"/>
+			<target ref="id14"/>
+			<label kind="select" x="-360" y="-448">IsFloor : FloorID_T</label>
+			<label kind="synchronisation" x="-360" y="-432">doorOpen[IsFloor][p_id]?</label>
+			<label kind="assignment" x="-360" y="-416">f_id = IsFloor</label>
+		</transition>
+		<transition>
+			<source ref="id16"/>
+			<target ref="id15"/>
+			<label kind="select" x="-352" y="-248">IsFloor : FloorID_T</label>
+			<label kind="synchronisation" x="-352" y="-232">doorOpen[IsFloor][p_id]?</label>
+			<label kind="assignment" x="-352" y="-216">f_id = IsFloor</label>
+		</transition>
+		<transition>
+			<source ref="id18"/>
+			<target ref="id16"/>
+			<label kind="guard" x="-608" y="-239">floor != whereIs</label>
+			<label kind="synchronisation" x="-608" y="-224">pressButton[floor][p_id][e_id]!</label>
+		</transition>
+		<transition>
+			<source ref="id18"/>
+			<target ref="id17"/>
+			<label kind="guard" x="-424" y="-344">floor == whereIs</label>
+			<label kind="synchronisation" x="-440" y="-328">getTarget[destination][p_id][e_id]!</label>
+		</transition>
+		<transition>
+			<source ref="id19"/>
+			<target ref="id20"/>
+			<label kind="guard" x="-856" y="-224">floor == destination</label>
+			<nail x="-800" y="-224"/>
+		</transition>
+		<transition>
+			<source ref="id19"/>
+			<target ref="id18"/>
+			<label kind="select" x="-680" y="-392">IsFloor : FloorID_T,
+IsID : ElevID_T</label>
+			<label kind="guard" x="-680" y="-360">floor != destination</label>
+			<label kind="synchronisation" x="-680" y="-344">whereElev[IsFloor][IsID]?</label>
+			<label kind="assignment" x="-680" y="-328">whereIs = IsFloor,
+e_id = IsID</label>
+		</transition>
+		<transition>
+			<source ref="id20"/>
+			<target ref="id19"/>
+			<label kind="select" x="-840" y="-312">i: int[1, 4]</label>
+			<label kind="assignment" x="-852" y="-288">destination = i</label>
+			<label kind="comments">wait for elevator</label>
+		</transition>
+		<transition>
+			<source ref="id21"/>
+			<target ref="id20"/>
+			<label kind="select" x="-1048" y="-312">i: int[1, 4]</label>
+			<label kind="assignment" x="-1016" y="-288">floor = i</label>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
 //Elev01 = Elevator(1);
 //Pers01 = People(1);
 // List one or more processes to be composed into a system.
-system Elevator, People;</system></nta>
+system Elevator, People;</system>
+</nta>
