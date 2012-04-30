@@ -120,23 +120,24 @@ public class HomeActivity extends Activity {
 			}
 		});
 		
-		mConnectivityWidget.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				
-				GTooltip gTooltip = new GTooltip(mContext);
-				gTooltip.setRightOf(v);
 
-				gTooltip.setOwnerActivity(mActivity);
-				
-				Button button = new Button(mContext);
-				
-				LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-				button.setLayoutParams(lp);
-				
-				gTooltip.addView(button);
-				gTooltip.show();
-			}
-		});
+//		mConnectivityWidget.setOnClickListener(new View.OnClickListener() {
+//			public void onClick(View v) {
+//				
+//				GTooltip gTooltip = new GTooltip(mContext);
+//				gTooltip.setRightOf(v);
+//
+//				gTooltip.setOwnerActivity(mActivity);
+//				
+//				Button button = new Button(mContext);
+//				
+//				LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+//				button.setLayoutParams(lp);
+//				
+//				gTooltip.addView(button);
+//				gTooltip.show();
+//			}
+//		});
 		
 		View main = findViewById(R.id.HomeWrapperLayout);
 		
@@ -185,7 +186,14 @@ public class HomeActivity extends Activity {
 					
 					break;
 				case MotionEvent.ACTION_UP:
-					Log.i("thomas", "STOP DRAG");
+					
+					ViewGroup vg = (ViewGroup) v;
+					int numChildren = vg.getChildCount();
+					
+					for(int i = 0; i < numChildren; i++){
+						vg.getChildAt(i).invalidate();
+					}
+					
 					result = false;
 					break;
 					
