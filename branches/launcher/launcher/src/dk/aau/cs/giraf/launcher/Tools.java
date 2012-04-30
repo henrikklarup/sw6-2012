@@ -59,7 +59,28 @@ public class Tools {
 
 		editor.commit();
 	}
-
+	
+	/**
+	 * Finds the currently logged in user.
+	 * @param context Context of the current activity.
+	 * @return Currently logged in user.
+	 */
+	public static Profile findCurrentUser(Context context) {
+		Helper helper = new Helper(context);
+		
+		return helper.profilesHelper.getProfileById(findCurrentUserID(context));
+	}
+	
+	/**
+	 * Finds the ID of the currently logged in user.
+	 * @param context Context of the current activity.
+	 * @return ID of the currently logged in user.
+	 */
+	public static long findCurrentUserID(Context context) {
+		SharedPreferences sp = context.getSharedPreferences(TIMERKEY, 0);
+		return sp.getLong(GUARDIANID, -1);
+	}
+	
 	/**
 	 Logs the current guardian out and launches the authentication activity.
 	 * @param context Context of the current activity.
