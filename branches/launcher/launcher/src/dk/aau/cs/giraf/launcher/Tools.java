@@ -196,6 +196,33 @@ public class Tools {
 
 		return userApps;
 	}
+	
+	/**
+	 * Gets the apps that are usable by the given user, relative to their settings and the system they're logged in on.
+	 * @param context Context of the current activity.
+	 * @param currentUser The user to find apps for.
+	 * @return List of apps that are usable by this user on this device.
+	 */
+	public static List<App> getVisibleApps(Context context, Profile user) {
+		Helper helper = new Helper(context);
+
+		List<App> userApps = helper.appsHelper.getAppsByProfile(user);
+		List<App> deviceApps = getAllAvailableApps(context);
+
+		if (userApps.isEmpty() || deviceApps.isEmpty()) {
+			return new ArrayList<App>();
+		}
+
+		// Remove all apps from user's list of apps that are not installed on the device.
+		for (int i = 0; i < userApps.size(); i++) {
+			if (!appsContain_A(deviceApps, userApps.get(i))) {
+				userApps.remove(i);
+				i--;
+			}
+		}
+
+		return userApps;
+	}
 
 	/**
 	 * Finds all GIRAF apps installed on the device that are also registered in the database.
