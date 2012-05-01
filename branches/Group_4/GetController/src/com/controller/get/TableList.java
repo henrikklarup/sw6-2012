@@ -2,6 +2,7 @@ package com.controller.get;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -24,36 +25,46 @@ public class TableList extends ListActivity {
 	App app;
 	Profile profile;
 	Setting settings;
-
+	long profileId;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
 		helper = new Helper(this);
-		settings = new Setting();
+		settings = new Setting<String, String, String>();
 		
 
-		HashMap map = new HashMap();
+		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("Settings", "Favorite Color,Favorite Food,Favorite Animal");
 		map.put("Favorite Color", "Blue");
 		map.put("Favorite Food", "Carrot");
 		map.put("Favorite Animal", "Rabbit");
 		settings.put("Profile1", map);
 		
-		profile = new Profile("Dummy", "Dummy", "Dummy", 0, 1234567890, "Dummy", null);
-		long profileId = helper.profilesHelper.insertProfile(profile);
+		profile = new Profile("Firstname", "Surname", null, Profile.pRoles.GUARDIAN.ordinal(), 1234567890, "Pic", null);
+		profileId = helper.profilesHelper.insertProfile(profile);
 		profile.setId(profileId);
 		
-		app = new App("TestApp", "0.2", "/mnt/sdcard/?", "FakePackage", "FakeActivity");
-		helper.appsHelper.insertApp(app);
-		List<App> apps = helper.appsHelper.getApps();
-		app = apps.get(apps.size() - 1);
+		String basePackageName = "dk.aau.cs.giraf.";
+		
+		Random rnd = new Random();
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < 10 + 1; i++)
+		{
+			sb.append((char)(rnd.nextInt(26) + 97));
+		}
+		String randomString = sb.toString();
+		
+		app = new App("TestApp", basePackageName + randomString, "FakeActivity");
+		long appId = helper.appsHelper.insertApp(app);
+		app.setId(appId);
 		app.setSettings(settings);
 		
 		helper.appsHelper.attachAppToProfile(app, profile);
 		helper.appsHelper.modifyAppByProfile(app, profile);
 		
-		values = helper.appsHelper.getApps();
+		values = helper.appsHelper.getAppsByProfile(profile);
 		
 		adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, tables);
 		setListAdapter(adapter);
@@ -65,7 +76,7 @@ public class TableList extends ListActivity {
 		try{
 			Class _class = Class.forName("com.controller.get." + tables[position]);
 			Intent _intent = new Intent(TableList.this, _class);
-			_intent.putExtra("ID", values.get(values.size()-1).getId());
+			_intent.putExtra("ProfileId", profileId);
 			startActivity(_intent);
 		} catch (ClassNotFoundException e){
 			e.printStackTrace();

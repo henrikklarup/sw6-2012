@@ -26,6 +26,7 @@ public class AppsView extends ListActivity {
 	TextView tvHeader;
 	int _position;
 	List<App> values;
+	Profile profile;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +38,7 @@ public class AppsView extends ListActivity {
 		//profile er en forud deklareret profil
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
-			app = helper.appsHelper.getAppById(extras.getLong("ID"));
-		} else {
-			app = new App("Should not be added","0.1", "/mnt/sdcard/?", "FakePackage", "FakeActivity");
+			profile = helper.profilesHelper.getProfileById(extras.getLong("ProfileId"));
 		}
 
 		updateList();
@@ -59,13 +58,7 @@ public class AppsView extends ListActivity {
 				App m_App = null;
 				
 				// Find the app which has the same package name as this one
-                for (App a : helper.appsHelper.getApps()) {
-                        String cname = AppsView.this.getPackageName();
-                        if(a.getaPackage().equalsIgnoreCase(cname)){
-                                m_App = a;
-                                break;
-                        }
-                }
+                m_App = helper.appsHelper.getAppByPackageName();
                         
                 if(m_App == null){
                         // If no app has been found, generate one and insert it in Oasis
@@ -82,7 +75,6 @@ public class AppsView extends ListActivity {
 
 			@Override
 			public void onClick(View v) {
-				helper.appsHelper.clearAppsTable();
 				updateList();
 			}
 		});
@@ -93,20 +85,11 @@ public class AppsView extends ListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 
-//		App clickedApp = new App();
-//		clickedApp = helper.appsHelper.getAppById(((App)getListAdapter().getItem(position)).getId());
-
-		List<Profile> profiles = helper.profilesHelper.getProfiles();
-		Profile profile = profiles.get(profiles.size() - 1);
+		App clickedApp;
 		
-		List<App> apps;
-		apps = helper.appsHelper.getAppsByProfile(profile);
-		Log.e("Size of apps", Integer.toString(apps.size()));
+		clickedApp = helper.appsHelper.getAppByPackageName();
+		App clickedAppWithSettings = helper.appsHelper.getAppByIds(app.getId(), profile.getId());
 		
-
-
-		App clickedAppWithSettings = apps.get(apps.size() - 1);
-
 		if (clickedAppWithSettings != null) {
 			Log.e("clickedAppWithSetting", "clickedAppWithSetting not null");
 			Log.e("App Id: ", Long.toString(clickedAppWithSettings.getId()));
@@ -132,7 +115,7 @@ public class AppsView extends ListActivity {
 	}
 
 	public void updateList() {
-		values = helper.appsHelper.getApps();
+		values = helper.appsHelper.getAppsByProfile(profile);
 		adapter = new ArrayAdapter<App>(this, android.R.layout.simple_list_item_1, values);
 		setListAdapter(adapter);
 	}
