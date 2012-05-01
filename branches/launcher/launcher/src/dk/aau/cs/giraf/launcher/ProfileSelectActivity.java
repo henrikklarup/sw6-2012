@@ -3,6 +3,7 @@ package dk.aau.cs.giraf.launcher;
 import java.util.List;
 
 import dk.aau.cs.giraf.oasis.lib.Helper;
+import dk.aau.cs.giraf.oasis.lib.models.Department;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
 import dk.aau.cs.giraf.gui.*;
@@ -46,16 +47,17 @@ public class ProfileSelectActivity extends Activity {
 		// Get "freeflying" profiles
 		mProfiles = helper.profilesHelper.getProfiles();
 
-		/// TODO implement using recursive mehtod which we wait for from admin group!
 		// Get profiles from departments
-		/*Profile guardianProfile = helper.profilesHelper.getProfileById(guardianID);
-		ArrayList<Department> departments = (ArrayList<Department>) helper.departmentsHelper.getDepartmentsByProfile(guardianProfile);
-
+		Profile guardianProfile = helper.profilesHelper.getProfileById(guardianID);
+		List<Department> departments = helper.departmentsHelper.getDepartmentsByProfile(guardianProfile);
+		
 		for (Department department : departments) {
-			for (Profile profile : helper.profilesHelper.getGuardiansByDepartment(department)) {
+			List<Profile> profiles = helper.profilesHelper.getChildrenByDepartmentAndSubDepartments(department);
+			for (Profile profile : profiles) {
 				mProfiles.add(profile);
 			}
-		}*/
+		}
+		
 
 		// Remove profiles which are not children
 		for(int i = 0; i < mProfiles.size(); i++) {
