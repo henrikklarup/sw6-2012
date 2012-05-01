@@ -116,7 +116,7 @@ public class HomeActivity extends Activity {
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
 		this.resizeBar();
-		this.rotateGridView();
+		this.drawGridView();
 	}
 
 	@Override
@@ -133,10 +133,16 @@ public class HomeActivity extends Activity {
 		mWidgetTimer.sendEmptyMessage(GWidgetUpdater.MSG_START);
 	}
 
-	private void rotateGridView() {
+	private void drawGridView() {
 		final boolean isLandscape = Tools.isLandscape(mContext);
+		Log.i("magnus", "count: " + mNumberOfApps);
 		if (isLandscape) {
-			mGrid.setNumColumns((int) Math.ceil(mNumberOfApps / 3));
+			int columns = (int) Math.ceil((double)((double)mNumberOfApps) / ((double)3));
+			int gridWidth = columns * 300;
+			mGrid.setNumColumns(columns);
+			LayoutParams gridParams = (LayoutParams) mGrid.getLayoutParams();
+			gridParams.width = gridWidth;
+			mGrid.setLayoutParams(gridParams);
 		}
 	}
 
@@ -310,6 +316,9 @@ public class HomeActivity extends Activity {
 					v2.setLayoutParams(v2Params);
 
 					result = true;
+					
+					// Setting width of the horizontalscrollview
+					
 
 					break;
 				case MotionEvent.ACTION_UP:
@@ -327,6 +336,7 @@ public class HomeActivity extends Activity {
 				}
 				return result;
 			}
+			
 		});
 	}
 
