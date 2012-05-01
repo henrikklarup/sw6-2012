@@ -38,8 +38,7 @@ public class SpeechBoardFragment extends Fragment
 	String picturePath = pictureBuffer.toString();
 	*/
 	
-	private Pictogram empty = new Pictogram("#usynlig#", null, null, null); //FIXME find the right path to the picture "usynlig", or find a way to use the picture directly
-	
+	private Pictogram empty;  //FIXME find the right path to the picture "usynlig", or find a way to use the picture directly
 	
 	public void onAttach(Activity activity) {
 		// TODO Auto-generated method stub
@@ -50,7 +49,9 @@ public class SpeechBoardFragment extends Fragment
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		
 		parrent.setContentView(R.layout.speechboard_layout);
+		empty = new Pictogram("#usynlig#", null, null, null, parrent);
 
 		user=PARROTActivity.getUser();
 		if(user.getCategoryAt(0)!=null)
