@@ -14,7 +14,9 @@ import dk.aau.cs.giraf.oasis.lib.models.HasDepartment;
 import dk.aau.cs.giraf.oasis.lib.models.HasGuardian;
 import dk.aau.cs.giraf.oasis.lib.models.HasSubDepartment;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
+import dk.aau.cs.giraf.oasis.lib.models.Profile.pRoles;
 import dk.aau.cs.giraf.oasis.lib.models.Setting;
+
 
 
 /**
@@ -70,7 +72,9 @@ public class ProfilesHelper {
 	 * @return Rows
 	 */
 	public int removeChildAttachmentToGuardian(Profile child, Profile guardian) {
-		if (child.getPRole() == 3 && (guardian.getPRole() == 1 || guardian.getPRole() == 2)) {
+		if (child.getPRole() == pRoles.CHILD.ordinal() && 
+				(guardian.getPRole() == pRoles.GUARDIAN.ordinal() || 
+				 guardian.getPRole() == pRoles.PARENT.ordinal())) {
 			return hg.removeHasGuardian(child, guardian);
 		} else {
 			return -1;
@@ -97,7 +101,9 @@ public class ProfilesHelper {
 	 * @return
 	 */
 	public long attachChildToGuardian(Profile child, Profile guardian) {
-		if (child.getPRole() == 3 && (guardian.getPRole() == 1 || guardian.getPRole() == 2)) {
+		if (child.getPRole() == pRoles.CHILD.ordinal() && 
+				(guardian.getPRole() == pRoles.GUARDIAN.ordinal() || 
+				 guardian.getPRole() == pRoles.PARENT.ordinal())) {
 			HasGuardian hgModel = new HasGuardian();
 			hgModel.setIdChild(child.getId());
 			hgModel.setIdGuardian(guardian.getId());
@@ -188,7 +194,7 @@ public class ProfilesHelper {
 
 		for (HasDepartment hdModel : list) {
 			Profile profile = getProfileById(hdModel.getIdProfile());
-			if (profile.getPRole() == 3) {
+			if (profile.getPRole() == pRoles.CHILD.ordinal()) {
 				profiles.add(profile);
 			}
 		}
@@ -225,11 +231,16 @@ public class ProfilesHelper {
 	public List<Profile> getChildrenByGuardian(Profile guardian) {
 		List<Profile> profiles = new ArrayList<Profile>();
 		
-		List<HasGuardian> list = hg.getChildrenByGuardian(guardian);
-		
-		for (HasGuardian hgModel : list) {
-			Profile profile = getProfileById(hgModel.getIdChild());
-			profiles.add(profile);
+		if (guardian.getPRole() == pRoles.GUARDIAN.ordinal() || 
+				guardian.getPRole() == pRoles.PARENT.ordinal()) {
+			List<HasGuardian> list = hg.getChildrenByGuardian(guardian);
+			
+			for (HasGuardian hgModel : list) {
+				Profile child = getProfileById(hgModel.getIdChild());
+				if (child.getPRole() == pRoles.CHILD.ordinal()) {
+					profiles.add(child);
+				}
+			}
 		}
 
 		return profiles;
@@ -247,7 +258,7 @@ public class ProfilesHelper {
 
 		for (HasDepartment hd : list) {
 			Profile profile = getProfileById(hd.getIdProfile());
-			if (profile.getPRole() == 1) {
+			if (profile.getPRole() == pRoles.GUARDIAN.ordinal()) {
 				profiles.add(profile);
 			}
 		}
@@ -312,7 +323,6 @@ public class ProfilesHelper {
 				cursor.moveToNext();
 			}
 		}
-
 
 		return profiles;
 	}
