@@ -205,7 +205,7 @@ class AuthUsersController {
 	private String getNewCertificate() {
 		Random rnd = new Random();
 		StringBuilder certificate = new StringBuilder();
-		for (int i = 0; i < 256 + 1; i++)
+		for (int i = 0; i < 200; i++)
 		{
 			certificate.append((char)(rnd.nextInt(26) + 97));
 		}
