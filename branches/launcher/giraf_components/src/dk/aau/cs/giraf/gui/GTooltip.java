@@ -72,12 +72,13 @@ public class GTooltip extends Dialog {
 		return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, i, mContext.getResources().getDisplayMetrics());
 	}
 
-	public void addView(View v){
+	public View addView(View v){
 		ViewGroup target = (ViewGroup) this.findViewById(R.id.tooltip_content);
 		target.addView(v);
-		
+		View result = target.getChildAt(target.getChildCount()-1);
 		RelativeLayout.LayoutParams lp = (LayoutParams) target.findViewById(R.id.tooltip_content).getLayoutParams();
 		int y = -(12 - (target.getHeight()/2)); 
 		lp.setMargins(0, y, 0, 0);
+		return result;
 	}
 }

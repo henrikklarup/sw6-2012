@@ -101,15 +101,15 @@ public class GWidgetConnectivity extends ImageView implements IGWidget {
 		tv.setText(generateTooltipString());
 		tv.setTextColor(Color.WHITE);
 		
-		g.addView(tv);
+		mTooltipTextview = (TextView) g.addView(tv);
 		g.setRightOf(this);
 		g.show();
 		
-		mTooltipTextview = tv;
+		
 	}
 
 	private String generateTooltipString() {
-		return mPreString + mPostString;
+		return mPreString +" "+ mPostString;
 	}
 
 
