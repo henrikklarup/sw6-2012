@@ -80,6 +80,16 @@ footer {
 	z-index: 9002;
 }
 
+#popUpSearch {
+	border-radius: 15px;
+	position: absolute;
+	background-color: #eeeeee;
+	border-style: solid;
+	width: 300px;
+	height: 300px;
+	z-index: 9002;
+}
+
 #popUpDiv {
 	border-radius: 15px;
 	position: absolute;
@@ -102,12 +112,24 @@ footer {
 #my_wrapper {
 	width: 100%;
 	height: auto;
+	
+}
+
+#boxOfTags {
+	width: auto;
+	height: 100px;
+	background-color: red;
+	
+	overflow: scroll;
+	overflow-x: hidden;
+	
 }
 
 #simple_wrapper
 {
 	width: auto;
 	height: auto;
+	
 	
 }
 
@@ -122,6 +144,14 @@ footer {
 {
 	
 	height: 435px;
+	overflow: auto;
+}
+
+
+#select_wrapper
+{
+	
+	height: 430px;
 	overflow: auto;
 }
 

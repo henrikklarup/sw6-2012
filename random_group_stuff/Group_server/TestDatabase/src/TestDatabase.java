@@ -274,7 +274,7 @@ public class TestDatabase extends HttpServlet {
 				+ "<center><h3>"
 				+ "Tilføj:"
 				+ "</h3>"
-				+ "<a href=\"AddProfile\"><u>P</u>rofil</a>  -  Billede  -  Lyd  -  Animation/film"
+				+ "<a href=\"AddProfile\"><u>P</u>rofil</a>  -  <a href=\"SelectProfileToPicture\">Billede</a>  -  Lyd  -  Animation/film"
 				+ "</center>" + "</div>");
 
 		aOutput.println("<div id=\"blanket\" style=\"display:none;\"></div>"
@@ -283,7 +283,7 @@ public class TestDatabase extends HttpServlet {
 				+ "<center><h3>"
 				+ "Tilføj:"
 				+ "</h3>"
-				+ "<a href=\"SelectProfileToDelete\"><u>P</u>rofil</a>  -  Billede  -  Lyd  -  Animation/film"
+				+ "<a href=\"SelectProfileToDelete\"><u>P</u>rofil</a>  -  <a href=\"SelectProfileToDeletePic\"><u>B</u>illede</a>  -  Lyd  -  Animation/film"
 				+ "</center>" + "</div>");
 
 

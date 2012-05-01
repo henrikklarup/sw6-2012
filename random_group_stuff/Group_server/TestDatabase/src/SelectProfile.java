@@ -120,7 +120,7 @@ public class SelectProfile extends HttpServlet {
 					picture = context + picture;
 
 				Profile p = new Profile(id, rs.getString("firstname"),
-						rs.getString("middlename"), rs.getString("surname"), 1,
+						 rs.getString("surname"), rs.getString("middlename"), 1,
 						-1, picture);
 
 				profiles.add(p);
@@ -316,7 +316,6 @@ public class SelectProfile extends HttpServlet {
 			session.removeAttribute("SelectProfileERROR");
 		}*/
 		out.println("</center>");
-		out.println("</div>");
 		out.println("</div>");
 out.println("<hr>");
 		out.println("<footer>Savannah v. 1.0.0 <a href='http://en.wikipedia.org/wiki/Copyleft'>(C)opyleft</a> under Freedom 3 me!</footer> " +
