@@ -57,35 +57,41 @@ public class BoxDragListener implements OnDragListener
 					int x = (int)event.getX();
 					int y = (int)event.getY();
 					int index = speech.pointToPosition(x, y);
-
-					draggedPictogram =SpeechBoardFragment.displayedCat.getPictogramAtIndex(SpeechBoardFragment.draggedPictogramIndex);
-
-
-
-					if(SpeechBoardFragment.speechBoardCategory.getPictogramAtIndex(index).isEmpty() == false) //Replaces a pictogram already in the sentencebord
+					if(index <0)	//If the pictorgram is dropped at an illegal index
 					{
-						SpeechBoardFragment.speechBoardCategory.removePictogram(index); //Removes the pictogram at the specific index
-						SpeechBoardFragment.speechBoardCategory.addPictogramAtIndex(draggedPictogram, index); //add the pictogram at the specific position
+						//Do nothing
+						//TODO improve this situation.
 					}
-					else 
+					else
 					{
-						int count = 0;
-						while (count < numberOfSentencePictograms) 
+						draggedPictogram =SpeechBoardFragment.displayedCat.getPictogramAtIndex(SpeechBoardFragment.draggedPictogramIndex);
+
+
+
+						if(SpeechBoardFragment.speechBoardCategory.getPictogramAtIndex(index).isEmpty() == false) //Replaces a pictogram already in the sentencebord
 						{
-
-							if (SpeechBoardFragment.speechBoardCategory.getPictogramAtIndex(count).isEmpty() == true) 
-							{
-								SpeechBoardFragment.speechBoardCategory.removePictogram(count); //Removes the pictogram at the specific index
-								SpeechBoardFragment.speechBoardCategory.addPictogramAtIndex(draggedPictogram, count); //add the pictogram at the specific position
-								break;
-							} 
-							count++;
+							SpeechBoardFragment.speechBoardCategory.removePictogram(index); //Removes the pictogram at the specific index
+							SpeechBoardFragment.speechBoardCategory.addPictogramAtIndex(draggedPictogram, index); //add the pictogram at the specific position
 						}
-					}
+						else 
+						{
+							int count = 0;
+							while (count < numberOfSentencePictograms) 
+							{
+
+								if (SpeechBoardFragment.speechBoardCategory.getPictogramAtIndex(count).isEmpty() == true) 
+								{
+									SpeechBoardFragment.speechBoardCategory.removePictogram(count); //Removes the pictogram at the specific index
+									SpeechBoardFragment.speechBoardCategory.addPictogramAtIndex(draggedPictogram, count); //add the pictogram at the specific position
+									break;
+								} 
+								count++;
+							}
+						}
 
 
 
-					/*//old code by Dalhoff
+						/*//old code by Dalhoff
 					if(index <0)
 					{
 						SpeechBoardFragment.speechBoardCategory.addPictogram(pic);//Add the references pictogram to the back-end list
@@ -95,10 +101,11 @@ public class BoxDragListener implements OnDragListener
 						SpeechBoardFragment.speechBoardCategory.removePictogram(index); //Removes the pictogram at the specific index
 						SpeechBoardFragment.speechBoardCategory.addPictogramAtIndex(pic, index); //add the pictogram at the specific position
 					}
-					 */
+						 */
 
-					speech.setAdapter(new PictogramAdapter(SpeechBoardFragment.speechBoardCategory, parrent));
-					speech.invalidate();
+						speech.setAdapter(new PictogramAdapter(SpeechBoardFragment.speechBoardCategory, parrent));
+						speech.invalidate();
+					}
 				}
 				if(self.getId() == R.id.sentenceboard && SpeechBoardFragment.dragOwnerID == R.id.sentenceboard) //We are rearanging the position of pictograms on the sentenceboard
 				{
@@ -107,46 +114,46 @@ public class BoxDragListener implements OnDragListener
 					int x = (int)event.getX();
 					int y = (int)event.getY();
 					int index = speech.pointToPosition(x, y);
-					if(SpeechBoardFragment.speechBoardCategory.getPictogramAtIndex(index).isEmpty() == true)
+					if(index <0)//if the pictogram is dropped at an illegal position
 					{
-						//if it is empty, there might be empty spaces to the left of it too
-						int count = 0;
-						while (count < numberOfSentencePictograms) 
-						{
+						//do nothing, let the pictogram be removed
+						//TODO improve this
 
-							if (SpeechBoardFragment.speechBoardCategory.getPictogramAtIndex(count).isEmpty() == true) 
-							{
-								SpeechBoardFragment.speechBoardCategory.removePictogram(count); //Removes the pictogram at the specific index
-								SpeechBoardFragment.speechBoardCategory.addPictogramAtIndex(draggedPictogram, count); //add the pictogram at the specific position
-								break;
-							} 
-							count++;
-						}
 					}
 					else
 					{
-						SpeechBoardFragment.speechBoardCategory.addPictogramAtIndex(draggedPictogram, index);
+						if(SpeechBoardFragment.speechBoardCategory.getPictogramAtIndex(index).isEmpty() == true)
+						{
+							//if it is empty, there might be empty spaces to the left of it too
+							int count = 0;
+							while (count < numberOfSentencePictograms) 
+							{
+
+								if (SpeechBoardFragment.speechBoardCategory.getPictogramAtIndex(count).isEmpty() == true) 
+								{
+									SpeechBoardFragment.speechBoardCategory.removePictogram(count); //Removes the pictogram at the specific index
+									SpeechBoardFragment.speechBoardCategory.addPictogramAtIndex(draggedPictogram, count); //add the pictogram at the specific position
+									break;
+								} 
+								count++;
+							}
+						}
+						else
+						{
+							SpeechBoardFragment.speechBoardCategory.addPictogramAtIndex(draggedPictogram, index);
+						}
+
+
+						speech.setAdapter(new PictogramAdapter(SpeechBoardFragment.speechBoardCategory, parrent));
+						speech.invalidate();
+						draggedPictogram = null;
 					}
-					//						if(index < 0) //TODO this is probably not used anymore. It was supposed to ensure that  new pictograms would be added to the end of the list.
-					//						{
-					//							SpeechBoardFragment.speechBoardCategory.addPictogram(draggedPictogram);
-					//						}
-					//						else
-					//						{
-					
-					//						}
-
-
-					speech.setAdapter(new PictogramAdapter(SpeechBoardFragment.speechBoardCategory, parrent));
-					speech.invalidate();
-					draggedPictogram = null;
 
 				}
 				if(self.getId() != R.id.sentenceboard && SpeechBoardFragment.dragOwnerID == R.id.sentenceboard) //If we drag something from the sentenceboard to somewhere else
 				{
 
 					GridView speech = (GridView) parrent.findViewById(R.id.sentenceboard);
-					//SpeechBoardFragment.speechBoardCategory.addPictogram(new Pictogram("#usynlig#", null, null, null, parrent));
 					speech.setAdapter(new PictogramAdapter(SpeechBoardFragment.speechBoardCategory, parrent));
 					speech.invalidate();
 
