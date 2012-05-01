@@ -2,6 +2,7 @@ package dk.aau.cs.giraf.oasis.lib;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import android.content.Context;
 import dk.aau.cs.giraf.oasis.lib.controllers.AppsHelper;
@@ -247,19 +248,20 @@ public class Helper {
 		mediaHelper.addTagsToMedia(tags1, media3Loaded);
 		
 		/*Apps*/
-		long appId;
-		List<App> apps = appsHelper.getApps();
+		String basePackageName = "dk.aau.cs.giraf.";
 		
-		if (!apps.isEmpty()) {
-			appId = apps.get(apps.size() - 1).getId();
-		} else {
-			appId = 0;
+		Random rnd = new Random();
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < 10 + 1; i++)
+		{
+			sb.append((char)(rnd.nextInt(26) + 97));
 		}
+		String randomString = sb.toString();
 		
-		App app1 = new App("App1", "1", "/mnt/sdcard/?", Long.toString(appId + 1), "FakeActivity");
-		App app2 = new App("App2", "1", "/mnt/sdcard/?", Long.toString(appId + 2), "FakeActivity");
-		App app3 = new App("App3", "1", "/mnt/sdcard/?", Long.toString(appId + 3), "FakeActivity");
-		App app4 = new App("App4", "1", "/mnt/sdcard/?", Long.toString(appId + 4), "FakeActivity");
+		App app1 = new App("App1", "1", "/mnt/sdcard/?", basePackageName + randomString, "FakeActivity");
+		App app2 = new App("App2", "1", "/mnt/sdcard/?", basePackageName + randomString, "FakeActivity");
+		App app3 = new App("App3", "1", "/mnt/sdcard/?", basePackageName + randomString, "FakeActivity");
+		App app4 = new App("App4", "1", "/mnt/sdcard/?", basePackageName + randomString, "FakeActivity");
 		
 		long app1Id = appsHelper.insertApp(app1);
 		long app2Id = appsHelper.insertApp(app2);
