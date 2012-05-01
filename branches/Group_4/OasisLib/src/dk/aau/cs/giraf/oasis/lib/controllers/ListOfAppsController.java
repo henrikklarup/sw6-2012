@@ -144,14 +144,14 @@ class ListOfAppsController {
 	
 	/**
 	 * Get setting by app and child id
-	 * @param app App
-	 * @param child profile
+	 * @param l App
+	 * @param profileId profile
 	 * @return Setting
 	 */
-	public Setting<String, String, String> getSettingByAppIdAndByChildId(App app, Profile child) {
+	public Setting<String, String, String> getSettingByAppIdAndByProfileId(long appId, long profileId) {
 		Setting<String, String, String> setting = null;
 		
-		Cursor c = _context.getContentResolver().query(ListOfAppsMetaData.CONTENT_URI, columns, ListOfAppsMetaData.Table.COLUMN_IDAPP + " = '" + app.getId() + "'" + ListOfAppsMetaData.Table.COLUMN_IDPROFILE + " = '" + child.getId() + "'", null, null);
+		Cursor c = _context.getContentResolver().query(ListOfAppsMetaData.CONTENT_URI, columns, ListOfAppsMetaData.Table.COLUMN_IDAPP + " = '" + appId + "'" + " AND " + ListOfAppsMetaData.Table.COLUMN_IDPROFILE + " = '" + profileId + "'", null, null);
 		if (c != null) {
 			if (c.moveToFirst()) {
 				setting = Setting.toSetting(c.getString(c.getColumnIndex(ListOfAppsMetaData.Table.COLUMN_SETTINGS)));
@@ -164,14 +164,14 @@ class ListOfAppsController {
 
 	/**
 	 * Get stat by app id and by child id
-	 * @param app app
-	 * @param child profile
+	 * @param appId the app id
+	 * @param profileId the profile id
 	 * @return stat
 	 */
-	public Stat<String, String, String> getStatByAppIdAndByChildId(App app, Profile child) {
+	public Stat<String, String, String> getStatByAppIdAndByProfileId(long appId, long profileId) {
 		Stat<String, String, String> stat = null;
 		
-		Cursor c = _context.getContentResolver().query(ListOfAppsMetaData.CONTENT_URI, columns, ListOfAppsMetaData.Table.COLUMN_IDAPP + " = '" + app.getId() + "'" + ListOfAppsMetaData.Table.COLUMN_IDPROFILE + " = '" + child.getId() + "'", null, null);
+		Cursor c = _context.getContentResolver().query(ListOfAppsMetaData.CONTENT_URI, columns, ListOfAppsMetaData.Table.COLUMN_IDAPP + " = '" + appId + "'" + " AND " + ListOfAppsMetaData.Table.COLUMN_IDPROFILE + " = '" + profileId + "'", null, null);
 		if (c != null) {
 			if (c.moveToFirst()) {
 				stat = Stat.toStat(c.getString(c.getColumnIndex(ListOfAppsMetaData.Table.COLUMN_SETTINGS)));

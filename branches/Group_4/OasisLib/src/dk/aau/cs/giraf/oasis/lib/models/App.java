@@ -16,6 +16,9 @@ public class App {
 	 * Constructor with arguments
 	 * @param name the name to set
 	 * @param version the version to set
+	 * @param icon the icon to set
+	 * @param aPackage the package to set
+	 * @param activity the activity to set
 	 */
 	public App(String name, String version, String icon, String aPackage, String activity) {
 		this.name = name;
@@ -24,7 +27,12 @@ public class App {
 		this.aPackage = aPackage;
 		this.activity = activity;
 	}
-	
+	/**
+	 * Constructor with arguments
+	 * @param name the name to set
+	 * @param aPackage the package to set
+	 * @param activity the activity to set
+	 */
 	public App(String name, String aPackage, String activity) {
 		this.name = name;
 		this.version = null;

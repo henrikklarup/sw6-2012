@@ -11,6 +11,7 @@ public class Profile {
 	private String picture;
 	private Setting<String, String, String> settings;
 	private static String _output = "{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}";
+	public static enum pRoles {ADMIN, CHILD, PARENT, GUARDIAN};
 
 	/**
 	 * Constructor with parameters

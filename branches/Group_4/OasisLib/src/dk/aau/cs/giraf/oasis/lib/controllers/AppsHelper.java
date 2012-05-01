@@ -12,6 +12,8 @@ import dk.aau.cs.giraf.oasis.lib.metadata.AppsMetaData;
 import dk.aau.cs.giraf.oasis.lib.models.App;
 import dk.aau.cs.giraf.oasis.lib.models.ListOfApps;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
+import dk.aau.cs.giraf.oasis.lib.models.Setting;
+import dk.aau.cs.giraf.oasis.lib.models.Stat;
 
 /**
  * Helper class for Apps
@@ -192,7 +194,7 @@ public class AppsHelper {
 	}
 	
 	/**
-	 * Get apps by packagename
+	 * Get app without settings by packagename
 	 * @return App
 	 */
 	public App getAppByPackageName() {
@@ -208,6 +210,40 @@ public class AppsHelper {
 		}
 		
 		return app;
+	}
+	
+	/**
+	 * Get app with settings by packagename and profile id
+	 * @return App
+	 */
+	public App getAppByPackageNameAndProfileId(long profileId) {
+		App app = null;
+		
+		app = getAppByPackageName();
+		app.setSettings(loa.getSettingByAppIdAndByProfileId(app.getId(), profileId));
+		app.setStats(loa.getStatByAppIdAndByProfileId(app.getId(), profileId));
+		
+		return app;
+	}
+	
+	/**
+	 * Yields the setting for a specific app and profile
+	 * @param appId the app id of the app
+	 * @param profileId the profile id of the profile
+	 * @return the setting for the profile on the specific app
+	 */
+	public Setting<String, String, String> getSettingByIds(long appId, long profileId) {
+		return loa.getSettingByAppIdAndByProfileId(appId, profileId);
+	}
+	
+	/**
+	 * Yields the stat for a specific app and profile
+	 * @param appId the app id of the app
+	 * @param profileId the profile id of the profile
+	 * @return the stat for the profile on the specific app
+	 */
+	public Stat<String, String, String> getStatByIds(long appId, long profileId) {
+		return loa.getStatByAppIdAndByProfileId(appId, profileId);
 	}
 	
 	/**

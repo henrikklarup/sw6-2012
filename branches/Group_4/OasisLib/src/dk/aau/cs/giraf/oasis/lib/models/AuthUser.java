@@ -6,6 +6,27 @@ public class AuthUser {
 	private String certificate;
 	private long aRole;
 	private static String _output = "{0}, {1}, {2}";
+	public static enum aRole {PROFILE, DEPARTMENT};
+	
+	/**
+	 * Constructor with arguments
+	 * @param id the id to set
+	 * @param certificate the certificate to set
+	 * @param role the role to set
+	**/
+	public AuthUser(long id, String certificate, long aRole) {
+		this.id = id;
+		this.certificate = certificate;
+		this.aRole = aRole;
+	}
+	
+	/**
+	 * Empty constructor
+	 */
+	public AuthUser() {
+		
+	}
+	
 	/**
 	 * @return the id
 	 */
