@@ -18,7 +18,7 @@ public class MainActivity extends Activity {
 		Bundle extras = getIntent().getExtras();
         if (extras != null) {        	
         	guardianId = extras.getLong("currentGuardianID");
-        	childId = extras.getLong("currentChildId");
+        	childId = extras.getLong("currentChildID");
         	color = 0xFFFFBB55;
         } else {
         	guardianId = -1;
