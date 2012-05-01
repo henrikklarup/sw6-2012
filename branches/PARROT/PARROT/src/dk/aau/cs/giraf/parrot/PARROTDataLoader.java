@@ -173,6 +173,7 @@ public class PARROTDataLoader {
 		//after all the changes are made, we save the settings to the database
 		app.setSettings(profileSetting);
 	}
+	
 	private Setting<String, String, String> saveCategory(Category category, int categoryNumber, Setting<String, String, String> profileSetting ) {
 		//first, we save the pictograms
 		String pictogramString = "";
@@ -181,13 +182,13 @@ public class PARROTDataLoader {
 			Pictogram pic = category.getPictogramAtIndex(i);
 			if(pic.isNewPictogram() == true)
 			{
-				//TODO save new pictogram
+				saveNewPictogram(pic);
 			}
 			else if (pic.isChanged() == true)
 			{
-				//TODO save changes to pictogram
+				savePictogram(pic);
 			}
-			//Otherwise, don't make changes to the pictograms, just save the references
+			//In any case, save the references
 			pictogramString += pic.getImageID()+'#';
 			
 		}
@@ -200,7 +201,7 @@ public class PARROTDataLoader {
 		Pictogram icon = category.getIcon();
 		if(icon.isNewPictogram() == true)
 		{
-			//TODO save new pictogram
+			saveNewPictogram(icon);
 		}
 		else if (icon.isChanged() == true)
 		{
@@ -210,8 +211,74 @@ public class PARROTDataLoader {
 
 		return profileSetting;
 	}
-	private void saveNewCategory(Category categoryAt) {	//FIXME this method is not needed anyway, since ALL categories will have to be saved if changes are made
-		// TODO Auto-generated method stub
+	
+	/**
+	 * 
+	 * @Rasmus This method is used to save completely new pictograms to the database
+	 */
+	private void saveNewPictogram(Pictogram pic)
+	{
+		Media imageMedia = null;
+		Media soundMedia = null;
+		Media wordMedia = null;
+		if(pic.getImageID() == -1) //if the picture is new in the database
+		{
+			imageMedia = new Media(pic.getName(), pic.getImagePath(), true, "IMAGE", PARROTActivity.getUser().getProfileID());
+			help.mediaHelper.insertMedia(imageMedia);
+		}
+		if(pic.getSoundID() == -1 && pic.getSoundPath() != null) //if the sound is new in the database
+		{
+			soundMedia = new Media(pic.getName(), pic.getSoundPath(), true, "SOUND", PARROTActivity.getUser().getProfileID());	//TODO we might want to set the booleans to false
+			help.mediaHelper.insertMedia(soundMedia);
+		}
+		if(pic.getWordID() == -1 && pic.getWordPath() != null) //if the word is not in the database
+		{
+			wordMedia = new Media(pic.getName(), pic.getWordPath(), true, "WORD", PARROTActivity.getUser().getProfileID());	//TODO we might want to set the booleans to false
+			help.mediaHelper.insertMedia(wordMedia);
+		}
 
+		// save the submedia references
+		if(soundMedia != null)
+		{
+			help.mediaHelper.attachSubMediaToMedia(soundMedia, imageMedia);
+		}
+		if(wordMedia !=null)
+		{
+			help.mediaHelper.attachSubMediaToMedia(wordMedia, imageMedia);
+		}
+		
+	}
+	
+	/**
+	 * 
+	 * @Rasmus This method is used to save a pictogram that has been edited.
+	 */
+	private void savePictogram(Pictogram pic)
+	{
+		Media imageMedia = null;
+		Media soundMedia = null;
+		Media wordMedia = null;
+		//Check the image
+		if(pic.getImageID() == -1) //if the picture is new in the database
+		{
+			imageMedia = new Media(pic.getName(), pic.getImagePath(), true, "IMAGE", PARROTActivity.getUser().getProfileID());
+			help.mediaHelper.insertMedia(imageMedia);
+		}
+		else
+		{
+			imageMedia = new Media(pic.getName(), pic.getImagePath(), true, "IMAGE",PARROTActivity.getUser().getProfileID());
+			imageMedia.setId(pic.getImageID());
+			help.mediaHelper.modifyMedia(imageMedia);
+		}
+		
+		if(pic.getSoundID() == -1 && pic.getSoundPath() != null)
+		{
+			
+		}
+		else if(pic.getSoundPath() != null)
+		{
+			
+		}
+		
 	}
 }
