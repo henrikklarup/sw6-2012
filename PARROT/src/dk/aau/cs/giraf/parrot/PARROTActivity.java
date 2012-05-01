@@ -66,6 +66,10 @@ public class PARROTActivity extends Activity {
 			tempCat2.addPictogram(tempPic2);
 		}
 		parrotUser.addCategory(tempCat2);
+		
+		parrotUser.setRights(0, true);
+		parrotUser.setRights(1, true);
+		parrotUser.setRights(2, true);
 		//END TEMP LINES
 
 		/* Here all the Tabs in the system is initialized based on whether or not a user
