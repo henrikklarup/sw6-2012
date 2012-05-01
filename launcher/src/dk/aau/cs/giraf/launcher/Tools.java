@@ -455,7 +455,7 @@ public class Tools {
 
 			for (ResolveInfo launcher : launchers) {
 				Log.i("GIRAF", "Launcher packages: " + launcher.activityInfo.packageName);
-				if (launcher.activityInfo.packageName == "dk.aau.cs.giraf.launcher") {
+				if (launcher.activityInfo.packageName.equals("dk.aau.cs.giraf.launcher")) {
 					insertAppInDB(context, launcher);
 					break;
 				}

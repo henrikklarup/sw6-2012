@@ -108,18 +108,11 @@ class AppInfo extends App {
 		int[] c = context.getResources().getIntArray(R.array.appcolors);
 		boolean saveNew = false;
 		
-		for (String s : settings.keySet()) {
-			Log.i("GIRAF_KEYS", "" + s);
-		}
-		
 		if (settings != null && settings.containsKey(Tools.COLORS)) {
 			HashMap<String, String> colorSettings = settings.get(Tools.COLORS);
 			
-			Log.i("GIRAF", "settings != null");
-			
 			if(colorSettings != null && colorSettings.containsKey(Tools.COLOR_BG)) {
 				mBgColor = Integer.parseInt(colorSettings.get(Tools.COLOR_BG));
-				Log.i("GIRAF", "bgColor set " + mBgColor);
 			} else {
 				saveNew = true;
 			}
@@ -129,11 +122,8 @@ class AppInfo extends App {
 		
 		if (saveNew) {
 			if (settings == null) {
-				Log.i("GIRAF", "Settings == null, creating new");
 				settings = new Setting<String, String, String>();
 			}
-			
-			Log.i("GIRAF", "Inserting color");
 			
 			Random rand = new Random();
 			int position = rand.nextInt(c.length);
@@ -148,10 +138,6 @@ class AppInfo extends App {
 		}
 		
 		settings = new Setting<String, String, String>();
-		
-		for (String s : settings.keySet()) {
-			Log.i("GIRAF_KEYS", "(POST) " + s);
-		}
 	}
 	
 	/**
@@ -180,7 +166,7 @@ class AppInfo extends App {
 	private void loadIcon(Context context) {
 		// Is supposed to allow for custom icons, but does not currently support this.
 
-		List<ResolveInfo> systemApps = Tools.getDeviceGirafApps(context);
+		List<ResolveInfo> systemApps = Tools.getDeviceApps(context);
 
 		for (ResolveInfo app : systemApps) {
 			if (app.activityInfo.packageName.equals(this.aPackage)) {
