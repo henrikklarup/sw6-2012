@@ -54,7 +54,6 @@ public class GWidgetCalendar extends TextView implements IGWidget {
 	}
 	
 	public final void showTooltip(){
-		Log.i("thomas", mContext+"");
 		GTooltip g = new GTooltip(mContext);
 		TextView tv = new TextView(mContext);
 		tv.setText(day_of_week+" den "+day_of_month+". "+month+", Uge "+week_num);
