@@ -68,6 +68,7 @@ public class HomeActivity extends Activity {
 	private boolean mWidgetRunning = false;
 	
 	private int mLandscapeBarWidth;
+	private int mNumberOfApps;
 	
 	
 	/** Called when the activity is first created. */
@@ -209,6 +210,10 @@ public class HomeActivity extends Activity {
 		mConnectivityWidget.setLayoutParams(connectivityWidgetParams);
 		mCalendarWidget.setLayoutParams(calendarWidgetParams);
 		mLogoutWidget.setLayoutParams(logoutWidgetParams);
+		
+		if (isLandscape) {
+			mGrid.setNumColumns((int) Math.ceil(mNumberOfApps / 3));
+		}
 	}
 
 	/**
@@ -216,12 +221,12 @@ public class HomeActivity extends Activity {
 	 */
 	private void loadApplications() {		
 		List<App> userApps = Tools.getVisibleGirafApps(mContext, mCurrentUser);
-
+		
 		// If a guardian does not have any apps available, give them all on the device:
-		//if (userApps.size() == 0 && mCurrentUser.getPRole() == Tools.ROLE_GUARDIAN) {
+		if (userApps.size() == 0 && mCurrentUser.getPRole() == Tools.ROLE_GUARDIAN) {
 			Tools.attachAllDeviceGirafAppsToUser(mContext);
 			userApps = Tools.getVisibleGirafApps(mContext, mCurrentUser);
-		//}
+		}
 
 		if (userApps != null) {
 			ArrayList<AppInfo> appInfos = new ArrayList<AppInfo>();
@@ -238,6 +243,9 @@ public class HomeActivity extends Activity {
 			mGrid = (GridView)this.findViewById(R.id.GridViewHome);
 			mGrid.setAdapter(new AppAdapter(this, appInfos));
 			mGrid.setOnItemClickListener(new ProfileLauncher());
+			mNumberOfApps = appInfos.size();
+		} else {
+			Log.e("launcher","App list is null");
 		}
 	}
 	/**
