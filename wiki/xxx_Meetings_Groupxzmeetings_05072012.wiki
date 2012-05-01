@@ -1,5 +1,5 @@
-#summary Meeting Agenda 7/05-2012
-= Group meeting 7/05-2012 =
+#summary Meeting Agenda 07/05-2012
+= Group meeting 07/05-2012 =
 
 Meeting takes place on 07/05-2012 @ 9:00 AM - 12:00 PM [0.2.11].
 
