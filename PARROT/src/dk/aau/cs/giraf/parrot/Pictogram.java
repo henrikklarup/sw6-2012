@@ -20,9 +20,9 @@ public class Pictogram {
 	private String soundPath;             ///< Corresponding sound effect.
 	private String wordPath; 		///< Corresponding pronounciation.
 
-	private long imageID;
-	private long soundID;
-	private long wordID;
+	private long imageID = -1;
+	private long soundID = -1;
+	private long wordID = -1;
 	private boolean newPictogram =false;
 	private boolean changed = false;
 	private Activity parrent;
