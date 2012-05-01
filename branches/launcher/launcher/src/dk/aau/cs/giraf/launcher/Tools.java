@@ -634,7 +634,7 @@ public class Tools {
 		Helper helper = new Helper(context);
 		Profile currentUser = findCurrentUser(context);
 
-		List<App> deviceApps = getAllAvailableGirafApps(context);
+		List<App> deviceApps = getAllAvailableApps(context);
 
 		for (App app : deviceApps) {
 			helper.appsHelper.attachAppToProfile(app, currentUser);
