@@ -1,5 +1,6 @@
 package dk.aau.cs.giraf.launcher;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import dk.aau.cs.giraf.oasis.lib.Helper;
@@ -43,29 +44,32 @@ public class ProfileSelectActivity extends Activity {
 	private void loadProfiles() {
 		Helper helper = new Helper(this);
 		Profile.setOutput("{1} {2} {3}");
-
-		// Get "freeflying" profiles
-		mProfiles = helper.profilesHelper.getProfiles();
+		
+		mProfiles = new ArrayList<Profile>();
 
 		// Get profiles from departments
 		Profile guardianProfile = helper.profilesHelper.getProfileById(guardianID);
+		
+		List<Profile> profilesFlying = helper.profilesHelper.getChildrenByGuardian(guardianProfile);
+		
+		//mProfiles.addAll(profilesFlying);
+		
 		List<Department> departments = helper.departmentsHelper.getDepartmentsByProfile(guardianProfile);
 		
 		for (Department department : departments) {
-			List<Profile> profiles = helper.profilesHelper.getChildrenByDepartmentAndSubDepartments(department);
-			for (Profile profile : profiles) {
-				mProfiles.add(profile);
+			List<Profile> profilesFromDepartments = helper.profilesHelper.getChildrenByDepartmentAndSubDepartments(department);
+			for (Profile pDep : profilesFromDepartments) {
+				for (Profile pFre : profilesFlying) {
+					if (pDep.getId() == pFre.getId()) {
+						mProfiles.add(pDep);
+					} else {
+						mProfiles.add(pDep);
+						mProfiles.add(pFre);
+					}
+				}
 			}
 		}
 		
-
-		// Remove profiles which are not children
-		for(int i = 0; i < mProfiles.size(); i++) {
-			if (mProfiles.get(i).getPRole() != Tools.ROLE_CHILD) {
-				mProfiles.remove(i);
-				i--;
-			}
-		}
 
 		GProfileAdapter adapter = new GProfileAdapter(this, mProfiles);
 		ListView lv = (ListView) findViewById(R.id.profilesList);

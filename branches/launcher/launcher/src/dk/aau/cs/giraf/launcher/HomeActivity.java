@@ -139,12 +139,21 @@ public class HomeActivity extends Activity {
 		final boolean isLandscape = Tools.isLandscape(mContext);
 		Log.i("magnus", "count: " + mNumberOfApps);
 		if (isLandscape) {
-			int columns = (int) Math.ceil((double)((double)mNumberOfApps) / ((double)3));
-			int gridWidth = columns * 300;
+			int columns = calculateNumOfColumns();
+			int gridWidth = columns * 290;
 			mGrid.setNumColumns(columns);
 			LayoutParams gridParams = (LayoutParams) mGrid.getLayoutParams();
 			gridParams.width = gridWidth;
 			mGrid.setLayoutParams(gridParams);
+		}
+	}
+	
+	private int calculateNumOfColumns() {
+		if (mNumberOfApps > 9) {
+			// We use 3 here becasue there should be three rows if there are more than 9 elements
+			return (int) Math.ceil((double)((double)mNumberOfApps) / ((double)3));
+		} else {
+			return 4;
 		}
 	}
 
@@ -325,7 +334,8 @@ public class HomeActivity extends Activity {
 					Display display = getWindowManager().getDefaultDisplay();
 					Point size = new Point();
 					display.getSize(size);
-					scrollParams.width = size.x - (margin + 100);
+					// removing 50 here to accomodate for "4 columns behaviour"
+					scrollParams.width = (size.x - (margin + 100));
 					hScrollView.setLayoutParams(scrollParams);
 
 					break;
