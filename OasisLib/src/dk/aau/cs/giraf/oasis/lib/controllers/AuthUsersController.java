@@ -19,7 +19,7 @@ import dk.aau.cs.giraf.oasis.lib.models.AuthUser;
  */
 class AuthUsersController {
 
-	private Context _context;
+	private Context _context; 
 	private String[] columns = new String[] { 
 			AuthUsersMetaData.Table.COLUMN_ID, 
 			AuthUsersMetaData.Table.COLUMN_CERTIFICATE,
@@ -51,17 +51,16 @@ class AuthUsersController {
 	 * @return Profile id
 	 */
 	public long insertAuthUser(long role) {
-		AuthUser authUser = new AuthUser();
-		authUser.setaRole(role);
-		authUser.setCertificate(getNewCertificate());
-		long id;
 		List<AuthUser> authUsers = getAuthUsers();
+
+		long id;
 		if (authUsers.size() != 0) {
 			id = authUsers.get(authUsers.size() - 1).getId() + 1;
 		} else {
 			id = 1;
 		}
-		authUser.setId(id);
+		
+		AuthUser authUser = new AuthUser(id, getNewCertificate(), role);
 		ContentValues cv = getContentValues(authUser);
 		_context.getContentResolver().insert(AuthUsersMetaData.CONTENT_URI, cv);
 
