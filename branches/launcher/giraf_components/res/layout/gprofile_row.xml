@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     android:background="@drawable/glistitem"
     android:orientation="horizontal"
-    android:padding="5dip" >
+    android:padding="15dip"
+     >
     
      <!--  Profile pic -->
     <LinearLayout android:id="@+id/profile_pic"
@@ -22,18 +23,18 @@
             android:src="@drawable/no_profile_pic"/>
  
     </LinearLayout>
-    
+
     <TextView
         android:id="@+id/profile_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/profile_pic"
-        android:layout_toRightOf="@+id/profile_pic"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="46dp"
+        android:layout_toRightOf="@id/profile_pic"
         android:text="Mr. Banjak"
         android:textColor="#596A79"
-        android:typeface="sans"
-        android:textSize="15dip"
-        android:textStyle="bold"/>
-    
+        android:textSize="60dp"
+        android:textStyle="bold"
+        android:typeface="sans" />
 
 </RelativeLayout>

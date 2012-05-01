@@ -56,9 +56,10 @@ public class GTooltip extends Dialog {
 	}
 	
 	public void setRightOf(View v) {
-		View target = this.findViewById(R.id.gtooltip_arrow_view);	
-		int newLeft = intToDP(v.getLeft() + v.getWidth() + padding);
-		int newTop = intToDP(v.getTop() + (v.getHeight()/2) - 12);
+		View target = this.findViewById(R.id.gtooltip_arrow_view);
+		int parentMarginLeft = ((RelativeLayout.LayoutParams) ((ViewGroup) v.getParent()).getLayoutParams()).leftMargin;
+		int newLeft = intToDP(v.getLeft() + v.getWidth() + padding) + parentMarginLeft;
+		int newTop = intToDP(v.getTop() + (v.getHeight()/2) - 12); 
 	
 		android.widget.RelativeLayout.LayoutParams p = (android.widget.RelativeLayout.LayoutParams) target.getLayoutParams();
 		p.setMargins(newLeft, newTop, 0, 0);
