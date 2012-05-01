@@ -269,6 +269,7 @@ public class HomeActivity extends Activity {
 		
 		main.layout(-600, 0, main.getWidth(), main.getHeight());
 		
+		// If result = true, the onTouchListner will be run again, if false it will not.
 		findViewById(R.id.HomeBarLayout).setOnTouchListener(new View.OnTouchListener() {
 			int offset = 0;
 			@Override
@@ -324,8 +325,6 @@ public class HomeActivity extends Activity {
 					break;
 					
 				}
-				
-
 				return result;
 			}
 		});
