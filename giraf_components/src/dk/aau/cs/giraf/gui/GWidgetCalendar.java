@@ -60,11 +60,10 @@ public class GWidgetCalendar extends TextView implements IGWidget {
 		tv.setText(generateTooltipString());
 		tv.setTextColor(Color.WHITE);
 		
-		g.addView(tv);
+		mTooltipTextview = (TextView) g.addView(tv);
 		g.setRightOf(this);
 		g.show();
 		
-		mTooltipTextview = tv;
 		
 	}
 	
