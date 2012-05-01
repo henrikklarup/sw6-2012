@@ -68,6 +68,14 @@ public class PARROTActivity extends Activity {
 		parrotUser.addCategory(tempCat2);
 		//END TEMP LINES
 
+		/* Here all the Tabs in the system is initialized based on whether or not a user
+		 * is allowed to use them. If not they will not be initialized.
+		 * We wish not make users aware that there exists functionality that they are not
+		 * entitled to.
+		 * Remember: Make sure the order of the Taps is consistent with the order of their rights in the
+		 * 			 Rights array.
+		 */
+		
 		ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		actionBar.setDisplayShowTitleEnabled(false);	//TODO figure out what this does
@@ -76,11 +84,28 @@ public class PARROTActivity extends Activity {
 				.setText(R.string.firstTab)
 				.setTabListener(new TabListener<SpeechBoardFragment>(this,"speechboard",SpeechBoardFragment.class));
 		actionBar.addTab(tab);
-
-		tab = actionBar.newTab()
-				.setText(R.string.secondTab)
-				.setTabListener(new TabListener<OptionsFragment>(this,"options",OptionsFragment.class));
-		actionBar.addTab(tab);
+		
+		if (parrotUser.getRights(0) == true)
+		{
+			tab = actionBar.newTab()
+					.setText(R.string.secondTab)
+					.setTabListener(new TabListener<OptionsFragment>(this,"options",OptionsFragment.class));
+			actionBar.addTab(tab);
+		}
+		if (parrotUser.getRights(1) == true)
+		{
+			tab = actionBar.newTab()
+					.setText(R.string.thirdTab)
+					.setTabListener(new TabListener<OptionsFragment>(this,"options",OptionsFragment.class));
+			actionBar.addTab(tab);
+		}
+		if (parrotUser.getRights(2) == true)
+		{
+			tab = actionBar.newTab()
+					.setText(R.string.fourthTab)
+					.setTabListener(new TabListener<OptionsFragment>(this,"options",OptionsFragment.class));
+			actionBar.addTab(tab);
+		}
 
 	}
 	@Override

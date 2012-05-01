@@ -6,5 +6,7 @@
     <string name="firstTab">Speech Board</string>
     <string name="secondTab">Options</string>
 	<color name="cell_empty">#FF993311</color>
+	<string name="thirdTab">Camera</string>
+	<string name="fourthTab">Internet</string>
 	
 </resources>
