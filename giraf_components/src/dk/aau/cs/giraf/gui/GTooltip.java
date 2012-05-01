@@ -18,6 +18,7 @@ public class GTooltip extends Dialog {
 	private GTooltip mTip;
 	private Context mContext;
 	private final int padding = 5;
+	private ViewGroup mViewGroup;
 
 	public GTooltip(Context context) {
 		super(context, android.R.style.Theme_Translucent_NoTitleBar);
@@ -51,6 +52,7 @@ public class GTooltip extends Dialog {
 	
 	public void setStyle() {
 		this.setContentView(R.layout.gtooltip_layout);
+		mViewGroup = (ViewGroup) this.findViewById(R.id.tooltip_content);
 	}
 	
 	public void setRightOf(View v) {
@@ -62,23 +64,23 @@ public class GTooltip extends Dialog {
 		p.setMargins(newLeft, newTop, 0, 0);
 		target.setLayoutParams(p);
 		
-//		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-//		
-//		RelativeLayout contentLayout = (RelativeLayout)this.findViewById(R.id.tooltip_content);
-//		contentLayout.setLayoutParams(params);
+
 	}
 	
 	private int intToDP(int i) {
 		return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, i, mContext.getResources().getDisplayMetrics());
 	}
 
-	public View addView(View v){
-		ViewGroup target = (ViewGroup) this.findViewById(R.id.tooltip_content);
-		target.addView(v);
-		View result = target.getChildAt(target.getChildCount()-1);
-		RelativeLayout.LayoutParams lp = (LayoutParams) target.findViewById(R.id.tooltip_content).getLayoutParams();
-		int y = -(12 - (target.getHeight()/2)); 
+	public void setView(View v){
+		
+		mViewGroup.removeAllViewsInLayout();
+		v.measure(0, 0);
+		RelativeLayout.LayoutParams lp = (LayoutParams) mViewGroup.getLayoutParams();
+		int height = mViewGroup.getPaddingBottom()+mViewGroup.getPaddingTop()+v.getMeasuredHeight();
+		
+		int y = -((height/2) -12);
 		lp.setMargins(0, y, 0, 0);
-		return result;
+		
+		mViewGroup.addView(v);		
 	}
 }
