@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, MainActivity!</string>
+    <string name="app_name">OasisApp</string>
+    <string name="myprofile">My Profile</string>
+    <string name="mychildren">My Children</string>
+    <string name="mydepartments">My Departments</string>
+    <string name="mydepchildren">My Dep. Children</string>
+    <string name="emptyList">The List is empty</string>
+    <string name="columnFirstName">Firstname:</string>
+    <string name="columnMiddleName">Middlename:</string>
+    <string name="columnSurName">Surname:</string>
+    <string name="columnDepName">Name:</string>
+    <string name="columnDepAddress">Address:</string>
+    <string name="columnDepContacts">Contacts:</string>
+
+</resources>
