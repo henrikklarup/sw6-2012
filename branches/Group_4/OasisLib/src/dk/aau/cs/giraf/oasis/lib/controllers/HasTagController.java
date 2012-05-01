@@ -35,13 +35,13 @@ class HasTagController {
 	//METHODS TO CALL
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	/**
-	 * Clear has tag
-	 * @return Rows
-	 */
-	public int clearHasTagTable() {
-		return _context.getContentResolver().delete(HasTagMetaData.CONTENT_URI, null, null);
-	}
+//	/**
+//	 * Clear has tag
+//	 * @return Rows
+//	 */
+//	public int clearHasTagTable() {
+//		return _context.getContentResolver().delete(HasTagMetaData.CONTENT_URI, null, null);
+//	}
 
 	/**
 	 * Remove has tag
@@ -82,23 +82,23 @@ class HasTagController {
 		return 0;
 	}
 
-	/**
-	 * Get has tags
-	 * @return List of has tags
-	 */
-	public List<HasTag> getHasTags() {
-		List<HasTag> list = new ArrayList<HasTag>();
-
-		Cursor c = _context.getContentResolver().query(HasTagMetaData.CONTENT_URI, columns, null, null, null);
-
-		if (c != null) {
-			list = cursorToHasTagList(c);
-
-			c.close();
-		}
-
-		return list;
-	}
+//	/**
+//	 * Get has tags
+//	 * @return List of has tags
+//	 */
+//	public List<HasTag> getHasTags() {
+//		List<HasTag> list = new ArrayList<HasTag>();
+//
+//		Cursor c = _context.getContentResolver().query(HasTagMetaData.CONTENT_URI, columns, null, null, null);
+//
+//		if (c != null) {
+//			list = cursorToHasTagList(c);
+//
+//			c.close();
+//		}
+//
+//		return list;
+//	}
 
 	/**
 	 * Get has tag by media

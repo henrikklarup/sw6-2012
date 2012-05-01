@@ -54,12 +54,12 @@ public class MediaHelper {
 	//METHODS TO CALL
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	/**
-	 * Clear media table
-	 */
-	public void clearMediaTable() {
-		_context.getContentResolver().delete(MediaMetaData.CONTENT_URI, null, null);
-	}
+//	/**
+//	 * Clear media table
+//	 */
+//	public void clearMediaTable() {
+//		_context.getContentResolver().delete(MediaMetaData.CONTENT_URI, null, null);
+//	}
 
 	/**
 	 * Remove media attachment to profile
@@ -205,22 +205,22 @@ public class MediaHelper {
 		_context.getContentResolver().update(uri, cv, null, null);
 	}
 
-	/**
-	 * Get all media
-	 * @return List<Media>, containing all media
-	 */
-	public List<Media> getMedia() {
-		List<Media> media = new ArrayList<Media>();
-		
-		Cursor c = _context.getContentResolver().query(MediaMetaData.CONTENT_URI, columns, null, null, null);
-
-		if (c != null) {
-			media = cursorToMedia(c);
-			c.close();
-		}
-		
-		return media;
-	}
+//	/**
+//	 * Get all media
+//	 * @return List<Media>, containing all media
+//	 */
+//	public List<Media> getMedia() {
+//		List<Media> media = new ArrayList<Media>();
+//		
+//		Cursor c = _context.getContentResolver().query(MediaMetaData.CONTENT_URI, columns, null, null, null);
+//
+//		if (c != null) {
+//			media = cursorToMedia(c);
+//			c.close();
+//		}
+//		
+//		return media;
+//	}
 
 	/**
 	 * Get sub media by media

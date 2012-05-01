@@ -84,29 +84,29 @@ public class Helper {
 		*/
 	}
 	
-	/**
-	 * Clear all method
-	 */
-	public void ClearAll() {
-		profilesHelper.clearProfilesTable();
-		mediaHelper.clearMediaTable();
-		departmentsHelper.clearDepartmentsTable();
-		appsHelper.clearAppsTable();
-		tagsHelper.clearTagsTable();
-		
-		//Controller only for viewDB
-		/*
-		au.clearAuthUsersTable();
-		hd.clearHasDepartmentTable();
-		hg.clearHasGuardianTable();
-		hl.clearHasLinkTable();
-		hsd.clearHasSubDepartmentTable();
-		ht.clearHasTagTable();
-		loa.clearListOfAppsTable();
-		mda.clearMediaDepartmentAccessTable();
-		mpa.clearMediaProfileAccessTable();
-		*/
-	}
+//	/**
+//	 * Clear all method
+//	 */
+//	public void ClearAll() {
+//		profilesHelper.clearProfilesTable();
+//		mediaHelper.clearMediaTable();
+//		departmentsHelper.clearDepartmentsTable();
+//		appsHelper.clearAppsTable();
+//		tagsHelper.clearTagsTable();
+//		
+//		//Controller only for viewDB
+//		/*
+//		au.clearAuthUsersTable();
+//		hd.clearHasDepartmentTable();
+//		hg.clearHasGuardianTable();
+//		hl.clearHasLinkTable();
+//		hsd.clearHasSubDepartmentTable();
+//		ht.clearHasTagTable();
+//		loa.clearListOfAppsTable();
+//		mda.clearMediaDepartmentAccessTable();
+//		mpa.clearMediaProfileAccessTable();
+//		*/
+//	}
 	
 	/**
 	 * Dummy data method

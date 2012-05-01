@@ -40,13 +40,13 @@ class ListOfAppsController {
 	//METHODS TO CALL
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	/**
-	 * Clear list of apps table
-	 * @return Rows
-	 */
-	public int clearListOfAppsTable() {
-		return _context.getContentResolver().delete(ListOfAppsMetaData.CONTENT_URI, null, null);
-	}
+//	/**
+//	 * Clear list of apps table
+//	 * @return Rows
+//	 */
+//	public int clearListOfAppsTable() {
+//		return _context.getContentResolver().delete(ListOfAppsMetaData.CONTENT_URI, null, null);
+//	}
 
 	/**
 	 * Remove list of apps
@@ -87,21 +87,21 @@ class ListOfAppsController {
 		return _context.getContentResolver().update(ListOfAppsMetaData.CONTENT_URI, cv, ListOfAppsMetaData.Table.COLUMN_IDAPP + " = '" + listOfApps.getIdApp() + "'" + " AND " + ListOfAppsMetaData.Table.COLUMN_IDPROFILE + " = '" + listOfApps.getIdProfile() + "'", null);
 	}
 	
-	/**
-	 * Get list of apps
-	 * @return List of list of apps
-	 */
-	public List<ListOfApps> getListOfApps() {
-		List<ListOfApps> listOfApps = new ArrayList<ListOfApps>();
-		Cursor c = _context.getContentResolver().query(ListOfAppsMetaData.CONTENT_URI, columns, null, null, null);
-		
-		if (c != null) {
-			listOfApps = cursorToListOfApps(c);
-			c.close();
-		}
-		
-		return listOfApps;
-	}
+//	/**
+//	 * Get list of apps
+//	 * @return List of list of apps
+//	 */
+//	public List<ListOfApps> getListOfApps() {
+//		List<ListOfApps> listOfApps = new ArrayList<ListOfApps>();
+//		Cursor c = _context.getContentResolver().query(ListOfAppsMetaData.CONTENT_URI, columns, null, null, null);
+//		
+//		if (c != null) {
+//			listOfApps = cursorToListOfApps(c);
+//			c.close();
+//		}
+//		
+//		return listOfApps;
+//	}
 
 	/**
 	 * Get list of apps by ids

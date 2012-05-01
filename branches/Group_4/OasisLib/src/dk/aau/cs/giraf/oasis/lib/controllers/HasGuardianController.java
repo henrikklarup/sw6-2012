@@ -34,13 +34,13 @@ class HasGuardianController {
 	//METHODS TO CALL
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	/**
-	 * Clear has guardian
-	 * @return Rows
-	 */
-	public int clearHasGuardianTable() {
-		return _context.getContentResolver().delete(HasGuardianMetaData.CONTENT_URI, null, null);
-	}
+//	/**
+//	 * Clear has guardian
+//	 * @return Rows
+//	 */
+//	public int clearHasGuardianTable() {
+//		return _context.getContentResolver().delete(HasGuardianMetaData.CONTENT_URI, null, null);
+//	}
 	
 	/**
 	 * Remove has guardian
@@ -66,23 +66,23 @@ class HasGuardianController {
 		return 0;
 	}
 	
-	/**
-	 * Get has guardian
-	 * @return List of has guardians
-	 */
-	public List<HasGuardian> getHasGuardians() {
-		List<HasGuardian> hgList = new ArrayList<HasGuardian>();
-		
-		Cursor c = _context.getContentResolver().query(HasGuardianMetaData.CONTENT_URI, columns, null, null, null);
-
-		if (c != null) {
-			hgList = cursorToHasGuardianList(c);
-			
-			c.close();
-		}
-
-		return hgList;
-	}
+//	/**
+//	 * Get has guardian
+//	 * @return List of has guardians
+//	 */
+//	public List<HasGuardian> getHasGuardians() {
+//		List<HasGuardian> hgList = new ArrayList<HasGuardian>();
+//		
+//		Cursor c = _context.getContentResolver().query(HasGuardianMetaData.CONTENT_URI, columns, null, null, null);
+//
+//		if (c != null) {
+//			hgList = cursorToHasGuardianList(c);
+//			
+//			c.close();
+//		}
+//
+//		return hgList;
+//	}
 	
 	/**
 	 * Get children by guardian
