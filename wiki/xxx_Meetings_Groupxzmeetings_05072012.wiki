@@ -1,0 +1,19 @@
+#summary Meeting Agenda 7/05-2012
+= Group meeting 7/05-2012 =
+
+Meeting takes place on 07/05-2012 @ 9:00 AM - 12:00 PM [0.2.11].
+
+Responsible: SW602
+
+Notary: SW603
+
+== Agenda ==
+  * For every individual group
+    * Where are we?
+      * What did we do since last time?
+        * _Issues_
+        * _Demonstrations_
+    * Where are we going?
+      * What are we going to work on until next time?
+  * How far are we, with the entire multiproject? (concluded by the responsible group)
+    * When are we at the next major milestone?
