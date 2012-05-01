@@ -101,6 +101,5 @@ public class PARROTActivity extends Activity {
 	{
 		return parrotUser;
 	}
-
 	
 }

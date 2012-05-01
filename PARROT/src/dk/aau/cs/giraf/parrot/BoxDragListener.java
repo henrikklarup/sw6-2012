@@ -1,4 +1,4 @@
-	package dk.aau.cs.giraf.parrot;
+package dk.aau.cs.giraf.parrot;
 
 import parrot.Package.R;
 import android.R.integer;
@@ -54,7 +54,7 @@ public class BoxDragListener implements OnDragListener
 
 
 
-					if(SpeechBoardFragment.speechBoardCategory.getPictogramAtIndex(index).getName()!="usynlig") //Replaces a pictogram already in the sentencebord
+					if(SpeechBoardFragment.speechBoardCategory.getPictogramAtIndex(index).isEmpty() == false) //Replaces a pictogram already in the sentencebord
 					{
 						SpeechBoardFragment.speechBoardCategory.removePictogram(index); //Removes the pictogram at the specific index
 						SpeechBoardFragment.speechBoardCategory.addPictogramAtIndex(pic, index); //add the pictogram at the specific position
@@ -63,13 +63,16 @@ public class BoxDragListener implements OnDragListener
 					{
 						int count = 0;
 						while (count <= numberOfSentencePictograms) 
+						{
 
-							if (SpeechBoardFragment.speechBoardCategory.getPictogramAtIndex(count).getName()=="usynlig") 
+							if (SpeechBoardFragment.speechBoardCategory.getPictogramAtIndex(count).isEmpty() == true) 
 							{
 								SpeechBoardFragment.speechBoardCategory.removePictogram(index); //Removes the pictogram at the specific index
 								SpeechBoardFragment.speechBoardCategory.addPictogramAtIndex(pic, index); //add the pictogram at the specific position
+								break;
 							} 
-						count++;
+							count++;
+						}
 					}
 
 
