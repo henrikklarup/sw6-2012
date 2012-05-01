@@ -391,7 +391,7 @@ public class HomeActivity extends Activity {
 		});
 	}
 
-	/**
+	/** 
 	 * Finds the background color of a given app, and if no color exists for the app, it is given one.
 	 * @param appID ID of the app to find the background color for.
 	 * @return The background color of the app.

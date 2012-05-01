@@ -16,7 +16,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 
 public class ProfileSelectActivity extends Activity {
 
@@ -74,6 +76,7 @@ public class ProfileSelectActivity extends Activity {
 		GProfileAdapter adapter = new GProfileAdapter(this, mProfiles);
 		ListView lv = (ListView) findViewById(R.id.profilesList);
 		lv.setAdapter(adapter);
+ 
 
 		lv.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

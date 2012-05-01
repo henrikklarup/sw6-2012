@@ -2,27 +2,30 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical"
     android:background="@drawable/gbackground"
-    android:padding="25dp" >
-    
-    <ImageView 
-        android:id="@+id/giraf_logo"
-        android:contentDescription="Logo"
-        android:layout_width="wrap_content"
-    	android:layout_height="wrap_content"
-    	android:layout_centerHorizontal="true"
-    	android:layout_marginTop="75dp"
-    	android:src="@drawable/icon_giraf"/>
-    
-     <ListView
+    android:orientation="vertical" >
+
+    <ListView
         android:id="@+id/profilesList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
+        android:layout_margin="30dp"
+        android:layout_toRightOf="@+id/giraf_logo"
         android:divider="#00000000"
-        android:dividerHeight="25dp"
-        android:layout_below="@+id/giraf_logo"
-        android:layout_marginTop="60dp"
+        android:dividerHeight="25dp" 
+        android:background="@android:color/transparent"
+        android:cacheColorHint="@android:color/transparent"
         />
+
+    <ImageView
+        android:id="@+id/giraf_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:contentDescription="Logo"
+        android:src="@drawable/icon_giraf" 
+        android:layout_marginLeft="30dp"
+        />
+
 </RelativeLayout>
