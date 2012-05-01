@@ -121,23 +121,22 @@ public class HomeActivity extends Activity {
 		});
 		
 
-//		mConnectivityWidget.setOnClickListener(new View.OnClickListener() {
-//			public void onClick(View v) {
-//				
-//				GTooltip gTooltip = new GTooltip(mContext);
-//				gTooltip.setRightOf(v);
-//
-//				gTooltip.setOwnerActivity(mActivity);
-//				
-//				Button button = new Button(mContext);
-//				
-//				LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-//				button.setLayoutParams(lp);
-//				
-//				gTooltip.addView(button);
-//				gTooltip.show();
-//			}
-//		});
+		mConnectivityWidget.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				
+				GTooltip gTooltip = new GTooltip(mContext);
+				gTooltip.setRightOf(v);
+				gTooltip.setOwnerActivity(mActivity);
+				
+				Button button = new Button(mContext);
+				
+				LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+				button.setLayoutParams(lp);
+				
+				gTooltip.addView(button);
+				gTooltip.show();
+			}
+		});
 		
 		View main = findViewById(R.id.HomeWrapperLayout);
 		
@@ -282,11 +281,6 @@ public class HomeActivity extends Activity {
 		RelativeLayout.LayoutParams connectivityWidgetParams = (LayoutParams) mConnectivityWidget.getLayoutParams();
 		RelativeLayout.LayoutParams calendarWidgetParams = (LayoutParams) mCalendarWidget.getLayoutParams();
 		RelativeLayout.LayoutParams logoutWidgetParams = (LayoutParams) mLogoutWidget.getLayoutParams();
-		
-		// remove me later - start
-		//mConnectivityWidget.setVisibility(View.VISIBLE);
-		//mCalendarWidget.setVisibility(View.VISIBLE);
-		// stop
 		
 		if (isLandscape) {
 			mNameView.setVisibility(View.INVISIBLE);
