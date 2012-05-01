@@ -269,7 +269,7 @@ public class HomeActivity extends Activity {
 	 */
 	private void loadPaintGrid(){
 		GridView AppColors = (GridView) findViewById(R.id.appcolors);
-		// Removes blue highlight and scroll
+		// Removes blue highlight and scroll on AppColors grid
 		AppColors.setEnabled(false);
 		AppColors.setAdapter(new GColorAdapter(this));
 	}
