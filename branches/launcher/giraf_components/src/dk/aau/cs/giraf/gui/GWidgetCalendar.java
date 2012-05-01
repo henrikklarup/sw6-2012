@@ -22,6 +22,7 @@ public class GWidgetCalendar extends TextView implements IGWidget {
 	private String month;
 	private final Context mContext;
 	private TextView mTooltipTextview;
+	private GTooltip GTip;
 	
 	private void setStyle(){
 		this.setBackgroundDrawable(getResources().getDrawable(R.drawable.gcal_icon));
@@ -55,14 +56,14 @@ public class GWidgetCalendar extends TextView implements IGWidget {
 	}
 	
 	public final void showTooltip(){
-		GTooltip g = new GTooltip(mContext);
-		TextView tv = new TextView(mContext);
-		tv.setText(generateTooltipString());
-		tv.setTextColor(Color.WHITE);
+		GTip = new GTooltip(mContext);
+		mTooltipTextview = new TextView(mContext);
+		mTooltipTextview.setText(generateTooltipString());
+		mTooltipTextview.setTextColor(Color.WHITE);
 		
-		mTooltipTextview = (TextView) g.addView(tv);
-		g.setRightOf(this);
-		g.show();
+		GTip.setView(mTooltipTextview);
+		GTip.setRightOf(this);
+		GTip.show();
 		
 		
 	}
@@ -88,7 +89,8 @@ public class GWidgetCalendar extends TextView implements IGWidget {
 		this.setText(day_of_month);
 		
 		if(mTooltipTextview != null){
-		mTooltipTextview.setText(generateTooltipString());
+			mTooltipTextview.setText(generateTooltipString());
+			GTip.setView(mTooltipTextview);
 		}
 	}
 	

@@ -22,6 +22,7 @@ public class GWidgetConnectivity extends ImageView implements IGWidget {
 	private final String mSyncingString;
 	private final String mOfflineString;
 	private TextView mTooltipTextview;
+	private GTooltip GTip;
 	
 	private void setStyle(int d) {
 		this.setBackgroundDrawable(getResources().getDrawable(d));
@@ -93,6 +94,13 @@ public class GWidgetConnectivity extends ImageView implements IGWidget {
 			setStyleSyncing();
 			break;
 		}
+		
+		if(mTooltipTextview != null){
+		mTooltipTextview.setText(generateTooltipString());
+		
+		GTip.setView(mTooltipTextview);
+		}
+		
 	}
 	
 	private void showTooltip(){
@@ -100,11 +108,14 @@ public class GWidgetConnectivity extends ImageView implements IGWidget {
 		TextView tv = new TextView(mContext);
 		tv.setText(generateTooltipString());
 		tv.setTextColor(Color.WHITE);
+		tv.setWidth(200);
+		mTooltipTextview = tv;
 		
-		mTooltipTextview = (TextView) g.addView(tv);
+		g.setView(tv);
 		g.setRightOf(this);
 		g.show();
 		
+		GTip = g;
 		
 	}
 
