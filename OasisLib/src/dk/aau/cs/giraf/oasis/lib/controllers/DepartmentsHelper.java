@@ -9,6 +9,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import dk.aau.cs.giraf.oasis.lib.metadata.DepartmentsMetaData;
+import dk.aau.cs.giraf.oasis.lib.models.AuthUser;
 import dk.aau.cs.giraf.oasis.lib.models.Department;
 import dk.aau.cs.giraf.oasis.lib.models.HasDepartment;
 import dk.aau.cs.giraf.oasis.lib.models.HasSubDepartment;
@@ -81,7 +82,7 @@ public class DepartmentsHelper {
 	 * @param department Department containg data
 	 */
 	public long insertDepartment(Department department) {
-		department.setId(au.insertAuthUser(1));
+		department.setId(au.insertAuthUser(AuthUser.aRole.DEPARTMENT.ordinal()));
 		
 		ContentValues cv = getContentValues(department);
 		cv.put(DepartmentsMetaData.Table.COLUMN_ID, department.getId());

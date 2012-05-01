@@ -9,6 +9,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import dk.aau.cs.giraf.oasis.lib.metadata.ProfilesMetaData;
+import dk.aau.cs.giraf.oasis.lib.models.AuthUser;
 import dk.aau.cs.giraf.oasis.lib.models.Department;
 import dk.aau.cs.giraf.oasis.lib.models.HasDepartment;
 import dk.aau.cs.giraf.oasis.lib.models.HasGuardian;
@@ -86,7 +87,7 @@ public class ProfilesHelper {
 	 * @param profile Profile containing data
 	 */
 	public long insertProfile(Profile profile) {		
-		long id = au.insertAuthUser(0);
+		long id = au.insertAuthUser(AuthUser.aRole.PROFILE.ordinal());
 
 		ContentValues profileContentValues = getContentValues(profile);
 		profileContentValues.put(ProfilesMetaData.Table.COLUMN_ID, id);
