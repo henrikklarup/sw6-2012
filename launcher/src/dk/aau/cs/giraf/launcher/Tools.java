@@ -153,7 +153,7 @@ public class Tools {
 		Helper helper = new Helper(context);
 
 		List<App> userApps = helper.appsHelper.getAppsByProfile(user);
-		List<App> deviceApps = getAllAvailableGirafApps(context);
+		List<App> deviceApps = getAvailableGirafApps(context);
 
 		if (userApps.isEmpty() || deviceApps.isEmpty()) {
 			return new ArrayList<App>();
@@ -180,7 +180,7 @@ public class Tools {
 		Helper helper = new Helper(context);
 
 		List<App> userApps = helper.appsHelper.getAppsByProfile(user);
-		List<App> deviceApps = getAllAvailableAndroidApps(context);
+		List<App> deviceApps = getAvailableAndroidApps(context);
 
 		if (userApps.isEmpty() || deviceApps.isEmpty()) {
 			return new ArrayList<App>();
@@ -207,7 +207,7 @@ public class Tools {
 		Helper helper = new Helper(context);
 
 		List<App> userApps = helper.appsHelper.getAppsByProfile(user);
-		List<App> deviceApps = getAllAvailableApps(context);
+		List<App> deviceApps = getAvailableApps(context);
 
 		if (userApps.isEmpty() || deviceApps.isEmpty()) {
 			return new ArrayList<App>();
@@ -225,81 +225,6 @@ public class Tools {
 	}
 
 	/**
-	 * Finds all GIRAF apps installed on the device that are also registered in the database.
-	 * @param context Context of the current activity.
-	 * @return List of apps available for use on the device.
-	 */
-	public static List<App> getAllAvailableGirafApps(Context context) {
-		Helper helper = new Helper(context);
-
-		List<App> dbApps = helper.appsHelper.getApps();
-		List<ResolveInfo> deviceApps = getDeviceGirafApps(context);
-
-		if (dbApps.isEmpty() || deviceApps.isEmpty()) {
-			return new ArrayList<App>();
-		}
-
-		for (int i = 0; i < dbApps.size(); i++) {
-			if (!appsContain_RI(deviceApps, dbApps.get(i))) {
-				dbApps.remove(i);
-				i--;
-			}
-		}
-
-		return dbApps;
-	}
-	
-	/**
-	 * Finds all Android apps (not GIRAF apps) installed on the device that are also registered in the database.
-	 * @param context Context of the current activity.
-	 * @return List of Android apps available for use on the device.
-	 */
-	public static List<App> getAllAvailableAndroidApps(Context context) {
-		Helper helper = new Helper(context);
-
-		List<App> dbApps = helper.appsHelper.getApps();
-		List<ResolveInfo> deviceApps = getDeviceAndroidApps(context);
-
-		if (dbApps.isEmpty() || deviceApps.isEmpty()) {
-			return new ArrayList<App>();
-		}
-
-		for (int i = 0; i < dbApps.size(); i++) {
-			if (!appsContain_RI(deviceApps, dbApps.get(i))) {
-				dbApps.remove(i);
-				i--;
-			}
-		}
-
-		return dbApps;
-	}
-	
-	/**
-	 * Finds all apps installed on the device that are also registered in the database.
-	 * @param context Context of the current activity.
-	 * @return List of apps available for use on the device.
-	 */
-	public static List<App> getAllAvailableApps(Context context) {
-		Helper helper = new Helper(context);
-
-		List<App> dbApps = helper.appsHelper.getApps();
-		List<ResolveInfo> deviceApps = getDeviceApps(context);
-
-		if (dbApps.isEmpty() || deviceApps.isEmpty()) {
-			return new ArrayList<App>();
-		}
-
-		for (int i = 0; i < dbApps.size(); i++) {
-			if (!appsContain_RI(deviceApps, dbApps.get(i))) {
-				dbApps.remove(i);
-				i--;
-			}
-		}
-
-		return dbApps;
-	}
-
-	/**
 	 * Finds all GIRAF apps not attached to a given profile.
 	 * @param context Context of the current activity.
 	 * @param currentUser Profile to find apps for.
@@ -309,7 +234,7 @@ public class Tools {
 		Helper helper = new Helper(context);
 
 		List<App> userApps = helper.appsHelper.getAppsByProfile(user);
-		List<App> deviceApps = getAllAvailableGirafApps(context);
+		List<App> deviceApps = getAvailableGirafApps(context);
 
 		if (userApps.isEmpty() || deviceApps.isEmpty()) {
 			return new ArrayList<App>();
@@ -335,7 +260,7 @@ public class Tools {
 		Helper helper = new Helper(context);
 
 		List<App> userApps = helper.appsHelper.getAppsByProfile(user);
-		List<App> deviceApps = getAllAvailableAndroidApps(context);
+		List<App> deviceApps = getAvailableAndroidApps(context);
 
 		if (userApps.isEmpty() || deviceApps.isEmpty()) {
 			return new ArrayList<App>();
@@ -361,7 +286,7 @@ public class Tools {
 		Helper helper = new Helper(context);
 
 		List<App> userApps = helper.appsHelper.getAppsByProfile(user);
-		List<App> deviceApps = getAllAvailableApps(context);
+		List<App> deviceApps = getAvailableApps(context);
 
 		if (userApps.isEmpty() || deviceApps.isEmpty()) {
 			return new ArrayList<App>();
@@ -375,6 +300,81 @@ public class Tools {
 		}
 
 		return deviceApps;
+	}
+	
+	/**
+	 * Finds all GIRAF apps installed on the device that are also registered in the database.
+	 * @param context Context of the current activity.
+	 * @return List of apps available for use on the device.
+	 */
+	private static List<App> getAvailableGirafApps(Context context) {
+		Helper helper = new Helper(context);
+
+		List<App> dbApps = helper.appsHelper.getApps();
+		List<ResolveInfo> deviceApps = getDeviceGirafApps(context);
+
+		if (dbApps.isEmpty() || deviceApps.isEmpty()) {
+			return new ArrayList<App>();
+		}
+
+		for (int i = 0; i < dbApps.size(); i++) {
+			if (!appsContain_RI(deviceApps, dbApps.get(i))) {
+				dbApps.remove(i);
+				i--;
+			}
+		}
+
+		return dbApps;
+	}
+	
+	/**
+	 * Finds all Android apps (not GIRAF apps) installed on the device that are also registered in the database.
+	 * @param context Context of the current activity.
+	 * @return List of Android apps available for use on the device.
+	 */
+	private static List<App> getAvailableAndroidApps(Context context) {
+		Helper helper = new Helper(context);
+
+		List<App> dbApps = helper.appsHelper.getApps();
+		List<ResolveInfo> deviceApps = getDeviceAndroidApps(context);
+
+		if (dbApps.isEmpty() || deviceApps.isEmpty()) {
+			return new ArrayList<App>();
+		}
+
+		for (int i = 0; i < dbApps.size(); i++) {
+			if (!appsContain_RI(deviceApps, dbApps.get(i))) {
+				dbApps.remove(i);
+				i--;
+			}
+		}
+
+		return dbApps;
+	}
+	
+	/**
+	 * Finds all apps installed on the device that are also registered in the database.
+	 * @param context Context of the current activity.
+	 * @return List of apps available for use on the device.
+	 */
+	private static List<App> getAvailableApps(Context context) {
+		Helper helper = new Helper(context);
+
+		List<App> dbApps = helper.appsHelper.getApps();
+		List<ResolveInfo> deviceApps = getDeviceApps(context);
+
+		if (dbApps.isEmpty() || deviceApps.isEmpty()) {
+			return new ArrayList<App>();
+		}
+
+		for (int i = 0; i < dbApps.size(); i++) {
+			if (!appsContain_RI(deviceApps, dbApps.get(i))) {
+				dbApps.remove(i);
+				i--;
+			}
+		}
+
+		return dbApps;
 	}
 
 	/**
@@ -445,17 +445,14 @@ public class Tools {
 		Helper helper = new Helper(context);
 
 		// Insert the launcher into the DB.
-		if (!packageRegistered(helper, "dk.aau.cs.giraf.launcher")) {
+		if (!packageRegistered(helper, context.getPackageName())) {
 			Intent launcherIntent = new Intent(Intent.ACTION_MAIN, null);
 			launcherIntent.addCategory(Intent.CATEGORY_HOME);
 
 			List<ResolveInfo> launchers = context.getPackageManager().queryIntentActivities(launcherIntent, 0);
 
-			Log.i("GIRAF", "Launchers: " + launchers.size());
-
 			for (ResolveInfo launcher : launchers) {
-				Log.i("GIRAF", "Launcher packages: " + launcher.activityInfo.packageName);
-				if (launcher.activityInfo.packageName.equals("dk.aau.cs.giraf.launcher")) {
+				if (launcher.activityInfo.packageName.equals(context.getPackageName())) {
 					insertAppInDB(context, launcher);
 					break;
 				}
@@ -484,6 +481,38 @@ public class Tools {
 			if (!appRegistered(helper, installedApp)) {
 				insertAppInDB(context, installedApp);
 			}
+		}
+	}
+	
+	/**
+	 * Attaches all GIRAF apps currently installed on a device to a given user.
+	 * @param context Context of the current activity.
+	 * @param currentUser The user to attach apps to.
+	 */
+	public static void attachAllDeviceGirafAppsToUser(Context context) {
+		Helper helper = new Helper(context);
+		Profile currentUser = findCurrentUser(context);
+
+		List<App> deviceApps = getAvailableGirafApps(context);
+
+		for (App app : deviceApps) {
+			helper.appsHelper.attachAppToProfile(app, currentUser);
+		}
+	}
+	
+	/**
+	 * Attaches all GIRAF apps currently installed on a device to a given user.
+	 * @param context Context of the current activity.
+	 * @param currentUser The user to attach apps to.
+	 */
+	public static void attachAllDeviceAppsToUser(Context context) {
+		Helper helper = new Helper(context);
+		Profile currentUser = findCurrentUser(context);
+
+		List<App> deviceApps = getAvailableApps(context);
+
+		for (App app : deviceApps) {
+			helper.appsHelper.attachAppToProfile(app, currentUser);
 		}
 	}
 
@@ -607,37 +636,5 @@ public class Tools {
 	 */
 	public static boolean appRegistered(Helper helper, App app) {
 		return packageRegistered(helper, app.getaPackage());
-	}
-
-	/**
-	 * Attaches all GIRAF apps currently installed on a device to a given user.
-	 * @param context Context of the current activity.
-	 * @param currentUser The user to attach apps to.
-	 */
-	public static void attachAllDeviceGirafAppsToUser(Context context) {
-		Helper helper = new Helper(context);
-		Profile currentUser = findCurrentUser(context);
-
-		List<App> deviceApps = getAllAvailableGirafApps(context);
-
-		for (App app : deviceApps) {
-			helper.appsHelper.attachAppToProfile(app, currentUser);
-		}
-	}
-	
-	/**
-	 * Attaches all GIRAF apps currently installed on a device to a given user.
-	 * @param context Context of the current activity.
-	 * @param currentUser The user to attach apps to.
-	 */
-	public static void attachAllDeviceAppsToUser(Context context) {
-		Helper helper = new Helper(context);
-		Profile currentUser = findCurrentUser(context);
-
-		List<App> deviceApps = getAllAvailableApps(context);
-
-		for (App app : deviceApps) {
-			helper.appsHelper.attachAppToProfile(app, currentUser);
-		}
 	}
 }
