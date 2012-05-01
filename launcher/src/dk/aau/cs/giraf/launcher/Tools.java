@@ -266,12 +266,12 @@ public class Tools {
 		}
 
 		// Remove all non-GIRAF apps from the list of apps in the system.
-		/*for (int i = 0; i < systemApps.size(); i++) {
+		for (int i = 0; i < systemApps.size(); i++) {
 			if (!systemApps.get(i).toString().toLowerCase().contains("dk.aau.cs.giraf")) {
 				systemApps.remove(i); 
 				i--;
 			}
-		}*/
+		}
 
 		return systemApps;
 	}
