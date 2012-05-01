@@ -33,7 +33,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.GridView;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -318,7 +320,13 @@ public class HomeActivity extends Activity {
 					result = true;
 					
 					// Setting width of the horizontalscrollview
-					
+					HorizontalScrollView hScrollView = (HorizontalScrollView)findViewById(R.id.horizontalScrollView);
+					LayoutParams scrollParams = (LayoutParams) hScrollView.getLayoutParams();
+					Display display = getWindowManager().getDefaultDisplay();
+					Point size = new Point();
+					display.getSize(size);
+					scrollParams.width = size.x - (margin + 100);
+					hScrollView.setLayoutParams(scrollParams);
 
 					break;
 				case MotionEvent.ACTION_UP:
