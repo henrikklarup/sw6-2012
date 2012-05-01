@@ -7,6 +7,7 @@ import java.util.Random;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -25,7 +26,6 @@ public class TableList extends ListActivity {
 	App app;
 	Profile profile;
 	Setting settings;
-	long profileId;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,27 +42,25 @@ public class TableList extends ListActivity {
 		map.put("Favorite Animal", "Rabbit");
 		settings.put("Profile1", map);
 		
-		profile = new Profile("Firstname", "Surname", null, Profile.pRoles.GUARDIAN.ordinal(), 1234567890, "Pic", null);
-		profileId = helper.profilesHelper.insertProfile(profile);
-		profile.setId(profileId);
+		profile = helper.profilesHelper.authenticateProfile("HejJens");
 		
-		String basePackageName = "dk.aau.cs.giraf.";
-		
-		Random rnd = new Random();
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < 10 + 1; i++)
-		{
-			sb.append((char)(rnd.nextInt(26) + 97));
+		if (profile == null) {
+			profile = new Profile("Firstname", "Surname", null, Profile.pRoles.GUARDIAN.ordinal(), 1234567890, "Pic", null);
+			profile.setId(helper.profilesHelper.insertProfile(profile));
+			helper.profilesHelper.setCertificate("HejJens", profile);
 		}
-		String randomString = sb.toString();
 		
-		app = new App("TestApp", basePackageName + randomString, "FakeActivity");
-		long appId = helper.appsHelper.insertApp(app);
-		app.setId(appId);
+		app = helper.appsHelper.getAppByPackageName();
+		if (app == null) {
+			app = new App("TestApp", this.getPackageName(), "FakeActivity");
+			long appId = helper.appsHelper.insertApp(app);
+			app.setId(appId);
+		}
+		
 		app.setSettings(settings);
 		
-		helper.appsHelper.attachAppToProfile(app, profile);
-		helper.appsHelper.modifyAppByProfile(app, profile);
+		Log.i("Oasis", "DB attach: " + helper.appsHelper.attachAppToProfile(app, profile));
+		Log.i("Oasis", "DB modify: " + helper.appsHelper.modifyAppByProfile(app, profile));
 		
 		values = helper.appsHelper.getAppsByProfile(profile);
 		
@@ -76,7 +74,7 @@ public class TableList extends ListActivity {
 		try{
 			Class _class = Class.forName("com.controller.get." + tables[position]);
 			Intent _intent = new Intent(TableList.this, _class);
-			_intent.putExtra("ProfileId", profileId);
+			_intent.putExtra("ProfileId", profile.getId());
 			startActivity(_intent);
 		} catch (ClassNotFoundException e){
 			e.printStackTrace();

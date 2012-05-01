@@ -27,6 +27,7 @@ public class AppsView extends ListActivity {
 	int _position;
 	List<App> values;
 	Profile profile;
+	String packageName;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,9 @@ public class AppsView extends ListActivity {
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			profile = helper.profilesHelper.getProfileById(extras.getLong("ProfileId"));
+		} else {
+			Log.i("Oasis", "Something went wrong");
+			profile = null;
 		}
 
 		updateList();
@@ -48,13 +52,6 @@ public class AppsView extends ListActivity {
 
 			@Override
 			public void onClick(View v) {
-//				helper.appsHelper.insertApp(app);
-//				List<App> apps = helper.appsHelper.getApps();
-//				app = apps.get(apps.size() - 1);
-//				List<Profile> profiles = helper.profilesHelper.getProfiles();
-//				Profile profile = profiles.get(profiles.size() - 1);
-//				helper.appsHelper.attachAppToProfile(app, profile);
-							
 				App m_App = null;
 				
 				// Find the app which has the same package name as this one
@@ -62,10 +59,10 @@ public class AppsView extends ListActivity {
                         
                 if(m_App == null){
                         // If no app has been found, generate one and insert it in Oasis
-                        m_App = new App("Wombat", "1", "", AppsView.this.getPackageName(), "MainActivity");
+                        m_App = new App("Wombat", AppsView.this.getPackageName(), "MainActivity");
                         m_App.setId(helper.appsHelper.insertApp(m_App));
                 }
-                                
+                Log.i("Oasis", "This App Id: " + m_App.getId());            
 				updateList();
 			}
 		});
@@ -84,20 +81,18 @@ public class AppsView extends ListActivity {
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
-
-		App clickedApp;
+		long _id = getListAdapter().getItemId(position);
 		
-		clickedApp = helper.appsHelper.getAppByPackageName();
-		App clickedAppWithSettings = helper.appsHelper.getAppByIds(app.getId(), profile.getId());
+		App clickedAppWithSettings = helper.appsHelper.getAppByPackageNameAndProfileId(profile.getId());
 		
 		if (clickedAppWithSettings != null) {
-			Log.e("clickedAppWithSetting", "clickedAppWithSetting not null");
-			Log.e("App Id: ", Long.toString(clickedAppWithSettings.getId()));
-			Log.e("Profile Id: ", Long.toString(profile.getId()));
+			Log.i("clickedAppWithSetting", "clickedAppWithSetting not null");
+			Log.i("App Id: ", Long.toString(clickedAppWithSettings.getId()));
+			Log.i("Profile Id: ", Long.toString(profile.getId()));
 			Setting<String, String, String> setting = clickedAppWithSettings.getSettings();
 
 			if (setting != null) {
-				Log.e("Setting", "Setting not null");
+				Log.i("Setting", "Setting not null");
 				String settings = setting.get("Profile1").get("Settings");
 				String[] settingsList = settings.split(",");
 				for (String s : settingsList) {

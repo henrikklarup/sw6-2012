@@ -122,21 +122,21 @@ public class AppsHelper {
 		return loa.modifyListOfApps(listOfApps);
 	}
 
-//	/**
-//	 * Get all applications
-//	 * @return List<App>, containing all applications
-//	 */
-//	public List<App> getApps() {
-//		List<App> apps = new ArrayList<App>();
-//		Cursor c = _context.getContentResolver().query(AppsMetaData.CONTENT_URI, columns, null, null, null);
-//		
-//		if (c != null) {
-//			apps = cursorToAppList(c);
-//			c.close();
-//		}
-//
-//		return apps;
-//	}
+	/**
+	 * Get all applications
+	 * @return List<App>, containing all applications
+	 */
+	public List<App> getApps() {
+		List<App> apps = new ArrayList<App>();
+		Cursor c = _context.getContentResolver().query(AppsMetaData.CONTENT_URI, columns, null, null, null);
+		
+		if (c != null) {
+			apps = cursorToAppList(c);
+			c.close();
+		}
+
+		return apps;
+	}
 
 	/**
 	 * Get application by id
@@ -286,6 +286,7 @@ public class AppsHelper {
 		app.setIcon(cursor.getString(cursor.getColumnIndex(AppsMetaData.Table.COLUMN_ICON)));
 		app.setaPackage(cursor.getString(cursor.getColumnIndex(AppsMetaData.Table.COLUMN_PACKAGE)));
 		app.setActivity(cursor.getString(cursor.getColumnIndex(AppsMetaData.Table.COLUMN_ACTIVITY)));
+		cursor.close();
 		return app;
 	}
 
@@ -303,6 +304,8 @@ public class AppsHelper {
 				cursor.moveToNext();
 			}
 		}
+		
+		cursor.close();
 
 		return apps;
 	}

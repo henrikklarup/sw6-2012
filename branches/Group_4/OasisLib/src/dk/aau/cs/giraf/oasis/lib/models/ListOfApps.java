@@ -86,10 +86,10 @@ public class ListOfApps {
 	}
 
 	/**
-	 * @param _output the _output to set
+	 * @param output the _output to set
 	 */
-	public static void set_output(String _output) {
-		ListOfApps._output = _output;
+	public static void set_output(String output) {
+		ListOfApps._output = output;
 	}
 	
 	@Override

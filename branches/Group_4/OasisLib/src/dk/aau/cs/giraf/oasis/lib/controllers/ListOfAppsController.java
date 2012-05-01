@@ -143,8 +143,7 @@ class ListOfAppsController {
 	}
 	
 	/**
-	 * Get setting by app and child id
-	 * @param l App
+	 * Get setting by app and profile id
 	 * @param profileId profile
 	 * @return Setting
 	 */
@@ -174,7 +173,7 @@ class ListOfAppsController {
 		Cursor c = _context.getContentResolver().query(ListOfAppsMetaData.CONTENT_URI, columns, ListOfAppsMetaData.Table.COLUMN_IDAPP + " = '" + appId + "'" + " AND " + ListOfAppsMetaData.Table.COLUMN_IDPROFILE + " = '" + profileId + "'", null, null);
 		if (c != null) {
 			if (c.moveToFirst()) {
-				stat = Stat.toStat(c.getString(c.getColumnIndex(ListOfAppsMetaData.Table.COLUMN_SETTINGS)));
+				stat = Stat.toStat(c.getString(c.getColumnIndex(ListOfAppsMetaData.Table.COLUMN_STATS)));
 			}
 			c.close();
 		}

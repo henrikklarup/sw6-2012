@@ -7,6 +7,7 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
@@ -40,7 +41,7 @@ public class DbProvider extends ContentProvider {
 	private static final int PROFILES_TYPE_ONE = 18;
 	private static final int TAGS_TYPE_LIST = 19;
 	private static final int TAGS_TYPE_ONE = 20;
-	
+
 	static {
 		sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 		sUriMatcher.addURI(DbHelper.AUTHORITY, "apps", APPS_TYPE_LIST);
@@ -83,7 +84,7 @@ public class DbProvider extends ContentProvider {
 		authusersProjectionMap.put(AuthUsersMetaData.Table.COLUMN_CERTIFICATE, AuthUsersMetaData.Table.COLUMN_CERTIFICATE);
 		authusersProjectionMap.put(AuthUsersMetaData.Table.COLUMN_ROLE, AuthUsersMetaData.Table.COLUMN_ROLE);
 	}
-	
+
 	private static final HashMap<String, String> departmentsProjectionMap;
 	static {
 		departmentsProjectionMap = new HashMap<String, String>();
@@ -93,42 +94,42 @@ public class DbProvider extends ContentProvider {
 		departmentsProjectionMap.put(DepartmentsMetaData.Table.COLUMN_PHONE, DepartmentsMetaData.Table.COLUMN_PHONE);
 		departmentsProjectionMap.put(DepartmentsMetaData.Table.COLUMN_EMAIL, DepartmentsMetaData.Table.COLUMN_EMAIL);
 	}
-	
+
 	private static final HashMap<String, String> hasdepartmentProjectionMap;
 	static {
 		hasdepartmentProjectionMap = new HashMap<String, String>();
 		hasdepartmentProjectionMap.put(HasDepartmentMetaData.Table.COLUMN_IDPROFILE, HasDepartmentMetaData.Table.COLUMN_IDPROFILE);
 		hasdepartmentProjectionMap.put(HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT, HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT);
 	}
-	
+
 	private static final HashMap<String, String> hasguardianProjectionMap;
 	static {
 		hasguardianProjectionMap = new HashMap<String, String>();
 		hasguardianProjectionMap.put(HasGuardianMetaData.Table.COLUMN_IDGUARDIAN, HasGuardianMetaData.Table.COLUMN_IDGUARDIAN);
 		hasguardianProjectionMap.put(HasGuardianMetaData.Table.COLUMN_IDCHILD, HasGuardianMetaData.Table.COLUMN_IDCHILD);
 	}
-	
+
 	private static final HashMap<String, String> haslinkProjectionMap;
 	static {
 		haslinkProjectionMap = new HashMap<String, String>();
 		haslinkProjectionMap.put(HasLinkMetaData.Table.COLUMN_IDMEDIA, HasLinkMetaData.Table.COLUMN_IDMEDIA);
 		haslinkProjectionMap.put(HasLinkMetaData.Table.COLUMN_IDSUBMEDIA, HasLinkMetaData.Table.COLUMN_IDSUBMEDIA);
 	}
-	
+
 	private static final HashMap<String, String> hassubdepartmentProjectionMap;
 	static {
 		hassubdepartmentProjectionMap = new HashMap<String, String>();
 		hassubdepartmentProjectionMap.put(HasSubDepartmentMetaData.Table.COLUMN_IDDEPARTMENT, HasSubDepartmentMetaData.Table.COLUMN_IDDEPARTMENT);
 		hassubdepartmentProjectionMap.put(HasSubDepartmentMetaData.Table.COLUMN_IDSUBDEPARTMENT, HasSubDepartmentMetaData.Table.COLUMN_IDSUBDEPARTMENT);
 	}
-	
+
 	private static final HashMap<String, String> hastagProjectionMap;
 	static {
 		hastagProjectionMap = new HashMap<String, String>();
 		hastagProjectionMap.put(HasTagMetaData.Table.COLUMN_IDMEDIA, HasTagMetaData.Table.COLUMN_IDMEDIA);
 		hastagProjectionMap.put(HasTagMetaData.Table.COLUMN_IDTAG, HasTagMetaData.Table.COLUMN_IDTAG);
 	}
-	
+
 	private static final HashMap<String, String> listofappsProjectionMap;
 	static {
 		listofappsProjectionMap = new HashMap<String, String>();
@@ -137,7 +138,7 @@ public class DbProvider extends ContentProvider {
 		listofappsProjectionMap.put(ListOfAppsMetaData.Table.COLUMN_SETTINGS, ListOfAppsMetaData.Table.COLUMN_SETTINGS);
 		listofappsProjectionMap.put(ListOfAppsMetaData.Table.COLUMN_STATS, ListOfAppsMetaData.Table.COLUMN_STATS);
 	}
-	
+
 	private static final HashMap<String, String> mediaProjectionMap;
 	static {
 		mediaProjectionMap = new HashMap<String, String>();
@@ -148,14 +149,14 @@ public class DbProvider extends ContentProvider {
 		mediaProjectionMap.put(MediaMetaData.Table.COLUMN_TYPE, MediaMetaData.Table.COLUMN_TYPE);
 		mediaProjectionMap.put(MediaMetaData.Table.COLUMN_OWNERID, MediaMetaData.Table.COLUMN_OWNERID);
 	}
-	
+
 	private static final HashMap<String, String> mediaDepartmentAccessProjectionMap;
 	static {
 		mediaDepartmentAccessProjectionMap = new HashMap<String, String>();
 		mediaDepartmentAccessProjectionMap.put(MediaDepartmentAccessMetaData.Table.COLUMN_IDDEPARTMENT, MediaDepartmentAccessMetaData.Table.COLUMN_IDDEPARTMENT);
 		mediaDepartmentAccessProjectionMap.put(MediaDepartmentAccessMetaData.Table.COLUMN_IDMEDIA, MediaDepartmentAccessMetaData.Table.COLUMN_IDMEDIA);
 	}
-	
+
 	private static final HashMap<String, String> mediaProfileAccessProjectionMap;
 	static {
 		mediaProfileAccessProjectionMap = new HashMap<String, String>();
@@ -188,13 +189,13 @@ public class DbProvider extends ContentProvider {
 		dbHelper = new DbHelper(getContext());
 		return false;
 	}
-	
+
 	@Override
 	public int delete(Uri uri, String where, String[] whereArgs) {
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		int rowsDeleted = 0;
 		String rowId;
-		
+
 		switch(sUriMatcher.match(uri)) {
 		case APPS_TYPE_LIST:
 			rowsDeleted = db.delete(AppsMetaData.Table.TABLE_NAME, where, whereArgs); 
@@ -333,157 +334,149 @@ public class DbProvider extends ContentProvider {
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		long rowId;
 		Uri _uri;
-		
-		switch(sUriMatcher.match(uri)) {
-		case APPS_TYPE_LIST:
-			rowId = db.insert(AppsMetaData.Table.TABLE_NAME, null, values);
-			if (rowId > 0) {
-				_uri = ContentUris.withAppendedId(AppsMetaData.CONTENT_URI, rowId);
-				getContext().getContentResolver().notifyChange(_uri, null);
+
+		try {
+			switch(sUriMatcher.match(uri)) {
+			case APPS_TYPE_LIST:
+				rowId = db.insertOrThrow(AppsMetaData.Table.TABLE_NAME, null, values);
+				if (rowId > 0) {
+					_uri = ContentUris.withAppendedId(AppsMetaData.CONTENT_URI, rowId);
+					getContext().getContentResolver().notifyChange(_uri, null);
+				} else {
+					_uri = ContentUris.withAppendedId(AppsMetaData.CONTENT_URI, -1);
+				}
 				return _uri;
-			} else {
-				_uri = ContentUris.withAppendedId(AppsMetaData.CONTENT_URI, -1);
+			case AUTHUSERS_TYPE_LIST:
+				rowId = db.insertOrThrow(AuthUsersMetaData.Table.TABLE_NAME, null, values);
+				if (rowId > 0) {
+					_uri = ContentUris.withAppendedId(AuthUsersMetaData.CONTENT_URI, rowId);
+					getContext().getContentResolver().notifyChange(_uri, null);
+				} else {
+					_uri = ContentUris.withAppendedId(AuthUsersMetaData.CONTENT_URI, -1);
+				}
 				return _uri;
+			case DEPARTMENTS_TYPE_LIST:
+				rowId = db.insertOrThrow(DepartmentsMetaData.Table.TABLE_NAME, null, values);
+				if (rowId > 0) {
+					_uri = ContentUris.withAppendedId(DepartmentsMetaData.CONTENT_URI, rowId);
+					getContext().getContentResolver().notifyChange(_uri, null);
+				} else {
+					_uri = ContentUris.withAppendedId(DepartmentsMetaData.CONTENT_URI, -1);
+				}
+				return _uri;
+			case HASDEPARTMENT_TYPE_LIST:
+				rowId = db.insertOrThrow(HasDepartmentMetaData.Table.TABLE_NAME, null, values);
+				if (rowId > 0) {
+					_uri = ContentUris.withAppendedId(HasDepartmentMetaData.CONTENT_URI, rowId);
+					getContext().getContentResolver().notifyChange(_uri, null);
+				} else {
+					_uri = ContentUris.withAppendedId(HasDepartmentMetaData.CONTENT_URI, -1);
+				}
+				return _uri;
+			case HASGUARDIAN_TYPE_LIST:
+				rowId = db.insertOrThrow(HasGuardianMetaData.Table.TABLE_NAME, null, values);
+				if (rowId > 0) {
+					_uri = ContentUris.withAppendedId(HasGuardianMetaData.CONTENT_URI, rowId);
+					getContext().getContentResolver().notifyChange(_uri, null);
+				} else {
+					_uri = ContentUris.withAppendedId(HasGuardianMetaData.CONTENT_URI, -1);
+				}
+				return _uri;
+			case HASLINK_TYPE_LIST:
+				rowId = db.insertOrThrow(HasLinkMetaData.Table.TABLE_NAME, null, values);
+				if (rowId > 0) {
+					_uri = ContentUris.withAppendedId(HasLinkMetaData.CONTENT_URI, rowId);
+					getContext().getContentResolver().notifyChange(_uri, null);
+				} else {
+					_uri = ContentUris.withAppendedId(HasLinkMetaData.CONTENT_URI, -1);
+				}
+				return _uri;
+			case HASSUBDEPARTMENT_TYPE_LIST:
+				rowId = db.insertOrThrow(HasSubDepartmentMetaData.Table.TABLE_NAME, null, values);
+				if (rowId > 0) {
+					_uri = ContentUris.withAppendedId(HasSubDepartmentMetaData.CONTENT_URI, rowId);
+					getContext().getContentResolver().notifyChange(_uri, null);
+				} else {
+					_uri = ContentUris.withAppendedId(HasSubDepartmentMetaData.CONTENT_URI, -1);
+				}
+				return _uri;
+			case HASTAG_TYPE_LIST:
+				rowId = db.insertOrThrow(HasTagMetaData.Table.TABLE_NAME, null, values);
+				if (rowId > 0) {
+					_uri = ContentUris.withAppendedId(HasTagMetaData.CONTENT_URI, rowId);
+					getContext().getContentResolver().notifyChange(_uri, null);
+				} else {
+					_uri = ContentUris.withAppendedId(HasTagMetaData.CONTENT_URI, -1);
+				}
+				return _uri;
+			case LISTOFAPPS_TYPE_LIST:
+				rowId = db.insertOrThrow(ListOfAppsMetaData.Table.TABLE_NAME, null, values);
+				if (rowId > 0) {
+					_uri = ContentUris.withAppendedId(ListOfAppsMetaData.CONTENT_URI, rowId);
+					getContext().getContentResolver().notifyChange(_uri, null);
+				} else {
+					_uri = ContentUris.withAppendedId(ListOfAppsMetaData.CONTENT_URI, -1);
+				}
+				return _uri;
+			case MEDIA_TYPE_LIST:
+				rowId = db.insertOrThrow(MediaMetaData.Table.TABLE_NAME, null, values);
+				if (rowId > 0) {
+					_uri = ContentUris.withAppendedId(MediaMetaData.CONTENT_URI, rowId);
+					getContext().getContentResolver().notifyChange(_uri, null);
+				} else {
+					_uri = ContentUris.withAppendedId(MediaMetaData.CONTENT_URI, -1);
+				}
+				return _uri;
+			case MEDIADEPARTMENTACCESS_TYPE_LIST:
+				rowId = db.insertOrThrow(MediaDepartmentAccessMetaData.Table.TABLE_NAME, null, values);
+				if (rowId > 0) {
+					_uri = ContentUris.withAppendedId(MediaDepartmentAccessMetaData.CONTENT_URI, rowId);
+					getContext().getContentResolver().notifyChange(_uri, null);
+				} else {
+					_uri = ContentUris.withAppendedId(MediaDepartmentAccessMetaData.CONTENT_URI, -1);
+				}
+				return _uri;
+			case MEDIAPROFILEACCESS_TYPE_LIST:
+				rowId = db.insertOrThrow(MediaProfileAccessMetaData.Table.TABLE_NAME, null, values);
+				if (rowId > 0) {
+					_uri = ContentUris.withAppendedId(MediaProfileAccessMetaData.CONTENT_URI, rowId);
+					getContext().getContentResolver().notifyChange(_uri, null);
+				} else {
+					_uri = ContentUris.withAppendedId(MediaProfileAccessMetaData.CONTENT_URI, -1);
+				}
+				return _uri;
+			case PROFILES_TYPE_LIST:
+				rowId = db.insertOrThrow(ProfilesMetaData.Table.TABLE_NAME, null, values);
+				if (rowId > 0) {
+					_uri = ContentUris.withAppendedId(ProfilesMetaData.CONTENT_URI, rowId);
+					getContext().getContentResolver().notifyChange(_uri, null);
+				} else {
+					_uri = ContentUris.withAppendedId(ProfilesMetaData.CONTENT_URI, -1);
+				}
+				return _uri;
+			case TAGS_TYPE_LIST:
+				rowId = db.insertOrThrow(TagsMetaData.Table.TABLE_NAME, null, values);
+				if (rowId > 0) {
+					_uri = ContentUris.withAppendedId(TagsMetaData.CONTENT_URI, rowId);
+					getContext().getContentResolver().notifyChange(_uri, null);
+				} else {
+					_uri = ContentUris.withAppendedId(TagsMetaData.CONTENT_URI, -1);
+				}
+				return _uri;
+			default:
+				throw new IllegalArgumentException("Unknown URI: " + uri);
 			}
-		case AUTHUSERS_TYPE_LIST:
-			rowId = db.insert(AuthUsersMetaData.Table.TABLE_NAME, null, values);
-			if (rowId > 0) {
-				_uri = ContentUris.withAppendedId(AuthUsersMetaData.CONTENT_URI, rowId);
-				getContext().getContentResolver().notifyChange(_uri, null);
-				return _uri;
-			} else {
-				_uri = ContentUris.withAppendedId(AuthUsersMetaData.CONTENT_URI, -1);
-				return _uri;
-			}
-		case DEPARTMENTS_TYPE_LIST:
-			rowId = db.insert(DepartmentsMetaData.Table.TABLE_NAME, null, values);
-			if (rowId > 0) {
-				_uri = ContentUris.withAppendedId(DepartmentsMetaData.CONTENT_URI, rowId);
-				getContext().getContentResolver().notifyChange(_uri, null);
-				return _uri;
-			} else {
-				_uri = ContentUris.withAppendedId(DepartmentsMetaData.CONTENT_URI, -1);
-				return _uri;
-			}
-		case HASDEPARTMENT_TYPE_LIST:
-			rowId = db.insert(HasDepartmentMetaData.Table.TABLE_NAME, null, values);
-			if (rowId > 0) {
-				_uri = ContentUris.withAppendedId(HasDepartmentMetaData.CONTENT_URI, rowId);
-				getContext().getContentResolver().notifyChange(_uri, null);
-				return _uri;
-			} else {
-				_uri = ContentUris.withAppendedId(HasDepartmentMetaData.CONTENT_URI, -1);
-				return _uri;
-			}
-		case HASGUARDIAN_TYPE_LIST:
-			rowId = db.insert(HasGuardianMetaData.Table.TABLE_NAME, null, values);
-			if (rowId > 0) {
-				_uri = ContentUris.withAppendedId(HasGuardianMetaData.CONTENT_URI, rowId);
-				getContext().getContentResolver().notifyChange(_uri, null);
-				return _uri;
-			} else {
-				_uri = ContentUris.withAppendedId(HasGuardianMetaData.CONTENT_URI, -1);
-				return _uri;
-			}
-		case HASLINK_TYPE_LIST:
-			rowId = db.insert(HasLinkMetaData.Table.TABLE_NAME, null, values);
-			if (rowId > 0) {
-				_uri = ContentUris.withAppendedId(HasLinkMetaData.CONTENT_URI, rowId);
-				getContext().getContentResolver().notifyChange(_uri, null);
-				return _uri;
-			} else {
-				_uri = ContentUris.withAppendedId(HasLinkMetaData.CONTENT_URI, -1);
-				return _uri;
-			}
-		case HASSUBDEPARTMENT_TYPE_LIST:
-			rowId = db.insert(HasSubDepartmentMetaData.Table.TABLE_NAME, null, values);
-			if (rowId > 0) {
-				_uri = ContentUris.withAppendedId(HasSubDepartmentMetaData.CONTENT_URI, rowId);
-				getContext().getContentResolver().notifyChange(_uri, null);
-				return _uri;
-			} else {
-				_uri = ContentUris.withAppendedId(HasSubDepartmentMetaData.CONTENT_URI, -1);
-				return _uri;
-			}
-		case HASTAG_TYPE_LIST:
-			rowId = db.insert(HasTagMetaData.Table.TABLE_NAME, null, values);
-			if (rowId > 0) {
-				_uri = ContentUris.withAppendedId(HasTagMetaData.CONTENT_URI, rowId);
-				getContext().getContentResolver().notifyChange(_uri, null);
-				return _uri;
-			} else {
-				_uri = ContentUris.withAppendedId(HasTagMetaData.CONTENT_URI, -1);
-				return _uri;
-			}
-		case LISTOFAPPS_TYPE_LIST:
-			rowId = db.insert(ListOfAppsMetaData.Table.TABLE_NAME, null, values);
-			if (rowId > 0) {
-				_uri = ContentUris.withAppendedId(ListOfAppsMetaData.CONTENT_URI, rowId);
-				getContext().getContentResolver().notifyChange(_uri, null);
-				return _uri;
-			} else {
-				_uri = ContentUris.withAppendedId(ListOfAppsMetaData.CONTENT_URI, -1);
-				return _uri;
-			}
-		case MEDIA_TYPE_LIST:
-			rowId = db.insert(MediaMetaData.Table.TABLE_NAME, null, values);
-			if (rowId > 0) {
-				_uri = ContentUris.withAppendedId(MediaMetaData.CONTENT_URI, rowId);
-				getContext().getContentResolver().notifyChange(_uri, null);
-				return _uri;
-			} else {
-				_uri = ContentUris.withAppendedId(MediaMetaData.CONTENT_URI, -1);
-				return _uri;
-			}
-		case MEDIADEPARTMENTACCESS_TYPE_LIST:
-			rowId = db.insert(MediaDepartmentAccessMetaData.Table.TABLE_NAME, null, values);
-			if (rowId > 0) {
-				_uri = ContentUris.withAppendedId(MediaDepartmentAccessMetaData.CONTENT_URI, rowId);
-				getContext().getContentResolver().notifyChange(_uri, null);
-				return _uri;
-			} else {
-				_uri = ContentUris.withAppendedId(MediaDepartmentAccessMetaData.CONTENT_URI, -1);
-				return _uri;
-			}
-		case MEDIAPROFILEACCESS_TYPE_LIST:
-			rowId = db.insert(MediaProfileAccessMetaData.Table.TABLE_NAME, null, values);
-			if (rowId > 0) {
-				_uri = ContentUris.withAppendedId(MediaProfileAccessMetaData.CONTENT_URI, rowId);
-				getContext().getContentResolver().notifyChange(_uri, null);
-				return _uri;
-			} else {
-				_uri = ContentUris.withAppendedId(MediaProfileAccessMetaData.CONTENT_URI, -1);
-				return _uri;
-			}
-		case PROFILES_TYPE_LIST:
-			rowId = db.insert(ProfilesMetaData.Table.TABLE_NAME, null, values);
-			if (rowId > 0) {
-				_uri = ContentUris.withAppendedId(ProfilesMetaData.CONTENT_URI, rowId);
-				getContext().getContentResolver().notifyChange(_uri, null);
-				return _uri;
-			} else {
-				_uri = ContentUris.withAppendedId(ProfilesMetaData.CONTENT_URI, -1);
-				return _uri;
-			}
-		case TAGS_TYPE_LIST:
-			rowId = db.insert(TagsMetaData.Table.TABLE_NAME, null, values);
-			if (rowId > 0) {
-				_uri = ContentUris.withAppendedId(TagsMetaData.CONTENT_URI, rowId);
-				getContext().getContentResolver().notifyChange(_uri, null);
-				return _uri;
-			} else {
-				_uri = ContentUris.withAppendedId(TagsMetaData.CONTENT_URI, -1);
-				return _uri;
-			}
-		default:
-			throw new IllegalArgumentException("Unknown URI: " + uri);
+		} catch (SQLiteConstraintException e) {
+			_uri = ContentUris.withAppendedId(TagsMetaData.CONTENT_URI, -2);
+			return _uri;
 		}
+
 	}
 
 	@Override
 	public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
 		SQLiteQueryBuilder builder = new SQLiteQueryBuilder();
-		
+
 		switch(sUriMatcher.match(uri)) {
 		case APPS_TYPE_LIST:
 			builder.setTables(AppsMetaData.Table.TABLE_NAME);
@@ -574,7 +567,7 @@ public class DbProvider extends ContentProvider {
 		default:
 			throw new IllegalArgumentException("Unknown URI: " + uri);
 		}
-		
+
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		Cursor queryCursor = builder.query(db, projection, selection, selectionArgs, null, null, null);
 		queryCursor.setNotificationUri(getContext().getContentResolver(), uri);
@@ -585,7 +578,7 @@ public class DbProvider extends ContentProvider {
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		int rowsUpdated = 0;
 		String rowId;
-		
+
 		switch(sUriMatcher.match(uri)) {
 		case APPS_TYPE_LIST:
 			rowsUpdated = db.update(AppsMetaData.Table.TABLE_NAME, values, where, whereArgs);

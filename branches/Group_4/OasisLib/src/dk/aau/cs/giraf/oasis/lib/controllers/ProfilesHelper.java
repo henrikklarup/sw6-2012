@@ -155,21 +155,21 @@ public class ProfilesHelper {
 		return result;
 	}
 
-//	/**
-//	 * Get all profiles
-//	 * @return List<Profile>, containing all profiles
-//	 */
-//	public List<Profile> getProfiles() {
-//		List<Profile> profiles = new ArrayList<Profile>();
-//		Cursor c = _context.getContentResolver().query(ProfilesMetaData.CONTENT_URI, columns, null, null, null);
-//
-//		if (c != null) {
-//			profiles = cursorToProfiles(c);
-//			c.close();
-//		}
-//
-//		return profiles;
-//	}
+	/**
+	 * Get all profiles
+	 * @return List<Profile>, containing all profiles
+	 */
+	public List<Profile> getProfiles() {
+		List<Profile> profiles = new ArrayList<Profile>();
+		Cursor c = _context.getContentResolver().query(ProfilesMetaData.CONTENT_URI, columns, null, null, null);
+
+		if (c != null) {
+			profiles = cursorToProfiles(c);
+			c.close();
+		}
+
+		return profiles;
+	}
 
 	/**
 	 * Retrieve the certificates for a profile
@@ -324,6 +324,8 @@ public class ProfilesHelper {
 				cursor.moveToNext();
 			}
 		}
+		
+		cursor.close();
 
 		return profiles;
 	}
@@ -343,6 +345,7 @@ public class ProfilesHelper {
 		profile.setPhone(cursor.getLong(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_PHONE)));
 		profile.setPRole(cursor.getLong(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_ROLE)));
 		profile.setSettings(Setting.toSetting(cursor.getString(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_SETTINGS))));
+		cursor.close();
 		return profile;
 	}
 
