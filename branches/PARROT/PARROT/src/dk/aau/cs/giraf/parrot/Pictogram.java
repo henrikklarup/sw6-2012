@@ -25,6 +25,7 @@ public class Pictogram {
 	private long wordID;
 	private boolean newPictogram =false;
 	private boolean changed = false;
+	private Activity parrent;
 
 	//This are the constructor for the Pictogram class
 	public Pictogram(String name, String imagePath, String soundPath, String wordPath)
@@ -34,6 +35,15 @@ public class Pictogram {
 		this.setSoundPath(soundPath);
 		this.setWordPath(wordPath);
 	}
+	
+	public Pictogram(String name, String imagePath, String soundPath, String wordPath, Activity parrent)
+	{
+		this.setName(name);
+		this.setImagePath(imagePath);
+		this.setSoundPath(soundPath);
+		this.setWordPath(wordPath);
+		this.parrent = parrent;
+	}
 
 	//TODO make methods to ensure that the constructor can not put illegal arguments as the path for images, sounds and words
 
@@ -42,7 +52,6 @@ public class Pictogram {
 	{
 		if(isEmpty() == true)
 		{
-			PARROTActivity parrent = new PARROTActivity();
 			Resources res = parrent.getResources();
 			Bitmap bm = BitmapFactory.decodeResource(res, R.drawable.usynlig);
 			return bm;
@@ -164,7 +173,7 @@ public class Pictogram {
 	}
 
 	public boolean isEmpty() {
-		if(this.name=="#usynlig#")
+		if(this.name.equals("#usynlig#"))
 		{
 			return true;
 		}
