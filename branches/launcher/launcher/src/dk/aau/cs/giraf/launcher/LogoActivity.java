@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import dk.aau.cs.giraf.launcher.R;
 import dk.aau.cs.giraf.oasis.lib.Helper;
+import dk.aau.cs.giraf.oasis.lib.models.App;
 
 public class LogoActivity extends Activity {
 
@@ -20,18 +21,17 @@ public class LogoActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.logo);
-
-	    mActivity = this;
 	    
 	    mContext = this.getApplicationContext();
+	    
+	    Tools.updateGirafApps_DB(mContext);
+	    Tools.updateAndroidApps_DB(mContext);
 	    
 	    Helper helper = new Helper(this);
 	    int size = helper.profilesHelper.getProfiles().size();
 	    if (size <= 0) {
 	    	helper.CreateDummyData();
 	    }
-	    
-	    Tools.updateGirafApps_DB(mContext);
 	    
 	    splashTread = new Thread() {
 	        @Override
