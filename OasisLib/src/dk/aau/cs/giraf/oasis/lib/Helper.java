@@ -115,9 +115,59 @@ public class Helper {
 	public void CreateDummyData() {
 		
 		/*Guardians*/
+		Profile guardian1 = new Profile("User01", "User01", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
+		Profile guardian2 = new Profile("User02", "User02", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
+		Profile guardian3 = new Profile("User03", "User03", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
+		Profile guardian4 = new Profile("User04", "User04", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
+		Profile guardian5 = new Profile("User05", "User05", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
+		Profile guardian6 = new Profile("User06", "User06", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
+		Profile guardian7 = new Profile("User07", "User07", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
+		Profile guardian8 = new Profile("User08", "User08", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
+		Profile guardian9 = new Profile("User09", "User09", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
+		Profile guardian10 = new Profile("User10", "User10", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
+		
+		/*Add guardians*/
+		long guardian1Id = profilesHelper.insertProfile(guardian1);
+		long guardian2Id = profilesHelper.insertProfile(guardian2);
+		long guardian3Id = profilesHelper.insertProfile(guardian3);
+		long guardian4Id = profilesHelper.insertProfile(guardian4);
+		long guardian5Id = profilesHelper.insertProfile(guardian5);
+		long guardian6Id = profilesHelper.insertProfile(guardian6);
+		long guardian7Id = profilesHelper.insertProfile(guardian7);
+		long guardian8Id = profilesHelper.insertProfile(guardian8);
+		long guardian9Id = profilesHelper.insertProfile(guardian9);
+		long guardian10Id = profilesHelper.insertProfile(guardian10);
+		
+		/*Load guardians*/
+		Profile guardian1Loaded = profilesHelper.getProfileById(guardian1Id);
+		Profile guardian2Loaded = profilesHelper.getProfileById(guardian2Id);
+		Profile guardian3Loaded = profilesHelper.getProfileById(guardian3Id);
+		Profile guardian4Loaded = profilesHelper.getProfileById(guardian4Id);
+		Profile guardian5Loaded = profilesHelper.getProfileById(guardian5Id);
+		Profile guardian6Loaded = profilesHelper.getProfileById(guardian6Id);
+		Profile guardian7Loaded = profilesHelper.getProfileById(guardian7Id);
+		Profile guardian8Loaded = profilesHelper.getProfileById(guardian8Id);
+		Profile guardian9Loaded = profilesHelper.getProfileById(guardian9Id);
+		Profile guardian10Loaded = profilesHelper.getProfileById(guardian10Id);
+		
+		/*Set Hardcoded certificates*/
+		profilesHelper.setCertificate("jkkxlagqyrztlrexhzofekyzrnppajeobqxcmunkqhsbrgpxdtqgygnmbhrgnpphaxsjshlpupgakmirhpyfaivvtpynqarxsghhilhkqvpelpreevykxurtppcggkzfaepihlodgznrmbrzgqucstflhmndibuymmvwauvdlyqnnlxkurinuypmqypspmkqavuhfwsh", guardian1);
+		profilesHelper.setCertificate("ldsgjrtvuiwclpjtuxysmyjgpzsqnrtbwbdmgpalnlwtxzdubhbbtkioukaiwgbebhwovfuevykgbbnktnbzhxwugnkkllgjyovisfzzghyuqvxaoscblwqtvujqzgctslihoqetymxfupblcegpfjrfzyrfnjwevgeimxkrdixocyqmaxmyelptofyrsrtrggffmgak", guardian2);
+		profilesHelper.setCertificate("atntrqkxlnftvxquwrwcdloaumdhzkgyglezzsebpvnethrlstvmlorrolymdynjcyonkrtvcuagwigdqqkftsxxhklcnbhznthcqjxnjzzdoqvmfdlxrudcyakvrnfcbohdumawlwmfndjascmvrsoxfjgwzhdvcvqcroxoyjeazmxtrjtlkldoevgdrqvgfbklhtgm", guardian3);
+		profilesHelper.setCertificate("juuaygujymvacvldvhgirtvtumbdtfhmthtumpgqjvlhzvpzmwezifupvfhpjermlckxdvmjfpmqfadepwdvgdtwvoqkruyeuklsrurgirioqiqdzdxnbuemdmezycyncjqkvcjhgfusfggckxaispgbrzcxmtrgztnbshucxpaoodjvqujhwyeccnsxfjgkrjfoszvu", guardian4);
+		profilesHelper.setCertificate("qyrmohbmcnsljhknvggvcdifarowqvpckzxfvlkwnglztjormumiroifttxbqzmybyvbulrvnoxrdidieoxeeayxkohqrwapdnszdnnegsgdnwdoenjlwcgurjtvmufwhjfnkcpyalzkrvzmspdliaodnlkookaszjyurwjclxufomktgucbsaknxztrpkhxutbelrrc", guardian5);
+		profilesHelper.setCertificate("bphiomxvbsricewxcpuzpdtqjdcywlaplsmzjqzayhdyxeawyaeeofkpvfhwaudzwaafihtfuddsbrjhuztepopztbdgcokafnrgqrbaydsryfianltscyitukssklazgubhkdvvjqolmwiyyhuidhyqxoxwabmvdnnxatvzhvkawyiktbswjdcqlustzermuytgqvae", guardian6);
+		profilesHelper.setCertificate("qldstjxxvbdacxfqjfwbjysjzmuobkajrdnofbtewuwpfkrobhqeblvpolnwtrhxiovuepqgssemakkjvpqoworokauseymbhafvmyhcnpdfxvpevsnjvbcwzlbordoaifgjixztsadmhldzbnvbaaxvmhssijnhvrqfretxqxhxvxsjuwcknxbktfigctbwppndwxpj", guardian7);
+		profilesHelper.setCertificate("duzogdegzhtazsqmjwmxfktmnqcbpuxuvgxmbhpkzcnomoxrtrqlfisqdvfmnhmrmssocxifquqtfnzczzznunywesepobaiikgzlaecairmrlcqzdtfrxmispgamrwwcgzvlfnaysrexwdtmhytgpnncelikvrfozixdtsixwipnfactxywyeqvjhosqwekdnbcbcac", guardian8);
+		profilesHelper.setCertificate("wzkbaaogonrkgckgfrjrwdvklpcwpmloamhlfqmytotpqkrixkwqnqamazcbybhjfdalsvqpdpiwlyctcuvtyclgreonxkqqevokjdbjwdcrgkhozleidpnoiwkdmcaylmosmwbfsrcnmlwlstgfljfwdgodinjrjrygeurrxyjpudsqukqkdgwwerlotgafhqhlxszv", guardian9);
+		profilesHelper.setCertificate("osrvixzwyklicmkcwymiccawlbgctvigycafvftciuznhqrrztnyoafqrfuskqdbddrrppnadthngsfsdvooybjfwdfcdzxfdpzyvaxibxcbqnebgifdusgldvdkeonkvdmcmwffghreolhfxhrwgcogpsfayzxsoeyqwddposjdqwwiovnwabefudybzapihunhluaj", guardian10);
+		
+		
+		/*Guardians*/
 		Profile Guardian1 = new Profile("Guardian1", "First", "LoL1", 1, 88888888, null, null);
 		Profile Guardian2 = new Profile("Guardian2", "Second", "LoL2", 1, 88888888, null, null);
 		Profile Guardian3 = new Profile("Guardian3", "Third", "LoL3", 1, 88888888, null, null);
+		
 		/*Add guardians*/
 		long guard1Id = profilesHelper.insertProfile(Guardian1);
 		long guard2Id = profilesHelper.insertProfile(Guardian2);
