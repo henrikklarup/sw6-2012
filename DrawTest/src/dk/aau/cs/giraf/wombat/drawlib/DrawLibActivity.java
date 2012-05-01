@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Display;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import dk.aau.cs.giraf.TimerLib.Guardian;
@@ -34,7 +33,6 @@ public class DrawLibActivity extends Activity {
 		Guardian guard = Guardian.getInstance();
 		SubProfile sub = guard.getSubProfile();
 		
-
 		
 		// Get display size
 		WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
@@ -62,7 +60,14 @@ public class DrawLibActivity extends Activity {
 			setContentView(frame);	
 		}
 		
-	    this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		new Handler().postDelayed(new Runnable() {
+            public void run() {
+                final Intent mainIntent = new Intent(DrawLibActivity.this, DoneScreenActivity.class);
+                //TODO: putExtra data with picture and text information
+                DrawLibActivity.this.startActivity(mainIntent);
+                DrawLibActivity.this.finish();
+            }
+        }, sub.get_totalTime()*1000);
 	}
 	
 	private View genDrawView(SubProfile sub) {
