@@ -21,6 +21,7 @@ public class GWidgetCalendar extends TextView implements IGWidget {
 	private String day_of_month;
 	private String month;
 	private final Context mContext;
+	private TextView mTooltipTextview;
 	
 	private void setStyle(){
 		this.setBackgroundDrawable(getResources().getDrawable(R.drawable.gcal_icon));
@@ -56,12 +57,19 @@ public class GWidgetCalendar extends TextView implements IGWidget {
 	public final void showTooltip(){
 		GTooltip g = new GTooltip(mContext);
 		TextView tv = new TextView(mContext);
-		tv.setText(day_of_week+" den "+day_of_month+". "+month+", Uge "+week_num);
+		tv.setText(generateTooltipString());
 		tv.setTextColor(Color.WHITE);
 		
 		g.addView(tv);
 		g.setRightOf(this);
 		g.show();
+		
+		mTooltipTextview = tv;
+		
+	}
+	
+	private String generateTooltipString(){
+		return day_of_week+" den "+day_of_month+". "+month+", Uge "+week_num;
 	}
 	
 	public void updateDisplay(){
@@ -79,6 +87,10 @@ public class GWidgetCalendar extends TextView implements IGWidget {
 		
 		day_of_month = Integer.toString(cal.get(Calendar.DAY_OF_MONTH));
 		this.setText(day_of_month);
+		
+		if(mTooltipTextview != null){
+		mTooltipTextview.setText(generateTooltipString());
+		}
 	}
 	
 	public void onWindowFocusChanged(boolean hasFocus) {

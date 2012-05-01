@@ -24,5 +24,9 @@
         <item >November</item>
         <item >December</item>
     </string-array>
+    <string name="mPreString">GIRAF is: </string>
+    <string name="mOnlineString">GIRAF is fully updated with the newest content.</string>
+    <string name="mSyncingString">Syncing with the Savannah server.</string>
+    <string name="mOfflineString">Unable to reach the Savannah server, so your systemt might not be fully up-to-date.</string>
     
 </resources>
