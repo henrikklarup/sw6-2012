@@ -224,10 +224,10 @@ public class HomeActivity extends Activity {
 	 * Load the user's applications into the grid.
 	 */
 	private void loadApplications() {		
-		//List<App> userApps = Tools.getVisibleGirafApps(mContext, mCurrentUser);
+		List<App> userApps = Tools.getVisibleGirafApps(mContext, mCurrentUser);
 
-		Tools.attachAllDeviceAppsToUser(mContext);
-		List<App> userApps = Tools.getVisibleApps(mContext, mCurrentUser);
+		//Tools.attachAllDeviceAppsToUser(mContext);
+		//List<App> userApps = Tools.getVisibleApps(mContext, mCurrentUser);
 		
 		// If a guardian does not have any apps available, give them all GIRAF apps on the device:
 		if (userApps.size() == 0 && mCurrentUser.getPRole() == Tools.ROLE_GUARDIAN) {
