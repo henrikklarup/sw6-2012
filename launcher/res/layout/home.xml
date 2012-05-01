@@ -88,8 +88,8 @@
 
     <HorizontalScrollView
     android="http://schemas.android.com/apk/res/android" 
-    android:layout_width="500dp"
-    android:layout_height="wrap_content" 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
     android:layout_toRightOf="@id/HomeBarLayout">
     	<RelativeLayout
     	xmlns:android="http://schemas.android.com/apk/res/android"
@@ -102,11 +102,11 @@
     		android:id="@+id/GridViewHome"
     		android:layout_width="wrap_content"
     		android:layout_height="match_parent"
-    		android:columnWidth="250dp"
-    		android:numColumns="auto_fit"
-    		android:stretchMode="columnWidth"
-    		android:padding="50dp"
-    		android:horizontalSpacing="50dp"
+    		android:columnWidth="200dp"
+    		android:stretchMode="none"
+    		android:paddingLeft="50dp"
+    		android:paddingTop="30dp"
+    		android:horizontalSpacing="100dp"
     		android:verticalSpacing="50dp" 
     		android:listSelector="#00000000"
     		android:scrollbars="horizontal" />
