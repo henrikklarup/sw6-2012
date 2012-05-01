@@ -116,6 +116,7 @@ public class HomeActivity extends Activity {
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
 		this.resizeBar();
+		this.rotateGridView();
 	}
 	
 	@Override
@@ -131,6 +132,13 @@ public class HomeActivity extends Activity {
         super.onResume();
         mWidgetTimer.sendEmptyMessage(GWidgetUpdater.MSG_START);
     }
+	
+	private void rotateGridView() {
+		final boolean isLandscape = Tools.isLandscape(mContext);
+		if (isLandscape) {
+			mGrid.setNumColumns((int) Math.ceil(mNumberOfApps / 3));
+		}
+	}
 
 	private void resizeBar() {
 		GridView homeGridView = (GridView)this.findViewById(R.id.GridViewHome);
@@ -210,10 +218,6 @@ public class HomeActivity extends Activity {
 		mConnectivityWidget.setLayoutParams(connectivityWidgetParams);
 		mCalendarWidget.setLayoutParams(calendarWidgetParams);
 		mLogoutWidget.setLayoutParams(logoutWidgetParams);
-		
-		if (isLandscape) {
-			mGrid.setNumColumns((int) Math.ceil(mNumberOfApps / 3));
-		}
 	}
 
 	/**
