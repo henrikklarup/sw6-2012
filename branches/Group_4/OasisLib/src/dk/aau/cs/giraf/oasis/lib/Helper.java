@@ -124,7 +124,7 @@ public class Helper {
 		Profile guardian7 = new Profile("User07", "User07", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
 		Profile guardian8 = new Profile("User08", "User08", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
 		Profile guardian9 = new Profile("User09", "User09", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
-		Profile guardian10 = new Profile("User10", "User10", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
+		Profile guardian0 = new Profile("User10", "User10", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
 		
 		/*Add guardians*/
 		long guardian1Id = profilesHelper.insertProfile(guardian1);
@@ -136,7 +136,7 @@ public class Helper {
 		long guardian7Id = profilesHelper.insertProfile(guardian7);
 		long guardian8Id = profilesHelper.insertProfile(guardian8);
 		long guardian9Id = profilesHelper.insertProfile(guardian9);
-		long guardian10Id = profilesHelper.insertProfile(guardian10);
+		long guardian0Id = profilesHelper.insertProfile(guardian0);
 		
 		/*Load guardians*/
 		Profile guardian1Loaded = profilesHelper.getProfileById(guardian1Id);
@@ -148,8 +148,8 @@ public class Helper {
 		Profile guardian7Loaded = profilesHelper.getProfileById(guardian7Id);
 		Profile guardian8Loaded = profilesHelper.getProfileById(guardian8Id);
 		Profile guardian9Loaded = profilesHelper.getProfileById(guardian9Id);
-		Profile guardian10Loaded = profilesHelper.getProfileById(guardian10Id);
-		
+		Profile guardian0Loaded = profilesHelper.getProfileById(guardian0Id);
+	
 		/*Set Hardcoded certificates*/
 		profilesHelper.setCertificate("jkkxlagqyrztlrexhzofekyzrnppajeobqxcmunkqhsbrgpxdtqgygnmbhrgnpphaxsjshlpupgakmirhpyfaivvtpynqarxsghhilhkqvpelpreevykxurtppcggkzfaepihlodgznrmbrzgqucstflhmndibuymmvwauvdlyqnnlxkurinuypmqypspmkqavuhfwsh", guardian1);
 		profilesHelper.setCertificate("ldsgjrtvuiwclpjtuxysmyjgpzsqnrtbwbdmgpalnlwtxzdubhbbtkioukaiwgbebhwovfuevykgbbnktnbzhxwugnkkllgjyovisfzzghyuqvxaoscblwqtvujqzgctslihoqetymxfupblcegpfjrfzyrfnjwevgeimxkrdixocyqmaxmyelptofyrsrtrggffmgak", guardian2);
@@ -160,100 +160,129 @@ public class Helper {
 		profilesHelper.setCertificate("qldstjxxvbdacxfqjfwbjysjzmuobkajrdnofbtewuwpfkrobhqeblvpolnwtrhxiovuepqgssemakkjvpqoworokauseymbhafvmyhcnpdfxvpevsnjvbcwzlbordoaifgjixztsadmhldzbnvbaaxvmhssijnhvrqfretxqxhxvxsjuwcknxbktfigctbwppndwxpj", guardian7);
 		profilesHelper.setCertificate("duzogdegzhtazsqmjwmxfktmnqcbpuxuvgxmbhpkzcnomoxrtrqlfisqdvfmnhmrmssocxifquqtfnzczzznunywesepobaiikgzlaecairmrlcqzdtfrxmispgamrwwcgzvlfnaysrexwdtmhytgpnncelikvrfozixdtsixwipnfactxywyeqvjhosqwekdnbcbcac", guardian8);
 		profilesHelper.setCertificate("wzkbaaogonrkgckgfrjrwdvklpcwpmloamhlfqmytotpqkrixkwqnqamazcbybhjfdalsvqpdpiwlyctcuvtyclgreonxkqqevokjdbjwdcrgkhozleidpnoiwkdmcaylmosmwbfsrcnmlwlstgfljfwdgodinjrjrygeurrxyjpudsqukqkdgwwerlotgafhqhlxszv", guardian9);
-		profilesHelper.setCertificate("osrvixzwyklicmkcwymiccawlbgctvigycafvftciuznhqrrztnyoafqrfuskqdbddrrppnadthngsfsdvooybjfwdfcdzxfdpzyvaxibxcbqnebgifdusgldvdkeonkvdmcmwffghreolhfxhrwgcogpsfayzxsoeyqwddposjdqwwiovnwabefudybzapihunhluaj", guardian10);
-		
-		
-		/*Guardians*/
-		Profile Guardian1 = new Profile("Guardian1", "First", "LoL1", 1, 88888888, null, null);
-		Profile Guardian2 = new Profile("Guardian2", "Second", "LoL2", 1, 88888888, null, null);
-		Profile Guardian3 = new Profile("Guardian3", "Third", "LoL3", 1, 88888888, null, null);
-		
-		/*Add guardians*/
-		long guard1Id = profilesHelper.insertProfile(Guardian1);
-		long guard2Id = profilesHelper.insertProfile(Guardian2);
-		long guard3Id = profilesHelper.insertProfile(Guardian3);
-		
-		/*Load guardians*/
-		Profile Guardian1Loaded = profilesHelper.getProfileById(guard1Id);
-		Profile Guardian2Loaded = profilesHelper.getProfileById(guard2Id);
-		Profile Guardian3Loaded = profilesHelper.getProfileById(guard3Id);
-		
-		/*Departments*/
-		Department dep1 = new Department("Dep1", "Hjoernet", 88888888, "dep1[at]dep.com");
-		Department subdep1 = new Department("subDep1", "Hjoernet", 88888888, "subdep1[at]dep.com");
-		Department dep3 = new Department("Dep3", "Hjoernet", 88888888, "dep3[at]dep.com");
-		
-		/*Add departments*/
-		long dep1Id = departmentsHelper.insertDepartment(dep1);
-		long dep2Id = departmentsHelper.insertDepartment(subdep1);
-		long dep3Id = departmentsHelper.insertDepartment(dep3);
-
-		/*Load Departments*/
-		Department dep1Loaded = departmentsHelper.getDepartmentById(dep1Id);
-		Department subDep1Loaded = departmentsHelper.getDepartmentById(dep2Id);
-		Department dep3Loaded = departmentsHelper.getDepartmentById(dep3Id);
-		
-		/*Add subdepartment*/
-		departmentsHelper.attachSubDepartmentToDepartment(dep1Loaded, subDep1Loaded);
-				
-		/*Attach guardians to departments*/
-		departmentsHelper.attachProfileToDepartment(Guardian1Loaded, dep1Loaded);
-		departmentsHelper.attachProfileToDepartment(Guardian2Loaded, subDep1Loaded);
-		departmentsHelper.attachProfileToDepartment(Guardian3Loaded, dep3Loaded);
-		
-		/*Set Hardcoded certificates*/
-		profilesHelper.setCertificate("abcde", Guardian1Loaded);
-		profilesHelper.setCertificate("fghij", Guardian2Loaded);
-		profilesHelper.setCertificate("klmno", Guardian3Loaded);
+		profilesHelper.setCertificate("osrvixzwyklicmkcwymiccawlbgctvigycafvftciuznhqrrztnyoafqrfuskqdbddrrppnadthngsfsdvooybjfwdfcdzxfdpzyvaxibxcbqnebgifdusgldvdkeonkvdmcmwffghreolhfxhrwgcogpsfayzxsoeyqwddposjdqwwiovnwabefudybzapihunhluaj", guardian0);
 		
 		/*Children*/
-		Profile Child1 = new Profile("Child1", "G1", "LoLA", 3, 88888888, null, null);
-		Profile Child2 = new Profile("Child2", "G1", "LoLA", 3, 88888888, null, null);
-		Profile Child3 = new Profile("Child3", "G2", "LoLB", 3, 88888888, null, null);
-		Profile Child4 = new Profile("Child4", "G2", "LoLB", 3, 88888888, null, null);
-		Profile Child5 = new Profile("Child5", "G3", "LoLC", 3, 88888888, null, null);
+		Profile child1 = new Profile("Child1", "Child1", null, Profile.pRoles.CHILD.ordinal(), 88888888, null, null);
+		Profile child2 = new Profile("Child2", "Child2", null, Profile.pRoles.CHILD.ordinal(), 88888888, null, null);
+		Profile child3 = new Profile("Child3", "Child3", null, Profile.pRoles.CHILD.ordinal(), 88888888, null, null);
+		Profile child4 = new Profile("Child4", "Child4", null, Profile.pRoles.CHILD.ordinal(), 88888888, null, null);
+		Profile child5 = new Profile("Child5", "Child5", null, Profile.pRoles.CHILD.ordinal(), 88888888, null, null);
+		Profile child6 = new Profile("Child6", "Child6", null, Profile.pRoles.CHILD.ordinal(), 88888888, null, null);
+		Profile child7 = new Profile("Child7", "Child7", null, Profile.pRoles.CHILD.ordinal(), 88888888, null, null);
+		Profile child8 = new Profile("Child8", "Child8", null, Profile.pRoles.CHILD.ordinal(), 88888888, null, null);
+		Profile child9 = new Profile("Child9", "Child9", null, Profile.pRoles.CHILD.ordinal(), 88888888, null, null);
+		Profile child0 = new Profile("Child10", "Child10", null, Profile.pRoles.CHILD.ordinal(), 88888888, null, null);
 
 		/*Add children*/
-		long child1Id = profilesHelper.insertProfile(Child1);
-		long child2Id = profilesHelper.insertProfile(Child2);
-		long child3Id = profilesHelper.insertProfile(Child3);
-		long child4Id = profilesHelper.insertProfile(Child4);
-		long child5Id = profilesHelper.insertProfile(Child5);
+		long child1Id = profilesHelper.insertProfile(child1);
+		long child2Id = profilesHelper.insertProfile(child2);
+		long child3Id = profilesHelper.insertProfile(child3);
+		long child4Id = profilesHelper.insertProfile(child4);
+		long child5Id = profilesHelper.insertProfile(child5);
+		long child6Id = profilesHelper.insertProfile(child6);
+		long child7Id = profilesHelper.insertProfile(child7);
+		long child8Id = profilesHelper.insertProfile(child8);
+		long child9Id = profilesHelper.insertProfile(child9);
+		long child0Id = profilesHelper.insertProfile(child0);
 		
 		/*Load children*/
-		Profile Child1Loaded = profilesHelper.getProfileById(child1Id);
-		Profile Child2Loaded = profilesHelper.getProfileById(child2Id);
-		Profile Child3Loaded = profilesHelper.getProfileById(child3Id);
-		Profile Child4Loaded = profilesHelper.getProfileById(child4Id);
-		Profile Child5Loaded = profilesHelper.getProfileById(child5Id);
-		
-		/*Set Hardcoded certificates*/
-		profilesHelper.setCertificate("pqrst", Child1Loaded);
-		profilesHelper.setCertificate("uvxyz", Child2Loaded);
-		profilesHelper.setCertificate("12345", Child3Loaded);
-		profilesHelper.setCertificate("67890", Child4Loaded);
-		profilesHelper.setCertificate("qwert", Child5Loaded);
+		Profile child1Loaded = profilesHelper.getProfileById(child1Id);
+		Profile child2Loaded = profilesHelper.getProfileById(child2Id);
+		Profile child3Loaded = profilesHelper.getProfileById(child3Id);
+		Profile child4Loaded = profilesHelper.getProfileById(child4Id);
+		Profile child5Loaded = profilesHelper.getProfileById(child5Id);
+		Profile child6Loaded = profilesHelper.getProfileById(child6Id);
+		Profile child7Loaded = profilesHelper.getProfileById(child7Id);
+		Profile child8Loaded = profilesHelper.getProfileById(child8Id);
+		Profile child9Loaded = profilesHelper.getProfileById(child9Id);
+		Profile child0Loaded = profilesHelper.getProfileById(child0Id);
 
-		/*Attach children to department*/
-		departmentsHelper.attachProfileToDepartment(Child1Loaded, dep1Loaded);
-		departmentsHelper.attachProfileToDepartment(Child2Loaded, dep1Loaded);
-		departmentsHelper.attachProfileToDepartment(Child3Loaded, subDep1Loaded);
-		departmentsHelper.attachProfileToDepartment(Child4Loaded, subDep1Loaded);
-		departmentsHelper.attachProfileToDepartment(Child5Loaded, dep3Loaded);
-		
-		
 		/*Attach children and guardians*/
-		profilesHelper.attachChildToGuardian(Child1Loaded, Guardian1Loaded);
-		profilesHelper.attachChildToGuardian(Child2Loaded, Guardian1Loaded);
-		profilesHelper.attachChildToGuardian(Child3Loaded, Guardian2Loaded);
-		profilesHelper.attachChildToGuardian(Child4Loaded, Guardian2Loaded);
-		profilesHelper.attachChildToGuardian(Child5Loaded, Guardian3Loaded);
+		profilesHelper.attachChildToGuardian(child1Loaded, guardian1Loaded);
+		profilesHelper.attachChildToGuardian(child2Loaded, guardian1Loaded);
+		profilesHelper.attachChildToGuardian(child3Loaded, guardian1Loaded);
+		profilesHelper.attachChildToGuardian(child4Loaded, guardian1Loaded);
+		profilesHelper.attachChildToGuardian(child5Loaded, guardian1Loaded);
+		profilesHelper.attachChildToGuardian(child6Loaded, guardian1Loaded);
+		profilesHelper.attachChildToGuardian(child7Loaded, guardian1Loaded);
+		profilesHelper.attachChildToGuardian(child8Loaded, guardian1Loaded);
+		profilesHelper.attachChildToGuardian(child9Loaded, guardian1Loaded);
+		profilesHelper.attachChildToGuardian(child0Loaded, guardian1Loaded);
 		
+		profilesHelper.attachChildToGuardian(child2Loaded, guardian2Loaded);
+		profilesHelper.attachChildToGuardian(child3Loaded, guardian3Loaded);
+		profilesHelper.attachChildToGuardian(child4Loaded, guardian4Loaded);
+		profilesHelper.attachChildToGuardian(child5Loaded, guardian5Loaded);
+		profilesHelper.attachChildToGuardian(child6Loaded, guardian6Loaded);
+		profilesHelper.attachChildToGuardian(child7Loaded, guardian7Loaded);
+		profilesHelper.attachChildToGuardian(child8Loaded, guardian8Loaded);
+		profilesHelper.attachChildToGuardian(child9Loaded, guardian9Loaded);
+		profilesHelper.attachChildToGuardian(child0Loaded, guardian0Loaded);
+		
+		/*Departments*/
+		Department department1 = new Department("Egebakken", "Hjoernet", 88888888, "dep1@dep.com");
+		Department department2 = new Department("Birken", "Hjoernet", 88888888, "dep2@dep.com");
+		Department subdepartment11 = new Department("SubDep11", "Hjoernet", 88888888, "subdep11@dep.com");
+		Department subdepartment12 = new Department("SubDep12", "Hjoernet", 88888888, "subdep12@dep.com");
+		Department subsubdepartment111= new Department("SubSubDep111", "Hjoernet", 88888888, "subsubdep111@dep.com");
+		Department subsubdepartment112 = new Department("SubSubDep112", "Hjoernet", 88888888, "subsubdep112@dep.com");
+		Department subsubdepartment121 = new Department("SubSubDep123", "Hjoernet", 88888888, "subsubdep123@dep.com");
+		
+		
+		/*Add departments*/
+		long department1Id = departmentsHelper.insertDepartment(department1);
+		long department2Id = departmentsHelper.insertDepartment(department2);
+		long subdepartment11Id = departmentsHelper.insertDepartment(subdepartment11);
+		long subdepartment12Id = departmentsHelper.insertDepartment(subdepartment12);
+		long subsubdepartment111Id = departmentsHelper.insertDepartment(subsubdepartment111);
+		long subsubdepartment112Id = departmentsHelper.insertDepartment(subsubdepartment112);
+		long subsubdepartment121Id = departmentsHelper.insertDepartment(subsubdepartment121);
+
+		/*Load Departments*/
+		Department department1Loaded = departmentsHelper.getDepartmentById(department1Id);
+		Department department2Loaded = departmentsHelper.getDepartmentById(department2Id);
+		Department subdepartment11Loaded = departmentsHelper.getDepartmentById(subdepartment11Id);
+		Department subdepartment12Loaded = departmentsHelper.getDepartmentById(subdepartment12Id);
+		Department subsubdepartment111Loaded = departmentsHelper.getDepartmentById(subsubdepartment111Id);
+		Department subsubdepartment112Loaded = departmentsHelper.getDepartmentById(subsubdepartment112Id);
+		Department subsubdepartment121Loaded = departmentsHelper.getDepartmentById(subsubdepartment121Id);
+		
+		/*Add subdepartments*/
+		departmentsHelper.attachSubDepartmentToDepartment(department1Loaded, subdepartment11Loaded);
+		departmentsHelper.attachSubDepartmentToDepartment(department1Loaded, subdepartment12Loaded);
+		departmentsHelper.attachSubDepartmentToDepartment(subdepartment11Loaded, subsubdepartment111Loaded);
+		departmentsHelper.attachSubDepartmentToDepartment(subdepartment11Loaded, subsubdepartment112Loaded);
+		departmentsHelper.attachSubDepartmentToDepartment(subdepartment12Loaded, subsubdepartment121Loaded);
+				
+		/*Attach guardians to departments*/
+		departmentsHelper.attachProfileToDepartment(guardian1Loaded, department1Loaded);
+		departmentsHelper.attachProfileToDepartment(guardian2Loaded, department2Loaded);
+		departmentsHelper.attachProfileToDepartment(guardian3Loaded, subdepartment11Loaded);
+		departmentsHelper.attachProfileToDepartment(guardian4Loaded, subdepartment12Loaded);
+		departmentsHelper.attachProfileToDepartment(guardian5Loaded, subsubdepartment111Loaded);
+		departmentsHelper.attachProfileToDepartment(guardian6Loaded, subsubdepartment112Loaded);
+		departmentsHelper.attachProfileToDepartment(guardian7Loaded, subsubdepartment121Loaded);
+		departmentsHelper.attachProfileToDepartment(guardian8Loaded, subsubdepartment111Loaded);
+		departmentsHelper.attachProfileToDepartment(guardian9Loaded, subsubdepartment112Loaded);
+		departmentsHelper.attachProfileToDepartment(guardian0Loaded, subsubdepartment121Loaded);
+		
+		/*Attach children to department*/
+		departmentsHelper.attachProfileToDepartment(child1Loaded, department1Loaded);
+		departmentsHelper.attachProfileToDepartment(child2Loaded, department2Loaded);
+		departmentsHelper.attachProfileToDepartment(child3Loaded, subdepartment11Loaded);
+		departmentsHelper.attachProfileToDepartment(child4Loaded, subdepartment12Loaded);
+		departmentsHelper.attachProfileToDepartment(child5Loaded, subsubdepartment111Loaded);
+		departmentsHelper.attachProfileToDepartment(child6Loaded, subsubdepartment112Loaded);
+		departmentsHelper.attachProfileToDepartment(child7Loaded, subsubdepartment121Loaded);
+		departmentsHelper.attachProfileToDepartment(child8Loaded, subsubdepartment111Loaded);
+		departmentsHelper.attachProfileToDepartment(child9Loaded, subsubdepartment112Loaded);
+		departmentsHelper.attachProfileToDepartment(child0Loaded, subsubdepartment121Loaded);
 		
 		/*Media*/
-		Media media1 = new Media("Media1", "/mnt/sdcard/Pictures/giraf/private/media1.jpg", false, "Picture", Child1Loaded.getId());
-		Media media2 = new Media("Media2", "/mnt/sdcard/Pictures/giraf/public/media2.jpg", true, "Picture", Child1Loaded.getId());
-		Media media3 = new Media("Media3", "/mnt/sdcard/Pictures/giraf/private/media3.jpg", false, "Picture", Child2Loaded.getId());
+		Media media1 = new Media("Media1", "/mnt/sdcard/Pictures/giraf/private/media1.jpg", false, "Picture", child1Loaded.getId());
+		Media media2 = new Media("Media2", "/mnt/sdcard/Pictures/giraf/public/media2.jpg", true, "Picture", child1Loaded.getId());
+		Media media3 = new Media("Media3", "/mnt/sdcard/Pictures/giraf/private/media3.jpg", false, "Picture", child2Loaded.getId());
 		
 		long media1Id = mediaHelper.insertMedia(media1);
 		long media2Id = mediaHelper.insertMedia(media2);
@@ -267,9 +296,9 @@ public class Helper {
 		mediaHelper.attachSubMediaToMedia(media2Loaded, media2Loaded);
 		
 		/*Attach media to department*/
-		mediaHelper.attachMediaToDepartment(media1Loaded, dep1Loaded, Child1Loaded);
-		mediaHelper.attachMediaToDepartment(media2Loaded, dep1Loaded, Child1Loaded);
-		mediaHelper.attachMediaToDepartment(media3Loaded, dep3Loaded, Child2Loaded);
+		mediaHelper.attachMediaToDepartment(media1Loaded, department1Loaded, child1Loaded);
+		mediaHelper.attachMediaToDepartment(media2Loaded, department1Loaded, child1Loaded);
+		mediaHelper.attachMediaToDepartment(media3Loaded, subdepartment11Loaded, child2Loaded);
 		
 		/*Tags*/
 		Tag tag1 = new Tag("Dog1");
@@ -325,10 +354,10 @@ public class Helper {
 		App app4Loaded = appsHelper.getAppById(app4Id);
 		
 		/*Attach app to profile*/
-		appsHelper.attachAppToProfile(app1Loaded, Child1Loaded);
-		appsHelper.attachAppToProfile(app2Loaded, Child1Loaded);
-		appsHelper.attachAppToProfile(app3Loaded, Child2Loaded);
-		appsHelper.attachAppToProfile(app4Loaded, Child3Loaded);
+		appsHelper.attachAppToProfile(app1Loaded, child1Loaded);
+		appsHelper.attachAppToProfile(app2Loaded, child1Loaded);
+		appsHelper.attachAppToProfile(app3Loaded, child2Loaded);
+		appsHelper.attachAppToProfile(app4Loaded, child3Loaded);
 		
 	}
 	
