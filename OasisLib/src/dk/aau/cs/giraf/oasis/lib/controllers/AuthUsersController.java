@@ -37,13 +37,13 @@ class AuthUsersController {
 	//METHODS TO CALL
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	/**
-	 * Clear auth users table
-	 * @return Rows
-	 */
-	public int clearAuthUsersTable() {
-		return _context.getContentResolver().delete(AuthUsersMetaData.CONTENT_URI, null, null);
-	}
+//	/**
+//	 * Clear auth users table
+//	 * @return Rows
+//	 */
+//	public int clearAuthUsersTable() {
+//		return _context.getContentResolver().delete(AuthUsersMetaData.CONTENT_URI, null, null);
+//	}
 
 	/**
 	 * Insert auth user

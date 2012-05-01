@@ -36,13 +36,13 @@ class MediaDepartmentAccessController {
 	//METHODS TO CALL
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	/**
-	 * Clear media department access
-	 * @return Rows
-	 */
-	public int clearMediaDepartmentAccessTable() {
-		return _context.getContentResolver().delete(MediaDepartmentAccessMetaData.CONTENT_URI, null, null);
-	}
+//	/**
+//	 * Clear media department access
+//	 * @return Rows
+//	 */
+//	public int clearMediaDepartmentAccessTable() {
+//		return _context.getContentResolver().delete(MediaDepartmentAccessMetaData.CONTENT_URI, null, null);
+//	}
 	
 	/**
 	 * Remove media profiles access
@@ -68,23 +68,23 @@ class MediaDepartmentAccessController {
 		return 0;
 	}
 
-	/**
-	 * Get media department accesses
-	 * @return List of media department access
-	 */
-	public List<MediaDepartmentAccess> getMediaDepartmentAccesses() {
-		List<MediaDepartmentAccess> list = new ArrayList<MediaDepartmentAccess>();
-
-		Cursor c = _context.getContentResolver().query(MediaDepartmentAccessMetaData.CONTENT_URI, columns, null, null, null);
-
-		if (c != null) {
-			list = cursorToMediaDepartmentAccessList(c);
-
-			c.close();
-		}
-
-		return list;
-	}
+//	/**
+//	 * Get media department accesses
+//	 * @return List of media department access
+//	 */
+//	public List<MediaDepartmentAccess> getMediaDepartmentAccesses() {
+//		List<MediaDepartmentAccess> list = new ArrayList<MediaDepartmentAccess>();
+//
+//		Cursor c = _context.getContentResolver().query(MediaDepartmentAccessMetaData.CONTENT_URI, columns, null, null, null);
+//
+//		if (c != null) {
+//			list = cursorToMediaDepartmentAccessList(c);
+//
+//			c.close();
+//		}
+//
+//		return list;
+//	}
 
 	/**
 	 * Get media by department

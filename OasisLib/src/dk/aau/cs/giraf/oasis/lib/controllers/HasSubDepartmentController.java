@@ -34,13 +34,13 @@ class HasSubDepartmentController {
 	//METHODS TO CALL
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	/**
-	 * Clear has sub department
-	 * @return Rows
-	 */
-	public int clearHasSubDepartmentTable() {
-		return _context.getContentResolver().delete(HasSubDepartmentMetaData.CONTENT_URI, null, null);
-	}
+//	/**
+//	 * Clear has sub department
+//	 * @return Rows
+//	 */
+//	public int clearHasSubDepartmentTable() {
+//		return _context.getContentResolver().delete(HasSubDepartmentMetaData.CONTENT_URI, null, null);
+//	}
 	
 	/**
 	 * Remove has sub deparment

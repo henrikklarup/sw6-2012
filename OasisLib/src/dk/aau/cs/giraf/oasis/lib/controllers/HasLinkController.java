@@ -34,13 +34,13 @@ class HasLinkController {
 	//METHODS TO CALL
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	/**
-	 * Clear has link
-	 * @return Rows
-	 */
-	public int clearHasLinkTable() {
-		return _context.getContentResolver().delete(HasLinkMetaData.CONTENT_URI, null, null);
-	}
+//	/**
+//	 * Clear has link
+//	 * @return Rows
+//	 */
+//	public int clearHasLinkTable() {
+//		return _context.getContentResolver().delete(HasLinkMetaData.CONTENT_URI, null, null);
+//	}
 
 	/**
 	 * Remove has link
@@ -66,23 +66,23 @@ class HasLinkController {
 		return 0;
 	}
 
-	/**
-	 * Get has links
-	 * @return List of has links
-	 */
-	public List<HasLink> getHasLinks() {
-		List<HasLink> list = new ArrayList<HasLink>();
-
-		Cursor c = _context.getContentResolver().query(HasLinkMetaData.CONTENT_URI, columns, null, null, null);
-
-		if (c != null) {
-			list = cursorToHasLinkList(c);
-
-			c.close();
-		}
-
-		return list;
-	}
+//	/**
+//	 * Get has links
+//	 * @return List of has links
+//	 */
+//	public List<HasLink> getHasLinks() {
+//		List<HasLink> list = new ArrayList<HasLink>();
+//
+//		Cursor c = _context.getContentResolver().query(HasLinkMetaData.CONTENT_URI, columns, null, null, null);
+//
+//		if (c != null) {
+//			list = cursorToHasLinkList(c);
+//
+//			c.close();
+//		}
+//
+//		return list;
+//	}
 
 	/**
 	 * Get sub media by media

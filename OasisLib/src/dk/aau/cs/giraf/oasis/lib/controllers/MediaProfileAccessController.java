@@ -35,13 +35,13 @@ class MediaProfileAccessController {
 	//METHODS TO CALL
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	/**
-	 * Clear media profile access
-	 * @return Rows
-	 */
-	public int clearMediaProfileAccessTable() {
-		return _context.getContentResolver().delete(MediaProfileAccessMetaData.CONTENT_URI, null, null);
-	}
+//	/**
+//	 * Clear media profile access
+//	 * @return Rows
+//	 */
+//	public int clearMediaProfileAccessTable() {
+//		return _context.getContentResolver().delete(MediaProfileAccessMetaData.CONTENT_URI, null, null);
+//	}
 	
 	/**
 	 * Remove media profile access
@@ -67,23 +67,23 @@ class MediaProfileAccessController {
 		return 0;
 	}
 
-	/**
-	 * Get media profile accesses
-	 * @return List of media profile access
-	 */
-	public List<MediaProfileAccess> getMediaProfileAccesses() {
-		List<MediaProfileAccess> list = new ArrayList<MediaProfileAccess>();
-
-		Cursor c = _context.getContentResolver().query(MediaProfileAccessMetaData.CONTENT_URI, columns, null, null, null);
-
-		if (c != null) {
-			list = cursorToMediaProfileAccessList(c);
-
-			c.close();
-		}
-
-		return list;
-	}
+//	/**
+//	 * Get media profile accesses
+//	 * @return List of media profile access
+//	 */
+//	public List<MediaProfileAccess> getMediaProfileAccesses() {
+//		List<MediaProfileAccess> list = new ArrayList<MediaProfileAccess>();
+//
+//		Cursor c = _context.getContentResolver().query(MediaProfileAccessMetaData.CONTENT_URI, columns, null, null, null);
+//
+//		if (c != null) {
+//			list = cursorToMediaProfileAccessList(c);
+//
+//			c.close();
+//		}
+//
+//		return list;
+//	}
 
 	/**
 	 * Get media by profile

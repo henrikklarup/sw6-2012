@@ -35,13 +35,13 @@ class HasDepartmentController {
 	//METHODS TO CALL
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	/**
-	 * Clear has department
-	 * @return Rows
-	 */
-	public int clearHasDepartmentTable() {
-		return _context.getContentResolver().delete(HasDepartmentMetaData.CONTENT_URI, null, null);
-	}
+//	/**
+//	 * Clear has department
+//	 * @return Rows
+//	 */
+//	public int clearHasDepartmentTable() {
+//		return _context.getContentResolver().delete(HasDepartmentMetaData.CONTENT_URI, null, null);
+//	}
 	
 	/**
 	 * Remove had department
@@ -67,23 +67,23 @@ class HasDepartmentController {
 		return 0;
 	}
 
-	/**
-	 * Get had department
-	 * @return List of Has departments
-	 */
-	public List<HasDepartment> getHasDepartments() {
-		List<HasDepartment> list = new ArrayList<HasDepartment>();
-
-		Cursor c = _context.getContentResolver().query(HasDepartmentMetaData.CONTENT_URI, columns, null, null, null);
-
-		if (c != null) {
-			list = cursorToHasDepartmentList(c);
-
-			c.close();
-		}
-
-		return list;
-	}
+//	/**
+//	 * Get had department
+//	 * @return List of Has departments
+//	 */
+//	public List<HasDepartment> getHasDepartments() {
+//		List<HasDepartment> list = new ArrayList<HasDepartment>();
+//
+//		Cursor c = _context.getContentResolver().query(HasDepartmentMetaData.CONTENT_URI, columns, null, null, null);
+//
+//		if (c != null) {
+//			list = cursorToHasDepartmentList(c);
+//
+//			c.close();
+//		}
+//
+//		return list;
+//	}
 
 	/**
 	 * Get profiles by department
