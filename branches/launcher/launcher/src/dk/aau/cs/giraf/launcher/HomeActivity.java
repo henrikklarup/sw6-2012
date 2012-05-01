@@ -306,11 +306,6 @@ public class HomeActivity extends Activity {
 					
 					result = true;
 					
-					//RelativeLayout GridViewWrapper = (RelativeLayout) findViewById(R.id.GridViewWrapper);
-					//RelativeLayout.LayoutParams GridViewParams = (RelativeLayout.LayoutParams) GridViewWrapper.getLayoutParams();
-					//GridViewParams.setMargins(margin + mLandscapeBarWidth, 0, 0, 0);
-					//GridViewWrapper.setLayoutParams(GridViewParams);
-					
 					break;
 				case MotionEvent.ACTION_UP:
 					
