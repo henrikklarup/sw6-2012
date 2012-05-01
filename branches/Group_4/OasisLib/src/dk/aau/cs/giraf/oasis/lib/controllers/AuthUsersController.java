@@ -204,11 +204,11 @@ class AuthUsersController {
 	 */
 	private String getNewCertificate() {
 		Random rnd = new Random();
-		String certificate = "";
+		StringBuilder certificate = new StringBuilder();
 		for (int i = 0; i < 256 + 1; i++)
 		{
-			certificate += (char)(rnd.nextInt(26) + 97);
+			certificate.append((char)(rnd.nextInt(26) + 97));
 		}
-		return certificate;
+		return certificate.toString();
 	}
 }
