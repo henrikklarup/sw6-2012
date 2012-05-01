@@ -181,6 +181,7 @@ class AppInfo extends App {
 	 * @param parent App to get data from.
 	 */
 	public AppInfo(App parent) {
+		super.id = parent.getId();
 		super.activity = parent.getActivity();
 		super.aPackage = parent.getaPackage();
 		super.icon = parent.getIcon();
