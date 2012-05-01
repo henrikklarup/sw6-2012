@@ -59,12 +59,12 @@ public class ProfilesHelper {
 	//METHODS TO CALL
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	/**
-	 * Clear profiles table
-	 */
-	public void clearProfilesTable() {
-		_context.getContentResolver().delete(ProfilesMetaData.CONTENT_URI, null, null);
-	}
+//	/**
+//	 * Clear profiles table
+//	 */
+//	public void clearProfilesTable() {
+//		_context.getContentResolver().delete(ProfilesMetaData.CONTENT_URI, null, null);
+//	}
 
 	/**
 	 * Remove child attachment to guardian
@@ -155,21 +155,21 @@ public class ProfilesHelper {
 		return result;
 	}
 
-	/**
-	 * Get all profiles
-	 * @return List<Profile>, containing all profiles
-	 */
-	public List<Profile> getProfiles() {
-		List<Profile> profiles = new ArrayList<Profile>();
-		Cursor c = _context.getContentResolver().query(ProfilesMetaData.CONTENT_URI, columns, null, null, null);
-
-		if (c != null) {
-			profiles = cursorToProfiles(c);
-			c.close();
-		}
-
-		return profiles;
-	}
+//	/**
+//	 * Get all profiles
+//	 * @return List<Profile>, containing all profiles
+//	 */
+//	public List<Profile> getProfiles() {
+//		List<Profile> profiles = new ArrayList<Profile>();
+//		Cursor c = _context.getContentResolver().query(ProfilesMetaData.CONTENT_URI, columns, null, null, null);
+//
+//		if (c != null) {
+//			profiles = cursorToProfiles(c);
+//			c.close();
+//		}
+//
+//		return profiles;
+//	}
 
 	/**
 	 * Retrieve the certificates for a profile
