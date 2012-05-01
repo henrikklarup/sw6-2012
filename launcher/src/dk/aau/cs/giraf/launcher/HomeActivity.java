@@ -65,6 +65,7 @@ public class HomeActivity extends Activity {
 	private RelativeLayout mHomeDrawer;
 	private final int DRAWER_WIDTH = 400;
 	private Activity mActivity;
+	private boolean mWidgetRunning = false;
 	
 	private int mLandscapeBarWidth;
 	
@@ -95,120 +96,10 @@ public class HomeActivity extends Activity {
 		mProfilePictureHeightLandscape = Tools.intToDP(mContext, 100);
 		mProfilePictureWidthPortrait = Tools.intToDP(mContext, 100);
 		mProfilePictureHeightPortrait = Tools.intToDP(mContext, 100);
-		
-		mCalendarWidget = (GWidgetCalendar) findViewById(R.id.calendarwidget);
-		mConnectivityWidget = (GWidgetConnectivity) findViewById(R.id.connectivitywidget);
-		mLogoutWidget = (GWidgetLogout) findViewById(R.id.logoutwidget);
-		
-		mWidgetTimer = new GWidgetUpdater();
-		mWidgetTimer.addWidget(mCalendarWidget);
-		mWidgetTimer.addWidget(mConnectivityWidget);
-		
-		mHomeDrawer = (RelativeLayout) findViewById(R.id.HomeDrawer);
-		
-		mLogoutWidget.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				View.OnClickListener task = new View.OnClickListener() {
-					public void onClick(View v) {
-						startActivity(Tools.logOutIntent(mContext));
-						mActivity.finish();
-					}
-				};
-				GDialog g = new GDialog(mContext, R.drawable.large_switch_profile, "Log out", "You're about to log out", task);
-				g.setOwnerActivity(mActivity);
-				g.show();
-			}
-		});
-		
 
-		mConnectivityWidget.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				
-				GTooltip gTooltip = new GTooltip(mContext);
-				gTooltip.setRightOf(v);
-				gTooltip.setOwnerActivity(mActivity);
-				
-				Button button = new Button(mContext);
-				
-				LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-				button.setLayoutParams(lp);
-				
-				gTooltip.addView(button);
-				gTooltip.show();
-			}
-		});
-		
-		View main = findViewById(R.id.HomeWrapperLayout);
-		
-		main.layout(-600, 0, main.getWidth(), main.getHeight());
-		
-		findViewById(R.id.HomeBarLayout).setOnTouchListener(new View.OnTouchListener() {
-			int offset = 0;
-			@Override
-			public boolean onTouch(View v, MotionEvent e) {
-				int margin = 0;
-				
-				boolean result = true;
-				
-				switch(e.getActionMasked()){
-				case MotionEvent.ACTION_DOWN:
-					offset = (int) e.getX();
-					result = true;
-					break;
-				case MotionEvent.ACTION_MOVE:
-					mHomeBarParams = (RelativeLayout.LayoutParams) v.getLayoutParams();
-					margin = mHomeBarParams.leftMargin + ((int) e.getX() - offset);
-					int snaplength = 40;
-					
-					if (margin < snaplength) {
-						margin = 0;
-					} else if (margin > (DRAWER_WIDTH - snaplength)) {
-						margin = DRAWER_WIDTH;
-					} else if (margin > DRAWER_WIDTH) {
-						margin = DRAWER_WIDTH;
-					}
-					
-					mHomeBarParams.setMargins(margin, 0, 0, 0);
-					v.setLayoutParams(mHomeBarParams);
-					
-					View v2 = findViewById(R.id.HomeDrawer);
-					RelativeLayout.LayoutParams v2Params = (RelativeLayout.LayoutParams) v2.getLayoutParams();
-					v2Params.setMargins((margin-800), 0, 0, 0);
-					v2.setLayoutParams(v2Params);
-					
-					result = true;
-					
-					//RelativeLayout GridViewWrapper = (RelativeLayout) findViewById(R.id.GridViewWrapper);
-					//RelativeLayout.LayoutParams GridViewParams = (RelativeLayout.LayoutParams) GridViewWrapper.getLayoutParams();
-					//GridViewParams.setMargins(margin + mLandscapeBarWidth, 0, 0, 0);
-					//GridViewWrapper.setLayoutParams(GridViewParams);
-					
-					break;
-				case MotionEvent.ACTION_UP:
-					
-					ViewGroup vg = (ViewGroup) v;
-					int numChildren = vg.getChildCount();
-					
-					for(int i = 0; i < numChildren; i++){
-						vg.getChildAt(i).invalidate();
-					}
-					
-					result = false;
-					break;
-					
-				}
-				
-
-				return result;
-			}
-		});
-		
-		
-		GridView AppColors = (GridView) findViewById(R.id.appcolors);
-		// Removes blue highlight and scroll
-		AppColors.setEnabled(false);
-		AppColors.setAdapter(new GColorAdapter(this));
-		
+		loadDrawer();
+		loadWidgets();
+		loadPaintGrid();
 		loadApplications();
 	}
 	
@@ -321,7 +212,7 @@ public class HomeActivity extends Activity {
 	}
 
 	/**
-	 * Loads the user's applications into the grid.
+	 * Load the user's applications into the grid.
 	 */
 	private void loadApplications() {		
 		List<App> userApps = Tools.getVisibleGirafApps(mContext, mCurrentUser);
@@ -348,6 +239,116 @@ public class HomeActivity extends Activity {
 			mGrid.setAdapter(new AppAdapter(this, appInfos));
 			mGrid.setOnItemClickListener(new ProfileLauncher());
 		}
+	}
+	/**
+	 * Load the user's paintgrid in the drawer.
+	 */
+	private void loadPaintGrid(){
+		GridView AppColors = (GridView) findViewById(R.id.appcolors);
+		// Removes blue highlight and scroll
+		AppColors.setEnabled(false);
+		AppColors.setAdapter(new GColorAdapter(this));
+	}
+	/**
+	 * Load the drawer and its functionality.
+	 */
+	private void loadDrawer(){
+		View main = findViewById(R.id.HomeWrapperLayout);
+		
+		main.layout(-600, 0, main.getWidth(), main.getHeight());
+		
+		findViewById(R.id.HomeBarLayout).setOnTouchListener(new View.OnTouchListener() {
+			int offset = 0;
+			@Override
+			public boolean onTouch(View v, MotionEvent e) {
+				int margin = 0;
+				
+				boolean result = true;
+				
+				switch(e.getActionMasked()){
+				case MotionEvent.ACTION_DOWN:
+					offset = (int) e.getX();
+					result = true;
+					break;
+				case MotionEvent.ACTION_MOVE:
+					mHomeBarParams = (RelativeLayout.LayoutParams) v.getLayoutParams();
+					margin = mHomeBarParams.leftMargin + ((int) e.getX() - offset);
+					int snaplength = 40;
+					
+					if (margin < snaplength) {
+						margin = 0;
+					} else if (margin > (DRAWER_WIDTH - snaplength)) {
+						margin = DRAWER_WIDTH;
+					} else if (margin > DRAWER_WIDTH) {
+						margin = DRAWER_WIDTH;
+					}
+					
+					mHomeBarParams.setMargins(margin, 0, 0, 0);
+					v.setLayoutParams(mHomeBarParams);
+					
+					View v2 = findViewById(R.id.HomeDrawer);
+					RelativeLayout.LayoutParams v2Params = (RelativeLayout.LayoutParams) v2.getLayoutParams();
+					v2Params.setMargins((margin-800), 0, 0, 0);
+					v2.setLayoutParams(v2Params);
+					
+					result = true;
+					
+					//RelativeLayout GridViewWrapper = (RelativeLayout) findViewById(R.id.GridViewWrapper);
+					//RelativeLayout.LayoutParams GridViewParams = (RelativeLayout.LayoutParams) GridViewWrapper.getLayoutParams();
+					//GridViewParams.setMargins(margin + mLandscapeBarWidth, 0, 0, 0);
+					//GridViewWrapper.setLayoutParams(GridViewParams);
+					
+					break;
+				case MotionEvent.ACTION_UP:
+					
+					ViewGroup vg = (ViewGroup) v;
+					int numChildren = vg.getChildCount();
+					
+					for(int i = 0; i < numChildren; i++){
+						vg.getChildAt(i).invalidate();
+					}
+					
+					result = false;
+					break;
+					
+				}
+				
+
+				return result;
+			}
+		});
+	}
+	/**
+	 * Load the widgets placed on the drawer.
+	 */
+	private void loadWidgets(){
+		mCalendarWidget = (GWidgetCalendar) findViewById(R.id.calendarwidget);
+		mConnectivityWidget = (GWidgetConnectivity) findViewById(R.id.connectivitywidget);
+		mLogoutWidget = (GWidgetLogout) findViewById(R.id.logoutwidget);
+		
+		mWidgetTimer = new GWidgetUpdater();
+		mWidgetTimer.addWidget(mCalendarWidget);
+		mWidgetTimer.addWidget(mConnectivityWidget);
+		
+		mHomeDrawer = (RelativeLayout) findViewById(R.id.HomeDrawer);
+		
+		mLogoutWidget.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				View.OnClickListener task = new View.OnClickListener() {
+					public void onClick(View v) {
+						startActivity(Tools.logOutIntent(mContext));
+						mActivity.finish();
+					}
+				};
+				if(!mWidgetRunning){
+					mWidgetRunning = true;
+					GDialog g = new GDialog(mContext, R.drawable.large_switch_profile, "Log ud", "Du er på vej til at logge ud", task);
+					g.setOwnerActivity(mActivity);
+					g.show();
+					mWidgetRunning = false;
+				};
+			}
+		});
 	}
 	
 	/**
