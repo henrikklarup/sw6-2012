@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:keepScreenOn="true"
+    android:orientation="horizontal" >
+
+    <fragment
+        android:id="@+id/fMenuList"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="100" 
+        class="dk.aau.cs.giraf.oasis.app.FragmentMenuList" />
+
+    <FrameLayout
+        android:id="@+id/fDetails"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="20" />
+    
+</LinearLayout>
