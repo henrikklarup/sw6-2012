@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -13,7 +14,7 @@ import dk.aau.cs.giraf.oasis.lib.models.App;
 
 public class LogoActivity extends Activity {
 
-	protected int _splashTime = 400; 
+	protected int _splashTime = 2000; 
 	private Thread splashTread;
 	private Context mContext;
 	private Activity mActivity;
@@ -24,6 +25,8 @@ public class LogoActivity extends Activity {
 	    setContentView(R.layout.logo);
 	    
 	    mContext = this.getApplicationContext();
+	    
+	    
 	    
 	    Tools.updateGirafApps_DB(mContext);
 	    Tools.updateAndroidApps_DB(mContext);
@@ -62,6 +65,8 @@ public class LogoActivity extends Activity {
 	        }
 	    };
 	    
+	    this.setOrientation();
+	    
 	    splashTread.start();
 	}
 
@@ -73,5 +78,17 @@ public class LogoActivity extends Activity {
 	    	}
 	    }
 	    return true;
+	}
+	
+	/**
+	 * Sets the orientation based on current session information. If session has expired, then switch to portrait, else go to landscape.
+	 * This is make the flow more consistent with the screens which the user will be greeted with later. (homescreen = landscape, authentication = portrait)
+	 */
+	private void setOrientation() {
+		if (Tools.sessionExpired(mContext)) {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		} else {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+		}
 	}
 }
