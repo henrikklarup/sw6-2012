@@ -325,8 +325,6 @@ public class ProfilesHelper {
 			}
 		}
 		
-		cursor.close();
-
 		return profiles;
 	}
 
@@ -345,7 +343,6 @@ public class ProfilesHelper {
 		profile.setPhone(cursor.getLong(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_PHONE)));
 		profile.setPRole(cursor.getLong(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_ROLE)));
 		profile.setSettings(Setting.toSetting(cursor.getString(cursor.getColumnIndex(ProfilesMetaData.Table.COLUMN_SETTINGS))));
-		cursor.close();
 		return profile;
 	}
 
