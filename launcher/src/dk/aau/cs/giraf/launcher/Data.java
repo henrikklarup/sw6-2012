@@ -24,5 +24,9 @@ public final class Data {
 	// Home activity values.
 	public static final int DRAWER_WIDTH = 400;
 	public static final int HOMEBAR_WIDTH_LANDSCAPE = 200;
+	public static final int GRID_CELL_WIDTH = 290;
+	public static final int APPS_PER_PAGE = 9;
+	public static final int MAX_ROWS_PER_PAGE = 3;
+	public static final int MAX_COLUMNS_PER_PAGE = 4;
 
 }
