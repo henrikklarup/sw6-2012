@@ -8,22 +8,28 @@ import android.view.View.OnDragListener;
 public class GAppDragger implements OnDragListener {
 
 	@Override
-	public boolean onDrag(View v, DragEvent e) {
-		switch(e.getAction()){
+	public boolean onDrag(View view, DragEvent drawEvent) {
+		switch(drawEvent.getAction()){
 		case DragEvent.ACTION_DRAG_STARTED:
 			
 			break;
 		case DragEvent.ACTION_DRAG_ENTERED:
-			//HIGHLIGHT APP HERE
+			/*
+			 * Future todo: implement highlighting
+			 */
 			break;
 		case DragEvent.ACTION_DRAG_EXITED:
-			//dehighlight
+			/*
+			 * Future todo: implement dehighlighting
+			 */
 			break;
 		case DragEvent.ACTION_DROP:
-			AppAdapter.setAppBackground(v, (int) Integer.parseInt(e.getClipData().getItemAt(0).getText().toString()));
+			AppAdapter.setAppBackground(view, (int) Integer.parseInt(drawEvent.getClipData().getItemAt(0).getText().toString()));
 			break;
 		case DragEvent.ACTION_DRAG_ENDED:
-			//dehighligth
+			/*
+			 * Future todo: implement dehighlighting
+			 */
 			break;
 		
 		}
