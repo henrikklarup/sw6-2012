@@ -171,64 +171,72 @@ public class HomeActivity extends Activity {
 	 * Repaints the bar
 	 */
 	private void drawBar() {
-		GridView homeGridView = (GridView)this.findViewById(R.id.GridViewHome);
-		RelativeLayout homebar = (RelativeLayout)this.findViewById(R.id.HomeBarLayout);
+		GridView gridView = (GridView)this.findViewById(R.id.GridViewHome);
+		RelativeLayout homebarLayout = (RelativeLayout)this.findViewById(R.id.HomeBarLayout);
 
-		LayoutParams paramsGrid = (RelativeLayout.LayoutParams)homeGridView.getLayoutParams();
-		RelativeLayout.LayoutParams paramsBar = (RelativeLayout.LayoutParams)homebar.getLayoutParams();
+		LayoutParams paramsGrid = (RelativeLayout.LayoutParams)gridView.getLayoutParams();
+		RelativeLayout.LayoutParams homebarLayoutParams = (RelativeLayout.LayoutParams)homebarLayout.getLayoutParams();
 
 		int barHeightLandscape = Tools.intToDP(mContext, 100);
 		int barHeightPortrait = Tools.intToDP(mContext, 200);
 
+		/* Get the size of the screen */
 		Display display = getWindowManager().getDefaultDisplay();
 		Point size = new Point();
 		display.getSize(size);
 		int screenWidth = size.x;
 		int screenHeight = size.y;
 
-		final boolean isLandscape = Tools.isLandscape(mContext);
-
-		if (isLandscape) {
-			homebar.setBackgroundDrawable(getResources().getDrawable(R.drawable.homebar_back_land));
-			paramsBar.height = LayoutParams.MATCH_PARENT;
-			paramsBar.width = barHeightLandscape;
+		if (Tools.isLandscape(mContext)) {
+			homebarLayout.setBackgroundDrawable(getResources().getDrawable(R.drawable.homebar_back_land));
+			homebarLayoutParams.height = LayoutParams.MATCH_PARENT;
+			homebarLayoutParams.width = barHeightLandscape;
 
 			paramsGrid.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
 			paramsGrid.width = screenWidth - barHeightLandscape;
 		} else {
-			homebar.setBackgroundDrawable(getResources().getDrawable(R.drawable.homebar_back_port));
-			paramsBar.height = barHeightPortrait;
-			paramsBar.width = LayoutParams.MATCH_PARENT;
+			homebarLayout.setBackgroundDrawable(getResources().getDrawable(R.drawable.homebar_back_port));
+			homebarLayoutParams.height = barHeightPortrait;
+			homebarLayoutParams.width = LayoutParams.MATCH_PARENT;
 
 			paramsGrid.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 			paramsGrid.height = screenHeight - barHeightPortrait;
 		}
 
-		homeGridView.setLayoutParams(paramsGrid);
-		homebar.setLayoutParams(paramsBar);
+		gridView.setLayoutParams(paramsGrid);
+		homebarLayout.setLayoutParams(homebarLayoutParams);
 
+		this.drawWidgets();
+	}
+	
+	/**
+	 * Repaints the widgets
+	 */
+	public void drawWidgets() {
 		ViewGroup.LayoutParams profilePictureViewParams = mProfilePictureView.getLayoutParams();
 		RelativeLayout.LayoutParams connectivityWidgetParams = (LayoutParams) mConnectivityWidget.getLayoutParams();
 		RelativeLayout.LayoutParams calendarWidgetParams = (LayoutParams) mCalendarWidget.getLayoutParams();
 		RelativeLayout.LayoutParams logoutWidgetParams = (LayoutParams) mLogoutWidget.getLayoutParams();
 
-		if (isLandscape) {
+		if (Tools.isLandscape(mContext)) {
 			mNameView.setVisibility(View.INVISIBLE);
 
-			profilePictureViewParams.width = Tools.intToDP(mContext, 70);
-			profilePictureViewParams.height = Tools.intToDP(mContext, 91);
-			mHomeBarLayout.setPadding(Tools.intToDP(mContext, 15), Tools.intToDP(mContext, 15), Tools.intToDP(mContext, 15), Tools.intToDP(mContext, 15));
+			profilePictureViewParams.width = Tools.intToDP(mContext, Data.PROFILEPIC_WIDTH_LANDSCAPE);
+			profilePictureViewParams.height = Tools.intToDP(mContext, Data.PROFILEPIC_HEIGHT_LANDSCAPE);
+			mHomeBarLayout.setPadding(Tools.intToDP(mContext, Data.HOMEBAR_PADDING_LANDSCAPE), Tools.intToDP(mContext, Data.HOMEBAR_PADDING_LANDSCAPE), Tools.intToDP(mContext, Data.HOMEBAR_PADDING_LANDSCAPE), Tools.intToDP(mContext, Data.HOMEBAR_PADDING_LANDSCAPE));
 
-			connectivityWidgetParams.setMargins(0, Tools.intToDP(mContext, 106), 0, 0);
-			calendarWidgetParams.setMargins(0, Tools.intToDP(mContext, 15), 0,0);
+			connectivityWidgetParams.setMargins(Tools.intToDP(mContext, Data.WIDGET_CONNECTIVITY_MARGIN_LEFT), Tools.intToDP(mContext, Data.WIDGET_CONNECTIVITY_MARGIN_TOP), Tools.intToDP(mContext, Data.WIDGET_CONNECTIVITY_MARGIN_RIGHT), Tools.intToDP(mContext, Data.WIDGET_CONNECTIVITY_MARGIN_BOTTOM));
+			calendarWidgetParams.setMargins(Tools.intToDP(mContext, Data.WIDGET_CALENDAR_MARGIN_LEFT), Tools.intToDP(mContext, Data.WIDGET_CALENDAR_MARGIN_TOP), Tools.intToDP(mContext, Data.WIDGET_CALENDAR_MARGIN_RIGHT), Tools.intToDP(mContext, Data.WIDGET_CALENDAR_MARGIN_BOTTOM));
 			calendarWidgetParams.addRule(RelativeLayout.BELOW, mConnectivityWidget.getId());
-			calendarWidgetParams.addRule(RelativeLayout.LEFT_OF, 0);
+			//calendarWidgetParams.addRule(RelativeLayout.LEFT_OF, 0);
 
 			logoutWidgetParams.setMargins(0, Tools.intToDP(mContext, 390), 0, 0);
 			logoutWidgetParams.addRule(RelativeLayout.BELOW, mCalendarWidget.getId());
-			logoutWidgetParams.addRule(RelativeLayout.LEFT_OF, 0);
+			//logoutWidgetParams.addRule(RelativeLayout.LEFT_OF, 0);
 		} else {
-
+			/**
+			 * future todo: implement portrait mode and fix the below code
+			 */
 			connectivityWidgetParams.setMargins(0, 0, 0, 0);
 			calendarWidgetParams.setMargins(0, 0, Tools.intToDP(mContext, 25),0);
 			calendarWidgetParams.addRule(RelativeLayout.BELOW, 0);
@@ -254,26 +262,15 @@ public class HomeActivity extends Activity {
 	 * Load the user's applications into the grid.
 	 */
 	private void loadApplications() {		
-		List<App> userApps = Tools.getVisibleGirafApps(mContext, mCurrentUser);
+		List<App> girafAppsList = Tools.getVisibleGirafApps(mContext, mCurrentUser);
 
-		Tools.attachAvailableAppsToUser(mContext);
-		//List<App> userApps = Tools.getVisibleApps(mContext, mCurrentUser);
-		
-		// If a guardian does not have any apps available, give them all GIRAF apps on the device:
-		if (userApps.size() == 0 && mCurrentUser.getPRole() == Data.ROLE_GUARDIAN) {
-			Tools.attachAvailableGirafAppsToUser(mContext);
-			userApps = Tools.getVisibleGirafApps(mContext, mCurrentUser);
-		}
-
-		if (userApps != null) {
+		if (girafAppsList != null) {
 			ArrayList<AppInfo> appInfos = new ArrayList<AppInfo>();
-
-			for (App app : userApps) {
+			for (App app : girafAppsList) {
 				AppInfo appInfo = new AppInfo(app);
 
 				appInfo.load(mContext, mCurrentUser);
 				appInfo.setBgColor(appBgColor(appInfo.getId()));
-
 				appInfos.add(appInfo);
 			}
 
@@ -282,7 +279,7 @@ public class HomeActivity extends Activity {
 			mGrid.setOnItemClickListener(new ProfileLauncher());
 			mNumberOfApps = appInfos.size();
 		} else {
-			Log.e("launcher","App list is null");
+			Log.e(Data.ERRORTAG, "App list is null");
 		}
 	}
 
