@@ -12,23 +12,21 @@ import dk.aau.cs.giraf.gui.*;
 import android.view.View;
 import android.app.Activity;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 
 public class ProfileSelectActivity extends Activity {
 
-	private static List<Profile> mProfiles;
-
-	private long childID;
-	private long guardianID;
-
-	private String packageName;
-	private String activityName;
+	private List<Profile> mChildren;
+	private Context mContext;
+	private long mGuardianID;
+	
+	private String mPackageName;
+	private String mActivityName;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -36,60 +34,65 @@ public class ProfileSelectActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.profileselect);
 
-		guardianID = getIntent().getExtras().getLong(Data.GUARDIANID);
-		packageName = getIntent().getExtras().getString(Data.APP_PACKAGENAME);
-		activityName = getIntent().getExtras().getString(Data.APP_ACTIVITYNAME);
+		mContext = getApplicationContext();
+		
+		mPackageName = getIntent().getExtras().getString(Data.APP_PACKAGENAME);
+		mActivityName = getIntent().getExtras().getString(Data.APP_ACTIVITYNAME);
+		
+		mGuardianID = getIntent().getExtras().getLong(Data.GUARDIANID);
 
 		loadProfiles();
 	}
 
+	/**
+	 * Finds children attached to the guardian or the institution, 
+	 * and creates the list used to select which child to run an app with. 
+	 */
 	private void loadProfiles() {
-		Helper helper = new Helper(this);
+		Helper helper = new Helper(mContext);
 		Profile.setOutput("{1} {2} {3}");
 		
-		mProfiles = new ArrayList<Profile>();
+		mChildren = new ArrayList<Profile>();
 
-		// Get profiles from departments
-		Profile guardianProfile = helper.profilesHelper.getProfileById(guardianID);
+		Profile guardianProfile = helper.profilesHelper.getProfileById(mGuardianID);
 		
-		List<Profile> profilesFlying = helper.profilesHelper.getChildrenByGuardian(guardianProfile);
+		List<Profile> guardianChildren = helper.profilesHelper.getChildrenByGuardian(guardianProfile);
 		
-		//mProfiles.addAll(profilesFlying);
+		List<Department> guardianDepartments = helper.departmentsHelper.getDepartmentsByProfile(guardianProfile);
 		
-		List<Department> departments = helper.departmentsHelper.getDepartmentsByProfile(guardianProfile);
+		List<Profile> totalChildren = new ArrayList<Profile>();
+		totalChildren.addAll(guardianChildren);
 		
-		for (Department department : departments) {
-			List<Profile> profilesFromDepartments = helper.profilesHelper.getChildrenByDepartmentAndSubDepartments(department);
-			for (Profile pDep : profilesFromDepartments) {
-				for (Profile pFre : profilesFlying) {
-					if (pDep.getId() == pFre.getId()) {
-						mProfiles.add(pDep);
-					} else {
-						mProfiles.add(pDep);
-						mProfiles.add(pFre);
-					}
-				}
+		for (Department department : guardianDepartments) {
+			List<Profile> childrenFromDepartments = helper.profilesHelper.getChildrenByDepartmentAndSubDepartments(department);
+			
+			totalChildren.addAll(childrenFromDepartments);
+		}
+		
+		// Duplicate profiles are removed.
+		for (Profile child : totalChildren) {
+			if (!mChildren.contains(child)) {
+				mChildren.add(child);
 			}
 		}
 		
-
-		GProfileAdapter adapter = new GProfileAdapter(this, mProfiles);
-		ListView lv = (ListView) findViewById(R.id.profilesList);
-		lv.setAdapter(adapter);
+		GProfileAdapter childAdapter = new GProfileAdapter(this, mChildren);
+		ListView listOfChildren = (ListView) findViewById(R.id.profilesList);
+		listOfChildren.setAdapter(childAdapter);
  
-
-		lv.setOnItemClickListener(new OnItemClickListener() {
+		// When a child is selected, launch the app that was chosen with the correct data in the extras.
+		listOfChildren.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				childID = ((Profile) parent.getAdapter().getItem(position)).getId();
+				final long childID = ((Profile) parent.getAdapter().getItem(position)).getId();
 
 				Intent intent = new Intent(Intent.ACTION_MAIN);
 				intent.addCategory(Intent.CATEGORY_LAUNCHER);
-				intent.setComponent(new ComponentName(packageName, activityName));
+				intent.setComponent(new ComponentName(mPackageName, mActivityName));
 				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
 						| Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
 
 				intent.putExtra(Data.CHILDID, childID);
-				intent.putExtra(Data.GUARDIANID, guardianID);
+				intent.putExtra(Data.GUARDIANID, mGuardianID);
 
 				startActivity(intent);
 			}
