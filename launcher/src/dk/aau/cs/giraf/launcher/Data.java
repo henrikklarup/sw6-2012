@@ -11,17 +11,18 @@ public final class Data {
 	public static final String CHILDID = "currentChildID";
 	public static final String APP_PACKAGENAME = "appPackageName";
 	public static final String APP_ACTIVITYNAME = "appActivityName";
-	public static final String SKIP = "skipActivity";
 
 	// Keys for settings
-	public static final String COLORS = "colorSettings";
 	public static final String COLOR_BG = "backgroundColor";
 
 	// Constants denoting user roles
 	public static final long ROLE_GUARDIAN = 1L;
 	public static final long ROLE_CHILD = 3L;
+	
+	// Logo activity
+	public static final int TIME_TO_DISPLAY_LOGO = 2000;
 
-	//Authentication activity
+	// Authentication activity
 	public static final long TIME_TO_STAY_LOGGED_IN = 14400000;
 	
 	// Home activity values.
