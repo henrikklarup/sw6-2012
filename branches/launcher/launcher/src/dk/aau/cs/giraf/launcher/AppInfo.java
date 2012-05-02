@@ -19,7 +19,7 @@ class AppInfo extends App {
 	/**
 	 * The intent used to start the application.
 	 */
-	Intent intent;
+	Intent mIntent;
 
 	/**
 	 * The application icon.
@@ -35,10 +35,42 @@ class AppInfo extends App {
 	}
 
 	/**
+	 * ID of the guardian who is using the launcher.
+	 */
+	private Profile mGuardian;
+	
+	/**
+	 * Creates a new AppInfo from a given parent app.
+	 * @param parent App to get data from.
+	 */
+	public AppInfo(App parent) {
+		super.id = parent.getId();
+		super.activity = parent.getActivity();
+		super.aPackage = parent.getaPackage();
+		super.icon = parent.getIcon();
+		super.name = parent.getName();
+		super.settings = parent.getSettings();
+	}
+
+	/**
+	 * Set ID for the current guardian using the system.
+	 * @param guardian The guardian using the system.
+	 */
+	public void setGuardian(Profile guardian) {
+		if (guardian.getPRole() == Tools.ROLE_GUARDIAN) {
+			mGuardian = guardian;
+		}
+	}
+	
+	/**
 	 * The application icon background color.
 	 */
 	private int mBgColor;
 	
+	/**
+	 * Set the backgroud color
+	 * @param color
+	 */
 	public void setBgColor(int color) {
 		this.mBgColor = color;
 	}
@@ -52,21 +84,6 @@ class AppInfo extends App {
 	}
 
 	/**
-	 * ID of the guardian who is using the launcher.
-	 */
-	private Profile mGuardian;
-
-	/**
-	 * Set ID for the current guardian using the system.
-	 * @param guardian The guardian using the system.
-	 */
-	public void setGuardian(Profile guardian) {
-		if (guardian.getPRole() == Tools.ROLE_GUARDIAN) {
-			mGuardian = guardian;
-		}
-	}
-
-	/**
 	 * 
 	 * @return ID of the guardian logged into the system.
 	 */
@@ -77,7 +94,7 @@ class AppInfo extends App {
 	/**
 	 * Getter for the title of the app. 
 	 * Cuts the name off, to make sure it's not too long to show in the launcher.
-	 * @return 
+	 * @return shortened name for the app
 	 */
 	public String getShortenedName() {
 		String title = super.getName();
@@ -157,16 +174,5 @@ class AppInfo extends App {
 		}
 	}
 
-	/**
-	 * Creates a new AppInfo from a given parent app.
-	 * @param parent App to get data from.
-	 */
-	public AppInfo(App parent) {
-		super.id = parent.getId();
-		super.activity = parent.getActivity();
-		super.aPackage = parent.getaPackage();
-		super.icon = parent.getIcon();
-		super.name = parent.getName();
-		super.settings = parent.getSettings();
-	}
+	
 }
