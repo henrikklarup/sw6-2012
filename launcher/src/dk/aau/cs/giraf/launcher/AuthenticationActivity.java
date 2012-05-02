@@ -26,9 +26,9 @@ import dk.aau.cs.giraf.oasis.lib.models.Profile;
 public class AuthenticationActivity extends CaptureActivity {
 	
 	private Intent mHomeIntent;
-	private GButton gLoginButton;
-	private TextView loginNameView;
-	private TextView infoView;
+	private GButton mGLoginButton;
+	private TextView mLoginNameView;
+	private TextView mInfoView;
 	private Context mContext;
 	private Vibrator mVibrator;
 	private Profile mPreviousProfile;
@@ -38,25 +38,14 @@ public class AuthenticationActivity extends CaptureActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.authentication);
 		
-		mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-
-
-		final ImageView instruct = (ImageView) findViewById(R.id.animation);
-		instruct.setBackgroundResource(R.animator.instruct_ani);
-		instruct.post(new Runnable(){
-			@Override
-			public void run(){
-				AnimationDrawable anim = (AnimationDrawable) instruct.getBackground();
-				anim.start();
-			}
-		});
-		
-		gLoginButton = (GButton)this.findViewById(R.id.loginGButton);
-		loginNameView = (TextView)this.findViewById(R.id.loginname);
-		infoView = (TextView)this.findViewById(R.id.authentication_step1);
 		mContext = this;
+		mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);		
+		mGLoginButton = (GButton)this.findViewById(R.id.loginGButton);
+		mLoginNameView = (TextView)this.findViewById(R.id.loginname);
+		mInfoView = (TextView)this.findViewById(R.id.authentication_step1);
+		
 
-		gLoginButton.setOnClickListener(new View.OnClickListener() {
+		mGLoginButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				if (!getIntent().hasCategory("dk.aau.cs.giraf.launcher.GIRAF")) {
 					mHomeIntent.putExtra(Tools.SKIP, true);
@@ -64,6 +53,17 @@ public class AuthenticationActivity extends CaptureActivity {
 				} else {
 					finish();
 				}
+			}
+		});
+		
+		final ImageView instructImageView = (ImageView) findViewById(R.id.animation);
+		instructImageView.setBackgroundResource(R.animator.instruct_ani);
+		
+		instructImageView.post(new Runnable(){
+			@Override
+			public void run(){
+				AnimationDrawable anim = (AnimationDrawable) instructImageView.getBackground();
+				anim.start();
 			}
 		});
 	}
@@ -93,10 +93,10 @@ public class AuthenticationActivity extends CaptureActivity {
 			mPreviousProfile = profile;
 			
 			this.changeCamerafeedBorderColor(0xFF3AAA35);
-			loginNameView.setText(profile.getFirstname() + " " + profile.getSurname());
-			loginNameView.setVisibility(View.VISIBLE);
-			gLoginButton.setVisibility(View.VISIBLE);
-			infoView.setText(R.string.saadan);
+			mLoginNameView.setText(profile.getFirstname() + " " + profile.getSurname());
+			mLoginNameView.setVisibility(View.VISIBLE);
+			mGLoginButton.setVisibility(View.VISIBLE);
+			mInfoView.setText(R.string.saadan);
 			
 			mHomeIntent = new Intent(AuthenticationActivity.this, HomeActivity.class);
 			mHomeIntent.putExtra("currentGuardianID", profile.getId());
@@ -105,9 +105,9 @@ public class AuthenticationActivity extends CaptureActivity {
 			Tools.saveLogInData(mContext, profile.getId());
 		} else {
 			this.changeCamerafeedBorderColor(0xFFFF0000);
-			gLoginButton.setVisibility(View.INVISIBLE);
-			loginNameView.setVisibility(View.INVISIBLE);
-			infoView.setText(R.string.authentication_step1);
+			mGLoginButton.setVisibility(View.INVISIBLE);
+			mLoginNameView.setVisibility(View.INVISIBLE);
+			mInfoView.setText(R.string.authentication_step1);
 
 		}
 
