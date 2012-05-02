@@ -96,7 +96,7 @@ class AppInfo extends App {
 	public void load(Context context, Profile guardian) {
 		setGuardian(guardian);
 		
-		//loadBgColor(context);
+		loadBgColor(context);
 		loadIcon(context);
 	}
 
@@ -138,25 +138,6 @@ class AppInfo extends App {
 		}
 		
 		settings = new Setting<String, String, String>();
-	}
-	
-	/**
-	 * Allows the app to overwrite its current background color with a new color.
-	 * @param context Context of the current activity.
-	 * @param color Color to change the background to.
-	 */
-	public void saveBgColor(Context context, int color) {
-		if (settings == null) {
-			settings = new Setting<String, String, String>();
-		}
-		
-		settings.addValue(Tools.COLORS, Tools.COLOR_BG, String.valueOf(color));
-		this.setSettings(settings);
-		
-		Helper h = new Helper(context);
-		h.appsHelper.modifyAppByProfile(this, mGuardian);
-		
-		mBgColor = color;
 	}
 
 	/**
