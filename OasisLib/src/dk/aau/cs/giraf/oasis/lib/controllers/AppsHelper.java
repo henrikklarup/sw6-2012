@@ -286,7 +286,6 @@ public class AppsHelper {
 		app.setIcon(cursor.getString(cursor.getColumnIndex(AppsMetaData.Table.COLUMN_ICON)));
 		app.setaPackage(cursor.getString(cursor.getColumnIndex(AppsMetaData.Table.COLUMN_PACKAGE)));
 		app.setActivity(cursor.getString(cursor.getColumnIndex(AppsMetaData.Table.COLUMN_ACTIVITY)));
-		cursor.close();
 		return app;
 	}
 
@@ -304,8 +303,6 @@ public class AppsHelper {
 				cursor.moveToNext();
 			}
 		}
-		
-		cursor.close();
 
 		return apps;
 	}
