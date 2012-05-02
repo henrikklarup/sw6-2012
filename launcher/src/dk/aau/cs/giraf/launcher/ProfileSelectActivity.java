@@ -36,9 +36,9 @@ public class ProfileSelectActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.profileselect);
 
-		guardianID = getIntent().getExtras().getLong(Tools.GUARDIANID);
-		packageName = getIntent().getExtras().getString(Tools.APP_PACKAGENAME);
-		activityName = getIntent().getExtras().getString(Tools.APP_ACTIVITYNAME);
+		guardianID = getIntent().getExtras().getLong(Data.GUARDIANID);
+		packageName = getIntent().getExtras().getString(Data.APP_PACKAGENAME);
+		activityName = getIntent().getExtras().getString(Data.APP_ACTIVITYNAME);
 
 		loadProfiles();
 	}
@@ -88,8 +88,8 @@ public class ProfileSelectActivity extends Activity {
 				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
 						| Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
 
-				intent.putExtra(Tools.CHILDID, childID);
-				intent.putExtra(Tools.GUARDIANID, guardianID);
+				intent.putExtra(Data.CHILDID, childID);
+				intent.putExtra(Data.GUARDIANID, guardianID);
 
 				startActivity(intent);
 			}

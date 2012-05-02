@@ -56,7 +56,7 @@ class AppInfo extends App {
 	 * @param guardian The guardian using the system.
 	 */
 	public void setGuardian(Profile guardian) {
-		if (guardian.getPRole() == Tools.ROLE_GUARDIAN) {
+		if (guardian.getPRole() == Data.ROLE_GUARDIAN) {
 			mGuardian = guardian;
 		}
 	}
@@ -124,11 +124,11 @@ class AppInfo extends App {
 		int[] c = context.getResources().getIntArray(R.array.appcolors);
 		boolean saveNew = false;
 		
-		if (settings != null && settings.containsKey(Tools.COLORS)) {
-			HashMap<String, String> colorSettings = settings.get(Tools.COLORS);
+		if (settings != null && settings.containsKey(Data.COLORS)) {
+			HashMap<String, String> colorSettings = settings.get(Data.COLORS);
 			
-			if(colorSettings != null && colorSettings.containsKey(Tools.COLOR_BG)) {
-				mBgColor = Integer.parseInt(colorSettings.get(Tools.COLOR_BG));
+			if(colorSettings != null && colorSettings.containsKey(Data.COLOR_BG)) {
+				mBgColor = Integer.parseInt(colorSettings.get(Data.COLOR_BG));
 			} else {
 				saveNew = true;
 			}
@@ -144,7 +144,7 @@ class AppInfo extends App {
 			Random rand = new Random();
 			int position = rand.nextInt(c.length);
 
-			settings.addValue(Tools.COLORS, Tools.COLOR_BG, String.valueOf(c[position]));
+			settings.addValue(Data.COLORS, Data.COLOR_BG, String.valueOf(c[position]));
 			
 			Helper h = new Helper(context);
 			setSettings(settings);

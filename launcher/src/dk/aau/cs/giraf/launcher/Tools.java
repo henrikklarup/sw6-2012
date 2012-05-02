@@ -21,24 +21,6 @@ import android.view.WindowManager;
  */
 public class Tools {
 
-	// SharedPreferences keys for log in data.
-	public static final String TIMERKEY = "TIMING";
-	public static final String DATEKEY = "DATE";
-
-	// Keys for inserting and retrieving data in Intents.
-	public static final String GUARDIANID = "currentGuardianID";
-	public static final String CHILDID = "currentChildID";
-	public static final String APP_PACKAGENAME = "appPackageName";
-	public static final String APP_ACTIVITYNAME = "appActivityName";
-	public static final String SKIP = "skipActivity";
-
-	// Keys for settings.
-	public static final String COLORS = "colorSettings";
-	public static final String COLOR_BG = "backgroundColor";
-
-	// Constants denoting user roles.
-	public static final long ROLE_GUARDIAN = 1L;
-	public static final long ROLE_CHILD = 3L;
 
 	// 24 hours in milliseconds = 86400000;
 	// 4 hours in milliseconds:
@@ -50,12 +32,12 @@ public class Tools {
 	 * @param id ID of the guardian logging in.
 	 */
 	public static void saveLogInData(Context context, Long id) {
-		SharedPreferences sp = context.getSharedPreferences(TIMERKEY, 0);
+		SharedPreferences sp = context.getSharedPreferences(Data.TIMERKEY, 0);
 		SharedPreferences.Editor editor = sp.edit();
 		Date d = new Date();
 
-		editor.putLong(DATEKEY, d.getTime());
-		editor.putLong(GUARDIANID, id);
+		editor.putLong(Data.DATEKEY, d.getTime());
+		editor.putLong(Data.GUARDIANID, id);
 
 		editor.commit();
 	}
@@ -77,8 +59,8 @@ public class Tools {
 	 * @return ID of the currently logged in user.
 	 */
 	public static long findCurrentUserID(Context context) {
-		SharedPreferences sp = context.getSharedPreferences(TIMERKEY, 0);
-		return sp.getLong(GUARDIANID, -1);
+		SharedPreferences sp = context.getSharedPreferences(Data.TIMERKEY, 0);
+		return sp.getLong(Data.GUARDIANID, -1);
 	}
 
 	/**
@@ -97,11 +79,11 @@ public class Tools {
 	 * @param context Context of the current activity.
 	 */
 	public static void clearAuthData(Context context) {
-		SharedPreferences sp = context.getSharedPreferences(TIMERKEY, 0);
+		SharedPreferences sp = context.getSharedPreferences(Data.TIMERKEY, 0);
 		SharedPreferences.Editor editor = sp.edit();
 
-		editor.putLong(DATEKEY, 1);
-		editor.putLong(GUARDIANID, -1);
+		editor.putLong(Data.DATEKEY, 1);
+		editor.putLong(Data.GUARDIANID, -1);
 
 		editor.commit();
 	}
@@ -112,8 +94,8 @@ public class Tools {
 	 * @return True if a log in is required; otherwise false.
 	 */
 	public static boolean sessionExpired(Context context) {
-		SharedPreferences sp = context.getSharedPreferences(TIMERKEY, 0);
-		Long lastAuthTime = sp.getLong(DATEKEY, 1);
+		SharedPreferences sp = context.getSharedPreferences(Data.TIMERKEY, 0);
+		Long lastAuthTime = sp.getLong(Data.DATEKEY, 1);
 		Date d = new Date();
 
 		return d.getTime() > lastAuthTime + mAuthSpan;
