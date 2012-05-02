@@ -16,8 +16,8 @@ import android.widget.TextView;
 
 public class AppAdapter extends ArrayAdapter<AppInfo> {
 
-	Context context;
-	ArrayList<AppInfo> apps;
+	Context mContext;
+	ArrayList<AppInfo> mApps;
 
 	/**
 	 * Constructs a new adapter to handle the presentation of apps in the launcher.
@@ -27,17 +27,17 @@ public class AppAdapter extends ArrayAdapter<AppInfo> {
 	public AppAdapter(Context context, ArrayList<AppInfo> apps) {
 		super(context, 0, apps);
 
-		this.context = context;
-		this.apps = apps;
+		this.mContext = context;
+		this.mApps = apps;
 	}
-
+	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
-		final AppInfo app = apps.get(position);
+		final AppInfo app = mApps.get(position);
 
 		if (convertView == null) {
-			final LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			final LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = inflater.inflate(R.layout.apps, parent, false);
 		}
 
@@ -55,16 +55,16 @@ public class AppAdapter extends ArrayAdapter<AppInfo> {
 
 	/**
 	 * Sets the background of the app.
-	 * @param convertView The view the app is located inside.
-	 * @param color The color to use for the background.
+	 * @param wrapperView The view the app is located inside.
+	 * @param backgroundColor The color to use for the background.
 	 */
-	public static void setAppBackground(View convertView, int color) {    
-		LinearLayout ll = (LinearLayout) convertView.findViewById(R.id.app_bg);
+	public static void setAppBackground(View wrapperView, int backgroundColor) {    
+		LinearLayout convertViewLayout = (LinearLayout) wrapperView.findViewById(R.id.app_bg);
 		
-		RoundRectShape rect = new RoundRectShape( new float[] {15,15, 15,15, 15,15, 15,15}, new RectF(), null);
-		ShapeDrawable bg = new ShapeDrawable(rect);
+		RoundRectShape roundRect = new RoundRectShape( new float[] {15,15, 15,15, 15,15, 15,15}, new RectF(), null);
+		ShapeDrawable shapeDrawable = new ShapeDrawable(roundRect);
 		
-		bg.getPaint().setColor(color);
-		ll.setBackgroundDrawable(bg);
+		shapeDrawable.getPaint().setColor(backgroundColor);
+		convertViewLayout.setBackgroundDrawable(shapeDrawable);
 	}
 }
