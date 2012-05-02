@@ -108,6 +108,9 @@ public class HomeActivity extends Activity {
 		loadApplications();
 	}
 
+	/**
+	 * Catch all clicks on the back key and do nothing, since we dont want people to be able to "log out" with the back key
+	 */
 	@Override
 	public void onBackPressed() {
 		// If it should -- in the future -- be needed to have other activities below the homeactivity (stackwise) then the following check might come in handy:
@@ -120,7 +123,7 @@ public class HomeActivity extends Activity {
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
-		this.resizeBar();
+		this.drawBar();
 		this.drawGridView();
 	}
 
@@ -136,6 +139,9 @@ public class HomeActivity extends Activity {
 		mWidgetTimer.sendEmptyMessage(GWidgetUpdater.MSG_START);
 	}
 
+	/**
+	 * Repaint the Grid View
+	 */
 	private void drawGridView() {
 		if (Tools.isLandscape(mContext)) {
 			int columns = calculateNumOfColumns();
@@ -145,9 +151,17 @@ public class HomeActivity extends Activity {
 			LayoutParams gridParams = (LayoutParams) mGrid.getLayoutParams();
 			gridParams.width = gridWidth;
 			mGrid.setLayoutParams(gridParams);
+		} else {
+			/*
+			 * Future todo: implement portrait mode
+			 */
 		}
 	}
 	
+	/**
+	 * Calculate the current number of columns to use, based on the current number of apps.
+	 * @return number of columns to use, based on the current number of apps
+	 */
 	private int calculateNumOfColumns() {
 		if (mNumberOfApps > Data.APPS_PER_PAGE) {
 			// We use 3 here becasue there should be three rows if there are more than 9 elements
@@ -157,7 +171,10 @@ public class HomeActivity extends Activity {
 		}
 	}
 
-	private void resizeBar() {
+	/**
+	 * Repaints the bar
+	 */
+	private void drawBar() {
 		GridView homeGridView = (GridView)this.findViewById(R.id.GridViewHome);
 		RelativeLayout homebar = (RelativeLayout)this.findViewById(R.id.HomeBarLayout);
 
