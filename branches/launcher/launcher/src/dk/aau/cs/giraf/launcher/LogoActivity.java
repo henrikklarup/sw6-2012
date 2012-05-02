@@ -45,7 +45,7 @@ public class LogoActivity extends Activity {
 	            finally {
 	            	Intent i;
 
-	            	if (Tools.AuthRequired(mContext)) {
+	            	if (Tools.sessionExpired(mContext)) {
 	            		i = new Intent(mContext, AuthenticationActivity.class);
 	            	} else {
 	            		i = new Intent(mContext, HomeActivity.class);
