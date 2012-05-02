@@ -108,10 +108,11 @@ public class HomeActivity extends Activity {
 
 	@Override
 	public void onBackPressed() {
+		// If it should -- in the future -- be needed to have other activities below the homeactivity (stackwise) then the following check might come in handy:
 		// To stop the device from going back to the logo activity on back press.
-		if (!getIntent().getBooleanExtra(Tools.SKIP, false)) {
+		/*if (!getIntent().getBooleanExtra(Tools.SKIP, false)) {
 			super.onBackPressed();
-		}
+		}*/
 	}
 
 	@Override
