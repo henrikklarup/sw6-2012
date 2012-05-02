@@ -249,7 +249,7 @@ public class HomeActivity extends Activity {
 		
 		// If a guardian does not have any apps available, give them all GIRAF apps on the device:
 		if (userApps.size() == 0 && mCurrentUser.getPRole() == Tools.ROLE_GUARDIAN) {
-			Tools.attachAllDeviceGirafAppsToUser(mContext);
+			Tools.attachAvailableGirafAppsToUser(mContext);
 			userApps = Tools.getVisibleGirafApps(mContext, mCurrentUser);
 		}
 

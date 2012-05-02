@@ -111,7 +111,7 @@ public class Tools {
 	 * @param context Context of the current activity.
 	 * @return True if a log in is required; otherwise false.
 	 */
-	public static boolean AuthRequired(Context context) {
+	public static boolean sessionExpired(Context context) {
 		SharedPreferences sp = context.getSharedPreferences(TIMERKEY, 0);
 		Long lastAuthTime = sp.getLong(DATEKEY, 1);
 		Date d = new Date();
