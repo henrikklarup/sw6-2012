@@ -14,10 +14,8 @@ import dk.aau.cs.giraf.oasis.lib.models.App;
 
 public class LogoActivity extends Activity {
 
-	protected int _splashTime = 2000; 
-	private Thread splashTread;
+	private Thread mLogoThread;
 	private Context mContext;
-	private Activity mActivity;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -31,18 +29,19 @@ public class LogoActivity extends Activity {
 	    
 	    Tools.attachLauncher(mContext);
 	    
-	    Helper helper = new Helper(this);
+	    Helper helper = new Helper(mContext);
 	    int size = helper.profilesHelper.getProfiles().size();
 	    if (size <= 0) {
 	    	helper.CreateDummyData();
 	    }
 	    
-	    splashTread = new Thread() {
+	    // Thread used to display the logo for a set amount of time.
+	    mLogoThread = new Thread() {
 	        @Override
 	        public void run() {
 	            try {
 	            	synchronized(this) {
-	            		wait(_splashTime);
+	            		wait(Data.TIME_TO_DISPLAY_LOGO);
 	            	}
 	            } catch(InterruptedException e) {}
 	            finally {
@@ -53,9 +52,8 @@ public class LogoActivity extends Activity {
 	            	} else {
 	            		i = new Intent(mContext, HomeActivity.class);
 	            		
-	            		SharedPreferences sp = getSharedPreferences(Data.TIMERKEY, 0);
-	            		i.putExtra(Data.GUARDIANID, sp.getLong(Data.GUARDIANID, -1));
-	            		i.putExtra(Data.SKIP, true);
+	            		SharedPreferences sharedPreferences = getSharedPreferences(Data.TIMERKEY, 0);
+	            		i.putExtra(Data.GUARDIANID, sharedPreferences.getLong(Data.GUARDIANID, -1));
 	            	}
 	            	
 	                startActivity(i);
@@ -67,14 +65,14 @@ public class LogoActivity extends Activity {
 	    
 	    this.setOrientation();
 	    
-	    splashTread.start();
+	    mLogoThread.start();
 	}
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 	    if (event.getAction() == MotionEvent.ACTION_DOWN) {
-	    	synchronized(splashTread){
-	    		splashTread.notifyAll();
+	    	synchronized(mLogoThread){
+	    		mLogoThread.notifyAll();
 	    	}
 	    }
 	    return true;
