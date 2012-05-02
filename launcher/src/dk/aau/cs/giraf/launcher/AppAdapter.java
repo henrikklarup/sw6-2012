@@ -34,19 +34,19 @@ public class AppAdapter extends ArrayAdapter<AppInfo> {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
-		final AppInfo app = mApps.get(position);
+		final AppInfo appInfo = mApps.get(position);
 
 		if (convertView == null) {
 			final LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = inflater.inflate(R.layout.apps, parent, false);
 		}
 
-		ImageView iv = (ImageView) convertView.findViewById(R.id.app_icon);
-		TextView tv = (TextView) convertView.findViewById(R.id.app_text);
+		ImageView appIconImageView = (ImageView) convertView.findViewById(R.id.app_icon);
+		TextView appTextTextView = (TextView) convertView.findViewById(R.id.app_text);
 		
-		tv.setText(app.getShortenedName());
-		iv.setImageDrawable(app.getIconImage());
-		setAppBackground(convertView, app.getBgColor());
+		appTextTextView.setText(appInfo.getShortenedName());
+		appIconImageView.setImageDrawable(appInfo.getIconImage());
+		setAppBackground(convertView, appInfo.getBgColor());
 
 		convertView.setOnDragListener(new GAppDragger());
 		
