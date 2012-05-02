@@ -467,6 +467,18 @@ public class Tools {
 	}
 	
 	/**
+	 * Finds all apps installed on the device.
+	 * @param context Context of the current activity.
+	 * @return List of apps.
+	 */
+	public static void attachLauncher(Context context) {
+		Helper helper = new Helper(context);
+		Profile currentUser = Tools.findCurrentUser(context);
+		
+		helper.appsHelper.attachAppToProfile(helper.appsHelper.getAppByPackageName(), currentUser);
+	}
+	
+	/**
 	 * Attaches all GIRAF apps currently available on a device to a given user.
 	 * @param context Context of the current activity.
 	 * @param currentUser The user to attach apps to.
@@ -476,7 +488,7 @@ public class Tools {
 		Profile currentUser = findCurrentUser(context);
 
 		List<App> deviceApps = getAvailableGirafApps(context);
-
+		
 		for (App app : deviceApps) {
 			helper.appsHelper.attachAppToProfile(app, currentUser);
 		}
@@ -492,7 +504,7 @@ public class Tools {
 		Profile currentUser = findCurrentUser(context);
 
 		List<App> deviceApps = getAvailableAndroidApps(context);
-
+		
 		for (App app : deviceApps) {
 			helper.appsHelper.attachAppToProfile(app, currentUser);
 		}
@@ -508,7 +520,7 @@ public class Tools {
 		Profile currentUser = findCurrentUser(context);
 
 		List<App> deviceApps = getAvailableApps(context);
-
+		
 		for (App app : deviceApps) {
 			helper.appsHelper.attachAppToProfile(app, currentUser);
 		}

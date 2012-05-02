@@ -23,7 +23,10 @@ public class GAppDragger implements OnDragListener {
 			 */
 			break;
 		case DragEvent.ACTION_DROP:
-			AppAdapter.setAppBackground(view, (int) Integer.parseInt(drawEvent.getClipData().getItemAt(0).getText().toString()));
+			long id = Long.parseLong((String)view.getTag());
+			int color = (int) Integer.parseInt(drawEvent.getClipData().getItemAt(0).getText().toString());
+			
+			AppAdapter.saveAppBackground(view.getContext(), view, color, id);
 			break;
 		case DragEvent.ACTION_DRAG_ENDED:
 			/*

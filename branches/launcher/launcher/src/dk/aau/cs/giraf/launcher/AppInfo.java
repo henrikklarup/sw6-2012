@@ -1,13 +1,9 @@
 package dk.aau.cs.giraf.launcher;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 
-import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.App;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
-import dk.aau.cs.giraf.oasis.lib.models.Setting;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
@@ -112,48 +108,7 @@ class AppInfo extends App {
 	public void load(Context context, Profile guardian) {
 		setGuardian(guardian);
 		
-		loadBgColor(context);
 		loadIcon(context);
-	}
-
-	/**
-	 * Finds the background color of the app.
-	 * @param context Context of the current activity.
-	 */
-	private void loadBgColor(Context context) {
-		int[] c = context.getResources().getIntArray(R.array.appcolors);
-		boolean saveNew = false;
-		
-		if (settings != null && settings.containsKey(Data.COLORS)) {
-			HashMap<String, String> colorSettings = settings.get(Data.COLORS);
-			
-			if(colorSettings != null && colorSettings.containsKey(Data.COLOR_BG)) {
-				mBgColor = Integer.parseInt(colorSettings.get(Data.COLOR_BG));
-			} else {
-				saveNew = true;
-			}
-		} else {
-			saveNew = true;
-		}
-		
-		if (saveNew) {
-			if (settings == null) {
-				settings = new Setting<String, String, String>();
-			}
-			
-			Random rand = new Random();
-			int position = rand.nextInt(c.length);
-
-			settings.addValue(Data.COLORS, Data.COLOR_BG, String.valueOf(c[position]));
-			
-			Helper h = new Helper(context);
-			setSettings(settings);
-			h.appsHelper.modifyAppByProfile((App)this, mGuardian);
-			
-			mBgColor = c[position];
-		}
-		
-		settings = new Setting<String, String, String>();
 	}
 
 	/**

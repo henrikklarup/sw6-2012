@@ -244,7 +244,7 @@ public class HomeActivity extends Activity {
 	private void loadApplications() {		
 		List<App> userApps = Tools.getVisibleGirafApps(mContext, mCurrentUser);
 
-		//Tools.attachAllDeviceAppsToUser(mContext);
+		Tools.attachAvailableAppsToUser(mContext);
 		//List<App> userApps = Tools.getVisibleApps(mContext, mCurrentUser);
 		
 		// If a guardian does not have any apps available, give them all GIRAF apps on the device:
@@ -260,7 +260,7 @@ public class HomeActivity extends Activity {
 				AppInfo appInfo = new AppInfo(app);
 
 				appInfo.load(mContext, mCurrentUser);
-				//appInfo.setBgColor(appBgColor(appInfo.getId()));
+				appInfo.setBgColor(appBgColor(appInfo.getId()));
 
 				appInfos.add(appInfo);
 			}
@@ -399,7 +399,7 @@ public class HomeActivity extends Activity {
 	 */
 	private int appBgColor(Long appID) {
 		int[] colors = getResources().getIntArray(R.array.appcolors);
-		App launcher = mHelper.appsHelper.getAppByIds(mHelper.appsHelper.getAppByPackageName().getId(), mCurrentUser.getId());
+		App launcher = mHelper.appsHelper.getAppByPackageNameAndProfileId(mCurrentUser.getId());
 		Setting<String, String, String> launchSetting = launcher.getSettings();
 		
 		if (launchSetting != null && launchSetting.containsKey(String.valueOf(appID))) {
