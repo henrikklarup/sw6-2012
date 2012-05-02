@@ -47,7 +47,6 @@ import android.view.WindowManager;
 public class HomeActivity extends Activity {
 
 	private static Context mContext;
-	private Activity mActivity;
 	
 	private Profile mCurrentUser; 
 	private Setting<String,String,String> mSettings;
@@ -84,10 +83,9 @@ public class HomeActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.home);
 
-		mActivity = this;
 		mLandscapeBarWidth = Tools.intToDP(this, Data.HOMEBAR_WIDTH_LANDSCAPE);
 
-		HomeActivity.mContext = this; //getApplicationContext();
+		HomeActivity.mContext = this;
 		mHelper = new Helper(mContext);
 
 		mCurrentUser = mHelper.profilesHelper.getProfileById(getIntent().getExtras().getLong(Data.GUARDIANID));
@@ -127,25 +125,22 @@ public class HomeActivity extends Activity {
 	}
 
 	@Override
-	protected void onPause()
-	{
+	protected void onPause() {
 		super.onPause();
 		mWidgetTimer.sendEmptyMessage(GWidgetUpdater.MSG_STOP);
 	}
 
 	@Override
-	protected void onResume()
-	{
+	protected void onResume() {
 		super.onResume();
 		mWidgetTimer.sendEmptyMessage(GWidgetUpdater.MSG_START);
 	}
 
 	private void drawGridView() {
-		final boolean isLandscape = Tools.isLandscape(mContext);
-		Log.i("magnus", "count: " + mNumberOfApps);
-		if (isLandscape) {
+		if (Tools.isLandscape(mContext)) {
 			int columns = calculateNumOfColumns();
-			int gridWidth = columns * 290;
+			int gridWidth = columns * Data.GRID_CELL_WIDTH;
+			
 			mGrid.setNumColumns(columns);
 			LayoutParams gridParams = (LayoutParams) mGrid.getLayoutParams();
 			gridParams.width = gridWidth;
@@ -154,11 +149,11 @@ public class HomeActivity extends Activity {
 	}
 	
 	private int calculateNumOfColumns() {
-		if (mNumberOfApps > 9) {
+		if (mNumberOfApps > Data.APPS_PER_PAGE) {
 			// We use 3 here becasue there should be three rows if there are more than 9 elements
-			return (int) Math.ceil((double)((double)mNumberOfApps) / ((double)3));
+			return (int) Math.ceil((double)((double)mNumberOfApps) / ((double)Data.APPS_PER_PAGE));
 		} else {
-			return 4;
+			return Data.MAX_COLUMNS_PER_PAGE;
 		}
 	}
 
@@ -370,25 +365,26 @@ public class HomeActivity extends Activity {
 		mCalendarWidget = (GWidgetCalendar) findViewById(R.id.calendarwidget);
 		mConnectivityWidget = (GWidgetConnectivity) findViewById(R.id.connectivitywidget);
 		mLogoutWidget = (GWidgetLogout) findViewById(R.id.logoutwidget);
+		mHomeDrawer = (RelativeLayout) findViewById(R.id.HomeDrawer);
 
 		mWidgetTimer = new GWidgetUpdater();
 		mWidgetTimer.addWidget(mCalendarWidget);
 		mWidgetTimer.addWidget(mConnectivityWidget);
 
-		mHomeDrawer = (RelativeLayout) findViewById(R.id.HomeDrawer);
 
 		mLogoutWidget.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				View.OnClickListener task = new View.OnClickListener() {
 					public void onClick(View v) {
 						startActivity(Tools.logOutIntent(mContext));
-						mActivity.finish();
+						((Activity) mContext).finish();
 					}
 				};
+				
 				if(!mWidgetRunning){
 					mWidgetRunning = true;
 					GDialog g = new GDialog(mContext, R.drawable.large_switch_profile, "Log ud", "Du er på vej til at logge ud", task);
-					g.setOwnerActivity(mActivity);
+					g.setOwnerActivity((Activity)mContext);
 					g.show();
 					mWidgetRunning = false;
 				};
@@ -403,8 +399,8 @@ public class HomeActivity extends Activity {
 	 */
 	private int appBgColor(Long appID) {
 		int[] colors = getResources().getIntArray(R.array.appcolors);
-		App launcher = mHelper.appsHelper.getAppByPackageNameAndProfileId(mCurrentUser.getId());
-		Setting<String, String, String> launchSetting = launcher.getSettings();
+		App launcherApp = mHelper.appsHelper.getAppByPackageNameAndProfileId(mCurrentUser.getId());
+		Setting<String, String, String> launchSetting = launcherApp.getSettings();
 		
 		if (launchSetting != null && launchSetting.containsKey(String.valueOf(appID))) {
 			HashMap<String, String> appSetting = launchSetting.get(String.valueOf(appID));
@@ -414,8 +410,7 @@ public class HomeActivity extends Activity {
 			}
 		}
 
-		Random rand = new Random();
-		int position = rand.nextInt(colors.length);
+		int position = (new Random()).nextInt(colors.length);
 
 		if (launchSetting == null) {
 			launchSetting = new Setting<String, String, String>();
@@ -427,8 +422,8 @@ public class HomeActivity extends Activity {
 			launchSetting.get(String.valueOf(appID)).put(Data.COLOR_BG, String.valueOf(colors[position]));
 		}
 
-		launcher.setSettings(launchSetting);
-		mHelper.appsHelper.modifyAppByProfile(launcher, mCurrentUser);
+		launcherApp.setSettings(launchSetting);
+		mHelper.appsHelper.modifyAppByProfile(launcherApp, mCurrentUser);
 		
 		return colors[position];
 	}
