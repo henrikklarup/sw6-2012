@@ -85,13 +85,13 @@ public class AppAdapter extends ArrayAdapter<AppInfo> {
 	 * @param appID ID of the app to change for.
 	 */
 	public static void saveAppBackground(Context context, View convertView, int color, long appID) { 
+		setAppBackground(convertView, color);
+		
 		Helper helper = new Helper(context);
 		final Profile currentUser = Tools.findCurrentUser(context);
 		
 		App launcher = helper.appsHelper.getAppByPackageNameAndProfileId(currentUser.getId());
 		Setting<String, String, String> launchSetting = launcher.getSettings();
-		
-		Log.i("GIRAF", "App id in saveAppBackground " + appID);
 		
 		HashMap<String, String> colorSettings = launchSetting.get(String.valueOf(appID));
 
@@ -99,8 +99,6 @@ public class AppAdapter extends ArrayAdapter<AppInfo> {
 		colorSettings.put(Data.COLOR_BG, String.valueOf(color));
 		
 		launcher.setSettings(launchSetting);
-		helper.appsHelper.modifyAppByProfile(launcher, Tools.findCurrentUser(context));
-
-		setAppBackground(convertView, color);
+		helper.appsHelper.modifyAppByProfile(launcher, currentUser);
 	}
 }
