@@ -47,31 +47,36 @@ import android.view.WindowManager;
 public class HomeActivity extends Activity {
 
 	private static Context mContext;
-	private GridView mGrid;
+	private Activity mActivity;
+	
 	private Profile mCurrentUser; 
 	private Setting<String,String,String> mSettings;
 	private Helper mHelper;
+	
+	private GridView mGrid;
 	private TextView mNameView;
-	private LinearLayout mPictureLayout;
 	private ImageView mProfilePictureView;
-	private RelativeLayout mHomeBarLayout;
+	
 	private int mProfilePictureWidthLandscape;
 	private int mProfilePictureHeightLandscape;
 	private int mProfilePictureWidthPortrait;
 	private int mProfilePictureHeightPortrait;
+	private int mLandscapeBarWidth;
+	private int mNumberOfApps;
+
+	private boolean mWidgetRunning = false;
+		
 	private GWidgetUpdater mWidgetTimer;
 	private GWidgetCalendar mCalendarWidget;
 	private GWidgetConnectivity mConnectivityWidget;
 	private GWidgetLogout mLogoutWidget;
-	private RelativeLayout.LayoutParams mHomeBarParams;
+	
 	private RelativeLayout mHomeDrawer;
-	private final int DRAWER_WIDTH = 400;
-	private Activity mActivity;
-	private boolean mWidgetRunning = false;
-
-	private int mLandscapeBarWidth;
-	private int mNumberOfApps;
-
+	private RelativeLayout mHomeBarLayout;
+	private LinearLayout mPictureLayout;	
+	
+	private RelativeLayout.LayoutParams mHomeBarParams;
+	
 
 	/** Called when the activity is first created. */
 	@Override
@@ -80,8 +85,7 @@ public class HomeActivity extends Activity {
 		setContentView(R.layout.home);
 
 		mActivity = this;
-
-		mLandscapeBarWidth = Tools.intToDP(this, 200);
+		mLandscapeBarWidth = Tools.intToDP(this, Data.HOMEBAR_WIDTH_LANDSCAPE);
 
 		HomeActivity.mContext = this; //getApplicationContext();
 		mHelper = new Helper(mContext);
@@ -313,10 +317,10 @@ public class HomeActivity extends Activity {
 
 					if (margin < snaplength) {
 						margin = 0;
-					} else if (margin > (DRAWER_WIDTH - snaplength)) {
-						margin = DRAWER_WIDTH;
-					} else if (margin > DRAWER_WIDTH) {
-						margin = DRAWER_WIDTH;
+					} else if (margin > (Data.DRAWER_WIDTH - snaplength)) {
+						margin = Data.DRAWER_WIDTH;
+					} else if (margin > Data.DRAWER_WIDTH) {
+						margin = Data.DRAWER_WIDTH;
 					}
 
 					mHomeBarParams.setMargins(margin, 0, 0, 0);
