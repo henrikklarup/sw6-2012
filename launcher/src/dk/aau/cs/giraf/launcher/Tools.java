@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ResolveInfo;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.WindowManager;
 
@@ -45,7 +46,13 @@ public class Tools {
 	public static Profile findCurrentUser(Context context) {
 		Helper helper = new Helper(context);
 
-		return helper.profilesHelper.getProfileById(findCurrentUserID(context));
+		long currentUserID = findCurrentUserID(context);
+		
+		if (currentUserID == -1) {
+			return null;
+		} else {
+			return helper.profilesHelper.getProfileById(currentUserID);
+		}
 	}
 
 	/**
@@ -54,8 +61,8 @@ public class Tools {
 	 * @return ID of the currently logged in user.
 	 */
 	public static long findCurrentUserID(Context context) {
-		SharedPreferences sp = context.getSharedPreferences(Data.TIMERKEY, 0);
-		return sp.getLong(Data.GUARDIANID, -1);
+		SharedPreferences sharedPreferences = context.getSharedPreferences(Data.TIMERKEY, 0);
+		return sharedPreferences.getLong(Data.GUARDIANID, -1);
 	}
 
 	/**
@@ -468,7 +475,11 @@ public class Tools {
 		Helper helper = new Helper(context);
 		Profile currentUser = Tools.findCurrentUser(context);
 		
-		helper.appsHelper.attachAppToProfile(helper.appsHelper.getAppByPackageName(), currentUser);
+		if (currentUser != null) {
+			helper.appsHelper.attachAppToProfile(helper.appsHelper.getAppByPackageName(), currentUser);
+		} else {
+			Log.e(Data.ERRORTAG, "Could not get current user!");
+		}
 	}
 	
 	/**
