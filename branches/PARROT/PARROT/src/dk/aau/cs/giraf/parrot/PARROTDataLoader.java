@@ -27,6 +27,7 @@ public class PARROTDataLoader {
 	{
 		this.parrent = activity;
 	}
+	
 	public PARROTProfile loadProfile()	
 	{
 		//This part of the code is supposed to get a profile from the launcher, and read it from the admin.
@@ -90,7 +91,7 @@ public class PARROTDataLoader {
 		return cat;
 	}
 
-	public Pictogram loadPictogram(long id)	//FIXME make sure that all ID references are of the type long
+	public Pictogram loadPictogram(long id)
 	{
 		Pictogram pic = null;
 		Media media=help.mediaHelper.getSingleMediaById(id); //This is the image media //TODO check type
@@ -173,24 +174,19 @@ public class PARROTDataLoader {
 		//after all the changes are made, we save the settings to the database
 		app.setSettings(profileSetting);
 	}
-	
+
 	private Setting<String, String, String> saveCategory(Category category, int categoryNumber, Setting<String, String, String> profileSetting ) {
 		//first, we save the pictograms
 		String pictogramString = "";
 		for(int i=1;i<category.getPictograms().size();i++)
 		{
 			Pictogram pic = category.getPictogramAtIndex(i);
-			if(pic.isNewPictogram() == true)
-			{
-				saveNewPictogram(pic);
-			}
-			else if (pic.isChanged() == true)
-			{
-				savePictogram(pic);
-			}
+
+			savePictogram(pic);
+
 			//In any case, save the references
 			pictogramString += pic.getImageID()+'#';
-			
+
 		}
 		pictogramString += "$";
 		pictogramString.replace("#$", "$");	//Here we make sure that the end is $, and not #$
@@ -199,66 +195,21 @@ public class PARROTDataLoader {
 		profileSetting.addValue("category"+categoryNumber, "colour", String.valueOf(category.getCategoryColour()));
 		//and then we save the icon
 		Pictogram icon = category.getIcon();
-		if(icon.isNewPictogram() == true)
-		{
-			saveNewPictogram(icon);
-		}
-		else if (icon.isChanged() == true)
-		{
-			//TODO save changes to pictogram
-		}
+		savePictogram(icon);
 		profileSetting.addValue("category"+categoryNumber, "icon", String.valueOf(icon.getImageID()));
 
 		return profileSetting;
 	}
-	
-	/**
-	 * 
-	 * @Rasmus This method is used to save completely new pictograms to the database
-	 */
-	private void saveNewPictogram(Pictogram pic)
-	{
-		Media imageMedia = null;
-		Media soundMedia = null;
-		Media wordMedia = null;
-		if(pic.getImageID() == -1) //if the picture is new in the database
-		{
-			imageMedia = new Media(pic.getName(), pic.getImagePath(), true, "IMAGE", PARROTActivity.getUser().getProfileID());
-			help.mediaHelper.insertMedia(imageMedia);
-		}
-		if(pic.getSoundID() == -1 && pic.getSoundPath() != null) //if the sound is new in the database
-		{
-			soundMedia = new Media(pic.getName(), pic.getSoundPath(), true, "SOUND", PARROTActivity.getUser().getProfileID());	//TODO we might want to set the booleans to false
-			help.mediaHelper.insertMedia(soundMedia);
-		}
-		if(pic.getWordID() == -1 && pic.getWordPath() != null) //if the word is not in the database
-		{
-			wordMedia = new Media(pic.getName(), pic.getWordPath(), true, "WORD", PARROTActivity.getUser().getProfileID());	//TODO we might want to set the booleans to false
-			help.mediaHelper.insertMedia(wordMedia);
-		}
 
-		// save the submedia references
-		if(soundMedia != null)
-		{
-			help.mediaHelper.attachSubMediaToMedia(soundMedia, imageMedia);
-		}
-		if(wordMedia !=null)
-		{
-			help.mediaHelper.attachSubMediaToMedia(wordMedia, imageMedia);
-		}
-		
-	}
-	
 	/**
 	 * 
-	 * @Rasmus This method is used to save a pictogram that has been edited.
+	 * @Rasmus This method is used to save completely new pictograms to the database, as well as modify existing ones.
 	 */
 	private void savePictogram(Pictogram pic)
 	{
 		Media imageMedia = null;
 		Media soundMedia = null;
 		Media wordMedia = null;
-		//Check the image
 		if(pic.getImageID() == -1) //if the picture is new in the database
 		{
 			imageMedia = new Media(pic.getName(), pic.getImagePath(), true, "IMAGE", PARROTActivity.getUser().getProfileID());
@@ -266,19 +217,66 @@ public class PARROTDataLoader {
 		}
 		else
 		{
-			imageMedia = new Media(pic.getName(), pic.getImagePath(), true, "IMAGE",PARROTActivity.getUser().getProfileID());
+			imageMedia = new Media(pic.getName(),pic.getImagePath(),true,"IMAGE",PARROTActivity.getUser().getProfileID());
 			imageMedia.setId(pic.getImageID());
 			help.mediaHelper.modifyMedia(imageMedia);
 		}
-		
-		if(pic.getSoundID() == -1 && pic.getSoundPath() != null)
+
+		if(pic.getSoundID() == -1 && pic.getSoundPath() != null) //if the sound is new in the database
 		{
-			
+			soundMedia = new Media(pic.getName(), pic.getSoundPath(), true, "SOUND", PARROTActivity.getUser().getProfileID());	//TODO we might want to set the booleans to false
+			help.mediaHelper.insertMedia(soundMedia);
 		}
 		else if(pic.getSoundPath() != null)
 		{
-			
+			soundMedia = new Media(pic.getName(), pic.getSoundPath(), true, "SOUND", PARROTActivity.getUser().getProfileID());	//TODO we might want to set the booleans to false
+			soundMedia.setId(pic.getSoundID());
+			help.mediaHelper.modifyMedia(soundMedia);
 		}
-		
+
+		if(pic.getWordID() == -1 && pic.getWordPath() != null) //if the word is not in the database
+		{
+			wordMedia = new Media(pic.getName(), pic.getWordPath(), true, "WORD", PARROTActivity.getUser().getProfileID());	//TODO we might want to set the booleans to false
+			help.mediaHelper.insertMedia(wordMedia);
+		}
+		else if(pic.getWordPath() != null)
+		{
+			wordMedia = new Media(pic.getName(), pic.getWordPath(), true, "WORD", PARROTActivity.getUser().getProfileID());	//TODO we might want to set the booleans to false
+			wordMedia.setId(pic.getWordID());
+			help.mediaHelper.modifyMedia(wordMedia);
+		}
+
+		// save the submedia references for NEW pictograms
+		if(pic.isNewPictogram() == true)
+		{
+			if(soundMedia != null)
+			{
+				help.mediaHelper.attachSubMediaToMedia(soundMedia, imageMedia);
+			}
+			if(wordMedia !=null)
+			{
+				help.mediaHelper.attachSubMediaToMedia(wordMedia, imageMedia);
+			}
+		}
+		//save the submedia references for a MODIFIED pictogram
+		else if(pic.isChanged() == true)
+		{
+			List<Media> mediasToRemove = help.mediaHelper.getSubMediaByMedia(imageMedia);
+			for(int i = 0;i<mediasToRemove.size();i++)	//find all previous references, and remove them
+			{
+				help.mediaHelper.removeSubMediaAttachmentToMedia(mediasToRemove.get(i), imageMedia);
+			}
+			if(soundMedia != null)
+			{
+				help.mediaHelper.attachSubMediaToMedia(soundMedia, imageMedia);
+			}
+			if(wordMedia !=null)
+			{
+				help.mediaHelper.attachSubMediaToMedia(wordMedia, imageMedia);
+			}
+
+		}
+
 	}
+
 }
