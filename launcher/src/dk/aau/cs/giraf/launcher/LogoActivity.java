@@ -26,10 +26,10 @@ public class LogoActivity extends Activity {
 	    
 	    mContext = this.getApplicationContext();
 	    
-	    
-	    
 	    Tools.updateGirafApps_DB(mContext);
 	    Tools.updateAndroidApps_DB(mContext);
+	    
+	    Tools.attachLauncher(mContext);
 	    
 	    Helper helper = new Helper(this);
 	    int size = helper.profilesHelper.getProfiles().size();

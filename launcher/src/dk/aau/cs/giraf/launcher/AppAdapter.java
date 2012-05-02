@@ -1,11 +1,18 @@
 package dk.aau.cs.giraf.launcher;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import dk.aau.cs.giraf.oasis.lib.Helper;
+import dk.aau.cs.giraf.oasis.lib.models.App;
+import dk.aau.cs.giraf.oasis.lib.models.Profile;
+import dk.aau.cs.giraf.oasis.lib.models.Setting;
 
 import android.content.Context;
 import android.graphics.RectF;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RoundRectShape;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +55,7 @@ public class AppAdapter extends ArrayAdapter<AppInfo> {
 		appIconImageView.setImageDrawable(appInfo.getIconImage());
 		setAppBackground(convertView, appInfo.getBgColor());
 
+		convertView.setTag(String.valueOf(appInfo.getId()));
 		convertView.setOnDragListener(new GAppDragger());
 		
 		return convertView;
@@ -66,5 +74,33 @@ public class AppAdapter extends ArrayAdapter<AppInfo> {
 		
 		shapeDrawable.getPaint().setColor(backgroundColor);
 		convertViewLayout.setBackgroundDrawable(shapeDrawable);
+	}
+	
+	/**
+	 * Sets the background color of a given app and saves the color.
+	 * @param context Context of the current activity.
+	 * @param currentUser User currently logged into the system.
+	 * @param convertView View to change color for.
+	 * @param color Color to change to.
+	 * @param appID ID of the app to change for.
+	 */
+	public static void saveAppBackground(Context context, View convertView, int color, long appID) { 
+		Helper helper = new Helper(context);
+		final Profile currentUser = Tools.findCurrentUser(context);
+		
+		App launcher = helper.appsHelper.getAppByPackageNameAndProfileId(currentUser.getId());
+		Setting<String, String, String> launchSetting = launcher.getSettings();
+		
+		Log.i("GIRAF", "App id in saveAppBackground " + appID);
+		
+		HashMap<String, String> colorSettings = launchSetting.get(String.valueOf(appID));
+
+		colorSettings.remove(Data.COLOR_BG);
+		colorSettings.put(Data.COLOR_BG, String.valueOf(color));
+		
+		launcher.setSettings(launchSetting);
+		helper.appsHelper.modifyAppByProfile(launcher, Tools.findCurrentUser(context));
+
+		setAppBackground(convertView, color);
 	}
 }
