@@ -12,7 +12,6 @@ import android.content.Context;
 import android.graphics.RectF;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RoundRectShape;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,11 +47,11 @@ public class AppAdapter extends ArrayAdapter<AppInfo> {
 			convertView = inflater.inflate(R.layout.apps, parent, false);
 		}
 
-		ImageView appIconImageView = (ImageView) convertView.findViewById(R.id.app_icon);
-		TextView appTextTextView = (TextView) convertView.findViewById(R.id.app_text);
+		ImageView appIconView = (ImageView) convertView.findViewById(R.id.app_icon);
+		TextView appTextView = (TextView) convertView.findViewById(R.id.app_text);
 		
-		appTextTextView.setText(appInfo.getShortenedName());
-		appIconImageView.setImageDrawable(appInfo.getIconImage());
+		appTextView.setText(appInfo.getShortenedName());
+		appIconView.setImageDrawable(appInfo.getIconImage());
 		setAppBackground(convertView, appInfo.getBgColor());
 
 		convertView.setTag(String.valueOf(appInfo.getId()));
@@ -87,16 +86,16 @@ public class AppAdapter extends ArrayAdapter<AppInfo> {
 	public static void saveAppBackground(Context context, View convertView, int color, long appID) { 
 		setAppBackground(convertView, color);
 		
-		Helper helper = new Helper(context);
+		final Helper helper = new Helper(context);
 		final Profile currentUser = Tools.findCurrentUser(context);
 		
 		App launcher = helper.appsHelper.getAppByPackageNameAndProfileId(currentUser.getId());
 		Setting<String, String, String> launchSetting = launcher.getSettings();
 		
-		HashMap<String, String> colorSettings = launchSetting.get(String.valueOf(appID));
+		HashMap<String, String> appSettings = launchSetting.get(String.valueOf(appID));
 
-		colorSettings.remove(Data.COLOR_BG);
-		colorSettings.put(Data.COLOR_BG, String.valueOf(color));
+		appSettings.remove(Data.COLOR_BG);
+		appSettings.put(Data.COLOR_BG, String.valueOf(color));
 		
 		launcher.setSettings(launchSetting);
 		helper.appsHelper.modifyAppByProfile(launcher, currentUser);
