@@ -9,5 +9,6 @@
     <string name="authentication_name">Firstname Middlename Lastname</string>
     <string name="saadan">Sådan! Klik på "Log in" for at bekræfte.</string>
     <string name="barnameview">Firstname Middlename Lastname</string>
+    <string name="profileselect_headline">Select a profile:</string>
 
 </resources>
