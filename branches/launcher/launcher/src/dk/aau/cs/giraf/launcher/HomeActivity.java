@@ -381,7 +381,9 @@ public class HomeActivity extends Activity {
 				
 				if(!mWidgetRunning){
 					mWidgetRunning = true;
-					GDialog g = new GDialog(mContext, R.drawable.large_switch_profile, "Log ud", "Du er p� vej til at logge ud", task);
+					String headline = mContext.getResources().getString(R.string.Log_out);
+					String description = mContext.getResources().getString(R.string.Log_out_description);
+					GDialog g = new GDialog(mContext, R.drawable.large_switch_profile, headline, description, task);
 					g.setOwnerActivity((Activity)mContext);
 					g.show();
 					mWidgetRunning = false;
