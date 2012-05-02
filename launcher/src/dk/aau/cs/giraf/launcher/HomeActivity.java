@@ -221,35 +221,66 @@ public class HomeActivity extends Activity {
 		if (Tools.isLandscape(mContext)) {
 			mNameView.setVisibility(View.INVISIBLE);
 
-			profilePictureViewParams.width = Tools.intToDP(mContext, Data.PROFILEPIC_WIDTH_LANDSCAPE);
-			profilePictureViewParams.height = Tools.intToDP(mContext, Data.PROFILEPIC_HEIGHT_LANDSCAPE);
-			mHomeBarLayout.setPadding(Tools.intToDP(mContext, Data.HOMEBAR_PADDING_LANDSCAPE), Tools.intToDP(mContext, Data.HOMEBAR_PADDING_LANDSCAPE), Tools.intToDP(mContext, Data.HOMEBAR_PADDING_LANDSCAPE), Tools.intToDP(mContext, Data.HOMEBAR_PADDING_LANDSCAPE));
+			profilePictureViewParams.width = Tools.intToDP(mContext, Data.PROFILEPIC_LANDSCAPE_WIDTH);
+			profilePictureViewParams.height = Tools.intToDP(mContext, Data.PROFILEPIC_LANDSCAPE_HEIGHT);
+			mHomeBarLayout.setPadding(Tools.intToDP(mContext, Data.HOMEBAR_LANDSCAPE_PADDING),
+					Tools.intToDP(mContext, Data.HOMEBAR_LANDSCAPE_PADDING),
+					Tools.intToDP(mContext, Data.HOMEBAR_LANDSCAPE_PADDING),
+					Tools.intToDP(mContext, Data.HOMEBAR_LANDSCAPE_PADDING));
 
-			connectivityWidgetParams.setMargins(Tools.intToDP(mContext, Data.WIDGET_CONNECTIVITY_MARGIN_LEFT), Tools.intToDP(mContext, Data.WIDGET_CONNECTIVITY_MARGIN_TOP), Tools.intToDP(mContext, Data.WIDGET_CONNECTIVITY_MARGIN_RIGHT), Tools.intToDP(mContext, Data.WIDGET_CONNECTIVITY_MARGIN_BOTTOM));
-			calendarWidgetParams.setMargins(Tools.intToDP(mContext, Data.WIDGET_CALENDAR_MARGIN_LEFT), Tools.intToDP(mContext, Data.WIDGET_CALENDAR_MARGIN_TOP), Tools.intToDP(mContext, Data.WIDGET_CALENDAR_MARGIN_RIGHT), Tools.intToDP(mContext, Data.WIDGET_CALENDAR_MARGIN_BOTTOM));
+			connectivityWidgetParams.setMargins(Tools.intToDP(mContext, Data.WIDGET_CONNECTIVITY_MARGIN_LANDSCAPE_LEFT),
+					Tools.intToDP(mContext, Data.WIDGET_CONNECTIVITY_MARGIN_LANDSCAPE_TOP),
+					Tools.intToDP(mContext, Data.WIDGET_CONNECTIVITY_MARGIN_LANDSCAPE_RIGHT),
+					Tools.intToDP(mContext, Data.WIDGET_CONNECTIVITY_MARGIN_LANDSCAPE_BOTTOM));
+			
+			calendarWidgetParams.setMargins(Tools.intToDP(mContext, Data.WIDGET_CALENDAR_MARGIN_LANDSCAPE_LEFT),
+					Tools.intToDP(mContext, Data.WIDGET_CALENDAR_MARGIN_LANDSCAPE_TOP),
+					Tools.intToDP(mContext, Data.WIDGET_CALENDAR_MARGIN_LANDSCAPE_RIGHT),
+					Tools.intToDP(mContext, Data.WIDGET_CALENDAR_MARGIN_LANDSCAPE_BOTTOM));
 			calendarWidgetParams.addRule(RelativeLayout.BELOW, mConnectivityWidget.getId());
+			
 			calendarWidgetParams.addRule(RelativeLayout.LEFT_OF, 0);
 
-			logoutWidgetParams.setMargins(0, Tools.intToDP(mContext, 390), 0, 0);
+			logoutWidgetParams.setMargins(Tools.intToDP(mContext, Data.WIDGET_LOGOUT_MARGIN_LANDSCAPE_LEFT),
+					Tools.intToDP(mContext, Data.WIDGET_LOGOUT_MARGIN_LANDSCAPE_TOP),
+					Tools.intToDP(mContext, Data.WIDGET_LOGOUT_MARGIN_LANDSCAPE_RIGHT),
+					Tools.intToDP(mContext, Data.WIDGET_LOGOUT_MARGIN_LANDSCAPE_BOTTOM));
+			
 			logoutWidgetParams.addRule(RelativeLayout.BELOW, mCalendarWidget.getId());
 			logoutWidgetParams.addRule(RelativeLayout.LEFT_OF, 0);
 		} else {
 			/**
 			 * future todo: implement portrait mode and fix the below code
 			 */
-			connectivityWidgetParams.setMargins(0, 0, 0, 0);
-			calendarWidgetParams.setMargins(0, 0, Tools.intToDP(mContext, 25),0);
+			connectivityWidgetParams.setMargins(Tools.intToDP(mContext, Data.WIDGET_CONNECTIVITY_MARGIN_PORTRAIT_LEFT),
+					Tools.intToDP(mContext, Data.WIDGET_CONNECTIVITY_MARGIN_PORTRAIT_TOP),
+					Tools.intToDP(mContext, Data.WIDGET_CONNECTIVITY_MARGIN_PORTRAIT_RIGHT),
+					Tools.intToDP(mContext, Data.WIDGET_CONNECTIVITY_MARGIN_PORTRAIT_BOTTOM));
+			
+			calendarWidgetParams.setMargins(Tools.intToDP(mContext, Data.WIDGET_CALENDAR_MARGIN_PORTRAIT_LEFT),
+					Tools.intToDP(mContext, Data.WIDGET_CALENDAR_MARGIN_PORTRAIT_TOP),
+					Tools.intToDP(mContext, Data.WIDGET_CALENDAR_MARGIN_PORTRAIT_RIGHT),
+					Tools.intToDP(mContext, Data.WIDGET_CALENDAR_MARGIN_PORTRAIT_BOTTOM));
+			
 			calendarWidgetParams.addRule(RelativeLayout.BELOW, 0);
 			calendarWidgetParams.addRule(RelativeLayout.LEFT_OF, mConnectivityWidget.getId());
 
-			logoutWidgetParams.setMargins(0, 0, Tools.intToDP(mContext, 25), 0);
+			logoutWidgetParams.setMargins(Tools.intToDP(mContext, Data.WIDGET_LOGOUT_MARGIN_PORTRAIT_LEFT),
+					Tools.intToDP(mContext, Data.WIDGET_LOGOUT_MARGIN_PORTRAIT_TOP),
+					Tools.intToDP(mContext, Data.WIDGET_LOGOUT_MARGIN_PORTRAIT_RIGHT),
+					Tools.intToDP(mContext, Data.WIDGET_LOGOUT_MARGIN_PORTRAIT_BOTTOM));
+			
 			logoutWidgetParams.addRule(RelativeLayout.BELOW, 0);
 			logoutWidgetParams.addRule(RelativeLayout.LEFT_OF, mCalendarWidget.getId());
 
-			profilePictureViewParams.width = Tools.intToDP(mContext, 100);
-			profilePictureViewParams.height = Tools.intToDP(mContext, 130);
+			profilePictureViewParams.width = Tools.intToDP(mContext, Data.PROFILEPIC_PORTRAIT_WIDTH);
+			profilePictureViewParams.height = Tools.intToDP(mContext, Data.PROFILEPIC_PORTRAIT_HEIGHT);
 
-			mHomeBarLayout.setPadding(Tools.intToDP(mContext, 15), Tools.intToDP(mContext, 15), Tools.intToDP(mContext, 15), Tools.intToDP(mContext, 15));
+			mHomeBarLayout.setPadding(Tools.intToDP(mContext, Data.HOMEBAR_PORTRAIT_PADDING),
+					Tools.intToDP(mContext, Data.HOMEBAR_PORTRAIT_PADDING),
+					Tools.intToDP(mContext, Data.HOMEBAR_PORTRAIT_PADDING),
+					Tools.intToDP(mContext, Data.HOMEBAR_PORTRAIT_PADDING));
+			
 			mNameView.setVisibility(View.VISIBLE);
 		}
 		mProfilePictureView.setLayoutParams(profilePictureViewParams);	
