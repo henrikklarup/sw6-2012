@@ -211,7 +211,7 @@ public class HomeActivity extends Activity {
 			calendarWidgetParams.addRule(RelativeLayout.BELOW, mConnectivityWidget.getId());
 			calendarWidgetParams.addRule(RelativeLayout.LEFT_OF, 0);
 
-			logoutWidgetParams.setMargins(0, Tools.intToDP(mContext, 15), 0, 0);
+			logoutWidgetParams.setMargins(0, Tools.intToDP(mContext, 390), 0, 0);
 			logoutWidgetParams.addRule(RelativeLayout.BELOW, mCalendarWidget.getId());
 			logoutWidgetParams.addRule(RelativeLayout.LEFT_OF, 0);
 		} else {
