@@ -68,15 +68,27 @@ public class AuthenticationActivity extends CaptureActivity {
 		});
 	}
 
+	/**
+	 * Changes the color of the border around the camera feed of the QR code scanner.
+	 * @param color The color which the border should have
+	 */
 	private void changeCamerafeedBorderColor(int color) {
 		ViewGroup cameraFeedView = (ViewGroup)this.findViewById(R.id.camerafeed);
+		
 		RectF rectf = new RectF(10,10,10,10);
-		RoundRectShape rect = new RoundRectShape( new float[] {15,15, 15,15, 15,15, 15,15}, rectf, null); // 15,15, 15,15, 15,15, 15,15 // 30,30, 30,30, 30,30, 30,30
-		ShapeDrawable bg = new ShapeDrawable(rect);
-		bg.getPaint().setColor(color);
-		cameraFeedView.setBackgroundDrawable(bg);
+		RoundRectShape rect = new RoundRectShape( new float[] {15,15, 15,15, 15,15, 15,15}, rectf, null);
+		ShapeDrawable shapeDrawable = new ShapeDrawable(rect);
+		
+		shapeDrawable.getPaint().setColor(color);
+		cameraFeedView.setBackgroundDrawable(shapeDrawable);
 	}
 
+	/**
+	 * Method which is ran every time the QR scanner scans a valid QR code.
+	 * SuppressWarnings("unused") is used here, as eclipse cannot figure out by itself that this method is actually used.
+	 * @param Result which the scanned string is saved in.
+	 * @param A greyscale bitmap of the camera data which was decoded.
+	 */
 	@SuppressWarnings("unused")
 	@Override
 	public void handleDecode(Result rawResult, Bitmap barcode)
@@ -84,12 +96,14 @@ public class AuthenticationActivity extends CaptureActivity {
 		Helper helper = new Helper(this);
 		Profile profile = helper.profilesHelper.authenticateProfile(rawResult.getText());
 
+		/* If the scanned code is not a valid certificate which is
+		 * attached to a profile, authenticateProfile() will return null,
+		 * hence the null check here.
+		 */
 		if (profile != null) {	
-			
 			if (mPreviousProfile == null || !profile.toString().equals(mPreviousProfile.toString())) {
 				mVibrator.vibrate(400);
 			}
-			
 			mPreviousProfile = profile;
 			
 			this.changeCamerafeedBorderColor(0xFF3AAA35);
@@ -100,7 +114,6 @@ public class AuthenticationActivity extends CaptureActivity {
 			
 			mHomeIntent = new Intent(AuthenticationActivity.this, HomeActivity.class);
 			mHomeIntent.putExtra("currentGuardianID", profile.getId());
-			Log.i("magnus","guardianID: " + profile.getId());
 			
 			Tools.saveLogInData(mContext, profile.getId());
 		} else {
@@ -108,9 +121,11 @@ public class AuthenticationActivity extends CaptureActivity {
 			mGLoginButton.setVisibility(View.INVISIBLE);
 			mLoginNameView.setVisibility(View.INVISIBLE);
 			mInfoView.setText(R.string.authentication_step1);
-
 		}
-
+		
+		/*
+		 * Needed by ZXing in order to continuously scan QR codes, and not halt after first scan.
+		 */
 		this.getHandler().sendEmptyMessageDelayed(R.id.restart_preview, 500);
 	}
 }
