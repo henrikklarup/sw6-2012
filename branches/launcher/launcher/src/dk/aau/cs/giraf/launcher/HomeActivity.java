@@ -399,32 +399,33 @@ public class HomeActivity extends Activity {
 	 */
 	private int appBgColor(Long appID) {
 		int[] colors = getResources().getIntArray(R.array.appcolors);
-		App launcher = mHelper.appsHelper.getAppByPackageName();
+		App launcher = mHelper.appsHelper.getAppByIds(mHelper.appsHelper.getAppByPackageName().getId(), mCurrentUser.getId());
 		Setting<String, String, String> launchSetting = launcher.getSettings();
-		boolean saveNew = false;
-
-		if (launchSetting != null && launchSetting.containsKey(appID)) {
-			HashMap<String, String> appSetting = launchSetting.get(appID);
-
+		
+		if (launchSetting != null && launchSetting.containsKey(String.valueOf(appID))) {
+			HashMap<String, String> appSetting = launchSetting.get(String.valueOf(appID));
+			
 			if (appSetting != null && appSetting.containsKey(Tools.COLOR_BG)) {
 				return Integer.parseInt(appSetting.get(Tools.COLOR_BG));
-			} else {
-				saveNew = true;
 			}
-		} else {
-			saveNew = true;
 		}
 
 		Random rand = new Random();
 		int position = rand.nextInt(colors.length);
 
-		if (saveNew) {
+		if (launchSetting == null) {
+			launchSetting = new Setting<String, String, String>();
+		}
+		
+		if (!launchSetting.containsKey(String.valueOf(appID))) {
 			launchSetting.addValue(String.valueOf(appID), Tools.COLOR_BG, String.valueOf(colors[position]));
-
-			launcher.setSettings(launchSetting);
-			mHelper.appsHelper.modifyAppByProfile(launcher, mCurrentUser);
+		} else if (!launchSetting.get(String.valueOf(appID)).containsKey(Tools.COLOR_BG)) {
+			launchSetting.get(String.valueOf(appID)).put(Tools.COLOR_BG, String.valueOf(colors[position]));
 		}
 
+		launcher.setSettings(launchSetting);
+		mHelper.appsHelper.modifyAppByProfile(launcher, mCurrentUser);
+		
 		return colors[position];
 	}
 }
