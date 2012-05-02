@@ -430,34 +430,50 @@ public class HomeActivity extends Activity {
 	 */
 	private int appBgColor(Long appID) {
 		int[] colors = getResources().getIntArray(R.array.appcolors);
-		App launcherApp = mHelper.appsHelper.getAppByPackageNameAndProfileId(mCurrentUser.getId());
-		Setting<String, String, String> launchSetting = launcherApp.getSettings();
+		App launcher = mHelper.appsHelper.getAppByPackageNameAndProfileId(mCurrentUser.getId());
+		Setting<String, String, String> launchSetting = launcher.getSettings();
 		
+		// If settings for the given app exists.
 		if (launchSetting != null && launchSetting.containsKey(String.valueOf(appID))) {
 			HashMap<String, String> appSetting = launchSetting.get(String.valueOf(appID));
 			
+			// If color settings for the given app exists.
 			if (appSetting != null && appSetting.containsKey(Data.COLOR_BG)) {
 				return Integer.parseInt(appSetting.get(Data.COLOR_BG));
 			}
 		}
 		
-		//Randomize a color, if no setting exist. 
-		
+		//Randomize a color, if no setting exist, and save it. 
 		int position = (new Random()).nextInt(colors.length);
 
-		if (launchSetting == null) {
-			launchSetting = new Setting<String, String, String>();
-		}
-		
-		if (!launchSetting.containsKey(String.valueOf(appID))) {
-			launchSetting.addValue(String.valueOf(appID), Data.COLOR_BG, String.valueOf(colors[position]));
-		} else if (!launchSetting.get(String.valueOf(appID)).containsKey(Data.COLOR_BG)) {
-			launchSetting.get(String.valueOf(appID)).put(Data.COLOR_BG, String.valueOf(colors[position]));
-		}
-
-		launcherApp.setSettings(launchSetting);
-		mHelper.appsHelper.modifyAppByProfile(launcherApp, mCurrentUser);
+		// No settings existed, save the new.
+		saveNewBgColor(colors[position], appID);
 		
 		return colors[position];
+	}
+	
+	/**
+	 * Saves a new color in the launcher settings.
+	 * @param color Color to save.
+	 * @param appID ID of the app to save for.
+	 */
+	private void saveNewBgColor(int color, long appID) {
+		App launcher = mHelper.appsHelper.getAppByPackageNameAndProfileId(mCurrentUser.getId());
+		Setting<String, String, String> settings = launcher.getSettings();
+		
+		if (settings == null) {
+			settings = new Setting<String, String, String>();
+		}
+		
+		// If no app specific settings exist.
+		if (!settings.containsKey(String.valueOf(appID))) {
+			settings.addValue(String.valueOf(appID), Data.COLOR_BG, String.valueOf(color));
+		} // If no app specific color settings exist.
+		else if (!settings.get(String.valueOf(appID)).containsKey(Data.COLOR_BG)) {
+			settings.get(String.valueOf(appID)).put(Data.COLOR_BG, String.valueOf(color));
+		}
+
+		launcher.setSettings(settings);
+		mHelper.appsHelper.modifyAppByProfile(launcher, mCurrentUser);
 	}
 }
