@@ -119,7 +119,7 @@ public class Tools {
 	 * @return true if the device currently is held in landscape orientation by the user.
 	 */
 	public static boolean isLandscape(Context context) {
-		int rotation = ((WindowManager) context.getSystemService(context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
+		int rotation = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
 		if ((rotation % 2) == 0) {
 			return true;
 		} else {
