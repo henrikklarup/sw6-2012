@@ -228,11 +228,11 @@ public class HomeActivity extends Activity {
 			connectivityWidgetParams.setMargins(Tools.intToDP(mContext, Data.WIDGET_CONNECTIVITY_MARGIN_LEFT), Tools.intToDP(mContext, Data.WIDGET_CONNECTIVITY_MARGIN_TOP), Tools.intToDP(mContext, Data.WIDGET_CONNECTIVITY_MARGIN_RIGHT), Tools.intToDP(mContext, Data.WIDGET_CONNECTIVITY_MARGIN_BOTTOM));
 			calendarWidgetParams.setMargins(Tools.intToDP(mContext, Data.WIDGET_CALENDAR_MARGIN_LEFT), Tools.intToDP(mContext, Data.WIDGET_CALENDAR_MARGIN_TOP), Tools.intToDP(mContext, Data.WIDGET_CALENDAR_MARGIN_RIGHT), Tools.intToDP(mContext, Data.WIDGET_CALENDAR_MARGIN_BOTTOM));
 			calendarWidgetParams.addRule(RelativeLayout.BELOW, mConnectivityWidget.getId());
-			//calendarWidgetParams.addRule(RelativeLayout.LEFT_OF, 0);
+			calendarWidgetParams.addRule(RelativeLayout.LEFT_OF, 0);
 
 			logoutWidgetParams.setMargins(0, Tools.intToDP(mContext, 390), 0, 0);
 			logoutWidgetParams.addRule(RelativeLayout.BELOW, mCalendarWidget.getId());
-			//logoutWidgetParams.addRule(RelativeLayout.LEFT_OF, 0);
+			logoutWidgetParams.addRule(RelativeLayout.LEFT_OF, 0);
 		} else {
 			/**
 			 * future todo: implement portrait mode and fix the below code
