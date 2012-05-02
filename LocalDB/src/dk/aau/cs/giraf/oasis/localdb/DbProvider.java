@@ -410,7 +410,7 @@ public class DbProvider extends ContentProvider {
 			return _uri;
 		case LISTOFAPPS_TYPE_LIST:
 			try {
-				rowId = db.insert(ListOfAppsMetaData.Table.TABLE_NAME, null, values);
+				rowId = db.insertOrThrow(ListOfAppsMetaData.Table.TABLE_NAME, null, values);
 				_uri = ContentUris.withAppendedId(ListOfAppsMetaData.CONTENT_URI, rowId);
 				getContext().getContentResolver().notifyChange(_uri, null);
 			} catch (SQLiteConstraintException e) {
