@@ -297,6 +297,7 @@ public class HomeActivity extends Activity {
 
 		if (girafAppsList != null) {
 			ArrayList<AppInfo> appInfos = new ArrayList<AppInfo>();
+			
 			for (App app : girafAppsList) {
 				AppInfo appInfo = new AppInfo(app);
 
@@ -304,7 +305,6 @@ public class HomeActivity extends Activity {
 				appInfo.setBgColor(appBgColor(appInfo.getId()));
 				appInfos.add(appInfo);
 			}
-
 			mGrid = (GridView)this.findViewById(R.id.GridViewHome);
 			mGrid.setAdapter(new AppAdapter(this, appInfos));
 			mGrid.setOnItemClickListener(new ProfileLauncher());
