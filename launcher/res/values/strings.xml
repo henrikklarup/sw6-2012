@@ -10,5 +10,7 @@
     <string name="saadan">Sådan! Klik på "Log in" for at bekræfte.</string>
     <string name="barnameview">Firstname Middlename Lastname</string>
     <string name="profileselect_headline">Select a profile:</string>
+    <string name="Log_out">Log ud</string>
+    <string name="Log_out_description">Du er på vej til at logge ud.</string>
 
 </resources>
