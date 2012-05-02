@@ -12,7 +12,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ResolveInfo;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.WindowManager;
 
@@ -21,10 +20,6 @@ import android.view.WindowManager;
  */
 public class Tools {
 
-
-	// 24 hours in milliseconds = 86400000;
-	// 4 hours in milliseconds:
-	private static final long mAuthSpan = 14400000;
 
 	/**
 	 * Saves data for the currently authorized log in.
@@ -98,7 +93,7 @@ public class Tools {
 		Long lastAuthTime = sp.getLong(Data.DATEKEY, 1);
 		Date d = new Date();
 
-		return d.getTime() > lastAuthTime + mAuthSpan;
+		return d.getTime() > lastAuthTime + Data.TIME_TO_STAY_LOGGED_IN;
 	}
 
 	/**
@@ -195,15 +190,28 @@ public class Tools {
 			return new ArrayList<App>();
 		}
 
-		// Remove all apps from user's list of apps that are not installed on the device.
-		for (int i = 0; i < userApps.size(); i++) {
-			if (!appsContain_A(deviceApps, userApps.get(i))) {
-				userApps.remove(i);
+		userApps = subtractAppLists(userApps, deviceApps);
+
+		return userApps;
+	}
+	
+	
+	/**
+	 * Subtracts the apps lists: a, b.
+	 * @param List<App> a, the list to be substracted from. 
+	 * @param List<App> b, the list to subtract.
+	 * @return The substract of a - b.
+	 */
+	private static List<App> subtractAppLists(List<App> a, List<App> b){
+		
+		for (int i = 0; i < a.size(); i++) {
+			if (!appsContain_A(b, a.get(i))) {
+				a.remove(i);
 				i--;
 			}
 		}
-
-		return userApps;
+		
+		return a;
 	}
 
 	/**
@@ -222,12 +230,7 @@ public class Tools {
 			return new ArrayList<App>();
 		}
 
-		for (int i = 0; i < deviceApps.size(); i++) {
-			if (appsContain_A(userApps, deviceApps.get(i))) {
-				deviceApps.remove(i);
-				i--;
-			}
-		}
+		deviceApps = subtractAppLists(deviceApps, userApps);
 
 		return deviceApps;
 	}
@@ -248,12 +251,7 @@ public class Tools {
 			return new ArrayList<App>();
 		}
 
-		for (int i = 0; i < deviceApps.size(); i++) {
-			if (appsContain_A(userApps, deviceApps.get(i))) {
-				deviceApps.remove(i);
-				i--;
-			}
-		}
+		deviceApps = subtractAppLists(deviceApps, userApps);
 
 		return deviceApps;
 	}
@@ -274,12 +272,7 @@ public class Tools {
 			return new ArrayList<App>();
 		}
 
-		for (int i = 0; i < deviceApps.size(); i++) {
-			if (appsContain_A(userApps, deviceApps.get(i))) {
-				deviceApps.remove(i);
-				i--;
-			}
-		}
+		deviceApps = subtractAppLists(deviceApps, userApps);
 
 		return deviceApps;
 	}
