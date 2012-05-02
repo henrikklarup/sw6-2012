@@ -96,7 +96,7 @@ class AppInfo extends App {
 	public void load(Context context, Profile guardian) {
 		setGuardian(guardian);
 		
-		loadBgColor(context);
+		//loadBgColor(context);
 		loadIcon(context);
 	}
 
