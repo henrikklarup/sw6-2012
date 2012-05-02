@@ -86,7 +86,7 @@ public class HomeActivity extends Activity {
 		HomeActivity.mContext = this; //getApplicationContext();
 		mHelper = new Helper(mContext);
 
-		mCurrentUser = mHelper.profilesHelper.getProfileById(getIntent().getExtras().getLong(Tools.GUARDIANID));
+		mCurrentUser = mHelper.profilesHelper.getProfileById(getIntent().getExtras().getLong(Data.GUARDIANID));
 
 		mNameView = (TextView)this.findViewById(R.id.nameView);
 		mNameView.setText(mCurrentUser.getFirstname() + " " + mCurrentUser.getSurname());
@@ -248,7 +248,7 @@ public class HomeActivity extends Activity {
 		//List<App> userApps = Tools.getVisibleApps(mContext, mCurrentUser);
 		
 		// If a guardian does not have any apps available, give them all GIRAF apps on the device:
-		if (userApps.size() == 0 && mCurrentUser.getPRole() == Tools.ROLE_GUARDIAN) {
+		if (userApps.size() == 0 && mCurrentUser.getPRole() == Data.ROLE_GUARDIAN) {
 			Tools.attachAvailableGirafAppsToUser(mContext);
 			userApps = Tools.getVisibleGirafApps(mContext, mCurrentUser);
 		}
@@ -405,8 +405,8 @@ public class HomeActivity extends Activity {
 		if (launchSetting != null && launchSetting.containsKey(String.valueOf(appID))) {
 			HashMap<String, String> appSetting = launchSetting.get(String.valueOf(appID));
 			
-			if (appSetting != null && appSetting.containsKey(Tools.COLOR_BG)) {
-				return Integer.parseInt(appSetting.get(Tools.COLOR_BG));
+			if (appSetting != null && appSetting.containsKey(Data.COLOR_BG)) {
+				return Integer.parseInt(appSetting.get(Data.COLOR_BG));
 			}
 		}
 
@@ -418,9 +418,9 @@ public class HomeActivity extends Activity {
 		}
 		
 		if (!launchSetting.containsKey(String.valueOf(appID))) {
-			launchSetting.addValue(String.valueOf(appID), Tools.COLOR_BG, String.valueOf(colors[position]));
-		} else if (!launchSetting.get(String.valueOf(appID)).containsKey(Tools.COLOR_BG)) {
-			launchSetting.get(String.valueOf(appID)).put(Tools.COLOR_BG, String.valueOf(colors[position]));
+			launchSetting.addValue(String.valueOf(appID), Data.COLOR_BG, String.valueOf(colors[position]));
+		} else if (!launchSetting.get(String.valueOf(appID)).containsKey(Data.COLOR_BG)) {
+			launchSetting.get(String.valueOf(appID)).put(Data.COLOR_BG, String.valueOf(colors[position]));
 		}
 
 		launcher.setSettings(launchSetting);

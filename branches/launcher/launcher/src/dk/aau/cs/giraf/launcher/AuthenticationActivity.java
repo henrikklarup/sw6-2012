@@ -47,7 +47,7 @@ public class AuthenticationActivity extends CaptureActivity {
 		mGLoginButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				if (!getIntent().hasCategory("dk.aau.cs.giraf.launcher.GIRAF")) {
-					mHomeIntent.putExtra(Tools.SKIP, true);
+					mHomeIntent.putExtra(Data.SKIP, true);
 					startActivity(mHomeIntent);
 				} else {
 					finish();

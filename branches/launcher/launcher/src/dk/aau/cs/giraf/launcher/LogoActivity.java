@@ -53,9 +53,9 @@ public class LogoActivity extends Activity {
 	            	} else {
 	            		i = new Intent(mContext, HomeActivity.class);
 	            		
-	            		SharedPreferences sp = getSharedPreferences(Tools.TIMERKEY, 0);
-	            		i.putExtra(Tools.GUARDIANID, sp.getLong(Tools.GUARDIANID, -1));
-	            		i.putExtra(Tools.SKIP, true);
+	            		SharedPreferences sp = getSharedPreferences(Data.TIMERKEY, 0);
+	            		i.putExtra(Data.GUARDIANID, sp.getLong(Data.GUARDIANID, -1));
+	            		i.putExtra(Data.SKIP, true);
 	            	}
 	            	
 	                startActivity(i);

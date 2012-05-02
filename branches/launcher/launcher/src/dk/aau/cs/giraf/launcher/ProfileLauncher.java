@@ -11,9 +11,9 @@ import android.content.Intent;
             AppInfo app = (AppInfo) parent.getItemAtPosition(position);
             
             Intent profileSelectIntent = new Intent(v.getContext(),ProfileSelectActivity.class);
-            profileSelectIntent.putExtra(Tools.APP_PACKAGENAME, app.getaPackage());
-            profileSelectIntent.putExtra(Tools.APP_ACTIVITYNAME, app.getActivity());
-            profileSelectIntent.putExtra(Tools.GUARDIANID, app.getGuardianID());
+            profileSelectIntent.putExtra(Data.APP_PACKAGENAME, app.getaPackage());
+            profileSelectIntent.putExtra(Data.APP_ACTIVITYNAME, app.getActivity());
+            profileSelectIntent.putExtra(Data.GUARDIANID, app.getGuardianID());
             
 			v.getContext().startActivity(profileSelectIntent);
     }  
