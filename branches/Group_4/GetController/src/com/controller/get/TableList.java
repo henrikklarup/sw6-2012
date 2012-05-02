@@ -27,6 +27,7 @@ public class TableList extends ListActivity {
 	Profile profile;
 	Setting settings;
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
