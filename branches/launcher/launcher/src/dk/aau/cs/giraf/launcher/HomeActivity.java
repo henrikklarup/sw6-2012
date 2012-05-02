@@ -297,11 +297,8 @@ public class HomeActivity extends Activity {
 	 * Load the drawer and its functionality.
 	 */
 	private void loadDrawer(){
-		View main = findViewById(R.id.HomeWrapperLayout);
 
-		main.layout(-600, 0, main.getWidth(), main.getHeight());
-
-		// If result = true, the onTouchListner will be run again, if false it will not.
+		// If result = true, the onTouch-function will be run again.
 		findViewById(R.id.HomeBarLayout).setOnTouchListener(new View.OnTouchListener() {
 			int offset = 0;
 			@Override
@@ -350,15 +347,6 @@ public class HomeActivity extends Activity {
 
 					break;
 				case MotionEvent.ACTION_UP:
-
-					ViewGroup vg = (ViewGroup) v;
-					int numChildren = vg.getChildCount();
-
-					for(int i = 0; i < numChildren; i++){
-						vg.getChildAt(i).invalidate();
-					}
-
-					result = false;
 					break;
 
 				}
@@ -393,7 +381,7 @@ public class HomeActivity extends Activity {
 				
 				if(!mWidgetRunning){
 					mWidgetRunning = true;
-					GDialog g = new GDialog(mContext, R.drawable.large_switch_profile, "Log ud", "Du er på vej til at logge ud", task);
+					GDialog g = new GDialog(mContext, R.drawable.large_switch_profile, "Log ud", "Du er pï¿½ vej til at logge ud", task);
 					g.setOwnerActivity((Activity)mContext);
 					g.show();
 					mWidgetRunning = false;
