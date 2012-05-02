@@ -100,6 +100,7 @@ public class AuthenticationActivity extends CaptureActivity {
 			
 			mHomeIntent = new Intent(AuthenticationActivity.this, HomeActivity.class);
 			mHomeIntent.putExtra("currentGuardianID", profile.getId());
+			Log.i("magnus","guardianID: " + profile.getId());
 			
 			Tools.saveLogInData(mContext, profile.getId());
 		} else {
