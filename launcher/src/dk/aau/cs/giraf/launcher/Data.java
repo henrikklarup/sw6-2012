@@ -21,6 +21,9 @@ public final class Data {
 	public static final long ROLE_GUARDIAN = 1L;
 	public static final long ROLE_CHILD = 3L;
 	
+	//Authentication activity
+	public static final long TIME_TO_STAY_LOGGED_IN = 14400000;
+	
 	// Home activity values.
 	public static final int DRAWER_WIDTH = 400;
 	public static final int HOMEBAR_WIDTH_LANDSCAPE = 200;
