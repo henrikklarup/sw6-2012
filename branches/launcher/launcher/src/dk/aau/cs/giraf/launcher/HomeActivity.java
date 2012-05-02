@@ -409,7 +409,9 @@ public class HomeActivity extends Activity {
 				return Integer.parseInt(appSetting.get(Data.COLOR_BG));
 			}
 		}
-
+		
+		//Randomize a color, if no setting exist. 
+		
 		int position = (new Random()).nextInt(colors.length);
 
 		if (launchSetting == null) {
