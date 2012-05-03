@@ -28,17 +28,19 @@ public class PARROTDataLoader {
 		this.parrent = activity;
 	}
 	
-	public PARROTProfile loadProfile()	
+
+	
+	public PARROTProfile loadProfile(Long childId,Long appId)	
 	{
 		//This part of the code is supposed to get a profile from the launcher, and read it from the admin.
-		Bundle extras = parrent.getIntent().getExtras();
+//		Bundle extras = parrent.getIntent().getExtras();
 		Profile prof;
 
 		help = new Helper(parrent);
-		if(extras !=null)
+		if(childId !=null && appId !=null)
 		{
-			prof = help.profilesHelper.getProfileById(extras.getLong("currentChildID"));	//It used to be "currentProfileId"
-			app = help.appsHelper.getAppByIds(extras.getLong("currentAppId"), extras.getLong("currentChildID"));
+			prof = help.profilesHelper.getProfileById(childId);	//It used to be "currentProfileId"
+			app = help.appsHelper.getAppByIds(appId, childId);
 			Pictogram pic = new Pictogram(prof.getFirstname(), prof.getPicture(), null, null);	//TODO discuss whether this image might be changed
 			PARROTProfile parrotUser = new PARROTProfile(prof.getFirstname(), pic);
 			parrotUser.setProfileID(prof.getId());
@@ -163,7 +165,6 @@ public class PARROTDataLoader {
 
 	public void saveProfile(PARROTProfile user)
 	{
-		Profile prof = new Profile();
 		Setting<String, String, String> profileSetting = new Setting<String, String, String>();
 		//TODO save profile settings
 
@@ -173,6 +174,56 @@ public class PARROTDataLoader {
 		}
 		//after all the changes are made, we save the settings to the database
 		app.setSettings(profileSetting);
+	}
+	
+	public void TESTsaveTestProfile()
+	{
+		help = new Helper(parrent);
+		//help.CreateDummyData();
+		Profile tempProf = new Profile("Jens","Jensen",null,Profile.pRoles.CHILD.ordinal(),12345678,null,null);
+		Long profileId = help.profilesHelper.insertProfile(tempProf);
+		app = help.appsHelper.getAppByIds(1, profileId);
+		
+		Setting<String, String, String> profileSetting = new Setting<String, String, String>();
+		
+		//START TEMP LINES
+		Pictogram tempPic= new Pictogram("Koala","/sdcard/Pictures/005.jpg", null, null);
+		Category tempCat = new Category(0,tempPic);
+		tempCat.addPictogram(tempPic);
+		tempCat.addPictogram(tempPic);
+		Pictogram tempPic2 = new Pictogram("Meg", "/sdcard/Pictures/meg.png", null, null);
+		tempCat.addPictogram(tempPic2);
+		
+		PARROTProfile testProfile = new PARROTProfile("Niels", tempPic);
+		testProfile.setProfileID(profileId);
+		
+		for (int i=0;i<6;i++)
+		{
+			tempCat.addPictogram(tempPic);
+			tempCat.addPictogram(tempPic2);
+		}
+
+		Category tempCat2 = new Category(2, tempPic2);
+		tempPic = new Pictogram("Bob", "/sdcard/Pictures/007.jpg", null, null);
+		tempPic2= new Pictogram("Madeline", "/sdcard/Pictures/003.jpg", null, null);
+
+		for (int i=0;i<6;i++)
+		{
+			tempCat2.addPictogram(tempPic);
+			tempCat2.addPictogram(tempPic2);
+		}
+		testProfile.addCategory(tempCat);
+		testProfile.addCategory(tempCat2);
+		PARROTActivity.setUser(testProfile);
+		
+		for(int i=0;i<testProfile.getCategories().size();i++)
+		{
+			profileSetting = saveCategory(testProfile.getCategoryAt(i), i, profileSetting);
+		}
+		app.setSettings(profileSetting);
+		long appID=1;
+		PARROTActivity.setUser(loadProfile(profileId, appID));
+		//END TEMP LINES
 	}
 
 	private Setting<String, String, String> saveCategory(Category category, int categoryNumber, Setting<String, String, String> profileSetting ) {
