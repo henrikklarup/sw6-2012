@@ -9,6 +9,7 @@ import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
 import dk.aau.cs.giraf.gui.*;
 
+import android.util.Log;
 import android.view.View;
 import android.app.Activity;
 import android.content.ComponentName;

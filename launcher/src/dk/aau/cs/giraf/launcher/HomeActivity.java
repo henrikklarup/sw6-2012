@@ -47,16 +47,15 @@ import android.view.WindowManager;
 public class HomeActivity extends Activity {
 
 	private static Context mContext;
-	
+
 	private Profile mCurrentUser; 
 	private Setting<String,String,String> mSettings;
 	private Helper mHelper;
 	private App mLauncher;
-	
 	private GridView mGrid;
 	private TextView mNameView;
 	private ImageView mProfilePictureView;
-	
+
 	private int mProfilePictureWidthLandscape;
 	private int mProfilePictureHeightLandscape;
 	private int mProfilePictureWidthPortrait;
@@ -65,18 +64,18 @@ public class HomeActivity extends Activity {
 	private int mNumberOfApps;
 
 	private boolean mWidgetRunning = false;
-		
+
 	private GWidgetUpdater mWidgetTimer;
 	private GWidgetCalendar mCalendarWidget;
 	private GWidgetConnectivity mConnectivityWidget;
 	private GWidgetLogout mLogoutWidget;
-	
+
 	private RelativeLayout mHomeDrawer;
 	private RelativeLayout mHomeBarLayout;
 	private LinearLayout mPictureLayout;	
-	
+
 	private RelativeLayout.LayoutParams mHomeBarParams;
-	
+
 
 	/** Called when the activity is first created. */
 	@Override
@@ -116,7 +115,7 @@ public class HomeActivity extends Activity {
 	 */
 	@Override
 	public void onBackPressed() {
-		
+
 	}
 
 	@Override
@@ -145,7 +144,7 @@ public class HomeActivity extends Activity {
 		if (Tools.isLandscape(mContext)) {
 			int columns = calculateNumOfColumns();
 			int gridWidth = columns * Data.GRID_CELL_WIDTH;
-			
+
 			mGrid.setNumColumns(columns);
 			LayoutParams gridParams = (LayoutParams) mGrid.getLayoutParams();
 			gridParams.width = gridWidth;
@@ -156,7 +155,7 @@ public class HomeActivity extends Activity {
 			 */
 		}
 	}
-	
+
 	/**
 	 * Calculate the current number of columns to use, based on the current number of apps.
 	 * @return number of columns to use, based on the current number of apps
@@ -211,7 +210,7 @@ public class HomeActivity extends Activity {
 
 		this.drawWidgets();
 	}
-	
+
 	/**
 	 * Repaints the widgets
 	 */
@@ -235,20 +234,20 @@ public class HomeActivity extends Activity {
 					Tools.intToDP(mContext, Data.WIDGET_CONNECTIVITY_MARGIN_LANDSCAPE_TOP),
 					Tools.intToDP(mContext, Data.WIDGET_CONNECTIVITY_MARGIN_LANDSCAPE_RIGHT),
 					Tools.intToDP(mContext, Data.WIDGET_CONNECTIVITY_MARGIN_LANDSCAPE_BOTTOM));
-			
+
 			calendarWidgetParams.setMargins(Tools.intToDP(mContext, Data.WIDGET_CALENDAR_MARGIN_LANDSCAPE_LEFT),
 					Tools.intToDP(mContext, Data.WIDGET_CALENDAR_MARGIN_LANDSCAPE_TOP),
 					Tools.intToDP(mContext, Data.WIDGET_CALENDAR_MARGIN_LANDSCAPE_RIGHT),
 					Tools.intToDP(mContext, Data.WIDGET_CALENDAR_MARGIN_LANDSCAPE_BOTTOM));
 			calendarWidgetParams.addRule(RelativeLayout.BELOW, mConnectivityWidget.getId());
-			
+
 			calendarWidgetParams.addRule(RelativeLayout.LEFT_OF, 0);
 
 			logoutWidgetParams.setMargins(Tools.intToDP(mContext, Data.WIDGET_LOGOUT_MARGIN_LANDSCAPE_LEFT),
 					Tools.intToDP(mContext, Data.WIDGET_LOGOUT_MARGIN_LANDSCAPE_TOP),
 					Tools.intToDP(mContext, Data.WIDGET_LOGOUT_MARGIN_LANDSCAPE_RIGHT),
 					Tools.intToDP(mContext, Data.WIDGET_LOGOUT_MARGIN_LANDSCAPE_BOTTOM));
-			
+
 			logoutWidgetParams.addRule(RelativeLayout.BELOW, mCalendarWidget.getId());
 			logoutWidgetParams.addRule(RelativeLayout.LEFT_OF, 0);
 		} else {
@@ -259,12 +258,12 @@ public class HomeActivity extends Activity {
 					Tools.intToDP(mContext, Data.WIDGET_CONNECTIVITY_MARGIN_PORTRAIT_TOP),
 					Tools.intToDP(mContext, Data.WIDGET_CONNECTIVITY_MARGIN_PORTRAIT_RIGHT),
 					Tools.intToDP(mContext, Data.WIDGET_CONNECTIVITY_MARGIN_PORTRAIT_BOTTOM));
-			
+
 			calendarWidgetParams.setMargins(Tools.intToDP(mContext, Data.WIDGET_CALENDAR_MARGIN_PORTRAIT_LEFT),
 					Tools.intToDP(mContext, Data.WIDGET_CALENDAR_MARGIN_PORTRAIT_TOP),
 					Tools.intToDP(mContext, Data.WIDGET_CALENDAR_MARGIN_PORTRAIT_RIGHT),
 					Tools.intToDP(mContext, Data.WIDGET_CALENDAR_MARGIN_PORTRAIT_BOTTOM));
-			
+
 			calendarWidgetParams.addRule(RelativeLayout.BELOW, 0);
 			calendarWidgetParams.addRule(RelativeLayout.LEFT_OF, mConnectivityWidget.getId());
 
@@ -272,7 +271,7 @@ public class HomeActivity extends Activity {
 					Tools.intToDP(mContext, Data.WIDGET_LOGOUT_MARGIN_PORTRAIT_TOP),
 					Tools.intToDP(mContext, Data.WIDGET_LOGOUT_MARGIN_PORTRAIT_RIGHT),
 					Tools.intToDP(mContext, Data.WIDGET_LOGOUT_MARGIN_PORTRAIT_BOTTOM));
-			
+
 			logoutWidgetParams.addRule(RelativeLayout.BELOW, 0);
 			logoutWidgetParams.addRule(RelativeLayout.LEFT_OF, mCalendarWidget.getId());
 
@@ -283,7 +282,7 @@ public class HomeActivity extends Activity {
 					Tools.intToDP(mContext, Data.HOMEBAR_PORTRAIT_PADDING),
 					Tools.intToDP(mContext, Data.HOMEBAR_PORTRAIT_PADDING),
 					Tools.intToDP(mContext, Data.HOMEBAR_PORTRAIT_PADDING));
-			
+
 			mNameView.setVisibility(View.VISIBLE);
 		}
 		mProfilePictureView.setLayoutParams(profilePictureViewParams);	
@@ -300,7 +299,7 @@ public class HomeActivity extends Activity {
 
 		if (girafAppsList != null) {
 			ArrayList<AppInfo> appInfos = new ArrayList<AppInfo>();
-			
+
 			for (App app : girafAppsList) {
 				AppInfo appInfo = new AppInfo(app);
 
@@ -320,7 +319,7 @@ public class HomeActivity extends Activity {
 	/**
 	 * Load the user's paintgrid in the drawer.
 	 */
-	private void loadPaintGrid(){
+	private void loadPaintGrid() {
 		GridView AppColors = (GridView) findViewById(R.id.appcolors);
 		// Removes blue highlight and scroll on AppColors grid
 		AppColors.setEnabled(false);
@@ -330,7 +329,7 @@ public class HomeActivity extends Activity {
 	/**
 	 * Load the drawer and its functionality.
 	 */
-	private void loadDrawer(){
+	private void loadDrawer() {
 		// If result = true, the onTouch-function will be run again.
 		findViewById(R.id.HomeBarLayout).setOnTouchListener(new View.OnTouchListener() {
 			int offset = 0;
@@ -364,7 +363,7 @@ public class HomeActivity extends Activity {
 						homeDrawerLayoutParams.setMargins((margin-(Data.DRAWER_WIDTH*2)), 0, 0, 0);
 						homeDrawerView.setLayoutParams(homeDrawerLayoutParams);
 						result = true;
-					
+
 						/* Setting width of the horizontalscrollview */
 						HorizontalScrollView hScrollView = (HorizontalScrollView)findViewById(R.id.horizontalScrollView);
 						LayoutParams scrollParams = (LayoutParams) hScrollView.getLayoutParams();
@@ -407,6 +406,7 @@ public class HomeActivity extends Activity {
 						((Activity) mContext).finish();
 					}
 				};
+				
 				if (!mWidgetRunning) {
 					mWidgetRunning = true;
 					String headline = mContext.getResources().getString(R.string.Log_out);
@@ -428,26 +428,26 @@ public class HomeActivity extends Activity {
 	private int appBgColor(Long appID) {
 		int[] colors = getResources().getIntArray(R.array.appcolors);
 		Setting<String, String, String> launcherSettings = mLauncher.getSettings();
-		
+
 		// If settings for the given app exists.
 		if (launcherSettings != null && launcherSettings.containsKey(String.valueOf(appID))) {
 			HashMap<String, String> appSetting = launcherSettings.get(String.valueOf(appID));
-			
+
 			// If color settings for the given app exists.
 			if (appSetting != null && appSetting.containsKey(Data.COLOR_BG)) {
 				return Integer.parseInt(appSetting.get(Data.COLOR_BG));
 			}
 		}
-		
+
 		//Randomize a color, if no setting exist, and save it. 
 		int position = (new Random()).nextInt(colors.length);
 
 		// No settings existed, save the new.
 		saveNewBgColor(colors[position], appID);
-		
+
 		return colors[position];
 	}
-	
+
 	/**
 	 * Saves a new color in the launcher settings.
 	 * @param color Color to save.
@@ -455,11 +455,11 @@ public class HomeActivity extends Activity {
 	 */
 	private void saveNewBgColor(int color, long appID) {
 		Setting<String, String, String> launcherSettings = mLauncher.getSettings();
-		
+
 		if (launcherSettings == null) {
 			launcherSettings = new Setting<String, String, String>();
 		}
-		
+
 		// If no app specific settings exist.
 		if (!launcherSettings.containsKey(String.valueOf(appID))) {
 			launcherSettings.addValue(String.valueOf(appID), Data.COLOR_BG, String.valueOf(color));
