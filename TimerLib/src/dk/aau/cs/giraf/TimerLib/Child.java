@@ -105,21 +105,25 @@ public class Child implements Comparable<Child>{
 	 * @param p The SubProfile you which to save
 	 * @return return Id
 	 */
-	public SubProfile save(SubProfile p){
+	public SubProfile save(SubProfile p, boolean override){
 
-		//Check if there exists an old profile
-		for(SubProfile oldProfile : this.SubProfiles()){
-			if(p.getId() == oldProfile.getId()){
-				//Set same DB id
-				p.setId(oldProfile.getId());
-				p.setDB_id(oldProfile.getDB_id());
-				this.remove(oldProfile);
-			}
+		if(!override){
+			p.setDB_id(getNewId());
 		}
-			if(p.getDB_id() <= -1){
-				p.setDB_id(getNewId());
-			}
-			
+		
+		//Check if there exists an old profile
+//		for(SubProfile oldProfile : this.SubProfiles()){
+//			if(p.getId() == oldProfile.getId()){
+//				//Set same DB id
+//				p.setId(oldProfile.getId());
+//				p.setDB_id(oldProfile.getDB_id());
+//				this.remove(oldProfile);
+//			}
+//		}
+//			if(p.getDB_id() <= -1){
+//				p.setDB_id(getNewId());
+//			}
+//			
 			p.name = "id: " + p.getId() + " db id: " + p.getDB_id();
 			this.SubProfiles().add(p);
 			Guardian.saveChild(this, p);

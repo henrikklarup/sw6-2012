@@ -73,7 +73,7 @@ public class CRUD {
 	}
 	
 	void retrieveLastUsed(long profileId){
-		// Find the profile by Id
+		// Find the guardian by Id
 		Profile prof = oHelp.profilesHelper.getProfileById(profileId);
 			
 		//retrieve all last used :D:D:
@@ -95,6 +95,13 @@ public class CRUD {
 			oHelp.appsHelper.modifyAppByProfile(app, prof);
 		}
 	}
+	
+	//Waiting for admin, we can insert media but not retrieve them :D
+//	public void LoadPictures(){
+//		MediaHelper mp = new MediaHelper(guard.m_context);
+//		
+//		Media m = mp.getMediaById(id)
+//	}
 	
 	public void loadGuardian(long guardianID){
 		// Load the guardian form Oasis

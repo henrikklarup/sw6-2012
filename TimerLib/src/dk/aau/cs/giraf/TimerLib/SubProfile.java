@@ -131,6 +131,7 @@ public class SubProfile implements Comparable<SubProfile>{
 			for(Child c : guard.Children()){
 				for(SubProfile p : c.SubProfiles()){
 					if(p._id == this._id){
+						//Toast.makeText(guard.m_context, "Id: " + this.getId() + " DB_id: " + this.getDB_id(), 4000).show();
 						guard.delete(c, this);
 						break START;
 					}
@@ -176,16 +177,18 @@ public class SubProfile implements Comparable<SubProfile>{
 		return this;
 	}
 	
-	public SubProfile save(SubProfile oldProfile){
+	public SubProfile save(SubProfile oldProfile, boolean override){
 		START:
 		for(Child c : guard.Children()){
 			for(SubProfile p : c.SubProfiles()){
 				if(p._id == oldProfile._id){
+					
 					this.setDB_id(oldProfile.getDB_id());
 					this.setId(oldProfile.getId());
 					c.remove(p);
-					c.save(this);
+					c.save(this, override);
 					break START;
+					
 				}
 			}
 		}

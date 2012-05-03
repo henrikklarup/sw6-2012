@@ -1,6 +1,5 @@
 package dk.aau.cs.giraf.TimerLib;
 
-import java.util.Iterator;
 
 public class Hourglass extends SubProfile {
 	
