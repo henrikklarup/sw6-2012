@@ -233,7 +233,7 @@ public class PARROTDataLoader {
 		{
 			Pictogram pic = category.getPictogramAtIndex(i);
 
-			savePictogram(pic);
+			pic = savePictogram(pic);
 
 			//In any case, save the references
 			pictogramString += pic.getImageID()+'#';
@@ -256,7 +256,7 @@ public class PARROTDataLoader {
 	 * 
 	 * @Rasmus This method is used to save completely new pictograms to the database, as well as modify existing ones.
 	 */
-	private void savePictogram(Pictogram pic)
+	private Pictogram savePictogram(Pictogram pic)
 	{
 		Media imageMedia = null;
 		Media soundMedia = null;
@@ -264,7 +264,7 @@ public class PARROTDataLoader {
 		if(pic.getImageID() == -1) //if the picture is new in the database
 		{
 			imageMedia = new Media(pic.getName(), pic.getImagePath(), true, "IMAGE", PARROTActivity.getUser().getProfileID());
-			help.mediaHelper.insertMedia(imageMedia);
+			pic.setImageID(help.mediaHelper.insertMedia(imageMedia));
 		}
 		else
 		{
@@ -276,7 +276,7 @@ public class PARROTDataLoader {
 		if(pic.getSoundID() == -1 && pic.getSoundPath() != null) //if the sound is new in the database
 		{
 			soundMedia = new Media(pic.getName(), pic.getSoundPath(), true, "SOUND", PARROTActivity.getUser().getProfileID());	//TODO we might want to set the booleans to false
-			help.mediaHelper.insertMedia(soundMedia);
+			pic.setSoundID(help.mediaHelper.insertMedia(soundMedia));
 		}
 		else if(pic.getSoundPath() != null)
 		{
@@ -288,7 +288,7 @@ public class PARROTDataLoader {
 		if(pic.getWordID() == -1 && pic.getWordPath() != null) //if the word is not in the database
 		{
 			wordMedia = new Media(pic.getName(), pic.getWordPath(), true, "WORD", PARROTActivity.getUser().getProfileID());	//TODO we might want to set the booleans to false
-			help.mediaHelper.insertMedia(wordMedia);
+			pic.setWordID(help.mediaHelper.insertMedia(wordMedia));
 		}
 		else if(pic.getWordPath() != null)
 		{
@@ -327,6 +327,7 @@ public class PARROTDataLoader {
 			}
 
 		}
+		return pic;
 
 	}
 
