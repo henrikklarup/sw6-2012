@@ -14,6 +14,7 @@ import android.content.Intent;
             profileSelectIntent.putExtra(Data.APP_PACKAGENAME, app.getaPackage());
             profileSelectIntent.putExtra(Data.APP_ACTIVITYNAME, app.getActivity());
             profileSelectIntent.putExtra(Data.GUARDIANID, app.getGuardianID());
+            profileSelectIntent.putExtra(Data.APP_COLOR, app.getBgColor());
             
 			v.getContext().startActivity(profileSelectIntent);
     }  

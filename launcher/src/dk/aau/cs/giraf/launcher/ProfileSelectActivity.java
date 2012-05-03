@@ -27,6 +27,7 @@ public class ProfileSelectActivity extends Activity {
 	
 	private String mPackageName;
 	private String mActivityName;
+	private int mAppColor;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -38,6 +39,7 @@ public class ProfileSelectActivity extends Activity {
 		
 		mPackageName = getIntent().getExtras().getString(Data.APP_PACKAGENAME);
 		mActivityName = getIntent().getExtras().getString(Data.APP_ACTIVITYNAME);
+		mAppColor = getIntent().getExtras().getInt(Data.APP_COLOR);
 		
 		mGuardianID = getIntent().getExtras().getLong(Data.GUARDIANID);
 
@@ -93,6 +95,7 @@ public class ProfileSelectActivity extends Activity {
 
 				intent.putExtra(Data.CHILDID, childID);
 				intent.putExtra(Data.GUARDIANID, mGuardianID);
+				intent.putExtra(Data.APP_COLOR, mAppColor);
 
 				startActivity(intent);
 			}
