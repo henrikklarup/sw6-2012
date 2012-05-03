@@ -19,7 +19,7 @@ public class MainActivity extends Activity {
         if (extras != null) {        	
         	guardianId = extras.getLong("currentGuardianID");
         	childId = extras.getLong("currentChildID");
-        	color = 0xFFFFBB55;
+        	color = extras.getInt("appBackgroundColor");
         } else {
         	guardianId = -1;
         	childId = -1;

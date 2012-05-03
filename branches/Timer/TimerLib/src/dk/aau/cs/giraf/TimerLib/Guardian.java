@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import android.content.Context;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.App;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
-
-import android.content.Context;
-import android.widget.Toast;
 
 public class Guardian {
 	
@@ -38,7 +36,7 @@ public class Guardian {
 	
 	private static long childId;
 	private static long guardianId;
-	private static Context m_context;
+	static Context m_context;
 	
 	public static int profilePosition;
 	public static long profileID;
@@ -90,6 +88,8 @@ public class Guardian {
 			
 			help.loadPredef();
 			_instance.publishList();
+			
+			//crud.retrieveLastUsed(m_guardianId);
 		}
 		return _instance;
 	}
@@ -141,7 +141,7 @@ public class Guardian {
 		// If not, try the default guard
 		if(m_oGuard == null){
 			for (Profile p : oHelp.profilesHelper.getProfiles()) {
-				if(p.getFirstname().equals("John") && p.getSurname().equals("Doe")){
+				if(p.getFirstname().equals("Mette") && p.getSurname().equals("Als")){
 					m_oGuard = p;
 					break;
 				}
@@ -149,9 +149,11 @@ public class Guardian {
 			
 			// If thats not valid either, make the default guard
 			if(m_oGuard == null){
-				m_oGuard = new Profile("John", "Doe", null, 1, 88888888, null, null);				
+				m_oGuard = new Profile("Mette", "Als", null, 1, 88888888, null, null);				
 				m_oGuard.setId(oHelp.profilesHelper.insertProfile(m_oGuard));
 				oHelp.appsHelper.attachAppToProfile(m_app, m_oGuard);
+				oHelp.profilesHelper.setCertificate("abcde", m_oGuard);
+				
 			}
 		} 
 		
@@ -289,7 +291,7 @@ public class Guardian {
 	 */
 	public void addLastUsed(SubProfile profile){
 		lastUsed();
-		crud.retrieveLastUsed(guardianId);
+//		crud.retrieveLastUsed(guardianId);
 		boolean exists = false;
 		
 		Child child = null;
@@ -308,8 +310,8 @@ public class Guardian {
 			if(_lastUsed.get(i).getId() == profile.getId()){
 				_lastUsed.remove(i);				
 				_lastUsed.add(profile);
-				crud.removeLastUsed(child, profile, guardianId);
-				crud.addLastUsed(child,profile,guardianId);
+				//crud.removeLastUsed(child, profile, guardianId);
+				//crud.addLastUsed(child,profile,guardianId);
 				exists = true;
 				break;
 			}
@@ -317,12 +319,13 @@ public class Guardian {
 		
 		if(!exists){
 			_lastUsed.add(profile);
-			crud.addLastUsed(child,profile,guardianId);
+//			crud.addLastUsed(child,profile,guardianId);
 		}
 		
 		if(_lastUsed.size() > 10){
-			crud.removeLastUsed(child, profile, guardianId);
+//			crud.removeLastUsed(child, profile, guardianId);
 			_lastUsed.remove(_lastUsed.remove(0));
+			//crud.removeLastUsed(child, profile, guardianId);
 		}
 		
 	}
@@ -385,7 +388,7 @@ public class Guardian {
 		c.SubProfiles().remove(subProfile);
 		crud.removeSubprofileFromProfileId(subProfile, c.getProfileId());
 		//TODO: DELETE THIS
-		Toast.makeText(m_context, subProfile.getDB_id() + " ", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(m_context, subProfile.getDB_id() + " ", Toast.LENGTH_SHORT).show();
 	}
 
 

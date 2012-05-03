@@ -713,10 +713,10 @@ public class CustomizeFragment extends Fragment {
 
 									SubProfile m_savedSubprofile;
 									if (preSubP != null) {
-										m_savedSubprofile = currSubP.save(preSubP);
+										m_savedSubprofile = currSubP.save(preSubP, true);
 									} else {
 										m_savedSubprofile = guard.getChild()
-												.save(currSubP);
+												.save(currSubP, false);
 									}
 									Guardian.subProfileID = m_savedSubprofile.getId();
 									loadSettings(m_savedSubprofile);
@@ -871,7 +871,7 @@ public class CustomizeFragment extends Fragment {
 
 													Child c = guard.Children().get(item);
 													getName();
-													c.save(currSubP);
+													c.save(currSubP, false);
 													Guardian.saveChild(c, currSubP);
 													SubProfileFragment df = (SubProfileFragment) getFragmentManager()
 															.findFragmentById(

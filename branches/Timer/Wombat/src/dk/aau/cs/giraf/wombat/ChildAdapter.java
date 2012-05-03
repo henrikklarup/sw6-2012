@@ -30,6 +30,7 @@ public class ChildAdapter extends ArrayAdapter<Child> {
 					Context.LAYOUT_INFLATER_SERVICE);
 			v = li.inflate(R.layout.profile_list, null);
 		}
+		// TODO: Pictures
 		Child c = items.get(position);
 		if (c != null) {
 			ImageView iv = (ImageView) v.findViewById(R.id.profilePic);
