@@ -210,7 +210,6 @@ public class Tools {
 	 * @return The substract of a - b.
 	 */
 	private static List<App> subtractAppLists(List<App> a, List<App> b){
-		
 		for (int i = 0; i < a.size(); i++) {
 			if (!appsContain_A(b, a.get(i))) {
 				a.remove(i);
