@@ -77,22 +77,22 @@ public class TagsHelper {
 		return _context.getContentResolver().update(uri, cv, null, null);
 	}
 
-//	/**
-//	 * Get tags
-//	 * @return List of tags
-//	 */
-//	public List<Tag> getTags() {
-//		List<Tag> tags = new ArrayList<Tag>();
-//
-//		Cursor c = _context.getContentResolver().query(TagsMetaData.CONTENT_URI, columns, null, null, null);
-//
-//		if (c != null) {
-//			tags = cursorToTagList(c);
-//			c.close();
-//		}
-//
-//		return tags;
-//	}
+	/**
+	 * Get tags
+	 * @return List of tags
+	 */
+	public List<Tag> getTags() {
+		List<Tag> tags = new ArrayList<Tag>();
+
+		Cursor c = _context.getContentResolver().query(TagsMetaData.CONTENT_URI, columns, null, null, null);
+
+		if (c != null) {
+			tags = cursorToTagList(c);
+			c.close();
+		}
+
+		return tags;
+	}
 	
 	/**
 	 * Get tags by caption

@@ -67,24 +67,36 @@ class MediaDepartmentAccessController {
 
 		return 0;
 	}
+	
+	/**
+	 * Modify media department access
+	 * @param mda Media department access
+	 * @return Rows
+	 */
+	public int modifyMediaDepartmentAccess(MediaDepartmentAccess mda) {
+		ContentValues cv = getContentValues(mda);
+		return _context.getContentResolver().update(MediaProfileAccessMetaData.CONTENT_URI, cv, 
+				MediaDepartmentAccessMetaData.Table.COLUMN_IDMEDIA + " = '" + mda.getIdMedia() + "' AND " +
+				MediaDepartmentAccessMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + mda.getIdDepartment() + "'", null);
+	}
+	
+	/**
+	 * Get media department accesses
+	 * @return List of media department access
+	 */
+	public List<MediaDepartmentAccess> getMediaDepartmentAccesses() {
+		List<MediaDepartmentAccess> list = new ArrayList<MediaDepartmentAccess>();
 
-//	/**
-//	 * Get media department accesses
-//	 * @return List of media department access
-//	 */
-//	public List<MediaDepartmentAccess> getMediaDepartmentAccesses() {
-//		List<MediaDepartmentAccess> list = new ArrayList<MediaDepartmentAccess>();
-//
-//		Cursor c = _context.getContentResolver().query(MediaDepartmentAccessMetaData.CONTENT_URI, columns, null, null, null);
-//
-//		if (c != null) {
-//			list = cursorToMediaDepartmentAccessList(c);
-//
-//			c.close();
-//		}
-//
-//		return list;
-//	}
+		Cursor c = _context.getContentResolver().query(MediaDepartmentAccessMetaData.CONTENT_URI, columns, null, null, null);
+
+		if (c != null) {
+			list = cursorToMediaDepartmentAccessList(c);
+
+			c.close();
+		}
+
+		return list;
+	}
 
 	/**
 	 * Get media by department
@@ -106,18 +118,6 @@ class MediaDepartmentAccessController {
 		return list;
 	}
 	
-	/**
-	 * Modify media department access
-	 * @param mda Media department access
-	 * @return Rows
-	 */
-	public int modifyMediaDepartmentAccess(MediaDepartmentAccess mda) {
-		ContentValues cv = getContentValues(mda);
-		return _context.getContentResolver().update(MediaProfileAccessMetaData.CONTENT_URI, cv, 
-				MediaDepartmentAccessMetaData.Table.COLUMN_IDMEDIA + " = '" + mda.getIdMedia() + "' AND " +
-				MediaDepartmentAccessMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + mda.getIdDepartment() + "'", null);
-	}
-
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//PRIVATE METHODS - keep out!
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

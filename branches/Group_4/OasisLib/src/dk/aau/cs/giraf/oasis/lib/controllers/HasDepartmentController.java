@@ -66,24 +66,36 @@ class HasDepartmentController {
 
 		return 0;
 	}
+	
+	/**
+	 * Modify has department
+	 * @param hd Has department
+	 * @return Rows
+	 */
+	public int modifyHasDepartment(HasDepartment hd) {
+		ContentValues cv = getContentValues(hd);
+		return _context.getContentResolver().update(HasDepartmentMetaData.CONTENT_URI, cv, 
+				HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + hd.getIdDepartment() + "' AND " +
+				HasDepartmentMetaData.Table.COLUMN_IDPROFILE + " = '" + hd.getIdProfile() + "'", null);
+	}
 
-//	/**
-//	 * Get had department
-//	 * @return List of Has departments
-//	 */
-//	public List<HasDepartment> getHasDepartments() {
-//		List<HasDepartment> list = new ArrayList<HasDepartment>();
-//
-//		Cursor c = _context.getContentResolver().query(HasDepartmentMetaData.CONTENT_URI, columns, null, null, null);
-//
-//		if (c != null) {
-//			list = cursorToHasDepartmentList(c);
-//
-//			c.close();
-//		}
-//
-//		return list;
-//	}
+	/**
+	 * Get had department
+	 * @return List of Has departments
+	 */
+	public List<HasDepartment> getHasDepartments() {
+		List<HasDepartment> list = new ArrayList<HasDepartment>();
+
+		Cursor c = _context.getContentResolver().query(HasDepartmentMetaData.CONTENT_URI, columns, null, null, null);
+
+		if (c != null) {
+			list = cursorToHasDepartmentList(c);
+
+			c.close();
+		}
+
+		return list;
+	}
 
 	/**
 	 * Get profiles by department
@@ -123,18 +135,6 @@ class HasDepartmentController {
 		}
 
 		return list;
-	}
-	
-	/**
-	 * Modify has department
-	 * @param hd Has department
-	 * @return Rows
-	 */
-	public int modifyHasDepartment(HasDepartment hd) {
-		ContentValues cv = getContentValues(hd);
-		return _context.getContentResolver().update(HasDepartmentMetaData.CONTENT_URI, cv, 
-				HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + hd.getIdDepartment() + "' AND " +
-				HasDepartmentMetaData.Table.COLUMN_IDPROFILE + " = '" + hd.getIdProfile() + "'", null);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

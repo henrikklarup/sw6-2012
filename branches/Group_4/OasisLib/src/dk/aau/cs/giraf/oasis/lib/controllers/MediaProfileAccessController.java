@@ -66,24 +66,35 @@ class MediaProfileAccessController {
 
 		return 0;
 	}
+	
+	/**
+	 * Modify media profile access
+	 * @param mpa Media profile access
+	 * @return Rows
+	 */
+	public int modifyMediaProfileAccess(MediaProfileAccess mpa) {
+		ContentValues cv = getContentValues(mpa);
+		return _context.getContentResolver().update(MediaProfileAccessMetaData.CONTENT_URI, cv, 
+				MediaProfileAccessMetaData.Table.COLUMN_IDMEDIA + " = '" + mpa.getIdMedia() + "' AND " +
+				MediaProfileAccessMetaData.Table.COLUMN_IDPROFILE + " = '" + mpa.getIdProfile() + "'", null);
+	}
+	/**
+	 * Get media profile accesses
+	 * @return List of media profile access
+	 */
+	public List<MediaProfileAccess> getMediaProfileAccesses() {
+		List<MediaProfileAccess> list = new ArrayList<MediaProfileAccess>();
 
-//	/**
-//	 * Get media profile accesses
-//	 * @return List of media profile access
-//	 */
-//	public List<MediaProfileAccess> getMediaProfileAccesses() {
-//		List<MediaProfileAccess> list = new ArrayList<MediaProfileAccess>();
-//
-//		Cursor c = _context.getContentResolver().query(MediaProfileAccessMetaData.CONTENT_URI, columns, null, null, null);
-//
-//		if (c != null) {
-//			list = cursorToMediaProfileAccessList(c);
-//
-//			c.close();
-//		}
-//
-//		return list;
-//	}
+		Cursor c = _context.getContentResolver().query(MediaProfileAccessMetaData.CONTENT_URI, columns, null, null, null);
+
+		if (c != null) {
+			list = cursorToMediaProfileAccessList(c);
+
+			c.close();
+		}
+
+		return list;
+	}
 
 	/**
 	 * Get media by profile
@@ -103,18 +114,6 @@ class MediaProfileAccessController {
 		}
 
 		return list;
-	}
-	
-	/**
-	 * Modify media profile access
-	 * @param mpa Media profile access
-	 * @return Rows
-	 */
-	public int modifyMediaProfileAccess(MediaProfileAccess mpa) {
-		ContentValues cv = getContentValues(mpa);
-		return _context.getContentResolver().update(MediaProfileAccessMetaData.CONTENT_URI, cv, 
-				MediaProfileAccessMetaData.Table.COLUMN_IDMEDIA + " = '" + mpa.getIdMedia() + "' AND " +
-				MediaProfileAccessMetaData.Table.COLUMN_IDPROFILE + " = '" + mpa.getIdProfile() + "'", null);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

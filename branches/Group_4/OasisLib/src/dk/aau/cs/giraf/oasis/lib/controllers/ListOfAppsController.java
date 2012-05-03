@@ -8,9 +8,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import dk.aau.cs.giraf.oasis.lib.metadata.ListOfAppsMetaData;
-import dk.aau.cs.giraf.oasis.lib.models.App;
 import dk.aau.cs.giraf.oasis.lib.models.ListOfApps;
-import dk.aau.cs.giraf.oasis.lib.models.Profile;
 import dk.aau.cs.giraf.oasis.lib.models.Setting;
 import dk.aau.cs.giraf.oasis.lib.models.Stat;
 
@@ -64,11 +62,7 @@ class ListOfAppsController {
 	 * @return Rows
 	 */
 	public int insertListOfApps(ListOfApps listOfApps) {
-		ContentValues cv = new ContentValues();
-		cv.put(ListOfAppsMetaData.Table.COLUMN_IDAPP, listOfApps.getIdApp());
-		cv.put(ListOfAppsMetaData.Table.COLUMN_IDPROFILE, listOfApps.getIdProfile());
-		cv.put(ListOfAppsMetaData.Table.COLUMN_SETTINGS, Setting.toStringSetting(listOfApps.getSetting()));
-		cv.put(ListOfAppsMetaData.Table.COLUMN_STATS, Stat.toStringStat(listOfApps.getStat()));
+		ContentValues cv = getContentValues(listOfApps);
 		Uri uri = _context.getContentResolver().insert(ListOfAppsMetaData.CONTENT_URI, cv);
 		return Integer.parseInt(uri.getPathSegments().get(1));
 	}
@@ -79,29 +73,25 @@ class ListOfAppsController {
 	 * @return Rows
 	 */
 	public int modifyListOfApps(ListOfApps listOfApps) {
-		ContentValues cv = new ContentValues();
-		cv.put(ListOfAppsMetaData.Table.COLUMN_IDAPP, listOfApps.getIdApp());
-		cv.put(ListOfAppsMetaData.Table.COLUMN_IDPROFILE, listOfApps.getIdProfile());
-		cv.put(ListOfAppsMetaData.Table.COLUMN_SETTINGS, Setting.toStringSetting(listOfApps.getSetting()));
-		cv.put(ListOfAppsMetaData.Table.COLUMN_STATS, Stat.toStringStat(listOfApps.getStat()));
+		ContentValues cv = getContentValues(listOfApps);
 		return _context.getContentResolver().update(ListOfAppsMetaData.CONTENT_URI, cv, ListOfAppsMetaData.Table.COLUMN_IDAPP + " = '" + listOfApps.getIdApp() + "'" + " AND " + ListOfAppsMetaData.Table.COLUMN_IDPROFILE + " = '" + listOfApps.getIdProfile() + "'", null);
 	}
 	
-//	/**
-//	 * Get list of apps
-//	 * @return List of list of apps
-//	 */
-//	public List<ListOfApps> getListOfApps() {
-//		List<ListOfApps> listOfApps = new ArrayList<ListOfApps>();
-//		Cursor c = _context.getContentResolver().query(ListOfAppsMetaData.CONTENT_URI, columns, null, null, null);
-//		
-//		if (c != null) {
-//			listOfApps = cursorToListOfApps(c);
-//			c.close();
-//		}
-//		
-//		return listOfApps;
-//	}
+	/**
+	 * Get list of apps
+	 * @return List of list of apps
+	 */
+	public List<ListOfApps> getListOfApps() {
+		List<ListOfApps> listOfApps = new ArrayList<ListOfApps>();
+		Cursor c = _context.getContentResolver().query(ListOfAppsMetaData.CONTENT_URI, columns, null, null, null);
+		
+		if (c != null) {
+			listOfApps = cursorToListOfApps(c);
+			c.close();
+		}
+		
+		return listOfApps;
+	}
 
 	/**
 	 * Get list of apps by ids
@@ -223,5 +213,14 @@ class ListOfAppsController {
 			listOfApp.setStat(Stat.toStat(temp));
 		
 		return listOfApp;
+	}
+	
+	private ContentValues getContentValues(ListOfApps listOfApps) {
+		ContentValues cv = new ContentValues();
+		cv.put(ListOfAppsMetaData.Table.COLUMN_IDAPP, listOfApps.getIdApp());
+		cv.put(ListOfAppsMetaData.Table.COLUMN_IDPROFILE, listOfApps.getIdProfile());
+		cv.put(ListOfAppsMetaData.Table.COLUMN_SETTINGS, Setting.toStringSetting(listOfApps.getSetting()));
+		cv.put(ListOfAppsMetaData.Table.COLUMN_STATS, Stat.toStringStat(listOfApps.getStat()));
+		return cv;
 	}
 }

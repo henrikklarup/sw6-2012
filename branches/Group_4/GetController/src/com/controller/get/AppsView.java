@@ -72,6 +72,7 @@ public class AppsView extends ListActivity {
 
 			@Override
 			public void onClick(View v) {
+				helper.CreateDummyData();
 				updateList();
 			}
 		});

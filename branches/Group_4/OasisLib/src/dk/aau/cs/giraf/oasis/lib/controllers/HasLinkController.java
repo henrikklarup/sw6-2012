@@ -65,24 +65,36 @@ class HasLinkController {
 
 		return 0;
 	}
+	
+	/**
+	 * Modify has link
+	 * @param hl Has link
+	 * @return Rows
+	 */
+	public int modifyHasLink(HasLink hl) {
+		ContentValues cv = getContentValues(hl);
+		return _context.getContentResolver().update(HasLinkMetaData.CONTENT_URI, cv, 
+				HasLinkMetaData.Table.COLUMN_IDMEDIA + " = '" + hl.getIdMedia() + "' AND " +
+						HasLinkMetaData.Table.COLUMN_IDSUBMEDIA + " = '" + hl.getIdSubMedia() + "'", null);
+	}
 
-//	/**
-//	 * Get has links
-//	 * @return List of has links
-//	 */
-//	public List<HasLink> getHasLinks() {
-//		List<HasLink> list = new ArrayList<HasLink>();
-//
-//		Cursor c = _context.getContentResolver().query(HasLinkMetaData.CONTENT_URI, columns, null, null, null);
-//
-//		if (c != null) {
-//			list = cursorToHasLinkList(c);
-//
-//			c.close();
-//		}
-//
-//		return list;
-//	}
+	/**
+	 * Get has links
+	 * @return List of has links
+	 */
+	public List<HasLink> getHasLinks() {
+		List<HasLink> list = new ArrayList<HasLink>();
+
+		Cursor c = _context.getContentResolver().query(HasLinkMetaData.CONTENT_URI, columns, null, null, null);
+
+		if (c != null) {
+			list = cursorToHasLinkList(c);
+
+			c.close();
+		}
+
+		return list;
+	}
 
 	/**
 	 * Get sub media by media
@@ -102,18 +114,6 @@ class HasLinkController {
 		}
 
 		return list;
-	}
-
-	/**
-	 * Modify has link
-	 * @param hl Has link
-	 * @return Rows
-	 */
-	public int modifyHasLink(HasLink hl) {
-		ContentValues cv = getContentValues(hl);
-		return _context.getContentResolver().update(HasLinkMetaData.CONTENT_URI, cv, 
-				HasLinkMetaData.Table.COLUMN_IDMEDIA + " = '" + hl.getIdMedia() + "' AND " +
-						HasLinkMetaData.Table.COLUMN_IDSUBMEDIA + " = '" + hl.getIdSubMedia() + "'", null);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
