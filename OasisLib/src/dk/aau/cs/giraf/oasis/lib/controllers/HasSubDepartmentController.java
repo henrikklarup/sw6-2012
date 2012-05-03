@@ -65,7 +65,19 @@ class HasSubDepartmentController {
 
 		return 0;
 	}
-
+	
+	/**
+	 * Moodify has sub department
+	 * @param hsd Has sub department
+	 * @return rows
+	 */
+	public int modifyHasSubDepartment(HasSubDepartment hsd) {
+		ContentValues cv = getContentValues(hsd);
+		return _context.getContentResolver().update(HasSubDepartmentMetaData.CONTENT_URI, cv, 
+				HasSubDepartmentMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + hsd.getIdDepartment() + "' AND " +
+				HasSubDepartmentMetaData.Table.COLUMN_IDSUBDEPARTMENT + " = '" + hsd.getIdSubDepartment() + "'", null);
+	}
+	
 	/**
 	 * Get has sub departments
 	 * @return List of has sub departments
@@ -102,18 +114,6 @@ class HasSubDepartmentController {
 		}
 
 		return hsdList;
-	}
-	
-	/**
-	 * Moodify has sub department
-	 * @param hsd Has sub department
-	 * @return rows
-	 */
-	public int modifyHasSubDepartment(HasSubDepartment hsd) {
-		ContentValues cv = getContentValues(hsd);
-		return _context.getContentResolver().update(HasSubDepartmentMetaData.CONTENT_URI, cv, 
-				HasSubDepartmentMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + hsd.getIdDepartment() + "' AND " +
-				HasSubDepartmentMetaData.Table.COLUMN_IDSUBDEPARTMENT + " = '" + hsd.getIdSubDepartment() + "'", null);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

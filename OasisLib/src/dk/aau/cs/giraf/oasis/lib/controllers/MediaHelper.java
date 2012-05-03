@@ -153,6 +153,11 @@ public class MediaHelper {
 	 * @return Rows
 	 */
 	public long attachMediaToProfile(Media media, Profile profile, Profile owner) {
+		if (owner == null) {
+			owner = new Profile();
+			owner.setId(-1);
+		}
+		
 		if (media.isMPublic() || media.getOwnerId() == owner.getId()) {
 			MediaProfileAccess mpaModel  = new MediaProfileAccess();
 			mpaModel.setIdMedia(media.getId());
@@ -205,22 +210,22 @@ public class MediaHelper {
 		_context.getContentResolver().update(uri, cv, null, null);
 	}
 
-//	/**
-//	 * Get all media
-//	 * @return List<Media>, containing all media
-//	 */
-//	public List<Media> getMedia() {
-//		List<Media> media = new ArrayList<Media>();
-//		
-//		Cursor c = _context.getContentResolver().query(MediaMetaData.CONTENT_URI, columns, null, null, null);
-//
-//		if (c != null) {
-//			media = cursorToMedia(c);
-//			c.close();
-//		}
-//		
-//		return media;
-//	}
+	/**
+	 * Get all media
+	 * @return List<Media>, containing all media
+	 */
+	public List<Media> getMedia() {
+		List<Media> media = new ArrayList<Media>();
+		
+		Cursor c = _context.getContentResolver().query(MediaMetaData.CONTENT_URI, columns, null, null, null);
+
+		if (c != null) {
+			media = cursorToMedia(c);
+			c.close();
+		}
+		
+		return media;
+	}
 
 	/**
 	 * Get sub media by media
@@ -309,7 +314,7 @@ public class MediaHelper {
 	/**
 	 * Get media by profile
 	 * @param profile Profile
-	 * @return List of medias
+	 * @return List of media
 	 */
 	public List<Media> getMediaByProfile(Profile profile) {
 		List<Media> mediaList = new ArrayList<Media>();

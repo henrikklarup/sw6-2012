@@ -81,24 +81,34 @@ class HasTagController {
 
 		return 0;
 	}
+	/**
+	 * Modify has tag
+	 * @param ht Has tag
+	 * @return Rows
+	 */
+	public int modifyHasTag(HasTag ht) {
+		ContentValues cv = getContentValues(ht);
+		return _context.getContentResolver().update(HasTagMetaData.CONTENT_URI, cv, 
+				HasTagMetaData.Table.COLUMN_IDMEDIA + " = '" + ht.getIdMedia() + "' AND " +
+						HasTagMetaData.Table.COLUMN_IDTAG + " = '" + ht.getIdTag() + "'", null);
+	}
+	/**
+	 * Get has tags
+	 * @return List of has tags
+	 */
+	public List<HasTag> getHasTags() {
+		List<HasTag> list = new ArrayList<HasTag>();
 
-//	/**
-//	 * Get has tags
-//	 * @return List of has tags
-//	 */
-//	public List<HasTag> getHasTags() {
-//		List<HasTag> list = new ArrayList<HasTag>();
-//
-//		Cursor c = _context.getContentResolver().query(HasTagMetaData.CONTENT_URI, columns, null, null, null);
-//
-//		if (c != null) {
-//			list = cursorToHasTagList(c);
-//
-//			c.close();
-//		}
-//
-//		return list;
-//	}
+		Cursor c = _context.getContentResolver().query(HasTagMetaData.CONTENT_URI, columns, null, null, null);
+
+		if (c != null) {
+			list = cursorToHasTagList(c);
+
+			c.close();
+		}
+
+		return list;
+	}
 
 	/**
 	 * Get has tag by media
@@ -138,18 +148,6 @@ class HasTagController {
 		}
 
 		return list;
-	}
-
-	/**
-	 * Modify has tag
-	 * @param ht Has tag
-	 * @return Rows
-	 */
-	public int modifyHasTag(HasTag ht) {
-		ContentValues cv = getContentValues(ht);
-		return _context.getContentResolver().update(HasTagMetaData.CONTENT_URI, cv, 
-				HasTagMetaData.Table.COLUMN_IDMEDIA + " = '" + ht.getIdMedia() + "' AND " +
-						HasTagMetaData.Table.COLUMN_IDTAG + " = '" + ht.getIdTag() + "'", null);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -135,8 +135,12 @@ public class DepartmentsHelper {
 	public Department authenticateDepartment(String certificate) {
 		Department dep = null;
 		long id;
+		
 		id = au.getIdByCertificate(certificate);
-		dep = getDepartmentById(id);
+		
+		if (id != -1) {
+			dep = getDepartmentById(id);
+		}
 
 		return dep;
 	}
@@ -154,28 +158,28 @@ public class DepartmentsHelper {
 		return result;
 	}
 
-//	/**
-//	 * Get all departments
-//	 * @return List<Department>, containing all departments
-//	 */
-//	public List<Department> getDepartments() {
-//		List<Department> departments = new ArrayList<Department>();
-//		Cursor c = _context.getContentResolver().query(
-//				DepartmentsMetaData.CONTENT_URI, columns, null, null, null);
-//
-//		if (c != null) {
-//			if (c.moveToFirst()) {
-//				while (!c.isAfterLast()) {
-//					departments.add(cursorToDepartment(c));
-//					c.moveToNext();
-//				}
-//			}
-//
-//			c.close();
-//		}
-//
-//		return departments;
-//	}
+	/**
+	 * Get all departments
+	 * @return List<Department>, containing all departments
+	 */
+	public List<Department> getDepartments() {
+		List<Department> departments = new ArrayList<Department>();
+		Cursor c = _context.getContentResolver().query(
+				DepartmentsMetaData.CONTENT_URI, columns, null, null, null);
+
+		if (c != null) {
+			if (c.moveToFirst()) {
+				while (!c.isAfterLast()) {
+					departments.add(cursorToDepartment(c));
+					c.moveToNext();
+				}
+			}
+
+			c.close();
+		}
+
+		return departments;
+	}
 	
 	/**
 	 * Retrieve the certificates for a department

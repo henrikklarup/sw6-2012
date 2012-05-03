@@ -65,24 +65,36 @@ class HasGuardianController {
 
 		return 0;
 	}
+
+	/**
+	 * Modify has guardians
+	 * @param hg Has guardian
+	 * @return Rows
+	 */
+	public int modifyHasGuardian(HasGuardian hg) {
+		ContentValues cv = getContentValues(hg);
+		return _context.getContentResolver().update(HasGuardianMetaData.CONTENT_URI, cv, 
+				HasGuardianMetaData.Table.COLUMN_IDGUARDIAN + " = '" + hg.getIdGuardian() + "' AND " +
+						HasGuardianMetaData.Table.COLUMN_IDCHILD + " = '" + hg.getIdChild() + "'", null);
+	}
 	
-//	/**
-//	 * Get has guardian
-//	 * @return List of has guardians
-//	 */
-//	public List<HasGuardian> getHasGuardians() {
-//		List<HasGuardian> hgList = new ArrayList<HasGuardian>();
-//		
-//		Cursor c = _context.getContentResolver().query(HasGuardianMetaData.CONTENT_URI, columns, null, null, null);
-//
-//		if (c != null) {
-//			hgList = cursorToHasGuardianList(c);
-//			
-//			c.close();
-//		}
-//
-//		return hgList;
-//	}
+	/**
+	 * Get has guardian
+	 * @return List of has guardians
+	 */
+	public List<HasGuardian> getHasGuardians() {
+		List<HasGuardian> hgList = new ArrayList<HasGuardian>();
+		
+		Cursor c = _context.getContentResolver().query(HasGuardianMetaData.CONTENT_URI, columns, null, null, null);
+
+		if (c != null) {
+			hgList = cursorToHasGuardianList(c);
+			
+			c.close();
+		}
+
+		return hgList;
+	}
 	
 	/**
 	 * Get children by guardian
@@ -102,18 +114,6 @@ class HasGuardianController {
 		}
 
 		return hgList;
-	}
-	
-	/**
-	 * Modify has guardians
-	 * @param hg Has guardian
-	 * @return Rows
-	 */
-	public int modifyHasGuardian(HasGuardian hg) {
-		ContentValues cv = getContentValues(hg);
-		return _context.getContentResolver().update(HasGuardianMetaData.CONTENT_URI, cv, 
-				HasGuardianMetaData.Table.COLUMN_IDGUARDIAN + " = '" + hg.getIdGuardian() + "' AND " +
-						HasGuardianMetaData.Table.COLUMN_IDCHILD + " = '" + hg.getIdChild() + "'", null);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
