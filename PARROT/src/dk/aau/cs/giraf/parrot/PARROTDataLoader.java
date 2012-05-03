@@ -182,7 +182,10 @@ public class PARROTDataLoader {
 		//help.CreateDummyData();
 		Profile tempProf = new Profile("Jens","Jensen",null,Profile.pRoles.CHILD.ordinal(),12345678,null,null);
 		Long profileId = help.profilesHelper.insertProfile(tempProf);
-		app = help.appsHelper.getAppByIds(1, profileId);
+		app= new App("PARROT", "dk.aau.cs.giraf.parrot", "PARROTActivity");
+		app.setId(1337);
+		help.appsHelper.modifyApp(app);
+		//app = help.appsHelper.getAppById(1337);	//FIXME I need help with the apps, and the settings... I guess
 		
 		Setting<String, String, String> profileSetting = new Setting<String, String, String>();
 		
@@ -220,9 +223,10 @@ public class PARROTDataLoader {
 		{
 			profileSetting = saveCategory(testProfile.getCategoryAt(i), i, profileSetting);
 		}
-		app.setSettings(profileSetting);
-		long appID=1;
-		PARROTActivity.setUser(loadProfile(profileId, appID));
+		app.setSettings(profileSetting);	//FIXME figure out if settings works as intended, or if addValue replaces ALL previous values
+		long appID=app.getId();
+		PARROTProfile parrot =loadProfile(profileId, appID);
+		PARROTActivity.setUser(parrot);
 		//END TEMP LINES
 	}
 
@@ -236,11 +240,11 @@ public class PARROTDataLoader {
 			pic = savePictogram(pic);
 
 			//In any case, save the references
-			pictogramString += pic.getImageID()+'#';
+			pictogramString = pictogramString + pic.getImageID()+'#';
 
 		}
 		pictogramString += "$";
-		pictogramString.replace("#$", "$");	//Here we make sure that the end is $, and not #$
+		pictogramString = pictogramString.replace("#$", "$");	//Here we make sure that the end is $, and not #$
 		profileSetting.addValue("category"+categoryNumber, "pictograms", pictogramString);
 		//then we save the colour
 		profileSetting.addValue("category"+categoryNumber, "colour", String.valueOf(category.getCategoryColour()));
