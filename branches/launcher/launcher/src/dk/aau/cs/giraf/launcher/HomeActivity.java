@@ -83,7 +83,7 @@ public class HomeActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.home);
 
-		mLandscapeBarWidth = Tools.intToDP(this, Data.HOMEBAR_WIDTH_LANDSCAPE);
+		mLandscapeBarWidth = Tools.intToDP(this, Data.HOMEBAR_LANDSCAPE_WIDTH);
 
 		HomeActivity.mContext = this;
 		mHelper = new Helper(mContext);
@@ -179,8 +179,8 @@ public class HomeActivity extends Activity {
 		LayoutParams paramsGrid = (RelativeLayout.LayoutParams)gridView.getLayoutParams();
 		RelativeLayout.LayoutParams homebarLayoutParams = (RelativeLayout.LayoutParams)homebarLayout.getLayoutParams();
 
-		int barHeightLandscape = Tools.intToDP(mContext, 100);
-		int barHeightPortrait = Tools.intToDP(mContext, 200);
+		int barHeightLandscape = Tools.intToDP(mContext, Data.HOMEBAR_LANDSCAPE_HEIGHT);
+		int barHeightPortrait = Tools.intToDP(mContext, Data.HOMEBAR_PORTRAIT_HEIGHT);
 
 		/* Get the size of the screen */
 		Display display = getWindowManager().getDefaultDisplay();
