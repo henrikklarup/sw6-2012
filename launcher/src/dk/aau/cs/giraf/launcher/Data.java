@@ -28,7 +28,6 @@ public final class Data {
 	
 	// Home activity values.
 	public static final int DRAWER_WIDTH = 400;
-	public static final int HOMEBAR_WIDTH_LANDSCAPE = 200;
 	public static final int GRID_CELL_WIDTH = 290;
 	public static final int APPS_PER_PAGE = 9;
 	public static final int MAX_ROWS_PER_PAGE = 3;
@@ -36,6 +35,11 @@ public final class Data {
 	public static final int DRAWER_SNAPLENGTH = 40;
 	
 	// Home activity graphics values
+	public static final int HOMEBAR_LANDSCAPE_WIDTH = 200;
+	public static final int HOMEBAR_LANDSCAPE_HEIGHT = 100;
+	public static final int HOMEBAR_PORTRAIT_WIDTH = 100;
+	public static final int HOMEBAR_PORTRAIT_HEIGHT = 200;
+	
 	public static final int PROFILEPIC_LANDSCAPE_WIDTH = 70;
 	public static final int PROFILEPIC_LANDSCAPE_HEIGHT = 91;
 	
