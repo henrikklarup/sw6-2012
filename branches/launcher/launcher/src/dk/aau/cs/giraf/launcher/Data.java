@@ -11,6 +11,7 @@ public final class Data {
 	public static final String CHILDID = "currentChildID";
 	public static final String APP_PACKAGENAME = "appPackageName";
 	public static final String APP_ACTIVITYNAME = "appActivityName";
+	public static final String APP_COLOR = "appBackgroundColor";
 
 	// Keys for settings
 	public static final String COLOR_BG = "backgroundColor";
