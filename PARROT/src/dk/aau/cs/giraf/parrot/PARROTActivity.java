@@ -100,7 +100,7 @@ public class PARROTActivity extends Activity {
 		{
 			tab = actionBar.newTab()
 					.setText(R.string.thirdTab)
-					.setTabListener(new TabListener<OptionsFragment>(this,"options",OptionsFragment.class));
+					.setTabListener(new TabListener<AddFromCameraFragment>(this,"camera",AddFromCameraFragment.class));
 			actionBar.addTab(tab);
 		}
 		if (parrotUser.getRights(2) == true)
