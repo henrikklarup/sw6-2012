@@ -33,6 +33,7 @@ public final class Data {
 	public static final int APPS_PER_PAGE = 9;
 	public static final int MAX_ROWS_PER_PAGE = 3;
 	public static final int MAX_COLUMNS_PER_PAGE = 4;
+	public static final int DRAWER_SNAPLENGTH = 40;
 	
 	// Home activity graphics values
 	public static final int PROFILEPIC_LANDSCAPE_WIDTH = 70;

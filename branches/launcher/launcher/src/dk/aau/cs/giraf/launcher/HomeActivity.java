@@ -328,69 +328,65 @@ public class HomeActivity extends Activity {
 	 * Load the drawer and its functionality.
 	 */
 	private void loadDrawer(){
-
 		// If result = true, the onTouch-function will be run again.
 		findViewById(R.id.HomeBarLayout).setOnTouchListener(new View.OnTouchListener() {
 			int offset = 0;
 			@Override
 			public boolean onTouch(View v, MotionEvent e) {
 				int margin = 0;
-
 				boolean result = true;
 
-				switch(e.getActionMasked()){
-				case MotionEvent.ACTION_DOWN:
-					offset = (int) e.getX();
-					result = true;
-					break;
-				case MotionEvent.ACTION_MOVE:
-					mHomeBarParams = (RelativeLayout.LayoutParams) v.getLayoutParams();
-					margin = mHomeBarParams.leftMargin + ((int) e.getX() - offset);
-					int snaplength = 40;
+				switch (e.getActionMasked()) {
+					case MotionEvent.ACTION_DOWN:
+						offset = (int) e.getX();
+						result = true;
+						break;
+					case MotionEvent.ACTION_MOVE:
+						mHomeBarParams = (RelativeLayout.LayoutParams) v.getLayoutParams();
+						margin = mHomeBarParams.leftMargin + ((int) e.getX() - offset);
 
-					if (margin < snaplength) {
-						margin = 0;
-					} else if (margin > (Data.DRAWER_WIDTH - snaplength)) {
-						margin = Data.DRAWER_WIDTH;
-					} else if (margin > Data.DRAWER_WIDTH) {
-						margin = Data.DRAWER_WIDTH;
-					}
+						if (margin < Data.DRAWER_SNAPLENGTH) {
+							margin = 0;
+						} else if (margin > (Data.DRAWER_WIDTH - Data.DRAWER_SNAPLENGTH)) {
+							margin = Data.DRAWER_WIDTH;
+						} else if (margin > Data.DRAWER_WIDTH) {
+							margin = Data.DRAWER_WIDTH;
+						}
 
-					mHomeBarParams.setMargins(margin, 0, 0, 0);
-					v.setLayoutParams(mHomeBarParams);
+						mHomeBarParams.setMargins(margin, 0, 0, 0);
+						v.setLayoutParams(mHomeBarParams);
 
-					View v2 = findViewById(R.id.HomeDrawer);
-					RelativeLayout.LayoutParams v2Params = (RelativeLayout.LayoutParams) v2.getLayoutParams();
-					v2Params.setMargins((margin-800), 0, 0, 0);
-					v2.setLayoutParams(v2Params);
-
-					result = true;
+						View homeDrawerView = findViewById(R.id.HomeDrawer);
+						RelativeLayout.LayoutParams homeDrawerLayoutParams = (RelativeLayout.LayoutParams) homeDrawerView.getLayoutParams();
+						homeDrawerLayoutParams.setMargins((margin-(Data.DRAWER_WIDTH*2)), 0, 0, 0);
+						homeDrawerView.setLayoutParams(homeDrawerLayoutParams);
+						result = true;
 					
-					// Setting width of the horizontalscrollview
-					HorizontalScrollView hScrollView = (HorizontalScrollView)findViewById(R.id.horizontalScrollView);
-					LayoutParams scrollParams = (LayoutParams) hScrollView.getLayoutParams();
-					Display display = getWindowManager().getDefaultDisplay();
-					Point size = new Point();
-					display.getSize(size);
-					// removing 50 here to accomodate for "4 columns behaviour"
-					scrollParams.width = (size.x - (margin + 100));
-					hScrollView.setLayoutParams(scrollParams);
-
-					break;
-				case MotionEvent.ACTION_UP:
-					break;
-
+						/* Setting width of the horizontalscrollview */
+						HorizontalScrollView hScrollView = (HorizontalScrollView)findViewById(R.id.horizontalScrollView);
+						LayoutParams scrollParams = (LayoutParams) hScrollView.getLayoutParams();
+						Display display = getWindowManager().getDefaultDisplay();
+						Point size = new Point();
+						display.getSize(size);
+						
+						/* removing 100 additional here to accomodate for "4 columns behaviour"
+						 * which occure when there are <= 9 apps on the screen and we dont want to be able to scroll
+						 */
+						scrollParams.width = (size.x - (margin + 100));
+						hScrollView.setLayoutParams(scrollParams);
+						break;
+					case MotionEvent.ACTION_UP:
+						break;
 				}
 				return result;
 			}
-			
 		});
 	}
 
 	/**
 	 * Load the widgets placed on the drawer.
 	 */
-	private void loadWidgets(){
+	private void loadWidgets() {
 		mCalendarWidget = (GWidgetCalendar) findViewById(R.id.calendarwidget);
 		mConnectivityWidget = (GWidgetConnectivity) findViewById(R.id.connectivitywidget);
 		mLogoutWidget = (GWidgetLogout) findViewById(R.id.logoutwidget);
@@ -400,7 +396,6 @@ public class HomeActivity extends Activity {
 		mWidgetTimer.addWidget(mCalendarWidget);
 		mWidgetTimer.addWidget(mConnectivityWidget);
 
-
 		mLogoutWidget.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				View.OnClickListener task = new View.OnClickListener() {
@@ -409,8 +404,7 @@ public class HomeActivity extends Activity {
 						((Activity) mContext).finish();
 					}
 				};
-				
-				if(!mWidgetRunning){
+				if (!mWidgetRunning) {
 					mWidgetRunning = true;
 					String headline = mContext.getResources().getString(R.string.Log_out);
 					String description = mContext.getResources().getString(R.string.Log_out_description);
