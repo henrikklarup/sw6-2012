@@ -37,39 +37,14 @@ public class PARROTActivity extends Activity {
 
 
 
-		//PARROTDataLoader dataLoader = new PARROTDataLoader(this);
+		PARROTDataLoader dataLoader = new PARROTDataLoader(this);
 		//PARROTProfile parrotUser = dataLoader.loadProfile();			
 		//TODO replace the temp lines with the above lines
 		//START TEMP LINES
-		Pictogram tempPic= new Pictogram("Koala","/sdcard/Pictures/005.jpg", null, null);
-		parrotUser = new PARROTProfile("tempNiels", tempPic);
-		Category tempCat = new Category(0,tempPic);
-		tempCat.addPictogram(tempPic);
-		tempCat.addPictogram(tempPic);
-		Pictogram tempPic2 = new Pictogram("Meg", "/sdcard/Pictures/meg.png", null, null);
-		tempCat.addPictogram(tempPic2);
-
-		for (int i=0;i<6;i++)
-		{
-			tempCat.addPictogram(tempPic);
-			tempCat.addPictogram(tempPic2);
-		}
-		parrotUser.addCategory(tempCat);
-
-		Category tempCat2 = new Category(2, tempPic2);
-		tempPic = new Pictogram("Bob", "/sdcard/Pictures/007.jpg", null, null);
-		tempPic2= new Pictogram("Madeline", "/sdcard/Pictures/003.jpg", null, null);
-
-		for (int i=0;i<6;i++)
-		{
-			tempCat2.addPictogram(tempPic);
-			tempCat2.addPictogram(tempPic2);
-		}
-		parrotUser.addCategory(tempCat2);
-		
-		parrotUser.setRights(0, true);
-		parrotUser.setRights(1, true);
-		parrotUser.setRights(2, true);
+		dataLoader.TESTsaveTestProfile();
+//		parrotUser.setRights(0, true);
+//		parrotUser.setRights(1, true);
+//		parrotUser.setRights(2, true);
 		//END TEMP LINES
 
 		/* Here all the Tabs in the system is initialized based on whether or not a user
@@ -96,13 +71,13 @@ public class PARROTActivity extends Activity {
 					.setTabListener(new TabListener<OptionsFragment>(this,"options",OptionsFragment.class));
 			actionBar.addTab(tab);
 		}
-		if (parrotUser.getRights(1) == true)
-		{
-			tab = actionBar.newTab()
-					.setText(R.string.thirdTab)
-					.setTabListener(new TabListener<AddFromCameraFragment>(this,"camera",AddFromCameraFragment.class));
-			actionBar.addTab(tab);
-		}
+//		if (parrotUser.getRights(1) == true)//TODO put me back in
+//		{
+//			tab = actionBar.newTab()
+//					.setText(R.string.thirdTab)
+//					.setTabListener(new TabListener<AddFromCameraFragment>(this,"camera",AddFromCameraFragment.class));
+//			actionBar.addTab(tab);
+//		}
 		if (parrotUser.getRights(2) == true)
 		{
 			tab = actionBar.newTab()
@@ -129,6 +104,9 @@ public class PARROTActivity extends Activity {
 	public static PARROTProfile getUser()
 	{
 		return parrotUser;
+	}
+	public static void setUser(PARROTProfile user) {
+		parrotUser = user;
 	}
 	
 }
