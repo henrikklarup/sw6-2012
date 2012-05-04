@@ -86,14 +86,19 @@ public class CRUD {
 			Set<Entry<String, String>> keys = settings.get(_lastUsed).entrySet();
 	
 			for (Map.Entry<String, String> key : keys) {
-				lastUsedList.add(key.getKey()+";"+key.getValue());
+				initLastUsed(key.getKey(), key.getValue());
 			}
+			
 		} else {
 			Setting<String,String,String> newSet = new Setting<String,String,String>();
 			newSet.put(_lastUsed, null);
 			app.setSettings(newSet);
 			oHelp.appsHelper.modifyAppByProfile(app, prof);
 		}
+	}
+	
+	void initLastUsed(String key, String value){
+		
 	}
 	
 	//Waiting for admin, we can insert media but not retrieve them :D
