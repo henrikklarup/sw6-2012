@@ -13,6 +13,8 @@ import java.io.DataOutputStream;
 import java.io.File;
 
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -54,25 +56,6 @@ public class Connection {
 		this.socket = new Socket(ConnectionConfiguration.HOSTNAME, ConnectionConfiguration.PORT);
 	}
 
-	
-//	private final boolean makeFolder(String folderPath) {
-//		File dir = new File(folderPath);
-//		boolean success = false;
-//		try {
-//			if (dir.exists() == false) {
-//				success = dir.mkdir();
-//				if (success == false) {
-//					throw new IOException("folderPath: Could not create folder !");
-//				}
-//			}	else {
-//				this.folder = dir;
-//				success = true;
-//			}
-//		}	catch (IOException e) {
-//			System.err.println(e.getMessage());
-//		}
-//		return success;
-//	}
 	private byte[] stringBuilderToBytes(StringBuilder sb) {
 		char[] buf = new char[sb.length()];
 		sb.getChars(0, sb.length(), buf, 0);
@@ -92,20 +75,84 @@ public class Connection {
 		}
 		return buf;
 	}
+	private String bytesToString(byte[] b) {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < b.length; i++) {
+			sb.append((char)b[i]);
+		}
+		return sb.toString();
+	}
+	private int sizeOf(int in) {
+		return new String("" + in).length();
+	}
+	private int sizeOf(long in) {
+		return new String("" + in).length();
+	}
+	private String xmlLength(int in) {
+		String result = "";
+		int maxIntSize = 10;
+		for (int i = 0; i < (maxIntSize - this.sizeOf(in)); i++) {
+			result += "0";
+		}
+		result += in;
+		return result;
+	}
+	private String pingLength(int in) {
+		String result = "";
+		int maxPingSize = 4;
+		for (int i = 0; i < (maxPingSize - this.sizeOf(in)); i++) {
+			result+= "0";
+		}
+		result += in;
+		return result;
+	}
+	private String fileLength(long in) {
+		String result = "";
+		int maxLongSize = 19;
+		for (int i = 0; i < (maxLongSize - this.sizeOf(in)); i++) {
+			result += "0";
+		}
+		result += in;
+		return result;
+	}
+	private String fileName(String fileName) {
+		StringBuilder sb = new StringBuilder();
+		int maxFileNameSize = 256;
+		for (int i = 0; i < (maxFileNameSize - fileName.length()); i++) {
+			sb.append(" ");
+		}
+		sb.append(fileName);
+		return sb.toString();
+	}
 
-	private void sendFile(OutputStream os, File f) throws FileNotFoundException, IOException {
+	private void sendFILE(OutputStream os, File f, boolean moreFiles) throws FileNotFoundException, IOException {
 		InputStream is = new FileInputStream(f);
 		StringBuilder sb = new StringBuilder();
-		byte[] buf = new byte[this.bufferSize];
-		int len;
 
 		//Writing "header-START"
-		sb.append("FILE[" + f.length() + "," + f.getName() + "]=\"");
+		int fileFlag = (moreFiles == true) ? 1 : 0;
+		sb.append("FILE[" + this.fileLength(f.length()) + "," + this.fileName(f.getName()) + "," + fileFlag + "]=\"");
 		os.write(this.stringBuilderToBytes(sb));
+
 		//Writing content
-		while ((len = is.read(buf)) > 0) {
-			os.write(buf);
+		long bufCalc = f.length();
+		byte[] buf = new byte[this.bufferSize];
+		int len;
+		while (bufCalc > 0) {
+			if (bufCalc > this.bufferSize) {
+				buf = new byte[this.bufferSize];
+				len = is.read(buf);
+				os.write(buf);
+				bufCalc -= len;
+			}
+			else {
+				buf = new byte[(int)bufCalc];
+				len = is.read(buf);
+				os.write(buf);
+				bufCalc = 0;
+			}
 		}
+
 		//Writing "header-END"
 		sb = null;
 		sb = new StringBuilder();
@@ -121,7 +168,7 @@ public class Connection {
 		return sb.toString();
 	}
 	//Improve the CRUD check.............................
-	private void getCRUD(CRUD cr, StringBuilder builder) {
+	private void makeCRUD(CRUD cr, StringBuilder builder) {
 		try {
 			//Exception handling 
 			if (cr.getValue() == -1 || cr == CRUD.ERROR) {
@@ -142,7 +189,7 @@ public class Connection {
 			System.err.println(e.getMessage());
 		}
 	}
-	private void getXML(String XML, boolean anyFiles, StringBuilder builder) {
+	private void makeXML(String XML, boolean anyFiles, StringBuilder builder) {
 		try {
 			//Exception handling 
 			if (XML.equals("") == true) {
@@ -153,7 +200,7 @@ public class Connection {
 			}
 			int files = (anyFiles == true) ? 1 : 0; 
 			//Adding the data
-			builder.append("MXML[" + XML.length() + "," + files + "]=\"");
+			builder.append("MXML[" + this.xmlLength(XML.length()) + "," + files + "]=\"");
 			builder.append(XML);
 			builder.append("\"");
 		}	catch (IllegalArgumentException e) {
@@ -162,7 +209,37 @@ public class Connection {
 			System.err.println(e.getMessage());
 		}
 	}
-	private void getACCEPT(StringBuilder builder) {
+	private void makePing(StringBuilder builder, int pingSize) {
+		try {
+			if (builder == null) {
+				throw new NullPointerException("builder: Cannot be null !");
+			}
+			
+			int packageOffset = 20;
+			int randomBytes = -1;
+
+			if (pingSize + packageOffset <= 4096) {
+				if (pingSize - packageOffset >= 1) {
+					randomBytes = pingSize;
+				}	else {
+					randomBytes = 12;
+				}
+			}	else {
+				randomBytes = 12;
+			}
+
+			builder.append("PING[" + this.pingLength(pingSize) + "]=\"");
+			Random rand = new Random();
+			byte[] buf = new byte[randomBytes];
+			rand.nextBytes(buf);
+			builder.append(this.bytesToString(this.bytesToChars(buf)));
+			builder.append("\"");
+
+		}	catch (NullPointerException e) {
+			System.err.println(e.getMessage());
+		}
+	}
+	private void makeACCEPT(StringBuilder builder) {
 		try {
 			if (builder == null) {
 				throw new NullPointerException("builder: Cannot be null !");
@@ -173,134 +250,158 @@ public class Connection {
 		}
 	}
 
-	public String sendCommit(String xml, File... files) throws IOException {
-		this.writer = new DataOutputStream(this.socket.getOutputStream());
-		this.reader = new DataInputStream(this.socket.getInputStream());
-		StringBuilder sb = new StringBuilder();
-
-		//Writing the first part of the package
-		this.getCRUD(CRUD.COMMIT, sb);
-		this.getXML(xml, true, sb);
-		this.writer.write(this.stringBuilderToBytes(sb));
-
-		//Writing any Files
-		for (File f : files) {
-			this.sendFile(this.writer, f);
-		}
-		this.writer.flush();
+	
+	private final CRUD CR(InputStream is) throws IOException {
+		/*
+			-------------------------
+					CRUD
+			-------------------------
+			crudLength	= 1
+			tag-stuff	= 6
+			total		= 7
+		 */
+		is = new DataInputStream(is);
+		byte[] buf = new byte[7];
+		int len = is.read(buf);
+		String data = this.bytesToString(buf);
 		
-		//Writing acceptance
-		this.getACCEPT(sb);
-		this.writer.write(this.stringBuilderToBytes(sb));
-		this.writer.flush();
+		Pattern expr = Pattern.compile("\\[[0-9]\\]");
+		Matcher match = expr.matcher(data);
+		if (match.find() != true) {
+			throw new IllegalStateException("Could not find CRUD !");
+		}
+//		String result = data.substring(match.start() + 1, match.end() - 1);
 
-		//Re-using "old" Objects
+		switch(Integer.parseInt(data.substring(match.start() + 1, match.end() - 1))) {
+		case 1:
+			return CRUD.COMMIT;
+		case 2:
+			return CRUD.REQUEST;
+		case 3:
+			return CRUD.PING;
+		default:
+			return CRUD.ERROR;
+		}
+	}
+	private void receivePing(InputStream reader) {
+		
+	}
+	
+	
+	
+	private long sendPackage(OutputStream writer, int pingSize) throws IOException {
+		StringBuilder sb = new StringBuilder();
+		this.makeCRUD(CRUD.PING, sb);
+		this.makePing(sb, pingSize);
+		long init = -1;
+		long end = -1;
+		
+		init = System.currentTimeMillis();
+		writer.write(this.stringBuilderToBytes(sb));
+		end = System.currentTimeMillis();
+		writer.flush();
+		
+		return (end - init);
+	}
+	private void sendPackage(OutputStream writer, CRUD cr, String data) throws IOException {
+		StringBuilder sb = new StringBuilder();
+		this.makeCRUD(cr, sb);
+		this.makeXML(data, false, sb);
+		this.makeACCEPT(sb);
+
+		writer.write(this.stringBuilderToBytes(sb));
+		writer.flush();
+	}
+	private void sendPackage(OutputStream writer, CRUD cr, String data, File f) throws IOException {
+		StringBuilder sb = new StringBuilder();
+		this.makeCRUD(cr, sb);
+		this.makeXML(data, true, sb);
+
+		writer.write(this.stringBuilderToBytes(sb));
+		this.sendFILE(writer, f, false);
+		writer.flush();
+
 		sb = null;
 		sb = new StringBuilder();
+		this.makeACCEPT(sb);
+		writer.write(this.stringBuilderToBytes(sb));
+		writer.flush();
+	}
+	private void sendPackage(OutputStream writer, CRUD cr, String data, File... files) throws IOException {
+		StringBuilder sb = new StringBuilder();
+		this.makeCRUD(cr, sb);
+		this.makeXML(data, true, sb);
 
-		//Waiting for Server confirmation
-		byte[] buf = new byte[this.bufferSize];
-		int len;
-		while ((len = reader.read(buf)) > 0) {
-			sb.append(this.bytesToChars(buf));
+		writer.write(this.stringBuilderToBytes(sb));
+		for (int i = 0; i < files.length; i++) {
+			if ( (i + 1 ) >= files.length ) {
+				//Last file is set to false -> no more files are comming
+				this.sendFILE(writer, files[i], false);
+				writer.flush();
+			}	else {
+				this.sendFILE(writer, files[i], true);
+				writer.flush();
+			}
 		}
-		
-		//Sending acceptance
-		this.getACCEPT(sb);
-		this.writer.write(this.stringBuilderToBytes(sb));
+
+		sb = null;
+		sb = new StringBuilder();
+		this.makeACCEPT(sb);
+		writer.write(this.stringBuilderToBytes(sb));
+		writer.flush();
+	}
+
+
+	public String sendCommit(String xml, File... files) throws IOException {
+		//Sending the commit event
+		this.writer = new DataOutputStream(this.socket.getOutputStream());
+		this.sendPackage(this.writer, CRUD.COMMIT, xml, files);
+
+		//Receiving the responds
+		TransmissionHandler th = new TransmissionHandler(this.socket, this.folderPath);
 
 		//Cleanup crew...
+		this.writer.flush();
 		this.writer.close();
-		//this.reader.close();
 
-		return sb.toString();
+		return th.getXML();
 	}
 	public String sendCommit(String xml, File f) throws IOException {
+		//Sending the commit event
 		this.writer = new DataOutputStream(this.socket.getOutputStream());
-		this.reader = new DataInputStream(this.socket.getInputStream());
-		StringBuilder sb = new StringBuilder();
+		this.sendPackage(this.writer, CRUD.COMMIT, xml, f);
 
-		//Writing the first part of the package
-		this.getCRUD(CRUD.COMMIT, sb);
-		this.getXML(xml, true, sb);
-		this.writer.write(this.stringBuilderToBytes(sb));
-
-		//Writing the File
-		this.sendFile(this.writer, f);
-		this.writer.flush();
-		
-		//Writing acceptance
-		this.getACCEPT(sb);
-		this.writer.write(this.stringBuilderToBytes(sb));
-		this.writer.flush();
-
-		//Re-using "old" Objects
-		sb = null;
-		sb = new StringBuilder();
-
-		//Waiting for Server confirmation
-		byte[] buf = new byte[this.bufferSize];
-		int len;
-		while ((len = reader.read(buf)) > 0) {
-			sb.append(this.bytesToChars(buf));
-		}
+		//Receiving the responds
+		TransmissionHandler th = new TransmissionHandler(this.socket, this.folderPath);
 
 		//Cleanup crew...
+		this.writer.flush();
 		this.writer.close();
-		//this.reader.close();
 
-		return sb.toString();
+		return th.getXML();
 	}
 	public String sendCommit(String xml) throws IOException {
-		System.out.println("Init");
+		//Sending the commit event
 		this.writer = new DataOutputStream(this.socket.getOutputStream());
-		this.reader = new DataInputStream(this.socket.getInputStream());
-		StringBuilder sb = new StringBuilder();
-		System.out.println("Init - Done \n");
-		
-		//Writing the first part of the package
-		this.getCRUD(CRUD.COMMIT, sb);
-		this.getXML(xml, false, sb);
-		this.getACCEPT(sb);
-		System.out.println("Sending data !");
-		this.writer.write(this.stringBuilderToBytes(sb));
-		this.writer.flush();
-		System.out.println("Sending data - Done !");
+		this.sendPackage(this.writer, CRUD.COMMIT, xml);
 
-		//Re-using "old" Objects
-		sb = null;
-		sb = new StringBuilder();
-
-		//Waiting for Server confirmation
-		byte[] buf = new byte[this.bufferSize];
-		int len;
-		while ((len = this.reader.read(buf)) > 0) {
-			sb.append(this.bytesToChars(buf));
-		}
+		//Receiving the responds
+		TransmissionHandler th = new TransmissionHandler(this.socket, this.folderPath);
 
 		//Cleanup crew...
+		this.writer.flush();
 		this.writer.close();
-		//this.reader.close();
 
-		return sb.toString();
+		return th.getXML();
 	}
 	//Make the sendPing function receive a TransmissionHandler instead !
-	public long sendPing() throws IOException {
+	public long sendPing(int pingSize) throws IOException {
 		this.writer = new DataOutputStream(this.socket.getOutputStream());
 		this.reader = new DataInputStream(this.socket.getInputStream());
-		Random rand = new Random();
-		StringBuilder sb = new StringBuilder();
-		byte[] buf = new byte[Connection.PINGSIZE];
-		long timeSend, timeRespond = 0;
-		System.out.println("buf - size: " + buf.length);
-		//Creating the data package
-		this.getCRUD(CRUD.PING, sb);
-		rand.nextBytes(buf);
-		this.getXML(this.bytesToString(this.bytesToChars(buf)), false, sb);
+		
+		long timeSend, timeRespond = -1;
+		timeSend = this.sendPackage(this.writer, pingSize); 		
 
-		//Sending the data to the Socket
-		timeSend = System.currentTimeMillis();	//Time start
-		this.writer.write(this.stringBuilderToBytes(sb));
 
 		//Re-using the "old" structures
 		buf = null;
@@ -317,25 +418,14 @@ public class Connection {
 	}
 
 	public TransmissionHandler sendRequest(String xml) throws FileNotFoundException, IOException {
+		//Sending the request event
 		this.writer = new DataOutputStream(this.socket.getOutputStream());
-		this.reader = new DataInputStream(this.socket.getInputStream());
-		StringBuilder sb = new StringBuilder();
-
-		//Writing the first part of the package
-		this.getCRUD(CRUD.REQUEST, sb);
-		this.getXML(xml, false, sb);
-		this.getACCEPT(sb);
-		this.writer.write(this.stringBuilderToBytes(sb));
-
-		//Re-using the "old" Objects
-		sb = null;
-		sb = new StringBuilder();
+		this.sendPackage(this.writer, CRUD.REQUEST, xml);
 
 		//Waiting for Server confirmation
 		TransmissionHandler th = new TransmissionHandler(this.socket, this.folderPath);
 
 		//Cleanup crew...
-		//this.reader.close();
 		this.writer.flush();
 		this.writer.close();
 

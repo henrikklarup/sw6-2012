@@ -8,6 +8,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOError;
 import java.io.IOException;
 import java.io.File;
 import java.io.InputStream;
@@ -15,6 +16,10 @@ import java.io.OutputStream;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
+import java.util.Random;
+
+import com.sun.swing.internal.plaf.synth.resources.synth;
 
 public class IOHandler implements Runnable {
 	//Field variables
@@ -97,13 +102,196 @@ public class IOHandler implements Runnable {
 		}
 		return buf;
 	}
+	private String messageToString(byte[] b) {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < b.length; i++) {
+			sb.append((char)b[i]);
+		}
+		return sb.toString();
+	}
 	private byte[] stringBuilderToBytes(StringBuilder sb) {
 		char[] buf = new char[sb.length()];
 		sb.getChars(0, sb.length(), buf, 0);
 		return this.messageToBytes(buf);
 	}
+	private int sizeOf(int in) {
+		return new String("" + in).length();
+	}
+	private int sizeOf(long in) {
+		return new String("" + in).length();
+	}
+	private String xmlLength(int in) {
+		String result = "";
+		int maxIntSize = 10;
+		for (int i = 0; i < (maxIntSize - this.sizeOf(in)); i++) {
+			result += "0";
+		}
+		result += in;
+		return result;
+	}
+	private String fileLength(long in) {
+		String result = "";
+		int maxLongSize = 19;
+		for (int i = 0; i < (maxLongSize - this.sizeOf(in)); i++) {
+			result += "0";
+		}
+		result += in;
+		return result;
+	}
+	private String fileName(String fileName) {
+		StringBuilder sb = new StringBuilder();
+		int maxFileNameSize = 256;
+		for (int i = 0; i < (maxFileNameSize - fileName.length()); i++) {
+			sb.append(" ");
+		}
+		sb.append(fileName);
+		return sb.toString();
+	}
+	private String pingLength(int in) {
+		String result = "";
+		int maxPingSize = 4;
+		for (int i = 0; i < (maxPingSize - this.sizeOf(in)); i++) {
+			result+= "0";
+		}
+		result += in;
+		return result;
+	}
+	
+	private long sendPackage(OutputStream writer, int pingSize) {
+		StringBuilder sb = new StringBuilder();
+		this.makeCRUD(CRUD.PING, sb);
+		this.makePing(sb, pingSize);
+		long init = -1;
+		long end = -1;
+		
+		try {
+			init = System.currentTimeMillis();
+			writer.write(this.stringBuilderToBytes(sb));
+			end = System.currentTimeMillis();
+			writer.flush();
+		}	catch (IOException e) {
+			System.err.println("sendPackage: Could not write CRUD and PING !");
+		}
+		
+		return (end - init);
+	}
+	private void sendPackage(OutputStream writer, CRUD cr, String data) {
+		StringBuilder sb = new StringBuilder();
+		this.makeCRUD(cr, sb);
+		this.makeXML(data, false, sb);
+		this.makeACCEPT(sb);
+		
+		try {
+			writer.write(this.stringBuilderToBytes(sb));
+			writer.flush();
+		}	catch (IOException e) {
+			System.err.println("sendPackage: Could not write CRUD, XML, ACCEPT !");
+		}
+	}
+	private void sendPackage(OutputStream writer, CRUD cr, String data, File f) {
+		StringBuilder sb = new StringBuilder();
+		this.makeCRUD(cr, sb);
+		this.makeXML(data, true, sb);
+		try {
+			writer.write(this.stringBuilderToBytes(sb));
+		}	catch (IOException e) {
+			System.err.println("sendPackage: Could not write CRUD and XML !");
+		}
+		try {
+			this.sendFILE(writer, f, false);
+			writer.flush();
+		}	catch (FileNotFoundException e) {
+			System.err.println("File not found: " + f.getName() + ", path: " + f.getAbsolutePath());
+		}	catch (IOException e) {
+			System.err.println("sendPackage: Could not write or flush for function - sendFile !");
+		}
+		
+		sb = null;
+		sb = new StringBuilder();
+		this.makeACCEPT(sb);
+		try {
+			writer.write(this.stringBuilderToBytes(sb));
+			writer.flush();
+		}	catch (IOException e) {
+			System.err.println("sendPackage: Could not write ACCEPT !");
+		}
+	}
+	private void sendPackage(OutputStream writer, CRUD cr, String data, File... files) {
+		StringBuilder sb = new StringBuilder();
+		this.makeCRUD(cr, sb);
+		this.makeXML(data, true, sb);
+		
+		try {
+			writer.write(this.stringBuilderToBytes(sb));
+		}	catch (IOException e) {
+			System.err.println("sendPackage: Could not write CRUD and XML !");
+		}
+		
+		for (int i = 0; i < files.length; i++) {
+			if ( (i + 1 ) >= files.length ) {
+				//Last file is set to false -> no more files are comming
+				try {
+					this.sendFILE(writer, files[i], false);
+					writer.flush();
+				}	catch (FileNotFoundException e) {
+					System.err.println("File not found: " + files[i].getName() + ", path: " + files[i].getAbsolutePath());
+				}	catch (IOException e) {
+					System.err.println("sendPackage: Could not write or flush for function - sendFile !");
+				}
+			}	else {
+				try {
+					this.sendFILE(writer, files[i], true);
+					writer.flush(); 
+				}	catch (FileNotFoundException e) {
+					System.err.println("File not found: " + files[i].getName() + ", path: " + files[i].getAbsolutePath());
+				}	catch (IOException e) {
+					System.err.println("sendPackage: Could not write or flush for function - sendFile !");
+				}
+			}
+		}
+		
+		sb = null;
+		sb = new StringBuilder();
+		this.makeACCEPT(sb);
+		try {
+			writer.write(this.stringBuilderToBytes(sb));
+			writer.flush();
+		}	catch (IOException e) {
+			System.err.println("sendPackage: Could not write ACCEPT !");
+		}
+	}
+	
+	private void makePing(StringBuilder builder, int pingSize) {
+		try {
+			if (builder == null) {
+				throw new NullPointerException("builder: Cannot be null !");
+			}
+			
+			int packageOffset = 20;
+			int randomBytes = -1;
 
-	private void createCRUD(CRUD cr, StringBuilder builder) {
+			if (pingSize + packageOffset <= 4096) {
+				if (pingSize - packageOffset >= 1) {
+					randomBytes = pingSize;
+				}	else {
+					randomBytes = 12;
+				}
+			}	else {
+				randomBytes = 12;
+			}
+
+			builder.append("PING[" + this.pingLength(pingSize) + "]=\"");
+			Random rand = new Random();
+			byte[] buf = new byte[randomBytes];
+			rand.nextBytes(buf);
+			builder.append(this.messageToString(buf));
+			builder.append("\"");
+
+		}	catch (NullPointerException e) {
+			System.err.println(e.getMessage());
+		}
+	}
+	private void makeCRUD(CRUD cr, StringBuilder builder) {
 		try {
 			//Exception handling 
 			if (cr.getValue() == -1 || cr == CRUD.ERROR) {
@@ -124,7 +312,7 @@ public class IOHandler implements Runnable {
 			System.err.println(e.getMessage());
 		}
 	}
-	private void createDATA(String data, boolean anyFiles, StringBuilder builder) {
+	private void makeXML(String data, boolean anyFiles, StringBuilder builder) {
 		try {
 			//Exception handling 
 			if (data.equals("") == true) {
@@ -135,7 +323,7 @@ public class IOHandler implements Runnable {
 			}
 			int files = (anyFiles == true) ? 1 : 0;
 			//Adding the data
-			builder.append("MXML[" + data.length() + "," + files + "]=\"");
+			builder.append("MXML[" + this.xmlLength(data.length()) + "," + files + "]=\"");
 			builder.append(data);
 			builder.append("\"");
 		}	catch (IllegalArgumentException e) {
@@ -144,19 +332,43 @@ public class IOHandler implements Runnable {
 			System.err.println(e.getMessage());
 		}
 	}
-	private void createFILE(OutputStream os, File f) throws FileNotFoundException, IOException {
+	private void makeACCEPT(StringBuilder builder) {
+		try {
+			if (builder == null) {
+				throw new NullPointerException("builder: Cannot be null !");
+			}
+			builder.append("[ACCEPT]");
+		}	catch (NullPointerException e) {
+			System.err.println(e.getMessage());
+		}
+	}
+	private void sendFILE(OutputStream os, File f, boolean moreFiles) throws FileNotFoundException, IOException {
 		InputStream is = new FileInputStream(f);
 		StringBuilder sb = new StringBuilder();
-		byte[] buf = new byte[this.bufferSize];
-		@SuppressWarnings("unused")
-		int len;
 
 		//Writing "header-START"
-		sb.append("FILE[" + f.length() + "," + f.getName() + "]=\"");
+		int fileFlag = (moreFiles == true) ? 1 : 0;
+		sb.append("FILE[" + this.fileLength(f.length()) + "," + this.fileName(f.getName()) + "," + fileFlag + "]=\"");
 		os.write(this.stringBuilderToBytes(sb));
+
 		//Writing content
-		while ((len = is.read(buf)) > 0) {
-			os.write(buf);
+		long bufCalc = f.length();
+		System.out.println("bufCalc = " + bufCalc);
+		byte[] buf = new byte[this.bufferSize];
+		int len;
+		while (bufCalc > 0) {
+			if (bufCalc > this.bufferSize) {
+				buf = new byte[this.bufferSize];
+				len = is.read(buf);
+				os.write(buf);
+				bufCalc -= len;
+			}
+			else {
+				buf = new byte[(int)bufCalc];
+				len = is.read(buf);
+				os.write(buf);
+				bufCalc = 0;
+			}
 		}
 		//Writing "header-END"
 		sb = null;
@@ -168,79 +380,38 @@ public class IOHandler implements Runnable {
 		is.close();
 	}
 	private void commitResponds(Socket socket, String data) {
-		DataOutputStream temp = this.getDataOutputStream(socket);
-		StringBuilder sb = new StringBuilder();
-		this.createCRUD(CRUD.COMMIT, sb);
-		this.createDATA(data, false, sb);
 		try {
-			temp.write(this.messageToBytes(sb.toString()));
-			temp.flush();
+			this.sendPackage(new DataOutputStream(socket.getOutputStream()), CRUD.COMMIT, data);
 		}	catch (IOException e) {
-			System.err.println("Could not commitResponds - write !");
+			System.err.println("commitResponds: Could not establish an OutputStream !");
 		}
 	}
 	private void requestResponds(Socket socket, String data) {
-		DataOutputStream temp = this.getDataOutputStream(socket);
-		StringBuilder sb = new StringBuilder();
-		this.createCRUD(CRUD.REQUEST, sb);
-		this.createDATA(data, false, sb);
 		try {
-			temp.write(this.stringBuilderToBytes(sb));
-			temp.flush();
+			this.sendPackage(new DataOutputStream(socket.getOutputStream()), CRUD.REQUEST, data);
 		}	catch (IOException e) {
-			System.err.println("Could not requestResponds - write - CRUD and data !");
+			System.err.println("requestResponds: Could not establish an OutputStream !");
 		}
 	}
 	private void requestResponds(Socket socket, String data, File f) {
-		DataOutputStream temp = this.getDataOutputStream(socket);
-		StringBuilder sb = new StringBuilder();
-		this.createCRUD(CRUD.REQUEST, sb);
-		this.createDATA(data, true, sb);
-
 		try {
-			temp.write(this.stringBuilderToBytes(sb));
-			temp.flush();
-		}	catch(IOException e) {
-			System.err.println("Could not requestResponds - write - CRUD and data !");
-		}
-
-		try {
-			this.createFILE(temp, f);
-		}	catch (FileNotFoundException e) {
-			System.err.println("Could not requestResponds - write - FileNotFound: " + f.getName() + " !");
+			this.sendPackage(new DataOutputStream(socket.getOutputStream()), CRUD.REQUEST, data, f);
 		}	catch (IOException e) {
-			System.err.println("Could not requestResponds - write - File !");
+			System.err.println("requestResponds: Could not establish an OutputStream !");
 		}
-
 	}
 	private void requestResponds(Socket socket, String data, File... files) {
-		DataOutputStream temp = this.getDataOutputStream(socket);
-		StringBuilder sb = new StringBuilder();
-		this.createCRUD(CRUD.REQUEST, sb);
-		this.createDATA(data, true, sb);
-
 		try {
-			temp.write(this.stringBuilderToBytes(sb));
-			temp.flush();
-		}	catch(IOException e) {
-			System.err.println("Could not requestResponds - write - CRUD and data !");
-		}
-		
-		for (File f : files) {
-			try {
-				this.createFILE(temp, f);
-			}	catch (FileNotFoundException e) {
-				System.err.println("Could not requestResponds - write - FileNotFound: " + f.getName() + " !");
-			}	catch (IOException e) {
-				System.err.println("Could not requestResponds - write - File !");
-			}
+			this.sendPackage(new DataOutputStream(socket.getOutputStream()), CRUD.REQUEST, data, files);
+		}	catch (IOException e) {
+			System.err.println("requestResponds: Could not establish an OutputStream !");
 		}
 	}
 	private void pingResponds(Socket socket, String data) {
 		DataOutputStream temp = this.getDataOutputStream(socket);
 		StringBuilder sb = new StringBuilder();
-		this.createCRUD(CRUD.PING, sb);
-		this.createDATA(data, false, sb);
+		this.makeCRUD(CRUD.PING, sb);
+		this.makeXML(data, false, sb);
 		try {
 			temp.write(this.messageToBytes(sb.toString()));
 			temp.flush();
@@ -249,15 +420,10 @@ public class IOHandler implements Runnable {
 		}
 	}
 	private void errorResponds(Socket socket, String data) {
-		DataOutputStream temp = this.getDataOutputStream(socket);
-		StringBuilder sb = new StringBuilder();
-		this.createCRUD(CRUD.ERROR, sb);
-		this.createDATA(data, false, sb);
 		try {
-			temp.write(this.messageToBytes(sb.toString()));
-			temp.flush();
+			this.sendPackage(new DataOutputStream(socket.getOutputStream()), CRUD.ERROR, data);
 		}	catch (IOException e) {
-			System.err.println("Could not pingResponds - write !");
+			System.err.println("errorResponds: Could not establish an OutputStream !");
 		}
 	}
 	public void respond(Socket socket, CRUD cr, String data) {
@@ -312,6 +478,10 @@ public class IOHandler implements Runnable {
 	public synchronized void logIt(Socket socket, String performedAction) {
 		LogFile lf = new LogFile(Configuration.LOGFILEPATH);
 		lf.logIt(socket, performedAction);
+	}
+	public synchronized void logIt(List<File> list) {
+		LogFile lf = new LogFile(Configuration.LOGFILEPATH);
+		lf.logIt(list);
 	}
 	public synchronized void logIt(boolean completed) {
 		LogFile lf = new LogFile(Configuration.LOGFILEPATH);
