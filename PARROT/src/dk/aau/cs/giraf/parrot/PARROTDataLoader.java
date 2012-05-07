@@ -30,12 +30,30 @@ public class PARROTDataLoader {
 		app = help.appsHelper.getAppByPackageName();
 	}
 	
-
-	
-	public PARROTProfile loadProfile(Long childId,Long appId)	
+	/**
+	 * 
+	 * @return
+	 * The PARROTProfile corresponding to the current child user of the PARROT system.
+	 */
+	public PARROTProfile loadPARROT()
 	{
 		//This part of the code is supposed to get a profile from the launcher, and read it from the admin.
-//		Bundle extras = parrent.getIntent().getExtras();
+		Long childId = parrent.getIntent().getExtras().getLong("currentChildID");
+		Long appId = app.getId();
+		
+		return loadProfile(childId, appId);
+	}
+
+	/**
+	 * @param childId
+	 * The ID of the child using the app.
+	 * @param appId
+	 * The ID of the app.
+	 * @return
+	 * This methods loads a specific PARROTProfile.
+	 */
+	public PARROTProfile loadProfile(Long childId,Long appId)	
+	{
 		Profile prof;
 
 		
