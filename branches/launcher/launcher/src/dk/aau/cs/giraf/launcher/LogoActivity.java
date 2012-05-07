@@ -41,18 +41,24 @@ public class LogoActivity extends Activity {
 	            	}
 	            } catch(InterruptedException e) {}
 	            finally {
-	            	Intent i;
+	            	Intent intent;
 
 	            	if (Tools.sessionExpired(mContext)) {
-	            		i = new Intent(mContext, AuthenticationActivity.class);
+	            		intent = new Intent(mContext, AuthenticationActivity.class);
 	            	} else {
-	            		i = new Intent(mContext, HomeActivity.class);
+	            		intent = new Intent(mContext, HomeActivity.class);
 	            		
 	            		SharedPreferences sharedPreferences = getSharedPreferences(Data.TIMERKEY, 0);
-	            		i.putExtra(Data.GUARDIANID, sharedPreferences.getLong(Data.GUARDIANID, -1));
+	            		long guardianID = sharedPreferences.getLong(Data.GUARDIANID, -1);
+	            		
+	            		if ((new Helper(mContext)).profilesHelper.getProfileById(guardianID) != null) {
+	            			intent.putExtra(Data.GUARDIANID, sharedPreferences.getLong(Data.GUARDIANID, -1));
+	            		} else {
+	            			intent = new Intent(mContext, AuthenticationActivity.class);
+	            		}
 	            	}
 	            	
-	                startActivity(i);
+	                startActivity(intent);
 	                stop();
 	                finish();
 	            }
