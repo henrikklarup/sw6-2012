@@ -19,13 +19,13 @@ public class MainActivity extends Activity implements OnClickListener {
 		
 		Bundle extras = getIntent().getExtras();
         if (extras != null) {        	
-//        	MetaData.setGuardianId(extras.getLong(("currentGuardianID")));
         	guardianId = extras.getLong(("currentGuardianID"));
         } else {
-//        	MetaData.setGuardianId(-1);
         	guardianId = -1;
         }
-    	
+        
+        guardianId = 2;
+		
 		setContentView(R.layout.main);
 		
 		initialize();

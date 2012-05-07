@@ -14,5 +14,10 @@
     <string name="columnDepName">Name:</string>
     <string name="columnDepAddress">Address:</string>
     <string name="columnDepContacts">Contacts:</string>
+    <string name="nameLabel">Name: </string>
+    <string name="phoneLabel">Phone: </string>
+    <string name="myAppsButton">My Apps</string>
+    <string name="myMediaButton">My Media</string>
+    <string name="mySettingsButton">Change Settings</string>
 
 </resources>

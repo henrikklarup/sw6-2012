@@ -9,25 +9,42 @@
         android:layout_gravity="center_horizontal" >
 
         <TextView
+            android:id="@+id/tvDepHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_span="3"
+            android:textSize="42dp" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_horizontal" >
+
+        <TextView
             android:id="@+id/tvDepName"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:text="@string/columnDepName"
-            android:textAppearance="@android:style/TextAppearance.Large" />
+            android:textAppearance="@android:style/TextAppearance.Large"
+            android:textSize="32dp" />
 
         <TextView
             android:id="@+id/tvDepAddress"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:text="@string/columnDepAddress"
-            android:textAppearance="@android:style/TextAppearance.Large" />
+            android:textAppearance="@android:style/TextAppearance.Large"
+            android:textSize="32dp" />
 
         <TextView
             android:id="@+id/tvDepContacts"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:text="@string/columnDepContacts"
-            android:textAppearance="@android:style/TextAppearance.Large" />
+            android:textAppearance="@android:style/TextAppearance.Large"
+            android:textSize="32dp" />
     </TableRow>
 
     <TableRow
@@ -50,7 +67,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dip"
-                android:text="@string/emptyList" />
+                android:text="@string/emptyList"
+                android:textSize="28dp" />
         </LinearLayout>
     </TableRow>
 

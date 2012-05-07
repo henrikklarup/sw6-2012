@@ -1,20 +1,24 @@
 package dk.aau.cs.giraf.oasis.app;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import android.app.ListFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import dk.aau.cs.giraf.oasis.lib.Helper;
+import dk.aau.cs.giraf.oasis.lib.models.Department;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
-public class MyChildrenFrag extends ListFragment {
+public class MyChildrenFrag extends ExpandableListFragment {
 
 	Helper helper;
 	List<Profile> list;
 	Profile guardian;
+	TextView tvHeader;
+	ChildListAdapter adapter;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -32,15 +36,41 @@ public class MyChildrenFrag extends ListFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
+		tvHeader = (TextView) getView().findViewById(R.id.tvChildHeader);
+		tvHeader.setText("My Children");
+
 		helper = new Helper(getActivity().getApplicationContext());
-		
+
 		if (MainActivity.guardianId != -1) {
-			guardian = helper.profilesHelper.getProfileById(MainActivity.guardianId);
-			list = helper.profilesHelper.getChildrenByGuardian(guardian);
-			setListAdapter(new ChildListAdapter(getActivity().getApplicationContext(), list));
+			updateList();
 		} else {
 			setListAdapter(null);
 		}
+	}
+
+	private void updateList() {
+		adapter = new ChildListAdapter(getActivity().getApplicationContext());
+
+		guardian = helper.profilesHelper.getProfileById(MainActivity.guardianId);
+		list = helper.profilesHelper.getChildrenByGuardian(guardian);
+
+		List<Department> depList = helper.departmentsHelper.getDepartmentsByProfile(guardian);
+
+		for(Department d : depList) {
+			ArrayList<Profile> result = new ArrayList<Profile>();
+			List<Profile> pList = helper.profilesHelper.getChildrenByDepartment(d);		
+
+			for(Profile p : pList) {
+				if (list.contains(p)) {
+					result.add(p);
+				}
+			}
+			if (!result.isEmpty()) {
+				adapter.AddGroup(d.getName(), result);
+			}
+		}
+
+		setListAdapter(adapter);
 	}
 
 }

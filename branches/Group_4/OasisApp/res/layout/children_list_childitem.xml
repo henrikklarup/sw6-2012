@@ -8,6 +8,7 @@
         android:id="@+id/tvItemFirstName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:textSize="22dp"
         android:layout_weight="1"
         android:text="@string/columnFirstName" />
 
@@ -15,6 +16,7 @@
         android:id="@+id/tvItemMiddleName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:textSize="22dp"
         android:layout_weight="1"
         android:text="@string/columnMiddleName" />
 
@@ -22,6 +24,7 @@
         android:id="@+id/tvItemSurName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:textSize="22dp"
         android:layout_weight="1"
         android:text="@string/columnSurName" />
 
