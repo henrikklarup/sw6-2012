@@ -5,7 +5,6 @@ package dk.aau.cs.giraf.parrot;
 import java.util.ArrayList;
 import java.util.List;
 
-import parrot.Package.R;
 import android.R.integer;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
@@ -41,7 +40,7 @@ public class PARROTActivity extends Activity {
 		//PARROTProfile parrotUser = dataLoader.loadProfile();			
 		//TODO replace the temp lines with the above lines
 		//START TEMP LINES
-//		dataLoader.TESTsaveTestProfile();
+		dataLoader.TESTsaveTestProfile();
 		Pictogram tempPic= new Pictogram("Koala","/sdcard/Pictures/005.jpg", null, null);
 		Category tempCat = new Category(0,tempPic);
 		tempCat.addPictogram(tempPic);

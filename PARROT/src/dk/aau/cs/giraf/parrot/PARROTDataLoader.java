@@ -182,8 +182,8 @@ public class PARROTDataLoader {
 		//help.CreateDummyData();
 		Profile tempProf = new Profile("Jens","Jensen",null,Profile.pRoles.CHILD.ordinal(),12345678,null,null);
 		Long profileId = help.profilesHelper.insertProfile(tempProf);
-		app= new App("PARROT", "dk.aau.cs.giraf.parrot", "PARROTActivity");
-		app.setId(1337);
+		app = help.appsHelper.getAppByPackageName();
+
 		help.appsHelper.modifyApp(app);
 		//app = help.appsHelper.getAppById(1337);	//FIXME I need help with the apps, and the settings... I guess
 		
