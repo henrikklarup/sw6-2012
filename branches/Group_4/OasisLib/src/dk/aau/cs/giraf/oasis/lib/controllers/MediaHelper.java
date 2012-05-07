@@ -26,6 +26,7 @@ import dk.aau.cs.giraf.oasis.lib.models.Tag;
 public class MediaHelper {
 
 	private static Context _context;
+	private DepartmentsHelper dh;
 	private HasLinkController hl;
 	private MediaDepartmentAccessController mda;
 	private MediaProfileAccessController mpa;
@@ -44,6 +45,7 @@ public class MediaHelper {
 	 */
 	public MediaHelper(Context context){
 		_context = context;
+		dh = new DepartmentsHelper(_context);
 		hl = new HasLinkController(_context);
 		mda = new MediaDepartmentAccessController(_context);
 		mpa = new MediaProfileAccessController(_context);
@@ -54,12 +56,12 @@ public class MediaHelper {
 	//METHODS TO CALL
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//	/**
-//	 * Clear media table
-//	 */
-//	public void clearMediaTable() {
-//		_context.getContentResolver().delete(MediaMetaData.CONTENT_URI, null, null);
-//	}
+	//	/**
+	//	 * Clear media table
+	//	 */
+	//	public void clearMediaTable() {
+	//		_context.getContentResolver().delete(MediaMetaData.CONTENT_URI, null, null);
+	//	}
 
 	/**
 	 * Remove media attachment to profile
@@ -157,7 +159,7 @@ public class MediaHelper {
 			owner = new Profile();
 			owner.setId(-1);
 		}
-		
+
 		if (media.isMPublic() || media.getOwnerId() == owner.getId()) {
 			MediaProfileAccess mpaModel  = new MediaProfileAccess();
 			mpaModel.setIdMedia(media.getId());
@@ -216,15 +218,76 @@ public class MediaHelper {
 	 */
 	public List<Media> getMedia() {
 		List<Media> media = new ArrayList<Media>();
-		
+
 		Cursor c = _context.getContentResolver().query(MediaMetaData.CONTENT_URI, columns, null, null, null);
 
 		if (c != null) {
 			media = cursorToMedia(c);
 			c.close();
 		}
-		
+
 		return media;
+	}
+
+	/**
+	 * Get all media of a person
+	 * @param p The person
+	 * @return a list consisting of the persons media
+	 */
+	public List<Media> getMyMedia(Profile p) {
+		List<Media> result = new ArrayList<Media>();
+
+		List<Media> tmp;
+		List<Department> depList = dh.getDepartmentsByProfile(p);
+		for (Department dep : depList) {
+			tmp = getMediaByDepartment(dep);
+			for (Media m : tmp) {
+				if (!result.contains(m)) {
+					result.add(m);
+				}
+			}
+		}
+		tmp = getMediaByProfile(p);
+		for (Media m : tmp) {
+			if (!result.contains(m)) {
+				result.add(m);
+			}
+		}
+
+		return result;
+	}
+
+	/**
+	 * Get all media a person owns
+	 * @param p the person that owns the media
+	 * @return a list containing the media
+	 */
+	public List<Media> getMediaIOwn(Profile p) {
+		List<Media> result = new ArrayList<Media>();
+
+		Cursor c = _context.getContentResolver().query(MediaMetaData.CONTENT_URI, columns, MediaMetaData.Table.COLUMN_OWNERID + " = '" + p.getId(), null, null);
+		if (c != null) {
+			result = cursorToMedia(c);
+			c.close();
+		}
+
+		return result;
+	}
+	
+	/**
+	 * Get all public media
+	 * @return a list containing all public media
+	 */
+	public List<Media> getPublicMedia() {
+		List<Media> result = new ArrayList<Media>();
+
+		Cursor c = _context.getContentResolver().query(MediaMetaData.CONTENT_URI, columns, MediaMetaData.Table.COLUMN_PUBLIC + " = '" + 1, null, null);
+		if (c != null) {
+			result = cursorToMedia(c);
+			c.close();
+		}
+
+		return result;
 	}
 
 	/**
@@ -339,10 +402,10 @@ public class MediaHelper {
 			if (c.moveToFirst()) {
 				media = cursorToSingleMedia(c);
 			}
-			
+
 			c.close();
 		}
-		
+
 		return media;
 	}
 
