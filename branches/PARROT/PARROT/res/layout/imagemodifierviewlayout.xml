@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*
+ * Copyright (C) 2011 Mette Bank, Rikke Jensen, Kenneth Brodersen, Thomas Pedersen
+ * 
+ * This file is part of digiPECS.
+ * 
+ * digiPECS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * digiPECS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with digiPECS.  If not, see <http://www.gnu.org/licenses/>.
+ */
+ -->
+ 
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="fill_parent" 
+android:layout_height="fill_parent">
+	<LinearLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent" android:orientation="vertical">
+		<TextView style="@style/Text.Admin.Catagory.Left"
+			android:text="@string/modifyPicturePreviewText">
+		</TextView>
+		<ImageView android:id="@+id/modifypicturepreview"
+			android:layout_height="100dip" android:layout_centerHorizontal="true"
+			android:layout_centerVertical="true" android:layout_width="100dip">
+			>
+		</ImageView>
+
+		<TextView style="@style/Text.Admin.Catagory.Left"
+			android:text="@string/modifyPictureEditTextDescription">
+		</TextView>
+		<EditText android:id="@+id/modifipictureedittext"
+			android:layout_width="120dip" android:layout_height="wrap_content">
+		</EditText>
+		<TextView style="@style/Text.Admin.Catagory.Left"
+			android:text="@string/modifyPictureModifySoundDescription">
+		</TextView>
+		<LinearLayout android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal">
+			<ImageButton android:id="@+id/modifiPictureSoundPlayButton"
+				android:text="Afspil Lyd" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:src="@drawable/play">
+			</ImageButton>
+			<ImageButton
+				android:id="@+id/modifiPictureSoundRecordButton"
+				android:text="Optag Lyd" android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:src="@drawable/record">
+			</ImageButton>
+		</LinearLayout>
+
+		<TextView style="@style/Text.Admin.Catagory.Left"
+			android:id="@+id/saveModifiedImageText"
+			android:text="@string/modifyPictureSaveDescription">
+		</TextView>
+
+		<LinearLayout android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal">
+			<Button android:id="@+id/modifipicturesavebutton"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:layout_column="1"
+				android:text="@string/modifyPictureSaveButtonText">
+			</Button>
+			<Button android:id="@+id/modifipicturedeletebutton"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/modifyPictureDeleteButtonText">
+			</Button>
+		</LinearLayout>
+	</LinearLayout>
+</ScrollView>
