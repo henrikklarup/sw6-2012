@@ -8,5 +8,33 @@
 	<color name="cell_empty">#FF993311</color>
 	<string name="thirdTab">Camera</string>
 	<string name="fourthTab">Internet</string>
+	<string name="TakePictureButton">Tag Billed</string>
+	
+	<!-- Old DigiPecs String Values.  -->
+	
+    <string name="admin_app_name">DigiPECS</string>
+    <string name="star">Star</string>
+    <string name="modifyPicturePreviewText">Preview</string>
+    <string name="modifyPictureEditTextDescription">Vælg Tekst</string>
+    <string name="modifyPictureModifySoundDescription">Afspil eller modifcer tilhørende lyd</string>
+    <string name="modifyPictureSaveDescription">Gem ændringer/Fjern billede</string>
+    <string name="modifyPictureSaveButtonText">Gem Ændringer</string>
+    <string name="modifyPictureDeleteButtonText">Fjern Billede</string>
+    <string name="addPictureSaveButtonText">Gem Billede</string>
+    <string name="addPictureSaveDescription">Gem billede i pecs bogen</string>
+    <string name="addPictureTakePictureButtonText">Tag Billede</string>
+    <string name="situationsListContextMenuAddText">Ny Situation</string>
+    <string name="createSituationTextboxNameText">Situationens Navn</string>
+    <string name="createSituationSaveButtonText">Gem</string>
+    <string name="createSituationCancelButtonText">Annuler</string>
+    <string name="situationsListContextMenuDeleteText">Fjern Situation</string>
+    <string name="situationListOptionMenuDeleteText"/>
+    <string name="selectActiveSituationOkButtonText">ok</string>
+    <string name="electActiveSituationOkButtonText">Fortryd</string>
+    <string name="selectSituationSpinnerPromptText">Vælg situation</string>
+    <string name="defaultSituationNameDB">Hele Arkiv</string>
+    <string name="situationListOptionsMenuEditText">Ret Situationsnavn</string>
+    <string name="addImageFromCameraButtonText">Fra Kamera</string>
+    <string name="addImageFromPhoneButtonText">Fra Telefon</string>
 	
 </resources>
