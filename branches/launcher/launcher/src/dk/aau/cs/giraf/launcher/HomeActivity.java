@@ -305,6 +305,7 @@ public class HomeActivity extends Activity {
 
 				appInfo.load(mContext, mCurrentUser);
 				appInfo.setBgColor(appBgColor(appInfo.getId()));
+				appInfo.setGuardian(mCurrentUser);
 				appInfos.add(appInfo);
 			}
 			mGrid = (GridView)this.findViewById(R.id.GridViewHome);

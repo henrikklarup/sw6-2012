@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
 class AppInfo extends App {
 
@@ -52,7 +53,7 @@ class AppInfo extends App {
 	 * @param guardian The guardian using the system.
 	 */
 	public void setGuardian(Profile guardian) {
-		if (guardian.getPRole() == Data.ROLE_GUARDIAN) {
+		if (guardian.getPRole() == Profile.pRoles.GUARDIAN.ordinal()) {
 			mGuardian = guardian;
 		}
 	}
