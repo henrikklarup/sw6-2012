@@ -4,5 +4,7 @@
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="lib" path="C:/Users/Mudde/Desktop/SW6/branches/Group_4/OasisLib_dev.jar"/>
+	<classpathentry kind="src" path="/DrawLib"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

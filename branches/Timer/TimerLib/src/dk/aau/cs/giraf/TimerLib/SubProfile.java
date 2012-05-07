@@ -16,7 +16,7 @@ public class SubProfile implements Comparable<SubProfile>{
 	public boolean gradient = false;
 	public boolean save = true;
 	public boolean saveAs = true;
-	protected SubProfile _attachment = null;
+	protected Attachment _attachment = null;
 	boolean _AttaBool = false;
 	private long DB_id = -1;
 
@@ -85,21 +85,12 @@ public class SubProfile implements Comparable<SubProfile>{
 		map.put("save", String.valueOf(this.save));		
 		map.put("saveAs", String.valueOf(this.saveAs));
 		
-		//Attachment
+		// TODO: Attachment this needs some testing and remember to add it to the crud!!!!
 		if(this._AttaBool){
-			map.put("Atype", this._attachment.formType().toString());		
-			map.put("Abgcolor", String.valueOf(this._attachment.bgcolor));		
-			map.put("AtimeLeftColor", String.valueOf(this._attachment.timeLeftColor));		
-			map.put("AtimeSpentColor", String.valueOf(this._attachment.timeSpentColor));		
-			map.put("AframeColor", String.valueOf(this._attachment.frameColor));
-			map.put("Agradient", String.valueOf(this._attachment.gradient));	
+			map = this._attachment.getHashMap(map);				
 		}	else {
-			map.put("Atype", "-1");		
-			map.put("Abgcolor", String.valueOf(-1));		
-			map.put("AtimeLeftColor", String.valueOf(-1));		
-			map.put("AtimeSpentColor", String.valueOf(-1));		
-			map.put("AframeColor", String.valueOf(-1));
-			map.put("Agradient", String.valueOf(-1));	
+			Attachment tempAttachment = new Attachment();
+			map = tempAttachment.getHashMap(map);
 		}
 		
 		return map;
@@ -118,7 +109,7 @@ public class SubProfile implements Comparable<SubProfile>{
 		this._totalTime = _totalTime;
 		// Syncronizes the time of the profile and its attachment
 		if(this._attachment != null){
-			this._attachment._totalTime = _totalTime;
+			this._attachment.changeTime(_totalTime);
 		}
 	}
 	
@@ -153,16 +144,16 @@ public class SubProfile implements Comparable<SubProfile>{
 		this._id = l;
 	}
 	
-	public SubProfile getAttachment(){
+	public Attachment getAttachment(){
 		return _attachment;
 	}
 	
 	
-	public void setAttachment(SubProfile p){
+	public void setAttachment(Attachment p){
 		if(p != null){
 			this._AttaBool = true;
 			this._attachment = p;
-			this._attachment._totalTime = this._totalTime;
+			this._attachment.changeTime(this._totalTime);
 		} else {
 			this._attachment = null;
 			this._AttaBool = false;

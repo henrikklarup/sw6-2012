@@ -274,15 +274,32 @@ public class CRUD {
 		p._AttaBool = (Boolean.valueOf((String) hm.get("Attachment")));
 		
 		if(p._AttaBool){
-			SubProfile attachP = new SubProfile();
-			formFactor aFactor = formFactor.convert(hm.get("Atype"));
+			Attachment attachP = new Attachment();
+			formFactor aFactor = formFactor.convert(hm.get("AttachmentForm"));
+			formFactor tFactor = formFactor.convert(hm.get("timerForm"));
 			
-			attachP.bgcolor = Integer.valueOf((String)hm.get("Abgcolor"));
-			attachP.timeLeftColor = Integer.valueOf((String)hm.get("AtimeLeftColor"));
-			attachP.timeSpentColor = Integer.valueOf((String)hm.get("AtimeSpentColor"));
-			attachP.frameColor = Integer.valueOf((String)hm.get("AframeColor"));
-			attachP.set_totalTime(0);
-			attachP.gradient = Boolean.valueOf((String)hm.get("Agradient"));
+			//Add method to Attachment.java that will return the correct processed object based on the HashMap :D
+			attachP.
+			
+			/*
+			//Attachment form
+			map.put("AttachmentForm", String.valueOf(this.getForm()));
+		
+			//Timer
+			map.put("timerForm", String.valueOf(this.getForm()));
+			map.put("_bgColor", String.valueOf(-1));
+			map.put("_frameColor", String.valueOf(-1));
+			map.put("_timeLeftColor", String.valueOf(-1));
+			map.put("_timeSpentColor", String.valueOf(-1));
+			map.put("_gradient", String.valueOf(false));
+			
+			//SingleImg
+			map.put("singleImgId", String.valueOf(-1));
+			
+			//SplitImg
+			map.put("leftImgId", String.valueOf(-1));
+			map.put("rightImgId", String.valueOf(-1));
+			 */
 			
 			attachP = convertType(attachP, aFactor);
 			
