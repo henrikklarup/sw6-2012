@@ -26,6 +26,8 @@ public class PARROTDataLoader {
 	public PARROTDataLoader(Activity activity)
 	{
 		this.parrent = activity;
+		help = new Helper(parrent);
+		app = help.appsHelper.getAppByPackageName();
 	}
 	
 
@@ -36,11 +38,12 @@ public class PARROTDataLoader {
 //		Bundle extras = parrent.getIntent().getExtras();
 		Profile prof;
 
-		help = new Helper(parrent);
+		
 		if(childId !=null && appId !=null)
 		{
 			prof = help.profilesHelper.getProfileById(childId);	//It used to be "currentProfileId"
-			app = help.appsHelper.getAppByIds(appId, childId);
+			//app = help.appsHelper.getAppByIds(appId, childId);
+			
 			Pictogram pic = new Pictogram(prof.getFirstname(), prof.getPicture(), null, null);	//TODO discuss whether this image might be changed
 			PARROTProfile parrotUser = new PARROTProfile(prof.getFirstname(), pic);
 			parrotUser.setProfileID(prof.getId());
@@ -53,19 +56,29 @@ public class PARROTDataLoader {
 			{
 				//Here we read the pictograms of the categories
 				//The settings reader uses this format : category +number | cat_property | value
-				categoryString = specialSettings.get("category"+number).get("pictograms");	
-				if(categoryString !=null)		//If the category of that number exists
+				try
 				{
+					categoryString = specialSettings.get("category"+number).get("pictograms");	//FIXME if this value is null, we will crash
+				}
+				catch (NullPointerException e)
+				{
+					//the value does not exist, so we will not load anymore categories
+					break;
+				}
+				
+				
+//				if(categoryString !=null)		//If the category of that number exists
+//				{
 					String colourString = specialSettings.get("category"+number).get("colour");
 					int col=Integer.valueOf(colourString);
 					String iconString = specialSettings.get("category"+number).get("icon");
 					parrotUser.addCategory(loadCategory(categoryString,col,iconString));
 					number++;
-				}
-				else
-				{
-					break;
-				}
+//				}
+//				else
+//				{
+//					break;
+//				}
 
 			}
 
@@ -182,10 +195,7 @@ public class PARROTDataLoader {
 		//help.CreateDummyData();
 		Profile tempProf = new Profile("Jens","Jensen",null,Profile.pRoles.CHILD.ordinal(),12345678,null,null);
 		Long profileId = help.profilesHelper.insertProfile(tempProf);
-		app = help.appsHelper.getAppByPackageName();
 
-		help.appsHelper.modifyApp(app);
-		//app = help.appsHelper.getAppById(1337);	//FIXME I need help with the apps, and the settings... I guess
 		
 		Setting<String, String, String> profileSetting = new Setting<String, String, String>();
 		
