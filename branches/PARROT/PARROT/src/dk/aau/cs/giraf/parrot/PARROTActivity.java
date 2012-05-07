@@ -27,48 +27,14 @@ public class PARROTActivity extends Activity {
 		super.onCreate(savedInstanceState);		
 		setContentView(R.layout.main);
 
-		/*//Made by kim
-		GridView gridview = (GridView) findViewById(R.id.pictogramgrid);
-		gridview.setAdapter(new PictogramAdapter(getUser().getCategoryAt(0), this));
-
-		findViewById(R.id.pictogramgrid).setOnDragListener(new BoxDragListener());
-		 */
 
 
 
 		PARROTDataLoader dataLoader = new PARROTDataLoader(this);
-		//PARROTProfile parrotUser = dataLoader.loadProfile();			
-		//TODO replace the temp lines with the above lines
+		//parrotUser = dataLoader.loadPARROT();			
+		//TODO replace the temp lines with the above line
 		//START TEMP LINES
 		dataLoader.TESTsaveTestProfile();
-//		dataLoader.loadProfile(childId, appId);	//TODO insert me somewhere around here
-//		Pictogram tempPic= new Pictogram("Koala","/sdcard/Pictures/005.jpg", null, null);
-//		Category tempCat = new Category(0,tempPic);
-//		tempCat.addPictogram(tempPic);
-//		tempCat.addPictogram(tempPic);
-//		Pictogram tempPic2 = new Pictogram("Meg", "/sdcard/Pictures/meg.png", null, null);
-//		tempCat.addPictogram(tempPic2);
-//		
-//		PARROTProfile testProfile = new PARROTProfile("Niels", tempPic);
-//		
-//		for (int i=0;i<6;i++)
-//		{
-//			tempCat.addPictogram(tempPic);
-//			tempCat.addPictogram(tempPic2);
-//		}
-//
-//		Category tempCat2 = new Category(2, tempPic2);
-//		tempPic = new Pictogram("Bob", "/sdcard/Pictures/007.jpg", null, null);
-//		tempPic2= new Pictogram("Madeline", "/sdcard/Pictures/003.jpg", null, null);
-//
-//		for (int i=0;i<6;i++)
-//		{
-//			tempCat2.addPictogram(tempPic);
-//			tempCat2.addPictogram(tempPic2);
-//		}
-//		testProfile.addCategory(tempCat);
-//		testProfile.addCategory(tempCat2);
-//		PARROTActivity.setUser(testProfile);
 		parrotUser.setRights(0, true);
 		parrotUser.setRights(1, true);
 		parrotUser.setRights(2, true);
