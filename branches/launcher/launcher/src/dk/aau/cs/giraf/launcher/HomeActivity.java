@@ -162,8 +162,7 @@ public class HomeActivity extends Activity {
 	 */
 	private int calculateNumOfColumns() {
 		if (mNumberOfApps > Data.APPS_PER_PAGE) {
-			// We use 3 here becasue there should be three rows if there are more than 9 elements
-			return (int) Math.ceil((double)((double)mNumberOfApps) / ((double)Data.APPS_PER_PAGE));
+			return (int) Math.ceil((double)((double)mNumberOfApps) / ((double)Data.MAX_ROWS_PER_PAGE));
 		} else {
 			return Data.MAX_COLUMNS_PER_PAGE;
 		}

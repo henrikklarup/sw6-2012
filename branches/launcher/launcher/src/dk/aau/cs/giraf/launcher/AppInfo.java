@@ -93,12 +93,10 @@ class AppInfo extends App {
 	 * @return shortened name for the app
 	 */
 	public String getShortenedName() {
-		String title = super.getName();
-
-		if(title.length() > 6){
-			return title.subSequence(0, 5) + "...";
+		if(name.length() > 6){
+			return name.subSequence(0, 5) + "...";
 		} else {
-			return title;
+			return name;
 		}
 	}
 

@@ -72,6 +72,7 @@ public class AppAdapter extends ArrayAdapter<AppInfo> {
 		ShapeDrawable shapeDrawable = new ShapeDrawable(roundRect);
 		
 		shapeDrawable.getPaint().setColor(backgroundColor);
+		
 		convertViewLayout.setBackgroundDrawable(shapeDrawable);
 	}
 	

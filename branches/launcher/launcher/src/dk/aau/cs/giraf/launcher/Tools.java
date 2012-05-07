@@ -466,9 +466,8 @@ public class Tools {
 	}
 	
 	/**
-	 * Finds all apps installed on the device.
+	 * Attach the launcher to the current user.
 	 * @param context Context of the current activity.
-	 * @return List of apps.
 	 */
 	public static void attachLauncher(Context context) {
 		Helper helper = new Helper(context);
