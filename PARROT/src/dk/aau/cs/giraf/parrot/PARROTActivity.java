@@ -41,10 +41,37 @@ public class PARROTActivity extends Activity {
 		//PARROTProfile parrotUser = dataLoader.loadProfile();			
 		//TODO replace the temp lines with the above lines
 		//START TEMP LINES
-		dataLoader.TESTsaveTestProfile();
-//		parrotUser.setRights(0, true);
-//		parrotUser.setRights(1, true);
-//		parrotUser.setRights(2, true);
+//		dataLoader.TESTsaveTestProfile();
+		Pictogram tempPic= new Pictogram("Koala","/sdcard/Pictures/005.jpg", null, null);
+		Category tempCat = new Category(0,tempPic);
+		tempCat.addPictogram(tempPic);
+		tempCat.addPictogram(tempPic);
+		Pictogram tempPic2 = new Pictogram("Meg", "/sdcard/Pictures/meg.png", null, null);
+		tempCat.addPictogram(tempPic2);
+		
+		PARROTProfile testProfile = new PARROTProfile("Niels", tempPic);
+		
+		for (int i=0;i<6;i++)
+		{
+			tempCat.addPictogram(tempPic);
+			tempCat.addPictogram(tempPic2);
+		}
+
+		Category tempCat2 = new Category(2, tempPic2);
+		tempPic = new Pictogram("Bob", "/sdcard/Pictures/007.jpg", null, null);
+		tempPic2= new Pictogram("Madeline", "/sdcard/Pictures/003.jpg", null, null);
+
+		for (int i=0;i<6;i++)
+		{
+			tempCat2.addPictogram(tempPic);
+			tempCat2.addPictogram(tempPic2);
+		}
+		testProfile.addCategory(tempCat);
+		testProfile.addCategory(tempCat2);
+		PARROTActivity.setUser(testProfile);
+		parrotUser.setRights(0, true);
+		parrotUser.setRights(1, true);
+		parrotUser.setRights(2, true);
 		//END TEMP LINES
 
 		/* Here all the Tabs in the system is initialized based on whether or not a user
