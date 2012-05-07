@@ -20,3 +20,7 @@ Notary: SW603
     * When are we at the next major milestone?
 
   * Testing (Kim)
+
+  * Usability test
+    * Combined product or single products?
+
