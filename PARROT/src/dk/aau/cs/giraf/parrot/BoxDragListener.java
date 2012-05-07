@@ -163,6 +163,16 @@ public class BoxDragListener implements OnDragListener
 					speech.invalidate();
 
 				}
+				if( self.getId() == R.id.supercategory && SpeechBoardFragment.dragOwnerID == R.id.pictogramgrid)	//We are about to copy a pictogram from one category to another
+				{
+					GridView gridCat = (GridView) parrent.findViewById(R.id.supercategory);
+					int x = (int)event.getX();
+					int y = (int)event.getY();
+					int index = gridCat.pointToPosition(x, y);
+					
+					Category categoryDroppedIn = profile.getCategoryAt(index);
+					categoryDroppedIn.addPictogram(draggedPictogram);
+				}
 
 
 			}
