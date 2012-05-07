@@ -73,7 +73,7 @@ public class IOHandler implements Runnable {
 				this.connections.put(con, new DataOutputStream(con.getOutputStream()));
 				//				this.connections.add(new ConnectionIO(con, new DataOutputStream(con.getOutputStream())));
 				//Starts a new Thread used for communication
-				Thread comThread = new CommunicationThread(con, this.folder, this.bufferSize);
+				Thread comThread = new CommunicationThread(con, this.folder);
 				comThread.start();
 				
 			}	catch (IOException e) {
@@ -157,23 +157,18 @@ public class IOHandler implements Runnable {
 		return result;
 	}
 	
-	private long sendPackage(OutputStream writer, int pingSize) {
+	private void sendPackage(OutputStream writer, int pingSize) {
 		StringBuilder sb = new StringBuilder();
 		this.makeCRUD(CRUD.PING, sb);
 		this.makePing(sb, pingSize);
-		long init = -1;
-		long end = -1;
 		
 		try {
-			init = System.currentTimeMillis();
 			writer.write(this.stringBuilderToBytes(sb));
-			end = System.currentTimeMillis();
 			writer.flush();
 		}	catch (IOException e) {
 			System.err.println("sendPackage: Could not write CRUD and PING !");
 		}
 		
-		return (end - init);
 	}
 	private void sendPackage(OutputStream writer, CRUD cr, String data) {
 		StringBuilder sb = new StringBuilder();
@@ -280,7 +275,7 @@ public class IOHandler implements Runnable {
 				randomBytes = 12;
 			}
 
-			builder.append("PING[" + this.pingLength(pingSize) + "]=\"");
+			builder.append("PING[" + this.pingLength(randomBytes) + "]=\"");
 			Random rand = new Random();
 			byte[] buf = new byte[randomBytes];
 			rand.nextBytes(buf);
@@ -407,16 +402,11 @@ public class IOHandler implements Runnable {
 			System.err.println("requestResponds: Could not establish an OutputStream !");
 		}
 	}
-	private void pingResponds(Socket socket, String data) {
-		DataOutputStream temp = this.getDataOutputStream(socket);
-		StringBuilder sb = new StringBuilder();
-		this.makeCRUD(CRUD.PING, sb);
-		this.makeXML(data, false, sb);
+	private void pingResponds(Socket socket, int pingSize) {
 		try {
-			temp.write(this.messageToBytes(sb.toString()));
-			temp.flush();
+			this.sendPackage(new DataOutputStream(socket.getOutputStream()), pingSize);
 		}	catch (IOException e) {
-			System.err.println("Could not pingResponds - write !");
+			System.err.println("pingResponds: Could not establish an OutputStream !");
 		}
 	}
 	private void errorResponds(Socket socket, String data) {
@@ -426,6 +416,10 @@ public class IOHandler implements Runnable {
 			System.err.println("errorResponds: Could not establish an OutputStream !");
 		}
 	}
+	public void respond(Socket socket, int pingSize) {
+		/* CRUD.PING */
+		this.pingResponds(socket, pingSize);
+	}
 	public void respond(Socket socket, CRUD cr, String data) {
 		switch(cr.getValue()) {
 		case 1:		/*  CRUD.COMMIT */
@@ -433,9 +427,6 @@ public class IOHandler implements Runnable {
 			break;
 		case 2:		/* CRUD.REQUEST */
 			this.requestResponds(socket, data);
-			break;
-		case 3:		/* CRUD.PING */
-			this.pingResponds(socket, data);
 			break;
 		default:	/* CRUD.ERROR */
 			this.errorResponds(socket, data);
@@ -450,9 +441,6 @@ public class IOHandler implements Runnable {
 		case 2:		/* CRUD.REQUEST */
 			this.requestResponds(socket, data, f);
 			break;
-		case 3:		/* CRUD.PING */
-			this.pingResponds(socket, data);
-			break;
 		default:	/* CRUD.ERROR */
 			this.errorResponds(socket, data);
 			throw new IllegalArgumentException("CRUD.ERROR cannot be resolved to an action !");
@@ -466,15 +454,13 @@ public class IOHandler implements Runnable {
 		case 2:		/* CRUD.REQUEST */
 			this.requestResponds(socket, data, files);
 			break;
-		case 3:		/* CRUD.PING */
-			this.pingResponds(socket, data);
-			break;
 		default:	/* CRUD.ERROR */
 			this.errorResponds(socket, data);
 			throw new IllegalArgumentException("CRUD.ERROR cannot be resolved to an action !");
 		}
 	}
-	
+
+	/*
 	public synchronized void logIt(Socket socket, String performedAction) {
 		LogFile lf = new LogFile(Configuration.LOGFILEPATH);
 		lf.logIt(socket, performedAction);
@@ -487,7 +473,7 @@ public class IOHandler implements Runnable {
 		LogFile lf = new LogFile(Configuration.LOGFILEPATH);
 		lf.logIt(completed);
 	}
-
+	*/
 	public void respond(Socket socket, String message) {
 		synchronized (this.connections) {
 			DataOutputStream temp = this.getDataOutputStream(socket);
