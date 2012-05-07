@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Department;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
@@ -16,6 +17,7 @@ public class MyDepartmentsFrag extends ListFragment {
 	Helper helper;
 	List<Department> list;
 	Profile guardian;
+	TextView tvHeader;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,9 @@ public class MyDepartmentsFrag extends ListFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
+		tvHeader = (TextView) getView().findViewById(R.id.tvDepHeader);
+		tvHeader.setText("My Departments");
+		
 		helper = new Helper(getActivity().getApplicationContext());
 		
 		if (MainActivity.guardianId != -1) {
