@@ -1,20 +1,20 @@
 package savannah.server;
 
 import java.io.File;
+import savannah.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 
 import savannah.io.CRUD;
+import savannah.io.LogFile;
 
 public class RequestHandler {
-	
 	private QueryHandler qHandler;
 	private ArrayList<ResultSet> rset;
 	private XMLBuilder xBuilder;
 	private String xml;
 	public RequestHandler()
 	{
-		
 		try {
 			qbuilder = new QueryBuilder();
 			qHandler = new QueryHandler();
@@ -38,7 +38,7 @@ public class RequestHandler {
 	public void HandleIt(RequestEvent e)
 	{
 		try{
-			
+
 		String s = e.getEventContent();
 		ArrayList<String> que = qbuilder.buildQueries(s);
 		rset = RunQueries(que);
@@ -49,6 +49,8 @@ public class RequestHandler {
 		//line 2 for no files, line 1 for plenty files
 //		savannah.io.IOHandler.getInstance().respond(e.getEventsocket(),CRUD.REQUEST,xml,afiles);
 		savannah.io.IOHandler.getInstance().respond(e.getEventsocket(),CRUD.REQUEST,xml);
+		LogFile log = new LogFile(Configuration.LOGFILEPATH);
+		log.makeLogEntry(e.getEventsocket(), CRUD.REQUEST.toString(), true);
 		}
 		catch (SQLException exc)
 		{

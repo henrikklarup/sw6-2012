@@ -91,10 +91,11 @@ public class CommunicationThread extends Thread {
 			System.out.println("CommunicationThread: Could not initiate inputStream for the connection");
 		} 	catch (JDOMException e) {
 			System.err.println("CommunicationThread: Could not DOMinate");
-		}	finally {
-			//TODO Didn't we move this implementation ???
-			IOHandler.getInstance().removeConnection(this.socket);
 		}
+//			finally {
+//			//TODO Didn't we move this implementation ???
+//			IOHandler.getInstance().removeConnection(this.socket);
+//		}
 	}
 
 }

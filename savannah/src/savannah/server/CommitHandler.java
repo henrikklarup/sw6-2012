@@ -6,7 +6,10 @@ import java.util.ArrayList;
 import org.jdom.Document;
 import org.jdom.JDOMException;
 
+import savannah.io.CRUD;
+import savannah.io.Configuration;
 import savannah.io.IOHandler;
+import savannah.io.LogFile;
 
 public class CommitHandler {
 	private ArrayList<String> queries;
@@ -23,6 +26,7 @@ public class CommitHandler {
 	public void HandleIt(CommitEvent e)
 	{
 	try{
+			LogFile log = new LogFile(Configuration.LOGFILEPATH);
 			Document xml = e.getEventContent();
 		
 			queries = qbuilder.buildQueries(xml);
@@ -40,6 +44,7 @@ public class CommitHandler {
 			}
 			if(e.getEventsocket() != null)
 			{
+				log.makeLogEntry(e.getEventsocket(), CRUD.COMMIT.toString(), true);
 				IOHandler.getInstance().respond(e.getEventsocket(), queries.size() + " received, of which "+failed);
 			}
 			failed = 0;
