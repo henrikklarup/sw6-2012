@@ -247,11 +247,11 @@ public class PARROTDataLoader {
 		pictogramString = pictogramString.replace("#$", "$");	//Here we make sure that the end is $, and not #$
 		profileSetting.addValue("category"+categoryNumber, "pictograms", pictogramString);
 		//then we save the colour
-		profileSetting.addValue("category"+categoryNumber, "colour", String.valueOf(category.getCategoryColour()));
+		profileSetting.get("category"+categoryNumber).put("colour", String.valueOf(category.getCategoryColour()));
 		//and then we save the icon
 		Pictogram icon = category.getIcon();
 		savePictogram(icon);
-		profileSetting.addValue("category"+categoryNumber, "icon", String.valueOf(icon.getImageID()));
+		profileSetting.get("category"+categoryNumber).put("icon", String.valueOf(icon.getImageID()));
 
 		return profileSetting;
 	}
