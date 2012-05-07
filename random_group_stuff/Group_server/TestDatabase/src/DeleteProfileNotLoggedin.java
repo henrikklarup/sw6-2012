@@ -1,5 +1,6 @@
 
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -174,15 +175,37 @@ public class DeleteProfileNotLoggedin extends HttpServlet {
 		HttpSession session = request.getSession();
 		PrintWriter out = response.getWriter();
 		String userID = (String) session.getAttribute("PROFILEIDTODELETE");
+		ArrayList<Media> medialist = new ArrayList<Media>();
 		//out.println(userID);
 		
 		//creating a connection
 		Connection con;
+		Statement stmt = null;
+		ResultSet rs = null;
 		try{
 			Class.forName("org.gjt.mm.mysql.Driver");
 			//connects to our server with user: eder and password: 123456
 			con = DriverManager.getConnection("jdbc:mysql://172.25.11.65:3306/04","eder","123456");
-			//This line executes the query to delete from Authusers table where idUser matches the userID that we get from the selected profile
+			
+			
+			stmt = con.createStatement();
+			rs = stmt.executeQuery("select mPath from Media where ownerID = " + userID + ";");
+			
+			
+			while(rs.next()){
+				String mPath = rs.getString("mPath");
+				Media m = new Media(mPath);
+				medialist.add(m);
+			}
+			
+			for(Media m : medialist){
+				File deletePicture = new File(m.getMPath());
+				if(deletePicture.exists()){
+					deletePicture.delete();
+				}
+			}
+			
+			//This line executes the query to delete from Authusers table where idUser matches the userID that we get from the selected profile	
 			PreparedStatement ps = (PreparedStatement) con.prepareStatement("delete from AuthUsers where idUser = " + userID +";");
 			int i = ps.executeUpdate();
 			//this if-statement is not working properly 
@@ -191,9 +214,9 @@ public class DeleteProfileNotLoggedin extends HttpServlet {
 				
 			}
 			else{
-				//out.println(userID + " has been deleted");
-				//response.sendRedirect("SelectProfileToDelete");
-				out.println(i);
+				out.println(userID + " has been deleted");
+				response.sendRedirect("SelectProfileToDelete");
+				//out.println(i);
 			}
 		}
 		catch(Exception e){
