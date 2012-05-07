@@ -7,9 +7,9 @@ public class ServerMain {
 	
 	public static void main(String[] args) {
 		Thread t1 = new Thread(IOHandler.getInstance());
-//		Thread t2 = new Thread(new EventHandler());
+		Thread t2 = new Thread(new EventHandler());
 		t1.start();
-//		t2.start();
+		t2.start();
 	}
 
 }

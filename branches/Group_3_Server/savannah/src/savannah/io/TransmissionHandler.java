@@ -185,7 +185,7 @@ public class TransmissionHandler {
 
 		Pattern expr = Pattern.compile("\\[[0-9]\\]");
 		Matcher match = expr.matcher(data);
-		if (match.find() != true) {
+		if (match.find() == false) {
 			throw new IllegalStateException("Could not find CRUD !");
 		}
 		//		String result = data.substring(match.start() + 1, match.end() - 1);
@@ -230,7 +230,7 @@ public class TransmissionHandler {
 				bufCalc = 0;
 			}
 		}
-		//maybe dump ónè char.... for the "
+		//maybe dump ï¿½nï¿½ char.... for the "
 		int dump = is.read();
 
 		this.iHaveFile = wrap.areThereFiles();
@@ -276,7 +276,7 @@ public class TransmissionHandler {
 				bufCalc = 0;
 			}
 		}
-		//maybe dump ónè char.... for the "
+		//maybe dump ï¿½nï¿½ char.... for the "
 		int dump = is.read();
 
 		this.working = wrap.getMoreFiles();
