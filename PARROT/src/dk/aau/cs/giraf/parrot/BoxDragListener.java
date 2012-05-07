@@ -165,6 +165,7 @@ public class BoxDragListener implements OnDragListener
 				}
 				if( self.getId() == R.id.supercategory && SpeechBoardFragment.dragOwnerID == R.id.pictogramgrid)	//We are about to copy a pictogram from one category to another
 				{
+					//TODO Create a OPTIONS boolean to insures that this can be turned on or off.
 					GridView gridCat = (GridView) parrent.findViewById(R.id.supercategory);
 					int x = (int)event.getX();
 					int y = (int)event.getY();
