@@ -25,39 +25,47 @@ public class TestingTransmissionHandler {
 		
 		
 		
+//		try {
+//			Connection con = new Connection(TestingTransmissionHandler.CLIENTFOLDER);
+//		
+////			TransmissionHandler th = con.sendRequest("Anal !");
+////			System.out.println("Any file: " + th.getAnyFiles());
+////			for (File f: th.getFILES()) {
+////				System.out.println(f.getName());
+////				System.out.println(f.getAbsolutePath());
+////			}
+//			System.out.println(con.sendCommit("My test String", new File("C:\\tempClient\\sadPanda.jpg"), new File("C:\\tempClient\\bendover-sml.jpg")));
+//			
+//			//The long "empty" part of the received transmission is because of the bufferSize in the Connection.java
+//			//Maybe it should receive a TransmissionHandler instead ?
+//			
+//			//Debugging path:
+//			//D:\MyDocuments\SW6\SW62012\branches\Group_3_Server\savannah\bin>
+//			
+//			//Run option:
+//			//java -classpath . savannah.serverMain.ServerMain
+//			//java -classpath . savannah.test.TestingTransmissionHandler
+//			
+////			System.out.println(con.sendCommit("Anal"));
+//		}	catch (IOException e) {
+//			System.err.println("con: " + e);
+//		}
+		long result = -1;
+		System.out.println("result = " + result);
 		try {
 			Connection con = new Connection(TestingTransmissionHandler.CLIENTFOLDER);
-		
-//			TransmissionHandler th = con.sendRequest("Anal !");
-//			System.out.println("Any file: " + th.getAnyFiles());
-//			for (File f: th.getFILES()) {
-//				System.out.println(f.getName());
-//				System.out.println(f.getAbsolutePath());
-//			}
-			System.out.println(con.sendCommit("My test String", new File("C:\\tempClient\\sadPanda.jpg"), new File("C:\\tempClient\\bendover-sml.jpg")));
-			
-			//The long "empty" part of the received transmission is because of the bufferSize in the Connection.java
-			//Maybe it should receive a TransmissionHandler instead ?
-			
-			//Debugging path:
-			//D:\MyDocuments\SW6\SW62012\branches\Group_3_Server\savannah\bin>
-			
-			//Run option:
-			//java -classpath . savannah.serverMain.ServerMain
-			//java -classpath . savannah.test.TestingTransmissionHandler
-			
-//			System.out.println(con.sendCommit("Anal"));
+			result = con.sendPing(0);
 		}	catch (IOException e) {
-			System.err.println("con: " + e);
+			System.err.println("Could not ping !");
 		}
-		
+		System.out.println("result = " + result);
 		
 		
 		
 
 		//"FILE\\[[0-9]*,[0-9]*\\]"
-//		Pattern pat = Pattern.compile(",[0-1]\\]");
-//		String input = "FILE[000012345,   hehh.jpg,1]=\"";
+//		Pattern pat = Pattern.compile("\\[[0-9]*\\]");
+//		String input = "PING[4096]=\"";
 //		Matcher man = pat.matcher(input);
 //		
 //		if (man.find() == true) {

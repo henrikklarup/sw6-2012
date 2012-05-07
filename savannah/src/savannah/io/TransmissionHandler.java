@@ -28,6 +28,7 @@ public class TransmissionHandler {
 	private String xml 			= "";
 	private boolean iHaveFile	= false;
 	private boolean accepted	= false;
+	private int pingLength		= -1; 
 
 	public TransmissionHandler(Socket socket, String folder) throws FileNotFoundException, IOException, IllegalStateException {
 		this.bufferSize = 4096;
@@ -59,27 +60,32 @@ public class TransmissionHandler {
 	private final void deconstruct(InputStream is) throws FileNotFoundException, IOException {
 		is = new DataInputStream(is);
 		this.cr = this.CR(is);
-		this.xml = this.XML(is);
+		if (cr == CRUD.PING) {
+			this.pingLength = this.PING(is);
+		}
+		else {
+			this.xml = this.XML(is);
 
-		if (iHaveFile == true) {
-			while (this.working == true) {
-				this.FILE(is);
+			if (iHaveFile == true) {
+				while (this.working == true) {
+					this.FILE(is);
+				}
+			}	else {
+				this.accepted = this.ACCEPT(is);
 			}
-		}	else {
-			this.accepted = this.ACCEPT(is);
 		}
 	}
 
 	private final XMLWrapper findXMLlength(byte[] buf) {
 		String data = this.bytesToString(buf);
-		
+
 		Pattern expr = Pattern.compile("MXML\\[");
 		Matcher match = expr.matcher(data);
 		if (match.find() != true) {
 			throw new IllegalStateException("Could not find MXML length !");
 		}
 		String length = data.substring(match.end() + 1, match.end() + 10);
-		
+
 		expr = Pattern.compile(",[0-1]\\]");
 		match = expr.matcher(data);
 		if (match.find() != true) {
@@ -92,7 +98,7 @@ public class TransmissionHandler {
 	}
 	private final FileWrapper findFilelength(byte[] buf) {
 		String data = this.bytesToString(buf);
-		
+
 		Pattern expr = Pattern.compile("FILE\\[");
 		Matcher match = expr.matcher(data);
 		if (match.find() != true) {
@@ -100,7 +106,7 @@ public class TransmissionHandler {
 		}
 		String length = data.substring(match.end() + 1, match.end() + 19);
 		String name = this.getfileName(data.substring(match.end() + 21, match.end() + 276));
-		
+
 		expr = Pattern.compile(",[0-1]\\]");
 		match = expr.matcher(data);
 		if (match.find() != true) {
@@ -132,6 +138,37 @@ public class TransmissionHandler {
 		return sb.toString();
 	}
 
+	private int PING(InputStream is) throws IOException {
+		/*
+			-------------------------
+					PING
+			-------------------------
+			crudLength	= 4
+			tag-stuff	= 8
+			total		= 12
+		 */
+		is = new DataInputStream(is);
+		byte[] buf = new byte[12];
+		int len = is.read(buf);
+		String data = this.bytesToString(buf);
+		
+		Pattern expr = Pattern.compile("\\[[0-9]*\\]");
+		Matcher match = expr.matcher(data);
+		if (match.find() != true) {
+			throw new IllegalStateException("Could not find PING !");
+		}
+		int length = Integer.parseInt(data.substring(match.start() + 1, match.end() - 1));
+		
+		//Reading the random PING data
+		buf = null;
+		buf = new byte[length];
+		len = is.read(buf);
+		
+		//Dumping the last char
+		len = is.read();
+		
+		return length; 
+	}
 	private final CRUD CR(InputStream is) throws IOException {
 		/*
 			-------------------------
@@ -145,13 +182,13 @@ public class TransmissionHandler {
 		byte[] buf = new byte[7];
 		int len = is.read(buf);
 		String data = this.bytesToString(buf);
-		
+
 		Pattern expr = Pattern.compile("\\[[0-9]\\]");
 		Matcher match = expr.matcher(data);
 		if (match.find() != true) {
 			throw new IllegalStateException("Could not find CRUD !");
 		}
-//		String result = data.substring(match.start() + 1, match.end() - 1);
+		//		String result = data.substring(match.start() + 1, match.end() - 1);
 
 		switch(Integer.parseInt(data.substring(match.start() + 1, match.end() - 1))) {
 		case 1:
@@ -177,7 +214,7 @@ public class TransmissionHandler {
 		int len = is.read(buf);
 		XMLWrapper wrap = this.findXMLlength(buf);
 		StringBuilder sb = new StringBuilder();
-		
+
 		int bufCalc = wrap.getLength();
 		while (bufCalc > 0) {
 			if (bufCalc > this.bufferSize) {
@@ -195,7 +232,7 @@ public class TransmissionHandler {
 		}
 		//maybe dump ónè char.... for the "
 		int dump = is.read();
-		
+
 		this.iHaveFile = wrap.areThereFiles();
 		return sb.toString();
 	}
@@ -213,7 +250,7 @@ public class TransmissionHandler {
 		byte[] buf = new byte[286];
 		int len = is.read(buf);
 		FileWrapper wrap = this.findFilelength(buf);
-		
+
 		File dst = new File(this.folder.getAbsolutePath() + File.separator + wrap.getName());
 		if (dst.exists() == false) {
 			boolean success = dst.createNewFile();
@@ -222,7 +259,7 @@ public class TransmissionHandler {
 			}
 		}
 		OutputStream os = new FileOutputStream(this.folder.getAbsolutePath() + File.separator + wrap.getName());
-		
+
 		long bufCalc = wrap.getLength();
 		System.out.println("bufCalc = " + bufCalc);
 		while (bufCalc > 0) {
@@ -241,7 +278,7 @@ public class TransmissionHandler {
 		}
 		//maybe dump ónè char.... for the "
 		int dump = is.read();
-		
+
 		this.working = wrap.getMoreFiles();
 		this.files.add(dst);
 		os.flush();
@@ -259,17 +296,20 @@ public class TransmissionHandler {
 		byte[] buf = new byte[10];
 		int len = is.read(buf);
 		String data = this.bytesToString(buf);
-		
+
 		Pattern expr = Pattern.compile("\\[ACCEPT\\]");
 		Matcher match = expr.matcher(data);
 		if (match.find() != true) {
 			throw new IllegalStateException("Could not find ACCEPT !");
 		}
-//		String result = data.substring(match.start() + 1, match.end() -1);
+		//		String result = data.substring(match.start() + 1, match.end() -1);
 
 		return (data.substring(match.start() + 1, match.end() -1).equals("ACCEPT") == true) ? true : false;
 	}
 
+	public int getPING() {
+		return this.pingLength;
+	}
 	public CRUD getCRUD() {
 		return this.cr;
 	}

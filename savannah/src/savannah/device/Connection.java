@@ -31,7 +31,6 @@ public class Connection {
 	private File folder					= null;
 	private int bufferSize 				= -1;
 
-	private static final int PINGSIZE 	= 32;
 
 	//Default for bufferSize is ConnectionConfiguration.BUFFERSIZE
 	public Connection(String folderPath, int bufferSize) throws UnknownHostException, IOException {
@@ -74,13 +73,6 @@ public class Connection {
 			buf[i] = (char)b[i];
 		}
 		return buf;
-	}
-	private String bytesToString(byte[] b) {
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < b.length; i++) {
-			sb.append((char)b[i]);
-		}
-		return sb.toString();
 	}
 	private int sizeOf(int in) {
 		return new String("" + in).length();
@@ -228,7 +220,7 @@ public class Connection {
 				randomBytes = 12;
 			}
 
-			builder.append("PING[" + this.pingLength(pingSize) + "]=\"");
+			builder.append("PING[" + this.pingLength(randomBytes) + "]=\"");
 			Random rand = new Random();
 			byte[] buf = new byte[randomBytes];
 			rand.nextBytes(buf);
@@ -250,58 +242,17 @@ public class Connection {
 		}
 	}
 
-	
-	private final CRUD CR(InputStream is) throws IOException {
-		/*
-			-------------------------
-					CRUD
-			-------------------------
-			crudLength	= 1
-			tag-stuff	= 6
-			total		= 7
-		 */
-		is = new DataInputStream(is);
-		byte[] buf = new byte[7];
-		int len = is.read(buf);
-		String data = this.bytesToString(buf);
-		
-		Pattern expr = Pattern.compile("\\[[0-9]\\]");
-		Matcher match = expr.matcher(data);
-		if (match.find() != true) {
-			throw new IllegalStateException("Could not find CRUD !");
-		}
-//		String result = data.substring(match.start() + 1, match.end() - 1);
-
-		switch(Integer.parseInt(data.substring(match.start() + 1, match.end() - 1))) {
-		case 1:
-			return CRUD.COMMIT;
-		case 2:
-			return CRUD.REQUEST;
-		case 3:
-			return CRUD.PING;
-		default:
-			return CRUD.ERROR;
-		}
-	}
-	private void receivePing(InputStream reader) {
-		
-	}
-	
-	
-	
 	private long sendPackage(OutputStream writer, int pingSize) throws IOException {
 		StringBuilder sb = new StringBuilder();
 		this.makeCRUD(CRUD.PING, sb);
 		this.makePing(sb, pingSize);
 		long init = -1;
-		long end = -1;
 		
 		init = System.currentTimeMillis();
 		writer.write(this.stringBuilderToBytes(sb));
-		end = System.currentTimeMillis();
 		writer.flush();
 		
-		return (end - init);
+		return init;
 	}
 	private void sendPackage(OutputStream writer, CRUD cr, String data) throws IOException {
 		StringBuilder sb = new StringBuilder();
@@ -399,22 +350,16 @@ public class Connection {
 		this.writer = new DataOutputStream(this.socket.getOutputStream());
 		this.reader = new DataInputStream(this.socket.getInputStream());
 		
-		long timeSend, timeRespond = -1;
-		timeSend = this.sendPackage(this.writer, pingSize); 		
-
-
-		//Re-using the "old" structures
-		buf = null;
-		buf = new byte[this.bufferSize];
-		int len = this.reader.read(buf);
-		timeRespond = System.currentTimeMillis();	//Time stop
+		long timeStart, timeEnd = -1;
+		timeStart = this.sendPackage(this.writer, pingSize);
+		TransmissionHandler th = new TransmissionHandler(this.socket, this.folderPath);
+		timeEnd = System.currentTimeMillis();
 
 		//Cleanup crew...
-		//this.reader.close();
 		this.writer.flush();
 		this.writer.close();
 
-		return (timeRespond - timeSend);
+		return (timeEnd - timeStart);
 	}
 
 	public TransmissionHandler sendRequest(String xml) throws FileNotFoundException, IOException {
