@@ -3,6 +3,7 @@ package savannah.server;
 import java.io.File;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.jdom.Document;
 
@@ -59,6 +60,13 @@ public class CommitEvent implements Event {
 		{
 			files.remove(e);
 		}
+	}
+	
+	public void addFiles(List<File> newFiles)
+	{
+		if(files == null)
+			 { this.files = new ArrayList<File>(); }
+		this.files.addAll(newFiles);
 	}
 	/**
 	 * Retrieve a an ArrayList<File> of files attached to this event
