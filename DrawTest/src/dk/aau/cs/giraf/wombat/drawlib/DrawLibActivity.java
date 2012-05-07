@@ -54,6 +54,9 @@ public class DrawLibActivity extends Activity {
 			View v = genDrawView(sub);
 			frame.addView(v, frameWidth, frameHeight);
 			
+			
+			//TODO: Attachment is working different now so this will crash ! :D
+			//TODO: Add picture
 			View v2 = genDrawView(sub.getAttachment());
 			frame.addView(v2, frameWidth, frameHeight);
 			
