@@ -23,6 +23,9 @@ public class DrawLibActivity extends Activity {
 	public static int frameHeight;
 	public static int frameWidth;
 	
+	private Handler mHandler;
+	private Runnable mRunnable;
+	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -63,14 +66,23 @@ public class DrawLibActivity extends Activity {
 			setContentView(frame);	
 		}
 		
-		new Handler().postDelayed(new Runnable() {
+		mHandler = new Handler();
+		
+		mRunnable = new Runnable() {
             public void run() {
                 final Intent mainIntent = new Intent(DrawLibActivity.this, DoneScreenActivity.class);
                 //TODO: putExtra data with picture and text information
                 DrawLibActivity.this.startActivity(mainIntent);
                 DrawLibActivity.this.finish();
             }
-        }, sub.get_totalTime()*1000);
+        };
+		
+		mHandler.postDelayed(mRunnable, (sub.get_totalTime()+1)*1000);
+	}
+	
+	public void onDestroy(){
+		super.onDestroy();
+		mHandler.removeCallbacks(mRunnable);
 	}
 	
 	private View genDrawView(SubProfile sub) {
