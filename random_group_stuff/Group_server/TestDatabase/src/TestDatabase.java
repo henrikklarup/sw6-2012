@@ -219,10 +219,11 @@ public class TestDatabase extends HttpServlet {
 		aOutput.println("</p>");
 		aOutput.println("</center>");
 		aOutput.println("<br>");
-		aOutput.println("<br>");
+		if (systemMessage == null)
+			aOutput.println("<br>");
 		aOutput.println("<a href=\"#\" onclick=\"setOpen(1); testThis('profile');popup('popUpDiv');getFocus();\">Hurtig <u>L</u>ogin</a>");
 
-		
+
 		aOutput.println("</div>");
 		aOutput.println("<hr>");
 		aOutput.println("<footer>Savannah v. 1.0.0 <a href='http://en.wikipedia.org/wiki/Copyleft'>(C)opyleft</a> under Freedom 3 me!</footer> </div>");
@@ -290,6 +291,7 @@ public class TestDatabase extends HttpServlet {
 
 
 		aOutput.println("</body></form></html>");
+		systemMessage = null;
 	}
 
 }

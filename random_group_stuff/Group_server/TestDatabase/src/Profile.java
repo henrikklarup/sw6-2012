@@ -9,6 +9,7 @@ public class Profile {
 	private String picture;
 	private String username;
 	private String password;
+	private int profileMediaID;
 
 	public Profile(int id, String firstname, String surname, String middlename,
 			int role, int phone, String picture) {
@@ -20,6 +21,25 @@ public class Profile {
 		this.phone = phone;
 		this.picture = picture;
 	}
+	
+	public Profile(String firstname, String surname, String middlename, int profileMediaID)
+	{
+		this.firstname = firstname;
+		this.surname = surname;
+		this.middlename = middlename;
+		this.profileMediaID = profileMediaID;
+	}
+	
+	public Profile(String firstname, String surname, String middlename, int profileMediaID, String picture)
+	{
+		this.firstname = firstname;
+		this.surname = surname;
+		this.middlename = middlename;
+		this.profileMediaID = profileMediaID;
+		this.picture = picture;
+	}
+	
+	
 
 	public Profile(int id, String firstname, String surname, String middlename,
 			int role, int phone, String picture, String username) {
@@ -46,11 +66,18 @@ public class Profile {
 		this.username = username;
 		this.password = password;
 	}
+	
 
 	/*
 	 * public String getUsername() { return this.username; }
 	 */
 
+	
+	public int getProfileMediaID()
+	{
+		return this.profileMediaID;
+	}
+	
 	public int getID() {
 		return this.id;
 	}

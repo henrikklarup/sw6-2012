@@ -612,9 +612,11 @@ public class AddPictureNotLoggedin extends HttpServlet {
 
 			}
 
-			PrintWriter out = response.getWriter();
+			
 			searchCriteria = null;
 			searchString = null;
+			searchTags.clear();
+			selectedTags.clear();
 
 			session.setAttribute("PICTUREMESSAGE","<font color='green'>Billedet tilføjet</font>");
 			response.sendRedirect("AddPictureNotLoggedin");

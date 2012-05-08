@@ -1,0 +1,102 @@
+
+<html>
+<head>
+<title>Savannah 1.0 - Tilføj profil</title>
+<link rel='stylesheet' type='text/css' href='CSS/SavannahStyle.css' />
+</head>
+<body>
+	<script type='text/javascript'>
+		function updateTryToAdd() {
+			document.addForm1.tryToAdd.value = '1';
+		}
+		function submitform() {
+			document.addForm1.submit();
+		}
+	</script>
+	<div id="mainBackground">
+		<script>
+			fillOutForm();
+		</script>
+		<center>
+			<h2>Tilføj profil</h2>
+			<hr>
+			<div id="edit_wrapper">
+		</center>
+		<br>
+		<table border='0'>
+			<form method='POST' name='addForm1' enctype='multipart/form-data'
+				action='AddProfile'>
+				<tr>
+					<td>Afdeling</td>
+					<td><select name='dept'>
+							<option value='2''>Skolebakken
+							<option value='6''>Sebvej
+							<option value='7''>Subdep1
+							<option value='8''>SubSubdep1
+					</select>
+				</tr>
+				<tr>
+					<td>Navn:</td>
+					<td><input type='text' name='firstname' value='' /></td>
+				</tr>
+				<tr>
+					<td>Mellemnavn(e):</td>
+					<td><input type='text' name='middlename' value='' /></td>
+				</tr>
+				<tr>
+					<td>Efternavn:</td>
+					<td><input type='text' name='surname' value='' /></td>
+				</tr>
+				<tr>
+					<td>Telefon nummer:</td>
+					<td><input type='text' name='phone' value='' /></td>
+				</tr>
+				<tr>
+					<td><select name='prole'><option value='0'>Administrator</option>
+							<option value='1'>Pedagog</option>
+							<option value='2'>Forældre</option>
+							<option value='3'>Barn</option></select></td>
+				</tr>
+				<tr>
+					<td><input type='hidden' name='MAX_FILE_SIZE' value='100' /><input
+						name='file1' type='file' /></td>
+				</tr>
+				<tr>
+					<td>Brugernavn:</td>
+					<td><input type='text' name='username' value='' /></td>
+				</tr>
+				<tr>
+					<td>Kodeord:</td>
+					<td><input type='password' name='password' /></td>
+				</tr>
+				<tr>
+					<td>Gentag kodeord:</td>
+					<td><input type='password' name='password2' /></td>
+				</tr>
+				<tr>
+					<td><hr></td>
+					<td><hr></td>
+				</tr>
+				<tr>
+					<td>Adgang til apps</td>
+					<td><input type='checkbox' name="appList" value="1" />TestAppe1<br>
+						<input type='checkbox' name="appList" value="2" />TestAppe2<br>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type='submit' value='Tilføj'><input
+						type='button' value='Fortryd'></td>
+				</tr>
+				<input type='hidden' name='tryToAdd' value='0'>
+			</form>
+		</table>
+	</div>
+	<footer>
+		Savannah v. 1.0.0 <a href='http://en.wikipedia.org/wiki/Copyleft'>(C)opyleft</a>
+		me!
+	</footer>
+	</div>
+	</div>
+</body>
+</html>

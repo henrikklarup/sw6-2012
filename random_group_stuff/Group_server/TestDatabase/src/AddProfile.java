@@ -173,7 +173,10 @@ public class AddProfile extends HttpServlet {
 		String userOutput = (String) session.getAttribute("ADDPROFILERESPONSE");
 
 		if (userOutput != null && !userOutput.equals(""))
+		{
 			out.print(userOutput + "<br>");
+			session.removeAttribute("ADDPROFILERESPONSE");
+		}
 
 		/*
 		 * if(appList != null) { for (int i=0;i<appList.length; i++) {
@@ -236,7 +239,7 @@ public class AddProfile extends HttpServlet {
 				+ "</tr>"
 				+ "<tr>"
 				+ "<td><input type='hidden' name='MAX_FILE_SIZE' value='100' />"
-				+ "<input name='file1' type='file' /></td> "
+				+ "<input name='file1' type='file' value='null'/></td> "
 				+ "</tr>"
 				+ "<tr>"
 				+ "<td>Brugernavn: </td><td><input type='text' name='username' value='' />");
@@ -277,9 +280,9 @@ public class AddProfile extends HttpServlet {
 				+ "<input type='hidden' name='tryToAdd' value='0'>" + "</form>"
 
 				+ "</table>" + "<br><br><br></div><hr>");
-				out.println("<footer>Savannah v. 1.0.0 <a href='http://en.wikipedia.org/wiki/Copyleft'>(C)opyleft</a> under Freedom 3 me!</footer> </div>");
+		out.println("<footer>Savannah v. 1.0.0 <a href='http://en.wikipedia.org/wiki/Copyleft'>(C)opyleft</a> under Freedom 3 me!</footer> </div>");
 
-				out.println( "</div></body>" + "</html>");
+		out.println( "</div></body>" + "</html>");
 	}
 
 
@@ -291,6 +294,7 @@ public class AddProfile extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
+		String tempFile = null;
 		ServletContext context = getServletContext();
 		PrintWriter out = response.getWriter();
 		String qrToken = getNewCertificate();
@@ -386,8 +390,12 @@ public class AddProfile extends HttpServlet {
 					/*
 					 * Write file to the ultimate location.
 					 */
-					File file = new File(destinationDir, token);
-					item.write(file);
+					tempFile = item.getName();
+					if (tempFile != null && !tempFile.equals(""))
+					{	
+						File file = new File(destinationDir, token);
+						item.write(file);
+					}
 				}
 
 			}
@@ -400,6 +408,16 @@ public class AddProfile extends HttpServlet {
 
 		// appList = request.getParameterValues("appList");
 		// doGet(aRequest, aResponse);
+		
+		try {
+			int phoneint = Integer.parseInt(phone);
+		} catch (NumberFormatException  e) {
+			// TODO: handle exception
+			session.setAttribute("ADDPROFILERESPONSE", "<font color=red>Telefon nummer må kun indeholde tal</font>)");
+			response.sendRedirect("AddProfile");
+			return;
+		}
+		
 		int tempId = -1;
 		int temp = -1;
 		Connection con = null;
@@ -433,6 +451,7 @@ public class AddProfile extends HttpServlet {
 				password2 = "";
 				deptField = "";
 				phone = "";
+				response.sendRedirect("AddProfile");
 			} else {
 
 
@@ -445,7 +464,7 @@ public class AddProfile extends HttpServlet {
 				pst.setString(5, password);
 
 				int i = pst.executeUpdate();
-				session.setAttribute("QRTOKEN",qrToken );
+				
 
 				con = DriverManager.getConnection(
 						"jdbc:mysql://172.25.11.65:3306/04", "eder", "123456");
@@ -471,11 +490,17 @@ public class AddProfile extends HttpServlet {
 				pst1.setString(4, middlename);
 				pst1.setInt(5, Integer.parseInt(role));
 				pst1.setString(6, phone);
-				pst1.setString(7, "/images/" + token);
+				
+				if (tempFile == null || tempFile.equals("") || tempFile.equals(" "))
+					pst1.setString(7, null);
+				else
+					pst1.setString(7, "/images/" + token);
+				
+				session.setAttribute("QRNAME", firstname + " " + middlename + " " + surname);
 				pst1.setString(8, null);
 
-				session.setAttribute("QRNAME", firstname + " " + middlename + " " + surname);
 				
+
 				int i1 = pst1.executeUpdate();
 
 				PreparedStatement pst2 = con
@@ -534,6 +559,7 @@ public class AddProfile extends HttpServlet {
 			}
 		}
 
+		session.setAttribute("QRTOKEN",qrToken );
 
 		response.sendRedirect("generateQR");
 
