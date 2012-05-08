@@ -10,7 +10,7 @@
         android:icon="@drawable/logo"
         android:label="@string/app_name" >
         <activity
-            android:name=".MainActivity"
+            android:name="dk.aau.cs.giraf.oasis.app.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
          <activity
-            android:name=".FragmentParent"
+            android:name="dk.aau.cs.giraf.oasis.app.FragmentParent"
             android:screenOrientation="landscape"
             android:label="@string/app_name" >
             <intent-filter>
