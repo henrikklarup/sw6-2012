@@ -64,35 +64,35 @@
               <xs:complexType>
                 <xs:sequence>
                   <xs:element name="idProfile" type="xs:integer">
-				  <xs:attribute name="type" type="ttype" use="required"/>
-				  </xs:element>
+        				    <xs:attribute name="type" type="ttype" use="required"/>
+        				  </xs:element>
                   <xs:element name="Firstname" type="xs:string">
-				  <xs:attribute name="type" type="ttype" use="required"/>
-				  </xs:element>
+        				   <xs:attribute name="type" type="ttype" use="required"/>
+      		  		  </xs:element>
                   <xs:element name="Surname" type="xs:string">
-				  <xs:attribute name="type" type="ttype" use="required"/>
-				  </xs:element>
+				            <xs:attribute name="type" type="ttype" use="required"/>
+				          </xs:element>
                   <xs:element name="Middlename" type="xs:string">
-				  <xs:attribute name="type" type="ttype" use="required"/>
-				  </xs:element>
+				           <xs:attribute name="type" type="ttype" use="required"/>
+				          </xs:element>
                   <xs:element name="pRole" type="xs:integer">
-				  <xs:attribute name="type" type="ttype" use="required"/>
-				  </xs:element>
+				            <xs:attribute name="type" type="ttype" use="required"/>
+				          </xs:element>
                   <xs:element name="Phone" type="xs:long">
-				  <xs:attribute name="type" type="ttype" use="required"/>
-				  </xs:element>
+				            <xs:attribute name="type" type="ttype" use="required"/>
+				          </xs:element>
                   <xs:element name="Picture" type="xs:string">
-				  <xs:attribute name="type" type="ttype" use="required"/>
-				  </xs:element>
+				            <xs:attribute name="type" type="ttype" use="required"/>
+				           </xs:element>
                   <xs:element name="Settings" type="xs:string">
-				  <xs:attribute name="type" type="ttype" use="required"/>
-				  </xs:element>
-				  <xs:element name="username" type="xs:string">
-				  <xs:attribute name="type" type="ttype" use="required"/>
-				  </xs:element>
-				  <xs:element name="password" type="xs:string">
-				  <xs:attribute name="type" type="ttype" use="required"/>
-				  </xs:element>
+				            <xs:attribute name="type" type="ttype" use="required"/>
+        				  </xs:element>
+        				  <xs:element name="username" type="xs:string">
+        				    <xs:attribute name="type" type="ttype" use="required"/>
+        				  </xs:element>
+        				  <xs:element name="password" type="xs:string">
+        				    <xs:attribute name="type" type="ttype" use="required"/>
+        				  </xs:element>
                 </xs:sequence>
                 <xs:attribute name="action" type="crud" use="required"/>
               </xs:complexType>
@@ -177,14 +177,23 @@
               <xs:complexType>
                 <xs:sequence>
                   <xs:element name="idApp" type="xs:integer">
-				  <xs:attribute name="type" type="ttype" use="required"/>
-				  </xs:element>
+				            <xs:attribute name="type" type="ttype" use="required"/>
+			            </xs:element>
                   <xs:element name="name" type="xs:string">
-				  <xs:attribute name="type" type="ttype" use="required"/>
-				  </xs:element>
+				           <xs:attribute name="type" type="ttype" use="required"/>
+				          </xs:element>
                   <xs:element name="version" type="xs:string">
-				  <xs:attribute name="type" type="ttype" use="required"/>
-				  </xs:element>
+        				   <xs:attribute name="type" type="ttype" use="required"/>
+        				  </xs:element>
+                  <xs:element name="icon" type="xs:string">
+                   <xs:attribute name="type" type="ttype" use="required"/>
+                  </xs:element>
+                  <xs:element name="package" type="xs:string">
+                   <xs:attribute name="type" type="ttype" use="required"/>
+                  </xs:element>
+                  <xs:element name="activity" type="xs:string">
+                   <xs:attribute name="type" type="ttype" use="required"/>
+                  </xs:element>
                 </xs:sequence>
                 <xs:attribute name="action" type="crud" use="required"/>
               </xs:complexType>
