@@ -51,11 +51,13 @@ public class LogoActivity extends Activity {
 	            		SharedPreferences sharedPreferences = getSharedPreferences(Data.TIMERKEY, 0);
 	            		long guardianID = sharedPreferences.getLong(Data.GUARDIANID, -1);
 	            		
-	            		if ((new Helper(mContext)).profilesHelper.getProfileById(guardianID) != null) {
-	            			intent.putExtra(Data.GUARDIANID, sharedPreferences.getLong(Data.GUARDIANID, -1));
-	            		} else {
-	            			intent = new Intent(mContext, AuthenticationActivity.class);
-	            		}
+	            		/* Following did we not have time to test due to errors in the Oasislib */
+	            		
+//	            		if ((new Helper(mContext)).profilesHelper.getProfileById(guardianID) != null) {
+	            			intent.putExtra(Data.GUARDIANID, guardianID);
+//	            		} else {
+//	            			intent = new Intent(mContext, AuthenticationActivity.class);
+//	            		}
 	            	}
 	            	
 	                startActivity(intent);

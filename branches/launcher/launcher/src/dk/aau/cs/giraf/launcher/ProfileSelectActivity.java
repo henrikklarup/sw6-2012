@@ -73,8 +73,12 @@ public class ProfileSelectActivity extends Activity {
 		}
 		
 		// Duplicate profiles are removed.
+		outerloop:
 		for (Profile child : totalChildren) {
-			if (!mChildren.contains(child)) {
+			for (Profile mChild : mChildren) {
+				if (child.getId() == mChild.getId()) {
+					continue outerloop;
+				}
 				mChildren.add(child);
 			}
 		}
