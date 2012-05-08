@@ -76,11 +76,11 @@ public class ProfileSelectActivity extends Activity {
 		outerloop:
 		for (Profile child : totalChildren) {
 			for (Profile mChild : mChildren) {
-				if (child.getId() == mChild.getId()) {
+				if (mChild.getId() == child.getId()) {
 					continue outerloop;
 				}
-				mChildren.add(child);
 			}
+			mChildren.add(child);
 		}
 		
 		GProfileAdapter childAdapter = new GProfileAdapter(this, mChildren);
