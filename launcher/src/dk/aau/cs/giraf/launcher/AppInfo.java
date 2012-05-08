@@ -37,15 +37,15 @@ class AppInfo extends App {
 	
 	/**
 	 * Creates a new AppInfo from a given parent app.
-	 * @param parent App to get data from.
+	 * @param parentApp App to get data from.
 	 */
-	public AppInfo(App parent) {
-		super.id = parent.getId();
-		super.activity = parent.getActivity();
-		super.aPackage = parent.getaPackage();
-		super.icon = parent.getIcon();
-		super.name = parent.getName();
-		super.settings = parent.getSettings();
+	public AppInfo(App parentApp) {
+		super.id = parentApp.getId();
+		super.activity = parentApp.getActivity();
+		super.aPackage = parentApp.getaPackage();
+		super.icon = parentApp.getIcon();
+		super.name = parentApp.getName();
+		super.settings = parentApp.getSettings();
 	}
 
 	/**
