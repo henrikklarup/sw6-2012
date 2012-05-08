@@ -365,7 +365,7 @@ public class Helper {
 		departmentsHelper.attachProfileToDepartment(childrenLoaded.get(9), subsubdepartment121Loaded);
 
 		List<Media> medias = mediaHelper.getMediaByProfile(childrenLoaded.get(0));
-
+		
 		if (medias.isEmpty()) {
 			/*Media*/
 			Media mediaDog = new Media("Dog", "/sdcard/Pictures/giraf/public/dog.jpg", true, "picture", childrenLoaded.get(0).getId());
@@ -458,10 +458,10 @@ public class Helper {
 		/*Apps*/
 		String basePackageName = "dk.aau.cs.giraf.";
 
-		App launcher = new App("Launcher", basePackageName + "launcher", "HomeActivity");
-		App parrot = new App("Parrot", basePackageName + "parrot", "PARROTActivity");
-		App wombat = new App("Wombat", basePackageName + "wombat", "MainActivity");
-		App admin = new App("Admin", basePackageName + "oasis.app", "MainActivity");
+		App launcher = new App("Launcher", basePackageName + "launcher", basePackageName + "launcher.HomeActivity");
+		App parrot = new App("Parrot", basePackageName + "parrot", basePackageName + "parrot.PARROTActivity");
+		App wombat = new App("Wombat", basePackageName + "wombat", basePackageName + "wombat.MainActivity");
+		App admin = new App("Admin", basePackageName + "oasis.app", basePackageName + "oasis.app.MainActivity");
 
 		long launcherId = appsHelper.insertApp(launcher);
 		long parrotId = appsHelper.insertApp(parrot);
@@ -500,7 +500,7 @@ public class Helper {
 
 		/*Get apps*/
 		App launcherLoaded = appsHelper.getAppById(launcherId);
-		App parrotLoaded = appsHelper.getAppById(parrotId);	
+		App parrotLoaded = appsHelper.getAppById(parrotId);
 		App wombatLoaded = appsHelper.getAppById(wombatId);
 		App adminLoaded = appsHelper.getAppById(adminId);
 
@@ -516,7 +516,6 @@ public class Helper {
 			appsHelper.attachAppToProfile(launcherLoaded, child);
 			appsHelper.attachAppToProfile(parrotLoaded, child);
 			appsHelper.attachAppToProfile(wombatLoaded, child);
-			appsHelper.attachAppToProfile(adminLoaded, child);
 		}
 	}
 }

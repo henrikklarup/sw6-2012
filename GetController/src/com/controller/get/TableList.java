@@ -33,6 +33,8 @@ public class TableList extends ListActivity {
 		super.onCreate(savedInstanceState);
 		
 		helper = new Helper(this);
+		helper.CreateDummyData();
+		
 		settings = new Setting<String, String, String>();
 		
 

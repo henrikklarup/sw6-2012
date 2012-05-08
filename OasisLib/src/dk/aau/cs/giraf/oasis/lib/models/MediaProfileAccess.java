@@ -7,6 +7,22 @@ public class MediaProfileAccess {
 	private static String _output = "{0}, {1}";
 	
 	/**
+	 * Constructor with arguments
+	 * @param idProfile the profile id to set
+	 * @param idMedia the media id to set
+	 */
+	public MediaProfileAccess(long idProfile, long idMedia) {
+		this.idProfile = idProfile;
+		this.idMedia = idMedia;
+	}
+	/**
+	 * Empty constructor
+	 */
+	public MediaProfileAccess() {
+		
+	}
+
+	/**
 	 * @return the idProfile
 	 */
 	public long getIdProfile() {

@@ -124,6 +124,8 @@ public class MediaHelper {
 		ContentValues cv = getContentValues(media);
 		uri = _context.getContentResolver().insert(MediaMetaData.CONTENT_URI, cv);
 		result = Integer.parseInt(uri.getPathSegments().get(1));
+		
+		mpa.insertMediaProfileAccess(new MediaProfileAccess(media.getOwnerId(), media.getId()));
 
 		return result;
 	}
@@ -155,12 +157,7 @@ public class MediaHelper {
 	 * @return Rows
 	 */
 	public long attachMediaToProfile(Media media, Profile profile, Profile owner) {
-		if (owner == null) {
-			owner = new Profile();
-			owner.setId(-1);
-		}
-
-		if (media.isMPublic() || media.getOwnerId() == owner.getId()) {
+		if (media.isMPublic() || (owner != null && media.getOwnerId() == owner.getId())) {
 			MediaProfileAccess mpaModel  = new MediaProfileAccess();
 			mpaModel.setIdMedia(media.getId());
 			mpaModel.setIdProfile(profile.getId());
@@ -178,7 +175,7 @@ public class MediaHelper {
 	 * @return Rows
 	 */
 	public long attachMediaToDepartment(Media media, Department department, Profile owner) {
-		if (media.isMPublic() || media.getOwnerId() == owner.getId()) {
+		if (media.isMPublic() || (owner != null && media.getOwnerId() == owner.getId())) {
 			MediaDepartmentAccess mdaModel = new MediaDepartmentAccess();
 			mdaModel.setIdMedia(media.getId());
 			mdaModel.setIdDepartment(department.getId());
@@ -234,6 +231,7 @@ public class MediaHelper {
 	 * @param p The person
 	 * @return a list consisting of the persons media
 	 */
+	//getAccessableMediaByProfile
 	public List<Media> getMyMedia(Profile p) {
 		List<Media> result = new ArrayList<Media>();
 
@@ -262,6 +260,7 @@ public class MediaHelper {
 	 * @param p the person that owns the media
 	 * @return a list containing the media
 	 */
+	//getMediaByOwner(Profile owner) 
 	public List<Media> getMediaIOwn(Profile p) {
 		List<Media> result = new ArrayList<Media>();
 
