@@ -1,7 +1,5 @@
 package dk.aau.cs.giraf.parrot;
 
-import java.util.ArrayList;
-
 import parrot.Package.R;
 import android.app.Activity;
 import android.view.DragEvent;
@@ -16,7 +14,7 @@ public class ManagementBoxDragListener implements OnDragListener
 
 	private Activity parrent;
 	private Pictogram draggedPictogram = null;
-	private PARROTProfile profile = PARROTActivity.getUser()
+	private PARROTProfile profile = PARROTActivity.getUser();
 
 
 	public ManagementBoxDragListener(Activity active) {
@@ -57,28 +55,40 @@ public class ManagementBoxDragListener implements OnDragListener
 
 				if(self.getId()==R.id.trash && ManageCategoryFragment.catDragOwnerID != R.id.pictograms) //We are to delete a pictogram from a category
 				{
-					ListView speech = (ListView) parrent.findViewById(R.id.pictograms);
-					int x = (int)event.getX();
-					int y = (int)event.getY();
-					int index = speech.pointToPosition(x, y);
-					
-					profile.getCategoryAt(ManageCategoryFragment.currentCategoryId).removePictogram(ManageCategoryFragment.draggedItemIndex);
-					
+					profile.getCategoryAt(ManageCategoryFragment.currentCategoryId).removePictogram(ManageCategoryFragment.draggedItemIndex); //TODO create longclick listener that modifies draggedItemIndex //FIXME update view
 				}
 				
 				else if(self.getId()==R.id.categories && ManageCategoryFragment.catDragOwnerID != R.id.pictograms) //We are to copy a pictogram into another category
 				{
 					
+					draggedPictogram = profile.getCategoryAt(ManageCategoryFragment.currentCategoryId).getPictogramAtIndex(ManageCategoryFragment.draggedItemIndex); 
+							
+					ListView categories = (ListView) parrent.findViewById(R.id.categories);
+					int x = (int)event.getX();
+					int y = (int)event.getY();
+					int index = categories.pointToPosition(x, y);
+					
+					profile.getCategoryAt(index).addPictogram(draggedPictogram);
 				}
 				else if(self.getId()==R.id.categories && ManageCategoryFragment.catDragOwnerID != R.id.categories) //We are to copy a category into another category
 				{
+					ListView categories = (ListView) parrent.findViewById(R.id.categories);
+					int x = (int)event.getX();
+					int y = (int)event.getY();
+					int index = categories.pointToPosition(x, y);
 					
+					Category categoryCopiedTo = profile.getCategoryAt(index);
+					Category categoryCopiedFrom = profile.getCategoryAt(ManageCategoryFragment.draggedItemIndex);
+					
+					for(int i = 0; i < categoryCopiedFrom.getPictograms().size(); i++)
+					{
+						categoryCopiedTo.addPictogram(categoryCopiedFrom.getPictogramAtIndex(i)); 
+					}
+					//FIXME Update View And redraw
 				}
 				else if(self.getId()==R.id.trash && ManageCategoryFragment.catDragOwnerID != R.id.categories) //We are to delete a category
-				{
-					
-					
-					profile.removeCaregory(index);
+				{	
+					profile.removeCaregory(ManageCategoryFragment.draggedItemIndex); //FIXME update view (redraw)
 				}
 				else
 				{

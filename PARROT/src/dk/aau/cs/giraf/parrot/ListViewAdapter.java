@@ -39,11 +39,11 @@ public class ListViewAdapter extends ArrayAdapter<Category> //FIXME In this clas
 			if (imageView != null) {
 				imageView.setImageResource(R.drawable.default_profile);
 			}
-			if (textView != null) {
+			/*if (textView != null) {
 
 				textView.setText(category.name);//FIXME reffer to the categorys name. (add a name dalhoff!!!)
 
-			}
+			}*/
 
 		}
 
