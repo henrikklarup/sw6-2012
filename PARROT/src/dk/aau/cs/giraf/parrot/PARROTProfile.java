@@ -89,7 +89,7 @@ public class PARROTProfile {
 	 * The getRights getMethod is used in Parrot Activity to determine if a given user is allowed 
 	 * to use certain functionalities in the App.
 	 * i is to determine which functionality is in question.
-	 * Remember: Make sure the order of the Taps is consistent with the order of their rights in the
+	 * Remember: Make sure the order of the Tabs is consistent with the order of their rights in the
 	 * 			 Rights array.
 	 * Read: Consider reading comment on tab initialization in PARROTActivity.Java
 	 */

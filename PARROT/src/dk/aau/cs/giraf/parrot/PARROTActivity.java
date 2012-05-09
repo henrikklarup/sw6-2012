@@ -1,21 +1,10 @@
 package dk.aau.cs.giraf.parrot;
 
-
-
-import java.util.ArrayList;
-import java.util.List;
-
-import android.R.integer;
+import dk.aau.cs.giraf.parrot.R;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.ListView;
-import dk.aau.cs.giraf.oasis.lib.Helper;
-import dk.aau.cs.giraf.oasis.lib.models.App;
-import dk.aau.cs.giraf.oasis.lib.models.Media;
-import dk.aau.cs.giraf.oasis.lib.models.Profile;
-import dk.aau.cs.giraf.oasis.lib.models.Setting;
 
 
 public class PARROTActivity extends Activity {
@@ -61,21 +50,21 @@ public class PARROTActivity extends Activity {
 		{
 			tab = actionBar.newTab()
 					.setText(R.string.secondTab)
+					.setTabListener(new TabListener<ManageCategoryFragment>(this,"manage",ManageCategoryFragment.class));
+			actionBar.addTab(tab);
+		}
+		if (parrotUser.getRights(1) == true) 
+		{
+			tab = actionBar.newTab()
+					.setText(R.string.thirdTab)
 					.setTabListener(new TabListener<OptionsFragment>(this,"options",OptionsFragment.class));
 			actionBar.addTab(tab);
 		}
-//		if (parrotUser.getRights(1) == true)//TODO put me back in
-//		{
-//			tab = actionBar.newTab()
-//					.setText(R.string.thirdTab)
-//					.setTabListener(new TabListener<AddFromCameraFragment>(this,"camera",AddFromCameraFragment.class));
-//			actionBar.addTab(tab);
-//		}
-		if (parrotUser.getRights(2) == true)
+		if (parrotUser.getRights(2) == true)//TODO put me back in
 		{
 			tab = actionBar.newTab()
 					.setText(R.string.fourthTab)
-					.setTabListener(new TabListener<OptionsFragment>(this,"options",OptionsFragment.class));
+					.setTabListener(new TabListener<OptionsFragment>(this,"camera",OptionsFragment.class));
 			actionBar.addTab(tab);
 		}
 

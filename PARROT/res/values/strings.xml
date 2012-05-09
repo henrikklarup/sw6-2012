@@ -4,10 +4,10 @@
     <string name="hello">Hello World, PARROTActivity!</string>
     <string name="app_name">PARROT</string>
     <string name="firstTab">Speech Board</string>
-    <string name="secondTab">Options</string>
+    <string name="secondTab">Administrer</string>
 	<color name="cell_empty">#FF993311</color>
-	<string name="thirdTab">Camera</string>
-	<string name="fourthTab">Internet</string>
+	<string name="thirdTab">Options</string>
+	<string name="fourthTab">Kamera</string>
 	<string name="TakePictureButton">Tag Billed</string>
 	<string name="changecategorycolor">Ændring af baggrunds farve på kategoriten</string>
 	<string name="changesentencecolor">Ændring af baggrunds farve på sætningsbrættet</string>
