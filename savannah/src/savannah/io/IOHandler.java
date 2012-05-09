@@ -1,25 +1,18 @@
 package savannah.io;
 
-
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOError;
 import java.io.IOException;
 import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.List;
 import java.util.Random;
-
-import com.sun.swing.internal.plaf.synth.resources.synth;
 
 public class IOHandler implements Runnable {
 	//Field variables
