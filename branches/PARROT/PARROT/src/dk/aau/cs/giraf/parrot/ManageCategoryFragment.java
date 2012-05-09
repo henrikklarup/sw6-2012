@@ -39,10 +39,11 @@ public class ManageCategoryFragment extends Fragment {
 		ImageView trash = (ImageView) parrent.findViewById(R.id.trash);//FIXME Make xml for this to work.
 		ImageView categoryPic = (ImageView) parrent.findViewById(R.id.categorypic);//FIXME Make xml for this to work.
 		
+		/*
 		ArrayAdapter<String> categoriesArray = new ArrayAdap; //FIXME not sure which constructor to use...
 		
 		setListAdapter();
-				
+		 */			
 		
 		
 		categories.setAdapter(new ListViewAdapter(this, R.id.categoriesitem, profileBeingModified.getCategoryAt(currentCategoryId))); //FIXME Create xml for this
