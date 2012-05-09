@@ -13,7 +13,6 @@ import android.app.AlertDialog.Builder;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
@@ -35,9 +34,11 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import dk.aau.cs.giraf.TimerLib.Attachment;
 import dk.aau.cs.giraf.TimerLib.Child;
 import dk.aau.cs.giraf.TimerLib.Guardian;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
+import dk.aau.cs.giraf.TimerLib.Timer;
 import dk.aau.cs.giraf.TimerLib.formFactor;
 import dk.aau.cs.giraf.wombat.drawlib.DrawLibActivity;
 
@@ -520,7 +521,7 @@ public class CustomizeFragment extends Fragment {
 						lv.setOnItemClickListener(new OnItemClickListener() {
 							public void onItemClick(AdapterView<?> parent,
 									View view, int position, long id) {
-								setAttachment(subProfiles.get(position));								
+								setAttachment(new Timer(subProfiles.get(position)));								
 								builder.dismiss();
 								builder2.dismiss();
 							}
@@ -548,9 +549,9 @@ public class CustomizeFragment extends Fragment {
 	 * @param subProfile
 	 *            SubProfile to be attached
 	 */
-	private void setAttachment(SubProfile subProfile) {
-		int pictureRes;
-		int textRes;
+	private void setAttachment(Attachment att) {
+		int pictureRes = 0;
+		int textRes = 0;
 		int color = 0x00000000;
 		int alpha = 255;
 		String attachText = getString(R.string.attached);
@@ -558,27 +559,47 @@ public class CustomizeFragment extends Fragment {
 		TextView attView = (TextView) getActivity().findViewById(
 				R.id.customize_attachment_text);
 
-		if (subProfile != null) {
-
-			currSubP.setAttachment(subProfile);
-			color = subProfile.timeLeftColor;
-
-			switch (subProfile.formType()) {
-			case Hourglass:
-				pictureRes = R.drawable.thumbnail_hourglass;
-				textRes = R.string.customize_hourglass_description;
+		if (att != null) {
+			
+			currSubP.setAttachment(att);
+			color = att.getColor();
+			
+			switch (att.getForm()) {
+			case Timer:
+				Timer tempT = (Timer) att;
+				switch (tempT.formType()) {
+				case Hourglass:
+					pictureRes = R.drawable.thumbnail_hourglass;
+					textRes = R.string.customize_hourglass_description;
+					break;
+				case DigitalClock:
+					pictureRes = R.drawable.thumbnail_digital;
+					textRes = R.string.customize_digital_description;
+					break;
+				case ProgressBar:
+					pictureRes = R.drawable.thumbnail_progressbar;
+					textRes = R.string.customize_progressbar_description;
+					break;
+				case TimeTimer:
+					pictureRes = R.drawable.thumbnail_timetimer;
+					textRes = R.string.customize_timetimer_description;
+					break;
+				default:
+					pictureRes = R.drawable.thumbnail_attachment;
+					textRes = R.string.attachment_button_description;
+					attachText = "";
+					alpha = 0;
+					break;
+				}
+			case SingleImg:
+				//TODO: Create thumbnail for Single Img
+				pictureRes = R.drawable.thumbnail_attachment;
+				textRes = R.string.customize_single_img_description;
 				break;
-			case DigitalClock:
-				pictureRes = R.drawable.thumbnail_digital;
-				textRes = R.string.customize_digital_description;
-				break;
-			case ProgressBar:
-				pictureRes = R.drawable.thumbnail_progressbar;
-				textRes = R.string.customize_progressbar_description;
-				break;
-			case TimeTimer:
-				pictureRes = R.drawable.thumbnail_timetimer;
-				textRes = R.string.customize_timetimer_description;
+			case SplitImg:
+				//TODO: Create thumbnail for Split Img
+				pictureRes = R.drawable.thumbnail_attachment;
+				textRes = R.string.customize_split_img_description;
 				break;
 			default:
 				pictureRes = R.drawable.thumbnail_attachment;
