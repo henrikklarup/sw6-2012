@@ -4,7 +4,7 @@ package dk.aau.cs.giraf.parrot;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-import parrot.Package.R;
+
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.ClipData;
