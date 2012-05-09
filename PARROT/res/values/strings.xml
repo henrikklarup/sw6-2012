@@ -36,5 +36,6 @@
     <string name="situationListOptionsMenuEditText">Ret Situationsnavn</string>
     <string name="addImageFromCameraButtonText">Fra Kamera</string>
     <string name="addImageFromPhoneButtonText">Fra Telefon</string>
-	
+    <string name="changecategorycolor">Ændring af baggrunds farve på kategoriten</string>
+	\<string name="changesentencecolor">Ændring af baggrunds farve på sætningsbrættet</string>
 </resources>
