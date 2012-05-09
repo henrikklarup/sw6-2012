@@ -274,12 +274,12 @@ public class CRUD {
 		p._AttaBool = (Boolean.valueOf((String) hm.get("Attachment")));
 		
 		if(p._AttaBool){
-			Attachment attachP = new Attachment();
+			//Attachment attachP = new Attachment();
 			formFactor aFactor = formFactor.convert(hm.get("AttachmentForm"));
 			formFactor tFactor = formFactor.convert(hm.get("timerForm"));
 			
 			//Add method to Attachment.java that will return the correct processed object based on the HashMap :D
-			attachP.
+			//attachP.
 			
 			/*
 			//Attachment form
@@ -301,9 +301,9 @@ public class CRUD {
 			map.put("rightImgId", String.valueOf(-1));
 			 */
 			
-			attachP = convertType(attachP, aFactor);
-			
-			p.setAttachment(attachP);
+//			attachP = convertType(attachP, aFactor);
+//			
+//			p.setAttachment(attachP);
 			
 		}	
 		

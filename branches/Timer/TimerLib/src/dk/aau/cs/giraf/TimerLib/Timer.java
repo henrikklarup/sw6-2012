@@ -32,6 +32,10 @@ public class Timer extends Attachment {
 		return formFactor.Timer;
 	}
 	
+	public formFactor formType(){
+		return this._form;
+	}
+	
 	void changeTime(int t){
 		this._time = t;
 	}

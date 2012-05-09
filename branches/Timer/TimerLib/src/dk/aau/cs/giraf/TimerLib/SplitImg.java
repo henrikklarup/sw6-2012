@@ -25,7 +25,6 @@ public class SplitImg extends Attachment {
 	public formFactor getForm(){
 		return formFactor.SplitImg;
 	}
-
 	
 	public HashMap getHashMap(HashMap map){
 		//Defines what kind of attachment it is

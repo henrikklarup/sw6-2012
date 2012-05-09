@@ -21,6 +21,10 @@ public class Attachment {
 		
 	}
 	
+	public int getColor(){
+		return 0;
+	}
+	
 	public HashMap getHashMap(HashMap map){
 		//Defines what kind of attachment it is
 		map.put("AttachmentForm", String.valueOf(this.getForm()));
