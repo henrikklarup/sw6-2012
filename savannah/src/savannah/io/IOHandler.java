@@ -409,11 +409,11 @@ public class IOHandler implements Runnable {
 			System.err.println("errorResponds: Could not establish an OutputStream !");
 		}
 	}
-	public void respond(Socket socket, int pingSize) {
+	public synchronized void respond(Socket socket, int pingSize) {
 		/* CRUD.PING */
 		this.pingResponds(socket, pingSize);
 	}
-	public void respond(Socket socket, CRUD cr, String data) {
+	public synchronized void respond(Socket socket, CRUD cr, String data) {
 		switch(cr.getValue()) {
 		case 1:		/*  CRUD.COMMIT */
 			this.commitResponds(socket, data);
@@ -426,7 +426,7 @@ public class IOHandler implements Runnable {
 			throw new IllegalArgumentException("CRUD.ERROR cannot be resolved to an action !");
 		}
 	}
-	public void respond(Socket socket, CRUD cr, String data, File f) {
+	public synchronized void respond(Socket socket, CRUD cr, String data, File f) {
 		switch(cr.getValue()) {
 		case 1:		/*  CRUD.COMMIT */
 			this.commitResponds(socket, data);
@@ -439,7 +439,7 @@ public class IOHandler implements Runnable {
 			throw new IllegalArgumentException("CRUD.ERROR cannot be resolved to an action !");
 		}
 	}
-	public void respond(Socket socket, CRUD cr, String data, File... files) {
+	public synchronized void respond(Socket socket, CRUD cr, String data, File... files) {
 		switch(cr.getValue()) {
 		case 1:		/*  CRUD.COMMIT */
 			this.commitResponds(socket, data);
@@ -467,17 +467,6 @@ public class IOHandler implements Runnable {
 		lf.logIt(completed);
 	}
 	*/
-	public void respond(Socket socket, String message) {
-		synchronized (this.connections) {
-			DataOutputStream temp = this.getDataOutputStream(socket);
-			try {
-				temp.write(this.messageToBytes(message));
-				temp.flush();
-			}	catch (IOException io) {
-				System.err.println("Could not send respond to Socket ! Error: " + io.getMessage());
-			}
-		}
-	}
 
 	private DataOutputStream getDataOutputStream(Socket socket) {
 		DataOutputStream temp = this.connections.get(socket);
@@ -500,16 +489,9 @@ public class IOHandler implements Runnable {
 	 * Removes a Socket connection based on the specified
 	 * @param socket - the specified Socket
 	 */
-	public void removeConnection(Socket socket) {
+	public synchronized void removeConnection(Socket socket) {
 		synchronized (this.connections) {
 			System.out.println("Disconnecting Socket: " + socket);
-
-			//Safety check
-//			if (this.isConnected(socket)) {
-//				throw new NullPointerException("The connection did not exist !");
-//			}	else {
-//				this.connections.remove(socket);
-//			}
 			this.connections.remove(socket);
 
 			try {
