@@ -49,6 +49,7 @@ public class CommunicationThread extends Thread {
 				DOMinator domI = new DOMinator();
 				IOHandler.getInstance().displayMessage("CommitEvent created by: " + this.socket);
 				CommitEvent comEvt = new CommitEvent(domI.Dominate(handle.getXML()), this.socket);
+				comEvt.addFiles(handle.getFILES());
 				EventQueue.getInstance().add(comEvt);
 //				IOHandler.getInstance().respond(this.socket, CRUD.COMMIT, "Anal");
 //				IOHandler.getInstance().logIt(true);

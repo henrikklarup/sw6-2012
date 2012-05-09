@@ -1,20 +1,16 @@
 package savannah.device;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.io.InputStream;
 import java.io.FileInputStream;
-import java.io.DataInputStream;
 
 import java.io.OutputStream;
 import java.io.DataOutputStream;
 
-import java.io.File;
-
 import java.util.Random;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -22,10 +18,17 @@ import java.net.UnknownHostException;
 import savannah.io.CRUD;
 import savannah.io.TransmissionHandler;
 
+/**
+ * It is recommended that this class is run in its own {@link java.lang.Thread}. This
+ * is because it can block the {@link java.lang.Thread} it is run in.
+ * The reason for this is that it internally tries to read from an {@link java.io.InputStream}, however
+ * if there is no data to read, it will block the {@link java.lang.Thread} until some data is read.
+ * @author Thorbjørn Kvist Nielsen
+ *
+ */
 public class Connection {
 	//Field Variables
 	private Socket socket				= null;
-	private InputStream reader			= null;
 	private OutputStream writer			= null;
 	private String folderPath			= "";
 	private File folder					= null;
@@ -33,6 +36,13 @@ public class Connection {
 
 
 	//Default for bufferSize is ConnectionConfiguration.BUFFERSIZE
+	/**
+	 * Constructs a Connection object from the specified arguments
+	 * @param folderPath - the specified path for storing received files
+	 * @param bufferSize - the specified buffer size to use. Default value can be seen in {@link savannah.device.ConnectionConfiguration}.
+	 * @throws UnknownHostException - thrown if the Server cannot be found.
+	 * @throws IOException - thrown if folderPath is null.
+	 */
 	public Connection(String folderPath, int bufferSize) throws UnknownHostException, IOException {
 		if (folderPath.equals("") == true) {
 			throw new IllegalArgumentException("folderPath: Cannot be null !");
@@ -46,6 +56,12 @@ public class Connection {
 		this.folderPath = folderPath;
 		this.socket = new Socket(ConnectionConfiguration.HOSTNAME, ConnectionConfiguration.PORT);
 	}
+	/**
+	 * Constructs a Connection object from the specified arguments
+	 * @param folderPath - the specified path for storing received files
+	 * @throws UnknownHostException - thrown if the Server cannot be found.
+	 * @throws IOException - thrown if folderPath is null.
+	 */
 	public Connection(String folderPath) throws UnknownHostException, IOException {
 		if (folderPath.equals("") == true) {
 			throw new IllegalArgumentException("folderPath: Cannot be null !");
@@ -73,6 +89,11 @@ public class Connection {
 			buf[i] = (char)b[i];
 		}
 		return buf;
+	}
+	private String bytesToString(char[] c) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(c);
+		return sb.toString();
 	}
 	private int sizeOf(int in) {
 		return new String("" + in).length();
@@ -154,12 +175,7 @@ public class Connection {
 		//The cleanup crew... Put this stuff in the finally clause
 		is.close();
 	}
-	private String bytesToString(char[] c) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(c);
-		return sb.toString();
-	}
-	//Improve the CRUD check.............................
+
 	private void makeCRUD(CRUD cr, StringBuilder builder) {
 		try {
 			//Exception handling 
@@ -302,7 +318,15 @@ public class Connection {
 		writer.flush();
 	}
 
-
+	/**
+	 * This method sends a Commit Event to the Server.
+	 * @param xml - the specified xml
+	 * @param files - the specified files
+	 * @return - A String from the Server explaining what happened
+	 * @throws IOException - If the internal {@link java.net.Socket} could not connect. 
+	 * If any of the specified files could not be found. 
+	 * If the Connection cannot receive the String from the Server
+	 */
 	public String sendCommit(String xml, File... files) throws IOException {
 		//Sending the commit event
 		this.writer = new DataOutputStream(this.socket.getOutputStream());
@@ -317,6 +341,15 @@ public class Connection {
 
 		return th.getXML();
 	}
+	/**
+	 * This method sends a Commit Event to the Server.
+	 * @param xml - the specified xml
+	 * @param f - the specified file
+	 * @return - A String from the Server explaining what happened
+	 * @throws IOException - If the internal {@link java.net.Socket} could not connect. 
+	 * If the specified file could not be found. 
+	 * If the Connection cannot receive the String from the Server
+	 */
 	public String sendCommit(String xml, File f) throws IOException {
 		//Sending the commit event
 		this.writer = new DataOutputStream(this.socket.getOutputStream());
@@ -331,6 +364,13 @@ public class Connection {
 
 		return th.getXML();
 	}
+	/**
+	 * This method sends a Commit Event to the Server.
+	 * @param xml - the specified xml
+	 * @return - A String from the Server explaining what happened
+	 * @throws IOException - If the internal {@link java.net.Socket} could not connect. 
+	 * If the Connection cannot receive the String from the Server.
+	 */
 	public String sendCommit(String xml) throws IOException {
 		//Sending the commit event
 		this.writer = new DataOutputStream(this.socket.getOutputStream());
@@ -345,13 +385,20 @@ public class Connection {
 
 		return th.getXML();
 	}
-	//Make the sendPing function receive a TransmissionHandler instead !
+	/**
+	 * This method sends a Ping to the Server.
+	 * @param pingSize - the amount of specified bytes to use for the Ping. The pingSize can be between 1 and 4096 bytes.
+	 * The default pingSize value is 32 bytes.
+	 * @return - A long representing the time used by the Ping function. The return value is equal to System.currentTimeMillis().
+	 * @throws IOException - If the internal {@link java.net.Socket} could not connect. 
+	 * If the Connection cannot receive Ping responds from the Server.
+	 */
 	public long sendPing(int pingSize) throws IOException {
 		this.writer = new DataOutputStream(this.socket.getOutputStream());
-		this.reader = new DataInputStream(this.socket.getInputStream());
 		
 		long timeStart, timeEnd = -1;
 		timeStart = this.sendPackage(this.writer, pingSize);
+		@SuppressWarnings("unused")
 		TransmissionHandler th = new TransmissionHandler(this.socket, this.folderPath);
 		timeEnd = System.currentTimeMillis();
 
@@ -361,7 +408,15 @@ public class Connection {
 
 		return (timeEnd - timeStart);
 	}
-
+	/**
+	 * This method sends a Request Event to the Server.
+	 * @param xml - the specified xml
+	 * @return - A {@link savannah.io.TransmissionHandler} object that contains all the data and references for any files received.
+	 * @throws FileNotFoundException - If the files received could not be written to the HDD.
+	 * @throws IOException - If the internal {@link java.net.Socket} could not connect. 
+	 * If the Connection cannot receive a {@link savannah.io.TransmissionHandler} from the Server.
+	 * If the files received could not be written to the HDD.
+	 */
 	public TransmissionHandler sendRequest(String xml) throws FileNotFoundException, IOException {
 		//Sending the request event
 		this.writer = new DataOutputStream(this.socket.getOutputStream());
@@ -376,16 +431,25 @@ public class Connection {
 
 		return th;
 	}
-	//If this.reader.close() is called, then this will be epic fail !!!
-	public InputStream getConnectionInputStream() throws IOException {
-		return this.socket.getInputStream();
-	}
+
+	
+	/**
+	 * @return The FolderPath as a String.
+	 */
 	public String getFolderPath() {
 		return this.folderPath;
 	}
+	
+	/**
+	 * @return The buffer size of the Connection.
+	 */
 	public int getBufferSize() {
 		return this.bufferSize;
 	}
+	
+	/** 
+	 * @return The FolderPath as a {@link java.io.File} object.
+	 */
 	public File getFolder() {
 		return this.folder;
 	}
