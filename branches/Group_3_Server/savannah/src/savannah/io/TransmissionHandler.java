@@ -25,10 +25,12 @@ import java.lang.IllegalStateException;
  * 	Ping:		TYPE[int]PING[size]="randomBytes"
  * 		int		= int, CRUD value
  * 		size	= int, size of the random bytes
+ * 
  * 	Request:	TYPE[int1]MXML[length,int2]="xmlData"[ACCEPT]
  * 		int1	= int, CRUD value
  * 		length	= int, length of xmlData
  * 		int2	= boolean, any files comming ? False for Request
+ * 
  * 	COMMIT:		TYPE[int1]MXML[length,int2]="xmlData"FILE[length2,name.ext,int3]="fileData"[ACCEPT]
  * 		int1	= int, CRUD value
  * 		length	= int, length of xmlData
@@ -36,6 +38,20 @@ import java.lang.IllegalStateException;
  * 		length2	= long, size of file
  * 		name.ext	= String, name and extension of file
  * 		int3	= boolean, any files comming ?
+ * </pre>
+ * 
+ * <pre>
+ * 	TYPE[int]
+ * 		- int = has 10 cell spaces allocated
+ * 
+ * 	MXML[length,int]
+ * 		- length = has 10 cell spaces allocated
+ * 		- int = has 1 cell space allocated
+ * 
+ * 	FILE[length,name.ext,int]
+ * 		- length = has 19 cell spaces allocated
+ * 		- name.ext = has 256 cell spaces allocated
+ * 		- int = has 1 cell space allocated
  * </pre>
  * @author Thorbjørn Kvist Nielsen
  *

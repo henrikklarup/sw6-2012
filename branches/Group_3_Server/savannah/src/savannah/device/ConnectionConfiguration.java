@@ -14,5 +14,5 @@ public final class ConnectionConfiguration {
 	/**
 	 * A constant that defines the Server address.
 	 */
-	public static final String HOSTNAME = "127.0.0.1";
+	public static final String HOSTNAME = "172.25.11.65";
 }
