@@ -31,6 +31,8 @@
     <string name="customize_timetimer_description">Ur</string>
     <string name="customize_progressbar_description">Bar</string>
     <string name="customize_digital_description">Digital Ur</string>
+    <string name="customize_single_img_description">Et billed</string>
+    <string name="customize_split_img_description">To billeder</string>
     <string name="colors">Farver</string>
     <string name="color_time_left">Tid Tilbage</string>
     <string name="color_picker_button">Vælg Farve</string>
