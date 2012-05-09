@@ -18,6 +18,28 @@ import java.net.Socket;
 
 import java.lang.IllegalStateException;
 
+/**
+ * When this object is constructed it calls a method that will begin to deconstruct the {@link java.io.InputStream} data.
+ * <pre>
+ * Format:
+ * 	Ping:		TYPE[int]PING[size]="randomBytes"
+ * 		int		= int, CRUD value
+ * 		size	= int, size of the random bytes
+ * 	Request:	TYPE[int1]MXML[length,int2]="xmlData"[ACCEPT]
+ * 		int1	= int, CRUD value
+ * 		length	= int, length of xmlData
+ * 		int2	= boolean, any files comming ? False for Request
+ * 	COMMIT:		TYPE[int1]MXML[length,int2]="xmlData"FILE[length2,name.ext,int3]="fileData"[ACCEPT]
+ * 		int1	= int, CRUD value
+ * 		length	= int, length of xmlData
+ * 		int2	= boolean, any files comming ? False if last file.
+ * 		length2	= long, size of file
+ * 		name.ext	= String, name and extension of file
+ * 		int3	= boolean, any files comming ?
+ * </pre>
+ * @author Thorbjørn Kvist Nielsen
+ *
+ */
 public class TransmissionHandler {
 	private List<File> files 	= null;
 	private File folder			= null;
@@ -30,6 +52,16 @@ public class TransmissionHandler {
 	private boolean accepted	= false;
 	private int pingLength		= -1; 
 
+	/**
+	 * Constructs a TransmissionHandler from the specified arguments.
+	 * @param socket - the {@link java.net.Socket} used to connect to the Server.
+	 * @param folder - the folder used to stored received files.
+	 * @throws FileNotFoundException - If the files received could not be written to the HDD.
+	 * @throws IOException - If the internal {@link java.net.Socket} could not connect. 
+	 * If the transmission cannot be receive from the Server.
+	 * If the files received could not be written to the HDD.
+	 * @throws IllegalStateException - If the data in the InputStream does not conform with the defined transmission format.
+	 */
 	public TransmissionHandler(Socket socket, String folder) throws FileNotFoundException, IOException, IllegalStateException {
 		this.bufferSize = 4096;
 		this.files = new ArrayList<File>();
@@ -138,7 +170,7 @@ public class TransmissionHandler {
 		return sb.toString();
 	}
 
-	private int PING(InputStream is) throws IOException {
+	private final int PING(InputStream is) throws IOException {
 		/*
 			-------------------------
 					PING
@@ -149,24 +181,25 @@ public class TransmissionHandler {
 		 */
 		is = new DataInputStream(is);
 		byte[] buf = new byte[12];
+		@SuppressWarnings("unused")
 		int len = is.read(buf);
 		String data = this.bytesToString(buf);
-		
+
 		Pattern expr = Pattern.compile("\\[[0-9]*\\]");
 		Matcher match = expr.matcher(data);
 		if (match.find() != true) {
 			throw new IllegalStateException("Could not find PING !");
 		}
 		int length = Integer.parseInt(data.substring(match.start() + 1, match.end() - 1));
-		
+
 		//Reading the random PING data
 		buf = null;
 		buf = new byte[length];
 		len = is.read(buf);
-		
+
 		//Dumping the last char
 		len = is.read();
-		
+
 		return length; 
 	}
 	private final CRUD CR(InputStream is) throws IOException {
@@ -180,6 +213,7 @@ public class TransmissionHandler {
 		 */
 		is = new DataInputStream(is);
 		byte[] buf = new byte[7];
+		@SuppressWarnings("unused")
 		int len = is.read(buf);
 		String data = this.bytesToString(buf);
 
@@ -231,6 +265,7 @@ public class TransmissionHandler {
 			}
 		}
 		//maybe dump ï¿½nï¿½ char.... for the "
+		@SuppressWarnings("unused")
 		int dump = is.read();
 
 		this.iHaveFile = wrap.areThereFiles();
@@ -277,6 +312,7 @@ public class TransmissionHandler {
 			}
 		}
 		//maybe dump ï¿½nï¿½ char.... for the "
+		@SuppressWarnings("unused")
 		int dump = is.read();
 
 		this.working = wrap.getMoreFiles();
@@ -294,6 +330,7 @@ public class TransmissionHandler {
 			total		= 10
 		 */
 		byte[] buf = new byte[10];
+		@SuppressWarnings("unused")
 		int len = is.read(buf);
 		String data = this.bytesToString(buf);
 
@@ -307,21 +344,44 @@ public class TransmissionHandler {
 		return (data.substring(match.start() + 1, match.end() -1).equals("ACCEPT") == true) ? true : false;
 	}
 
+	/**
+	 * @return The amount of data used in the Ping. Returns -1 unless a Ping is received.
+	 */
 	public int getPING() {
 		return this.pingLength;
 	}
+
+	/**
+	 * @return The {@link savannah.io.CRUD} value of the transmission.
+	 */
 	public CRUD getCRUD() {
 		return this.cr;
 	}
+
+	/**
+	 * @return The xml contained in the transmission. Returns an empty String, if a Ping is received.
+	 */
 	public String getXML() {
 		return this.xml;
 	}
+
+	/**
+	 * @return A list of {@link java.io.File} objects which were transfered. Returns an empty list, if a Ping is received.
+	 */
 	public List<File> getFILES() {
 		return this.files;
 	}
+
+	/**
+	 * @return True if any files were transfered, otherwise it returns false.
+	 */
 	public boolean getAnyFiles() {
 		return !this.files.isEmpty();
 	}
+
+	/**
+	 * @return True, if a transmission is received. Returns false if a Ping is received.
+	 */
 	public boolean getAccepted() {
 		return this.accepted;
 	}
