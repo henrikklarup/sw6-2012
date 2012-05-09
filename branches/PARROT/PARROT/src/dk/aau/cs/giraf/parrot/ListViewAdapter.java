@@ -28,7 +28,7 @@ public class ListViewAdapter extends ArrayAdapter<Category> //FIXME In this clas
 		if (view == null) {
 			LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(
 					Context.LAYOUT_INFLATER_SERVICE);
-			view = layoutInflater.inflate(R.layout.profile_list, null); //FIXME change profile_list to apropriate xml document
+			view = layoutInflater.inflate(R.layout.categoriesitem, null); //FIXME change profile_list to apropriate xml document
 		}
 
 		Category category = items.get(position);
