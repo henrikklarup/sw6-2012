@@ -1,0 +1,31 @@
+prologue
+	motivation
+	target group
+	target platform
+	workform
+	problem definition
+	system description
+analyse
+	architecture of the platform - achieved through the agile work - mentioned in *workform
+	customer criteria (usability, flexibility, easy to use) - achieved through meetings - mentioned in *workform
+	backlog - built up agily during the project - mentioned in *workform (scrum)
+		comment why they are important and why we prioritized as we did
+		mark done vs not done - comment with "next semester"
+design
+	architecture of the launcher
+	chosen criteria for the launcher - based on the *customer_criteria-section - slight modifications?
+implementation
+	usecase diagram with activities as main object of modulation
+		explanation of the implementational details of the activities
+			listings with critical code and explanation
+testing
+	unit testing
+		how testing was conducted
+		what testing gave us and how it affected our work
+	usability test
+		how testing was conducted
+		what testing gave us and how it affected our work
+epilogue
+	reflection
+	remarks to the next group of developers
+	conclusion
