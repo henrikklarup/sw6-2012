@@ -9,6 +9,8 @@
 	<string name="thirdTab">Camera</string>
 	<string name="fourthTab">Internet</string>
 	<string name="TakePictureButton">Tag Billed</string>
+	<string name="changecategorycolor">Ændring af baggrunds farve på kategoriten</string>
+	<string name="changesentencecolor">Ændring af baggrunds farve på sætningsbrættet</string>
 	
 	<!-- Old DigiPecs String Values.  -->
 	
@@ -37,7 +39,4 @@
     <string name="addImageFromCameraButtonText">Fra Kamera</string>
     <string name="addImageFromPhoneButtonText">Fra Telefon</string>
     <string name="errorSoundNotSavedIO">Sound not Saved</string>
-	
-    <string name="changecategorycolor">Ændring af baggrunds farve på kategoriten</string>
-	\<string name="changesentencecolor">Ændring af baggrunds farve på sætningsbrættet</string>
 </resources>
