@@ -41,7 +41,7 @@ public class OptionsFragment extends Fragment
 	}
 	private void initColorButtons() {
 		
-		Button ccc = (Button) parrent.findViewById(R.id);
+		Button ccc = (Button) parrent.findViewById(R.id.c);
 	
 		
 		colorGradientButton1.setOnClickListener(new OnClickListener() {
