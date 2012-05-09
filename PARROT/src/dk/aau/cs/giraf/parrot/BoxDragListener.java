@@ -1,6 +1,6 @@
 package dk.aau.cs.giraf.parrot;
 
-import parrot.Package.R;
+
 import android.R.integer;
 import android.app.Activity;
 import android.view.DragEvent;
