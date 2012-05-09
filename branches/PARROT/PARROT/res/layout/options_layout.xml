@@ -4,4 +4,25 @@
     android:layout_height="match_parent"
     android:background="@drawable/optionsbackground"
     android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/changecategorycolor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:radius="7dp"
+        android:textSize="14dp" 
+        android:text="@string/changecategorycolor"
+        android:background="@drawable/Button"
+        android:layout_margin="5dp"/>
+
+    <Button
+        android:id="@+id/changesentencecolor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/Button"
+        android:radius="7dp"
+        android:text="@string/changesentencecolor"
+        android:textSize="14dp"
+        android:layout_margin="5dp"/>
+    
 </LinearLayout>
