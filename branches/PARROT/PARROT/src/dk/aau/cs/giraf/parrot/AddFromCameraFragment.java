@@ -21,12 +21,10 @@
 
 package dk.aau.cs.giraf.parrot;
 
+import dk.aau.cs.giraf.parrot.R;
 import java.io.IOException;
-
-import parrot.Package.R;
-
-import dk.aau.cs.giraf.parrot.ImageModificationListener;
-import dk.aau.cs.giraf.parrot.ImageModifyView;
+import dk.aau.cs.giraf.parrot.digipecs.ImageModificationListener;
+import dk.aau.cs.giraf.parrot.digipecs.ImageModifyView;
 import android.app.Activity;
 import android.app.Fragment;
 import android.graphics.Bitmap;
