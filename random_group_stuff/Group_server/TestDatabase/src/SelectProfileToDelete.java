@@ -266,6 +266,7 @@ public class SelectProfileToDelete extends HttpServlet {
 			out.println("<hr>");
 			out.println("<table>");
 			out.println("<tr>");
+			out.println("<th>Billede</th>");
 			out.println("<th>ID</th>");
 			out.println("<th>Navn</th>");
 			out.println("</tr>");
@@ -275,7 +276,7 @@ public class SelectProfileToDelete extends HttpServlet {
 
 				out.println("<tr onmouseover=\"ChangeColor(this, true);\" onmouseout=\"ChangeColor(this, false);\"" + 
 						"onclick=\"setID('"+p.getID()+"'); submitform();\">");
-				out.println("<td>" + p.getID() + "</td><td>"+p.getName()+"</td>");//<td>"+p.getGuardian()+"</td><td>"+p.getParent()+"</td>");
+				out.println("<td><img src='"+p.getPicture()+"' width=50 height=50></td><td>" + p.getID() + "</td><td>"+p.getName()+"</td>");//<td>"+p.getGuardian()+"</td><td>"+p.getParent()+"</td>");
 				out.println("</tr>");
 
 			}

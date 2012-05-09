@@ -179,9 +179,10 @@ public class DeleteProfileNotLoggedin extends HttpServlet {
 		//out.println(userID);
 		
 		//creating a connection
-		Connection con;
+		Connection con = null;
 		Statement stmt = null;
 		ResultSet rs = null;
+		String path = null;
 		try{
 			Class.forName("org.gjt.mm.mysql.Driver");
 			//connects to our server with user: eder and password: 123456
@@ -199,10 +200,13 @@ public class DeleteProfileNotLoggedin extends HttpServlet {
 			}
 			
 			for(Media m : medialist){
-				File deletePicture = new File(m.getMPath());
+				path = getServletContext().getRealPath(m.getMPath()); 
+				File deletePicture = new File(path);
 				if(deletePicture.exists()){
 					deletePicture.delete();
 				}
+				//out.println("Debug");
+				//out.println(m.getMPath());
 			}
 			
 			//This line executes the query to delete from Authusers table where idUser matches the userID that we get from the selected profile	
@@ -221,6 +225,32 @@ public class DeleteProfileNotLoggedin extends HttpServlet {
 		}
 		catch(Exception e){
 			out.println("The execution is " + e);
+		}
+		finally
+		{
+			try
+			{
+				if (rs != null) 
+				{
+					rs.close();
+					rs = null;
+				}
+				if (stmt != null) 
+				{
+					stmt.close();
+					stmt = null;
+				}
+				if (con != null)
+				{
+					con.close();
+					con = null;
+				}
+			}
+			catch (SQLException e) 
+			{
+				out.println("The execution is " + e);
+			}
+			
 		}
 	}
 }
