@@ -45,7 +45,8 @@ public class CommitHandler {
 			if(e.getEventsocket() != null)
 			{
 				log.makeLogEntry(e.getEventsocket(), CRUD.COMMIT.toString(), true);
-				IOHandler.getInstance().respond(e.getEventsocket(), queries.size() + " received, of which "+failed);
+//				IOHandler.getInstance().respond(e.getEventsocket(), queries.size() + " received, of which "+failed);
+				IOHandler.getInstance().respond(e.getEventsocket(), CRUD.COMMIT, queries.size() + " received, of which " + failed);
 			}
 			failed = 0;
 		}
