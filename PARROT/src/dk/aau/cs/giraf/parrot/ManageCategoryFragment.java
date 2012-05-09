@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.DragShadowBuilder;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
@@ -27,6 +28,13 @@ public class ManageCategoryFragment extends Fragment {
 	public static int currentCategoryId = 0; //This is the currrent category that is chosen
 	public static PARROTProfile profileBeingModified = PARROTActivity.getUser();
 	public static ArrayList<Pictogram> categories =  new ArrayList<Pictogram>();
+	
+	
+	public void onAttach(Activity activity) {
+		// TODO Auto-generated method stub
+		super.onAttach(activity);
+		this.parrent = activity;
+	}
 	
 	public void onCreate(Bundle savedInstanceState) {
 		
@@ -46,9 +54,22 @@ public class ManageCategoryFragment extends Fragment {
 		 */			
 		
 		
-		categories.setAdapter(new ListViewAdapter(this, R.id.categoriesitem, profileBeingModified.getCategoryAt(currentCategoryId))); //FIXME Create xml for this
+		categories.setAdapter(new ListViewAdapter(parrent, R.id.categoriesitem, profileBeingModified.getCategories())); //FIXME Create xml for this
+		
 		
 		pictograms.setAdapter(new PictogramAdapter(profileBeingModified.getCategoryAt(currentCategoryId), parrent));
+		
+		
+		
+		categories.setOnItemClickListener(new OnItemClickListener() {
+
+			public void onItemClick(AdapterView<?> arg0, View view, int position, long id) 
+			{
+				//TODO change currentCategoryId
+								
+			}
+			
+		});
 		
 		
 		categories.setOnItemLongClickListener(new OnItemLongClickListener()
@@ -57,7 +78,7 @@ public class ManageCategoryFragment extends Fragment {
 			public boolean onItemLongClick(AdapterView<?> arg0, View view, int position, long id)
 			{
 				draggedItemIndex = position;
-				catDragOwnerID = R.id.pictogramgrid;
+				catDragOwnerID = R.id.categories;
 				ClipData data = ClipData.newPlainText("label", "text"); //TODO Dummy. Pictogram information can be placed here instead.
 				DragShadowBuilder shadowBuilder = new DragShadowBuilder(view);
 				view.startDrag(data, shadowBuilder, view, 0);
@@ -72,7 +93,7 @@ public class ManageCategoryFragment extends Fragment {
 			public boolean onItemLongClick(AdapterView<?> arg0, View view, int position, long id)
 			{
 				draggedItemIndex = position;
-				catDragOwnerID = R.id.pictogramgrid;
+				catDragOwnerID = R.id.pictograms;
 				ClipData data = ClipData.newPlainText("label", "text"); //TODO Dummy. Pictogram information can be placed here instead.
 				DragShadowBuilder shadowBuilder = new DragShadowBuilder(view);
 				view.startDrag(data, shadowBuilder, view, 0);

@@ -1,13 +1,12 @@
 package dk.aau.cs.giraf.parrot;
 
-import parrot.Package.R;
+import android.R;
 import android.app.Activity;
 import android.view.DragEvent;
 import android.view.View;
 import android.view.View.OnDragListener;
+import android.widget.GridView;
 import android.widget.ListView;
-
-//TODO work in progress... (do not touch !!!) (kim)
 
 public class ManagementBoxDragListener implements OnDragListener
 {
@@ -15,12 +14,12 @@ public class ManagementBoxDragListener implements OnDragListener
 	private Activity parrent;
 	private Pictogram draggedPictogram = null;
 	private PARROTProfile profile = PARROTActivity.getUser();
-
-
+	ListView categories = (ListView) parrent.findViewById(R.id.categories);
+	GridView pictograms = (GridView) parrent.findViewById(R.id.pictograms);
+	
 	public ManagementBoxDragListener(Activity active) {
 		parrent = active;
 	}
-// This is where i got to TODO
 	boolean insideOfMe = false;
 	public boolean onDrag(View self, DragEvent event) {
 		if (event.getAction() == DragEvent.ACTION_DRAG_STARTED){
@@ -53,12 +52,14 @@ public class ManagementBoxDragListener implements OnDragListener
 		} else if (event.getAction() == DragEvent.ACTION_DROP){
 			if (insideOfMe){
 
-				if(self.getId()==R.id.trash && ManageCategoryFragment.catDragOwnerID != R.id.pictograms) //We are to delete a pictogram from a category
+				if(self.getId()==R.id.trash && ManageCategoryFragment.catDragOwnerID == R.id.pictograms) //We are to delete a pictogram from a category
 				{
-					profile.getCategoryAt(ManageCategoryFragment.currentCategoryId).removePictogram(ManageCategoryFragment.draggedItemIndex); //TODO create longclick listener that modifies draggedItemIndex //FIXME update view
+					profile.getCategoryAt(ManageCategoryFragment.currentCategoryId).removePictogram(ManageCategoryFragment.draggedItemIndex);
+					
+					pictograms.setAdapter(new PictogramAdapter(ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.currentCategoryId), parrent));
 				}
 				
-				else if(self.getId()==R.id.categories && ManageCategoryFragment.catDragOwnerID != R.id.pictograms) //We are to copy a pictogram into another category
+				else if(self.getId()==R.id.categories && ManageCategoryFragment.catDragOwnerID == R.id.pictograms) //We are to copy a pictogram into another category
 				{
 					
 					draggedPictogram = profile.getCategoryAt(ManageCategoryFragment.currentCategoryId).getPictogramAtIndex(ManageCategoryFragment.draggedItemIndex); 
@@ -69,9 +70,10 @@ public class ManagementBoxDragListener implements OnDragListener
 					int index = categories.pointToPosition(x, y);
 					
 					profile.getCategoryAt(index).addPictogram(draggedPictogram);
+					
 				}
-				else if(self.getId()==R.id.categories && ManageCategoryFragment.catDragOwnerID != R.id.categories) //We are to copy a category into another category
-				{
+				else if(self.getId()==R.id.pictograms && ManageCategoryFragment.catDragOwnerID == R.id.categories) //We are to copy a category into another category
+				{	
 					ListView categories = (ListView) parrent.findViewById(R.id.categories);
 					int x = (int)event.getX();
 					int y = (int)event.getY();
@@ -84,15 +86,16 @@ public class ManagementBoxDragListener implements OnDragListener
 					{
 						categoryCopiedTo.addPictogram(categoryCopiedFrom.getPictogramAtIndex(i)); 
 					}
-					//FIXME Update View And redraw
+					pictograms.setAdapter(new PictogramAdapter(ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.currentCategoryId), parrent));
 				}
-				else if(self.getId()==R.id.trash && ManageCategoryFragment.catDragOwnerID != R.id.categories) //We are to delete a category
+				else if(self.getId()==R.id.trash && ManageCategoryFragment.catDragOwnerID == R.id.categories) //We are to delete a category
 				{	
-					profile.removeCaregory(ManageCategoryFragment.draggedItemIndex); //FIXME update view (redraw)
+					profile.removeCaregory(ManageCategoryFragment.draggedItemIndex);
+					categories.setAdapter(new ListViewAdapter(parrent, R.id.categoriesitem, ManageCategoryFragment.profileBeingModified.getCategories()));
 				}
 				else
 				{
-					
+					//TODO check that nothing is done. 
 				}
 				
 				
