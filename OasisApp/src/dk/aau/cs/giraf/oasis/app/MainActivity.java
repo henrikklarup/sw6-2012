@@ -12,7 +12,7 @@ import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
 public class MainActivity extends Activity implements OnClickListener {
 
-	private Button bMyProfile, bMyChildren, bMyDepartments, bMyDepChildren;
+	private Button bMyProfile, bAllProfiles, bAllDepartments;
 	private Intent direct;
 	private long guardianId;
 	public Helper helper;
@@ -44,34 +44,27 @@ public class MainActivity extends Activity implements OnClickListener {
 	private void initializeViews() {
 		bMyProfile = (Button) findViewById(R.id.bMyProfile);
 		bMyProfile.setOnClickListener(this);
-		bMyChildren = (Button) findViewById(R.id.bMyChildren);
-		bMyChildren.setOnClickListener(this);
-		bMyDepartments = (Button) findViewById(R.id.bMyDepartments);
-		bMyDepartments.setOnClickListener(this);
-		bMyDepChildren = (Button) findViewById(R.id.bMyDepChildren);
-		bMyDepChildren.setOnClickListener(this);
+		bAllProfiles = (Button) findViewById(R.id.bAllProfiles);
+		bAllProfiles.setOnClickListener(this);
+		bAllDepartments = (Button) findViewById(R.id.bAllDepartments);
+		bAllDepartments.setOnClickListener(this);
 	}
 
 	@Override
 	public void onClick(View v) {
 		direct = new Intent(this, FragParentTab.class);
-		direct.putExtra("tabView", 0);
 		
 		switch (v.getId()) {
 		case R.id.bMyProfile:
-			direct.putExtra("view", 0);
+			direct.putExtra("tabView", FragParentTab.TABPROFILE);
 			startActivity(direct);
 			break;
-		case R.id.bMyChildren:
-			direct.putExtra("view", 1);
+		case R.id.bAllProfiles:
+			direct.putExtra("tabView", FragParentTab.TABALLPROFILES);
 			startActivity(direct);
 			break;
-		case R.id.bMyDepartments:
-			direct.putExtra("view", 2);
-			startActivity(direct);
-			break;
-		case R.id.bMyDepChildren:
-			direct.putExtra("view", 3);
+		case R.id.bAllDepartments:
+			direct.putExtra("tabView", FragParentTab.TABALLDEPARTMENTS);
 			startActivity(direct);
 			break;
 		}
