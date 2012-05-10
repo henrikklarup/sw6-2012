@@ -174,6 +174,22 @@ public class ProfilesHelper {
 
 		return profiles;
 	}
+	
+	/**
+	 * Get all profiles by a role
+	 * @return List<Profile>, containing all profiles
+	 */	
+	public List<Profile> getProfilesByRole(Profile.pRoles role) {
+		List<Profile> profiles = new ArrayList<Profile>();
+		Cursor c = _context.getContentResolver().query(ProfilesMetaData.CONTENT_URI, columns, ProfilesMetaData.Table.COLUMN_ROLE + " = '" + role.ordinal() + "'", null, null);
+
+		if (c != null) {
+			profiles = cursorToProfiles(c);
+			c.close();
+		}
+		
+		return profiles;
+	}
 
 	/**
 	 * Retrieve the certificates for a profile
