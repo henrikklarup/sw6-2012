@@ -9,7 +9,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_margin="20dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="20dp"
         android:drawableLeft="@drawable/logo"
         android:drawablePadding="10dp"
         android:gravity="center_vertical"
@@ -31,6 +32,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:background="@drawable/tab_selector"
             android:text="@string/myprofile" />
 
         <Button
@@ -38,6 +40,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:background="@drawable/tab_selector"
             android:text="@string/allprofiles" />
 
         <Button
@@ -45,6 +48,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:background="@drawable/tab_selector"
             android:text="@string/alldepartments" />
     </LinearLayout>
 

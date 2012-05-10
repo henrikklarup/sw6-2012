@@ -31,7 +31,7 @@ public class TabManagerAllProfiles extends Fragment implements OnTabChangeListen
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		mRoot = inflater.inflate(R.layout.tabappview, null);
+		mRoot = inflater.inflate(R.layout.taballprofilesview, null);
 		mTabHost = (TabHost) mRoot.findViewById(android.R.id.tabhost);
 		setupTabs();
 		return mRoot;

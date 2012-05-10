@@ -12,7 +12,8 @@
         <TabWidget
             android:id="@android:id/tabs"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/tab_unselected" />
 
         <FrameLayout
             android:id="@android:id/tabcontent"
@@ -34,6 +35,7 @@
         android:layout_marginBottom="50dp"
         android:layout_marginLeft="200dp"
         android:layout_marginRight="200dp"
+        android:background="@drawable/tab_selector"
         android:text="@string/back_button" />
 
 </TabHost>
