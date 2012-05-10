@@ -1,6 +1,5 @@
 package dk.aau.cs.giraf.parrot;
 
-import android.R;
 import android.app.Activity;
 import android.view.DragEvent;
 import android.view.View;
@@ -91,7 +90,7 @@ public class ManagementBoxDragListener implements OnDragListener
 				else if(self.getId()==R.id.trash && ManageCategoryFragment.catDragOwnerID == R.id.categories) //We are to delete a category
 				{	
 					profile.removeCaregory(ManageCategoryFragment.draggedItemIndex);
-					categories.setAdapter(new ListViewAdapter(parrent, R.id.categoriesitem, ManageCategoryFragment.profileBeingModified.getCategories()));
+					categories.setAdapter(new ListViewAdapter(parrent, R.layout.categoriesitem, ManageCategoryFragment.profileBeingModified.getCategories()));
 				}
 				else
 				{
