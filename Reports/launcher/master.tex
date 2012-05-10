@@ -36,6 +36,17 @@
 % Includes the file which contains all the document configurations and packages - make sure to edit this file
 \input{classicthesis-config}
 
+% to get \newevenside :
+\usepackage{ifthen}
+\newcommand{\newevenside}{
+        \ifthenelse{\isodd{\thepage}}{\newpage}{
+        \newpage
+        \phantom{placeholder} % doesn't appear on page
+        \thispagestyle{empty} % if want no header/footer
+        \newpage
+        }
+}
+
 \begin{document}
 
 \frenchspacing % Reduces space after periods to make text more compact
@@ -71,7 +82,9 @@
 
 
 
-\cleardoublepage\include{FrontBackmatter/Contents} % Contents, list of figures/tables/listings and acronyms
+%\cleardoublepage
+\newevenside
+\include{FrontBackmatter/Contents} % Contents, list of figures/tables/listings and acronyms
 
 \pagenumbering{arabic} % Arabic page numbering for thesis content (1, 2, 3, etc)
 %\setcounter{page}{90} % Uncomment to manually start the page counter at an arbitrary value (for example if you wish to count the pre-content pages in the page count)
