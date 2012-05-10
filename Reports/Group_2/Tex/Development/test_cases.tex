@@ -1,0 +1,227 @@
+\section{Test Cases}
+\label{sec:test_cases}
+
+\begin{center}
+	\line(1,0){384}
+\end{center}
+\paragraph{Identifier}
+	\textit{saveAs\#1}
+\paragraph{Test item}
+	Functionality to save customized timers in specific lists.
+\paragraph{Input spec.}
+	\begin{enumerate}
+		\item Click "New Template", click "Save As", and choose name and location. Check if the profile was saved in the chosen location and with the chosen name.
+		\item Choose any configuration, edit the settings, click "Save As", and choose name and location. Check if the profile was saved in the chosen location and with the chosen name.
+		\item Create a new configuration with random settings and use "Save As" to save it. Go to the saved configuration, and check if the settings has changed since the save.
+		\item Choose an existing configuration or create a new one, and do step 1. with "Predefined" and "Last Used" as save locations.
+		\item Do step 1-3 again, but clear the tablet memory before the correctness is checked.
+	\end{enumerate}
+\paragraph{Output spec.}
+	\begin{enumerate}
+		\item Configurations is saved in the chosen locations, unless the chosen locations is "Predefined" or "Last Used".
+		\item Configurations is saved with the chosen name.
+		\item Configurations is saved with the chosen settings.
+	\end{enumerate}
+\paragraph{environmental needs}
+	\begin{itemize}
+		\item Tablet running Android 3.2.
+		\item Timer application installed.
+		\item OasisLocalDatabase installed.
+		\item One staff member to perform the test.
+	\end{itemize}
+\begin{center}
+	\line(1,0){384}
+\end{center}
+
+\paragraph{Identifier}
+	\textit{save\#1}
+\paragraph{Test item}
+	Functionality to save customized or predefined timers in the highlighted child, without having to choose name and location.
+\paragraph{Input spec.}
+	\begin{enumerate}
+		\item Check if it is possible to save configurations in "Predefined" or "Last Used" by choosing one of the configurations in each list, edit some settings, and press "Save".
+		\item Select a child, edit the settings, and press "Save". Check if the chosen settings were saved.
+		\item Select a child, select a configuration among the child's configurations, edit the settings, and press "Save". Check if the chosen settings were saved in the same configuration.
+		\item Select a child, edit the settings, and press "Save" two times and see if two identical configurations are saved on the given child.
+		\item Highlight another configuration than the one you have just saved, then highlight the one you just saved and press "Save". Check if there is now saved a duplicate of the first saved configuration.
+		\item Do step 2-3 again and check if any other configuration was changed during the saving process.
+	\end{enumerate}
+\paragraph{Output spec.}
+	\begin{enumerate}
+		\item Configurations is saved in the highlighted child.
+		\item When "Predefined" or "Last Used" is highlighted, nothing is saved when the "Save" is pressed.
+		\item New configurations are saved with the chosen settings.
+		\item When selecting and saving existing configurations, they are updated with the edited settings.
+	\end{enumerate}
+\paragraph{environmental needs}
+	\begin{itemize}
+		\item Tablet running android 3.2.
+		\item Timer application installed.
+		\item OasisLocalDatabase installed.
+		\item One staff member to perform the test.
+	\end{itemize}
+\begin{center}
+	\line(1,0){384}
+\end{center}
+
+\paragraph{Identifier}
+	\textit{checkLastUsed\#1}
+\paragraph{Test item}
+	Functionality to save timers into the "Last Used" list every any timer has been run.
+\paragraph{Input spec.}
+	\begin{enumerate}
+		\item Run 3 different timers, and see if they were saved on top if the "Last Used" list.
+		\item Repeat step 1, but clear the tablet memory before "Last Used" is inspected.
+	\end{enumerate}
+\paragraph{Output spec.}
+	\begin{enumerate}
+		\item Whenever a timer has been used, it is saved on top of the "Last Used" list.
+	\end{enumerate}
+\paragraph{environmental needs}
+	\begin{itemize}
+		\item Tablet running android 3.2.
+		\item Timer application installed.
+		\item OasisLocalDatabase installed.
+		\item One staff member to perform the test.
+	\end{itemize}
+\begin{center}
+	\line(1,0){384}
+\end{center}
+
+\paragraph{Identifier}
+	\textit{hOnClick\#1}
+\paragraph{Test item}
+	Functionality to highlight list items when they are clicked.
+\paragraph{Input spec.}
+	\begin{enumerate}
+		\item Select three different list items in both the child list and the configuration list and see if they stay highlighted.
+	\end{enumerate}
+\paragraph{Output spec.}
+	\begin{enumerate}
+		\item When a list item is selected, it is highlighted, and it stays highlighted until another list item is selected.
+	\end{enumerate}
+\paragraph{environmental needs}
+	\begin{itemize}
+		\item Tablet running android 3.2.
+		\item Timer application installed.
+		\item One staff member to perform the test.
+	\end{itemize}
+\paragraph{Special procedural requirements}
+	\begin{itemize}
+		\item The configurations on every child will always be visible when a child list has been selected. Therefore, make sure that the highlighted child has at least one configuration before testing.
+		\item There is no element in the configuration list if no element in the child list has been selected.
+	\end{itemize}
+\begin{center}
+	\line(1,0){384}
+\end{center}
+
+\paragraph{Identifier}
+	\textit{stillHAfterSave\#1}
+\paragraph{Test item}
+	Functionality to highlight list items after a save procedure.
+\paragraph{Input spec.}
+	\begin{enumerate}
+		\item Select a child and a configuration, edit the settings for the configuration, and click "Save". See if the selected list items stay highlighted after it has been updated.
+	\end{enumerate}
+\paragraph{Output spec.}
+	\begin{enumerate}
+		\item When a child and configuration is selected, and the settings for that configuration is changed and saved, the child list item and configuration list item is still highlighted.
+	\end{enumerate}
+\paragraph{environmental needs}
+	\begin{itemize}
+		\item Tablet running android 3.2.
+		\item Timer application installed.
+		\item One staff member to perform the test.
+	\end{itemize}
+\paragraph{Special procedural requirements}
+	\begin{itemize}
+		\item The configurations on every child will always be visible when a child list has been selected. Therefore, make sure that the highlighted child has at least one configuration in the list before testing.
+		\item There is no element in the configuration list if no element in the child list has been selected.
+		\item When a configuration is selected, the settings for that configuration is always shown set in the "Customize" menu.
+	\end{itemize}
+\paragraph{Intercase dependencies}
+	\textit{save\#1}
+\begin{center}
+	\line(1,0){384}
+\end{center}
+
+\paragraph{Identifier}
+	\textit{hChildOnLaunch\#1}
+\paragraph{Test item}
+	Functionality to highlight list items according to the chosen child when the application is launched through the GIRAF launcher.
+\paragraph{Input spec.}
+	\begin{enumerate}
+		\item Start the GIRAF launcher and open the timer application.
+		\item Select a child and note the name of the child.
+	\end{enumerate}
+\paragraph{Output spec.}
+	\begin{enumerate}
+		\item The child selected in the GIRAF launcher is highlighted and the configurations belonging to this child is loaded.
+	\end{enumerate}
+\paragraph{environmental needs}
+	\begin{itemize}
+		\item Tablet running android 3.2.
+		\item Timer application installed.
+		\item GIRAF launcher installed.
+		\item One staff member to perform the test.
+	\end{itemize}
+\paragraph{Special procedural requirements}
+	\begin{itemize}
+		\item The configurations on every child will always be visible when a child list has been selected. Therefore, make sure that the highlighted child has at least one configuration before testing.
+		\item There is no element in the configuration list if no element in the child list has been selected.
+	\end{itemize}
+\begin{center}
+	\line(1,0){384}
+\end{center}
+
+\paragraph{Identifier}
+	\textit{checkTimerTime\#1}
+\paragraph{Test item}
+	Functionality which draws and updates the timer according to the time left and ensures the timer ends when the time is up.
+\paragraph{Input spec.}
+	\begin{enumerate}
+		\item Run four different timer styles with a static timespan (fx 20 minutes).
+		\item Each time a timer is started, start a precise independent stopwatch.
+		\item When the timer reaches zero stop the independent stopwatch.
+	\end{enumerate}
+\paragraph{Output spec.}
+	\begin{enumerate}
+		\item The stopwatch must deviate no more than two seconds from the time selected in \textbf{input spec.} step [1].
+	\end{enumerate}
+\paragraph{environmental needs}
+	\begin{itemize}
+		\item Tablet running android 3.2.
+		\item Timer application installed.
+		\item Stopwatch.
+		\item One staff member to perform the test.
+	\end{itemize}
+\begin{center}
+	\line(1,0){384}
+\end{center}
+
+\paragraph{Identifier}
+	\textit{checkDoneFunc\#1}
+\paragraph{Test item}
+	The "Done" screen appearing when the time has run out.
+\paragraph{Input spec.}
+	\begin{enumerate}
+		\item Start a timer at any timespan and let the time run out. See if the "Done" screen appears within two seconds after the time has run out.
+		\item Start a timer at any timespan and click the "back" button, and wait at least the amount of time the timer would have run, to verify that the "Done" screen do not show up anyways, if the timer has been interrupted.
+	\end{enumerate}
+\paragraph{Output spec.}
+	\begin{enumerate}
+		\item When a timer has been run, and not interrupted, the "Done" screen appears about two seconds after the time has run out.
+		\item The "Done" screen is only shown if the timer is not interrupted, and the time has run out.
+	\end{enumerate}
+\paragraph{environmental needs}
+	\begin{itemize}
+		\item Tablet running android 3.2.
+		\item Timer application installed.
+		\item Stopwatch.
+		\item One staff member to perform the test.
+	\end{itemize}
+\paragraph{Intercase dependencies}
+	Test case: \textit{checkTimerTime\#1}
+\begin{center}
+	\line(1,0){384}
+\end{center}

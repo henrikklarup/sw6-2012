@@ -1,0 +1,61 @@
+%--- old table layout ---%
+\begin{comment}
+
+\begin{table}[H]
+\centering 
+\begin{tabular}{|p{3cm}|p{10cm}|} 
+\hline
+\textbf{Identifier} & Save and load configurations \\
+\hline
+\textbf{Feature} & 
+	\begin{enumerate} 
+		\item Saving and loading a configuration 
+	\end{enumerate} \\
+\hline
+\textbf{Approach} & 
+NB! Check if the configuration has changed in the database by closing the application and resetting the memory (RAM).
+	\begin{itemize} 
+		\item Create a configuration in three ways:
+			\begin{itemize}
+				\item Click "New Template" and click "Save As".
+				\item Edit a current configuration and click "Save As".
+				\item Check if it is possible to "Save As" a configuration in "Predefined" or "Last Used".
+				\item Check if loaded settings are the same as the when they were saved. 
+			\end{itemize}
+		\item Edit and save (by clicking "Save") each of the configuration:
+			\begin{itemize}
+				\item Check if it is possible to save configurations in "Predefined" or "Last Used".
+				\item Check if they have the settings they were saved with.
+				\item Check if there is any duplicates of any of the configurations.
+				\item Check if any other configuration was changed while editing.
+			\end{itemize}
+		\end{itemize} \\
+\hline
+\textbf{Test case ID} & 
+	\begin{enumerate}
+		\item Check save as functionality - \textit{saveAs\#1}
+		\item Check save functionality - \textit{save\#1}
+	\end{enumerate} \\
+\hline
+\textbf{Pass/fail criteria} &
+	Pass
+	\begin{itemize}
+		\item It is possible to create a new configuration by clicking "New Template" and "Save As".
+		\item It is possible to make a new configuration by clicking "Save As" on any configuration.
+		\item No profiles in "Last Used" or "Predefined" is editable.
+		\item It is not possible to save new profiles to "Last Used" or "Predefined".
+	\end{itemize}
+	Fail
+	\begin{itemize}
+		\item If any of the above does not hold.
+		\item When saving with "Save" the configuration is being duplicated.
+		\item When saving another configuration is being altered.
+	\end{itemize} \\
+[1ex]  % [1ex] adds vertical space
+\hline %inserts single line
+\end{tabular}
+\caption{Test design for save and load configurations.}
+\label{tab:TD_SAVELOAD}
+\end{table}
+
+\end{comment}

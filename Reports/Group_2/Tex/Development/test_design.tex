@@ -1,0 +1,153 @@
+\chapter{Test}
+\label{cha:test}
+The WOMBAT application is tested through dynamic black box testing, which means that we run the application, and test the functionality through the user interface, without viewing the code. We have made test design and test cases for some of the most important functionality, and these are then out sourced to one of the other project groups of this semester.
+
+\section{Test Design}
+\label{sec:test_design}
+The test designs are split into four schemes, which are listed in this section.
+
+\begin{center}
+	\line(1,0){384}
+\end{center}
+\paragraph{Identifier}
+	Save and load.
+\paragraph{Feature}
+	Saving and loading configurations.
+\paragraph{Approach}
+	NB! Check if the configuration has changed in the database by closing the application and resetting the memory (RAM).
+		\begin{itemize} 
+			\item Create a configuration in three ways:
+				\begin{itemize}
+					\item Click "New Template" and click "Save As".
+					\item Edit a current configuration and click "Save As".
+					\item Check if it is possible to "Save As" a configuration in "Predefined" or "Last Used".
+					\item Check if loaded settings are the same as the when they were saved. 
+				\end{itemize}
+			\item Edit and save (by clicking "Save") each of the configuration:
+		\begin{itemize}
+			\item Check if it is possible to save configurations in "Predefined" or "Last Used".
+			\item Check if they have the settings they were saved with.
+			\item Check if there is any duplicates of any of the configurations.
+			\item Check if any other configuration was changed while editing.	
+		\end{itemize}
+	\end{itemize}
+\paragraph{Test case ID}
+	\begin{enumerate}
+		\item Check save as functionality - \textit{saveAs\#1}
+		\item Check save functionality - \textit{save\#1}
+	\end{enumerate}
+\paragraph{Pass/fail criteria}
+	Pass
+	\begin{itemize}
+		\item It is possible to create a new configuration by clicking "New Template" and "Save As".
+		\item It is possible to make a new configuration by clicking "Save As" on any configuration.
+		\item No profiles in "Last Used" or "Predefined" is editable.
+		\item It is not possible to save new profiles to "Last Used" or "Predefined".
+	\end{itemize}
+	Fail
+	\begin{itemize}
+		\item If any of the above does not hold.
+		\item When saving with "Save" the configuration is being duplicated.
+		\item When saving another configuration is being altered.
+	\end{itemize}
+
+
+\begin{center}
+	\line(1,0){384}
+\end{center}
+\paragraph{Identifier}
+	Last used is updated correct
+\paragraph{Feature}
+	When a timer has been used, it should lie in the top of the list of last used configurations. 
+\paragraph{Approach}
+	\begin{enumerate} 
+		\item Start any timer
+			\begin{itemize}
+				\item Check if the timer has been added to the last used list
+			\end{itemize}
+		\item Repeat step [1] 7 times with different timers
+		\item Start any of the timers in "Last Used" and check if it is being moved to the top of the list.
+	\end{enumerate}
+\paragraph{Test case ID}
+	\begin{enumerate}
+		\item Check "last used" functionality - \textit{checkLastUsed\#1}
+	\end{enumerate}
+\paragraph{Pass/fail criteria}
+	Pass
+	\begin{itemize}
+		\item Every time a timer used, it is saved on the top of the "Last Used" list.
+	\end{itemize}
+	Fail
+	\begin{itemize}
+		\item If, in any case, a timer is not saved in the "Last Used" list after it has been used.
+	\end{itemize}
+\begin{center}
+	\line(1,0){384}
+\end{center}
+
+\paragraph{Identifier}
+	Highlight is working
+\paragraph{Feature}
+	When choosing a child or a configuration this should be highlighted, and when Wombat is started from the GIRAF launcher a child is chosen, this should be highlighted.
+\paragraph{Approach}
+	\begin{enumerate} 
+		\item Test if children and configurations is being highlighted when they are chosen.
+		\item Test if the child chosen in the GIRAF launcher is being highlighted in Wombat.
+		\item Test if the child chosen is still highlighted after saving.
+	\end{enumerate}
+	NOTE! An element in the child list is chosen if there is configurations in the configurations list, and an element in the configurations list is chosen if there is loaded a configuration in the edit screen.
+\paragraph{Test case ID}
+	\begin{enumerate}
+		\item Check if list elements is highlighted when clicked - \textit{hOnClick\#1}
+		\item Check if child is still highlighted after save - \textit{stillHAfterSave\#1}
+		\item Check if the right child is highlighted after launch through the GIRAF launcher - \textit{hChildOnLaunch\#1}
+	\end{enumerate}
+\paragraph{Pass/fail criteria}
+	Pass
+	\begin{itemize}
+		\item If list elements are always highlighted when selected.
+	\end{itemize}
+	Fail
+	\begin{itemize}
+		\item If a child is selected and it is not highlighted.
+		\item If a configuration is selected and it is not highlighted.
+		\item If nothing is highlighted when starting Wombat from the GIRAF Launcher
+	\end{itemize}
+
+
+\begin{center}
+	\line(1,0){384}
+\end{center}
+\paragraph{Identifier}
+	Deviation in time on done activity
+\paragraph{Feature}
+	When the timer has run out, the "Done" screen will appear. 
+\paragraph{Approach}
+	\begin{enumerate} 
+		\item Run a timer with any timespan, and wait for the "Done" screen to appear
+			\begin{itemize}
+				\item Use an independent stopwatch to verify the time it takes to show the "Done" screen.
+				\item Verify that there is no more than a 2 second deviation in time, from the time has run out until the "Done" screen appears.
+			\end{itemize}
+		\item Repeat step [1] 3 times with different timespans.
+		\item Do step [2] again with any timer with a "Digital Watch" attached.
+		\item Start a timer with any timespan, click the "back" button, and verify that the "Done" screen do not show up randomly.
+	\end{enumerate}
+\paragraph{Test case ID}
+	\begin{enumerate}
+		\item Check if timer matches real-life time - \textit{checkTimerTime\#1}
+		\item Check if the done screen appears when it should - \textit{checkDoneFunc\#1}
+	\end{enumerate}
+\paragraph{Pass/fail criteria}
+	Pass
+	\begin{itemize}
+		\item If the "Done" screen appears no more than two seconds after the time has run out.
+		\item If any timer is not deviating more than two seconds from real-world time.
+	\end{itemize}
+	Fail
+	\begin{itemize}
+		\item The "Done" screen appears even though the timer is not running anymore or the timer is not finished.
+	\end{itemize}
+\begin{center}
+	\line(1,0){384}
+\end{center}
