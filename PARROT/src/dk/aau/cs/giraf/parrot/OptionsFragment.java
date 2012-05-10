@@ -10,12 +10,11 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.LinearLayout;
 
 
 
@@ -38,12 +37,16 @@ public class OptionsFragment extends Fragment
 		parrent.setContentView(R.layout.options_layout);
 		initColorButtons();
 	}
+	
+
 	private void initColorButtons() {
 
 		Button ccc = (Button) parrent.findViewById(R.id.changecategorycolor);// these are two different buttons
 
 		Button csc = (Button) parrent.findViewById(R.id.changesentencecolor);
 
+		//FIXME after clicking OK on any of the colour picker dialogs, it is nolonger possible to click the buttons.
+		//This is fixed by removing the  lines that interact the views of another fragment.
 
 		ccc.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
@@ -56,7 +59,9 @@ public class OptionsFragment extends Fragment
 						PARROTProfile user = PARROTActivity.getUser();
 						user.setCategoryColor(color);
 						PARROTActivity.setUser(user);
-						SpeechBoardFragment.setColours(parrent);
+//						parrent.setContentView(R.layout.speechboard_layout);
+//						SpeechBoardFragment.setColours(parrent);
+//						parrent.setContentView(R.layout.options_layout);
 
 					}
 				});
@@ -76,7 +81,9 @@ public class OptionsFragment extends Fragment
 						PARROTProfile user = PARROTActivity.getUser();
 						user.setSentenceBoardColor(color);
 						PARROTActivity.setUser(user);
-						SpeechBoardFragment.setColours(parrent);
+//						parrent.setContentView(R.layout.speechboard_layout);
+//						SpeechBoardFragment.setColours(parrent);
+//						parrent.setContentView(R.layout.options_layout);
 
 					}
 				});

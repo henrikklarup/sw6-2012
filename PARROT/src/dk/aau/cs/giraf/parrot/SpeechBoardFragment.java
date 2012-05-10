@@ -10,12 +10,15 @@ import android.app.Fragment;
 import android.content.ClipData;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.DragShadowBuilder;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 
 public class SpeechBoardFragment extends Fragment
 {
@@ -45,6 +48,9 @@ public class SpeechBoardFragment extends Fragment
 		super.onAttach(activity);
 		this.parrent = activity;
 	}
+	
+
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -58,7 +64,7 @@ public class SpeechBoardFragment extends Fragment
 		{
 			displayedCat = user.getCategoryAt(0); //TODO we might have to replace this.
 
-			//Fills the sentenceboard with emty pictograms
+			//Fills the sentenceboard with empty pictograms
 			while(speechBoardCategory.getPictograms().size() <PARROTActivity.getUser().getNumberOfSentencePictograms())
 			{
 				speechBoardCategory.addPictogram(empty);
@@ -132,6 +138,7 @@ public class SpeechBoardFragment extends Fragment
 
 
 	}
+
 	
 	public static void setColours(Activity invoker)
 	{
