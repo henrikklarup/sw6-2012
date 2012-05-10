@@ -15,6 +15,9 @@
     <string name="last_used">Sidst Brugt</string>
     <string name="profile_pic_description">Profil Billede</string>
     <string name="profile_list_time">Tid</string>
+    <string name="formfactor_timer">Timer</string>
+    <string name="formfactor_singleimg">Enkelt pictogram</string>
+    <string name="formfactor_splitimg">Split pictogram</string>
     
     <!-- TEMPLATE LIST -->
     <string name="template_list_header">Gemte Tilpasninger</string>
@@ -37,6 +40,10 @@
     <string name="color_time_left">Tid Tilbage</string>
     <string name="color_picker_button">Vælg Farve</string>
     <string name="attachment_button_description">Vedhæft</string>
+    <string name="attachment_dialog_pick_a_profile">Vælg den liste du vil kopierer og vedhæfte en profile fra</string>
+    <string name="attachment_dialog_pick_a_picture">Vælg et pictogram</string>
+    <string name="attachment_dialog_split_left">Vælg venstre pictogram</string>
+    <string name="attachment_dialog_split_right">Vælg højre pictogram</string>
     <string name="attachment_dialog_description">Vælg den profil du vil kopierer og vedhæfte</string>
     
     <string name="select_attachment_dialog">Vælg Vedhæft</string>

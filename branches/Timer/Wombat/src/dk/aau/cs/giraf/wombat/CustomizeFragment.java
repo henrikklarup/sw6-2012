@@ -1,7 +1,6 @@
 package dk.aau.cs.giraf.wombat;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import kankan.wheel.widget.OnWheelChangedListener;
 import kankan.wheel.widget.WheelView;
@@ -26,6 +25,7 @@ import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -34,9 +34,12 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import dk.aau.cs.giraf.TimerLib.Art;
 import dk.aau.cs.giraf.TimerLib.Attachment;
 import dk.aau.cs.giraf.TimerLib.Child;
 import dk.aau.cs.giraf.TimerLib.Guardian;
+import dk.aau.cs.giraf.TimerLib.SingleImg;
+import dk.aau.cs.giraf.TimerLib.SplitImg;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
 import dk.aau.cs.giraf.TimerLib.Timer;
 import dk.aau.cs.giraf.TimerLib.formFactor;
@@ -480,60 +483,155 @@ public class CustomizeFragment extends Fragment {
 	 */
 	private void initAttachmentButton() {
 
+		//Button for attachment
 		attachmentButton = (Button) getActivity().findViewById(
 				R.id.customize_attachment);
-
+		//Set attachment button onclicklistener
+		//1. window
 		attachmentButton.setOnClickListener(new OnClickListener() {
 
+			//First onClick
 			public void onClick(final View v) {
-				final ArrayList<Child> children = guard.publishList();
+				final ArrayList<formFactor> mode = guard.getMode();
 
 				final AlertDialog builder = new AlertDialog.Builder(v
 						.getContext()).create();
-
 				builder.setTitle(getString(R.string.attachment_button_description));
+				
 				ListView lv = new ListView(getActivity());
-				ChildAdapter adapter = new ChildAdapter(getActivity(),
-						android.R.layout.simple_list_item_1, children);
+				
+				ModeAdapter adapter = new ModeAdapter(getActivity(),android.R.layout.simple_list_item_1, mode);
+				
 				lv.setAdapter(adapter);
+				
+				
+				//2. window
 				lv.setOnItemClickListener(new OnItemClickListener() {
 
-					public void onItemClick(AdapterView<?> parent, View view,
-							int position, long id) {
-						List<String> values = new ArrayList<String>();
-						final ArrayList<SubProfile> subProfiles;
-						subProfiles = children.get(position).SubProfiles();
-
-						for (SubProfile subProfile : subProfiles) {
-							values.add(subProfile.name);
-						}
-
+					public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+//						List<String> values = new ArrayList<String>();
+						final formFactor form = mode.get(position);
+						
 						// Cast values to CharSequence and put it in the builder
-						final AlertDialog builder2 = new AlertDialog.Builder(v
-								.getContext()).create();
-						builder2.setTitle(getString(R.string.attachment_dialog_description));
+						final AlertDialog builder2 = new AlertDialog.Builder(v.getContext()).create();
+						
+						//New listview
 						ListView lv = new ListView(getActivity());
-						SubProfileAdapter adapter = new SubProfileAdapter(
-								getActivity(),
-								android.R.layout.simple_list_item_1,
-								subProfiles);
+						
+						ArrayAdapter adapter = null;
+						
+						switch(form){
+						case Timer:
+							builder2.setTitle(getString(R.string.attachment_dialog_pick_a_profile));
+							ArrayList<Child> child = guard.publishList();
+							adapter = new ChildAdapter(getActivity(),android.R.layout.simple_list_item_1,child);
+							break;
+						case SingleImg:
+							builder2.setTitle(getString(R.string.attachment_dialog_pick_a_picture));
+							ArrayList<Art> art = guard.ArtList;
+							adapter = new ArtAdapter(getActivity(),android.R.layout.simple_list_item_1,art);
+							break;
+						case SplitImg:
+							builder2.setTitle(getString(R.string.attachment_dialog_split_left));
+							ArrayList<Art> splitArt = guard.ArtList;
+							adapter = new ArtAdapter(getActivity(),android.R.layout.simple_list_item_1,splitArt);
+							break;
+						}
+	
+						
+//						SubProfileAdapter adapter = new SubProfileAdapter(
+//								getActivity(),
+//								android.R.layout.simple_list_item_1,
+//								subProfiles);
+						
 						lv.setAdapter(adapter);
+						//3. window
 						lv.setOnItemClickListener(new OnItemClickListener() {
 							public void onItemClick(AdapterView<?> parent,
 									View view, int position, long id) {
-								setAttachment(new Timer(subProfiles.get(position)));								
-								builder.dismiss();
-								builder2.dismiss();
+								
+								// Cast values to CharSequence and put it in the builder
+								final AlertDialog builder3 = new AlertDialog.Builder(v.getContext()).create();
+								
+								//New listview
+								ListView lv = new ListView(getActivity());
+								
+								ArrayAdapter adapter = null;
+								switch(form){
+								case Timer:
+									builder3.setTitle(getString(R.string.attachment_dialog_description));
+									final ArrayList<SubProfile> sp = guard.publishList().get(position).SubProfiles();
+									adapter = new SubProfileAdapter(getActivity(),android.R.layout.simple_list_item_1,sp);
+									
+									lv.setAdapter(adapter);
+									
+									lv.setOnItemClickListener(new OnItemClickListener() {
+										public void onItemClick(AdapterView<?> parent,
+												View view, int position, long id) {
+											
+											Attachment attTimer = new Timer(sp.get(position));
+											setAttachment(attTimer);
+											
+											builder.dismiss();
+											builder2.dismiss();
+											builder3.dismiss();
+											
+										}
+									});
+									builder3.setView(lv);
+									builder3.show();
+									
+									break;
+								case SingleImg:
+									Attachment att = new SingleImg(guard.ArtList.get(position));
+									setAttachment(att);
+									builder.dismiss();
+									builder2.dismiss();
+									break;
+								case SplitImg:
+									builder3.setTitle(getString(R.string.attachment_dialog_split_right));
+									ArrayList<Art> splitArt = guard.ArtList;
+									final Art art1 = guard.ArtList.get(position);
+									adapter = new ArtAdapter(getActivity(),android.R.layout.simple_list_item_1,splitArt);
+									
+									lv.setAdapter(adapter);
+									
+									lv.setOnItemClickListener(new OnItemClickListener() {
+										public void onItemClick(AdapterView<?> parent,
+												View view, int position, long id) {
+											final Art art2 = guard.ArtList.get(position);
+											Attachment attSplit = new SplitImg(art1, art2);
+											setAttachment(attSplit); 
+											builder.dismiss();
+											builder2.dismiss();
+											builder3.dismiss();
+											
+										}
+									});
+									builder3.setView(lv);
+									builder3.show();
+									
+									break;
+								}
 							}
 						});
+						
 						builder2.setView(lv);
 						builder2.show();
+						
+						
+//						for (SubProfile subProfile : subProfiles) {
+//							values.add(subProfile.name);
+//						}
+//
 					}
 				});
 				builder.setView(lv);
 				builder.show();
 			}
 		});
+		
+		//Long click to remove
 		attachmentButton.setOnLongClickListener(new OnLongClickListener() {
 
 			public boolean onLongClick(View v) {
@@ -542,6 +640,7 @@ public class CustomizeFragment extends Fragment {
 			}
 		});
 	}
+
 
 	/**
 	 * Sets the attachment to subProfile, resets if subProfile == null
@@ -563,7 +662,7 @@ public class CustomizeFragment extends Fragment {
 			
 			currSubP.setAttachment(att);
 			color = att.getColor();
-			
+			GETOUT:
 			switch (att.getForm()) {
 			case Timer:
 				Timer tempT = (Timer) att;
@@ -571,25 +670,25 @@ public class CustomizeFragment extends Fragment {
 				case Hourglass:
 					pictureRes = R.drawable.thumbnail_hourglass;
 					textRes = R.string.customize_hourglass_description;
-					break;
+					break GETOUT;
 				case DigitalClock:
 					pictureRes = R.drawable.thumbnail_digital;
 					textRes = R.string.customize_digital_description;
-					break;
+					break GETOUT;
 				case ProgressBar:
 					pictureRes = R.drawable.thumbnail_progressbar;
 					textRes = R.string.customize_progressbar_description;
-					break;
+					break GETOUT;
 				case TimeTimer:
 					pictureRes = R.drawable.thumbnail_timetimer;
 					textRes = R.string.customize_timetimer_description;
-					break;
+					break GETOUT;
 				default:
 					pictureRes = R.drawable.thumbnail_attachment;
 					textRes = R.string.attachment_button_description;
 					attachText = "";
 					alpha = 0;
-					break;
+					break GETOUT;
 				}
 			case SingleImg:
 				//TODO: Create thumbnail for Single Img
