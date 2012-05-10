@@ -53,7 +53,7 @@ public class SpeechBoardFragment extends Fragment
 		parrent.setContentView(R.layout.speechboard_layout);
 		empty = new Pictogram("#usynlig#", null, null, null, parrent);
 
-		user=PARROTActivity.getUser();
+		user=PARROTActivity.getUser();	//FIXME this might mean that the user is not updated. It would be better to us the static user from PARROTActivity
 		if(user.getCategoryAt(0)!=null)
 		{
 			displayedCat = user.getCategoryAt(0); //TODO we might have to replace this.
