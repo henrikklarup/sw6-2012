@@ -28,16 +28,17 @@ public class ListViewAdapter extends ArrayAdapter<Category> //FIXME In this clas
 		if (view == null) {
 			LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(
 					Context.LAYOUT_INFLATER_SERVICE);
-			view = layoutInflater.inflate(R.layout.categoriesitem, null); //FIXME change profile_list to apropriate xml document
+			view = layoutInflater.inflate(R.layout.categoriesitem, null); 
 		}
 
 		Category category = items.get(position);
 		if (category != null) {
-			ImageView imageView = (ImageView) view.findViewById(R.id.catpic); //FIXME add this to xml
-			TextView textView = (TextView) view.findViewById(R.id.catname); //FIXME add this to xml
+			ImageView imageView = (ImageView) view.findViewById(R.id.catpic); 
+			TextView textView = (TextView) view.findViewById(R.id.catname);
 
 			if (imageView != null) {
-				imageView.setImageResource(R.drawable.default_profile);
+				//imageView.setImageResource(R.drawable.default_profile);
+				imageView.setImageBitmap(items.get(position).getIcon().getBitmap());
 			}
 			/*if (textView != null) {
 
