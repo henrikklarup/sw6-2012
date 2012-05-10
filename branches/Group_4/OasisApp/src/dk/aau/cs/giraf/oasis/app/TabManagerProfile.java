@@ -48,89 +48,89 @@ public class TabManagerProfile extends Fragment implements OnTabChangeListener {
 
 		updateTab(TAB_MYPROFILE, R.id.tabP_1);
 
-	Button b = (Button) getView().findViewById(R.id.bTabProfile);
-	b.setOnClickListener(new OnClickListener() {
+		Button b = (Button) getView().findViewById(R.id.bTabProfile);
+		b.setOnClickListener(new OnClickListener() {
 
-		@Override
-		public void onClick(View v) {
-			// TODO Auto-generated method stub
-			getActivity().finish();
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				getActivity().finish();
+			}
+		});
+	}
+
+	private void setupTabs() {
+		mTabHost.setup();
+		mTabHost.addTab(newTab(TAB_MYPROFILE, R.string.tab_myprofile, R.id.tabP_1));
+		mTabHost.addTab(newTab(TAB_MYCHILDREN, R.string.tab_mychildren, R.id.tabP_2));
+		mTabHost.addTab(newTab(TAB_MYDEPARTMENTS, R.string.tab_mydepartments, R.id.tabP_3));
+		mTabHost.addTab(newTab(TAB_MYDEPCHILDREN, R.string.tab_mydepchildren, R.id.tabP_4));
+	}
+
+	private TabSpec newTab(String tag, int labelId, int tabContentId) {
+		//		Log.d(TAG, "buildTab(): tag=" + tag);
+
+		View indicator = LayoutInflater.from(getActivity()).inflate(
+				R.layout.tab, (ViewGroup) mRoot.findViewById(android.R.id.tabs), false);
+		((TextView) indicator.findViewById(R.id.tvtab)).setText(labelId);
+
+		TabSpec tabSpec = mTabHost.newTabSpec(tag);
+		tabSpec.setIndicator(indicator);
+		tabSpec.setContent(tabContentId);
+		return tabSpec;
+	}
+
+	@Override
+	public void onTabChanged(String tabId) {
+		//		Log.d(TAG, "onTabChanged(): tabId=" + tabId);
+		if (TAB_MYPROFILE.equals(tabId)) {
+			updateTab(tabId, R.id.tabP_1);
+			mCurrentTab = 0;
+			return;
 		}
-	});
-}
+		if (TAB_MYCHILDREN.equals(tabId)) {
+			updateTab(tabId, R.id.tabP_2);
+			mCurrentTab = 1;
+			return;
+		}
+		if (TAB_MYDEPARTMENTS.equals(tabId)) {
+			updateTab(tabId, R.id.tabP_3);
+			mCurrentTab = 2;
+			return;
+		}
+		if (TAB_MYDEPCHILDREN.equals(tabId)) {
+			updateTab(tabId, R.id.tabP_4);
+			mCurrentTab = 3;
+			return;
+		}
+	}
 
-private void setupTabs() {
-	mTabHost.setup();
-	mTabHost.addTab(newTab(TAB_MYPROFILE, R.string.tab_myprofile, R.id.tabP_1));
-	mTabHost.addTab(newTab(TAB_MYCHILDREN, R.string.tab_mychildren, R.id.tabP_2));
-	mTabHost.addTab(newTab(TAB_MYDEPARTMENTS, R.string.tab_mydepartments, R.id.tabP_3));
-	mTabHost.addTab(newTab(TAB_MYDEPCHILDREN, R.string.tab_mydepchildren, R.id.tabP_4));
-}
+	private void updateTab(String tabId, int placeholder) {
+		FragmentManager fm = getFragmentManager();
 
-private TabSpec newTab(String tag, int labelId, int tabContentId) {
-	//		Log.d(TAG, "buildTab(): tag=" + tag);
-
-	View indicator = LayoutInflater.from(getActivity()).inflate(
-			R.layout.tab, (ViewGroup) mRoot.findViewById(android.R.id.tabs), false);
-	((TextView) indicator.findViewById(R.id.tvtab)).setText(labelId);
-
-	TabSpec tabSpec = mTabHost.newTabSpec(tag);
-	tabSpec.setIndicator(indicator);
-	tabSpec.setContent(tabContentId);
-	return tabSpec;
-}
-
-@Override
-public void onTabChanged(String tabId) {
-	//		Log.d(TAG, "onTabChanged(): tabId=" + tabId);
-	if (TAB_MYPROFILE.equals(tabId)) {
-		updateTab(tabId, R.id.tabP_1);
-		mCurrentTab = 0;
-		return;
+		if (TAB_MYPROFILE.equals(tabId)) {
+			fm.beginTransaction()
+			.replace(placeholder, new MyProfileFrag(), tabId)
+			.commit();
+			return;
+		}
+		if (TAB_MYCHILDREN.equals(tabId)) {
+			fm.beginTransaction()
+			.replace(placeholder, new MyChildrenFrag(), tabId)
+			.commit();
+			return;
+		}
+		if (TAB_MYDEPARTMENTS.equals(tabId)) {
+			fm.beginTransaction()
+			.replace(placeholder, new MyDepartmentsFrag(), tabId)
+			.commit();
+			return;
+		}
+		if (TAB_MYDEPCHILDREN.equals(tabId)) {
+			fm.beginTransaction()
+			.replace(placeholder, new MyDepChildrenFrag(), tabId)
+			.commit();
+			return;
+		}
 	}
-	if (TAB_MYCHILDREN.equals(tabId)) {
-		updateTab(tabId, R.id.tabP_2);
-		mCurrentTab = 1;
-		return;
-	}
-	if (TAB_MYDEPARTMENTS.equals(tabId)) {
-		updateTab(tabId, R.id.tabP_3);
-		mCurrentTab = 2;
-		return;
-	}
-	if (TAB_MYDEPCHILDREN.equals(tabId)) {
-		updateTab(tabId, R.id.tabP_4);
-		mCurrentTab = 3;
-		return;
-	}
-}
-
-private void updateTab(String tabId, int placeholder) {
-	FragmentManager fm = getFragmentManager();
-
-	if (TAB_MYPROFILE.equals(tabId)) {
-		fm.beginTransaction()
-		.replace(placeholder, new MyProfileFrag(), tabId)
-		.commit();
-		return;
-	}
-	if (TAB_MYCHILDREN.equals(tabId)) {
-		fm.beginTransaction()
-		.replace(placeholder, new MyChildrenFrag(), tabId)
-		.commit();
-		return;
-	}
-	if (TAB_MYDEPARTMENTS.equals(tabId)) {
-		fm.beginTransaction()
-		.replace(placeholder, new MyDepartmentsFrag(), tabId)
-		.commit();
-		return;
-	}
-	if (TAB_MYDEPCHILDREN.equals(tabId)) {
-		fm.beginTransaction()
-		.replace(placeholder, new MyDepChildrenFrag(), tabId)
-		.commit();
-		return;
-	}
-}
 }

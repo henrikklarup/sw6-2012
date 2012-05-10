@@ -52,14 +52,14 @@ public class MyChildrenFrag extends ExpandableListFragment {
 
 		list = helper.profilesHelper.getChildrenByGuardian(MainActivity.guardian);
 
-		List<Department> depList = helper.departmentsHelper.getDepartmentsByProfile(MainActivity.guardian);
+		List<Department> depList = helper.departmentsHelper.getDepartments();
 
 		for(Department d : depList) {
 			ArrayList<Profile> result = new ArrayList<Profile>();
 			List<Profile> pList = helper.profilesHelper.getChildrenByDepartment(d);		
 
 			for(Profile p : pList) {
-				if (list.contains(p)) {
+				if (!list.contains(p)) {
 					result.add(p);
 				}
 			}

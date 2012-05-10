@@ -102,19 +102,19 @@ public class TabManagerAllProfiles extends Fragment implements OnTabChangeListen
 
 		if (TAB_PROFILES.equals(tabId)) {
 			fm.beginTransaction()
-			.replace(placeholder, new MyProfileFrag(), tabId)
+			.replace(placeholder, new ProfilesFrag(), tabId)
 			.commit();
 			return;
 		}
 		if (TAB_GUARDIANS.equals(tabId)) {
 			fm.beginTransaction()
-			.replace(placeholder, new MyChildrenFrag(), tabId)
+			.replace(placeholder, new GuardiansFrag(), tabId)
 			.commit();
 			return;
 		}
 		if (TAB_CHILDREN.equals(tabId)) {
 			fm.beginTransaction()
-			.replace(placeholder, new MyDepartmentsFrag(), tabId)
+			.replace(placeholder, new ChildrenFrag(), tabId)
 			.commit();
 			return;
 		}

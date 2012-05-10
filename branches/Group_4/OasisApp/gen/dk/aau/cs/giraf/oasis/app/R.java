@@ -91,30 +91,31 @@ public final class R {
         public static final int tabprofileview=0x7f03000e;
     }
     public static final class string {
-        public static final int alldepartments=0x7f040005;
+        public static final int alldepartments=0x7f040006;
         public static final int allprofiles=0x7f040004;
         public static final int app_name=0x7f040002;
         public static final int back_button=0x7f040001;
-        public static final int columnDepAddress=0x7f04000e;
-        public static final int columnDepContacts=0x7f04000f;
-        public static final int columnDepName=0x7f04000d;
-        public static final int columnFirstName=0x7f04000a;
-        public static final int columnMiddleName=0x7f04000b;
-        public static final int columnSurName=0x7f04000c;
-        public static final int emptyList=0x7f040009;
+        public static final int columnDepAddress=0x7f04000f;
+        public static final int columnDepContacts=0x7f040010;
+        public static final int columnDepName=0x7f04000e;
+        public static final int columnFirstName=0x7f04000b;
+        public static final int columnMiddleName=0x7f04000c;
+        public static final int columnSurName=0x7f04000d;
+        public static final int emptyList=0x7f04000a;
         public static final int hello=0x7f040000;
-        public static final int myAppsButton=0x7f040012;
-        public static final int myMediaButton=0x7f040013;
-        public static final int mySettingsButton=0x7f040014;
-        public static final int mychildren=0x7f040006;
-        public static final int mydepartments=0x7f040007;
-        public static final int mydepchildren=0x7f040008;
+        public static final int myAppsButton=0x7f040013;
+        public static final int myMediaButton=0x7f040014;
+        public static final int mySettingsButton=0x7f040015;
+        public static final int mychildren=0x7f040007;
+        public static final int mydepartments=0x7f040008;
+        public static final int mydepchildren=0x7f040009;
         public static final int myprofile=0x7f040003;
-        public static final int nameLabel=0x7f040010;
-        public static final int phoneLabel=0x7f040011;
-        public static final int tab_mychildren=0x7f040016;
-        public static final int tab_mydepartments=0x7f040017;
-        public static final int tab_mydepchildren=0x7f040018;
-        public static final int tab_myprofile=0x7f040015;
+        public static final int nameLabel=0x7f040011;
+        public static final int noprofile=0x7f040005;
+        public static final int phoneLabel=0x7f040012;
+        public static final int tab_mychildren=0x7f040017;
+        public static final int tab_mydepartments=0x7f040018;
+        public static final int tab_mydepchildren=0x7f040019;
+        public static final int tab_myprofile=0x7f040016;
     }
 }
