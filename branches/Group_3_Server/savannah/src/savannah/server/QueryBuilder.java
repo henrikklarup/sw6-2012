@@ -7,8 +7,20 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.xpath.XPath;
-
+/**
+ * A query builder which produces queries for use with the savannah server.
+ * Queries are either build based on a well formed sw6ml document(JDom -> event)
+ * or a well formed string for requests.
+ * @author Martin Fjordvald
+ *
+ */
 public class QueryBuilder {
+	/**
+	 * Builds the queries"
+	 * @param xml JDOM document
+	 * @return ArrayList<String> of the Queries
+	 * @throws JDOMException
+	 */
 	public ArrayList<String> buildQueries(Document xml) throws JDOMException
 	{
 		ArrayList<String> out = new ArrayList<String>();
@@ -27,7 +39,7 @@ public class QueryBuilder {
 			//Retrieve all children of the current Entry
 			List<Element> vals = entry.getChildren();
 			String[] str;
-			if(type.equals("update"))
+			if(type.equals("update") || type.equals("delete"))
 			{
 				str = new String[vals.size()+4];
 			}
@@ -40,14 +52,14 @@ public class QueryBuilder {
 			int i = 2;
 			for(Element s: vals)
 			{
-				if(type.equals("update"))
+				if(type.equals("update") || type.equals("delete"))
 				{
 					str[i] = s.getName();
 					i++;
 				}
 				str[i] = addApos(s.getText(),s.getAttributeValue("type"));
 				i++;
-			}		
+			}	
 			out.add(buildQuery(str));		
 		}
 		return out;
@@ -81,7 +93,7 @@ public class QueryBuilder {
 		//Delete will only need 1 tag, the unique identifier of the table.
 		else if(str[0].equals("delete"))
 		{
-			return "DELETE FROM " + str[1] + " where idUsers=" + str[2] + ";";
+			return "DELETE FROM " + str[1] + " WHERE "+str[2]+"=" + str[3] + ";";
 		}
 		//Update will require two tags, the tag that is being updated, and the unique identifier of the table.
 		else if(str[0].equals("update"))
@@ -139,8 +151,6 @@ public class QueryBuilder {
 		out.add("SELECT * FROM HasSubDepartment "+
 				"WHERE HasSubDepartment.idDepartment=(SELECT idUser FROM AuthUsers WHERE certificate='"+cert+"');");
 		
-//		out.add("SELECT * FROM ListOfApps " +
-//				"WHERE idProfile=(SELECT idUser FROM AuthUsers WHERE certificate='"+cert+"');");
 		
 		out.add("SELECT * FROM Apps,ListOfApps " +
 				"WHERE Apps.idApp=ListOfApps.idApp AND " +
@@ -171,11 +181,6 @@ public class QueryBuilder {
 				                "FROM AuthUsers " +
 				                "WHERE certificate='"+cert+"');");
 		
-//		out.add("SELECT M.idDepartment,M.idMedia " +
-//				"FROM MediaDepartmentAccess M,Department D " +
-//				"WHERE M.idDepartment=D.idDepartment AND D.idDepartment=(SELECT idUser " +
-//				                                                        "FROM AuthUsers " +
-//				                                                        "WHERE certificate='"+cert+"');");
 		out.add("SELECT M.idProfile,M.idMedia "+
 				"FROM MediaProfileAccess M,Profile P "+
                 "WHERE M.idProfile=P.idProfile AND "+

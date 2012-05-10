@@ -4,13 +4,21 @@ import java.sql.SQLException;
 
 import savannah.io.IOHandler;
 
+/**
+ * EventHandler class for picking out events from the EventQue and process them.
+ * Create as a thread and start.
+ * @author Martin Fjordvald
+ *
+ */
 public class EventHandler implements Runnable {
 	private CommitHandler cHandler;
 	private RequestHandler rHandler;
+
 	public EventHandler()
 	{
 		try {
 			cHandler = new CommitHandler();
+			rHandler = new RequestHandler();
 		} catch (InstantiationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -21,11 +29,14 @@ public class EventHandler implements Runnable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.err.println("something is wrong with the sql or db connection");
 			e.printStackTrace();
 		}
-		rHandler = new RequestHandler();
+		
 	}
+	/**
+	 * The EventHandler
+	 */
 	public void start() {
 		EventQueue eque = EventQueue.getInstance();
 		while(true) {
