@@ -43,29 +43,14 @@ public class TabManagerApp extends Fragment implements OnTabChangeListener {
 		super.onActivityCreated(savedInstanceState);
 		setRetainInstance(true);
 
-		mCurrentTab = FragParentTab.view;
-
 		mTabHost.setOnTabChangedListener(this);
 		mTabHost.setCurrentTab(mCurrentTab);
 
-		switch (mCurrentTab) {
-		case 0:
-			updateTab(TAB_MYAPP, R.id.tabA_1);
-			break;
-		case 1:
-			updateTab(TAB_MYAPP1, R.id.tabA_2);
-			break;
-		case 2:
-			updateTab(TAB_MYAPP2, R.id.tabA_3);
-			break;
-		case 3:
-			updateTab(TAB_MYAPP3, R.id.tabA_4);
-			break;
-		}
-		
+		updateTab(TAB_MYAPP, R.id.tabA_1);
+
 		Button b = (Button) getView().findViewById(R.id.bTabApp);
 		b.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -83,11 +68,11 @@ public class TabManagerApp extends Fragment implements OnTabChangeListener {
 	}
 
 	private TabSpec newTab(String tag, int labelId, int tabContentId) {
-//		Log.d(TAG, "buildTab(): tag=" + tag);
+		//		Log.d(TAG, "buildTab(): tag=" + tag);
 
 		View indicator = LayoutInflater.from(getActivity()).inflate(
-				R.layout.tabapp, (ViewGroup) mRoot.findViewById(android.R.id.tabs), false);
-		((TextView) indicator.findViewById(R.id.tvtabApp)).setText(labelId);
+				R.layout.tab, (ViewGroup) mRoot.findViewById(android.R.id.tabs), false);
+		((TextView) indicator.findViewById(R.id.tvtab)).setText(labelId);
 
 		TabSpec tabSpec = mTabHost.newTabSpec(tag);
 		tabSpec.setIndicator(indicator);
@@ -97,7 +82,7 @@ public class TabManagerApp extends Fragment implements OnTabChangeListener {
 
 	@Override
 	public void onTabChanged(String tabId) {
-//		Log.d(TAG, "onTabChanged(): tabId=" + tabId);
+		//		Log.d(TAG, "onTabChanged(): tabId=" + tabId);
 		if (TAB_MYAPP.equals(tabId)) {
 			updateTab(tabId, R.id.tabA_1);
 			mCurrentTab = 0;

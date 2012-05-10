@@ -71,8 +71,8 @@ private TabSpec newTab(String tag, int labelId, int tabContentId) {
 	//		Log.d(TAG, "buildTab(): tag=" + tag);
 
 	View indicator = LayoutInflater.from(getActivity()).inflate(
-			R.layout.tabprofile, (ViewGroup) mRoot.findViewById(android.R.id.tabs), false);
-	((TextView) indicator.findViewById(R.id.tvtabProfile)).setText(labelId);
+			R.layout.tab, (ViewGroup) mRoot.findViewById(android.R.id.tabs), false);
+	((TextView) indicator.findViewById(R.id.tvtab)).setText(labelId);
 
 	TabSpec tabSpec = mTabHost.newTabSpec(tag);
 	tabSpec.setIndicator(indicator);

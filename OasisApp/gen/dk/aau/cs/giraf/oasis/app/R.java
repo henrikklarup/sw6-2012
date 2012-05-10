@@ -28,8 +28,8 @@ public final class R {
         public static final int bMyProfileMedia=0x7f05001a;
         public static final int bMyProfileSettings=0x7f05001c;
         public static final int bTabApp=0x7f050022;
-        public static final int bTabMedia=0x7f050028;
-        public static final int bTabProfile=0x7f05002e;
+        public static final int bTabMedia=0x7f050027;
+        public static final int bTabProfile=0x7f05002c;
         public static final int fDetails=0x7f05000f;
         public static final int ivProfilePicture=0x7f050018;
         public static final int llMyProfile=0x7f050019;
@@ -37,14 +37,14 @@ public final class R {
         public static final int tabA_2=0x7f05001f;
         public static final int tabA_3=0x7f050020;
         public static final int tabA_4=0x7f050021;
-        public static final int tabM_1=0x7f050024;
-        public static final int tabM_2=0x7f050025;
-        public static final int tabM_3=0x7f050026;
-        public static final int tabM_4=0x7f050027;
-        public static final int tabP_1=0x7f05002a;
-        public static final int tabP_2=0x7f05002b;
-        public static final int tabP_3=0x7f05002c;
-        public static final int tabP_4=0x7f05002d;
+        public static final int tabM_1=0x7f050023;
+        public static final int tabM_2=0x7f050024;
+        public static final int tabM_3=0x7f050025;
+        public static final int tabM_4=0x7f050026;
+        public static final int tabP_1=0x7f050028;
+        public static final int tabP_2=0x7f050029;
+        public static final int tabP_3=0x7f05002a;
+        public static final int tabP_4=0x7f05002b;
         public static final int tvChildHeader=0x7f050004;
         public static final int tvDepAddress=0x7f05000d;
         public static final int tvDepContacts=0x7f05000e;
@@ -65,9 +65,7 @@ public final class R {
         public static final int tvMyProfilePhone=0x7f050017;
         public static final int tvMyProfilePhoneLabel=0x7f050016;
         public static final int tvSurName=0x7f050007;
-        public static final int tvtabApp=0x7f05001d;
-        public static final int tvtabMedia=0x7f050023;
-        public static final int tvtabProfile=0x7f050029;
+        public static final int tvtab=0x7f05001d;
     }
     public static final class layout {
         public static final int children_list_childitem=0x7f030000;
@@ -79,12 +77,10 @@ public final class R {
         public static final int main=0x7f030006;
         public static final int menulist_fragment_view=0x7f030007;
         public static final int myprofile_view=0x7f030008;
-        public static final int tabapp=0x7f030009;
+        public static final int tab=0x7f030009;
         public static final int tabappview=0x7f03000a;
-        public static final int tabmedia=0x7f03000b;
-        public static final int tabmediaview=0x7f03000c;
-        public static final int tabprofile=0x7f03000d;
-        public static final int tabprofileview=0x7f03000e;
+        public static final int tabmediaview=0x7f03000b;
+        public static final int tabprofileview=0x7f03000c;
     }
     public static final class string {
         public static final int alldepartments=0x7f040005;
