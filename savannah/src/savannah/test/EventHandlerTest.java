@@ -9,6 +9,11 @@ import org.jdom.Document;
 import savannah.io.DOMinator.DOMinator;
 import savannah.server.CommitEvent;
 
+/**
+ * Ad hoc testing only.
+ * @author martin
+ *
+ */
 public class EventHandlerTest {
 		public static void main(String[] args) throws Exception
 		{			

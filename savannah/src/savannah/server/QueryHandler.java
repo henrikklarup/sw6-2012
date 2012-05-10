@@ -9,7 +9,7 @@ public class QueryHandler {
 	public QueryHandler() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException
 	{
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
-		con = DriverManager.getConnection("jdbc:mysql://localhost/testbase","admin","admin");
+		con = DriverManager.getConnection("jdbc:mysql://172.25.11.65:3306/04","eder","123456");
 	}
 	
 	public int SendCommit(String s)
