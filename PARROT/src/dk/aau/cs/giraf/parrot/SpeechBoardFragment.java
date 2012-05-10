@@ -59,19 +59,23 @@ public class SpeechBoardFragment extends Fragment
 			displayedCat = user.getCategoryAt(0); //TODO we might have to replace this.
 
 			//Fills the sentenceboard with emty pictograms
-			speechBoardCategory.addPictogram(empty);
-			speechBoardCategory.addPictogram(empty);
-			speechBoardCategory.addPictogram(empty);
-			speechBoardCategory.addPictogram(empty);
+			while(speechBoardCategory.getPictograms().size() <PARROTActivity.getUser().getNumberOfSentencePictograms())
+			{
+				speechBoardCategory.addPictogram(empty);
+			}
 
 			GridView pictogramGrid = (GridView) parrent.findViewById(R.id.pictogramgrid);
 			pictogramGrid.setAdapter(new PictogramAdapter(displayedCat, parrent));
+			
 			
 			GridView sentenceBoardGrid = (GridView) parrent.findViewById(R.id.sentenceboard);
 			sentenceBoardGrid.setAdapter(new PictogramAdapter(speechBoardCategory, parrent));
 			
 			GridView superCategoryGrid = (GridView) parrent.findViewById(R.id.supercategory);
 			superCategoryGrid.setAdapter(new CategoryAdapter(user.getCategories(), parrent));
+			
+			//initialise the colours of the fragment
+			setColours(parrent);
 			
 			parrent.findViewById(R.id.pictogramgrid).setOnDragListener(new BoxDragListener(parrent));
 			parrent.findViewById(R.id.sentenceboard).setOnDragListener(new BoxDragListener(parrent));
@@ -127,6 +131,16 @@ public class SpeechBoardFragment extends Fragment
 
 
 
+	}
+	
+	public static void setColours(Activity invoker)
+	{
+		GridView sentenceBoardGrid = (GridView) invoker.findViewById(R.id.sentenceboard);
+		sentenceBoardGrid.setBackgroundColor(PARROTActivity.getUser().getSentenceBoardColor());
+		
+		GridView superCategoryGrid = (GridView) invoker.findViewById(R.id.supercategory);
+		superCategoryGrid.setBackgroundColor(PARROTActivity.getUser().getCategoryColor());
+		
 	}
 }
 
