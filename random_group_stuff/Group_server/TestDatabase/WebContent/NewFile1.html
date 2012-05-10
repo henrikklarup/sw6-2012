@@ -1,102 +1,151 @@
 
 <html>
 <head>
-<title>Savannah 1.0 - Tilføj profil</title>
+<title>Savannah 1.0</title>
 <link rel='stylesheet' type='text/css' href='CSS/SavannahStyle.css' />
+<script src="javascript/popup.js"></script>
 </head>
-<body>
+<body onLoad="getFocusQuick();">
 	<script type='text/javascript'>
-		function updateTryToAdd() {
-			document.addForm1.tryToAdd.value = '1';
+		var open = 0;
+		function setOpen(number) {
+			open = number;
+			document.DasForm.jsOpenVar.value = number;
+		}
+		function ChangeColor(tableRow, highLight) {
+			if (highLight) {
+				tableRow.style.backgroundColor = '#dcfac9';
+			} else {
+				tableRow.style.backgroundColor = '#00CCFA';
+			}
+		}
+		function DoNav(theUrl) {
+			document.location.href = theUrl;
+		}
+		function setID(id) {
+			document.DasForm.myId.value = id;
+		}
+		function setLogin() {
+			document.DasForm.triedLogin.value = 1;
+		}
+		function clearLogin() {
+			document.DasForm.triedLogin.value = 0;
 		}
 		function submitform() {
-			document.addForm1.submit();
+			document.DasForm.submit();
+		}
+		function clearForm() {
+			document.DasForm.password1.value = "";
+		}
+		function getFocus() {
+			document.DasForm.password1.focus();
+		}
+		function getFocusQuick() {
+			document.quickForm.quickSelect.focus();
+		}
+		document.onkeydown = function(e) {
+			e = e || window.event;
+			var keyCode = e.keyCode || e.which;
+			if (keyCode == 27 && open == 1) {
+				setOpen(0);
+				popup('popUpDiv');
+				clearForm();
+				getFocusQuick();
+			}
+			if (keyCode == 8 && document.quickForm.quickSelect.value == '') {
+				window.history.go(-1);
+			}
 		}
 	</script>
 	<div id="mainBackground">
-		<script>
-			fillOutForm();
-		</script>
 		<center>
-			<h2>Tilføj profil</h2>
+			<h2>Vælg profil:</h2>
 			<hr>
-			<div id="edit_wrapper">
-		</center>
-		<br>
-		<table border='0'>
-			<form method='POST' name='addForm1' enctype='multipart/form-data'
-				action='AddProfile'>
-				<tr>
-					<td>Afdeling</td>
-					<td><select name='dept'>
-							<option value='2''>Skolebakken
-							<option value='6''>Sebvej
-							<option value='7''>Subdep1
-							<option value='8''>SubSubdep1
-					</select>
-				</tr>
-				<tr>
-					<td>Navn:</td>
-					<td><input type='text' name='firstname' value='' /></td>
-				</tr>
-				<tr>
-					<td>Mellemnavn(e):</td>
-					<td><input type='text' name='middlename' value='' /></td>
-				</tr>
-				<tr>
-					<td>Efternavn:</td>
-					<td><input type='text' name='surname' value='' /></td>
-				</tr>
-				<tr>
-					<td>Telefon nummer:</td>
-					<td><input type='text' name='phone' value='' /></td>
-				</tr>
-				<tr>
-					<td><select name='prole'><option value='0'>Administrator</option>
-							<option value='1'>Pedagog</option>
-							<option value='2'>Forældre</option>
-							<option value='3'>Barn</option></select></td>
-				</tr>
-				<tr>
-					<td><input type='hidden' name='MAX_FILE_SIZE' value='100' /><input
-						name='file1' type='file' /></td>
-				</tr>
-				<tr>
-					<td>Brugernavn:</td>
-					<td><input type='text' name='username' value='' /></td>
-				</tr>
-				<tr>
-					<td>Kodeord:</td>
-					<td><input type='password' name='password' /></td>
-				</tr>
-				<tr>
-					<td>Gentag kodeord:</td>
-					<td><input type='password' name='password2' /></td>
-				</tr>
-				<tr>
-					<td><hr></td>
-					<td><hr></td>
-				</tr>
-				<tr>
-					<td>Adgang til apps</td>
-					<td><input type='checkbox' name="appList" value="1" />TestAppe1<br>
-						<input type='checkbox' name="appList" value="2" />TestAppe2<br>
-					</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td><input type='submit' value='Tilføj'><input
-						type='button' value='Fortryd'></td>
-				</tr>
-				<input type='hidden' name='tryToAdd' value='0'>
-			</form>
-		</table>
+			<div id="simple_wrapper">
+				<div id="edit_wrapper">
+					<table>
+						<tr>
+							<th>Billede</th>
+							<th>ID</th>
+							<th>Navn</th>
+						</tr>
+						<tr onmouseover="ChangeColor(this, true);"
+							onmouseout="ChangeColor(this, false);"
+							onclick="setID('4'); submitform();">
+							<td><img src='/TestDatabase/images/i.jpg' width=50 height=50></td>
+							<td>4</td>
+							<td>User04 User04</td>
+						</tr>
+						<tr onmouseover="ChangeColor(this, true);"
+							onmouseout="ChangeColor(this, false);"
+							onclick="setID('5'); submitform();">
+							<td><img src='/TestDatabase/images/i.jpg' width=50 height=50></td>
+							<td>5</td>
+							<td>User05 User05</td>
+						</tr>
+						<tr onmouseover="ChangeColor(this, true);"
+							onmouseout="ChangeColor(this, false);"
+							onclick="setID('6'); submitform();">
+							<td><img src='/TestDatabase/images/i.jpg' width=50 height=50></td>
+							<td>6</td>
+							<td>User06 User06</td>
+						</tr>
+						<tr onmouseover="ChangeColor(this, true);"
+							onmouseout="ChangeColor(this, false);"
+							onclick="setID('7'); submitform();">
+							<td><img src='/TestDatabase/images/i.jpg' width=50 height=50></td>
+							<td>7</td>
+							<td>User07 User07</td>
+						</tr>
+						<tr onmouseover="ChangeColor(this, true);"
+							onmouseout="ChangeColor(this, false);"
+							onclick="setID('8'); submitform();">
+							<td><img src='/TestDatabase/images/i.jpg' width=50 height=50></td>
+							<td>8</td>
+							<td>User08 User08</td>
+						</tr>
+						<tr onmouseover="ChangeColor(this, true);"
+							onmouseout="ChangeColor(this, false);"
+							onclick="setID('9'); submitform();">
+							<td><img src='/TestDatabase/images/i.jpg' width=50 height=50></td>
+							<td>9</td>
+							<td>User09 User09</td>
+						</tr>
+						<tr onmouseover="ChangeColor(this, true);"
+							onmouseout="ChangeColor(this, false);"
+							onclick="setID('10'); submitform();">
+							<td><img src='/TestDatabase/images/i.jpg' width=50 height=50></td>
+							<td>10</td>
+							<td>User10 User10</td>
+						</tr>
+					</table>
+					<hr>
+				</div>
+				<div id="my_wrapper">
+					<hr>
+					<center>
+						<form method='POST' action='SelectProfileToEdit' name='quickForm'>
+							<input type='text' name='quickSelect'
+								onkeypress='if (window.event.keyCode == 13) {setLogin(); setID(document.quickForm.quickSelect.value); submitform();}'><img
+								src='images/question1.png' width=20 height=20
+								alt='For hurtig adgang:
+Indtast id nummer, efterfulgt af <enter>'
+								onClick="javascript:alert('For hurtig adgang: Indtast id nummer, efterfulgt af enter');"
+								Title='For hurtig adgang:
+Indtast id nummer, efterfulgt af <enter>'>
+						</form>
+					</center>
+				</div>
+			</div>
+			<hr>
+			<footer>
+				Savannah v. 1.0.0 <a href='http://en.wikipedia.org/wiki/Copyleft'>(C)opyleft</a>
+				under Freedom 3 me!
+			</footer>
 	</div>
-	<footer>
-		Savannah v. 1.0.0 <a href='http://en.wikipedia.org/wiki/Copyleft'>(C)opyleft</a>
-		me!
-	</footer>
-	</div>
-	</div>
+	<form method='POST' action='SelectProfileToEdit' name='DasForm'>
+		<input type='hidden' name='myId' value=''><input type='hidden'
+			name='triedLogin' value=0>
+	</form>
 </body>
 </html>

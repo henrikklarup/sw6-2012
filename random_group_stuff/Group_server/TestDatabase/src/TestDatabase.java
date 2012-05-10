@@ -275,7 +275,7 @@ public class TestDatabase extends HttpServlet {
 				+ "<center><h3>"
 				+ "Tilføj:"
 				+ "</h3>"
-				+ "<a href=\"AddProfile\"><u>P</u>rofil</a>  -  <a href=\"SelectProfileToPicture\">Billede</a>  -  Lyd  -  Animation/film"
+				+ "<a href=\"AddProfile\"><u>P</u>rofil</a>  -  <a href=\"SelectProfileToPicture\">Billede</a>  -  <a href=\"SelectProfileToAudio\">Lyd</a>  -  Animation/film"
 				+ "</center>" + "</div>");
 
 		aOutput.println("<div id=\"blanket\" style=\"display:none;\"></div>"

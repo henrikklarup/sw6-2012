@@ -1,156 +1,199 @@
 
 <html>
 <head>
-<title>Tilføj billede</title>
-<script src="javascript/popup.js"></script>
+<title>Savannah 1.0</title>
 <link rel='stylesheet' type='text/css' href='CSS/SavannahStyle.css' />
-<SCRIPT language=JavaScript>
-	var reader = new FileReader();
-	reader.onload = function(e) {
-		document.billedet.src = e.target.result;
-		var picName = addForm1.file1.value;
-		var picName1 = picName.replace("C:\\fakepath\\", "");
-		var picName2 = picName1.replace(".jpg", "");
-		addForm1.txtName.value = picName2;
-	};
-	function readURL(input) {
-		if (input.files && input.files[0]) {
-			reader.readAsDataURL(input.files[0]);
-		} else {
-			document.billedet.src = input.value || "No file selected";
-			alert(input.value);
-		}
-	}
-	function clearSearch() {
-		addForm1.serchString.value = '-1';
-		document.forms["addForm1"].submit();
-	}
-</script>
+<script src="javascript/popup.js"></script>
 </head>
 <body>
-	<div id='MainBackground'>
+	<div id="mainBackground">
 		<center>
-			<h2>Tilføj billedenull</h2>
+			<h2>Billede stuff</h2>
 		</center>
 		<hr>
-		<div id='generic_wrapper'>
-			<center>
-				<form method='POST' name='addForm1' enctype='multipart/form-data'
-					action='AddPictureNotLoggedin'>
-					<table>
-						<tr>
-							<td align='center' colspan='2'><img src='' name='billedet'
-								width=100 height=100></td>
-						</tr>
-						<tr>
-							<td colspan='2' align=center><input name='file1' type='file'
-								accept='image/*' onChange="readURL(this);" /></td>
-						</tr>
-						<tr>
-							<td>Navn:</td>
-							<td><input type='text' name='txtName'></td>
-						</tr>
-						<tr>
-							<td><input type=checkbox name='isPublic' value='on'/>Offentlig</td>
-						</tr>
-						<tr>
-							<td>Tags:</td>
-							<td>
-								<div id='boxOfTags'>
-									<table>
+		<div id="simple_wrapper">
+			<div id="edit_wrapper">
+				<center>
+					<form method='POST' action='EditPictureAccess' name='PicForm'>
+						Bruger: <input type=text name='name' disabled=true
+							value='User04 User04'> <br>
+						<table>
+							<tr>
+								<td></td>
+							</tr>
+							<tr>
+								<td>
+								<td><table borde=1>
 										<tr>
+											<td align="center"><img
+												src='/images/appImages/p3kptzdx6g23.jpg' width=50 height=50></td>
 										</tr>
 										<tr>
-											<td><input type=checkbox name='selectedTags' value='5'><br>Abe</td>
-											<td><input type=checkbox name='selectedTags' value='11'><br>Anus</td>
-											<td><input type=checkbox name='selectedTags' value='1'><br>Bil</td>
+											<td align="center"><input type=checkbox checked='yes'
+												disabled='disabled' name='selectedPic' value='9'>Chrysanthemum</td>
+										</tr>
+									</table></td>
+								<td><table borde=1>
+										<tr>
+											<td align="center"><img
+												src='/images/appImages/2w7c7ze0che8.jpg' width=50 height=50></td>
 										</tr>
 										<tr>
-											<td><input type=checkbox name='selectedTags' value='28'><br>Bror</td>
-											<td><input type=checkbox name='selectedTags' value='26'><br>Far</td>
-											<td><input type=checkbox name='selectedTags' value='6'><br>Hund</td>
+											<td align="center"><input type=checkbox checked='yes'
+												disabled='disabled' name='selectedPic' value='10'>Chrysanthemum</td>
+										</tr>
+									</table></td>
+								<td><table borde=1>
+										<tr>
+											<td align="center"><img
+												src='/images/appImages/xry1j7swy567.jpg' width=50 height=50></td>
 										</tr>
 										<tr>
-											<td><input type=checkbox name='selectedTags' value='2'><br>Kat</td>
-											<td><input type=checkbox name='selectedTags' value='7'><br>Mand</td>
-											<td><input type=checkbox name='selectedTags' value='25'><br>Mor</td>
+											<td align="center"><input type=checkbox checked='yes'
+												disabled='disabled' name='selectedPic' value='11'>Chrysanthemum</td>
+										</tr>
+									</table></td>
+								<td><table borde=1>
+										<tr>
+											<td align="center"><img
+												src='/images/appImages/adkfn0vl89tq.jpg' width=50 height=50></td>
 										</tr>
 										<tr>
-											<td><input type=checkbox name='selectedTags' value='33'><br>Mus</td>
-											<td><input type=checkbox name='selectedTags' value='13'><br>Sang</td>
-											<td><input type=checkbox name='selectedTags' value='8'><br>Sko</td>
+											<td align="center"><input type=checkbox checked='yes'
+												disabled='disabled' name='selectedPic' value='12'>Chrysanthemum</td>
+										</tr>
+									</table></td>
+								</td>
+							</tr>
+							<tr>
+								<td>
+								<td><table borde=1>
+										<tr>
+											<td align="center"><img
+												src='/images/appImages/2jf89zii9vmc.jpg' width=50 height=50></td>
 										</tr>
 										<tr>
-											<td><input type=checkbox name='selectedTags' value='9'><br>Sok</td>
-											<td><input type=checkbox name='selectedTags' value='27'><br>Søster</td>
-											<td><input type=checkbox name='selectedTags' value='12'><br>Taske</td>
+											<td align="center"><input type=checkbox checked='yes'
+												disabled='disabled' name='selectedPic' value='13'>Chrysanthemum</td>
+										</tr>
+									</table></td>
+								<td><table borde=1>
+										<tr>
+											<td align="center"><img
+												src='/images/appImages/4wgoclwkd8rc.jpg' width=50 height=50></td>
 										</tr>
 										<tr>
-											<td><input type=checkbox name='selectedTags' value='10'><br>Ål</td>
-											</td>
+											<td align="center"><input type=checkbox checked='yes'
+												disabled='disabled' name='selectedPic' value='14'>Chrysanthemum</td>
 										</tr>
-									</table>
-								</div>
-						<tr>
-							<td></td>
-							<td align=center><a href='#' onClick="popup('popUpSearch')">Søg</a>
-								- <a href='#' onClick="popup('popUpDiv')">Tilføj</a></td>
-						</tr>
-						</tr>
-						<tr>
-							<td>Ejer:</td>
-							<td><input type=Text disabled='true' value='User02' /></td>
-						</tr>
-						<tr>
-							<td><input type='submit' name='send' value='Tilføj!'></td>
-							<td><input type='button' name='send' value='Fortryd'
-								onclick="javascript:window.location = 'TestDatabase';"></td>
-						</tr>
-					</table>
+									</table></td>
+								<td><table borde=1>
+										<tr>
+											<td align="center"><img
+												src='/images/appImages/eypztewfqaa0.jpg' width=50 height=50></td>
+										</tr>
+										<tr>
+											<td align="center"><input type=checkbox checked='yes'
+												disabled='disabled' name='selectedPic' value='15'>Chrysanthemum</td>
+										</tr>
+									</table></td>
+								<td><table borde=1>
+										<tr>
+											<td align="center"><img
+												src='/images/appImages/sttuoeuw4vof.jpg' width=50 height=50></td>
+										</tr>
+										<tr>
+											<td align="center"><input type=checkbox checked='yes'
+												disabled='disabled' name='selectedPic' value='16'>Chrysanthemum</td>
+										</tr>
+									</table></td>
+								</td>
+							</tr>
+							<tr>
+								<td>
+								<td><table borde=1>
+										<tr>
+											<td align="center"><img
+												src='/images/appImages/j01req34r9mw.jpg' width=50 height=50></td>
+										</tr>
+										<tr>
+											<td align="center"><input type=checkbox checked='yes'
+												disabled='disabled' name='selectedPic' value='17'>Chrysanthemum</td>
+										</tr>
+									</table></td>
+								<td><table borde=1>
+										<tr>
+											<td align="center"><img
+												src='/images/appImages/1mzrs3jyh3dc6.jpg' width=50 height=50></td>
+										</tr>
+										<tr>
+											<td align="center"><input type=checkbox checked='yes'
+												disabled='disabled' name='selectedPic' value='18'>Chrysanthemum</td>
+										</tr>
+									</table></td>
+								</td>
+							</tr>
+						</table>
+					</form>
+				</center>
+			</div>
+			<div id="my_wrapper">
+				<hr>
+				<center>
+					<input type=button value='Gem'> <input type=button
+						value='Fortryd'> <input type=button value='Søg'
+						onclick="popup('popUpDiv')">
+			</div>
+			<hr>
+			<footer>
+				Savannah v. 1.0.0 <a href='http://en.wikipedia.org/wiki/Copyleft'>(C)opyleft</a>
+				under Freedom 3 me!
+			</footer>
 		</div>
-		</td>
-		</table>
-		</center>
-		<hr>
-	</div>
-	<footer>
-		Savannah v. 1.0.0 <a href='http://en.wikipedia.org/wiki/Copyleft'>(C)opyleft</a>
-		under Freedom 3 me!
-	</footer>
-	</div>
-	<div id="blanket" style="display: none;"></div>
-	<div id="popUpSearch" style="display: none;">
-		<P align="right">
-			<a href="#" onclick="popup('popUpSearch')" ALIGN=RIGHT>[X]</a>
-		</p>
-		<center>
-			<h3>Søg tag:</h3>
-			<br>
-			<input type='radio' name='criteria' value='begins' checked />Begynder
-			med<br />
-			<input type='radio' name='criteria' value='contains' />Indeholder<br />
-			<input type='radio' name='criteria' value='ends' />Slutter med<br />
-			<br>
-			<input type=text name='serchString'><br>
-			<input type=submit name='search' value='Søg'><input
-				type=button name='clearsearch' value='Slet' onClick="clearSearch();">
-			</h3>
-			</form>
-	</div>
-	<div id="blanket" style="display: none;"></div>
-	<div id="popUpDiv" style="display: none;">
-		<P align="right">
-			<a href="#" onclick="popup('popUpDiv')" ALIGN=RIGHT>[X]</a>
-		</p>
-		<form method='POST' action='AddNewTag' name='TagForm'>
+		<div id="blanket" style="display: none;"></div>
+		<div id="popUpDiv" style="display: none;">
+			<P align="right">
+				<a href="#" onclick="popup('popUpDiv')" ALIGN=RIGHT>[X]</a>
+			</p>
 			<center>
-				<h3>
-					Tilføj tag:<br>
-					<input type=text name='newTag'><br>
-					<input type=submit values='Tilføj tag'>
-				</h3>
-		</form>
-		</center>
+				<h3>Søg:</h3>
+				<hr>
+				<table>
+					<tr>
+						<td>Navn:</td>
+						<td><input type=text name='searchName'></td>
+					</tr>
+					<div id='boxOfTags'>
+						<tr>
+						</tr>
+						<tr>
+							<td><input type=checkbox name='selectedTags' value='3'><br>Abe</td>
+							<td><input type=checkbox name='selectedTags' value='9'><br>Anus</td>
+							<td><input type=checkbox name='selectedTags' value='1'><br>Bil</td>
+						</tr>
+						<tr>
+							<td><input type=checkbox name='selectedTags' value='15'><br>Bror</td>
+							<td><input type=checkbox name='selectedTags' value='13'><br>Far</td>
+							<td><input type=checkbox name='selectedTags' value='4'><br>Hund</td>
+						</tr>
+						<tr>
+							<td><input type=checkbox name='selectedTags' value='2'><br>Kat</td>
+							<td><input type=checkbox name='selectedTags' value='5'><br>Mand</td>
+							<td><input type=checkbox name='selectedTags' value='12'><br>Mor</td>
+						</tr>
+						<tr>
+							<td><input type=checkbox name='selectedTags' value='11'><br>Sang</td>
+							<td><input type=checkbox name='selectedTags' value='6'><br>Sko</td>
+							<td><input type=checkbox name='selectedTags' value='7'><br>Sok</td>
+						</tr>
+						<tr>
+							<td><input type=checkbox name='selectedTags' value='14'><br>Søster</td>
+							<td><input type=checkbox name='selectedTags' value='10'><br>Taske</td>
+							<td><input type=checkbox name='selectedTags' value='8'><br>Ål</td>
+							</td>
+						</tr>
+				</table>
+		</div>
 	</div>
 </body>
 </html>

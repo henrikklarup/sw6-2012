@@ -94,15 +94,20 @@ public class SelectProfileToDelete extends HttpServlet {
 				con =DriverManager.getConnection 
 						("jdbc:mysql://172.25.11.65:3306/04","eder","123456");
 				stmt = con.createStatement();
-				rs = stmt.executeQuery("SELECT idUser, username, idProfile, firstname, middlename, surname from AuthUsers, Profile " +
+				rs = stmt.executeQuery("SELECT idUser, username, idProfile, firstname, middlename, surname, picture from AuthUsers, Profile " +
 						"where idUser = idProfile;");
 				// displaying records
 				while(rs.next()){
 					id = rs.getInt("idUser");
 					name = rs.getString("firstname") + " " +rs.getString("middlename") + " " + rs.getString("surname");
 					username = rs.getString("username");
+					String picture = rs.getString("picture");
+					if (picture == null || picture.equals("null"))
+						picture = request.getContextPath() + "/images/i.jpg";
+					else
+						picture =  request.getContextPath()  + "/"+picture;
 
-					Profile p = new Profile(rs.getInt("idProfile"),rs.getString("firstname"),rs.getString("surname"), rs.getString("middlename"),  1, -1, null, username);
+					Profile p = new Profile(rs.getInt("idProfile"),rs.getString("firstname"),rs.getString("surname"), rs.getString("middlename"),  1, -1,picture, username);
 
 					profiles.add(p);
 				}

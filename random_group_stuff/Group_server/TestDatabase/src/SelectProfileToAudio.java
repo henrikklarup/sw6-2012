@@ -1,4 +1,5 @@
 
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -24,10 +25,10 @@ import com.sun.corba.se.impl.oa.poa.AOMEntry;
  */
 
 @WebServlet(
-		name = "SelectProfileToDeletePic", 
-		urlPatterns = {"/SelectProfileToDeletePic"}
+		name = "SelectProfileToAudio", 
+		urlPatterns = {"/SelectProfileToAudio"}
 		)
-public class SelectProfileToDeletePic extends HttpServlet {
+public class SelectProfileToAudio extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	int id;
@@ -43,7 +44,7 @@ public class SelectProfileToDeletePic extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public SelectProfileToDeletePic() {
+	public SelectProfileToAudio() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -112,7 +113,7 @@ public class SelectProfileToDeletePic extends HttpServlet {
 
 				String picture = rs.getString("picture");
 
-				if (picture == null || picture.equals(""))
+				if (picture == null || picture.equals("null"))
 					picture = context + "/images/i.jpg";
 				else
 					picture = context + "/"+picture;
@@ -155,19 +156,19 @@ public class SelectProfileToDeletePic extends HttpServlet {
 					if (user == null)
 					{
 						session.setAttribute("SelectProfileERROR", "Ugyldigt id");
-						response.sendRedirect("SelectProfileToDeletePic");
+						response.sendRedirect("SelectProfileToAudio");
 						return;
 					}
 					else
 					{
-						session.setAttribute("PROFILEIDTODELETEPIC", loginID);
-						response.sendRedirect("DeletePictureNotLoggedin");
+						session.setAttribute("PROFILEIDTOADD", loginID);
+						response.sendRedirect("AddAudioNotLoggedin");
 					}
 
 				}
 				else {
-					session.setAttribute("PROFILEIDTODELETEPIC", loginID);
-					response.sendRedirect("DeletePictureNotLoggedin");
+					session.setAttribute("PROFILEIDTOADD", loginID);
+					response.sendRedirect("AddAudioNotLoggedin");
 				}
 				/*
 				 * if (triedLogin != null && triedLogin.equals("1") &&
@@ -319,7 +320,7 @@ public class SelectProfileToDeletePic extends HttpServlet {
 				"if(keyCode == 8 && document.quickForm.quickSelect.value == '') {window.history.go(-1);}"
 				+ "}" + "</script>");
 		out.println("<div id=\"mainBackground\">");
-		out.println("<center><h2> Vælg ejer profil!:</h2>");
+		out.println("<center><h2> Vælg ejer profil:</h2>");
 		out.println("<hr>");
 		out.println("<div id=\"simple_wrapper\">");
 		out.println("<div id=\"edit_wrapper\">");
@@ -357,7 +358,7 @@ public class SelectProfileToDeletePic extends HttpServlet {
 		out.println("<div id=\"my_wrapper\">");
 		out.println("<hr>");
 		out.println("<center>");
-		out.println("<form method='POST' action='SelectProfileToDeletePic' name='quickForm'>");
+		out.println("<form method='POST' action='SelectProfileToAudio' name='quickForm'>");
 		out.println("<input type='text' name='quickSelect' onkeypress='if (window.event.keyCode == 13) {setLogin(); setID(document.quickForm.quickSelect.value); submitform();}'><img src='images/question1.png' width=20 height=20 alt='For hurtig adgang:\nIndtast id nummer, efterfulgt af <enter>' onClick=\"javascript:alert('For hurtig adgang: Indtast id nummer, efterfulgt af enter');\" Title='For hurtig adgang:\nIndtast id nummer, efterfulgt af <enter>'>");
 		out.println("</form>");
 		out.println("</center>");
@@ -383,7 +384,7 @@ public class SelectProfileToDeletePic extends HttpServlet {
 		 * "<P align=\"right\"><a href=\"#\" onclick=\"setOpen(0); popup('popUpDiv')\" ALIGN=RIGHT>[X]</a></p>"
 		 * +
 		 */
-		out.println("<form method='POST' action='SelectProfileToDeletePic' name='DasForm'>\n"
+		out.println("<form method='POST' action='SelectProfileToAudio' name='DasForm'>\n"
 				+ "<input type='hidden' name='myId' value=''>"
 				+ "<input type='hidden' name='triedLogin' value=0>" + "</form>");
 		/*

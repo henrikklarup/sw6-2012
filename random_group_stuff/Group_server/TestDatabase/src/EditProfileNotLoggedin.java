@@ -726,6 +726,11 @@ public class EditProfileNotLoggedin extends HttpServlet {
 		}
 		// /The above section needs optimization
 
+		out.println("<tr>" + "<td colspan='3'><hr></td>"
+				+ "</tr>");
+		out.println("<tr><td></td><td><a href=\"EditPictureAccess\">Billede håndtering</a></td><td></td></tr>");
+		out.println("<tr>" + "<td colspan='3'><hr></td>"
+				+ "</tr>");
 		out.println("</td></tr><tr>"
 				+ "<td>Brugernavn: </td><td><input type=\"text\" name=\"brugernavn\" disabled=true value='"
 				+ username
