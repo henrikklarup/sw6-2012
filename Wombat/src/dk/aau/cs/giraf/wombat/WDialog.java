@@ -8,13 +8,17 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Adapter;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import dk.aau.cs.giraf.TimerLib.Child;
 import dk.aau.cs.giraf.TimerLib.Guardian;
@@ -22,6 +26,7 @@ import dk.aau.cs.giraf.TimerLib.Guardian;
 public class WDialog extends Dialog{
 	
 	private int layoutId = 1337;
+	private int editTextLayoutId = 1338;
 	
 	public WDialog(Context context) {
 		super(context, R.style.WombatStyle_Dialog);
@@ -97,5 +102,37 @@ public class WDialog extends Dialog{
 	public void setButtonOnClickListener(int buttonId, View.OnClickListener listener){
 		Button b = (Button)this.findViewById(buttonId);
 		b.setOnClickListener(listener);
+	}
+
+	public void addEditText(String text, int editTextId) {
+		LinearLayout editTextLayout = (LinearLayout) this.findViewById(editTextLayoutId);
+		if(editTextLayout == null){
+			LinearLayout ll = (LinearLayout) this.findViewById(R.id.profile_list_dialog);
+			ListView lv = (ListView) this.findViewById(R.id.profile_list_dialog_listview);
+			lv.setLayoutParams(new LinearLayout.LayoutParams(0,0));
+			
+			editTextLayout = new LinearLayout(this.getContext());
+			editTextLayout.setId(editTextLayoutId);
+			editTextLayout.setOrientation(LinearLayout.VERTICAL);
+			editTextLayout.setGravity(Gravity.CENTER);
+			editTextLayout.setPadding(0, 0, 0, 20);
+			
+			ll.addView(editTextLayout);
+		}
+		
+		EditText et = new EditText(this.getContext());
+		et.setId(editTextId);
+		et.setText(text);
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+		params.setMargins(20, 20, 20, 20);
+		et.setLayoutParams(params);
+		editTextLayout.addView(et);
+		editTextLayout.setLayoutParams(new LinearLayout.LayoutParams(300, LayoutParams.WRAP_CONTENT));
+		
+	}
+	
+	public String getEditTextText(int editTextId){
+		EditText et = (EditText) this.findViewById(editTextId);
+		return et.getText().toString();
 	}
 }
