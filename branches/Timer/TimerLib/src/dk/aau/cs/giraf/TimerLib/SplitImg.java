@@ -26,6 +26,14 @@ public class SplitImg extends Attachment {
 		return formFactor.SplitImg;
 	}
 	
+	public Art getLeftImg(){
+		return null;
+	}
+	
+	public Art getRightImg(){
+		return null;
+	}
+	
 	public HashMap getHashMap(HashMap map){
 		//Defines what kind of attachment it is
 		map.put("AttachmentForm", String.valueOf(this.getForm()));

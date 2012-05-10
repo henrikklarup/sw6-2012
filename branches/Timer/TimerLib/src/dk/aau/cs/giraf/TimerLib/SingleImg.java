@@ -24,6 +24,10 @@ public class SingleImg extends Attachment {
 		return formFactor.SingleImg;
 	}
 	
+	public Art getImg(){
+		return this._art;
+	}
+	
 	public HashMap getHashMap(HashMap map){
 		//Defines what kind of attachment it is
 		map.put("AttachmentForm", String.valueOf(this.getForm()));

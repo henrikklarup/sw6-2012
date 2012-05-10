@@ -21,6 +21,23 @@ public class Attachment {
 		
 	}
 	
+	public Art getImg(){
+		return null;
+	}
+	
+	public Art getLeftImg(){
+		return null;
+	}
+	
+	public Art getRightImg(){
+		return null;
+	}
+	
+	public SubProfile genSub(){
+		SubProfile asd = null;
+		return asd;
+	}
+	
 	public int getColor(){
 		return 0;
 	}

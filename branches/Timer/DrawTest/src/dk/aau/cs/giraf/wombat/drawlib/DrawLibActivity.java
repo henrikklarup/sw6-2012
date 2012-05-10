@@ -3,18 +3,16 @@ package dk.aau.cs.giraf.wombat.drawlib;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import dk.aau.cs.giraf.TimerLib.Attachment;
 import dk.aau.cs.giraf.TimerLib.Guardian;
-import dk.aau.cs.giraf.TimerLib.ProgressBar;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
-import dk.aau.cs.giraf.TimerLib.TimeTimer;
 
 
 public class DrawLibActivity extends Activity {
@@ -50,18 +48,46 @@ public class DrawLibActivity extends Activity {
 			v.setKeepScreenOn(true);
 			setContentView(v);
 		} else {
-			frameWidth = frameWidth/2;
 			
 			LinearLayout frame = new LinearLayout(this);
 			frame.setKeepScreenOn(true);
-			View v = genDrawView(sub);
-			frame.addView(v, frameWidth, frameHeight);
-			
-			
-			//TODO: Attachment is working different now so this will crash ! :D
-			//TODO: Add picture
-			View v2 = genDrawView(sub.getAttachment());
-			frame.addView(v2, frameWidth, frameHeight);
+			View v = null;
+			View v2 = null;
+			ImageView i = null;
+			ImageView i2 = null;
+			switch(sub.getAttachment().getForm()){
+			case Timer:
+				frameWidth = frameWidth/2;
+				 v = genDrawView(sub);
+				frame.addView(v, frameWidth, frameHeight);
+				v2 = genDrawView(sub.getAttachment().genSub());
+				frame.addView(v2, frameWidth, frameHeight);
+				break;
+			case SingleImg:
+				frameWidth = frameWidth/2;
+				v = genDrawView(sub);
+				frame.addView(v, frameWidth, frameHeight);
+				
+				i = new ImageView(this);
+				i.setImageResource(sub.getAttachment().getImg().getPath());
+				frame.addView(i, frameWidth, frameHeight);
+				break;
+			case SplitImg:
+				frameWidth = frameWidth/2;
+				v = genDrawView(sub);
+				frame.addView(v, frameWidth, frameHeight);
+				frameWidth = frameWidth/2;
+				i = new ImageView(this);
+				i2 = new ImageView(this);
+				
+				i.setImageResource(sub.getAttachment().getLeftImg().getPath());
+				//i2.setImageResource(sub.getAttachment().getRightImg().getPath());
+				
+				frame.addView(i, frameWidth, frameHeight);
+				//frame.addView(i2, frameWidth, frameHeight);
+				
+				break;
+			}
 			
 			setContentView(frame);	
 		}
@@ -99,4 +125,5 @@ public class DrawLibActivity extends Activity {
 			return null;
 		}
 	}
+	
 }
