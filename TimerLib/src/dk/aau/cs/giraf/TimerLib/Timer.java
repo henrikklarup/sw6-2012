@@ -23,6 +23,27 @@ public class Timer extends Attachment {
 		this._gradient = p.gradient;
 		this._time = p.get_totalTime();
 	}
+	
+	public SubProfile genSub(){
+		
+		SubProfile sp = null;
+		switch(this._form){
+		case DigitalClock:
+			sp = new DigitalClock("undefined", "undefined", this._bgColor, this._timeLeftColor, this._timeSpentColor, this._frameColor, this._time, this._gradient);
+			break;
+		case TimeTimer:
+			sp = new TimeTimer("undefined", "undefined", this._bgColor, this._timeLeftColor, this._timeSpentColor, this._frameColor, this._time, this._gradient);
+			break;
+		case Hourglass:
+			sp = new Hourglass("undefined", "undefined", this._bgColor, this._timeLeftColor, this._timeSpentColor, this._frameColor, this._time, this._gradient);
+			break;
+		case ProgressBar:
+			sp = new ProgressBar("undefined", "undefined", this._bgColor, this._timeLeftColor, this._timeSpentColor, this._frameColor, this._time, this._gradient);
+			break;
+		}
+		
+		return sp;
+	}
 
 	public Timer getAttachment(){
 		return this;
