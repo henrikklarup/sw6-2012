@@ -266,6 +266,22 @@ public class ProfilesHelper {
 
 		return profiles;
 	}
+	
+	/**
+	 * Get profiles by department
+	 * @param department Department
+	 * @return List of profiles
+	 */
+	public List<Profile> getProfilesByDepartment(Department department) {
+		List<Profile> profiles = new ArrayList<Profile>();
+		List<HasDepartment> list = hd.getProfilesByDepartment(department);
+
+		for (HasDepartment hd : list) {
+			profiles.add(getProfileById(hd.getIdProfile()));
+		}
+		
+		return profiles;
+	}
 
 	/**
 	 * Get guardian by department
