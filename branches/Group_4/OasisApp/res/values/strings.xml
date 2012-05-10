@@ -2,6 +2,7 @@
 <resources>
 
     <string name="hello">Hello World, MainActivity!</string>
+    <string name="back_button">Back</string>
     <string name="app_name">OasisApp</string>
     <string name="myprofile">My Profile</string>
     <string name="mychildren">My Children</string>
@@ -19,5 +20,10 @@
     <string name="myAppsButton">My Apps</string>
     <string name="myMediaButton">My Media</string>
     <string name="mySettingsButton">Change Settings</string>
+    
+    <string name="tab_myprofile">My Profile</string>
+    <string name="tab_mychildren">My Children</string>
+    <string name="tab_mydepartments">My Departments</string>
+    <string name="tab_mydepchildren">My Dep. Children</string>
 
 </resources>

@@ -6,16 +6,16 @@
     android:keepScreenOn="true"
     android:orientation="horizontal" >
 
-    <FrameLayout
-        android:id="@+id/fMenuList"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="100" />
+    <!-- <FrameLayout -->
+    <!-- android:id="@+id/fMenuList" -->
+    <!-- android:layout_marginTop="30dp" -->
+    <!-- android:layout_width="fill_parent" -->
+    <!-- android:layout_height="fill_parent" -->
+    <!-- android:layout_weight="100" /> -->
 
     <FrameLayout
         android:id="@+id/fDetails"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="20" />
+        android:layout_height="fill_parent" />
 
 </LinearLayout>

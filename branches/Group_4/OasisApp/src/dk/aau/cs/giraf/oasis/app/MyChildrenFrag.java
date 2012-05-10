@@ -16,7 +16,6 @@ public class MyChildrenFrag extends ExpandableListFragment {
 
 	Helper helper;
 	List<Profile> list;
-	Profile guardian;
 	TextView tvHeader;
 	ChildListAdapter adapter;
 
@@ -41,7 +40,7 @@ public class MyChildrenFrag extends ExpandableListFragment {
 
 		helper = new Helper(getActivity().getApplicationContext());
 
-		if (MainActivity.guardianId != -1) {
+		if (MainActivity.guardian != null) {
 			updateList();
 		} else {
 			setListAdapter(null);
@@ -51,10 +50,9 @@ public class MyChildrenFrag extends ExpandableListFragment {
 	private void updateList() {
 		adapter = new ChildListAdapter(getActivity().getApplicationContext());
 
-		guardian = helper.profilesHelper.getProfileById(MainActivity.guardianId);
-		list = helper.profilesHelper.getChildrenByGuardian(guardian);
+		list = helper.profilesHelper.getChildrenByGuardian(MainActivity.guardian);
 
-		List<Department> depList = helper.departmentsHelper.getDepartmentsByProfile(guardian);
+		List<Department> depList = helper.departmentsHelper.getDepartmentsByProfile(MainActivity.guardian);
 
 		for(Department d : depList) {
 			ArrayList<Profile> result = new ArrayList<Profile>();

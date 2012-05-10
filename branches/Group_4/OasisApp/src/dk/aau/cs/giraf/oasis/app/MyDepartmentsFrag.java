@@ -10,13 +10,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Department;
-import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
 public class MyDepartmentsFrag extends ListFragment {
 
 	Helper helper;
 	List<Department> list;
-	Profile guardian;
 	TextView tvHeader;
 
 	@Override
@@ -40,9 +38,8 @@ public class MyDepartmentsFrag extends ListFragment {
 		
 		helper = new Helper(getActivity().getApplicationContext());
 		
-		if (MainActivity.guardianId != -1) {
-			guardian = helper.profilesHelper.getProfileById(MainActivity.guardianId);
-			list = helper.departmentsHelper.getDepartmentsByProfile(guardian);
+		if (MainActivity.guardian != null) {
+			list = helper.departmentsHelper.getDepartmentsByProfile(MainActivity.guardian);
 			setListAdapter(new DepartmentListAdapter(getActivity().getApplicationContext(), list));
 		} else {
 			setListAdapter(null);
