@@ -1,6 +1,5 @@
 package dk.aau.cs.giraf.parrot;
 
-import dk.aau.cs.giraf.parrot.R;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
