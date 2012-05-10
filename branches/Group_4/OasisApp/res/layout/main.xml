@@ -34,25 +34,18 @@
             android:text="@string/myprofile" />
 
         <Button
-            android:id="@+id/bMyChildren"
+            android:id="@+id/bAllProfiles"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="@string/mychildren" />
+            android:text="@string/allprofiles" />
 
         <Button
-            android:id="@+id/bMyDepartments"
+            android:id="@+id/bAllDepartments"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="@string/mydepartments" />
-
-        <Button
-            android:id="@+id/bMyDepChildren"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/mydepchildren" />
+            android:text="@string/alldepartments" />
     </LinearLayout>
 
 </RelativeLayout>

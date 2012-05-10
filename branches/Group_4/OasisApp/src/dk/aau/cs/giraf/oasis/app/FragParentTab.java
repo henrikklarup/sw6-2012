@@ -8,11 +8,12 @@ import android.view.Window;
 
 public class FragParentTab extends Activity {
 
-	public static int view;
 	private int tabView;
 	public final static int TABPROFILE = 0;
 	public final static int TABAPP = 1;
 	public final static int TABMEDIA = 2;
+	public final static int TABALLPROFILES = 3;
+	public final static int TABALLDEPARTMENTS = 4;
 	static FragmentManager t;
 
 	@Override
@@ -25,26 +26,26 @@ public class FragParentTab extends Activity {
 
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
-			view = extras.getInt("view");
 			tabView = extras.getInt("tabView");
 		} else {
-			view = -1;
 			tabView = -1;
 		}
 
 		setContentView(R.layout.fragments_view);
 
 		t = getFragmentManager();
-		t.beginTransaction().add(R.id.fDetails, new TabManagerProfile()).commit();
 
-		/*switch(tabView) {
+		switch(tabView) {
 		case TABPROFILE:
 			t.beginTransaction().add(R.id.fDetails, new TabManagerProfile()).commit();
 			break;
-		case TABMEDIA:
-			t.beginTransaction().add(R.id.fDetails, new TabManagerMedia()).commit();
+		case TABALLPROFILES:
+			t.beginTransaction().add(R.id.fDetails, new TabManagerAllProfiles()).commit();
 			break;
-		}*/
+		case TABALLDEPARTMENTS:
+			t.beginTransaction().add(R.id.fDetails, new TabManagerAllDepartments()).commit();
+			break;
+		}
 	}
 
 	public static void switchTab(int tabViewId) {

@@ -5,6 +5,8 @@
     <string name="back_button">Back</string>
     <string name="app_name">OasisApp</string>
     <string name="myprofile">My Profile</string>
+    <string name="allprofiles">All Profiles</string>
+    <string name="alldepartments">All Departments</string>
     <string name="mychildren">My Children</string>
     <string name="mydepartments">My Departments</string>
     <string name="mydepchildren">My Dep. Children</string>
