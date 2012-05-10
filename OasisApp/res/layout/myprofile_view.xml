@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/tvHeaderMyProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="@string/myprofile"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="42dp" />
+<!--     <TextView -->
+<!--         android:id="@+id/tvHeaderMyProfile" -->
+<!--         android:layout_width="wrap_content" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:layout_centerHorizontal="true" -->
+<!--         android:text="@string/myprofile" -->
+<!--         android:textAppearance="?android:attr/textAppearanceLarge" -->
+<!--         android:textSize="42dp" /> -->
 
     <TextView
         android:id="@+id/tvMyProfileNameLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvHeaderMyProfile"
         android:layout_margin="20dp"
         android:text="@string/nameLabel"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -27,7 +26,6 @@
         android:id="@+id/tvMyProfileName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvHeaderMyProfile"
         android:layout_margin="20dp"
         android:layout_toRightOf="@id/tvMyProfileNameLabel"
         android:text="@string/hello"
@@ -59,7 +57,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@id/tvMyProfileNameLabel"
-        android:layout_below="@id/tvHeaderMyProfile"
         android:layout_marginRight="100dp"
         android:src="@drawable/logo" />
 

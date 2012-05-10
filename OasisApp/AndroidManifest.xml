@@ -5,29 +5,20 @@
     android:versionName="1.0" >
 
     <uses-sdk android:minSdkVersion="13" />
-
+    
     <application
         android:icon="@drawable/logo"
         android:label="@string/app_name" >
-        <activity
-            android:name="dk.aau.cs.giraf.oasis.app.MainActivity"
-            android:label="@string/app_name" >
+        <activity android:name="dk.aau.cs.giraf.oasis.app.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-         <activity
-            android:name="dk.aau.cs.giraf.oasis.app.FragmentParent"
-            android:screenOrientation="landscape"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="dk.aau.cs.giraf.oasis.app.FRAGMENTPARENT" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+        <activity
+            android:name=".FragParentTab"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>
