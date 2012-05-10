@@ -45,13 +45,13 @@ public class PARROTActivity extends Activity {
 				.setTabListener(new TabListener<SpeechBoardFragment>(this,"speechboard",SpeechBoardFragment.class));
 		actionBar.addTab(tab);
 		
-//		if (parrotUser.getRights(0) == true)
-//		{
-//			tab = actionBar.newTab()
-//					.setText(R.string.secondTab)
-//					.setTabListener(new TabListener<ManageCategoryFragment>(this,"manage",ManageCategoryFragment.class));
-//			actionBar.addTab(tab);
-//		}
+		if (parrotUser.getRights(0) == true)
+		{
+			tab = actionBar.newTab()
+					.setText(R.string.secondTab)
+					.setTabListener(new TabListener<ManageCategoryFragment>(this,"manage",ManageCategoryFragment.class));
+			actionBar.addTab(tab);
+		}
 		if (parrotUser.getRights(1) == true) 
 		{
 			tab = actionBar.newTab()
