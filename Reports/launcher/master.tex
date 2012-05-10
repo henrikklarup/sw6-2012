@@ -59,10 +59,6 @@
 
 \include{FrontBackmatter/Titleback} % Back of the title page
 
-\cleardoublepage\include{FrontBackmatter/Dedication} % Dedication page
-
-%\cleardoublepage\include{FrontBackmatter/Foreword} % Uncomment and create a Foreword.tex to include a foreword
-
 \cleardoublepage\include{FrontBackmatter/Abstract} % Abstract page
 
 \cleardoublepage\include{FrontBackmatter/Publication} % Publications from the thesis page
@@ -79,46 +75,38 @@
 \cleardoublepage % Avoids problems with pdfbookmark
 
 %----------------------------------------------------------------------------------------
-%	THESIS CONTENT - CHAPTERS
+%	INTRODUCTION
 %----------------------------------------------------------------------------------------
 
-\ctparttext{You can put some informational part preamble text here. Illo principalmente su nos. Non message \emph{occidental} angloromanic da. Debitas effortio simplificate sia se, auxiliar summarios da que, se avantiate publicationes via. Pan in terra summarios, capital interlingua se que. Al via multo esser specimen, campo responder que da. Le usate medical addresses pro, europa origine sanctificate nos se.} % Text on the Part 1 page describing  the content in Part 1
+\part{Prologue} % First part of the report
 
-\part{Some Kind of Manual} % First part of the thesis
-
-\include{Chapters/Chapter01} % Chapter 1
+\include{chapters/preface/index} % Preface/Prologue
+% \include{../common_report/input/introduction}
+\include{chapters/problem_definition/index}
 
 \cleardoublepage % Empty page before the start of the next part
 
 %------------------------------------------------
 
-\ctparttext{You can put some informational part preamble text here. Illo principalmente su nos. Non message \emph{occidental} angloromanic da. Debitas effortio simplificate sia se, auxiliar summarios da que, se avantiate publicationes via. Pan in terra summarios, capital interlingua se que. Al via multo esser specimen, campo responder que da. Le usate medical addresses pro, europa origine sanctificate nos se.} % Text on the Part 2 page describing the content in Part 2
+\part{Process} % Describing the process
 
-\include{chapters/preface/index}
-% \include{../common_report/input/introduction}
-\include{chapters/problem_definition/index}
 \include{chapters/iterative_process/index}
 \include{chapters/design/index}
 \include{chapters/implementation/index}
 \include{chapters/test/index}
 \include{chapters/closure/index}
 
+\part{Appendix} % The appendix
+
 \appendix
 
-\part{Appendix} % New part of the thesis for the appendix
-
-\include{Chapters/Chapter0A} % Appendix A
-%\include{Chapters/Chapter0B} % Appendix B - empty template
+%\include{Chapters/Chapter0A} % Appendix A
 
 %----------------------------------------------------------------------------------------
-%	POST-CONTENT THESIS PAGES
+%	POST-CONTENT
 %----------------------------------------------------------------------------------------
 
 \cleardoublepage\include{FrontBackmatter/Bibliography} % Bibliography
-
-\cleardoublepage\include{FrontBackmatter/Colophon} % Colophon
-
-\cleardoublepage\include{FrontBackmatter/Declaration} % Declaration
 
 %----------------------------------------------------------------------------------------
 
