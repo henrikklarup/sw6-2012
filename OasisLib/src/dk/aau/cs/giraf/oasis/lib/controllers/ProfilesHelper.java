@@ -138,6 +138,10 @@ public class ProfilesHelper {
 		if (id != -1) {
 			profile = getProfileById(id);
 		}
+		
+		if (profile == null) {
+			
+		}
 
 		return profile;
 	}
