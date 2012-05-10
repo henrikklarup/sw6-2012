@@ -41,23 +41,49 @@ public class OptionsFragment extends Fragment
 	}
 	private void initColorButtons() {
 		
-		Button ccc = (Button) parrent.findViewById(R.id.c);
+		Button ccc = (Button) parrent.findViewById(R.id.changecategorycolor);// these are two different buttons
+		
+		Button csc = (Button) parrent.findViewById(R.id.changesentencecolor);
 	
 		
-		colorGradientButton1.setOnClickListener(new OnClickListener() {
+		ccc.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				AmbilWarnaDialog dialog = new AmbilWarnaDialog(getActivity(),
-						currSubP.timeLeftColor, new OnAmbilWarnaListener() {
+						PARROTActivity.getUser().getCategoryColor(), new OnAmbilWarnaListener() {
 							public void onCancel(AmbilWarnaDialog dialog) {
 							}
 
 							public void onOk(AmbilWarnaDialog dialog, int color) {
-								currSubP.timeLeftColor = color;
-								setColor(colorGradientButton1.getBackground(),
-										currSubP.timeLeftColor);
+								PARROTProfile user = PARROTActivity.getUser();
+								user.setCategoryColor(color);
+								PARROTActivity.setUser(user);
+								SpeechBoardFragment.setColours(parrent);
+							
 							}
 						});
 				dialog.show();
 			}
 		});
+		
+		csc.setOnClickListener(new OnClickListener() {
+			
+			public void onClick(View v) {
+				AmbilWarnaDialog dialog = new AmbilWarnaDialog(getActivity(),
+						PARROTActivity.getUser().getSentenceBoardColor(), new OnAmbilWarnaListener() {
+							public void onCancel(AmbilWarnaDialog dialog) {
+							}
+
+							public void onOk(AmbilWarnaDialog dialog, int color) {
+								PARROTProfile user = PARROTActivity.getUser();
+								user.setSentenceBoardColor(color);
+								PARROTActivity.setUser(user);
+								SpeechBoardFragment.setColours(parrent);
+							
+							}
+						});
+				dialog.show();
+				
+			}
+		});
+	}
 }

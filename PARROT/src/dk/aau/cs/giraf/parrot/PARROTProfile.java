@@ -15,6 +15,8 @@ public class PARROTProfile {
 	private long profileID;
 	private int NumberOfSentencePictograms = 4;
 	private boolean[] rights = new boolean[3];
+	private int categoryColor = 0;
+	private int sentenceBoardColor = 0;
 	
 	//TODO add settings such as colour specification and others...
 	
@@ -97,6 +99,22 @@ public class PARROTProfile {
 	{
 		boolean isAllowed = this.rights[i];
 		return isAllowed;
+	}
+
+	public int getCategoryColor() {
+		return categoryColor;
+	}
+
+	public void setCategoryColor(int categoryColor) {
+		this.categoryColor = categoryColor;
+	}
+
+	public int getSentenceBoardColor() {
+		return sentenceBoardColor;
+	}
+
+	public void setSentenceBoardColor(int sentenceBoardColor) {
+		this.sentenceBoardColor = sentenceBoardColor;
 	}
 	
 }
