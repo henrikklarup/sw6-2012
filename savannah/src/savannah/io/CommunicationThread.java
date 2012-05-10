@@ -1,32 +1,44 @@
 package savannah.io;
 
-import savannah.device.Connection;
+import org.jdom.JDOMException;
+
 import savannah.io.DOMinator.DOMinator;
 import savannah.server.*;
 
 import java.net.Socket;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.io.DataInputStream;
 import java.io.IOException;
 
 import java.lang.Thread;
 
-import org.jdom.JDOMException;
 
+
+/**
+ * This class is used to facilitate communication between the {@link savannah.io.IOHandler} and any connection to it.
+ * @author Thorbjørn Kvist Nielsen
+ *
+ */
 public class CommunicationThread extends Thread {
 	private Socket socket;
 	private TransmissionHandler handle = null;
 	private String folder;
 
+	/**
+	 * Constructs a CommunicationThread from the specified arguments.
+	 * This {@link java.lang.Thread} does not start automatically, and therefore it needs to be started manually.
+	 * @param _socket - the connecting {@link java.net.Socket}
+	 * @param _folder - the specified path for file storage
+	 */
 	public CommunicationThread(Socket _socket, String _folder) {
 		this.socket = _socket;
 		this.folder = _folder;
 		//		start();
 	}
 	
+	/**
+	 * Starts the {@link savannah.io.CommunicationThread}.
+	 */
 	public void run() {
 		try {
 //			InputStream inputStream = new DataInputStream(this.socket.getInputStream());

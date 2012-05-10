@@ -11,29 +11,44 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Random;
 
+/**
+ * This class maintains all communication with any and all connections.
+ * The class itself is made using the Singleton design pattern.
+ * @author Thorbjørn Kvist Nielsen
+ *
+ */
 public class IOHandler implements Runnable {
 	//Field variables
 	private static IOHandler _instance = null;
 	private ServerSocket serverSocket;
 	private Hashtable<Socket, DataOutputStream> connections = new Hashtable<Socket, DataOutputStream>(100);
+	private LogFile log;
 	private String folder;
 	private int bufferSize;
+
 
 	@Override
 	public void run() {
 		listen();
 	}
 
-	private IOHandler(String folder, int bufferSize) {
+	private IOHandler(String folder, int bufferSize, String logfilePath) {
 		this.folder = folder;
 		this.bufferSize = bufferSize;
+		log = new LogFile(logfilePath);
 	}
+	
+	/**
+	 * @return The instance of the {@link savannah.io.IOHandler}.
+	 */
 	public static synchronized IOHandler getInstance() {
 		if (_instance == null) {
-			_instance = new IOHandler(Configuration.FOLDERPATH, Configuration.BUFFERSIZE);
+			_instance = new IOHandler(Configuration.FOLDERPATH, Configuration.BUFFERSIZE, Configuration.LOGFILEPATH);
 		}
 		return _instance;
 	}
@@ -74,6 +89,7 @@ public class IOHandler implements Runnable {
 			}
 		}
 	}
+	
 	/**
 	 * Prints the specified message to the IOHandler's console.
 	 * @param message - the specified message
@@ -81,13 +97,11 @@ public class IOHandler implements Runnable {
 	public void displayMessage(String message) {
 		System.out.println("Message: " + message);
 	}
-	private byte[] messageToBytes(String message) {
-		byte[] buf = new byte[message.length()];
-		for (int i = 0; i < message.length(); i++) {
-			buf[i] = (byte)message.charAt(i);
-		}
-		return buf;
-	}
+	
+
+	 // ------------------------------------------------- \\
+	 // 	Methods for calculations and conversions      \\
+	 // ------------------------------------------------- \\
 	private byte[] messageToBytes(char[] c) {
 		byte[] buf = new byte[c.length];
 		for (int i = 0; i < c.length; i++) {
@@ -150,6 +164,10 @@ public class IOHandler implements Runnable {
 		return result;
 	}
 	
+	
+	 // ------------------------------------------------- \\
+	 // 			Methods for sending data 		      \\
+	 // ------------------------------------------------- \\
 	private void sendPackage(OutputStream writer, int pingSize) {
 		StringBuilder sb = new StringBuilder();
 		this.makeCRUD(CRUD.PING, sb);
@@ -249,6 +267,9 @@ public class IOHandler implements Runnable {
 		}
 	}
 	
+	 // ------------------------------------------------- \\
+	 // 			Methods for data generation		      \\
+	 // ------------------------------------------------- \\
 	private void makePing(StringBuilder builder, int pingSize) {
 		try {
 			if (builder == null) {
@@ -367,6 +388,10 @@ public class IOHandler implements Runnable {
 		//The cleanup crew... Put this stuff in the finally clause
 		is.close();
 	}
+	
+	 // ------------------------------------------------- \\
+	 //   Methods for catching exceptions in send data 	  \\
+	 // ------------------------------------------------- \\
 	private void commitResponds(Socket socket, String data) {
 		try {
 			this.sendPackage(new DataOutputStream(socket.getOutputStream()), CRUD.COMMIT, data);
@@ -409,10 +434,27 @@ public class IOHandler implements Runnable {
 			System.err.println("errorResponds: Could not establish an OutputStream !");
 		}
 	}
+	
+	
+	 // ------------------------------------------------- \\
+	 // 		Methods for responding to Events		  \\
+	 // ------------------------------------------------- \\
+	/**
+	 * Responds to an {@link savannah.server.Event}
+	 * @param socket - the specified {@link java.net.Socket} to respond to
+	 * @param pingSize - the size of a Ping to send
+	 */
 	public synchronized void respond(Socket socket, int pingSize) {
 		/* CRUD.PING */
 		this.pingResponds(socket, pingSize);
 	}
+	
+	/**
+	 * Responds to an {@link savannah.server.Event}
+	 * @param socket - the specified {@link java.net.Socket} to respond to
+	 * @param cr - the action to respond to
+	 * @param data - the data to send back
+	 */
 	public synchronized void respond(Socket socket, CRUD cr, String data) {
 		switch(cr.getValue()) {
 		case 1:		/*  CRUD.COMMIT */
@@ -426,6 +468,14 @@ public class IOHandler implements Runnable {
 			throw new IllegalArgumentException("CRUD.ERROR cannot be resolved to an action !");
 		}
 	}
+	
+	/**
+	 * Responds to an {@link savannah.server.Event}
+	 * @param socket - the specified {@link java.net.Socket} to respond to
+	 * @param cr - the action to respond to
+	 * @param data - the data to send back
+	 * @param f - a {@link java.io.File} object to send
+	 */
 	public synchronized void respond(Socket socket, CRUD cr, String data, File f) {
 		switch(cr.getValue()) {
 		case 1:		/*  CRUD.COMMIT */
@@ -439,6 +489,14 @@ public class IOHandler implements Runnable {
 			throw new IllegalArgumentException("CRUD.ERROR cannot be resolved to an action !");
 		}
 	}
+	
+	/**
+	 * Responds to an {@link savannah.server.Event}
+	 * @param socket - the specified {@link java.net.Socket} to respond to
+	 * @param cr - the action to respond to
+	 * @param data - the data to send back
+	 * @param files - a number of {@link java.io.File} objects to send
+	 */
 	public synchronized void respond(Socket socket, CRUD cr, String data, File... files) {
 		switch(cr.getValue()) {
 		case 1:		/*  CRUD.COMMIT */
@@ -453,38 +511,46 @@ public class IOHandler implements Runnable {
 		}
 	}
 
-	/*
-	public synchronized void logIt(Socket socket, String performedAction) {
-		LogFile lf = new LogFile(Configuration.LOGFILEPATH);
-		lf.logIt(socket, performedAction);
-	}
-	public synchronized void logIt(List<File> list) {
-		LogFile lf = new LogFile(Configuration.LOGFILEPATH);
-		lf.logIt(list);
-	}
-	public synchronized void logIt(boolean completed) {
-		LogFile lf = new LogFile(Configuration.LOGFILEPATH);
-		lf.logIt(completed);
-	}
-	*/
-
-	private DataOutputStream getDataOutputStream(Socket socket) {
-		DataOutputStream temp = this.connections.get(socket);
-
-		if (temp == null) {
-			throw new NullPointerException("Could not find the Socket");
-		}	else {
-			return temp;
-		}
-	}
+	
+	 // ------------------------------------------------- \\
+	 // 			Methods used to log stuff  		      \\
+	 // ------------------------------------------------- \\
 	/**
-	 * Checks if the specified Socket is in the list of connections.
-	 * @param socket - the specified Socket
-	 * @return true, if the Socket exists, otherwise false
+	 * Creates an entry in the logfile from the specified arguments.
+	 * @param socket - the {@link java.net.Socket} to log
+	 * @param performedAction - the CRUD action performed
+	 * @param completed - did the {@link savannah.server.Event} fail or succeed
 	 */
-	private boolean isConnected(Socket socket) {
-		return this.connections.containsKey(socket);
+	public synchronized void logIt(Socket socket, String performedAction, boolean completed) {
+		log.makeLogEntry(socket, performedAction, completed);
 	}
+	
+	/**
+	 * Creates an entry in the logfile from the specified arguments.
+	 * @param socket - the {@link java.net.Socket} to log
+	 * @param performedAction - the CRUD action performed
+	 * @param completed - did the {@link savannah.server.Event} fail or succeed
+	 * @param files - the {@link java.io.File} objects to log
+	 */
+	public synchronized void logIt(Socket socket, String performedAction, boolean completed, List<File> files) {
+		log.makeLogEntry(socket, performedAction, completed, files);
+	}
+	
+	/**
+	 * Creates an entry in the logfile from the specified arguments.
+	 * @param socket - the {@link java.net.Socket} to log
+	 * @param performedAction - the CRUD action performed
+	 * @param completed - did the {@link savannah.server.Event} fail or succeed
+	 * @param files - the {@link java.io.File} objects to log
+	 */
+	public synchronized void logIt(Socket socket, String performedAction, boolean completed, ArrayList<File> files) {
+		log.makeLogEntry(socket, performedAction, completed, files);
+	}
+	
+	
+	 // ------------------------------------------------- \\
+	 // 			Methods for clean up    		      \\
+	 // ------------------------------------------------- \\
 	/**
 	 * Removes a Socket connection based on the specified
 	 * @param socket - the specified Socket
