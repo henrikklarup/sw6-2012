@@ -45,7 +45,7 @@ public class TabManagerAllDepartments extends Fragment implements OnTabChangeLis
 
 		updateTab(TAB_DEPARTMENTS, R.id.tabAD_1);
 
-		Button b = (Button) getView().findViewById(R.id.bTabApp);
+		Button b = (Button) getView().findViewById(R.id.bTabAllDepartments);
 		b.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -88,7 +88,7 @@ public class TabManagerAllDepartments extends Fragment implements OnTabChangeLis
 
 		if (TAB_DEPARTMENTS.equals(tabId)) {
 			fm.beginTransaction()
-			.replace(placeholder, new MyProfileFrag(), tabId)
+			.replace(placeholder, new DepartmentsFrag(), tabId)
 			.commit();
 			return;
 		}

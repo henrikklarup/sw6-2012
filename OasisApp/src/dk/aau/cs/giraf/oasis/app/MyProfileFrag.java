@@ -32,6 +32,7 @@ public class MyProfileFrag extends Fragment {
 		super.onActivityCreated(savedInstanceState);
 
 		tvName = (TextView) getView().findViewById(R.id.tvMyProfileName);
+
 		name = MainActivity.guardian.getFirstname();
 		if (MainActivity.guardian.getMiddlename() != null) {
 			name += " " + MainActivity.guardian.getMiddlename();

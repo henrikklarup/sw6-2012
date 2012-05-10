@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.Toast;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
@@ -23,9 +24,9 @@ public class MainActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-        View main_layout = findViewById(android.R.id.content).getRootView();
-        main_layout.setSystemUiVisibility(View.STATUS_BAR_HIDDEN);
-		
+		View main_layout = findViewById(android.R.id.content).getRootView();
+		main_layout.setSystemUiVisibility(View.STATUS_BAR_HIDDEN);
+
 		helper = new Helper(this);
 
 		Bundle extras = getIntent().getExtras();
@@ -33,7 +34,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			guardianId = extras.getLong(("currentGuardianID"));
 			guardian = helper.profilesHelper.getProfileById(guardianId);
 		} else {
-			guardianId = -1;
+			//			guardianId = -1;
 		}
 
 		setContentView(R.layout.main);
@@ -53,11 +54,15 @@ public class MainActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		direct = new Intent(this, FragParentTab.class);
-		
+
 		switch (v.getId()) {
 		case R.id.bMyProfile:
-			direct.putExtra("tabView", FragParentTab.TABPROFILE);
-			startActivity(direct);
+			if (guardian != null) {
+				direct.putExtra("tabView", FragParentTab.TABPROFILE);
+				startActivity(direct);
+			} else {
+				Toast.makeText(this, R.string.noprofile, Toast.LENGTH_SHORT).show();
+			}
 			break;
 		case R.id.bAllProfiles:
 			direct.putExtra("tabView", FragParentTab.TABALLPROFILES);

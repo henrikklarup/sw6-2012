@@ -49,10 +49,10 @@ public class ProfilesFrag extends ExpandableListFragment {
 
 		for(Department d : depList) {
 			ArrayList<Profile> result = new ArrayList<Profile>();
-			List<Profile> pList = helper.profilesHelper.getChildrenByDepartment(d);		
+			List<Profile> pList = helper.profilesHelper.getProfilesByDepartment(d);		
 
 			for(Profile p : pList) {
-				if (list.contains(p)) {
+				if (!list.contains(p)) {
 					result.add(p);
 				}
 			}

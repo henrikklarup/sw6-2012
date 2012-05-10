@@ -52,7 +52,7 @@ public class ChildrenFrag extends ExpandableListFragment {
 			List<Profile> pList = helper.profilesHelper.getChildrenByDepartment(d);		
 
 			for(Profile p : pList) {
-				if (list.contains(p)) {
+				if (!list.contains(p)) {
 					result.add(p);
 				}
 			}
