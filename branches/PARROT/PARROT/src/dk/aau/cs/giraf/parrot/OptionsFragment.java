@@ -31,13 +31,11 @@ public class OptionsFragment extends Fragment
 		this.parrent = activity;
 		
 	}
-	
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) 
-	{        
-		// Inflate the layout for this fragment
-		return inflater.inflate(R.layout.options_layout, container, false);
+	public void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		initColorButtons();
 	}
 	private void initColorButtons() {
 		
