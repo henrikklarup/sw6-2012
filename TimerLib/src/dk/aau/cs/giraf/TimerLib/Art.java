@@ -2,12 +2,26 @@ package dk.aau.cs.giraf.TimerLib;
 
 public class Art {
 	
-	private String _path;
+	private int _path;
 	private String _caption;
+	private int _id = -1;
+	Guardian guard = Guardian.getInstance();
 	
-	public Art(String path, String caption){
+	public Art(int path, String caption){
 		this._path = path;
 		this._caption = caption;
+		this._id = guard.getArtId();
 	}
-
+	
+	public String getName(){
+		return this._caption;
+	}
+	
+	public int getPath(){
+		return this._path;
+	}
+	
+	int getId(){
+		return this._id;
+	}
 }

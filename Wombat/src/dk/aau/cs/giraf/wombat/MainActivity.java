@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import dk.aau.cs.giraf.TimerLib.Art;
 import dk.aau.cs.giraf.TimerLib.Guardian;
 
 public class MainActivity extends Activity {
@@ -13,7 +14,7 @@ public class MainActivity extends Activity {
 		
 		long guardianId;
 		long childId;
-		int color;
+		int color;	
 
 		Bundle extras = getIntent().getExtras();
         if (extras != null) {        	
@@ -26,7 +27,17 @@ public class MainActivity extends Activity {
         	color = 0xFFFFBB55;
         }
 
-    	Guardian.getInstance(childId, guardianId, getApplicationContext());
+    	Guardian guard = Guardian.getInstance(childId, guardianId, getApplicationContext());
+    	
+
+		Art p_done = new Art(R.drawable.p_done,"Færdig");
+		Art p_skema = new Art(R.drawable.p_gaa_til_skema,"Gå til skema");
+		Art p_taxa = new Art(R.drawable.p_gaa_til_taxa,"Gå til taxa");
+		
+		guard.ArtList.clear();
+		guard.ArtList.add(p_done);
+		guard.ArtList.add(p_skema);
+		guard.ArtList.add(p_taxa);
     	
 		// Set content view according to main, which implements two fragments
 		setContentView(R.layout.main);

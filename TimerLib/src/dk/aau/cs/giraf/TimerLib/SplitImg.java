@@ -10,12 +10,12 @@ public class SplitImg extends Attachment {
 	Guardian guard = Guardian.getInstance();
 	Helper help = new Helper(guard.m_context);
 	
-	private Media _leftImg;
-	private Media _rightImg;
+	private Art _leftImg;
+	private Art _rightImg;
 	
-	public SplitImg(long leftId, long rightId){
-		this._leftImg = help.mediaHelper.getMediaById(leftId);
-		this._rightImg = help.mediaHelper.getMediaById(rightId);
+	public SplitImg(Art left, Art right){
+		this._leftImg = left;
+		this._rightImg = right;
 	}
 	
 	public Attachment getAttachment(){

@@ -10,10 +10,10 @@ public class SingleImg extends Attachment {
 	Guardian guard = Guardian.getInstance();
 	Helper help = new Helper(guard.m_context);
 	
-	private Media _img;
+	private Art _art = null;
 	
-	public SingleImg(long id){
-		this._img = help.mediaHelper.getMediaById(id);
+	public SingleImg(Art art){
+		this._art = art;
 	}
 	
 	public Attachment getAttachment(){
@@ -37,7 +37,7 @@ public class SingleImg extends Attachment {
 		map.put("_gradient", String.valueOf(-1));
 		
 		//SingleImg
-		map.put("singleImgId", String.valueOf(this._img.getId()));
+		map.put("singleImgId", String.valueOf(this._art.getId()));
 		
 		//SplitImg
 		map.put("leftImgId", String.valueOf(-1));

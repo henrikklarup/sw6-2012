@@ -109,6 +109,7 @@ public class Child implements Comparable<Child>{
 
 		if(!override){
 			p.setDB_id(getNewId());
+			p.setId(guard.getId());
 		}
 		
 		//Check if there exists an old profile

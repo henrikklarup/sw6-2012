@@ -25,10 +25,14 @@ public class Guardian {
 	
 	private SubProfile _selectedSubProfile = null;
 	
+	public ArrayList<Art> ArtList = new ArrayList<Art>();
+	
 	public static String _name = null;
 	public static CRUD crud;
 	
 	private int id = -1;
+	
+	private int _artId = -1;
 	
 	private static App m_app;
 	private static Helper oHelp;
@@ -44,6 +48,25 @@ public class Guardian {
 	public static boolean subProfileFirstClick;	// When a subprofile is saved, this is set to true
 												// When something is clicked in the subprofile list, set to false
 	public static boolean profileFirstClick;
+	
+	private ArrayList<formFactor> _mode = null;
+	
+	int getArtId(){
+		this._artId++;
+		return this._artId;
+	}
+	
+	public ArrayList<formFactor> getMode(){
+		if(_mode == null){
+			_mode = new ArrayList<formFactor>();
+			_mode.add(formFactor.Timer);
+			_mode.add(formFactor.SingleImg);
+			_mode.add(formFactor.SplitImg);
+			return _mode;
+		}  else {
+			return _mode;
+		}
+	}
 	
 	/**
 	 * Default constructor for Guardian
