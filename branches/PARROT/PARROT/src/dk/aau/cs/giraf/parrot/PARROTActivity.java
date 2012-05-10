@@ -18,7 +18,6 @@ public class PARROTActivity extends Activity {
 
 
 
-
 		PARROTDataLoader dataLoader = new PARROTDataLoader(this);
 		//parrotUser = dataLoader.loadPARROT();			
 		//TODO replace the temp lines with the above line
@@ -60,13 +59,13 @@ public class PARROTActivity extends Activity {
 					.setTabListener(new TabListener<OptionsFragment>(this,"options",OptionsFragment.class));
 			actionBar.addTab(tab);
 		}
-		if (parrotUser.getRights(2) == true)//TODO put me back in
-		{
-			tab = actionBar.newTab()
-					.setText(R.string.fourthTab)
-					.setTabListener(new TabListener<OptionsFragment>(this,"camera",OptionsFragment.class));
-			actionBar.addTab(tab);
-		}
+//		if (parrotUser.getRights(2) == true)//TODO put me back in
+//		{
+//			tab = actionBar.newTab()
+//					.setText(R.string.fourthTab)
+//					.setTabListener(new TabListener<OptionsFragment>(this,"camera",OptionsFragment.class));
+//			actionBar.addTab(tab);
+//		}
 
 	}
 	@Override
