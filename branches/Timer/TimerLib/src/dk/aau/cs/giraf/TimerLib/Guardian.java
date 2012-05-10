@@ -48,6 +48,7 @@ public class Guardian {
 	public static boolean subProfileFirstClick;	// When a subprofile is saved, this is set to true
 												// When something is clicked in the subprofile list, set to false
 	public static boolean profileFirstClick;
+	public static int backgroundColor;
 	
 	private ArrayList<formFactor> _mode = null;
 	
