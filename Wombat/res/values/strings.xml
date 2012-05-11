@@ -8,6 +8,7 @@
     <string name="second">sekund</string>
     <string name="seconds">sekunder</string>
     <string name="and_devider">og</string>
+    <string name="ok">Ok</string>
     
     <!-- PROFILE LIST -->
     <string name="profile_list_header">Profiler</string>

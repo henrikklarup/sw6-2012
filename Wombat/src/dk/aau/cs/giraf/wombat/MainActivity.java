@@ -29,6 +29,7 @@ public class MainActivity extends Activity {
 
     	Guardian guard = Guardian.getInstance(childId, guardianId, getApplicationContext());
     	
+    	Guardian.backgroundColor = color;
 
 		Art p_done = new Art(R.drawable.p_done,"Færdig");
 		Art p_skema = new Art(R.drawable.p_gaa_til_skema,"Gå til skema");

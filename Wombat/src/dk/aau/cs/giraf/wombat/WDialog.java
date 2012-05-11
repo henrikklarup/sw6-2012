@@ -186,9 +186,9 @@ public class WDialog extends Dialog{
 		b.setText(text);
 		
 		// Set the margin to other objects
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-		params.setMargins(20, 20, 20, 20);
-		b.setLayoutParams(params);
+//		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+//		params.setMargins(20, 20, 20, 20);
+//		b.setLayoutParams(params);
 		
 		// Add the button to the view
 		buttonLayout.addView(b);
