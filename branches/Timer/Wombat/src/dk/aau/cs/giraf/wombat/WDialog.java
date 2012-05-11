@@ -295,10 +295,10 @@ public class WDialog extends Dialog{
 		tv.setId(textViewId);
 		tv.setText(text);
 		
-		// Set the margin of the edit text field
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-		params.setMargins(20, 20, 20, 20);
-		tv.setLayoutParams(params);
+//		// Set the margin of the edit text field
+//		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+//		params.setMargins(20, 20, 20, 20);
+//		tv.setLayoutParams(params);
 		
 		// Add the edit text field to its layout
 		textLayout.addView(tv);
