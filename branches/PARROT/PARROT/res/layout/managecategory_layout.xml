@@ -3,8 +3,8 @@
     android:id="@+id/categorymon"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-
-    <RelativeLayout
+
+    <LinearLayout
         android:id="@+id/rlspincat"
         android:layout_width="240dp"
         android:layout_height="match_parent"
@@ -15,26 +15,20 @@
             android:id="@+id/profiles"
             android:layout_width="match_parent"
             android:layout_height="75dp" />
-
+
         <ListView
             android:id="@+id/categories"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/trash"
-            android:layout_below="@id/profiles"
+            android:layout_height="700dp"
             android:entries="@layout/categoriesitem" >
-
         </ListView>
 
         <ImageView
             android:id="@+id/trash"
             android:layout_width="240dp"
             android:layout_height="240dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
             android:src="@drawable/stop" />
-
-    </RelativeLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/rlinfoall"
@@ -43,11 +37,11 @@
         android:layout_toRightOf="@id/rlspincat"
         android:orientation="vertical" >
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="501dp"
             android:background="#ff0000" >
-        </RelativeLayout>
+        </LinearLayout>
 
         <GridView
             android:id="@+id/pictograms"
