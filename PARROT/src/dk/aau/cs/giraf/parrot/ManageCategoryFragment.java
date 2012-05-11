@@ -34,9 +34,16 @@ public class ManageCategoryFragment extends Fragment {
 		this.parrent = activity;
 	}
 
-	public void onCreate(Bundle savedInstanceState) {
 
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+	}
+	
+	public void onResume() {
+
+		super.onResume();
 		parrent.setContentView(R.layout.managecategory_layout);
 
 		Spinner profiles = (Spinner) parrent.findViewById(R.id.profiles);
