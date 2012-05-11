@@ -3,7 +3,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
-	<classpathentry kind="lib" path="C:/Users/Bærbar/Desktop/SW6-Giraf/branches/Timer/TimerLibV0.55.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Bærbar/Desktop/SW6-Giraf/branches/Timer/TimerLibV0.6.jar"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
