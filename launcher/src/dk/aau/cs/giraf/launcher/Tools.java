@@ -21,7 +21,6 @@ import android.view.WindowManager;
  */
 public class Tools {
 
-
 	/**
 	 * Saves data for the currently authorized log in.
 	 * @param context Context of the current activity.
