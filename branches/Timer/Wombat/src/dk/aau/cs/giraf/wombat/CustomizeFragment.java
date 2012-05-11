@@ -999,15 +999,10 @@ public class CustomizeFragment extends Fragment {
 	 * Initialize the Save As button
 	 */
 	 private void initSaveAsButton() {
-         final ArrayList<String> values = new ArrayList<String>();
+		 ArrayList<Child> child = guard.Children();
+		 ArrayAdapter adapter = new ChildAdapter(getActivity(),android.R.layout.simple_list_item_1,child);
+			
          Drawable d;
-         for (Child c : guard.Children()) {
-                 values.add(c.name);
-         }
-
-         // Cast values to CharSequence
-         final CharSequence[] items = values.toArray(new CharSequence[values
-                         .size()]);
 
          saveAsButton = (Button) getActivity().findViewById(
                          R.id.customize_save_as);
