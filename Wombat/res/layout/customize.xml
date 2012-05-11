@@ -272,7 +272,7 @@
                 android:text="@string/attachment_button_description"
                 android:textSize="14dp" />
             
-            <!-- 
+             
             <Button
                 android:id="@+id/customize_donescreen"
                 android:layout_width="110dp"
@@ -283,7 +283,7 @@
                 android:paddingTop="20dp"
                 android:text="@string/donescreen_button_description"
                 android:textSize="14dp" />
-			 -->
+			 
 
             <Button
                 android:id="@+id/customize_save"

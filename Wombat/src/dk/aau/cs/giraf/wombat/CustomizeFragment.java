@@ -811,77 +811,118 @@ public class CustomizeFragment extends Fragment {
 		attView.setText(attachText);
 	}
 
-	// private void initDonePictureButton() {
-	//
-	// donePictureButton = (Button) getActivity().findViewById(
-	// R.id.customize_donescreen);
-	//
-	// donePictureButton.setOnClickListener(new OnClickListener() {
-	//
-	// public void onClick(final View v) {
-	// final ArrayList<Child> children = guard.publishList();
-	//
-	// final AlertDialog builder = new AlertDialog.Builder(v
-	// .getContext()).create();
-	//
-	// builder.setTitle(getString(R.string.donescreen_dialog_title));
-	// ListView lv = new ListView(getActivity());
-	//
-	//
-	// ChildAdapter adapter = new ChildAdapter(getActivity(),
-	// android.R.layout.simple_list_item_1, children);
-	// lv.setAdapter(adapter);
-	//
-	//
-	// lv.setOnItemClickListener(new OnItemClickListener() {
-	//
-	// public void onItemClick(AdapterView<?> parent, View view,
-	// int position, long id) {
-	// List<String> values = new ArrayList<String>();
-	// final ArrayList<SubProfile> subProfiles;
-	// subProfiles = children.get(position).SubProfiles();
-	//
-	// for (SubProfile subProfile : subProfiles) {
-	// values.add(subProfile.name);
-	// }
-	//
-	// // Cast values to CharSequence and put it in the builder
-	// final AlertDialog builder2 = new AlertDialog.Builder(v
-	// .getContext()).create();
-	// builder2.setTitle(getString(R.string.donescreen_button_description));
-	// ListView lv = new ListView(getActivity());
-	// SubProfileAdapter adapter = new SubProfileAdapter(
-	// getActivity(),
-	// android.R.layout.simple_list_item_1,
-	// subProfiles);
-	// lv.setAdapter(adapter);
-	// lv.setOnItemClickListener(new OnItemClickListener() {
-	// public void onItemClick(AdapterView<?> parent,
-	// View view, int position, long id) {
-	// setAttachment(subProfiles.get(position));
-	// builder.dismiss();
-	// builder2.dismiss();
-	// }
-	// });
-	// builder2.setView(lv);
-	// builder2.show();
-	// }
-	// });
-	// builder.setView(lv);
-	// builder.show();
-	// }
-	// });
-	// donePictureButton.setOnLongClickListener(new OnLongClickListener() {
-	//
-	// public boolean onLongClick(View v) {
-	// setAttachment(null);
-	// return true;
-	// }
-	// });
-	// }
+	private void initDonePictureButton() {
+		final ArrayList<formFactor> modeArray = new ArrayList<formFactor>();
+		modeArray.add(formFactor.SingleImg);
+		modeArray.add(formFactor.SplitImg);
+		donePictureButton = (Button) getActivity().findViewById(
+				R.id.customize_donescreen);
+
+		donePictureButton.setOnClickListener(new OnClickListener() {
+
+			public void onClick(final View v) {
+				final ArrayList<Art> art = guard.ArtList;
+				
+				
+				final WDialog doneDialog = new WDialog(getActivity(), R.string.donescreen_dialog_title);
+
+
+				ArrayAdapter adapter = new ModeAdapter(getActivity(),android.R.layout.simple_list_item_1, modeArray);
+				
+				doneDialog.setAdapter(adapter);
+
+
+				doneDialog.setOnItemClickListener(new OnItemClickListener() {
+
+					public void onItemClick(AdapterView<?> parent, View view,
+							int position, long id) {
+						final formFactor mode = modeArray.get(position);
+						
+						WDialog dialog = null;
+						final ArrayAdapter artList = new ArtAdapter(getActivity(),android.R.layout.simple_list_item_1, guard.ArtList);
+						switch(mode){
+						case SingleImg:
+							dialog = new WDialog(getActivity(),R.string.donescreen_dialog_single);
+							dialog.setAdapter(artList);
+							dialog.setOnItemClickListener(new OnItemClickListener() {
+
+								public void onItemClick(AdapterView<?> parent, View view,
+										int position, long id) {
+									Attachment atta1 = new SingleImg(guard.ArtList.get(position));
+									currSubP.setDoneArt(atta1);
+									
+								}
+							});
+							dialog.addButton(R.string.cancel, 1, new OnClickListener() {
+								
+								public void onClick(View arg0) {
+									// TODO Auto-generated method stub
+									doneDialog.cancel();
+								}
+							});
+							break;
+						case SplitImg:
+							dialog = new WDialog(getActivity(),R.string.donescreen_dialog_left);
+							dialog.setAdapter(artList);
+							dialog.setOnItemClickListener(new OnItemClickListener() {
+
+								public void onItemClick(AdapterView<?> parent, View view,
+										int position, long id) {
+									final Art art1 = guard.ArtList.get(position);
+									WDialog dialog1 = new WDialog(getActivity(),R.string.donescreen_dialog_left);
+									dialog1.setAdapter(artList);
+									dialog1.setOnItemClickListener(new OnItemClickListener() {
+
+										public void onItemClick(AdapterView<?> parent, View view,
+												int position, long id) {
+											final Art art2 = guard.ArtList.get(position);
+											Attachment atta = new SplitImg(art1,art2);
+											
+										}
+									});
+									dialog1.addButton(R.string.cancel, 1, new OnClickListener() {
+										
+										public void onClick(View arg0) {
+											// TODO Auto-generated method stub
+											doneDialog.cancel();
+										}
+									});
+									
+								}
+							});
+							dialog.addButton(R.string.cancel, 1, new OnClickListener() {
+								
+								public void onClick(View arg0) {
+									// TODO Auto-generated method stub
+									doneDialog.cancel();
+								}
+							});
+							break;
+						}
+						
+					}
+					});
+				doneDialog.addButton(R.string.cancel, 1, new OnClickListener() {
+					
+					public void onClick(View arg0) {
+						// TODO Auto-generated method stub
+						doneDialog.cancel();
+					}
+				});
+				doneDialog.show();
+			}
+		});
+		donePictureButton.setOnLongClickListener(new OnLongClickListener() {
+
+			public boolean onLongClick(View v) {
+				setAttachment(null);
+				return true;
+			}
+		});
+	}
 
 	private void initBottomMenu() {
-		// initDonePictureButton();
+		initDonePictureButton();
 		initSaveButton();
 		initSaveAsButton();
 		initStartButton();
