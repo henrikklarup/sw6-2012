@@ -494,45 +494,47 @@ public class CustomizeFragment extends Fragment {
 			public void onClick(final View v) {
 				final ArrayList<formFactor> mode = guard.getMode();
 
-				final AlertDialog builder = new AlertDialog.Builder(v
-						.getContext()).create();
-				builder.setTitle(getString(R.string.attachment_button_description));
-				
-				ListView lv = new ListView(getActivity());
+				final WDialog attachment1 = new WDialog(getActivity(),R.string.attachment_dialog_description);
 				
 				ModeAdapter adapter = new ModeAdapter(getActivity(),android.R.layout.simple_list_item_1, mode);
 				
-				lv.setAdapter(adapter);
-				
+				attachment1.setAdapter(adapter);
+
+				attachment1.addButton(R.string.cancel, 1, new OnClickListener() {
+					
+					public void onClick(View arg0) {
+						// TODO Auto-generated method stub
+						attachment1.cancel();
+					}
+				});
 				
 				//2. window
-				lv.setOnItemClickListener(new OnItemClickListener() {
+				attachment1.setOnItemClickListener(new OnItemClickListener() {
 
 					public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
 //						List<String> values = new ArrayList<String>();
 						final formFactor form = mode.get(position);
 						
 						// Cast values to CharSequence and put it in the builder
-						final AlertDialog builder2 = new AlertDialog.Builder(v.getContext()).create();
+						final WDialog attachment2 = new WDialog(getActivity());
 						
 						//New listview
-						ListView lv = new ListView(getActivity());
 						
 						ArrayAdapter adapter = null;
 						
 						switch(form){
 						case Timer:
-							builder2.setTitle(getString(R.string.attachment_dialog_pick_a_profile));
+							attachment2.setTitle(getString(R.string.attachment_dialog_pick_a_profile));
 							ArrayList<Child> child = guard.publishList();
 							adapter = new ChildAdapter(getActivity(),android.R.layout.simple_list_item_1,child);
 							break;
 						case SingleImg:
-							builder2.setTitle(getString(R.string.attachment_dialog_pick_a_picture));
+							attachment2.setTitle(getString(R.string.attachment_dialog_pick_a_picture));
 							ArrayList<Art> art = guard.ArtList;
 							adapter = new ArtAdapter(getActivity(),android.R.layout.simple_list_item_1,art);
 							break;
 						case SplitImg:
-							builder2.setTitle(getString(R.string.attachment_dialog_split_left));
+							attachment2.setTitle(getString(R.string.attachment_dialog_split_left));
 							ArrayList<Art> splitArt = guard.ArtList;
 							adapter = new ArtAdapter(getActivity(),android.R.layout.simple_list_item_1,splitArt);
 							break;
@@ -543,81 +545,111 @@ public class CustomizeFragment extends Fragment {
 //								getActivity(),
 //								android.R.layout.simple_list_item_1,
 //								subProfiles);
+						//FIXME: Resource
+						attachment2.addButton("Gå tilbage", 1, new OnClickListener() {
+							
+							public void onClick(View arg0) {
+								attachment2.cancel();
+								
+							}
+						});
 						
-						lv.setAdapter(adapter);
+						attachment2.addButton(R.string.cancel, 2, new OnClickListener() {
+							
+							public void onClick(View arg0) {
+								attachment1.cancel();
+								attachment2.cancel();
+							}
+						});
+						attachment2.setAdapter(adapter);
 						//3. window
-						lv.setOnItemClickListener(new OnItemClickListener() {
+						
+						
+						attachment2.setOnItemClickListener(new OnItemClickListener() {
 							public void onItemClick(AdapterView<?> parent,
 									View view, int position, long id) {
 								
 								// Cast values to CharSequence and put it in the builder
-								final AlertDialog builder3 = new AlertDialog.Builder(v.getContext()).create();
-								
+								final WDialog attachment3 = new WDialog(getActivity());
 								//New listview
-								ListView lv = new ListView(getActivity());
+								attachment3.addButton("Gå tilbage", 1, new OnClickListener() {
+									
+									public void onClick(View arg0) {
+										attachment3.cancel();
+										
+									}
+								});
 								
+								attachment3.addButton(R.string.cancel, 2, new OnClickListener() {
+									
+									public void onClick(View arg0) {
+										attachment1.cancel();
+										attachment2.cancel();
+										attachment3.cancel();
+									}
+								});
 								ArrayAdapter adapter = null;
 								switch(form){
 								case Timer:
-									builder3.setTitle(getString(R.string.attachment_dialog_description));
+									attachment3.setTitle(getString(R.string.attachment_dialog_description));
 									final ArrayList<SubProfile> sp = guard.publishList().get(position).SubProfiles();
 									adapter = new SubProfileAdapter(getActivity(),android.R.layout.simple_list_item_1,sp);
 									
-									lv.setAdapter(adapter);
+									attachment3.setAdapter(adapter);
 									
-									lv.setOnItemClickListener(new OnItemClickListener() {
+									attachment3.setOnItemClickListener(new OnItemClickListener() {
 										public void onItemClick(AdapterView<?> parent,
 												View view, int position, long id) {
 											
 											Attachment attTimer = new Timer(sp.get(position));
 											setAttachment(attTimer);
-											
-											builder.dismiss();
-											builder2.dismiss();
-											builder3.dismiss();
+
+											attachment1.dismiss();
+											attachment2.dismiss();
+											attachment3.dismiss();
 											
 										}
 									});
-									builder3.setView(lv);
-									builder3.show();
+									
+									attachment3.show();
 									
 									break;
 								case SingleImg:
 									Attachment att = new SingleImg(guard.ArtList.get(position));
 									setAttachment(att);
-									builder.dismiss();
-									builder2.dismiss();
+				
+									attachment2.dismiss();
 									break;
 								case SplitImg:
-									builder3.setTitle(getString(R.string.attachment_dialog_split_right));
+									attachment3.setTitle(getString(R.string.attachment_dialog_split_right));
 									ArrayList<Art> splitArt = guard.ArtList;
 									final Art art1 = guard.ArtList.get(position);
 									adapter = new ArtAdapter(getActivity(),android.R.layout.simple_list_item_1,splitArt);
 									
-									lv.setAdapter(adapter);
+									attachment3.setAdapter(adapter);
 									
-									lv.setOnItemClickListener(new OnItemClickListener() {
+									attachment3.setOnItemClickListener(new OnItemClickListener() {
 										public void onItemClick(AdapterView<?> parent,
 												View view, int position, long id) {
 											final Art art2 = guard.ArtList.get(position);
 											Attachment attSplit = new SplitImg(art1, art2);
 											setAttachment(attSplit); 
-											builder.dismiss();
-											builder2.dismiss();
-											builder3.dismiss();
+											
+											attachment1.dismiss();
+											attachment2.dismiss();
+											attachment3.dismiss();
 											
 										}
 									});
-									builder3.setView(lv);
-									builder3.show();
+									attachment3.show();
 									
 									break;
 								}
 							}
 						});
 						
-						builder2.setView(lv);
-						builder2.show();
+						
+						attachment2.show();
 						
 						
 //						for (SubProfile subProfile : subProfiles) {
@@ -626,8 +658,7 @@ public class CustomizeFragment extends Fragment {
 //
 					}
 				});
-				builder.setView(lv);
-				builder.show();
+				attachment1.show();
 			}
 		});
 		
@@ -818,42 +849,65 @@ public class CustomizeFragment extends Fragment {
 			d = getResources().getDrawable(R.drawable.thumbnail_save);
 			saveButton.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
-					Builder builder = new AlertDialog.Builder(getActivity());
-					builder.setTitle(getActivity().getString(R.string.save_button));
-					final EditText et = new EditText(getActivity());
-					et.setText(getName());
-					builder.setView(et);
-					builder.setPositiveButton(R.string.save_button,
-							new DialogInterface.OnClickListener() {
+					if(preSubP == null){
+					final WDialog save1 = new WDialog(getActivity(),R.string.save_button);
+					//et.setText(getName());
+					save1.addEditText(getName(), 1);
+					save1.addButton(R.string.ok, 2, new OnClickListener() {
+						
+						public void onClick(View arg0) {
+							currSubP.name = save1.getEditTextText(1);
+							guard.publishList().get(Guardian.profilePosition)
+									.select();
 
-								public void onClick(DialogInterface dialog, int which) {
-									currSubP.name = et.getText().toString();
-									guard.publishList().get(Guardian.profilePosition)
-											.select();
+							SubProfile m_savedSubprofile;
+							if (preSubP != null) {
+								m_savedSubprofile = currSubP.save(preSubP, true);
+							} else {
+								m_savedSubprofile = guard.getChild()
+										.save(currSubP, false);
+							}
+							Guardian.subProfileID = m_savedSubprofile.getId();
+							loadSettings(m_savedSubprofile);
+							
+							ChildFragment cf = (ChildFragment)getFragmentManager().findFragmentById(R.id.childFragment);
+							SubProfileFragment spf = (SubProfileFragment) getFragmentManager()
+									.findFragmentById(R.id.subprofileFragment);
+							Guardian.profileID = guard.getChild().getProfileId();
+							cf.loadSubProfiles();
+							spf.loadSubProfiles();
+							save1.dismiss();
+						}
+					});
+					save1.addButton(R.string.cancel, 3, new OnClickListener() {
+						
+						public void onClick(View arg0) {
+							save1.cancel();
+							
+						}
+					});
+					save1.show();
+				}else {
+					guard.publishList().get(Guardian.profilePosition)
+					.select();
 
-									SubProfile m_savedSubprofile;
-									if (preSubP != null) {
-										m_savedSubprofile = currSubP.save(preSubP, true);
-									} else {
-										m_savedSubprofile = guard.getChild()
-												.save(currSubP, false);
-									}
-									Guardian.subProfileID = m_savedSubprofile.getId();
-									loadSettings(m_savedSubprofile);
-									
-									ChildFragment cf = (ChildFragment)getFragmentManager().findFragmentById(R.id.childFragment);
-									SubProfileFragment spf = (SubProfileFragment) getFragmentManager()
-											.findFragmentById(R.id.subprofileFragment);
-									Guardian.profileID = guard.getChild().getProfileId();
-									cf.loadSubProfiles();
-									spf.loadSubProfiles();
-									
-
-								}
-
-							});
-					AlertDialog alert = builder.create();
-					alert.show();
+			SubProfile m_savedSubprofile;
+			if (preSubP != null) {
+				m_savedSubprofile = currSubP.save(preSubP, true);
+			} else {
+				m_savedSubprofile = guard.getChild()
+						.save(currSubP, false);
+			}
+			Guardian.subProfileID = m_savedSubprofile.getId();
+			loadSettings(m_savedSubprofile);
+			
+			ChildFragment cf = (ChildFragment)getFragmentManager().findFragmentById(R.id.childFragment);
+			SubProfileFragment spf = (SubProfileFragment) getFragmentManager()
+					.findFragmentById(R.id.subprofileFragment);
+			Guardian.profileID = guard.getChild().getProfileId();
+			cf.loadSubProfiles();
+			spf.loadSubProfiles();
+				}
 				}
 			});
 		} else {
@@ -945,16 +999,9 @@ public class CustomizeFragment extends Fragment {
 	 * Initialize the Save As button
 	 */
 	private void initSaveAsButton() {
-		final ArrayList<String> values = new ArrayList<String>();
-		Drawable d;
-		for (Child c : guard.Children()) {
-			values.add(c.name);
-		}
-
-		// Cast values to CharSequence
-		final CharSequence[] items = values.toArray(new CharSequence[values
-				.size()]);
-
+		ArrayList<Child> child = guard.Children();
+		ArrayAdapter adapter = new ChildAdapter(getActivity(),android.R.layout.simple_list_item_1,child);
+		
 		saveAsButton = (Button) getActivity().findViewById(
 				R.id.customize_save_as);
 		// If this is a profile which is "saveable", enable the save functionality
@@ -964,10 +1011,14 @@ public class CustomizeFragment extends Fragment {
 
 				public void onClick(View v) {
 					// Profile and pictogram loader
-					AlertDialog.Builder builder = new AlertDialog.Builder(
-							getActivity());
-					builder.setTitle(getActivity().getString(
-							R.string.choose_profile));
+					WDialog saveAs1 = new WDialog(getActivity(),R.string.choose_profile);
+					void onItemClick(AdapterView<?> arg0, View arg1,
+								int arg2, long arg3) {
+							// TODO Auto-generated method stub
+							
+						}
+					});
+					
 					builder.setItems(items,
 							new DialogInterface.OnClickListener() {
 
