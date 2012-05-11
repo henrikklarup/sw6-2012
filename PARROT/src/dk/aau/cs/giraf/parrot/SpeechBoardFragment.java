@@ -138,6 +138,12 @@ public class SpeechBoardFragment extends Fragment
 
 
 	}
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		return (LinearLayout)parrent.findViewById(R.layout.speechboard_layout);
+	}
 
 	
 	public static void setColours(Activity invoker)
