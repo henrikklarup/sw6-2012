@@ -37,9 +37,9 @@ public class DrawHourglass extends View {
 
 	Bitmap bitmap;
 
-	public DrawHourglass(Context context, SubProfile sub) {
+	public DrawHourglass(Context context, SubProfile sub, int frameWidth) {
 		super(context);
-		windowWidth = DrawLibActivity.frameWidth;
+		this.windowWidth = frameWidth;
 		windowHeight = DrawLibActivity.frameHeight;
 
 		sp = sub;

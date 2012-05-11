@@ -37,11 +37,11 @@ public class DrawWatch extends View {
 	private int top;
 	private int bottom;
 
-	public DrawWatch(Context context, SubProfile sub) {
+	public DrawWatch(Context context, SubProfile sub,int frameWidth) {
 		super(context);
 
 		/* Get the window hight assigned by the draw activity */
-		frameWidth = DrawLibActivity.frameWidth;
+		this.frameWidth = frameWidth;
 		frameHeight = DrawLibActivity.frameHeight;
 
 		if (frameWidth > frameHeight)

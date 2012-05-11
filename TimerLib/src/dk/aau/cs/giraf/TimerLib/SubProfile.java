@@ -19,6 +19,7 @@ public class SubProfile implements Comparable<SubProfile>{
 	protected Attachment _attachment = null;
 	boolean _AttaBool = false;
 	private long DB_id = -1;
+	private Attachment _doneArt = null;
 
 	//constructor
 	public SubProfile(String name, String description, int bgcolor, int timeLeftColor, int timeSpentColor, int frameColor, int totalTime, boolean changeColor){
@@ -61,6 +62,14 @@ public class SubProfile implements Comparable<SubProfile>{
 		this.gradient = obj.gradient;
 	}
 	
+	public Attachment getDoneArt(){
+		return this._doneArt;
+	}
+	
+	public void setDoneArt(Attachment art){
+		this._doneArt = art;
+	}
+	
 	/**
 	 * Generates a hashmap with settings of the subprofile
 	 * @param p
@@ -84,6 +93,27 @@ public class SubProfile implements Comparable<SubProfile>{
 		map.put("gradient", String.valueOf(this.gradient));		
 		map.put("save", String.valueOf(this.save));		
 		map.put("saveAs", String.valueOf(this.saveAs));
+		
+		if(this._doneArt != null){
+			map.put("doneArtType", String.valueOf(this._doneArt.getForm()));
+			switch(this._doneArt.getForm()){
+			case SingleImg:
+				map.put("doneArtPic", String.valueOf(this._doneArt.getImg()));
+				map.put("doneArtLeftPic", String.valueOf(-1));
+				map.put("doneArtRightPic", String.valueOf(-1));
+				break;
+			case SplitImg:
+				map.put("doneArtPic", String.valueOf(-1));
+				map.put("doneArtLeftPic", String.valueOf(this._doneArt.getLeftImg()));
+				map.put("doneArtRightPic", String.valueOf(this._doneArt.getRightImg()));
+				break;
+			}
+		} else {
+			map.put("doneArtType", String.valueOf(formFactor.undefined));
+			map.put("doneArtPic", String.valueOf(-1));
+			map.put("doneArtLeftPic", String.valueOf(-1));
+			map.put("doneArtRightPic", String.valueOf(-1));
+		}
 		
 		// TODO: Attachment this needs some testing and remember to add it to the crud!!!!
 		if(this._AttaBool){

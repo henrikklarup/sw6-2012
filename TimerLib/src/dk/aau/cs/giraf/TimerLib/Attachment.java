@@ -42,6 +42,12 @@ public class Attachment {
 		return 0;
 	}
 	
+	public Attachment generateAtt(HashMap map){
+		Attachment att = null;
+		
+		return att;
+	}
+	
 	public HashMap getHashMap(HashMap map){
 		//Defines what kind of attachment it is
 		map.put("AttachmentForm", String.valueOf(this.getForm()));

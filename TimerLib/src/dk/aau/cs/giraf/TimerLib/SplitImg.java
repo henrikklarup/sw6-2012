@@ -27,11 +27,11 @@ public class SplitImg extends Attachment {
 	}
 	
 	public Art getLeftImg(){
-		return null;
+		return this._leftImg;
 	}
 	
 	public Art getRightImg(){
-		return null;
+		return this._rightImg;
 	}
 	
 	public HashMap getHashMap(HashMap map){

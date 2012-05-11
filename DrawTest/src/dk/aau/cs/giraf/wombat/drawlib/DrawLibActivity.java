@@ -47,7 +47,7 @@ public class DrawLibActivity extends Activity {
 		
 		if (sub.getAttachment() == null) {
 			/* Set the drawing class (which extends View) as the content view */
-			View v = genDrawView(sub);
+			View v = genDrawView(sub,frameWidth);
 			v.setKeepScreenOn(true);
 			setContentView(v);
 		} else {
@@ -62,14 +62,14 @@ public class DrawLibActivity extends Activity {
 			switch(sub.getAttachment().getForm()){
 			case Timer:
 				frameWidth = frameWidth/2;
-				 v = genDrawView(sub);
+				 v = genDrawView(sub,frameWidth);
 				frame.addView(v, frameWidth, frameHeight);
-				v2 = genDrawView(sub.getAttachment().genSub());
+				v2 = genDrawView(sub.getAttachment().genSub(),frameWidth);
 				frame.addView(v2, frameWidth, frameHeight);
 				break;
 			case SingleImg:
 				frameWidth = frameWidth/2;
-				v = genDrawView(sub);
+				v = genDrawView(sub,frameWidth);
 				frame.addView(v, frameWidth, frameHeight);
 				
 				i = new ImageView(this);
@@ -79,7 +79,8 @@ public class DrawLibActivity extends Activity {
 				break;
 			case SplitImg:
 				frameWidth = frameWidth/2;
-				v = genDrawView(sub);
+				v = genDrawView(sub, frameWidth);
+
 				frame.addView(v, frameWidth, frameHeight);
 				
 				frameWidth = frameWidth/2;
@@ -122,16 +123,16 @@ public class DrawLibActivity extends Activity {
 		mHandler.removeCallbacks(mRunnable);
 	}
 	
-	private View genDrawView(SubProfile sub) {
+	private View genDrawView(SubProfile sub, int frameWidth) {
 		switch (sub.formType()) {
 		case ProgressBar:
-			return new DrawProgressBar(getApplicationContext(), sub);
+			return new DrawProgressBar(getApplicationContext(), sub, frameWidth);
 		case Hourglass:
-			return new DrawHourglass(getApplicationContext(), sub);
+			return new DrawHourglass(getApplicationContext(), sub, frameWidth);
 		case DigitalClock:
-			return new DrawDigital(getApplicationContext(), sub);
+			return new DrawDigital(getApplicationContext(), sub, frameWidth);
 		case TimeTimer:
-			return new DrawWatch(getApplicationContext(), sub);
+			return new DrawWatch(getApplicationContext(), sub, frameWidth);
 		default:
 			return null;
 		}
