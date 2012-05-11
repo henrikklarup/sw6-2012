@@ -7,10 +7,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Display;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import dk.aau.cs.giraf.TimerLib.Attachment;
 import dk.aau.cs.giraf.TimerLib.Guardian;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
 
@@ -28,6 +28,9 @@ public class DrawLibActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);	
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		  View main_layout = findViewById(android.R.id.content).getRootView();
+		  main_layout.setSystemUiVisibility(View.STATUS_BAR_HIDDEN);
 //		SubProfile sub = new ProgressBar("", "", 0xff3D3D3D, 0xff000066, 0xffB8B8B8, 0xff000000, 3, false);
 //		SubProfile sub2 = new ProgressBar("", "", 0xff3D3D3D, 0xff000066, 0xffB8B8B8, 0xff000000, 900, true);
 //		sub.setAttachment(sub2);
@@ -55,6 +58,7 @@ public class DrawLibActivity extends Activity {
 			View v2 = null;
 			ImageView i = null;
 			ImageView i2 = null;
+			ImageView i3 = null;
 			switch(sub.getAttachment().getForm()){
 			case Timer:
 				frameWidth = frameWidth/2;
@@ -70,22 +74,29 @@ public class DrawLibActivity extends Activity {
 				
 				i = new ImageView(this);
 				i.setImageResource(sub.getAttachment().getImg().getPath());
+				i.setBackgroundColor(sub.bgcolor);
 				frame.addView(i, frameWidth, frameHeight);
 				break;
 			case SplitImg:
 				frameWidth = frameWidth/2;
 				v = genDrawView(sub);
 				frame.addView(v, frameWidth, frameHeight);
+				
 				frameWidth = frameWidth/2;
+				frameWidth = frameWidth - 15;
 				i = new ImageView(this);
-				i2 = new ImageView(this);
-				
 				i.setImageResource(sub.getAttachment().getLeftImg().getPath());
-				//i2.setImageResource(sub.getAttachment().getRightImg().getPath());
-				
+				i.setBackgroundColor(sub.bgcolor);
 				frame.addView(i, frameWidth, frameHeight);
-				//frame.addView(i2, frameWidth, frameHeight);
 				
+				i2 = new ImageView(this);
+				i2.setImageResource(sub.getAttachment().getRightImg().getPath());
+				i2.setBackgroundColor(sub.bgcolor);
+				frame.addView(i2, frameWidth, frameHeight);
+				
+				i3 = new ImageView(this);
+				i3.setBackgroundColor(sub.bgcolor);
+				frame.addView(i3, 30, frameHeight);
 				break;
 			}
 			
