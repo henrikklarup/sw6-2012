@@ -24,7 +24,7 @@ public class ManageCategoryFragment extends Fragment {
 	public static int draggedItemIndex = -1;
 	public static int catDragOwnerID =-1;
 	public static int currentCategoryId = 0; //This is the currrent category that is chosen
-	public static PARROTProfile profileBeingModified = PARROTActivity.getUser();
+	public static PARROTProfile profileBeingModified; 
 	public static ArrayList<Pictogram> categories =  new ArrayList<Pictogram>();
 
 
@@ -32,6 +32,7 @@ public class ManageCategoryFragment extends Fragment {
 		// TODO Auto-generated method stub
 		super.onAttach(activity);
 		this.parrent = activity;
+		ManageCategoryFragment.profileBeingModified = PARROTActivity.getUser();
 	}
 
 
