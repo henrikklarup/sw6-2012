@@ -1,13 +1,11 @@
 package dk.aau.cs.giraf.launcher;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
 import dk.aau.cs.giraf.gui.GColorAdapter;
-import dk.aau.cs.giraf.gui.GTooltip;
 import dk.aau.cs.giraf.gui.GWidgetCalendar;
 import dk.aau.cs.giraf.gui.GWidgetConnectivity;
 import dk.aau.cs.giraf.gui.GWidgetLogout;
@@ -20,20 +18,13 @@ import dk.aau.cs.giraf.oasis.lib.models.Setting;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.ResolveInfo;
-import android.graphics.Canvas;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.Display;
-import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
@@ -41,15 +32,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
-import android.view.WindowManager;
-
 
 public class HomeActivity extends Activity {
 
 	private static Context mContext;
 
 	private Profile mCurrentUser; 
-	private Setting<String,String,String> mSettings;
 	private Helper mHelper;
 	private App mLauncher;
 	private GridView mGrid;
@@ -304,9 +292,10 @@ public class HomeActivity extends Activity {
 
 				appInfo.load(mContext, mCurrentUser);
 				appInfo.setBgColor(appBgColor(appInfo.getId()));
-				appInfo.setGuardian(mCurrentUser);
+				
 				appInfos.add(appInfo);
 			}
+			
 			mGrid = (GridView)this.findViewById(R.id.GridViewHome);
 			mGrid.setAdapter(new AppAdapter(this, appInfos));
 			mGrid.setOnItemClickListener(new ProfileLauncher());
