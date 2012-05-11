@@ -27,6 +27,7 @@ public class WDialog extends Dialog{
 	
 	private int layoutId = 1337;
 	private int editTextLayoutId = 1338;
+	private int textLayoutId = 1339;
 	
 	/**
 	 * Creates a new Wombat Dialog, with a list view in its body by default
@@ -262,5 +263,46 @@ public class WDialog extends Dialog{
 			return et.getText().toString();
 		else
 			return "";
+	}
+	
+	/**
+	 * Substitutes the linear layout with an text field
+	 * @param text
+	 * 		The start text of the text field
+	 * @param textViewId
+	 * 		The id of the text field, the identifier does not have to be unique in this view's hierarchy. The identifier should be a positive number.
+	 */
+	public void addTextView(String text, int textViewId) {
+		LinearLayout textLayout = (LinearLayout) this.findViewById(textLayoutId );
+		// Create a new editTextLayout if it doesn't exist already
+		if(textLayout == null){
+			LinearLayout ll = (LinearLayout) this.findViewById(R.id.profile_list_dialog);
+			
+			// Shrink the list view, we don't want both a list view and an edit text field
+			ListView lv = (ListView) this.findViewById(R.id.profile_list_dialog_listview);
+			lv.setLayoutParams(new LinearLayout.LayoutParams(0,0));
+			
+			textLayout = new LinearLayout(this.getContext());
+			textLayout.setId(textLayoutId);
+			textLayout.setOrientation(LinearLayout.VERTICAL);
+			textLayout.setGravity(Gravity.CENTER);
+			textLayout.setPadding(0, 0, 0, 20);
+			
+			ll.addView(textLayout);
+		}
+		
+		TextView tv = new TextView(this.getContext());
+		tv.setId(textViewId);
+		tv.setText(text);
+		
+		// Set the margin of the edit text field
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+		params.setMargins(20, 20, 20, 20);
+		tv.setLayoutParams(params);
+		
+		// Add the edit text field to its layout
+		textLayout.addView(tv);
+		textLayout.setLayoutParams(new LinearLayout.LayoutParams(300, LayoutParams.WRAP_CONTENT));
+		
 	}
 }
