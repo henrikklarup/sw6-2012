@@ -26,6 +26,7 @@ public class Pictogram {
 	private boolean newPictogram =false;
 	private boolean changed = false;
 	private Activity parrent;
+	private Bitmap bitmap;
 
 	//This are the constructor for the Pictogram class
 	public Pictogram(String name, String imagePath, String soundPath, String wordPath)
@@ -50,17 +51,20 @@ public class Pictogram {
 
 	public Bitmap getBitmap()
 	{
-		if(isEmpty() == true)
+		if(bitmap == null)
 		{
-			Resources res = parrent.getResources();
-			Bitmap bm = BitmapFactory.decodeResource(res, R.drawable.usynlig);
-			return bm;
+			if(isEmpty() == true)
+			{
+				Resources res = parrent.getResources();
+				bitmap = BitmapFactory.decodeResource(res, R.drawable.usynlig);
+			}
+			else
+			{
+				bitmap = BitmapFactory.decodeFile(imagePath);
+			}
 		}
-		else
-		{
-			Bitmap bm = BitmapFactory.decodeFile(imagePath);
-			return bm;
-		}
+		return bitmap;
+	
 	}
 
 
