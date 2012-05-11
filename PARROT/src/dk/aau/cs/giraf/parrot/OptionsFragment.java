@@ -31,18 +31,26 @@ public class OptionsFragment extends Fragment
 
 	}
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onResume() {
 		// TODO Auto-generated method stub
-		super.onCreate(savedInstanceState);
+		super.onResume();
 		parrent.setContentView(R.layout.options_layout);
 		initColorButtons();
 	}
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		return (LinearLayout)parrent.findViewById(R.layout.options_layout);
+		super.onCreate(savedInstanceState);
+		parrent.setContentView(R.layout.options_layout);
+//		initColorButtons();
 	}
+//	@Override
+//	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//			Bundle savedInstanceState) {
+//		// TODO Auto-generated method stub
+//		initColorButtons();
+//		return inflater.inflate(R.layout.options_layout, container,false);
+//	}
 
 	private void initColorButtons() {
 

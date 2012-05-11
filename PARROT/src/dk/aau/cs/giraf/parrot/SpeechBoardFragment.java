@@ -9,6 +9,8 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.ClipData;
 import android.content.res.AssetManager;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,12 +52,15 @@ public class SpeechBoardFragment extends Fragment
 	}
 	
 
-	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		
+	}
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
 		parrent.setContentView(R.layout.speechboard_layout);
 		empty = new Pictogram("#usynlig#", null, null, null, parrent);
 
@@ -138,21 +143,26 @@ public class SpeechBoardFragment extends Fragment
 
 
 	}
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		return (LinearLayout)parrent.findViewById(R.layout.speechboard_layout);
-	}
+//	@Override
+//	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//			Bundle savedInstanceState) {
+//		// TODO Auto-generated method stub
+//		return inflater.inflate(R.layout.speechboard_layout, container,false);
+//	}
 
 	
-	public static void setColours(Activity invoker)
+	public void setColours(Activity invoker)
 	{
-		GridView sentenceBoardGrid = (GridView) invoker.findViewById(R.id.sentenceboard);
-		sentenceBoardGrid.setBackgroundColor(PARROTActivity.getUser().getSentenceBoardColor());
-		
-		GridView superCategoryGrid = (GridView) invoker.findViewById(R.id.supercategory);
-		superCategoryGrid.setBackgroundColor(PARROTActivity.getUser().getCategoryColor());
+		LinearLayout sentenceBoardLayout = (LinearLayout) invoker.findViewById(R.id.sentenceboardlinearhelper);
+		//sentenceBoardLayout.setBackgroundColor(PARROTActivity.getUser().getSentenceBoardColor());
+		Drawable draw = parrent.getResources().getDrawable(R.drawable.sentenceboardlayout);
+		draw.setColorFilter(PARROTActivity.getUser().getSentenceBoardColor(), PorterDuff.Mode.OVERLAY);
+		sentenceBoardLayout.setBackgroundDrawable(draw);
+
+		LinearLayout superCategoryLayout = (LinearLayout) invoker.findViewById(R.id.supercategory_layout);
+		draw=parrent.getResources().getDrawable(R.drawable.catlayout);
+		draw.setColorFilter(PARROTActivity.getUser().getCategoryColor(), PorterDuff.Mode.OVERLAY);
+		superCategoryLayout.setBackgroundDrawable(draw);
 		
 	}
 }
