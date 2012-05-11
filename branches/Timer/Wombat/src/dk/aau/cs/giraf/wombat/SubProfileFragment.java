@@ -55,43 +55,40 @@ public class SubProfileFragment extends android.app.ListFragment {
 					tv.setText(getString(R.string.delete_description) + " " + guard.getChild().SubProfiles().get(row).name + "?");
 					tv.setTextColor(0xFFFFFFFF);
 				
-					AlertDialog alertDialog = new AlertDialog.Builder(v
-							.getContext()).create();
-					alertDialog.setTitle(R.string.delete_subprofile_message);
-					alertDialog.setView(tv);
-					alertDialog.setButton(getText(R.string.delete_yes),
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface arg0,
-										int arg1) {
-									if (guard.getChild() != null && guard.getChild().deleteCheck()) {
-									guard.getChild().SubProfiles().get(row)
-											.delete();
-									CustomizeFragment cf = (CustomizeFragment) getFragmentManager()
-											.findFragmentById(R.id.customizeFragment);
-									cf.setDefaultProfile();
+					final WDialog deleteDialog = new WDialog(getActivity(), R.string.delete_subprofile_message);
+					deleteDialog.addTextView(getString(R.string.delete_description) + " " + guard.getChild().SubProfiles().get(row).name + "?", 1);
+					deleteDialog.addButton(R.string.delete_yes, 2, new View.OnClickListener() {
+						
+						public void onClick(View v) {
+							if (guard.getChild() != null && guard.getChild().deleteCheck()) {
+								guard.getChild().SubProfiles().get(row)
+										.delete();
+								CustomizeFragment cf = (CustomizeFragment) getFragmentManager()
+										.findFragmentById(R.id.customizeFragment);
+								cf.setDefaultProfile();
+								Toast t = Toast.makeText(getActivity(),
+										R.string.delete_subprofile_toast,
+										5000);
+								t.show();
+								loadSubProfiles();
+								} else {
 									Toast t = Toast.makeText(getActivity(),
-											R.string.delete_subprofile_toast,
-											5000);
+											R.string.cannot_delete_subprofile_toast, 5000);
 									t.show();
-									loadSubProfiles();
-									} else {
-										Toast t = Toast.makeText(getActivity(),
-												R.string.cannot_delete_subprofile_toast, 5000);
-										t.show();
-									}
 								}
-							});
+							deleteDialog.dismiss();
+						}
+					});
 
-					alertDialog.setButton2(getText(R.string.delete_no),
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface arg0,
-										int arg1) {
-									// do nothing
+					deleteDialog.addButton(R.string.delete_no, 3, new View.OnClickListener() {
+						
+						public void onClick(View v) {
+							deleteDialog.cancel();
+							
+						}
+					});
 
-								}
-							});
-
-					alertDialog.show();
+					deleteDialog.show();
 				return true;
 			}
 		});
