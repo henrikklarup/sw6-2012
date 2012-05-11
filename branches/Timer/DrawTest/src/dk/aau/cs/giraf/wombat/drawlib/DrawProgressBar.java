@@ -20,6 +20,7 @@ public class DrawProgressBar extends View {
 	private int timespent;
 	private int totalTime;
 	private double endTime;
+	private int frameWidth;
 
 	Paint paint = new Paint();
 	Rect r;
@@ -30,9 +31,9 @@ public class DrawProgressBar extends View {
 	int left;
 	int top;
 
-	public DrawProgressBar(Context context, SubProfile sub) {
+	public DrawProgressBar(Context context, SubProfile sub, int frameWidth) {
 		super(context);
-
+		this.frameWidth = frameWidth;
 		width = (DrawLibActivity.frameHeight / 8) * 5;
 		height = (int) (width * 0.2);
 
@@ -68,7 +69,7 @@ public class DrawProgressBar extends View {
 		paint.setAntiAlias(true);
 		paint.setColor(frame);
 
-		left = (DrawLibActivity.frameWidth - width) / 2;
+		left = (frameWidth - width) / 2;
 		top = (DrawLibActivity.frameHeight - height) / 2;
 
 		r = new Rect(left, top, left + width, top + height);

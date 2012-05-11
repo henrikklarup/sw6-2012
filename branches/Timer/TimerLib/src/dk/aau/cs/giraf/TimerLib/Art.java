@@ -17,6 +17,10 @@ public class Art {
 		return this._caption;
 	}
 	
+	public formFactor getForm(){
+		return formFactor.undefined;
+	}
+	
 	public int getPath(){
 		return this._path;
 	}

@@ -22,6 +22,7 @@ public class DrawDigital extends View {
 	private int timespent;
 	private int totalTime;
 	private double endTime;
+	private 
 
 	Paint paint = new Paint();
 	Rect r;
@@ -40,13 +41,13 @@ public class DrawDigital extends View {
 	ArrayList<Path> secPath = new ArrayList<Path>();
 	
 
-	public DrawDigital(Context context, SubProfile sub) {
+	public DrawDigital(Context context, SubProfile sub, int frameWidth) {
 		super(context);
 
 		sp = sub;
 		
 		frameHeight = DrawLibActivity.frameHeight;
-		frameWidth = DrawLibActivity.frameWidth;
+		this.frameWidth = frameWidth;
 		
 		background = sp.bgcolor;
 		frame = sp.frameColor;
