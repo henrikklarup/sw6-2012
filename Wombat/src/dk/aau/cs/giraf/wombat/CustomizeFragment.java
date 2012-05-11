@@ -7,10 +7,7 @@ import kankan.wheel.widget.WheelView;
 import kankan.wheel.widget.adapters.NumericWheelAdapter;
 import yuku.ambilwarna.AmbilWarnaDialog;
 import yuku.ambilwarna.AmbilWarnaDialog.OnAmbilWarnaListener;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.app.Fragment;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
@@ -30,8 +27,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import dk.aau.cs.giraf.TimerLib.Art;
@@ -508,7 +503,6 @@ public class CustomizeFragment extends Fragment {
 						new OnClickListener() {
 
 							public void onClick(View arg0) {
-								// TODO Auto-generated method stub
 								attachment1.cancel();
 							}
 						});
@@ -655,6 +649,7 @@ public class CustomizeFragment extends Fragment {
 													guard.ArtList.get(position));
 											setAttachment(att);
 
+											attachment1.dismiss();
 											attachment2.dismiss();
 											break;
 										case SplitImg:
@@ -769,13 +764,11 @@ public class CustomizeFragment extends Fragment {
 					break GETOUT;
 				}
 			case SingleImg:
-				// TODO: Create thumbnail for Single Img
-				pictureRes = R.drawable.thumbnail_attachment;
+				pictureRes = R.drawable.thumbnail_single_pic;
 				textRes = R.string.customize_single_img_description;
 				break;
 			case SplitImg:
-				// TODO: Create thumbnail for Split Img
-				pictureRes = R.drawable.thumbnail_attachment;
+				pictureRes = R.drawable.thumbnail_dual_pic;
 				textRes = R.string.customize_split_img_description;
 				break;
 			default:
@@ -825,51 +818,49 @@ public class CustomizeFragment extends Fragment {
 				
 				
 				final WDialog doneDialog = new WDialog(getActivity(), R.string.donescreen_dialog_title);
-
-
-				ArrayAdapter adapter = new ModeAdapter(getActivity(),android.R.layout.simple_list_item_1, modeArray);
-				
+				ArrayAdapter adapter = new ModeAdapter(getActivity(),android.R.layout.simple_list_item_1, modeArray);	
 				doneDialog.setAdapter(adapter);
-
-
 				doneDialog.setOnItemClickListener(new OnItemClickListener() {
 
 					public void onItemClick(AdapterView<?> parent, View view,
 							int position, long id) {
 						final formFactor mode = modeArray.get(position);
 						
-						WDialog dialog = null;
+						
 						final ArrayAdapter artList = new ArtAdapter(getActivity(),android.R.layout.simple_list_item_1, guard.ArtList);
 						switch(mode){
 						case SingleImg:
-							dialog = new WDialog(getActivity(),R.string.donescreen_dialog_single);
-							dialog.setAdapter(artList);
-							dialog.setOnItemClickListener(new OnItemClickListener() {
+							final WDialog singleDialog = new WDialog(getActivity(),R.string.donescreen_dialog_single);
+							singleDialog.setAdapter(artList);
+							singleDialog.setOnItemClickListener(new OnItemClickListener() {
 
 								public void onItemClick(AdapterView<?> parent, View view,
 										int position, long id) {
 									Attachment atta1 = new SingleImg(guard.ArtList.get(position));
 									currSubP.setDoneArt(atta1);
+									doneDialog.dismiss();
+									singleDialog.dismiss();
 									
 								}
 							});
-							dialog.addButton(R.string.cancel, 1, new OnClickListener() {
+							singleDialog.addButton(R.string.cancel, 1, new OnClickListener() {
 								
 								public void onClick(View arg0) {
-									// TODO Auto-generated method stub
 									doneDialog.cancel();
+									singleDialog.cancel();
 								}
 							});
+							singleDialog.show();
 							break;
 						case SplitImg:
-							dialog = new WDialog(getActivity(),R.string.donescreen_dialog_left);
-							dialog.setAdapter(artList);
-							dialog.setOnItemClickListener(new OnItemClickListener() {
+							final WDialog dualDialog = new WDialog(getActivity(),R.string.donescreen_dialog_left);
+							dualDialog.setAdapter(artList);
+							dualDialog.setOnItemClickListener(new OnItemClickListener() {
 
 								public void onItemClick(AdapterView<?> parent, View view,
 										int position, long id) {
 									final Art art1 = guard.ArtList.get(position);
-									WDialog dialog1 = new WDialog(getActivity(),R.string.donescreen_dialog_left);
+									final WDialog dialog1 = new WDialog(getActivity(),R.string.donescreen_dialog_right);
 									dialog1.setAdapter(artList);
 									dialog1.setOnItemClickListener(new OnItemClickListener() {
 
@@ -877,35 +868,37 @@ public class CustomizeFragment extends Fragment {
 												int position, long id) {
 											final Art art2 = guard.ArtList.get(position);
 											Attachment atta = new SplitImg(art1,art2);
-											
+											doneDialog.dismiss();
+											dualDialog.dismiss();
+											dialog1.dismiss();
 										}
 									});
 									dialog1.addButton(R.string.cancel, 1, new OnClickListener() {
 										
 										public void onClick(View arg0) {
-											// TODO Auto-generated method stub
 											doneDialog.cancel();
+											dualDialog.cancel();
+											dialog1.cancel();
 										}
 									});
-									
+								dialog1.show();	
 								}
 							});
-							dialog.addButton(R.string.cancel, 1, new OnClickListener() {
+							dualDialog.addButton(R.string.cancel, 1, new OnClickListener() {
 								
 								public void onClick(View arg0) {
-									// TODO Auto-generated method stub
 									doneDialog.cancel();
+									dualDialog.cancel();
 								}
 							});
+							dualDialog.show();
 							break;
 						}
-						
 					}
 					});
 				doneDialog.addButton(R.string.cancel, 1, new OnClickListener() {
 					
 					public void onClick(View arg0) {
-						// TODO Auto-generated method stub
 						doneDialog.cancel();
 					}
 				});

@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import dk.aau.cs.giraf.TimerLib.Art;
-import dk.aau.cs.giraf.TimerLib.formFactor;
 
 public class ArtAdapter extends ArrayAdapter<Art> {
 

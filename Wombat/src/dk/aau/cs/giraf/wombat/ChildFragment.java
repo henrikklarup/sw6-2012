@@ -3,8 +3,6 @@ package dk.aau.cs.giraf.wombat;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
