@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/categorymon"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-
+
+
     <LinearLayout
         android:id="@+id/rlspincat"
         android:layout_width="240dp"
@@ -20,21 +21,19 @@
             android:id="@+id/categories"
             android:layout_width="match_parent"
             android:layout_height="700dp"
-            android:entries="@layout/categoriesitem" >
-        </ListView>
+            android:entries="@layout/categoriesitem" />
 
         <ImageView
             android:id="@+id/trash"
             android:layout_width="240dp"
             android:layout_height="240dp"
-            android:src="@drawable/stop" />
+           android:src="@drawable/stop"/>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/rlinfoall"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_toRightOf="@id/rlspincat"
         android:orientation="vertical" >
 
         <LinearLayout
@@ -52,4 +51,4 @@
         </GridView>
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>
