@@ -998,104 +998,108 @@ public class CustomizeFragment extends Fragment {
 	/**
 	 * Initialize the Save As button
 	 */
-	private void initSaveAsButton() {
-		ArrayList<Child> child = guard.Children();
-		ArrayAdapter adapter = new ChildAdapter(getActivity(),android.R.layout.simple_list_item_1,child);
-		
-		saveAsButton = (Button) getActivity().findViewById(
-				R.id.customize_save_as);
-		// If this is a profile which is "saveable", enable the save functionality
-		if (currSubP.saveAs) {
-			d = getResources().getDrawable(R.drawable.thumbnail_saveas);
-			saveAsButton.setOnClickListener(new OnClickListener() {
+	 private void initSaveAsButton() {
+         final ArrayList<String> values = new ArrayList<String>();
+         Drawable d;
+         for (Child c : guard.Children()) {
+                 values.add(c.name);
+         }
 
-				public void onClick(View v) {
-					// Profile and pictogram loader
-					WDialog saveAs1 = new WDialog(getActivity(),R.string.choose_profile);
-					void onItemClick(AdapterView<?> arg0, View arg1,
-								int arg2, long arg3) {
-							// TODO Auto-generated method stub
-							
-						}
-					});
-					
-					builder.setItems(items,
-							new DialogInterface.OnClickListener() {
+         // Cast values to CharSequence
+         final CharSequence[] items = values.toArray(new CharSequence[values
+                         .size()]);
 
-								public void onClick(DialogInterface dialog,
-										final int item) {
-									// Name picker
-									Builder builder = new AlertDialog.Builder(getActivity());
-									builder.setTitle(getActivity().getString(R.string.save_button));
-									final EditText et = new EditText(getActivity());
-									et.setText(getName());
-									builder.setView(et);
-									builder.setPositiveButton(R.string.save_button,
-											new DialogInterface.OnClickListener() {
+         saveAsButton = (Button) getActivity().findViewById(
+                         R.id.customize_save_as);
+         // If this is a profile which is "saveable", enable the save functionality
+         if (currSubP.saveAs) {
+                 d = getResources().getDrawable(R.drawable.thumbnail_saveas);
+                 saveAsButton.setOnClickListener(new OnClickListener() {
 
-												public void onClick(DialogInterface dialog, int which) {
-													// saving!
-													currSubP.name = et.getText().toString();
-													guard.publishList().get(Guardian.profilePosition)
-															.select();
+                         public void onClick(View v) {
+                                 // Profile and pictogram loader
+                                 AlertDialog.Builder builder = new AlertDialog.Builder(
+                                                 getActivity());
+                                 builder.setTitle(getActivity().getString(
+                                                 R.string.choose_profile));
+                                 builder.setItems(items,
+                                                 new DialogInterface.OnClickListener() {
+
+                                                         public void onClick(DialogInterface dialog,
+                                                                         final int item) {
+                                                                 // Name picker
+                                                                 Builder builder = new AlertDialog.Builder(getActivity());
+                                                                 builder.setTitle(getActivity().getString(R.string.save_button));
+                                                                 final EditText et = new EditText(getActivity());
+                                                                 et.setText(getName());
+                                                                 builder.setView(et);
+                                                                 builder.setPositiveButton(R.string.save_button,
+                                                                                 new DialogInterface.OnClickListener() {
+
+                                                                                         public void onClick(DialogInterface dialog, int which) {
+                                                                                                 // saving!
+                                                                                                 currSubP.name = et.getText().toString();
+                                                                                                 guard.publishList().get(Guardian.profilePosition)
+                                                                                                                 .select();
 
 
-													Child c = guard.Children().get(item);
-													getName();
-													c.save(currSubP, false);
-													Guardian.saveChild(c, currSubP);
-													SubProfileFragment df = (SubProfileFragment) getFragmentManager()
-															.findFragmentById(
-																	R.id.subprofileFragment);
-													df.loadSubProfiles();
+                                                                                                 Child c = guard.Children().get(item);
+                                                                                                 getName();
+                                                                                                 c.save(currSubP, false);
+                                                                                                 Guardian.saveChild(c, currSubP);
+                                                                                                 SubProfileFragment df = (SubProfileFragment) getFragmentManager()
+                                                                                                                 .findFragmentById(
+                                                                                                                                 R.id.subprofileFragment);
+                                                                                                 df.loadSubProfiles();
 
-													String toastText = currSubP.name;
-													toastText += " "
-															+ getActivity()
-																	.getApplicationContext()
-																	.getText(
-																			R.string.toast_text);
-													toastText += " " + c.name;
+                                                                                                 String toastText = currSubP.name;
+                                                                                                 toastText += " "
+                                                                                                                 + getActivity()
+                                                                                                                                 .getApplicationContext()
+                                                                                                                                 .getText(
+                                                                                                                                                 R.string.toast_text);
+                                                                                                 toastText += " " + c.name;
 
-													Toast toast = Toast.makeText(getActivity(),
-															toastText, 3000);
-													toast.show();
-													
-													ChildFragment cf = (ChildFragment)getFragmentManager().findFragmentById(R.id.childFragment);
-													SubProfileFragment spf = (SubProfileFragment) getFragmentManager()
-															.findFragmentById(R.id.subprofileFragment);
-													Guardian.profileID = guard.getChild().getProfileId();
-													cf.loadSubProfiles();
-													spf.loadSubProfiles();
-													
+                                                                                                 Toast toast = Toast.makeText(getActivity(),
+                                                                                                                 toastText, 3000);
+                                                                                                 toast.show();
+                                                                                                 
+                                                                                                 ChildFragment cf = (ChildFragment)getFragmentManager().findFragmentById(R.id.childFragment);
+                                                                                                 SubProfileFragment spf = (SubProfileFragment) getFragmentManager()
+                                                                                                                 .findFragmentById(R.id.subprofileFragment);
+                                                                                                 Guardian.profileID = guard.getChild().getProfileId();
+                                                                                                 cf.loadSubProfiles();
+                                                                                                 spf.loadSubProfiles();
+                                                                                                 
 
-												}
+                                                                                         }
 
-											});
-									AlertDialog alert = builder.create();
-									alert.show();
-								}
-							});
-					AlertDialog alert = builder.create();
-					alert.show();
-				}
-			});
-		} else {
-			d = getResources().getDrawable(R.drawable.thumbnail_saveas_gray);
-			saveAsButton.setOnClickListener(new OnClickListener() {
+                                                                                 });
+                                                                 AlertDialog alert = builder.create();
+                                                                 alert.show();
+                                                         }
+                                                 });
+                                 AlertDialog alert = builder.create();
+                                 alert.show();
+                         }
+                 });
+         } else {
+                 d = getResources().getDrawable(R.drawable.thumbnail_saveas_gray);
+                 saveAsButton.setOnClickListener(new OnClickListener() {
 
-				public void onClick(View v) {
-					Toast t = Toast.makeText(getActivity(),
-							getString(R.string.cant_save), 2000);
-					t.show();
-				}
-			});
-		}
+                         public void onClick(View v) {
+                                 Toast t = Toast.makeText(getActivity(),
+                                                 getString(R.string.cant_save), 2000);
+                                 t.show();
+                         }
+                 });
+         }
 
-		saveAsButton.setCompoundDrawablesWithIntrinsicBounds(null, d, null,
-				null);
+         saveAsButton.setCompoundDrawablesWithIntrinsicBounds(null, d, null,
+                         null);
 
-	}
+ }
+
 
 	/**
 	 * Initialize the start button
