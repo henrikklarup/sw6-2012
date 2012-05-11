@@ -64,5 +64,6 @@
     <string name="cannot_delete_subprofile_toast">Kan ikke slette denne tilpasning</string>
     <string name="cant_save">Timeren kan ikke gemmes endnu!</string>
     <string name="cant_start">Timeren kan ikke startes endnu!</string>
+    <string name="cancel">Afbryd</string>
 
 </resources>
