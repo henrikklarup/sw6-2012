@@ -57,7 +57,7 @@ public class SubProfileFragment extends android.app.ListFragment {
 				
 					final WDialog deleteDialog = new WDialog(getActivity(), R.string.delete_subprofile_message);
 					deleteDialog.addTextView(getString(R.string.delete_description) + " " + guard.getChild().SubProfiles().get(row).name + "?", 1);
-					deleteDialog.addButton(R.string.delete_yes, 2, new View.OnClickListener() {
+					deleteDialog.addButton("JA", 2, new View.OnClickListener() {
 						
 						public void onClick(View v) {
 							if (guard.getChild() != null && guard.getChild().deleteCheck()) {
