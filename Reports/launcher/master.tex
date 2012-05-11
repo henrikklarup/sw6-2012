@@ -39,6 +39,11 @@
 % to get lastpage
 %\usepackage{lastpage}
 
+% fixme's
+%\usepackage{xkvltxp}
+\usepackage[footnote,draft,english,silent,nomargin]{fixme}
+\newcommand{\todo}[1]{\fxnote{#1}}
+
 % to get \newevenside :
 \usepackage{ifthen}
 \newcommand{\newevenside}{
@@ -79,9 +84,17 @@
 
 %\cleardoublepage\include{FrontBackmatter/Acknowledgments} % Acknowledgements page
 
+
+\listoffixmes
+\newpage
+
 \pagestyle{scrheadings} % Show chapter titles as headings
 
+
+
 \input{chapters/formalities/index}
+
+
 
 
 
