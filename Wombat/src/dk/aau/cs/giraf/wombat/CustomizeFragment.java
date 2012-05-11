@@ -1,6 +1,7 @@
 package dk.aau.cs.giraf.wombat;
 
 import java.util.ArrayList;
+import java.util.Currency;
 
 import kankan.wheel.widget.OnWheelChangedListener;
 import kankan.wheel.widget.WheelView;
@@ -766,10 +767,12 @@ public class CustomizeFragment extends Fragment {
 			case SingleImg:
 				pictureRes = R.drawable.thumbnail_single_pic;
 				textRes = R.string.customize_single_img_description;
+				alpha = 0;
 				break;
 			case SplitImg:
 				pictureRes = R.drawable.thumbnail_dual_pic;
 				textRes = R.string.customize_split_img_description;
+				alpha = 0;
 				break;
 			default:
 				pictureRes = R.drawable.thumbnail_attachment;
@@ -804,13 +807,29 @@ public class CustomizeFragment extends Fragment {
 		attView.setText(attachText);
 	}
 
+	private void setDonePicture(int pictureRes){
+		LayerDrawable ld = (LayerDrawable) getResources().getDrawable(
+				R.drawable.attachment_layer);
+		PorterDuffColorFilter filter = new PorterDuffColorFilter(0xFFF,
+				PorterDuff.Mode.SRC_ATOP);
+		Drawable d = getResources().getDrawable(
+				R.drawable.attachment_background);
+		d.setAlpha(0);
+		d.setColorFilter(filter);
+		ld.setDrawableByLayerId(R.id.first_attachment_layer, d);
+		ld.setDrawableByLayerId(R.id.second_attachment_layer, getResources()
+				.getDrawable(pictureRes));
+
+		donePictureButton.setCompoundDrawablesWithIntrinsicBounds(null, ld,
+				null, null);
+	}
+	
 	private void initDonePictureButton() {
 		final ArrayList<formFactor> modeArray = new ArrayList<formFactor>();
 		modeArray.add(formFactor.SingleImg);
 		modeArray.add(formFactor.SplitImg);
 		donePictureButton = (Button) getActivity().findViewById(
 				R.id.customize_donescreen);
-
 		donePictureButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(final View v) {
@@ -837,6 +856,7 @@ public class CustomizeFragment extends Fragment {
 								public void onItemClick(AdapterView<?> parent, View view,
 										int position, long id) {
 									Attachment atta1 = new SingleImg(guard.ArtList.get(position));
+									setDonePicture(R.drawable.thumbnail_single_pic);
 									currSubP.setDoneArt(atta1);
 									doneDialog.dismiss();
 									singleDialog.dismiss();
@@ -868,6 +888,7 @@ public class CustomizeFragment extends Fragment {
 												int position, long id) {
 											final Art art2 = guard.ArtList.get(position);
 											Attachment atta = new SplitImg(art1,art2);
+											setDonePicture(R.drawable.thumbnail_dual_pic);
 											doneDialog.dismiss();
 											dualDialog.dismiss();
 											dialog1.dismiss();
@@ -908,7 +929,8 @@ public class CustomizeFragment extends Fragment {
 		donePictureButton.setOnLongClickListener(new OnLongClickListener() {
 
 			public boolean onLongClick(View v) {
-				setAttachment(null);
+				currSubP.setDoneArt(null);
+				setDonePicture(R.drawable.thumbnail_attachment);
 				return true;
 			}
 		});
