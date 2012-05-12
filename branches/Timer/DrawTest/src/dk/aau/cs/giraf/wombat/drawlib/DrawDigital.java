@@ -122,7 +122,8 @@ public class DrawDigital extends View {
 		int num, x, y;
 		Paint paint2 = new Paint();
 		double percent = (timenow) / (totalTime/1000);
-		paint.setColor(background);
+		LinearGradient lg = new LinearGradient(DrawLibActivity.frameWidth/2, 0, DrawLibActivity.frameWidth/2, DrawLibActivity.frameHeight, background, 0xFF000000, Shader.TileMode.CLAMP);
+		paint.setShader(lg);
 
 		/* Set the second colors aplha */
 		col = new ColorDrawable(timeleft2);
