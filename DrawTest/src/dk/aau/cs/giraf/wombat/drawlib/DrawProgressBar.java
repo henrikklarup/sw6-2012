@@ -3,8 +3,10 @@ package dk.aau.cs.giraf.wombat.drawlib;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Shader;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.view.View;
@@ -62,9 +64,11 @@ public class DrawProgressBar extends View {
 
 		
 		/* Fill the canvas with the background color */
-		paint.setColor(background);
+		LinearGradient lg = new LinearGradient(DrawLibActivity.frameWidth/2, 0, DrawLibActivity.frameWidth/2, DrawLibActivity.frameHeight, background, 0xFF000000, Shader.TileMode.CLAMP);
+		paint.setShader(lg);
 		c.drawPaint(paint);
-
+		paint.setShader(null);
+		
 		/* Draw the frame of the progressbar */
 		paint.setAntiAlias(true);
 		paint.setColor(frame);

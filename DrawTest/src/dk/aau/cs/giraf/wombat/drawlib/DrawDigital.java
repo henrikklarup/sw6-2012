@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
+import android.graphics.Shader;
 import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
@@ -76,8 +78,10 @@ public class DrawDigital extends View {
 		Canvas c = new Canvas(bitmap);
 		
 		/* Fill the canvas with the background color */
-		paint.setColor(background);
+		LinearGradient lg = new LinearGradient(DrawLibActivity.frameWidth/2, 0, DrawLibActivity.frameWidth/2, DrawLibActivity.frameHeight, background, 0xFF000000, Shader.TileMode.CLAMP);
+		paint.setShader(lg);
 		c.drawPaint(paint);
+		paint.setShader(null);
 
 		paint.setColor(timeleft);
 		
