@@ -23,7 +23,7 @@ public class MainActivity extends Activity {
         	color = extras.getInt("appBackgroundColor");
         } else {
         	guardianId = -1;
-        	childId = -1;
+        	childId = -3;
         	color = 0xFFFFBB55;
         }
 

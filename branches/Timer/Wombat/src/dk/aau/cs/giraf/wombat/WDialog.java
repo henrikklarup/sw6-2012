@@ -2,6 +2,8 @@ package dk.aau.cs.giraf.wombat;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.view.Gravity;
@@ -85,6 +87,10 @@ public class WDialog extends Dialog{
 	 */
 	public void setAdapter(ArrayAdapter<?> adapter) {
 		ListView lv = (ListView) this.findViewById(R.id.profile_list_dialog_listview);
+		Drawable d = getContext().getResources().getDrawable(android.R.drawable.dark_header);
+		d.setAlpha(0);
+		lv.setDivider(d);
+		lv.setDividerHeight(1);
 		lv.setAdapter(adapter);
 	}
 	

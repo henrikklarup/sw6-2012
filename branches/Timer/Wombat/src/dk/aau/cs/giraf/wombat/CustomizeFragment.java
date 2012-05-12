@@ -985,7 +985,7 @@ public class CustomizeFragment extends Fragment {
 												R.id.subprofileFragment);
 								Guardian.profileID = guard.getChild()
 										.getProfileId();
-								cf.loadSubProfiles();
+								cf.loadChildren();
 								spf.loadSubProfiles();
 								save1.dismiss();
 							}
@@ -1018,7 +1018,7 @@ public class CustomizeFragment extends Fragment {
 						SubProfileFragment spf = (SubProfileFragment) getFragmentManager()
 								.findFragmentById(R.id.subprofileFragment);
 						Guardian.profileID = guard.getChild().getProfileId();
-						cf.loadSubProfiles();
+						cf.loadChildren();
 						spf.loadSubProfiles();
 					}
 				}
@@ -1187,7 +1187,7 @@ public class CustomizeFragment extends Fragment {
 															R.id.subprofileFragment);
 											Guardian.profileID = guard
 													.getChild().getProfileId();
-											cf.loadSubProfiles();
+											cf.loadChildren();
 											spf.loadSubProfiles();
 											saveAs2.dismiss();
 											saveAs1.dismiss();

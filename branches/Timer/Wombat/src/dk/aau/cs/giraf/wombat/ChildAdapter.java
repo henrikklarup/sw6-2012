@@ -54,7 +54,6 @@ public class ChildAdapter extends ArrayAdapter<Child> {
 			if(c.getProfileId() == Guardian.profileID){
 				v.setBackgroundResource(R.drawable.list_selected);
 				Guardian.profileFirstClick = true;
-				Guardian.profileID = -1;
 			}
 		return v;
 	}

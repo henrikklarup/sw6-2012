@@ -96,7 +96,7 @@ public class Guardian {
 		if(_instance == null){
 			_instance = new Guardian();
 			TimerHelper help = new TimerHelper();
-			childId = m_childId;
+			profileID = m_childId;
 			guardianId = m_guardianId;
 			m_context = c;
 			
@@ -385,12 +385,14 @@ public class Guardian {
 		
 		_sortedList.clear();
 		Child lastUsedChild = new Child("Last Used");
+		lastUsedChild.setProfileId(-3);
 		lastUsedChild.SubProfiles().addAll(reverse(lastUsed()));
 		lastUsedChild.setLock();
 		lastUsedChild.lockDelete();
 		_sortedList.add(lastUsedChild);
 		
 		Child predefChild = new Child("Predefined Profiles");
+		predefChild.setProfileId(-2);
 		Collections.sort(predefined());
 		predefChild.SubProfiles().addAll(predefined());
 		predefChild.setLock();

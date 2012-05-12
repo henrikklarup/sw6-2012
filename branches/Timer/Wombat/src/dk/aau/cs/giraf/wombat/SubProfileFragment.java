@@ -21,7 +21,7 @@ public class SubProfileFragment extends android.app.ListFragment {
 	// Start the list empty
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		if(Guardian.profileID != -1){
+		if(Guardian.profileID >= 0){
 			Helper helper = new Helper(getActivity());
 			int position;
 			// Marks the selected profile in the guard singleton
@@ -90,6 +90,12 @@ public class SubProfileFragment extends android.app.ListFragment {
 		});
 	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+		loadSubProfiles();
+	}
+	
 	/**
 	 * Inserts the templates on profile id in the details list
 	 * 
@@ -114,6 +120,8 @@ public class SubProfileFragment extends android.app.ListFragment {
 			lv.getChildAt(i).setSelected(false);
 		}
 		view.setSelected(true);
+		Guardian.subProfileID = guard.getChild().SubProfiles().get(position).getId();
+		
 		
 		CustomizeFragment fragment = (CustomizeFragment) getFragmentManager()
 				.findFragmentById(R.id.customizeFragment);
