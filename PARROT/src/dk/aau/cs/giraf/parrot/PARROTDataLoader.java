@@ -400,6 +400,21 @@ public class PARROTDataLoader {
 			help.mediaHelper.modifyMedia(imageMedia);
 		}
 
+		
+
+
+		if(pic.getWordID() == -1 && pic.getWordPath() != null) //if the word is not in the database
+		{
+			wordMedia = new Media(pic.getName(), pic.getWordPath(), true, "WORD", PARROTActivity.getUser().getProfileID());	//TODO we might want to set the booleans to false
+			pic.setWordID(help.mediaHelper.insertMedia(wordMedia));
+		}
+		else if(pic.getWordPath() != null)
+		{
+			wordMedia = new Media(pic.getName(), pic.getWordPath(), true, "WORD", PARROTActivity.getUser().getProfileID());	//TODO we might want to set the booleans to false
+			wordMedia.setId(pic.getWordID());
+			help.mediaHelper.modifyMedia(wordMedia);
+		}
+		
 		if(pic.getSoundID() == -1 && pic.getSoundPath() != null) //if the sound is new in the database
 		{
 			soundMedia = new Media(pic.getName(), pic.getSoundPath(), true, "SOUND", PARROTActivity.getUser().getProfileID());	//TODO we might want to set the booleans to false
@@ -413,19 +428,6 @@ public class PARROTDataLoader {
 				soundMedia.setId(pic.getSoundID());
 				help.mediaHelper.modifyMedia(soundMedia);
 			}
-		}
-
-
-		if(pic.getWordID() == -1 && pic.getWordPath() != null) //if the word is not in the database
-		{
-			wordMedia = new Media(pic.getName(), pic.getWordPath(), true, "WORD", PARROTActivity.getUser().getProfileID());	//TODO we might want to set the booleans to false
-			pic.setWordID(help.mediaHelper.insertMedia(wordMedia));
-		}
-		else if(pic.getWordPath() != null)
-		{
-			wordMedia = new Media(pic.getName(), pic.getWordPath(), true, "WORD", PARROTActivity.getUser().getProfileID());	//TODO we might want to set the booleans to false
-			wordMedia.setId(pic.getWordID());
-			help.mediaHelper.modifyMedia(wordMedia);
 		}
 
 		// save the submedia references for NEW pictograms
