@@ -62,7 +62,8 @@ public class DrawProgressBar extends View {
 		double timenow = (endTime - System.currentTimeMillis());
 		timenow = (endTime - System.currentTimeMillis());
 
-		
+		paint.setColor(background);
+		c.drawPaint(paint);
 		/* Fill the canvas with the background color */
 		LinearGradient lg = new LinearGradient(DrawLibActivity.frameWidth/2, 0, DrawLibActivity.frameWidth/2, DrawLibActivity.frameHeight, background, 0xFF000000, Shader.TileMode.CLAMP);
 		paint.setShader(lg);
