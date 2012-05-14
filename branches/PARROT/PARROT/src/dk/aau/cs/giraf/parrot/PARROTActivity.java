@@ -19,10 +19,10 @@ public class PARROTActivity extends Activity {
 
 
 		dataLoader = new PARROTDataLoader(this);
-		parrotUser = dataLoader.loadPARROT();			
+		//parrotUser = dataLoader.loadPARROT();			
 		//TODO replace the temp lines with the above line
 		//START TEMP LINES
-		//dataLoader.TESTsaveTestProfile();
+		dataLoader.TESTsaveTestProfile();
 		parrotUser.setRights(0, true);
 		parrotUser.setRights(1, true);
 		parrotUser.setRights(2, true);
