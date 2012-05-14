@@ -9,6 +9,7 @@ import android.os.Bundle;
 public class PARROTActivity extends Activity {
 
 	private static PARROTProfile parrotUser;
+	private PARROTDataLoader dataLoader;
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -17,11 +18,11 @@ public class PARROTActivity extends Activity {
 
 
 
-		PARROTDataLoader dataLoader = new PARROTDataLoader(this);
-		//parrotUser = dataLoader.loadPARROT();			
+		dataLoader = new PARROTDataLoader(this);
+		parrotUser = dataLoader.loadPARROT();			
 		//TODO replace the temp lines with the above line
 		//START TEMP LINES
-		dataLoader.TESTsaveTestProfile();
+		//dataLoader.TESTsaveTestProfile();
 		parrotUser.setRights(0, true);
 		parrotUser.setRights(1, true);
 		parrotUser.setRights(2, true);
@@ -71,6 +72,7 @@ public class PARROTActivity extends Activity {
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		AudioPlayer.close();
+		dataLoader.saveProfile(getUser());
 		super.onPause();
 	}
 
