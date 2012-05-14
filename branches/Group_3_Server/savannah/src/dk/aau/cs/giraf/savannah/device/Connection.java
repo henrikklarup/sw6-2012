@@ -40,14 +40,11 @@ public class Connection {
 	/**
 	 * Constructs a Connection object from the specified arguments
 	 * @param folderPath - the specified path for storing received files
-	 * @param bufferSize - the specified buffer size to use. Default value can be seen in {@link dk.aau.cs.giraf.savannah.device.ConnectionConfiguration}.
+	 * @param bufferSize - the specified buffer size to use. Default value can be seen in {@link dk.aau.cs.giraf.savannah.serverConnection.ConnectionConfiguration}.
 	 * @throws UnknownHostException - thrown if the Server cannot be found.
 	 * @throws IOException - thrown if folderPath is null.
 	 */
 	public Connection(String folderPath, int bufferSize) throws UnknownHostException, IOException {
-		if (folderPath.equals("") == true) {
-			throw new IllegalArgumentException("folderPath: Cannot be null !");
-		}
 		if (this.bufferSize <= 0) {
 			this.bufferSize = ConnectionConfiguration.BUFFERSIZE;
 		}
@@ -64,10 +61,17 @@ public class Connection {
 	 * @throws IOException - thrown if folderPath is null.
 	 */
 	public Connection(String folderPath) throws UnknownHostException, IOException {
-		if (folderPath.equals("") == true) {
-			throw new IllegalArgumentException("folderPath: Cannot be null !");
-		}
 		this.folderPath = folderPath;
+		this.bufferSize = ConnectionConfiguration.BUFFERSIZE;
+		this.socket = new Socket(ConnectionConfiguration.HOSTNAME, ConnectionConfiguration.PORT);
+	}
+	/**
+	 * Constructs a Connection object
+	 * @throws UnknownHostException - thrown if the Server cannot be found.
+	 * @throws IOException - thrown if folderPath is null.
+	 */
+	public Connection() throws UnknownHostException, IOException {
+		this.folderPath = "";
 		this.bufferSize = ConnectionConfiguration.BUFFERSIZE;
 		this.socket = new Socket(ConnectionConfiguration.HOSTNAME, ConnectionConfiguration.PORT);
 	}
@@ -177,86 +181,65 @@ public class Connection {
 		is.close();
 	}
 
-	private void makeCRUD(CRUD cr, StringBuilder builder) {
-		try {
-			//Exception handling 
-			if (cr.getValue() == -1 || cr == CRUD.ERROR) {
-				if (cr.getValue() == -1) {
-					throw new IllegalArgumentException("cr: Cannot be less than zero !");
-				}	else if (cr == CRUD.ERROR) {
-					throw new IllegalArgumentException("cr: Cannot is set CRUD.ERROR !");
-				}
+	private void makeCRUD(CRUD cr, StringBuilder builder) throws IllegalArgumentException, NullPointerException {
+		//Exception handling 
+		if (cr.getValue() == -1 || cr == CRUD.ERROR) {
+			if (cr.getValue() == -1) {
+				throw new IllegalArgumentException("cr: Cannot be less than zero !");
+			}	else if (cr == CRUD.ERROR) {
+				throw new IllegalArgumentException("cr: Cannot is set CRUD.ERROR !");
 			}
-			if (builder == null) {
-				throw new NullPointerException("builder: Cannot be null !");
-			}
-			//Adding the data
-			builder.append("TYPE[" + cr.getValue() + "]");
-		}	catch (IllegalArgumentException e) {
-			System.err.println(e.getMessage());
-		}	catch (NullPointerException e) {
-			System.err.println(e.getMessage());
 		}
-	}
-	private void makeXML(String XML, boolean anyFiles, StringBuilder builder) {
-		try {
-			//Exception handling 
-			if (XML.equals("") == true) {
-				throw new IllegalArgumentException("XML: Cannot be null !");
-			}
-			if (builder == null) {
-				throw new NullPointerException("builder: Cannot be null !");
-			}
-			int files = (anyFiles == true) ? 1 : 0; 
-			//Adding the data
-			builder.append("MXML[" + this.xmlLength(XML.length()) + "," + files + "]=\"");
-			builder.append(XML);
-			builder.append("\"");
-		}	catch (IllegalArgumentException e) {
-			System.err.println(e.getMessage());
-		}	catch (NullPointerException e) {
-			System.err.println(e.getMessage());
+		if (builder == null) {
+			throw new NullPointerException("builder: Cannot be null !");
 		}
+		//Adding the data
+		builder.append("TYPE[" + cr.getValue() + "]");
 	}
-	private void makePing(StringBuilder builder, int pingSize) {
-		try {
-			if (builder == null) {
-				throw new NullPointerException("builder: Cannot be null !");
-			}
-			
-			int packageOffset = 20;
-			int randomBytes = -1;
+	private void makeXML(String XML, boolean anyFiles, StringBuilder builder) throws IllegalArgumentException, NullPointerException {
+		//Exception handling 
+		if (XML.equals("") == true) {
+			throw new IllegalArgumentException("XML: Cannot be null !");
+		}
+		if (builder == null) {
+			throw new NullPointerException("builder: Cannot be null !");
+		}
+		int files = (anyFiles == true) ? 1 : 0; 
+		//Adding the data
+		builder.append("MXML[" + this.xmlLength(XML.length()) + "," + files + "]=\"");
+		builder.append(XML);
+		builder.append("\"");
+	}
+	private void makePing(StringBuilder builder, int pingSize) throws NullPointerException{
+		if (builder == null) {
+			throw new NullPointerException("builder: Cannot be null !");
+		}
 
-			if (pingSize + packageOffset <= 4096) {
-				if (pingSize - packageOffset >= 1) {
-					randomBytes = pingSize;
-				}	else {
-					randomBytes = 12;
-				}
+		int packageOffset = 20;
+		int randomBytes = -1;
+
+		if (pingSize + packageOffset <= 4096) {
+			if (pingSize - packageOffset >= 1) {
+				randomBytes = pingSize;
 			}	else {
 				randomBytes = 12;
 			}
-
-			builder.append("PING[" + this.pingLength(randomBytes) + "]=\"");
-			Random rand = new Random();
-			byte[] buf = new byte[randomBytes];
-			rand.nextBytes(buf);
-			builder.append(this.bytesToString(this.bytesToChars(buf)));
-			builder.append("\"");
-
-		}	catch (NullPointerException e) {
-			System.err.println(e.getMessage());
+		}	else {
+			randomBytes = 12;
 		}
+
+		builder.append("PING[" + this.pingLength(randomBytes) + "]=\"");
+		Random rand = new Random();
+		byte[] buf = new byte[randomBytes];
+		rand.nextBytes(buf);
+		builder.append(this.bytesToString(this.bytesToChars(buf)));
+		builder.append("\"");
 	}
-	private void makeACCEPT(StringBuilder builder) {
-		try {
-			if (builder == null) {
-				throw new NullPointerException("builder: Cannot be null !");
-			}
-			builder.append("[ACCEPT]");
-		}	catch (NullPointerException e) {
-			System.err.println(e.getMessage());
+	private void makeACCEPT(StringBuilder builder) throws NullPointerException {
+		if (builder == null) {
+			throw new NullPointerException("builder: Cannot be null !");
 		}
+		builder.append("[ACCEPT]");
 	}
 
 	private long sendPackage(OutputStream writer, int pingSize) throws IOException {
@@ -264,11 +247,11 @@ public class Connection {
 		this.makeCRUD(CRUD.PING, sb);
 		this.makePing(sb, pingSize);
 		long init = -1;
-		
+
 		init = System.currentTimeMillis();
 		writer.write(this.stringBuilderToBytes(sb));
 		writer.flush();
-		
+
 		return init;
 	}
 	private void sendPackage(OutputStream writer, CRUD cr, String data) throws IOException {
@@ -328,19 +311,29 @@ public class Connection {
 	 * If any of the specified files could not be found. 
 	 * If the Connection cannot receive the String from the Server
 	 */
-	public String sendCommit(String xml, File... files) throws IOException {
-		//Sending the commit event
-		this.writer = new DataOutputStream(this.socket.getOutputStream());
-		this.sendPackage(this.writer, CRUD.COMMIT, xml, files);
+	public synchronized String sendCommit(String xml, File... files) throws IOException {
+		if (this.folderPath.equals("")  == true || this.folderPath == null) {
+			if (this.folderPath.equals("") == true) {
+				throw new IllegalArgumentException("folderPath: Cannot be empty !");
+			}
+			else {
+				throw new NullPointerException("folderPath: Cannot be null !");
+			}
+		}
+		else {
+			//Sending the commit event
+			this.writer = new DataOutputStream(this.socket.getOutputStream());
+			this.sendPackage(this.writer, CRUD.COMMIT, xml, files);
 
-		//Receiving the responds
-		TransmissionHandler th = new TransmissionHandler(this.socket, this.folderPath);
+			//Receiving the responds
+			TransmissionHandler th = new TransmissionHandler(this.socket, this.folderPath);
 
-		//Cleanup crew...
-		this.writer.flush();
-		this.writer.close();
+			//Cleanup crew...
+			this.writer.flush();
+			this.writer.close();
 
-		return th.getXML();
+			return th.getXML();
+		}
 	}
 	/**
 	 * This method sends a Commit Event to the Server.
@@ -351,19 +344,29 @@ public class Connection {
 	 * If the specified file could not be found. 
 	 * If the Connection cannot receive the String from the Server
 	 */
-	public String sendCommit(String xml, File f) throws IOException {
-		//Sending the commit event
-		this.writer = new DataOutputStream(this.socket.getOutputStream());
-		this.sendPackage(this.writer, CRUD.COMMIT, xml, f);
+	public synchronized String sendCommit(String xml, File f) throws IOException {
+		if (this.folderPath.equals("")  == true || this.folderPath == null) {
+			if (this.folderPath.equals("") == true) {
+				throw new IllegalArgumentException("folderPath: Cannot be empty !");
+			}
+			else {
+				throw new NullPointerException("folderPath: Cannot be null !");
+			}
+		}
+		else {
+			//Sending the commit event
+			this.writer = new DataOutputStream(this.socket.getOutputStream());
+			this.sendPackage(this.writer, CRUD.COMMIT, xml, f);
 
-		//Receiving the responds
-		TransmissionHandler th = new TransmissionHandler(this.socket, this.folderPath);
+			//Receiving the responds
+			TransmissionHandler th = new TransmissionHandler(this.socket, this.folderPath);
 
-		//Cleanup crew...
-		this.writer.flush();
-		this.writer.close();
+			//Cleanup crew...
+			this.writer.flush();
+			this.writer.close();
 
-		return th.getXML();
+			return th.getXML();
+		}
 	}
 	/**
 	 * This method sends a Commit Event to the Server.
@@ -372,19 +375,29 @@ public class Connection {
 	 * @throws IOException - If the internal {@link java.net.Socket} could not connect. 
 	 * If the Connection cannot receive the String from the Server.
 	 */
-	public String sendCommit(String xml) throws IOException {
-		//Sending the commit event
-		this.writer = new DataOutputStream(this.socket.getOutputStream());
-		this.sendPackage(this.writer, CRUD.COMMIT, xml);
+	public synchronized String sendCommit(String xml) throws IOException {
+		if (this.folderPath.equals("")  == true || this.folderPath == null) {
+			if (this.folderPath.equals("") == true) {
+				throw new IllegalArgumentException("folderPath: Cannot be empty !");
+			}
+			else {
+				throw new NullPointerException("folderPath: Cannot be null !");
+			}
+		}
+		else {
+			//Sending the commit event
+			this.writer = new DataOutputStream(this.socket.getOutputStream());
+			this.sendPackage(this.writer, CRUD.COMMIT, xml);
 
-		//Receiving the responds
-		TransmissionHandler th = new TransmissionHandler(this.socket, this.folderPath);
+			//Receiving the responds
+			TransmissionHandler th = new TransmissionHandler(this.socket, this.folderPath);
 
-		//Cleanup crew...
-		this.writer.flush();
-		this.writer.close();
+			//Cleanup crew...
+			this.writer.flush();
+			this.writer.close();
 
-		return th.getXML();
+			return th.getXML();
+		}
 	}
 	/**
 	 * This method sends a Ping to the Server.
@@ -394,64 +407,89 @@ public class Connection {
 	 * @throws IOException - If the internal {@link java.net.Socket} could not connect. 
 	 * If the Connection cannot receive Ping responds from the Server.
 	 */
-	public long sendPing(int pingSize) throws IOException {
-		this.writer = new DataOutputStream(this.socket.getOutputStream());
-		
-		long timeStart, timeEnd = -1;
-		timeStart = this.sendPackage(this.writer, pingSize);
-		@SuppressWarnings("unused")
-		TransmissionHandler th = new TransmissionHandler(this.socket, this.folderPath);
-		timeEnd = System.currentTimeMillis();
+	public synchronized long sendPing(int pingSize) throws IOException {
+		if (this.folderPath.equals("")  == true || this.folderPath == null) {
+			if (this.folderPath.equals("") == true) {
+				throw new IllegalArgumentException("folderPath: Cannot be empty !");
+			}
+			else {
+				throw new NullPointerException("folderPath: Cannot be null !");
+			}
+		}
+		else {
+			this.writer = new DataOutputStream(this.socket.getOutputStream());
 
-		//Cleanup crew...
-		this.writer.flush();
-		this.writer.close();
+			long timeStart, timeEnd = -1;
+			timeStart = this.sendPackage(this.writer, pingSize);
+			@SuppressWarnings("unused")
+			TransmissionHandler th = new TransmissionHandler(this.socket, this.folderPath);
+			timeEnd = System.currentTimeMillis();
 
-		return (timeEnd - timeStart);
+			//Cleanup crew...
+			this.writer.flush();
+			this.writer.close();
+
+			return (timeEnd - timeStart);
+		}
 	}
 	/**
 	 * This method sends a Request Event to the Server.
 	 * @param xml - the specified xml
-	 * @return - A {@link dk.aau.cs.giraf.savannah.io.TransmissionHandler} object that contains all the data and references for any files received.
+	 * @return - A {@link dk.aau.cs.giraf.savannah.serverConnection.TransmissionHandler} object that contains all the data and references for any files received.
 	 * @throws FileNotFoundException - If the files received could not be written to the HDD.
 	 * @throws IOException - If the internal {@link java.net.Socket} could not connect. 
-	 * If the Connection cannot receive a {@link dk.aau.cs.giraf.savannah.io.TransmissionHandler} from the Server.
+	 * If the Connection cannot receive a {@link dk.aau.cs.giraf.savannah.serverConnection.TransmissionHandler} from the Server.
 	 * If the files received could not be written to the HDD.
 	 */
-	public TransmissionHandler sendRequest(String xml) throws FileNotFoundException, IOException {
-		//Sending the request event
-		this.writer = new DataOutputStream(this.socket.getOutputStream());
-		this.sendPackage(this.writer, CRUD.REQUEST, xml);
+	public synchronized TransmissionHandler sendRequest(String xml) throws FileNotFoundException, IOException {
+		if (this.folderPath.equals("")  == true || this.folderPath == null) {
+			if (this.folderPath.equals("") == true) {
+				throw new IllegalArgumentException("folderPath: Cannot be empty !");
+			}
+			else {
+				throw new NullPointerException("folderPath: Cannot be null !");
+			}
+		}
+		else {
+			//Sending the request event
+			this.writer = new DataOutputStream(this.socket.getOutputStream());
+			this.sendPackage(this.writer, CRUD.REQUEST, xml);
 
-		//Waiting for Server confirmation
-		TransmissionHandler th = new TransmissionHandler(this.socket, this.folderPath);
+			//Waiting for Server confirmation
+			TransmissionHandler th = new TransmissionHandler(this.socket, this.folderPath);
 
-		//Cleanup crew...
-		this.writer.flush();
-		this.writer.close();
+			//Cleanup crew...
+			this.writer.flush();
+			this.writer.close();
 
-		return th;
+			return th;
+		}
 	}
 
-	
+
 	/**
 	 * @return The FolderPath as a String.
 	 */
-	public String getFolderPath() {
+	public synchronized String getFolderPath() {
 		return this.folderPath;
 	}
-	
+	/**
+	 * Sets folderPath to the specified argument
+	 * @param folder
+	 */
+	public synchronized void setFolderPath(String folder) {
+		this.folderPath = folder;
+	}
 	/**
 	 * @return The buffer size of the Connection.
 	 */
-	public int getBufferSize() {
+	public synchronized int getBufferSize() {
 		return this.bufferSize;
 	}
-	
 	/** 
 	 * @return The FolderPath as a {@link java.io.File} object.
 	 */
-	public File getFolder() {
+	public synchronized File getFolder() {
 		return this.folder;
 	}
 
