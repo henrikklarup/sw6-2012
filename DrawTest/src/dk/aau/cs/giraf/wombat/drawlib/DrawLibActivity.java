@@ -3,6 +3,7 @@ package dk.aau.cs.giraf.wombat.drawlib;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Display;
@@ -54,6 +55,8 @@ public class DrawLibActivity extends Activity {
 			
 			LinearLayout frame = new LinearLayout(this);
 			frame.setKeepScreenOn(true);
+			GradientDrawable gd = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, new int[] {sub.bgcolor, 0xFF000000});
+			
 			View v = null;
 			View v2 = null;
 			ImageView i = null;
@@ -74,7 +77,7 @@ public class DrawLibActivity extends Activity {
 				
 				i = new ImageView(this);
 				i.setImageResource(sub.getAttachment().getImg().getPath());
-				i.setBackgroundColor(sub.bgcolor);
+				i.setBackgroundDrawable(gd);
 				frame.addView(i, frameWidth, frameHeight);
 				break;
 			case SplitImg:
@@ -87,16 +90,16 @@ public class DrawLibActivity extends Activity {
 				frameWidth = frameWidth - 15;
 				i = new ImageView(this);
 				i.setImageResource(sub.getAttachment().getLeftImg().getPath());
-				i.setBackgroundColor(sub.bgcolor);
+				i.setBackgroundDrawable(gd);
 				frame.addView(i, frameWidth, frameHeight);
 				
 				i2 = new ImageView(this);
 				i2.setImageResource(sub.getAttachment().getRightImg().getPath());
-				i2.setBackgroundColor(sub.bgcolor);
+				i2.setBackgroundDrawable(gd);
 				frame.addView(i2, frameWidth, frameHeight);
 				
 				i3 = new ImageView(this);
-				i3.setBackgroundColor(sub.bgcolor);
+				i3.setBackgroundDrawable(gd);
 				frame.addView(i3, 30, frameHeight);
 				break;
 			}
