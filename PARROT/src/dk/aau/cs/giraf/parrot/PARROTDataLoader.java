@@ -3,6 +3,7 @@ package dk.aau.cs.giraf.parrot;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.R.bool;
 import android.app.Activity;
 import android.os.Bundle;
 import dk.aau.cs.giraf.oasis.lib.Helper;
@@ -65,7 +66,10 @@ public class PARROTDataLoader {
 			Pictogram pic = new Pictogram(prof.getFirstname(), prof.getPicture(), null, null);	//TODO discuss whether this image might be changed
 			PARROTProfile parrotUser = new PARROTProfile(prof.getFirstname(), pic);
 			parrotUser.setProfileID(prof.getId());
-			Setting<String, String, String> specialSettings = app.getSettings();//This object might be null //FIXME handle eventual null pointer exception
+			Setting<String, String, String> specialSettings = app.getSettings();//This object might be null
+			
+			//Load the settings
+			parrotUser = loadSettings(parrotUser, specialSettings);
 
 			//Add all of the categories to the profile
 			int number = 0;
@@ -110,6 +114,25 @@ public class PARROTDataLoader {
 			return null;
 		}
 
+	}
+
+	private PARROTProfile loadSettings(PARROTProfile parrotUser, Setting<String, String, String> profileSettings) {
+
+		//First we load the colour settings
+		int catColour = Integer.valueOf(profileSettings.get("ColourSettings").get("SuperCategory"));
+		int sentenceColour = Integer.valueOf(profileSettings.get("ColourSettings").get("SentenceBoard"));
+		parrotUser.setCategoryColor(catColour);
+		parrotUser.setSentenceBoardColor(sentenceColour);
+		
+		//Then we load the tab settings
+		boolean tab0 = Boolean.valueOf(profileSettings.get("Rights").get("tab0"));
+		boolean tab1 = Boolean.valueOf(profileSettings.get("Rights").get("tab1"));
+		boolean tab2 = Boolean.valueOf(profileSettings.get("Rights").get("tab2"));
+		parrotUser.setRights(0, tab0);
+		parrotUser.setRights(1, tab1);
+		parrotUser.setRights(2, tab2);
+		
+		return parrotUser;
 	}
 
 	public Category loadCategory(String pictureIDs,int colour,String iconString)
@@ -197,7 +220,8 @@ public class PARROTDataLoader {
 	public void saveProfile(PARROTProfile user)
 	{
 		Setting<String, String, String> profileSetting = new Setting<String, String, String>();
-		//TODO save profile settings
+		//save profile settings
+		saveSettings(profileSetting, user);
 
 		for(int i=0;i<user.getCategories().size();i++)
 		{
@@ -205,6 +229,21 @@ public class PARROTDataLoader {
 		}
 		//after all the changes are made, we save the settings to the database
 		app.setSettings(profileSetting);
+	}
+	
+	public Setting<String, String, String> saveSettings(Setting<String, String, String> profileSettings, PARROTProfile user)
+	{
+		//First, we save the colour settings
+		profileSettings.addValue("ColourSettings", "SuperCategory", String.valueOf(user.getCategoryColor()));
+		profileSettings.get("ColourSettings").put("SentenceBoard", String.valueOf(user.getSentenceBoardColor()));
+		
+		//Then we save the rights, which are the available tabs for the user.
+		profileSettings.addValue("Rights", "tab0", String.valueOf(user.getRights(0)));
+		profileSettings.get("Rights").put("tab1", String.valueOf(user.getRights(1)));
+		profileSettings.get("Rights").put("tab2", String.valueOf(user.getRights(2)));
+	
+		//Now we return the settings so that they can be saved.
+		return profileSettings;	
 	}
 	
 	public void TESTsaveTestProfile()
@@ -359,6 +398,9 @@ public class PARROTDataLoader {
 			}
 
 		}
+		//Update the information about the pictogram so that it is nolonger new or changed from the version in the database.
+		pic.setChanged(false);
+		pic.setNewPictogram(false);
 		return pic;
 
 	}
