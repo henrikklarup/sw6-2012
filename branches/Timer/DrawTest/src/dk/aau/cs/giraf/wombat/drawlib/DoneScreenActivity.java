@@ -2,9 +2,11 @@ package dk.aau.cs.giraf.wombat.drawlib;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -65,7 +67,17 @@ public class DoneScreenActivity extends Activity {
 			i.setBackgroundColor(000);
 			frame.addView(i, frameWidth, frameHeight);
 		}
-
+		
+		frame.setOnClickListener(new OnClickListener() {
+			
+			public void onClick(View v) {
+				// Start 
+				Intent i = new Intent("dk.aau.cs.giraf.launcher.AUTHENTICATE");
+				i.addCategory("dk.aau.cs.giraf.launcher.GIRAF");
+				startActivity(i);
+				finish();
+			}
+		});
 
 		//		TextView tv = new TextView(getApplicationContext());
 		//		LayoutParams lp = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
