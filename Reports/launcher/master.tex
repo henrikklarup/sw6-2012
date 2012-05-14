@@ -39,16 +39,21 @@
 % to get lastpage
 %\usepackage{lastpage}
 
+\usepackage{verbatim}
+\usepackage{casecontrol}
+\usepackage{ifthen}
+\usepackage{xifthen}
+
 % fixme's
 %\usepackage{xkvltxp}
 \usepackage[footnote,draft,english,silent,nomargin]{fixme}
 \newcommand{\todo}[1]{\fxnote{#1}}
-\newcommand{\localgroup}[1][]{{project group}{#1}{}}
-\newcommand{\globalgroup}[1][]{{multiproject group}{#1}{}}
+\newcommand{\localgroup}[1][]{\caseControl{p}{roject group}{#1}{}}
+\newcommand{\globalgroup}[1][]{\caseControl{m}{ultiproject group}{#1}{}}
 \newcommand{\egebakken}[1][]{{Egebakken}{#1}{}}
-\newcommand{\guardian}[1][]{{guardian}{#1}{}}
-\newcommand{\autist}[1][]{{child with austim}{#1}{}}
-\newcommand{\autists}[1][]{{children with austim}{#1}{}}
+\newcommand{\guardian}[1][]{\caseControl{g}{uardian}{#1}{}}
+\newcommand{\autist}[1][]{\caseControl{c}{hild with austim}{#1}{}}
+\newcommand{\autists}[1][]{\caseControl{c}{hildren with austim}{#1}{}}
 
 % to get \newevenside :
 \usepackage{ifthen}
