@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- GENERAL -->
-    <string name="app_name">Wombat</string>
+    <string name="app_name">Timer</string>
     <string name="min_sec_devider">:</string>
     <string name="minut">minut</string>
     <string name="minutes">minutter</string>
