@@ -888,6 +888,7 @@ public class CustomizeFragment extends Fragment {
 												int position, long id) {
 											final Art art2 = guard.ArtList.get(position);
 											Attachment atta = new SplitImg(art1,art2);
+											currSubP.setDoneArt(atta);
 											setDonePicture(R.drawable.thumbnail_dual_pic);
 											doneDialog.dismiss();
 											dualDialog.dismiss();
