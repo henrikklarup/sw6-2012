@@ -9,9 +9,6 @@ import java.util.HashMap;
 
 public class Setting<Key, Type, Value> extends HashMap<Key, HashMap<Type, Value>> {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	public Setting() {

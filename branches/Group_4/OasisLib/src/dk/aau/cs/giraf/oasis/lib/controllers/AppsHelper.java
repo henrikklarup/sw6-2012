@@ -53,13 +53,27 @@ public class AppsHelper {
 //	}
 	
 	/**
+	 * Cascade remove app
+	 * @param app App to remove
+	 * @return Rows affected
+	 */
+	public int removeApp(App app) {
+		int rows = 0;
+		
+		rows += loa.removeListOfAppsByAppId(app.getId());
+		rows += _context.getContentResolver().delete(AppsMetaData.CONTENT_URI, AppsMetaData.Table.COLUMN_ID + " = '" + app.getId() + "'", null);
+
+		return rows;
+	}
+	
+	/**
 	 * Remove app attachment to profile
 	 * @param app App to remove
 	 * @param profile Profile to remove attachment from
 	 * @return Rows
 	 */
 	public int removeAppAttachmentToProfile(App app, Profile profile) {
-		return loa.removeListOfApps(app.getId(), profile.getId());
+		return loa.removeListOfApps(new ListOfApps(app.getId(), profile.getId()));
 	}
 	
 	/**

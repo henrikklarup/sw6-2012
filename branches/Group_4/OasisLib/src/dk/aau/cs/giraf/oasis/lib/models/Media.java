@@ -12,7 +12,6 @@ public class Media {
 
 	/**
 	 * Constructor with arguments
-	 * 
 	 * @param name the name to set
 	 * @param mPath the path to set
 	 * @param mPublic the public to set

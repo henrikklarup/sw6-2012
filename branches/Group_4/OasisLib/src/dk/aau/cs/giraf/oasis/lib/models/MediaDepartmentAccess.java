@@ -5,7 +5,22 @@ public class MediaDepartmentAccess {
 	private long idDepartment;
 	private long idMedia;
 	private static String _output = "{0}, {1}";
-	
+	/**
+	 * Constructor with arguments
+	 * @param idMedia the media id to set
+	 * @param idDepartment the department id to set
+	 */
+	public MediaDepartmentAccess(long idMedia, long idDepartment) {
+		this.idMedia = idMedia;
+		this.idDepartment = idDepartment;
+	}
+	/**
+	 * Empty constructor
+	 */
+	public MediaDepartmentAccess() {
+		
+	}
+
 	/**
 	 * @return the idDepartment
 	 */

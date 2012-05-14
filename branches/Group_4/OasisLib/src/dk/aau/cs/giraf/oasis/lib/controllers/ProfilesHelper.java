@@ -33,6 +33,8 @@ public class ProfilesHelper {
 	private HasGuardianController hg;
 	private HasDepartmentController hd;
 	private HasSubDepartmentController hsd;
+	private MediaProfileAccessController mpa;
+	private ListOfAppsController loa;
 	private String[] columns = new String[] { 
 			ProfilesMetaData.Table.COLUMN_ID, 
 			ProfilesMetaData.Table.COLUMN_FIRST_NAME,
@@ -53,6 +55,8 @@ public class ProfilesHelper {
 		hg = new HasGuardianController(_context);
 		hd = new HasDepartmentController(_context);
 		hsd = new HasSubDepartmentController(_context);
+		mpa = new MediaProfileAccessController(_context);
+		loa = new ListOfAppsController(_context);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -65,7 +69,28 @@ public class ProfilesHelper {
 //	public void clearProfilesTable() {
 //		_context.getContentResolver().delete(ProfilesMetaData.CONTENT_URI, null, null);
 //	}
+	
+	/**
+	 * Cascade remove profile
+	 * @param profile the profile to remove
+	 * @return Rows affected
+	 */
+	public int removeProfile(Profile profile) {
+		int rows = 0;
 
+		AuthUser authUser = au.getAuthUserById(profile.getId());
+		
+		rows += au.removeAuthUser(authUser);
+		rows += loa.removeListOfAppsByProfileId(profile.getId());
+		rows += hg.removeHasGuardiansByProfile(profile);
+		rows += hd.removeHasDepartmentByProfileId(profile.getId());
+		rows += mpa.removeMediaProfileAccessByProfileId(profile.getId());
+		rows += _context.getContentResolver().delete(ProfilesMetaData.CONTENT_URI, 
+				ProfilesMetaData.Table.COLUMN_ID + " = '" + profile.getId() + "'", null);
+
+		return rows;
+	}
+	
 	/**
 	 * Remove child attachment to guardian
 	 * @param child Child profile
@@ -76,7 +101,7 @@ public class ProfilesHelper {
 		if (child.getPRole() == pRoles.CHILD.ordinal() && 
 				(guardian.getPRole() == pRoles.GUARDIAN.ordinal() || 
 				 guardian.getPRole() == pRoles.PARENT.ordinal())) {
-			return hg.removeHasGuardian(child, guardian);
+			return hg.removeHasGuardian(new HasGuardian(guardian.getId(), child.getId()));
 		} else {
 			return -1;
 		}

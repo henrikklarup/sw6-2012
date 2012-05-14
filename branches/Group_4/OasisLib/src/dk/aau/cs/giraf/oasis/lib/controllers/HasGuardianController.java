@@ -43,15 +43,41 @@ class HasGuardianController {
 //	}
 	
 	/**
-	 * Remove has guardian
-	 * @param child Child profile
-	 * @param guardian Guardian profile
-	 * @return Rows
+	 * Remove HasGuardians by profile
+	 * @param profile Profile to remove hasGuardians by
+	 * @return Rows affected
 	 */
-	public int removeHasGuardian(Profile child, Profile guardian) {
+	public int removeHasGuardiansByProfile(Profile profile) {
+		int rows = 0;
+		String table = "";
+		switch ((int)profile.getPRole()) {
+		case 2: 
+			table = HasGuardianMetaData.Table.COLUMN_IDGUARDIAN;
+			break;
+		case 3:
+			table = HasGuardianMetaData.Table.COLUMN_IDCHILD;
+		default: 
+			table = "other";
+			break;
+		}
+		
+		if (!table.equals("other")) {
+			rows += _context.getContentResolver().delete(HasGuardianMetaData.CONTENT_URI, 
+					table + " = '" + profile.getId() + "'", null);
+		}
+		
+		return rows;
+	}
+	
+	/**
+	 * Remove HasGuardian
+	 * @param hasGuardian HasGuardian to remove
+	 * @return Rows affected
+	 */
+	public int removeHasGuardian(HasGuardian hasGuardian) {
 		return _context.getContentResolver().delete(HasGuardianMetaData.CONTENT_URI, 
-				HasGuardianMetaData.Table.COLUMN_IDCHILD + " = '" + child.getId() + "'" +
-						HasGuardianMetaData.Table.COLUMN_IDGUARDIAN + " = '" + guardian.getId() + "'", null);
+				HasGuardianMetaData.Table.COLUMN_IDCHILD + " = '" + hasGuardian.getIdChild() + "' AND " +
+						HasGuardianMetaData.Table.COLUMN_IDGUARDIAN + " = '" + hasGuardian.getIdGuardian() + "'", null);
 	}
 
 	/**
@@ -113,6 +139,37 @@ class HasGuardianController {
 			c.close();
 		}
 
+		return hgList;
+	}
+	
+	public List<HasGuardian> getHasGuardianByProfile(Profile profile) {
+		List<HasGuardian> hgList = new ArrayList<HasGuardian>();
+		
+		String table;
+		int role = (int) profile.getPRole();
+		
+		switch (role) {
+		case 2: 
+			table = HasGuardianMetaData.Table.COLUMN_IDGUARDIAN;
+			break;
+		case 3:
+			table = HasGuardianMetaData.Table.COLUMN_IDCHILD;
+			break;
+		default: 
+			table = "empty";
+			break;
+		}
+		
+		if (!table.equals("empty")) {
+			Cursor c = _context.getContentResolver().query(HasGuardianMetaData.CONTENT_URI, columns, 
+					table + " = '" + profile.getId() + "'", null, null);
+	
+			if (c != null) {
+				hgList = cursorToHasGuardianList(c);
+				c.close();
+			}
+		}
+		
 		return hgList;
 	}
 

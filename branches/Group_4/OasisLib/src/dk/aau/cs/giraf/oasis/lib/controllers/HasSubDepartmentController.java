@@ -41,17 +41,34 @@ class HasSubDepartmentController {
 //	public int clearHasSubDepartmentTable() {
 //		return _context.getContentResolver().delete(HasSubDepartmentMetaData.CONTENT_URI, null, null);
 //	}
-	
+
 	/**
-	 * Remove has sub deparment
-	 * @param department Department
-	 * @param subDepartment Sub department
-	 * @return Rows
+	 * Remove HasSubDeparments by subDepartment id
+	 * @param idSubDepartment the subdepartment id to remove hasSubDepartments by
+	 * @return Rows affected
 	 */
-	public int removeHasSubDepartment(Department department, Department subDepartment) {
+	public int removeHasSubDepartmentsBySubDepartmentId(long idSubDepartment) {
 		return _context.getContentResolver().delete(HasSubDepartmentMetaData.CONTENT_URI, 
-				HasSubDepartmentMetaData.Table.COLUMN_IDSUBDEPARTMENT + " = '" + subDepartment.getId() + "'" +
-						HasSubDepartmentMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + department.getId() + "'", null);
+					HasSubDepartmentMetaData.Table.COLUMN_IDSUBDEPARTMENT + " = '" + idSubDepartment + "'", null);
+	}
+	/**
+	 * Remove HasSubDeparments by department id
+	 * @param idDepartment the department id to remove hasSubDepartments by
+	 * @return Rows affected
+	 */
+	public int removeHasSubDepartmentsByDepartmentId(long idDepartment) {
+		return _context.getContentResolver().delete(HasSubDepartmentMetaData.CONTENT_URI, 
+					HasSubDepartmentMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + idDepartment + "'", null);
+	}
+	/**
+	 * Remove HasSubDeparment
+	 * @param hasSubDepartment HasSubDepartment
+	 * @return Rows affected
+	 */
+	public int removeHasSubDepartment(HasSubDepartment hasSubDepartment) {
+		return _context.getContentResolver().delete(HasSubDepartmentMetaData.CONTENT_URI, 
+				HasSubDepartmentMetaData.Table.COLUMN_IDSUBDEPARTMENT + " = '" + hasSubDepartment.getIdSubDepartment() + "' AND " +
+						HasSubDepartmentMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + hasSubDepartment.getIdDepartment() + "'", null);
 	}
 
 	/**

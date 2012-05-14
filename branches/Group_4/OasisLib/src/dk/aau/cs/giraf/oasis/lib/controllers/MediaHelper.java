@@ -62,6 +62,21 @@ public class MediaHelper {
 	//	public void clearMediaTable() {
 	//		_context.getContentResolver().delete(MediaMetaData.CONTENT_URI, null, null);
 	//	}
+	
+	/**
+	 * Remove media
+	 */
+	public int removeMedia(Media media) {
+		int rows = 0;
+		
+		rows += mpa.removeMediaProfileAccessByMediaId(media.getId());
+		rows += mda.removeMediaDepartmentAccessByMediaId(media.getId());
+		rows += ht.removeHasTagByMediaId(media.getId());
+		rows += _context.getContentResolver().delete(MediaMetaData.CONTENT_URI, 
+				MediaMetaData.Table.COLUMN_ID + " = '" + media.getId() + "'", null);
+		
+		return rows;
+	}
 
 	/**
 	 * Remove media attachment to profile
@@ -70,7 +85,7 @@ public class MediaHelper {
 	 * @return Rows
 	 */
 	public int removeMediaAttachmentToProfile(Media media, Profile profile) {
-		return mpa.removeMediaProfileAccess(media, profile); 
+		return mpa.removeMediaProfileAccess(new MediaProfileAccess(profile.getId(), media.getId())); 
 	}
 
 	/**
@@ -80,7 +95,7 @@ public class MediaHelper {
 	 * @return Rows
 	 */
 	public int removeMediaAttachmentToDepartment(Media media, Department department) {
-		return mda.removeMediaProfileAccess(media, department);
+		return mda.removeMediaDepartmentAccess(new MediaDepartmentAccess(department.getId(), media.getId()));
 	}
 
 	/**
@@ -100,17 +115,17 @@ public class MediaHelper {
 	 * @return Rows
 	 */
 	public int removeTagFromMedia(Tag tag, Media media) {
-		return ht.removeHasTag(tag, media);
+		return ht.removeHasTag(new HasTag(media.getId(), tag.getId()));
 	}
 
 	/**
 	 * Remove sub media attachment to media
-	 * @param subMedia Sub media to remove
-	 * @param media Media to remove from
+	 * @param subMedia sub media to remove
+	 * @param media media to remove from
 	 * @return Rows
 	 */
 	public int removeSubMediaAttachmentToMedia(Media subMedia, Media media) {
-		return hl.removeHasLink(subMedia, media);
+		return hl.removeHasLink(new HasLink(media.getId(), subMedia.getId()));
 	}
 
 	/**
@@ -381,7 +396,7 @@ public class MediaHelper {
 	public List<Media> getMediaByProfile(Profile profile) {
 		List<Media> mediaList = new ArrayList<Media>();
 
-		for (MediaProfileAccess mpaModel : mpa.getMediaByProfile(profile)) {
+		for (MediaProfileAccess mpaModel : mpa.getMediaProfileAccessByProfile(profile)) {
 			mediaList.add(getMediaById(mpaModel.getIdMedia()));
 		}
 

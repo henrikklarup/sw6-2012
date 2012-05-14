@@ -14,7 +14,7 @@ public class Profile {
 	public static enum pRoles {ADMIN, PARENT, GUARDIAN, CHILD};
 
 	/**
-	 * Constructor with parameters
+	 * Constructor with arguments
 	 * 
 	 * @param firstname the firstname to set
 	 * @param surname the surname to set

@@ -19,6 +19,7 @@ import dk.aau.cs.giraf.oasis.lib.models.Tag;
 public class TagsHelper {
 
 	private Context _context;
+	private HasTagController ht;
 	private String[] columns = new String[] { 
 			TagsMetaData.Table.COLUMN_ID, 
 			TagsMetaData.Table.COLUMN_CAPTION};
@@ -29,6 +30,7 @@ public class TagsHelper {
 	 */
 	public TagsHelper(Context context) {
 		_context = context;
+		ht = new HasTagController(_context);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -42,6 +44,21 @@ public class TagsHelper {
 //	public int clearTagsTable() {
 //		return _context.getContentResolver().delete(TagsMetaData.CONTENT_URI, null, null);
 //	}
+	
+	/**
+	 * Remove tag
+	 * @param tag Tag to remove
+	 * @return Rows affected
+	 */
+	public int removeTag(Tag tag) {
+		int rows = 0;
+		
+		rows += ht.removeHasTagByTagId(tag.getId());
+		rows += _context.getContentResolver().delete(TagsMetaData.CONTENT_URI, 
+					TagsMetaData.Table.COLUMN_ID + " = '" + tag.getId() + "'", null);
+		
+		return rows;
+	}
 	
 	/**
 	 * Insert tag

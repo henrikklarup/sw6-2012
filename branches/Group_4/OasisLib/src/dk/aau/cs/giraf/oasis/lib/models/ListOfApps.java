@@ -21,7 +21,15 @@ public class ListOfApps {
 		this.setting = setting;
 		this.stat = stat;
 	}
-	
+	/**
+	 * Constructor with arguments
+	 * @param idApp the app id to set
+	 * @param idProfile the profile id to set
+	 */
+	public ListOfApps(long idApp, long idProfile) {
+		this.idApp = idApp;
+		this.idProfile = idProfile;
+	}
 	/**
 	 * Empty constructor 
 	 */
