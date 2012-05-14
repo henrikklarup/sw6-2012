@@ -3,9 +3,9 @@
 
 Meeting takes place on 14/05-2012 @ 9:00 AM - 12:00 PM [0.2.90].
 
-Responsible: SW602
+Responsible: SW603
 
-Notary: SW603
+Notary: SW604
 
 == Agenda ==
   * Next sprint length
