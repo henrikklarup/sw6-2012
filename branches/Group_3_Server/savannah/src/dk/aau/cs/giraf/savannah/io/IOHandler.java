@@ -547,7 +547,7 @@ public class IOHandler implements Runnable {
 		log.makeLogEntry(socket, performedAction, completed, files);
 	}
 	
-	
+	 
 	 // ------------------------------------------------- \\
 	 // 			Methods for clean up    		      \\
 	 // ------------------------------------------------- \\
