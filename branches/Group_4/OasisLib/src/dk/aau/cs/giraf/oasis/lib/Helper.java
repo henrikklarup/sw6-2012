@@ -150,16 +150,16 @@ public class Helper {
 		/*If dummy guardians are not present in the DB then add them*/
 		if (guardians.isEmpty()) {
 			/*Guardians*/
-			Profile guardian1 = new Profile("PERSON", "A", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
-			Profile guardian2 = new Profile("PERSON", "B", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
-			Profile guardian3 = new Profile("PERSON", "C", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
-			Profile guardian4 = new Profile("PERSON", "D", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
-			Profile guardian5 = new Profile("PERSON", "E", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
-			Profile guardian6 = new Profile("PERSON", "F", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
-			Profile guardian7 = new Profile("PERSON", "G", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
-			Profile guardian8 = new Profile("PERSON", "H", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
-			Profile guardian9 = new Profile("PERSON", "I", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
-			Profile guardian0 = new Profile("PERSON", "J", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
+			Profile guardian1 = new Profile("Tony", "Stark", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
+			Profile guardian2 = new Profile("Steve", "Rogers", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
+			Profile guardian3 = new Profile("Bruce", "Banner", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
+			Profile guardian4 = new Profile("Thor", "Odinson", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
+			Profile guardian5 = new Profile("Natasha", "Romanoff", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
+			Profile guardian6 = new Profile("Clint", "Barton", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
+			Profile guardian7 = new Profile("Helle", "Klarup", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
+			Profile guardian8 = new Profile("Nick", "Fury", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
+			Profile guardian9 = new Profile("Bruce", "Wayne", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
+			Profile guardian0 = new Profile("Holger", "Danske", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
 
 			guardians.add(guardian1);
 			guardians.add(guardian2);
@@ -213,16 +213,16 @@ public class Helper {
 		/*If dummy children are not present in the DB then add them*/
 		if (children.isEmpty()) {
 			/*Children*/
-			Profile child1 = new Profile("CHILD", "A", null, Profile.pRoles.CHILD.ordinal(), 88888888, null, null);
-			Profile child2 = new Profile("CHILD", "B", null, Profile.pRoles.CHILD.ordinal(), 88888888, null, null);
-			Profile child3 = new Profile("CHILD", "C", null, Profile.pRoles.CHILD.ordinal(), 88888888, null, null);
-			Profile child4 = new Profile("CHILD", "D", null, Profile.pRoles.CHILD.ordinal(), 88888888, null, null);
-			Profile child5 = new Profile("CHILD", "E", null, Profile.pRoles.CHILD.ordinal(), 88888888, null, null);
-			Profile child6 = new Profile("CHILD", "F", null, Profile.pRoles.CHILD.ordinal(), 88888888, null, null);
-			Profile child7 = new Profile("CHILD", "G", null, Profile.pRoles.CHILD.ordinal(), 88888888, null, null);
-			Profile child8 = new Profile("CHILD", "H", null, Profile.pRoles.CHILD.ordinal(), 88888888, null, null);
-			Profile child9 = new Profile("CHILD", "I", null, Profile.pRoles.CHILD.ordinal(), 88888888, null, null);
-			Profile child0 = new Profile("CHILD", "J", null, Profile.pRoles.CHILD.ordinal(), 88888888, null, null);
+			Profile child1 = new Profile("William", "Jensen", null, Profile.pRoles.CHILD.ordinal(), 88888888, null, null);
+			Profile child2 = new Profile("Noah", "Nielsen", null, Profile.pRoles.CHILD.ordinal(), 88888888, null, null);
+			Profile child3 = new Profile("Johnathan", "Doerwald", null, Profile.pRoles.CHILD.ordinal(), 88888888, null, null);
+			Profile child4 = new Profile("Magnus", "Pedersen", null, Profile.pRoles.CHILD.ordinal(), 88888888, null, null);
+			Profile child5 = new Profile("Mikkel", "Andersen", null, Profile.pRoles.CHILD.ordinal(), 88888888, null, null);
+			Profile child6 = new Profile("Ida", "Christiansen", null, Profile.pRoles.CHILD.ordinal(), 88888888, null, null);
+			Profile child7 = new Profile("Janet", "Doeleman", null, Profile.pRoles.CHILD.ordinal(), 88888888, null, null);
+			Profile child8 = new Profile("Anna", "Sørensen", null, Profile.pRoles.CHILD.ordinal(), 88888888, null, null);
+			Profile child9 = new Profile("Lone", "Klarup", null, Profile.pRoles.CHILD.ordinal(), 88888888, null, null);
+			Profile child0 = new Profile("Freja", "Lemming", null, Profile.pRoles.CHILD.ordinal(), 88888888, null, null);
 
 			children.add(child1);
 			children.add(child2);
