@@ -30,7 +30,7 @@ public class PARROTDataLoader {
 		help = new Helper(parrent);
 		app = help.appsHelper.getAppByPackageName();
 	}
-	
+
 	/**
 	 * 
 	 * @return
@@ -41,7 +41,7 @@ public class PARROTDataLoader {
 		//This part of the code is supposed to get a profile from the launcher, and read it from the admin.
 		Long childId = parrent.getIntent().getExtras().getLong("currentChildID");
 		Long appId = app.getId();
-		
+
 		return loadProfile(childId, appId);
 	}
 
@@ -57,17 +57,17 @@ public class PARROTDataLoader {
 	{
 		Profile prof;
 
-		
+
 		if(childId !=null && appId !=null)
 		{
 			prof = help.profilesHelper.getProfileById(childId);	//It used to be "currentProfileId"
 			//app = help.appsHelper.getAppByIds(appId, childId);
-			
+
 			Pictogram pic = new Pictogram(prof.getFirstname(), prof.getPicture(), null, null);	//TODO discuss whether this image might be changed
 			PARROTProfile parrotUser = new PARROTProfile(prof.getFirstname(), pic);
 			parrotUser.setProfileID(prof.getId());
 			Setting<String, String, String> specialSettings = app.getSettings();//This object might be null
-			
+
 			//Load the settings
 			parrotUser = loadSettings(parrotUser, specialSettings);
 
@@ -87,20 +87,20 @@ public class PARROTDataLoader {
 					//the value does not exist, so we will not load anymore categories
 					break;
 				}
-				
-				
-//				if(categoryString !=null)		//If the category of that number exists
-//				{
-					String colourString = specialSettings.get("category"+number).get("colour");
-					int col=Integer.valueOf(colourString);
-					String iconString = specialSettings.get("category"+number).get("icon");
-					parrotUser.addCategory(loadCategory(categoryString,col,iconString));
-					number++;
-//				}
-//				else
-//				{
-//					break;
-//				}
+
+
+				//				if(categoryString !=null)		//If the category of that number exists
+				//				{
+				String colourString = specialSettings.get("category"+number).get("colour");
+				int col=Integer.valueOf(colourString);
+				String iconString = specialSettings.get("category"+number).get("icon");
+				parrotUser.addCategory(loadCategory(categoryString,col,iconString));
+				number++;
+				//				}
+				//				else
+				//				{
+				//					break;
+				//				}
 
 			}
 
@@ -123,7 +123,7 @@ public class PARROTDataLoader {
 		int sentenceColour = Integer.valueOf(profileSettings.get("ColourSettings").get("SentenceBoard"));
 		parrotUser.setCategoryColor(catColour);
 		parrotUser.setSentenceBoardColor(sentenceColour);
-		
+
 		//Then we load the tab settings
 		boolean tab0 = Boolean.valueOf(profileSettings.get("Rights").get("tab0"));
 		boolean tab1 = Boolean.valueOf(profileSettings.get("Rights").get("tab1"));
@@ -131,7 +131,7 @@ public class PARROTDataLoader {
 		parrotUser.setRights(0, tab0);
 		parrotUser.setRights(1, tab1);
 		parrotUser.setRights(2, tab2);
-		
+
 		return parrotUser;
 	}
 
@@ -230,22 +230,22 @@ public class PARROTDataLoader {
 		//after all the changes are made, we save the settings to the database
 		app.setSettings(profileSetting);
 	}
-	
+
 	public Setting<String, String, String> saveSettings(Setting<String, String, String> profileSettings, PARROTProfile user)
 	{
 		//First, we save the colour settings
 		profileSettings.addValue("ColourSettings", "SuperCategory", String.valueOf(user.getCategoryColor()));
 		profileSettings.get("ColourSettings").put("SentenceBoard", String.valueOf(user.getSentenceBoardColor()));
-		
+
 		//Then we save the rights, which are the available tabs for the user.
 		profileSettings.addValue("Rights", "tab0", String.valueOf(user.getRights(0)));
 		profileSettings.get("Rights").put("tab1", String.valueOf(user.getRights(1)));
 		profileSettings.get("Rights").put("tab2", String.valueOf(user.getRights(2)));
-	
+
 		//Now we return the settings so that they can be saved.
 		return profileSettings;	
 	}
-	
+
 	public void TESTsaveTestProfile()
 	{
 		help = new Helper(parrent);
@@ -253,38 +253,39 @@ public class PARROTDataLoader {
 		Profile tempProf = new Profile("Jens","Jensen",null,Profile.pRoles.CHILD.ordinal(),12345678,null,null);
 		Long profileId = help.profilesHelper.insertProfile(tempProf);
 
-		
+
 		Setting<String, String, String> profileSetting = new Setting<String, String, String>();
-		
+
 		//START TEMP LINES
 		Pictogram tempPic= new Pictogram("Koala","/sdcard/Pictures/005.jpg", null, null);
-		Category tempCat = new Category(0,tempPic);
-		tempCat.addPictogram(tempPic);
-		tempCat.addPictogram(tempPic);
+		//		Category tempCat = new Category(0,tempPic);
+		//		tempCat.addPictogram(tempPic);
+		//		tempCat.addPictogram(tempPic);
 		Pictogram tempPic2 = new Pictogram("Meg", "/sdcard/Pictures/meg.png", null, null);
-		tempCat.addPictogram(tempPic2);
-				
+		//		tempCat.addPictogram(tempPic2);
+
 		PARROTProfile testProfile = new PARROTProfile("Niels", tempPic);
 		testProfile.setProfileID(profileId);
-		
-		for (int i=0;i<6;i++)
-		{
-			tempCat.addPictogram(tempPic);
-			tempCat.addPictogram(tempPic2);
-		}
 
-		Category tempCat2 = new Category(2, tempPic2);
+		//		for (int i=0;i<6;i++)
+		//		{
+		//			tempCat.addPictogram(tempPic);
+		//			tempCat.addPictogram(tempPic2);
+		//		}
+
+		//		Category tempCat2 = new Category(2, tempPic2);
 		tempPic = new Pictogram("Bob", "/sdcard/Pictures/007.jpg", null, null);
 		tempPic2= new Pictogram("Madeline", "/sdcard/Pictures/003.jpg", null, null);
 
-		for (int i=0;i<6;i++)
-		{
-			tempCat2.addPictogram(tempPic);
-			tempCat2.addPictogram(tempPic2);
-		}
-		
-				
+		//		for (int i=0;i<6;i++)
+		//		{
+		//			tempCat2.addPictogram(tempPic);
+		//			tempCat2.addPictogram(tempPic2);
+		//		}
+		//		
+
 		Pictogram badePic = new Pictogram("Bade", "/sdcard/Pictogram/Bade.png", null, "/sdcard/Pictogram/bade.wma");
+		badePic.setNewPictogram(true);
 		Pictogram børsteTænderPic = new Pictogram("Børste Tænder", "/sdcard/Pictogram/Børste_Tænder.png", null, "/sdcard/Pictogram/børste_tænder.wma");
 		Pictogram drikkePic = new Pictogram("Drikke", "/sdcard/Pictogram/Drikke.png", null, "/sdcard/Pictogram/drikke.wma");
 		Pictogram duPic = new Pictogram("Du", "/sdcard/Pictogram/Du.png", null, "/sdcard/Pictogram/du.wma");
@@ -296,6 +297,7 @@ public class PARROTDataLoader {
 		Pictogram laveMadPic = new Pictogram("Lave Mad", "/sdcard/Pictogram/Lave_Mad.png", null, "/sdcard/Pictogram/lave_mad.wma");
 		Pictogram legePic = new Pictogram("Lege", "/sdcard/Pictogram/Lege.png", null, "/sdcard/Pictogram/lege.wma");
 		Pictogram migPic = new Pictogram("Mig", "/sdcard/Pictogram/Mig.png", null, "/sdcard/Pictogram/mig.wma");
+		migPic.setNewPictogram(true);
 		Pictogram morgenRoutinePic = new Pictogram("Morgen Routine", "/sdcard/Pictogram/Morgen_Routine.png", null, "/sdcard/Pictogram/morgen_routine.wma");
 		Pictogram nejPic = new Pictogram("Nej", "/sdcard/Pictogram/Nej.png", null, "/sdcard/Pictogram/nej.wma");
 		Pictogram sePic = new Pictogram("Se", "/sdcard/Pictogram/Se.png", null, "/sdcard/Pictogram/se.wma");
@@ -307,9 +309,9 @@ public class PARROTDataLoader {
 		Pictogram taleSammenPic = new Pictogram("Tale Sammen", "/sdcard/Pictogram/Tale_Sammen.png", null, "/sdcard/Pictogram/tale_sammen.wma");
 		Pictogram tørstigPic = new Pictogram("Tørstig", "/sdcard/Pictogram/Tørstig.png", null, "/sdcard/Pictogram/tørstig.wma");
 		Pictogram væreStillePic = new Pictogram("Være Stille", "/sdcard/Pictogram/Være_Stille.png", null, "/sdcard/Pictogram/være_stille.wma");
-		
+
 		Category tempCat3 = new Category(2, migPic);
-		
+
 		tempCat3.addPictogram(badePic);
 		tempCat3.addPictogram(børsteTænderPic);
 		tempCat3.addPictogram(drikkePic);
@@ -333,16 +335,17 @@ public class PARROTDataLoader {
 		tempCat3.addPictogram(taleSammenPic);
 		tempCat3.addPictogram(tørstigPic);
 		tempCat3.addPictogram(væreStillePic);
-		
-		testProfile.addCategory(tempCat);
-		testProfile.addCategory(tempCat2);
+		//		
+		//		testProfile.addCategory(tempCat);
+		//		testProfile.addCategory(tempCat2);
 		testProfile.addCategory(tempCat3);
 		PARROTActivity.setUser(testProfile);
-		
+
 		for(int i=0;i<testProfile.getCategories().size();i++)
 		{
 			profileSetting = saveCategory(testProfile.getCategoryAt(i), i, profileSetting);
 		}
+		profileSetting = saveSettings(profileSetting, testProfile);
 		app.setSettings(profileSetting);	//FIXME figure out if settings works as intended, or if addValue replaces ALL previous values
 		long appID=app.getId();
 		PARROTProfile parrot =loadProfile(profileId, appID);
@@ -353,7 +356,7 @@ public class PARROTDataLoader {
 	private Setting<String, String, String> saveCategory(Category category, int categoryNumber, Setting<String, String, String> profileSetting ) {
 		//first, we save the pictograms
 		String pictogramString = "";
-		for(int i=1;i<category.getPictograms().size();i++)
+		for(int i=0;i<category.getPictograms().size();i++)
 		{
 			Pictogram pic = category.getPictogramAtIndex(i);
 
@@ -402,12 +405,16 @@ public class PARROTDataLoader {
 			soundMedia = new Media(pic.getName(), pic.getSoundPath(), true, "SOUND", PARROTActivity.getUser().getProfileID());	//TODO we might want to set the booleans to false
 			pic.setSoundID(help.mediaHelper.insertMedia(soundMedia));
 		}
-		else if(pic.getSoundPath() != null)
+		else
 		{
-			soundMedia = new Media(pic.getName(), pic.getSoundPath(), true, "SOUND", PARROTActivity.getUser().getProfileID());	//TODO we might want to set the booleans to false
-			soundMedia.setId(pic.getSoundID());
-			help.mediaHelper.modifyMedia(soundMedia);
+			if(pic.getSoundPath() != null)
+			{
+				soundMedia = new Media(pic.getName(), pic.getSoundPath(), true, "SOUND", PARROTActivity.getUser().getProfileID());	//TODO we might want to set the booleans to false
+				soundMedia.setId(pic.getSoundID());
+				help.mediaHelper.modifyMedia(soundMedia);
+			}
 		}
+
 
 		if(pic.getWordID() == -1 && pic.getWordPath() != null) //if the word is not in the database
 		{
