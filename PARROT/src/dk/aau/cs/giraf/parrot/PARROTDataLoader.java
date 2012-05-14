@@ -263,7 +263,7 @@ public class PARROTDataLoader {
 		tempCat.addPictogram(tempPic);
 		Pictogram tempPic2 = new Pictogram("Meg", "/sdcard/Pictures/meg.png", null, null);
 		tempCat.addPictogram(tempPic2);
-		
+				
 		PARROTProfile testProfile = new PARROTProfile("Niels", tempPic);
 		testProfile.setProfileID(profileId);
 		
@@ -282,8 +282,61 @@ public class PARROTDataLoader {
 			tempCat2.addPictogram(tempPic);
 			tempCat2.addPictogram(tempPic2);
 		}
+		
+				
+		Pictogram badePic = new Pictogram("Bade", "/sdcard/Pictogram/Bade.png", null, "/sdcard/Pictogram/bade.wma");
+		Pictogram børsteTænderPic = new Pictogram("Børste Tænder", "/sdcard/Pictogram/Børste_Tænder.png", null, "/sdcard/Pictogram/børste_tænder.wma");
+		Pictogram drikkePic = new Pictogram("Drikke", "/sdcard/Pictogram/Drikke.png", null, "/sdcard/Pictogram/drikke.wma");
+		Pictogram duPic = new Pictogram("Du", "/sdcard/Pictogram/Du.png", null, "/sdcard/Pictogram/du.wma");
+		Pictogram filmPic = new Pictogram("Film", "/sdcard/Pictogram/Film.png", null, "/sdcard/Pictogram/film.wma");
+		Pictogram forHøjtPic = new Pictogram("For Højt", "/sdcard/Pictogram/For_Højt.png", null, "/sdcard/Pictogram/for_højt.wma");
+		Pictogram gåPic = new Pictogram("Gå", "/sdcard/Pictogram/Gå.png", null, "/sdcard/Pictogram/gå.wma");
+		Pictogram jaPic = new Pictogram("Ja", "/sdcard/Pictogram/Ja.png", null, "/sdcard/Pictogram/ja.wma");
+		Pictogram kørePic = new Pictogram("Køre", "/sdcard/Pictogram/Køre.png", null, "/sdcard/Pictogram/køre.wma");
+		Pictogram laveMadPic = new Pictogram("Lave Mad", "/sdcard/Pictogram/Lave_Mad.png", null, "/sdcard/Pictogram/lave_mad.wma");
+		Pictogram legePic = new Pictogram("Lege", "/sdcard/Pictogram/Lege.png", null, "/sdcard/Pictogram/lege.wma");
+		Pictogram migPic = new Pictogram("Mig", "/sdcard/Pictogram/Mig.png", null, "/sdcard/Pictogram/mig.wma");
+		Pictogram morgenRoutinePic = new Pictogram("Morgen Routine", "/sdcard/Pictogram/Morgen_Routine.png", null, "/sdcard/Pictogram/morgen_routine.wma");
+		Pictogram nejPic = new Pictogram("Nej", "/sdcard/Pictogram/Nej.png", null, "/sdcard/Pictogram/nej.wma");
+		Pictogram sePic = new Pictogram("Se", "/sdcard/Pictogram/Se.png", null, "/sdcard/Pictogram/se.wma");
+		Pictogram sideNedPic = new Pictogram("Side Ned", "/sdcard/Pictogram/Side_Ned.png", null, "/sdcard/Pictogram/side_ned.wma");
+		Pictogram SpilleComputerPic = new Pictogram("Spille Computer", "/sdcard/Pictogram/Spille_Computer.png", null, "/sdcard/Pictogram/spille_computer.wma");
+		Pictogram stopPic = new Pictogram("Stop", "/sdcard/Pictogram/Stop.png", null, "/sdcard/Pictogram/stop.wma");
+		Pictogram sultenPic = new Pictogram("Sulten", "/sdcard/Pictogram/Sulten.png", null, "/sdcard/Pictogram/sulten.wma");
+		Pictogram søvnigPic = new Pictogram("Søvnig", "/sdcard/Pictogram/Søvnig.png", null, "/sdcard/Pictogram/søvnig.wma");
+		Pictogram taleSammenPic = new Pictogram("Tale Sammen", "/sdcard/Pictogram/Tale_Sammen.png", null, "/sdcard/Pictogram/tale_sammen.wma");
+		Pictogram tørstigPic = new Pictogram("Tørstig", "/sdcard/Pictogram/Tørstig.png", null, "/sdcard/Pictogram/tørstig.wma");
+		Pictogram væreStillePic = new Pictogram("Være Stille", "/sdcard/Pictogram/Være_Stille.png", null, "/sdcard/Pictogram/være_stille.wma");
+		
+		Category tempCat3 = new Category(2, migPic);
+		
+		tempCat3.addPictogram(badePic);
+		tempCat3.addPictogram(børsteTænderPic);
+		tempCat3.addPictogram(drikkePic);
+		tempCat3.addPictogram(duPic);
+		tempCat3.addPictogram(filmPic);
+		tempCat3.addPictogram(forHøjtPic);
+		tempCat3.addPictogram(gåPic);
+		tempCat3.addPictogram(jaPic);
+		tempCat3.addPictogram(kørePic);
+		tempCat3.addPictogram(laveMadPic);
+		tempCat3.addPictogram(legePic);
+		tempCat3.addPictogram(migPic);
+		tempCat3.addPictogram(morgenRoutinePic);
+		tempCat3.addPictogram(nejPic);
+		tempCat3.addPictogram(sePic);
+		tempCat3.addPictogram(sideNedPic);
+		tempCat3.addPictogram(SpilleComputerPic);
+		tempCat3.addPictogram(stopPic);
+		tempCat3.addPictogram(sultenPic);
+		tempCat3.addPictogram(søvnigPic);
+		tempCat3.addPictogram(taleSammenPic);
+		tempCat3.addPictogram(tørstigPic);
+		tempCat3.addPictogram(væreStillePic);
+		
 		testProfile.addCategory(tempCat);
 		testProfile.addCategory(tempCat2);
+		testProfile.addCategory(tempCat3);
 		PARROTActivity.setUser(testProfile);
 		
 		for(int i=0;i<testProfile.getCategories().size();i++)
