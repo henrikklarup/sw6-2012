@@ -7,6 +7,23 @@ public class HasTag {
 	private static String _output = "{0}, {1}";
 	
 	/**
+	 * Constructor with arguments
+	 * @param idMedia the media id to set
+	 * @param idTag the tag id to set
+	 */
+	public HasTag(long idMedia, long idTag) {
+		this.idMedia = idMedia;
+		this.idTag = idTag;
+	}
+	
+	/**
+	 * Empty constructor
+	 */
+	public HasTag() {
+		
+	}
+	
+	/**
 	 * @return the idMedia
 	 */
 	public long getIdMedia() {

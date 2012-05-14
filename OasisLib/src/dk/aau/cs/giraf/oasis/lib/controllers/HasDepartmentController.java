@@ -44,15 +44,34 @@ class HasDepartmentController {
 //	}
 	
 	/**
-	 * Remove had department
-	 * @param profile Profile to remove from
-	 * @param department department to remove
-	 * @return Rows
+	 * Remove HasDepartment by department id
+	 * @param departmentId department id to remove hasDepartment by
+	 * @return Rows affected
 	 */
-	public int removeHasDepartment(Profile profile, Department department) {
+	public int removeHasDepartmentByDepartmentId(long departmentId) {
 		return _context.getContentResolver().delete(HasDepartmentMetaData.CONTENT_URI, 
-				HasDepartmentMetaData.Table.COLUMN_IDPROFILE + " = '" + profile.getId() + "'" +
-						HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + department.getId() + "'", null);
+				HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + departmentId + "'", null);
+	}
+	
+	/**
+	 * Remove HasDepartment by profile id
+	 * @param profileId profile id to remove hasDepartment by
+	 * @return Rows affected
+	 */
+	public int removeHasDepartmentByProfileId(long profileId) {
+		return _context.getContentResolver().delete(HasDepartmentMetaData.CONTENT_URI, 
+				HasDepartmentMetaData.Table.COLUMN_IDPROFILE + " = '" + profileId + "'", null);
+	}
+	
+	/**
+	 * Remove HasDepartment
+	 * @param hasDepartment HasDepartment to remove
+	 * @return Rows affected
+	 */
+	public int removeHasDepartment(HasDepartment hasDepartment) {
+		return _context.getContentResolver().delete(HasDepartmentMetaData.CONTENT_URI, 
+				HasDepartmentMetaData.Table.COLUMN_IDPROFILE + " = '" + hasDepartment.getIdProfile() + "' AND " +
+						HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + hasDepartment.getIdDepartment() + "'", null);
 	}
 
 	/**
@@ -122,7 +141,7 @@ class HasDepartmentController {
 	 * @param profile Profile
 	 * @return List of Has departments
 	 */
-	public List<HasDepartment> getDepartmentsByProfile(Profile profile) {
+	public List<HasDepartment> getHasDepartmentsByProfile(Profile profile) {
 		List<HasDepartment> list= new ArrayList<HasDepartment>();
 
 		Cursor c = _context.getContentResolver().query(HasDepartmentMetaData.CONTENT_URI, columns, 

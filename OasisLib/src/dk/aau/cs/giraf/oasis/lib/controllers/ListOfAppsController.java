@@ -47,13 +47,34 @@ class ListOfAppsController {
 //	}
 
 	/**
-	 * Remove list of apps
-	 * @param appId App id
-	 * @param profileId Profile Id
-	 * @return Rows
+	 * Remove list of apps by profile id
+	 * @param profileId Profile id to remove listOfApps by
+	 * @return Rows affected
 	 */
-	public int removeListOfApps(long appId, long profileId) {
-		return _context.getContentResolver().delete(ListOfAppsMetaData.CONTENT_URI, ListOfAppsMetaData.Table.COLUMN_IDAPP + " = '" + appId + "' AND " + ListOfAppsMetaData.Table.COLUMN_IDPROFILE + " = '" + profileId + "'", null);
+	public int removeListOfAppsByProfileId(long profileId) {
+		return _context.getContentResolver().delete(ListOfAppsMetaData.CONTENT_URI, 
+				ListOfAppsMetaData.Table.COLUMN_IDPROFILE + " = '" + profileId + "'", null);
+	}
+	
+	/**
+	 * Remove list of apps by app id
+	 * @param appId App id to remove ListOfApps by
+	 * @return Rows affected
+	 */
+	public int removeListOfAppsByAppId(long appId) {
+		return _context.getContentResolver().delete(ListOfAppsMetaData.CONTENT_URI, 
+				ListOfAppsMetaData.Table.COLUMN_IDAPP + " = '" + appId + "'", null);
+	}
+	
+	/**
+	 * Remove list of apps
+	 * @param listOfApps ListOfApps to remove
+	 * @return Rows affected
+	 */
+	public int removeListOfApps(ListOfApps listOfApps) {
+		return _context.getContentResolver().delete(ListOfAppsMetaData.CONTENT_URI, 
+				ListOfAppsMetaData.Table.COLUMN_IDAPP + " = '" + listOfApps.getIdApp() + "' AND " +
+						ListOfAppsMetaData.Table.COLUMN_IDPROFILE + " = '" + listOfApps.getIdProfile() + "'", null);
 	}
 	
 	/**
@@ -122,6 +143,25 @@ class ListOfAppsController {
 		List<ListOfApps> listOfApps = new ArrayList<ListOfApps>();
 		
 		Cursor c = _context.getContentResolver().query(ListOfAppsMetaData.CONTENT_URI, columns, ListOfAppsMetaData.Table.COLUMN_IDPROFILE + " = '" + profileId + "'", null, null);
+		if (c != null) {
+			if (c.moveToFirst()) {
+				listOfApps = cursorToListOfApps(c);
+			}
+			c.close();
+		}
+		
+		return listOfApps;
+	}
+	
+	/**
+	 * Get list of apps by app id
+	 * @param appId App id
+	 * @return List of list of apps
+	 */
+	public List<ListOfApps> getListOfAppsByAppId(long appId) {
+		List<ListOfApps> listOfApps = new ArrayList<ListOfApps>();
+		
+		Cursor c = _context.getContentResolver().query(ListOfAppsMetaData.CONTENT_URI, columns, ListOfAppsMetaData.Table.COLUMN_IDAPP + " = '" + appId + "'", null, null);
 		if (c != null) {
 			if (c.moveToFirst()) {
 				listOfApps = cursorToListOfApps(c);

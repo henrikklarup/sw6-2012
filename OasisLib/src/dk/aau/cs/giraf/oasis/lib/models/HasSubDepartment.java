@@ -7,6 +7,23 @@ public class HasSubDepartment {
 	private static String _output = "{0}, {1}";
 	
 	/**
+	 * Constructor with arguments
+	 * @param idDepartment the department id to set
+	 * @param idSubDepartment the sub department id to set
+	 */
+	public HasSubDepartment(long idDepartment, long idSubDepartment) {
+		this.idDepartment = idDepartment;
+		this.idSubDepartment = idSubDepartment;
+	}
+	
+	/**
+	 * Empty constructor
+	 */
+	public HasSubDepartment() {
+		
+	}
+
+	/**
 	 * @return the idDepartment
 	 */
 	public long getIdDepartment() {

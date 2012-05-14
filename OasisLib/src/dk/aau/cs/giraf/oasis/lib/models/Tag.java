@@ -6,7 +6,7 @@ public class Tag {
 	private static String _output = "{0}, {1}";
 	
 	/**
-	 * Constructor with parameters
+	 * Constructor with arguments
 	 * @param caption the caption of the tag
 	 */
 	public Tag(String caption) {

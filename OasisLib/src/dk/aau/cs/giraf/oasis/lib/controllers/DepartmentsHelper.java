@@ -13,6 +13,8 @@ import dk.aau.cs.giraf.oasis.lib.models.AuthUser;
 import dk.aau.cs.giraf.oasis.lib.models.Department;
 import dk.aau.cs.giraf.oasis.lib.models.HasDepartment;
 import dk.aau.cs.giraf.oasis.lib.models.HasSubDepartment;
+import dk.aau.cs.giraf.oasis.lib.models.Media;
+import dk.aau.cs.giraf.oasis.lib.models.MediaDepartmentAccess;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
 /**
@@ -27,6 +29,7 @@ public class DepartmentsHelper {
 	private AuthUsersController au;
 	private HasDepartmentController hd;
 	private HasSubDepartmentController hsd;
+	private MediaDepartmentAccessController mda;
 	private String[] columns = new String[] { 
 			DepartmentsMetaData.Table.COLUMN_ID,
 			DepartmentsMetaData.Table.COLUMN_NAME,
@@ -43,6 +46,7 @@ public class DepartmentsHelper {
 		au = new AuthUsersController(_context);
 		hd = new HasDepartmentController(_context);
 		hsd = new HasSubDepartmentController(_context);
+		mda = new MediaDepartmentAccessController(_context);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -56,30 +60,60 @@ public class DepartmentsHelper {
 //		_context.getContentResolver().delete(DepartmentsMetaData.CONTENT_URI,
 //				null, null);
 //	}
+	
+	/**
+	 * Cascade remove department
+	 * @param department the department to remove
+	 * @return Rows affected
+	 */
+	public int removeDepartment(Department department) {
+		int rows = 0;
+
+		AuthUser authUser = au.getAuthUserById(department.getId());
+
+		rows += au.removeAuthUser(authUser);
+		rows += hd.removeHasDepartmentByDepartmentId(department.getId());
+		rows += mda.removeMediaDepartmentAccessByDepartmentId(department.getId());
+		rows += hsd.removeHasSubDepartmentsByDepartmentId(department.getId());
+		rows += hsd.removeHasSubDepartmentsBySubDepartmentId(department.getId());
+		rows += _context.getContentResolver().delete(DepartmentsMetaData.CONTENT_URI, 
+					DepartmentsMetaData.Table.COLUMN_ID + " = '" + department.getId() + "'", null);
+
+		return rows;
+	}
 
 	/**
 	 * Remove profile attachment to department
 	 * @param profile Profile to remove
 	 * @param department Department to remove from
-	 * @return Rows
+	 * @return Rows affected
 	 */
 	public int removeProfileAttachmentToDepartment(Profile profile, Department department) {
-		return hd.removeHasDepartment(profile, department);
+		return hd.removeHasDepartment(new HasDepartment(profile.getId(), department.getId()));
 	}
 
 	/**
-	 * Remove sub department attachment to department
-	 * @param department Department
-	 * @param subDepartment Subdepartment
-	 * @return Rows
+	 * Remove subdepartment attachment to department
+	 * @param department Department to remove from
+	 * @param subDepartment Subdepartment to remove
+	 * @return Rows affected
 	 */
 	public int removeSubDepartmentAttachmentToDepartment(Department department, Department subDepartment) {
-		return hsd.removeHasSubDepartment(subDepartment, department);
+		return hsd.removeHasSubDepartment(new HasSubDepartment(department.getId(), subDepartment.getId()));
+	}
+	/**
+	 * Remove media attachment to department
+	 * @param media
+	 * @param department
+	 * @return Rows affected
+	 */
+	public int removeMediaAttachmentToDepartment(Media media, Department department) {
+		return mda.removeMediaDepartmentAccess(new MediaDepartmentAccess(media.getId(), department.getId()));
 	}
 
 	/**
 	 * Insert department
-	 * @param department Department containg data
+	 * @param department Department containing data
 	 */
 	public long insertDepartment(Department department) {
 		department.setId(au.insertAuthUser(AuthUser.aRole.DEPARTMENT.ordinal()));
@@ -94,12 +128,10 @@ public class DepartmentsHelper {
 	 * Attach profile to department
 	 * @param profile Profile to attach
 	 * @param department Department to attach to
-	 * @return Rows
+	 * @return Rows affected
 	 */
 	public long attachProfileToDepartment(Profile profile, Department department) {
-		HasDepartment hdModel = new HasDepartment();
-		hdModel.setIdDepartment(department.getId());
-		hdModel.setIdProfile(profile.getId());
+		HasDepartment hdModel = new HasDepartment(profile.getId(), department.getId());
 		return hd.insertHasDepartment(hdModel);
 	}
 
@@ -107,13 +139,21 @@ public class DepartmentsHelper {
 	 * Attach sub department to department
 	 * @param department Department to attach to
 	 * @param subDepartment Subdepartment to attach
-	 * @return Rows
+	 * @return Rows affected
 	 */
 	public long attachSubDepartmentToDepartment(Department department, Department subDepartment) {
-		HasSubDepartment hsdModel = new HasSubDepartment();
-		hsdModel.setIdDepartment(department.getId());
-		hsdModel.setIdSubDepartment(subDepartment.getId());
+		HasSubDepartment hsdModel = new HasSubDepartment(department.getId(), subDepartment.getId());
 		return hsd.insertHasSubDepartment(hsdModel);
+	}
+	/**
+	 * Attach media to department
+	 * @param media the media to attach
+	 * @param department the department to attach to
+	 * @return Rows affected
+	 */
+	public Long attachMediaToDepartment(Media media, Department department) {
+		MediaDepartmentAccess mdaModel = new MediaDepartmentAccess(media.getId(), department.getId());
+		return mda.insertMediaDepartmentAccess(mdaModel);
 	}
 
 	/**
@@ -242,7 +282,7 @@ public class DepartmentsHelper {
 	public List<Department> getDepartmentsByProfile(Profile profile) {
 		List<Department> departments = new ArrayList<Department>();
 		
-		List<HasDepartment> list = hd.getDepartmentsByProfile(profile);
+		List<HasDepartment> list = hd.getHasDepartmentsByProfile(profile);
 		
 		for (HasDepartment hdModel : list) {
 			Department department = getDepartmentById(hdModel.getIdDepartment());

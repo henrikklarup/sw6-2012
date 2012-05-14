@@ -5,7 +5,21 @@ public class HasGuardian {
 	private long idGuardian;
 	private long idChild;
 	private static String _output = "{0}, {1}";
-	
+	/**
+	 * Constructor with arguments
+	 * @param idGuardian the guardian id to set
+	 * @param idChild the child id to set
+	 */
+	public HasGuardian(long idGuardian, long idChild) {
+		this.idGuardian = idGuardian;
+		this.idChild = idChild;
+	}
+	/**
+	 * Empty constructor
+	 */
+	public HasGuardian() {
+		
+	}
 	/**
 	 * @return the idGuardian
 	 */

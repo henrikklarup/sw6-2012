@@ -44,6 +44,16 @@ class AuthUsersController {
 //	public int clearAuthUsersTable() {
 //		return _context.getContentResolver().delete(AuthUsersMetaData.CONTENT_URI, null, null);
 //	}
+	
+	/**
+	 * Remove AuthUser
+	 * @param authUser AuthUser to remove
+	 * @return Rows affected
+	 */
+	public int removeAuthUser(AuthUser authUser) {
+		return _context.getContentResolver().delete(AuthUsersMetaData.CONTENT_URI, 
+				AuthUsersMetaData.Table.COLUMN_ID + " = '" + authUser.getId() + "'", null);
+	}
 
 	/**
 	 * Insert auth user
@@ -130,8 +140,6 @@ class AuthUsersController {
 			c.close();
 		}
 
-
-
 		return certificates;
 	}
 
@@ -150,6 +158,20 @@ class AuthUsersController {
 			c.close();	
 		}
 		return id;
+	}
+	
+	public AuthUser getAuthUserById(long id) {
+		AuthUser authUser = null;
+		
+		Cursor c = _context.getContentResolver().query(AuthUsersMetaData.CONTENT_URI, columns, AuthUsersMetaData.Table.COLUMN_ID + " = '" + id + "'", null, null);
+		if (c != null) {
+			if (c.moveToFirst()) {
+				authUser = cursorToAuthUser(c);
+			}
+			c.close();
+		}
+
+		return authUser;
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

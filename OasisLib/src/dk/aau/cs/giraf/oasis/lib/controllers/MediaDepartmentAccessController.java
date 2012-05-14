@@ -9,7 +9,6 @@ import android.database.Cursor;
 import dk.aau.cs.giraf.oasis.lib.metadata.MediaDepartmentAccessMetaData;
 import dk.aau.cs.giraf.oasis.lib.metadata.MediaProfileAccessMetaData;
 import dk.aau.cs.giraf.oasis.lib.models.Department;
-import dk.aau.cs.giraf.oasis.lib.models.Media;
 import dk.aau.cs.giraf.oasis.lib.models.MediaDepartmentAccess;
 
 /**
@@ -45,17 +44,44 @@ class MediaDepartmentAccessController {
 //	}
 	
 	/**
-	 * Remove media profiles access
-	 * @param media Media to remove
-	 * @param department Department to remove from
-	 * @return Rows
+	 * Remove mediaDepartmentAccess by media id
+	 * @param idMedia the media id to remove by
+	 * @return Rows affected
 	 */
-	public int removeMediaProfileAccess(Media media, Department department) {
-		return _context.getContentResolver().delete(MediaDepartmentAccessMetaData.CONTENT_URI, 
-				MediaDepartmentAccessMetaData.Table.COLUMN_IDMEDIA + " = '" + media.getId() + "'" +
-						MediaDepartmentAccessMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + department.getId() + "'", null);
+	public int removeMediaDepartmentAccessByMediaId(long idMedia) {
+		int rows = 0;
+		
+		rows += _context.getContentResolver().delete(MediaDepartmentAccessMetaData.CONTENT_URI,
+					MediaDepartmentAccessMetaData.Table.COLUMN_IDMEDIA + " = '" + idMedia + "'", null);
+		
+		return rows;
 	}
-
+	
+	/**
+	 * Remove mediaDepartmentAccess by department id
+	 * @param idDepartment the department id to remove by
+	 * @return Rows affected
+	 */
+	public int removeMediaDepartmentAccessByDepartmentId(long idDepartment) {
+		int rows = 0;
+		
+		rows += _context.getContentResolver().delete(MediaDepartmentAccessMetaData.CONTENT_URI,
+					MediaDepartmentAccessMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + idDepartment + "'", null);
+		
+		return rows;
+	}
+	
+	/**
+	 * Remove mediaDepartmentAccess
+	 * @param mda MediaDepartmentAccess to remove
+	 * @return Rows affected
+	 */
+	public int removeMediaDepartmentAccess(MediaDepartmentAccess mda) {
+		return _context.getContentResolver().delete(MediaDepartmentAccessMetaData.CONTENT_URI, 
+				MediaDepartmentAccessMetaData.Table.COLUMN_IDMEDIA + " = '" + mda.getIdMedia() + "' AND " + 
+						MediaDepartmentAccessMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + mda.getIdDepartment() + "'", null);
+	}
+	
 	/**
 	 * Insert media department access
 	 * @param mda Media department access

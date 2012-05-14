@@ -7,6 +7,23 @@ public class HasLink {
 	private static String _output = "{0}, {1}";
 	
 	/**
+	 * Constructor with arguments
+	 * @param idMedia the media id to set
+	 * @param idSubMedia the sub media id to set
+	 */
+	public HasLink(long idMedia, long idSubMedia) {
+		this.idMedia = idMedia;
+		this.idSubMedia = idSubMedia;
+	}
+	
+	/**
+	 * Empty constructor
+	 */
+	public HasLink() {
+		
+	}
+
+	/**
 	 * @return the idMedia
 	 */
 	public long getIdMedia() {

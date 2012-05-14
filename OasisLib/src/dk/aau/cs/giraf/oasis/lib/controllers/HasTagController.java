@@ -42,16 +42,34 @@ class HasTagController {
 //	public int clearHasTagTable() {
 //		return _context.getContentResolver().delete(HasTagMetaData.CONTENT_URI, null, null);
 //	}
+	
+	public int removeHasTagByTagId(long idTag) {
+		int rows = 0;
+		
+		rows += _context.getContentResolver().delete(HasTagMetaData.CONTENT_URI, 
+					HasTagMetaData.Table.COLUMN_IDTAG + " = '" + idTag + "'", null);
+		
+		return rows;
+	}
+	
+	public int removeHasTagByMediaId(long idMedia) {
+		int rows = 0;
+		
+		rows += _context.getContentResolver().delete(HasTagMetaData.CONTENT_URI, 
+					HasTagMetaData.Table.COLUMN_IDMEDIA + " = '" + idMedia + "'", null);
+		
+		return rows;
+	}
 
 	/**
-	 * Remove has tag
-	 * @param tag Tag
-	 * @param media Media
-	 * @return Rows
+	 * Remove HasTag
+	 * @param hasTag HasTag to remove
+	 * @return Rows affected
 	 */
-	public int removeHasTag(Tag tag, Media media) {
-		return _context.getContentResolver().delete(HasTagMetaData.CONTENT_URI, HasTagMetaData.Table.COLUMN_IDTAG + " = '" + tag.getId() +
-				"' AND " + HasTagMetaData.Table.COLUMN_IDMEDIA + " = '" + media.getId() + "'", null);
+	public int removeHasTag(HasTag hasTag) {
+		return _context.getContentResolver().delete(HasTagMetaData.CONTENT_URI, 
+				HasTagMetaData.Table.COLUMN_IDTAG + " = '" + hasTag.getIdTag() + "' AND " + 
+						HasTagMetaData.Table.COLUMN_IDMEDIA + " = '" + hasTag.getIdMedia() + "'", null);
 	}
 	
 	/**
@@ -63,8 +81,9 @@ class HasTagController {
 	public int removeHasTagList(List<Tag> tags, Media media) {
 		int result = 0;
 		for (Tag t : tags) {
-			result += _context.getContentResolver().delete(HasTagMetaData.CONTENT_URI, HasTagMetaData.Table.COLUMN_IDTAG + " = '" + t.getId() +
-					"' AND " + HasTagMetaData.Table.COLUMN_IDMEDIA + " = '" + media.getId() + "'", null);
+			result += _context.getContentResolver().delete(HasTagMetaData.CONTENT_URI, 
+					HasTagMetaData.Table.COLUMN_IDTAG + " = '" + t.getId() + "' AND " + 
+							HasTagMetaData.Table.COLUMN_IDMEDIA + " = '" + media.getId() + "'", null);
 		}
 
 		return result;

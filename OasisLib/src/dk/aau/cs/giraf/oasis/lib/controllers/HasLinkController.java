@@ -43,15 +43,33 @@ class HasLinkController {
 //	}
 
 	/**
-	 * Remove has link
-	 * @param subMedia Sub media
-	 * @param media Media
-	 * @return Rows
+	 * Remove has link by media id
+	 * @param idMedia the media id to remove haslink by
+	 * @return Rows affected
 	 */
-	public int removeHasLink(Media subMedia, Media media) {
+	public int removeHasLinkByMediaId(long idMedia) {
 		return _context.getContentResolver().delete(HasLinkMetaData.CONTENT_URI, 
-				HasLinkMetaData.Table.COLUMN_IDMEDIA + " = '" + media.getId() + "'" +
-						HasLinkMetaData.Table.COLUMN_IDSUBMEDIA + " = '" + subMedia.getId() + "'", null);
+					HasLinkMetaData.Table.COLUMN_IDMEDIA + " = '" + idMedia + "'", null);
+	}
+	/**
+	 * Remove has link by submedia id
+	 * @param idSubMedia the submedia id to remove haslink by
+	 * @return Rows affected
+	 */
+	public int removeHasLinkBySubMediaId(long idSubMedia) {
+		return _context.getContentResolver().delete(HasLinkMetaData.CONTENT_URI, 
+					HasLinkMetaData.Table.COLUMN_IDSUBMEDIA + " = '" + idSubMedia + "'", null);
+	}
+
+	/**
+	 * Remove has link
+	 * @param hasLink HasLink to remove
+	 * @return Rows affected
+	 */
+	public int removeHasLink(HasLink hasLink) {
+		return _context.getContentResolver().delete(HasLinkMetaData.CONTENT_URI, 
+				HasLinkMetaData.Table.COLUMN_IDMEDIA + " = '" + hasLink.getIdMedia() + "' AND " +
+						HasLinkMetaData.Table.COLUMN_IDSUBMEDIA + " = '" + hasLink.getIdSubMedia() + "'", null);
 	}
 
 	/**
@@ -109,7 +127,6 @@ class HasLinkController {
 
 		if (c != null) {
 			list = cursorToHasLinkList(c);
-
 			c.close();
 		}
 

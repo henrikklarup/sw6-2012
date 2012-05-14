@@ -5,7 +5,23 @@ public class HasDepartment {
 	private long idDepartment;
 	private long idProfile;
 	private static String _output = "{0}, {1}";
+	/**
+	 * Constructor with arguments
+	 * @param idProfile the profile id to set
+	 * @param idDepartment the department id to set
+	 */
+	public HasDepartment(long idProfile, long idDepartment) {
+		this.idProfile = idProfile;
+		this.idDepartment = idDepartment;
+	}
 	
+	/**
+	 * Empty constructor
+	 */
+	public HasDepartment() {
+		
+	}
+
 	/**
 	 * @return the idDepartment
 	 */
