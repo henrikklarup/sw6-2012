@@ -312,7 +312,6 @@ public class TransmissionHandler {
 		OutputStream os = new FileOutputStream(this.folder.getAbsolutePath() + File.separator + wrap.getName());
 
 		long bufCalc = wrap.getLength();
-		System.out.println("bufCalc = " + bufCalc);
 		while (bufCalc > 0) {
 			if (bufCalc > this.bufferSize) {
 				buf = new byte[this.bufferSize];
