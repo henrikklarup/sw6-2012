@@ -20,10 +20,10 @@
         <ListView
             android:id="@+id/categories"
             android:layout_width="match_parent"
-            android:layout_height="700dp"
-            android:entries="@layout/categoriesitem" />
-
+            android:layout_height="700dp"/>             
+            
         <ImageView
+            android:contentDescription="Trashcan"
             android:id="@+id/trash"
             android:layout_width="240dp"
             android:layout_height="240dp"
