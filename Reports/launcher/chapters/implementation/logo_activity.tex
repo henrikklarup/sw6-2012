@@ -1,5 +1,41 @@
 \section{Logo Activity}
+This section will explain the Logo Activity and how it is used.
+
+This activity is used and only seen by the user when the launcher starts up.
+
+
 
 \begin{lstlisting}[style=sourceCode, language=JAVA, caption=This is code, label=lst:logoActivity] 
+		mLogoThread = new Thread() {
+	        @Override
+	        public void run() {
+	            try {
+	            	synchronized(this) {
+	            		wait(Data.TIME_TO_DISPLAY_LOGO);
+	            	}
+	            } catch(InterruptedException e) {}
+	            finally {
+	            	Intent intent;
 
+	            	if (Tools.sessionExpired(mContext)) {
+	            		intent = new Intent(mContext, AuthenticationActivity.class);
+	            	} else {
+	            		intent = new Intent(mContext, HomeActivity.class);
+	            		
+	            		SharedPreferences sharedPreferences = getSharedPreferences(Data.TIMERKEY, 0);
+	            		long guardianID = sharedPreferences.getLong(Data.GUARDIANID, -1);
+	            		
+	            		if ((new Helper(mContext)).profilesHelper.getProfileById(guardianID) != null) {
+	            			intent.putExtra(Data.GUARDIANID, sharedPreferences.getLong(Data.GUARDIANID, -1));
+	            		} else {
+	            			intent = new Intent(mContext, AuthenticationActivity.class);
+	            		}
+	            	}
+	            	
+	                startActivity(intent);
+	                stop();
+	                finish();
+	            }
+	        }
+	    };
 \end{lstlisting}
