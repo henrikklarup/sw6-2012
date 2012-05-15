@@ -108,29 +108,28 @@ public class SpeechBoardFragment extends Fragment
 
 			});
 			//Play sound
-			sentenceBoardGrid.setOnItemLongClickListener(new OnItemLongClickListener() {
+			sentenceBoardGrid.setOnItemClickListener(new OnItemClickListener() {
 
-				public boolean onItemLongClick(AdapterView<?> arg0, View view,	int position, long id) {
+				public void onItemClick(AdapterView<?> arg0, View view,	int position, long id) {
 					speechBoardCategory.getPictogramAtIndex(position).playWord();
-					return true;
 				}
 			});
 			
-//			sentenceBoardGrid.setOnItemLongClickListener(new OnItemLongClickListener()
-//			{
-//
-//				public boolean onItemLongClick(AdapterView<?> arg0, View view, int position, long id)
-//				{
-//					draggedPictogramIndex = position; //TODO make sure that position is the index of the pictogram
-//					dragOwnerID = R.id.sentenceboard;
-////					speechBoardCategory.removePictogram(draggedPictogramIndex);					
-//					ClipData data = ClipData.newPlainText("label", "text"); //TODO Dummy. Pictogram information can be placed here instead.
-//					DragShadowBuilder shadowBuilder = new DragShadowBuilder(view);
-//					view.startDrag(data, shadowBuilder, view, 0);
-//					return true;
-//				}
-//
-//			});
+			sentenceBoardGrid.setOnItemLongClickListener(new OnItemLongClickListener()
+			{
+
+				public boolean onItemLongClick(AdapterView<?> arg0, View view, int position, long id)
+				{
+					draggedPictogramIndex = position; //TODO make sure that position is the index of the pictogram
+					dragOwnerID = R.id.sentenceboard;
+//					speechBoardCategory.removePictogram(draggedPictogramIndex);					
+					ClipData data = ClipData.newPlainText("label", "text"); //TODO Dummy. Pictogram information can be placed here instead.
+					DragShadowBuilder shadowBuilder = new DragShadowBuilder(view);
+					view.startDrag(data, shadowBuilder, view, 0);
+					return true;
+				}
+
+			});
 			
 			
 			
