@@ -20,7 +20,6 @@
             android:id="@+id/categories"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@id/trash"
             android:layout_below="@id/profiles" >
 
         </ListView>

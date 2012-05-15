@@ -33,7 +33,7 @@ public class SpeechBoardFragment extends Fragment
 	//Serves as the back-end storage for the visual speechboard
 	public static ArrayList<Pictogram> speechboardPictograms = new ArrayList<Pictogram>();
 	public static Category speechBoardCategory = new Category(0x00ff00,null);	//This category contains the pictograms on the sentenceboard
-	public static Category displayedCat = new Category(0x00ff00,null);			//This category contains the pictograms displayed on the big board
+	public static Category displayedCat = new Category(PARROTActivity.getUser().getCategoryAt(0).getCategoryColour(),null);			//This category contains the pictograms displayed on the big board
 	private PARROTProfile user = null;
 	
 	/*//Not in use anymore
@@ -140,6 +140,7 @@ public class SpeechBoardFragment extends Fragment
 					displayedCat = user.getCategoryAt(position);
 					GridView pictogramGrid = (GridView) parrent.findViewById(R.id.pictogramgrid);
 					pictogramGrid.setAdapter(new PictogramAdapter(displayedCat, parrent));
+					setColours(parrent);
 					//pictogramGrid.invalidate();
 					
 				}
@@ -172,6 +173,11 @@ public class SpeechBoardFragment extends Fragment
 		draw=parrent.getResources().getDrawable(R.drawable.catlayout);
 		draw.setColorFilter(PARROTActivity.getUser().getCategoryColor(), PorterDuff.Mode.OVERLAY);
 		superCategoryLayout.setBackgroundDrawable(draw);
+		
+		LinearLayout pictogramLayout = (LinearLayout) invoker.findViewById(R.id.pictogramgrid_layout);
+		draw = parrent.getResources().getDrawable(R.drawable.gridviewlayout);
+		draw.setColorFilter(displayedCat.getCategoryColour(),PorterDuff.Mode.OVERLAY);
+		pictogramLayout.setBackgroundDrawable(draw);
 		
 	}
 }
