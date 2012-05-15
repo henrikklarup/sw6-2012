@@ -16,11 +16,13 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     
-  
+  <instrumentation android:name="android.test.InstrumentationTestRunner"
+       android:targetPackage="dk.aau.cs.giraf.launcher" android:label="Tests for My App" />
 
     <application
         android:icon="@drawable/app_icon"
         android:label="@string/application_name" >
+        <uses-library android:name="android.test.runner" />
         <activity
             android:name="dk.aau.cs.giraf.launcher.LogoActivity"
             android:label="@string/application_name"
