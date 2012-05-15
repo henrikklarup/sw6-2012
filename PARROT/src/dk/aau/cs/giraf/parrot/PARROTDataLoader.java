@@ -287,6 +287,7 @@ public class PARROTDataLoader {
 		Pictogram badePic = new Pictogram("Bade", "/sdcard/Pictogram/Bade.png", null, "/sdcard/Pictogram/bade.wma");
 		badePic.setNewPictogram(true);
 		Pictogram børsteTænderPic = new Pictogram("Børste Tænder", "/sdcard/Pictogram/Børste_Tænder.png", null, "/sdcard/Pictogram/børste_tænder.wma");
+		børsteTænderPic.setNewPictogram(true);
 		Pictogram drikkePic = new Pictogram("Drikke", "/sdcard/Pictogram/Drikke.png", null, "/sdcard/Pictogram/drikke.wma");
 		Pictogram duPic = new Pictogram("Du", "/sdcard/Pictogram/Du.png", null, "/sdcard/Pictogram/du.wma");
 		Pictogram filmPic = new Pictogram("Film", "/sdcard/Pictogram/Film.png", null, "/sdcard/Pictogram/film.wma");
@@ -392,6 +393,7 @@ public class PARROTDataLoader {
 		{
 			imageMedia = new Media(pic.getName(), pic.getImagePath(), true, "IMAGE", PARROTActivity.getUser().getProfileID());
 			pic.setImageID(help.mediaHelper.insertMedia(imageMedia));
+			imageMedia.setId(pic.getImageID());
 		}
 		else
 		{
@@ -407,6 +409,7 @@ public class PARROTDataLoader {
 		{
 			wordMedia = new Media(pic.getName(), pic.getWordPath(), true, "WORD", PARROTActivity.getUser().getProfileID());	//TODO we might want to set the booleans to false
 			pic.setWordID(help.mediaHelper.insertMedia(wordMedia));
+			wordMedia.setId(pic.getWordID());
 		}
 		else if(pic.getWordPath() != null)
 		{
@@ -419,6 +422,7 @@ public class PARROTDataLoader {
 		{
 			soundMedia = new Media(pic.getName(), pic.getSoundPath(), true, "SOUND", PARROTActivity.getUser().getProfileID());	//TODO we might want to set the booleans to false
 			pic.setSoundID(help.mediaHelper.insertMedia(soundMedia));
+			soundMedia.setId(pic.getSoundID());
 		}
 		else
 		{
