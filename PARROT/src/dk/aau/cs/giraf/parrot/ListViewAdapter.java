@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
-public class ListViewAdapter extends ArrayAdapter<Category> //FIXME In this class Profiles might not be right. Check if it works with Profile and change it if not.
+public class ListViewAdapter extends ArrayAdapter<Category> 
 {
 	private ArrayList<Category> items;
 

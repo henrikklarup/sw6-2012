@@ -65,19 +65,18 @@ public class ManageCategoryFragment extends Fragment {
 
 		pictograms.setAdapter(new PictogramAdapter(profileBeingModified.getCategoryAt(currentCategoryId), parrent));
 
+		
 
-
-		categories.setOnItemClickListener(new OnItemClickListener() {
+		categories.setOnItemClickListener(new OnItemClickListener() //This is when we want to select a category
+		{
 
 			public void onItemClick(AdapterView<?> arg0, View view, int position, long id) 
 			{
-				//TODO change currentCategoryId
-
+				currentCategoryId = position;
 			}
 		});
 
-
-		categories.setOnItemLongClickListener(new OnItemLongClickListener()
+		categories.setOnItemLongClickListener(new OnItemLongClickListener() //This is when we want to move a category.
 		{
 			public boolean onItemLongClick(AdapterView<?> arg0, View view, int position, long id)
 			{
@@ -89,6 +88,7 @@ public class ManageCategoryFragment extends Fragment {
 				return true;
 			}
 		});
+		
 
 		pictograms.setOnItemLongClickListener(new OnItemLongClickListener()
 		{
