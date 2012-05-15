@@ -279,7 +279,7 @@ public class MediaHelper {
 	public List<Media> getMediaIOwn(Profile p) {
 		List<Media> result = new ArrayList<Media>();
 
-		Cursor c = _context.getContentResolver().query(MediaMetaData.CONTENT_URI, columns, MediaMetaData.Table.COLUMN_OWNERID + " = '" + p.getId(), null, null);
+		Cursor c = _context.getContentResolver().query(MediaMetaData.CONTENT_URI, columns, MediaMetaData.Table.COLUMN_OWNERID + " = '" + p.getId() + "'", null, null);
 		if (c != null) {
 			result = cursorToMedia(c);
 			c.close();
@@ -295,7 +295,7 @@ public class MediaHelper {
 	public List<Media> getPublicMedia() {
 		List<Media> result = new ArrayList<Media>();
 
-		Cursor c = _context.getContentResolver().query(MediaMetaData.CONTENT_URI, columns, MediaMetaData.Table.COLUMN_PUBLIC + " = '" + 1, null, null);
+		Cursor c = _context.getContentResolver().query(MediaMetaData.CONTENT_URI, columns, MediaMetaData.Table.COLUMN_PUBLIC + " = '" + 1 + "'", null, null);
 		if (c != null) {
 			result = cursorToMedia(c);
 			c.close();

@@ -72,7 +72,9 @@ public class AppsView extends ListActivity {
 
 			@Override
 			public void onClick(View v) {
-				helper.CreateDummyData();
+				String certificate = "jkkxlagqyrztlrexhzofekyzrnppajeobqxcmunkqhsbrgpxdtqgygnmbhrgnpphaxsjshlpupgakmirhpyfaivvtpynqarxsghhilhkqvpelpreevykxurtppcggkzfaepihlodgznrmbrzgqucstflhmndibuymmvwauvdlyqnnlxkurinuypmqypspmkqavuhfwsh";
+				Toast.makeText(getApplicationContext(), helper.serverHelper.syncUserDataByCertificate(certificate), Toast.LENGTH_SHORT).show();
+ 
 				updateList();
 			}
 		});
