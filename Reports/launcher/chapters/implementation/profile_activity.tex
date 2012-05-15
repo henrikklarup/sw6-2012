@@ -1,1 +1,22 @@
-\section{Profile Activity}
+\section{Profile Select Activity}
+
+
+\begin{lstlisting}[style=sourceCode, language=JAVA, caption=This is code, label=code] 
+listOfChildren.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				final long childID = ((Profile) parent.getAdapter().getItem(position)).getId();
+
+				Intent intent = new Intent(Intent.ACTION_MAIN);
+				intent.addCategory(Intent.CATEGORY_LAUNCHER);
+				intent.setComponent(new ComponentName(mPackageName, mActivityName));
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+						| Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+
+				intent.putExtra(Data.CHILDID, childID);
+				intent.putExtra(Data.GUARDIANID, mGuardianID);
+				intent.putExtra(Data.APP_COLOR, mAppColor);
+
+				startActivity(intent);
+			}
+		});
+\end{lstlisting}
