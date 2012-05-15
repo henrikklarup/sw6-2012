@@ -3,9 +3,9 @@ This section will explain the Logo Activity and how it is used.
 
 This activity is used and only seen by the user when the launcher starts up.
 
+The important thing about this activity is that it runs in a \verb +Thread()+ and uses \verb +synchronized()+ to wait an amount of time until the Authentication Activity or the Home Activity is most certainly done. Which activity that should be started is decided by the \verb +Tools.sessionExpired(mContext)+ method. This method returnes true or false over if the users login is still valid or not. If the login is still valid and the id which is still logged in, in the \verb +sharedPreferences+ do not return \verb +null+. It will only return null if the user do not exsist in the system. The user should be taken to the Home Activity else they should be presented with the Authentication Activity so they can login. This can be seen in \autoref{lst:logoActivity}.
 
-
-\begin{lstlisting}[style=sourceCode, language=JAVA, caption=This is code, label=lst:logoActivity] 
+\begin{lstlisting}[style=sourceCode, language=JAVA, caption=The Logo Activity and how it uses Thread and synchronized, label=lst:logoActivity] 
 		mLogoThread = new Thread() {
 	        @Override
 	        public void run() {
