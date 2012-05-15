@@ -88,7 +88,8 @@ public class PARROTDataLoader {
 				String colourString = specialSettings.get("category"+number).get("colour");
 				int col=Integer.valueOf(colourString);
 				String iconString = specialSettings.get("category"+number).get("icon");
-				parrotUser.addCategory(loadCategory(categoryString,col,iconString));
+				String catName = specialSettings.get("category"+number).get("name");
+				parrotUser.addCategory(loadCategory(catName,categoryString,col,iconString));
 				number++;
 
 			}
@@ -124,10 +125,10 @@ public class PARROTDataLoader {
 		return parrotUser;
 	}
 
-	public Category loadCategory(String pictureIDs,int colour,String iconString)
+	public Category loadCategory(String catName, String pictureIDs,int colour,String iconString)
 	{
 		Long iconId = Long.valueOf(iconString);
-		Category cat = new Category(colour,loadPictogram(iconId));
+		Category cat = new Category(catName, colour, loadPictogram(iconId));
 		ArrayList<Long> listIDs = getIDsFromString(pictureIDs);
 		for(int i = 0; i<listIDs.size();i++)
 		{
@@ -319,7 +320,7 @@ public class PARROTDataLoader {
 		Pictogram væreStillePic = new Pictogram("Være Stille", "/sdcard/Pictogram/Være_Stille.png", null, "/sdcard/Pictogram/være_stille.wma");
 		væreStillePic.setNewPictogram(true);
 
-		Category tempCat3 = new Category(0xff05ff12, migPic);
+		Category tempCat3 = new Category("Kategori 1", 0xff05ff12, migPic);
 
 		tempCat3.addPictogram(badePic);
 		tempCat3.addPictogram(børsteTænderPic);
@@ -349,7 +350,7 @@ public class PARROTDataLoader {
 		//		testProfile.addCategory(tempCat2);
 		testProfile.addCategory(tempCat3);
 		
-		Category tempCat4 = new Category(0xffff0000, duPic);
+		Category tempCat4 = new Category("kategori 2", 0xffff0000, duPic);
 		tempCat4.addPictogram(duPic);
 		tempCat4.addPictogram(migPic);
 		tempCat4.addPictogram(jaPic);
@@ -385,7 +386,10 @@ public class PARROTDataLoader {
 		}
 		pictogramString += "$";
 		pictogramString = pictogramString.replace("#$", "$");	//Here we make sure that the end is $, and not #$
+		//now save the pictograms
 		profileSetting.addValue("category"+categoryNumber, "pictograms", pictogramString);
+		//And the name
+		profileSetting.get("category"+categoryNumber).put("name", category.getCategoryName());
 		//then we save the colour
 		profileSetting.get("category"+categoryNumber).put("colour", String.valueOf(category.getCategoryColour()));
 		//and then we save the icon
