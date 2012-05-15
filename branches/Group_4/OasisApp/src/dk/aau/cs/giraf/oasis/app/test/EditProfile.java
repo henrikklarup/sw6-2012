@@ -23,7 +23,7 @@ public class EditProfile extends ActivityInstrumentationTestCase2<MainActivity> 
 	
 	public void testGetProfileName() {
 		
-		assertTrue();
+//		assertTrue();
 	}
 	
 
