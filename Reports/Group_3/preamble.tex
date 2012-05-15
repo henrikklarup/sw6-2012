@@ -1,0 +1,127 @@
+\documentclass[12pt]{report}
+\usepackage[absolute]{textpos}
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath,amsfonts}
+\usepackage{natbib}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage[Conny]{fncychap}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{algorithmic}
+\setcitestyle{numbers,open={[},close={]}}
+\usepackage{epsfig}
+\usepackage[official,right]{eurosym}
+\usepackage{rotating}
+\usepackage{hyperref}
+\usepackage{rotating}
+\hypersetup{pdfborder={0 0 0}}
+\definecolor{light-gray}{gray}{0.95}
+\usepackage[absolute]{textpos}
+\usepackage[rounded]{syntax}
+\usepackage{appendix}
+\grammarparsep 1pt
+\usepackage{xyling}
+\usepackage{subfigure}
+\usepackage{slashbox}
+\usepackage{verbatim}
+\usepackage{float}
+\newfloat{Code}{H}{myc}
+\allowdisplaybreaks
+
+%semantic udtryk
+\usepackage{turnstile}
+%$\nststile{Bottom}{Top}$
+
+%\usepackage[tt]{titlepic}
+
+
+%LOL MARTIN!
+%End lool martin
+
+% C# lol?
+\usepackage{listings}
+% default words comes from lstlang1.sty
+\lstset{language=Java,
+  basicstyle=\ttfamily\footnotesize\bfseries,
+  float,
+  columns=flexible,
+  morekeywords=[1]{TmdbAPI,TmdbMovie},
+  %keywordstyle=[1]\sffamily,
+  backgroundcolor=\color{light-gray},
+  captionpos=b,
+  frame=single,
+  breaklines=true, 
+  keywordstyle=\color{Blue},
+  commentstyle=\color{Green},
+  stringstyle=\color{Mahogany},
+  showspaces=false,
+  showstringspaces=false,
+  numbers=left,                   % where to put the line-numbers
+  numberstyle=\footnotesize,      % the size of the fonts that are used for the line-numbers
+  stepnumber=1
+  }
+  \newenvironment{program}
+
+%End c-sharp lol
+
+\usepackage{url}
+
+%% Define a new 'leo' style for the package that will use a smaller font.
+\makeatletter
+\def\url@leostyle{%
+  \@ifundefined{selectfont}{\def\UrlFont{\sf}}{\def\UrlFont{\small\ttfamily}}}
+\makeatother
+%% Now actually use the newly defined style.
+\urlstyle{leo}
+
+
+\pagestyle{fancy}
+\lhead{}
+
+\newcommand{\appref}{appendix \ref}
+\newcommand{\chapref}{chapter \ref}
+\newcommand{\figref}{figure \ref}
+\newcommand{\tabelref}{table \ref}
+\newcommand{\listref}{listing \ref}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+%Rasmus' kind of lol
+\makeatletter
+\newenvironment{Figure}{%
+\par\addvspace{12pt plus2pt}%
+\def\@captype{figure}%
+}{%
+\par\addvspace{12pt plus2pt}%
+}%
+\long\def\@makecaption#1#2{%
+\vskip\abovecaptionskip
+\sbox\@tempboxa{#1: #2}%
+\ifdim \wd\@tempboxa >\hsize
+#1: #2\par
+\else
+\global \@minipagefalse
+\hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
+\fi
+\vskip\belowcaptionskip}
+\makeatother
+% Rasmus' kind of lol - stop
+
+\setlength{\headheight}{15pt}
+
+%titlepage image halløj
+%\usepackage{eso-pic}
+%\newcommand\BackgroundPic{
+%\put(0,0){
+%\parbox[b][\paperheight]{\paperwidth}{%
+%\vfill
+%\centering
+%\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{Images/front-page.png}%
+%\vfill
+%}}}
+%halløj end
