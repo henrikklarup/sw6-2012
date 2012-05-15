@@ -53,11 +53,11 @@ public class LogoActivity extends Activity {
 	            		
 	            		/* Following did we not have time to test due to errors in the Oasislib */
 	            		
-//	            		if ((new Helper(mContext)).profilesHelper.getProfileById(guardianID) != null) {
+	            		//if ((new Helper(mContext)).profilesHelper.getProfileById(guardianID) != null) {
 	            			intent.putExtra(Data.GUARDIANID, guardianID);
-//	            		} else {
-//	            			intent = new Intent(mContext, AuthenticationActivity.class);
-//	            		}
+	            		//} else {
+	            			//intent = new Intent(mContext, AuthenticationActivity.class);
+	            		//}
 	            	}
 	            	
 	                startActivity(intent);
