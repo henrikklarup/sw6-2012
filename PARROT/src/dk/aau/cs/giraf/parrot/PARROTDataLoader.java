@@ -26,6 +26,7 @@ public class PARROTDataLoader {
 		this.parrent = activity;
 		help = new Helper(parrent);
 		app = help.appsHelper.getAppByPackageName();
+		
 	}
 
 	/**
@@ -38,10 +39,29 @@ public class PARROTDataLoader {
 		//This part of the code is supposed to get a profile from the launcher, and read it from the admin.
 		Long childId = parrent.getIntent().getExtras().getLong("currentChildID");
 		Long appId = app.getId();
+		PARROTActivity.setGuardianID(parrent.getIntent().getExtras().getLong("currentGuardianID"));
 
 		return loadProfile(childId, appId);
 	}
 
+	/**
+	 * 
+	 * @return
+	 * An ArrayList of all the children asociated with the guardian who is currently using the system.
+	 */
+	public ArrayList<PARROTProfile> getChildrenFromCurrentGuardian()
+	{
+		ArrayList<PARROTProfile> parrotChildren = new ArrayList<PARROTProfile>();
+		Profile guardian = help.profilesHelper.getProfileById(PARROTActivity.getGuardianID());
+		List<Profile> children = help.profilesHelper.getChildrenByGuardian(guardian);
+		for(int i = 0;i<children.size();i++)
+		{
+			parrotChildren.add(loadProfile(children.get(i).getId(), app.getId()));
+		}
+		return parrotChildren;
+	}
+	
+	
 	/**
 	 * @param childId
 	 * The ID of the child using the app.

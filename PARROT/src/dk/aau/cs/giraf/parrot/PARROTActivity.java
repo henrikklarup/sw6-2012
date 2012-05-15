@@ -9,6 +9,7 @@ import android.os.Bundle;
 public class PARROTActivity extends Activity {
 
 	private static PARROTProfile parrotUser;
+	private static long guardianID;
 	private PARROTDataLoader dataLoader;
 	/** Called when the activity is first created. */
 	@Override
@@ -89,6 +90,12 @@ public class PARROTActivity extends Activity {
 	}
 	public static void setUser(PARROTProfile user) {
 		parrotUser = user;
+	}
+	public static long getGuardianID() {
+		return guardianID;
+	}
+	public static void setGuardianID(long guardianID) {
+		PARROTActivity.guardianID = guardianID;
 	}
 	
 }
