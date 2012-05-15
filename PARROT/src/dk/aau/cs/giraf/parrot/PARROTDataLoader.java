@@ -319,7 +319,7 @@ public class PARROTDataLoader {
 		Pictogram væreStillePic = new Pictogram("Være Stille", "/sdcard/Pictogram/Være_Stille.png", null, "/sdcard/Pictogram/være_stille.wma");
 		væreStillePic.setNewPictogram(true);
 
-		Category tempCat3 = new Category(2, migPic);
+		Category tempCat3 = new Category(0xff05ff12, migPic);
 
 		tempCat3.addPictogram(badePic);
 		tempCat3.addPictogram(børsteTænderPic);
@@ -348,6 +348,14 @@ public class PARROTDataLoader {
 		//		testProfile.addCategory(tempCat);
 		//		testProfile.addCategory(tempCat2);
 		testProfile.addCategory(tempCat3);
+		
+		Category tempCat4 = new Category(0xffff0000, duPic);
+		tempCat4.addPictogram(duPic);
+		tempCat4.addPictogram(migPic);
+		tempCat4.addPictogram(jaPic);
+		tempCat4.addPictogram(nejPic);
+		
+		testProfile.addCategory(tempCat4);
 		PARROTActivity.setUser(testProfile);
 
 		for(int i=0;i<testProfile.getCategories().size();i++)
@@ -382,7 +390,7 @@ public class PARROTDataLoader {
 		profileSetting.get("category"+categoryNumber).put("colour", String.valueOf(category.getCategoryColour()));
 		//and then we save the icon
 		Pictogram icon = category.getIcon();
-		savePictogram(icon);
+		icon = savePictogram(icon);
 		profileSetting.get("category"+categoryNumber).put("icon", String.valueOf(icon.getImageID()));
 
 		return profileSetting;
