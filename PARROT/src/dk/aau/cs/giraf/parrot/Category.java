@@ -13,13 +13,21 @@ public class Category {
 	private Pictogram icon;
 	private boolean newCategory;
 	private boolean changed;
+	private String categoryName;
 	//This is the constructor method.
 	public Category(int colour, Pictogram icon)
 	{
-		//TODO we might have to add an icon and a name of the category as well.
 		pictograms = new ArrayList<Pictogram>();
 		setCategoryColour(colour);
 		setIcon(icon);
+	}
+	
+	public Category(String categoryName,int colour,Pictogram icon)
+	{
+		pictograms = new ArrayList<Pictogram>();
+		setCategoryColour(colour);
+		setIcon(icon);
+		setCategoryName(categoryName);
 	}
 
 	public ArrayList<Pictogram> getPictograms() {
@@ -76,6 +84,14 @@ public class Category {
 
 	public void setChanged(boolean changed) {
 		this.changed = changed;
+	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
 }
