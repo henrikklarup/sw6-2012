@@ -67,24 +67,26 @@ public class ChildListAdapter extends BaseExpandableListAdapter {
 			convertView = mInflater.inflate(R.layout.children_list_childitem, null);
 
 			holder = new ViewHolder();
-			holder.tvFirstName = (TextView) convertView.findViewById(R.id.tvItemFirstName);
-			holder.tvMiddleName = (TextView) convertView.findViewById(R.id.tvItemMiddleName);
-			holder.tvSurName = (TextView) convertView.findViewById(R.id.tvItemSurName);
+			holder.tvName = (TextView) convertView.findViewById(R.id.tvItemName);
 
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		Profile p = getChild(groupPos, childPos);
-		holder.tvFirstName.setText("\t" + p.getFirstname());
-		holder.tvMiddleName.setText("\t" + p.getMiddlename());
-		holder.tvSurName.setText("\t" + p.getSurname());
+		String name = p.getFirstname();
+		if (p.getMiddlename() != null) {
+			name += " " + p.getMiddlename();
+		}
+		name += " " + p.getSurname();
+		
+		holder.tvName.setText("\t\t\t\t\t" + name);
 
 		return convertView;
 	}
 
 	static class ViewHolder {
-		TextView tvChildHeader, tvFirstName, tvMiddleName, tvSurName;
+		TextView tvChildHeader, tvName;
 	}
 
 	@Override
@@ -133,7 +135,7 @@ public class ChildListAdapter extends BaseExpandableListAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		
-		holder.tvChildHeader.setText(getGroup(groupPos));
+		holder.tvChildHeader.setText("\t\t\t" + getGroup(groupPos));
 
 		return convertView;
 	}

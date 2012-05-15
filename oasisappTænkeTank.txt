@@ -1,0 +1,26 @@
+oasis app notices
+
+
+Rediger profil.. når man skal vælge billede burde der være en metode, som giver alle billeder og ikke alle medier.
+
+Medier lister:
+ - Mine Medier -> getmediabyprofile?
+ - Private Medier -> ???
+ - Alle Medier -> getmediaByprofile + getmediabydepartement
+ 
+alm click på medie listerne giver popop med billedet i 
+ 
+Longclick på medie listerne
+	- Mine Medier -> sletter medie attachment til profil
+	- Private Medier -> når metoden kommer skal den slette mediet fuldstændigt
+	- Alle medier -> slet billede fuldstændigt
+
+Husk at lave så man kan tilføje medier
+
+Apps lister
+ - Skal der ske noget når man klikker på et item i listen?
+Longclick på app listerne
+	- Mine apps -> sletter app attachment til profil
+	- Skal slette item på alle apps listen når metode kommer
+ 
+ 

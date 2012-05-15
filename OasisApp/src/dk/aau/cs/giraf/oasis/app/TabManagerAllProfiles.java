@@ -31,7 +31,7 @@ public class TabManagerAllProfiles extends Fragment implements OnTabChangeListen
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		mRoot = inflater.inflate(R.layout.taballprofilesview, null);
+		mRoot = inflater.inflate(R.layout.threetabsview, null);
 		mTabHost = (TabHost) mRoot.findViewById(android.R.id.tabhost);
 		setupTabs();
 		return mRoot;
@@ -45,9 +45,9 @@ public class TabManagerAllProfiles extends Fragment implements OnTabChangeListen
 		mTabHost.setOnTabChangedListener(this);
 		mTabHost.setCurrentTab(mCurrentTab);
 
-		updateTab(TAB_PROFILES, R.id.tabAP_1);
+		updateTab(TAB_PROFILES, R.id.threetab_1);
 		
-		Button b = (Button) getView().findViewById(R.id.bTabAllProfiles);
+		Button b = (Button) getView().findViewById(R.id.b3Tab);
 		b.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -59,13 +59,12 @@ public class TabManagerAllProfiles extends Fragment implements OnTabChangeListen
 
 	private void setupTabs() {
 		mTabHost.setup();
-		mTabHost.addTab(newTab(TAB_PROFILES, R.string.nameLabel, R.id.tabAP_1));
-		mTabHost.addTab(newTab(TAB_GUARDIANS, R.string.nameLabel, R.id.tabAP_2));
-		mTabHost.addTab(newTab(TAB_CHILDREN, R.string.nameLabel, R.id.tabAP_3));
+		mTabHost.addTab(newTab(TAB_PROFILES, R.string.tab_profiles, R.id.threetab_1));
+		mTabHost.addTab(newTab(TAB_GUARDIANS, R.string.tab_guardians, R.id.threetab_2));
+		mTabHost.addTab(newTab(TAB_CHILDREN, R.string.tab_children, R.id.threetab_3));
 	}
 
 	private TabSpec newTab(String tag, int labelId, int tabContentId) {
-//		Log.d(TAG, "buildTab(): tag=" + tag);
 
 		View indicator = LayoutInflater.from(getActivity()).inflate(
 				R.layout.tab, (ViewGroup) mRoot.findViewById(android.R.id.tabs), false);
@@ -79,19 +78,18 @@ public class TabManagerAllProfiles extends Fragment implements OnTabChangeListen
 
 	@Override
 	public void onTabChanged(String tabId) {
-//		Log.d(TAG, "onTabChanged(): tabId=" + tabId);
 		if (TAB_PROFILES.equals(tabId)) {
-			updateTab(tabId, R.id.tabAP_1);
+			updateTab(tabId, R.id.threetab_1);
 			mCurrentTab = 0;
 			return;
 		}
 		if (TAB_GUARDIANS.equals(tabId)) {
-			updateTab(tabId, R.id.tabAP_2);
+			updateTab(tabId, R.id.threetab_2);
 			mCurrentTab = 1;
 			return;
 		}
 		if (TAB_CHILDREN.equals(tabId)) {
-			updateTab(tabId, R.id.tabAP_3);
+			updateTab(tabId, R.id.threetab_3);
 			mCurrentTab = 2;
 			return;
 		}

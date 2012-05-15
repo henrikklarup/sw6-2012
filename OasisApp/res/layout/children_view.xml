@@ -1,76 +1,34 @@
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:stretchColumns="*" >
+    android:orientation="vertical" >
 
-    <TableRow
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/bAddProfile"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/tab_selector"
+            android:layout_margin="5dp"
+            android:text="@string/addProfile" />
+    </LinearLayout>
+
+    <ExpandableListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_gravity="center_horizontal" >
+        android:scrollbars="none" />
 
-        <TextView
-            android:id="@+id/tvChildHeader"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_span="3"
-            android:textSize="42dp" />
-    </TableRow>
-
-    <TableRow
+    <TextView
+        android:id="@+id/android:empty"
         android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:layout_gravity="center_horizontal" >
+        android:layout_height="wrap_content"
+        android:paddingTop="10dip"
+        android:text="@string/emptyList"
+        android:textSize="28dp" />
 
-        <TextView
-            android:id="@+id/tvFirstName"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:text="@string/columnFirstName"
-            android:textAppearance="@android:style/TextAppearance.Large"
-            android:textSize="32dp" />
-
-        <TextView
-            android:id="@+id/tvMiddelName"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:text="@string/columnMiddleName"
-            android:textAppearance="@android:style/TextAppearance.Large"
-            android:textSize="32dp" />
-
-        <TextView
-            android:id="@+id/tvSurName"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:text="@string/columnSurName"
-            android:textAppearance="@android:style/TextAppearance.Large"
-            android:textSize="32dp" />
-    </TableRow>
-
-    <TableRow
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:layout_gravity="center_horizontal" >
-
-        <LinearLayout
-            android:layout_span="3"
-            android:orientation="vertical" >
-
-            <ExpandableListView
-                android:id="@android:id/list"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:groupIndicator="@null"
-                android:scrollbars="none" />
-
-            <TextView
-                android:id="@+id/android:empty"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="10dip"
-                android:text="@string/emptyList"
-                android:textSize="28dp" />
-        </LinearLayout>
-    </TableRow>
-
-</TableLayout>
+</LinearLayout>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tvCreateProfileLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/nameLabel"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="32dp" />
+
+    <EditText
+        android:id="@+id/etCreateProfileName"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_toRightOf="@id/tvCreateProfileLabel"
+        android:inputType="text"
+        android:textSize="32dp" />
+
+    <TextView
+        android:id="@+id/tvCreateProfilePhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etCreateProfileName"
+        android:layout_margin="20dp"
+        android:text="@string/phoneLabel"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="32dp" />
+
+    <EditText
+        android:id="@+id/etCreateProfilePhone"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/etCreateProfileName"
+        android:layout_below="@id/etCreateProfileName"
+        android:layout_toRightOf="@id/tvCreateProfilePhone"
+        android:inputType="phone"
+        android:textSize="32dp" />
+
+    <ImageView
+        android:id="@+id/iCreateProfileImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etCreateProfilePhone"
+        android:layout_margin="20dp"
+        android:src="@drawable/logo" />
+
+    <Button
+        android:id="@+id/bCreateProfileImg"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iCreateProfileImg"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/tab_selector"
+        android:text="Skift Billede" />
+
+    <Spinner
+        android:id="@+id/spinnerDep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    
+    <Spinner
+        android:id="@+id/spinnerRole"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

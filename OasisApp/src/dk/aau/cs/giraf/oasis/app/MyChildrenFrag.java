@@ -35,9 +35,6 @@ public class MyChildrenFrag extends ExpandableListFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
-		tvHeader = (TextView) getView().findViewById(R.id.tvChildHeader);
-		tvHeader.setText("My Children");
-
 		helper = new Helper(getActivity().getApplicationContext());
 
 		if (MainActivity.guardian != null) {

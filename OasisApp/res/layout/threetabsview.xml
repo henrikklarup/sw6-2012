@@ -13,44 +13,42 @@
             android:id="@android:id/tabs"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="@drawable/tab_unselected" />
 
         <FrameLayout
             android:id="@android:id/tabcontent"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent" >
+            android:layout_height="fill_parent"
+            android:layout_weight="100" >
 
             <FrameLayout
-                android:id="@+id/tabP_1"
+                android:id="@+id/threetab_1"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent" />
 
             <FrameLayout
-                android:id="@+id/tabP_2"
+                android:id="@+id/threetab_2"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent" />
 
             <FrameLayout
-                android:id="@+id/tabP_3"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent" />
-
-            <FrameLayout
-                android:id="@+id/tabP_4"
+                android:id="@+id/threetab_3"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent" />
         </FrameLayout>
-    </LinearLayout>
 
-    <Button
-        android:id="@+id/bTabProfile"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="50dp"
-        android:layout_marginLeft="200dp"
-        android:layout_marginRight="200dp"
-        android:background="@drawable/tab_selector"
-        android:text="@string/back_button" />
+        <Button
+            android:id="@+id/b3Tab"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="50dp"
+            android:layout_marginLeft="200dp"
+            android:layout_marginRight="200dp"
+            android:layout_weight="1"
+            android:background="@drawable/tab_selector"
+            android:text="@string/back_button" />
+    </LinearLayout>
 
 </TabHost>
