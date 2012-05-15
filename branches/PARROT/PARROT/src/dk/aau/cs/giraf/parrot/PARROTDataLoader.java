@@ -350,7 +350,7 @@ public class PARROTDataLoader {
 		//		testProfile.addCategory(tempCat2);
 		testProfile.addCategory(tempCat3);
 		
-		Category tempCat4 = new Category("kategori 2", 0xffff0000, duPic);
+		Category tempCat4 = new Category("Kategori 2", 0xffff0000, duPic);
 		tempCat4.addPictogram(duPic);
 		tempCat4.addPictogram(migPic);
 		tempCat4.addPictogram(jaPic);
