@@ -17,9 +17,8 @@ import android.widget.TextView;
 public class TabManagerMedia extends Fragment implements OnTabChangeListener {
 
 	public static final String TAB_MYMEDIA = "MyMedia";
-	public static final String TAB_MYMEDIA1 = "MyMedia1";
-	public static final String TAB_MYMEDIA2 = "MyMedia2";
-	public static final String TAB_MYMEDIA3 = "MyMedia3";
+	public static final String TAB_MYPRIVATEMEDIA = "MyPrivateMedia";
+	public static final String TAB_PUBLICMEDIA = "PublicMedia";
 
 	private View mRoot;
 	private TabHost mTabHost;
@@ -32,7 +31,7 @@ public class TabManagerMedia extends Fragment implements OnTabChangeListener {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		mRoot = inflater.inflate(R.layout.tabmediaview, null);
+		mRoot = inflater.inflate(R.layout.threetabsview, null);
 		mTabHost = (TabHost) mRoot.findViewById(android.R.id.tabhost);
 		setupTabs();
 		return mRoot;
@@ -46,14 +45,13 @@ public class TabManagerMedia extends Fragment implements OnTabChangeListener {
 		mTabHost.setOnTabChangedListener(this);
 		mTabHost.setCurrentTab(mCurrentTab);
 
-		updateTab(TAB_MYMEDIA, R.id.tabM_1);
+		updateTab(TAB_MYMEDIA, R.id.threetab_1);
 
-		Button b = (Button) getView().findViewById(R.id.bTabMedia);
+		Button b = (Button) getView().findViewById(R.id.b3Tab);
 		b.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				FragParentTab.switchTab(FragParentTab.TABPROFILE);
 			}
 		});
@@ -61,14 +59,12 @@ public class TabManagerMedia extends Fragment implements OnTabChangeListener {
 
 	private void setupTabs() {
 		mTabHost.setup();
-		mTabHost.addTab(newTab(TAB_MYMEDIA, R.string.app_name, R.id.tabM_1));
-		mTabHost.addTab(newTab(TAB_MYMEDIA1, R.string.app_name, R.id.tabM_2));
-		mTabHost.addTab(newTab(TAB_MYMEDIA2, R.string.app_name, R.id.tabM_3));
-		mTabHost.addTab(newTab(TAB_MYMEDIA3, R.string.app_name, R.id.tabM_4));
+		mTabHost.addTab(newTab(TAB_MYMEDIA, R.string.tab_mymedia, R.id.threetab_1));
+		mTabHost.addTab(newTab(TAB_MYPRIVATEMEDIA, R.string.tab_privatemedia, R.id.threetab_2));
+		mTabHost.addTab(newTab(TAB_PUBLICMEDIA, R.string.tab_publicmedia, R.id.threetab_3));
 	}
 
 	private TabSpec newTab(String tag, int labelId, int tabContentId) {
-		//		Log.d(TAG, "buildTab(): tag=" + tag);
 
 		View indicator = LayoutInflater.from(getActivity()).inflate(
 				R.layout.tab, (ViewGroup) mRoot.findViewById(android.R.id.tabs), false);
@@ -82,25 +78,19 @@ public class TabManagerMedia extends Fragment implements OnTabChangeListener {
 
 	@Override
 	public void onTabChanged(String tabId) {
-		//		Log.d(TAG, "onTabChanged(): tabId=" + tabId);
 		if (TAB_MYMEDIA.equals(tabId)) {
-			updateTab(tabId, R.id.tabM_1);
+			updateTab(tabId, R.id.threetab_1);
 			mCurrentTab = 0;
 			return;
 		}
-		if (TAB_MYMEDIA1.equals(tabId)) {
-			updateTab(tabId, R.id.tabM_2);
+		if (TAB_MYPRIVATEMEDIA.equals(tabId)) {
+			updateTab(tabId, R.id.threetab_2);
 			mCurrentTab = 1;
 			return;
 		}
-		if (TAB_MYMEDIA2.equals(tabId)) {
-			updateTab(tabId, R.id.tabM_3);
+		if (TAB_PUBLICMEDIA.equals(tabId)) {
+			updateTab(tabId, R.id.threetab_3);
 			mCurrentTab = 2;
-			return;
-		}
-		if (TAB_MYMEDIA3.equals(tabId)) {
-			updateTab(tabId, R.id.tabM_4);
-			mCurrentTab = 3;
 			return;
 		}
 	}
@@ -110,25 +100,19 @@ public class TabManagerMedia extends Fragment implements OnTabChangeListener {
 
 		if (TAB_MYMEDIA.equals(tabId)) {
 			fm.beginTransaction()
-			.replace(placeholder, new MyProfileFrag(), tabId)
+			.replace(placeholder, new MyMediaFrag(), tabId)
 			.commit();
 			return;
 		}
-		if (TAB_MYMEDIA1.equals(tabId)) {
+		if (TAB_MYPRIVATEMEDIA.equals(tabId)) {
 			fm.beginTransaction()
-			.replace(placeholder, new MyChildrenFrag(), tabId)
+			.replace(placeholder, new MyPrivateMediaFrag(), tabId)
 			.commit();
 			return;
 		}
-		if (TAB_MYMEDIA2.equals(tabId)) {
+		if (TAB_PUBLICMEDIA.equals(tabId)) {
 			fm.beginTransaction()
-			.replace(placeholder, new MyDepartmentsFrag(), tabId)
-			.commit();
-			return;
-		}
-		if (TAB_MYMEDIA3.equals(tabId)) {
-			fm.beginTransaction()
-			.replace(placeholder, new MyDepChildrenFrag(), tabId)
+			.replace(placeholder, new AllMediaFrag(), tabId)
 			.commit();
 			return;
 		}

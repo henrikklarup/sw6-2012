@@ -29,7 +29,7 @@ public class TabManagerAllDepartments extends Fragment implements OnTabChangeLis
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		mRoot = inflater.inflate(R.layout.taballdepartmentsview, null);
+		mRoot = inflater.inflate(R.layout.onetabsview, null);
 		mTabHost = (TabHost) mRoot.findViewById(android.R.id.tabhost);
 		setupTabs();
 		return mRoot;
@@ -43,9 +43,9 @@ public class TabManagerAllDepartments extends Fragment implements OnTabChangeLis
 		mTabHost.setOnTabChangedListener(this);
 		mTabHost.setCurrentTab(mCurrentTab);
 
-		updateTab(TAB_DEPARTMENTS, R.id.tabAD_1);
+		updateTab(TAB_DEPARTMENTS, R.id.onetab_1);
 
-		Button b = (Button) getView().findViewById(R.id.bTabAllDepartments);
+		Button b = (Button) getView().findViewById(R.id.b1Tab);
 		b.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -57,11 +57,10 @@ public class TabManagerAllDepartments extends Fragment implements OnTabChangeLis
 
 	private void setupTabs() {
 		mTabHost.setup();
-		mTabHost.addTab(newTab(TAB_DEPARTMENTS, R.string.nameLabel, R.id.tabAD_1));
+		mTabHost.addTab(newTab(TAB_DEPARTMENTS, R.string.tab_departments, R.id.onetab_1));
 	}
 
 	private TabSpec newTab(String tag, int labelId, int tabContentId) {
-//		Log.d(TAG, "buildTab(): tag=" + tag);
 
 		View indicator = LayoutInflater.from(getActivity()).inflate(
 				R.layout.tab, (ViewGroup) mRoot.findViewById(android.R.id.tabs), false);
@@ -75,9 +74,8 @@ public class TabManagerAllDepartments extends Fragment implements OnTabChangeLis
 
 	@Override
 	public void onTabChanged(String tabId) {
-//		Log.d(TAG, "onTabChanged(): tabId=" + tabId);
 		if (TAB_DEPARTMENTS.equals(tabId)) {
-			updateTab(tabId, R.id.tabAD_1);
+			updateTab(tabId, R.id.onetab_1);
 			mCurrentTab = 0;
 			return;
 		}

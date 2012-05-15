@@ -14,10 +14,12 @@ import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 
-public class TabManagerApp extends Fragment implements OnTabChangeListener {
+public class TabManagerChild extends Fragment implements OnTabChangeListener {
 
-	public static final String TAB_MYAPPS = "MyApps";
-	public static final String TAB_ALLAPPS = "AllApps";
+	public static final String TAB_CHILDPROFILE = "ChildProfile";
+	public static final String TAB_CHILDGUARDIANS = "ChildGuardians";
+	public static final String TAB_CHILDMEDIA = "ChildMedia";
+	public static final String TAB_CHILDAPPS = "ChildApps";
 
 	private View mRoot;
 	private TabHost mTabHost;
@@ -30,7 +32,7 @@ public class TabManagerApp extends Fragment implements OnTabChangeListener {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		mRoot = inflater.inflate(R.layout.twotabsview, null);
+		mRoot = inflater.inflate(R.layout.fourtabsview, null);
 		mTabHost = (TabHost) mRoot.findViewById(android.R.id.tabhost);
 		setupTabs();
 		return mRoot;
@@ -44,22 +46,24 @@ public class TabManagerApp extends Fragment implements OnTabChangeListener {
 		mTabHost.setOnTabChangedListener(this);
 		mTabHost.setCurrentTab(mCurrentTab);
 
-		updateTab(TAB_MYAPPS, R.id.twotab_1);
+		updateTab(TAB_CHILDPROFILE, R.id.fourtab_1);
 
-		Button b = (Button) getView().findViewById(R.id.b2Tab);
+		Button b = (Button) getView().findViewById(R.id.b4Tab);
 		b.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				FragParentTab.switchTab(FragParentTab.TABPROFILE);
+				getActivity().finish();
 			}
 		});
 	}
 
 	private void setupTabs() {
 		mTabHost.setup();
-		mTabHost.addTab(newTab(TAB_MYAPPS, R.string.tab_myapps, R.id.twotab_1));
-		mTabHost.addTab(newTab(TAB_ALLAPPS, R.string.tab_allapps, R.id.twotab_2));
+		mTabHost.addTab(newTab(TAB_CHILDPROFILE, R.string.tab_childprofile, R.id.fourtab_1));
+		mTabHost.addTab(newTab(TAB_CHILDGUARDIANS, R.string.tab_childguardians, R.id.fourtab_2));
+		mTabHost.addTab(newTab(TAB_CHILDMEDIA, R.string.tab_childmedia, R.id.fourtab_3));
+		mTabHost.addTab(newTab(TAB_CHILDAPPS, R.string.tab_childapps, R.id.fourtab_4));
 	}
 
 	private TabSpec newTab(String tag, int labelId, int tabContentId) {
@@ -76,14 +80,24 @@ public class TabManagerApp extends Fragment implements OnTabChangeListener {
 
 	@Override
 	public void onTabChanged(String tabId) {
-		if (TAB_MYAPPS.equals(tabId)) {
-			updateTab(tabId, R.id.twotab_1);
+		if (TAB_CHILDPROFILE.equals(tabId)) {
+			updateTab(tabId, R.id.fourtab_1);
 			mCurrentTab = 0;
 			return;
 		}
-		if (TAB_ALLAPPS.equals(tabId)) {
-			updateTab(tabId, R.id.twotab_2);
+		if (TAB_CHILDGUARDIANS.equals(tabId)) {
+			updateTab(tabId, R.id.fourtab_2);
 			mCurrentTab = 1;
+			return;
+		}
+		if (TAB_CHILDMEDIA.equals(tabId)) {
+			updateTab(tabId, R.id.fourtab_3);
+			mCurrentTab = 2;
+			return;
+		}
+		if (TAB_CHILDAPPS.equals(tabId)) {
+			updateTab(tabId, R.id.fourtab_4);
+			mCurrentTab = 3;
 			return;
 		}
 	}
@@ -91,15 +105,27 @@ public class TabManagerApp extends Fragment implements OnTabChangeListener {
 	private void updateTab(String tabId, int placeholder) {
 		FragmentManager fm = getFragmentManager();
 
-		if (TAB_MYAPPS.equals(tabId)) {
+		if (TAB_CHILDPROFILE.equals(tabId)) {
 			fm.beginTransaction()
-			.replace(placeholder, new MyAppsFrag(), tabId)
+			.replace(placeholder, new MyProfileFrag(), tabId)
 			.commit();
 			return;
 		}
-		if (TAB_ALLAPPS.equals(tabId)) {
+		if (TAB_CHILDGUARDIANS.equals(tabId)) {
 			fm.beginTransaction()
-			.replace(placeholder, new AllAppsFrag(), tabId)
+			.replace(placeholder, new MyChildrenFrag(), tabId)
+			.commit();
+			return;
+		}
+		if (TAB_CHILDMEDIA.equals(tabId)) {
+			fm.beginTransaction()
+			.replace(placeholder, new MyDepartmentsFrag(), tabId)
+			.commit();
+			return;
+		}
+		if (TAB_CHILDAPPS.equals(tabId)) {
+			fm.beginTransaction()
+			.replace(placeholder, new MyDepChildrenFrag(), tabId)
 			.commit();
 			return;
 		}

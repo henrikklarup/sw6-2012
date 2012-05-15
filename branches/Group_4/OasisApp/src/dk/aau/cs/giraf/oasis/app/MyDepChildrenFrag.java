@@ -38,9 +38,6 @@ public class MyDepChildrenFrag extends ExpandableListFragment {
 
 		helper = new Helper(getActivity().getApplicationContext());
 
-		tvHeader = (TextView) getView().findViewById(R.id.tvChildHeader);
-		tvHeader.setText("My Dep. Children");
-
 		if (MainActivity.guardian != null) {
 			updateList();
 		} else {

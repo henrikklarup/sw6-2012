@@ -32,7 +32,7 @@ public class TabManagerProfile extends Fragment implements OnTabChangeListener {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		mRoot = inflater.inflate(R.layout.tabprofileview, null);
+		mRoot = inflater.inflate(R.layout.fourtabsview, null);
 		mTabHost = (TabHost) mRoot.findViewById(android.R.id.tabhost);
 		setupTabs();
 		return mRoot;
@@ -46,14 +46,13 @@ public class TabManagerProfile extends Fragment implements OnTabChangeListener {
 		mTabHost.setOnTabChangedListener(this);
 		mTabHost.setCurrentTab(mCurrentTab);
 
-		updateTab(TAB_MYPROFILE, R.id.tabP_1);
+		updateTab(TAB_MYPROFILE, R.id.fourtab_1);
 
-		Button b = (Button) getView().findViewById(R.id.bTabProfile);
+		Button b = (Button) getView().findViewById(R.id.b4Tab);
 		b.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				getActivity().finish();
 			}
 		});
@@ -61,14 +60,13 @@ public class TabManagerProfile extends Fragment implements OnTabChangeListener {
 
 	private void setupTabs() {
 		mTabHost.setup();
-		mTabHost.addTab(newTab(TAB_MYPROFILE, R.string.tab_myprofile, R.id.tabP_1));
-		mTabHost.addTab(newTab(TAB_MYCHILDREN, R.string.tab_mychildren, R.id.tabP_2));
-		mTabHost.addTab(newTab(TAB_MYDEPARTMENTS, R.string.tab_mydepartments, R.id.tabP_3));
-		mTabHost.addTab(newTab(TAB_MYDEPCHILDREN, R.string.tab_mydepchildren, R.id.tabP_4));
+		mTabHost.addTab(newTab(TAB_MYPROFILE, R.string.tab_myprofile, R.id.fourtab_1));
+		mTabHost.addTab(newTab(TAB_MYCHILDREN, R.string.tab_mychildren, R.id.fourtab_2));
+		mTabHost.addTab(newTab(TAB_MYDEPARTMENTS, R.string.tab_mydepartments, R.id.fourtab_3));
+		mTabHost.addTab(newTab(TAB_MYDEPCHILDREN, R.string.tab_mydepchildren, R.id.fourtab_4));
 	}
 
 	private TabSpec newTab(String tag, int labelId, int tabContentId) {
-		//		Log.d(TAG, "buildTab(): tag=" + tag);
 
 		View indicator = LayoutInflater.from(getActivity()).inflate(
 				R.layout.tab, (ViewGroup) mRoot.findViewById(android.R.id.tabs), false);
@@ -82,24 +80,23 @@ public class TabManagerProfile extends Fragment implements OnTabChangeListener {
 
 	@Override
 	public void onTabChanged(String tabId) {
-		//		Log.d(TAG, "onTabChanged(): tabId=" + tabId);
 		if (TAB_MYPROFILE.equals(tabId)) {
-			updateTab(tabId, R.id.tabP_1);
+			updateTab(tabId, R.id.fourtab_1);
 			mCurrentTab = 0;
 			return;
 		}
 		if (TAB_MYCHILDREN.equals(tabId)) {
-			updateTab(tabId, R.id.tabP_2);
+			updateTab(tabId, R.id.fourtab_2);
 			mCurrentTab = 1;
 			return;
 		}
 		if (TAB_MYDEPARTMENTS.equals(tabId)) {
-			updateTab(tabId, R.id.tabP_3);
+			updateTab(tabId, R.id.fourtab_3);
 			mCurrentTab = 2;
 			return;
 		}
 		if (TAB_MYDEPCHILDREN.equals(tabId)) {
-			updateTab(tabId, R.id.tabP_4);
+			updateTab(tabId, R.id.fourtab_4);
 			mCurrentTab = 3;
 			return;
 		}
