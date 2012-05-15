@@ -85,19 +85,11 @@ public class PARROTDataLoader {
 					break;
 				}
 
-
-				//				if(categoryString !=null)		//If the category of that number exists
-				//				{
 				String colourString = specialSettings.get("category"+number).get("colour");
 				int col=Integer.valueOf(colourString);
 				String iconString = specialSettings.get("category"+number).get("icon");
 				parrotUser.addCategory(loadCategory(categoryString,col,iconString));
 				number++;
-				//				}
-				//				else
-				//				{
-				//					break;
-				//				}
 
 			}
 
@@ -246,7 +238,6 @@ public class PARROTDataLoader {
 	public void TESTsaveTestProfile()
 	{
 		help = new Helper(parrent);
-		//help.CreateDummyData();
 		Profile tempProf = new Profile("Jens","Jensen",null,Profile.pRoles.CHILD.ordinal(),12345678,null,null);
 		Long profileId = help.profilesHelper.insertProfile(tempProf);
 
