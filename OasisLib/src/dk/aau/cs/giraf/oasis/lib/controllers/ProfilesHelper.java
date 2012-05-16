@@ -201,6 +201,40 @@ public class ProfilesHelper {
 	}
 	
 	/**
+	 * Get all guardians
+	 * @return List of guardians
+	 */
+	public List<Profile> getGuardians() {
+		List<Profile> guardians = new ArrayList<Profile>();
+		
+		Cursor c = _context.getContentResolver().query(ProfilesMetaData.CONTENT_URI, columns, ProfilesMetaData.Table.COLUMN_ROLE + " = '" + Profile.pRoles.GUARDIAN.ordinal() + "'", null, null);
+
+		if (c != null) {
+			guardians = cursorToProfiles(c);
+			c.close();
+		}
+
+		return guardians;
+	}
+	
+	/**
+	 * Get all children
+	 * @return List of children
+	 */
+	public List<Profile> getChildren() {
+		List<Profile> children = new ArrayList<Profile>();
+		
+		Cursor c = _context.getContentResolver().query(ProfilesMetaData.CONTENT_URI, columns, ProfilesMetaData.Table.COLUMN_ROLE + " = '" + Profile.pRoles.CHILD.ordinal() + "'", null, null);
+
+		if (c != null) {
+			children = cursorToProfiles(c);
+			c.close();
+		}
+
+		return children;
+	}
+	
+	/**
 	 * Get all profiles by a role
 	 * @return List<Profile>, containing all profiles
 	 */	
@@ -278,7 +312,7 @@ public class ProfilesHelper {
 		List<Profile> profiles = new ArrayList<Profile>();
 		
 		if (guardian.getPRole() == pRoles.GUARDIAN.ordinal() || guardian.getPRole() == pRoles.PARENT.ordinal()) {
-			List<HasGuardian> list = hg.getChildrenByGuardian(guardian);
+			List<HasGuardian> list = hg.getHasGuardiansByProfile(guardian);
 			
 			for (HasGuardian hgModel : list) {
 				Profile child = getProfileById(hgModel.getIdChild());
@@ -289,6 +323,24 @@ public class ProfilesHelper {
 		}
 
 		return profiles;
+	}
+	
+	/**
+	 * get children with no department
+	 * @return list of children with no department
+	 */
+	public List<Profile> getChildrenWithNoDepartment() {
+		List<Profile> allChildren = getChildren();
+		
+		List<HasDepartment> hasDepartments = hd.getHasDepartments();
+		for (HasDepartment hasDepartment : hasDepartments) {
+			Profile profile = getProfileById(hasDepartment.getIdProfile());
+			if (profile.getPRole() == Profile.pRoles.CHILD.ordinal()) {
+				allChildren.remove(profile);
+			}
+		}
+		
+		return allChildren;
 	}
 	
 	/**
@@ -306,6 +358,24 @@ public class ProfilesHelper {
 		
 		return profiles;
 	}
+	
+	/**
+	 * get guardians with no department
+	 * @return list of guardians with no department
+	 */
+	public List<Profile> getGuardiansWithNoDepartment() {
+		List<Profile> allGuardians = getGuardians();
+		
+		List<HasDepartment> hasDepartments = hd.getHasDepartments();
+		for (HasDepartment hasDepartment : hasDepartments) {
+			Profile profile = getProfileById(hasDepartment.getIdProfile());
+			if (profile.getPRole() == Profile.pRoles.GUARDIAN.ordinal()) {
+				allGuardians.remove(profile);
+			}
+		}
+		
+		return allGuardians;
+	}
 
 	/**
 	 * Get guardian by department
@@ -313,18 +383,40 @@ public class ProfilesHelper {
 	 * @return List of profiles
 	 */
 	public List<Profile> getGuardiansByDepartment(Department department) {
-		List<Profile> profiles = new ArrayList<Profile>();
+		List<Profile> guardians = new ArrayList<Profile>();
 		
 		List<HasDepartment> list = hd.getProfilesByDepartment(department);
 
 		for (HasDepartment hd : list) {
-			Profile profile = getProfileById(hd.getIdProfile());
-			if (profile.getPRole() == pRoles.GUARDIAN.ordinal()) {
-				profiles.add(profile);
+			Profile guardian = getProfileById(hd.getIdProfile());
+			if (guardian.getPRole() == pRoles.GUARDIAN.ordinal()) {
+				guardians.add(guardian);
 			}
 		}
 		
-		return profiles;
+		return guardians;
+	}
+	
+	/**
+	 * Get guardians by child
+	 * @param child Child profile to get by
+	 * @return List of guardians
+	 */
+	public List<Profile> getGuardiansByChild(Profile child) {
+		List<Profile> guardians = new ArrayList<Profile>();
+		
+		if (child.getPRole() == pRoles.CHILD.ordinal()) {
+			List<HasGuardian> list = hg.getHasGuardiansByProfile(child);
+			
+			for (HasGuardian hgModel : list) {
+				Profile guardian = getProfileById(hgModel.getIdGuardian());
+				if (child.getPRole() == pRoles.GUARDIAN.ordinal()) {
+					guardians.add(guardian);
+				}
+			}
+		}
+
+		return guardians;
 	}
 
 	/**
