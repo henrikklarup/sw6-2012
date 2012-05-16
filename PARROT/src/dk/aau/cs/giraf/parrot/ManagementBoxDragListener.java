@@ -23,34 +23,22 @@ public class ManagementBoxDragListener implements OnDragListener
 	}
 	
 	public boolean onDrag(View self, DragEvent event) {
-		if (event.getAction() == DragEvent.ACTION_DRAG_STARTED){
-			
-			
-			/*//From BoxDragListener. Not used here
-			if(self.getId() == R.id.sentenceboard && SpeechBoardFragment.dragOwnerID == R.id.sentenceboard)
-			{
-				draggedPictogram = SpeechBoardFragment.speechBoardCategory.getPictogramAtIndex(SpeechBoardFragment.draggedPictogramIndex);
-				if(draggedPictogram.isEmpty()==true)
-				{
-					//Do not allow dragging empty pictograms
-				}
-				else
-				{
-					GridView speech = (GridView) parrent.findViewById(R.id.sentenceboard);
-					SpeechBoardFragment.speechBoardCategory.removePictogram(SpeechBoardFragment.draggedPictogramIndex);	
-					SpeechBoardFragment.speechBoardCategory.addPictogram(new Pictogram("#usynlig#", null, null, null, parrent));
-					speech.setAdapter(new PictogramAdapter(SpeechBoardFragment.speechBoardCategory, parrent));
-				}
-			}
-			*/
+		if (event.getAction() == DragEvent.ACTION_DRAG_STARTED)
+		{
 			//Dummy
-		} else if (event.getAction() == DragEvent.ACTION_DRAG_ENTERED){ 
+		} 
+		else if (event.getAction() == DragEvent.ACTION_DRAG_ENTERED)
+		{ 
 			insideOfMe = true;
-		} else if (event.getAction() == DragEvent.ACTION_DRAG_EXITED){
+		} 
+		else if (event.getAction() == DragEvent.ACTION_DRAG_EXITED)
+		{
 			insideOfMe = false;
-		} else if (event.getAction() == DragEvent.ACTION_DROP){
-			if (insideOfMe){
-
+		} 
+		else if (event.getAction() == DragEvent.ACTION_DROP)
+		{
+			if (insideOfMe)
+			{
 				if(self.getId()==R.id.trash && ManageCategoryFragment.catDragOwnerID == R.id.pictograms) //We are to delete a pictogram from a category
 				{
 					Category temp = ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.currentCategoryId);
