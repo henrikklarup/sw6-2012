@@ -11,10 +11,13 @@ import android.view.View.DragShadowBuilder;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
+
 
 public class ManageCategoryFragment extends Fragment {
 
@@ -58,14 +61,34 @@ public class ManageCategoryFragment extends Fragment {
 
 		setListAdapter();
 		 */			
-
-
-		categories.setAdapter(new ListViewAdapter(parrent, R.layout.categoriesitem, profileBeingModified.getCategories()));
-
+		
+		ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(parrent, textArrayResId /*Get profiles*/, android.R.layout.simple_spinner_item); //Adapter for the spinner
+		spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		profiles.setAdapter(spinnerAdapter);
+		
+		
+		
+		categories.setAdapter(new ListViewAdapter(parrent, R.layout.categoriesitem, profileBeingModified.getCategories())); //Adapter for the category gridview
 
 		pictograms.setAdapter(new PictogramAdapter(profileBeingModified.getCategoryAt(currentCategoryId), parrent));
 
 		
+		profiles.setOnItemSelectedListener(new OnItemSelectedListener() //Here we chose what profile to show 
+		{
+
+			public void onItemSelected(AdapterView<?> arg0, View view, int position, long id) 
+			{
+				// TODO Auto-generated method stub
+				//profileBeingModified = /* profil på position pladsen i arrayet givet til adapteren*/;
+				
+			}
+
+			public void onNothingSelected(AdapterView<?> arg0) 
+			{
+				//Do nothing
+				
+			}
+		});
 
 		categories.setOnItemClickListener(new OnItemClickListener() //This is when we want to select a category
 		{
@@ -73,6 +96,8 @@ public class ManageCategoryFragment extends Fragment {
 			public void onItemClick(AdapterView<?> arg0, View view, int position, long id) 
 			{
 				currentCategoryId = position;
+				GridView pictograms = (GridView) parrent.findViewById(R.id.pictograms);
+				pictograms.setAdapter(new PictogramAdapter(profileBeingModified.getCategoryAt(currentCategoryId), parrent));
 			}
 		});
 
