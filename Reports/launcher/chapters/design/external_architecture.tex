@@ -17,10 +17,10 @@ The Oasis database is the single required service provider for the launcher.
 It allows for authenticating profiles and store settings for the launcher relative to the profile.
 
 \subsection{\guicomponents[]}
-The \guicomponents[] architecture is not final, and is based on existing Android architecture. An example of the architecture can be seen in \autoref{fig:gui_comp_architecture}.
+The \guicomponents[] architecture is not final, and is based on existing Android architecture. The architecture is not final as it is meant to be open and changeable by anyone involved developing \giraf[]. An example of the architecture can be seen in \autoref{fig:gui_comp_architecture}.
 The philosophy behind the architecture is to use existing Android UI components, with a new layout and possible added functionality.
 The reason for basing on existing Android components is in order to gain guidelines, and fallback mechanisms.
-The example shown in \autoref{fig:gui_comp_architecture} highlights a possible way incorporate this philosophy, assuming the need for a customized button: \textit{GButton}. 
+The example shown in \autoref{fig:gui_comp_architecture} highlights a possible way of incorporating an component, assuming the need for a customized button: \textit{GButton}. 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=1\textwidth]{gfx/gui_components_architecture.pdf}
