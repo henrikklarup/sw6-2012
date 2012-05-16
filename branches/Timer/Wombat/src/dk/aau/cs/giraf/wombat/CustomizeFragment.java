@@ -1,7 +1,6 @@
 package dk.aau.cs.giraf.wombat;
 
 import java.util.ArrayList;
-import java.util.Currency;
 
 import kankan.wheel.widget.OnWheelChangedListener;
 import kankan.wheel.widget.WheelView;
@@ -815,9 +814,6 @@ public class CustomizeFragment extends Fragment {
 		//FIXME: NOW
 		
 		int pictureRes = 0;
-		int textRes = 0;
-		int color = 0x00000000;
-		int alpha = 255;
 		
 
 
@@ -825,13 +821,11 @@ public class CustomizeFragment extends Fragment {
 			switch(att.getForm()){
 			case SingleImg:
 				pictureRes = R.drawable.thumbnail_single_pic;
-				alpha = 0;
-				color = 0;
+
 				break;
 			case SplitImg:
 				pictureRes = R.drawable.thumbnail_dual_pic;
-				alpha = 0;
-				//color = 0;
+
 				break;
 			}
 		} else {
@@ -840,15 +834,14 @@ public class CustomizeFragment extends Fragment {
 		
 		LayerDrawable ld = (LayerDrawable) getResources().getDrawable(R.drawable.attachment_layer);
 		
-		PorterDuffColorFilter filter = new PorterDuffColorFilter(color,	PorterDuff.Mode.SRC_ATOP);
+		PorterDuffColorFilter filter = new PorterDuffColorFilter(0xFFF,	PorterDuff.Mode.SRC_ATOP);
 		
 		Drawable d = getResources().getDrawable(R.drawable.attachment_background);
 		
-		d.setAlpha(alpha);
-		
+		d.setAlpha(0);
 		d.setColorFilter(filter);
 		
-		ld.setDrawableByLayerId(R.id.second_attachment_layer, d);
+		ld.setDrawableByLayerId(R.id.first_attachment_layer, d);
 		ld.setDrawableByLayerId(R.id.second_attachment_layer, getResources().getDrawable(pictureRes));
 		
 		donePictureButton.setCompoundDrawablesWithIntrinsicBounds(null, ld,	null, null);
