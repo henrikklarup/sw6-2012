@@ -127,13 +127,27 @@ public class MyChildrenFrag extends ExpandableListFragment {
 				adapter.AddGroup(d, result);
 			}
 		}
+		
+		ArrayList<Profile> noDepResult = new ArrayList<Profile>();
+		List<Profile> noDep = helper.profilesHelper.getChildrenWithNoDepartment();
+		for (Profile p : noDep) {
+			for (Profile p2 : list) {
+				if (p.getId() == p2.getId()) {
+					noDepResult.add(p);
+				}
+			}
+		}
+		if (!noDepResult.isEmpty()) {
+			Department rogueDep = new Department();
+			rogueDep.setName("Ingen Afdeling");
+			adapter.AddGroup(rogueDep, noDepResult);
+		}
 
 		setListAdapter(adapter);
 	}
 	
 	@Override
 	public void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		updateList();
 	}

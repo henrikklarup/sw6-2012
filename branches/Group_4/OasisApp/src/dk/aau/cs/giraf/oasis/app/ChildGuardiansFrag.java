@@ -16,12 +16,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Department;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
@@ -58,8 +56,8 @@ public class ChildGuardiansFrag extends ExpandableListFragment {
 
 			@Override
 			public void onClick(View v) {
-//				List<Profile> valueList = helper.profilesHelper.getGuardians();
-				List<Profile> valueList = helper.profilesHelper.getProfiles();
+				List<Profile> valueList = helper.profilesHelper.getGuardians();
+
 				List<String> items = new ArrayList<String>();
 				for (Profile p : valueList) {
 					String name = ""+p.getId(); 
@@ -71,15 +69,14 @@ public class ChildGuardiansFrag extends ExpandableListFragment {
 					items.add(name);
 				}
 
-				final tmpListAdapter adapter = new tmpListAdapter(getActivity(), R.layout.children_list_childitem, items);
+				final tmpListAdapter tmpAdapter = new tmpListAdapter(getActivity(), R.layout.children_list_childitem, items);
 
 				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 				builder.setTitle("Vælg en Pædagog");
-				builder.setAdapter(adapter,
-						new DialogInterface.OnClickListener() {
+				builder.setAdapter(tmpAdapter,	new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int item) {
-						String tmpPath = adapter.getItem(item);
+						String tmpPath = tmpAdapter.getItem(item);
 						String tmpA[] = tmpPath.split(" ");
 						Profile newP = helper.profilesHelper.getProfileById(Long.parseLong(tmpA[0]));
 						helper.profilesHelper.attachChildToGuardian(MainActivity.child, newP);
@@ -118,19 +115,19 @@ public class ChildGuardiansFrag extends ExpandableListFragment {
 				builder.setTitle("Profil");
 				LayoutInflater mInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				View view = mInflater.inflate(R.layout.profilepopup_view, null, false);
-				EditText tName = (EditText) view.findViewById(R.id.etProfileName);
+				TextView tName = (TextView) view.findViewById(R.id.tvName);
 				tName.setText(name);
-				EditText tPhone = (EditText) view.findViewById(R.id.etProfilePhone);
+				TextView tPhone = (TextView) view.findViewById(R.id.tvPhone);
 				tPhone.setText(""+MainActivity.guardian.getPhone());
-				ImageView iProfileImg = (ImageView) view.findViewById(R.id.iProfileImg);
+				ImageView iProfileImg = (ImageView) view.findViewById(R.id.iImg);
 				if (guardProfile.getPicture() != null) {
 					Bitmap bm = BitmapFactory.decodeFile(guardProfile.getPicture());
 					iProfileImg.setImageBitmap(bm);
 				} else {
 					iProfileImg.setImageResource(R.drawable.no_profile_pic);
 				}
-
-				builder.setNegativeButton("Cancel", null);
+				builder.setView(view);
+				builder.setNegativeButton("Tilbage", null);
 				AlertDialog alert = builder.create();
 				alert.show();
 
@@ -165,7 +162,6 @@ public class ChildGuardiansFrag extends ExpandableListFragment {
 				public void onClick(DialogInterface dialog, int which) {
 					helper.profilesHelper.removeChildAttachmentToGuardian(MainActivity.child, guardProfile);
 					updateList();
-					Toast.makeText(getActivity(), guardProfile.toString(), Toast.LENGTH_SHORT).show();
 					dialog.dismiss();
 				}
 			});
@@ -178,11 +174,9 @@ public class ChildGuardiansFrag extends ExpandableListFragment {
 	private void updateList() {
 		adapter = new ChildListAdapter(getActivity().getApplicationContext());
 
-		//		list = helper.profilesHelper.getGuardiansByChild(MainActivity.child);
-		list = new ArrayList<Profile>();
+		list = helper.profilesHelper.getGuardiansByChild(MainActivity.child);
 
 		List<Department> depList = helper.departmentsHelper.getDepartments();
-
 		for(Department d : depList) {
 			ArrayList<Profile> result = new ArrayList<Profile>();
 			List<Profile> pList = helper.profilesHelper.getGuardiansByDepartment(d);		
@@ -197,6 +191,21 @@ public class ChildGuardiansFrag extends ExpandableListFragment {
 			if (!result.isEmpty()) {
 				adapter.AddGroup(d, result);
 			}
+		}
+		
+		ArrayList<Profile> noDepResult = new ArrayList<Profile>();
+		List<Profile> noDep = helper.profilesHelper.getGuardiansWithNoDepartment();
+		for (Profile p : noDep) {
+			for (Profile p2 : list) {
+				if (p.getId() == p2.getId()) {
+					noDepResult.add(p);
+				}
+			}
+		}
+		if (!noDepResult.isEmpty()) {
+			Department rogueDep = new Department();
+			rogueDep.setName("Ingen Afdeling");
+			adapter.AddGroup(rogueDep, noDepResult);
 		}
 
 		setListAdapter(adapter);
