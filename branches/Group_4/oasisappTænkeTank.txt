@@ -23,4 +23,18 @@ Longclick på app listerne
 	- Mine apps -> sletter app attachment til profil
 	- Skal slette item på alle apps listen når metode kommer
  
+
+- Lav bedre medier, alle medier er tilknyttet alle departments og alle children
+- Lav getGuardiansByChild() //Done
+- Lav getGuardians() //Done
+- Lav getChildren() //Done
+- getMyPictures() //Done
+- getMySounds() //Done
+- getMyWords() //DOne
+- getChildrenWithNoDep() 
+- getGuardiansWithNoDep()
+
+- Lav equals på profile //Done
+
+Opdater viewDB
  
