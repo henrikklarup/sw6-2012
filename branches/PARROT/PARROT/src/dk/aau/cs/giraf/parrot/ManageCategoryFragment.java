@@ -55,7 +55,7 @@ public class ManageCategoryFragment extends Fragment {
 		GridView pictograms = (GridView) parrent.findViewById(R.id.pictograms);
 		ImageView trash = (ImageView) parrent.findViewById(R.id.trash);
 		PARROTDataLoader dummyLoader = new PARROTDataLoader(parrent);
-		//ImageView categoryPic = (ImageView) parrent.findViewById(R.id.categorypic);//FIXME Make xml for this to work.
+		ImageView categoryPic = (ImageView) parrent.findViewById(R.id.categorypic);
 
 		/*
 		ArrayAdapter<String> categoriesArray = new ArrayAdap; //FIXME not sure which constructor to use...
@@ -99,8 +99,9 @@ public class ManageCategoryFragment extends Fragment {
 		{
 
 			public void onItemClick(AdapterView<?> arg0, View view, int position, long id) 
-			{
+			{	
 				currentCategoryId = position;
+				categoryPic.setImageBitmap(ManageCategoryFragment.profileBeingModified.getCategoryAt(currentCategoryId).getIcon().getBitmap());
 				GridView pictograms = (GridView) parrent.findViewById(R.id.pictograms);
 				pictograms.setAdapter(new PictogramAdapter(profileBeingModified.getCategoryAt(currentCategoryId), parrent));
 			}
