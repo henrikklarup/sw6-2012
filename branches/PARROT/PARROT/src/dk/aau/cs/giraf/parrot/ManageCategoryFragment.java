@@ -63,16 +63,20 @@ public class ManageCategoryFragment extends Fragment {
 		setListAdapter();
 		 */			
 		
-		ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(parrent, dummyLoader.getChildrenFromCurrentGuardian(), android.R.layout.simple_spinner_item); //Adapter for the spinner //FIXME
-		spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		profiles.setAdapter(spinnerAdapter);
+//		ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(parrent, dummyLoader.getChildrenFromCurrentGuardian(), android.R.layout.simple_spinner_item); //Adapter for the spinner //FIXME
+//		spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//		profiles.setAdapter(spinnerAdapter);
 		
 		
 		
 		categories.setAdapter(new ListViewAdapter(parrent, R.layout.categoriesitem, profileBeingModified.getCategories())); //Adapter for the category gridview
 
 		pictograms.setAdapter(new PictogramAdapter(profileBeingModified.getCategoryAt(currentCategoryId), parrent));
-
+		
+		parrent.findViewById(R.id.trash).setOnDragListener(new BoxDragListener(parrent));
+		parrent.findViewById(R.id.categories).setOnDragListener(new BoxDragListener(parrent));
+		parrent.findViewById(R.id.pictograms).setOnDragListener(new BoxDragListener(parrent));
+		
 		
 		profiles.setOnItemSelectedListener(new OnItemSelectedListener() //Here we chose what profile to show 
 		{
@@ -131,11 +135,10 @@ public class ManageCategoryFragment extends Fragment {
 		});
 	}
 	
-	public void onPause() 
-	{
-		
-		saveProfileChanges(parrent, profileBeingModified);
-	}
+//	public void onPause() 
+//	{
+//		saveProfileChanges(parrent, profileBeingModified);
+//	}
 	
 	public void saveProfileChanges(Activity parrent, PARROTProfile profileBeingModified)
 	{
