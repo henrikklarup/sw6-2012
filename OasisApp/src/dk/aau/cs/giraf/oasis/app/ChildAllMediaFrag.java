@@ -13,13 +13,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.ImageView;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
 
-public class MyPrivateMediaFrag extends ListFragment {
+public class ChildAllMediaFrag extends ListFragment {
 
 	Helper helper;
 	List<Media> list;
@@ -43,8 +43,8 @@ public class MyPrivateMediaFrag extends ListFragment {
 
 		helper = new Helper(getActivity().getApplicationContext());
 
-		if (MainActivity.guardian != null) {
-			list = helper.mediaHelper.getMediaIOwn(MainActivity.guardian);
+		if (MainActivity.child != null) {
+			list = helper.mediaHelper.getPublicMedia();
 			setListAdapter(new MediaListAdapter(getActivity().getApplicationContext(), list));
 		} else {
 			setListAdapter(null);
@@ -83,8 +83,8 @@ public class MyPrivateMediaFrag extends ListFragment {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						helper.mediaHelper.removeMediaAttachmentToProfile(media, MainActivity.guardian);
-						list = helper.mediaHelper.getMediaIOwn(MainActivity.guardian);
+						helper.mediaHelper.removeMediaAttachmentToProfile(media, MainActivity.child);
+						list = helper.mediaHelper.getPublicMedia();
 						setListAdapter(new MediaListAdapter(getActivity().getApplicationContext(), list));
 						dialog.dismiss();
 					}

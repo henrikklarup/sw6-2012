@@ -21,7 +21,7 @@ import android.widget.TextView;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
 
-public class MyProfileFrag extends Fragment {
+public class ChildProfileFrag extends Fragment {
 
 	private Button bMedia, bApps, bSettings;
 	private TextView tvName, tvPhone;
@@ -49,7 +49,7 @@ public class MyProfileFrag extends Fragment {
 		helper = new Helper(getActivity());
 
 		pPic = (ImageView) getView().findViewById(R.id.ivProfilePicture);
-		imgPath = MainActivity.guardian.getPicture();
+		imgPath = MainActivity.child.getPicture();
 		if (imgPath != null) {
 			Bitmap bm = BitmapFactory.decodeFile(imgPath);
 			pPic.setImageBitmap(bm);
@@ -60,30 +60,32 @@ public class MyProfileFrag extends Fragment {
 
 		tvName = (TextView) getView().findViewById(R.id.tvMyProfileName);
 
-		name = MainActivity.guardian.getFirstname();
-		if (MainActivity.guardian.getMiddlename() != null) {
-			name += " " + MainActivity.guardian.getMiddlename();
+		name = MainActivity.child.getFirstname();
+		if (MainActivity.child.getMiddlename() != null) {
+			name += " " + MainActivity.child.getMiddlename();
 		}
-		name += " " + MainActivity.guardian.getSurname();
+		name += " " + MainActivity.child.getSurname();
 		tvName.setText(name);
 		tvPhone = (TextView) getView().findViewById(R.id.tvMyProfilePhone);
-		tvPhone.setText("" + MainActivity.guardian.getPhone());
+		tvPhone.setText("" + MainActivity.child.getPhone());
 
 		bMedia = (Button) getView().findViewById(R.id.bMyProfileMedia);
+		bMedia.setText(R.string.childmedia);
 		bMedia.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				FragParentTab.switchTab(FragParentTab.TABMEDIA);
+				FragParentTab.switchTab(FragParentTab.TABCHILDMEDIA);
 			}
 		});
 
 		bApps = (Button) getView().findViewById(R.id.bMyProfileApps);
+		bApps.setText(R.string.childapps);
 		bApps.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				FragParentTab.switchTab(FragParentTab.TABAPP);
+				FragParentTab.switchTab(FragParentTab.TABCHILDAPP);
 			}
 		});
 
@@ -100,7 +102,7 @@ public class MyProfileFrag extends Fragment {
 				tName = (EditText) view.findViewById(R.id.etProfileName);
 				tName.setText(name);
 				tPhone = (EditText) view.findViewById(R.id.etProfilePhone);
-				tPhone.setText(""+MainActivity.guardian.getPhone());
+				tPhone.setText(""+MainActivity.child.getPhone());
 				iProfileImg = (ImageView) view.findViewById(R.id.iProfileImg);
 				if (imgPath != null) {
 					Bitmap bm = BitmapFactory.decodeFile(imgPath);
@@ -161,12 +163,12 @@ public class MyProfileFrag extends Fragment {
 						}
 						String last = tmp[tmp.length-1];
 						String newPhone = tPhone.getText().toString();
-						MainActivity.guardian.setFirstname(first);
-						MainActivity.guardian.setSurname(last);
-						MainActivity.guardian.setMiddlename(middle);
-						MainActivity.guardian.setPhone(Long.parseLong(newPhone));
-						MainActivity.guardian.setPicture(tmpPath);
-						helper.profilesHelper.modifyProfile(MainActivity.guardian);
+						MainActivity.child.setFirstname(first);
+						MainActivity.child.setSurname(last);
+						MainActivity.child.setMiddlename(middle);
+						MainActivity.child.setPhone(Long.parseLong(newPhone));
+						MainActivity.child.setPicture(tmpPath);
+						helper.profilesHelper.modifyProfile(MainActivity.child);
 
 						name = newName;
 						tvName.setText(newName);

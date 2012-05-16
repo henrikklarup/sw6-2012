@@ -3,10 +3,19 @@ package dk.aau.cs.giraf.oasis.app;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.TextView;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Department;
@@ -18,6 +27,7 @@ public class MyChildrenFrag extends ExpandableListFragment {
 	List<Profile> list;
 	TextView tvHeader;
 	ChildListAdapter adapter;
+	Profile childProfile;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -37,10 +47,61 @@ public class MyChildrenFrag extends ExpandableListFragment {
 
 		helper = new Helper(getActivity().getApplicationContext());
 
+		Button b = (Button) getView().findViewById(R.id.bAddProfile);
+		b.setVisibility(View.GONE);
+
 		if (MainActivity.guardian != null) {
 			updateList();
 		} else {
 			setListAdapter(null);
+		}
+
+		getExpandableListView().setOnChildClickListener(new OnChildClickListener() {
+
+			@Override
+			public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+
+				MainActivity.child = adapter.getChild(groupPosition, childPosition);
+				Intent direct = new Intent(getActivity(), FragParentTab.class);
+				direct.putExtra("tabView", FragParentTab.TABCHILD);
+				startActivity(direct);
+				return false;
+			}
+		});
+
+		registerForContextMenu(getExpandableListView());
+
+	}
+
+	public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) {
+
+		super.onCreateContextMenu(menu, v, menuInfo);
+		ExpandableListView.ExpandableListContextMenuInfo info =
+				(ExpandableListView.ExpandableListContextMenuInfo) menuInfo;
+		int type =
+				ExpandableListView.getPackedPositionType(info.packedPosition);
+		int group =
+				ExpandableListView.getPackedPositionGroup(info.packedPosition);
+		int child =
+				ExpandableListView.getPackedPositionChild(info.packedPosition);
+		//Only create a context menu for child items
+		if (type == 1) {
+			childProfile = adapter.getChild(group, child);
+			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			builder.setTitle("Fjern Barn");
+			builder.setMessage("Sikker på at du vil fjerne Barnet?");
+			builder.setPositiveButton("Ja", new OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					helper.profilesHelper.removeChildAttachmentToGuardian(childProfile, MainActivity.guardian);
+					updateList();
+					dialog.dismiss();
+				}
+			});
+			builder.setNegativeButton("Nej", null);
+			AlertDialog alert = builder.create();
+			alert.show();
 		}
 	}
 
@@ -56,16 +117,25 @@ public class MyChildrenFrag extends ExpandableListFragment {
 			List<Profile> pList = helper.profilesHelper.getChildrenByDepartment(d);		
 
 			for(Profile p : pList) {
-				if (!list.contains(p)) {
-					result.add(p);
+				for (Profile p2 : list) {
+					if (p.getId() == p2.getId()) {
+						result.add(p);
+					}
 				}
 			}
 			if (!result.isEmpty()) {
-				adapter.AddGroup(d.getName(), result);
+				adapter.AddGroup(d, result);
 			}
 		}
 
 		setListAdapter(adapter);
+	}
+	
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		updateList();
 	}
 
 }

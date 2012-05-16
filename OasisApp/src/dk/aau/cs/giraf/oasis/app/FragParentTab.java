@@ -14,6 +14,9 @@ public class FragParentTab extends Activity {
 	public final static int TABMEDIA = 2;
 	public final static int TABALLPROFILES = 3;
 	public final static int TABALLDEPARTMENTS = 4;
+	public final static int TABCHILD = 5;
+	public final static int TABCHILDAPP = 6;
+	public final static int TABCHILDMEDIA = 7;
 	static FragmentManager t;
 
 	@Override
@@ -45,6 +48,8 @@ public class FragParentTab extends Activity {
 		case TABALLDEPARTMENTS:
 			t.beginTransaction().add(R.id.fDetails, new TabManagerAllDepartments()).commit();
 			break;
+		case TABCHILD:
+			t.beginTransaction().add(R.id.fDetails, new TabManagerChild()).commit();
 		}
 	}
 
@@ -60,6 +65,21 @@ public class FragParentTab extends Activity {
 		case TABAPP:
 			t.beginTransaction().replace(R.id.fDetails, new TabManagerApp()).commit();
 			break;
+		case TABCHILD:
+			t.beginTransaction().replace(R.id.fDetails, new TabManagerChild()).commit();
+			break;
+		case TABCHILDMEDIA:
+			t.beginTransaction().replace(R.id.fDetails, new TabManagerChildMedia()).commit();
+			break;
+		case TABCHILDAPP:
+			t.beginTransaction().replace(R.id.fDetails, new TabManagerChildApp()).commit();
+			break;
 		}
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		t = getFragmentManager();
 	}
 }

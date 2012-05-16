@@ -17,7 +17,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ImageView;
 import dk.aau.cs.giraf.oasis.lib.Helper;
-import dk.aau.cs.giraf.oasis.lib.models.Department;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
 
 public class AllMediaFrag extends ListFragment {
@@ -45,16 +44,7 @@ public class AllMediaFrag extends ListFragment {
 		helper = new Helper(getActivity().getApplicationContext());
 
 		if (MainActivity.guardian != null) {
-			list = helper.mediaHelper.getMediaByProfile(MainActivity.guardian);
-			List<Department> deplist = helper.departmentsHelper.getDepartmentsByProfile(MainActivity.guardian);
-			for (Department d : deplist) {
-				List<Media> tmp = helper.mediaHelper.getMediaByDepartment(d);
-				for (Media m : tmp) {
-					if (!list.contains(m)) {
-						list.add(m);
-					}
-				}
-			}
+			list = helper.mediaHelper.getPublicMedia();
 			setListAdapter(new MediaListAdapter(getActivity().getApplicationContext(), list));
 		} else {
 			setListAdapter(null);
@@ -94,16 +84,7 @@ public class AllMediaFrag extends ListFragment {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						helper.mediaHelper.removeMediaAttachmentToProfile(media, MainActivity.guardian);
-						list = helper.mediaHelper.getMediaByProfile(MainActivity.guardian);
-						List<Department> deplist = helper.departmentsHelper.getDepartmentsByProfile(MainActivity.guardian);
-						for (Department d : deplist) {
-							List<Media> tmp = helper.mediaHelper.getMediaByDepartment(d);
-							for (Media m : tmp) {
-								if (!list.contains(m)) {
-									list.add(m);
-								}
-							}
-						}
+						list = helper.mediaHelper.getPublicMedia();
 						setListAdapter(new MediaListAdapter(getActivity().getApplicationContext(), list));
 						dialog.dismiss();
 					}

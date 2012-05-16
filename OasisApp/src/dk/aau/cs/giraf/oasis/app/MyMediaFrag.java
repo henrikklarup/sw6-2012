@@ -44,7 +44,7 @@ public class MyMediaFrag extends ListFragment {
 		helper = new Helper(getActivity().getApplicationContext());
 
 		if (MainActivity.guardian != null) {
-			list = helper.mediaHelper.getMediaByProfile(MainActivity.guardian);
+			list = helper.mediaHelper.getMyMedia(MainActivity.guardian);
 			setListAdapter(new MediaListAdapter(getActivity().getApplicationContext(), list));
 		} else {
 			setListAdapter(null);
@@ -84,7 +84,7 @@ public class MyMediaFrag extends ListFragment {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						helper.mediaHelper.removeMediaAttachmentToProfile(media, MainActivity.guardian);
-						list = helper.mediaHelper.getMediaByProfile(MainActivity.guardian);
+						list = helper.mediaHelper.getMyMedia(MainActivity.guardian);
 						setListAdapter(new MediaListAdapter(getActivity().getApplicationContext(), list));
 						dialog.dismiss();
 					}

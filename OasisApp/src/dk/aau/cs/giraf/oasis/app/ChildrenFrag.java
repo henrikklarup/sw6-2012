@@ -57,7 +57,7 @@ public class ChildrenFrag extends ExpandableListFragment {
 				}
 			}
 			if (!result.isEmpty()) {
-				adapter.AddGroup(d.getName(), result);
+				adapter.AddGroup(d, result);
 			}
 		}
 
