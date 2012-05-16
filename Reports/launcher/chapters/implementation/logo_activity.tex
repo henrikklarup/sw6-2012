@@ -1,6 +1,6 @@
 \section{Logo Activity}
 \todo{Husk at screenshots af alle activities skal vaere i appendix}
-The \activity{LogoActivity} activity is a splash screen, which shows the \giraf[] logo while the system is the loading the activity \activity{AuthenticationActivity}. \activity{LogoActivity} is justified by the possibility that the device running the launcher might spend more than a reasonable amount of time to load the authentication activity, and therefore might give the impression that the system had crashed or is not responding. The goal is to increase responsiveness. 
+The \activity{LogoActivity} activity is a splash screen, which shows the \giraf[] logo while the system is loading the activity \activity{AuthenticationActivity} or \activity{HomeActivity}, if this is loaded in a reasonable amount of time, this is set to 2000ms. \activity{LogoActivity} is justified by the possibility that the device running the launcher might spend more than a reasonable amount of time to load the authentication activity, and therefore might give the impression that the system had crashed or is not responding. The goal is to increase responsiveness. 
 
 
 However, \activity{LogoActivity} does not indicate whether or not the activity itself has crashed. This is a feature which is on the backlog. \todo{husk at tilfoeje til backlog + suggestion: solution could be create an animation}
