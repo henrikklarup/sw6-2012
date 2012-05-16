@@ -3,7 +3,8 @@ The logo activity is a splash screen, which shows the \giraf[] logo while the sy
 
 However, the logo activity does not indicate whether or not the activity itself has crashed. This is a feature which is on the backlog. \todo{husk at tilfoeje til backlog + suggestion: solution could be create an animation}
 
-The logo activity implements TIME-AUTO-LOGIN-FEATURE -- explained in \autoref{sec:autologin} -- by using the \method{sessionExpired} method, found in \class{Tools} class, seen in \autoref{lst:sessionexpired}. The usage of the \method{sessionExpired} method can be seen in \autoref{lst:sessionexpiredusage}
+The logo activity implements TIME-AUTO-LOGIN-FEATURE -- explained in \autoref{sec:autologin} -- by using the \method{sessionExpired} method, found in \class{Tools} class, seen in \autoref{lst:sessionexpired}.
+The usage of the \method{sessionExpired} method can be seen in \autoref{lst:sessionexpiredusage}
 
 \begin{lstlisting}[style=sourceCode, language=JAVA, caption=Snippet of: LogoActivity.java, label=lst:sessionexpiredusage] 
 		if (Tools.sessionExpired(mContext)) {
