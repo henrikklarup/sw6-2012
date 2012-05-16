@@ -15,9 +15,9 @@ public class Guardian {
 	
 	private ArrayList<Child> _guard = null;
 	
-	private static ArrayList<SubProfile> _lastUsed = null;
+	private ArrayList<SubProfile> _lastUsed = null;
 	
-	private static ArrayList<SubProfile> _predef = null;
+	private ArrayList<SubProfile> _predef = null;
 	
 	private ArrayList<Child> _sortedList = null;
 	
@@ -27,34 +27,38 @@ public class Guardian {
 	
 	public ArrayList<Art> ArtList = new ArrayList<Art>();
 	
-	public static String _name = null;
-	public static CRUD crud;
+	public String _name = null;
+	public CRUD crud;
 	
 	private int id = -1;
 	
 	private int _artId = -1;
 	
-	private static App m_app;
-	private static Helper oHelp;
-	private static Profile m_oGuard;
+	private App m_app;
+	private Helper oHelp;
+	private Profile m_oGuard;
 	
-	private static long childId;
-	private static long guardianId;
-	static Context m_context;
+	private long childId;
+	private long guardianId;
+	Context m_context;
 	
-	public static int profilePosition;
-	public static long profileID;
-	public static long subProfileID; 			// Stores the id of the saved subprofile
-	public static boolean subProfileFirstClick;	// When a subprofile is saved, this is set to true
+	public int profilePosition;
+	public long profileID;
+	public long subProfileID; 			// Stores the id of the saved subprofile
+	public boolean subProfileFirstClick;	// When a subprofile is saved, this is set to true
 												// When something is clicked in the subprofile list, set to false
-	public static boolean profileFirstClick;
-	public static int backgroundColor;
+	public boolean profileFirstClick;
+	public int backgroundColor;
 	
 	private ArrayList<formFactor> _mode = null;
 	
 	int getArtId(){
 		this._artId++;
 		return this._artId;
+	}
+	
+	public void reset(){
+		_instance = null;
 	}
 	
 	public ArrayList<formFactor> getMode(){
@@ -92,45 +96,48 @@ public class Guardian {
 	 * Guardian guard = Guadian.getInstance();
 	 * @return Guardian instance
 	 */
-	public static Guardian getInstance(long m_childId, long m_guardianId, Context c){
+	public static Guardian getInstance(long m_childId, long m_guardianId, Context c, ArrayList<Art> artList){
 		if(_instance == null){
 			_instance = new Guardian();
+			
+			_instance.ArtList = artList;
+		
+			
 			TimerHelper help = new TimerHelper();
-			profileID = m_childId;
-			guardianId = m_guardianId;
-			m_context = c;
+			_instance.profileID = m_childId;
+			_instance.guardianId = m_guardianId;
+			_instance.m_context = c;
 			
-			oHelp = new Helper(c);
+			_instance.oHelp = new Helper(c);
 			
-			long appId = findAppId();
-			guardianId = findGuardianId();
+			long appId = _instance.findAppId();
+			_instance.guardianId = _instance.findGuardianId();
 			
-			createChildren();
+			_instance.createChildren();
 			
-			crud = new CRUD(appId, c);
-			crud.loadGuardian(guardianId);
+			_instance.crud = new CRUD(appId, c);
+			_instance.crud.loadGuardian(_instance.guardianId);
 			
 			help.loadPredef();
+			
+			//_instance.crud.initLastUsed(_instance.m_oGuard.getId());
+			
 			_instance.publishList();
 			
 			//crud.retrieveLastUsed(m_guardianId);
 		}
-		return _instance;
+			return _instance;
 	}
 	
 	public static Guardian getInstance(){
-		if(_instance == null){
-			return _instance = new Guardian();
-		} else {
 			return _instance;
-		}
 	}
 	
 	/**
 	 * Find the app specified by the mainActivity, if non is avalible a default one is created
 	 * @return
 	 */
-	private static long findAppId() {
+	private long findAppId() {
 		// Find the app which has the same package name as this one
 		for (App a : oHelp.appsHelper.getApps()) {
 			String cname = m_context.getPackageName();
@@ -153,7 +160,7 @@ public class Guardian {
 	 * Search for the guard specified by the mainActivity, if non is existing a default one is created
 	 * @return
 	 */
-	private static long findGuardianId() {
+	private long findGuardianId() {
 		
 		if(guardianId != -1){
 			// Does the original guard exist
@@ -176,7 +183,7 @@ public class Guardian {
 				m_oGuard = new Profile("Mette", "Als", null, 1, 88888888, null, null);				
 				m_oGuard.setId(oHelp.profilesHelper.insertProfile(m_oGuard));
 				oHelp.appsHelper.attachAppToProfile(m_app, m_oGuard);
-				oHelp.profilesHelper.setCertificate("abcde", m_oGuard);
+				oHelp.profilesHelper.setCertificate("jkkxlagqyrztlrexhzofekyzrnppajeobqxcmunkqhsbrgpxdtqgygnmbhrgnpphaxsjshlpupgakmirhpyfaivvtpynqarxsghhilhkqvpelpreevykxurtppcggkzfaepihlodgznrmbrzgqucstflhmndibuymmvwauvdlyqnnlxkurinuypmqypspmkqavuhfwsh", m_oGuard);
 				
 			}
 		} 
@@ -185,7 +192,7 @@ public class Guardian {
 	}
 	
 	
-	private static void createChildren() {		
+	private void createChildren() {		
 		if(oHelp.profilesHelper.getChildrenByGuardian(m_oGuard).isEmpty()){
 			List<String> names = new ArrayList<String>();
 			names.add("Sigurd");
@@ -212,7 +219,7 @@ public class Guardian {
 	 * @return
 	 * 		Returns true if it completed, else returns false
 	 */
-	public static void saveGuardian(SubProfile currSubP) {
+	public void saveGuardian(SubProfile currSubP) {
 		crud.saveGuardian(guardianId, currSubP);
 	}	
 	
@@ -225,7 +232,7 @@ public class Guardian {
 	 * @return
 	 * 		Returns true if it completed, else returns false
 	 */
-	public static void saveChild(Child c, SubProfile sp){
+	public void saveChild(Child c, SubProfile sp){
 		crud.saveChild(c, sp);
 	}
 	
@@ -254,7 +261,7 @@ public class Guardian {
 	/**
 	 * Not in use atm
 	 */
-	private static void initLastUsedPredef(){
+	private void initLastUsedPredef(){
 		if(_lastUsed == null){
 			_lastUsed = new ArrayList<SubProfile>();
 		}

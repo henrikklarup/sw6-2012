@@ -24,6 +24,7 @@ public class WDialog extends Dialog{
 	private int layoutId = 1337;
 	private int editTextLayoutId = 1338;
 	private int textLayoutId = 1339;
+	Guardian guard = Guardian.getInstance();
 	
 	/**
 	 * Creates a new Wombat Dialog, with a list view in its body by default
@@ -40,7 +41,7 @@ public class WDialog extends Dialog{
 
 		// Sets the background color to the color from the Guardian (which is set in the MainActivity)
 		Drawable d = context.getResources().getDrawable(R.drawable.wdialog_background);
-		d.setColorFilter(Guardian.backgroundColor, PorterDuff.Mode.OVERLAY);
+		d.setColorFilter(guard.backgroundColor, PorterDuff.Mode.OVERLAY);
 		this.getWindow().setBackgroundDrawable(d);
 	}
 	

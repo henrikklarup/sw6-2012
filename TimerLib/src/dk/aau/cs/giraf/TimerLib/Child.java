@@ -125,9 +125,9 @@ public class Child implements Comparable<Child>{
 //				p.setDB_id(getNewId());
 //			}
 //			
-			p.name = "id: " + p.getId() + " db id: " + p.getDB_id();
+			//p.name = "id: " + p.getId() + " db id: " + p.getDB_id();
 			this.SubProfiles().add(p);
-			Guardian.saveChild(this, p);
+			guard.saveChild(this, p);
 			
 		return p;
 	}
@@ -155,6 +155,6 @@ public class Child implements Comparable<Child>{
 
 		public void remove(SubProfile p) {
 			_profileList.remove(p);
-			Guardian.crud.removeSubprofileFromProfileId(p, this.getProfileId());
+			guard.crud.removeSubprofileFromProfileId(p, this.getProfileId());
 		}
 }
