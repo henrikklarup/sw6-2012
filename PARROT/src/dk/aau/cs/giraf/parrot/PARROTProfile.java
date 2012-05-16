@@ -36,12 +36,17 @@ public class PARROTProfile {
 		return categories.get(i);
 	}
 	
+	public void setCategoryAt(int i, Category cat)
+	{
+		this.categories.set(i, cat);
+	}
+	
 	public void addCategory(Category cat)
 	{
 		categories.add(cat);
 	}
 	
-	public void removeCaregory(int i)
+	public void removeCategory(int i)
 	{
 		categories.remove(i);
 	}

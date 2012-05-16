@@ -63,7 +63,7 @@ public class ManageCategoryFragment extends Fragment {
 		setListAdapter();
 		 */			
 		
-		ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.//createFromResource(parrent, dummyLoader.getChildrenFromCurrentGuardian(), android.R.layout.simple_spinner_item); //Adapter for the spinner
+		ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(parrent, dummyLoader.getChildrenFromCurrentGuardian(), android.R.layout.simple_spinner_item); //Adapter for the spinner //FIXME
 		spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		profiles.setAdapter(spinnerAdapter);
 		
