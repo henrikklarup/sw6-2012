@@ -19,7 +19,7 @@ The usage of the \method{sessionExpired} method can be seen in \autoref{lst:sess
 \end{lstlisting}
 
 
-\begin{lstlisting}[style=sourceCode, language=JAVA, caption=LogoActivity.java, label=lst:sessionexpired]
+\begin{lstlisting}[style=sourceCode, language=JAVA, caption=Snippet of: Tools.java, label=lst:sessionexpired]
 public static boolean sessionExpired(Context context) {
 	SharedPreferences sp = context.getSharedPreferences(Data.TIMERKEY, 0);
 	Long lastAuthTime = sp.getLong(Data.DATEKEY, 1);
