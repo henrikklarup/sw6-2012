@@ -71,7 +71,7 @@ public class ProfileSelectActivity extends Activity {
 			totalChildren.addAll(childrenFromDepartments);
 		}
 		
-		// Duplicate profiles are removed.
+		// Removing duplicate profiles
 		outerloop:
 		for (Profile child : totalChildren) {
 			for (Profile mChild : mChildren) {
