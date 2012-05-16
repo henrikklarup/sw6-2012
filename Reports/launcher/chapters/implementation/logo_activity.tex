@@ -1,9 +1,13 @@
 \section{Logo Activity}
+
+\todo{Husk at screenshots af alle activities skal vaere i appendix}
+
+
 The logo activity is a splash screen, which shows the \giraf[] logo while the system is the loading the authentication activity. The logo activity is justified by the possibility that the device running the launcher might spend more than a reasonable amount of time to load the authentication activity, and therefore might give the impression that the system had crashed or is not responding. The goal is to increase responsiveness. 
 
 However, the logo activity does not indicate whether or not the activity itself has crashed. This is a feature which is on the backlog. \todo{husk at tilfoeje til backlog + suggestion: solution could be create an animation}
 
-The logo activity implements TIME-AUTO-LOGIN-FEATURE -- explained in \autoref{sec:autologin} -- by using the \method{sessionExpired} method, found in \class{Tools} class, seen in \autoref{lst:sessionexpired}.
+The logo activity implements TIME-AUTO-LOGIN-FEATURE -- explained in \autoref{sec:autologin}\todo{skriv om denne feature i design afsnittet} -- by using the \method{sessionExpired} method, found in \class{Tools} class, seen in \autoref{lst:sessionexpired}.
 The usage of the \method{sessionExpired} method can be seen in \autoref{lst:sessionexpiredusage}
 
 \begin{lstlisting}[style=sourceCode, language=JAVA, caption=Snippet of: LogoActivity.java, label=lst:sessionexpiredusage] 
