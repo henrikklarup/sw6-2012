@@ -12,13 +12,16 @@ public class ManagementBoxDragListener implements OnDragListener
 
 	private Activity parrent;
 	private Pictogram draggedPictogram = null;
-	ListView categories = (ListView) parrent.findViewById(R.id.categories);
-	GridView pictograms = (GridView) parrent.findViewById(R.id.pictograms);
+	ListView categories;
+	GridView pictograms;
+	boolean insideOfMe = false;
 	
 	public ManagementBoxDragListener(Activity active) {
 		parrent = active;
+		categories = (ListView) parrent.findViewById(R.id.categories);
+		pictograms = (GridView) parrent.findViewById(R.id.pictograms);
 	}
-	boolean insideOfMe = false;
+	
 	public boolean onDrag(View self, DragEvent event) {
 		if (event.getAction() == DragEvent.ACTION_DRAG_STARTED){
 			
