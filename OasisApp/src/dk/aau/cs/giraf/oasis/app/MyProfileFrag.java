@@ -114,7 +114,7 @@ public class MyProfileFrag extends Fragment {
 					
 					@Override
 					public void onClick(View v) {
-						List<Media> valueList = helper.mediaHelper.getMedia();
+						List<Media> valueList = helper.mediaHelper.getMyPictures(MainActivity.guardian);
 						List<String> items = new ArrayList<String>();
 						for (Media m : valueList) {
 							items.add(m.getMPath());
@@ -139,7 +139,7 @@ public class MyProfileFrag extends Fragment {
 			                            dialog.dismiss();
 			                        }
 			                    });
-			            builder.setNegativeButton("Cancel", null);
+			            builder.setNegativeButton("Tilbage", null);
 			            AlertDialog alert = builder.create();
 			            alert.show();
 					}

@@ -33,6 +33,8 @@
     
     <string name="nameLabel">Navn: </string>
     <string name="phoneLabel">Tlf: </string>
+    <string name="addressLabel">Addresse: </string>
+    <string name="emailLabel">Email: </string>
     <string name="myAppsButton">Mine Apps</string>
     <string name="myMediaButton">Mine Medier</string>
     <string name="mySettingsButton">Rediger Profil</string>
