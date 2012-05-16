@@ -12,6 +12,8 @@
     <string name="mydepartments">Mine Afdelinger</string>
     <string name="mydepchildren">Mine Afd. Børn</string>
     <string name="emptyList">Tom liste</string>
+    <string name="childmedia">Barnets Medier</string>
+    <string name="childapps">Barnets Apps</string>
     <string name="dropdownDep">Vælg department</string>
     <string name="dropdownRole">Vælg rolle</string>
     
@@ -36,6 +38,7 @@
     <string name="mySettingsButton">Rediger Profil</string>
     
     <string name="addProfile">Tilføj ny Profil</string>
+    <string name="addDepartment">Tilføj ny Afdeling</string>
 
     <string name="tab_myprofile">Min Profil</string>
     <string name="tab_mychildren">Mine Børn</string>
@@ -59,5 +62,6 @@
     <string name="tab_childapps">Barnets Apps</string>
     <string name="tab_childmedia">Barnets Medier</string>
     <string name="tab_childguardians">Barnets Pædagoger</string>
+    <string name="tab_childdepartments">Barnets Afdelinger</string>
 
 </resources>

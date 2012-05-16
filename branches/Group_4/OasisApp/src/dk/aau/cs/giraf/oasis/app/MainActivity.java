@@ -18,6 +18,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	private long guardianId;
 	public Helper helper;
 	public static Profile guardian;
+	public static Profile child;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState){

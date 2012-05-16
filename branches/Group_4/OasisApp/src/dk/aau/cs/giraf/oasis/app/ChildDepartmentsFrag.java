@@ -1,5 +1,6 @@
 package dk.aau.cs.giraf.oasis.app;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.AlertDialog;
@@ -17,7 +18,7 @@ import android.widget.Button;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Department;
 
-public class DepartmentsFrag extends ListFragment {
+public class ChildDepartmentsFrag extends ListFragment {
 
 	Helper helper;
 	List<Department> list;
@@ -41,20 +42,49 @@ public class DepartmentsFrag extends ListFragment {
 
 		helper = new Helper(getActivity().getApplicationContext());
 
-		if (MainActivity.guardian != null) {
-			list = helper.departmentsHelper.getDepartments();
+		if (MainActivity.child != null) {
+			list = helper.departmentsHelper.getDepartmentsByProfile(MainActivity.child);
 			setListAdapter(new DepartmentListAdapter(getActivity().getApplicationContext(), list));
 		} else {
 			setListAdapter(null);
 		}
 
 		Button bAdd = (Button) getView().findViewById(R.id.bAddDepartment);
-		bAdd.setText("Opret ny Afdeling");
+		bAdd.setText("Tilføj Afdeling");
 		bAdd.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				
+				List<Department> valueList = helper.departmentsHelper.getDepartments();
+				List<String> items = new ArrayList<String>();
+				for (Department d : valueList) {
+					String name = ""+d.getId(); 
+					name += " " + d.getName();
+					items.add(name);
+				}
+
+				final tmpListAdapter adapter = new tmpListAdapter(getActivity(), R.layout.children_list_childitem, items);
+
+				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+				builder.setTitle("Vælg en Afdeling");
+				builder.setAdapter(adapter,
+						new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int item) {
+						String tmpPath = adapter.getItem(item);
+						String tmpA[] = tmpPath.split(" ");
+						Department newDep = helper.departmentsHelper.getDepartmentById(Long.parseLong(tmpA[0]));
+						helper.departmentsHelper.attachProfileToDepartment(MainActivity.child, newDep);
+
+						list = helper.departmentsHelper.getDepartmentsByProfile(MainActivity.child);
+						setListAdapter(new DepartmentListAdapter(getActivity().getApplicationContext(), list));
+
+						dialog.dismiss();
+					}
+				});
+				builder.setNegativeButton("Cancel", null);
+				AlertDialog alert = builder.create();
+				alert.show();
 			}
 		});
 
@@ -71,9 +101,9 @@ public class DepartmentsFrag extends ListFragment {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						helper.departmentsHelper.removeDepartment(d);
+						helper.departmentsHelper.removeProfileAttachmentToDepartment(MainActivity.child, d);
 
-						list = helper.departmentsHelper.getDepartments();
+						list = helper.departmentsHelper.getDepartmentsByProfile(MainActivity.child);
 						setListAdapter(new DepartmentListAdapter(getActivity().getApplicationContext(), list));
 						
 						dialog.dismiss();

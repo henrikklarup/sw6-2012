@@ -9,13 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
+import dk.aau.cs.giraf.oasis.lib.models.Department;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
 public class ChildListAdapter extends BaseExpandableListAdapter {
 
 
-	private final HashMap<String, ArrayList<Profile>> myData = new HashMap<String, ArrayList<Profile>>();
-	private final HashMap<Integer, String> lookUp = new HashMap<Integer, String>();
+	private final HashMap<Department, ArrayList<Profile>> myData = new HashMap<Department, ArrayList<Profile>>();
+	private final HashMap<Integer, Department> lookUp = new HashMap<Integer, Department>();
 	private final Context context;
 	private LayoutInflater mInflater;
 	
@@ -25,7 +26,7 @@ public class ChildListAdapter extends BaseExpandableListAdapter {
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
-	public boolean AddGroup(final String groupName, final ArrayList<Profile> list)
+	public boolean AddGroup(final Department groupName, final ArrayList<Profile> list)
 	{
 		final ArrayList<Profile> prev = myData.put(groupName, list);
 
@@ -43,7 +44,7 @@ public class ChildListAdapter extends BaseExpandableListAdapter {
 	{
 		if (lookUp.containsKey(groupPos))
 		{
-			final String m = lookUp.get(groupPos);
+			final Department m = lookUp.get(groupPos);
 			final ArrayList<Profile> data = myData.get(m);
 
 			return data.get(childPos);
@@ -99,7 +100,7 @@ public class ChildListAdapter extends BaseExpandableListAdapter {
 	}
 
 	@Override
-	public String getGroup(int groupPos) 
+	public Department getGroup(int groupPos) 
 	{
 		if (lookUp.containsKey(groupPos))
 			//			return myData.get(lookUp.get(groupPos));
@@ -135,7 +136,7 @@ public class ChildListAdapter extends BaseExpandableListAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		
-		holder.tvChildHeader.setText("\t\t\t" + getGroup(groupPos));
+		holder.tvChildHeader.setText("\t\t\t" + getGroup(groupPos).getName());
 
 		return convertView;
 	}

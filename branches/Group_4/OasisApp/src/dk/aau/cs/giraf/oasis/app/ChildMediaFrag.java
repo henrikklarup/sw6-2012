@@ -13,13 +13,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.ImageView;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
 
-public class MyPrivateMediaFrag extends ListFragment {
+public class ChildMediaFrag extends ListFragment {
 
 	Helper helper;
 	List<Media> list;
@@ -43,17 +43,17 @@ public class MyPrivateMediaFrag extends ListFragment {
 
 		helper = new Helper(getActivity().getApplicationContext());
 
-		if (MainActivity.guardian != null) {
-			list = helper.mediaHelper.getMediaIOwn(MainActivity.guardian);
+		if (MainActivity.child != null) {
+			list = helper.mediaHelper.getMyMedia(MainActivity.child);
 			setListAdapter(new MediaListAdapter(getActivity().getApplicationContext(), list));
 		} else {
 			setListAdapter(null);
 		}
-
+		
 		getListView().setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> a, View v,int position, long id) 
+			public void onItemClick(AdapterView<?> a, View v, int position, long id) 
 			{
 				media = (Media) getListAdapter().getItem(position);
 
@@ -62,29 +62,29 @@ public class MyPrivateMediaFrag extends ListFragment {
 				ImageView i = new ImageView(getActivity());
 				Bitmap bm = BitmapFactory.decodeFile(media.getMPath());
 				i.setImageBitmap(bm);
-				//				i.setImageResource(R.drawable.no_profile_pic);
+//				i.setImageResource(R.drawable.no_profile_pic);
 				builder.setView(i);
 				builder.setNegativeButton("Cancel", null);
 				AlertDialog alert = builder.create();
 				alert.show();
 			}
 		});
-
+		
 		getListView().setOnItemLongClickListener(new OnItemLongClickListener() {
-
+			
 			@Override
 			public boolean onItemLongClick(AdapterView<?> a, View v, int position, long id) {
 				media = (Media) getListAdapter().getItem(position);
-
+				
 				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 				builder.setTitle("Slet Billede");
 				builder.setMessage("Sikker på at du vil slette Billedet?");
 				builder.setPositiveButton("Ja", new OnClickListener() {
-
+					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						helper.mediaHelper.removeMediaAttachmentToProfile(media, MainActivity.guardian);
-						list = helper.mediaHelper.getMediaIOwn(MainActivity.guardian);
+						helper.mediaHelper.removeMediaAttachmentToProfile(media, MainActivity.child);
+						list = helper.mediaHelper.getMyMedia(MainActivity.guardian);
 						setListAdapter(new MediaListAdapter(getActivity().getApplicationContext(), list));
 						dialog.dismiss();
 					}
@@ -92,7 +92,7 @@ public class MyPrivateMediaFrag extends ListFragment {
 				builder.setNegativeButton("Nej", null);
 				AlertDialog alert = builder.create();
 				alert.show();
-
+				
 				return false;
 			}
 		});

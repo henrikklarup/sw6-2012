@@ -14,11 +14,10 @@ import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 
-public class TabManagerChild extends Fragment implements OnTabChangeListener {
+public class TabManagerChildApp extends Fragment implements OnTabChangeListener {
 
-	public static final String TAB_CHILDPROFILE = "ChildProfile";
-	public static final String TAB_CHILDGUARDIANS = "ChildGuardians";
-	public static final String TAB_CHILDDEPARTMENTS = "ChildDepartments";
+	public static final String TAB_CHILDAPPS = "ChildApps";
+	public static final String TAB_ALLAPPS = "AllChildApps";
 
 	private View mRoot;
 	private TabHost mTabHost;
@@ -31,7 +30,7 @@ public class TabManagerChild extends Fragment implements OnTabChangeListener {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		mRoot = inflater.inflate(R.layout.threetabsview, null);
+		mRoot = inflater.inflate(R.layout.twotabsview, null);
 		mTabHost = (TabHost) mRoot.findViewById(android.R.id.tabhost);
 		setupTabs();
 		return mRoot;
@@ -45,24 +44,22 @@ public class TabManagerChild extends Fragment implements OnTabChangeListener {
 		mTabHost.setOnTabChangedListener(this);
 		mTabHost.setCurrentTab(mCurrentTab);
 
-		updateTab(TAB_CHILDPROFILE, R.id.threetab_1);
+		updateTab(TAB_CHILDAPPS, R.id.twotab_1);
 
-		Button b = (Button) getView().findViewById(R.id.b3Tab);
+		Button b = (Button) getView().findViewById(R.id.b2Tab);
 		b.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				getActivity().finish();
-				// SKAL IKKE FINISH ACTIVITY
+				FragParentTab.switchTab(FragParentTab.TABCHILD);
 			}
 		});
 	}
 
 	private void setupTabs() {
 		mTabHost.setup();
-		mTabHost.addTab(newTab(TAB_CHILDPROFILE, R.string.tab_childprofile, R.id.threetab_1));
-		mTabHost.addTab(newTab(TAB_CHILDGUARDIANS, R.string.tab_childguardians, R.id.threetab_2));
-		mTabHost.addTab(newTab(TAB_CHILDDEPARTMENTS, R.string.tab_childdepartments, R.id.threetab_3));
+		mTabHost.addTab(newTab(TAB_CHILDAPPS, R.string.tab_childapps, R.id.twotab_1));
+		mTabHost.addTab(newTab(TAB_ALLAPPS, R.string.tab_allapps, R.id.twotab_2));
 	}
 
 	private TabSpec newTab(String tag, int labelId, int tabContentId) {
@@ -79,19 +76,14 @@ public class TabManagerChild extends Fragment implements OnTabChangeListener {
 
 	@Override
 	public void onTabChanged(String tabId) {
-		if (TAB_CHILDPROFILE.equals(tabId)) {
-			updateTab(tabId, R.id.threetab_1);
+		if (TAB_CHILDAPPS.equals(tabId)) {
+			updateTab(tabId, R.id.twotab_1);
 			mCurrentTab = 0;
 			return;
 		}
-		if (TAB_CHILDGUARDIANS.equals(tabId)) {
-			updateTab(tabId, R.id.threetab_2);
+		if (TAB_ALLAPPS.equals(tabId)) {
+			updateTab(tabId, R.id.twotab_2);
 			mCurrentTab = 1;
-			return;
-		}
-		if (TAB_CHILDDEPARTMENTS.equals(tabId)) {
-			updateTab(tabId, R.id.threetab_3);
-			mCurrentTab = 2;
 			return;
 		}
 	}
@@ -99,21 +91,15 @@ public class TabManagerChild extends Fragment implements OnTabChangeListener {
 	private void updateTab(String tabId, int placeholder) {
 		FragmentManager fm = getFragmentManager();
 
-		if (TAB_CHILDPROFILE.equals(tabId)) {
+		if (TAB_CHILDAPPS.equals(tabId)) {
 			fm.beginTransaction()
-			.replace(placeholder, new ChildProfileFrag(), tabId)
+			.replace(placeholder, new ChildAppsFrag(), tabId)
 			.commit();
 			return;
 		}
-		if (TAB_CHILDGUARDIANS.equals(tabId)) {
+		if (TAB_ALLAPPS.equals(tabId)) {
 			fm.beginTransaction()
-			.replace(placeholder, new ChildGuardiansFrag(), tabId)
-			.commit();
-			return;
-		}
-		if (TAB_CHILDDEPARTMENTS.equals(tabId)) {
-			fm.beginTransaction()
-			.replace(placeholder, new ChildDepartmentsFrag(), tabId)
+			.replace(placeholder, new ChildAllAppsFrag(), tabId)
 			.commit();
 			return;
 		}

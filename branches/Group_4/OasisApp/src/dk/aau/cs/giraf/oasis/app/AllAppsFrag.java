@@ -54,13 +54,13 @@ public class AllAppsFrag extends ListFragment {
 				app = (App) getListAdapter().getItem(position);
 				
 				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-				builder.setTitle("Fjern App");
-				builder.setMessage("Sikker på at du vil fjerne App'en?");
+				builder.setTitle("Tilføj App");
+				builder.setMessage("Sikker på at du vil tilføje App'en?");
 				builder.setPositiveButton("Ja", new OnClickListener() {
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-//						helper.appsHelper.removeAppAttachmentToProfile(app, MainActivity.guardian);
+						helper.appsHelper.attachAppToProfile(app, MainActivity.guardian);
 						list = helper.appsHelper.getApps();
 						setListAdapter(new AppListAdapter(getActivity().getApplicationContext(), list));
 						dialog.dismiss();

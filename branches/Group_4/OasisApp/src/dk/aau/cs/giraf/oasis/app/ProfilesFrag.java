@@ -13,12 +13,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Department;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
@@ -28,10 +26,9 @@ public class ProfilesFrag extends ExpandableListFragment {
 
 	private Helper helper;
 	private List<Profile> list;
-	private TextView tvHeader;
 	private ChildListAdapter adapter;
 	private Button bAdd;
-	private String name, imgPath, tmpPath;
+	private String tmpPath;
 	private EditText tName, tPhone;
 	private ImageView iProfileImg;
 	private Spinner spinDep, spinRole;
@@ -183,7 +180,7 @@ public class ProfilesFrag extends ExpandableListFragment {
 				}
 			}
 			if (!result.isEmpty()) {
-				adapter.AddGroup(d.getName(), result);
+				adapter.AddGroup(d, result);
 			}
 		}
 

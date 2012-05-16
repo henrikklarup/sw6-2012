@@ -14,7 +14,7 @@ import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
 public class MediaListAdapter extends BaseAdapter {
 
-	private static List<Media> values;
+	private List<Media> values;
 	private LayoutInflater mInflater;
 	private Context c;
 
@@ -56,7 +56,7 @@ public class MediaListAdapter extends BaseAdapter {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-
+		
 		holder.tvName.setText(values.get(position).getName());
 		holder.tvPath.setText(values.get(position).getMPath());
 		if (values.get(position).isMPublic()) {

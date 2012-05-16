@@ -3,25 +3,23 @@ package dk.aau.cs.giraf.oasis.app;
 import java.util.List;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ListFragment;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.Button;
 import dk.aau.cs.giraf.oasis.lib.Helper;
-import dk.aau.cs.giraf.oasis.lib.models.Department;
+import dk.aau.cs.giraf.oasis.lib.models.App;
 
-public class DepartmentsFrag extends ListFragment {
+public class ChildAllAppsFrag extends ListFragment {
 
 	Helper helper;
-	List<Department> list;
-	Department d;
+	List<App> list;
+	App app;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -31,7 +29,7 @@ public class DepartmentsFrag extends ListFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.departments_view, container, false);
+		View view = inflater.inflate(R.layout.apps_view, container, false);
 		return view;
 	}
 
@@ -41,48 +39,37 @@ public class DepartmentsFrag extends ListFragment {
 
 		helper = new Helper(getActivity().getApplicationContext());
 
-		if (MainActivity.guardian != null) {
-			list = helper.departmentsHelper.getDepartments();
-			setListAdapter(new DepartmentListAdapter(getActivity().getApplicationContext(), list));
+		if (MainActivity.child != null) {
+			list = helper.appsHelper.getApps();
+			setListAdapter(new AppListAdapter(getActivity().getApplicationContext(), list));
 		} else {
 			setListAdapter(null);
 		}
-
-		Button bAdd = (Button) getView().findViewById(R.id.bAddDepartment);
-		bAdd.setText("Opret ny Afdeling");
-		bAdd.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				
-			}
-		});
-
+		
+		
 		getListView().setOnItemLongClickListener(new OnItemLongClickListener() {
-
+			
 			@Override
 			public boolean onItemLongClick(AdapterView<?> a, View v, int position, long id) {
-				d = (Department) getListAdapter().getItem(position);
-
+				app = (App) getListAdapter().getItem(position);
+				
 				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-				builder.setTitle("Fjern Afdeling");
-				builder.setMessage("Sikker på at du vil fjerne Afdelingen?");
-				builder.setPositiveButton("Ja", new Dialog.OnClickListener() {
-
+				builder.setTitle("Tilføj App");
+				builder.setMessage("Sikker på at du vil tilføje App'en?");
+				builder.setPositiveButton("Ja", new OnClickListener() {
+					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						helper.departmentsHelper.removeDepartment(d);
-
-						list = helper.departmentsHelper.getDepartments();
-						setListAdapter(new DepartmentListAdapter(getActivity().getApplicationContext(), list));
-						
+						helper.appsHelper.attachAppToProfile(app, MainActivity.child);
+						list = helper.appsHelper.getApps();
+						setListAdapter(new AppListAdapter(getActivity().getApplicationContext(), list));
 						dialog.dismiss();
 					}
 				});
 				builder.setNegativeButton("Nej", null);
 				AlertDialog alert = builder.create();
 				alert.show();
-
+				
 				return false;
 			}
 		});
