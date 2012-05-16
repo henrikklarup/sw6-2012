@@ -1,5 +1,5 @@
 \section{Logo Activity}
-This section will explain the activity \texit{Logo Activity}\todo{Remember to explain that activity refers to Android Activity} and how it is utilized.\\\\
+This section will explain the activity \textit{Logo Activity}\todo{Remember to explain that activity refers to Android Activity} and how it is utilized.\\\\
 This activity is only seen by the user when the launcher is not already on the Back Stack\todo{Android ref}.\\
 The important thing about this activity is that it runs in a \verb+Thread+ and uses \verb+synchronized()+ to wait an amount of time until the Authentication Activity or the Home Activity is most certainly done. Which activity that should be started is decided by the \verb+Tools.sessionExpired(mContext)+ method. 
 This method returns true or false over if the users login is still valid or not. If the login is still valid and the id which is still logged in, in the \verb+sharedPreferences+ do not return \verb+null+.
