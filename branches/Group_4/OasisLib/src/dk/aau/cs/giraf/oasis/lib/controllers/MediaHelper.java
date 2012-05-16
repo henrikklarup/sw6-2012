@@ -240,6 +240,57 @@ public class MediaHelper {
 
 		return media;
 	}
+	
+	/**
+	 * Get my pictures
+	 * @param profile Current profile
+	 * @return List of picture media
+	 */
+	public List<Media> getMyPictures(Profile profile) {
+		List<Media> returnedMedia = getMyMedia(profile); 
+		List<Media> media = new ArrayList<Media>();
+		
+		for (Media m : returnedMedia) {
+			if(m.getMType().toLowerCase() == "picture") {
+				media.add(m);
+			}
+		}
+		return media;
+	}
+	
+	/**
+	 * Get my Sounds
+	 * @param profile Current profile
+	 * @return List of sound media
+	 */
+	public List<Media> getMySounds(Profile profile) {
+		List<Media> returnedMedia = getMyMedia(profile); 
+		List<Media> media = new ArrayList<Media>();
+		
+		for (Media m : returnedMedia) {
+			if(m.getMType().toLowerCase() == "sound") {
+				media.add(m);
+			}
+		}
+		return media;
+	}
+	
+	/**
+	 * Get my Words
+	 * @param profile Current profile
+	 * @return List of word media
+	 */
+	public List<Media> getMyWords(Profile profile) {
+		List<Media> returnedMedia = getMyMedia(profile); 
+		List<Media> media = new ArrayList<Media>();
+		
+		for (Media m : returnedMedia) {
+			if(m.getMType().toLowerCase() == "word") {
+				media.add(m);
+			}
+		}
+		return media;
+	}
 
 	/**
 	 * Get all media of a person
