@@ -277,8 +277,7 @@ public class ProfilesHelper {
 	public List<Profile> getChildrenByGuardian(Profile guardian) {
 		List<Profile> profiles = new ArrayList<Profile>();
 		
-		if (guardian.getPRole() == pRoles.GUARDIAN.ordinal() || 
-				guardian.getPRole() == pRoles.PARENT.ordinal()) {
+		if (guardian.getPRole() == pRoles.GUARDIAN.ordinal() || guardian.getPRole() == pRoles.PARENT.ordinal()) {
 			List<HasGuardian> list = hg.getChildrenByGuardian(guardian);
 			
 			for (HasGuardian hgModel : list) {

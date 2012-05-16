@@ -57,11 +57,11 @@ public class HasGuardian {
 	
 	@Override
 	public String toString() {
-
 		String localOutput = _output;
-		localOutput = localOutput.replace("{0}", String.valueOf(getIdChild()));
-		localOutput = localOutput.replace("{1}", String.valueOf(getIdGuardian()));
 		
+		localOutput = localOutput.replace("{0}", String.valueOf(getIdGuardian()));
+		localOutput = localOutput.replace("{1}", String.valueOf(getIdChild()));
+
 		return localOutput;
 	}
 }

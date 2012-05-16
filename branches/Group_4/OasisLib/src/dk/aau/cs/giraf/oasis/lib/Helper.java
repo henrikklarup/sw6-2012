@@ -369,7 +369,7 @@ public class Helper {
 		if (medias.isEmpty()) {
 			/*Media*/
 			Media mediaDog = new Media("Dog", "/sdcard/Pictures/giraf/public/dog.jpg", true, "picture", childrenLoaded.get(0).getId());
-			Media mediaCat = new Media("Cat", "/sdcard/Pictures/giraf/public/cat.jpg", true, "picture", childrenLoaded.get(0).getId());
+			Media mediaCat = new Media("Cat", "/sdcard/Pictures/giraf/public/cat.jpg", true, "picture", childrenLoaded.get(1).getId());
 			Media mediaBat = new Media("Bat", "/sdcard/Pictures/giraf/private/bat.jpg", false, "picture", childrenLoaded.get(0).getId());
 			Media subMedia = new Media("Sound", "/sdcard/Pictures/giraf/public/sound.jpg", true, "sound", childrenLoaded.get(0).getId());
 
