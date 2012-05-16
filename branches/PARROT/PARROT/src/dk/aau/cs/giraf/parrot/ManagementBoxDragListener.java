@@ -72,7 +72,7 @@ public class ManagementBoxDragListener implements OnDragListener
 					
 					Category temp = ManageCategoryFragment.profileBeingModified.getCategoryAt(index);
 					temp.addPictogram(draggedPictogram);
-					ManageCategoryFragment.profileBeingModified.setCategoryAt(ManageCategoryFragment.currentCategoryId, temp);
+					ManageCategoryFragment.profileBeingModified.setCategoryAt(index, temp);
 										
 				}
 				else if(self.getId()==R.id.pictograms && ManageCategoryFragment.catDragOwnerID == R.id.categories) //We are to copy a category into another category
