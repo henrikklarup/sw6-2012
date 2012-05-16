@@ -26,6 +26,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,7 +60,7 @@ public class CustomizeFragment extends Fragment {
 	private Button colorFrameButton;
 	private Button colorBackgroundButton;
 
-	private CheckBox checkboxGradient;
+	private WCheckbox gradientButton;
 
 	private WheelView mins;
 	private WheelView secs;
@@ -351,7 +352,7 @@ public class CustomizeFragment extends Fragment {
 
 		/* Insert the devider if its needed */
 		if (m_minutes != 0 && m_seconds != 0) {
-			timeText += " " + this.getString(R.string.and_devider) + " ";
+			timeText += " " + this.getString(R.string.and_divider) + " ";
 		}
 
 		if (m_seconds == 1) {
@@ -370,19 +371,17 @@ public class CustomizeFragment extends Fragment {
 	 * Initialize the color picker buttons, change colors here etc.
 	 */
 	private void initColorButtons() {
-		checkboxGradient = (CheckBox) getActivity().findViewById(
-				R.id.checkbox_gradient);
-
-		checkboxGradient.setChecked(currSubP.gradient);
-		checkboxGradient
-		.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
-			public void onCheckedChanged(CompoundButton buttonView,
-					boolean isChecked) {
-				currSubP.gradient = isChecked;
+		LinearLayout mLL = (LinearLayout) getActivity().findViewById(
+				R.id.button_gradient_layout);
+		gradientButton = new WCheckbox(getActivity());
+		gradientButton.setOnClickListener(currSubP.gradient, new OnClickListener() {
+			
+			public void onClick(View v) {
+				currSubP.gradient = gradientButton.changeCheckedState();		
 			}
 		});
-
+		mLL.addView(gradientButton);
+		
 		colorGradientButton1 = (Button) getActivity().findViewById(
 				R.id.gradientButton_1);
 
@@ -551,8 +550,7 @@ public class CustomizeFragment extends Fragment {
 						// getActivity(),
 						// android.R.layout.simple_list_item_1,
 						// subProfiles);
-						// FIXME: Resource
-						attachment2.addButton("Gå tilbage", 1,
+						attachment2.addButton(R.string.go_back, 1,
 								new OnClickListener() {
 
 							public void onClick(View arg0) {
@@ -583,7 +581,7 @@ public class CustomizeFragment extends Fragment {
 								final WDialog attachment3 = new WDialog(
 										getActivity());
 								// New listview
-								attachment3.addButton("Gå tilbage", 1,
+								attachment3.addButton(R.string.go_back, 1,
 										new OnClickListener() {
 
 									public void onClick(
@@ -809,13 +807,8 @@ public class CustomizeFragment extends Fragment {
 		attView.setText(attachText);
 	}
 
-	private void setDonePicture(Attachment att){
-		//It is always white
-		//FIXME: NOW
-		
+	private void setDonePicture(Attachment att){		
 		int pictureRes = 0;
-		
-
 
 		if(att != null){
 			switch(att.getForm()){
@@ -1302,7 +1295,7 @@ public class CustomizeFragment extends Fragment {
 		 setTime(currSubP.get_totalTime());
 
 		 /* Set Colors */
-		 checkboxGradient.setChecked(currSubP.gradient);
+		 gradientButton.setChecked(currSubP.gradient);
 		 setColor(colorGradientButton1.getBackground(), currSubP.timeLeftColor);
 		 setColor(colorGradientButton2.getBackground(), currSubP.timeSpentColor);
 		 setColor(colorFrameButton.getBackground(), currSubP.frameColor);
@@ -1323,7 +1316,7 @@ public class CustomizeFragment extends Fragment {
 		 setTime(currSubP.get_totalTime());
 
 		 /* Set Colors */
-		 checkboxGradient.setChecked(currSubP.gradient);
+		 gradientButton.setChecked(currSubP.gradient);
 		 setColor(colorGradientButton1.getBackground(), currSubP.timeLeftColor);
 		 setColor(colorGradientButton2.getBackground(), currSubP.timeSpentColor);
 		 setColor(colorFrameButton.getBackground(), currSubP.frameColor);
