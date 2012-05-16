@@ -183,4 +183,21 @@ public class Profile {
 
 		return localOutput;
 	}
+	
+	@Override public boolean equals(Object aProfile) {
+		if ( this == aProfile ) return true;
+
+		if ( !(aProfile instanceof Profile) ) return false;
+
+		Profile profile = (Profile)aProfile;
+
+		return
+				EqualsUtil.areEqual(this.getId(), profile.getId()) &&
+				EqualsUtil.areEqual(this.getFirstname(), profile.getFirstname()) &&
+				EqualsUtil.areEqual(this.getMiddlename(), profile.getMiddlename()) &&
+				EqualsUtil.areEqual(this.getSurname(), profile.getSurname()) &&
+				EqualsUtil.areEqual(this.getPRole(), profile.getPRole()) &&
+				EqualsUtil.areEqual(this.getPhone(), profile.getPhone()) &&
+				EqualsUtil.areEqual(this.getPicture(), profile.getPicture());
+	}
 }

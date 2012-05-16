@@ -310,7 +310,7 @@ public class MediaHelper {
 				}
 			}
 		}
-
+		
 		return result;
 	}
 

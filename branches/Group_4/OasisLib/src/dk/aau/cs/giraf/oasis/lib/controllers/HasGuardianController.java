@@ -140,8 +140,31 @@ class HasGuardianController {
 
 		return hgList;
 	}
+	/**
+	 * Get guardians by child
+	 * @param child Child profile
+	 * @return List of has guardians
+	 */
+	public List<HasGuardian> getGuardiansByChild(Profile child) {
+		List<HasGuardian> hgList = new ArrayList<HasGuardian>();
+		
+		Cursor c = _context.getContentResolver().query(HasGuardianMetaData.CONTENT_URI, columns, 
+				HasGuardianMetaData.Table.COLUMN_IDCHILD + " = '" + child.getId() + "'", null, null);
+
+		if (c != null) {
+			hgList = cursorToHasGuardianList(c);
+			c.close();
+		}
+
+		return hgList;
+	}
 	
-	public List<HasGuardian> getHasGuardianByProfile(Profile profile) {
+	/**
+	 * get has guardians by profile
+	 * @param profile Profile to get by
+	 * @return List of profiles
+	 */
+	public List<HasGuardian> getHasGuardiansByProfile(Profile profile) {
 		List<HasGuardian> hgList = new ArrayList<HasGuardian>();
 		
 		String table;
