@@ -1,15 +1,16 @@
 \section{Home Activity}
-This section will explain what the activity \activity{Home Activity} provides if services for the user.\\\\
-This activity is the center of the hole launcher. It is here the user will spend most of their time when they are between running apps.
+This section will explain what the \activity{Home Activity} provides of services to the user.\\\\
+This activity is the center of the launcher. It is here the user will spend most of their time when they are between running apps. As the center it also have a lot of functionality some of it is the drawer which is explained in \autoref{home:drawer}. 
+Some of the more basic functionality is to show the user which apps they can open. This is done by showing all apps which is installed on the device, is certified as an app in the database and the user has a relation to the apps in the database. Only apps which has all of these three properties will be shown to the user. If this number of apps exceeds nine and or if the drawer is extended so much that some apps will be place to the right of the screen the user will be able to scroll horizontally and will be guided by a scroll indication bar in the bottom of the screen.
 
-\subsection{The drawer}
-\textit{The drawer} is a functionality where the user can hide tools when they do not use them or need them for a while, the drawer can be said to be some kind of toolbox. To show the functionality of the drawer a color picker for apps were implemented and hidden in the drawer. The color picker will be explained in \autoref{color:picker}.
-It is possible to put more functionality in the drawer for e.g. a way to put apps in the drawer if they are not being used by the user and if they need them they can drag them out from the drawer again.
+\subsection{The drawer} \label{home:drawer}
+\textit{The drawer} is a feature where the user can hide tools when they do not use them or do not need them for a while. The drawer can be said to be some kind of toolbox. To show the functionality of the drawer a color picker for apps were implemented and hidden in the drawer. The color picker will be explained in \autoref{home:colorpicker} and can be seen in \autoref{fig:home-activity}.
+It is possible to put more functionality in the drawer for e.g. a way to put apps in the drawer if they are not being used by the user or if they need them they can drag them out of the drawer. A kind of toolbox for apps.
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[scale=0.2]{gfx/home-activity_closed}
-	\caption{Shows the launcher with the drawerclosed.}
+	\caption{Shows the launcher with the drawer closed.}
 	\label{fig:home-activity_closed}
 \end{figure}
 
@@ -21,7 +22,7 @@ It is possible to put more functionality in the drawer for e.g. a way to put app
 	\label{fig:home-activity}
 \end{figure}
 
-\subsection{Color picker}\label{color:picker}
+\subsection{Color picker}\label{home:colorpicker}
 
 The \textit{color picker} is a tool that was made to change colors on apps, this have been extended so far that if the logo of e.g. Wombat is choosen to be red then the background in Wombat will also be set to red when the application is loaded.
 The color picker consist of a color board with ten predefined \giraf[] colors. These colors can be assigned to any app that are in the launcher and there is no limit on how many times the user can use a color. This means that if the user want they can make every app e.g. red.
