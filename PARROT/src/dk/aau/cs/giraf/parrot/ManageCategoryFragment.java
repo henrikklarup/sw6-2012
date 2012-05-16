@@ -54,6 +54,7 @@ public class ManageCategoryFragment extends Fragment {
 		ListView categories = (ListView) parrent.findViewById(R.id.categories);
 		GridView pictograms = (GridView) parrent.findViewById(R.id.pictograms);
 		ImageView trash = (ImageView) parrent.findViewById(R.id.trash);
+		PARROTDataLoader dummyLoader = new PARROTDataLoader(parrent);
 		//ImageView categoryPic = (ImageView) parrent.findViewById(R.id.categorypic);//FIXME Make xml for this to work.
 
 		/*
@@ -62,7 +63,7 @@ public class ManageCategoryFragment extends Fragment {
 		setListAdapter();
 		 */			
 		
-		ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(parrent, textArrayResId /*Get profiles*/, android.R.layout.simple_spinner_item); //Adapter for the spinner
+		ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.//createFromResource(parrent, dummyLoader.getChildrenFromCurrentGuardian(), android.R.layout.simple_spinner_item); //Adapter for the spinner
 		spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		profiles.setAdapter(spinnerAdapter);
 		
@@ -128,5 +129,17 @@ public class ManageCategoryFragment extends Fragment {
 				return true;
 			}
 		});
+	}
+	
+	public void onPause() 
+	{
+		
+		saveProfileChanges(parrent, profileBeingModified);
+	}
+	
+	public void saveProfileChanges(Activity parrent, PARROTProfile profileBeingModified)
+	{
+		PARROTDataLoader dataLoader = new PARROTDataLoader(parrent);
+		dataLoader.saveProfile(profileBeingModified);
 	}
 }

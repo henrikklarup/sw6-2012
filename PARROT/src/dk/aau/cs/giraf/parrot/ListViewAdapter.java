@@ -40,11 +40,11 @@ public class ListViewAdapter extends ArrayAdapter<Category>
 				//imageView.setImageResource(R.drawable.default_profile);
 				imageView.setImageBitmap(items.get(position).getIcon().getBitmap());
 			}
-			/*if (textView != null) {
+			if (textView != null) {
 
-				textView.setText(category.name);//FIXME reffer to the categorys name. (add a name dalhoff!!!)
+				textView.setText(category.getCategoryName());
 
-			}*/
+			}
 
 		}
 
