@@ -24,6 +24,16 @@ public class Timer extends Attachment {
 		this._time = p.get_totalTime();
 	}
 	
+	public Timer(formFactor form, int bgColor, int timeLeftColor, int timeSpentColor, int frameColor, int time, boolean gradient){
+		this._form = form;
+		this._bgColor = bgColor;
+		this._timeLeftColor = timeLeftColor;
+		this._timeSpentColor = timeSpentColor;
+		this._frameColor = frameColor;
+		this._time = time;
+		this._gradient = gradient;
+	}
+	
 	public SubProfile genSub(){
 		
 		SubProfile sp = null;

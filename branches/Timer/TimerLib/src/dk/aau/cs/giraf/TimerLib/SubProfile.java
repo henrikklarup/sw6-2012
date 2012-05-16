@@ -20,6 +20,10 @@ public class SubProfile implements Comparable<SubProfile>{
 	boolean _AttaBool = false;
 	private long DB_id = -1;
 	private Attachment _doneArt = null;
+	int lastUsedTime = -1;
+	long refChild = -1;
+	long refPro = -1;
+	int timeKey = 0;
 
 	//constructor
 	public SubProfile(String name, String description, int bgcolor, int timeLeftColor, int timeSpentColor, int frameColor, int totalTime, boolean changeColor){
@@ -93,19 +97,22 @@ public class SubProfile implements Comparable<SubProfile>{
 		map.put("gradient", String.valueOf(this.gradient));		
 		map.put("save", String.valueOf(this.save));		
 		map.put("saveAs", String.valueOf(this.saveAs));
+		map.put("refChild", String.valueOf(this.refChild));		
+		map.put("refPro", String.valueOf(this.refPro));
+		map.put("timeKey", String.valueOf(this.timeKey));
 		
 		if(this._doneArt != null){
 			map.put("doneArtType", String.valueOf(this._doneArt.getForm()));
 			switch(this._doneArt.getForm()){
 			case SingleImg:
-				map.put("doneArtPic", String.valueOf(this._doneArt.getImg()));
+				map.put("doneArtPic", String.valueOf(this._doneArt.getImg().getId()));
 				map.put("doneArtLeftPic", String.valueOf(-1));
 				map.put("doneArtRightPic", String.valueOf(-1));
 				break;
 			case SplitImg:
 				map.put("doneArtPic", String.valueOf(-1));
-				map.put("doneArtLeftPic", String.valueOf(this._doneArt.getLeftImg()));
-				map.put("doneArtRightPic", String.valueOf(this._doneArt.getRightImg()));
+				map.put("doneArtLeftPic", String.valueOf(this._doneArt.getLeftImg().getId()));
+				map.put("doneArtRightPic", String.valueOf(this._doneArt.getRightImg().getId()));
 				break;
 			}
 		} else {
@@ -223,6 +230,21 @@ public class SubProfile implements Comparable<SubProfile>{
 			guard.addLastUsed(this);
 		} else {
 		this._id = oldProfile._id;
+		this.refPro = oldProfile.DB_id;
+		long ref = 0;
+		for(Child c : guard.Children()){
+			for(SubProfile p : c.SubProfiles()){
+				if(p.getId() == this.getId()){
+					ref = c.getProfileId();
+				}
+			}
+		}
+		for(SubProfile p : guard.predefined()){
+			if(p.getId() == this.getId()){
+				ref = -2;
+			}
+		}
+		this.refChild = ref;
 		guard.addLastUsed(this);
 		}
 	}
@@ -251,6 +273,7 @@ public class SubProfile implements Comparable<SubProfile>{
 		Hourglass form = new Hourglass(this.name, this.desc, this.bgcolor, this.timeLeftColor, this.timeSpentColor, this.frameColor, this._totalTime, this.gradient);
 		form.setId(this.getId());		
 			form.setAttachment(this._attachment);
+			form.setDoneArt(this._doneArt);
 		return form;
 	}
 
@@ -258,6 +281,7 @@ public class SubProfile implements Comparable<SubProfile>{
 		ProgressBar form = new ProgressBar(this.name, this.desc, this.bgcolor, this.timeLeftColor, this.timeSpentColor, this.frameColor, this._totalTime, this.gradient);
 		form.setId(this.getId());
 			form.setAttachment(this._attachment);
+			form.setDoneArt(this._doneArt);
 		return form;
 	}
 
@@ -265,6 +289,7 @@ public class SubProfile implements Comparable<SubProfile>{
 		TimeTimer form = new TimeTimer(this.name, this.desc, this.bgcolor, this.timeLeftColor, this.timeSpentColor, this.frameColor, this._totalTime, this.gradient);
 		form.setId(this.getId());
 			form.setAttachment(this._attachment);
+			form.setDoneArt(this._doneArt);
 		return form;
 	}
 
@@ -272,6 +297,7 @@ public class SubProfile implements Comparable<SubProfile>{
 		DigitalClock form = new DigitalClock(this.name, this.desc, this.bgcolor, this.timeLeftColor, this.timeSpentColor, this.frameColor, this._totalTime, this.gradient);
 		form.setId(this.getId());
 			form.setAttachment(this._attachment);
+			form.setDoneArt(this._doneArt);
 		return form;
 	}
 

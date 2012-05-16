@@ -7,10 +7,10 @@ public class Art {
 	private int _id = -1;
 	Guardian guard = Guardian.getInstance();
 	
-	public Art(int path, String caption){
+	public Art(int path, String caption, int id){
 		this._path = path;
 		this._caption = caption;
-		this._id = guard.getArtId();
+		this._id = id;
 	}
 	
 	public String getName(){

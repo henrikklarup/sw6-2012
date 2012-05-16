@@ -27,7 +27,7 @@ public class ChildFragment extends android.app.ListFragment {
 		super.onResume();
 		loadChildren();
 		for (Child c : guard.publishList()) {
-			if(c.getProfileId() == Guardian.profileID){
+			if(c.getProfileId() == guard.profileID){
 				c.select();
 				break;
 			}
@@ -43,11 +43,11 @@ public class ChildFragment extends android.app.ListFragment {
 	
 	@Override
 	public void onListItemClick(ListView lv, View view, int position, long id) {
-		if (Guardian.profileFirstClick) {
+		if (guard.profileFirstClick) {
 			for (int i = 0; i < lv.getChildCount(); i++) {
 				lv.getChildAt(i).setBackgroundResource(R.drawable.list);
 			}
-			Guardian.profileFirstClick = false;
+			guard.profileFirstClick = false;
 		}
 		for(int i = 0; i < lv.getChildCount(); i++){
 			lv.getChildAt(i).setSelected(false);
@@ -62,9 +62,9 @@ public class ChildFragment extends android.app.ListFragment {
 		
 		if (detf != null) {
 			// Marks the selected profile in the guard singleton
-			Guardian.profilePosition = position; 
+			guard.profilePosition = position; 
 			guard.publishList().get(position).select();
-			Guardian.profileID = guard.publishList().get(position).getProfileId();
+			guard.profileID = guard.publishList().get(position).getProfileId();
 			detf.loadSubProfiles();
 			
 		}

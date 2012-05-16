@@ -3,15 +3,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
-	<classpathentry kind="lib" path="C:/Users/Bærbar/Desktop/SW6-Giraf/branches/Group_4/OasisLib_dev.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Bærbar/android-sdks/platforms/android-13/android.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Users/Bærbar/android-sdks/docs/reference"/>
-		</attributes>
-		<accessrules>
-			<accessrule kind="nonaccessible" pattern="com/android/internal/**"/>
-		</accessrules>
-	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Mudde/Desktop/SW6/branches/Group_4/OasisLib_dev.jar"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

@@ -11,6 +11,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 import dk.aau.cs.giraf.TimerLib.Attachment;
 import dk.aau.cs.giraf.TimerLib.Guardian;
 import dk.aau.cs.giraf.TimerLib.SplitImg;
@@ -39,7 +40,7 @@ public class DoneScreenActivity extends Activity {
 		ImageView i = null;
 		ImageView i2 = null;
 		SubProfile sub = guard.getSubProfile();
-		
+
 		if(sub.getDoneArt() != null){
 			switch(sub.getDoneArt().getForm()){
 			case SingleImg:

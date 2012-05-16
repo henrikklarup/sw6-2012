@@ -91,7 +91,7 @@ public class CustomizeFragment extends Fragment {
 		b.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				Guardian.subProfileID = -1;
+				guard.subProfileID = -1;
 				SubProfileFragment spf = (SubProfileFragment) getFragmentManager()
 						.findFragmentById(R.id.subprofileFragment);
 				spf.loadSubProfiles();
@@ -789,39 +789,69 @@ public class CustomizeFragment extends Fragment {
 			alpha = 0;
 		}
 
-		LayerDrawable ld = (LayerDrawable) getResources().getDrawable(
-				R.drawable.attachment_layer);
-		PorterDuffColorFilter filter = new PorterDuffColorFilter(color,
-				PorterDuff.Mode.SRC_ATOP);
-		Drawable d = getResources().getDrawable(
-				R.drawable.attachment_background);
+		LayerDrawable ld = (LayerDrawable) getResources().getDrawable(R.drawable.attachment_layer);
+		
+		PorterDuffColorFilter filter = new PorterDuffColorFilter(color,PorterDuff.Mode.SRC_ATOP);
+		
+		Drawable d = getResources().getDrawable(R.drawable.attachment_background);
+		
 		d.setAlpha(alpha);
+		
 		d.setColorFilter(filter);
+		
 		ld.setDrawableByLayerId(R.id.first_attachment_layer, d);
-		ld.setDrawableByLayerId(R.id.second_attachment_layer, getResources()
-				.getDrawable(pictureRes));
+		
+		ld.setDrawableByLayerId(R.id.second_attachment_layer, getResources().getDrawable(pictureRes));
 
-		attachmentButton.setCompoundDrawablesWithIntrinsicBounds(null, ld,
-				null, null);
+		attachmentButton.setCompoundDrawablesWithIntrinsicBounds(null, ld,null, null);
+		
 		attachmentButton.setText(textRes);
+		
 		attView.setText(attachText);
 	}
 
-	private void setDonePicture(int pictureRes){
-		LayerDrawable ld = (LayerDrawable) getResources().getDrawable(
-				R.drawable.attachment_layer);
-		PorterDuffColorFilter filter = new PorterDuffColorFilter(0xFFF,
-				PorterDuff.Mode.SRC_ATOP);
-		Drawable d = getResources().getDrawable(
-				R.drawable.attachment_background);
-		d.setAlpha(0);
-		d.setColorFilter(filter);
-		ld.setDrawableByLayerId(R.id.first_attachment_layer, d);
-		ld.setDrawableByLayerId(R.id.second_attachment_layer, getResources()
-				.getDrawable(pictureRes));
+	private void setDonePicture(Attachment att){
+		//It is always white
+		//FIXME: NOW
+		
+		int pictureRes = 0;
+		int textRes = 0;
+		int color = 0x00000000;
+		int alpha = 255;
+		
 
-		donePictureButton.setCompoundDrawablesWithIntrinsicBounds(null, ld,
-				null, null);
+
+		if(att != null){
+			switch(att.getForm()){
+			case SingleImg:
+				pictureRes = R.drawable.thumbnail_single_pic;
+				alpha = 0;
+				color = 0;
+				break;
+			case SplitImg:
+				pictureRes = R.drawable.thumbnail_dual_pic;
+				alpha = 0;
+				//color = 0;
+				break;
+			}
+		} else {
+			pictureRes = R.drawable.thumbnail_attachment;
+		}
+		
+		LayerDrawable ld = (LayerDrawable) getResources().getDrawable(R.drawable.attachment_layer);
+		
+		PorterDuffColorFilter filter = new PorterDuffColorFilter(color,	PorterDuff.Mode.SRC_ATOP);
+		
+		Drawable d = getResources().getDrawable(R.drawable.attachment_background);
+		
+		d.setAlpha(alpha);
+		
+		d.setColorFilter(filter);
+		
+		ld.setDrawableByLayerId(R.id.second_attachment_layer, d);
+		ld.setDrawableByLayerId(R.id.second_attachment_layer, getResources().getDrawable(pictureRes));
+		
+		donePictureButton.setCompoundDrawablesWithIntrinsicBounds(null, ld,	null, null);
 	}
 
 	private void initDonePictureButton() {
@@ -831,7 +861,6 @@ public class CustomizeFragment extends Fragment {
 		donePictureButton = (Button) getActivity().findViewById(
 				R.id.customize_donescreen);
 		donePictureButton.setOnClickListener(new OnClickListener() {
-
 			public void onClick(final View v) {
 				final ArrayList<Art> art = guard.ArtList;
 
@@ -856,7 +885,7 @@ public class CustomizeFragment extends Fragment {
 								public void onItemClick(AdapterView<?> parent, View view,
 										int position, long id) {
 									Attachment atta1 = new SingleImg(guard.ArtList.get(position));
-									setDonePicture(R.drawable.thumbnail_single_pic);
+									setDonePicture(atta1);
 									currSubP.setDoneArt(atta1);
 									doneDialog.dismiss();
 									singleDialog.dismiss();
@@ -889,7 +918,7 @@ public class CustomizeFragment extends Fragment {
 											final Art art2 = guard.ArtList.get(position);
 											Attachment atta = new SplitImg(art1,art2);
 											currSubP.setDoneArt(atta);
-											setDonePicture(R.drawable.thumbnail_dual_pic);
+											setDonePicture(atta);
 											doneDialog.dismiss();
 											dualDialog.dismiss();
 											dialog1.dismiss();
@@ -931,7 +960,7 @@ public class CustomizeFragment extends Fragment {
 
 			public boolean onLongClick(View v) {
 				currSubP.setDoneArt(null);
-				setDonePicture(R.drawable.thumbnail_attachment);
+				setDonePicture(null);
 				return true;
 			}
 		});
@@ -965,7 +994,7 @@ public class CustomizeFragment extends Fragment {
 							 public void onClick(View arg0) {
 								 currSubP.name = save1.getEditTextText(1);
 								 guard.publishList()
-								 .get(Guardian.profilePosition).select();
+								 .get(guard.profilePosition).select();
 
 								 SubProfile m_savedSubprofile;
 								 if (preSubP != null) {
@@ -975,7 +1004,7 @@ public class CustomizeFragment extends Fragment {
 									 m_savedSubprofile = guard.getChild().save(
 											 currSubP, false);
 								 }
-								 Guardian.subProfileID = m_savedSubprofile
+								 guard.subProfileID = m_savedSubprofile
 										 .getId();
 								 loadSettings(m_savedSubprofile);
 
@@ -984,7 +1013,7 @@ public class CustomizeFragment extends Fragment {
 								 SubProfileFragment spf = (SubProfileFragment) getFragmentManager()
 										 .findFragmentById(
 												 R.id.subprofileFragment);
-								 Guardian.profileID = guard.getChild()
+								 guard.profileID = guard.getChild()
 										 .getProfileId();
 								 cf.loadChildren();
 								 spf.loadSubProfiles();
@@ -1001,7 +1030,7 @@ public class CustomizeFragment extends Fragment {
 						 });
 						 save1.show();
 					 } else {
-						 guard.publishList().get(Guardian.profilePosition)
+						 guard.publishList().get(guard.profilePosition)
 						 .select();
 
 						 SubProfile m_savedSubprofile;
@@ -1011,14 +1040,14 @@ public class CustomizeFragment extends Fragment {
 							 m_savedSubprofile = guard.getChild().save(currSubP,
 									 false);
 						 }
-						 Guardian.subProfileID = m_savedSubprofile.getId();
+						 guard.subProfileID = m_savedSubprofile.getId();
 						 loadSettings(m_savedSubprofile);
 
 						 ChildFragment cf = (ChildFragment) getFragmentManager()
 								 .findFragmentById(R.id.childFragment);
 						 SubProfileFragment spf = (SubProfileFragment) getFragmentManager()
 								 .findFragmentById(R.id.subprofileFragment);
-						 Guardian.profileID = guard.getChild().getProfileId();
+						 guard.profileID = guard.getChild().getProfileId();
 						 cf.loadChildren();
 						 spf.loadSubProfiles();
 					 }
@@ -1154,14 +1183,14 @@ public class CustomizeFragment extends Fragment {
 									 currSubP.name = saveAs2
 											 .getEditTextText(1);
 									 guard.publishList()
-									 .get(Guardian.profilePosition)
+									 .get(guard.profilePosition)
 									 .select();
 
 									 Child c = guard.Children().get(
 											 position);
 									 getName();
 									 c.save(currSubP, false);
-									 Guardian.saveChild(c, currSubP);
+									 guard.saveChild(c, currSubP);
 									 SubProfileFragment df = (SubProfileFragment) getFragmentManager()
 											 .findFragmentById(
 													 R.id.subprofileFragment);
@@ -1186,7 +1215,7 @@ public class CustomizeFragment extends Fragment {
 									 SubProfileFragment spf = (SubProfileFragment) getFragmentManager()
 											 .findFragmentById(
 													 R.id.subprofileFragment);
-									 Guardian.profileID = guard
+									 guard.profileID = guard
 											 .getChild().getProfileId();
 									 cf.loadChildren();
 									 spf.loadSubProfiles();
@@ -1239,7 +1268,7 @@ public class CustomizeFragment extends Fragment {
 
 				 public void onClick(View v) {
 					 currSubP.addLastUsed(preSubP);
-					 Guardian.saveGuardian(currSubP);
+					 guard.saveGuardian(currSubP);
 					 currSubP.select();
 					 Intent i = new Intent(
 							 getActivity().getApplicationContext(),
@@ -1290,6 +1319,7 @@ public class CustomizeFragment extends Fragment {
 		 setAttachment(currSubP.getAttachment());
 
 		 /* Set Done picture */
+		 setDonePicture(currSubP.getDoneArt());
 	 }
 
 	 public void reloadCustomize() {
@@ -1308,5 +1338,8 @@ public class CustomizeFragment extends Fragment {
 
 		 /* Set Attachment */
 		 setAttachment(currSubP.getAttachment());
+		 
+		 /* Set Done picture */
+		 setDonePicture(currSubP.getDoneArt());
 	 }
 }

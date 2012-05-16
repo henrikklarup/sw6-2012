@@ -42,7 +42,7 @@ public class Attachment {
 		return 0;
 	}
 	
-	public Attachment generateAtt(HashMap map){
+	public Attachment generateAttArt(HashMap map){
 		Attachment att = null;
 		
 		return att;

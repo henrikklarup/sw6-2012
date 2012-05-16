@@ -19,6 +19,7 @@ public class ProgressBar extends SubProfile {
 		
 		
 			copyP.setAttachment(this._attachment);
+			copyP.setDoneArt(this.getDoneArt());
 		
 		return copyP;
 	}

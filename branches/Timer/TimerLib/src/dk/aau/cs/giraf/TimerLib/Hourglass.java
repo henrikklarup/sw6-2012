@@ -14,7 +14,8 @@ public class Hourglass extends SubProfile {
 	public Hourglass copy(){
 		Hourglass copyP = new Hourglass(this);
 		
-			copyP.setAttachment(this._attachment);
+		copyP.setAttachment(this._attachment);
+		copyP.setDoneArt(this.getDoneArt());
 		
 		return copyP;
 	}

@@ -1,5 +1,7 @@
 package dk.aau.cs.giraf.wombat;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -8,6 +10,7 @@ import dk.aau.cs.giraf.TimerLib.Art;
 import dk.aau.cs.giraf.TimerLib.Guardian;
 
 public class MainActivity extends Activity {
+	Guardian guard = null;
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -26,19 +29,20 @@ public class MainActivity extends Activity {
         	childId = -3;
         	color = 0xFFFFBB55;
         }
-
-    	Guardian guard = Guardian.getInstance(childId, guardianId, getApplicationContext());
-    	
-    	Guardian.backgroundColor = color;
-
-		Art p_done = new Art(R.drawable.p_done,"Færdig");
-		Art p_skema = new Art(R.drawable.p_gaa_til_skema,"Gå til skema");
-		Art p_taxa = new Art(R.drawable.p_gaa_til_taxa,"Gå til taxa");
+        
+        ArrayList<Art> artList = new ArrayList<Art>();
+        
+        Art p_done = new Art(R.drawable.p_done,"Færdig", 0);
+		Art p_skema = new Art(R.drawable.p_gaa_til_skema,"Gå til skema", 1);
+		Art p_taxa = new Art(R.drawable.p_gaa_til_taxa,"Gå til taxa", 2);
 		
-		guard.ArtList.clear();
-		guard.ArtList.add(p_done);
-		guard.ArtList.add(p_skema);
-		guard.ArtList.add(p_taxa);
+		artList.add(p_done);
+		artList.add(p_skema);
+		artList.add(p_taxa);
+
+    	guard = Guardian.getInstance(childId, guardianId, getApplicationContext(), artList);
+    	
+    	guard.backgroundColor = color;
     	
 		// Set content view according to main, which implements two fragments
 		setContentView(R.layout.main);
@@ -46,5 +50,10 @@ public class MainActivity extends Activity {
 		Drawable d = getResources().getDrawable(R.drawable.background);
 		d.setColorFilter(color, PorterDuff.Mode.OVERLAY);
 		findViewById(R.id.mainLayout).setBackgroundDrawable(d);
+	}
+	
+	public void onBackPressed() {
+		guard.reset();
+		finish();
 	}
 }

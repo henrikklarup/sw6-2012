@@ -15,6 +15,7 @@ import dk.aau.cs.giraf.TimerLib.Guardian;
 public class ChildAdapter extends ArrayAdapter<Child> {
 
 	private ArrayList<Child> items;
+	Guardian guard = Guardian.getInstance();
 
 	public ChildAdapter(Context context, int textViewResourceId,
 			ArrayList<Child> items) {
@@ -51,9 +52,9 @@ public class ChildAdapter extends ArrayAdapter<Child> {
 
 		}
 		
-			if(c.getProfileId() == Guardian.profileID){
+			if(c.getProfileId() == guard.profileID){
 				v.setBackgroundResource(R.drawable.list_selected);
-				Guardian.profileFirstClick = true;
+				guard.profileFirstClick = true;
 			}
 		return v;
 	}
