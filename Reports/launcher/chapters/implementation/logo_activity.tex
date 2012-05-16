@@ -17,6 +17,17 @@ The logo activity implements TIME-AUTO-LOGIN-FEATURE -- explained in \autoref{se
 			            	}
 \end{lstlisting}
 
+
+\begin{lstlisting}[style=sourceCode, language=JAVA, caption=LogoActivity.java, label=lst:sessionexpired]
+public static boolean sessionExpired(Context context) {
+	SharedPreferences sp = context.getSharedPreferences(Data.TIMERKEY, 0);
+	Long lastAuthTime = sp.getLong(Data.DATEKEY, 1);
+	Date d = new Date();
+
+	return d.getTime() > lastAuthTime + Data.TIME_TO_STAY_LOGGED_IN;
+}
+	\end{lstlisting}
+
 % This section will explain the activity \textit{Logo Activity}\todo{Remember to explain that activity refers to Android Activity} and how it is utilized.\\\\
 % This activity is only seen by the user when the launcher is not already on the Back Stack\todo{Android ref}.\\
 % The important thing about this activity is that it runs in a \verb+Thread+ and uses \verb+synchronized()+ to wait an amount of time until the Authentication Activity or the Home Activity is most certainly done. Which activity that should be started is decided by the \verb+Tools.sessionExpired(mContext)+ method. 
