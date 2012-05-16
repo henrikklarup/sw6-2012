@@ -50,7 +50,9 @@ public class ManagementBoxDragListener implements OnDragListener
 
 				if(self.getId()==R.id.trash && ManageCategoryFragment.catDragOwnerID == R.id.pictograms) //We are to delete a pictogram from a category
 				{
-					ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.currentCategoryId).removePictogram(ManageCategoryFragment.draggedItemIndex);
+					Category temp = ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.currentCategoryId);
+					temp.removePictogram(ManageCategoryFragment.draggedItemIndex);
+					ManageCategoryFragment.profileBeingModified.setCategoryAt(ManageCategoryFragment.currentCategoryId, temp);
 					
 					pictograms.setAdapter(new PictogramAdapter(ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.currentCategoryId), parrent));
 				}
@@ -65,8 +67,10 @@ public class ManagementBoxDragListener implements OnDragListener
 					int y = (int)event.getY();
 					int index = categories.pointToPosition(x, y);
 					
-					ManageCategoryFragment.profileBeingModified.getCategoryAt(index).addPictogram(draggedPictogram);
-					
+					Category temp = ManageCategoryFragment.profileBeingModified.getCategoryAt(index);
+					temp.addPictogram(draggedPictogram);
+					ManageCategoryFragment.profileBeingModified.setCategoryAt(ManageCategoryFragment.currentCategoryId, temp);
+										
 				}
 				else if(self.getId()==R.id.pictograms && ManageCategoryFragment.catDragOwnerID == R.id.categories) //We are to copy a category into another category
 				{	
@@ -77,16 +81,20 @@ public class ManagementBoxDragListener implements OnDragListener
 					
 					Category categoryCopiedFrom = ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.draggedItemIndex);
 					
+					Category temp;
+					
 					for(int i = 0; i < categoryCopiedFrom.getPictograms().size(); i++)
 					{
-						ManageCategoryFragment.profileBeingModified.getCategoryAt(index).addPictogram(categoryCopiedFrom.getPictogramAtIndex(i)); 
+						temp = ManageCategoryFragment.profileBeingModified.getCategoryAt(index);
+						temp.addPictogram(categoryCopiedFrom.getPictogramAtIndex(i)); 
+						ManageCategoryFragment.profileBeingModified.setCategoryAt(ManageCategoryFragment.currentCategoryId, temp);
 					}
 					
 					pictograms.setAdapter(new PictogramAdapter(ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.currentCategoryId), parrent));
 				}
 				else if(self.getId()==R.id.trash && ManageCategoryFragment.catDragOwnerID == R.id.categories) //We are to delete a category
 				{	
-					ManageCategoryFragment.profileBeingModified.removeCaregory(ManageCategoryFragment.draggedItemIndex);
+					ManageCategoryFragment.profileBeingModified.removeCategory(ManageCategoryFragment.draggedItemIndex);
 					categories.setAdapter(new ListViewAdapter(parrent, R.layout.categoriesitem, ManageCategoryFragment.profileBeingModified.getCategories()));
 				}
 				else
