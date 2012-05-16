@@ -1,4 +1,34 @@
 \section{Home Activity}
+This section will explain what the activity \textit{Home Activity} provides if services for the user.\\\\
+This activity is the center of the hole launcher. It is here the user will spend most of their time when they are between running apps.
+
+\subsection{The drawer}
+\textit{The drawer} is a functionality where the user can hide tools when they do not use them or need them for a while, the drawer can be said to be some kind of toolbox. To show the functionality of the drawer a color picker for apps were implemented and hidden in the drawer. The color picker will be explained in \autoref{color:picker}.
+It is possible to put more functionality in the drawer for e.g. a way to put apps in the drawer if they are not being used by the user and if they need them they can drag them out from the drawer again.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.3]{gfx/home-activity}
+	\caption{Shows the launcher with the drawer opened and closed. The color picker can also be seen here.}
+	\label{fig:home-activity}
+\end{figure}
+
+\subsection{Color picker}\label{color:picker}
+
+The \textit{color picker} is a tool that was made to change colors on apps, this have been extended so far that if the logo of e.g. Wombat is choosen to be red then the background in Wombat will also be set to red when the application is loaded.
+The color picker consist of a color board with ten predefined \giraf[] colors. These colors can be assigned to any app that are in the launcher and there is no limit on how many times the user can use a color. This means that if the user want they can make every app e.g. red.
+The color picker is made with drag and drop functionality, so to assign a color the user simply puts down their finger on the color they want and drag it to the app they want to assign the color to and release their finger from the screen.
+When the user release their finger the app changes color and this color is saved in the local database so if the user restarts the launcher the apps will still have the colors the users have designed. 
+The color picker can be seen in \autoref{fig:home-activity}
+
+\todo{Skal der være bugs her, eller i en known bugs section?}
+
+\subsection{Widgets}
+
+The widgets which can be seen in \autoref{fig:home-activity} is between the launcher and the drawer, this is called the \textit{home bar}. Here it is also possible to see a picture of the user curretly logged in and log out with the orange button in the button of the home bar. There are two widgets: One that shows the connectivity to the Savanah server. This widget has three states: Connected and updated, connected and synchronising and not connected. Connected and updated tells the user that all data is synchronized with the server and they are good to go. Connected and synchronising means that either the tablet needs data from the server or to push some changes to the server. Not connected tells the user that they are not connected to the server and therefore can not update or synchronize with the server. 
+If the user clicks on the connectivity widget they will get a description to the currently showing status telling them what this icon means.
+The second widget is a calendar widget which tells the user what day it is in the month in a numeric format. If the user clicks this widget they will get a description with day, d. dd, month, week. This is done so the user easily can access and see what day it is.
+
 
 \begin{lstlisting}[style=sourceCode, language=JAVA, caption=This is code, label=lst:homeActivity] 
 
