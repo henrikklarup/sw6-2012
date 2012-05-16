@@ -101,6 +101,7 @@ public class ManageCategoryFragment extends Fragment {
 			public void onItemClick(AdapterView<?> arg0, View view, int position, long id) 
 			{	
 				currentCategoryId = position;
+				ImageView categoryPic = (ImageView) parrent.findViewById(R.id.categorypic);
 				categoryPic.setImageBitmap(ManageCategoryFragment.profileBeingModified.getCategoryAt(currentCategoryId).getIcon().getBitmap());
 				GridView pictograms = (GridView) parrent.findViewById(R.id.pictograms);
 				pictograms.setAdapter(new PictogramAdapter(profileBeingModified.getCategoryAt(currentCategoryId), parrent));
