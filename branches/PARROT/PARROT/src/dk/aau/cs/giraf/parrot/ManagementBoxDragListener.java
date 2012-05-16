@@ -78,9 +78,6 @@ public class ManagementBoxDragListener implements OnDragListener
 				else if(self.getId()==R.id.pictograms && ManageCategoryFragment.catDragOwnerID == R.id.categories) //We are to copy a category into another category
 				{	
 					ListView categories = (ListView) parrent.findViewById(R.id.categories);
-					int x = (int)event.getX();
-					int y = (int)event.getY();
-					int index = categories.pointToPosition(x, y);
 					
 					Category categoryCopiedFrom = ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.draggedItemIndex);
 					
@@ -88,7 +85,7 @@ public class ManagementBoxDragListener implements OnDragListener
 					
 					for(int i = 0; i < categoryCopiedFrom.getPictograms().size(); i++)
 					{
-						temp = ManageCategoryFragment.profileBeingModified.getCategoryAt(index);
+						temp = ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.currentCategoryId);
 						temp.addPictogram(categoryCopiedFrom.getPictogramAtIndex(i)); 
 						ManageCategoryFragment.profileBeingModified.setCategoryAt(ManageCategoryFragment.currentCategoryId, temp);
 					}
