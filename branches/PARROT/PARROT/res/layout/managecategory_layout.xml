@@ -20,7 +20,8 @@
             android:id="@+id/categories"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/profiles" >
+            android:layout_below="@id/profiles"
+            android:fadeScrollbars="false" >
         </ListView>
 
         <ImageView
@@ -63,8 +64,8 @@
 
             <Button
                 android:id="@+id/button1_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="120dp"
+                android:layout_height="75dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="30dp"
@@ -72,8 +73,8 @@
 
             <Button
                 android:id="@+id/button1_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="120dp"
+                android:layout_height="75dp"
                 android:layout_alignTop="@id/button1_1"
                 android:layout_toRightOf="@id/button1_1"
                 android:layout_marginLeft="30dp"
@@ -81,8 +82,8 @@
 
             <Button
                 android:id="@+id/button1_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="120dp"
+                android:layout_height="75dp"
                 android:layout_alignTop="@id/button1_1"
                 android:layout_toRightOf="@id/button1_2"
                 android:layout_marginLeft="30dp"
@@ -90,8 +91,8 @@
 
             <Button
                 android:id="@+id/button2_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="120dp"
+                android:layout_height="75dp"
                 android:layout_alignLeft="@+id/button1_1"
                 android:layout_below="@+id/button1_1"
                 android:layout_marginTop="40dp"
@@ -99,8 +100,8 @@
 
             <Button
                 android:id="@+id/button2_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="120dp"
+                android:layout_height="75dp"
                 android:layout_alignTop="@id/button2_1"
                 android:layout_marginLeft="30dp"
                 android:layout_toRightOf="@id/button2_1"
@@ -108,8 +109,8 @@
 
             <Button
                 android:id="@+id/button2_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="120dp"
+                android:layout_height="75dp"
                 android:layout_alignTop="@id/button2_1"
                 android:layout_marginLeft="30dp"
                 android:layout_toRightOf="@id/button2_2"
@@ -121,7 +122,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#0000ff"
-            android:numColumns="auto_fit" >
+            android:numColumns="3"
+            android:fadeScrollbars="false" >
         </GridView>
     </LinearLayout>
 
