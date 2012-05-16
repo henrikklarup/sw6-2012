@@ -135,7 +135,6 @@ class HasGuardianController {
 
 		if (c != null) {
 			hgList = cursorToHasGuardianList(c);
-			
 			c.close();
 		}
 

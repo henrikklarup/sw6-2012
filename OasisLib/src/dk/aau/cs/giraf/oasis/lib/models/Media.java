@@ -1,5 +1,6 @@
 package dk.aau.cs.giraf.oasis.lib.models;
 
+
 public class Media {
 
 	private long id;
@@ -134,4 +135,20 @@ public class Media {
 
 		return localOutput;
 	}
+	
+	@Override public boolean equals(Object aMedia) {
+	    if ( this == aMedia ) return true;
+
+	    if ( !(aMedia instanceof Media) ) return false;
+
+	    Media media = (Media)aMedia;
+
+	    return
+	      EqualsUtil.areEqual(this.getId(), media.getId()) &&
+	      EqualsUtil.areEqual(this.getMPath(), media.getMPath()) &&
+	      EqualsUtil.areEqual(this.getName(), media.getName()) &&
+	      EqualsUtil.areEqual(this.isMPublic(), media.isMPublic()) &&
+	      EqualsUtil.areEqual(this.getMType(), media.getMType()) &&
+	      EqualsUtil.areEqual(this.getOwnerId(), media.getOwnerId());
+	    }
 }

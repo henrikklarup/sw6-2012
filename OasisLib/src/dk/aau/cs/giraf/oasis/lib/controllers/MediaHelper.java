@@ -134,15 +134,15 @@ public class MediaHelper {
 	 */
 
 	public long insertMedia(Media media) {
-		long result = 0;
+		long id = 0;
 		Uri uri;
 		ContentValues cv = getContentValues(media);
 		uri = _context.getContentResolver().insert(MediaMetaData.CONTENT_URI, cv);
-		result = Integer.parseInt(uri.getPathSegments().get(1));
+		id = Integer.parseInt(uri.getPathSegments().get(1));
 		
-		mpa.insertMediaProfileAccess(new MediaProfileAccess(media.getOwnerId(), media.getId()));
+		mpa.insertMediaProfileAccess(new MediaProfileAccess(media.getOwnerId(), id));
 
-		return result;
+		return id;
 	}
 
 	/**
@@ -248,22 +248,15 @@ public class MediaHelper {
 	 */
 	//getAccessableMediaByProfile
 	public List<Media> getMyMedia(Profile p) {
-		List<Media> result = new ArrayList<Media>();
-
-		List<Media> tmp;
+		List<Media> result = getMediaByProfile(p);
 		List<Department> depList = dh.getDepartmentsByProfile(p);
+		
 		for (Department dep : depList) {
-			tmp = getMediaByDepartment(dep);
+			List<Media> tmp = getMediaByDepartment(dep);
 			for (Media m : tmp) {
 				if (!result.contains(m)) {
 					result.add(m);
 				}
-			}
-		}
-		tmp = getMediaByProfile(p);
-		for (Media m : tmp) {
-			if (!result.contains(m)) {
-				result.add(m);
 			}
 		}
 
@@ -279,7 +272,8 @@ public class MediaHelper {
 	public List<Media> getMediaIOwn(Profile p) {
 		List<Media> result = new ArrayList<Media>();
 
-		Cursor c = _context.getContentResolver().query(MediaMetaData.CONTENT_URI, columns, MediaMetaData.Table.COLUMN_OWNERID + " = '" + p.getId() + "'", null, null);
+		Cursor c = _context.getContentResolver().query(MediaMetaData.CONTENT_URI, columns, 
+				MediaMetaData.Table.COLUMN_OWNERID + " = '" + p.getId() + "'", null, null);
 		if (c != null) {
 			result = cursorToMedia(c);
 			c.close();
@@ -295,7 +289,8 @@ public class MediaHelper {
 	public List<Media> getPublicMedia() {
 		List<Media> result = new ArrayList<Media>();
 
-		Cursor c = _context.getContentResolver().query(MediaMetaData.CONTENT_URI, columns, MediaMetaData.Table.COLUMN_PUBLIC + " = '" + 1 + "'", null, null);
+		Cursor c = _context.getContentResolver().query(MediaMetaData.CONTENT_URI, columns, 
+				MediaMetaData.Table.COLUMN_PUBLIC + " = '" + 1 + "'", null, null);
 		if (c != null) {
 			result = cursorToMedia(c);
 			c.close();
