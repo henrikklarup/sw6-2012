@@ -158,7 +158,7 @@ public class ManageCategoryFragment extends Fragment {
 			}
 		});
 		
-		changeCategoryPic.setOnClickListener(new OnClickListener() 
+		changeCategoryPic.setOnClickListener(new OnClickListener()  //TODO remove me as this is handled by drop and drop
 		{
 			public void onClick(View v) 
 			{

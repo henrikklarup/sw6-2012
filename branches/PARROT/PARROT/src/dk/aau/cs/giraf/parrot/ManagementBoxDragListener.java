@@ -5,6 +5,7 @@ import android.view.DragEvent;
 import android.view.View;
 import android.view.View.OnDragListener;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 public class ManagementBoxDragListener implements OnDragListener
@@ -82,6 +83,14 @@ public class ManagementBoxDragListener implements OnDragListener
 				{	
 					ManageCategoryFragment.profileBeingModified.removeCategory(ManageCategoryFragment.draggedItemIndex);
 					categories.setAdapter(new ListViewAdapter(parrent, R.layout.categoriesitem, ManageCategoryFragment.profileBeingModified.getCategories()));
+				}
+				else if(self.getId()==R.id.categorypic && ManageCategoryFragment.catDragOwnerID == R.id.pictograms) //We are to change the icon of the category
+				{
+					Category tempCat = ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.currentCategoryId);
+					tempCat.setIcon(draggedPictogram);
+					ManageCategoryFragment.profileBeingModified.setCategoryAt(ManageCategoryFragment.currentCategoryId, tempCat);
+					ImageView icon = (ImageView) parrent.findViewById(R.id.categorypic);
+					icon.setImageBitmap(draggedPictogram.getBitmap());
 				}
 				else
 				{
