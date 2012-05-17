@@ -18,18 +18,19 @@ This has also led to continuous, informal integration testing of the system, as 
 The work form used in our \localgroup{} is primarily based on XP. 
 XP is built around having a customer available at all times, but this has not been the case for this project. 
 We found it unnecessary to compensate for this however. 
-This was due to the nature of the project, which, in the case of the launcher, was focused a lot on usability and GUI, subjects that only require occasional user feedback to develop properly.
-\todo{Hvorfor kraever det kun occasional feedback?}
-The GUI focus also made it easier to fill out the backlog without the customer, and planning poker; a Scrum practice, which was used to determine the size of each task. \newline
+This was due to the nature of the project, which, in the case of the launcher, was focused mainly on the GUI. 
+The only requirements made by the customers in relation to the GUI, was that it should have high usability. 
+This allowed us to spend time refining designs, and only needing occasional feedback from the customer to evaluate the current ideas and design. 
+The GUI focus also made it easier to fill out the backlog without the customer, and planning poker, a Scrum practice, was used to determine the size of each task. \newline
 Other XP conventions did make it into the work form though, e.g. pair programming. 
 Pair programming has been a great tool in keeping the development pace up, as assisting each other in this manner makes it easier to discover problems and solutions early, while also reducing overhead in communicating code to the rest of the team. \newline
 Another XP convention that helped reduce this overhead was refactoring. 
 This involves going through existing code to rewrite parts that are complex from a readability point of view, in order to simplify the code and make it easier to understand. 
 This is essential, as the project will be handed over to a new team later on, and high readability helps ensure that the project is useful to them. \newline
-Lastly, the \textquotedblleft{}whole team\textquotedblright{} and \textquotedblleft{}sustainable pace\textquotedblright{} conventions were used as well. 
+The \textquotedblleft{}whole team\textquotedblright{} and \textquotedblleft{}sustainable pace\textquotedblright{} conventions were used as well. 
 The reason for this was to ensure that our work remained high in quality, and led to fairly stringent work rules, where the team agreed to work through the day together, but not work at home. 
-Exceptions were made in case of illness. \newline
-One final note is that \textquotedblleft{}collective code ownership\textquotedblright{} was also employed. 
-However, this is a demand from the study regulation, and not something that was deployed based on personal judgement.
-
-\todo{der mangler at skrives om TDD} 
+Exceptions were made in case of illness. 
+Lastly, \textquotedblleft{}collective code ownership\textquotedblright{} was also employed. 
+However, this is a demand from the study regulation, and not something that was deployed based on personal judgement. \newline
+One final note is that test driven development was considered as a possible convention to use as well. 
+We found that GUI programming does not lend itself well to writing tests ahead of the actual code however, and so this convention was not included. 
