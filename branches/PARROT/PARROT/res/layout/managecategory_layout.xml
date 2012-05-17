@@ -54,7 +54,18 @@
                 android:contentDescription=""
                 android:src="@drawable/stop" />
 
+            <!--
             <TextView
+                android:id="@+id/categoryinfo"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_toLeftOf="@id/categorypic"
+                android:fadeScrollbars="false"
+                android:scrollHorizontally="false" />
+            -->
+            
+            
+            <EditText
                 android:id="@+id/categoryinfo"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"

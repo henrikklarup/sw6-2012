@@ -22,6 +22,7 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -64,7 +65,8 @@ public class ManageCategoryFragment extends Fragment {
 		ListView categories = (ListView) parrent.findViewById(R.id.categories);
 		GridView pictograms = (GridView) parrent.findViewById(R.id.pictograms);
 		ImageView trash = (ImageView) parrent.findViewById(R.id.trash);
-		TextView categoryInfo = (TextView) parrent.findViewById(R.id.categoryinfo);
+		//TextView categoryInfo = (TextView) parrent.findViewById(R.id.categoryinfo);
+		EditText categoryInfo = (EditText) parrent.findViewById(R.id.categoryinfo);
 		PARROTDataLoader dummyLoader = new PARROTDataLoader(parrent);
 		ImageView categoryPic = (ImageView) parrent.findViewById(R.id.categorypic);
 		//createNewCategory, changeCategoryPic, changeCategoryColor, changeCategoryName, copyThisCategoryToOtherProfile, copyThisCategoryToOtherProfileCategory  
@@ -125,9 +127,8 @@ public class ManageCategoryFragment extends Fragment {
 				categoryPic.setImageBitmap(ManageCategoryFragment.profileBeingModified.getCategoryAt(currentCategoryId).getIcon().getBitmap());
 				GridView pictograms = (GridView) parrent.findViewById(R.id.pictograms);
 				pictograms.setAdapter(new PictogramAdapter(profileBeingModified.getCategoryAt(currentCategoryId), parrent));
-				TextView categoryInfo = (TextView) parrent.findViewById(R.id.categoryinfo);
+				EditText categoryInfo = (EditText) parrent.findViewById(R.id.categoryinfo);
 				categoryInfo.setText(profileBeingModified.getCategoryAt(currentCategoryId).getCategoryName());
-				categoryInfo.setTextColor(0xffffffff);
 			}
 		});
 
@@ -213,7 +214,7 @@ public class ManageCategoryFragment extends Fragment {
 		{
 			public void onClick(View v) 
 			{
-				TextView categoryInfo = (TextView) parrent.findViewById(R.id.categoryinfo);
+				EditText categoryInfo = (EditText) parrent.findViewById(R.id.categoryinfo);
 				((InputMethodManager)parrent.getSystemService(Context.INPUT_METHOD_SERVICE)).showSoftInput(categoryInfo, InputMethodManager.SHOW_FORCED);
 				
 				String name = categoryInfo.getText().toString();
