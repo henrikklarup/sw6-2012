@@ -90,7 +90,7 @@ public class ManagementBoxDragListener implements OnDragListener
 					tempCat.setIcon(draggedPictogram);
 					ManageCategoryFragment.profileBeingModified.setCategoryAt(ManageCategoryFragment.currentCategoryId, tempCat);
 					ImageView icon = (ImageView) parrent.findViewById(R.id.categorypic);
-					icon.setImageBitmap(draggedPictogram.getBitmap());
+					icon.setImageBitmap(ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.currentCategoryId).getIcon().getBitmap());
 				}
 				else
 				{
