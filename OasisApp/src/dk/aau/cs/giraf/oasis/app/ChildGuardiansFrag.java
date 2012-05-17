@@ -118,7 +118,7 @@ public class ChildGuardiansFrag extends ExpandableListFragment {
 				TextView tName = (TextView) view.findViewById(R.id.tvName);
 				tName.setText(name);
 				TextView tPhone = (TextView) view.findViewById(R.id.tvPhone);
-				tPhone.setText(""+MainActivity.guardian.getPhone());
+				tPhone.setText(""+guardProfile.getPhone());
 				ImageView iProfileImg = (ImageView) view.findViewById(R.id.iImg);
 				if (guardProfile.getPicture() != null) {
 					Bitmap bm = BitmapFactory.decodeFile(guardProfile.getPicture());
