@@ -85,6 +85,7 @@ public class ManageCategoryFragment extends Fragment {
 		parrent.findViewById(R.id.trash).setOnDragListener(new ManagementBoxDragListener(parrent));
 		parrent.findViewById(R.id.categories).setOnDragListener(new ManagementBoxDragListener(parrent));
 		parrent.findViewById(R.id.pictograms).setOnDragListener(new ManagementBoxDragListener(parrent));
+		parrent.findViewById(R.id.categorypic).setOnDragListener(new ManagementBoxDragListener(parrent));
 		
 		
 		profiles.setOnItemSelectedListener(new OnItemSelectedListener() //Here we chose what profile to show 
