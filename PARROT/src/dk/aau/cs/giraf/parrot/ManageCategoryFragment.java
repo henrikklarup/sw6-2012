@@ -76,7 +76,7 @@ public class ManageCategoryFragment extends Fragment {
 //		spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 //		profiles.setAdapter(spinnerAdapter);
 		
-		
+		categoryPic.setImageBitmap(profileBeingModified.getCategoryAt(currentCategoryId).getIcon().getBitmap()); //Loads the categorys icon
 		
 		categories.setAdapter(new ListViewAdapter(parrent, R.layout.categoriesitem, profileBeingModified.getCategories())); //Adapter for the category gridview
 
@@ -144,13 +144,17 @@ public class ManageCategoryFragment extends Fragment {
 				return true;
 			}
 		});
-	
+		
+		//We are creating a new category here. We fill it with dummy data to start with. The empty picture, the name "Kategori navn" and the color red.
 		createNewCategory.setOnClickListener(new OnClickListener() 
 		{
 			public void onClick(View v) 
 			{
-				// TODO Auto-generated method stub
-				
+				Pictogram pictogram = new Pictogram("#usynlig#", null, null, null);
+				Category cat = new Category("Kategori Navn", 0xffff0000, pictogram);
+				profileBeingModified.addCategory(cat);
+				ListView categories = (ListView) parrent.findViewById(R.id.categories); //Redrawing the categories
+				categories.setAdapter(new ListViewAdapter(parrent, R.layout.categoriesitem, profileBeingModified.getCategories())); //Adapter for the category gridview
 			}
 		});
 		
