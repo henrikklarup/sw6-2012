@@ -1,10 +1,16 @@
 \section{External Architecture}
 
-\autoref{fig:launcherservices} illustrates the service which is needed in order for the launcher to be a functional part of the \giraf[] platform, which architecture is shown in \autoref{cmn:fig:architecture}.
-The illustrated service is the ability to launch a specific \girafapp[] as a guardian, with a child profile, as explained in \autoref{FIXME} \todo{indsaet ref til hvor servicen er forklaret}.
+\autoref{fig:external_architecture} illustrates the \giraf[] launcher component. The component provides one service and have one dependency. The services it provides is based on demands from the surrounding components of the \giraf[] platform, which can be seen in \autoref{cmn:fig:architecture}. The illustrated service provides a way for launched \girafapp[]s to determine which guardian launched the application in question, and with which child profile. The illustrated dependency represents the need for being able to read and update profile data. The service which fulfill this dependency is provided by Oasis. 
 
 As seen on \autoref{cmn:fig:architecture}, Oasis is available for the launcher to use. This database stores the modulated data, including the guardian and child profiles.
 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{gfx/external_launcher_architecture.pdf}
+	\caption{The external architecture of the \giraf[] launcher.}
+	\label{fig:external_architecture}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% COMMENT
 \begin{comment}
