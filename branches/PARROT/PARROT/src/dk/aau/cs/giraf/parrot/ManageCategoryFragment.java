@@ -8,6 +8,7 @@ import android.content.ClipData;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.DragShadowBuilder;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -62,8 +63,8 @@ public class ManageCategoryFragment extends Fragment {
 		Button changeCategoryPic = (Button) parrent.findViewById(R.id.changecategorypicbutton);
 		Button changeCategoryColor = (Button) parrent.findViewById(R.id.changecategorycolorbutton);
 		Button changeCategoryName = (Button) parrent.findViewById(R.id.changecategorynamebutton);
-		Button copyThisCategoryToOtherProfile = (Button) parrent.findViewById(R.id.copythiscategorytootherprofile);
-		Button copyThisCategoryToOtherProfileCategory = (Button) parrent.findViewById(R.id.copythiscategorytootherprofileCategory);
+		Button copyThisCategoryToOtherProfile = (Button) parrent.findViewById(R.id.copythiscategorytootherprofilebutton);
+		Button copyThisCategoryToOtherProfileCategory = (Button) parrent.findViewById(R.id.copythiscategorytootherprofilecategorybutton);
 
 		/*
 		ArrayAdapter<String> categoriesArray = new ArrayAdap; //FIXME not sure which constructor to use...
@@ -143,6 +144,64 @@ public class ManageCategoryFragment extends Fragment {
 				return true;
 			}
 		});
+	
+		createNewCategory.setOnClickListener(new OnClickListener() 
+		{
+			public void onClick(View v) 
+			{
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		changeCategoryPic.setOnClickListener(new OnClickListener() 
+		{
+			public void onClick(View v) 
+			{
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		changeCategoryColor.setOnClickListener(new OnClickListener() 
+		{
+			public void onClick(View v) 
+			{
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		changeCategoryName.setOnClickListener(new OnClickListener() 
+		{
+			public void onClick(View v) 
+			{
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		copyThisCategoryToOtherProfile.setOnClickListener(new OnClickListener() 
+		{
+			public void onClick(View v) 
+			{
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		copyThisCategoryToOtherProfileCategory.setOnClickListener(new OnClickListener() 
+		{
+			public void onClick(View v) 
+			{
+				// TODO Auto-generated method stub
+				
+			}
+		});
+	
+	
+	
+	
 	}
 	
 //	public void onPause() 
