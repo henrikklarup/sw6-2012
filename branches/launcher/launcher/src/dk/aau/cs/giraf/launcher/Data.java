@@ -24,7 +24,8 @@ public final class Data {
 	public static final int TIME_TO_DISPLAY_LOGO = 2000;
 
 	// Authentication activity
-	public static final long TIME_TO_STAY_LOGGED_IN = 14400000;
+	// Eight hours.
+	public static final long TIME_TO_STAY_LOGGED_IN = 28800000;
 	
 	// Home activity values.
 	public static final int DRAWER_WIDTH = 400;
