@@ -2,6 +2,9 @@ package dk.aau.cs.giraf.parrot;
 
 import java.util.ArrayList;
 
+import yuku.ambilwarna.AmbilWarnaDialog;
+import yuku.ambilwarna.AmbilWarnaDialog.OnAmbilWarnaListener;
+
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.ClipData;
@@ -46,7 +49,7 @@ public class ManageCategoryFragment extends Fragment {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 	}
-	
+
 	public void onResume() {
 
 		super.onResume();
@@ -71,23 +74,23 @@ public class ManageCategoryFragment extends Fragment {
 
 		setListAdapter();
 		 */			
-		
-//		ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(parrent, dummyLoader.getChildrenFromCurrentGuardian(), android.R.layout.simple_spinner_item); //Adapter for the spinner //FIXME
-//		spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//		profiles.setAdapter(spinnerAdapter);
-		
+
+		//		ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(parrent, dummyLoader.getChildrenFromCurrentGuardian(), android.R.layout.simple_spinner_item); //Adapter for the spinner //FIXME
+		//		spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		//		profiles.setAdapter(spinnerAdapter);
+
 		categoryPic.setImageBitmap(profileBeingModified.getCategoryAt(currentCategoryId).getIcon().getBitmap()); //Loads the categorys icon
-		
+
 		categories.setAdapter(new ListViewAdapter(parrent, R.layout.categoriesitem, profileBeingModified.getCategories())); //Adapter for the category gridview
 
 		pictograms.setAdapter(new PictogramAdapter(profileBeingModified.getCategoryAt(currentCategoryId), parrent));
-		
+
 		parrent.findViewById(R.id.trash).setOnDragListener(new ManagementBoxDragListener(parrent));
 		parrent.findViewById(R.id.categories).setOnDragListener(new ManagementBoxDragListener(parrent));
 		parrent.findViewById(R.id.pictograms).setOnDragListener(new ManagementBoxDragListener(parrent));
 		parrent.findViewById(R.id.categorypic).setOnDragListener(new ManagementBoxDragListener(parrent));
-		
-		
+
+
 		profiles.setOnItemSelectedListener(new OnItemSelectedListener() //Here we chose what profile to show 
 		{
 
@@ -95,13 +98,13 @@ public class ManageCategoryFragment extends Fragment {
 			{
 				// TODO Auto-generated method stub
 				//profileBeingModified = /* profil på position pladsen i arrayet givet til adapteren*/;
-				
+
 			}
 
 			public void onNothingSelected(AdapterView<?> arg0) 
 			{
 				//Do nothing
-				
+
 			}
 		});
 
@@ -130,7 +133,7 @@ public class ManageCategoryFragment extends Fragment {
 				return true;
 			}
 		});
-		
+
 
 		pictograms.setOnItemLongClickListener(new OnItemLongClickListener()
 		{
@@ -145,7 +148,7 @@ public class ManageCategoryFragment extends Fragment {
 				return true;
 			}
 		});
-		
+
 		//We are creating a new category here. We fill it with dummy data to start with. The empty picture, the name "Kategori navn" and the color red.
 		createNewCategory.setOnClickListener(new OnClickListener() 
 		{
@@ -158,62 +161,81 @@ public class ManageCategoryFragment extends Fragment {
 				categories.setAdapter(new ListViewAdapter(parrent, R.layout.categoriesitem, profileBeingModified.getCategories())); //Adapter for the category gridview
 			}
 		});
-		
+
 		changeCategoryPic.setOnClickListener(new OnClickListener()  //TODO remove me as this is handled by drop and drop
 		{
 			public void onClick(View v) 
 			{
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
-		
+
 		changeCategoryColor.setOnClickListener(new OnClickListener() 
 		{
 			public void onClick(View v) 
 			{
-				// TODO Auto-generated method stub
-				
+				AmbilWarnaDialog dialog = new AmbilWarnaDialog(getActivity(), profileBeingModified.getCategoryAt(currentCategoryId).getCategoryColour(), new OnAmbilWarnaListener() 
+				{
+					public void onCancel(AmbilWarnaDialog dialog) 
+					{
+					
+					}
+
+					public void onOk(AmbilWarnaDialog dialog, int color) 
+					{
+						Category tempCat = profileBeingModified.getCategoryAt(currentCategoryId);
+						tempCat.setCategoryColour(color);
+						profileBeingModified.setCategoryAt(currentCategoryId, tempCat);
+						
+						GridView pictograms = (GridView) parrent.findViewById(R.id.pictograms);
+						pictograms.setBackgroundColor(color);
+					}
+				});
+				dialog.show();
 			}
 		});
-		
+
+
+
+
 		changeCategoryName.setOnClickListener(new OnClickListener() 
 		{
 			public void onClick(View v) 
 			{
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
-		
+
 		copyThisCategoryToOtherProfile.setOnClickListener(new OnClickListener() 
 		{
 			public void onClick(View v) 
 			{
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
-		
+
 		copyThisCategoryToOtherProfileCategory.setOnClickListener(new OnClickListener() 
 		{
 			public void onClick(View v) 
 			{
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
-	
-	
-	
-	
+
+
+
+
 	}
-	
-//	public void onPause() 
-//	{
-//		saveProfileChanges(parrent, profileBeingModified);
-//	}
-	
+
+	//	public void onPause() 
+	//	{
+	//		saveProfileChanges(parrent, profileBeingModified);
+	//	}
+
 	public void saveProfileChanges(Activity parrent, PARROTProfile profileBeingModified)
 	{
 		PARROTDataLoader dataLoader = new PARROTDataLoader(parrent);
