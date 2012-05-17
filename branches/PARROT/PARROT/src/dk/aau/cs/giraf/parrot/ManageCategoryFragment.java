@@ -151,7 +151,7 @@ public class ManageCategoryFragment extends Fragment {
 		{
 			public void onClick(View v) 
 			{
-				Pictogram pictogram = new Pictogram("#usynlig#", null, null, null);
+				Pictogram pictogram = new Pictogram("#usynlig#", null, null, null, parrent);
 				Category cat = new Category("Kategori Navn", 0xffff0000, pictogram);
 				profileBeingModified.addCategory(cat);
 				ListView categories = (ListView) parrent.findViewById(R.id.categories); //Redrawing the categories
