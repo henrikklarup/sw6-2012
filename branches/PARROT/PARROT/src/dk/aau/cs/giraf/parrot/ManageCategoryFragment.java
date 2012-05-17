@@ -13,6 +13,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -56,6 +57,13 @@ public class ManageCategoryFragment extends Fragment {
 		ImageView trash = (ImageView) parrent.findViewById(R.id.trash);
 		PARROTDataLoader dummyLoader = new PARROTDataLoader(parrent);
 		ImageView categoryPic = (ImageView) parrent.findViewById(R.id.categorypic);
+		//createNewCategory, changeCategoryPic, changeCategoryColor, changeCategoryName, copyThisCategoryToOtherProfile, copyThisCategoryToOtherProfileCategory  
+		Button createNewCategory = (Button) parrent.findViewById(R.id.createnewcategorybutton);
+		Button changeCategoryPic = (Button) parrent.findViewById(R.id.changecategorypicbutton);
+		Button changeCategoryColor = (Button) parrent.findViewById(R.id.changecategorycolorbutton);
+		Button changeCategoryName = (Button) parrent.findViewById(R.id.changecategorynamebutton);
+		Button copyThisCategoryToOtherProfile = (Button) parrent.findViewById(R.id.copythiscategorytootherprofile);
+		Button copyThisCategoryToOtherProfileCategory = (Button) parrent.findViewById(R.id.copythiscategorytootherprofileCategory);
 
 		/*
 		ArrayAdapter<String> categoriesArray = new ArrayAdap; //FIXME not sure which constructor to use...
