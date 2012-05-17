@@ -127,6 +127,7 @@ public class ManageCategoryFragment extends Fragment {
 				pictograms.setAdapter(new PictogramAdapter(profileBeingModified.getCategoryAt(currentCategoryId), parrent));
 				TextView categoryInfo = (TextView) parrent.findViewById(R.id.categoryinfo);
 				categoryInfo.setText(profileBeingModified.getCategoryAt(currentCategoryId).getCategoryName());
+				categoryInfo.setTextColor(0xffffffff);
 			}
 		});
 
