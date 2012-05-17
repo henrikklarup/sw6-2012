@@ -69,52 +69,52 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="30dp"
-                android:text="Button 1_1" />
+                android:text="@string/createNewCategoryButton"/>
 
             <Button
                 android:id="@+id/changecategorypicbutton"
                 android:layout_width="120dp"
                 android:layout_height="75dp"
-                android:layout_alignTop="@id/button1_1"
-                android:layout_toRightOf="@id/button1_1"
+                android:layout_alignTop="@id/createnewcategorybutton"
+                android:layout_toRightOf="@id/createnewcategorybutton"
                 android:layout_marginLeft="30dp"
-                android:text="Button 1_2" />
+                android:text="@string/changeCategoryPicButton" />
 
             <Button
                 android:id="@+id/changecategorycolorbutton"
                 android:layout_width="120dp"
                 android:layout_height="75dp"
-                android:layout_alignTop="@id/button1_1"
-                android:layout_toRightOf="@id/button1_2"
+                android:layout_alignTop="@id/createnewcategorybutton"
+                android:layout_toRightOf="@id/changecategorypicbutton"
                 android:layout_marginLeft="30dp"
-                android:text="Button 1_3" />
+                android:text="@string/changeCategoryColorButton" />
 
             <Button
                 android:id="@+id/changecategorynamebutton"
                 android:layout_width="120dp"
                 android:layout_height="75dp"
-                android:layout_alignLeft="@+id/button1_1"
-                android:layout_below="@+id/button1_1"
+                android:layout_alignLeft="@id/createnewcategorybutton"
+                android:layout_below="@id/createnewcategorybutton"
                 android:layout_marginTop="40dp"
-                android:text="Button 2_1" />
+                android:text="@string/changeCategoryNameButton" />
 
             <Button
-                android:id="copythiscategorytootherprofilebutton"
+                android:id="@+id/copythiscategorytootherprofilebutton"
                 android:layout_width="120dp"
                 android:layout_height="75dp"
-                android:layout_alignTop="@id/button2_1"
+                android:layout_alignTop="@id/changecategorynamebutton"
                 android:layout_marginLeft="30dp"
-                android:layout_toRightOf="@id/button2_1"
-                android:text="Button 1_2" />
+                android:layout_toRightOf="@id/changecategorynamebutton"
+                android:text="@string/copyThisCategoryToOtherProfileButton" />
 
             <Button
                 android:id="@+id/copythiscategorytootherprofilecategorybutton"
                 android:layout_width="120dp"
                 android:layout_height="75dp"
-                android:layout_alignTop="@id/button2_1"
+                android:layout_alignTop="@id/changecategorynamebutton"
                 android:layout_marginLeft="30dp"
-                android:layout_toRightOf="@id/button2_2"
-                android:text="Button 1_2" />
+                android:layout_toRightOf="@id/copythiscategorytootherprofilebutton"
+                android:text="@string/copyThisCategoryToOtherProfileCategoryButton" />
         </RelativeLayout>
 
         <GridView
