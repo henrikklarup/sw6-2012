@@ -92,6 +92,8 @@ public class ManagementBoxDragListener implements OnDragListener
 					ManageCategoryFragment.profileBeingModified.setCategoryAt(ManageCategoryFragment.currentCategoryId, tempCat);
 					ImageView icon = (ImageView) parrent.findViewById(R.id.categorypic);
 					icon.setImageBitmap(ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.currentCategoryId).getIcon().getBitmap());
+					ListView list = (ListView) parrent.findViewById(R.id.categories);
+					list.setAdapter(new ListViewAdapter(parrent, R.layout.categoriesitem, ManageCategoryFragment.profileBeingModified.getCategories()));
 				}
 				else
 				{
