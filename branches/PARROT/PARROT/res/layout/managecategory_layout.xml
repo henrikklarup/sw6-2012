@@ -71,7 +71,8 @@
                 android:layout_height="200dp"
                 android:layout_toLeftOf="@id/categorypic"
                 android:fadeScrollbars="false"
-                android:scrollHorizontally="false" />
+                android:scrollHorizontally="false" 
+                android:inputType="text"/>
 
             <Button
                 android:id="@+id/createnewcategorybutton"
