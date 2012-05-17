@@ -86,6 +86,7 @@ public class ManagementBoxDragListener implements OnDragListener
 				}
 				else if(self.getId()==R.id.categorypic && ManageCategoryFragment.catDragOwnerID == R.id.pictograms) //We are to change the icon of the category
 				{
+					draggedPictogram = ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.currentCategoryId).getPictogramAtIndex(ManageCategoryFragment.draggedItemIndex);
 					Category tempCat = ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.currentCategoryId);
 					tempCat.setIcon(draggedPictogram);
 					ManageCategoryFragment.profileBeingModified.setCategoryAt(ManageCategoryFragment.currentCategoryId, tempCat);
