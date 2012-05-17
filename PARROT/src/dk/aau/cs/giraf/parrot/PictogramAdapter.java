@@ -2,11 +2,13 @@ package dk.aau.cs.giraf.parrot;
 
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 /**
  * 
@@ -39,38 +41,27 @@ public class PictogramAdapter extends BaseAdapter {
 		return 0;
 	}
 	//create an image view for each pictogram in the list.
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(int position, View convertView, ViewGroup parent) 
+	{
 		ImageView imageView;
+		View view = convertView;
+		TextView textView;
 		Pictogram pct=cat.getPictogramAtIndex(position);
-		if (convertView == null) {  // if it's not recycled, initialize some attributes
-			imageView = new ImageView(context);
+		if (convertView == null) 
+		{  // if it's not recycled, initialize some attributes
+			LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			view = layoutInflater.inflate(R.layout.pictogramview, null);
+			
+			imageView = (ImageView) view.findViewById(R.id.pictogrambitmap); 
             imageView.setLayoutParams(new GridView.LayoutParams(145, 145));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setPadding(8, 8, 8, 8);
-        } else {
-            imageView = (ImageView) convertView;
-           
-        }
-        
-		
-		/*
-		imageView.setOnLongClickListener(new OnLongClickListener()
-		{
-
-			public boolean onLongClick(View view)
-			{
-				//Look At DndActivity for inspiration
-				ClipData data = ClipData.newPlainText("label", "text"); //TODO Dummy. Pictogram information can be placed here instead.
-				DragShadowBuilder shadowBuilder = new DragShadowBuilder(view);
-				view.startDrag(data, shadowBuilder, view, 0);
-				return true;
-			}
-
-		});
-        */
-        
-		imageView.setImageBitmap(pct.getBitmap());
-        return imageView;
+            imageView.setImageBitmap(pct.getBitmap());
+            
+            textView = (TextView) view.findViewById(R.id.pictogramtext);
+            textView.setText(pct.getName());
+        } 
+        return view;
 	}
 
 }
