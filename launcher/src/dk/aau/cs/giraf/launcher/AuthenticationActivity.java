@@ -46,8 +46,10 @@ public class AuthenticationActivity extends CaptureActivity {
 
 		mGLoginButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
+				// If the authentication activity was not launched by the launcher...
 				if (!getIntent().hasCategory("dk.aau.cs.giraf.launcher.GIRAF")) {
 					Tools.attachLauncher(mContext); // should not be called
+					Tools.saveLogInData(mContext, mPreviousProfile.getId());
 					startActivity(mHomeIntent);
 				} else {
 					finish();
@@ -113,8 +115,6 @@ public class AuthenticationActivity extends CaptureActivity {
 			
 			mHomeIntent = new Intent(AuthenticationActivity.this, HomeActivity.class);
 			mHomeIntent.putExtra("currentGuardianID", profile.getId());
-			
-			Tools.saveLogInData(mContext, profile.getId());
 		} else {
 			this.changeCamerafeedBorderColor(0xFFFF0000);
 			mGLoginButton.setVisibility(View.INVISIBLE);
