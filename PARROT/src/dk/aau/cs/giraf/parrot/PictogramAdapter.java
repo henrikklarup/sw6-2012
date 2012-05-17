@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -19,13 +20,14 @@ public class PictogramAdapter extends BaseAdapter {
 
 	private Category cat;
 	private Context context;
-	
+
 	public PictogramAdapter(Category cat, Context c)
 	{
+		super();
 		this.cat=cat;
 		context = c;
 	}
-	
+
 	public int getCount() {
 		//return the number of pictograms
 		return cat.getPictograms().size();
@@ -47,21 +49,30 @@ public class PictogramAdapter extends BaseAdapter {
 		View view = convertView;
 		TextView textView;
 		Pictogram pct=cat.getPictogramAtIndex(position);
-		if (convertView == null) 
-		{  // if it's not recycled, initialize some attributes
-			LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+			LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			view = layoutInflater.inflate(R.layout.pictogramview, null);
-			
+
 			imageView = (ImageView) view.findViewById(R.id.pictogrambitmap); 
-            imageView.setLayoutParams(new GridView.LayoutParams(145, 145));
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setPadding(8, 8, 8, 8);
-            imageView.setImageBitmap(pct.getBitmap());
-            
-            textView = (TextView) view.findViewById(R.id.pictogramtext);
-            textView.setText(pct.getName());
-        } 
-        return view;
+			//            imageView.setLayoutParams(new GridView.LayoutParams(145, 145));
+			//            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+			//            imageView.setPadding(8, 8, 8, 8);
+			imageView.setImageBitmap(pct.getBitmap());
+
+			textView = (TextView) view.findViewById(R.id.pictogramtext);
+			textView.setTextSize(20);	//TODO this value should be customizable
+			if(pct.isEmpty() == false)
+			{
+
+				textView.setText(pct.getName());
+			}
+			else
+			{
+				textView.setText("");
+			}
+
+		view.setPadding(8, 8, 8, 8);
+		return view;
 	}
 
 }
