@@ -39,4 +39,10 @@
     <string name="addImageFromCameraButtonText">Fra Kamera</string>
     <string name="addImageFromPhoneButtonText">Fra Telefon</string>
     <string name="errorSoundNotSavedIO">Sound not Saved</string>
+    <string name="createNewCategoryButton">Opret Ny Kategori</string>
+    <string name="changeCategoryPicButton">Kategori Billede</string>
+    <string name="changeCategoryColorButton">Kategori Farve</string>
+    <string name="changeCategoryNameButton">Kategori Titel</string>
+    <string name="copyThisCategoryToOtherProfileButton">Kopier Denne Kategori</string>
+    <string name="copyThisCategoryToOtherProfileCategoryButton">Kopier Til Anden Profil Kategori</string>
 </resources>
