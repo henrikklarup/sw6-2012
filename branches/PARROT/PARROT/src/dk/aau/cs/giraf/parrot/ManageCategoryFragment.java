@@ -6,12 +6,16 @@ import yuku.ambilwarna.AmbilWarnaDialog;
 import yuku.ambilwarna.AmbilWarnaDialog.OnAmbilWarnaListener;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.ClipData;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.DragShadowBuilder;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -22,6 +26,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 
 public class ManageCategoryFragment extends Fragment {
@@ -59,6 +64,7 @@ public class ManageCategoryFragment extends Fragment {
 		ListView categories = (ListView) parrent.findViewById(R.id.categories);
 		GridView pictograms = (GridView) parrent.findViewById(R.id.pictograms);
 		ImageView trash = (ImageView) parrent.findViewById(R.id.trash);
+		TextView categoryInfo = (TextView) parrent.findViewById(R.id.categoryinfo);
 		PARROTDataLoader dummyLoader = new PARROTDataLoader(parrent);
 		ImageView categoryPic = (ImageView) parrent.findViewById(R.id.categorypic);
 		//createNewCategory, changeCategoryPic, changeCategoryColor, changeCategoryName, copyThisCategoryToOtherProfile, copyThisCategoryToOtherProfileCategory  
@@ -203,8 +209,8 @@ public class ManageCategoryFragment extends Fragment {
 		{
 			public void onClick(View v) 
 			{
-				// TODO Auto-generated method stub
-
+				TextView categoryInfo = (TextView) parrent.findViewById(R.id.categoryinfo);
+				((InputMethodManager)parrent.getSystemService(Context.INPUT_METHOD_SERVICE)).showSoftInput(categoryInfo, InputMethodManager.SHOW_FORCED);
 			}
 		});
 
