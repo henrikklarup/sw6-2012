@@ -86,9 +86,10 @@ public class ManageCategoryFragment extends Fragment {
 		//		profiles.setAdapter(spinnerAdapter);
 
 		categoryPic.setImageBitmap(profileBeingModified.getCategoryAt(currentCategoryId).getIcon().getBitmap()); //Loads the categorys icon
-
+		categoryInfo.setText(profileBeingModified.getCategoryAt(currentCategoryId).getCategoryName());
+		
 		categories.setAdapter(new ListViewAdapter(parrent, R.layout.categoriesitem, profileBeingModified.getCategories())); //Adapter for the category gridview
-
+		
 		pictograms.setAdapter(new PictogramAdapter(profileBeingModified.getCategoryAt(currentCategoryId), parrent));
 
 		parrent.findViewById(R.id.trash).setOnDragListener(new ManagementBoxDragListener(parrent));
@@ -124,6 +125,8 @@ public class ManageCategoryFragment extends Fragment {
 				categoryPic.setImageBitmap(ManageCategoryFragment.profileBeingModified.getCategoryAt(currentCategoryId).getIcon().getBitmap());
 				GridView pictograms = (GridView) parrent.findViewById(R.id.pictograms);
 				pictograms.setAdapter(new PictogramAdapter(profileBeingModified.getCategoryAt(currentCategoryId), parrent));
+				TextView categoryInfo = (TextView) parrent.findViewById(R.id.categoryinfo);
+				categoryInfo.setText(profileBeingModified.getCategoryAt(currentCategoryId).getCategoryName());
 			}
 		});
 
@@ -211,6 +214,10 @@ public class ManageCategoryFragment extends Fragment {
 			{
 				TextView categoryInfo = (TextView) parrent.findViewById(R.id.categoryinfo);
 				((InputMethodManager)parrent.getSystemService(Context.INPUT_METHOD_SERVICE)).showSoftInput(categoryInfo, InputMethodManager.SHOW_FORCED);
+				
+				String name = categoryInfo.getText().toString();
+				profileBeingModified.getCategoryAt(currentCategoryId).setCategoryName(name);
+			
 			}
 		});
 
