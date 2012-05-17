@@ -99,7 +99,7 @@
                 android:text="Button 2_1" />
 
             <Button
-                android:id="copythiscategorytootherprofile"
+                android:id="copythiscategorytootherprofilebutton"
                 android:layout_width="120dp"
                 android:layout_height="75dp"
                 android:layout_alignTop="@id/button2_1"
@@ -108,7 +108,7 @@
                 android:text="Button 1_2" />
 
             <Button
-                android:id="@+id/copythiscategorytootherprofileCategory"
+                android:id="@+id/copythiscategorytootherprofilecategorybutton"
                 android:layout_width="120dp"
                 android:layout_height="75dp"
                 android:layout_alignTop="@id/button2_1"
