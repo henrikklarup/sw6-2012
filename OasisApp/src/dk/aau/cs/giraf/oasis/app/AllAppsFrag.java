@@ -55,7 +55,7 @@ public class AllAppsFrag extends ListFragment {
 				
 				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 				builder.setTitle("Tilføj App");
-				builder.setMessage("Sikker på at du vil tilføje App'en?");
+				builder.setMessage("Sikker på at du vil tilføje " + app.getName() + "?");
 				builder.setPositiveButton("Ja", new OnClickListener() {
 					
 					@Override

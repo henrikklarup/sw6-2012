@@ -286,8 +286,13 @@ public class ChildrenFrag extends ExpandableListFragment {
 			delProfile = adapter.getChild(group, child);
 			AlertDialog.Builder delbuilder = new AlertDialog.Builder(getActivity());
 			if (delProfile.getId() != MainActivity.guardian.getId()) {
-				delbuilder.setTitle("Fjern Pædagog");
-				delbuilder.setMessage("Sikker på at du vil fjerne Pædagogen?");
+				delbuilder.setTitle("Fjern Barn");
+				String dName = delProfile.getFirstname();
+				if (delProfile.getMiddlename() != null) {
+				dName += delProfile.getMiddlename();
+				}
+				dName += delProfile.getSurname();
+				delbuilder.setMessage("Sikker på at du vil fjerne " + dName + "?");
 				delbuilder.setPositiveButton("Ja", new Dialog.OnClickListener() {
 
 					@Override

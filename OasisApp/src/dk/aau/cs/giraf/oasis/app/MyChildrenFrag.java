@@ -135,7 +135,12 @@ public class MyChildrenFrag extends ExpandableListFragment {
 			childProfile = adapter.getChild(group, child);
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			builder.setTitle("Fjern Barn");
-			builder.setMessage("Sikker på at du vil fjerne Barnet?");
+			String dName = childProfile.getFirstname();
+			if (childProfile.getMiddlename() != null) {
+			dName += childProfile.getMiddlename();
+			}
+			dName += childProfile.getSurname();
+			builder.setMessage("Sikker på at du vil fjerne " + dName + "?");
 			builder.setPositiveButton("Ja", new OnClickListener() {
 
 				@Override

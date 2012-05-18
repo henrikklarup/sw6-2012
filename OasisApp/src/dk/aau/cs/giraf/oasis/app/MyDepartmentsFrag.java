@@ -103,7 +103,7 @@ public class MyDepartmentsFrag extends ListFragment {
 
 				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 				builder.setTitle("Fjern Afdeling");
-				builder.setMessage("Sikker på at du vil fjerne Afdelingen?");
+				builder.setMessage("Sikker på at du vil fjerne " + d.getName() + "?");
 				builder.setPositiveButton("Ja", new Dialog.OnClickListener() {
 
 					@Override

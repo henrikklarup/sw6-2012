@@ -159,7 +159,10 @@ public class MyProfileFrag extends Fragment {
 						if (middle.equals("")) {
 							middle = null;
 						}
-						String last = tmp[tmp.length-1];
+						String last = "";
+						if (tmp.length > 1) {
+							last = tmp[tmp.length-1];
+						}
 						String newPhone = tPhone.getText().toString();
 						MainActivity.guardian.setFirstname(first);
 						MainActivity.guardian.setSurname(last);
