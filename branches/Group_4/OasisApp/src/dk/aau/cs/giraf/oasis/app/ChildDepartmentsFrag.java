@@ -55,7 +55,14 @@ public class ChildDepartmentsFrag extends ListFragment {
 
 			@Override
 			public void onClick(View v) {
-				List<Department> valueList = helper.departmentsHelper.getDepartments();
+				List<Department> depList = helper.departmentsHelper.getDepartments();
+				List<Department> valueList = new ArrayList<Department>();
+				for (Department dItem : depList) {
+					if (!list.contains(dItem)) {
+						valueList.add(dItem);
+					}
+				}
+				
 				List<String> items = new ArrayList<String>();
 				for (Department d : valueList) {
 					String name = ""+d.getId(); 

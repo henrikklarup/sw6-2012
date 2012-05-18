@@ -56,7 +56,13 @@ public class ChildGuardiansFrag extends ExpandableListFragment {
 
 			@Override
 			public void onClick(View v) {
-				List<Profile> valueList = helper.profilesHelper.getGuardians();
+				List<Profile> guardList = helper.profilesHelper.getGuardians();
+				List<Profile> valueList = new ArrayList<Profile>();
+				for (Profile pItem : guardList) {
+					if (!list.contains(pItem)) {
+						valueList.add(pItem);
+					}
+				}
 
 				List<String> items = new ArrayList<String>();
 				for (Profile p : valueList) {
