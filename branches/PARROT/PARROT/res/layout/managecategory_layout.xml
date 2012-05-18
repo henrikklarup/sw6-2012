@@ -21,12 +21,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/profiles"
-            android:layout_above="@id/trash"
+            android:layout_above="@+id/trash"
             android:fadeScrollbars="false" >
         </ListView>
 
         <ImageView
-            android:id="@+id/trash"
+            android:id="@id/trash"
             android:layout_width="240dp"
             android:layout_height="240dp"
             android:layout_alignParentBottom="true"
