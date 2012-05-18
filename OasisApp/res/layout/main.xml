@@ -51,6 +51,14 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/tab_selector"
             android:text="@string/alldepartments" />
+        
+        <Button
+            android:id="@+id/bAddDummyData"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/tab_selector"
+            android:text="@string/addDummyData" />
     </LinearLayout>
 
 </RelativeLayout>

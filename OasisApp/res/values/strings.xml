@@ -8,6 +8,8 @@
     <string name="allprofiles">Alle Profiler</string>
     <string name="noprofile">Ingen profil er valgt!</string>
     <string name="alldepartments">Alle Afdelinger</string>
+    <string name="addDummyData">Tilføj Test Data</string>
+    <string name="addedDummyData">Test dataen er blevet tilføjet</string>
     <string name="mychildren">Mine Børn</string>
     <string name="mydepartments">Mine Afdelinger</string>
     <string name="mydepchildren">Mine Afd. Børn</string>

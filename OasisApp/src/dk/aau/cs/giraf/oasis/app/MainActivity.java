@@ -13,7 +13,7 @@ import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
 public class MainActivity extends Activity implements OnClickListener {
 
-	private Button bMyProfile, bAllProfiles, bAllDepartments;
+	private Button bMyProfile, bAllProfiles, bAllDepartments, bAddDummyData;
 	private Intent direct;
 	private long guardianId;
 	public Helper helper;
@@ -54,6 +54,8 @@ public class MainActivity extends Activity implements OnClickListener {
 		bAllProfiles.setOnClickListener(this);
 		bAllDepartments = (Button) findViewById(R.id.bAllDepartments);
 		bAllDepartments.setOnClickListener(this);
+		bAddDummyData = (Button) findViewById(R.id.bAddDummyData);
+		bAddDummyData.setOnClickListener(this);
 	}
 
 	@Override
@@ -76,6 +78,10 @@ public class MainActivity extends Activity implements OnClickListener {
 		case R.id.bAllDepartments:
 			direct.putExtra("tabView", FragParentTab.TABALLDEPARTMENTS);
 			startActivity(direct);
+			break;
+		case R.id.bAddDummyData:
+			helper.CreateDummyData();
+			Toast.makeText(this, R.string.addedDummyData, Toast.LENGTH_SHORT).show();
 			break;
 		}
 	}
