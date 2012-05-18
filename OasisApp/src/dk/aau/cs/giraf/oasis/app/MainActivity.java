@@ -19,6 +19,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	public Helper helper;
 	public static Profile guardian;
 	public static Profile child;
+	public static int color;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState){
@@ -32,14 +33,17 @@ public class MainActivity extends Activity implements OnClickListener {
 
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {        	   
-			guardianId = extras.getLong(("currentGuardianID"));
+			guardianId = extras.getLong("currentGuardianID");
+			color = extras.getInt("appBackgroundColor");
 			guardian = helper.profilesHelper.getProfileById(guardianId);
 		} else {
 			//			guardianId = -1;
 		}
 
 		setContentView(R.layout.main);
-
+		
+		findViewById(R.id.UpperLayout).setBackgroundColor(color);
+		
 		initializeViews();
 	}
 

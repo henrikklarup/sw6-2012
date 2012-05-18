@@ -35,6 +35,8 @@ public class FragParentTab extends Activity {
 		}
 
 		setContentView(R.layout.fragments_view);
+		
+		findViewById(R.id.fragUpperLayout).setBackgroundColor(MainActivity.color);
 
 		t = getFragmentManager();
 

@@ -47,8 +47,54 @@ public class MyChildrenFrag extends ExpandableListFragment {
 
 		helper = new Helper(getActivity().getApplicationContext());
 
-		Button b = (Button) getView().findViewById(R.id.bAddProfile);
-		b.setVisibility(View.GONE);
+		Button bAdd = (Button) getView().findViewById(R.id.bAddProfile);
+		bAdd.setText("Tilføj Barn");
+		bAdd.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				List<Profile> childList = helper.profilesHelper.getChildren();
+				List<Profile> valueList = new ArrayList<Profile>();
+				for (Profile pItem : childList) {
+					if (!list.contains(pItem)) {
+						valueList.add(pItem);
+					}
+				}
+				
+				List<String> items = new ArrayList<String>();
+				for (Profile d : valueList) {
+					String name = ""+d.getId(); 
+					name += " " + d.getFirstname();
+					if (d.getMiddlename() != null) {
+					name += " " + d.getMiddlename();
+					}
+					name += " " + d.getSurname();
+					items.add(name);
+				}
+
+				final tmpListAdapter adapter = new tmpListAdapter(getActivity(), R.layout.children_list_childitem, items);
+
+				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+				builder.setTitle("Vælg et Barn");
+				builder.setAdapter(adapter,
+						new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int item) {
+						String tmpPath = adapter.getItem(item);
+						String tmpA[] = tmpPath.split(" ");
+						Profile newProf = helper.profilesHelper.getProfileById(Long.parseLong(tmpA[0]));
+						helper.profilesHelper.attachChildToGuardian(newProf, MainActivity.guardian);
+
+						updateList();
+
+						dialog.dismiss();
+					}
+				});
+				builder.setNegativeButton("Cancel", null);
+				AlertDialog alert = builder.create();
+				alert.show();
+			}
+		});
 
 		if (MainActivity.guardian != null) {
 			updateList();
