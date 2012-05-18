@@ -55,7 +55,7 @@ public class ChildAppsFrag extends ListFragment {
 				
 				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 				builder.setTitle("Fjern App");
-				builder.setMessage("Sikker på at du vil fjerne App'en?");
+				builder.setMessage("Sikker på at du vil fjerne " + app.getName() +"?");
 				builder.setPositiveButton("Ja", new OnClickListener() {
 					
 					@Override

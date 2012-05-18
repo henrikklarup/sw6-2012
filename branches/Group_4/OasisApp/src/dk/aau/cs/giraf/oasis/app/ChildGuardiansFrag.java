@@ -161,7 +161,12 @@ public class ChildGuardiansFrag extends ExpandableListFragment {
 			guardProfile = adapter.getChild(group, child);
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			builder.setTitle("Fjern Pædagog");
-			builder.setMessage("Sikker på at du vil fjerne Pædagogen?");
+			String gName = guardProfile.getFirstname();
+			if (guardProfile.getMiddlename() != null) {
+				gName += " " + guardProfile.getMiddlename();
+			}
+			gName += " " + guardProfile.getSurname();
+			builder.setMessage("Sikker på at du vil fjerne " + gName + "?");
 			builder.setPositiveButton("Ja", new OnClickListener() {
 
 				@Override
@@ -198,7 +203,7 @@ public class ChildGuardiansFrag extends ExpandableListFragment {
 				adapter.AddGroup(d, result);
 			}
 		}
-		
+
 		ArrayList<Profile> noDepResult = new ArrayList<Profile>();
 		List<Profile> noDep = helper.profilesHelper.getGuardiansWithNoDepartment();
 		for (Profile p : noDep) {

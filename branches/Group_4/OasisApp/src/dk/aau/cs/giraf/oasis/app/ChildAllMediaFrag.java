@@ -78,7 +78,7 @@ public class ChildAllMediaFrag extends ListFragment {
 
 				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 				builder.setTitle("Slet Billede");
-				builder.setMessage("Sikker på at du vil slette Billedet?");
+				builder.setMessage("Sikker på at du vil slette " + media.getName() + "?");
 				builder.setPositiveButton("Ja", new OnClickListener() {
 
 					@Override
