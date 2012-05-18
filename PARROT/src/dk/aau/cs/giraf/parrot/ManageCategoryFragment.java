@@ -89,6 +89,7 @@ public class ManageCategoryFragment extends Fragment {
 
 		categoryPic.setImageBitmap(profileBeingModified.getCategoryAt(currentCategoryId).getIcon().getBitmap()); //Loads the categorys icon
 		categoryInfo.setText(profileBeingModified.getCategoryAt(currentCategoryId).getCategoryName());
+		setPictogramsColour(profileBeingModified.getCategoryAt(currentCategoryId).getCategoryColour());
 		
 		categories.setAdapter(new ListViewAdapter(parrent, R.layout.categoriesitem, profileBeingModified.getCategories())); //Adapter for the category gridview
 		
@@ -129,6 +130,7 @@ public class ManageCategoryFragment extends Fragment {
 				pictograms.setAdapter(new PictogramAdapter(profileBeingModified.getCategoryAt(currentCategoryId), parrent));
 				EditText categoryInfo = (EditText) parrent.findViewById(R.id.categoryinfo);
 				categoryInfo.setText(profileBeingModified.getCategoryAt(currentCategoryId).getCategoryName());
+				setPictogramsColour(profileBeingModified.getCategoryAt(currentCategoryId).getCategoryColour());
 			}
 		});
 
@@ -199,8 +201,7 @@ public class ManageCategoryFragment extends Fragment {
 						tempCat.setCategoryColour(color);
 						profileBeingModified.setCategoryAt(currentCategoryId, tempCat);
 						
-						GridView pictograms = (GridView) parrent.findViewById(R.id.pictograms);
-						pictograms.setBackgroundColor(color);
+						setPictogramsColour(color);
 					}
 				});
 				dialog.show();
