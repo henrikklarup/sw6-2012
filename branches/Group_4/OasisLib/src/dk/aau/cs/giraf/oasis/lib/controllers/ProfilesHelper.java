@@ -410,7 +410,7 @@ public class ProfilesHelper {
 			
 			for (HasGuardian hgModel : list) {
 				Profile guardian = getProfileById(hgModel.getIdGuardian());
-				if (child.getPRole() == pRoles.GUARDIAN.ordinal()) {
+				if (guardian.getPRole() == pRoles.GUARDIAN.ordinal()) {
 					guardians.add(guardian);
 				}
 			}
