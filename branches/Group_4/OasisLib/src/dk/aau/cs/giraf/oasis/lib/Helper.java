@@ -298,13 +298,13 @@ public class Helper {
 		/*Test if dumme guardians is present in the DB*/
 		if (department1Loaded == null) {
 			/*Departments*/
-			department1 = new Department("Egebakken", "Hjoernet", 88888888, "dep1@dep.com");
-			department2 = new Department("Birken", "Hjoernet", 88888888, "dep2@dep.com");
-			subdepartment11 = new Department("SubDep11", "Hjoernet", 88888888, "subdep11@dep.com");
-			subdepartment12 = new Department("SubDep12", "Hjoernet", 88888888, "subdep12@dep.com");
-			subsubdepartment111= new Department("SubSubDep111", "Hjoernet", 88888888, "subsubdep111@dep.com");
-			subsubdepartment112 = new Department("SubSubDep112", "Hjoernet", 88888888, "subsubdep112@dep.com");
-			subsubdepartment121 = new Department("SubSubDep121", "Hjoernet", 88888888, "subsubdep121@dep.com");
+			department1 = new Department("Egebakken", "Hjoernet", 88888888, "Egebakken@dep.com");
+			department2 = new Department("Birken", "Hjoernet", 88888888, "Birken@dep.com");
+			subdepartment11 = new Department("Bikuben", "Hjoernet", 88888888, "Bikuben@dep.com");
+			subdepartment12 = new Department("Myretuen", "Hjoernet", 88888888, "Myretuen@dep.com");
+			subsubdepartment111= new Department("Hvepseboet", "Hjoernet", 88888888, "Hvepseboet@dep.com");
+			subsubdepartment112 = new Department("Musehullet", "Hjoernet", 88888888, "Musehullet@dep.com");
+			subsubdepartment121 = new Department("Termitboet", "Hjoernet", 88888888, "Termitboet@dep.com");
 
 			/*Add departments*/
 			department1Id = departmentsHelper.insertDepartment(department1);
