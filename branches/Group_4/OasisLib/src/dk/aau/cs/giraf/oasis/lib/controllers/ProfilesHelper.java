@@ -312,7 +312,7 @@ public class ProfilesHelper {
 		List<Profile> profiles = new ArrayList<Profile>();
 		
 		if (guardian.getPRole() == pRoles.GUARDIAN.ordinal() || guardian.getPRole() == pRoles.PARENT.ordinal()) {
-			List<HasGuardian> list = hg.getHasGuardiansByProfile(guardian);
+			List<HasGuardian> list = hg.getChildrenByGuardian(guardian);
 			
 			for (HasGuardian hgModel : list) {
 				Profile child = getProfileById(hgModel.getIdChild());
@@ -406,7 +406,7 @@ public class ProfilesHelper {
 		List<Profile> guardians = new ArrayList<Profile>();
 		
 		if (child.getPRole() == pRoles.CHILD.ordinal()) {
-			List<HasGuardian> list = hg.getHasGuardiansByProfile(child);
+			List<HasGuardian> list = hg.getGuardiansByChild(child);
 			
 			for (HasGuardian hgModel : list) {
 				Profile guardian = getProfileById(hgModel.getIdGuardian());

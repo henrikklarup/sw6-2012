@@ -348,10 +348,7 @@ public class Helper {
 		departmentsHelper.attachProfileToDepartment(guardiansLoaded.get(4), subsubdepartment111Loaded);
 		departmentsHelper.attachProfileToDepartment(guardiansLoaded.get(5), subsubdepartment112Loaded);
 		departmentsHelper.attachProfileToDepartment(guardiansLoaded.get(6), subsubdepartment121Loaded);
-		departmentsHelper.attachProfileToDepartment(guardiansLoaded.get(7), subsubdepartment111Loaded);
-		departmentsHelper.attachProfileToDepartment(guardiansLoaded.get(8), subsubdepartment112Loaded);
-		departmentsHelper.attachProfileToDepartment(guardiansLoaded.get(9), subsubdepartment121Loaded);
-
+		
 		/*Attach children to department*/
 		departmentsHelper.attachProfileToDepartment(childrenLoaded.get(0), department1Loaded);
 		departmentsHelper.attachProfileToDepartment(childrenLoaded.get(1), department2Loaded);
@@ -360,10 +357,7 @@ public class Helper {
 		departmentsHelper.attachProfileToDepartment(childrenLoaded.get(4), subsubdepartment111Loaded);
 		departmentsHelper.attachProfileToDepartment(childrenLoaded.get(5), subsubdepartment112Loaded);
 		departmentsHelper.attachProfileToDepartment(childrenLoaded.get(6), subsubdepartment121Loaded);
-		departmentsHelper.attachProfileToDepartment(childrenLoaded.get(7), subsubdepartment111Loaded);
-		departmentsHelper.attachProfileToDepartment(childrenLoaded.get(8), subsubdepartment112Loaded);
-		departmentsHelper.attachProfileToDepartment(childrenLoaded.get(9), subsubdepartment121Loaded);
-
+		
 		List<Media> medias = mediaHelper.getMediaByProfile(childrenLoaded.get(0));
 		
 		if (medias.isEmpty()) {
@@ -371,12 +365,16 @@ public class Helper {
 			Media mediaDog = new Media("Dog", "/sdcard/Pictures/giraf/public/dog.jpg", true, "picture", childrenLoaded.get(0).getId());
 			Media mediaCat = new Media("Cat", "/sdcard/Pictures/giraf/public/cat.jpg", true, "picture", childrenLoaded.get(1).getId());
 			Media mediaBat = new Media("Bat", "/sdcard/Pictures/giraf/private/bat.jpg", false, "picture", childrenLoaded.get(0).getId());
-			Media subMedia = new Media("Sound", "/sdcard/Pictures/giraf/public/sound.jpg", true, "sound", childrenLoaded.get(0).getId());
-
+			Media subMedia = new Media("Sound", "/sdcard/Pictures/giraf/public/sound.jpg", true, "picture", childrenLoaded.get(0).getId());
+			Media mediaFood = new Media("Food", "/sdcard/Pictures/giraf/public/food.jpg", true, "picture", childrenLoaded.get(2).getId());
+			Media mediaHouse = new Media ("House", "/sdcard/Pictures/giraf/private/house.jpg", false, "picture", childrenLoaded.get(3).getId());
+			
 			media.add(mediaDog);
 			media.add(mediaCat);
 			media.add(mediaBat);
 			media.add(subMedia);
+			media.add(mediaFood);
+			media.add(mediaHouse);
 
 			/*Add media*/
 			for (Media singleMedia : media) {
@@ -404,15 +402,7 @@ public class Helper {
 
 			/*Attach media to department*/
 			for (Media singleMedia : mediaLoaded) {
-				mediaHelper.attachMediaToDepartment(singleMedia, department1Loaded, childrenLoaded.get(0));
-				mediaHelper.attachMediaToDepartment(singleMedia, department2Loaded, childrenLoaded.get(0));
-				mediaHelper.attachMediaToDepartment(singleMedia, subdepartment11Loaded, childrenLoaded.get(0));
-				mediaHelper.attachMediaToDepartment(singleMedia, subdepartment12Loaded, childrenLoaded.get(0));
-				mediaHelper.attachMediaToDepartment(singleMedia, subsubdepartment111Loaded, childrenLoaded.get(0));
-				mediaHelper.attachMediaToDepartment(singleMedia, subsubdepartment112Loaded, childrenLoaded.get(0));
-				mediaHelper.attachMediaToDepartment(singleMedia, subsubdepartment121Loaded, childrenLoaded.get(0));
-				mediaHelper.attachMediaToDepartment(singleMedia, subdepartment11Loaded, childrenLoaded.get(0));
-				mediaHelper.attachMediaToDepartment(singleMedia, subdepartment12Loaded, childrenLoaded.get(0));
+				mediaHelper.attachMediaToDepartment(singleMedia, department1Loaded, null);
 			}
 		}
 		
