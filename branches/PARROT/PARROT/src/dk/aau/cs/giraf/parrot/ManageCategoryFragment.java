@@ -256,4 +256,10 @@ public class ManageCategoryFragment extends Fragment {
 		PARROTDataLoader dataLoader = new PARROTDataLoader(parrent);
 		dataLoader.saveProfile(profileBeingModified);
 	}
+	
+	private void setPictogramsColour(int colour)
+	{
+		GridView pictograms = (GridView) parrent.findViewById(R.id.pictograms);
+		pictograms.setBackgroundColor(colour);
+	}
 }
