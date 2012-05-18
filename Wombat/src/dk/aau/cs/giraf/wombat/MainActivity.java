@@ -35,12 +35,12 @@ public class MainActivity extends Activity {
         Art p_done = new Art(R.drawable.p_done,"Færdig", 0);
 		Art p_skema = new Art(R.drawable.p_gaa_til_skema,"Gå til skema", 1);
 		Art p_taxa = new Art(R.drawable.p_gaa_til_taxa,"Gå til taxa", 2);
-		Art p_ryd_op = new Art(R.drawable.p_ryd_op, "Ryd op", 3);
+//		Art p_ryd_op = new Art(R.drawable.p_ryd_op, "Ryd op", 3);
 		
 		artList.add(p_done);
 		artList.add(p_skema);
 		artList.add(p_taxa);
-		artList.add(p_ryd_op);
+//		artList.add(p_ryd_op);
 
     	guard = Guardian.getInstance(childId, guardianId, getApplicationContext(), artList);
     	
