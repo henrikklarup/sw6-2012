@@ -118,4 +118,19 @@ public class Department {
 
 		return localOutput;
 	}
+	
+	@Override public boolean equals(Object aDepartment) {
+		if ( this == aDepartment ) return true;
+
+		if ( !(aDepartment instanceof Department) ) return false;
+
+		Department department = (Department)aDepartment;
+
+		return
+				EqualsUtil.areEqual(this.getId(), department.getId()) &&
+				EqualsUtil.areEqual(this.getName(), department.getName()) &&
+				EqualsUtil.areEqual(this.getAddress(), department.getAddress()) &&
+				EqualsUtil.areEqual(this.getPhone(), department.getPhone()) &&
+				EqualsUtil.areEqual(this.getEmail(), department.getEmail());
+	}
 }
