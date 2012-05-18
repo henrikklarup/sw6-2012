@@ -1,8 +1,8 @@
 package dk.aau.cs.giraf.wombat;
 
-import android.app.Activity;
 import android.content.Context;
-import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 
 public class WCheckbox extends Button{
@@ -11,10 +11,21 @@ public class WCheckbox extends Button{
 	
 	public WCheckbox(Context c) {
 		super(c);
+		
+		this.setBackgroundResource(R.drawable.btn);
+
+		this.setLayoutParams(
+				new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 
+						ViewGroup.LayoutParams.MATCH_PARENT));
 	}
 
 	private void changePicture(){
-		// TODO: Change picture
+		if(mChecked){
+			this.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.checkmark, 0, 0);
+		} else {
+			this.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+		}
+		
 	}
 	
 	public void setOnClickListener(boolean checked,
@@ -32,6 +43,7 @@ public class WCheckbox extends Button{
 
 	public void setChecked(boolean gradient) {
 		mChecked = gradient;
+		changePicture();
 	}
 
 }
