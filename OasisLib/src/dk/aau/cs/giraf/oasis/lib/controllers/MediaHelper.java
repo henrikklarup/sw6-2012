@@ -251,7 +251,7 @@ public class MediaHelper {
 		List<Media> media = new ArrayList<Media>();
 		
 		for (Media m : returnedMedia) {
-			if(m.getMType().toLowerCase() == "picture") {
+			if(m.getMType().toLowerCase().equals("picture")) {
 				media.add(m);
 			}
 		}
@@ -268,7 +268,7 @@ public class MediaHelper {
 		List<Media> media = new ArrayList<Media>();
 		
 		for (Media m : returnedMedia) {
-			if(m.getMType().toLowerCase() == "sound") {
+			if(m.getMType().toLowerCase().equals("sound")) {
 				media.add(m);
 			}
 		}
@@ -285,7 +285,7 @@ public class MediaHelper {
 		List<Media> media = new ArrayList<Media>();
 		
 		for (Media m : returnedMedia) {
-			if(m.getMType().toLowerCase() == "word") {
+			if(m.getMType().toLowerCase().equals("word")) {
 				media.add(m);
 			}
 		}

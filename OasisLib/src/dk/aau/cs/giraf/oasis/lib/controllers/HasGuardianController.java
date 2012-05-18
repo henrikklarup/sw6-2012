@@ -158,42 +158,6 @@ class HasGuardianController {
 
 		return hgList;
 	}
-	
-	/**
-	 * get has guardians by profile
-	 * @param profile Profile to get by
-	 * @return List of profiles
-	 */
-	public List<HasGuardian> getHasGuardiansByProfile(Profile profile) {
-		List<HasGuardian> hgList = new ArrayList<HasGuardian>();
-		
-		String table;
-		int role = (int) profile.getPRole();
-		
-		switch (role) {
-		case 2: 
-			table = HasGuardianMetaData.Table.COLUMN_IDGUARDIAN;
-			break;
-		case 3:
-			table = HasGuardianMetaData.Table.COLUMN_IDCHILD;
-			break;
-		default: 
-			table = "empty";
-			break;
-		}
-		
-		if (!table.equals("empty")) {
-			Cursor c = _context.getContentResolver().query(HasGuardianMetaData.CONTENT_URI, columns, 
-					table + " = '" + profile.getId() + "'", null, null);
-	
-			if (c != null) {
-				hgList = cursorToHasGuardianList(c);
-				c.close();
-			}
-		}
-		
-		return hgList;
-	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//PRIVATE METHODS - keep out!
