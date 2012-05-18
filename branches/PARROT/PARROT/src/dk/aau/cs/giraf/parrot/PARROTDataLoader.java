@@ -24,9 +24,9 @@ public class PARROTDataLoader {
 	public PARROTDataLoader(Activity activity)
 	{
 		this.parrent = activity;
-		help = new Helper(parrent);
-		app = help.appsHelper.getAppByPackageName();
-		
+		help = PARROTActivity.getHelp();
+		app = PARROTActivity.getApp();
+
 	}
 
 	/**
@@ -37,9 +37,9 @@ public class PARROTDataLoader {
 	public PARROTProfile loadPARROT()
 	{
 		//This part of the code is supposed to get a profile from the launcher, and read it from the admin.
-		Long childId = parrent.getIntent().getExtras().getLong("currentChildID");
+		Long childId = PARROTActivity.getGirafIntent().getExtras().getLong("currentChildID");
 		Long appId = app.getId();
-		PARROTActivity.setGuardianID(parrent.getIntent().getExtras().getLong("currentGuardianID"));
+		//PARROTActivity.setGuardianID(parrent.getIntent().getExtras().getLong("currentGuardianID"));
 
 		return loadProfile(childId, appId);
 	}
@@ -60,8 +60,8 @@ public class PARROTDataLoader {
 		}
 		return parrotChildren;
 	}
-	
-	
+
+
 	/**
 	 * @param childId
 	 * The ID of the child using the app.
@@ -84,45 +84,52 @@ public class PARROTDataLoader {
 			PARROTProfile parrotUser = new PARROTProfile(prof.getFirstname(), pic);
 			parrotUser.setProfileID(prof.getId());
 			Setting<String, String, String> specialSettings = app.getSettings();//This object might be null
-
-			//Load the settings
-			parrotUser = loadSettings(parrotUser, specialSettings);
-
-			//Add all of the categories to the profile
-			int number = 0;
-			String categoryString=null;
-			while (true)
+			if(specialSettings != null)
 			{
-				//Here we read the pictograms of the categories
-				//The settings reader uses this format : category +number | cat_property | value
-				try
+
+
+				//Load the settings
+				parrotUser = loadSettings(parrotUser, specialSettings);
+
+				//Add all of the categories to the profile
+				int number = 0;
+				String categoryString=null;
+				while (true)
 				{
-					categoryString = specialSettings.get("category"+number).get("pictograms");	//FIXME if this value is null, we will crash
-				}
-				catch (NullPointerException e)
-				{
-					//the value does not exist, so we will not load anymore categories
-					break;
+					//Here we read the pictograms of the categories
+					//The settings reader uses this format : category +number | cat_property | value
+					try
+					{
+						categoryString = specialSettings.get("category"+number).get("pictograms");	//FIXME if this value is null, we will crash
+					}
+					catch (NullPointerException e)
+					{
+						//the value does not exist, so we will not load anymore categories
+						break;
+					}
+
+					String colourString = specialSettings.get("category"+number).get("colour");
+					int col=Integer.valueOf(colourString);
+					String iconString = specialSettings.get("category"+number).get("icon");
+					String catName = specialSettings.get("category"+number).get("name");
+					parrotUser.addCategory(loadCategory(catName,categoryString,col,iconString));
+					number++;
+
 				}
 
-				String colourString = specialSettings.get("category"+number).get("colour");
-				int col=Integer.valueOf(colourString);
-				String iconString = specialSettings.get("category"+number).get("icon");
-				String catName = specialSettings.get("category"+number).get("name");
-				parrotUser.addCategory(loadCategory(catName,categoryString,col,iconString));
-				number++;
-
+				return parrotUser;
 			}
+			else
+			{
+				//If no profile is found, return null.
+				//TODO find out if this means that a Guardian is using the PARROT app.
+				//It doesn't, it means the launcher has not provided a profile, either due to an error, or because PARROT has been launched outside of GIRAF.
+				return null;
+			}
+		}
+		//If an error has happened, return null
+		return null;
 
-			return parrotUser;
-		}
-		else
-		{
-			//If no profile is found, return null.
-			//TODO find out if this means that a Guardian is using the PARROT app.
-			//It doesn't, it means the launcher has not provided a profile, either due to an error, or because PARROT has been launched outside of GIRAF.
-			return null;
-		}
 
 	}
 
@@ -259,6 +266,7 @@ public class PARROTDataLoader {
 	public void TESTsaveTestProfile()
 	{
 		help = new Helper(parrent);
+		app = help.appsHelper.getAppByPackageName();
 		Profile tempProf = new Profile("Jens","Jensen",null,Profile.pRoles.CHILD.ordinal(),12345678,null,null);
 		Long profileId = help.profilesHelper.insertProfile(tempProf);
 
@@ -369,14 +377,16 @@ public class PARROTDataLoader {
 		//		testProfile.addCategory(tempCat);
 		//		testProfile.addCategory(tempCat2);
 		testProfile.addCategory(tempCat3);
-		
+
 		Category tempCat4 = new Category("Kategori 2", 0xffff0000, duPic);
 		tempCat4.addPictogram(duPic);
 		tempCat4.addPictogram(migPic);
 		tempCat4.addPictogram(jaPic);
 		tempCat4.addPictogram(nejPic);
-		
+
 		testProfile.addCategory(tempCat4);
+		testProfile.setCategoryColor(0xff23ff12);
+		testProfile.setSentenceBoardColor(0xffffffff);
 		PARROTActivity.setUser(testProfile);
 
 		for(int i=0;i<testProfile.getCategories().size();i++)
@@ -442,7 +452,7 @@ public class PARROTDataLoader {
 			help.mediaHelper.modifyMedia(imageMedia);
 		}
 
-		
+
 
 
 		if(pic.getWordID() == -1 && pic.getWordPath() != null) //if the word is not in the database
@@ -457,7 +467,7 @@ public class PARROTDataLoader {
 			wordMedia.setId(pic.getWordID());
 			help.mediaHelper.modifyMedia(wordMedia);
 		}
-		
+
 		if(pic.getSoundID() == -1 && pic.getSoundPath() != null) //if the sound is new in the database
 		{
 			soundMedia = new Media(pic.getName(), pic.getSoundPath(), true, "SOUND", PARROTActivity.getUser().getProfileID());	//TODO we might want to set the booleans to false

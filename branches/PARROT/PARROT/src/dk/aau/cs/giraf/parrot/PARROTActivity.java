@@ -1,8 +1,11 @@
 package dk.aau.cs.giraf.parrot;
 
+import dk.aau.cs.giraf.oasis.lib.Helper;
+import dk.aau.cs.giraf.oasis.lib.models.App;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 
@@ -11,9 +14,18 @@ public class PARROTActivity extends Activity {
 	private static PARROTProfile parrotUser;
 	private static long guardianID;
 	private PARROTDataLoader dataLoader;
+	private static App app;
+	private static Helper help;
+	private static Intent girafIntent;
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+//		//These lines get the intent from the launcher //TODO use us when testing with the launcher.
+//		girafIntent = getIntent();
+//		Helper help = new Helper(this);
+//		app = help.appsHelper.getAppByPackageName();
+//		guardianID = girafIntent.getExtras().getLong("currentGuardianID");
+//		
 		super.onCreate(savedInstanceState);		
 		setContentView(R.layout.main);
 
@@ -94,8 +106,16 @@ public class PARROTActivity extends Activity {
 	public static long getGuardianID() {
 		return guardianID;
 	}
-	public static void setGuardianID(long guardianID) {
-		PARROTActivity.guardianID = guardianID;
+	public static Helper getHelp() {
+		return help;
+	}
+	
+	public static App getApp()
+	{
+		return app;
+	}
+	public static Intent getGirafIntent() {
+		return girafIntent;
 	}
 	
 }
