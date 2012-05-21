@@ -2,10 +2,6 @@ package dk.aau.cs.giraf.wombat;
 
 import java.util.ArrayList;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,11 +21,11 @@ public class SubProfileFragment extends android.app.ListFragment {
 	// Start the list empty
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		if(Guardian.profileID != -1){
+		if(guard.profileID >= 0){
 			Helper helper = new Helper(getActivity());
 			int position;
 			// Marks the selected profile in the guard singleton
-			position = guard.publishList().indexOf(helper.profilesHelper.getProfileById(Guardian.profileID));
+			position = guard.publishList().indexOf(helper.profilesHelper.getProfileById(guard.profileID));
 			if(position != -1){
 				guard.publishList().get(position).select();
 				ArrayList<SubProfile> subprofiles = guard.getChild().SubProfiles();
@@ -55,48 +51,51 @@ public class SubProfileFragment extends android.app.ListFragment {
 					tv.setText(getString(R.string.delete_description) + " " + guard.getChild().SubProfiles().get(row).name + "?");
 					tv.setTextColor(0xFFFFFFFF);
 				
-					AlertDialog alertDialog = new AlertDialog.Builder(v
-							.getContext()).create();
-					alertDialog.setTitle(R.string.delete_subprofile_message);
-					alertDialog.setView(tv);
-					alertDialog.setButton(getText(R.string.delete_yes),
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface arg0,
-										int arg1) {
-									if (guard.getChild() != null && guard.getChild().deleteCheck()) {
-									guard.getChild().SubProfiles().get(row)
-											.delete();
-									CustomizeFragment cf = (CustomizeFragment) getFragmentManager()
-											.findFragmentById(R.id.customizeFragment);
-									cf.setDefaultProfile();
+					final WDialog deleteDialog = new WDialog(getActivity(), R.string.delete_subprofile_message);
+					deleteDialog.addTextView(getString(R.string.delete_description) + " " + guard.getChild().SubProfiles().get(row).name + "?", 1);
+					deleteDialog.addButton(R.string.delete_yes, 2, new View.OnClickListener() {
+						
+						public void onClick(View v) {
+							if (guard.getChild() != null && guard.getChild().deleteCheck()) {
+								guard.getChild().SubProfiles().get(row)
+										.delete();
+								CustomizeFragment cf = (CustomizeFragment) getFragmentManager()
+										.findFragmentById(R.id.customizeFragment);
+								cf.setDefaultProfile();
+								Toast t = Toast.makeText(getActivity(),
+										R.string.delete_subprofile_toast,
+										5000);
+								t.show();
+								loadSubProfiles();
+								} else {
 									Toast t = Toast.makeText(getActivity(),
-											R.string.delete_subprofile_toast,
-											5000);
+											R.string.cannot_delete_subprofile_toast, 5000);
 									t.show();
-									loadSubProfiles();
-									} else {
-										Toast t = Toast.makeText(getActivity(),
-												R.string.cannot_delete_subprofile_toast, 5000);
-										t.show();
-									}
 								}
-							});
+							deleteDialog.dismiss();
+						}
+					});
 
-					alertDialog.setButton2(getText(R.string.delete_no),
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface arg0,
-										int arg1) {
-									// do nothing
+					deleteDialog.addButton(R.string.delete_no, 3, new View.OnClickListener() {
+						
+						public void onClick(View v) {
+							deleteDialog.cancel();
+							
+						}
+					});
 
-								}
-							});
-
-					alertDialog.show();
+					deleteDialog.show();
 				return true;
 			}
 		});
 	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+		loadSubProfiles();
+	}
+	
 	/**
 	 * Inserts the templates on profile id in the details list
 	 * 
@@ -111,16 +110,21 @@ public class SubProfileFragment extends android.app.ListFragment {
 	}
 
 	public void onListItemClick(ListView lv, View view, int position, long id) {
-		if (Guardian.subProfileFirstClick) {
+		if (guard.subProfileFirstClick) {
 			for (int i = 0; i < lv.getChildCount(); i++) {
 				lv.getChildAt(i).setBackgroundResource(R.drawable.list);
 			}
-			Guardian.subProfileFirstClick = false;
+			guard.subProfileFirstClick = false;
 		}
 		for (int i = 0; i < lv.getChildCount(); i++) {
 			lv.getChildAt(i).setSelected(false);
 		}
 		view.setSelected(true);
+		guard.subProfileID = guard.getChild().SubProfiles().get(position).getId();
+		
+		
+		@SuppressWarnings("unused")
+		SubProfile asd = guard.getChild().SubProfiles().get(position);
 		
 		CustomizeFragment fragment = (CustomizeFragment) getFragmentManager()
 				.findFragmentById(R.id.customizeFragment);

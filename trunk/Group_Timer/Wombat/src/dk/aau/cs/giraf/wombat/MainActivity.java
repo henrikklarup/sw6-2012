@@ -1,32 +1,50 @@
 package dk.aau.cs.giraf.wombat;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import dk.aau.cs.giraf.TimerLib.Art;
 import dk.aau.cs.giraf.TimerLib.Guardian;
 
 public class MainActivity extends Activity {
+	Guardian guard = null;
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		
 		long guardianId;
 		long childId;
-		int color;
+		int color;	
 
 		Bundle extras = getIntent().getExtras();
         if (extras != null) {        	
         	guardianId = extras.getLong("currentGuardianID");
         	childId = extras.getLong("currentChildID");
-        	color = 0xFFFFBB55;
+        	color = extras.getInt("appBackgroundColor");
         } else {
         	guardianId = -1;
-        	childId = -1;
+        	childId = -3;
         	color = 0xFFFFBB55;
         }
+        
+        ArrayList<Art> artList = new ArrayList<Art>();
+        
+        Art p_done = new Art(R.drawable.p_done,"Færdig", 0);
+		Art p_skema = new Art(R.drawable.p_gaa_til_skema,"Gå til skema", 1);
+		Art p_taxa = new Art(R.drawable.p_gaa_til_taxa,"Gå til taxa", 2);
+		Art p_ryd_op = new Art(R.drawable.p_ryd_op, "Ryd op", 3);
+		
+		artList.add(p_done);
+		artList.add(p_skema);
+		artList.add(p_taxa);
+		artList.add(p_ryd_op);
 
-    	Guardian.getInstance(childId, guardianId, getApplicationContext());
+    	guard = Guardian.getInstance(childId, guardianId, getApplicationContext(), artList);
+    	
+    	guard.backgroundColor = color;
     	
 		// Set content view according to main, which implements two fragments
 		setContentView(R.layout.main);
@@ -34,5 +52,10 @@ public class MainActivity extends Activity {
 		Drawable d = getResources().getDrawable(R.drawable.background);
 		d.setColorFilter(color, PorterDuff.Mode.OVERLAY);
 		findViewById(R.id.mainLayout).setBackgroundDrawable(d);
+	}
+	
+	public void onBackPressed() {
+		guard.reset();
+		finish();
 	}
 }

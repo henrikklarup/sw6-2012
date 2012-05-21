@@ -10,7 +10,7 @@
         android:icon="@drawable/wombat_icon"
         android:label="@string/app_name" >
         <activity
-            android:name=".MainActivity"
+            android:name="dk.aau.cs.giraf.wombat.MainActivity"
             android:label="@string/app_name" 
             android:screenOrientation="landscape"
             android:theme="@style/WombatStyle">
