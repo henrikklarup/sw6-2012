@@ -94,20 +94,15 @@ public class SelectProfileToDelete extends HttpServlet {
 				con =DriverManager.getConnection 
 						("jdbc:mysql://172.25.11.65:3306/04","eder","123456");
 				stmt = con.createStatement();
-				rs = stmt.executeQuery("SELECT idUser, username, idProfile, firstname, middlename, surname, picture from AuthUsers, Profile " +
+				rs = stmt.executeQuery("SELECT idUser, username, idProfile, firstname, middlename, surname from AuthUsers, Profile " +
 						"where idUser = idProfile;");
 				// displaying records
 				while(rs.next()){
 					id = rs.getInt("idUser");
 					name = rs.getString("firstname") + " " +rs.getString("middlename") + " " + rs.getString("surname");
 					username = rs.getString("username");
-					String picture = rs.getString("picture");
-					if (picture == null || picture.equals("null"))
-						picture = request.getContextPath() + "/images/i.jpg";
-					else
-						picture =  request.getContextPath()  + "/"+picture;
 
-					Profile p = new Profile(rs.getInt("idProfile"),rs.getString("firstname"),rs.getString("surname"), rs.getString("middlename"),  1, -1,picture, username);
+					Profile p = new Profile(rs.getInt("idProfile"),rs.getString("firstname"),rs.getString("surname"), rs.getString("middlename"),  1, -1, null, username);
 
 					profiles.add(p);
 				}
@@ -300,6 +295,8 @@ public class SelectProfileToDelete extends HttpServlet {
 			}
 			out.println("</center>");
 			out.println("<p>");
+			//out.println("<hr>");
+			out.println("<footer>Savannah v. 1.0.0 <a href='http://en.wikipedia.org/wiki/Copyleft'>(C)opyleft</a> under Freedom 3 me!</footer>");
 			out.println("</div>");
 
 			out.println("<form method='POST' action='SelectProfileToDelete' name='DasForm'>\n" +
@@ -307,7 +304,7 @@ public class SelectProfileToDelete extends HttpServlet {
 					"<input type='hidden' name='triedLogin' value=0>"+
 					"</form>");
 		
-
+			
 			out.println("</body>");
 			out.println("</html>");
 	}

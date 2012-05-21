@@ -141,26 +141,27 @@ public class DeleteProfileNotLoggedin extends HttpServlet {
 						"}"+
 						"</script>");
 				out.println("<body>");
-				out.println("<center><h2>Er du sikker på at du vil slette: </h2>");
+				out.println("<center><h2>Vær opmærksom på at alle billeder som er ejet af denne profil også vil blive slettet. Er du sikker på at du vil slette: </h2>");
 				out.println("<br>");
 				out.println("<hr>");
 				out.println("<form method='POST' name='DasForm' action='DeleteProfileNotLoggedin'>");
 				out.println("<table borders='0'>");
-				out.println("<tr>");
 				// The list is unnecessary because it only contains 1 element
 				//FIXME
 				for (Profile p : profilelist){
 				
 					out.println("<tr onmouseover=\"ChangeColor(this, true);\" onmouseout=\"ChangeColor(this, false);\"" + 
 					"onclick=\"setID('"+p.getID()+"'); submitform();\">");
-					out.println("<td>" + p.getID() + "</td><td>"+p.getName()+"</td>");
+					out.println("<td><img src='"+p.getPicture()+"' width=50 height=50></td><td>" + p.getID() + "</td><td>"+p.getName()+"</td>");
 					out.println("</tr>");
 				}
 				//creates two buttons, one to delete that utilizes deleteContent() and one that takes you back to the selection screen
-				out.println("<tr><td></td><td><input type='button' onClick=\"deleteContent();\" value='Slet'/><input type='button' onClick=\"history.go(-1)\" value='Fortryd'/></tr>");
+				out.println("<tr><td></td><td><input type='button' onClick=\"deleteContent();\" value='Slet'/></td><td><input type='button' onclick=\"javascript:window.location = \'TestDatabase\';\" value='Fortryd'/></td></tr>");
 				out.println("</table>");
-				out.println("<hr>");
+				//out.println("<hr>");
 				out.println("</form>");
+				out.println("<hr>");
+				out.println("<footer>Savannah v. 1.0.0 <a href='http://en.wikipedia.org/wiki/Copyleft'>(C)opyleft</a> under Freedom 3 me!</footer>");
 				out.println("</div>");
 				out.println("</body>");
 				out.println("</html>");
@@ -219,7 +220,7 @@ public class DeleteProfileNotLoggedin extends HttpServlet {
 			}
 			else{
 				out.println(userID + " has been deleted");
-				response.sendRedirect("SelectProfileToDelete");
+				//response.sendRedirect("SelectProfileToDelete");
 				//out.println(i);
 			}
 		}
@@ -251,6 +252,8 @@ public class DeleteProfileNotLoggedin extends HttpServlet {
 				out.println("The execution is " + e);
 			}
 			
+			session.setAttribute("SYSTEMMESSAGE", "<font color='green'>Profilen blev slettet korrekt</font>");
+			response.sendRedirect("TestDatabase");
 		}
 	}
 }
