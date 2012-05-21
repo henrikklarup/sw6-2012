@@ -30,6 +30,7 @@
 \usepackage{slashbox}
 \usepackage{verbatim}
 \usepackage{float}
+\usepackage{epstopdf}
 \newfloat{Code}{H}{myc}
 \allowdisplaybreaks
 
@@ -83,6 +84,8 @@
 \pagestyle{fancy}
 \lhead{}
 
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\secref}{section \ref}
 \newcommand{\appref}{appendix \ref}
 \newcommand{\chapref}{chapter \ref}
 \newcommand{\figref}{figure \ref}
