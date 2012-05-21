@@ -71,7 +71,6 @@ public class ManageCategoryFragment extends Fragment {
 		ImageView categoryPic = (ImageView) parrent.findViewById(R.id.categorypic);
 		//createNewCategory, changeCategoryPic, changeCategoryColor, changeCategoryName, copyThisCategoryToOtherProfile, copyThisCategoryToOtherProfileCategory  
 		Button createNewCategory = (Button) parrent.findViewById(R.id.createnewcategorybutton);
-		Button changeCategoryPic = (Button) parrent.findViewById(R.id.changecategorypicbutton);
 		Button changeCategoryColor = (Button) parrent.findViewById(R.id.changecategorycolorbutton);
 		Button changeCategoryName = (Button) parrent.findViewById(R.id.changecategorynamebutton);
 		Button copyThisCategoryToOtherProfile = (Button) parrent.findViewById(R.id.copythiscategorytootherprofilebutton);
@@ -175,14 +174,6 @@ public class ManageCategoryFragment extends Fragment {
 			}
 		});
 
-		changeCategoryPic.setOnClickListener(new OnClickListener()  //TODO remove me as this is handled by drop and drop
-		{
-			public void onClick(View v) 
-			{
-				// TODO Auto-generated method stub
-
-			}
-		});
 
 		changeCategoryColor.setOnClickListener(new OnClickListener() 
 		{
@@ -210,19 +201,20 @@ public class ManageCategoryFragment extends Fragment {
 
 
 
-
-		changeCategoryName.setOnClickListener(new OnClickListener() 
-		{
-			public void onClick(View v) 
-			{
-				EditText categoryInfo = (EditText) parrent.findViewById(R.id.categoryinfo);
-				((InputMethodManager)parrent.getSystemService(Context.INPUT_METHOD_SERVICE)).showSoftInput(categoryInfo, InputMethodManager.SHOW_FORCED);
-				
-				String name = categoryInfo.getText().toString();
-				profileBeingModified.getCategoryAt(currentCategoryId).setCategoryName(name);
-			
-			}
-		});
+		//FIXME This part of the code is currently not functioning
+//		//Click this button to change the name of the category
+//		changeCategoryName.setOnClickListener(new OnClickListener() 
+//		{
+//			public void onClick(View v) 
+//			{
+//				EditText categoryInfo = (EditText) parrent.findViewById(R.id.categoryinfo);
+//				((InputMethodManager)parrent.getSystemService(Context.INPUT_METHOD_SERVICE)).showSoftInput(categoryInfo, InputMethodManager.SHOW_FORCED);
+//				
+//				String name = categoryInfo.getText().toString();
+//				profileBeingModified.getCategoryAt(currentCategoryId).setCategoryName(name);
+//			
+//			}
+//		});
 
 		copyThisCategoryToOtherProfile.setOnClickListener(new OnClickListener() 
 		{
