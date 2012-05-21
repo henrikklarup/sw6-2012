@@ -125,7 +125,7 @@ public class Child implements Comparable<Child>{
 //				p.setDB_id(getNewId());
 //			}
 //			
-			//p.name = "id: " + p.getId() + " db id: " + p.getDB_id();
+//			p.name = "id: " + p.getId() + " db id: " + p.getDB_id();
 			this.SubProfiles().add(p);
 			guard.saveChild(this, p);
 			

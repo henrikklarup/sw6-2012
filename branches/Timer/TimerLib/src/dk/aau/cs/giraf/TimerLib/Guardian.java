@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import android.content.Context;
+import android.util.Log;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.App;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
@@ -122,7 +123,7 @@ public class Guardian {
 			
 			//_instance.crud.initLastUsed(_instance.m_oGuard.getId());
 			
-			_instance.publishList();
+			_instance.publishList();			
 			
 			//crud.retrieveLastUsed(m_guardianId);
 		}

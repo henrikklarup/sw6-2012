@@ -62,6 +62,7 @@ public class SubProfileAdapter extends ArrayAdapter<SubProfile> {
 			}
 			if(tvName != null){
 				tvName.setText(sp.name);
+				tvName.setText("id: " + sp.getId() + " db id: " + sp.getDB_id());
 			}
 			if(tvDesc != null){
 				tvDesc.setText(sp.desc);
