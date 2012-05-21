@@ -286,7 +286,7 @@ public class GuardiansFrag extends ExpandableListFragment {
 		if (type == 1) {
 			delProfile = adapter.getChild(group, child);
 			AlertDialog.Builder delbuilder = new AlertDialog.Builder(getActivity());
-			if (delProfile.getId() != MainActivity.guardian.getId()) {
+			if (MainActivity.guardian == null || delProfile.getId() != MainActivity.guardian.getId()) {
 				delbuilder.setTitle("Fjern Pædagog");
 				String dName = delProfile.getFirstname();
 				if (delProfile.getMiddlename() != null) {
