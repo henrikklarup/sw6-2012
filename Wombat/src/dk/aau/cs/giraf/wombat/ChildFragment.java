@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -26,11 +27,15 @@ public class ChildFragment extends android.app.ListFragment {
 		// TODO Auto-generated method stub
 		super.onResume();
 		loadChildren();
-		for (Child c : guard.publishList()) {
-			if(c.getProfileId() == guard.profileID){
-				c.select();
+		int i = 0;
+		for (Child child : guard.publishList()) {
+			if(child.getProfileId() == guard.profileID){
+				guard.profilePosition = i; 
+				guard.publishList().get(i).select();
+				Log.e("", guard.getChild().name);
 				break;
 			}
+			i++;
 		}
 		
 		SubProfileFragment detf = (SubProfileFragment) getFragmentManager()

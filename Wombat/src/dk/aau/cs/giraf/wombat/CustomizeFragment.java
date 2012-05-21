@@ -986,6 +986,7 @@ public class CustomizeFragment extends Fragment {
 								 if (preSubP != null) {
 									 m_savedSubprofile = currSubP.save(preSubP,
 											 true);
+									 preSubP = null;
 								 } else {
 									 m_savedSubprofile = guard.getChild().save(
 											 currSubP, false);
@@ -1022,6 +1023,7 @@ public class CustomizeFragment extends Fragment {
 						 SubProfile m_savedSubprofile;
 						 if (preSubP != null) {
 							 m_savedSubprofile = currSubP.save(preSubP, true);
+							 preSubP = null;
 						 } else {
 							 m_savedSubprofile = guard.getChild().save(currSubP,
 									 false);
