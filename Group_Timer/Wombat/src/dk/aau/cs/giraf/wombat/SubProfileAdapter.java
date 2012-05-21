@@ -15,7 +15,7 @@ import dk.aau.cs.giraf.TimerLib.SubProfile;
 public class SubProfileAdapter extends ArrayAdapter<SubProfile> {
 
 	private ArrayList<SubProfile> items;
-
+	Guardian guard = Guardian.getInstance();
 	public SubProfileAdapter(Context context, int textViewResourceId,
 			ArrayList<SubProfile> items) {
 		super(context, textViewResourceId, items);
@@ -68,10 +68,10 @@ public class SubProfileAdapter extends ArrayAdapter<SubProfile> {
 			}
 			
 		}
-		if(sp.getId() == Guardian.subProfileID){
+		if(sp.getId() == guard.subProfileID){
 			v.setBackgroundResource(R.drawable.list_selected);
-			Guardian.subProfileFirstClick = true;
-			Guardian.subProfileID = -1;
+			guard.subProfileFirstClick = true;
+			guard.subProfileID = -1;
 		} else {
 			v.setBackgroundResource(R.drawable.list);
 		}

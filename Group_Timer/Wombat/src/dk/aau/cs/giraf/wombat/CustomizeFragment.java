@@ -1,19 +1,14 @@
 package dk.aau.cs.giraf.wombat;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import kankan.wheel.widget.OnWheelChangedListener;
 import kankan.wheel.widget.WheelView;
 import kankan.wheel.widget.adapters.NumericWheelAdapter;
 import yuku.ambilwarna.AmbilWarnaDialog;
 import yuku.ambilwarna.AmbilWarnaDialog.OnAmbilWarnaListener;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.app.Fragment;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
@@ -27,17 +22,22 @@ import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import dk.aau.cs.giraf.TimerLib.Art;
+import dk.aau.cs.giraf.TimerLib.Attachment;
 import dk.aau.cs.giraf.TimerLib.Child;
 import dk.aau.cs.giraf.TimerLib.Guardian;
+import dk.aau.cs.giraf.TimerLib.SingleImg;
+import dk.aau.cs.giraf.TimerLib.SplitImg;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
+import dk.aau.cs.giraf.TimerLib.Timer;
 import dk.aau.cs.giraf.TimerLib.formFactor;
 import dk.aau.cs.giraf.wombat.drawlib.DrawLibActivity;
 
@@ -60,7 +60,7 @@ public class CustomizeFragment extends Fragment {
 	private Button colorFrameButton;
 	private Button colorBackgroundButton;
 
-	private CheckBox checkboxGradient;
+	private WCheckbox gradientButton;
 
 	private WheelView mins;
 	private WheelView secs;
@@ -91,7 +91,7 @@ public class CustomizeFragment extends Fragment {
 		b.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				Guardian.subProfileID = -1;
+				guard.subProfileID = -1;
 				SubProfileFragment spf = (SubProfileFragment) getFragmentManager()
 						.findFragmentById(R.id.subprofileFragment);
 				spf.loadSubProfiles();
@@ -105,7 +105,8 @@ public class CustomizeFragment extends Fragment {
 			}
 		});
 
-		currSubP = new SubProfile("", "", 0xff3D3D3D, 0xffFF0000, 0xffB8B8B8, 0xff000000, 600, false);
+		currSubP = new SubProfile("", "", 0xff3D3D3D, 0xffFF0000, 0xffB8B8B8,
+				0xff000000, 600, false);
 		currSubP.save = false;
 		currSubP.saveAs = false;
 
@@ -126,7 +127,8 @@ public class CustomizeFragment extends Fragment {
 	}
 
 	public void setDefaultProfile() {
-		currSubP = new SubProfile("", "", 0xff3D3D3D, 0xffFF0000, 0xffB8B8B8, 0xff000000, 600, false);
+		currSubP = new SubProfile("", "", 0xff3D3D3D, 0xffFF0000, 0xffB8B8B8,
+				0xff000000, 600, false);
 		currSubP.save = false;
 		currSubP.saveAs = false;
 
@@ -288,8 +290,8 @@ public class CustomizeFragment extends Fragment {
 	/**
 	 * Sets the time on the time picker wheels
 	 * 
-	 * @param get_totalTime()
-	 *            Total time in seconds
+	 * @param get_totalTime
+	 *            () Total time in seconds
 	 */
 	private void setTime(int _totalTime) {
 		int minutes, seconds;
@@ -350,7 +352,7 @@ public class CustomizeFragment extends Fragment {
 
 		/* Insert the devider if its needed */
 		if (m_minutes != 0 && m_seconds != 0) {
-			timeText += " " + this.getString(R.string.and_devider) + " ";
+			timeText += " " + this.getString(R.string.and_divider) + " ";
 		}
 
 		if (m_seconds == 1) {
@@ -369,19 +371,17 @@ public class CustomizeFragment extends Fragment {
 	 * Initialize the color picker buttons, change colors here etc.
 	 */
 	private void initColorButtons() {
-		checkboxGradient = (CheckBox) getActivity().findViewById(
-				R.id.checkbox_gradient);
-
-		checkboxGradient.setChecked(currSubP.gradient);
-		checkboxGradient
-				.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
-					public void onCheckedChanged(CompoundButton buttonView,
-							boolean isChecked) {
-						currSubP.gradient = isChecked;
-					}
-				});
-
+		LinearLayout mLL = (LinearLayout) getActivity().findViewById(
+				R.id.button_gradient_layout);
+		gradientButton = new WCheckbox(getActivity());
+		gradientButton.setOnClickListener(currSubP.gradient, new OnClickListener() {
+			
+			public void onClick(View v) {
+				currSubP.gradient = gradientButton.changeCheckedState();		
+			}
+		});
+		mLL.addView(gradientButton);
+		
 		colorGradientButton1 = (Button) getActivity().findViewById(
 				R.id.gradientButton_1);
 
@@ -391,15 +391,15 @@ public class CustomizeFragment extends Fragment {
 			public void onClick(View v) {
 				AmbilWarnaDialog dialog = new AmbilWarnaDialog(getActivity(),
 						currSubP.timeLeftColor, new OnAmbilWarnaListener() {
-							public void onCancel(AmbilWarnaDialog dialog) {
-							}
+					public void onCancel(AmbilWarnaDialog dialog) {
+					}
 
-							public void onOk(AmbilWarnaDialog dialog, int color) {
-								currSubP.timeLeftColor = color;
-								setColor(colorGradientButton1.getBackground(),
-										currSubP.timeLeftColor);
-							}
-						});
+					public void onOk(AmbilWarnaDialog dialog, int color) {
+						currSubP.timeLeftColor = color;
+						setColor(colorGradientButton1.getBackground(),
+								currSubP.timeLeftColor);
+					}
+				});
 				dialog.show();
 			}
 		});
@@ -411,15 +411,15 @@ public class CustomizeFragment extends Fragment {
 			public void onClick(View v) {
 				AmbilWarnaDialog dialog = new AmbilWarnaDialog(getActivity(),
 						currSubP.timeSpentColor, new OnAmbilWarnaListener() {
-							public void onCancel(AmbilWarnaDialog dialog) {
-							}
+					public void onCancel(AmbilWarnaDialog dialog) {
+					}
 
-							public void onOk(AmbilWarnaDialog dialog, int color) {
-								currSubP.timeSpentColor = color;
-								setColor(colorGradientButton2.getBackground(),
-										currSubP.timeSpentColor);
-							}
-						});
+					public void onOk(AmbilWarnaDialog dialog, int color) {
+						currSubP.timeSpentColor = color;
+						setColor(colorGradientButton2.getBackground(),
+								currSubP.timeSpentColor);
+					}
+				});
 				dialog.show();
 			}
 		});
@@ -431,15 +431,15 @@ public class CustomizeFragment extends Fragment {
 			public void onClick(View v) {
 				AmbilWarnaDialog dialog = new AmbilWarnaDialog(getActivity(),
 						currSubP.frameColor, new OnAmbilWarnaListener() {
-							public void onCancel(AmbilWarnaDialog dialog) {
-							}
+					public void onCancel(AmbilWarnaDialog dialog) {
+					}
 
-							public void onOk(AmbilWarnaDialog dialog, int color) {
-								currSubP.frameColor = color;
-								setColor(colorFrameButton.getBackground(),
-										currSubP.frameColor);
-							}
-						});
+					public void onOk(AmbilWarnaDialog dialog, int color) {
+						currSubP.frameColor = color;
+						setColor(colorFrameButton.getBackground(),
+								currSubP.frameColor);
+					}
+				});
 				dialog.show();
 			}
 		});
@@ -452,15 +452,15 @@ public class CustomizeFragment extends Fragment {
 			public void onClick(View v) {
 				AmbilWarnaDialog dialog = new AmbilWarnaDialog(getActivity(),
 						currSubP.bgcolor, new OnAmbilWarnaListener() {
-							public void onCancel(AmbilWarnaDialog dialog) {
-							}
+					public void onCancel(AmbilWarnaDialog dialog) {
+					}
 
-							public void onOk(AmbilWarnaDialog dialog, int color) {
-								currSubP.bgcolor = color;
-								setColor(colorBackgroundButton.getBackground(),
-										currSubP.bgcolor);
-							}
-						});
+					public void onOk(AmbilWarnaDialog dialog, int color) {
+						currSubP.bgcolor = color;
+						setColor(colorBackgroundButton.getBackground(),
+								currSubP.bgcolor);
+					}
+				});
 				dialog.show();
 			}
 
@@ -479,60 +479,232 @@ public class CustomizeFragment extends Fragment {
 	 */
 	private void initAttachmentButton() {
 
+		// Button for attachment
 		attachmentButton = (Button) getActivity().findViewById(
 				R.id.customize_attachment);
-
+		// Set attachment button onclicklistener
+		// 1. window
 		attachmentButton.setOnClickListener(new OnClickListener() {
 
+			// First onClick
 			public void onClick(final View v) {
-				final ArrayList<Child> children = guard.publishList();
+				final ArrayList<formFactor> mode = guard.getMode();
 
-				final AlertDialog builder = new AlertDialog.Builder(v
-						.getContext()).create();
+				final WDialog attachment1 = new WDialog(getActivity(),
+						R.string.attachment_dialog_description);
 
-				builder.setTitle(getString(R.string.attachment_button_description));
-				ListView lv = new ListView(getActivity());
-				ChildAdapter adapter = new ChildAdapter(getActivity(),
-						android.R.layout.simple_list_item_1, children);
-				lv.setAdapter(adapter);
-				lv.setOnItemClickListener(new OnItemClickListener() {
+				ModeAdapter adapter = new ModeAdapter(getActivity(),
+						android.R.layout.simple_list_item_1, mode);
+
+				attachment1.setAdapter(adapter);
+
+				attachment1.addButton(R.string.cancel, 1,
+						new OnClickListener() {
+
+					public void onClick(View arg0) {
+						attachment1.cancel();
+					}
+				});
+
+				// 2. window
+				attachment1.setOnItemClickListener(new OnItemClickListener() {
 
 					public void onItemClick(AdapterView<?> parent, View view,
 							int position, long id) {
-						List<String> values = new ArrayList<String>();
-						final ArrayList<SubProfile> subProfiles;
-						subProfiles = children.get(position).SubProfiles();
-
-						for (SubProfile subProfile : subProfiles) {
-							values.add(subProfile.name);
-						}
+						// List<String> values = new ArrayList<String>();
+						final formFactor form = mode.get(position);
 
 						// Cast values to CharSequence and put it in the builder
-						final AlertDialog builder2 = new AlertDialog.Builder(v
-								.getContext()).create();
-						builder2.setTitle(getString(R.string.attachment_dialog_description));
-						ListView lv = new ListView(getActivity());
-						SubProfileAdapter adapter = new SubProfileAdapter(
-								getActivity(),
-								android.R.layout.simple_list_item_1,
-								subProfiles);
-						lv.setAdapter(adapter);
-						lv.setOnItemClickListener(new OnItemClickListener() {
-							public void onItemClick(AdapterView<?> parent,
-									View view, int position, long id) {
-								setAttachment(subProfiles.get(position));								
-								builder.dismiss();
-								builder2.dismiss();
+						final WDialog attachment2 = new WDialog(getActivity());
+
+						// New listview
+
+						ArrayAdapter adapter = null;
+
+						switch (form) {
+						case Timer:
+							attachment2
+							.setTitle(getString(R.string.attachment_dialog_pick_a_profile));
+							ArrayList<Child> child = guard.publishList();
+							adapter = new ChildAdapter(getActivity(),
+									android.R.layout.simple_list_item_1, child);
+							break;
+						case SingleImg:
+							attachment2
+							.setTitle(getString(R.string.attachment_dialog_pick_a_picture));
+							ArrayList<Art> art = guard.ArtList;
+							adapter = new ArtAdapter(getActivity(),
+									android.R.layout.simple_list_item_1, art);
+							break;
+						case SplitImg:
+							attachment2
+							.setTitle(getString(R.string.attachment_dialog_split_left));
+							ArrayList<Art> splitArt = guard.ArtList;
+							adapter = new ArtAdapter(getActivity(),
+									android.R.layout.simple_list_item_1,
+									splitArt);
+							break;
+						}
+
+						// SubProfileAdapter adapter = new SubProfileAdapter(
+						// getActivity(),
+						// android.R.layout.simple_list_item_1,
+						// subProfiles);
+						attachment2.addButton(R.string.go_back, 1,
+								new OnClickListener() {
+
+							public void onClick(View arg0) {
+								attachment2.cancel();
+
 							}
 						});
-						builder2.setView(lv);
-						builder2.show();
+
+						attachment2.addButton(R.string.cancel, 2,
+								new OnClickListener() {
+
+							public void onClick(View arg0) {
+								attachment1.cancel();
+								attachment2.cancel();
+							}
+						});
+						attachment2.setAdapter(adapter);
+						// 3. window
+
+						attachment2
+						.setOnItemClickListener(new OnItemClickListener() {
+							public void onItemClick(
+									AdapterView<?> parent, View view,
+									int position, long id) {
+
+								// Cast values to CharSequence and put
+								// it in the builder
+								final WDialog attachment3 = new WDialog(
+										getActivity());
+								// New listview
+								attachment3.addButton(R.string.go_back, 1,
+										new OnClickListener() {
+
+									public void onClick(
+											View arg0) {
+										attachment3.cancel();
+
+									}
+								});
+
+								attachment3.addButton(R.string.cancel,
+										2, new OnClickListener() {
+
+									public void onClick(
+											View arg0) {
+										attachment1.cancel();
+										attachment2.cancel();
+										attachment3.cancel();
+									}
+								});
+								ArrayAdapter adapter = null;
+								switch (form) {
+								case Timer:
+									attachment3
+									.setTitle(getString(R.string.attachment_dialog_description));
+									final ArrayList<SubProfile> sp = guard
+											.publishList()
+											.get(position)
+											.SubProfiles();
+									adapter = new SubProfileAdapter(
+											getActivity(),
+											android.R.layout.simple_list_item_1,
+											sp);
+
+									attachment3.setAdapter(adapter);
+
+									attachment3
+									.setOnItemClickListener(new OnItemClickListener() {
+										public void onItemClick(
+												AdapterView<?> parent,
+												View view,
+												int position,
+												long id) {
+
+											Attachment attTimer = new Timer(
+													sp.get(position));
+											setAttachment(attTimer);
+
+											attachment1
+											.dismiss();
+											attachment2
+											.dismiss();
+											attachment3
+											.dismiss();
+
+										}
+									});
+
+									attachment3.show();
+
+									break;
+								case SingleImg:
+									Attachment att = new SingleImg(
+											guard.ArtList.get(position));
+									setAttachment(att);
+
+									attachment1.dismiss();
+									attachment2.dismiss();
+									break;
+								case SplitImg:
+									attachment3
+									.setTitle(getString(R.string.attachment_dialog_split_right));
+									ArrayList<Art> splitArt = guard.ArtList;
+									final Art art1 = guard.ArtList
+											.get(position);
+									adapter = new ArtAdapter(
+											getActivity(),
+											android.R.layout.simple_list_item_1,
+											splitArt);
+
+									attachment3.setAdapter(adapter);
+
+									attachment3
+									.setOnItemClickListener(new OnItemClickListener() {
+										public void onItemClick(
+												AdapterView<?> parent,
+												View view,
+												int position,
+												long id) {
+											final Art art2 = guard.ArtList
+													.get(position);
+											Attachment attSplit = new SplitImg(
+													art1, art2);
+											setAttachment(attSplit);
+
+											attachment1
+											.dismiss();
+											attachment2
+											.dismiss();
+											attachment3
+											.dismiss();
+
+										}
+									});
+									attachment3.show();
+
+									break;
+								}
+							}
+						});
+
+						attachment2.show();
+
+						// for (SubProfile subProfile : subProfiles) {
+						// values.add(subProfile.name);
+						// }
+						//
 					}
 				});
-				builder.setView(lv);
-				builder.show();
+				attachment1.show();
 			}
 		});
+
+		// Long click to remove
 		attachmentButton.setOnLongClickListener(new OnLongClickListener() {
 
 			public boolean onLongClick(View v) {
@@ -548,9 +720,9 @@ public class CustomizeFragment extends Fragment {
 	 * @param subProfile
 	 *            SubProfile to be attached
 	 */
-	private void setAttachment(SubProfile subProfile) {
-		int pictureRes;
-		int textRes;
+	private void setAttachment(Attachment att) {
+		int pictureRes = 0;
+		int textRes = 0;
 		int color = 0x00000000;
 		int alpha = 255;
 		String attachText = getString(R.string.attached);
@@ -558,27 +730,46 @@ public class CustomizeFragment extends Fragment {
 		TextView attView = (TextView) getActivity().findViewById(
 				R.id.customize_attachment_text);
 
-		if (subProfile != null) {
+		if (att != null) {
 
-			currSubP.setAttachment(subProfile);
-			color = subProfile.timeLeftColor;
-
-			switch (subProfile.formType()) {
-			case Hourglass:
-				pictureRes = R.drawable.thumbnail_hourglass;
-				textRes = R.string.customize_hourglass_description;
+			currSubP.setAttachment(att);
+			color = att.getColor();
+			GETOUT: switch (att.getForm()) {
+			case Timer:
+				Timer tempT = (Timer) att;
+				switch (tempT.formType()) {
+				case Hourglass:
+					pictureRes = R.drawable.thumbnail_hourglass;
+					textRes = R.string.customize_hourglass_description;
+					break GETOUT;
+				case DigitalClock:
+					pictureRes = R.drawable.thumbnail_digital;
+					textRes = R.string.customize_digital_description;
+					break GETOUT;
+				case ProgressBar:
+					pictureRes = R.drawable.thumbnail_progressbar;
+					textRes = R.string.customize_progressbar_description;
+					break GETOUT;
+				case TimeTimer:
+					pictureRes = R.drawable.thumbnail_timetimer;
+					textRes = R.string.customize_timetimer_description;
+					break GETOUT;
+				default:
+					pictureRes = R.drawable.thumbnail_attachment;
+					textRes = R.string.attachment_button_description;
+					attachText = "";
+					alpha = 0;
+					break GETOUT;
+				}
+			case SingleImg:
+				pictureRes = R.drawable.thumbnail_single_pic;
+				textRes = R.string.customize_single_img_description;
+				alpha = 0;
 				break;
-			case DigitalClock:
-				pictureRes = R.drawable.thumbnail_digital;
-				textRes = R.string.customize_digital_description;
-				break;
-			case ProgressBar:
-				pictureRes = R.drawable.thumbnail_progressbar;
-				textRes = R.string.customize_progressbar_description;
-				break;
-			case TimeTimer:
-				pictureRes = R.drawable.thumbnail_timetimer;
-				textRes = R.string.customize_timetimer_description;
+			case SplitImg:
+				pictureRes = R.drawable.thumbnail_dual_pic;
+				textRes = R.string.customize_split_img_description;
+				alpha = 0;
 				break;
 			default:
 				pictureRes = R.drawable.thumbnail_attachment;
@@ -596,92 +787,173 @@ public class CustomizeFragment extends Fragment {
 		}
 
 		LayerDrawable ld = (LayerDrawable) getResources().getDrawable(R.drawable.attachment_layer);
-		PorterDuffColorFilter filter = new PorterDuffColorFilter(color,
-				PorterDuff.Mode.SRC_ATOP);
+		
+		PorterDuffColorFilter filter = new PorterDuffColorFilter(color,PorterDuff.Mode.SRC_ATOP);
+		
 		Drawable d = getResources().getDrawable(R.drawable.attachment_background);
+		
 		d.setAlpha(alpha);
+		
 		d.setColorFilter(filter);
+		
 		ld.setDrawableByLayerId(R.id.first_attachment_layer, d);
+		
 		ld.setDrawableByLayerId(R.id.second_attachment_layer, getResources().getDrawable(pictureRes));
 
-		attachmentButton.setCompoundDrawablesWithIntrinsicBounds(null, ld,
-				null, null);
+		attachmentButton.setCompoundDrawablesWithIntrinsicBounds(null, ld,null, null);
+		
 		attachmentButton.setText(textRes);
+		
 		attView.setText(attachText);
 	}
-	
-	
-//	private void initDonePictureButton() {
-//
-//		donePictureButton = (Button) getActivity().findViewById(
-//				R.id.customize_donescreen);
-//
-//		donePictureButton.setOnClickListener(new OnClickListener() {
-//
-//			public void onClick(final View v) {
-//				final ArrayList<Child> children = guard.publishList();
-//
-//				final AlertDialog builder = new AlertDialog.Builder(v
-//						.getContext()).create();
-//
-//				builder.setTitle(getString(R.string.donescreen_dialog_title));
-//				ListView lv = new ListView(getActivity());
-//				
-//				
-//				ChildAdapter adapter = new ChildAdapter(getActivity(),
-//						android.R.layout.simple_list_item_1, children);
-//				lv.setAdapter(adapter);
-//				
-//				
-//				lv.setOnItemClickListener(new OnItemClickListener() {
-//
-//					public void onItemClick(AdapterView<?> parent, View view,
-//							int position, long id) {
-//						List<String> values = new ArrayList<String>();
-//						final ArrayList<SubProfile> subProfiles;
-//						subProfiles = children.get(position).SubProfiles();
-//
-//						for (SubProfile subProfile : subProfiles) {
-//							values.add(subProfile.name);
-//						}
-//
-//						// Cast values to CharSequence and put it in the builder
-//						final AlertDialog builder2 = new AlertDialog.Builder(v
-//								.getContext()).create();
-//						builder2.setTitle(getString(R.string.donescreen_button_description));
-//						ListView lv = new ListView(getActivity());
-//						SubProfileAdapter adapter = new SubProfileAdapter(
-//								getActivity(),
-//								android.R.layout.simple_list_item_1,
-//								subProfiles);
-//						lv.setAdapter(adapter);
-//						lv.setOnItemClickListener(new OnItemClickListener() {
-//							public void onItemClick(AdapterView<?> parent,
-//									View view, int position, long id) {
-//								setAttachment(subProfiles.get(position));
-//								builder.dismiss();
-//								builder2.dismiss();
-//							}
-//						});
-//						builder2.setView(lv);
-//						builder2.show();
-//					}
-//				});
-//				builder.setView(lv);
-//				builder.show();
-//			}
-//		});
-//		donePictureButton.setOnLongClickListener(new OnLongClickListener() {
-//
-//			public boolean onLongClick(View v) {
-//				setAttachment(null);
-//				return true;
-//			}
-//		});
-//	}
+
+	private void setDonePicture(Attachment att){		
+		int pictureRes = 0;
+
+		if(att != null){
+			switch(att.getForm()){
+			case SingleImg:
+				pictureRes = R.drawable.thumbnail_single_pic;
+
+				break;
+			case SplitImg:
+				pictureRes = R.drawable.thumbnail_dual_pic;
+
+				break;
+			}
+		} else {
+			pictureRes = R.drawable.thumbnail_attachment;
+		}
+		
+		LayerDrawable ld = (LayerDrawable) getResources().getDrawable(R.drawable.attachment_layer);
+		
+		PorterDuffColorFilter filter = new PorterDuffColorFilter(0xFFF,	PorterDuff.Mode.SRC_ATOP);
+		
+		Drawable d = getResources().getDrawable(R.drawable.attachment_background);
+		
+		d.setAlpha(0);
+		d.setColorFilter(filter);
+		
+		ld.setDrawableByLayerId(R.id.first_attachment_layer, d);
+		ld.setDrawableByLayerId(R.id.second_attachment_layer, getResources().getDrawable(pictureRes));
+		
+		donePictureButton.setCompoundDrawablesWithIntrinsicBounds(null, ld,	null, null);
+	}
+
+	private void initDonePictureButton() {
+		final ArrayList<formFactor> modeArray = new ArrayList<formFactor>();
+		modeArray.add(formFactor.SingleImg);
+		modeArray.add(formFactor.SplitImg);
+		donePictureButton = (Button) getActivity().findViewById(
+				R.id.customize_donescreen);
+		donePictureButton.setOnClickListener(new OnClickListener() {
+			public void onClick(final View v) {
+				final ArrayList<Art> art = guard.ArtList;
+
+
+				final WDialog doneDialog = new WDialog(getActivity(), R.string.donescreen_dialog_title);
+				ArrayAdapter adapter = new ModeAdapter(getActivity(),android.R.layout.simple_list_item_1, modeArray);	
+				doneDialog.setAdapter(adapter);
+				doneDialog.setOnItemClickListener(new OnItemClickListener() {
+
+					public void onItemClick(AdapterView<?> parent, View view,
+							int position, long id) {
+						final formFactor mode = modeArray.get(position);
+
+
+						final ArrayAdapter artList = new ArtAdapter(getActivity(),android.R.layout.simple_list_item_1, guard.ArtList);
+						switch(mode){
+						case SingleImg:
+							final WDialog singleDialog = new WDialog(getActivity(),R.string.donescreen_dialog_single);
+							singleDialog.setAdapter(artList);
+							singleDialog.setOnItemClickListener(new OnItemClickListener() {
+
+								public void onItemClick(AdapterView<?> parent, View view,
+										int position, long id) {
+									Attachment atta1 = new SingleImg(guard.ArtList.get(position));
+									setDonePicture(atta1);
+									currSubP.setDoneArt(atta1);
+									doneDialog.dismiss();
+									singleDialog.dismiss();
+
+								}
+							});
+							singleDialog.addButton(R.string.cancel, 1, new OnClickListener() {
+
+								public void onClick(View arg0) {
+									doneDialog.cancel();
+									singleDialog.cancel();
+								}
+							});
+							singleDialog.show();
+							break;
+						case SplitImg:
+							final WDialog dualDialog = new WDialog(getActivity(),R.string.donescreen_dialog_left);
+							dualDialog.setAdapter(artList);
+							dualDialog.setOnItemClickListener(new OnItemClickListener() {
+
+								public void onItemClick(AdapterView<?> parent, View view,
+										int position, long id) {
+									final Art art1 = guard.ArtList.get(position);
+									final WDialog dialog1 = new WDialog(getActivity(),R.string.donescreen_dialog_right);
+									dialog1.setAdapter(artList);
+									dialog1.setOnItemClickListener(new OnItemClickListener() {
+
+										public void onItemClick(AdapterView<?> parent, View view,
+												int position, long id) {
+											final Art art2 = guard.ArtList.get(position);
+											Attachment atta = new SplitImg(art1,art2);
+											currSubP.setDoneArt(atta);
+											setDonePicture(atta);
+											doneDialog.dismiss();
+											dualDialog.dismiss();
+											dialog1.dismiss();
+										}
+									});
+									dialog1.addButton(R.string.cancel, 1, new OnClickListener() {
+
+										public void onClick(View arg0) {
+											doneDialog.cancel();
+											dualDialog.cancel();
+											dialog1.cancel();
+										}
+									});
+									dialog1.show();	
+								}
+							});
+							dualDialog.addButton(R.string.cancel, 1, new OnClickListener() {
+
+								public void onClick(View arg0) {
+									doneDialog.cancel();
+									dualDialog.cancel();
+								}
+							});
+							dualDialog.show();
+							break;
+						}
+					}
+				});
+				doneDialog.addButton(R.string.cancel, 1, new OnClickListener() {
+
+					public void onClick(View arg0) {
+						doneDialog.cancel();
+					}
+				});
+				doneDialog.show();
+			}
+		});
+		donePictureButton.setOnLongClickListener(new OnLongClickListener() {
+
+			public boolean onLongClick(View v) {
+				currSubP.setDoneArt(null);
+				setDonePicture(null);
+				return true;
+			}
+		});
+	}
 
 	private void initBottomMenu() {
-//		initDonePictureButton();
+		initDonePictureButton();
 		initSaveButton();
 		initSaveAsButton();
 		initStartButton();
@@ -690,322 +962,370 @@ public class CustomizeFragment extends Fragment {
 	/**
 	 * Initialize the save button
 	 */
-	private void initSaveButton() {
-		saveButton = (Button) getActivity().findViewById(R.id.customize_save);
-		Drawable d;
-		if (currSubP.save && !guard.getChild().getLock()
-				&& guard.getChild() != null) {
-			d = getResources().getDrawable(R.drawable.thumbnail_save);
-			saveButton.setOnClickListener(new OnClickListener() {
-				public void onClick(View v) {
-					Builder builder = new AlertDialog.Builder(getActivity());
-					builder.setTitle(getActivity().getString(R.string.save_button));
-					final EditText et = new EditText(getActivity());
-					et.setText(getName());
-					builder.setView(et);
-					builder.setPositiveButton(R.string.save_button,
-							new DialogInterface.OnClickListener() {
+	 private void initSaveButton() {
+		 saveButton = (Button) getActivity().findViewById(R.id.customize_save);
+		 Drawable d;
+		 if (currSubP.save && !guard.getChild().getLock()
+				 && guard.getChild() != null) {
+			 d = getResources().getDrawable(R.drawable.thumbnail_save);
+			 saveButton.setOnClickListener(new OnClickListener() {
+				 public void onClick(View v) {
+					 if (preSubP == null) {
+						 final WDialog save1 = new WDialog(getActivity(),
+								 R.string.save_button);
+						 // et.setText(getName());
+						 save1.addEditText(getName(), 1);
+						 save1.addButton(R.string.ok, 2, new OnClickListener() {
 
-								public void onClick(DialogInterface dialog, int which) {
-									currSubP.name = et.getText().toString();
-									guard.publishList().get(Guardian.profilePosition)
-											.select();
+							 public void onClick(View arg0) {
+								 currSubP.name = save1.getEditTextText(1);
+								 guard.publishList()
+								 .get(guard.profilePosition).select();
 
-									SubProfile m_savedSubprofile;
-									if (preSubP != null) {
-										m_savedSubprofile = currSubP.save(preSubP);
-									} else {
-										m_savedSubprofile = guard.getChild()
-												.save(currSubP);
-									}
-									Guardian.subProfileID = m_savedSubprofile.getId();
-									loadSettings(m_savedSubprofile);
-									
-									ChildFragment cf = (ChildFragment)getFragmentManager().findFragmentById(R.id.childFragment);
-									SubProfileFragment spf = (SubProfileFragment) getFragmentManager()
-											.findFragmentById(R.id.subprofileFragment);
-									Guardian.profileID = guard.getChild().getProfileId();
-									cf.loadSubProfiles();
-									spf.loadSubProfiles();
-									
+								 SubProfile m_savedSubprofile;
+								 if (preSubP != null) {
+									 m_savedSubprofile = currSubP.save(preSubP,
+											 true);
+								 } else {
+									 m_savedSubprofile = guard.getChild().save(
+											 currSubP, false);
+								 }
+								 guard.subProfileID = m_savedSubprofile
+										 .getId();
+								 loadSettings(m_savedSubprofile);
 
-								}
+								 ChildFragment cf = (ChildFragment) getFragmentManager()
+										 .findFragmentById(R.id.childFragment);
+								 SubProfileFragment spf = (SubProfileFragment) getFragmentManager()
+										 .findFragmentById(
+												 R.id.subprofileFragment);
+								 guard.profileID = guard.getChild()
+										 .getProfileId();
+								 cf.loadChildren();
+								 spf.loadSubProfiles();
+								 save1.dismiss();
+							 }
+						 });
+						 save1.addButton(R.string.cancel, 3,
+								 new OnClickListener() {
 
-							});
-					AlertDialog alert = builder.create();
-					alert.show();
-				}
-			});
-		} else {
-			d = getResources().getDrawable(R.drawable.thumbnail_save_gray);
-			saveButton.setOnClickListener(new OnClickListener() {
+							 public void onClick(View arg0) {
+								 save1.cancel();
 
-				public void onClick(View v) {
-					Toast t = Toast.makeText(getActivity(),
-							getString(R.string.cant_save), 2000);
-					t.show();
-				}
-			});
-		}
+							 }
+						 });
+						 save1.show();
+					 } else {
+						 guard.publishList().get(guard.profilePosition)
+						 .select();
 
-		saveButton.setCompoundDrawablesWithIntrinsicBounds(null, d, null, null);
-	}
+						 SubProfile m_savedSubprofile;
+						 if (preSubP != null) {
+							 m_savedSubprofile = currSubP.save(preSubP, true);
+						 } else {
+							 m_savedSubprofile = guard.getChild().save(currSubP,
+									 false);
+						 }
+						 guard.subProfileID = m_savedSubprofile.getId();
+						 loadSettings(m_savedSubprofile);
 
-	/**
-	 * Sets the name of the profile if there is non
-	 * And asks the user which name to save as
-	 */
-	protected String getName() {
-		String name = "";
-		if (currSubP.name == "") {
+						 ChildFragment cf = (ChildFragment) getFragmentManager()
+								 .findFragmentById(R.id.childFragment);
+						 SubProfileFragment spf = (SubProfileFragment) getFragmentManager()
+								 .findFragmentById(R.id.subprofileFragment);
+						 guard.profileID = guard.getChild().getProfileId();
+						 cf.loadChildren();
+						 spf.loadSubProfiles();
+					 }
+				 }
+			 });
+		 } else {
+			 d = getResources().getDrawable(R.drawable.thumbnail_save_gray);
+			 saveButton.setOnClickListener(new OnClickListener() {
 
-			switch (currSubP.formType()) {
-			case Hourglass:
-				name += getString(R.string.customize_hourglass_description);
-				break;
+				 public void onClick(View v) {
+					 Toast t = Toast.makeText(getActivity(),
+							 getString(R.string.cant_save), 2000);
+					 t.show();
+				 }
+			 });
+		 }
 
-			case DigitalClock:
-				name += getString(R.string.customize_digital_description);
-				break;
+		 saveButton.setCompoundDrawablesWithIntrinsicBounds(null, d, null, null);
+	 }
 
-			case ProgressBar:
-				name += getString(R.string.customize_progressbar_description);
-				break;
+	 /**
+	  * Sets the name of the profile if there is non And asks the user which name
+	  * to save as
+	  */
+	 protected String getName() {
+		 String name = "";
+		 if (currSubP.name == "") {
 
-			case TimeTimer:
-				name += getString(R.string.customize_timetimer_description);
-				break;
+			 switch (currSubP.formType()) {
+			 case Hourglass:
+				 name += getString(R.string.customize_hourglass_description);
+				 break;
 
-			default:
-				name += "";
-				break;
-			}
-		} else {
-			name = currSubP.name;
-		}
-		return name;
-	}
+			 case DigitalClock:
+				 name += getString(R.string.customize_digital_description);
+				 break;
 
-	private void genDescription() {
-		String name = "";
-		String desc = "";
+			 case ProgressBar:
+				 name += getString(R.string.customize_progressbar_description);
+				 break;
 
-		switch (currSubP.formType()) {
-		case Hourglass:
-			name += getString(R.string.customize_hourglass_description);
-			break;
+			 case TimeTimer:
+				 name += getString(R.string.customize_timetimer_description);
+				 break;
 
-		case DigitalClock:
-			name += getString(R.string.customize_digital_description);
-			break;
+			 default:
+				 name += "";
+				 break;
+			 }
+		 } else {
+			 name = currSubP.name;
+		 }
+		 return name;
+	 }
 
-		case ProgressBar:
-			name += getString(R.string.customize_progressbar_description);
-			break;
+	 private void genDescription() {
+		 String name = "";
+		 String desc = "";
 
-		case TimeTimer:
-			name += getString(R.string.customize_timetimer_description);
-			break;
+		 switch (currSubP.formType()) {
+		 case Hourglass:
+			 name += getString(R.string.customize_hourglass_description);
+			 break;
 
-		default:
-			name += "";
-			break;
-		}
+		 case DigitalClock:
+			 name += getString(R.string.customize_digital_description);
+			 break;
 
-		int seconds = currSubP.get_totalTime() % 60;
-		int minutes = (currSubP.get_totalTime() - seconds) / 60;
+		 case ProgressBar:
+			 name += getString(R.string.customize_progressbar_description);
+			 break;
 
-		desc += name + " - ";
-		desc += "(" + minutes + ":" + seconds + ")";
+		 case TimeTimer:
+			 name += getString(R.string.customize_timetimer_description);
+			 break;
 
-		currSubP.desc = desc;
-	}
+		 default:
+			 name += "";
+			 break;
+		 }
 
-	/**
-	 * Initialize the Save As button
-	 */
-	private void initSaveAsButton() {
-		final ArrayList<String> values = new ArrayList<String>();
-		Drawable d;
-		for (Child c : guard.Children()) {
-			values.add(c.name);
-		}
+		 int seconds = currSubP.get_totalTime() % 60;
+		 int minutes = (currSubP.get_totalTime() - seconds) / 60;
 
-		// Cast values to CharSequence
-		final CharSequence[] items = values.toArray(new CharSequence[values
-				.size()]);
+		 desc += name + " - ";
+		 desc += "(" + minutes + ":" + seconds + ")";
 
-		saveAsButton = (Button) getActivity().findViewById(
-				R.id.customize_save_as);
-		// If this is a profile which is "saveable", enable the save functionality
-		if (currSubP.saveAs) {
-			d = getResources().getDrawable(R.drawable.thumbnail_saveas);
-			saveAsButton.setOnClickListener(new OnClickListener() {
+		 currSubP.desc = desc;
+	 }
 
-				public void onClick(View v) {
-					// Profile and pictogram loader
-					AlertDialog.Builder builder = new AlertDialog.Builder(
-							getActivity());
-					builder.setTitle(getActivity().getString(
-							R.string.choose_profile));
-					builder.setItems(items,
-							new DialogInterface.OnClickListener() {
+	 /**
+	  * Initialize the Save As button
+	  */
+	 private void initSaveAsButton() {
+		 Drawable d;
 
-								public void onClick(DialogInterface dialog,
-										final int item) {
-									// Name picker
-									Builder builder = new AlertDialog.Builder(getActivity());
-									builder.setTitle(getActivity().getString(R.string.save_button));
-									final EditText et = new EditText(getActivity());
-									et.setText(getName());
-									builder.setView(et);
-									builder.setPositiveButton(R.string.save_button,
-											new DialogInterface.OnClickListener() {
+		 saveAsButton = (Button) getActivity().findViewById(
+				 R.id.customize_save_as);
+		 // If this is a profile which is "saveable", enable the save
+		 // functionality
+		 if (currSubP.saveAs) {
+			 d = getResources().getDrawable(R.drawable.thumbnail_saveas);
+			 saveAsButton.setOnClickListener(new OnClickListener() {
 
-												public void onClick(DialogInterface dialog, int which) {
-													// saving!
-													currSubP.name = et.getText().toString();
-													guard.publishList().get(Guardian.profilePosition)
-															.select();
+				 public void onClick(View v) {
+					 ArrayList<Child> child = guard.Children();
+					 ArrayAdapter adapter = new ChildAdapter(getActivity(),
+							 android.R.layout.simple_list_item_1, child);
+					 // Profile and pictogram loader
+					 final WDialog saveAs1 = new WDialog(getActivity(),
+							 R.string.choose_profile);
+					 saveAs1.setAdapter(adapter);
+					 saveAs1.addButton(R.string.cancel, 1,
+							 new OnClickListener() {
+						 public void onClick(View v) {
+							 saveAs1.cancel();
+						 }
+					 });
 
+					 saveAs1.setOnItemClickListener(new OnItemClickListener() {
 
-													Child c = guard.Children().get(item);
-													getName();
-													c.save(currSubP);
-													Guardian.saveChild(c, currSubP);
-													SubProfileFragment df = (SubProfileFragment) getFragmentManager()
-															.findFragmentById(
-																	R.id.subprofileFragment);
-													df.loadSubProfiles();
+						 public void onItemClick(AdapterView<?> arg0, View arg1,
+								 final int position, long arg3) {
+							 // Name picker
+							 final WDialog saveAs2 = new WDialog(getActivity(),
+									 R.string.save_button);
 
-													String toastText = currSubP.name;
-													toastText += " "
-															+ getActivity()
-																	.getApplicationContext()
-																	.getText(
-																			R.string.toast_text);
-													toastText += " " + c.name;
+							 saveAs2.addEditText(getName(), 1);
+							 saveAs2.addButton(R.string.ok, 2,
+									 new OnClickListener() {
 
-													Toast toast = Toast.makeText(getActivity(),
-															toastText, 3000);
-													toast.show();
-													
-													ChildFragment cf = (ChildFragment)getFragmentManager().findFragmentById(R.id.childFragment);
-													SubProfileFragment spf = (SubProfileFragment) getFragmentManager()
-															.findFragmentById(R.id.subprofileFragment);
-													Guardian.profileID = guard.getChild().getProfileId();
-													cf.loadSubProfiles();
-													spf.loadSubProfiles();
-													
+								 public void onClick(View arg0) {
+									 currSubP.name = saveAs2
+											 .getEditTextText(1);
+									 guard.publishList()
+									 .get(guard.profilePosition)
+									 .select();
 
-												}
+									 Child c = guard.Children().get(
+											 position);
+									 getName();
+									 c.save(currSubP, false);
+									 guard.saveChild(c, currSubP);
+									 SubProfileFragment df = (SubProfileFragment) getFragmentManager()
+											 .findFragmentById(
+													 R.id.subprofileFragment);
+									 df.loadSubProfiles();
 
-											});
-									AlertDialog alert = builder.create();
-									alert.show();
-								}
-							});
-					AlertDialog alert = builder.create();
-					alert.show();
-				}
-			});
-		} else {
-			d = getResources().getDrawable(R.drawable.thumbnail_saveas_gray);
-			saveAsButton.setOnClickListener(new OnClickListener() {
+									 String toastText = currSubP.name;
+									 toastText += " "
+											 + getActivity()
+											 .getApplicationContext()
+											 .getText(
+													 R.string.toast_text);
+									 toastText += " " + c.name;
 
-				public void onClick(View v) {
-					Toast t = Toast.makeText(getActivity(),
-							getString(R.string.cant_save), 2000);
-					t.show();
-				}
-			});
-		}
+									 Toast toast = Toast.makeText(
+											 getActivity(), toastText,
+											 3000);
+									 toast.show();
 
-		saveAsButton.setCompoundDrawablesWithIntrinsicBounds(null, d, null,
-				null);
+									 ChildFragment cf = (ChildFragment) getFragmentManager()
+											 .findFragmentById(
+													 R.id.childFragment);
+									 SubProfileFragment spf = (SubProfileFragment) getFragmentManager()
+											 .findFragmentById(
+													 R.id.subprofileFragment);
+									 guard.profileID = guard
+											 .getChild().getProfileId();
+									 cf.loadChildren();
+									 spf.loadSubProfiles();
+									 saveAs2.dismiss();
+									 saveAs1.dismiss();
+								 }
+							 });
+							 saveAs2.addButton(R.string.cancel, 3,
+									 new OnClickListener() {
 
-	}
+								 public void onClick(View arg0) {
+									 saveAs2.cancel();
+									 saveAs1.cancel();
 
-	/**
-	 * Initialize the start button
-	 */
-	private void initStartButton() {
-		startButton = (Button) getActivity().findViewById(
-				R.id.customize_start_button);
-		Drawable d;
-		if (currSubP.saveAs) {
-			d = getResources().getDrawable(R.drawable.thumbnail_start);
-			startButton.setOnClickListener(new OnClickListener() {
+								 }
+							 });
+							 saveAs2.show();
+						 }
+					 });
+					 saveAs1.show();
+				 }
+			 });
+		 } else {
+			 d = getResources().getDrawable(R.drawable.thumbnail_saveas_gray);
+			 saveAsButton.setOnClickListener(new OnClickListener() {
 
-				public void onClick(View v) {
-					currSubP.addLastUsed(preSubP);
-					Guardian.saveGuardian(currSubP);
-					currSubP.select();
-					Intent i = new Intent(
-							getActivity().getApplicationContext(), DrawLibActivity.class);
-					startActivity(i);
-				}
-			});
-		} else {
-			d = getResources().getDrawable(R.drawable.thumbnail_start_gray);
-			startButton.setOnClickListener(new OnClickListener() {
+				 public void onClick(View v) {
+					 Toast t = Toast.makeText(getActivity(),
+							 getString(R.string.cant_save), 2000);
+					 t.show();
+				 }
+			 });
+		 }
 
-				public void onClick(View v) {
-					Toast t = Toast.makeText(getActivity(),
-							getString(R.string.cant_start), 2000);
-					t.show();
-				}
-			});
-		}
+		 saveAsButton.setCompoundDrawablesWithIntrinsicBounds(null, d, null,
+				 null);
 
-		startButton
-				.setCompoundDrawablesWithIntrinsicBounds(null, d, null, null);
-	}
+	 }
 
-	/**
-	 * Sets the predefined settings of the chosen subprofile
-	 * 
-	 * @param subp
-	 *            The Subprofile chosen
-	 */
-	public void loadSettings(SubProfile subProfile) {
-		currSubP = subProfile.copy();
-		preSubP = subProfile;
+	 /**
+	  * Initialize the start button
+	  */
+	 private void initStartButton() {
+		 startButton = (Button) getActivity().findViewById(
+				 R.id.customize_start_button);
+		 Drawable d;
+		 if (currSubP.saveAs) {
+			 d = getResources().getDrawable(R.drawable.thumbnail_start);
+			 startButton.setOnClickListener(new OnClickListener() {
 
-		/* Set Style */
-		selectStyle(currSubP.formType());
+				 public void onClick(View v) {
+					 currSubP.addLastUsed(preSubP);
+					 guard.saveGuardian(currSubP);
+					 currSubP.select();
+					 Intent i = new Intent(
+							 getActivity().getApplicationContext(),
+							 DrawLibActivity.class);
+					 startActivity(i);
+				 }
+			 });
+		 } else {
+			 d = getResources().getDrawable(R.drawable.thumbnail_start_gray);
+			 startButton.setOnClickListener(new OnClickListener() {
 
-		/* Set Time */
-		setTime(currSubP.get_totalTime());
+				 public void onClick(View v) {
+					 Toast t = Toast.makeText(getActivity(),
+							 getString(R.string.cant_start), 2000);
+					 t.show();
+				 }
+			 });
+		 }
 
-		/* Set Colors */
-		checkboxGradient.setChecked(currSubP.gradient);
-		setColor(colorGradientButton1.getBackground(), currSubP.timeLeftColor);
-		setColor(colorGradientButton2.getBackground(), currSubP.timeSpentColor);
-		setColor(colorFrameButton.getBackground(), currSubP.frameColor);
-		setColor(colorBackgroundButton.getBackground(), currSubP.bgcolor);
+		 startButton
+		 .setCompoundDrawablesWithIntrinsicBounds(null, d, null, null);
+	 }
 
-		/* Set Attachment */
-		setAttachment(currSubP.getAttachment());
-		
-		/* Set Done picture */
-	}
+	 /**
+	  * Sets the predefined settings of the chosen subprofile
+	  * 
+	  * @param subp
+	  *            The Subprofile chosen
+	  */
+	 public void loadSettings(SubProfile subProfile) {
+		 currSubP = subProfile.copy();
+		 preSubP = subProfile;
 
-	public void reloadCustomize() {
-		/* Set Style */
-		selectStyle(currSubP.formType());
+		 /* Set Style */
+		 selectStyle(currSubP.formType());
 
-		/* Set Time */
-		setTime(currSubP.get_totalTime());
+		 /* Set Time */
+		 setTime(currSubP.get_totalTime());
 
-		/* Set Colors */
-		checkboxGradient.setChecked(currSubP.gradient);
-		setColor(colorGradientButton1.getBackground(), currSubP.timeLeftColor);
-		setColor(colorGradientButton2.getBackground(), currSubP.timeSpentColor);
-		setColor(colorFrameButton.getBackground(), currSubP.frameColor);
-		setColor(colorBackgroundButton.getBackground(), currSubP.bgcolor);
+		 /* Set Colors */
+		 gradientButton.setChecked(currSubP.gradient);
+		 setColor(colorGradientButton1.getBackground(), currSubP.timeLeftColor);
+		 setColor(colorGradientButton2.getBackground(), currSubP.timeSpentColor);
+		 setColor(colorFrameButton.getBackground(), currSubP.frameColor);
+		 setColor(colorBackgroundButton.getBackground(), currSubP.bgcolor);
 
-		/* Set Attachment */
-		setAttachment(currSubP.getAttachment());
-	}
+		 /* Set Attachment */
+		 setAttachment(currSubP.getAttachment());
+
+		 /* Set Done picture */
+		 setDonePicture(currSubP.getDoneArt());
+	 }
+
+	 public void reloadCustomize() {
+		 /* Set Style */
+		 selectStyle(currSubP.formType());
+
+		 /* Set Time */
+		 setTime(currSubP.get_totalTime());
+
+		 /* Set Colors */
+		 gradientButton.setChecked(currSubP.gradient);
+		 setColor(colorGradientButton1.getBackground(), currSubP.timeLeftColor);
+		 setColor(colorGradientButton2.getBackground(), currSubP.timeSpentColor);
+		 setColor(colorFrameButton.getBackground(), currSubP.frameColor);
+		 setColor(colorBackgroundButton.getBackground(), currSubP.bgcolor);
+
+		 /* Set Attachment */
+		 setAttachment(currSubP.getAttachment());
+		 
+		 /* Set Done picture */
+		 setDonePicture(currSubP.getDoneArt());
+	 }
 }

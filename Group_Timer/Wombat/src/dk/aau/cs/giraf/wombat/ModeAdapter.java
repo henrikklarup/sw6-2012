@@ -9,16 +9,14 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import dk.aau.cs.giraf.TimerLib.Child;
-import dk.aau.cs.giraf.TimerLib.Guardian;
+import dk.aau.cs.giraf.TimerLib.formFactor;
 
-public class ChildAdapter extends ArrayAdapter<Child> {
+public class ModeAdapter extends ArrayAdapter<formFactor> {
 
-	private ArrayList<Child> items;
-	Guardian guard = Guardian.getInstance();
+	private ArrayList<formFactor> items;
 
-	public ChildAdapter(Context context, int textViewResourceId,
-			ArrayList<Child> items) {
+	public ModeAdapter(Context context, int textViewResourceId,
+			ArrayList<formFactor> items) {
 		super(context, textViewResourceId, items);
 		this.items = items;
 	}
@@ -31,8 +29,8 @@ public class ChildAdapter extends ArrayAdapter<Child> {
 					Context.LAYOUT_INFLATER_SERVICE);
 			v = li.inflate(R.layout.profile_list, null);
 		}
-		// FIXME: Insert pictures from admin here
-		Child c = items.get(position);
+		// TODO: Pictures
+		formFactor c = items.get(position);
 		if (c != null) {
 			ImageView iv = (ImageView) v.findViewById(R.id.profilePic);
 			TextView tv = (TextView) v.findViewById(R.id.profileName);
@@ -41,21 +39,22 @@ public class ChildAdapter extends ArrayAdapter<Child> {
 				iv.setImageResource(R.drawable.default_profile);
 			}
 			if (tv != null) {
-				if (c.name == "Last Used") {
-					tv.setText(R.string.last_used);
-				} else if (c.name == "Predefined Profiles") {
-					tv.setText(R.string.predefined);
-				} else {
-					tv.setText(c.name);
+				if (c == formFactor.Timer) {
+					tv.setText(R.string.formfactor_timer);
+				} else if (c == formFactor.SingleImg) {
+					tv.setText(R.string.formfactor_singleimg);
+				} else if (c == formFactor.SplitImg) {
+					tv.setText(R.string.formfactor_splitimg);
 				}
 			}
 
 		}
 		
-			if(c.getProfileId() == guard.profileID){
-				v.setBackgroundResource(R.drawable.list_selected);
-				guard.profileFirstClick = true;
-			}
+//			if(c.getProfileId() == Guardian.profileID){
+//				v.setBackgroundResource(R.drawable.list_selected);
+//				Guardian.profileFirstClick = true;
+//				Guardian.profileID = -1;
+//			}
 		return v;
 	}
 }
