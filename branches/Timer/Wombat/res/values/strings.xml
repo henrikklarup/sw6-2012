@@ -19,7 +19,7 @@
     <string name="profile_list_time">Tid</string>
     <string name="formfactor_timer">Timer</string>
     <string name="formfactor_singleimg">Enkelt pictogram</string>
-    <string name="formfactor_splitimg">Split pictogram</string>
+    <string name="formfactor_splitimg">Dobbelt pictogram</string>
     
     <!-- TEMPLATE LIST -->
     <string name="template_list_header">Gemte Tilpasninger</string>
