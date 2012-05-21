@@ -3,13 +3,13 @@
 
     <string name="hello">Hello World, PARROTActivity!</string>
     <string name="app_name">PARROT</string>
-    <string name="firstTab">Speech Board</string>
+    <string name="firstTab">Tale</string>
     <string name="secondTab">Administrer</string>
 	<color name="cell_empty">#FF993311</color>
-	<string name="thirdTab">Options</string>
+	<string name="thirdTab">Indstillinger</string>
 	<string name="fourthTab">Kamera</string>
 	<string name="TakePictureButton">Tag Billed</string>
-	<string name="changecategorycolor">Ændring af baggrunds farve på kategorien</string>
+	<string name="changecategorycolor">Ændring af baggrunds farve på kategorilisten</string>
 	<string name="changesentencecolor">Ændring af baggrunds farve på sætningsbrættet</string>
 	
 	<!-- Old DigiPecs String Values.  -->
