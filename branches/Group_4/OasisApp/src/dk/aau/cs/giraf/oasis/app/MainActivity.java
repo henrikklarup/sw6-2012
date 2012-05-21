@@ -57,7 +57,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		bAllDepartments = (Button) findViewById(R.id.bAllDepartments);
 		bAllDepartments.setOnClickListener(this);
 		bAddDummyData = (Button) findViewById(R.id.bAddDummyData);
-		if (guardian != null) {
+		if (guardian == null) {
 			bAddDummyData.setOnClickListener(this);
 		} else {
 			bAddDummyData.setVisibility(View.GONE);
