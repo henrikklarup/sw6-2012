@@ -79,7 +79,7 @@ class HasDepartmentController {
 	 * @param hd department to insert
 	 * @return 0
 	 */
-	public long insertHasDepartment(HasDepartment hd) {
+	public int insertHasDepartment(HasDepartment hd) {
 		ContentValues cv = getContentValues(hd);
 		_context.getContentResolver().insert(HasDepartmentMetaData.CONTENT_URI, cv);
 
@@ -145,7 +145,7 @@ class HasDepartmentController {
 		List<HasDepartment> list= new ArrayList<HasDepartment>();
 
 		Cursor c = _context.getContentResolver().query(HasDepartmentMetaData.CONTENT_URI, columns, 
-				HasDepartmentMetaData.Table.COLUMN_IDPROFILE+ " = '" + profile.getId() + "'", null, null);
+				HasDepartmentMetaData.Table.COLUMN_IDPROFILE + " = '" + profile.getId() + "'", null, null);
 
 		if (c != null) {
 			list = cursorToHasDepartmentList(c);

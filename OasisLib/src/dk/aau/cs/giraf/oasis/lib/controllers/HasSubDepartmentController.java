@@ -76,7 +76,7 @@ class HasSubDepartmentController {
 	 * @param hsd Has sub department
 	 * @return 0
 	 */
-	public long insertHasSubDepartment(HasSubDepartment hsd) {
+	public int insertHasSubDepartment(HasSubDepartment hsd) {
 		ContentValues cv = getContentValues(hsd);
 		_context.getContentResolver().insert(HasSubDepartmentMetaData.CONTENT_URI, cv);
 

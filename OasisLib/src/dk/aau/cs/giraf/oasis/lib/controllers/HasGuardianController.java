@@ -85,7 +85,7 @@ class HasGuardianController {
 	 * @param hg Has guardian
 	 * @return 0
 	 */
-	public long insertHasGuardian(HasGuardian hg) {
+	public int insertHasGuardian(HasGuardian hg) {
 		ContentValues cv = getContentValues(hg);
 		_context.getContentResolver().insert(HasGuardianMetaData.CONTENT_URI, cv);
 

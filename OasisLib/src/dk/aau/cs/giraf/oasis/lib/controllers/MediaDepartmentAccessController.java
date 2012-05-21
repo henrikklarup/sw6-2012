@@ -87,7 +87,7 @@ class MediaDepartmentAccessController {
 	 * @param mda Media department access
 	 * @return 0
 	 */
-	public long insertMediaDepartmentAccess(MediaDepartmentAccess mda) {
+	public int insertMediaDepartmentAccess(MediaDepartmentAccess mda) {
 		ContentValues cv = getContentValues(mda);
 		_context.getContentResolver().insert(MediaDepartmentAccessMetaData.CONTENT_URI, cv);
 
