@@ -26,3 +26,10 @@ Notary: SW605
   * Usability test
 
   * Div.
+
+
+Referat:
+
+- Next sprint starter tirsdag d. 29
+- Usability gruppen står for at ordne devices til usa ility testen. Grupper bedes lægge APK filer til TAGS mappen.
+- Alle grupper skriver deres individuelle set up-guide til på onsdag.
