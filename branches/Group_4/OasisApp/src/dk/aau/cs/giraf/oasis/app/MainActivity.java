@@ -42,12 +42,14 @@ public class MainActivity extends Activity implements OnClickListener {
 
 		setContentView(R.layout.main);
 		
-		findViewById(R.id.UpperLayout).setBackgroundColor(color);
+		
 		
 		initializeViews();
 	}
 
 	private void initializeViews() {
+		findViewById(R.id.UpperLayout).setBackgroundColor(color);
+		
 		bMyProfile = (Button) findViewById(R.id.bMyProfile);
 		bMyProfile.setOnClickListener(this);
 		bAllProfiles = (Button) findViewById(R.id.bAllProfiles);
@@ -55,7 +57,11 @@ public class MainActivity extends Activity implements OnClickListener {
 		bAllDepartments = (Button) findViewById(R.id.bAllDepartments);
 		bAllDepartments.setOnClickListener(this);
 		bAddDummyData = (Button) findViewById(R.id.bAddDummyData);
-		bAddDummyData.setOnClickListener(this);
+		if (guardian != null) {
+			bAddDummyData.setOnClickListener(this);
+		} else {
+			bAddDummyData.setVisibility(View.GONE);
+		}
 	}
 
 	@Override
