@@ -38,10 +38,16 @@ public class ProfilesHelperTest extends ActivityInstrumentationTestCase2<MainAct
 		long idGuard = mActivity.helper.profilesHelper.insertProfile(newGuard);
 		newGuard.setId(idGuard);
 		mActivity.helper.profilesHelper.attachChildToGuardian(newChild, newGuard);
+		int result = mActivity.helper.profilesHelper.removeChildAttachmentToGuardian(newChild, newGuard);
+		
+		assertEquals("Should return 1", 1, result);
 	}
 	
 	public void testInsertProfile() {
+		Profile newProfile = new Profile("Test", "Profile", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
+		long id = mActivity.helper.profilesHelper.insertProfile(newProfile);
 		
+		assertNotSame("Should not be -1", -1, id);
 	}
 	
 	public void testAttachChildToGuardian() {
