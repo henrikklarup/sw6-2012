@@ -1,0 +1,83 @@
+\input{/home/martin/Documents/latex/preamble.tex} %Skal nok lige ændre den her preamble hvis filen skal bruges i et andet projekt;-)
+
+\title{Savannah how to}
+\begin{document}
+
+\maketitle
+This is a short guide for using the savannah server project, while savannah should run on any OS that supports java, this guide will assume 
+ubuntu server 11.04. Savannah has also been briefly tested on a windows machine, a few changes is required in the source code, more on this in the windows section.
+\part*{Dependencies}
+\label{depends}
+
+\b{JDOM 1.1.3} \newline
+\url{http://www.jdom.org/dist/binary/archive/jdom-1.1.3.tar.gz} \newline \\
+\b{Connector/J mysql JDBC driver} \newline
+\url{http://www.mysql.com/downloads/connector/j/}\newline \\
+\b{JUnit} (only needed if you downloaded the source and want to avoid compiler warnings from junit test cases in the project \newline
+\url{http://www.junit.org/} \newline \\
+\b{Tomcat 6} (can be installed from a terminal in ubuntu 12.04) \newline
+\url{http://tomcat.apache.org/} \newline
+
+
+\part*{Ubuntu server}
+the server needs java, mysql-server and tomcat installed, you can choose to install mysql and java during installation of the OS or install the packages afterwards.
+This can be done by entering the following commands in a terminal
+\begin{verbatim}
+sudo apt-get update
+sudo apt-get install mysql-server
+sudo apt-get install openjdk-6-jre
+\end{verbatim}
+
+You can choose a different version of java if you like, however we have tested with openJDK-6, it should work just fine with oracle java(6 or 7) or openJDK-7, no guarantees though.
+
+\part*{Installation of externals}
+It is easiest to install the external libraries(JDOM,JUnit and mysql JDBC) directly on the systems jvm, do this by copying all .jar files to 
+\begin{verbatim}
+ /usr/lib/jvm/java-6-openjdk/jre/lib/ext
+\end{verbatim}
+If you use a different version of java, replace ``java-6-openjdk'' with your version.\newline\newline
+
+if you are using ubuntu server 12.04, tomcat6 can be installed by typing 
+\begin{verbatim}
+ sudo apt-get install tomcat6
+\end{verbatim}
+in a terminal, if using any earlier version, like 11.04 you will need to download it manually from tomcats homepage, provided in the dependencies list.
+and follow the installation guide on their homepage.
+
+
+\part*{Source}
+You can check out the source code from our Google code repository, use your favorite svn tool(tortoise on windows, or svn checkout on most Linux distroes)
+\begin{verbatim}
+ https://sw6-2012.googlecode.com/svn/branches/Group_3_Server/savannah local_name
+\end{verbatim}
+
+\part*{configuration}
+Import the project into your favorite JAVA editor.
+Savannah is currently hardwired to connect to a specific database, you will need to navigate to 
+\begin{verbatim}
+ dk.aau.cs.giraf.savannah.server.QueryHandler.java
+\end{verbatim}
+and change line 12 to the IP of your host machine and provide user name(currently eder), password(currently 123456) and database name(currently /04).
+
+when done, export as a runnable jar and select
+\begin{verbatim}
+ ServerMain (dk.aau.cs.giraf.savannah/serverMain/ServerMain.java)
+\end{verbatim}
+as launch configuration.
+
+\part*{.jar}
+After exporting the jar, drop it somewhere on your server where your user has write access(~/server will do just fine)
+open a terminal, if you have not already, cd to the directory and type
+\begin{verbatim}
+ java -jar savannah.jar
+\end{verbatim}
+
+\part*{Windows}
+\label{windows}
+If you wish to run savannah on a windows server, you will need to navigate	 to 
+\begin{verbatim}
+ dk.aau.cs.giraf.savannah.io.Configuration.java
+\end{verbatim}
+and change line 23 and 28 to something a windows machine understands.
+
+\end{document}
