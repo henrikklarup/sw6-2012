@@ -14,7 +14,7 @@ Diagram ledger: (see \figref{fig:IOLedger})\newline
 The uppermost port is used to indicate input and the lowermost port is used to indicate output. The arrows indicate which way the information is forwarded in the system. Any arrows leading to and fro a component, and not from an input or output port, are to be executed first.	\newline
 \begin{figure}[H]
 	\centering
-		\includegraphics[scale=0.40]{images/ledger.eps}
+		\includegraphics[scale=0.40]{images/ledger.pdf} %FIXME epstopdf package fucker, har ændret noget her
 	\caption{Ledger for diagrams}
 	\label{fig:IOLedger}
 \end{figure}
@@ -26,8 +26,8 @@ The \code{CommunicationThread} will then use the \newline \code{TransmissionHand
 In this case the input is of the type ping, and it will just directly respond to the caller (connection).
 \begin{figure}[htbp]
 	\centering
-		\includegraphics[scale=0.30]{images/ping}
-	\caption{A diagram illustrating how a ping is processed.}
+          \includegraphics[scale=0.30]{images/ping.pdf}%FIXME epstopdf packager fucker, har ændret til at bruge de generede pdf filer direkte
+	\caption{A diagram illustrating how a ping is processed.} 
 	\label{fig:IOPing}
 \end{figure}
 

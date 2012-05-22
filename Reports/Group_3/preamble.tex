@@ -30,9 +30,28 @@
 \usepackage{slashbox}
 \usepackage{verbatim}
 \usepackage{float}
-\usepackage{epstopdf}
+
 \newfloat{Code}{H}{myc}
 \allowdisplaybreaks
+
+%EPS images snask
+\usepackage{epstopdf}
+\newif\ifpdf
+\ifx\pdfoutput\undefined
+   \pdffalse
+\else
+   \pdfoutput=1
+   \pdftrue
+\fi
+\ifpdf
+   \usepackage{graphicx}
+   \usepackage{epstopdf}
+   \DeclareGraphicsRule{.eps}{pdf}{.pdf}{`epstopdf #1}
+   \pdfcompresslevel=9
+\else
+   \usepackage{graphicx}
+\fi
+%eps image snask end
 
 %semantic udtryk
 \usepackage{turnstile}
