@@ -1,9 +1,10 @@
 \section{Authentication Activity}
 This section will explain the \activity{AuthenticationActivity}.
 
+
+This activity is the first one the user will face when using the \giraf[] system.
+
 \begin{lstlisting}[style=sourceCode, language=JAVA, caption=This is code, label=lst:authenticationAcitivity] 
-mGLoginButton.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
 				// If the authentication activity was not launched by the launcher...
 				if (!getIntent().hasCategory("dk.aau.cs.giraf.launcher.GIRAF")) {
 					Tools.attachLauncher(mContext); // should not be called
@@ -12,6 +13,4 @@ mGLoginButton.setOnClickListener(new View.OnClickListener() {
 				} else {
 					finish();
 				}
-			}
-		});
 \end{lstlisting}
