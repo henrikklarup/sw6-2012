@@ -1,0 +1,44 @@
+\section{Tab Navigation} %%Name of Feature.
+\subsection{Problem}
+With major features being either important or big enough to warrant having their own view, we needed to find a way to accommodate this.
+This is also an important way of avoiding clutter by having too many different features in one view.
+At the same time we also needed an easy way to isolate features for users who are not supposed to have access to them, as we do not wish for them to be aware of functions they cannot access.
+
+\subsection{Solution}
+The Action Bar with its Tab navigation mode turned out to be the perfect solution, it allowed us to create a Tab for each major feature in the parent view.
+Each major feature has its own fragment, and each fragment is tied to a view, clicking on the matching tab will prompt the attached fragment to display its view.\\
+The action Bar is initialized with the parent activity, as are the Tabs.
+This gives us control over what Tabs are going to be present when the application starts, so that a user will never know about the features he is not allowed to use.
+
+\subsection{Execution}
+Implementing an Action Bar first of all means including a Tab Listener.
+In this project we did so in a separate class file, using an existing Tab Listener from (Insert Book Reference here).
+Using the Tab listener you can instantiate an Action Bar as you can see in the following code example.
+
+\begin{verbatim}
+		ActionBar actionBar = getActionBar();
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS); 
+		actionBar.setDisplayShowTitleEnabled(false);
+		
+		Tab tab = actionBar.newTab() //Creating a new Tab
+				.setText(R.string.firstTab) //
+				.setTabListener(new TabListener<SpeechBoardFragment>(this,"speechboard",SpeechBoardFragment.class));
+		actionBar.addTab(tab); //add the tab to the action Bar
+\end{verbatim}
+In order of lines of code:\\
+Get the activities Action bar through reference.\\
+Establishing that the action bar is to be used for Tabs by setting its Navigation Mode.\\
+Something.\\
+Creating a New Tab.\\
+Setting the Text that should be seen on the Tab.\\
+Constructing a Tab listener so that when you click on this Tab or others, the system know what to do.\\
+Finally, Add the Tab to the Action Bar.\\
+
+\subsection{Result}
+The Application can successfully flip between several major features using tabs, as well as hide major features on startup if the user profile does not have permission to use them.
+
+\subsection{Notes:}
+Note that in our application, we use ``IF'' Statements to check if an User has the right to see a Tab.
+The Order of the Tabs should therefore match up with the order in the Rights Array.
+
+\subsection{Further Reading:}
