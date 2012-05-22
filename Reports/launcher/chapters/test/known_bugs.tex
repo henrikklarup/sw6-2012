@@ -1,1 +1,22 @@
 \section{Known Bugs}
+This section describes all bugs confirmed to exist in the product. 
+
+\subsection{Apps not updated}
+This bug is that the home screen is not automatically updated when a new app is added to a user. 
+To make the app appear, the launcher must either be restarted or the user must log in again. 
+This bug is not critical at this point, as it is not currently explicitly supported that a user can add new apps, though the bug can manifest itself in the following scenario.\newline
+For the scenario, the following conditions are true.
+
+\begin{itemize}
+	\item User X is logged in on device Y.
+	\item User X has app Z attached in the database. 
+	\item App Z is not installed on device Y.
+\end{itemize}
+
+The bug occurs when app Z is then installed on device Y, as app Z will not show in the home screen until steps have been taken to show it, as described before. 
+
+\subsection{Incorrect color data sent to apps}
+The launcher will currently send data about the color chosen for the app in the launcher to each app. 
+This data is however not changed immediatly when the user chooses a new color for the app, as the data is only brought up to date either when the launcher is restarted or a user logs in. 
+This is because the color data is only inserted into the database when the user changes a color, whereas the data held in memory by the launcher is not. 
+This bug is important to fix, as it creates inconcistency for the user, but the bug was not discovered until after implementation had finished. 
