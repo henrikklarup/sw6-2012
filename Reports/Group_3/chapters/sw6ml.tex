@@ -2,7 +2,91 @@
 In order to facilitate consistent data transfer between the global database and localDB, we have designed an XML language which mimics
 the schema of the database. We have chosen to use XML as it is a recognized standard, with a wide array of tools available, in particular JDOM\cite{www.jdom.org}.
 JDOM is a light weight implementation of SAX and the Data Object Model(DOM) for java, which allows seamless integration of XML, with support for XPath and XSLT.
+In \ref{sw6mlusage} a short usage documentation for sw6ml. sw6ml is defined with XML schema.
 
 \subsubsection{Language Design}
 
-The language 
+The sw6ml language consists of a number of primary elements which reflect the tables in the database, each of these elements accepts any number of ENTRY elements that tell
+the server what action is should do with the incomming data.
+in \autoref{code:sw6mlExample01} a short example of legit sw6ml syntax for adding a row to the AuthUsers table and deleting a row with the idUser attribute equal to 2 is shown.
+The \code{<AuthUsers>..content..</AuthUsers>} element identify the table on which we want to make changes, the following \code{<Entry>..content..</Entry>} elements
+define what row and what kind of action, through the \code{action="foo"} attribute, should be done on the row. 
+
+
+\begin{lstlisting}[label=code:sw6mlExample01,caption=Example of sw6ml syntax]
+ <AuthUsers>
+    <Entry action="create">
+      <certificate type="string">This is a certificate</certificate>
+      <idUser type="int">1</idUser>
+      <arole type="int">1</arole>
+      <username type="string">mette</username>
+      <password type="string">obfuscated</password>
+    </Entry>
+    <Entry action="delete">
+      <idUser type="int">2</idUser>
+    </Entry>
+  </AuthUsers>
+\end{lstlisting}
+The \code{action="foo"} attribute has four legal types corresponding to the CRUD profile actions, create, read, update, and delete, shown in \autoref{code:sw6mlCrud}.
+Contained in the  \code{<Entry action="crud_type`">..content..</Entry>} element is a series of 0 or more elements corresponding to the table schema of, in this case, the AuthUsers table.
+It takes zero or more of the attributes in a row, since not all attributes are needed for all actions, as an example delete only requires the unique identifier of the table and
+updates will only need the unique identifier and the field being updated.
+
+\begin{lstlisting}[label=code:sw6mlCrud,caption=sw6ml crud simple type]
+ <xs:simpleType name="crud">
+  <xs:restriction base="xs:string">
+    <xs:enumeration value="create"/>
+    <xs:enumeration value="read"/>
+    <xs:enumeration value="update"/>
+    <xs:enumeration value="delete"/>
+  </xs:restriction>
+</xs:simpleType>
+\end{lstlisting}
+
+\subsubsection{Documentation}
+\label{sw6mlusage}
+To use the current version of sw6ml and savannah together it is essential to know the elements required from the different crud types.
+while XML schema provides advanced features for dynamic languages, currently it is a simple language consisting of static types and sequences.
+this is however all that is needed, with a few assertions on the format server side.
+
+\ref{code:sw6mlformal} show the formal structure of a sw6ml document.
+\begin{lstlisting}[label=code:sw6mlformal,caption=root and table elements]
+<sw6ml> 
+  <table_element_1>
+    <Entry action="crud_type">
+      <table_element_1_attribute_1/>
+      ...
+      <table_element_1_attribute_n/>
+    </Entry>
+  </table_element_n>
+  ...
+  <table_element_n>
+    <Entry ...
+    .../Entry>
+  </table_element>
+</sw6ml>
+\end{lstlisting}
+
+following is a short description of the setup of each crud type.
+
+\begin{description}
+ \item[create] creates a new row in the database: All attributes from the database schema is required, if no value exists, use null. See \ref{code:sw6mlExample01} for an example.
+ \item[update] Updates a field in a row, Required in this order: Unique identifier of the row, Attribute to be updated. See \ref{code:sw6mlExample02} for an example.
+ \item[delete] Deletes a row in the able: Only the unique identier is required. See \ref{code:sw6mlExample01} for an example.
+ \item[read]   Read is only used in xml which is send back on a request to the server, and thus require no special formatting.
+\end{description}
+
+Notice the \code{<row_attribute type="bar">..</..>} xml attribute, legal types are \code{string} or \code{int}, if the data type of the row attribute is a string or any other type requiring apostrophes
+in a sql query, use \code{string}, for anything else use \code{int}
+
+\begin{lstlisting}[label=code:sw6mlExample02,caption="sw6ml Update syntax example]
+ <Entry action="update">
+   <unique_identifier type="bar">foo</unique_identifier>
+   <attribute_to_be_updated type="bar">newValue</attribute_to_be_updated>
+ </Entry>
+\end{lstlisting}
+
+
+
+
+
