@@ -116,6 +116,7 @@ public class ProfilesFrag extends ExpandableListFragment {
 					}
 				});
 				cbGuard = (CheckBox) view.findViewById(R.id.cbCreateProfileIsGuardian);
+				newProfile.setPRole(Profile.pRoles.CHILD.ordinal());
 				cbGuard.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 					@Override
