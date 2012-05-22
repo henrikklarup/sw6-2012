@@ -103,7 +103,7 @@ public class QueryBuilder {
 			return "UPDATE " + str[1] +" SET " + str[4] +"="+str[5]+" WHERE " + str[2] + "="+str[3]+";";
 		}
 		//This return should never be reachable, a JDOMException should occur if the xml document is not well formed.
-		return "";	
+		return "";	 //FIXME This is silly tbh...
 	}
 	
 	//Query builder for CRUD:Read

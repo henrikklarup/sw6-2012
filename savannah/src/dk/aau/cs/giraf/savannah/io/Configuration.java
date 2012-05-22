@@ -25,5 +25,5 @@ public final class Configuration {
 	/**
 	 * A constant that defines the path of the logfile for the Server.
 	 */
-	public static final String LOGFILEPATH	= "/home/anrdoid/server/savannah.log";
+	public static final String LOGFILEPATH	= "/home/android/server/savannah.log";
 }
