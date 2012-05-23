@@ -1,2 +1,18 @@
 %datadasedesign.tex
-TROLOLOLO
+The database is designed in MySQL 5.1.61, and resembles the local database created by the ``Admin-group'' very closely -- the only difference is, that the Savanah database has two extra fields in the ``AuthUsers'' table: username and password. The reason for this is, that while all apps running on the android platform uses QR-codes for user authentication, this is not a fitting choice for the webinterface; it would be more complicated to scan the QR-code form a webcam to login, than to simply use a username and password combination.
+
+\subsubsection*{Requirements}
+The requirements for the database has been provided by the app groups, and are as follows:
+
+\begin{itemize}
+	\item All users must be able to login with a QR-code
+	\item Each department must also be able to login
+	\item All users must be linked to at least one department
+	\item All guardians must be able to be linked to at least one child.
+	\item All users mu be able to have access all the apps
+	\item All users must be able to access their own pictures, and all public pictures
+	\item All departments must be able to access all public pictures
+	\item All pictures needs to be able to be linked to different tags
+	\item Pictures must be able to be linked with audio and vice versa
+	\item A department must be able to have a subdepartment
+\end{itemize}
