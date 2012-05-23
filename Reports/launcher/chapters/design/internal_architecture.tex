@@ -13,8 +13,6 @@ QR-codes are copyable, by e.g. a copymachine, and therefore must be kept away fr
 
 To sum up, QR-codes are chosen because of they improve usability, despite of their ability to be copied.\todo{Ulrik, er dette i orden?}
 
-
-
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=1\textwidth]{gfx/flow-diagram2.pdf}
@@ -38,12 +36,16 @@ To sum up, QR-codes are chosen because of they improve usability, despite of the
 	\label{fig:authentication_design}
 \end{figure}
 
+\autoref{fig:authentication_design} shows the states of the \activity{Authentication}. The simple ones is the start and stop states and they does just what they say. The interessting states is the ``Scan QR code'' state where when a user scans an QR code there is two path: One is that the QR code is invalid. The other one is if the QR code is valid then it leeds to another state where the activity checks the identity of the QR code scanned if it is not an known identity it is rejected else the \activity{Authentication} logs in the user and termintes.
+
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.7\textwidth]{gfx/appselection.pdf}
 	\caption{Features of the App selection functionality}
 	\label{fig:appselection_design}
 \end{figure}
+
+\autoref{fig:appselection_design} shows the states that the app selection can take. 
 
 \begin{figure}[h]
 	\centering
