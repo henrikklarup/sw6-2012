@@ -1,11 +1,11 @@
 \documentclass[12pt]{report}
+\usepackage{graphicx,epstopdf}
 \usepackage[absolute]{textpos}
 \usepackage[english]{babel}
 \usepackage[latin1]{inputenc}
 \usepackage{amsmath,amsfonts}
 \usepackage{natbib}
 \usepackage{fancyhdr}
-\usepackage{graphicx}
 \usepackage{wrapfig}
 \usepackage{float}
 \usepackage[Conny]{fncychap}
@@ -35,7 +35,8 @@
 \allowdisplaybreaks
 
 %EPS images snask
-\usepackage{epstopdf}
+
+%\usepackage{epstopdf}
 \newif\ifpdf
 \ifx\pdfoutput\undefined
    \pdffalse
@@ -52,6 +53,7 @@
    \usepackage{graphicx}
 \fi
 %eps image snask end
+\epstopdfsetup{suffix=}
 
 %semantic udtryk
 \usepackage{turnstile}
