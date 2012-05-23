@@ -11,7 +11,7 @@ public class CommitEventJUnit extends TestCase {
 	private File f;
 	public CommitEventJUnit(String name)
 	{
-		super(name);
+		super(name);  
 	}
 	
 	protected void setUp() throws Exception
