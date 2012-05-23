@@ -1,3 +1,11 @@
-\section{Architecture}.
-We build our Architecture primarily on our understanding of how the original system was meant to function.
-From there the system was simply developed organically, the architecture forming after the supply and demand for functionality as described in the previous section.
+\section{Architecture}
+Our System architecture -- shown in \autoref{fig:Giraf_comp_pic} has been designed with simplicity in mind and was greatly inspired by the MVC pattern. This means that the architecture are divided into three layers. The lowest layer is the database where the information is stored. Above this layer is the controller layer which, in the GIRAF platform, is known as Oasis. The controller is responsible for querying the database for information needed in an app and the controller is also responsible for storing information in the database. The last layer is the apps. This division of layers give the GIRAF platform a low cohesion which makes it easier to work with individual parts of the platform independently.
+
+We have chosen to redesign last year’s architecture to make it easier to work with. We have simplified the design because we feel it is unnecessarily complex.
+
+\begin{figure}
+	\centering
+		\includegraphics{images/Giraf_comp_pic.jpg}
+	\caption{The GIRAF architecture}
+	\label{fig:Giraf_comp_pic}
+\end{figure}
