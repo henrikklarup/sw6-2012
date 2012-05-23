@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: C:\Users\Jakob\Desktop\common_report\master.aux
+The style file: plain.bst
+Database file #1: input/bibtex/literature.bib
+Warning--entry type for "autism.about.com1" isn't style-file defined
+--line 8 of file input/bibtex/literature.bib
+Warning--entry type for "autism.about.com2" isn't style-file defined
+--line 16 of file input/bibtex/literature.bib
+Warning--entry type for "definitionOfAutism" isn't style-file defined
+--line 24 of file input/bibtex/literature.bib
+Warning--string name "?" is undefined
+--line 27 of file input/bibtex/literature.bib
+Warning--entry type for "autism.com" isn't style-file defined
+--line 32 of file input/bibtex/literature.bib
+Warning--entry type for "SW6Android2012" isn't style-file defined
+--line 40 of file input/bibtex/literature.bib
+Warning--entry type for "androidPhilosophy" isn't style-file defined
+--line 49 of file input/bibtex/literature.bib
+Warning--entry type for "androidCommunity" isn't style-file defined
+--line 57 of file input/bibtex/literature.bib
+Warning--entry type for "androidDevelopers" isn't style-file defined
+--line 65 of file input/bibtex/literature.bib
+Warning--entry type for "tablet" isn't style-file defined
+--line 73 of file input/bibtex/literature.bib
+Warning--entry type for "android32" isn't style-file defined
+--line 79 of file input/bibtex/literature.bib
+Warning--entry type for "XP" isn't style-file defined
+--line 87 of file input/bibtex/literature.bib
+Warning--entry type for "SCRUM" isn't style-file defined
+--line 94 of file input/bibtex/literature.bib
+Warning--entry type for "strategyanalytics" isn't style-file defined
+--line 101 of file input/bibtex/literature.bib
+Warning--entry type for "developApple" isn't style-file defined
+--line 108 of file input/bibtex/literature.bib
+Warning--entry type for "htcflyer" isn't style-file defined
+--line 115 of file input/bibtex/literature.bib
+I was expecting a `,' or a `}'---line 119 of file input/bibtex/literature.bib
+ : url = {http://www.htc.com/dk/tablets/htc-flyer/}
+ :                                                 http://www.samsung.com/dk/consumer/mobile/mobilephones/galaxy-tab
+I'm skipping whatever remains of this entry
+Warning--entry type for "galaxytabs" isn't style-file defined
+--line 122 of file input/bibtex/literature.bib
+Warning--entry type for "mediontablet" isn't style-file defined
+--line 129 of file input/bibtex/literature.bib
+Warning--I didn't find a database entry for "adminreport"
+Warning--empty year in studyreg
+(There was 1 error message)

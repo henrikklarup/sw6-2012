@@ -1,0 +1,65 @@
+	%	PREAMBLE	%
+\input{preamble}
+\raggedbottom
+
+%	INTRODUKTION OG START AF DOC	%
+\begin{document}
+	
+	%	TÆLLER I ROMERTAL TIL STARTEN - INKLUDERER STARTFILER	%
+	\frontmatter
+	
+	\input{input/formalities}
+	
+	%	INDHOLDSFORTEGNELSE 	%
+	\phantomsection	
+	\pdfbookmark[0]{Table of Contents}{Contents}
+	\setlength\parskip{0ex}
+	\tableofcontents*
+	\setlength{\parskip}{3mm}
+	
+	\newpage
+	%\listoffigures*
+	%\lstlistoflistings
+	
+	%	STARTER HOVEDTEKSTEN OG NORMAL NUMMERING	%
+	\mainmatter
+	
+	%	FIXME LISTEN	%
+	\newpage
+	\listoffixmes
+	
+	\part{Introduction}
+	\input{input/introduction}
+		
+	\part{Analysis}
+
+	\part{Design}
+
+	\part{Implementation}
+
+	\part{Epilogue}
+	
+	
+	%	LITTERATURLISTE 	%
+	\begingroup
+		\raggedright
+		\bibliography{input/bibtex/literature}
+	\endgroup
+	
+	
+	
+	 %APPENDIX	
+	 %Appendix
+	 \clearforchapter
+	 \part*{Appendix}
+	 \addcontentsline{toc}{part}{\numberline{}Appendix}
+	 \appendix
+	 \input{input/appendices.tex}
+	
+	
+%	\appendix
+%	\part{Appendix}
+%	\chapter{Appendix}
+%	\input{appendix/appendix}
+	
+\end{document}
