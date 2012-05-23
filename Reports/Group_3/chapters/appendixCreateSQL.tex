@@ -1,0 +1,277 @@
+%appendixCreateSQL.tex
+\begin{lstlisting}[language=SQL,breaklines=true, label=createAuthUsers, caption=Create AuthUsers, float]
+  CREATE  TABLE `04`.`AuthUsers` (
+
+  `certificate` VARCHAR(512) NOT NULL ,
+
+  `idUser` INT NOT NULL AUTO_INCREMENT ,
+  
+  `aRole` INT NOT NULL,
+    
+  `username` VARCHAR(45) UNIQUE NOT NULL,
+  
+  `password` VARCHAR(45) NOT NULL,
+
+  PRIMARY KEY (`certificate`) ,
+
+  UNIQUE INDEX `idUser_UNIQUE` (`idUser` ASC) );
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL,breaklines=true, label=createApps, caption=Create Apps]
+  
+  CREATE  TABLE `04`.`Apps` (
+
+  `idApp` INT NOT NULL AUTO_INCREMENT,
+
+  `name` VARCHAR(45) NOT NULL ,
+
+  `version` VARCHAR(45) NOT NULL ,
+  
+  `icon` VARCHAR(45) NOT NULL,
+  
+  `package` VARCHAR(45) NOT NULL,
+  
+  `activity` VARCHAR(45) NOT NULL,
+
+  PRIMARY KEY (`idApp`) );
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL,breaklines=true, label=createTags, caption=Create Tags]
+CREATE  TABLE `04`.`Tags` (
+
+  `idTags` INT NOT NULL AUTO_INCREMENT,
+
+  `caption` VARCHAR(45) NOT NULL ,
+
+  PRIMARY KEY (`idTags`) ,
+
+  UNIQUE INDEX `caption_UNIQUE` (`caption` ASC) );
+
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL,breaklines=true, label=createProfile, caption=Create Profile]
+CREATE  TABLE `04`.`Profile` (
+
+  `idProfile` INT NOT NULL ,
+
+  `firstname` VARCHAR(45) NOT NULL ,
+
+  `surname` VARCHAR(45) NOT NULL ,
+
+  `middlename` VARCHAR(45) NULL ,
+
+  `pRole` INT NOT NULL ,
+
+  `phone` BIGINT NOT NULL ,
+
+  `picture` VARCHAR(45) NULL ,
+
+  `settings` BLOB NULL ,
+  
+  FOREIGN KEY (`idProfile` )
+
+  REFERENCES `04`.`AuthUsers` (`idUser` ) on delete cascade,
+
+  PRIMARY KEY (`idProfile`) );
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL,breaklines=true, label=createListOfApps, caption=Create ListOfApps]
+CREATE  TABLE `04`.`ListOfApps` (
+
+  `idApp` INT NOT NULL ,
+
+  `idProfile` INT NOT NULL ,
+  
+  `setting` BLOB,
+  
+  `stats` BLOB,
+  
+  FOREIGN KEY (`idApp` )
+
+  REFERENCES `04`.`Apps` (`idApp` ),
+  
+  FOREIGN KEY (`idProfile` )
+
+  REFERENCES `04`.`Profile` (`idProfile` ) ON DELETE CASCADE,
+
+  PRIMARY KEY (`idApp`,`idProfile`) );
+
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL,breaklines=true, label=createDepartment, caption=Create Department]
+CREATE  TABLE `04`.`Department` (
+
+  `idDepartment` INT NOT NULL ,
+
+  `name` VARCHAR(45) NOT NULL ,
+
+  `address` VARCHAR(45) NOT NULL ,
+
+  `phone` BIGINT NOT NULL ,
+
+  `email` VARCHAR(45) NOT NULL ,
+  
+  FOREIGN KEY (`idDepartment` )
+
+  REFERENCES `04`.`AuthUsers` (`idUser` ),
+
+  PRIMARY KEY (`idDepartment`) );
+
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL,breaklines=true, label=createHasDepartment, caption=Create HasDepartment]
+CREATE  TABLE `04`.`HasDepartment` (
+
+  `idProfile` INT NOT NULL ,
+
+  `idDepartment` INT NOT NULL ,
+  
+  FOREIGN KEY (`idProfile` )
+
+  REFERENCES `04`.`Profile` (`idProfile` ) ON DELETE CASCADE,
+
+  FOREIGN KEY (`idDepartment` )
+
+  REFERENCES `04`.`Department` (`idDepartment` ),
+
+
+  PRIMARY KEY (`idProfile`, `idDepartment`) );
+
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL,breaklines=true, label=createHasGuardian, caption=Create HasGuardian]
+CREATE  TABLE `04`.`HasGuardian` (
+
+  `idGuardian` INT NOT NULL ,
+
+  `idChild` INT NOT NULL ,
+  
+  FOREIGN KEY (`idGuardian` )
+
+  REFERENCES `04`.`Profile` (`idProfile` ) on delete cascade,
+  
+  FOREIGN KEY (`idChild` )
+
+  REFERENCES `04`.`Profile` (`idProfile` ) on delete cascade,
+
+  PRIMARY KEY (`idGuardian`,`idChild`) );
+
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL,breaklines=true, label=createHasSubDepartment, caption=Create HasSubDepartment]
+CREATE  TABLE `04`.`HasSubDepartment` (
+
+  `idDepartment` INT NOT NULL ,
+
+  `idSubDepartment` INT NOT NULL ,
+  
+  FOREIGN KEY (`idDepartment` )
+
+  REFERENCES `04`.`Department` (`idDepartment` ),
+  
+  FOREIGN KEY (`idSubDepartment` )
+
+  REFERENCES `04`.`Department` (`idDepartment` ),
+
+  PRIMARY KEY (`idDepartment`, `idSubDepartment`) );
+
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL,breaklines=true, label=createMedia, caption=Create Media]
+CREATE  TABLE `04`.`Media` (
+
+  `idMedia` INT NOT NULL AUTO_INCREMENT,
+
+  `mPath` VARCHAR(45) NOT NULL ,
+
+  `name` VARCHAR(45) NOT NULL ,
+
+  `mPublic` TINYINT NOT NULL ,
+
+  `mType` VARCHAR(45) NOT NULL ,
+
+  `ownerID` INT NOT NULL ,
+  
+  FOREIGN KEY (`OwnerID` )
+
+  REFERENCES `04`.`AuthUsers` (`idUser` )  ON DELETE CASCADE,
+
+  PRIMARY KEY (`idMedia`) );
+
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL,breaklines=true, label=createHasTag, caption=Create HasTag]
+CREATE  TABLE `04`.`HasTag` (
+
+  `idMedia` INT NOT NULL ,
+
+  `idTag` INT NOT NULL ,
+  
+  FOREIGN KEY (`idMedia` )
+
+  REFERENCES `04`.`Media` (`idMedia` ) on delete cascade,
+  
+  FOREIGN KEY (`idTag` )
+
+  REFERENCES `04`.`Tags` (`idTags` ),
+
+  PRIMARY KEY (`idMedia`, `idTag`) );
+
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL,breaklines=true, label=createHasLink, caption=Create HasLink]
+CREATE  TABLE `04`.`HasLink` (
+
+  `idMedia` INT NOT NULL ,
+
+  `idSubMedia` INT NOT NULL ,
+  
+  FOREIGN KEY (`idMedia` )
+
+  REFERENCES `04`.`Media` (`idMedia` ) on delete cascade,
+  
+  FOREIGN KEY (`idSubMedia` )
+
+  REFERENCES `04`.`Media` (`idMedia` ) on delete cascade,
+
+  PRIMARY KEY (`idMedia`, `idSubMedia`) );
+
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL,breaklines=true, label=createMediaProfileAccess, caption=Create MediaProfileAccess]
+CREATE  TABLE `04`.`MediaProfileAccess` (
+
+  `idProfile` INT NOT NULL ,
+
+  `idMedia` INT NOT NULL ,
+  
+  FOREIGN KEY (`idProfile` )
+
+  REFERENCES `04`.`Profile` (`idProfile` ) ON DELETE CASCADE,
+  
+  FOREIGN KEY (`idMedia` )
+
+  REFERENCES `04`.`Media` (`idMedia` ) ON DELETE CASCADE,
+
+  PRIMARY KEY (`idProfile`, `idMedia`) );
+
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL,breaklines=true, label=createMediaDepartmentAccess, caption=Create MediaDepartmentAccess]
+CREATE  TABLE `04`.`MediaDepartmentAccess` (
+
+  `idDepartment` INT NOT NULL ,
+
+  `idMedia` INT NOT NULL ,
+  
+  FOREIGN KEY (`idDepartment` )
+
+  REFERENCES `04`.`Department` (`idDepartment` ),
+  
+  FOREIGN KEY (`idMedia` )
+
+  REFERENCES `04`.`Media` (`idMedia` ),
+
+  PRIMARY KEY (`idDepartment`, `idMedia`) );
+
+\end{lstlisting}

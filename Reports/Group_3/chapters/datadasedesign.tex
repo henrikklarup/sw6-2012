@@ -31,6 +31,7 @@ A database diagram has been made to get a overview of the different tables and t
 Although the diagram in \autoref{fig:DiaDesign} does not meet the standard of database diagrams, it does provide a good view of the different tables, and the relations: Foreign keys points to where the value is fetched form. This crude diagram shows that be having the ``idUser'' from the ``AuthUsers'' one is able to access all other information for that specific user.
 
 \subsubsection*{Rules}
+\label{databaseRules}
 To provide the security needed in the system, a few rules need to apply for the databse:
 \begin{itemize}
 	\item The ``Profile''$\rightarrow$''AuthUsers'' relation must be one-to-one, as one user form the ``AuthUsers'' can only have one profile in the system
