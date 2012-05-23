@@ -12,6 +12,7 @@ public class ProfilesHelperTest extends ActivityInstrumentationTestCase2<MainAct
 
 	private MainActivity mActivity;
 
+
 	public ProfilesHelperTest() {
 		super("dk.aau.cs.giraf.oasis.app", MainActivity.class);
 	}
@@ -90,12 +91,9 @@ public class ProfilesHelperTest extends ActivityInstrumentationTestCase2<MainAct
 		Profile expectedProfile = new Profile("Test", "Profile", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
 
 		long id = mActivity.helper.profilesHelper.insertProfile(expectedProfile);
-		if (id != -1) {
-			expectedProfile.setId(id);
-			mActivity.helper.profilesHelper.setCertificate(certificate, expectedProfile);
-		} else {
-			// FOO
-		}
+		expectedProfile.setId(id);
+		
+		mActivity.helper.profilesHelper.setCertificate(certificate, expectedProfile);
 
 
 		Profile actualProfile = mActivity.helper.profilesHelper.authenticateProfile(certificate);
@@ -152,7 +150,7 @@ public class ProfilesHelperTest extends ActivityInstrumentationTestCase2<MainAct
 		long id = mActivity.helper.departmentsHelper.insertDepartment(newDepartment);
 		newDepartment.setId(id);
 		List<Profile> list = mActivity.helper.profilesHelper.getChildrenByDepartment(newDepartment);
-		
+
 		assertNotNull("Should not be empty", list);
 	}
 
@@ -161,7 +159,7 @@ public class ProfilesHelperTest extends ActivityInstrumentationTestCase2<MainAct
 		long id = mActivity.helper.departmentsHelper.insertDepartment(newDepartment);
 		newDepartment.setId(id);
 		List<Profile> list = mActivity.helper.profilesHelper.getChildrenByDepartmentAndSubDepartments(newDepartment);
-		
+
 		assertNotNull("Should not be empty", list);
 	}
 
@@ -185,13 +183,13 @@ public class ProfilesHelperTest extends ActivityInstrumentationTestCase2<MainAct
 		long id = mActivity.helper.departmentsHelper.insertDepartment(newDepartment);
 		newDepartment.setId(id);
 		List<Profile> list = mActivity.helper.profilesHelper.getProfilesByDepartment(newDepartment);
-		
+
 		assertNotNull("Should not be empty", list);
 	}
 
 	public void testGetGuardiansWithNoDepartment() {
 		List<Profile> list = mActivity.helper.profilesHelper.getGuardiansWithNoDepartment();
-		
+
 		assertNotNull("Should not be empty", list);
 	}
 
@@ -200,7 +198,7 @@ public class ProfilesHelperTest extends ActivityInstrumentationTestCase2<MainAct
 		long id = mActivity.helper.departmentsHelper.insertDepartment(newDepartment);
 		newDepartment.setId(id);
 		List<Profile> list = mActivity.helper.profilesHelper.getGuardiansByDepartment(newDepartment);
-		
+
 		assertNotNull("Should not be empty", list);
 	}
 
@@ -225,7 +223,7 @@ public class ProfilesHelperTest extends ActivityInstrumentationTestCase2<MainAct
 	public void testGetProfilesByName() {
 		String name = "Test";
 		List<Profile> list = mActivity.helper.profilesHelper.getProfilesByName(name);
-		
+
 		assertNotNull("Should not be empty", list);
 	}
 }
