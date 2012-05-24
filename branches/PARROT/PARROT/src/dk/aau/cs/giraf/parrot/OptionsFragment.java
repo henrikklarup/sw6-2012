@@ -72,10 +72,6 @@ public class OptionsFragment extends Fragment
 						PARROTProfile user = PARROTActivity.getUser();
 						user.setCategoryColor(color);
 						PARROTActivity.setUser(user);
-//						parrent.setContentView(R.layout.speechboard_layout);
-//						SpeechBoardFragment.setColours(parrent);
-//						parrent.setContentView(R.layout.options_layout);
-
 					}
 				});
 				dialog.show();
@@ -94,10 +90,6 @@ public class OptionsFragment extends Fragment
 						PARROTProfile user = PARROTActivity.getUser();
 						user.setSentenceBoardColor(color);
 						PARROTActivity.setUser(user);
-//						parrent.setContentView(R.layout.speechboard_layout);
-//						SpeechBoardFragment.setColours(parrent);
-//						parrent.setContentView(R.layout.options_layout);
-
 					}
 				});
 				dialog.show();
