@@ -9,7 +9,7 @@ They have shown they use an Android library project called AmbilWarna in their o
 \subsection{Execution}
 The use of the AmbilWarna dialog is best seen in the optionsfragment, more precisely when the \textbf{Change Category Colour} button is clicked.
 
-\begin{\begin{verbatim}{}
+\begin{verbatim}{}
 		ccc.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				AmbilWarnaDialog dialog = new AmbilWarnaDialog(getActivity(),
@@ -28,8 +28,18 @@ The use of the AmbilWarna dialog is best seen in the optionsfragment, more preci
 		});
 \end{verbatim}
 
+As seen in the code, if the button is clicked, a new AmbilWarna dialog will pop up. The default selected colour of the dialog will be 
+\begin{verbatim}{}
+PARROTActivity.getUser().getCategoryColor()
+\end{verbatim}, which corresponds to the colour that the category list already has for the current user.\newline
+If the \textbf{Ok} button is pressed on the AmbilWarna dialog, the colour of the category list will be set to the colour that the user picked in the dialog.
+
 \subsection{Result}
+PARROT gives the user the ability to change the colour of different items.\newline
 
 \subsection{Notes:}
+Currently, the AmbilWarna dialog is used in the Options fragment %tab/fragment?
+to change the colour of some of the items in the Speechboard fragment. It is also used in the Management fragment to change the colour of the categories asociated with a user.\newline
+Note that changing the colour of items is only a proof of concept. In the final version of PARROT, the guardians will have the ability to tailor the user interface for the needs of each individual child.\newline
 
 \subsection{Further Reading:}
