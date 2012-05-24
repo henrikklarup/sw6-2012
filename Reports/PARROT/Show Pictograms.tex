@@ -7,11 +7,11 @@ Areas where we will be displaying pictograms are the Talk board and the Manageme
 
 \subsection{Solution}
 Using Grid-view we can display both the pictograms and its text.
-Rather than having the Grid-View display pictograms, we can display a Linear-Layout containing an Image-View and a Text-View.
-The Image-View contains the Pictogram and the Text-View contains the Text.
+Rather than having the Grid-View display pictograms, we can display a Linear-Layout called ``PictogramView''.
+This layout contains an Image-View with a pictogram and a Text-View with the associated text.
 In that way we are able to show images with text, without having to imprint the text into the image.\\
 
-In order to prepare the pictograms for display we have to convert them to bitmaps, which is done by creating a custom made adapter. 
+In order to prepare the pictograms for display, we have to convert them to bitmaps before our Pictogram Adapter class can convert them into views.
 
 \subsection{Execution}
 
