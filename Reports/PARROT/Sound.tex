@@ -43,7 +43,12 @@ The Pictogram class handles the data, and starts up the AudioPlayer wheneven it 
 	}
 \end{verbatim}
 
-For instance, suppose we want to play the word of a pictogram (The word is a sound file with the pronounciation of the pictogram). The first thing we do is call the \textbf{playWord} method form the Pictogram in question. This method cheks if the pictogram has a word, and if the path of that word corresponds to an existing sound file. If this is correct, it will call the \textbf{playItem} with its path as the input. The playItem then starts a new thread in which it makes the AudioPlayer play the corresponding sound. The reason for starting a new thread is that the user interface would become unresponsive while the sound was playing otherwise.\newline
+For instance, suppose we want to play the word of a pictogram (The word is a sound file with the pronounciation of the pictogram). 
+The first thing we do is call the \textbf{playWord} method form the Pictogram in question. 
+This method cheks if the pictogram has a word, and if the path of that word corresponds to an existing sound file. 
+If this is correct, it will call the \textbf{playItem} with its path as the input. 
+The playItem then starts a new thread in which it makes the AudioPlayer play the corresponding sound. 
+The reason for starting a new thread is that the user interface would become unresponsive while the sound was playing otherwise.\newline
 The actual functionality that plays the sound is found the AudioPlayer class, more specifically the static \textbf{play} method.\newline
 
 \begin{\begin{verbatim}{}
