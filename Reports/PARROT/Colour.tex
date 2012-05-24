@@ -7,6 +7,26 @@ To this problem, the solution is fairly simple. As the WOMBAT group have already
 They have shown they use an Android library project called AmbilWarna in their own project, which has been a great help to implementing it ourselves. The AmbilWarna library provides the application with a dialog box that allows the user to pick a colour as an input to the system.
 
 \subsection{Execution}
+The use of the AmbilWarna dialog is best seen in the optionsfragment, more precisely when the \textbf{Change Category Colour} button is clicked.
+
+\begin{\begin{verbatim}{}
+		ccc.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				AmbilWarnaDialog dialog = new AmbilWarnaDialog(getActivity(),
+						PARROTActivity.getUser().getCategoryColor(), new OnAmbilWarnaListener() {
+					public void onCancel(AmbilWarnaDialog dialog) {
+					}
+
+					public void onOk(AmbilWarnaDialog dialog, int color) {
+						PARROTProfile user = PARROTActivity.getUser();
+						user.setCategoryColor(color);
+						PARROTActivity.setUser(user);
+					}
+				});
+				dialog.show();
+			}
+		});
+\end{verbatim}
 
 \subsection{Result}
 
