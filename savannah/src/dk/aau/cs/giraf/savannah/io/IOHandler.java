@@ -307,7 +307,7 @@ public class IOHandler implements Runnable {
 				if (cr.getValue() == -1) {
 					throw new IllegalArgumentException("cr: Cannot be less than zero !");
 				}	else if (cr == CRUD.ERROR) {
-					throw new IllegalArgumentException("cr: Cannot is set CRUD.ERROR !");
+					throw new IllegalArgumentException("cr: Cannot is be set CRUD.ERROR !");
 				}
 			}
 			if (builder == null) {
