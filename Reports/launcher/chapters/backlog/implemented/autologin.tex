@@ -1,0 +1,8 @@
+\subsection{Autologin}
+\label{autologin}
+
+The autologin feature enables guardians to start the launcher without authentication, if authentication was performed within the last eight hours. This is to allow guardians to easily switch between different Android launchers, without having to re-authenticate every time the GIRAF launcher is accessed. Although not an highly important feature, this feature improved the development speed in such a degree that it simply was worth spending the time implementing it.
+
+One could argue that this feature introduces a security issue, as an attacker, if able to physically get a locked device, running the GIRAF launcher in an authenticated session, could simply reboot the device in order to get full access.
+
+We deem that this is not critical, since a simple workaround is to always logout whenever the device is placed in an location where unauthorized users might get a hold of it.
