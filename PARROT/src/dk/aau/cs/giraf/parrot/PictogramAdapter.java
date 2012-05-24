@@ -50,23 +50,23 @@ public class PictogramAdapter extends BaseAdapter {
 		TextView textView;
 		Pictogram pct=cat.getPictogramAtIndex(position);
 
-			LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			view = layoutInflater.inflate(R.layout.pictogramview, null);
+		LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		view = layoutInflater.inflate(R.layout.pictogramview, null);
 
-			imageView = (ImageView) view.findViewById(R.id.pictogrambitmap); 
-			imageView.setImageBitmap(pct.getBitmap());
+		imageView = (ImageView) view.findViewById(R.id.pictogrambitmap); 
+		imageView.setImageBitmap(pct.getBitmap());
 
-			textView = (TextView) view.findViewById(R.id.pictogramtext);
-			textView.setTextSize(20);	//TODO this value should be customizable
-			if(pct.isEmpty() == false)
-			{
+		textView = (TextView) view.findViewById(R.id.pictogramtext);
+		textView.setTextSize(20);	//TODO this value should be customizable
+		if(pct.isEmpty() == false)
+		{
 
-				textView.setText(pct.getName());
-			}
-			else
-			{
-				textView.setText("");
-			}
+			textView.setText(pct.getName());
+		}
+		else
+		{
+			textView.setText("");
+		}
 
 		view.setPadding(8, 8, 8, 8);
 		return view;
