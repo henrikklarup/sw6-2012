@@ -1,0 +1,50 @@
+\section{} Drag And Drop
+\subsection{Problem:}
+We want to be able to drag pictograms from one view onto another. 
+For example we want to drag pictograms from a category Onto the sentence board. 
+
+
+\subsection{Solution:}
+We do this by creating listeners to attach to the views we want to drag from or to. 
+These listeners then stores information and listens for different actions, which include DRAG_STARTED and DROP which helps us define different behavior.
+Drag and drop is simply but a 3 step process.
+Firstly we need to figure which object is dragged along with whatever information is needed. 
+Secondly we need to show the dragged object.
+Thirdly we need to handle when the object are dragged and dropped into a view.
+
+\subsection{Execution:}
+So far PARROT have 2 tabs which include drag and drop. To optimize the code we have created a listener for each of these tabs.
+The tabs holds a few information’s that the listeners utilize. These include the index of the dragged object, and the ID of the view which held the dragged object. The index is used to get all information attached to a given object, while the ID is used to indicate what action are to be performed.\\
+An example on that can be seen in codesnippet REFFER TO CODESNIPPET that show the variables from SpeechBoardFragment.java.
+These are first initialized to -1 to make sure no mistakes are made.
+
+%%get code from SpeechBoardFragment.java lines 31-31 
+
+In the tabs we also select what views should handle drag and drop.
+The listeners run for all views for the tab simultaneous. When a object is dropped, all of the handled views will notice the DROP action. Therefor we have a boolean that handles if the object being dropped is inside a specific view. 
+If the object leave the view this is set to false, and if it enters it is set to true, which can be seen in codesnippet REFFER TO CODE HERE. 
+Only if this boolean is set to true do we actually do anything. This secures that an action is only performed once and in the right view. 
+
+%%get  code from BoxDragListener.java lines 46-49
+
+When a object is dropped into a view we list a number of possibilities. 
+In each of these possibilities we check what view we are dropping an object into and where it is from. What view we drop the object into is handled through the value "self", where the self value are the view that are currently being handled. 
+What view the object is from is gathered from the tab via the former mentioned information. 
+With these two information we know where the object is from, and where it has been dropped, and therefor we know what action to perform. 
+These actions vary and some will be described in other sections. REFFER TO THOSE OTHER FUNCTION SECTIONS 
+After an action has been performed, relevant information is reset.
+
+\subsection{Result:}
+With this method we are able to drag and drop from and to any view we want. 
+We are also capable of defining what actions are to be performed in each case of and drag and drop, which means we can be rather flexible in what functionality we want to add to specific actions. 
+The downside is that the drag and drop classes will be less reusable in others code. 
+They need a direct connection with the tab they are linked to.
+
+
+\subsection{Notes:}
+Much functionality lies in the listeners, which we haven’t described here. Mostly because any functionality that is activated by drag and drop are coded into the listeners in some kind of fashion. If one is reading the class file it is recommended to look at some of the other functionality listed in Further Reading.
+
+
+\subsection{Further Reading:}
+We have used the book Android In Practice REFFER TO BOOK HERE. Good guide on how drag and drop functions.
+ADD ALL FUNCTIONALITY THAT IS IN THE TWO DND CLASSES
