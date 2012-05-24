@@ -54,9 +54,6 @@ public class PictogramAdapter extends BaseAdapter {
 			view = layoutInflater.inflate(R.layout.pictogramview, null);
 
 			imageView = (ImageView) view.findViewById(R.id.pictogrambitmap); 
-			//            imageView.setLayoutParams(new GridView.LayoutParams(145, 145));
-			//            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-			//            imageView.setPadding(8, 8, 8, 8);
 			imageView.setImageBitmap(pct.getBitmap());
 
 			textView = (TextView) view.findViewById(R.id.pictogramtext);
