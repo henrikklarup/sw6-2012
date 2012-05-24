@@ -286,7 +286,7 @@ public class IOHandler implements Runnable {
 					randomBytes = 12;
 				}
 			}	else {
-				randomBytes = 12;
+				randomBytes = 4096;
 			}
 
 			builder.append("PING[" + this.pingLength(randomBytes) + "]=\"");

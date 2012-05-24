@@ -86,6 +86,7 @@ public class TransmissionHandler {
 		}
 		this.deconstruct(new DataInputStream(socket.getInputStream()));
 	}
+
 	private final boolean makeFolder(String folderPath) {
 		File dir = new File(folderPath);
 		boolean success = false;
