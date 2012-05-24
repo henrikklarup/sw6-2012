@@ -1,0 +1,5 @@
+As seen in the test results, we almost got all expected results. During our testing we found that it is quite important to set the tables' aql mode to strict with the command 
+"mysql>SET sql_mode = 'STRICT_ALL_TABLES';", if this is not done, when inserting a too large string, the system will simple chrop the string, instead of giving a fault.
+Furthermore we found that it is possible to inerset a integer value into a string field. the integer is simply changed to the string value. This we not as we expected.
+
+We conclude that the database acts almost as expected. We do however need to do the checking of putting an integer into a string on software level.
