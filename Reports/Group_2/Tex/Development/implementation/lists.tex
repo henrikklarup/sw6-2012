@@ -21,33 +21,33 @@ This is done by making an adapter with the layout that the items of the list is 
 
 \begin{figure}[H]
 	\centering
-		\begin{verbatim}
-		View v = list_item_view;
-				if (v == null) {
-					LayoutInflater li = (LayoutInflater) getContext().getSystemService(
-							Context.LAYOUT_INFLATER_SERVICE);
-					v = li.inflate(R.layout.profile_list, null);
-				}
-				// FIXME: Insert pictures from admin here
-				Child c = items.get(position);
-				if (c != null) {
-					ImageView iv = (ImageView) v.findViewById(R.id.profilePic);
-					TextView tv = (TextView) v.findViewById(R.id.profileName);
+	\begin{lstlisting}
+View v = list_item_view;
+	if (v == null) {
+		LayoutInflater li = (LayoutInflater) getContext().getSystemService(
+				Context.LAYOUT_INFLATER_SERVICE);
+		v = li.inflate(R.layout.profile_list, null);
+	}
+	// FIXME: Insert pictures from admin here
+	Child c = items.get(position);
+	if (c != null) {
+		ImageView iv = (ImageView) v.findViewById(R.id.profilePic);
+		TextView tv = (TextView) v.findViewById(R.id.profileName);
 
-					if (iv != null) {
-						iv.setImageResource(R.drawable.default_profile);
-					}
-					if (tv != null) {
-						if (c.name == "Last Used") {
-							tv.setText(R.string.last_used);
-						} else if (c.name == "Predefined Profiles") {
-							tv.setText(R.string.predefined);
-						} else {
-							tv.setText(c.name);
-						}
-					}
-				}
-		\end{verbatim}
+		if (iv != null) {
+			iv.setImageResource(R.drawable.default_profile);
+		}
+		if (tv != null) {
+			if (c.name == "Last Used") {
+				tv.setText(R.string.last_used);
+			} else if (c.name == "Predefined Profiles") {
+				tv.setText(R.string.predefined);
+			} else {
+				tv.setText(c.name);
+			}
+		}
+	}
+\end{lstlisting}
 	\caption{Example of an adapter to a list view, the actual adapter used in the children list}%
 	\label{code:listview_adapter_example}%
 \end{figure}
@@ -70,7 +70,7 @@ Which means that the configurations list only requires another layout to be cons
 The on click listeners of both lists, ensures that the next fragments and Guardian object, described in \ref{??}\color[rgb]{1,0.41,0.13} REF MANGLER \color[rgb]{0,0,0}, is updated figure \ref{code:listview_onclick_example} is an example of the child fragment listview.
 
 \begin{figure}[H]%
-		\begin{verbatim}
+		\begin{lstlisting}
 			public void onListItemClick(ListView lv, View view, int position, long id) {
 				// Update the fragments
 				SubProfileFragment detf = (SubProfileFragment) getFragmentManager()
@@ -86,7 +86,7 @@ The on click listeners of both lists, ensures that the next fragments and Guardi
 					detf.loadSubProfiles();
 				}
 			}
-		\end{verbatim}
+		\end{lstlisting}
 	\caption{Example of the on click listener of the child fragment}%
 	\label{code:listview_onclick_example}%
 \end{figure}
