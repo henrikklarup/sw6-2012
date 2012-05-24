@@ -51,15 +51,15 @@ public class TestingTransmissionHandler {
 //		}	catch (IOException e) {
 //			System.err.println("con: " + e);
 //		}
-		long result = -1;
-		System.out.println("result = " + result);
-		try {
-			Connection con = new Connection(TestingTransmissionHandler.CLIENTFOLDER);
-			result = con.sendPing(0);
-		}	catch (IOException e) {
-			System.err.println("Could not ping !");
-		}
-		System.out.println("result = " + result);
+//		long result = -1;
+//		System.out.println("result = " + result);
+//		try {
+//			Connection con = new Connection(TestingTransmissionHandler.CLIENTFOLDER);
+//			result = con.sendPing(0);
+//		}	catch (IOException e) {
+//			System.err.println("Could not ping !");
+//		}
+//		System.out.println("result = " + result);
 		
 		
 		
@@ -94,7 +94,36 @@ public class TestingTransmissionHandler {
 //			result += in.charAt(i);
 //		}
 //		System.out.println("Result: ---" + result + "---");
-
+		
+		char[] testData = new char[]{'T','e','s','t',' ','d','a','t','a'};
+		byte[] temp = messageToBytes(testData);
+		System.out.println(temp);
+//		[84, 101, 115, 116, 32, 100, 97, 116, 97]
+		
+		for(int i = 0; i < temp.length; i++) {
+			System.out.print((char)temp[i]);
+		}
+		System.out.println("");
+		
+		String tempp = "XMLSchema.xsd";
+		String result = fileName(tempp);
+		System.out.println(fileName(tempp));
+	}
+	public static byte[] messageToBytes(char[] c) {
+		byte[] buf = new byte[c.length];
+		for (int i = 0; i < c.length; i++) {
+			buf[i] = (byte)c[i];
+		}
+		return buf;
+	}
+	private static String fileName(String fileName) {
+		StringBuilder sb = new StringBuilder();
+		int maxFileNameSize = 256;
+		for (int i = 0; i < (maxFileNameSize - fileName.length()); i++) {
+			sb.append(" ");
+		}
+		sb.append(fileName);
+		return sb.toString();
 	}
 
 }
