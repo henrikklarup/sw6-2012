@@ -6,27 +6,29 @@
 				\hline
 				\textbf{Test Case ID} & \textbf{Pass} & \textbf{Fail} & \textbf{} \\
 				\hline
-				saveAs\#1 & X &  &  \\
+				\textit{saveAs\#1} & X &  &  \\
 				\hline
-				save\#1 & X &  &  \\
+				\textit{save\#1} & X &  &  \\
 				\hline
-				checkLastUsed\#1 &  & X & When tablet memory is cleared, the last used timers disappears. \\
+				\textit{checkLastUsed\#1} &  & X & When tablet memory is cleared, the last used timers disappears. \\
 				\hline
-				hOnClick\#1 & X &  &  \\
+				\textit{hOnClick\#1} & X &  &  \\
 				\hline
-				stillHAfterSave\#1 & X &  &  \\
+				\textit{stillHAfterSave\#1} & X &  &  \\
 				\hline
-				hChildOnLaunch\#1 & X &  &  \\
+				\textit{hChildOnLaunch\#1} & X &  &  \\
 				\hline
-				checkTimerTime\#1 & X &  &  \\
+				\textit{checkTimerTime\#1} & X &  &  \\
 				\hline
-				checkDoneFunc\#1 & X &  &  \\
+				\textit{checkDoneFunc\#1} & X &  &  \\
 				\hline
 			\end{tabular}
-			\caption{This table shows some data}
-			\label{tab:myfirsttable}
+			\caption{Test results of the black box testing of the WOMBAT application.}
+			\label{tab:bb_test_results}
 		\end{center}
 	\end{table}
 
 \subsection{Reflections}
-\textit{Refleksioner om testen}
+We did not outsource the test, so we did the testing ourselves. This is not the best way to do testing, because we wrote program, and the test design and test cases, and thereby have a deeper knowledge about the features we want to test, and therefore we may have done things different than persons with no knowledge about the application would have done.
+
+The only test that did not pass was known beforehand (\textit{checkLastUsed\#1}). We had trouble implementing the "Last Used" together with the features of the database developed by the admin-group. This resulted in sporadic system failure, so we decided to only use the tablet memory to save the last used timers, and save the correct implementation of this feature to future development.
