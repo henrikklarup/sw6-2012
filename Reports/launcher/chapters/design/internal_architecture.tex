@@ -1,51 +1,56 @@
-\section{Internal Architecture}
+\chapter{Internal Architecture}
 
-QR-codes can be scanned by a built-in camera on tablets and can be printed using standard paper and printer equipment. 
+\input{chapters/design/states}
+\input{chapters/design/functionality}
+\input{chapters/design/QR_code}
+\input{chapters/design/GUI}
 
-QR-codes are copyable, by e.g. a copymachine, and therefore must be kept away from untrusted users, if they should not be used by people for which they were not intended.
-
-To sum up, QR-codes are chosen because of they improve usability, despite of their ability to be copied.\todo{Ulrik, er dette i orden?}
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=1\textwidth]{gfx/flow-diagram2.pdf}
-	\caption{Flow diagram}
-	\label{fig:flow_diagram}
-\end{figure}
-
-\autoref{fig:flow_diagram} shows the state of the launcher. The first three states handles the distinction between users which are allowed to access the launchable applications, and those who are not. \todo{indsaet ref til der hvor vi fandt ud af at vi skulle have authentication}
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=1\textwidth]{gfx/design_diagram.pdf}
-	\caption{Design diagram}
-	\label{fig:design_diagram}
-\end{figure}
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.5\textwidth]{gfx/authentication_design.pdf}
-	\caption{Features of the Authentication functionality}
-	\label{fig:authentication_design}
-\end{figure}
-
-\autoref{fig:authentication_design} shows the states of the \activity{Authentication}. The simple ones is the start and stop states and they does just what they say. The interessting states is the ``Scan QR code'' state where when a user scans an QR code there is two path: One is that the QR code is invalid. The other one is if the QR code is valid then it leeds to another state where the activity checks the identity of the QR code scanned if it is not an known identity it is rejected else the \activity{Authentication} logs in the user and termintes.
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.7\textwidth]{gfx/appselection.pdf}
-	\caption{Features of the App selection functionality}
-	\label{fig:appselection_design}
-\end{figure}
-
-\autoref{fig:appselection_design} shows the states that the app selection can take. 
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.3\textwidth]{gfx/profileselect_design.pdf}
-	\caption{Features of the Profile selection functionality}
-	\label{fig:profileselection_design}
-\end{figure}
+% QR-codes can be scanned by a built-in camera on tablets and can be printed using standard paper and printer equipment. 
+% 
+% QR-codes are copyable, by e.g. a copymachine, and therefore must be kept away from untrusted users, if they should not be used by people for which they were not intended.
+% 
+% To sum up, QR-codes are chosen because of they improve usability, despite of their ability to be copied.\todo{Ulrik, er dette i orden?}
+% 
+% \begin{figure}[h]
+% 	\centering
+% 	\includegraphics[width=1\textwidth]{gfx/flow-diagram2.pdf}
+% 	\caption{Flow diagram}
+% 	\label{fig:flow_diagram}
+% \end{figure}
+% 
+% \autoref{fig:flow_diagram} shows the state of the launcher. The first three states handles the distinction between users which are allowed to access the launchable applications, and those who are not. \todo{indsaet ref til der hvor vi fandt ud af at vi skulle have authentication}
+% 
+% \begin{figure}[h]
+% 	\centering
+% 	\includegraphics[width=1\textwidth]{gfx/design_diagram.pdf}
+% 	\caption{Design diagram}
+% 	\label{fig:design_diagram}
+% \end{figure}
+% 
+% \begin{figure}[h]
+% 	\centering
+% 	\includegraphics[width=0.5\textwidth]{gfx/authentication_design.pdf}
+% 	\caption{Features of the Authentication functionality}
+% 	\label{fig:authentication_design}
+% \end{figure}
+% 
+% \autoref{fig:authentication_design} shows the states of the \activity{Authentication}. The simple ones is the start and stop states and they does just what they say. The interessting states is the ``Scan QR code'' state where when a user scans an QR code there is two path: One is that the QR code is invalid. The other one is if the QR code is valid then it leeds to another state where the activity checks the identity of the QR code scanned if it is not an known identity it is rejected else the \activity{Authentication} logs in the user and termintes.
+% 
+% \begin{figure}[h]
+% 	\centering
+% 	\includegraphics[width=0.7\textwidth]{gfx/appselection.pdf}
+% 	\caption{Features of the App selection functionality}
+% 	\label{fig:appselection_design}
+% \end{figure}
+% 
+% \autoref{fig:appselection_design} shows the states that the app selection can take. 
+% 
+% \begin{figure}[h]
+% 	\centering
+% 	\includegraphics[width=0.3\textwidth]{gfx/profileselect_design.pdf}
+% 	\caption{Features of the Profile selection functionality}
+% 	\label{fig:profileselection_design}
+% \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% COMMENT
 \begin{comment}
