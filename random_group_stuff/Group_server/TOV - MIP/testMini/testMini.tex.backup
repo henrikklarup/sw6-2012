@@ -1,0 +1,24 @@
+\input{/home/martin/Documents/latex/preamble}
+
+\begin{document}
+ 
+ \part*{Test Results}
+  \input{/home/martin/Documents/eadocs/testResults.txt}
+ \part*{Evaluation}
+    Pages 1 to 4 and the first few lines of page 5, are the messages from insertion of two
+    full valid profiles into the database. There were no real surprises here before a few other tests were run.
+    These results cover test cases 0 to 12, insertion part.
+    \newline
+    The errors following on page 5, marked error 1366,1406,1064 and 1452 are attempts at inserting data that is not valid
+    according to our schema. first run of these test cases showed that we had a small flaw in the server setup.
+    Instead of barring invalid data into some fields, it would just give a warning. Changing the mode of the database to strict fixed this,
+    at least for strings into int fields, and to long strings, however, it will still accept an int value into a string field.
+    \newline
+    From the middle of page 5 and forward we verify one of the profiles that we have inserted, we only check one 
+    of the profiles as we find it safe to assume that if we can insert 1 profile, we can also insert 2.
+    During this process out test cases showed us that we the group did not share an understanding of the database schema, which
+    also means that part of the server implementation made in our project, is actually incorrect.
+    \newline
+  
+
+\end{document}
