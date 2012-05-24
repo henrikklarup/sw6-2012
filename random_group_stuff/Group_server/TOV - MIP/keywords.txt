@@ -3,3 +3,8 @@ As seen in the test results, we almost got all expected results. During our test
 Furthermore we found that it is possible to inerset a integer value into a string field. the integer is simply changed to the string value. This we not as we expected.
 
 We conclude that the database acts almost as expected. We do however need to do the checking of putting an integer into a string on software level.
+
+
+
+select * from AuthUsers, Profile, Department
+    where Profile.idProfile = 1 and AuthUsers.idUser = 1 and Department.idDepartment in (select idDepartment from HasDepartment where HasDepartment.idProfile = 1);
