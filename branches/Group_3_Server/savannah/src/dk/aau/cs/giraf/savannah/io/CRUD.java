@@ -9,7 +9,7 @@ package dk.aau.cs.giraf.savannah.io;
  * 	PING(3, "PING")			- Ping (Event)
  * 	ERROR(4, "ERROR")		- Error, in case something goes wrong, then this message is sent.
  * </pre>
- * @author Sir.Thundar
+ * @author Thorbjørn Kvist Nielsen
  *
  */
 public enum CRUD {

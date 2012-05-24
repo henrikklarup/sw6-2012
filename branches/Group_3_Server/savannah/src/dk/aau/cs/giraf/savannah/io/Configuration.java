@@ -2,7 +2,7 @@ package dk.aau.cs.giraf.savannah.io;
 
 /**
  * 
- * @author Sir.Thundar
+ * @author Thorbjørn Kvist Nielsen
  *
  */
 public final class Configuration {
