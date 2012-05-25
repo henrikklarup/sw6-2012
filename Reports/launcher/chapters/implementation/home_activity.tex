@@ -5,8 +5,7 @@ This activity is the center of the launcher and implements the design described 
 Some of the more basic functionality is to show the user which apps they can open. This is done by showing all apps which is installed on the device, is certified as an app in the database and the user has a relation to the apps in the database. Only apps which has all of these three properties will be shown to the user. If this number of apps exceeds nine and or if the drawer is extended so much that some apps will be place to the right of the screen the user will be able to scroll horizontally and will be guided by a scroll indication bar in the bottom of the screen.
 
 \subsection{The drawer}
-To show the functionality of the drawer a color picker for apps were implemented and hidden in the drawer. The color picker will be explained in \autoref{home:colorpicker} and can be seen in \autoref{fig:home-activity}.
-It is possible to put more functionality in the drawer for e.g. a way to put apps in the drawer if they are not being used by the user or if they need them they can drag them out of the drawer. A kind of toolbox for apps.
+It is possible to put functionality in the drawer for e.g. a way to put apps in the drawer if they are not being used by the user or if they need them they can drag them out of the drawer \autoref{backlog:hide_apps}.
 
 \begin{figure}[h!]
 	\centering
@@ -25,6 +24,7 @@ It is possible to put more functionality in the drawer for e.g. a way to put app
 
 \subsection{Color picker}\label{home:colorpicker}
 
+To show the functionality of the drawer a color picker for apps were implemented and hidden in the drawer. The color picker can be seen in \autoref{fig:home-activity}.
 The \textit{color picker} is a tool that was made to change colors on apps, this have been extended so far that if the logo of e.g. Wombat is choosen to be red then the background in Wombat will also be set to red when the application is loaded.
 The color picker consist of a color board with ten predefined \giraf[] colors. These colors can be assigned to any app that are in the launcher and there is no limit on how many times the user can use a color. This means that if the user want they can make every app e.g. red.
 The color picker is made with drag and drop functionality, so to assign a color the user simply puts down their finger on the color they want and drag it to the app they want to assign the color to and release their finger from the screen.
