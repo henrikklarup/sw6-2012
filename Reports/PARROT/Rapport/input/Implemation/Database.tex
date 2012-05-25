@@ -69,7 +69,13 @@ public PARROTProfile loadProfile(Long childId,Long appId)
 
 	}
 \end{verbatim}
-First, we check if the ID's have a value different from null. If they do not, an error has happened, and we abort the operation. If they do, we continue and load a profile from the database corresponding to the child currently using PARROT.
+First, we check if the ID's have a value different from null. If they do not, an error has happened, and we abort the operation.
+If they do, we continue and load a profile from the database corresponding to the child currently using PARROT.
+Then, we begin the the conversion.
+First, a Pictogram object is made, which is fed with the firstname of the child, as well as the path to the picture of the child.
+This pictogram will serve as the child's identity icon.
+Then, a PARROTProfile is instantiated with the name of the child, as well as its Pictogram icon.
+In order to go on, we load a Setting object from the database
 
 \begin{verbatim}{}
 	public Category loadCategory(String catName, String pictureIDs,int colour,String iconString)
