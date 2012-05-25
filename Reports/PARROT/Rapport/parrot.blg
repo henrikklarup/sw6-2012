@@ -11,9 +11,10 @@ Warning--entry type for "SCRUM" isn't style-file defined
 --line 100 of file bibtex/literature.bib
 Warning--entry type for "ScrumOfScrums" isn't style-file defined
 --line 107 of file bibtex/literature.bib
+Warning--I didn't find a database entry for "ni_lego"
 Warning--I didn't find a database entry for "AndroidVersion"
 Warning--I didn't find a database entry for "LastYearsArchitecture"
 Warning--empty publisher in usability:ida
 Warning--empty year in usability:ida
 Warning--empty year in studyreg
-(There were 10 warnings)
+(There were 11 warnings)

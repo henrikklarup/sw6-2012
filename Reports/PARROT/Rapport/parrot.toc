@@ -13,4 +13,6 @@
 \contentsline {section}{\numberline {1.8}Usability Test}{4}{section.1.8}
 \contentsline {subsection}{\numberline {1.8.1}Approach}{4}{subsection.1.8.1}
 \contentsline {chapter}{\chapternumberline {2}Implementation}{9}{chapter.2}
-\contentsline {chapter}{Litteratur}{11}{section*.6}
+\contentsline {appendix}{\chapternumberline {A}Notes from Interview}{11}{appendix.A}
+\contentsline {appendix}{\chapternumberline {B}invitation to usability test}{13}{appendix.B}
+\contentsline {chapter}{Litteratur}{15}{section*.6}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2012.2.5)  25 MAY 2012 11:14
+This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2012.2.5)  25 MAY 2012 23:22
 entering extended mode
 **D:/Aalborg*universitet/P6/Project/Reports/PARROT/Rapport/preamble.tex
 ("D:/Aalborg universitet/P6/Project/Reports/PARROT/Rapport/preamble.tex"
@@ -1387,10 +1387,10 @@ LaTeX Info: Redefining \_ on input line 43.
 \cftsubtablenumwidth=\skip211
 \dlf@normtxtw=\skip212
 \feline@chapter=\box73
-Package color Info: Redefining color red on input line 324.
-Package color Info: Redefining color green on input line 325.
-Package color Info: Redefining color yellow on input line 326.
-Package color Info: Redefining color blue on input line 327.
+Package color Info: Redefining color red on input line 323.
+Package color Info: Redefining color green on input line 324.
+Package color Info: Redefining color yellow on input line 325.
+Package color Info: Redefining color blue on input line 326.
 
 
 ******************************************************
@@ -1422,7 +1422,7 @@ Sidefootvsep and sidefootheight: 13.6pt and 594.32022pt
 Here is how much of TeX's memory you used:
  13446 strings out of 495285
  191846 string characters out of 3180538
- 309801 words of memory out of 3000000
+ 309793 words of memory out of 3000000
  16448 multiletter control sequences out of 15000+200000
  6005 words of font info for 20 fonts, out of 3000000 for 9000
  15 hyphenation exceptions out of 8191
