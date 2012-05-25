@@ -48,6 +48,10 @@ class HasGuardianController {
 	 * @return Rows affected
 	 */
 	public int removeHasGuardiansByProfile(Profile profile) {
+		if (profile == null) {
+			return -1;
+		}
+		
 		int rows = 0;
 		String table = "";
 		switch ((int)profile.getPRole()) {
@@ -75,9 +79,13 @@ class HasGuardianController {
 	 * @return Rows affected
 	 */
 	public int removeHasGuardian(HasGuardian hasGuardian) {
-		return _context.getContentResolver().delete(HasGuardianMetaData.CONTENT_URI, 
-				HasGuardianMetaData.Table.COLUMN_IDCHILD + " = '" + hasGuardian.getIdChild() + "' AND " +
-						HasGuardianMetaData.Table.COLUMN_IDGUARDIAN + " = '" + hasGuardian.getIdGuardian() + "'", null);
+		if (hasGuardian == null) {
+			return -1;
+		}
+		
+		return _context.getContentResolver().delete(HasGuardianMetaData.CONTENT_URI,
+				HasGuardianMetaData.Table.COLUMN_IDGUARDIAN + " = '" + hasGuardian.getIdGuardian() + "' AND " +
+						HasGuardianMetaData.Table.COLUMN_IDCHILD + " = '" + hasGuardian.getIdChild() + "'", null);						
 	}
 
 	/**
@@ -86,6 +94,10 @@ class HasGuardianController {
 	 * @return 0
 	 */
 	public int insertHasGuardian(HasGuardian hg) {
+		if (hg == null) {
+			return -1;
+		}
+		
 		ContentValues cv = getContentValues(hg);
 		_context.getContentResolver().insert(HasGuardianMetaData.CONTENT_URI, cv);
 
@@ -95,9 +107,13 @@ class HasGuardianController {
 	/**
 	 * Modify has guardians
 	 * @param hg Has guardian
-	 * @return Rows
+	 * @return Rows affected
 	 */
 	public int modifyHasGuardian(HasGuardian hg) {
+		if (hg == null) {
+			return -1;
+		}
+		
 		ContentValues cv = getContentValues(hg);
 		return _context.getContentResolver().update(HasGuardianMetaData.CONTENT_URI, cv, 
 				HasGuardianMetaData.Table.COLUMN_IDGUARDIAN + " = '" + hg.getIdGuardian() + "' AND " +
@@ -129,6 +145,10 @@ class HasGuardianController {
 	 */
 	public List<HasGuardian> getChildrenByGuardian(Profile guardian) {
 		List<HasGuardian> hgList = new ArrayList<HasGuardian>();
+
+		if (guardian == null) {
+			return hgList;
+		}
 		
 		Cursor c = _context.getContentResolver().query(HasGuardianMetaData.CONTENT_URI, columns, 
 				HasGuardianMetaData.Table.COLUMN_IDGUARDIAN + " = '" + guardian.getId() + "'", null, null);
@@ -147,6 +167,10 @@ class HasGuardianController {
 	 */
 	public List<HasGuardian> getGuardiansByChild(Profile child) {
 		List<HasGuardian> hgList = new ArrayList<HasGuardian>();
+		
+		if (child == null) {
+			return hgList;
+		}
 		
 		Cursor c = _context.getContentResolver().query(HasGuardianMetaData.CONTENT_URI, columns, 
 				HasGuardianMetaData.Table.COLUMN_IDCHILD + " = '" + child.getId() + "'", null, null);

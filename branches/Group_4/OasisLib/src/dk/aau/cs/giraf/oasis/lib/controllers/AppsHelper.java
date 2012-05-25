@@ -58,6 +58,10 @@ public class AppsHelper {
 	 * @return Rows affected
 	 */
 	public int removeApp(App app) {
+		if (app == null) {
+			return -1;
+		}
+		
 		int rows = 0;
 		
 		rows += loa.removeListOfAppsByAppId(app.getId());
@@ -73,6 +77,10 @@ public class AppsHelper {
 	 * @return Rows
 	 */
 	public int removeAppAttachmentToProfile(App app, Profile profile) {
+		if (app == null || profile == null) {
+			return -1;
+		}
+		
 		return loa.removeListOfApps(new ListOfApps(app.getId(), profile.getId()));
 	}
 	
@@ -82,13 +90,13 @@ public class AppsHelper {
 	 * @return the app id
 	 */
 	public long insertApp(App app) {
-		int result = 0;
-		Uri uri;
-		ContentValues cv = getContentValues(app);
-		uri = _context.getContentResolver().insert(AppsMetaData.CONTENT_URI, cv);
-		result = Integer.parseInt(uri.getPathSegments().get(1));
+		if (app == null) {
+			return -1;
+		}
 		
-		return result;
+		ContentValues cv = getContentValues(app);
+		Uri uri = _context.getContentResolver().insert(AppsMetaData.CONTENT_URI, cv);
+		return Integer.parseInt(uri.getPathSegments().get(1));
 	}
 
 	/**
@@ -97,13 +105,12 @@ public class AppsHelper {
 	 * @param profile Profile to attach to
 	 * @return Rows
 	 */
-	public long attachAppToProfile(App app, Profile profile) {
-		ListOfApps loaModel = new ListOfApps();
-		loaModel.setIdApp(app.getId());
-		loaModel.setIdProfile(profile.getId());
-		loaModel.setSetting(app.getSettings());
-		loaModel.setStat(app.getStats());
-		return loa.insertListOfApps(loaModel);
+	public int attachAppToProfile(App app, Profile profile) {
+		if (app == null || profile == null) {
+			return -1;
+		}
+		
+		return loa.insertListOfApps(new ListOfApps(app.getId(), profile.getId(), app.getSettings(), app.getStats()));
 	}
 
 	/**
@@ -111,6 +118,10 @@ public class AppsHelper {
 	 * @param app Application containing data to modify
 	 */
 	public int modifyApp(App app) {
+		if (app == null) {
+			return -1;
+		}
+		
 		Uri uri = ContentUris.withAppendedId(AppsMetaData.CONTENT_URI, app.getId());
 		ContentValues cv = getContentValues(app);
 		return _context.getContentResolver().update(uri, cv, null, null);
@@ -122,18 +133,12 @@ public class AppsHelper {
 	 * @param profile the profile the settings belong to
 	 */
 	public int modifyAppByProfile(App app, Profile profile) {
+		if (app == null || profile == null) {
+			return -1;
+		}
+		
 		modifyApp(app);
-		
-		ListOfApps listOfApps = new ListOfApps(app.getId(), profile.getId(), null, null);
-		try {
-			listOfApps.setSetting(app.getSettings());
-		} catch (NullPointerException e) { }
-		
-		try {
-			listOfApps.setStat(app.getStats());
-		} catch (NullPointerException e) { }
-		
-		return loa.modifyListOfApps(listOfApps);
+		return loa.modifyListOfApps(new ListOfApps(app.getId(), profile.getId(), app.getSettings(), app.getStats()));
 	}
 
 	/**
@@ -197,6 +202,11 @@ public class AppsHelper {
 	 */
 	public List<App> getAppsByName(String name) {
 		List<App> apps = new ArrayList<App>();
+
+		if (name == null) {
+			return apps;
+		}
+		
 		Cursor c = _context.getContentResolver().query(AppsMetaData.CONTENT_URI, columns, AppsMetaData.Table.COLUMN_NAME + " LIKE '%" + name + "%'", null, null);
 		
 		if (c != null) {
@@ -267,6 +277,11 @@ public class AppsHelper {
 	 */
 	public List<App> getAppsByProfile(Profile profile) {
 		List<App> apps = new ArrayList<App>();
+		
+		if (profile == null) {
+			return apps;
+		}
+		
 		List<ListOfApps> listOfApps = new ArrayList<ListOfApps>();
 
 		listOfApps = loa.getListOfAppsByProfileId(profile.getId());

@@ -238,6 +238,7 @@ public class DbProvider extends ContentProvider {
 			break;
 		case HASTAG_TYPE_LIST:
 			rowsDeleted = db.delete(HasTagMetaData.Table.TABLE_NAME, where, whereArgs);
+			break;
 		case MEDIA_TYPE_LIST:
 			rowsDeleted = db.delete(MediaMetaData.Table.TABLE_NAME, where, whereArgs);
 			break;

@@ -51,6 +51,10 @@ class AuthUsersController {
 	 * @return Rows affected
 	 */
 	public int removeAuthUser(AuthUser authUser) {
+		if (authUser == null) {
+			return -1;
+		}
+		
 		return _context.getContentResolver().delete(AuthUsersMetaData.CONTENT_URI, 
 				AuthUsersMetaData.Table.COLUMN_ID + " = '" + authUser.getId() + "'", null);
 	}
@@ -84,6 +88,10 @@ class AuthUsersController {
 	 * @return Rows
 	 */
 	public int setCertificate(String certificate, long id) {
+		if (certificate == null) {
+			return -1;
+		}
+		
 		Uri uri = ContentUris.withAppendedId(AuthUsersMetaData.CONTENT_URI, id);
 
 		ContentValues cv = new ContentValues();
@@ -97,6 +105,10 @@ class AuthUsersController {
 	 * @return Rows
 	 */
 	public int modifyAuthUser(AuthUser authUser) {
+		if (authUser == null) {
+			return -1;
+		}
+		
 		Uri uri = ContentUris.withAppendedId(AuthUsersMetaData.CONTENT_URI, authUser.getId());
 		ContentValues cv = getContentValues(authUser);
 		return _context.getContentResolver().update(uri, cv, null, null);
@@ -149,6 +161,10 @@ class AuthUsersController {
 	 * @return Profile id
 	 */
 	public long getIdByCertificate(String certificate) {
+		if (certificate == null) {
+			return -1;
+		}
+		
 		long id = -1;
 		Cursor c = _context.getContentResolver().query(AuthUsersMetaData.CONTENT_URI, columns, AuthUsersMetaData.Table.COLUMN_CERTIFICATE + " = '" + certificate + "'", null, null);
 		if (c != null) {

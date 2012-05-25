@@ -72,6 +72,10 @@ class ListOfAppsController {
 	 * @return Rows affected
 	 */
 	public int removeListOfApps(ListOfApps listOfApps) {
+		if (listOfApps == null) {
+			return -1;
+		}
+		
 		return _context.getContentResolver().delete(ListOfAppsMetaData.CONTENT_URI, 
 				ListOfAppsMetaData.Table.COLUMN_IDAPP + " = '" + listOfApps.getIdApp() + "' AND " +
 						ListOfAppsMetaData.Table.COLUMN_IDPROFILE + " = '" + listOfApps.getIdProfile() + "'", null);
@@ -83,6 +87,10 @@ class ListOfAppsController {
 	 * @return Rows
 	 */
 	public int insertListOfApps(ListOfApps listOfApps) {
+		if (listOfApps == null) {
+			return -1;
+		}
+		
 		ContentValues cv = getContentValues(listOfApps);
 		Uri uri = _context.getContentResolver().insert(ListOfAppsMetaData.CONTENT_URI, cv);
 		return Integer.parseInt(uri.getPathSegments().get(1));
@@ -94,6 +102,10 @@ class ListOfAppsController {
 	 * @return Rows
 	 */
 	public int modifyListOfApps(ListOfApps listOfApps) {
+		if (listOfApps == null) {
+			return -1;
+		}
+		
 		ContentValues cv = getContentValues(listOfApps);
 		return _context.getContentResolver().update(ListOfAppsMetaData.CONTENT_URI, cv, ListOfAppsMetaData.Table.COLUMN_IDAPP + " = '" + listOfApps.getIdApp() + "'" + " AND " + ListOfAppsMetaData.Table.COLUMN_IDPROFILE + " = '" + listOfApps.getIdProfile() + "'", null);
 	}

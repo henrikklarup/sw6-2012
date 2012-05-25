@@ -88,4 +88,16 @@ public class AuthUser {
 
 		return localOutput;
 	}
+	@Override public boolean equals(Object aAuthUser) {
+		if ( this == aAuthUser ) return true;
+
+		if ( !(aAuthUser instanceof AuthUser) ) return false;
+
+		AuthUser authUser = (AuthUser)aAuthUser;
+
+		return
+				EqualsUtil.areEqual(this.getId(), authUser.getId()) &&
+				EqualsUtil.areEqual(this.getCertificate(), authUser.getCertificate()) &&
+				EqualsUtil.areEqual(this.getaRole(), authUser.getaRole());
+	}
 }

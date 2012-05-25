@@ -67,4 +67,15 @@ public class HasLink {
 		
 		return localOutput;
 	}
+	@Override public boolean equals(Object aHasLink) {
+		if ( this == aHasLink ) return true;
+
+		if ( !(aHasLink instanceof HasLink) ) return false;
+
+		HasLink hasLink = (HasLink)aHasLink;
+
+		return
+				EqualsUtil.areEqual(this.getIdMedia(), hasLink.getIdMedia()) &&
+				EqualsUtil.areEqual(this.getIdSubMedia(), hasLink.getIdSubMedia());
+	}
 }

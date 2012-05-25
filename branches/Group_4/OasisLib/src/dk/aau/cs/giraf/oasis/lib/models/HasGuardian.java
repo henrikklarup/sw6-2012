@@ -64,4 +64,15 @@ public class HasGuardian {
 
 		return localOutput;
 	}
+	@Override public boolean equals(Object aHasGuardian) {
+		if ( this == aHasGuardian ) return true;
+
+		if ( !(aHasGuardian instanceof HasGuardian) ) return false;
+
+		HasGuardian hasGuardian = (HasGuardian)aHasGuardian;
+
+		return
+				EqualsUtil.areEqual(this.getIdGuardian(), hasGuardian.getIdGuardian()) &&
+				EqualsUtil.areEqual(this.getIdChild(), hasGuardian.getIdChild());
+	}
 }

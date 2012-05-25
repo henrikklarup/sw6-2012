@@ -69,6 +69,10 @@ class HasDepartmentController {
 	 * @return Rows affected
 	 */
 	public int removeHasDepartment(HasDepartment hasDepartment) {
+		if (hasDepartment == null) {
+			return -1;
+		}
+		
 		return _context.getContentResolver().delete(HasDepartmentMetaData.CONTENT_URI, 
 				HasDepartmentMetaData.Table.COLUMN_IDPROFILE + " = '" + hasDepartment.getIdProfile() + "' AND " +
 						HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + hasDepartment.getIdDepartment() + "'", null);
@@ -80,6 +84,10 @@ class HasDepartmentController {
 	 * @return 0
 	 */
 	public int insertHasDepartment(HasDepartment hd) {
+		if (hd == null) {
+			return -1;
+		}
+		
 		ContentValues cv = getContentValues(hd);
 		_context.getContentResolver().insert(HasDepartmentMetaData.CONTENT_URI, cv);
 
@@ -92,6 +100,10 @@ class HasDepartmentController {
 	 * @return Rows
 	 */
 	public int modifyHasDepartment(HasDepartment hd) {
+		if (hd == null) {
+			return -1;
+		}
+		
 		ContentValues cv = getContentValues(hd);
 		return _context.getContentResolver().update(HasDepartmentMetaData.CONTENT_URI, cv, 
 				HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + hd.getIdDepartment() + "' AND " +
@@ -122,8 +134,12 @@ class HasDepartmentController {
 	 * @return List of Has departments
 	 */
 	public List<HasDepartment> getProfilesByDepartment(Department dep) {
-		List<HasDepartment> list= new ArrayList<HasDepartment>();
-
+		List<HasDepartment> list = new ArrayList<HasDepartment>();
+		
+		if (dep == null) {
+			return list;
+		}
+		
 		Cursor c = _context.getContentResolver().query(HasDepartmentMetaData.CONTENT_URI, columns, 
 				HasDepartmentMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + dep.getId() + "'", null, null);
 
@@ -142,7 +158,11 @@ class HasDepartmentController {
 	 * @return List of Has departments
 	 */
 	public List<HasDepartment> getHasDepartmentsByProfile(Profile profile) {
-		List<HasDepartment> list= new ArrayList<HasDepartment>();
+		List<HasDepartment> list = new ArrayList<HasDepartment>();
+		
+		if (profile == null) {
+			return list;
+		}
 
 		Cursor c = _context.getContentResolver().query(HasDepartmentMetaData.CONTENT_URI, columns, 
 				HasDepartmentMetaData.Table.COLUMN_IDPROFILE + " = '" + profile.getId() + "'", null, null);

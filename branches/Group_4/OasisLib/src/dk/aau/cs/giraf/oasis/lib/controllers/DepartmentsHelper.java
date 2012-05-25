@@ -67,19 +67,21 @@ public class DepartmentsHelper {
 	 * @return Rows affected
 	 */
 	public int removeDepartment(Department department) {
-		int rows = -1;
-		if (department != null) {
-			rows = 0;
-			AuthUser authUser = au.getAuthUserById(department.getId());
-
-			rows += au.removeAuthUser(authUser);
-			rows += hd.removeHasDepartmentByDepartmentId(department.getId());
-			rows += mda.removeMediaDepartmentAccessByDepartmentId(department.getId());
-			rows += hsd.removeHasSubDepartmentsByDepartmentId(department.getId());
-			rows += hsd.removeHasSubDepartmentsBySubDepartmentId(department.getId());
-			rows += _context.getContentResolver().delete(DepartmentsMetaData.CONTENT_URI, 
-					DepartmentsMetaData.Table.COLUMN_ID + " = '" + department.getId() + "'", null);
+		if (department == null) {
+			return -1;
 		}
+
+		int rows = 0;
+		AuthUser authUser = au.getAuthUserById(department.getId());
+
+		rows += au.removeAuthUser(authUser);
+		rows += hd.removeHasDepartmentByDepartmentId(department.getId());
+		rows += mda.removeMediaDepartmentAccessByDepartmentId(department.getId());
+		rows += hsd.removeHasSubDepartmentsByDepartmentId(department.getId());
+		rows += hsd.removeHasSubDepartmentsBySubDepartmentId(department.getId());
+		rows += _context.getContentResolver().delete(DepartmentsMetaData.CONTENT_URI, 
+				DepartmentsMetaData.Table.COLUMN_ID + " = '" + department.getId() + "'", null);
+
 		return rows;
 	}
 
@@ -90,13 +92,11 @@ public class DepartmentsHelper {
 	 * @return Rows affected
 	 */
 	public int removeProfileAttachmentToDepartment(Profile profile, Department department) {
-		int result = 0;
-		if (profile != null && department != null) {
-			result = hd.removeHasDepartment(new HasDepartment(profile.getId(), department.getId()));
-		} else {
-			result = -1;
+		if (profile == null || department == null) {
+			return -1;
 		}
-		return result;
+
+		return hd.removeHasDepartment(new HasDepartment(profile.getId(), department.getId()));
 	}
 
 	/**
@@ -106,13 +106,11 @@ public class DepartmentsHelper {
 	 * @return Rows affected
 	 */
 	public int removeSubDepartmentAttachmentToDepartment(Department department, Department subDepartment) {
-		int result = 0;
-		if (department != null && subDepartment != null) {
-			result = hsd.removeHasSubDepartment(new HasSubDepartment(department.getId(), subDepartment.getId()));
-		} else {
-			result = -1;
+		if (department == null || subDepartment == null) {
+			return -1;
 		}
-		return result;
+
+		return hsd.removeHasSubDepartment(new HasSubDepartment(department.getId(), subDepartment.getId()));
 	}
 	/**
 	 * Remove media attachment to department
@@ -121,13 +119,10 @@ public class DepartmentsHelper {
 	 * @return Rows affected
 	 */
 	public int removeMediaAttachmentToDepartment(Media media, Department department) {
-		int result = 0;
-		if (media != null && department != null) {
-			result = mda.removeMediaDepartmentAccess(new MediaDepartmentAccess(media.getId(), department.getId()));
-		} else {
-			result = -1;
+		if (media == null || department == null) {
+			return -1;
 		}
-		return result;
+		return mda.removeMediaDepartmentAccess(new MediaDepartmentAccess(media.getId(), department.getId()));
 	}
 
 	/**
@@ -135,14 +130,16 @@ public class DepartmentsHelper {
 	 * @param department Department containing data
 	 */
 	public long insertDepartment(Department department) {
-		long id = -1;
-		if (department != null) {
-			id = au.insertAuthUser(AuthUser.aRole.DEPARTMENT.ordinal());
-
-			ContentValues cv = getContentValues(department);
-			cv.put(DepartmentsMetaData.Table.COLUMN_ID, id);
-			_context.getContentResolver().insert(DepartmentsMetaData.CONTENT_URI, cv);
+		if (department == null) {
+			return -1;
 		}
+
+		long id = au.insertAuthUser(AuthUser.aRole.DEPARTMENT.ordinal());
+
+		ContentValues cv = getContentValues(department);
+		cv.put(DepartmentsMetaData.Table.COLUMN_ID, id);
+		_context.getContentResolver().insert(DepartmentsMetaData.CONTENT_URI, cv);
+
 		return id;
 	}
 
@@ -153,12 +150,11 @@ public class DepartmentsHelper {
 	 * @return Result
 	 */
 	public int attachProfileToDepartment(Profile profile, Department department) {
-		int result = -1;
-		if (profile != null && department != null) {
-			HasDepartment hdModel = new HasDepartment(profile.getId(), department.getId());
-			result = hd.insertHasDepartment(hdModel);
+		if (profile == null || department == null) {
+			return -1;
 		}
-		return result;
+
+		return hd.insertHasDepartment(new HasDepartment(profile.getId(), department.getId()));
 	}
 
 	/**
@@ -168,12 +164,11 @@ public class DepartmentsHelper {
 	 * @return Result
 	 */
 	public int attachSubDepartmentToDepartment(Department department, Department subDepartment) {
-		int result = -1;
-		if (department != null && subDepartment != null) {
-			HasSubDepartment hsdModel = new HasSubDepartment(department.getId(), subDepartment.getId());
-			result = hsd.insertHasSubDepartment(hsdModel);
+		if (department == null || subDepartment == null) {
+			return -1;
 		}
-		return result;
+
+		return hsd.insertHasSubDepartment(new HasSubDepartment(department.getId(), subDepartment.getId()));
 	}
 	/**
 	 * Attach media to department
@@ -182,12 +177,11 @@ public class DepartmentsHelper {
 	 * @return Rows affected
 	 */
 	public int attachMediaToDepartment(Media media, Department department) {
-		int result = -1;
-		if (media != null && department != null) {
-			MediaDepartmentAccess mdaModel = new MediaDepartmentAccess(media.getId(), department.getId());
-			result = mda.insertMediaDepartmentAccess(mdaModel);
+		if (media == null || department == null) {
+			return -1;
 		}
-		return result;
+
+		return mda.insertMediaDepartmentAccess(new MediaDepartmentAccess(media.getId(), department.getId()));
 	}
 
 	/**
@@ -196,14 +190,13 @@ public class DepartmentsHelper {
 	 * Department containing data to modify
 	 */
 	public int modifyDepartment(Department department) {
-		int result = -1;
-		if (department != null) {
-			Uri uri = ContentUris.withAppendedId(DepartmentsMetaData.CONTENT_URI, department.getId());
-			ContentValues cv = getContentValues(department);
-			_context.getContentResolver().update(uri, cv, null, null);
-			result = 0;
+		if (department == null) {
+			return -1;
 		}
-		return result;
+
+		Uri uri = ContentUris.withAppendedId(DepartmentsMetaData.CONTENT_URI, department.getId());
+		ContentValues cv = getContentValues(department);
+		return _context.getContentResolver().update(uri, cv, null, null);
 	}
 
 	/**
@@ -213,12 +206,15 @@ public class DepartmentsHelper {
 	 */
 	public Department authenticateDepartment(String certificate) {
 		Department dep = null;
-		if (certificate != null) {
-			long id = au.getIdByCertificate(certificate);
-			if (id != -1) {
-				dep = getDepartmentById(id);
-			}
+		if (certificate == null) {
+			return dep;
 		}
+
+		long id = au.getIdByCertificate(certificate);
+		if (id != -1) {
+			dep = getDepartmentById(id);
+		}
+
 		return dep;
 	}
 
@@ -229,11 +225,11 @@ public class DepartmentsHelper {
 	 * @return Rows affected
 	 */
 	public int setCertificate(String certificate, Department department) {
-		int rows = -1;
-		if (certificate != null && department != null) {
-			rows = au.setCertificate(certificate, department.getId());
+		if (certificate == null || department == null) {
+			return -1;
 		}
-		return rows;
+
+		return au.setCertificate(certificate, department.getId());
 	}
 
 	/**
@@ -266,10 +262,11 @@ public class DepartmentsHelper {
 	public List<String> getCertificatesByDepartment(Department department) {
 		List<String> certificates = new ArrayList<String>();
 
-		if (department != null) {
-			certificates = au.getCertificatesById(department.getId());
+		if (department == null) {
+			return certificates;
 		}
 
+		certificates = au.getCertificatesById(department.getId());
 		return certificates;
 	}
 
@@ -301,23 +298,23 @@ public class DepartmentsHelper {
 	 */
 	public List<Department> getDepartmentByName(String name) {
 		List<Department> departments = new ArrayList<Department>();
-		if (name != null) {
-			
-			Cursor c = _context.getContentResolver().query(DepartmentsMetaData.CONTENT_URI, columns, 
-					DepartmentsMetaData.Table.COLUMN_NAME + " = '" + name + "'", null, null);
-			
-			if (c != null) {
-				if (c.moveToFirst()) {
-					while (!c.isAfterLast()) {
-						departments.add(cursorToDepartment(c));
-						c.moveToNext();
-					}
-				}
-				c.close();
-			}
-			
+		if (name == null) {
+			return departments;
 		}
-		
+
+		Cursor c = _context.getContentResolver().query(DepartmentsMetaData.CONTENT_URI, columns, 
+				DepartmentsMetaData.Table.COLUMN_NAME + " = '" + name + "'", null, null);
+
+		if (c != null) {
+			if (c.moveToFirst()) {
+				while (!c.isAfterLast()) {
+					departments.add(cursorToDepartment(c));
+					c.moveToNext();
+				}
+			}
+			c.close();
+		}
+
 		return departments;
 	}
 
@@ -328,14 +325,17 @@ public class DepartmentsHelper {
 	 */
 	public List<Department> getDepartmentsByProfile(Profile profile) {
 		List<Department> departments = new ArrayList<Department>();
-		
-		if (profile != null) {
-			List<HasDepartment> list = hd.getHasDepartmentsByProfile(profile);
 
-			for (HasDepartment hdModel : list) {
-				departments.add(getDepartmentById(hdModel.getIdDepartment()));
-			}
+		if (profile == null) {
+			return departments;
 		}
+
+		List<HasDepartment> list = hd.getHasDepartmentsByProfile(profile);
+
+		for (HasDepartment hdModel : list) {
+			departments.add(getDepartmentById(hdModel.getIdDepartment()));
+		}
+
 		return departments;
 	}
 
@@ -346,13 +346,16 @@ public class DepartmentsHelper {
 	 */
 	public List<Department> getSubDepartments(Department department) {
 		List<Department> departments = new ArrayList<Department>();
-		if (department != null) {
-			List<HasSubDepartment> list = hsd.getSubDepartmentsByDepartment(department);
-
-			for (HasSubDepartment hsdModel : list) {
-				departments.add(getDepartmentById(hsdModel.getIdSubDepartment()));
-			}
+		if (department == null) {
+			return departments;
 		}
+
+		List<HasSubDepartment> list = hsd.getSubDepartmentsByDepartment(department);
+
+		for (HasSubDepartment hsdModel : list) {
+			departments.add(getDepartmentById(hsdModel.getIdSubDepartment()));
+		}
+
 		return departments;
 	}
 

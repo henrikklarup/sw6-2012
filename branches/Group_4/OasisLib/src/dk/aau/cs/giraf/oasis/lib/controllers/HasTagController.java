@@ -67,6 +67,10 @@ class HasTagController {
 	 * @return Rows affected
 	 */
 	public int removeHasTag(HasTag hasTag) {
+		if (hasTag == null) {
+			return -1;
+		}
+		
 		return _context.getContentResolver().delete(HasTagMetaData.CONTENT_URI, 
 				HasTagMetaData.Table.COLUMN_IDTAG + " = '" + hasTag.getIdTag() + "' AND " + 
 						HasTagMetaData.Table.COLUMN_IDMEDIA + " = '" + hasTag.getIdMedia() + "'", null);
@@ -79,6 +83,10 @@ class HasTagController {
 	 * @return Rows
 	 */
 	public int removeHasTagList(List<Tag> tags, Media media) {
+		if (tags == null || media == null) {
+			return -1;
+		}
+		
 		int result = 0;
 		for (Tag t : tags) {
 			result += _context.getContentResolver().delete(HasTagMetaData.CONTENT_URI, 
@@ -95,6 +103,10 @@ class HasTagController {
 	 * @return 0
 	 */
 	public long insertHasTag(HasTag ht) {
+		if (ht == null) {
+			return -1;
+		}
+		
 		ContentValues cv = getContentValues(ht);
 		_context.getContentResolver().insert(HasTagMetaData.CONTENT_URI, cv);
 
@@ -106,6 +118,10 @@ class HasTagController {
 	 * @return Rows
 	 */
 	public int modifyHasTag(HasTag ht) {
+		if (ht == null) {
+			return -1;
+		}
+		
 		ContentValues cv = getContentValues(ht);
 		return _context.getContentResolver().update(HasTagMetaData.CONTENT_URI, cv, 
 				HasTagMetaData.Table.COLUMN_IDMEDIA + " = '" + ht.getIdMedia() + "' AND " +
@@ -135,8 +151,12 @@ class HasTagController {
 	 * @return List of has tags
 	 */
 	public List<HasTag> getHasTagsByMedia(Media media) {
-		List<HasTag> list= new ArrayList<HasTag>();
+		List<HasTag> list = new ArrayList<HasTag>();
 
+		if (media == null) {
+			return list;
+		}
+		
 		Cursor c = _context.getContentResolver().query(HasTagMetaData.CONTENT_URI, columns, 
 				HasTagMetaData.Table.COLUMN_IDMEDIA + " = '" + media.getId() + "'", null, null);
 
@@ -155,8 +175,12 @@ class HasTagController {
 	 * @return List of has tags
 	 */
 	public List<HasTag> getHasTagsByTag(Tag tag) {
-		List<HasTag> list= new ArrayList<HasTag>();
-
+		List<HasTag> list = new ArrayList<HasTag>();
+		
+		if (tag == null) {
+			return list;
+		}
+		
 		Cursor c = _context.getContentResolver().query(HasTagMetaData.CONTENT_URI, columns, 
 				HasTagMetaData.Table.COLUMN_IDTAG + " = '" + tag.getId() + "'", null, null);
 

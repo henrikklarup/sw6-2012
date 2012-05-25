@@ -67,4 +67,16 @@ public class HasTag {
 		
 		return localOutput;
 	}
+	
+	@Override public boolean equals(Object aHasTag) {
+		if ( this == aHasTag ) return true;
+
+		if ( !(aHasTag instanceof HasTag) ) return false;
+
+		HasTag hasTag = (HasTag)aHasTag;
+
+		return
+				EqualsUtil.areEqual(this.getIdTag(), hasTag.getIdTag()) &&
+				EqualsUtil.areEqual(this.getIdMedia(), hasTag.getIdMedia());
+	}
 }

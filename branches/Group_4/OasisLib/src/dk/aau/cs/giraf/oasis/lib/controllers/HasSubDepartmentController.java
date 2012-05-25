@@ -66,6 +66,10 @@ class HasSubDepartmentController {
 	 * @return Rows affected
 	 */
 	public int removeHasSubDepartment(HasSubDepartment hasSubDepartment) {
+		if (hasSubDepartment == null) {
+			return -1;
+		}
+		
 		return _context.getContentResolver().delete(HasSubDepartmentMetaData.CONTENT_URI, 
 				HasSubDepartmentMetaData.Table.COLUMN_IDSUBDEPARTMENT + " = '" + hasSubDepartment.getIdSubDepartment() + "' AND " +
 						HasSubDepartmentMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + hasSubDepartment.getIdDepartment() + "'", null);
@@ -77,6 +81,10 @@ class HasSubDepartmentController {
 	 * @return 0
 	 */
 	public int insertHasSubDepartment(HasSubDepartment hsd) {
+		if (hsd == null) {
+			return -1;
+		}
+		
 		ContentValues cv = getContentValues(hsd);
 		_context.getContentResolver().insert(HasSubDepartmentMetaData.CONTENT_URI, cv);
 
@@ -89,6 +97,10 @@ class HasSubDepartmentController {
 	 * @return rows
 	 */
 	public int modifyHasSubDepartment(HasSubDepartment hsd) {
+		if (hsd == null) {
+			return -1;
+		}
+		
 		ContentValues cv = getContentValues(hsd);
 		return _context.getContentResolver().update(HasSubDepartmentMetaData.CONTENT_URI, cv, 
 				HasSubDepartmentMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + hsd.getIdDepartment() + "' AND " +
@@ -121,6 +133,10 @@ class HasSubDepartmentController {
 	public List<HasSubDepartment> getSubDepartmentsByDepartment(Department dep) {
 		List<HasSubDepartment> hsdList= new ArrayList<HasSubDepartment>();
 
+		if (dep == null) {
+			return hsdList;
+		}
+		
 		Cursor c = _context.getContentResolver().query(HasSubDepartmentMetaData.CONTENT_URI, columns, 
 				HasSubDepartmentMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + dep.getId() + "'", null, null);
 

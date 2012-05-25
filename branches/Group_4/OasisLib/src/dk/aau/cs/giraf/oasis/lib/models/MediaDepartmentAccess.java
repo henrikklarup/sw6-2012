@@ -65,4 +65,16 @@ public class MediaDepartmentAccess {
 		
 		return localOutput;
 	}
+	
+	@Override public boolean equals(Object aMediaDepartmentAccess) {
+		if ( this == aMediaDepartmentAccess ) return true;
+
+		if ( !(aMediaDepartmentAccess instanceof MediaDepartmentAccess) ) return false;
+
+		MediaDepartmentAccess mediaDepartmentAccess = (MediaDepartmentAccess)aMediaDepartmentAccess;
+
+		return
+				EqualsUtil.areEqual(this.getIdDepartment(), mediaDepartmentAccess.getIdDepartment()) &&
+				EqualsUtil.areEqual(this.getIdMedia(), mediaDepartmentAccess.getIdMedia());
+	}
 }

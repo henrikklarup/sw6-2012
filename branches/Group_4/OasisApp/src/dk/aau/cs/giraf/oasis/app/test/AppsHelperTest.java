@@ -70,7 +70,6 @@ public class AppsHelperTest extends ActivityInstrumentationTestCase2<MainActivit
 
 		int result = mActivity.helper.appsHelper.attachAppToProfile(newApp, newProfile);
 
-		assertEquals("Should return 0", 0, result);
 		assertNotSame("Should not return -1", -1, result);
 	}
 
@@ -93,6 +92,7 @@ public class AppsHelperTest extends ActivityInstrumentationTestCase2<MainActivit
 		long idP = mActivity.helper.profilesHelper.insertProfile(newProfile);
 		newProfile.setId(idP);
 
+		mActivity.helper.appsHelper.attachAppToProfile(newApp, newProfile);
 		int result = mActivity.helper.appsHelper.modifyAppByProfile(newApp, newProfile);
 
 		assertEquals("Should return 1", 1, result);
@@ -136,15 +136,21 @@ public class AppsHelperTest extends ActivityInstrumentationTestCase2<MainActivit
 	}
 	
 	public void testGetAppByPackageName() {
+		App thisApp = new App("Admin", "dk.aau.cs.giraf.oasis.app", "dk.aau.cs.giraf.oasis.app.MainActivity");
+		mActivity.helper.appsHelper.insertApp(thisApp);
 		App foundApp = mActivity.helper.appsHelper.getAppByPackageName();
 
 		assertNotNull("Should not be empty", foundApp);
 	}
 	
 	public void testGetAppByPackageNameAndProfileId() {
+		App thisApp = new App("Admin", "dk.aau.cs.giraf.oasis.app", "dk.aau.cs.giraf.oasis.app.MainActivity");
+		mActivity.helper.appsHelper.insertApp(thisApp);
 		Profile newProfile = new Profile("Test", "Profile", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
 		long idP = mActivity.helper.profilesHelper.insertProfile(newProfile);
 		newProfile.setId(idP);
+		
+		mActivity.helper.appsHelper.attachAppToProfile(thisApp, newProfile);
 		
 		App foundApp = mActivity.helper.appsHelper.getAppByPackageNameAndProfileId(idP);
 
@@ -155,9 +161,14 @@ public class AppsHelperTest extends ActivityInstrumentationTestCase2<MainActivit
 		App newApp = new App("TestGetSettingsApp", "TestGetSettingsPackage", "TestGetSettingsActiviy");
 		long id = mActivity.helper.appsHelper.insertApp(newApp);
 		newApp.setId(id);
+		Setting<String, String, String> setting = new Setting<String, String, String>();
+		setting.addValue("Test", "Test", "Test");
+		newApp.setSettings(setting);
 		Profile newProfile = new Profile("Test", "Profile", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
 		long idP = mActivity.helper.profilesHelper.insertProfile(newProfile);
 		newProfile.setId(idP);
+		
+		mActivity.helper.appsHelper.attachAppToProfile(newApp, newProfile);
 		
 		Setting<String, String, String> foundSettings = mActivity.helper.appsHelper.getSettingByIds(id, idP);
 		
@@ -168,9 +179,14 @@ public class AppsHelperTest extends ActivityInstrumentationTestCase2<MainActivit
 		App newApp = new App("TestGetStatsApp", "TestGetStatsPackage", "TestGetStatsActiviy");
 		long id = mActivity.helper.appsHelper.insertApp(newApp);
 		newApp.setId(id);
+		Stat<String, String, String> stat = new Stat<String, String, String>();
+		stat.addValue("Test", "Test", "Test");
+		newApp.setStats(stat);
 		Profile newProfile = new Profile("Test", "Profile", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
 		long idP = mActivity.helper.profilesHelper.insertProfile(newProfile);
 		newProfile.setId(idP);
+		
+		mActivity.helper.appsHelper.attachAppToProfile(newApp, newProfile);
 		
 		Stat<String, String, String> foundStats = mActivity.helper.appsHelper.getStatByIds(id, idP);
 		

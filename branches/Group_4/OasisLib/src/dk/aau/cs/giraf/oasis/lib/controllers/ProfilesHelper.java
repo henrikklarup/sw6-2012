@@ -73,20 +73,21 @@ public class ProfilesHelper {
 	 * @return Rows affected
 	 */
 	public int removeProfile(Profile profile) {
-		int rows = -1;
-
-		if (profile != null) {
-			rows = 0;
-			AuthUser authUser = au.getAuthUserById(profile.getId());
-
-			rows += au.removeAuthUser(authUser);
-			rows += loa.removeListOfAppsByProfileId(profile.getId());
-			rows += hg.removeHasGuardiansByProfile(profile);
-			rows += hd.removeHasDepartmentByProfileId(profile.getId());
-			rows += mpa.removeMediaProfileAccessByProfileId(profile.getId());
-			rows += _context.getContentResolver().delete(ProfilesMetaData.CONTENT_URI, 
-					ProfilesMetaData.Table.COLUMN_ID + " = '" + profile.getId() + "'", null);
+		if (profile == null) {
+			return -1;
 		}
+
+		int rows = 0;
+
+		AuthUser authUser = au.getAuthUserById(profile.getId());
+
+		rows += au.removeAuthUser(authUser);
+		rows += loa.removeListOfAppsByProfileId(profile.getId());
+		rows += hg.removeHasGuardiansByProfile(profile);
+		rows += hd.removeHasDepartmentByProfileId(profile.getId());
+		rows += mpa.removeMediaProfileAccessByProfileId(profile.getId());
+		rows += _context.getContentResolver().delete(ProfilesMetaData.CONTENT_URI, 
+				ProfilesMetaData.Table.COLUMN_ID + " = '" + profile.getId() + "'", null);
 
 		return rows;
 	}
@@ -95,16 +96,20 @@ public class ProfilesHelper {
 	 * Remove child attachment to guardian
 	 * @param child Child profile
 	 * @param guardian Guardian profile
-	 * @return Rows
+	 * @return Rows affected
 	 */
 	public int removeChildAttachmentToGuardian(Profile child, Profile guardian) {
-		int rows = -1;
-		if (child != null && guardian != null) {
-			if (child.getPRole() == pRoles.CHILD.ordinal() && 
-					(guardian.getPRole() == pRoles.GUARDIAN.ordinal() || 
-					guardian.getPRole() == pRoles.PARENT.ordinal())) {
-				rows = hg.removeHasGuardian(new HasGuardian(guardian.getId(), child.getId()));
-			}
+		if (child == null || guardian == null) {
+			return -1;
+		}
+
+		int rows = -4;
+		if (child.getPRole() == pRoles.CHILD.ordinal() && 
+				(guardian.getPRole() == pRoles.GUARDIAN.ordinal() || 
+				guardian.getPRole() == pRoles.PARENT.ordinal())) {
+			rows = hg.removeHasGuardian(new HasGuardian(guardian.getId(), child.getId()));
+		} else {
+			rows = -2;
 		}
 
 		return rows;
@@ -113,17 +118,18 @@ public class ProfilesHelper {
 	/**
 	 * Insert profile
 	 * @param profile Profile containing data
+	 * @return profile id
 	 */
 	public long insertProfile(Profile profile) {
-		long id = -1;
-
-		if (profile != null) {
-			id = au.insertAuthUser(AuthUser.aRole.PROFILE.ordinal());
-
-			ContentValues profileContentValues = getContentValues(profile);
-			profileContentValues.put(ProfilesMetaData.Table.COLUMN_ID, id);
-			_context.getContentResolver().insert(ProfilesMetaData.CONTENT_URI, profileContentValues);
+		if (profile == null) {
+			return -1;
 		}
+
+		long id = au.insertAuthUser(AuthUser.aRole.PROFILE.ordinal());
+
+		ContentValues profileContentValues = getContentValues(profile);
+		profileContentValues.put(ProfilesMetaData.Table.COLUMN_ID, id);
+		_context.getContentResolver().insert(ProfilesMetaData.CONTENT_URI, profileContentValues);
 
 		return id;
 	}
@@ -135,15 +141,19 @@ public class ProfilesHelper {
 	 * @return Rows affected
 	 */
 	public int attachChildToGuardian(Profile child, Profile guardian) {
-		int result = -1; 
-		if (child != null && guardian != null) {
-			if (child.getPRole() == pRoles.CHILD.ordinal() && 
-					(guardian.getPRole() == pRoles.GUARDIAN.ordinal() || 
-					guardian.getPRole() == pRoles.PARENT.ordinal())) {
-
-				result = hg.insertHasGuardian(new HasGuardian(child.getId(), guardian.getId()));
-			}	
+		if (child == null || guardian == null) {
+			return -1;
 		}
+
+		int result = -1; 
+
+		if (child.getPRole() == pRoles.CHILD.ordinal() && 
+				(guardian.getPRole() == pRoles.GUARDIAN.ordinal() || 
+				guardian.getPRole() == pRoles.PARENT.ordinal())) {
+
+			result = hg.insertHasGuardian(new HasGuardian(child.getId(), guardian.getId()));
+		}
+
 		return result;
 	}
 
@@ -153,13 +163,13 @@ public class ProfilesHelper {
 	 * @return Rows affected
 	 */
 	public int modifyProfile(Profile profile) {
-		int rows = -1;
-		if (profile != null) {
-			Uri uri = ContentUris.withAppendedId(ProfilesMetaData.CONTENT_URI, profile.getId());
-			ContentValues cv = getContentValues(profile);
-			rows = _context.getContentResolver().update(uri, cv, null, null);
+		if (profile == null) {
+			return -1;
 		}
-		return rows;
+
+		Uri uri = ContentUris.withAppendedId(ProfilesMetaData.CONTENT_URI, profile.getId());
+		ContentValues cv = getContentValues(profile);
+		return _context.getContentResolver().update(uri, cv, null, null);
 	}
 
 	/**
@@ -168,13 +178,15 @@ public class ProfilesHelper {
 	 * @return Authenticated profile
 	 */
 	public Profile authenticateProfile(String certificate) {
-		Profile profile = null;
-		if (certificate != null) {
-			long id = au.getIdByCertificate(certificate);
+		if (certificate == null) {
+			return null;
+		}
 
-			if (id != -1) {
-				profile = getProfileById(id);
-			}
+		Profile profile = null;
+		long id = au.getIdByCertificate(certificate);
+
+		if (id != -1) {
+			profile = getProfileById(id);
 		}
 
 		return profile;
@@ -187,11 +199,11 @@ public class ProfilesHelper {
 	 * @return Rows affected
 	 */
 	public int setCertificate(String certificate, Profile profile) {
-		int result = -1;
-		if (certificate != null && profile != null) {
-			result = au.setCertificate(certificate, profile.getId());
+		if (certificate == null || profile == null) {
+			return -1;
 		}
-		return result;
+
+		return au.setCertificate(certificate, profile.getId());
 	}
 
 	/**
@@ -254,10 +266,11 @@ public class ProfilesHelper {
 	public List<String> getCertificatesByProfile(Profile profile) {
 		List<String> certificates = new ArrayList<String>();
 
-		if (profile != null) {
-			certificates = au.getCertificatesById(profile.getId());
+		if (profile == null) {
+			return certificates;
 		}
 
+		certificates = au.getCertificatesById(profile.getId());
 		return certificates;
 	}
 
@@ -267,20 +280,22 @@ public class ProfilesHelper {
 	 * @return List of profiles
 	 */
 	public List<Profile> getChildrenByDepartment(Department department) {
-		List<Profile> profiles = new ArrayList<Profile>();
+		List<Profile> children = new ArrayList<Profile>();
 
-		if (department != null) {
-			List<HasDepartment> list = hd.getProfilesByDepartment(department);
+		if (department == null) {
+			return children;
+		}
 
-			for (HasDepartment hdModel : list) {
-				Profile profile = getProfileById(hdModel.getIdProfile());
-				if (profile.getPRole() == pRoles.CHILD.ordinal()) {
-					profiles.add(profile);
-				}
+		List<HasDepartment> list = hd.getProfilesByDepartment(department);
+
+		for (HasDepartment hdModel : list) {
+			Profile profile = getProfileById(hdModel.getIdProfile());
+			if (profile.getPRole() == pRoles.CHILD.ordinal()) {
+				children.add(profile);
 			}
 		}
 
-		return profiles;
+		return children;
 	}
 
 	/**
@@ -289,23 +304,23 @@ public class ProfilesHelper {
 	 * @return List of profiles
 	 */
 	public List<Profile> getChildrenByDepartmentAndSubDepartments(Department department) {
-		List<Profile> profiles = new ArrayList<Profile>();
+		List<Profile> children = new ArrayList<Profile>();
 
-		if (department != null) {
-
-			profiles.addAll(getChildrenByDepartment(department));
-
-			List<HasSubDepartment> list = hsd.getSubDepartmentsByDepartment(department);
-
-			for (HasSubDepartment hsdModel : list) {
-				Department _department = new Department();
-				department.setId(hsdModel.getIdSubDepartment());
-				profiles.addAll(getChildrenByDepartmentAndSubDepartments(_department));
-			}
-
+		if (department == null) {
+			return children;
 		}
 
-		return profiles;
+		children.addAll(getChildrenByDepartment(department));
+
+		List<HasSubDepartment> list = hsd.getSubDepartmentsByDepartment(department);
+
+		for (HasSubDepartment hsdModel : list) {
+			Department _department = new Department();
+			department.setId(hsdModel.getIdSubDepartment());
+			children.addAll(getChildrenByDepartmentAndSubDepartments(_department));
+		}
+
+		return children;
 	}
 
 	/**
@@ -314,24 +329,26 @@ public class ProfilesHelper {
 	 * @return List of profiles
 	 */
 	public List<Profile> getChildrenByGuardian(Profile guardian) {
-		List<Profile> profiles = new ArrayList<Profile>();
-		
-		if (guardian != null) {
-			if (guardian.getPRole() == pRoles.GUARDIAN.ordinal() || 
-					guardian.getPRole() == pRoles.PARENT.ordinal()) {
-				
-				List<HasGuardian> list = hg.getChildrenByGuardian(guardian);
-	
-				for (HasGuardian hgModel : list) {
-					Profile child = getProfileById(hgModel.getIdChild());
-					if (child.getPRole() == pRoles.CHILD.ordinal()) {
-						profiles.add(child);
-					}
+		List<Profile> children = new ArrayList<Profile>();
+
+		if (guardian == null) {
+			return children;
+		}
+
+		if (guardian.getPRole() == pRoles.GUARDIAN.ordinal() || 
+				guardian.getPRole() == pRoles.PARENT.ordinal()) {
+
+			List<HasGuardian> list = hg.getChildrenByGuardian(guardian);
+
+			for (HasGuardian hgModel : list) {
+				Profile child = getProfileById(hgModel.getIdChild());
+				if (child.getPRole() == pRoles.CHILD.ordinal()) {
+					children.add(child);
 				}
 			}
 		}
 
-		return profiles;
+		return children;
 	}
 
 	/**
@@ -359,15 +376,17 @@ public class ProfilesHelper {
 	 */
 	public List<Profile> getProfilesByDepartment(Department department) {
 		List<Profile> profiles = new ArrayList<Profile>();
-		
-		if (department != null) {
-			List<HasDepartment> list = hd.getProfilesByDepartment(department);
-	
-			for (HasDepartment hd : list) {
-				profiles.add(getProfileById(hd.getIdProfile()));
-			}
+
+		if (department == null) {
+			return profiles;
 		}
-		
+
+		List<HasDepartment> list = hd.getProfilesByDepartment(department);
+
+		for (HasDepartment hd : list) {
+			profiles.add(getProfileById(hd.getIdProfile()));
+		}
+
 		return profiles;
 	}
 
@@ -396,15 +415,17 @@ public class ProfilesHelper {
 	 */
 	public List<Profile> getGuardiansByDepartment(Department department) {
 		List<Profile> guardians = new ArrayList<Profile>();
-		
-		if (department != null) {
-			List<HasDepartment> list = hd.getProfilesByDepartment(department);
-	
-			for (HasDepartment hd : list) {
-				Profile guardian = getProfileById(hd.getIdProfile());
-				if (guardian.getPRole() == pRoles.GUARDIAN.ordinal()) {
-					guardians.add(guardian);
-				}
+
+		if (department == null) {
+			return guardians;
+		}
+
+		List<HasDepartment> list = hd.getProfilesByDepartment(department);
+
+		for (HasDepartment hd : list) {
+			Profile guardian = getProfileById(hd.getIdProfile());
+			if (guardian.getPRole() == pRoles.GUARDIAN.ordinal()) {
+				guardians.add(guardian);
 			}
 		}
 
@@ -418,16 +439,18 @@ public class ProfilesHelper {
 	 */
 	public List<Profile> getGuardiansByChild(Profile child) {
 		List<Profile> guardians = new ArrayList<Profile>();
-		
-		if (child != null) {
-			if (child.getPRole() == pRoles.CHILD.ordinal()) {
-				List<HasGuardian> list = hg.getGuardiansByChild(child);
-	
-				for (HasGuardian hgModel : list) {
-					Profile guardian = getProfileById(hgModel.getIdGuardian());
-					if (guardian.getPRole() == pRoles.GUARDIAN.ordinal()) {
-						guardians.add(guardian);
-					}
+
+		if (child == null) {
+			return guardians;
+		}
+
+		if (child.getPRole() == pRoles.CHILD.ordinal()) {
+			List<HasGuardian> list = hg.getGuardiansByChild(child);
+
+			for (HasGuardian hgModel : list) {
+				Profile guardian = getProfileById(hgModel.getIdGuardian());
+				if (guardian.getPRole() == pRoles.GUARDIAN.ordinal()) {
+					guardians.add(guardian);
 				}
 			}
 		}
@@ -436,7 +459,7 @@ public class ProfilesHelper {
 	}
 
 	/**
-	 * Get a profile by its ID
+	 * Get a profile by its Id
 	 * @param id the id of the profile
 	 * @return profile
 	 */
@@ -461,17 +484,19 @@ public class ProfilesHelper {
 	 */
 	public List<Profile> getProfilesByName(String name) {
 		List<Profile> profiles = new ArrayList<Profile>();
-		
-		if (name != null) {
-			Cursor c = _context.getContentResolver().query(ProfilesMetaData.CONTENT_URI, columns, 
-					ProfilesMetaData.Table.COLUMN_FIRST_NAME + " LIKE '%" + name + "%' OR " +
-					ProfilesMetaData.Table.COLUMN_MIDDLE_NAME + " LIKE '%" + name + "%' OR " +
-					ProfilesMetaData.Table.COLUMN_SUR_NAME +  " LIKE '%" + name + "%'", null, null);
-	
-			if (c != null) {
-				profiles = cursorToProfiles(c);
-				c.close();
-			}
+
+		if (name == null) {
+			return profiles;
+		}
+
+		Cursor c = _context.getContentResolver().query(ProfilesMetaData.CONTENT_URI, columns, 
+				ProfilesMetaData.Table.COLUMN_FIRST_NAME + " LIKE '%" + name + "%' OR " +
+						ProfilesMetaData.Table.COLUMN_MIDDLE_NAME + " LIKE '%" + name + "%' OR " +
+						ProfilesMetaData.Table.COLUMN_SUR_NAME +  " LIKE '%" + name + "%'", null, null);
+
+		if (c != null) {
+			profiles = cursorToProfiles(c);
+			c.close();
 		}
 
 		return profiles;

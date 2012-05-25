@@ -61,4 +61,16 @@ public class Tag {
 
 		return localOutput;
 	}
+	
+	@Override public boolean equals(Object aTag) {
+		if ( this == aTag ) return true;
+
+		if ( !(aTag instanceof Tag) ) return false;
+
+		Tag tag = (Tag)aTag;
+
+		return
+				EqualsUtil.areEqual(this.getId(), tag.getId()) &&
+				EqualsUtil.areEqual(this.getCaption(), tag.getCaption());
+		}
 }

@@ -51,6 +51,10 @@ public class TagsHelper {
 	 * @return Rows affected
 	 */
 	public int removeTag(Tag tag) {
+		if (tag == null) {
+			return -1;
+		}
+		
 		int rows = 0;
 		
 		rows += ht.removeHasTagByTagId(tag.getId());
@@ -66,6 +70,10 @@ public class TagsHelper {
 	 * @return Tag id
 	 */
 	public long insertTag(Tag tag) {
+		if (tag == null) {
+			return -1;
+		}
+		
 		long id = 0;
 		
 		Cursor c = _context.getContentResolver().query(TagsMetaData.CONTENT_URI, columns, TagsMetaData.Table.COLUMN_CAPTION + " = '" + tag.getCaption() + "'", null, null);
@@ -89,6 +97,10 @@ public class TagsHelper {
 	 * @return Rows
 	 */
 	public int modifyTag(Tag tag) {
+		if (tag == null) {
+			return -1;
+		}
+		
 		Uri uri = ContentUris.withAppendedId(TagsMetaData.CONTENT_URI, tag.getId());
 		ContentValues cv = getContentValues(tag);
 		return _context.getContentResolver().update(uri, cv, null, null);
@@ -118,7 +130,11 @@ public class TagsHelper {
 	 */
 	public List<Tag> getTagsByCaption(String name) {
 		List<Tag> tags = new ArrayList<Tag>();
-
+		
+		if (name == null) {
+			return tags;
+		}
+		
 		Cursor c = _context.getContentResolver().query(TagsMetaData.CONTENT_URI, columns, TagsMetaData.Table.COLUMN_CAPTION + " LIKE '%" + name + "%'", null, null);
 
 		if (c != null) {
@@ -134,7 +150,7 @@ public class TagsHelper {
 	 * @param id Id
 	 * @return Tag
 	 */
-	public Tag getTagById(Long id) {
+	public Tag getTagById(long id) {
 		Tag tag = null;
 		
 		Uri uri = ContentUris.withAppendedId(TagsMetaData.CONTENT_URI, id);
@@ -147,8 +163,6 @@ public class TagsHelper {
 			}
 			c.close();
 		}
-
-		
 
 		return tag;
 	}

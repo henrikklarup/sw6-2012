@@ -61,7 +61,7 @@ public class DepartmentsHelperTest extends ActivityInstrumentationTestCase2<Main
 		newDepartment.setId(idD);
 		
 		mActivity.helper.departmentsHelper.attachSubDepartmentToDepartment(newDepartment, newSubDepartment);
-		int result = mActivity.helper.departmentsHelper.removeSubDepartmentAttachmentToDepartment(newDepartment, newDepartment);
+		int result = mActivity.helper.departmentsHelper.removeSubDepartmentAttachmentToDepartment(newDepartment, newSubDepartment);
 		
 		assertEquals("Should return 1", 1, result);
 		assertNotSame("Should not return -1", -1, result);
