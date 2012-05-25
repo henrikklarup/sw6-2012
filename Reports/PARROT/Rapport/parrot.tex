@@ -19,12 +19,7 @@
 \newpage
 \pagenumbering{arabic}
 \InputIfFileExists{input/introduction}{}{}
-\InputIfFileExists{scenario/scenario}{}{}
-\InputIfFileExists{hardware/hardware}{}{}
-\InputIfFileExists{design/design}{}{}
-\InputIfFileExists{software/software}{}{}
-\InputIfFileExists{Test/test}{}{}
-\InputIfFileExists{epilogue/epilogue}{}{}
+\InputIfFileExists{input/implementation}{}{}
 
 \clearpage{\thispagestyle{empty}\cleardoublepage}
 
@@ -34,8 +29,8 @@
 \InputIfFileExists{appendix/color_sensor_test_2}{}{}
 \InputIfFileExists{appendix/background_test}{}{}
 \clearpage{\thispagestyle{empty}\cleardoublepage}
-\bibliographystyle{alpha}
-\bibliography{bibtex/bibliography}
+\bibliographystyle{plain}
+\bibliography{bibtex/literature}
 
 
 \end{document}

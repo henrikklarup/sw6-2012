@@ -1,0 +1,92 @@
+\section{Displaying Pictograms} %%Name of Feature.
+
+\subsection{Problem}
+We need a way import pictograms from the tablet storage drive and displaying them in the application so that they are ready to be used.
+Displaying the pictograms also involves showing the associated text peices so that one can easily tell what it represents.
+Areas where we will be displaying pictograms are the Talk board and the Management board.
+
+\subsection{Solution}
+Using GridView we can display both the pictograms and its text.
+Rather than having the GridView display pictograms, we can display a LinearLayout called ``PictogramView''.
+This layout contains an ImageView with a pictogram and a TextView with the associated text.
+In that way we are able to show images with text, without having to imprint the text into the image.\\
+
+In order to prepare the pictograms for display, we have to convert them to bitmaps before our Pictogram Adapter class can convert them into views.
+
+\subsection{Execution}
+In order to determine what to show in a GridView, an adapter is needed. Therefore we constructed the Pictogram Adapter in our project, by extending the ``BaseAdapter'' class.
+In code segment .... you can see the getView Method, who's function is to return a view for every index in a GridView.
+These views are the image and text that you see in the application.\\
+
+
+\begin{verbatim}
+	public View getView(int position, View convertView, ViewGroup parent) 
+	{
+		ImageView imageView;
+		View view = convertView;
+		TextView textView;
+		Pictogram pct=cat.getPictogramAtIndex(position);
+
+		LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		view = layoutInflater.inflate(R.layout.pictogramview, null);
+
+		imageView = (ImageView) view.findViewById(R.id.pictogrambitmap); 
+		imageView.setImageBitmap(pct.getBitmap());
+
+		textView = (TextView) view.findViewById(R.id.pictogramtext);
+		textView.setTextSize(20);	//TODO this value should be customizable
+		if(pct.isEmpty() == false)
+		{
+
+			textView.setText(pct.getName());
+		}
+		else
+		{
+			textView.setText("");
+		}
+
+		view.setPadding(8, 8, 8, 8);
+		return view;
+	}
+\end{verbatim}
+We instantiate the different views that we expect to use and start by initializing the Pictogram according to its position in the Category.
+The Category, in short, is an object containing both information about itself and a list of pictograms.
+This is followed by creating a ``LayoutInflater'' who's job it is to prepare a view for the application.
+In this case the pictogramview found through id reference and used to re-initialize the ``View'' we plan on returning.\\
+The Imageview and TextView´are supplied with the data they are to show through method calls. 
+As long as the Pictogram is not an Empty pictogram, empty being our placeholder for pictograms, the View will be given an Pictogram and its name before being returned.\\
+
+The code fragment ... is our getBitmap method from the pictogram class.
+This method is important for several reasons, it checks for existing bitmaps, making sure that the application do not waste time reconverting image files to bitmaps.
+It retrieves information from resources and converts it to bitmaps if the pictogram is supposed to be ``Empty'', or creates the bitmap from the image on the Tablet storage.
+
+\begin{verbatim}
+	public Bitmap getBitmap()
+	{
+		if(bitmap == null)
+		{
+			if(isEmpty() == true)
+			{
+				Resources res = parrent.getResources();
+				bitmap = BitmapFactory.decodeResource(res, R.drawable.usynlig);
+			}
+			else
+			{
+				bitmap = BitmapFactory.decodeFile(imagePath);
+			}
+		}
+		return bitmap;
+	
+	}
+\end{verbatim}
+
+
+\subsection{Result}
+The result of this is that we are able to use our adapter to show pictograms in GridViews whereever we need them.
+By storing the bitmap, we can change between views much faster than we could otherwise.
+
+
+\subsection{Notes}
+The input view ``convertView'' in the getView method is an leftover from an earlier iteration of the method. it no longer serves a purpose but ``BaseAdapter'' requires that the function exists with its current inputs.\\
+
+\subsection{Further Reading}
