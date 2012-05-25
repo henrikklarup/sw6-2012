@@ -1,8 +1,13 @@
 \section{Authentication Activity}
 This section will explain the \activity{AuthenticationActivity}.
 
+\todo{needs label in design->internal acrh -> authentication called design:authentication}
 
-This activity is the first one the user will face when using the \giraf[] system.
+This activity is the first one the user will face when using the \giraf[] system. It is also the current lock screen which is used by Wombat. 
+
+This activity was implemented using ZXing which is a libaray under Apache 2.0. This libarary is called Zebra Crossing and is made for use with Android for scanning 1D and 2D QR codes.
+
+There were also implemented the instructions and illustrations talked about in \autoref{design:authentication}. There is also implemented an gesture, a short vibration, for showing the user that the QR code was scanned correct because some customers had trouble seeing the login button when it appeard.
 
 \begin{lstlisting}[style=sourceCode, language=JAVA, caption=This is code, label=lst:authenticationAcitivity] 
 				// If the authentication activity was not launched by the launcher...
@@ -14,3 +19,4 @@ This activity is the first one the user will face when using the \giraf[] system
 					finish();
 				}
 \end{lstlisting}
+\todo{Forklaring til lstlisting}
