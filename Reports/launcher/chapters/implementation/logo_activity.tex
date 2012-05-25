@@ -4,7 +4,7 @@ The \activity{LogoActivity} is a splash screen, which shows the \giraf[] logo wh
 
 However, \activity{LogoActivity} does not indicate whether or not the activity itself has crashed. This is a feature which is on the backlog \autoref{backlog:logo_screen_loading}.
 
-The logo activity implements TIME-AUTO-LOGIN-FEATURE -- explained in \autoref{design:autologin}\todo{skriv om denne feature i design afsnittet} -- by using the \method{sessionExpired} method, found in \class{Tools} class, seen in \autoref{lst:sessionexpired}.
+The logo activity implements TIME-AUTO-LOGIN-FEATURE -- explained in \autoref{design:autologin}\todo{check autoref} -- by using the \method{sessionExpired} method, found in \class{Tools} class, seen in \autoref{lst:sessionexpired}.
 The usage of the \method{sessionExpired} method can be seen in \autoref{lst:sessionexpiredusage}
 
 \begin{lstlisting}[style=sourceCode, language=JAVA, caption=Snippet of: LogoActivity.java, label=lst:sessionexpiredusage] 
