@@ -78,7 +78,6 @@ public class PARROTDataLoader {
 		if(childId !=null && appId !=null)
 		{
 			prof = help.profilesHelper.getProfileById(childId);	//It used to be "currentProfileId"
-			//app = help.appsHelper.getAppByIds(appId, childId);
 
 			Pictogram pic = new Pictogram(prof.getFirstname(), prof.getPicture(), null, null);	//TODO discuss whether this image might be changed
 			PARROTProfile parrotUser = new PARROTProfile(prof.getFirstname(), pic);
@@ -122,8 +121,7 @@ public class PARROTDataLoader {
 			else
 			{
 				//If no profile is found, return null.
-				//TODO find out if this means that a Guardian is using the PARROT app.
-				//It doesn't, it means the launcher has not provided a profile, either due to an error, or because PARROT has been launched outside of GIRAF.
+				//It means that the launcher has not provided a profile, either due to an error, or because PARROT has been launched outside of GIRAF.
 				return null;
 			}
 		}
