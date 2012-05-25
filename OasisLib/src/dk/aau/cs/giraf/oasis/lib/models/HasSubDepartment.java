@@ -67,4 +67,16 @@ public class HasSubDepartment {
 		
 		return localOutput;
 	}
+	
+	@Override public boolean equals(Object aHasSubDepartment) {
+		if ( this == aHasSubDepartment ) return true;
+
+		if ( !(aHasSubDepartment instanceof HasSubDepartment) ) return false;
+
+		HasSubDepartment hasSubDepartment = (HasSubDepartment)aHasSubDepartment;
+
+		return
+				EqualsUtil.areEqual(this.getIdDepartment(), hasSubDepartment.getIdDepartment()) &&
+				EqualsUtil.areEqual(this.getIdSubDepartment(), hasSubDepartment.getIdSubDepartment());
+	}
 }

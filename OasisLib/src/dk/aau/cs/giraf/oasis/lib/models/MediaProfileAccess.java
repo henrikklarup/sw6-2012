@@ -66,4 +66,16 @@ public class MediaProfileAccess {
 		
 		return localOutput;
 	}
+	
+	@Override public boolean equals(Object aMediaProfileAccess) {
+		if ( this == aMediaProfileAccess ) return true;
+
+		if ( !(aMediaProfileAccess instanceof MediaProfileAccess) ) return false;
+
+		MediaProfileAccess mediaProfileAccess = (MediaProfileAccess)aMediaProfileAccess;
+
+		return
+				EqualsUtil.areEqual(this.getIdProfile(), mediaProfileAccess.getIdProfile()) &&
+				EqualsUtil.areEqual(this.getIdMedia(), mediaProfileAccess.getIdMedia());
+	}
 }

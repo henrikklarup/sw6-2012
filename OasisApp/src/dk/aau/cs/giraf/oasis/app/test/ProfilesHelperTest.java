@@ -24,7 +24,7 @@ public class ProfilesHelperTest extends ActivityInstrumentationTestCase2<MainAct
 
 		mActivity = getActivity();
 	}
-
+	
 	public void testRemoveProfile() {
 		Profile newProfile = new Profile("Test", "Profile", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
 		long id = mActivity.helper.profilesHelper.insertProfile(newProfile);
@@ -37,15 +37,23 @@ public class ProfilesHelperTest extends ActivityInstrumentationTestCase2<MainAct
 	}
 
 	public void testRemoveChildAttachmentToGuardian() {
-		Profile newChild = new Profile("Test", "Child", null, Profile.pRoles.CHILD.ordinal(), 12345678, null, null);
-		long idChild = mActivity.helper.profilesHelper.insertProfile(newChild);
-		newChild.setId(idChild);
-		Profile newGuard = new Profile("Test", "Guard", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
+		Profile newGuard = new Profile("TestRemoveChildAttachmentToGuardian", "Guard", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
 		long idGuard = mActivity.helper.profilesHelper.insertProfile(newGuard);
 		newGuard.setId(idGuard);
+		
+		Profile newChild = new Profile("TestRemoveChildAttachmentToGuardian", "Child", null, Profile.pRoles.CHILD.ordinal(), 12345678, null, null);
+		long idChild = mActivity.helper.profilesHelper.insertProfile(newChild);
+		newChild.setId(idChild);
+		
 		mActivity.helper.profilesHelper.attachChildToGuardian(newChild, newGuard);
+		
+		newGuard = new Profile();
+		newGuard.setId(46);
+		newChild = new Profile();
+		newChild.setId(47);
+		
 		int result = mActivity.helper.profilesHelper.removeChildAttachmentToGuardian(newChild, newGuard);
-
+		
 		assertEquals("Should return 1", 1, result);
 		assertNotSame("Should not return -1", -1, result);
 	}

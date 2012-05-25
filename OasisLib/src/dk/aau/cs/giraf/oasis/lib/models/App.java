@@ -185,7 +185,22 @@ public class App {
 		localOutput = localOutput.replace("{4}", getaPackage());
 		localOutput = localOutput.replace("{5}", getActivity());
 
-		
 		return localOutput;
+	}
+	
+	@Override public boolean equals(Object anApp) {
+		if ( this == anApp ) return true;
+
+		if ( !(anApp instanceof App) ) return false;
+
+		App app = (App)anApp;
+
+		return
+				EqualsUtil.areEqual(this.getId(), app.getId()) &&
+				EqualsUtil.areEqual(this.getName(), app.getName()) &&
+				EqualsUtil.areEqual(this.getVersion(), app.getVersion()) &&
+				EqualsUtil.areEqual(this.getIcon(), app.getIcon()) &&
+				EqualsUtil.areEqual(this.getaPackage(), app.getaPackage()) &&
+				EqualsUtil.areEqual(this.getActivity(), app.getActivity());
 	}
 }

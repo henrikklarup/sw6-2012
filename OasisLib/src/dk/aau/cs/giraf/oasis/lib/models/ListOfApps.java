@@ -109,4 +109,16 @@ public class ListOfApps {
 		
 		return localOutput;
 	}
+	
+	@Override public boolean equals(Object aListOfApps) {
+		if ( this == aListOfApps ) return true;
+
+		if ( !(aListOfApps instanceof ListOfApps) ) return false;
+
+		ListOfApps listOfApps = (ListOfApps)aListOfApps;
+
+		return
+				EqualsUtil.areEqual(this.getIdApp(), listOfApps.getIdApp()) &&
+				EqualsUtil.areEqual(this.getIdProfile(), listOfApps.getIdProfile());
+	}
 }

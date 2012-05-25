@@ -67,6 +67,10 @@ class HasLinkController {
 	 * @return Rows affected
 	 */
 	public int removeHasLink(HasLink hasLink) {
+		if (hasLink == null) {
+			return -1;
+		}
+		
 		return _context.getContentResolver().delete(HasLinkMetaData.CONTENT_URI, 
 				HasLinkMetaData.Table.COLUMN_IDMEDIA + " = '" + hasLink.getIdMedia() + "' AND " +
 						HasLinkMetaData.Table.COLUMN_IDSUBMEDIA + " = '" + hasLink.getIdSubMedia() + "'", null);
@@ -75,9 +79,13 @@ class HasLinkController {
 	/**
 	 * Insert has link
 	 * @param hl Has link
-	 * @return 0
+	 * @return 0 for success or -1 for error
 	 */
-	public long insertHasLink(HasLink hl) {
+	public int insertHasLink(HasLink hl) {
+		if (hl == null) {
+			return -1;
+		}
+		
 		ContentValues cv = getContentValues(hl);
 		_context.getContentResolver().insert(HasLinkMetaData.CONTENT_URI, cv);
 
@@ -90,6 +98,10 @@ class HasLinkController {
 	 * @return Rows
 	 */
 	public int modifyHasLink(HasLink hl) {
+		if (hl == null) {
+			return -1;
+		}
+		
 		ContentValues cv = getContentValues(hl);
 		return _context.getContentResolver().update(HasLinkMetaData.CONTENT_URI, cv, 
 				HasLinkMetaData.Table.COLUMN_IDMEDIA + " = '" + hl.getIdMedia() + "' AND " +
@@ -120,7 +132,11 @@ class HasLinkController {
 	 * @return List of has links
 	 */
 	public List<HasLink> getSubMediaByMedia(Media media) {
-		List<HasLink> list= new ArrayList<HasLink>();
+		List<HasLink> list = new ArrayList<HasLink>();
+		
+		if (media == null) {
+			return list;
+		}
 
 		Cursor c = _context.getContentResolver().query(HasLinkMetaData.CONTENT_URI, columns, 
 				HasLinkMetaData.Table.COLUMN_IDMEDIA + " = '" + media.getId() + "'", null, null);

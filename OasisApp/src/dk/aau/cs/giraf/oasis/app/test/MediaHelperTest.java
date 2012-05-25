@@ -55,14 +55,16 @@ public class MediaHelperTest extends ActivityInstrumentationTestCase2<MainActivi
 	}
 
 	public void testRemoveMediaAttachmentToDepartment() {
-		Media newMedia = new Media("TestMedia", "TPath", true, "picture", 2);
+		Media newMedia = new Media("TestRemoveMedia", "TPath", true, "picture", 2);
 		long id = mActivity.helper.mediaHelper.insertMedia(newMedia);
 		newMedia.setId(id);
-		Department newDepartment = new Department("TestDep", "Test", 12345678, "test@test.com");
+		
+		Department newDepartment = new Department("TestDepartment", "Test", 12345678, "test@test.com");
 		long idD = mActivity.helper.departmentsHelper.insertDepartment(newDepartment);
 		newDepartment.setId(idD);
+		
 		mActivity.helper.mediaHelper.attachMediaToDepartment(newMedia, newDepartment, null);
-
+		
 		int result = mActivity.helper.mediaHelper.removeMediaAttachmentToDepartment(newMedia, newDepartment);
 
 		assertEquals("Should return 1", 1, result);
@@ -144,7 +146,7 @@ public class MediaHelperTest extends ActivityInstrumentationTestCase2<MainActivi
 
 		int result = mActivity.helper.mediaHelper.attachMediaToProfile(newMedia, newProfile, null);
 
-		assertEquals("Should return 1", 1, result);
+		assertEquals("Should return 0", 0, result);
 		assertNotSame("Should not return -1", -1, result);
 	}
 
@@ -158,7 +160,7 @@ public class MediaHelperTest extends ActivityInstrumentationTestCase2<MainActivi
 
 		int result = mActivity.helper.mediaHelper.attachMediaToDepartment(newMedia, newDepartment, null);
 
-		assertEquals("Should return 1", 1, result);
+		assertEquals("Should return 0", 0, result);
 		assertNotSame("Should not return -1", -1, result);
 	}
 
@@ -172,7 +174,7 @@ public class MediaHelperTest extends ActivityInstrumentationTestCase2<MainActivi
 
 		int result = mActivity.helper.mediaHelper.attachSubMediaToMedia(newSubMedia, newMedia);
 
-		assertEquals("Should return 1", 1, result);
+		assertEquals("Should return 0", 0, result);
 		assertNotSame("Should not return -1", -1, result);
 	}
 

@@ -68,6 +68,10 @@ class MediaProfileAccessController {
 	 * @return Rows affected
 	 */
 	public int removeMediaProfileAccess(MediaProfileAccess mediaProfileAccess) {
+		if (mediaProfileAccess == null) {
+			return -1;
+		}
+		
 		return _context.getContentResolver().delete(MediaProfileAccessMetaData.CONTENT_URI, 
 				MediaProfileAccessMetaData.Table.COLUMN_IDMEDIA + " = '" + mediaProfileAccess.getIdMedia() + "' AND " + 
 						MediaProfileAccessMetaData.Table.COLUMN_IDPROFILE + " = '" + mediaProfileAccess.getIdProfile() + "'", null);
@@ -78,7 +82,11 @@ class MediaProfileAccessController {
 	 * @param mpa Media profile access
 	 * @return 0
 	 */
-	public long insertMediaProfileAccess(MediaProfileAccess mpa) {
+	public int insertMediaProfileAccess(MediaProfileAccess mpa) {
+		if (mpa == null) {
+			return -1;
+		}
+		
 		ContentValues cv = getContentValues(mpa);
 		_context.getContentResolver().insert(MediaProfileAccessMetaData.CONTENT_URI, cv);
 
@@ -91,6 +99,10 @@ class MediaProfileAccessController {
 	 * @return Rows
 	 */
 	public int modifyMediaProfileAccess(MediaProfileAccess mpa) {
+		if (mpa == null) {
+			return -1;
+		}
+		
 		ContentValues cv = getContentValues(mpa);
 		return _context.getContentResolver().update(MediaProfileAccessMetaData.CONTENT_URI, cv, 
 				MediaProfileAccessMetaData.Table.COLUMN_IDMEDIA + " = '" + mpa.getIdMedia() + "' AND " +
@@ -120,7 +132,11 @@ class MediaProfileAccessController {
 	 * @return List of media profile access
 	 */
 	public List<MediaProfileAccess> getMediaProfileAccessByProfile(Profile profile) {
-		List<MediaProfileAccess> list= new ArrayList<MediaProfileAccess>();
+		List<MediaProfileAccess> list = new ArrayList<MediaProfileAccess>();
+		
+		if (profile == null) {
+			return list;
+		}
 
 		Cursor c = _context.getContentResolver().query(MediaProfileAccessMetaData.CONTENT_URI, columns, 
 				MediaProfileAccessMetaData.Table.COLUMN_IDPROFILE + " = '" + profile.getId() + "'", null, null);

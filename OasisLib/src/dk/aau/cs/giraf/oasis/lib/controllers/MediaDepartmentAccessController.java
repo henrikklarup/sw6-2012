@@ -77,6 +77,10 @@ class MediaDepartmentAccessController {
 	 * @return Rows affected
 	 */
 	public int removeMediaDepartmentAccess(MediaDepartmentAccess mda) {
+		if (mda == null) {
+			return -1;
+		}
+		
 		return _context.getContentResolver().delete(MediaDepartmentAccessMetaData.CONTENT_URI, 
 				MediaDepartmentAccessMetaData.Table.COLUMN_IDMEDIA + " = '" + mda.getIdMedia() + "' AND " + 
 						MediaDepartmentAccessMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + mda.getIdDepartment() + "'", null);
@@ -85,9 +89,13 @@ class MediaDepartmentAccessController {
 	/**
 	 * Insert media department access
 	 * @param mda Media department access
-	 * @return 0
+	 * @return 0 for success or -1 for error
 	 */
 	public int insertMediaDepartmentAccess(MediaDepartmentAccess mda) {
+		if (mda == null) {
+			return -1;
+		}
+		
 		ContentValues cv = getContentValues(mda);
 		_context.getContentResolver().insert(MediaDepartmentAccessMetaData.CONTENT_URI, cv);
 
@@ -100,6 +108,10 @@ class MediaDepartmentAccessController {
 	 * @return Rows
 	 */
 	public int modifyMediaDepartmentAccess(MediaDepartmentAccess mda) {
+		if (mda == null) {
+			return -1;
+		}
+		
 		ContentValues cv = getContentValues(mda);
 		return _context.getContentResolver().update(MediaProfileAccessMetaData.CONTENT_URI, cv, 
 				MediaDepartmentAccessMetaData.Table.COLUMN_IDMEDIA + " = '" + mda.getIdMedia() + "' AND " +
@@ -131,6 +143,10 @@ class MediaDepartmentAccessController {
 	 */
 	public List<MediaDepartmentAccess> getMediaByDepartment(Department department) {
 		List<MediaDepartmentAccess> list= new ArrayList<MediaDepartmentAccess>();
+		
+		if (department == null) {
+			return list;
+		}
 
 		Cursor c = _context.getContentResolver().query(MediaDepartmentAccessMetaData.CONTENT_URI, columns, 
 				MediaDepartmentAccessMetaData.Table.COLUMN_IDDEPARTMENT + " = '" + department.getId() + "'", null, null);
@@ -163,7 +179,7 @@ class MediaDepartmentAccessController {
 			}
 		}
 
-		return  list;
+		return list;
 	}
 
 	/**

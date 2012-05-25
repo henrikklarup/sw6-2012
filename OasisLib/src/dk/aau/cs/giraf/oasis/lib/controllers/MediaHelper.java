@@ -67,6 +67,10 @@ public class MediaHelper {
 	 * Remove media
 	 */
 	public int removeMedia(Media media) {
+		if (media == null) {
+			return -1;
+		}
+		
 		int rows = 0;
 		
 		rows += mpa.removeMediaProfileAccessByMediaId(media.getId());
@@ -85,6 +89,10 @@ public class MediaHelper {
 	 * @return Rows
 	 */
 	public int removeMediaAttachmentToProfile(Media media, Profile profile) {
+		if (media == null || profile == null) {
+			return -1;
+		}
+		
 		return mpa.removeMediaProfileAccess(new MediaProfileAccess(profile.getId(), media.getId())); 
 	}
 
@@ -95,7 +103,11 @@ public class MediaHelper {
 	 * @return Rows
 	 */
 	public int removeMediaAttachmentToDepartment(Media media, Department department) {
-		return mda.removeMediaDepartmentAccess(new MediaDepartmentAccess(department.getId(), media.getId()));
+		if (media == null || department == null) {
+			return -1;
+		}
+		
+		return mda.removeMediaDepartmentAccess(new MediaDepartmentAccess(media.getId(), department.getId()));
 	}
 
 	/**
@@ -105,6 +117,10 @@ public class MediaHelper {
 	 * @return Rows
 	 */
 	public int removeTagListFromMedia(List<Tag> tags, Media media) {
+		if (tags == null || media == null) {
+			return -1;
+		}
+		
 		return ht.removeHasTagList(tags, media);
 	}
 
@@ -115,6 +131,10 @@ public class MediaHelper {
 	 * @return Rows
 	 */
 	public int removeTagFromMedia(Tag tag, Media media) {
+		if (tag == null || media == null) {
+			return -1;
+		}
+		
 		return ht.removeHasTag(new HasTag(media.getId(), tag.getId()));
 	}
 
@@ -125,20 +145,27 @@ public class MediaHelper {
 	 * @return Rows
 	 */
 	public int removeSubMediaAttachmentToMedia(Media subMedia, Media media) {
+		if (subMedia == null || media == null) {
+			return -1;
+		}
+		
 		return hl.removeHasLink(new HasLink(media.getId(), subMedia.getId()));
 	}
 
 	/**
 	 * Insert media
 	 * @param media Media containing data
+	 * @return media id
 	 */
 
 	public long insertMedia(Media media) {
-		long id = 0;
-		Uri uri;
+		if (media == null) {
+			return -1;
+		}
+		
 		ContentValues cv = getContentValues(media);
-		uri = _context.getContentResolver().insert(MediaMetaData.CONTENT_URI, cv);
-		id = Integer.parseInt(uri.getPathSegments().get(1));
+		Uri uri = _context.getContentResolver().insert(MediaMetaData.CONTENT_URI, cv);
+		long id = Integer.parseInt(uri.getPathSegments().get(1));
 		
 		mpa.insertMediaProfileAccess(new MediaProfileAccess(media.getOwnerId(), id));
 
@@ -151,14 +178,18 @@ public class MediaHelper {
 	 * @param media Media to add to
 	 * @return Rows
 	 */
-	public long addTagsToMedia(List<Tag> tags, Media media) {
-		long result = -1;
+	public int addTagsToMedia(List<Tag> tags, Media media) {
+		if (tags == null || media == null) {
+			return -1;
+		}
+		
+		int result = 0;
 		for (Tag t : tags) {
 			HasTag htModel = new HasTag();
 			htModel.setIdMedia(media.getId());
 			htModel.setIdTag(t.getId());
 			ht.insertHasTag(htModel);
-			result = 0;
+			result++;
 		}
 
 		return result;
@@ -171,15 +202,17 @@ public class MediaHelper {
 	 * @param owner Owner profile
 	 * @return Rows
 	 */
-	public long attachMediaToProfile(Media media, Profile profile, Profile owner) {
-		if (media.isMPublic() || (owner != null && media.getOwnerId() == owner.getId())) {
-			MediaProfileAccess mpaModel  = new MediaProfileAccess();
-			mpaModel.setIdMedia(media.getId());
-			mpaModel.setIdProfile(profile.getId());
-			return mpa.insertMediaProfileAccess(mpaModel);
-		} else {
+	public int attachMediaToProfile(Media media, Profile profile, Profile owner) {
+		if (media == null || profile == null) {
 			return -1;
 		}
+		
+		int result = -2;
+		if (media.isMPublic() || (owner != null && media.getOwnerId() == owner.getId())) {
+			result = mpa.insertMediaProfileAccess(new MediaProfileAccess(profile.getId(), media.getId()));
+		}
+		
+		return result;
 	}
 
 	/**
@@ -189,15 +222,17 @@ public class MediaHelper {
 	 * @param owner Profile owner
 	 * @return Rows
 	 */
-	public long attachMediaToDepartment(Media media, Department department, Profile owner) {
-		if (media.isMPublic() || (owner != null && media.getOwnerId() == owner.getId())) {
-			MediaDepartmentAccess mdaModel = new MediaDepartmentAccess();
-			mdaModel.setIdMedia(media.getId());
-			mdaModel.setIdDepartment(department.getId());
-			return mda.insertMediaDepartmentAccess(mdaModel);
-		} else {
+	public int attachMediaToDepartment(Media media, Department department, Profile owner) {
+		if (media == null || department == null) {
 			return -1;
 		}
+		
+		int result = -2;
+		if (media.isMPublic() || (owner != null && media.getOwnerId() == owner.getId())) {
+			result = mda.insertMediaDepartmentAccess(new MediaDepartmentAccess(media.getId(), department.getId()));
+		}
+		
+		return result;
 	}
 
 	/**
@@ -206,22 +241,26 @@ public class MediaHelper {
 	 * @param media Media to attach to
 	 * @return Rows
 	 */
-	public long attachSubMediaToMedia(Media subMedia, Media media) {
-		HasLink hlModel = new HasLink();
-		hlModel.setIdMedia(media.getId());
-		hlModel.setIdSubMedia(subMedia.getId());
-
-		return hl.insertHasLink(hlModel);
+	public int attachSubMediaToMedia(Media subMedia, Media media) {
+		if (subMedia == null || media == null) {
+			return -1;
+		}
+		
+		return hl.insertHasLink(new HasLink(media.getId(), subMedia.getId()));
 	}
 
 	/**
 	 * Modify media
 	 * @param media Media containing data to modify
 	 */
-	public void modifyMedia(Media media) {
+	public int modifyMedia(Media media) {
+		if (media == null) {
+			return -1;
+		}
+		
 		Uri uri = ContentUris.withAppendedId(MediaMetaData.CONTENT_URI, media.getId());
 		ContentValues cv = getContentValues(media);
-		_context.getContentResolver().update(uri, cv, null, null);
+		return _context.getContentResolver().update(uri, cv, null, null);
 	}
 
 	/**
@@ -248,6 +287,10 @@ public class MediaHelper {
 	 */
 	public List<Media> getMyPictures(Profile profile) {
 		List<Media> returnedMedia = getMyMedia(profile); 
+		if (profile == null) {
+			return returnedMedia;
+		}
+		
 		List<Media> media = new ArrayList<Media>();
 		
 		for (Media m : returnedMedia) {
@@ -265,6 +308,11 @@ public class MediaHelper {
 	 */
 	public List<Media> getMySounds(Profile profile) {
 		List<Media> returnedMedia = getMyMedia(profile); 
+		
+		if (profile == null) {
+			return returnedMedia;
+		}
+		
 		List<Media> media = new ArrayList<Media>();
 		
 		for (Media m : returnedMedia) {
@@ -282,6 +330,10 @@ public class MediaHelper {
 	 */
 	public List<Media> getMyWords(Profile profile) {
 		List<Media> returnedMedia = getMyMedia(profile); 
+		if (profile == null) {
+			return returnedMedia;
+		}
+		
 		List<Media> media = new ArrayList<Media>();
 		
 		for (Media m : returnedMedia) {
@@ -294,13 +346,17 @@ public class MediaHelper {
 
 	/**
 	 * Get all media of a person
-	 * @param p The person
+	 * @param profile The person
 	 * @return a list consisting of the persons media
 	 */
 	//getAccessableMediaByProfile
-	public List<Media> getMyMedia(Profile p) {
-		List<Media> result = getMediaByProfile(p);
-		List<Department> depList = dh.getDepartmentsByProfile(p);
+	public List<Media> getMyMedia(Profile profile) {
+		List<Media> result = getMediaByProfile(profile);
+		if (profile == null) {
+			return result;
+		}
+		
+		List<Department> depList = dh.getDepartmentsByProfile(profile);
 		
 		for (Department dep : depList) {
 			List<Media> tmp = getMediaByDepartment(dep);
@@ -316,15 +372,19 @@ public class MediaHelper {
 
 	/**
 	 * Get all media a person owns
-	 * @param p the person that owns the media
+	 * @param profile the person that owns the media
 	 * @return a list containing the media
 	 */
 	//getMediaByOwner(Profile owner) 
-	public List<Media> getMediaIOwn(Profile p) {
+	public List<Media> getMediaIOwn(Profile profile) {
 		List<Media> result = new ArrayList<Media>();
+		
+		if (profile == null) {
+			return result;
+		}
 
 		Cursor c = _context.getContentResolver().query(MediaMetaData.CONTENT_URI, columns, 
-				MediaMetaData.Table.COLUMN_OWNERID + " = '" + p.getId() + "'", null, null);
+				MediaMetaData.Table.COLUMN_OWNERID + " = '" + profile.getId() + "'", null, null);
 		if (c != null) {
 			result = cursorToMedia(c);
 			c.close();
@@ -357,6 +417,10 @@ public class MediaHelper {
 	 */
 	public List<Media> getSubMediaByMedia(Media media) {
 		List<Media> medias = new ArrayList<Media>();
+		
+		if (media == null) {
+			return medias;
+		}
 
 		for (HasLink link : hl.getSubMediaByMedia(media)) {
 			medias.add(getSingleMediaById(link.getIdSubMedia()));
@@ -393,6 +457,10 @@ public class MediaHelper {
 	 */
 	public List<Media> getMediaByName(String name) {
 		List<Media> media = new ArrayList<Media>();
+		if (name == null) {
+			return media;
+		}
+		
 		Cursor c = _context.getContentResolver().query(MediaMetaData.CONTENT_URI, columns, MediaMetaData.Table.COLUMN_NAME + " LIKE '%" + name + "%'", null, null);
 
 		if (c != null) {
@@ -410,6 +478,10 @@ public class MediaHelper {
 	public List<Media> getMediaByTags(List<Tag> tags) {
 		List<Media> resultList = new ArrayList<Media>();
 
+		if (tags == null) {
+			return resultList;
+		}
+		
 		for (Tag t : tags) {
 			for (HasTag htModel : ht.getHasTagsByTag(t)) {
 				resultList.add(getMediaById(htModel.getIdMedia()));
@@ -422,10 +494,14 @@ public class MediaHelper {
 	/**
 	 * Get media by department
 	 * @param department Department
-	 * @return List fo media
+	 * @return List of media
 	 */
 	public List<Media> getMediaByDepartment(Department department) {
 		List<Media> mediaList = new ArrayList<Media>();
+		
+		if (department == null) {
+			return mediaList;
+		}
 
 		for (MediaDepartmentAccess mdaModel : mda.getMediaByDepartment(department)) {
 			mediaList.add(getMediaById(mdaModel.getIdMedia()));
@@ -441,6 +517,10 @@ public class MediaHelper {
 	 */
 	public List<Media> getMediaByProfile(Profile profile) {
 		List<Media> mediaList = new ArrayList<Media>();
+		
+		if (profile == null) {
+			return mediaList;
+		}
 
 		for (MediaProfileAccess mpaModel : mpa.getMediaProfileAccessByProfile(profile)) {
 			mediaList.add(getMediaById(mpaModel.getIdMedia()));
