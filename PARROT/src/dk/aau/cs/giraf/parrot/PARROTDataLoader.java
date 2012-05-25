@@ -100,7 +100,7 @@ public class PARROTDataLoader {
 					//The settings reader uses this format : category +number | cat_property | value
 					try
 					{
-						categoryString = specialSettings.get("category"+number).get("pictograms");	//FIXME if this value is null, we will crash
+						categoryString = specialSettings.get("category"+number).get("pictograms");
 					}
 					catch (NullPointerException e)
 					{
