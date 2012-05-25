@@ -13,10 +13,12 @@
 \contentsline {section}{\numberline {1.5}Problem Definition}{7}{section.1.5}
 \contentsline {section}{\numberline {1.6}System Description}{8}{section.1.6}
 \contentsline {section}{\numberline {1.7}Architecture}{8}{section.1.7}
-\contentsline {part}{\numberline {II}Analysis}{11}{part.2}
-\contentsline {part}{\numberline {III}Design}{13}{part.3}
-\contentsline {part}{\numberline {IV}Implementation}{15}{part.4}
-\contentsline {part}{\numberline {V}Epilogue}{17}{part.5}
-\contentsline {chapter}{Bibliography}{19}{section*.8}
-\contentsline {part}{\hbox to\@tempdima {\hfil }Appendix}{23}{part*.9}
-\contentsline {section}{\numberline {.1}Notes from Interview}{23}{section..1}
+\contentsline {section}{\numberline {1.8}Usability Test}{9}{section.1.8}
+\contentsline {subsection}{\numberline {1.8.1}Approach}{10}{subsection.1.8.1}
+\contentsline {part}{\numberline {II}Analysis}{13}{part.2}
+\contentsline {part}{\numberline {III}Design}{15}{part.3}
+\contentsline {part}{\numberline {IV}Implementation}{17}{part.4}
+\contentsline {part}{\numberline {V}Epilogue}{19}{part.5}
+\contentsline {chapter}{Bibliography}{21}{section*.10}
+\contentsline {part}{\hbox to\@tempdima {\hfil }Appendix}{25}{section*.12}
+\contentsline {section}{\numberline {.1}Notes from Interview}{25}{section..1}
