@@ -5,9 +5,10 @@ These classes contain the exact ammount of information needed in the application
 The primary problem is that the data classes provided by the admin does not match the ones used in PARROT, and therefore needs to be transformed into PARROT objects before they can be used.
 
 \subsection{Solution}
-
+In PARROT, we have solved the problem of data transformation by writing a class called PARROTDataLoader. The purpose of this class is to handle all interaction between the PARROT application and the Admin interface. An object of this class is used whenever it is nescesary to transfer informataion between PARROT and the database. For instance, whenever the application is started, all information about the current user is loaded from the database.
 
 \subsection{Execution}
+In order to demonstrate the functionality of PARROTDataLoader, a few pieces of the code will be shown. However, since the class is fairly long, not all will be shown.\newline
 
 
 \subsection{Result}
