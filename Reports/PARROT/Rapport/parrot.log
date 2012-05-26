@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2012.2.5)  25 MAY 2012 23:56
+This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2012.2.5)  26 MAY 2012 09:31
 entering extended mode
 **D:/Aalborg*universitet/P6/Project/Reports/PARROT/Rapport/parrot.tex
 ("D:/Aalborg universitet/P6/Project/Reports/PARROT/Rapport/parrot.tex"
@@ -1503,7 +1503,7 @@ LaTeX Font Info:    Try loading font information for T1+lmss on input line 5.
  ("C:\Program Files\MiKTeX 2.8\tex\latex\lm\t1lmss.fd"
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-<input/images/ic_launcher.png, id=67, 21.681pt x 21.681pt>
+<input/images/ic_launcher.png, id=75, 21.681pt x 21.681pt>
 File: input/images/ic_launcher.png Graphic file (type png)
 
 <use input/images/ic_launcher.png>
@@ -1546,7 +1546,7 @@ LaTeX Font Info:    Font shape `U/futm/m/n' will be
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
 (Font)              scaled to size 5.51999pt on input line 3.
 
-<input/images/aaulogo_study.png, id=81, 236.885pt x 321.2pt>
+<input/images/aaulogo_study.png, id=89, 236.885pt x 321.2pt>
 File: input/images/aaulogo_study.png Graphic file (type png)
 
 <use input/images/aaulogo_study.png>
@@ -1764,7 +1764,7 @@ rchitecture.tex"
 LaTeX Warning: Citation `LastYearsArchitecture' on page 4 undefined on input li
 ne 4.
 
-<input/images/Giraf_comp_pic.jpg, id=146, 571.38469pt x 590.205pt>
+<input/images/Giraf_comp_pic.jpg, id=156, 571.38469pt x 590.205pt>
 File: input/images/Giraf_comp_pic.jpg Graphic file (type jpg)
 
 <use input/images/Giraf_comp_pic.jpg>
@@ -1784,14 +1784,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 10--11
                                                   \fi \fi 
 l.13 
       <D:/Aalborg universitet/P6/Project/Reports/PARROT/Rapport/input/images/Gi
-raf_comp_pic.jpg>] <input/images/test_setup.png, id=160, 642.4pt x 401.5pt>
+raf_comp_pic.jpg>] <input/images/test_setup.png, id=170, 642.4pt x 401.5pt>
 File: input/images/test_setup.png Graphic file (type png)
 
 <use input/images/test_setup.png>
 Package pdftex.def Info: input/images/test_setup.png used on input line 34.
 (pdftex.def)             Requested size: 423.0pt x 264.3843pt.
  [6]
-<input/images/usability_testschedule.png, id=169, 350.81062pt x 100.87688pt>
+<input/images/usability_testschedule.png, id=179, 350.81062pt x 100.87688pt>
 File: input/images/usability_testschedule.png Graphic file (type png)
 
 <use input/images/usability_testschedule.png>
@@ -1807,26 +1807,75 @@ LaTeX Warning: Reference `app:usability_documents' on page 7 undefined on input
 LaTeX Warning: Reference `sec:usability_results' on page 7 undefined on input l
 ine 52.
 
-))
-("D:\Aalborg universitet\P6\Project\Reports\PARROT\Rapport\input/implementation
-.tex" [7pdfTeX warning (ext4): destination with the same identifier (name{figur
-e.1.2}) has been already used, duplicate ignored
+)) ("D:\Aalborg universitet\P6\Project\Reports\PARROT\Rapport\input/Analysis.te
+x" [7pdfTeX warning (ext4): destination with the same identifier (name{figure.1
+.2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.1 \chapter
-            {Implementation}pdfTeX warning (ext4): destination with the same id
-entifier (name{figure.1.3}) has been already used, duplicate ignored
+            {Analysis}pdfTeX warning (ext4): destination with the same identifi
+er (name{figure.1.3}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.1 \chapter
-            {Implementation} <D:/Aalborg universitet/P6/Project/Reports/PARROT/
-Rapport/input/images/test_setup.png> <D:/Aalborg universitet/P6/Project/Reports
-/PARROT/Rapport/input/images/usability_testschedule.png (PNG copy)>] [8])
+            {Analysis} <D:/Aalborg universitet/P6/Project/Reports/PARROT/Rappor
+t/input/images/test_setup.png> <D:/Aalborg universitet/P6/Project/Reports/PARRO
+T/Rapport/input/images/usability_testschedule.png (PNG copy)>] [8]
+Underfull \hbox (badness 10000) in paragraph at lines 3--4
+
+ []
+
+) ("D:\Aalborg universitet\P6\Project\Reports\PARROT\Rapport\input/Design.tex"
+Underfull \hbox (badness 10000) in paragraph at lines 5--1
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--1
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--1
+
+ []
+
 [9
 
-] [10
+] [10]
+Underfull \hbox (badness 10000) in paragraph at lines 2--18
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2--18
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2--18
+
+ []
+
+[11
+
+]
+Overfull \hbox (6.9399pt too wide) in paragraph at lines 27--28
+\T1/futs/m/n/10.95 col-or the speach-board tab should have and the col-or pick-
+er is al-so used when the guardian
+ []
+
+[12]
+
+LaTeX Warning: Reference `' on page 13 undefined on input line 33.
+
+)
+("D:\Aalborg universitet\P6\Project\Reports\PARROT\Rapport\input/implementation
+.tex" [13] [14
+
+]) [15] [16
 
 
 ]
@@ -1866,7 +1915,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 24--27
 
  []
 
-[11
+[17
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 28--30
@@ -1875,13 +1924,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 28--30
 
 )
 ("D:\Aalborg universitet\P6\Project\Reports\PARROT\Rapport\input/appendices/inv
-itation_to_usability_test.tex" [12]
+itation_to_usability_test.tex" [18]
 
 pdfTeX warning: pdflatex (file D:/Aalborg universitet/P6/Project/Reports/PARROT
 /Rapport/input/appendices/invitation_to_usability_test.pdf): PDF inclusion: fou
 nd PDF version <1.5>, but at most version <1.4> allowed
 
-<input/appendices/invitation_to_usability_test.pdf, id=200, 597.55246pt x 845.0
+<input/appendices/invitation_to_usability_test.pdf, id=235, 597.55246pt x 845.0
 7718pt>
 File: input/appendices/invitation_to_usability_test.pdf Graphic file (type pdf)
 
@@ -1893,14 +1942,14 @@ Package pdftex.def Info: input/appendices/invitation_to_usability_test.pdf used
 
 LaTeX Warning: Float too large for page by 5.74255pt on input line 8.
 
-) [13
+) [19
 
-] [14pdfTeX warning (ext4): destination with the same identifier (name{figure.B
+] [20pdfTeX warning (ext4): destination with the same identifier (name{figure.B
 .1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.31 \clearpage
+l.33 \clearpage
                {\thispagestyle{empty}\cleardoublepage} <D:/Aalborg universitet/
 P6/Project/Reports/PARROT/Rapport/input/appendices/invitation_to_usability_test
 .pdf>] ("D:\Aalborg universitet\P6\Project\Reports\PARROT\Rapport\parrot.bbl"
@@ -1916,29 +1965,29 @@ FiXme Summary: Number of notes: 0,
 (FiXme)        Number of fatal errors: 0,
 (FiXme)        Total: 0.
 
-[15
+[21
 
 
 
 ]
 \tf@toc=\write5
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 36.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 36.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 38.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 38.
  ("D:\Aalborg universitet\P6\Project\Reports\PARROT\Rapport\parrot.aux")
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 36.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 36.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 38.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 38.
 Package rerunfilecheck Info: File `parrot.out' has not changed.
-(rerunfilecheck)             Checksum: ED94B764C4F0B933B0F3DA569F455155;957.
+(rerunfilecheck)             Checksum: 52DFF09461B2FC51B07C8F3C9A0F4C48;1057.
 
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 14567 strings out of 495285
- 211971 string characters out of 3180538
+ 14590 strings out of 495285
+ 212461 string characters out of 3180538
  332466 words of memory out of 3000000
- 17353 multiletter control sequences out of 15000+200000
+ 17365 multiletter control sequences out of 15000+200000
  115110 words of font info for 89 fonts, out of 3000000 for 9000
  15 hyphenation exceptions out of 8191
  44i,21n,78p,888b,415s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1949,9 +1998,9 @@ ic/lm/lmssbx10.pfb><C:/Program Files/MiKTeX 2.8/fonts/type1/public/lm/lmtti10.p
 fb><C:/Program Files/MiKTeX 2.8/fonts/type1/adobe/utopia/putb8a.pfb><C:/Program
  Files/MiKTeX 2.8/fonts/type1/adobe/utopia/putr8a.pfb><C:/Program Files/MiKTeX 
 2.8/fonts/type1/adobe/utopia/putri8a.pfb>
-Output written on parrot.pdf (22 pages, 356737 bytes).
+Output written on parrot.pdf (28 pages, 370546 bytes).
 PDF statistics:
- 271 PDF objects out of 1000 (max. 8388607)
- 52 named destinations out of 1000 (max. 500000)
- 159 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 307 PDF objects out of 1000 (max. 8388607)
+ 60 named destinations out of 1000 (max. 500000)
+ 175 words of extra memory for PDF output out of 10000 (max. 10000000)
 

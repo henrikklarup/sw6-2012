@@ -19,6 +19,8 @@
 \newpage
 \pagenumbering{arabic}
 \InputIfFileExists{input/introduction}{}{}
+\InputIfFileExists{input/Analysis}{}{}
+\InputIfFileExists{input/Design}{}{}
 \InputIfFileExists{input/implementation}{}{}
 
 \clearpage{\thispagestyle{empty}\cleardoublepage}
@@ -26,8 +28,8 @@
 \appendix
 \InputIfFileExists{input/appendices/interview_notes_birken}{}{}
 \InputIfFileExists{input/appendices/invitation_to_usability_test}{}{}
-\InputIfFileExists{appendix/color_sensor_test_2}{}{}
-\InputIfFileExists{appendix/background_test}{}{}
+
+
 \clearpage{\thispagestyle{empty}\cleardoublepage}
 \bibliographystyle{plain}
 \bibliography{bibtex/literature}
