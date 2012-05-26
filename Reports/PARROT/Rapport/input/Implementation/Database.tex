@@ -11,7 +11,7 @@ In PARROT, we have solved the problem of data transformation by writing a class 
 In order to demonstrate the functionality of PARROTDataLoader, a few pieces of the code will be shown. However, since the class is fairly long, not all will be shown. To get an idea of how the system works, we will show the code for how categories and pictograms are handled.\newline
 The first piece of code to be shown is \textbf{loadProfile}.
 
-\begin{verbatim}{}
+\begin{source}{}
 public PARROTProfile loadProfile(Long childId,Long appId)	
 	{
 		Profile prof;
@@ -68,10 +68,10 @@ public PARROTProfile loadProfile(Long childId,Long appId)
 
 
 	}
-\end{verbatim}
+\end{source}
 First, we check if the ID's have a value different from null. If they do not, an error has happened, and we abort the operation. If they do, we continue and load a profile from the database corresponding to the child currently using PARROT.
 
-\begin{verbatim}{}
+\begin{source}{}
 	public Category loadCategory(String catName, String pictureIDs,int colour,String iconString)
 	{
 		Long iconId = Long.valueOf(iconString);
@@ -83,10 +83,10 @@ First, we check if the ID's have a value different from null. If they do not, an
 		}
 		return cat;
 	}
-\end{verbatim}
+\end{source}
 
 
-\begin{verbatim}{}
+\begin{source}{}
 	public Pictogram loadPictogram(long id)
 	{
 		Pictogram pic = null;
@@ -125,7 +125,7 @@ First, we check if the ID's have a value different from null. If they do not, an
 		return pic;
 	}
 
-\end{verbatim}
+\end{source}
 
 \subsection{Result}
 

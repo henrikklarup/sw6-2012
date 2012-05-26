@@ -12,7 +12,7 @@ In PARROT, the playing of sounds are handled in two different places in cooperat
 The Pictogram class handles the data, and starts up the AudioPlayer wheneven it is needed.\newline
 
 %Replace the with a code box instead?
-\begin{\begin{verbatim}{}
+\begin{source}{test}{}
 	private void playItem(final String path) {
 		// Running this in the background to keep UI reponsive and smooth
 		new Thread(new Runnable() {
@@ -41,7 +41,7 @@ The Pictogram class handles the data, and starts up the AudioPlayer wheneven it 
 			playItem(wordPath);
 		}
 	}
-\end{verbatim}
+\end{source}
 
 For instance, suppose we want to play the word of a pictogram (The word is a sound file with the pronounciation of the pictogram). 
 The first thing we do is call the \textbf{playWord} method form the Pictogram in question. 
@@ -51,7 +51,7 @@ The playItem then starts a new thread in which it makes the AudioPlayer play the
 The reason for starting a new thread is that the user interface would become unresponsive while the sound was playing otherwise.\newline
 The actual functionality that plays the sound is found the AudioPlayer class, more specifically the static \textbf{play} method.\newline
 
-\begin{\begin{verbatim}{}
+\begin{source}{}
 	public static void play(String path, final OnCompletionListener listener)
 	{
 		AudioPlayer ap = getInstance();
@@ -74,7 +74,7 @@ The actual functionality that plays the sound is found the AudioPlayer class, mo
 			e.printStackTrace();
 		} 
 	}
-\end{verbatim}
+\end{source}
 
 What happens here is that the internal MediaPlayer object (A native android class) is reset, fed with data, and prepared for playing the sound. The MediaPlayer object is then started with the \textbf{start} method, which causes it to play the sound, If an error occurs, it will be caught, no sound will be played, and the error will be written to the log.\newline
 

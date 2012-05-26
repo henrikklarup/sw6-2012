@@ -6,7 +6,7 @@ For example we want to drag pictograms from a category Onto the sentence board.
 
 \subsection{Solution:}
 We do this by creating listeners to attach to the views we want to drag from or to. 
-These listeners then stores information and listens for different actions, which include DRAG_STARTED and DROP which helps us define different behavior.
+These listeners then stores information and listens for different actions, which include DRAG\_STARTED and DROP which helps us define different behavior.
 Drag and drop is simply but a 3 step process.
 Firstly we need to figure which object is dragged along with whatever information is needed. 
 Secondly we need to show the dragged object.
@@ -14,7 +14,7 @@ Thirdly we need to handle when the object are dragged and dropped into a view.
 
 \subsection{Execution:}
 So far PARROT have 2 tabs which include drag and drop. To optimize the code we have created a listener for each of these tabs.
-The tabs holds a few information’s that the listeners utilize. These include the index of the dragged object, and the ID of the view which held the dragged object. The index is used to get all information attached to a given object, while the ID is used to indicate what action are to be performed.\\
+The tabs holds a few information's that the listeners utilize. These include the index of the dragged object, and the ID of the view which held the dragged object. The index is used to get all information attached to a given object, while the ID is used to indicate what action are to be performed.\\
 An example on that can be seen in codesnippet REFFER TO CODESNIPPET that show the variables from SpeechBoardFragment.java.
 These are first initialized to -1 to make sure no mistakes are made.
 
@@ -42,7 +42,7 @@ They need a direct connection with the tab they are linked to.
 
 
 \subsection{Notes:}
-Much functionality lies in the listeners, which we haven’t described here. Mostly because any functionality that is activated by drag and drop are coded into the listeners in some kind of fashion. If one is reading the class file it is recommended to look at some of the other functionality listed in Further Reading.
+Much functionality lies in the listeners, which we haven't described here. Mostly because any functionality that is activated by drag and drop are coded into the listeners in some kind of fashion. If one is reading the class file it is recommended to look at some of the other functionality listed in Further Reading.
 
 
 \subsection{Further Reading:}

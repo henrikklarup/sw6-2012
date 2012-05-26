@@ -19,7 +19,7 @@ In code segment .... you can see the getView Method, who's function is to return
 These views are the image and text that you see in the application.\\
 
 
-\begin{verbatim}
+\begin{source}{}
 	public View getView(int position, View convertView, ViewGroup parent) 
 	{
 		ImageView imageView;
@@ -48,19 +48,19 @@ These views are the image and text that you see in the application.\\
 		view.setPadding(8, 8, 8, 8);
 		return view;
 	}
-\end{verbatim}
+\end{source}
 We instantiate the different views that we expect to use and start by initializing the Pictogram according to its position in the Category.
 The Category, in short, is an object containing both information about itself and a list of pictograms.
 This is followed by creating a ``LayoutInflater'' who's job it is to prepare a view for the application.
 In this case the pictogramview found through id reference and used to re-initialize the ``View'' we plan on returning.\\
-The Imageview and TextView´are supplied with the data they are to show through method calls. 
+The Imageview and TextView'are supplied with the data they are to show through method calls. 
 As long as the Pictogram is not an Empty pictogram, empty being our placeholder for pictograms, the View will be given an Pictogram and its name before being returned.\\
 
 The code fragment ... is our getBitmap method from the pictogram class.
 This method is important for several reasons, it checks for existing bitmaps, making sure that the application do not waste time reconverting image files to bitmaps.
 It retrieves information from resources and converts it to bitmaps if the pictogram is supposed to be ``Empty'', or creates the bitmap from the image on the Tablet storage.
 
-\begin{verbatim}
+\begin{source}{}
 	public Bitmap getBitmap()
 	{
 		if(bitmap == null)
@@ -78,7 +78,7 @@ It retrieves information from resources and converts it to bitmaps if the pictog
 		return bitmap;
 	
 	}
-\end{verbatim}
+\end{source}
 
 
 \subsection{Result}

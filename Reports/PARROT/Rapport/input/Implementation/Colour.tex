@@ -6,10 +6,10 @@ Since no two children with autism are the same, our application needs to be cust
 To this problem, the solution is fairly simple. As the WOMBAT group have already found a solution to the problem, we are free to use that solution through data sharing. %is that what we called it, or was it something else?
 They have shown they use an Android library project called AmbilWarna in their own project, which has been a great help to implementing it ourselves. The AmbilWarna library provides the application with a dialog box that allows the user to pick a colour as an input to the system.
 
-\subsection{Execution}
+\subsection{Execution}{}
 The use of the AmbilWarna dialog is best seen in the optionsfragment, more precisely when the \textbf{Change Category Colour} button is clicked.
 
-\begin{verbatim}{}
+\begin{source}{}
 		ccc.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				AmbilWarnaDialog dialog = new AmbilWarnaDialog(getActivity(),
@@ -26,12 +26,12 @@ The use of the AmbilWarna dialog is best seen in the optionsfragment, more preci
 				dialog.show();
 			}
 		});
-\end{verbatim}
+\end{source}
 
 As seen in the code, if the button is clicked, a new AmbilWarna dialog will pop up. The default selected colour of the dialog will be 
-\begin{verbatim}{}
+\begin{source}{}
 PARROTActivity.getUser().getCategoryColor()
-\end{verbatim}, which corresponds to the colour that the category list already has for the current user.\newline
+\end{source}, which corresponds to the colour that the category list already has for the current user.\newline
 If the \textbf{Ok} button is pressed on the AmbilWarna dialog, the colour of the category list will be set to the colour that the user picked in the dialog.
 
 \subsection{Result}
