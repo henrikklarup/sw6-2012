@@ -117,9 +117,9 @@ Then comes the part where we transform the string \textbf{pictureIDs} into a lis
 This is done by a method called \textbf{getIDsFromString}.
 To explain what it is doing, here is an example:
 Suppose a category is going to contain the items 5, 23, 12, and 18. Then the string pictureIDs will look like this:\newline
-\begin{math}
-5#23#12#18\$
-\end{math} 
+
+5\#23\#12\#18\$
+ 
 \\
 The method getIDsFromString will then return the list\\
  \begin{math}
@@ -181,7 +181,9 @@ Note that this list can be empty.
 Now we create 5 new objects, a Media called investigatedMedia, two String objects called soundPath and wordPath, and Long values soundID and wordID, which are both set to -1.
 If the list subMedias is not empty, we will iterate our way through it.
 We set the value of investigatedMedia to that of the Media object at the current position in investigatedMedia, and prepare to determine what kind of object it is.
-We 
+We look at investigatedMedia, and determine if its type is SOUND, or if it is WORD.
+If the type is SOUND, we set soundPath to the path of the media, and set soundID to the ID of the media.
+If the type is WORD, we do the same but for wordPath and wordID instead.
 
 \subsection{Result}
 
