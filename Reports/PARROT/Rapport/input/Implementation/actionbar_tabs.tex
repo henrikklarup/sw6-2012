@@ -15,7 +15,7 @@ Implementing an Action Bar first of all means including a Tab Listener.
 In this project we did so in a separate class file, using an existing Tab Listener from (Insert Book Reference here).
 Using the Tab listener you can instantiate an Action Bar as you can see in the following code example.
 
-\begin{verbatim}
+\begin{source}{}
 		ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS); 
 		actionBar.setDisplayShowTitleEnabled(false);
@@ -24,7 +24,7 @@ Using the Tab listener you can instantiate an Action Bar as you can see in the f
 				.setText(R.string.firstTab) //
 				.setTabListener(new TabListener<SpeechBoardFragment>(this,"speechboard",SpeechBoardFragment.class));
 		actionBar.addTab(tab); //add the tab to the action Bar
-\end{verbatim}
+\end{source}
 In order of lines of code:\\
 Get the activities Action bar through reference.\\
 Establishing that the action bar is to be used for Tabs by setting its Navigation Mode.\\
