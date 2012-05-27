@@ -170,21 +170,21 @@ After having described how we load a category into the system, we will described
 
 \end{source}
 The job of the method loadPictogram is to return a pictogram, given its input. The input is the ID of a Media object of the type IMAGE.\\
-We start by instantiating an empty Pictogram object pic.
+We start by instantiating an empty Pictogram object pic.\newline
 Then, we use the admin funtionality given by OasisLib to get the Media object media, which is the image part of the pictogram.
 Then, we use the newly loaded object media to get a list of Medias called subMedias.
 This list, contains the sound and word parts of the pictogram.
-Note that this list can be empty.
+Note that this list can be empty.\newline
 Now we create 5 new objects, a Media called investigatedMedia, two String objects called soundPath and wordPath, and Long values soundID and wordID, which are both set to -1.
-If the list subMedias is not empty, we will iterate our way through it.
+If the list subMedias is not empty, we will iterate our way through it.\\
 We set the value of investigatedMedia to that of the Media object at the current position in investigatedMedia, and prepare to determine what kind of object it is.
 We look at investigatedMedia, and determine if its type is SOUND, or if it is WORD.
 If the type is SOUND, we set soundPath to the path of the media, and set soundID to the ID of the media.
-If the type is WORD, we do the same but for wordPath and wordID instead.
-Note that it is possible that the type of investigatedMedia is a completely different type. In this case, the asociation is made by one of the other applications, and we simply ignore the media and continue through the list.
+If the type is WORD, we do the same but for wordPath and wordID instead.\\
+Note that it is possible that the type of investigatedMedia is a completely different type. In this case, the asociation is made by one of the other applications, and we simply ignore the media and continue through the list.\\
 When we have gone through the list, we initialise pic as a new Pictogram from the name of media, the path of media, wordPath and soundPath.
 Finally, we set the IDs of pic to those of the different medias and return pic.\newline
-Not the if an ID is -1 at this point, or a path is null, it simply means that the pictogram in question does not contain either a word or a sound.
+Note that if an ID is -1 at this point, or a path is null, it simply means that the pictogram in question does not contain either a word or a sound.
 
 \subsection{Result}
 The PARROTDataLoader class provides PARROT with objects that can interact with the local database, either to read from the database, or write to it.
