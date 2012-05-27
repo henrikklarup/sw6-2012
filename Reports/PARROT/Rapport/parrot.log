@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2012.2.5)  27 MAY 2012 13:12
+This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2012.2.5)  27 MAY 2012 14:59
 entering extended mode
 **D:/Aalborg*universitet/P6/Project/Reports/PARROT/Rapport/parrot.tex
 ("D:/Aalborg universitet/P6/Project/Reports/PARROT/Rapport/parrot.tex"
@@ -1845,41 +1845,42 @@ Underfull \hbox (badness 10000) in paragraph at lines 5--1
 [9
 
 ] [10]
-Underfull \hbox (badness 10000) in paragraph at lines 3--25
+Underfull \hbox (badness 10000) in paragraph at lines 5--27
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 3--25
+Underfull \hbox (badness 10000) in paragraph at lines 5--27
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 3--25
+Underfull \hbox (badness 10000) in paragraph at lines 5--27
 
  []
 
 [11
 
-pdfTeX warning (ext4): destination with the same identifier (name{figure.3.1}) 
-has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.25 
-     ] <input/images/admincate.jpg, id=396, 1557.82pt x 2208.25pt>
+] <input/images/admincate.jpg, id=395, 1557.82pt x 2208.25pt>
 File: input/images/admincate.jpg Graphic file (type jpg)
 
 <use input/images/admincate.jpg>
-Package pdftex.def Info: input/images/admincate.jpg used on input line 29.
+Package pdftex.def Info: input/images/admincate.jpg used on input line 31.
 (pdftex.def)             Requested size: 155.79112pt x 220.83794pt.
+ [12pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
+1}) has been already used, duplicate ignored
 
-Overfull \hbox (8.57143pt too wide) in paragraph at lines 40--41
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.42 	\item \textbf
+                   {Color Picker:} This feature gives the user a color schem...
+]
+Overfull \hbox (8.57143pt too wide) in paragraph at lines 42--43
 \T1/futs/m/n/10.95 col-or the speech board tab should have and the col-or pick-
 er is al-so used when the guardian
  []
 
-[12])
+)
 ("D:\Aalborg universitet\P6\Project\Reports\PARROT\Rapport\input/implementation
 .tex" [13pdfTeX warning (ext4): destination with the same identifier (name{figu
 re.3.2}) has been already used, duplicate ignored
@@ -1929,7 +1930,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 79--80
 [18])
 ("D:\Aalborg universitet\P6\Project\Reports\PARROT\Rapport\input/Implementation
 /actionbar_tabs.tex" [19]
-Overfull \hbox (94.8496pt too wide) in paragraph at lines 25--26
+Overfull \hbox (66.49983pt too wide) in paragraph at lines 25--26
 [][][][][][][][][][][][][][][][][][][][][][][][][]  
  []
 
@@ -1987,16 +1988,36 @@ Underfull \hbox (badness 10000) in paragraph at lines 90--91
 /SentenceBoard.tex" [24] [25])
 ("D:\Aalborg universitet\P6\Project\Reports\PARROT\Rapport\input/Implementation
 /Database.tex" [26]
-Overfull \hbox (2.4497pt too wide) in paragraph at lines 41--42
+Overfull \hbox (2.4497pt too wide) in paragraph at lines 42--43
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]  
  []
 
 
-Overfull \hbox (68.02454pt too wide) in paragraph at lines 53--54
+Overfull \hbox (68.02454pt too wide) in paragraph at lines 54--55
 [][][][][][][][][][][][][][][][][][][][][]  
  []
 
-[27] [28])) [29] [30
+[27]
+Underfull \hbox (badness 10000) in paragraph at lines 74--96
+
+ []
+
+[28]
+Underfull \hbox (badness 10000) in paragraph at lines 111--118
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 119--120
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 121--131
+
+ []
+
+[29] [30])) [31] [32
 
 
 ]
@@ -2036,7 +2057,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 24--27
 
  []
 
-[31
+[33
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 28--30
@@ -2045,13 +2066,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 28--30
 
 )
 ("D:\Aalborg universitet\P6\Project\Reports\PARROT\Rapport\input/appendices/inv
-itation_to_usability_test.tex" [32]
+itation_to_usability_test.tex" [34]
 
 pdfTeX warning: pdflatex (file D:/Aalborg universitet/P6/Project/Reports/PARROT
 /Rapport/input/appendices/invitation_to_usability_test.pdf): PDF inclusion: fou
 nd PDF version <1.5>, but at most version <1.4> allowed
 
-<input/appendices/invitation_to_usability_test.pdf, id=744, 597.55246pt x 845.0
+<input/appendices/invitation_to_usability_test.pdf, id=753, 597.55246pt x 845.0
 7718pt>
 File: input/appendices/invitation_to_usability_test.pdf Graphic file (type pdf)
 
@@ -2063,9 +2084,9 @@ Package pdftex.def Info: input/appendices/invitation_to_usability_test.pdf used
 
 LaTeX Warning: Float too large for page by 5.74255pt on input line 8.
 
-) [33
+) [35
 
-] [34pdfTeX warning (ext4): destination with the same identifier (name{figure.B
+] [36pdfTeX warning (ext4): destination with the same identifier (name{figure.B
 .1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
@@ -2083,7 +2104,7 @@ FiXme Summary: Number of notes: 0,
 (FiXme)        Number of fatal errors: 0,
 (FiXme)        Total: 0.
 
-[35
+[37
 
 
 
@@ -2102,11 +2123,11 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 15992 strings out of 495285
- 231897 string characters out of 3180538
+ 15997 strings out of 495285
+ 231948 string characters out of 3180538
  422513 words of memory out of 3000000
  18426 multiletter control sequences out of 15000+200000
- 121045 words of font info for 96 fonts, out of 3000000 for 9000
+ 121560 words of font info for 98 fonts, out of 3000000 for 9000
  15 hyphenation exceptions out of 8191
  44i,21n,78p,888b,2035s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.8/fonts/enc/dvips/lm/lm-ec.enc}{C:/Program Files/M
@@ -2118,9 +2139,9 @@ es/MiKTeX 2.8/fonts/type1/public/lm/lmtti10.pfb><C:/Program Files/MiKTeX 2.8/fo
 nts/type1/adobe/utopia/putb8a.pfb><C:/Program Files/MiKTeX 2.8/fonts/type1/adob
 e/utopia/putr8a.pfb><C:/Program Files/MiKTeX 2.8/fonts/type1/adobe/utopia/putri
 8a.pfb><C:/Program Files/MiKTeX 2.8/fonts/type1/urw/symbol/usyr.pfb>
-Output written on parrot.pdf (43 pages, 1311101 bytes).
+Output written on parrot.pdf (45 pages, 1319887 bytes).
 PDF statistics:
- 891 PDF objects out of 1000 (max. 8388607)
- 367 named destinations out of 1000 (max. 500000)
+ 900 PDF objects out of 1000 (max. 8388607)
+ 370 named destinations out of 1000 (max. 500000)
  476 words of extra memory for PDF output out of 10000 (max. 10000000)
 

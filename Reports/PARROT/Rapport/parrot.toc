@@ -49,9 +49,9 @@
 \contentsline {subsection}{\numberline {4.7.1}Problem}{26}{subsection.4.7.1}
 \contentsline {subsection}{\numberline {4.7.2}Solution}{26}{subsection.4.7.2}
 \contentsline {subsection}{\numberline {4.7.3}Execution}{26}{subsection.4.7.3}
-\contentsline {subsection}{\numberline {4.7.4}Result}{29}{subsection.4.7.4}
-\contentsline {subsection}{\numberline {4.7.5}Notes:}{29}{subsection.4.7.5}
-\contentsline {subsection}{\numberline {4.7.6}Further Reading:}{29}{subsection.4.7.6}
-\contentsline {appendix}{\chapternumberline {A}Notes from Interview}{31}{appendix.A}
-\contentsline {appendix}{\chapternumberline {B}invitation to usability test}{33}{appendix.B}
-\contentsline {chapter}{Litteratur}{35}{section*.18}
+\contentsline {subsection}{\numberline {4.7.4}Result}{31}{subsection.4.7.4}
+\contentsline {subsection}{\numberline {4.7.5}Notes:}{31}{subsection.4.7.5}
+\contentsline {subsection}{\numberline {4.7.6}Further Reading:}{31}{subsection.4.7.6}
+\contentsline {appendix}{\chapternumberline {A}Notes from Interview}{33}{appendix.A}
+\contentsline {appendix}{\chapternumberline {B}invitation to usability test}{35}{appendix.B}
+\contentsline {chapter}{Litteratur}{37}{section*.18}
