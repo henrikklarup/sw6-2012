@@ -53,7 +53,8 @@ public class PARROTActivity extends Activity {
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		actionBar.setDisplayShowTitleEnabled(false);	//TODO figure out what this does
 
-		Tab tab = actionBar.newTab()
+		//Creating a new Tab, setting the text it is to show and construct and attach a Tab Listener to control it.
+		Tab tab = actionBar.newTab() 
 				.setText(R.string.firstTab)
 				.setTabListener(new TabListener<SpeechBoardFragment>(this,"speechboard",SpeechBoardFragment.class));
 		actionBar.addTab(tab);
