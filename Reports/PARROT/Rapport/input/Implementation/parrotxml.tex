@@ -2,13 +2,14 @@
 \subsection*{Problem}
 We need to establish the layout of our application, so that the user can navigate and manipulate it.
 \subsection*{Solution}
-The Android SDK utilizes, in part, an XML based method of creating the visual layouts or views that is seen in the application.
+The Android SDK allows you to utilize an XML based method of creating the visual layouts or views that is seen in the application.
 GridView, LinearLayout, and ImageView are all examples of Layout Elements used in the XML documents.
+It should also be noted that all attributes and layout parameters of an element are written within the start-tags.
 Eclipse with the Android Development Tools installed also allows for a drag and drop approach to setting up the XML document, by moving elements on a visual representation of it.
 
 \subsection*{Execution}
-The following is an example of XML code and an portion of the ``speechboard_layout''
-\begin{source}{}
+The following is an example of XML code taken from the ``categoriesitem.xml'' file.
+\begin{listings}{}
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -30,12 +31,27 @@ The following is an example of XML code and an portion of the ``speechboard_layo
         android:textColor="#FF000000" />
 
 </LinearLayout>
-\end{source}
+\end{listings}
 
+In this case the Root Element is a Horizontally oriented LinearLayout, as the attributes state.
+The Root element contains two other elements, a TextView and an ImageView, which will be shown in order from left to right because this is a horizontal Linear Layout.
+Id's are attached to Elements, for reference both within the Java code and the XML document, they are declared by using ``@+id/name'' and referenced to by using ``@id/name'' 
+In the example you can see the Layout Parameters determining the size of the Views inside the root, fill/match_parent and wrap_content are two examples of context sensitive sizes, while we also use defined sizes in dp(see Note, for other definable sizes, see further reading.). \\
+
+Another important layout is the RelativeLayout. 
+This layout does not focus on the order of child elements, rather it allows for attributes such as ``android:layout_above'' for positioning.
 
 \subsection*{Result}
 
+Using XML we have manage to get a functional and viable layout for our Application.
+
 \subsection*{Notes}
-The names of XML documents cannot contain capital letters.
+The names of XML documents cannot contain capital letters.\\
+Can be Manipulated in Activity classes with Java Code.
+See section \ref{disppict} on displaying pictograms, as it contains an example where a view is used by a method.\\
+Unique id's have to be declared the first time they are used in the document, which not necessarily when they are attached to an Element.\\
+``dp'' stands for Density-independent Pixels, its size depends physical density of of the screen.
 
 \subsection*{Further Reading}
+http://developer.android.com/guide/topics/ui/declaring-layout.html\\
+http://developer.android.com/guide/topics/resources/more-resources.html\\
