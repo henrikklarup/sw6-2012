@@ -90,7 +90,9 @@ If not, we have already found all the categories (in this case none) belonging t
 After that, we use the same procedure to get the category's colour, icon and category name.
 With this information now at hand, we call the \textbf{loadCategory} method, and adds the resulting category to the PARROTPRofile parrotUser, which is the object representing the current user.
 After this, we will increment the number, so that we will look for category number 1.
-We will continue to increment the number until we have found all the categories, and after that, we will return the parrotUser object.
+We will continue to increment the number until we have found all the categories, and after that, we will return the parrotUser object.\newline
+\\
+Following the description of the loadProfile method, we will desrcibe \textbf{loadCategory}.
 
 
 
@@ -108,6 +110,27 @@ We will continue to increment the number until we have found all the categories,
 	}
 \end{source}
 
+The purpose of loadCategory is to instantiate a Category object, fill it with pictograms, and return it to the system.
+The method starts by converting the iconString into a Long, which is the ID of a Media object in the database.
+After that, we contruct a new Category object cat from the name and colour given by inputs of loadCategory, as well as the icon of the category.
+Then comes the part where we transform the string \textbf{pictureIDs} into a list of numbers.
+This is done by a method called \textbf{getIDsFromString}.
+To explain what it is doing, here is an example:
+Suppose a category is going to contain the items 5, 23, 12, and 18. Then the string pictureIDs will look like this:\newline
+\begin{math}
+5#23#12#18\$
+\end{math} 
+\\
+The method getIDsFromString will then return the list\\
+ \begin{math}
+	{5,23,12,18}
+\end{math}
+\\
+which corresponds to the IDs.
+When we have all the IDs, the method will go through the list, and return the pictogram corresponding to the given ID.
+Finally, the Category object \textbf{cat} is returned.\newline
+\\
+After having described how we load a category into the system, we will described how the \textbf{loadPictogram} method works.
 
 \begin{source}{}
 	public Pictogram loadPictogram(long id)
@@ -149,6 +172,16 @@ We will continue to increment the number until we have found all the categories,
 	}
 
 \end{source}
+The job of the method loadPictogram is to return a pictogram, given its input. The input is the ID of a Media object of the type IMAGE.\\
+We start by instantiating an empty Pictogram object.
+Then, we use the admin funtionality given by OasisLib to get the Media object media, which is the image part of the pictogram.
+Then, we use the newly loaded object media to get a list of Medias called subMedias.
+This list, contains the sound and word parts of the pictogram.
+Note that this list can be empty.
+Now we create 5 new objects, a Media called investigatedMedia, two String objects called soundPath and wordPath, and Long values soundID and wordID, which are both set to -1.
+If the list subMedias is not empty, we will iterate our way through it.
+We set the value of investigatedMedia to that of the Media object at the current position in investigatedMedia, and prepare to determine what kind of object it is.
+We 
 
 \subsection{Result}
 
