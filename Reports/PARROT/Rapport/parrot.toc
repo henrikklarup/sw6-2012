@@ -24,18 +24,12 @@
 \contentsline {subsection}{\numberline {4.2.5}Notes:}{19}{subsection.4.2.5}
 \contentsline {subsection}{\numberline {4.2.6}Further Reading:}{19}{subsection.4.2.6}
 \contentsline {section}{\numberline {4.3}Tab Navigation}{19}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}Problem}{19}{subsection.4.3.1}
-\contentsline {subsection}{\numberline {4.3.2}Solution}{19}{subsection.4.3.2}
-\contentsline {subsection}{\numberline {4.3.3}Execution}{19}{subsection.4.3.3}
-\contentsline {subsection}{\numberline {4.3.4}Result}{20}{subsection.4.3.4}
-\contentsline {subsection}{\numberline {4.3.5}Notes:}{20}{subsection.4.3.5}
-\contentsline {subsection}{\numberline {4.3.6}Further Reading:}{20}{subsection.4.3.6}
 \contentsline {section}{\numberline {4.4}Colour Picker}{20}{section.4.4}
 \contentsline {subsection}{\numberline {4.4.1}Problem}{20}{subsection.4.4.1}
-\contentsline {subsection}{\numberline {4.4.2}Solution}{20}{subsection.4.4.2}
+\contentsline {subsection}{\numberline {4.4.2}Solution}{21}{subsection.4.4.2}
 \contentsline {subsection}{\numberline {4.4.3}Execution}{21}{subsection.4.4.3}
 \contentsline {subsection}{\numberline {4.4.4}Result}{21}{subsection.4.4.4}
-\contentsline {subsection}{\numberline {4.4.5}Notes:}{21}{subsection.4.4.5}
+\contentsline {subsection}{\numberline {4.4.5}Notes:}{22}{subsection.4.4.5}
 \contentsline {subsection}{\numberline {4.4.6}Further Reading:}{22}{subsection.4.4.6}
 \contentsline {section}{\numberline {4.5}Displaying Pictograms}{22}{section.4.5}
 \contentsline {subsection}{\numberline {4.5.1}Problem}{22}{subsection.4.5.1}
@@ -47,9 +41,9 @@
 \contentsline {section}{\numberline {4.6}}{24}{section.4.6}
 \contentsline {subsection}{\numberline {4.6.1}Problem:}{24}{subsection.4.6.1}
 \contentsline {subsection}{\numberline {4.6.2}Solution:}{24}{subsection.4.6.2}
-\contentsline {subsection}{\numberline {4.6.3}Execution:}{24}{subsection.4.6.3}
+\contentsline {subsection}{\numberline {4.6.3}Execution:}{25}{subsection.4.6.3}
 \contentsline {subsection}{\numberline {4.6.4}Result:}{25}{subsection.4.6.4}
-\contentsline {subsection}{\numberline {4.6.5}Notes:}{25}{subsection.4.6.5}
+\contentsline {subsection}{\numberline {4.6.5}Notes:}{26}{subsection.4.6.5}
 \contentsline {subsection}{\numberline {4.6.6}Further Reading:}{26}{subsection.4.6.6}
 \contentsline {section}{\numberline {4.7}Data management}{26}{section.4.7}
 \contentsline {subsection}{\numberline {4.7.1}Problem}{26}{subsection.4.7.1}
@@ -60,4 +54,4 @@
 \contentsline {subsection}{\numberline {4.7.6}Further Reading:}{29}{subsection.4.7.6}
 \contentsline {appendix}{\chapternumberline {A}Notes from Interview}{31}{appendix.A}
 \contentsline {appendix}{\chapternumberline {B}invitation to usability test}{33}{appendix.B}
-\contentsline {chapter}{Litteratur}{35}{section*.12}
+\contentsline {chapter}{Litteratur}{35}{section*.18}

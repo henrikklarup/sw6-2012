@@ -22,40 +22,34 @@
 \BOOKMARK [2][-]{subsection.4.2.5}{Notes:}{section.4.2}% 22
 \BOOKMARK [2][-]{subsection.4.2.6}{Further Reading:}{section.4.2}% 23
 \BOOKMARK [1][-]{section.4.3}{Tab Navigation}{chapter.4}% 24
-\BOOKMARK [2][-]{subsection.4.3.1}{Problem}{section.4.3}% 25
-\BOOKMARK [2][-]{subsection.4.3.2}{Solution}{section.4.3}% 26
-\BOOKMARK [2][-]{subsection.4.3.3}{Execution}{section.4.3}% 27
-\BOOKMARK [2][-]{subsection.4.3.4}{Result}{section.4.3}% 28
-\BOOKMARK [2][-]{subsection.4.3.5}{Notes:}{section.4.3}% 29
-\BOOKMARK [2][-]{subsection.4.3.6}{Further Reading:}{section.4.3}% 30
-\BOOKMARK [1][-]{section.4.4}{Colour Picker}{chapter.4}% 31
-\BOOKMARK [2][-]{subsection.4.4.1}{Problem}{section.4.4}% 32
-\BOOKMARK [2][-]{subsection.4.4.2}{Solution}{section.4.4}% 33
-\BOOKMARK [2][-]{subsection.4.4.3}{Execution}{section.4.4}% 34
-\BOOKMARK [2][-]{subsection.4.4.4}{Result}{section.4.4}% 35
-\BOOKMARK [2][-]{subsection.4.4.5}{Notes:}{section.4.4}% 36
-\BOOKMARK [2][-]{subsection.4.4.6}{Further Reading:}{section.4.4}% 37
-\BOOKMARK [1][-]{section.4.5}{Displaying Pictograms}{chapter.4}% 38
-\BOOKMARK [2][-]{subsection.4.5.1}{Problem}{section.4.5}% 39
-\BOOKMARK [2][-]{subsection.4.5.2}{Solution}{section.4.5}% 40
-\BOOKMARK [2][-]{subsection.4.5.3}{Execution}{section.4.5}% 41
-\BOOKMARK [2][-]{subsection.4.5.4}{Result}{section.4.5}% 42
-\BOOKMARK [2][-]{subsection.4.5.5}{Notes}{section.4.5}% 43
-\BOOKMARK [2][-]{subsection.4.5.6}{Further Reading}{section.4.5}% 44
-\BOOKMARK [1][-]{section.4.6}{}{chapter.4}% 45
-\BOOKMARK [2][-]{subsection.4.6.1}{Problem:}{section.4.6}% 46
-\BOOKMARK [2][-]{subsection.4.6.2}{Solution:}{section.4.6}% 47
-\BOOKMARK [2][-]{subsection.4.6.3}{Execution:}{section.4.6}% 48
-\BOOKMARK [2][-]{subsection.4.6.4}{Result:}{section.4.6}% 49
-\BOOKMARK [2][-]{subsection.4.6.5}{Notes:}{section.4.6}% 50
-\BOOKMARK [2][-]{subsection.4.6.6}{Further Reading:}{section.4.6}% 51
-\BOOKMARK [1][-]{section.4.7}{Data management}{chapter.4}% 52
-\BOOKMARK [2][-]{subsection.4.7.1}{Problem}{section.4.7}% 53
-\BOOKMARK [2][-]{subsection.4.7.2}{Solution}{section.4.7}% 54
-\BOOKMARK [2][-]{subsection.4.7.3}{Execution}{section.4.7}% 55
-\BOOKMARK [2][-]{subsection.4.7.4}{Result}{section.4.7}% 56
-\BOOKMARK [2][-]{subsection.4.7.5}{Notes:}{section.4.7}% 57
-\BOOKMARK [2][-]{subsection.4.7.6}{Further Reading:}{section.4.7}% 58
-\BOOKMARK [0][-]{appendix.A}{Notes from Interview}{}% 59
-\BOOKMARK [0][-]{appendix.B}{invitation to usability test}{}% 60
-\BOOKMARK [0][-]{section*.12}{Litteratur}{}% 61
+\BOOKMARK [1][-]{section.4.4}{Colour Picker}{chapter.4}% 25
+\BOOKMARK [2][-]{subsection.4.4.1}{Problem}{section.4.4}% 26
+\BOOKMARK [2][-]{subsection.4.4.2}{Solution}{section.4.4}% 27
+\BOOKMARK [2][-]{subsection.4.4.3}{Execution}{section.4.4}% 28
+\BOOKMARK [2][-]{subsection.4.4.4}{Result}{section.4.4}% 29
+\BOOKMARK [2][-]{subsection.4.4.5}{Notes:}{section.4.4}% 30
+\BOOKMARK [2][-]{subsection.4.4.6}{Further Reading:}{section.4.4}% 31
+\BOOKMARK [1][-]{section.4.5}{Displaying Pictograms}{chapter.4}% 32
+\BOOKMARK [2][-]{subsection.4.5.1}{Problem}{section.4.5}% 33
+\BOOKMARK [2][-]{subsection.4.5.2}{Solution}{section.4.5}% 34
+\BOOKMARK [2][-]{subsection.4.5.3}{Execution}{section.4.5}% 35
+\BOOKMARK [2][-]{subsection.4.5.4}{Result}{section.4.5}% 36
+\BOOKMARK [2][-]{subsection.4.5.5}{Notes}{section.4.5}% 37
+\BOOKMARK [2][-]{subsection.4.5.6}{Further Reading}{section.4.5}% 38
+\BOOKMARK [1][-]{section.4.6}{}{chapter.4}% 39
+\BOOKMARK [2][-]{subsection.4.6.1}{Problem:}{section.4.6}% 40
+\BOOKMARK [2][-]{subsection.4.6.2}{Solution:}{section.4.6}% 41
+\BOOKMARK [2][-]{subsection.4.6.3}{Execution:}{section.4.6}% 42
+\BOOKMARK [2][-]{subsection.4.6.4}{Result:}{section.4.6}% 43
+\BOOKMARK [2][-]{subsection.4.6.5}{Notes:}{section.4.6}% 44
+\BOOKMARK [2][-]{subsection.4.6.6}{Further Reading:}{section.4.6}% 45
+\BOOKMARK [1][-]{section.4.7}{Data management}{chapter.4}% 46
+\BOOKMARK [2][-]{subsection.4.7.1}{Problem}{section.4.7}% 47
+\BOOKMARK [2][-]{subsection.4.7.2}{Solution}{section.4.7}% 48
+\BOOKMARK [2][-]{subsection.4.7.3}{Execution}{section.4.7}% 49
+\BOOKMARK [2][-]{subsection.4.7.4}{Result}{section.4.7}% 50
+\BOOKMARK [2][-]{subsection.4.7.5}{Notes:}{section.4.7}% 51
+\BOOKMARK [2][-]{subsection.4.7.6}{Further Reading:}{section.4.7}% 52
+\BOOKMARK [0][-]{appendix.A}{Notes from Interview}{}% 53
+\BOOKMARK [0][-]{appendix.B}{invitation to usability test}{}% 54
+\BOOKMARK [0][-]{section*.18}{Litteratur}{}% 55
