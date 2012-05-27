@@ -4,13 +4,13 @@ Almost all requirements from our customers concern the user interface and genera
 in particular the oasis group, as their responsibility is to link the rest of the world to us.
 
 The giraf system is designed in such a way that it deploys with two databases: Savannah - our project, a global database for a full deployment unit and Oasis - or localDB, a local database which exists only
-on the mobile devices, which has an almost identical schema to the Savannahs database.
-Rather than having Oasis query the global database directly, it was decided to implement access to both the databases through a software layer.
+on the mobile devices, which has an almost identical schema to Savannahs database.
+Rather than having Oasis query the global database directly, it was decided to implement access to both the databases through a software layer, as shown in \autoref{fig:softwareLayers}.
 The pros and cons of this seemingly redundant software layer was considered, see \autoref{table:proconSoftwareLayers}
 
 \begin{figure}[H]
 	\centering
-		\includegraphics[scale=1]{images/softwareLayers} %FIXME epstopdf package fucker, har ændret noget her
+		\includegraphics[scale=1]{images/softwareLayers}
 	\caption{Software layers}
 	\label{fig:softwareLayers}
 \end{figure}
@@ -18,11 +18,10 @@ The pros and cons of this seemingly redundant software layer was considered, see
 \begin{table}[H]
   \begin{center}
     \begin{tabular}{c|c}
-    Pros            &             Cons \\
+    Pros                   &             Cons \\
     \hline
-    More flexibilty & higher complexity\\
-                    & Lower performance\\
-    
+    More flexibilty        & higher complexity\\
+    Independent DB updates & Lower performance\\
     \end{tabular}
     \caption{pros and cons of an extra software layer between the databases}
     \label{table:proconSoftwareLayers}
