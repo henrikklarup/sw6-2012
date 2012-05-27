@@ -82,7 +82,7 @@ which we use to store data.
 The Setting object specialSettings retuned from admin contains information unique to the current child user of the PARROT application, such as visual settings, and pictogram categories.
 Now, supposing specialSettings is not null (in which case we would abort and return null), we load the user specific settings with \textbf{loadSettings}, and goes on to load the categories.
 The way we load categories is special, so it will be described in detail.
-First of, categories are stored in the specialSettings hash-table in the format category_number | category_property | value.
+First of, categories are stored in the specialSettings hash-table in the format category_number \| category_property \| value.
 So, what we do is iterate our way through the specialSettings object.
 We start by trying to get the pictograms corresponding to category number 0, which will be the first category in the list.
 If the category exists, we will get a string containing information about the pictograms.
@@ -184,6 +184,8 @@ We set the value of investigatedMedia to that of the Media object at the current
 We look at investigatedMedia, and determine if its type is SOUND, or if it is WORD.
 If the type is SOUND, we set soundPath to the path of the media, and set soundID to the ID of the media.
 If the type is WORD, we do the same but for wordPath and wordID instead.
+Note that it is possible that the type of investigatedMedia is a completely different type. In this case, the asociation is made by one of the other applications, and we simply ignore the media and continue through the list.
+
 
 \subsection{Result}
 
