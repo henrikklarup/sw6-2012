@@ -22,10 +22,10 @@ Fx could the canvas drawings be changed to OpenGL drawings just by changing the 
 %Hvad er fordele ulemper for canvas frem for openGL}
 DrawLib contains the functionality that draws timers according to the settings set in the main activity.
 The main functionality in the DrawLib is that it can be either full screen, if there is no timer or pictogram attached, or it can be split screen if there is a timer or pictogram attached.
-This is done by creating the view layout programmatically instead of a static layout, figure \ref{code:backend_drawlib_singletimer} is an example of this functionality with a full screen timer, figure ref{code:backend_drawlib_splittimer} is an example of the functionality with a split screen timer.
-In both figures the method genDrawView is a method which returns the draw view, that matches the timer specified in customization, figure \ref{} is a code example of genDrawView.
+This is done by creating the view layout programmatically instead of a static layout, figure \ref{code:backend_drawlib_singletimer} is an example of this functionality with a full screen timer, figure \ref{code:backend_drawlib_splittimer} is an example of the functionality with a split screen timer.
+In both figures the method genDrawView is a method which returns the draw view, that matches the timer specified in customization, figure \ref{code:backend_drawlib_gendrawview} is a code example of genDrawView.
 
-figur\begin{figure}[H]
+\begin{figure}[H]
 \begin{lstlisting}
 public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);	
@@ -53,6 +53,9 @@ public void onCreate(Bundle savedInstanceState) {
 \caption{Example of how DrawLib sets just one timer view.}%
 \label{code:backend_drawlib_singletimer}%
 \end{figure}
+
+\begin{figure}[H]%
+\begin{lstlisting}
 LinearLayout frame = new LinearLayout(this);
 frame.setKeepScreenOn(true);
 GradientDrawable gd = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, new int[] {sub.bgcolor, 0xFF000000});
@@ -76,8 +79,6 @@ case SplitImg:
 }
 
 setContentView(frame);
-\begin{figure}[H]%
-\begin{lstlisting}
 \end{lstlisting}
 \caption{Example of how DrawLib sets two timers in one view}%
 \label{code:backend_drawlib_splittimer}%
@@ -117,4 +118,57 @@ Since all timers in WOMBAT can be modelled in two dimensions, the only benefits 
 %The timers
 %\textit{Introduktion til tegninger med canvas i Android\\
 %Beskrivelse af implementationen af timere og hvordan bevægelser er udregnet\\
+All timers are classes which inherits the view class, the view class draws in a method called onDraw which is called the first time it is opened and whenever the method \texttt{invalidate()} is invoked.
+The timers draw inside the onDraw method, as seen in figure \ref{code:backend_drawlib_onDraw}.
+
+\begin{figure}[H]%
+\begin{lstlisting}
+protected void onDraw(Canvas c) {
+	super.onDraw(c);
+	
+	... // Initialization of time + Draw Background and frame
+
+	/* Draw the backgroundcolor inside the frame */
+	paint.setColor(background);
+	r.set(r.left + 2, r.top + 2, r.right - 2, r.bottom - 2);
+	c.drawRect(r, paint);
+
+	/* Draw the timespent color (on the right) on top of the timeleft */
+	paint.setColor(timespent);
+	r.set(left + 3, top + 3, left + width - 3, top + height - 3);
+	c.drawRect(r, paint);
+
+	if (endTime >= System.currentTimeMillis()) {
+		timenow = endTime - System.currentTimeMillis();
+		double percent = (timenow) / totalTime;
+
+		paint.setColor(timeleft2);
+		r.set((int) ((left + 3) + ((width - 5) * (1-percent))), top + 3, (left + 3) + width - 5, top
+				+ height - 3);
+		c.drawRect(r, paint);
+
+		/* Draw the gradient color */
+		...
+
+		/*************** IMPORTANT ***************/
+		/* Recalls Draw! */
+		invalidate();
+	} else {
+		paint.setColor(timespent);
+		r.set(left + 3, top + 3, left + width - 3, top + height - 3);
+		c.drawRect(r, paint);
+	}
+}
+\end{lstlisting}
+\caption{The onDraw method of the progress bar.}%
+\label{code:backend_drawlib_onDraw}%
+\end{figure}
+
+The progress bar and the hourglass both draws according to how many percent of the total time is left, while the digital watch and the time timer draws according to the exact time left.
+All timers evaluates the time left according to the number of milliseconds elapsed, which is provided by the system timer.\\
+
+
 %Optimering af timere og de problemer vi løb ind i under vejs (canvas til bitmap og systemtimer)}
+Drawing can be time consuming and to optimize the timers, the background and frame is painted and stored as a bitmap file at the initialization of the view.
+The stored bitmap can then be redrawed on the canvas without having to be recalculated, this was especially useful when drawing the digital watch since all numbers has to be redrawn every time the view is reevaluated.
+With the bitmap it is possible to draw the numbers once and then blank out the lines not needed when reevaluating.
