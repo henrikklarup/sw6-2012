@@ -82,7 +82,7 @@ which we use to store data.
 The Setting object specialSettings retuned from admin contains information unique to the current child user of the PARROT application, such as visual settings, and pictogram categories.
 Now, supposing specialSettings is not null (in which case we would abort and return null), we load the user specific settings with \textbf{loadSettings}, and goes on to load the categories.
 The way we load categories is special, so it will be described in detail.
-First of, categories are stored in the specialSettings hash-table in the format category_number \| category_property \| value.
+First of, categories are stored in the specialSettings hash-table in the format category\_number | category\_property | value.
 So, what we do is iterate our way through the specialSettings object.
 We start by trying to get the pictograms corresponding to category number 0, which will be the first category in the list.
 If the category exists, we will get a string containing information about the pictograms.
@@ -93,8 +93,6 @@ After this, we will increment the number, so that we will look for category numb
 We will continue to increment the number until we have found all the categories, and after that, we will return the parrotUser object.\newline
 \\
 Following the description of the loadProfile method, we will desrcibe \textbf{loadCategory}.
-
-
 
 \begin{source}{}
 	public Category loadCategory(String catName, String pictureIDs,int colour,String iconString)
@@ -123,7 +121,7 @@ Suppose a category is going to contain the items 5, 23, 12, and 18. Then the str
 \\
 The method getIDsFromString will then return the list\\
  \begin{math}
-	{5,23,12,18}
+	\{5,23,12,18\}
 \end{math}
 \\
 which corresponds to the IDs.
