@@ -1,23 +1,120 @@
 \section{Backend Library}
 \label{sec:backend}
 %TimerLib
-\textit{Introduktion til hvorfor det er smart at bruge biblioteker frem for at udvikle på ét workspace\\
-(Man kan nemmere teste på et bibliotek hvor man kan lave en test app, frem for at være afhængig af at "main" appen virker)}
+%\textit{Introduktion til hvorfor det er smart at bruge biblioteker frem for at udvikle på ét workspace\\
+%(Man kan nemmere teste på et bibliotek hvor man kan lave en test app, frem for at være afhængig af at "main" appen virker)}
+The two libraries in WOMBAT each control a key functionality of the application, storage and drawing.
+These functionalities could have been implemented in the WOMBAT project, thereby avoiding situations where the project is compiled with an old library.\\
+A problem with external libraries is that debugging can be difficult in Eclipse if the developer want to change directly in the library. This is because they require the external library to be imported in Eclipse and set as an external library in the Android properties of the project.\\
+The benefits of using external libraries, is that they can be tested and debugged on an external test project instead of depending on a working main project.
+External libraries can be modelled by dummy functionalities in the main project untill they have been tested.
+Further, it becomes possible to change the library operation and thereby shifting entire modules in the application.
+Fx could the canvas drawings be changed to OpenGL drawings just by changing the canvas DrawLib in WOMBAT with a DrawLib that runs on OpenGL.
+
 
 \subsection{TimerLib}
-\textit{Beskrivelse af timerlib, hvad indeholder timerlib, services\\
-Beskrivelse af implementationen af timerlib med kode eksempler}
+%\textit{Beskrivelse af timerlib, hvad indeholder timerlib, services\\
+%Beskrivelse af implementationen af timerlib med kode eksempler}
 
 \subsection{DrawLib}
-\textit{Beskrivelse af DrawLib, hvad indeholder DrawLib, services\\
-Beskrivelse af implementationen af DrawLib med kode eksempler\\
-Hvad er fordele ulemper for canvas frem for openGL}
+%\textit{Beskrivelse af DrawLib, hvad indeholder DrawLib, services\\
+%Beskrivelse af implementationen af DrawLib med kode eksempler\\
+%Hvad er fordele ulemper for canvas frem for openGL}
+DrawLib contains the functionality that draws timers according to the settings set in the main activity.
+The main functionality in the DrawLib is that it can be either full screen, if there is no timer or pictogram attached, or it can be split screen if there is a timer or pictogram attached.
+This is done by creating the view layout programmatically instead of a static layout, figure \ref{code:backend_drawlib_singletimer} is an example of this functionality with a full screen timer, figure ref{code:backend_drawlib_splittimer} is an example of the functionality with a split screen timer.
+In both figures the method genDrawView is a method which returns the draw view, that matches the timer specified in customization, figure \ref{} is a code example of genDrawView.
 
+figur\begin{figure}[H]
+\begin{lstlisting}
+public void onCreate(Bundle savedInstanceState) {
+	super.onCreate(savedInstanceState);	
+	requestWindowFeature(Window.FEATURE_NO_TITLE);
+	View main_layout = findViewById(android.R.id.content).getRootView();
+	main_layout.setSystemUiVisibility(View.STATUS_BAR_HIDDEN);
+	Guardian guard = Guardian.getInstance();
+	SubProfile sub = guard.getSubProfile();
+
+	// Get display size and store it in static variables
+	WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
+	Display disp = wm.getDefaultDisplay();
+	frameHeight = disp.getHeight();
+	frameWidth = disp.getWidth();				
+
+	if (sub.getAttachment() == null) {
+		/* Set the drawing class (which extends View) as the content view */
+		View v = genDrawView(sub,frameWidth);
+		v.setKeepScreenOn(true);
+		setContentView(v);
+	} 
+...
+}
+\end{lstlisting}
+\caption{Example of how DrawLib sets just one timer view.}%
+\label{code:backend_drawlib_singletimer}%
+\end{figure}
+LinearLayout frame = new LinearLayout(this);
+frame.setKeepScreenOn(true);
+GradientDrawable gd = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, new int[] {sub.bgcolor, 0xFF000000});
+
+...
+
+switch(sub.getAttachment().getForm()){
+case Timer:
+	frameWidth = frameWidth/2;
+	
+	firstView = genDrawView(sub, frameWidth);
+	frame.addView(firstView, frameWidth, frameHeight);
+	
+	secondView = genDrawView(sub.getAttachment().genSub(), frameWidth);
+	frame.addView(secondView, frameWidth, frameHeight);
+	break;
+case SingleImg:
+	...
+case SplitImg:
+	...
+}
+
+setContentView(frame);
+\begin{figure}[H]%
+\begin{lstlisting}
+\end{lstlisting}
+\caption{Example of how DrawLib sets two timers in one view}%
+\label{code:backend_drawlib_splittimer}%
+\end{figure}
+
+\begin{figure}[H]%
+\begin{lstlisting}
+private View genDrawView(SubProfile sub, int frameWidth) {
+	switch (sub.formType()) {
+	case ProgressBar:
+		return new DrawProgressBar(getApplicationContext(), sub, frameWidth);
+	case Hourglass:
+		return new DrawHourglass(getApplicationContext(), sub, frameWidth);
+	case DigitalClock:
+		return new DrawDigital(getApplicationContext(), sub, frameWidth);
+	case TimeTimer:
+		return new DrawWatch(getApplicationContext(), sub, frameWidth);
+	default:
+		return null;
+	}
+}
+\end{lstlisting}
+\caption{The genDrawView, which generates the draw view matching the timer}%
+\label{code:backend_drawlib_gendrawview}%
+\end{figure}
+
+\subsubsection*{Canvas and OpenGL comparision}
+\label{subsection:compare}
+%\textit{Hvad er fordelen ved at vælge canvas frem for openGL og hvorfor har vi valgt canvas?}
+The timers in DrawLib are drawed with the Android canvas object, this could also have been done by creating and modelling an object in OpenGL.
+The major difference between the two approaches is that OpenGL is used to draw three dimensional objects and Android canvas can only draw in two dimensions.
+Drawing on a canvas is like drawing on coordinates, while drawing in OpenGL varies in the way that one will be drawing in triangles.
+Drawing in OpenGL is therefor much different from the way one would normally draw, thereby more time consuming.
+Since all timers in WOMBAT can be modelled in two dimensions, the only benefits of OpenGL compared to canvas is that one would be able to move the camera around or change the lighting in OpenGL.\\
+\\
 
 %The timers
-\textit{Introduktion til tegninger med canvas i Android\\
-Beskrivelse af implementationen af timere og hvordan bevægelser er udregnet\\
-Optimering af timere og de problemer vi løb ind i under vejs (canvas til bitmap og systemtimer)}
-
-\subsubsection{Canvas and OpenGL comparision}
-\label{subsection:compare}
+%\textit{Introduktion til tegninger med canvas i Android\\
+%Beskrivelse af implementationen af timere og hvordan bevægelser er udregnet\\
+%Optimering af timere og de problemer vi løb ind i under vejs (canvas til bitmap og systemtimer)}
