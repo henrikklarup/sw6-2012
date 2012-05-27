@@ -35,7 +35,8 @@ public PARROTProfile loadProfile(Long childId,Long appId)
 				while (true)
 				{
 					//Here we read the pictograms of the categories
-					//The settings reader uses this format : category +number | cat_property | value
+					//The settings reader uses this format :
+					// category +number | cat_property | value
 					try
 					{
 						categoryString = specialSettings.get("category"+number).get("pictograms");
@@ -76,7 +77,22 @@ Then, we begin the the conversion.
 First, a Pictogram object is made, which is fed with the firstname of the child, as well as the path to the picture of the child.
 This pictogram will serve as the child's identity icon.
 Then, a PARROTProfile is instantiated with the name of the child, as well as its Pictogram icon.
-In order to go on, we load a Setting object from the database
+In order to go on, we load a Setting object from the database. We will not go in depth with this object, as that is the topic of another report REF TIL ADMIN, but suffice to say that it is a wrapper class for a hash table %or is it hash map?
+which we use to store data.
+The Setting object specialSettings retuned from admin contains information unique to the current child user of the PARROT application, such as visual settings, and pictogram categories.
+Now, supposing specialSettings is not null (in which case we would abort and return null), we load the user specific settings with \textbf{loadSettings}, and goes on to load the categories.
+The way we load categories is special, so it will be described in detail.
+First of, categories are stored in the specialSettings hash-table in the format category_number | category_property | value.
+So, what we do is iterate our way through the specialSettings object.
+We start by trying to get the pictograms corresponding to category number 0, which will be the first category in the list.
+If the category exists, we will get a string containing information about the pictograms.
+If not, we have already found all the categories (in this case none) belonging to the current user.
+After that, we use the same procedure to get the category's colour, icon and category name.
+With this information now at hand, we call the \textbf{loadCategory} method, and adds the resulting category to the PARROTPRofile parrotUser, which is the object representing the current user.
+After this, we will increment the number, so that we will look for category number 1.
+We will continue to increment the number until we have found all the categories, and after that, we will return the parrotUser object.
+
+
 
 \begin{source}{}
 	public Category loadCategory(String catName, String pictureIDs,int colour,String iconString)
