@@ -21,6 +21,8 @@ Jan~Stage Jesper~Kjeldskov, Mikael B.~Skov.
 \bibitem{tablet}
 Samsung.
 \newblock Samsung tablet.
+\newblock test
+  \url{http://www.samsung.com/global/microsite/galaxytab/10.1/index.html}.
 
 \bibitem{studyreg}
 Aalborg University.
@@ -29,7 +31,7 @@ Aalborg University.
   \url{http://www.sict.aau.dk/digitalAssets/3/3331_softwbach_sept2009.pdf}}.
 \newblock Last viewed: 2012-03-15.
 
-\bibitem{XP1}
+\bibitem{XP}
 Don Wells.
 \newblock extreme programming, 2009.
 \newblock URL: \url{http://www.extremeprogramming.org/rules.html}.

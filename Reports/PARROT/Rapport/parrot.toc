@@ -54,4 +54,5 @@
 \contentsline {subsection}{\numberline {4.7.6}Further Reading:}{31}{subsection.4.7.6}
 \contentsline {appendix}{\chapternumberline {A}Notes from Interview}{33}{appendix.A}
 \contentsline {appendix}{\chapternumberline {B}invitation to usability test}{35}{appendix.B}
-\contentsline {chapter}{Litteratur}{37}{section*.18}
+\contentsline {appendix}{\chapternumberline {C}Notes from Interview with Tove}{37}{appendix.C}
+\contentsline {chapter}{Litteratur}{39}{section*.18}
