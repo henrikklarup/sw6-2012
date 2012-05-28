@@ -12,6 +12,7 @@ in \autoref{code:sw6mlExample01} a short example of legit sw6ml syntax for addin
 The \code{<AuthUsers>..content..</AuthUsers>} element identify the table on which we want to make changes, the following \code{<Entry>..content..</Entry>} elements
 define what row and what kind of action, through the \code{action="foo"} xml attribute, should be done on the row. 
 
+\begin{figure}[H]
 \begin{lstlisting}[label=code:sw6mlExample01,caption=Example of sw6ml syntax]
  <AuthUsers>
     <Entry action="create">
@@ -26,11 +27,12 @@ define what row and what kind of action, through the \code{action="foo"} xml att
     </Entry>
   </AuthUsers>
 \end{lstlisting}
+\end{figure}
 The \code{action="foo"} xml attribute has four legal types corresponding to the CRUD profile actions, create, read, update, and delete, shown in \autoref{code:sw6mlCrud}.
 Contained in the  \code{<Entry action="crud_type`">..content..</Entry>} element is a series of 0 or more elements corresponding to the table schema of, in this case, the AuthUsers table.
 It takes zero or more of the table attributes in a row, since not all table attributes are needed for all actions, as an example delete only requires the unique identifier of the table and
 updates will only need the unique identifier and the table attribute being updated.
-
+\begin{figure}[H]
 \begin{lstlisting}[label=code:sw6mlCrud,caption=sw6ml crud simple type]
  <xs:simpleType name="crud">
   <xs:restriction base="xs:string">
@@ -41,6 +43,7 @@ updates will only need the unique identifier and the table attribute being updat
   </xs:restriction>
 </xs:simpleType>
 \end{lstlisting}
+\end{figure}
 
 \subsubsection{Documentation}
 \label{sw6mlusage}
@@ -49,6 +52,7 @@ while XML schema provides advanced features for dynamic languages, sw6ml int its
 this is however all that is needed, with a few assertions on the format server side.
 
 \autoref{code:sw6mlformal} show the formal structure of a sw6ml document.
+\begin{figure}[H]
 \begin{lstlisting}[label=code:sw6mlformal,caption=root and table elements]
 <sw6ml> 
   <table_element_1>
@@ -68,6 +72,7 @@ this is however all that is needed, with a few assertions on the format server s
   </table_element>
 </sw6ml>
 \end{lstlisting}
+\end{figure}
 
 following is a short description of the setup of the \code{<Entry>} element for each crud type.
 
