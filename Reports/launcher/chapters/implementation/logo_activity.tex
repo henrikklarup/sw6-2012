@@ -7,7 +7,7 @@ However, \activity{LogoActivity} does not indicate whether or not the activity i
 The logo activity implements auto login -- explained in \autoref{backlog:autologin} -- by using the \method{sessionExpired} method, found in \class{Tools} class, seen in \autoref{lst:sessionexpired}.
 The usage of the \method{sessionExpired} method can be seen in \autoref{lst:sessionexpiredusage}
 
-\begin{lstlisting}[style=sourceCode, language=JAVA, caption=Snippet of: LogoActivity.java, label=lst:sessionexpiredusage] 
+\begin{lstlisting}[style=sourceCode, language=JAVA, caption=Snippet of LogoActivity.java, label=lst:sessionexpiredusage] 
 if (Tools.sessionExpired(mContext)) {
 	intent = new Intent(mContext, AuthenticationActivity.class);
 } else {
@@ -16,11 +16,10 @@ if (Tools.sessionExpired(mContext)) {
 	long guardianID = sharedPreferences.getLong(Data.GUARDIANID, -1);
 	intent.putExtra(Data.GUARDIANID, guardianID);
 }
-
 \end{lstlisting}
 
 
-\begin{lstlisting}[style=sourceCode, language=JAVA, caption=Snippet of: Tools.java, label=lst:sessionexpired]
+\begin{lstlisting}[style=sourceCode, language=JAVA, caption=Snippet of Tools.java, label=lst:sessionexpired]
 public static boolean sessionExpired(Context context) {
 	SharedPreferences sp = context.getSharedPreferences(Data.TIMERKEY, 0);
 	Long lastAuthTime = sp.getLong(Data.DATEKEY, 1);
@@ -28,4 +27,4 @@ public static boolean sessionExpired(Context context) {
 
 	return d.getTime() > lastAuthTime + Data.TIME_TO_STAY_LOGGED_IN;
 }
-	\end{lstlisting}
+\end{lstlisting}
