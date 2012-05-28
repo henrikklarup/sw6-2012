@@ -277,6 +277,10 @@ public class DepartmentsHelper {
 	 */
 	public Department getDepartmentById(long id) {
 		Department department = null;
+		
+		if (id <= 0) {
+			return null;
+		}
 
 		Uri uri = ContentUris.withAppendedId(DepartmentsMetaData.CONTENT_URI, id);
 		Cursor c = _context.getContentResolver().query(uri, columns, null, null, null);

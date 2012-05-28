@@ -55,16 +55,26 @@ public class TagsHelperTest extends ActivityInstrumentationTestCase2<MainActivit
 	}
 	
 	public void testGetTags() {
+		Tag newTag = new Tag("TestTag");
+		long idT = mActivity.helper.tagsHelper.insertTag(newTag);
+		newTag.setId(idT);
+
 		List<Tag> list = mActivity.helper.tagsHelper.getTags();
 		
+		assertNotSame("Should not be 0", 0, list.size());
 		assertNotNull("Should not be null", list);
 	}
 	
 	public void testGetTagsByCaption() {
-		String caption = "Test";
+		String caption = "TestTag";
+		
+		Tag newTag = new Tag("TestTag");
+		long idT = mActivity.helper.tagsHelper.insertTag(newTag);
+		newTag.setId(idT);
 		
 		List<Tag> list = mActivity.helper.tagsHelper.getTagsByCaption(caption);
 		
+		assertNotSame("Should not be 0", 0, list.size());
 		assertNotNull("Should not be null", list);
 	}
 	

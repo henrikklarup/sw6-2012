@@ -164,6 +164,11 @@ public class AppsHelper {
 	 */
 	public App getAppById(long id) {
 		App app = null;
+		
+		if (id <= 0) {
+			return null;
+		}
+		
 		Uri uri = ContentUris.withAppendedId(AppsMetaData.CONTENT_URI, id);
 		Cursor c = _context.getContentResolver().query(uri, columns, null, null, null);
 
@@ -184,6 +189,10 @@ public class AppsHelper {
 	 */
 	public App getAppByIds(long appId, long profileId) {
 		App app;
+		
+		if (appId <= 0 || profileId <= 0) {
+			return null;
+		}
 		
 		ListOfApps listOfApps = loa.getListOfAppByIds(appId, profileId);
 		app = getAppById(appId);
@@ -257,6 +266,10 @@ public class AppsHelper {
 	 * @return the setting for the profile on the specific app
 	 */
 	public Setting<String, String, String> getSettingByIds(long appId, long profileId) {
+		if (appId <= 0 || profileId <= 0) {
+			return null;
+		}
+		
 		return loa.getSettingByAppIdAndByProfileId(appId, profileId);
 	}
 	
@@ -267,6 +280,10 @@ public class AppsHelper {
 	 * @return the stat for the profile on the specific app
 	 */
 	public Stat<String, String, String> getStatByIds(long appId, long profileId) {
+		if (appId <= 0 || profileId <= 0) {
+			return null;
+		}
+		
 		return loa.getStatByAppIdAndByProfileId(appId, profileId);
 	}
 	

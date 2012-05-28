@@ -72,13 +72,23 @@ public class MediaHelperTest extends ActivityInstrumentationTestCase2<MainActivi
 	}
 
 	public void testRemoveTagListFromMedia() {
+		Tag newTag = new Tag("RemoveTestTag");
+		long idT = mActivity.helper.tagsHelper.insertTag(newTag);
+		newTag.setId(idT);
 		List<Tag> tList = new ArrayList<Tag>();
+		tList.add(newTag);
+		
 		Media newMedia = new Media("TestMedia", "TPath", true, "picture", 2);
 		long id = mActivity.helper.mediaHelper.insertMedia(newMedia);
 		newMedia.setId(id);
 
+		mActivity.helper.mediaHelper.addTagsToMedia(tList, newMedia);
+		
 		int result = mActivity.helper.mediaHelper.removeTagListFromMedia(tList, newMedia);
-
+		
+		List<Media> media = mActivity.helper.mediaHelper.getMediaByTags(tList);
+		
+		assertEquals("Should be 0", 0, media.size());
 		assertNotSame("Should not return -1", -1, result);
 	}
 

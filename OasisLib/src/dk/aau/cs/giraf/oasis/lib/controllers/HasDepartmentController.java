@@ -145,7 +145,6 @@ class HasDepartmentController {
 
 		if (c != null) {
 			list = cursorToHasDepartmentList(c);
-
 			c.close();
 		}
 

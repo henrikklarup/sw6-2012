@@ -153,6 +153,10 @@ public class TagsHelper {
 	public Tag getTagById(long id) {
 		Tag tag = null;
 		
+		if (id <= 0) {
+			return null;
+		}
+		
 		Uri uri = ContentUris.withAppendedId(TagsMetaData.CONTENT_URI, id);
 		
 		Cursor c = _context.getContentResolver().query(uri, columns, null, null, null);
