@@ -33,7 +33,7 @@ details from Savannah, like full profiles, oasis does not have worry about Savan
 will be lower, the performance issue is not critical though, since the perceived performance of the system will be dominated by the bandwidth of the mobile devices. 
 
 The overall server software is designed around a producer-consumer pattern, where Oasis acts as the producer through savannah's IO layer.
-Requests or commits packages send to savannah will be processed by the \code{IOHandler} which will add an event to the \code{EventQueue}. The consumer is the server itself, which will remove events from the queue and process its content, being it a request or a commit. Using a queue based design was chosen to for sake of simplicity, the project is a part of learning process and building a server with concurrent event handling was down prioritized versus a simpler server, which would allows us to gain experience and still meet the requirements of the study regulations.
+Request or commit packages send to savannah will be processed by the \code{IOHandler} which will add an event to the \code{EventQueue}. The consumer is the server itself, which will remove events from the queue and process its content, being it a request or a commit. Using a queue based design was chosen to for sake of simplicity, the project is a part of learning process and building a server with concurrent event handling was down prioritized versus a simpler server, which would allows us to gain experience and still meet the requirements of the study regulations.
  A mock overview of the design of the server can be seen in \autoref{figure:serverMockup}, this diagram represents the general idea and flow of the server and should not be understood as formal technical specification.
 \begin{figure}[H]
  \centering
@@ -41,4 +41,6 @@ Requests or commits packages send to savannah will be processed by the \code{IOH
  \caption{Savannnah server Mockup}
  \label{figure:serverMockup}
 \end{figure}
+
+The diagram in \autoref{figure:serverMockup} show the two primary packages of the server, \code{IO} and \code{server}
 
