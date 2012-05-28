@@ -1,4 +1,5 @@
 \section{Drag And Drop} 
+\label{dnd}
 \subsection*{Problem:}
 We want to be able to drag pictograms from one view onto another. 
 For example we want to drag pictograms from a category Onto the sentence board. 
@@ -15,23 +16,33 @@ Thirdly we need to handle when the object are dragged and dropped into a view.
 \subsection*{Execution:}
 So far PARROT have 2 tabs which include drag and drop. To optimize the code we have created a listener for each of these tabs.
 The tabs holds a few information's that the listeners utilize. These include the index of the dragged object, and the ID of the view which held the dragged object. The index is used to get all information attached to a given object, while the ID is used to indicate what action are to be performed.\\
-An example on that can be seen in codesnippet REFFER TO CODESNIPPET that show the variables from SpeechBoardFragment.java.
+An example on that can be seen in Source Code \ref{dpi} that show the variables from SpeechBoardFragment.java.
 These are first initialized to -1 to make sure no mistakes are made.
 
-%%get code from SpeechBoardFragment.java lines 31-31 
+%%get code from SpeechBoardFragment.java lines 31-31
+\begin{source}[{dpi}]{skriv noget}
+public static int draggedPictogramIndex = -1;
+\end{source} 
 
 In the tabs we also select what views should handle drag and drop.
 The listeners run for all views for the tab simultaneous. When a object is dropped, all of the handled views will notice the DROP action. Therefor we have a boolean that handles if the object being dropped is inside a specific view. 
-If the object leave the view this is set to false, and if it enters it is set to true, which can be seen in codesnippet REFFER TO CODE HERE. 
+If the object leave the view this is set to false, and if it enters it is set to true, which can be seen in Source Code \ref{elseif}. 
 Only if this boolean is set to true do we actually do anything. This secures that an action is only performed once and in the right view. 
 
 %%get  code from BoxDragListener.java lines 46-49
-
+\begin{source}[{elseif}]{skriv noget}
+else if (event.getAction() == DragEvent.ACTION_DRAG_ENTERED){ 
+			insideOfMe = true;
+			} 
+else if (event.getAction() == DragEvent.ACTION_DRAG_EXITED){
+			insideOfMe = false;
+			}
+\end{source}
 When a object is dropped into a view we list a number of possibilities. 
 In each of these possibilities we check what view we are dropping an object into and where it is from. What view we drop the object into is handled through the value "self", where the self value are the view that are currently being handled. 
 What view the object is from is gathered from the tab via the former mentioned information. 
 With these two information we know where the object is from, and where it has been dropped, and therefor we know what action to perform. 
-These actions vary and some will be described in other sections. REFFER TO THOSE OTHER FUNCTION SECTIONS 
+These actions vary and some will be described in other sections in this \autoref{imp}. 
 After an action has been performed, relevant information is reset.
 
 \subsection*{Result:}
