@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2012.2.5)  28 MAY 2012 10:10
+This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2012.2.5)  28 MAY 2012 11:15
 entering extended mode
 **D:/Aalborg*universitet/P6/Project/Reports/PARROT/Rapport/parrot.tex
 ("D:/Aalborg universitet/P6/Project/Reports/PARROT/Rapport/parrot.tex"
@@ -1958,27 +1958,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 79--80
 
 [18])
 ("D:\Aalborg universitet\P6\Project\Reports\PARROT\Rapport\input/Implementation
-/actionbar_tabs.tex" [19]
-Overfull \hbox (66.49983pt too wide) in paragraph at lines 25--26
-[][][][][][][][][][][][][][][][][][][][][][][][][]  
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 29--31
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 32--33
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 36--37
-
- []
-
-)
+/actionbar_tabs.tex" [19])
 ("D:\Aalborg universitet\P6\Project\Reports\PARROT\Rapport\input/Implementation
 /Colour.tex" [20]
 Underfull \hbox (badness 10000) in paragraph at lines 38--39
@@ -2101,7 +2081,7 @@ pdfTeX warning: pdflatex (file D:/Aalborg universitet/P6/Project/Reports/PARROT
 /Rapport/input/appendices/invitation_to_usability_test.pdf): PDF inclusion: fou
 nd PDF version <1.5>, but at most version <1.4> allowed
 
-<input/appendices/invitation_to_usability_test.pdf, id=742, 597.55246pt x 845.0
+<input/appendices/invitation_to_usability_test.pdf, id=745, 597.55246pt x 845.0
 7718pt>
 File: input/appendices/invitation_to_usability_test.pdf Graphic file (type pdf)
 
@@ -2125,7 +2105,7 @@ ater_fra_tove.tex" [35
 l.1 \chapter
             {Notes from Interview with Tove} <D:/Aalborg universitet/P6/Project
 /Reports/PARROT/Rapport/input/appendices/invitation_to_usability_test.pdf>]
-<input/appendices/notater_fra_tove.pdf, id=770, 597.23125pt x 845.1575pt>
+<input/appendices/notater_fra_tove.pdf, id=773, 597.23125pt x 845.1575pt>
 File: input/appendices/notater_fra_tove.pdf Graphic file (type pdf)
 
 <use input/appendices/notater_fra_tove.pdf>
@@ -2182,13 +2162,13 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 16334 strings out of 495285
- 236435 string characters out of 3180538
- 427912 words of memory out of 3000000
- 18751 multiletter control sequences out of 15000+200000
+ 16337 strings out of 495285
+ 236496 string characters out of 3180538
+ 428533 words of memory out of 3000000
+ 18754 multiletter control sequences out of 15000+200000
  121560 words of font info for 98 fonts, out of 3000000 for 9000
  15 hyphenation exceptions out of 8191
- 44i,21n,78p,888b,2033s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 44i,21n,78p,888b,2041s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.8/fonts/enc/dvips/lm/lm-ec.enc}{C:/Program Files/M
 iKTeX 2.8/fonts/enc/dvips/fontname/8r.enc}<C:/Program Files/MiKTeX 2.8/fonts/ty
 pe1/public/fourier/fourier-ms.pfb><C:/Program Files/MiKTeX 2.8/fonts/type1/publ
@@ -2198,9 +2178,9 @@ es/MiKTeX 2.8/fonts/type1/public/lm/lmtti10.pfb><C:/Program Files/MiKTeX 2.8/fo
 nts/type1/adobe/utopia/putb8a.pfb><C:/Program Files/MiKTeX 2.8/fonts/type1/adob
 e/utopia/putr8a.pfb><C:/Program Files/MiKTeX 2.8/fonts/type1/adobe/utopia/putri
 8a.pfb><C:/Program Files/MiKTeX 2.8/fonts/type1/urw/symbol/usyr.pfb>
-Output written on parrot.pdf (47 pages, 1556622 bytes).
+Output written on parrot.pdf (47 pages, 1557474 bytes).
 PDF statistics:
- 916 PDF objects out of 1000 (max. 8388607)
+ 919 PDF objects out of 1000 (max. 8388607)
  374 named destinations out of 1000 (max. 500000)
  446 words of extra memory for PDF output out of 10000 (max. 10000000)
 

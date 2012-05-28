@@ -8,11 +8,11 @@ Writing the Pictogram class so that it includes functionality for playing its as
 
 \subsection*{Execution}
 To use the a sound of a pictogram, the application needs to include an audio player so that the sound can be played. Fortunately for the development team, the group who previously worked on the project have already written a functional audio player, which have been easily included in the PARROT application.\newline
-In PARROT, the playing of sounds are handled in two different places in cooperation, the Pictogram class and the AudioPlayer class.\newline
+In PARROT, the playing of sounds are handled in two different places in cooperation, the Pictogram class see Source Code \ref{pictoplay} and the AudioPlayer class see Source Code \ref{audioplay}.\newline
 The Pictogram class handles the data, and starts up the AudioPlayer wheneven it is needed.\newline
 
 %Replace the with a code box instead?
-\begin{source}{test}{}
+\begin{source}[{pictoplay}]{The play methods from the Pictogram class}{}
 	private void playItem(final String path) {
 		// Running this in the background to keep UI responsive and smooth
 		new Thread(new Runnable() {
@@ -51,7 +51,7 @@ The playItem then starts a new thread in which it makes the AudioPlayer play the
 The reason for starting a new thread is that the user interface would become unresponsive while the sound was playing otherwise.\newline
 The actual functionality that plays the sound is found the AudioPlayer class, more specifically the static \textbf{play} method.\newline
 
-\begin{source}{}
+\begin{source}[{audioplay}]{The play method from the AudioPlayer class}
 	public static void play(String path, final OnCompletionListener listener)
 	{
 		AudioPlayer ap = getInstance();
