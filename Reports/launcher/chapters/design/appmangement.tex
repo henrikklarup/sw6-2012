@@ -9,24 +9,31 @@ As shown in \autoref{fig:state_diagram} in \autoref{sec:design_overview}, the ``
 \noindent Three pieces of information are needed in order to launch an app:
 
 \begin{enumerate}
-	\item the current authenticated guardian
-	\item the app to launch
-	\item the selected child to launch the app with
+	\item Current authenticated guardian
+	\item App to launch
+	\item Selected child to launch the app with
 \end{enumerate}
 
 The first requirement is already given, since the launcher cannot be in any of the two states without the user already being authenticated.
 The second requirement is straightforward, as it is not possible to launch an app without knowing which app to launch.
 The first and third requirements are needed in order to fulfill the services which the launcher needs to have in order to be a functional part of the \giraf[] platform, as shown in \autoref{fig:external_architecture}.
 
-\todo{tilfoej krav om hvorfor vi skal vise ugenr/date, og network connectivity}
+Furthermore, additional pieces of information must be known to the user:
+
+\begin{enumerate}
+	\item Date, including week number
+	\item Network status 
+\end{enumerate}
+
+As the \giraf[] platform is thought to be the primary electronic tool of guardians, the current date and weeknumber is provided.
+Since the \giraf[] platform uses both local and remove storage, there might be latency in synchronizing these storages, and therefore it is important for the user to know if the both storages are synchronized or not.
+
+Since the \giraf[] platform should be flexible and customizable, it must be possible to change color of the \giraf[] icons.
 
 \subsection{Solution}
 \label{sec:appman_solution}
 
-
-
 \autoref{fig:appmanagement_design} shows the flowchart over the interactions the user can perform, and the actions the launcher takes upon the interactions, in order to fullfill the requirements listed in \autoref{sec:appman_requirements}.
-
 
 \begin{figure}[h]
 	\centering
@@ -35,7 +42,13 @@ The first and third requirements are needed in order to fulfill the services whi
 	\label{fig:appmanagement_design}
 \end{figure}
 
+\autoref{fig:appmanagement_design} shows three branches of interactions and actions:
 
+\begin{itemize}
+	\item Change app settings
+	\item Launch app
+	\item Request information
+\end{itemize}
 
 
 
