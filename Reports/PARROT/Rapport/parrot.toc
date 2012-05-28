@@ -18,13 +18,8 @@
 \contentsline {section}{\numberline {4.1}Drag And Drop}{15}{section.4.1}
 \contentsline {section}{\numberline {4.2}Playing Sound}{16}{section.4.2}
 \contentsline {section}{\numberline {4.3}Tab Navigation}{19}{section.4.3}
-\contentsline {section}{\numberline {4.4}Colour Picker}{20}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Problem}{20}{subsection.4.4.1}
-\contentsline {subsection}{\numberline {4.4.2}Solution}{21}{subsection.4.4.2}
-\contentsline {subsection}{\numberline {4.4.3}Execution}{21}{subsection.4.4.3}
-\contentsline {subsection}{\numberline {4.4.4}Result}{21}{subsection.4.4.4}
-\contentsline {subsection}{\numberline {4.4.5}Notes:}{22}{subsection.4.4.5}
-\contentsline {subsection}{\numberline {4.4.6}Further Reading:}{22}{subsection.4.4.6}
+\contentsline {section}{\numberline {4.4}Color Picker}{20}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Further Reading:}{22}{subsection.4.4.1}
 \contentsline {section}{\numberline {4.5}Displaying Pictograms}{22}{section.4.5}
 \contentsline {subsection}{\numberline {4.5.1}Problem}{22}{subsection.4.5.1}
 \contentsline {subsection}{\numberline {4.5.2}Solution}{22}{subsection.4.5.2}
@@ -36,7 +31,7 @@
 \contentsline {subsection}{\numberline {4.6.1}Problem:}{24}{subsection.4.6.1}
 \contentsline {subsection}{\numberline {4.6.2}Solution:}{24}{subsection.4.6.2}
 \contentsline {subsection}{\numberline {4.6.3}Execution:}{25}{subsection.4.6.3}
-\contentsline {subsection}{\numberline {4.6.4}Result:}{25}{subsection.4.6.4}
+\contentsline {subsection}{\numberline {4.6.4}Result:}{26}{subsection.4.6.4}
 \contentsline {subsection}{\numberline {4.6.5}Notes:}{26}{subsection.4.6.5}
 \contentsline {subsection}{\numberline {4.6.6}Further Reading:}{26}{subsection.4.6.6}
 \contentsline {section}{\numberline {4.7}Data management}{26}{section.4.7}
@@ -49,4 +44,4 @@
 \contentsline {appendix}{\chapternumberline {A}Notes from Interview}{33}{appendix.A}
 \contentsline {appendix}{\chapternumberline {B}invitation to usability test}{35}{appendix.B}
 \contentsline {appendix}{\chapternumberline {C}Notes from Interview with Tove}{37}{appendix.C}
-\contentsline {chapter}{Litteratur}{39}{section*.24}
+\contentsline {chapter}{Litteratur}{39}{section*.29}
