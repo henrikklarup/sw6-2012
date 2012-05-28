@@ -11,14 +11,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1363
-NormalPos.bottom=464
+NormalPos.right=1339
+NormalPos.bottom=608
 Class=LaTeXView
 Document=SW604f12 - Android Project.tex
 
 [Frame0_View0,0]
-TopLine=66
-Cursor=1504
+TopLine=0
+Cursor=717
 
 [Frame1]
 Flags=0
@@ -29,14 +29,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1363
-NormalPos.bottom=464
+NormalPos.right=1339
+NormalPos.bottom=608
 Class=LaTeXView
-Document=Appendix\appendix.tex
+Document=..\..\..\..\..\SW3-306A\SW5\Report\preamble.tex
 
 [Frame1_View0,0]
-TopLine=0
-Cursor=110
+TopLine=1
+Cursor=533
 
 [Frame2]
 Flags=0
@@ -47,14 +47,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1363
-NormalPos.bottom=464
+NormalPos.right=1339
+NormalPos.bottom=608
 Class=LaTeXView
-Document=Discussion\reflexion_evaluate.tex
+Document=Title_page\title_page.tex
 
 [Frame2_View0,0]
 TopLine=0
-Cursor=39
+Cursor=488
 
 [SessionInfo]
 FrameCount=3

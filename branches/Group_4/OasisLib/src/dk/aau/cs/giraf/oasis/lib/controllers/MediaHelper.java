@@ -436,6 +436,11 @@ public class MediaHelper {
 	 */
 	public Media getSingleMediaById(long id) {
 		Media media = null;
+		
+		if (id <= 0) {
+			return null;
+		}
+		
 		Uri uri = ContentUris.withAppendedId(MediaMetaData.CONTENT_URI, id);
 		Cursor c = _context.getContentResolver().query(uri, columns, null, null, null);
 

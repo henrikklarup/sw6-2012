@@ -92,7 +92,7 @@ public class ProfilesHelperTest extends ActivityInstrumentationTestCase2<MainAct
 		assertNotSame("Should not be -1", -1, result);
 		assertEquals("Should return 1", 1, result);
 	}
-
+	
 	public void testAuthenticateProfileWithValidCertificate() {
 		Random rnd = new Random();
 		StringBuilder cert = new StringBuilder();
@@ -294,12 +294,12 @@ public class ProfilesHelperTest extends ActivityInstrumentationTestCase2<MainAct
 		long idD3 = mActivity.helper.departmentsHelper.insertDepartment(newDepartment3);
 		newDepartment3.setId(idD3);
 		
-		mActivity.helper.departmentsHelper.attachSubDepartmentToDepartment(newDepartment1, newDepartment2);
-		mActivity.helper.departmentsHelper.attachSubDepartmentToDepartment(newDepartment2, newDepartment3);
-		
 		mActivity.helper.departmentsHelper.attachProfileToDepartment(newChild1, newDepartment1);
 		mActivity.helper.departmentsHelper.attachProfileToDepartment(newChild2, newDepartment2);
 		mActivity.helper.departmentsHelper.attachProfileToDepartment(newChild3, newDepartment3);
+		
+		mActivity.helper.departmentsHelper.attachSubDepartmentToDepartment(newDepartment1, newDepartment2);
+		mActivity.helper.departmentsHelper.attachSubDepartmentToDepartment(newDepartment2, newDepartment3);
 		
 		List<Profile> list = mActivity.helper.profilesHelper.getChildrenByDepartmentAndSubDepartments(newDepartment1);
 		
@@ -409,8 +409,8 @@ public class ProfilesHelperTest extends ActivityInstrumentationTestCase2<MainAct
 		assertNotNull("Should not be empty", list);
 		assertEquals("Should be 1", 1, list.size());
 	}
-
-	public void testGetProfileById() {
+	
+	public void testGetProfileByValidId() {
 		Profile expectedProfile = new Profile("Test", "Profile", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
 		long id = mActivity.helper.profilesHelper.insertProfile(expectedProfile);
 		expectedProfile.setId(id);
@@ -418,7 +418,19 @@ public class ProfilesHelperTest extends ActivityInstrumentationTestCase2<MainAct
 
 		assertEquals("Should return profile; Test Profile", expectedProfile, foundProfile);
 	}
+	
+	public void testGetProfileByInvalidId() {
+		Profile foundProfile = mActivity.helper.profilesHelper.getProfileById(1000000);
 
+		assertNull("Should return null", foundProfile);
+	}
+	
+	public void testGetProfileByNegativeId() {
+		Profile foundProfile = mActivity.helper.profilesHelper.getProfileById(-1);
+
+		assertNull("Should return null", foundProfile);
+	}
+	
 	public void testGetProfilesByName() {
 		String name = "Test";
 		

@@ -464,17 +464,23 @@ public class ProfilesHelper {
 	 * @return profile
 	 */
 	public Profile getProfileById(long id) {
+		Profile profile = null;
+		
+		if (id <= 0) {
+			return null;
+		}
+		
 		Uri uri = ContentUris.withAppendedId(ProfilesMetaData.CONTENT_URI, id);
 		Cursor c = _context.getContentResolver().query(uri, columns, null, null, null);
 
 		if (c != null) {
 			if (c.moveToFirst()) {
-				return cursorToProfile(c);
+				profile = cursorToProfile(c);
 			}
 			c.close();
 		}
 
-		return null;
+		return profile;
 	}
 
 	/**
