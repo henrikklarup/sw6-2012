@@ -3,9 +3,9 @@
 As part of a greater platform, the launcher is required to provide services and depends on other components. The required services and dependencies are outlined below.
 %This chapter will explain the external architecture of the launcher, this is the services and components the launcher provides.
 
-\autoref{fig:external_architecture} illustrates the \giraf[] launcher component. The component provides one service and have one dependency. The services it provides is based on demands from the surrounding components of the \giraf[] platform, which can be seen in \autoref{cmn:fig:architecture}. The illustrated service provides a way for launched \girafapp[]s to determine which guardian launched the application in question, and with which child profile. The illustrated dependency represents the need for being able to read and update profile data. The service which fulfill this dependency is provided by the Oasis lib. 
+\autoref{fig:external_architecture} illustrates the \giraf[] launcher component. The component provides one service and have one dependency. The services it provides is based on demands from the surrounding components of the \giraf[] platform, which can be seen in \autoref{fig:Giraf_comp_pic}. The illustrated service provides a way for launched \girafapp[]s to determine which guardian launched the application in question, and with which child profile. The illustrated dependency represents the need for being able to read and update profile data. The service which fulfill this dependency is provided by the Oasis lib. 
 
-As seen on \autoref{cmn:fig:architecture} \todo{Ref not working}, Oasis is available for the launcher to use. This database stores the modulated data, including the guardian and child profiles on the device in a local database.
+As seen on \autoref{fig:Giraf_comp_pic}, Oasis is available for the launcher to use. This database stores the modulated data, including the guardian and child profiles on the device in a local database.
 
 
 \begin{figure}[h]
