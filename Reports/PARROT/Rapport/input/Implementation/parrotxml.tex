@@ -9,7 +9,8 @@ Eclipse with the Android Development Tools installed also allows for a drag and 
 
 \subsection*{Execution}
 The following is an example of XML code taken from the ``categoriesitem.xml'' file.
-\begin{listings}{}
+
+\begin{xml}{skriv noget her}
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -26,20 +27,20 @@ The following is an example of XML code taken from the ``categoriesitem.xml'' fi
         android:id="@+id/catname"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="10dp"\
         android:gravity="center_vertical"
         android:textColor="#FF000000" />
 
 </LinearLayout>
-\end{listings}
+\end{xml}
 
 In this case the Root Element is a Horizontally oriented LinearLayout, as the attributes state.
 The Root element contains two other elements, a TextView and an ImageView, which will be shown in order from left to right because this is a horizontal Linear Layout.
 Id's are attached to Elements, for reference both within the Java code and the XML document, they are declared by using ``@+id/name'' and referenced to by using ``@id/name'' 
-In the example you can see the Layout Parameters determining the size of the Views inside the root, fill/match_parent and wrap_content are two examples of context sensitive sizes, while we also use defined sizes in dp(see Note, for other definable sizes, see further reading.). \\
+In the example you can see the Layout Parameters determining the size of the Views inside the root, fill/match\_parent and wrap\_content are two examples of context sensitive sizes, while we also use defined sizes in dp(see Note, for other definable sizes, see further reading.). \\
 
 Another important layout is the RelativeLayout. 
-This layout does not focus on the order of child elements, rather it allows for attributes such as ``android:layout_above'' for positioning.
+This layout does not focus on the order of child elements, rather it allows for attributes such as ``android:layout\_above'' for positioning.
 
 \subsection*{Result}
 

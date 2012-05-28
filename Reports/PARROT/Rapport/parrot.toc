@@ -15,15 +15,16 @@
 \contentsline {chapter}{\chapternumberline {2}Analysis}{9}{chapter.2}
 \contentsline {chapter}{\chapternumberline {3}Application Design}{11}{chapter.3}
 \contentsline {chapter}{\chapternumberline {4}Implementation}{15}{chapter.4}
-\contentsline {section}{\numberline {4.1}Drag And Drop}{15}{section.4.1}
-\contentsline {section}{\numberline {4.2}Playing Sound}{17}{section.4.2}
-\contentsline {section}{\numberline {4.3}Tab Navigation}{19}{section.4.3}
-\contentsline {section}{\numberline {4.4}Color Picker}{21}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Further Reading:}{22}{subsection.4.4.1}
-\contentsline {section}{\numberline {4.5}Displaying Pictograms}{22}{section.4.5}
-\contentsline {section}{\numberline {4.6}Sentence Board.}{25}{section.4.6}
-\contentsline {section}{\numberline {4.7}Data management}{28}{section.4.7}
-\contentsline {appendix}{\chapternumberline {A}Notes from Interview}{35}{appendix.A}
-\contentsline {appendix}{\chapternumberline {B}invitation to usability test}{37}{appendix.B}
-\contentsline {appendix}{\chapternumberline {C}Notes from Interview with Tove}{39}{appendix.C}
-\contentsline {chapter}{Litteratur}{41}{section*.47}
+\contentsline {section}{\numberline {4.1}XML Layouts}{15}{section.4.1}
+\contentsline {section}{\numberline {4.2}Drag And Drop}{17}{section.4.2}
+\contentsline {section}{\numberline {4.3}Playing Sound}{18}{section.4.3}
+\contentsline {section}{\numberline {4.4}Tab Navigation}{21}{section.4.4}
+\contentsline {section}{\numberline {4.5}Color Picker}{22}{section.4.5}
+\contentsline {subsection}{\numberline {4.5.1}Further Reading:}{24}{subsection.4.5.1}
+\contentsline {section}{\numberline {4.6}Displaying Pictograms}{24}{section.4.6}
+\contentsline {section}{\numberline {4.7}Sentence Board.}{26}{section.4.7}
+\contentsline {section}{\numberline {4.8}Data management}{30}{section.4.8}
+\contentsline {appendix}{\chapternumberline {A}Notes from Interview}{37}{appendix.A}
+\contentsline {appendix}{\chapternumberline {B}invitation to usability test}{39}{appendix.B}
+\contentsline {appendix}{\chapternumberline {C}Notes from Interview with Tove}{41}{appendix.C}
+\contentsline {chapter}{Litteratur}{43}{section*.53}

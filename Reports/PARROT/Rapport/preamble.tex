@@ -377,6 +377,7 @@
         caption=#2,
     }
 }{}
+%\lstset{language=XML,captionpos=b,caption={Descriptive Caption Text},label=DescriptiveLabel, frame=tb}
 
 \lstnewenvironment{pseudo}[2][]{
     \def\lstlistingname{Pseudo Code}
@@ -405,7 +406,27 @@
         label={#2}
     }
 }{}
-
+\lstnewenvironment{xml}[2][]{
+	\def\lstlistingname{XML Code}
+	\lstset{
+	aboveskip=0.5cm,
+  belowskip=0.5cm,
+  linewidth=\textwidth,
+  xleftmargin=0.05\textwidth,
+  xrightmargin=0.05\textwidth,
+  basicstyle=\ttfamily\selectfont\small,
+	language=XML,
+	captionpos=b,
+	caption=#2,
+	label=#1, 
+	frame=tb,
+	numbers=left,
+	prebreak=\Pisymbol{psy}{191},
+	numbersep=10pt,
+  breaklines,
+  tabsize=3,
+	}
+}{}
 %
 % Make a small indent in tables
 %
