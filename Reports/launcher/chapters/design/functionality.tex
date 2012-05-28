@@ -32,7 +32,7 @@ The app management feature is illustrated in \autoref{fig:appmanagement_design}.
 	\caption{Features of the App management feature}
 	\label{fig:appmanagement_design}
 \end{figure}
-User action is the first step of the app management feature, and controls the interaction with the user.
+User action is the initial step of the app management feature, and controls the interaction with the user.
 One of the actions the user is able to make, is to change settings regarding the current authenticated user's apps.
 The user does that by interacting with the drawer \todo{insert ref to preanalysis}.
 The drawer can be opened or closed.
@@ -40,9 +40,15 @@ The closed state is when the drawer is sled all the way to the left.
 The open state is when the drawer is when is not sled all the way to the left, and is below or at its maximum span.
 When the drawer is opened, it is possible to change a color of an app.
 This is done by dragging a color from the color table, onto an app and releasing in order to make the app change color.
+The system can then return to the initial state.
 
-Another action the user is able to make, is to retrieve information regarding the system. T
+Another action the user is able to make, is to retrieve information regarding the system.
+After the information have been shown to the user, the user returns to the initial state.
+The last action the user is able to make from the initial state is to launch an app.
+This is done by the user clicking on the app, and then app management process is over.
+
 \subsection{Profile selection}
+The profile selection feature is illustrated in \autoref{fig:profileselection_design}. 
 \label{design:profile_selection}
 \begin{figure}[h]
 	\centering
@@ -50,3 +56,4 @@ Another action the user is able to make, is to retrieve information regarding th
 	\caption{Features of the Profile selection feature}
 	\label{fig:profileselection_design}
 \end{figure}
+The initial state of this feature is to choose which profile the previous selected should be launched as. This done by clicking on the chosen profile. If the chosen profile is not visible on the screen, it can be needed to scroll through the profiles in order to find it. When the chosen is clicked, the profile is selected and the profile selection process is over.
