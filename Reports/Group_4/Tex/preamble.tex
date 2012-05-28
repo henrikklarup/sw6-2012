@@ -1,0 +1,127 @@
+\documentclass[a4paper,twoside,12pt]{report}
+
+%%%%%%% Protect against orhpans and widows %%%%%%%%%
+\widowpenalty=300
+\clubpenalty=300
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%% Prettier chapters %%%%%
+\usepackage[Sonny]{fncychap}%
+%%%%%%%%%%%%%%%%%%%%
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fourier}
+\usepackage{luximono}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{varioref}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{lastpage}
+\usepackage{frontpage}
+\usepackage{here}
+\usepackage[final,marginclue,footnote,index]{fixme}
+\usepackage[pdftex,
+	colorlinks=false,
+	pdfduplex=DuplexFlipLongEdge,
+	pdfborder={0 0 0},
+	pdftitle={Oasis Administration for GIRAF},
+	pdfauthor={Group SW604E12, 6th Semester Software, AAU, Aalborg, Denmark},
+	pdfsubject={Android Systems},
+	pdfkeywords={},
+	plainpages=false,
+	bookmarksdepth=subsection
+	]{hyperref}
+
+% Includes chapters, sections and subsections in ToC and removes numbering from subsubsections.
+%\settocdepth{subsection}
+%\setsecnumdepth{subsection}
+
+% Force LaTeX to not fill the page with extra vertical space.
+\raggedbottom
+
+% Captions.
+%\captionnamefont{\bfseries\sffamily\small}
+%\captiontitlefont{\small}
+%\changecaptionwidth
+%\captionwidth{.8\textwidth}
+%\precaption{\vspace{\baselineskip}}
+
+% Custom colors.
+\definecolor{gray}{gray}{0.5} % For comments in listings.
+
+% Make \texttt{} use LuxiMono font, decrease size and embolden.
+\renewcommand{\texttt}[1]{{\footnotesize\ttfamily{#1}}}
+
+\lstnewenvironment{Java}[2]{
+  \lstset{caption={#1},													% Caption
+          label=#2,														% Label
+					language=Java,										% The language template to be used
+					captionpos=b,										% Positions captions at the bottom
+					frame=lines,										% Make line over and under listing
+					aboveskip=0.5cm,									% Space before listing
+					belowskip=0.5cm,									% Space after listing
+					linewidth=0.95\textwidth,							% Right margin 0.05
+					xleftmargin=0.05\textwidth,							% Left margin 0.05
+					basicstyle=\ttfamily\selectfont\tiny,				% Use typewriter font
+					emphstyle=\bfseries,								% Make keywords bold
+					tabsize=3,											% Default tabsize
+					numbers=left,										% Line numbers are placed on the left side
+					numberstyle=\tiny,									% Size of line numbers
+					numbersep=7pt,										% Space between line numbers and code
+					showspaces=false,									% Hide space character
+					showstringspaces=false,								% Hide space character in strings
+					showtabs=false,										% Hide tab character
+					breaklines=true,									% Automatically break lines
+					breakatwhitespace=true,								% Only automatically break lines at whitespaces
+					morecomment=[l][\color{gray}]{//},					% Make single-line comments gray
+					morecomment=[s][\color{gray}]{/*}{*/},				% Make multi-line comments gray
+					extendedchars=true,									% Use extended character set
+					sensitive=true,										% Case-sensitive
+					escapechar=\@,										% Escape char, example: @\textbb{bold text}@
+  }
+}{}
+
+\lstnewenvironment{Misc}[2]{
+	\lstset{caption={#1},												% Caption
+					label=#2,											% Label
+					captionpos=b,										% Positions captions at the bottom
+					frame=lines,										% Make line over and under listing
+					aboveskip=0.5cm,									% Space before listing
+					belowskip=0.5cm,									% Space after listing
+					linewidth=0.95\textwidth,							% Right margin 0.05
+					xleftmargin=0.05\textwidth,							% Left margin 0.05
+					basicstyle=\ttfamily\selectfont\tiny,				% Use typewriter font
+					tabsize=3,											% Default tabsize
+					showspaces=false,									% Hide space character
+					showstringspaces=false,								% Hide space character in strings
+					showtabs=false,										% Hide tab character
+					breaklines=true,									% Automatically break lines
+					breakatwhitespace=true,								% Only automatically break lines at whitespaces
+					morecomment=[l][\color{gray}]{\\},					% Make single-line comments gray
+					extendedchars=true,									% Use extended character set
+					sensitive=true,										% Case-sensitive
+					escapechar=\@,										% Escape char, example: @\textbb{bold text}@
+  }
+}{}
+
+% Fixes right margins.
+%\checkandfixthelayout[nearest]
+
+% Name of rule for operational semantics.
+\newcommand{\rulename}[1]{\uppercase{[#1]}}
+
+% Operational semantics rule.
+\newcommand{\semrule}[2]{$\dfrac{#1}{#2}$}
+
+% Operational semantics side condition.
+\newcommand{\sidecond}[1]{$#1$}
+
+% New Rule
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}

@@ -1,0 +1,9 @@
+del *.aux
+del *.bbl
+del *.blg
+del *.log
+del *.lox
+del *.out
+del *.toc
+del *.synctex
+del *.tps

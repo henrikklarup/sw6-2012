@@ -1,76 +1,81 @@
-\documentclass[a4paper,twoside,12pt]{report}
-
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{lmodern}
-\usepackage{url}
-\usepackage[pdftex,
-	colorlinks=false,
-	pdfduplex=DuplexFlipLongEdge,
-	pdfborder={0 0 0},
-	pdftitle={Oasis Administration for GIRAF},
-	pdfauthor={Group SW604E12, 6th Semester Software, AAU, Aalborg, Denmark},
-	pdfsubject={Android Systems},
-	pdfkeywords={},
-	plainpages=false,
-	bookmarksdepth=subsection
-	]{hyperref}
-\usepackage[english]{babel}
-\usepackage{color}
-\usepackage{graphics}
-\usepackage{graphicx}
-\usepackage{listings}
-\usepackage{ifpdf}
-\usepackage{tabularx,colortbl}
-\usepackage{float}
-\usepackage{verbatim}
-\usepackage{caption}
-\usepackage{ulem}
-\usepackage{lastpage}
-
-
-%%%%%%% Protect against orhpans and widows %%%%%%%%%
-\widowpenalty=300
-\clubpenalty=300
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%% Prettier chapters %%%%%
-\usepackage[Sonny]{fncychap}%
-%%%%%%%%%%%%%%%%%%%%
-
-% \include{Templates/standard}
-
-% Code examples preamble input
-% \include{Templates/code_examples}
-
-
-\ifpdf
-\DeclareGraphicsExtensions{.png}
-\else
-\DeclareGraphicsExtensions{.eps}
-\fi
+\input{preamble}
 
 \begin{document}
 
-\input{Frontpage/frontpage}
+\author{Group SW604F12}
+\title{Oasis Administration for GIRAF}
+\date{June 2012}
 
+\begin{titlepage}
+
+\begin{center}
+
+% Upper part of the page
+\includegraphics[width=\textwidth]{Images/aau_logo_en.pdf}\\[1cm]    
+
+%\textsc{\LARGE University of Aalborg}\\[1.5cm]
+
+\textsc{\Large Bachelor Project}\\[0.5cm]
+
+
+% Title
+\HRule \\[0.4cm]
+{ \huge \bfseries Oasis Administration for GIRAF}\\[0.4cm]
+
+\HRule \\[1.5cm]
+
+% Author and supervisor
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\vspace{1.25cm}
+\emph{Authors:}\\
+Henrik \textsc{Klarup} \\
+Jens Mohr \textsc{Mortensen} \\
+Dan Stenholt \textsc{M\o{}ller}
+\end{flushleft}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Supervisor:} \\
+Ulrik \textsc{Nyman}
+\end{flushright}
+\end{minipage}
+
+\vfill
+
+% Bottom of the page
+{\large \today}
+
+\end{center}
+
+\end{titlepage}
+
+% Remove page number and add blank page.
 \thispagestyle{empty}
-
-\clearpage{\thispagestyle{empty}\cleardoublepage}
-
-\pagenumbering{Roman}
 \input{Title_page/title_page}
-\clearpage{\thispagestyle{empty}\cleardoublepage}
+\cleardoublepage
 
+% Use roman numbers in the beginning of the report.
+\pagenumbering{Roman}
+
+% Preface.
+\chapter*{Preface}
 \input{Preface/preface}
-\clearpage{\thispagestyle{empty}\cleardoublepage}
 
-\tableofcontents
-\newpage
-\pagenumbering{arabic}
+% Create table of contents.
+\cleardoublepage
+\tableofcontents*
+
+\pagenumbering{arabic} % Switch back to arabic page numbers.
+
+% Report contents.
+% Split at sections.
+\chapter{Common Introduction}
+\label{chap:common_introduction}
+%\input{Introduction/introduction}
 
 
-\part{Introduction}
+\chapter{Introduction}
 \input{Introduction/head}
 % 
 % common report
@@ -79,7 +84,7 @@
 \input{Introduction/system_definition}
 \include{Introduction/tail}
 
-\part{Development}
+\chapter{Development}
 \input{Development/head}
 \input{Development/design}
 \input{Development/development_process}
@@ -87,7 +92,7 @@
 \input{Development/test_cases}
 \include{Development/tail}
 
-\part{Discussion}
+\chapter{Discussion}
 \input{Discussion/head}
 \input{Discussion/reflexion_evaluate}
 \input{Discussion/conclusion}
@@ -97,10 +102,23 @@
 
 \clearpage{\thispagestyle{empty}\cleardoublepage}
 
-\part{Appendix}
+% Appendix
+\chapter{Appendix}
 \input{Appendix/appendix}
+
+% Bibliography.
 \addcontentsline{toc}{chapter}{Bibliography}
-\bibliographystyle{plain}
+\bibliographystyle{alpha}
 \bibliography{Bibtex/bibliography}
+\label{bib}
+
+% A page used to attach the CD-ROM.
+\cleardoublepage
+\thispagestyle{empty}
+\vspace*{4cm}
+\label{cd}
+{\centering This page is left blank for the purpose of containing the attached CD-ROM.}
+
+\listoffixmes
 
 \end{document}
