@@ -10,11 +10,13 @@ As shown in \autoref{fig:state_diagram} in \autoref{sec:design_overview}, the ``
 
 \begin{enumerate}
 	\item the current authenticated guardian
-	\item the selected app
+	\item the app to launch
 	\item the selected child
 \end{enumerate}
 
-The first requirement is faily straightforward, as it is know possible to launch an app without knowing which app to launch. The two second requirements are needed in order to fulfill the services which the launcher needs to have in order to be a functional part of the \giraf[] platform, as shown in \autoref{fig:external_architecture}.
+The first requirement is already given, since the launcher cannot be in any of the two states without the user already being authenticated.
+The second requirement is straightforward, as it is not possible to launch an app without knowing which app to launch.
+The first and third requirements are needed in order to fulfill the services which the launcher needs to have in order to be a functional part of the \giraf[] platform, as shown in \autoref{fig:external_architecture}.
 
 
 \subsection{Solution}
