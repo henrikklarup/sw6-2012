@@ -4,7 +4,18 @@
 \subsection{Requirements}
 \label{sec:appman_requirements}
 
-As shown in \autoref{fig:state_diagram} in \autoref{sec:design_overview}, two states ``no app selected''-state and the ``no child selected''-state are the states which shows the 
+As shown in \autoref{fig:state_diagram} in \autoref{sec:design_overview}, the ``no app selected''-state and the ``no child selected''-state are the states which the launcher is in when the user is about to launch a \giraf[] app.
+
+Three pieces of information are needed in order to launch an app:
+
+\begin{enumerate}
+	\item the current authenticated guardian
+	\item the selected app
+	\item the selected child
+\end{enumerate}
+
+The first requirement is faily straightforward, as it is know possible to launch an app without knowing which app to launch. The two second requirements are needed in order to fulfill the services which the launcher needs to have in order to be a functional part of the \giraf[] platform, as shown in \autoref{fig:external_architecture}.
+
 
 \subsection{Solution}
 \label{sec:appman_solution}
@@ -14,3 +25,4 @@ As shown in \autoref{fig:state_diagram} in \autoref{sec:design_overview}, two st
 \paragraph{Widgets}
 \label{par:widgets}
 \paragraph{Color picker}
+\label{par:colorpicker}
