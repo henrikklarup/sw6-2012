@@ -145,13 +145,13 @@ public class ProfilesHelper {
 			return -1;
 		}
 
-		int result = -1; 
+		int result = -2; 
 
 		if (child.getPRole() == pRoles.CHILD.ordinal() && 
 				(guardian.getPRole() == pRoles.GUARDIAN.ordinal() || 
 				guardian.getPRole() == pRoles.PARENT.ordinal())) {
 
-			result = hg.insertHasGuardian(new HasGuardian(child.getId(), guardian.getId()));
+			result = hg.insertHasGuardian(new HasGuardian(guardian.getId(), child.getId()));
 		}
 
 		return result;
@@ -178,7 +178,7 @@ public class ProfilesHelper {
 	 * @return Authenticated profile
 	 */
 	public Profile authenticateProfile(String certificate) {
-		if (certificate == null) {
+		if (certificate == null || !certificate.matches("[a-z]{200}")) {
 			return null;
 		}
 
@@ -199,10 +199,10 @@ public class ProfilesHelper {
 	 * @return Rows affected
 	 */
 	public int setCertificate(String certificate, Profile profile) {
-		if (certificate == null || profile == null) {
+		if (certificate == null || !certificate.matches("[a-z]{200}") || profile == null) {
 			return -1;
 		}
-
+		
 		return au.setCertificate(certificate, profile.getId());
 	}
 
