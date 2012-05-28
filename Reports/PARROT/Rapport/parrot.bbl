@@ -24,6 +24,10 @@ Samsung.
 \newblock test
   \url{http://www.samsung.com/global/microsite/galaxytab/10.1/index.html}.
 
+\bibitem{AndroidVersion}
+Android~Development Team.
+\newblock Android 4.0.3 platform, 2012.
+
 \bibitem{studyreg}
 Aalborg University.
 \newblock Studieordning for bacheloruddannelsen i software.

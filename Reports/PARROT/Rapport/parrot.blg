@@ -7,8 +7,10 @@ Warning--entry type for "SCRUM" isn't style-file defined
 --line 99 of file bibtex/literature.bib
 Warning--entry type for "ScrumOfScrums" isn't style-file defined
 --line 106 of file bibtex/literature.bib
-Warning--I didn't find a database entry for "AndroidVersion"
-Warning--I didn't find a database entry for "XP1"
+Warning--entry type for "AndroidVersion" isn't style-file defined
+--line 113 of file bibtex/literature.bib
+Warning--string name "march" is undefined
+--line 116 of file bibtex/literature.bib
 Warning--I didn't find a database entry for "LastYearsArchitecture"
 Warning--empty publisher in usability:ida
 Warning--empty year in usability:ida
