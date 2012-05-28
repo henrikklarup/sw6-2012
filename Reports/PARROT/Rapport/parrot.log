@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2012.2.5)  27 MAY 2012 23:09
+This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2012.2.5)  28 MAY 2012 09:52
 entering extended mode
 **D:/Aalborg*universitet/P6/Project/Reports/PARROT/Rapport/parrot.tex
 ("D:/Aalborg universitet/P6/Project/Reports/PARROT/Rapport/parrot.tex"
@@ -1828,28 +1828,51 @@ l.1 \chapter
             {Analysis} <D:/Aalborg universitet/P6/Project/Reports/PARROT/Rappor
 t/input/images/test_setup.png> <D:/Aalborg universitet/P6/Project/Reports/PARRO
 T/Rapport/input/images/usability_testschedule.png (PNG copy)>] [8]
-Underfull \hbox (badness 10000) in paragraph at lines 3--4
+Underfull \hbox (badness 10000) in paragraph at lines 3--6
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3--6
 
  []
 
 ) ("D:\Aalborg universitet\P6\Project\Reports\PARROT\Rapport\input/Design.tex"
-Underfull \hbox (badness 10000) in paragraph at lines 5--1
+Underfull \hbox (badness 10000) in paragraph at lines 7--1
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 5--1
+Underfull \hbox (badness 10000) in paragraph at lines 7--1
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 5--1
+Underfull \hbox (badness 10000) in paragraph at lines 7--1
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--1
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--1
 
  []
 
 [9
 
 ] [10]
+<input/images/speechboard_sketch.pdf, id=397, 597.23125pt x 845.1575pt>
+File: input/images/speechboard_sketch.pdf Graphic file (type pdf)
+
+<use input/images/speechboard_sketch.pdf>
+Package pdftex.def Info: input/images/speechboard_sketch.pdf used on input line
+ 16.
+(pdftex.def)             Requested size: 298.61488pt x 422.57771pt.
+
 Underfull \hbox (badness 10000) in paragraph at lines 2--28
 
  []
@@ -1866,34 +1889,36 @@ Underfull \hbox (badness 10000) in paragraph at lines 2--28
 
 [11
 
-] <input/images/admincate.jpg, id=403, 1557.82pt x 2208.25pt>
+] [12pdfTeX warning (ext4): destination with the same identifier (name{figure.3
+.1}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.28 
+      <D:/Aalborg universitet/P6/Project/Reports/PARROT/Rapport/input/images/sp
+eechboard_sketch.pdf>]
+<input/images/admincate.jpg, id=412, 1557.82pt x 2208.25pt>
 File: input/images/admincate.jpg Graphic file (type jpg)
 
 <use input/images/admincate.jpg>
 Package pdftex.def Info: input/images/admincate.jpg used on input line 33.
 (pdftex.def)             Requested size: 155.79112pt x 220.83794pt.
- [12pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
-1}) has been already used, duplicate ignored
+ [13pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
+2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.43 	\item \textbf
-                   {Action Bar:} This feature allows us to use tabs in the a...
-])
+l.42 	\item \textbf
+                   {Sound:} This feature enables us to play the audio track ...
+ <D:/Aalborg universitet/P6/Project/Reports/PARROT/Rapport/input/images/adminca
+te.jpg>])
 ("D:\Aalborg universitet\P6\Project\Reports\PARROT\Rapport\input/implementation
 .tex"
 Underfull \hbox (badness 10000) in paragraph at lines 50--1
 
  []
 
-[13pdfTeX warning (ext4): destination with the same identifier (name{figure.3.2
-}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.1 \chapter
-            {Implementation} <D:/Aalborg universitet/P6/Project/Reports/PARROT/
-Rapport/input/images/admincate.jpg>] [14]
+[14]
 ("D:\Aalborg universitet\P6\Project\Reports\PARROT\Rapport\input/Implementation
 /DragAndDrop.tex" [15
 
@@ -2076,7 +2101,7 @@ pdfTeX warning: pdflatex (file D:/Aalborg universitet/P6/Project/Reports/PARROT
 /Rapport/input/appendices/invitation_to_usability_test.pdf): PDF inclusion: fou
 nd PDF version <1.5>, but at most version <1.4> allowed
 
-<input/appendices/invitation_to_usability_test.pdf, id=761, 597.55246pt x 845.0
+<input/appendices/invitation_to_usability_test.pdf, id=765, 597.55246pt x 845.0
 7718pt>
 File: input/appendices/invitation_to_usability_test.pdf Graphic file (type pdf)
 
@@ -2100,7 +2125,7 @@ ater_fra_tove.tex" [35
 l.1 \chapter
             {Notes from Interview with Tove} <D:/Aalborg universitet/P6/Project
 /Reports/PARROT/Rapport/input/appendices/invitation_to_usability_test.pdf>]
-<input/appendices/notater_fra_tove.pdf, id=789, 597.23125pt x 845.1575pt>
+<input/appendices/notater_fra_tove.pdf, id=793, 597.23125pt x 845.1575pt>
 File: input/appendices/notater_fra_tove.pdf Graphic file (type pdf)
 
 <use input/appendices/notater_fra_tove.pdf>
@@ -2157,10 +2182,10 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 16335 strings out of 495285
- 236382 string characters out of 3180538
- 428135 words of memory out of 3000000
- 18753 multiletter control sequences out of 15000+200000
+ 16340 strings out of 495285
+ 236573 string characters out of 3180538
+ 428187 words of memory out of 3000000
+ 18757 multiletter control sequences out of 15000+200000
  121560 words of font info for 98 fonts, out of 3000000 for 9000
  15 hyphenation exceptions out of 8191
  44i,21n,78p,888b,2033s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -2173,9 +2198,9 @@ es/MiKTeX 2.8/fonts/type1/public/lm/lmtti10.pfb><C:/Program Files/MiKTeX 2.8/fo
 nts/type1/adobe/utopia/putb8a.pfb><C:/Program Files/MiKTeX 2.8/fonts/type1/adob
 e/utopia/putr8a.pfb><C:/Program Files/MiKTeX 2.8/fonts/type1/adobe/utopia/putri
 8a.pfb><C:/Program Files/MiKTeX 2.8/fonts/type1/urw/symbol/usyr.pfb>
-Output written on parrot.pdf (47 pages, 1361030 bytes).
+Output written on parrot.pdf (47 pages, 1559229 bytes).
 PDF statistics:
- 935 PDF objects out of 1000 (max. 8388607)
+ 939 PDF objects out of 1000 (max. 8388607)
  374 named destinations out of 1000 (max. 500000)
- 489 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 494 words of extra memory for PDF output out of 10000 (max. 10000000)
 
