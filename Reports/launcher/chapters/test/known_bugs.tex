@@ -20,3 +20,10 @@ The launcher will currently send data about the color chosen for the app in the 
 This data is however not changed immediatly when the user chooses a new color for the app, as the data is only brought up to date either when the launcher is restarted or a user logs in. 
 This is because the color data is only inserted into the database when the user changes a color, whereas the data held in memory by the launcher is not. 
 This bug is important to fix, as it creates inconcistency for the user, but the bug was not discovered until after implementation had finished. 
+
+\subsection{Camera feed is too big}
+Authentication takes place on a single screen, where the camera feed used for QR scanning is an important element. 
+The camera feed is however a bit too big to fit in properly with the rest of the elements on the screen. 
+As such, there is currently some overlap with the camera feed and the animation on the left side of the screen, and the camera feed is also closer to edge of the screen than the design calls for. \newline
+This bug is not critical, but could potentially confuse users of the product. 
+Correcting it is however not trivial, which is why it has not been fixed. 
