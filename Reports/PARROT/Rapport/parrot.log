@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2012.2.5)  28 MAY 2012 13:44
+This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2012.2.5)  28 MAY 2012 14:15
 entering extended mode
 **D:/Aalborg*universitet/P6/Project/Reports/PARROT/Rapport/parrot.tex
 ("D:/Aalborg universitet/P6/Project/Reports/PARROT/Rapport/parrot.tex"
@@ -1510,7 +1510,7 @@ LaTeX Font Info:    Try loading font information for T1+lmss on input line 5.
  ("C:\Program Files\MiKTeX 2.8\tex\latex\lm\t1lmss.fd"
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-<input/images/ic_launcher.png, id=159, 21.681pt x 21.681pt>
+<input/images/ic_launcher.png, id=135, 21.681pt x 21.681pt>
 File: input/images/ic_launcher.png Graphic file (type png)
 
 <use input/images/ic_launcher.png>
@@ -1553,7 +1553,7 @@ LaTeX Font Info:    Font shape `U/futm/m/n' will be
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
 (Font)              scaled to size 5.51999pt on input line 3.
 
-<input/images/aaulogo_study.png, id=173, 236.885pt x 321.2pt>
+<input/images/aaulogo_study.png, id=149, 236.885pt x 321.2pt>
 File: input/images/aaulogo_study.png Graphic file (type png)
 
 <use input/images/aaulogo_study.png>
@@ -1760,7 +1760,7 @@ rchitecture.tex"
 Package natbib Warning: Citation `LastYearsArchitecture' on page 4 undefined on
  input line 4.
 
-<input/images/Giraf_comp_pic.jpg, id=269, 571.38469pt x 590.205pt>
+<input/images/Giraf_comp_pic.jpg, id=239, 571.38469pt x 590.205pt>
 File: input/images/Giraf_comp_pic.jpg Graphic file (type jpg)
 
 <use input/images/Giraf_comp_pic.jpg>
@@ -1780,14 +1780,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 10--11
                                                   \fi \fi 
 l.13 
       <D:/Aalborg universitet/P6/Project/Reports/PARROT/Rapport/input/images/Gi
-raf_comp_pic.jpg>] <input/images/test_setup.png, id=284, 642.4pt x 401.5pt>
+raf_comp_pic.jpg>] <input/images/test_setup.png, id=254, 642.4pt x 401.5pt>
 File: input/images/test_setup.png Graphic file (type png)
 
 <use input/images/test_setup.png>
 Package pdftex.def Info: input/images/test_setup.png used on input line 34.
 (pdftex.def)             Requested size: 423.0pt x 264.3843pt.
  [6]
-<input/images/usability_testschedule.png, id=292, 350.81062pt x 100.87688pt>
+<input/images/usability_testschedule.png, id=262, 350.81062pt x 100.87688pt>
 File: input/images/usability_testschedule.png Graphic file (type png)
 
 <use input/images/usability_testschedule.png>
@@ -1851,7 +1851,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 7--1
 [9
 
 ] [10]
-<input/images/speechboard_sketch.pdf, id=315, 597.23125pt x 845.1575pt>
+<input/images/speechboard_sketch.pdf, id=285, 597.23125pt x 845.1575pt>
 File: input/images/speechboard_sketch.pdf Graphic file (type pdf)
 
 <use input/images/speechboard_sketch.pdf>
@@ -1883,7 +1883,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 2--28
 l.28 
       <D:/Aalborg universitet/P6/Project/Reports/PARROT/Rapport/input/images/sp
 eechboard_sketch.pdf>]
-<input/images/admincate.jpg, id=330, 1557.82pt x 2208.25pt>
+<input/images/admincate.jpg, id=300, 1557.82pt x 2208.25pt>
 File: input/images/admincate.jpg Graphic file (type jpg)
 
 <use input/images/admincate.jpg>
@@ -2012,10 +2012,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 121--131
 
  []
 
-[29] [30])) [31] [32
-
-
-]
+[29] [30]) [31]) [32]
 ("D:\Aalborg universitet\P6\Project\Reports\PARROT\Rapport\input/appendices/int
 erview_notes_birken.tex"
 Underfull \hbox (badness 10000) in paragraph at lines 5--9
@@ -2054,6 +2051,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 24--27
 
 [33
 
+
+
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 28--30
 
@@ -2067,7 +2066,7 @@ pdfTeX warning: pdflatex (file D:/Aalborg universitet/P6/Project/Reports/PARROT
 /Rapport/input/appendices/invitation_to_usability_test.pdf): PDF inclusion: fou
 nd PDF version <1.5>, but at most version <1.4> allowed
 
-<input/appendices/invitation_to_usability_test.pdf, id=708, 597.55246pt x 845.0
+<input/appendices/invitation_to_usability_test.pdf, id=687, 597.55246pt x 845.0
 7718pt>
 File: input/appendices/invitation_to_usability_test.pdf Graphic file (type pdf)
 
@@ -2091,7 +2090,7 @@ ater_fra_tove.tex" [35
 l.1 \chapter
             {Notes from Interview with Tove} <D:/Aalborg universitet/P6/Project
 /Reports/PARROT/Rapport/input/appendices/invitation_to_usability_test.pdf>]
-<input/appendices/notater_fra_tove.pdf, id=736, 597.23125pt x 845.1575pt>
+<input/appendices/notater_fra_tove.pdf, id=715, 597.23125pt x 845.1575pt>
 File: input/appendices/notater_fra_tove.pdf Graphic file (type pdf)
 
 <use input/appendices/notater_fra_tove.pdf>
@@ -2141,20 +2140,20 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 39.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 39.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 39.
 Package rerunfilecheck Info: File `parrot.out' has not changed.
-(rerunfilecheck)             Checksum: 7F32330D3DCFDE168090DE35EBA195CF;2389.
+(rerunfilecheck)             Checksum: 423AF84616F5C1409530FD88929F930E;2007.
 
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 16332 strings out of 495285
- 236406 string characters out of 3180538
- 426884 words of memory out of 3000000
- 18748 multiletter control sequences out of 15000+200000
+ 16329 strings out of 495285
+ 236421 string characters out of 3180538
+ 430168 words of memory out of 3000000
+ 18745 multiletter control sequences out of 15000+200000
  121560 words of font info for 98 fonts, out of 3000000 for 9000
  15 hyphenation exceptions out of 8191
- 44i,21n,78p,888b,2041s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 44i,21n,78p,888b,2047s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.8/fonts/enc/dvips/lm/lm-ec.enc}{C:/Program Files/M
 iKTeX 2.8/fonts/enc/dvips/fontname/8r.enc}<C:/Program Files/MiKTeX 2.8/fonts/ty
 pe1/public/fourier/fourier-ms.pfb><C:/Program Files/MiKTeX 2.8/fonts/type1/publ
@@ -2164,9 +2163,9 @@ es/MiKTeX 2.8/fonts/type1/public/lm/lmtti10.pfb><C:/Program Files/MiKTeX 2.8/fo
 nts/type1/adobe/utopia/putb8a.pfb><C:/Program Files/MiKTeX 2.8/fonts/type1/adob
 e/utopia/putr8a.pfb><C:/Program Files/MiKTeX 2.8/fonts/type1/adobe/utopia/putri
 8a.pfb><C:/Program Files/MiKTeX 2.8/fonts/type1/urw/symbol/usyr.pfb>
-Output written on parrot.pdf (47 pages, 1555567 bytes).
+Output written on parrot.pdf (47 pages, 1554958 bytes).
 PDF statistics:
- 882 PDF objects out of 1000 (max. 8388607)
+ 861 PDF objects out of 1000 (max. 8388607)
  375 named destinations out of 1000 (max. 500000)
- 358 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 310 words of extra memory for PDF output out of 10000 (max. 10000000)
 

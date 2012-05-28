@@ -29,13 +29,7 @@
 \contentsline {subsection}{\numberline {4.6.5}Notes:}{26}{subsection.4.6.5}
 \contentsline {subsection}{\numberline {4.6.6}Further Reading:}{26}{subsection.4.6.6}
 \contentsline {section}{\numberline {4.7}Data management}{26}{section.4.7}
-\contentsline {subsection}{\numberline {4.7.1}Problem}{26}{subsection.4.7.1}
-\contentsline {subsection}{\numberline {4.7.2}Solution}{26}{subsection.4.7.2}
-\contentsline {subsection}{\numberline {4.7.3}Execution}{27}{subsection.4.7.3}
-\contentsline {subsection}{\numberline {4.7.4}Result}{31}{subsection.4.7.4}
-\contentsline {subsection}{\numberline {4.7.5}Notes:}{31}{subsection.4.7.5}
-\contentsline {subsection}{\numberline {4.7.6}Further Reading:}{31}{subsection.4.7.6}
 \contentsline {appendix}{\chapternumberline {A}Notes from Interview}{33}{appendix.A}
 \contentsline {appendix}{\chapternumberline {B}invitation to usability test}{35}{appendix.B}
 \contentsline {appendix}{\chapternumberline {C}Notes from Interview with Tove}{37}{appendix.C}
-\contentsline {chapter}{Litteratur}{39}{section*.35}
+\contentsline {chapter}{Litteratur}{39}{section*.41}
