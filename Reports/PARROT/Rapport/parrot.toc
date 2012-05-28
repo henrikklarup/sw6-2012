@@ -20,11 +20,14 @@
 \contentsline {section}{\numberline {4.3}Playing Sound}{18}{section.4.3}
 \contentsline {section}{\numberline {4.4}Tab Navigation}{21}{section.4.4}
 \contentsline {section}{\numberline {4.5}Color Picker}{22}{section.4.5}
-\contentsline {subsection}{\numberline {4.5.1}Further Reading:}{24}{subsection.4.5.1}
 \contentsline {section}{\numberline {4.6}Displaying Pictograms}{24}{section.4.6}
 \contentsline {section}{\numberline {4.7}Sentence Board.}{26}{section.4.7}
 \contentsline {section}{\numberline {4.8}Data management}{30}{section.4.8}
-\contentsline {appendix}{\chapternumberline {A}Notes from Interview}{37}{appendix.A}
-\contentsline {appendix}{\chapternumberline {B}invitation to usability test}{39}{appendix.B}
-\contentsline {appendix}{\chapternumberline {C}Notes from Interview with Tove}{41}{appendix.C}
-\contentsline {chapter}{Litteratur}{43}{section*.53}
+\contentsline {chapter}{\chapternumberline {5}Testing of application}{37}{chapter.5}
+\contentsline {section}{\numberline {5.1}Test Design}{37}{section.5.1}
+\contentsline {section}{\numberline {5.2}Result of Test}{38}{section.5.2}
+\contentsline {section}{\numberline {5.3}Test Reflections}{41}{section.5.3}
+\contentsline {appendix}{\chapternumberline {A}Notes from Interview}{43}{appendix.A}
+\contentsline {appendix}{\chapternumberline {B}invitation to usability test}{45}{appendix.B}
+\contentsline {appendix}{\chapternumberline {C}Notes from Interview with Tove}{47}{appendix.C}
+\contentsline {chapter}{Litteratur}{49}{section*.68}
