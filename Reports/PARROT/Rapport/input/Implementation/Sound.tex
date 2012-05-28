@@ -4,7 +4,7 @@ In our application we are making sentences by using pictograms. These pictograms
 For this to work, we need an elegant solution that will be easy to use.
 
 \subsection*{Solution}
-Writing the Pictogram class so that it includes functionality for playing its asociated sound files has proven to be a good solution. Not only is it using only a few lines of code, it also makes using the functionality thoughout the entire app very easy.
+Writing the Pictogram class so that it includes functionality for playing its associated sound files has proven to be a good solution. Not only is it using only a few lines of code, it also makes using the functionality throughout the entire application very easy.
 
 \subsection*{Execution}
 To use the a sound of a pictogram, the application needs to include an audio player so that the sound can be played. Fortunately for the development team, the group who previously worked on the project have already written a functional audio player, which have been easily included in the PARROT application.\newline
@@ -14,7 +14,7 @@ The Pictogram class handles the data, and starts up the AudioPlayer wheneven it 
 %Replace the with a code box instead?
 \begin{source}{test}{}
 	private void playItem(final String path) {
-		// Running this in the background to keep UI reponsive and smooth
+		// Running this in the background to keep UI responsive and smooth
 		new Thread(new Runnable() {
 			public void run() {
 				try {
@@ -43,9 +43,9 @@ The Pictogram class handles the data, and starts up the AudioPlayer wheneven it 
 	}
 \end{source}
 
-For instance, suppose we want to play the word of a pictogram (The word is a sound file with the pronounciation of the pictogram). 
+For instance, suppose we want to play the word of a pictogram (The word is a sound file with the pronunciation of the pictogram). 
 The first thing we do is call the \textbf{playWord} method form the Pictogram in question. 
-This method cheks if the pictogram has a word, and if the path of that word corresponds to an existing sound file. 
+This method checks if the pictogram has a word, and if the path of that word corresponds to an existing sound file. 
 If this is correct, it will call the \textbf{playItem} with its path as the input. 
 The playItem then starts a new thread in which it makes the AudioPlayer play the corresponding sound. 
 The reason for starting a new thread is that the user interface would become unresponsive while the sound was playing otherwise.\newline
@@ -79,10 +79,10 @@ The actual functionality that plays the sound is found the AudioPlayer class, mo
 What happens here is that the internal MediaPlayer object (A native android class) is reset, fed with data, and prepared for playing the sound. The MediaPlayer object is then started with the \textbf{start} method, which causes it to play the sound, If an error occurs, it will be caught, no sound will be played, and the error will be written to the log.\newline
 
 \subsection*{Result}
-The PARROT application can play sounds for its pictograms as long as they have asociated sound files, will just ignore the request if a pictogram does not have any sound.
+The PARROT application can play sounds for its pictograms as long as they have associated sound files, will just ignore the request if a pictogram does not have any sound.
 
 \subsection*{Notes:}
 At the current state of the program, the only place in which the functionality for playing sound is being used, is in the \textbf{Tale} (Speech) tab. Here, the \textbf{playWord} method is triggered by clicking on a pictogram on the sentence board.\newline
-Currently, the pictograms in the system only have a word-sound asociated with them, rather than a sound effect. As such, a new idea will be needed instead of a simple click if both a sound and a word should be able to be played.
+Currently, the pictograms in the system only have a word-sound associated with them, rather than a sound effect. As such, a new idea will be needed instead of a simple click if both a sound and a word should be able to be played.
 
 \subsection*{Further Reading:}

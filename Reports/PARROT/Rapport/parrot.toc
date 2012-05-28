@@ -17,12 +17,6 @@
 \contentsline {chapter}{\chapternumberline {4}Implementation}{15}{chapter.4}
 \contentsline {section}{\numberline {4.1}Drag And Drop}{15}{section.4.1}
 \contentsline {section}{\numberline {4.2}Playing Sound}{16}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Problem}{16}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Solution}{17}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}Execution}{17}{subsection.4.2.3}
-\contentsline {subsection}{\numberline {4.2.4}Result}{19}{subsection.4.2.4}
-\contentsline {subsection}{\numberline {4.2.5}Notes:}{19}{subsection.4.2.5}
-\contentsline {subsection}{\numberline {4.2.6}Further Reading:}{19}{subsection.4.2.6}
 \contentsline {section}{\numberline {4.3}Tab Navigation}{19}{section.4.3}
 \contentsline {section}{\numberline {4.4}Colour Picker}{20}{section.4.4}
 \contentsline {subsection}{\numberline {4.4.1}Problem}{20}{subsection.4.4.1}
@@ -55,4 +49,4 @@
 \contentsline {appendix}{\chapternumberline {A}Notes from Interview}{33}{appendix.A}
 \contentsline {appendix}{\chapternumberline {B}invitation to usability test}{35}{appendix.B}
 \contentsline {appendix}{\chapternumberline {C}Notes from Interview with Tove}{37}{appendix.C}
-\contentsline {chapter}{Litteratur}{39}{section*.18}
+\contentsline {chapter}{Litteratur}{39}{section*.24}
