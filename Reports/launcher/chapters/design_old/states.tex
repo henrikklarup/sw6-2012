@@ -2,15 +2,6 @@
 %This section will explain the internal architecture of the launcher, this is every dependency inside the launcher.
 
 
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=1\textwidth]{gfx/statediagram.pdf}
-	\caption{State diagram}
-	\label{fig:state_diagram}
-\end{figure}
-
-\autoref{fig:state_diagram} shows all possible states and transitions, which the launcher can be in.
 The ``no crendentials provided''-state is the initial state which the system is in, after initial execution.
 This state, together with the ``credentials provided''-state, handles authentication and confirmation of the guardian currently using the launcher.
 After confirmation, the launcher enters the ``no app selected''-state, where the launcher waits for user input, on which app to select for execution. \\
