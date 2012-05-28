@@ -22,24 +22,43 @@ The authentication functionality -- represented as the \nameref{backlog:authenti
 	\centering
 	\includegraphics[width=0.5\textwidth]{gfx/authentication_design.pdf}
 	%\caption{Features of the Authentication feature}
-	\caption{Flowchart over the authentication step}
+	\caption{Flowchart of the authentication functionality}
 	\label{fig:authentication_design}
 \end{figure}
-The first step to enter after initiating Authentication, is to scan a QR-code.
-Upon scanning a QR-code, there is two possible outcomes: The QR-code is invalid, as the credentials it represent doesn't exist in the GIRAF database, or it is QR-code containing valid credentials that exist in the database.
-In case of the QR-code being valid, the process then enters it second step. The second step consist of the user needs to confirm the identity, or reject if identity represented on the system does not match the user's identity. 
+
+\noindent The authentication consists of two steps:
+
+\begin{enumerate}
+	\item validating
+	\item confirmation
+\end{enumerate}
+
+The validation step consists of scanning the provided QR-code. If valid, the user is asked to confirm the scanned identity, or reject if needed. The user is not allowed to proceed if the QR-code is unvalid.
+
+Confirmation is chosen, in order to avoid authentications where a user uses a QR-code which is not the one the user thought it was.
+
+%Upon scanning a QR-code, there is two possible outcomes: The QR-code is invalid, as the credentials are not recognized, or the QR-code contains credentials which are recognized.
+%In case of the QR-code being valid, the process then enters it second step. The second step consist of the user needs to confirm the identity, or reject if identity represented on the system does not match the user's identity. 
 
 \subsection{App management}
 \label{design:app_manangement}
-The app management feature is illustrated in \autoref{fig:appmanagement_design}. 
+The app management functionality is illustrated in \autoref{fig:appmanagement_design}. 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=1\textwidth]{gfx/appmanagement.pdf}
 	\caption{Features of the App management feature}
 	\label{fig:appmanagement_design}
 \end{figure}
-User action is the initial step of the app management feature, and controls the interaction with the user.
-One of the actions the user is able to make, is to change settings regarding the current authenticated user's apps.
+User interaction is the initial step fof the app management functionality, and can be one of the three interactions:
+
+\begin{enumerate}
+	\item Change app settings
+	\item Launch app
+	\item Request information
+\end{enumerate}
+
+%User action is the initial step of the app management feature, and controls the interaction with the user.
+%One of the actions the user is able to make, is to change settings regarding the current authenticated user's apps.
 The user does that by interacting with the drawer \todo{insert ref to preanalysis}.
 The drawer can be opened or closed.
 The closed state is when the drawer is sled all the way to the left.
