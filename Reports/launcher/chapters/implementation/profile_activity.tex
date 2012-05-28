@@ -2,7 +2,7 @@
 
 The \activity{ProfileSelectActivity} activity implements the behavior described in \autoref{design:profile_selection}, and takes care of providing the profile service, described in \autoref{external_architecture}, to the launched \girafapp[].
 
-As explained in \autoref{external_architecture}, the \guardian[] should be able to launch apps with all profiles which are attached to the \guardian[]. \autoref{lst:snipgetprofiles} shows how all profiles are found, including those in attached departments, and their subdepartments.
+As explained in \autoref{external_architecture}, the \guardian[] should be able to launch apps with all profiles which is attached to the \guardian[]. \autoref{lst:snipgetprofiles} shows how all profiles are found, including those in attached departments and their subdepartments.
 
 \begin{lstlisting}[style=sourceCode, language=JAVA, caption=Snippet of the \method{loadApplications} method, label=lst:snipgetprofiles]
 		...
@@ -19,7 +19,6 @@ As explained in \autoref{external_architecture}, the \guardian[] should be able 
 			totalChildren.addAll(childrenFromDepartments);
 		}
 		
-		// Removing duplicate profiles
 		...
 \end{lstlisting}
 
