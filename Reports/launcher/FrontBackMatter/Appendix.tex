@@ -95,3 +95,227 @@ With a time app installed, it is visible on the list and allows Karen to choose 
 	\caption{Questionnaire filled out by the test subjects before the test. Afterwards, each subject was asked to rate the difficulty of each application on a five scale rating.}
 	\label{fig:usability_questionnaire}
 \end{figure}
+
+\chapter{Test Cases}
+\label{test_cases}
+Overall requirements: \newline
+Launcher is installed on a tablet running Android 3.2.x \newline
+
+The tests are grouped based on the class they exist in, with the identifier of each test case being the name of the function tested and the number of the test for that function. \newline
+
+For the second part of the tests of Tools-functions, the following apps must be present in the system as noted for each of them. \newline
+
+WOMBAT (is a GIRAF app):
+\begin{itemize}
+\item is in the database.
+\item is installed on the device.
+\item is attached to the current user.
+\end{itemize}
+
+PARROT (GIRAF):
+\begin{itemize}
+\item is in the database.
+\item is installed on the device.
+\item is \textbf{not} attached to the current user.
+\end{itemize}
+
+ViewDB (GIRAF):
+\begin{itemize}
+\item is \textbf{not} in the database.
+\item is installed on the device.
+\item is \textbf{not} attached to the current user.
+\end{itemize}
+
+Lion (GIRAF):
+\begin{itemize}
+\item is in the database.
+\item is \textbf{not} installed on the device.
+\item is \textbf{not} attached to the current user.
+\end{itemize}
+
+Leopard (GIRAF):
+\begin{itemize}
+\item is in the database
+\item is \textbf{not} installed on the device.
+\item is attached to the current user.
+\end{itemize}
+
+Calculator (is an Android app):
+\begin{itemize}
+\item is in the database.
+\item is installed on the device.
+\item is attached to the current user.
+\end{itemize}
+
+Camera (Android):
+\begin{itemize}
+\item is in the database.
+\item is installed on the device.
+\item is \textbf{not} attached to the current user.
+\end{itemize}
+
+Gallery (Android):
+\begin{itemize}
+\item is \textbf{not} in the database.
+\item is installed on the device.
+\item is \textbf{not} attached to the current user.
+\end{itemize}
+
+Internet (Android):
+\begin{itemize}
+\item is in the database.
+\item is \textbf{not} installed on the device.
+\item is \textbf{not} attached to the current user.
+\end{itemize}
+
+Mail (Android):
+\begin{itemize}
+\item is in the database
+\item is \textbf{not} installed on the device.
+\item is attached to the current user.
+\end{itemize}
+
+\begin{table}[ht]
+\caption{Test cases for the AppAdapter class} % title of Table
+\centering  % used for centering table
+\begin{tabular}{| p{1.7in} | p{1.7in} | p{1.7in} |}
+\hline
+Name: & Test: & Pass Criteria: \\ [0.5ex] % inserts table 
+%heading
+\hline                  % inserts single horizontal line
+setAppBackground-001: & Call setAppBackground with the color 0xFFFFFFFF. & The background of the app is the color 0xFFFFFFFF. \\ \hline 
+saveAppBackground-001: & Call saveAppBackground with the color 0xFFFFFFFF. & The launcher settings are changed so the color for the given app is 0xFFFFFFFF. \\ [1ex]      % [1ex] adds vertical space
+\hline %inserts single line
+\end{tabular}
+\label{table:appadapter_tests} % is used to refer this table in the text
+\end{table}
+
+\begin{table}[ht]
+\caption{Test cases for the AppInfo class} % title of Table
+\centering  % used for centering table
+\begin{tabular}{| p{1.7in} | p{1.7in} | p{1.7in} |}
+\hline
+Name: & Test: & Pass Criteria: \\ [0.5ex] % inserts table 
+%heading
+\hline    
+setGuardian-001: & Call setGuardian with a non-guardian profile. & The guardian of the AppInfo is null. \\ \hline 
+setGuardian-002: & Call setGuardian with a guardian profile. & The guardian of the AppInfo is the guardian used as input. \\ \hline
+getShortenedName-001: & Call getShortenedName on an AppInfo with a name of five characters. & The return value is equal to the name of the AppInfo. \\ \hline 
+getShortenedName-002: & Call getShortenedName on an AppInfo with a name of six characters. & The return value is equal to the name of the AppInfo. \\ \hline 
+getShortenedName-003: & Call getShortenedName on an AppInfo with a name of seven characters. & The returned string consists of six characters with "`..."' concatinated. \\ [1ex] 
+\hline %inserts single line
+\end{tabular}
+\label{table:appinfo_tests} % is used to refer this table in the text
+\end{table}
+
+\begin{table}[ht]
+\caption{Test cases for the AuthenticationActivity class} % title of Table
+\centering  % used for centering table
+\begin{tabular}{| p{1.7in} | p{1.7in} | p{1.7in} |}
+\hline
+Name: & Test: & Pass Criteria: \\ [0.5ex] % inserts table 
+%heading
+\hline    
+changeCamerafeed\newline{}BorderColor-001: & Scan an invalid QR code. & The camera feed border changes to red. \\ \hline 
+changeCamerafeed\newline{}BorderColor-002: & Scan a valid QR code. & The camera feed border changes to green. \\ \hline
+handleDecode-001: & Scan an invalid QR code. & The camera feed border changes to red and no log-in button and name is shown. \\ \hline 
+handleDecode-002: & Scan a valid QR code. & The camera feed border changes to green, a log-in button appears, the name of the user attached to the QR code appears and the device vibrates. \\ [1ex] 
+\hline %inserts single line
+\end{tabular}
+\label{table:authenticationactivity_tests} % is used to refer this table in the text
+\end{table}
+
+\begin{table}[ht]
+\caption{Test cases for the HomeActivity class} % title of Table
+\centering  % used for centering table
+\begin{tabular}{| p{1.7in} | p{1.7in} | p{1.7in} |}
+\hline
+Name: & Test: & Pass Criteria: \\ [0.5ex] % inserts table 
+%heading
+\hline    
+onBackPressed-001: & Press the device back button while on the home screen. & Nothing happens. \\ \hline 
+calculateNumOfColumns-001: & The user should have nine apps visible to them. Call calculateNumOfCollumns(). & The returned number is four. \\ \hline
+calculateNumOfColumns-002: & The user should have ten apps visible to them. Call calculateNumOfCollumns(). & The returned number is four. \\ \hline 
+calculateNumOfColumns-003: & The user should have thirteen apps visible to them. Call calculateNumOfCollumns(). & The returned number is five. \\ \hline 
+appBgColor-001: & A color for a given app already exists in the settings. Call appBgColor(). & The color returned matches the one from the settings. \\ \hline 
+saveNewBgColor-001: & Call saveNewBgColor() with a real color and the ID of an app in the database. & This color has been saved in the settings. \\ \hline 
+saveNewBgColor-002: & Call saveNewBgColor() with null as a color and the ID of an app in the database. & The settings are not changed. \\ \hline 
+saveNewBgColor-003: & Call saveNewBgColor() with a real color and null as the ID. & The settings are not changed. \\ [1ex] 
+\hline %inserts single line
+\end{tabular}
+\label{table:homeactivity_tests} % is used to refer this table in the text
+\end{table}
+
+\begin{table}[ht]
+\caption{Test cases for the ProfileSelectActivity class} % title of Table
+\centering  % used for centering table
+\begin{tabular}{| p{1.7in} | p{1.7in} | p{1.7in} |}
+\hline
+Name: & Test: & Pass Criteria: \\ [0.5ex] % inserts table 
+%heading
+\hline                  % inserts single horizontal line
+loadProfiles-001: & Call loadProfiles() for a guardian with children attached and different departments that also have children attached. & The returned list of children contains all children attached to the given guardian and the children attached to the departments of the guardian, but no duplicates. \\ [1ex]  
+\hline %inserts single line
+\end{tabular}
+\label{table:profileselectactivity_tests} % is used to refer this table in the text
+\end{table}
+
+\begin{table}[ht]
+\caption{Test cases for the Tools class, part one} % title of Table
+\centering  % used for centering table
+\begin{tabular}{| p{1.7in} | p{1.7in} | p{1.7in} |}
+\hline
+Name: & Test: & Pass Criteria: \\ [0.5ex] % inserts table 
+%heading
+\hline    
+saveLogInData-001: & Login as an valid guardian. & The correct ID and timestamp is saved in shared preferences. \\ \hline 
+findCurrentUser-001: & Call findCurrentUser(). & The currently logged in profile is returned. \\ \hline
+findCurrentUserID-001: & Call findCurrentUserID(). & The currently correct profile ID is returned. \\ \hline 
+clearAuthData-001: & Call clearAuthData(). & The ID is set to -1 and time to 1 in the shared preferences. \\ \hline 
+sessionExpired-001: & Let the session to expire after 1 minute. \newline Log in as a valid guardian. Turn off device. Wait one minuted. Turn on device. & The guardian is logged out. \\ [1ex] 
+\hline %inserts single line
+\end{tabular}
+\label{table:tools_tests1} % is used to refer this table in the text
+\end{table}
+
+\begin{table}[ht]
+\caption{Test cases for the Tools class, part two (where the app requirements are enforced)} % title of Table
+\centering  % used for centering table
+\begin{tabular}{| p{1.7in} | p{1.7in} | p{1.7in} |}
+\hline
+Name: & Test: & Pass Criteria: \\ [0.5ex] % inserts table 
+%heading
+\hline    
+getVisibleGirafApps-001: & Call getVisibleGirafApps() for the current user. & Only Wombat is returned. \\ \hline 
+getVisibleAndroidApps-001: & Call getVisibleAndroidApps() for the current user. & Only Calculator is returned. \\ \hline
+getVisibleApps-001: & Call getVisibleApps() for the current user. & Only Wombat and Calculator are returned. \\ \hline 
+getHiddenGirafApps-001: & Call getHiddenGirafApps() for the current user. & Only Parrot is returned. \\ \hline 
+getHiddenAndroidApps-001: & Call getHiddenAndroidApps() for the current user. & Only Camera is returned. \\ \hline 
+getHiddenApps-001: & Call getHiddenApps() for the current user. & Only Parrot, ViewDB, Lion, Camera, Gallery and Internet are returned. \\ \hline 
+getAvaliableGirafApps-001: & Call getAvaliableGirafApps() for the current user. & Only Wombat and Parrot are returned. \\ \hline 
+getAvaliableAndroidApps-001: & Call getAvaliableAndroidApps() for the current user. & Only Calculator and Camera is returned. \\ \hline 
+getAvaliableApps-001: & Call getAvaliableApps() for the current user. & Only Wombat, Parrot, Calculator and Camera is returned. \\ \hline 
+getDeviceGirafApps-001: & Call getDeviceGirafApps() for the current user. & Verify that Wombat, Parrot and ViewDB is shown. \\ \hline 
+getDeviceAndroidApps-001: & Call getDeviceAndroidApps() for the current user. & Only Calculator, Camera and Gallery is returned. \\ \hline 
+getDeviceApps-001: & Call getDeviceApps() for the current user. & Only Wombat, Parrot, ViewDB, Calculator, Camera and Gallery is returned. \\ \hline 
+subtractAppsList-001: & Call subtractAppsList with a[wombat,Calculator] and b[Calculator]. & Only Wombat is returned. \\ [1ex] 
+\hline %inserts single line
+\end{tabular}
+\label{table:tools_tests2} % is used to refer this table in the text
+\end{table}
+
+\begin{table}[ht]
+\centering  % used for centering table
+\begin{tabular}{| p{1.7in} | p{1.7in} | p{1.7in} |}
+\hline  
+packageRegistered-001: & Call packageRegistered() with Wombat. & True is returned. \\ \hline 
+packageRegistered-002: & Call packageRegistered() with ViewDB. & False is returned. \\ \hline 
+insertAppInDB-001: & Call insertAppInDB() with ViewDB. & ViewDB is now in the database. \\ \hline 
+attachLauncher-001: & A relation between the launcher and given user does not currently exist. Call attachLauncher() with the given user. & A relation between the launcher and user now exists in the database. \\ \hline 
+appsContain\_{}RI-001: & Call appsContain\_{}RI with list of apps installed on the device as ResolveInfo's and Parrot. & True is returned. \\ \hline 
+appsContain\_{}RI-002: & Call appsContain\_{}RI with list of apps installed on the device as ResolveInfo's and Lion. & False is returned. \\ \hline 
+appsContain\_{}A-001: & Call appsContain\_{}A with a list of apps in the database and Wombat. & True is returned. \\ \hline 
+appsContain\_{}A-002: & Call appsContain\_{}A with a list of apps in the database and ViewDB. & False is returned. \\ [1ex] 
+\hline %inserts single line
+\end{tabular}
+\end{table}
