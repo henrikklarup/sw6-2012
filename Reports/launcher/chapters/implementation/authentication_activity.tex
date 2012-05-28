@@ -1,11 +1,12 @@
 \section{Authentication Activity}
-This section will explain the \activity{AuthenticationActivity}.
 
-This activity implements the design described in \autoref{design:authentication} is the first one the user will face when using the \giraf[] system. It is also the current lock screen which is used by Wombat. 
+This activity implements the design described in \autoref{design:authentication} and is the first activity the user will face when using the \giraf[] system. It is also the current lock screen which is used by WOMBAT \autoref{backlog:lock_screen}.
 
-This activity was implemented using ZXing which is a libaray under Apache 2.0. This libarary is called Zebra Crossing and is made for use with Android for scanning 1D and 2D QR codes.
+This activity was implemented using ZXing \citep{web:ZXing}, pronouced Zebra crossing, which is a libaray under Apache 2.0. This library is made for use with Android for scanning 1D and 2D QR codes.
 
-There is implemented instructions and illustrations as mentioned in \autoref{design:authentication}. There is also implemented a gesture, a short vibration, for showing the user that the QR code was scanned correct because some of the users had trouble seeing the login button when it appeard.
+\todo{Thomas eller Magnus, explain what was changed in ZXing.}
+
+There is implemented instructions and illustrations as mentioned in \autoref{design:authentication}. There is also implemented a gesture, a 500ms vibration, for showing the user that the QR code was scanned correct because some of the users had trouble seeing the login button when it appeard.
 
 \begin{lstlisting}[style=sourceCode, language=JAVA, caption=This is code, label=lst:authenticationAcitivity] 
 				// If the authentication activity was not launched by the launcher...
