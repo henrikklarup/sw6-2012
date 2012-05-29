@@ -20,7 +20,7 @@ private void listen() {
 			//Saving the connections and a corresponding
 			//DataOutputStream for later use
 			this.connections.put(con, new DataOutputStream(con.getOutputStream()));
-			//				this.connections.add(new ConnectionIO(con, new DataOutputStream(con.getOutputStream())));
+			
 			//Starts a new Thread used for communication
 			Thread comThread = new CommunicationThread(con, this.folder);
 			comThread.start();
