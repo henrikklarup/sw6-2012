@@ -43,10 +43,12 @@ This leads to the functionality solution seen in \autoref{fig:authentication_des
 Upon scanning a QR-code, there is two possible outcomes: The QR-code is invalid, as the credentials are not recognized, or the QR-code contains credentials which are recognized.
 In case of the QR-code being valid, the process then enters it second step. The second step consist of the user needs to confirm the identity, or reject if identity represented on the system does not match the user's identity.
 
+\subsubsection{GUI}
+The GUI components of the authentication design, can be seen in \autoref{fig:authentication_gui_design_init}.
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.7\textwidth]{gfx/authentication_gui_design_init.pdf}
-	%\caption{Features of the Authentication feature}
 	\caption{Graphical User Interface of the authentication functionality}
 	\label{fig:authentication_gui_design_init}
 \end{figure}
+The camera border helps distinct the camera feed from the rest of the layout, but it also provides feedback upon scanning. 
