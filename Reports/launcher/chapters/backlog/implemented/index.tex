@@ -1,8 +1,38 @@
 \section{Implemented features}
 \label{backlog_implemented}
 
-\input{chapters/backlog/implemented/authentication}
-\input{chapters/backlog/implemented/GUIcomponents}
-\input{chapters/backlog/implemented/homescreen}
-\input{chapters/backlog/implemented/logoscreen}
-\input{chapters/backlog/implemented/profileselect}
+%\input{chapters/backlog/implemented/authentication}
+\subsection{Authentication}
+\label{backlog:authentication}
+Authentication gives protection of private data, and allows the launcher to know the identify of the current user.
+QR-codes are used to store the credentials of the users, and allows for authentication via the tablets camera, scanning a provided QR-code.
+
+\subsection{Autologin}
+\label{backlog:autologin}
+The autologin feature enables guardians to start the launcher without authentication, if authentication was performed within the last eight hours.
+
+%\input{chapters/backlog/implemented/GUIcomponents}
+\subsection{GUI components}
+\label{backlog:GUI_components}
+GUI components are shared using a public library, allowing \girafapp[]s to use the same dialogs, buttons, tooltips, widgets etc.
+
+\subsubsection{App grid}
+\label{backlog:appgrid}
+Launchable \girafapp[]s are launchable through a grid of apps, called ``app grid''.
+
+%\input{chapters/backlog/implemented/homescreen}
+\subsection{Homebar and drawer}
+\label{backlog:homebar_drawer}
+Information is accessible through a bar -- called ``homebar'' -- in the means of text, images and widgets.
+Additional information and functionality is hidden within the homebar, in a so called drawer, simply called ``drawer''. The homebar and the drawer is shown together with the app gridd, described in \autoref{backlog:appgrid}.
+
+%\input{chapters/backlog/implemented/logoscreen}
+\subsection{Logo screen}
+\label{backlog:logo_screen}
+While the launcher is initially loading, a splash screen containing the logo of the \giraf[] platform is shown, allerting the user that the system is loading.
+
+%\input{chapters/backlog/implemented/profileselect}
+\subsection{Profile select}
+\label{backlog:profile_select}
+Upon launching an app from the app grid, choosable child profiles are listed, such that the user is allowed to select one of them, prior to app execution.
+%Profile select was implemented so an app needs to be started for a specific child. The screen holds the \giraf[] logo and a list where all the children the currently logged in guardian have access to.
