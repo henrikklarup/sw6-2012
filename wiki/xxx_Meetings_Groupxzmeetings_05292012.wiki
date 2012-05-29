@@ -22,12 +22,13 @@ Notary: SW601
 
 
   * Release:
-Vi har valgt at installere alt på alle tablets frem til eksamenen.
+    Vi har valgt at installere alt på alle tablets frem til eksamenen.
 
-Release APK filer skal ligges i "Tags" på svn senest 30/5 kl 12.00 Sammen med andre nødvendige Filer.
+    Release APK filer skal ligges i "Tags" på svn senest 30/5 kl 12.00
+    Sammen med andre nødvendige Filer.
 
   * Usability Test:
-Gennemgang af stykket i common report for at rette fejl.
-Debat mellem Educators og Pedagory. Vi besluttede os for Educators.
+    Gennemgang af stykket i common report for at rette fejl.
+    Debat mellem Educators og Pedagory. Vi besluttede os for Educators.
 
   * Der vil ikke være nogle fremtidige møder.
