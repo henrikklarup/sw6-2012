@@ -12,7 +12,7 @@ in \autoref{code:sw6mlExample01} a short example of legit sw6ml syntax for addin
 The \code{<AuthUsers>..content..</AuthUsers>} element identify the table on which we want to make changes, the following \code{<Entry>..content..</Entry>} elements
 define what row and what kind of action, through the \code{action="foo"} xml attribute, should be done on the row. 
 
-\begin{figure}[H]
+\begin{Code}
 \begin{lstlisting}[label=code:sw6mlExample01,caption=Example of sw6ml syntax]
  <AuthUsers>
     <Entry action="create">
@@ -27,7 +27,7 @@ define what row and what kind of action, through the \code{action="foo"} xml att
     </Entry>
   </AuthUsers>
 \end{lstlisting}
-\end{figure}
+\end{Code}
 The \code{action="foo"} xml attribute has four legal types corresponding to the CRUD profile actions, create, read, update, and delete, shown in \autoref{code:sw6mlCrud}.
 Contained in the  \code{<Entry action="crud_type`">..content..</Entry>} element is a series of 0 or more elements corresponding to the table schema of, in this case, the AuthUsers table.
 It takes zero or more of the table attributes in a row, since not all table attributes are needed for all actions, as an example delete only requires the unique identifier of the table and
@@ -86,12 +86,14 @@ following is a short description of the setup of the \code{<Entry>} element for 
 Notice the \code{<row_attribute type="bar">..</..>} xml attribute, legal types are \code{string} or \code{int}, if the data type of the row attribute is a string or any other type requiring apostrophes
 in a sql query, use \code{string}, for anything else use \code{int}.
 
+\begin{Code}
 \begin{lstlisting}[label=code:sw6mlExample02,caption="sw6ml Update syntax example]
  <Entry action="update">
    <unique_identifier type="bar">foo</unique_identifier>
    <attribute_to_be_updated type="bar">newValue</attribute_to_be_updated>
  </Entry>
 \end{lstlisting}
+\end{Code}
 
 The sw6ml schema can be found on the project repository together with a valid sw6ml document,
 Full path: \url{http://code.google.com/p/sw6-2012/source/browse/random_group_stuff/Group_server/xml/sw6_schema.xsd}
