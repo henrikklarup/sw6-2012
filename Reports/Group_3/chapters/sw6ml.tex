@@ -52,7 +52,7 @@ while XML schema provides advanced features for dynamic languages, sw6ml int its
 this is however all that is needed, with a few assertions on the format server side.
 
 \autoref{code:sw6mlformal} show the formal structure of a sw6ml document.
-\begin{figure}[H]
+\begin{Code}
 \begin{lstlisting}[label=code:sw6mlformal,caption=root and table elements]
 <sw6ml> 
   <table_element_1>
@@ -72,7 +72,7 @@ this is however all that is needed, with a few assertions on the format server s
   </table_element>
 </sw6ml>
 \end{lstlisting}
-\end{figure}
+\end{Code}
 
 following is a short description of the setup of the \code{<Entry>} element for each crud type.
 
@@ -93,11 +93,7 @@ in a sql query, use \code{string}, for anything else use \code{int}.
  </Entry>
 \end{lstlisting}
 
-The sw6ml schema can be found on the project repository together with an valid sw6ml document
+The sw6ml schema can be found on the project repository together with a valid sw6ml document,
 Full path: \url{http://code.google.com/p/sw6-2012/source/browse/random_group_stuff/Group_server/xml/sw6_schema.xsd}
 and \url{http://code.google.com/p/sw6-2012/source/browse/random_group_stuff/Group_server/xml/sw6_example.xml} %TODO fix this document before handin;-)
-
-
-
-
 
