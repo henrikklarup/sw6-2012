@@ -1,73 +1,182 @@
-\section{} %%Name of Feature.
+\section{Managing Categories} %%Name of Feature.
 \subsection*{Problem}
-When more and more pictograms are added to PARROT, the categories help manange and organize these pictograms. 
+When more and more pictograms are added to PARROT, the categories help manage and organize these pictograms. 
 The categories help managing the different users needs, so for every user the categories can differ. 
-We therefor need to be able to manipultate categories to suit the different users needs, as well as create new categories. 
+We therefor need to be able to manipulate categories to suit the different users needs, as well as create new categories. 
 There is also the need to remove unwanted categories from a users profile.
 
 
 \subsection*{Solution}
 To do this we use the combination of buttons and drag and drop. 
 Functionality like deleting categories and pictograms and adding pictograms from one category to another are done via drag and drop. 
-Creating new catgories and changing information about the categories are done via buttons. 
+Creating new categories and changing information about the categories are done via buttons. 
 
 
 \subsection*{Execution}
 We will first describe the drag and drop functionalities. 
-When we want to delete a specific pictogram from a catgory we choose the pictogram from the gridview and drag it to the trahscan. 
-In the DROP part of the listener we therefore check if the dropzone are the trahscan and the dragged object are from the gridview.
+When we want to delete a specific pictogram from a category we choose the pictogram from the gridview and drag it to the trashcan. 
+In the DROP part of the listener we therefore check if the drop zone are the trashcan and the dragged object are from the gridview.
 When we know this we create a temporary category where we save the information of the category we are currently modifying. We then remove the pictogram, and overwrites the old category with this new information.
-This can be seen in codesnippet REFFER TO CODESNIPPET.
+This can be seen in Source Code \ref{mc1}.
 
-%% get code from ManagementBoxDragListener.java lines 43-50
+\begin{source}[{mc1}]{deleting a pictogram from a category}
+if(self.getId()==R.id.trash && ManageCategoryFragment.catDragOwnerID == R.id.pictograms) //We are to delete a pictogram from a category
+				{
+					Category temp = ManageCategoryFragment.profileBeingModified.getCategoryAt
+						(ManageCategoryFragment.currentCategoryId);
+					
+					temp.removePictogram(ManageCategoryFragment.draggedItemIndex);
+					
+					ManageCategoryFragment.profileBeingModified.setCategoryAt
+						(ManageCategoryFragment.currentCategoryId, temp);
+					
+					pictograms.setAdapter(new PictogramAdapter(ManageCategoryFragment.profileBeingModified.
+						getCategoryAt(ManageCategoryFragment.currentCategoryId), parrent));
+				}
+\end{source}
 
-When we want to copy a picogram from one category in to another category we choose the category we want to copy from and drag the chossen pictogram onto the category that we want to copy the pictogram to. 
-Still in the DROP part of the listener we check if the dropzone are the categories and if the dragged object are from the gridview showing the pictograms.
-To know what category we are dropping the pictogram into we need to know the index of the category which we do by coordinates of the drop, and refferencing to the index of the list.
+When we want to copy a picogram from one category in to another category we choose the category we want to copy from and drag the chosen pictogram onto the category that we want to copy the pictogram to. 
+Still in the DROP part of the listener we check if the drop zone are the categories and if the dragged object are from the gridview showing the pictograms.
+To know what category we are dropping the pictogram into we need to know the index of the category which we do by coordinates of the drop, and referencing to the index of the list.
 We now just add the pictogram to the category at the index.
-This can be seen in codesnippet REFFER TO CODESNIPPET.
+This can be seen in Source Code \ref{mc2}.
 
 %% get code from ManagementBoxDragListener.java lines 52 - 66
 
-When we want to copy all pictograms from one category into another category we first choose the category whihc we want to copy to. 
+\begin{source}[{mc2}]{Copying a pictogram into another category}
+else if(self.getId()==R.id.categories && ManageCategoryFragment.catDragOwnerID == R.id.pictograms) //We are to copy a pictogram into another category
+				{
+					
+					draggedPictogram = ManageCategoryFragment.profileBeingModified.getCategoryAt
+						(ManageCategoryFragment.currentCategoryId).getPictogramAtIndex
+						(ManageCategoryFragment.draggedItemIndex); 
+							
+					ListView categories = (ListView) parrent.findViewById(R.id.categories);
+					int x = (int)event.getX();
+					int y = (int)event.getY();
+					int index = categories.pointToPosition(x, y);
+					
+					Category temp = ManageCategoryFragment.profileBeingModified.getCategoryAt(index);
+					
+					temp.addPictogram(draggedPictogram);
+				
+					ManageCategoryFragment.profileBeingModified.setCategoryAt(index, temp);
+										
+				}
+\end{source}
+When we want to copy all pictograms from one category into another category we first choose the category which we want to copy to. 
 The we drag the category into the gridview showing the pictograms. 
-Also in the DROP part of the listener we check if the dropzone are the gridview showing the pictograms and the dragged object are from the categories.
+Also in the DROP part of the listener we check if the drop zone are the gridview showing the pictograms and the dragged object are from the categories.
 We then initialize two category objects. 
-One containing the category from whihc we want to copy that we call categoryCopiedFrom, and one containing the category we want to copy to whihc we call temp. 
+One containing the category from which we want to copy that we call categoryCopiedFrom, and one containing the category we want to copy to which we call temp. 
 We then go through the pictograms in categoryCopiedFrom, and add these pictograms to temp. 
 When all pictograms are copied we overwrite the old category we wanted to copy from with the new temp category. 
-This can be seen in codesnippet REFFER TO CODESNIPPET.
+This can be seen in Source Code \ref{mc3}.
 
 %% get code from ManagementBoxDragListener.java lines 67 - 81
-
-When we want to delete a category we drag the chossen category into the trash. 
-In the DROP part of the listener we check if the dropzone are the trash and the dragged object are from the category grid. 
+\begin{source}[{mc3}]{Copying a category into another category}
+else if(self.getId()==R.id.pictograms && ManageCategoryFragment.catDragOwnerID == R.id.categories) //We are to copy a category into another category
+				{	
+					
+					Category categoryCopiedFrom = ManageCategoryFragment.profileBeingModified.getCategoryAt
+						(ManageCategoryFragment.draggedItemIndex); 
+					
+					Category temp = ManageCategoryFragment.profileBeingModified.getCategoryAt
+						(ManageCategoryFragment.currentCategoryId);
+					
+					for(int i = 0; i < categoryCopiedFrom.getPictograms().size(); i++)
+					{
+						temp.addPictogram(categoryCopiedFrom.getPictogramAtIndex(i)); 
+					}
+					
+					ManageCategoryFragment.profileBeingModified.setCategoryAt
+						(ManageCategoryFragment.currentCategoryId, temp);
+					
+					pictograms.setAdapter(new PictogramAdapter
+						(ManageCategoryFragment.profileBeingModified.getCategoryAt
+						(ManageCategoryFragment.currentCategoryId), parrent));
+				}
+\end{source}
+When we want to delete a category we drag the chosen category into the trash. 
+In the DROP part of the listener we check if the drop zone are the trash and the dragged object are from the category grid. 
 We then remove the category from the profile that we are currently modifying. 
-This can be seen in codesnippet REFFER TO CODESNIPPET:
+This can be seen in Source Code \ref{mc4}:
 
 %% get code from ManagementBoxDragListener.java lines 82 - 86
-
-When we want to change the icon of a category we drag a chossen pictogram from the gridview into the space for the icon, whihc replaces the current icon. 
-In the DROP part of the listener we check if the dropzone are the Icon imageview and the dragged object are from the gridview showing the pictograms. 
+\begin{source}[{mc4}]{Deleting a category}
+else if(self.getId()==R.id.trash && ManageCategoryFragment.catDragOwnerID == R.id.categories) //We are to delete a category
+				{	
+					ManageCategoryFragment.profileBeingModified.removeCategory
+						(ManageCategoryFragment.draggedItemIndex);
+					
+					categories.setAdapter(new ListViewAdapter(parrent, R.layout.categoriesitem,
+						ManageCategoryFragment.profileBeingModified.getCategories()));
+				}
+\end{source}
+When we want to change the icon of a category we drag a chosen pictogram from the gridview into the space for the icon, which replaces the current icon. 
+In the DROP part of the listener we check if the drop zone are the Icon imageview and the dragged object are from the gridview showing the pictograms. 
 If so notice what index the dragged object are and we create a temporary category. 
 In this category we set its icon to be that of the dragged object.  
 We then overwrites the old category with the temporary category.
 Then we begin to draw the new icon in the imageview so that it can be seen. 
-This can be seen in codesnippet REFFER TO CODESNIPPET 
+This can be seen in Source Code \ref{mc5}.
 
 %% get code from ManagementBoxDragListener.java lines 87 - 97
-
+\begin{source}[{mc5}]{Changing the category icon.}
+else if(self.getId()==R.id.categorypic && ManageCategoryFragment.catDragOwnerID == R.id.pictograms) //We are to change the icon of the category
+				{
+					draggedPictogram = ManageCategoryFragment.profileBeingModified.getCategoryAt
+						(ManageCategoryFragment.currentCategoryId).getPictogramAtIndex
+						(ManageCategoryFragment.draggedItemIndex);
+					
+					Category tempCat = ManageCategoryFragment.profileBeingModified.getCategoryAt
+						(ManageCategoryFragment.currentCategoryId);
+					
+					tempCat.setIcon(draggedPictogram);
+					
+					ManageCategoryFragment.profileBeingModified.setCategoryAt
+						(ManageCategoryFragment.currentCategoryId, tempCat);
+					
+					ImageView icon = (ImageView) parrent.findViewById(R.id.categorypic);
+					
+					icon.setImageBitmap
+						(ManageCategoryFragment.profileBeingModified.getCategoryAt
+						(ManageCategoryFragment.currentCategoryId).getIcon().getBitmap());
+					
+					ListView list = (ListView) parrent.findViewById(R.id.categories);
+					
+					list.setAdapter(new ListViewAdapter(parrent, R.layout.categoriesitem,
+						ManageCategoryFragment.profileBeingModified.getCategories()));
+				}
+\end{source}
 We will now describe the functions that are activated via buttons.
 When we want to create a new category we simply push the "create new category" button. 
 We use a onCLikListener in ManageCategoryFragment.java. 
-When the button is pushed it creates a new category for the profile currently being chossen, ass well as some information needed to create such a category. 
-We create a empty pictogram to being used as its icon, sets its name to "kategori navn" and its clor to red. 
-This can be seen in codesnippet REFFER TO CODESNIPPET
+When the button is pushed it creates a new category for the profile currently being chosen, ass well as some information needed to create such a category. 
+We create a empty pictogram to being used as its icon, sets its name to "kategori navn" and its color to red. 
+This can be seen in Source Code \ref{mc6}.
 
 %% get code from ManageCategoryFragment.java lines 165 - 175
-
+\begin{source}[{mc6}]{Creating a new category}
+createNewCategory.setOnClickListener(new OnClickListener() 
+		{
+			public void onClick(View v) 
+			{
+				Pictogram pictogram = new Pictogram("#usynlig#", null, null, null, parrent);
+				
+				Category cat = new Category("Kategori Navn", 0xffff0000, pictogram);
+				
+				profileBeingModified.addCategory(cat);
+				
+				ListView categories = (ListView) parrent.findViewById(R.id.categories); //Redrawing the categories
+				
+				categories.setAdapter(new ListViewAdapter(parrent, R.layout.categoriesitem, profileBeingModified.getCategories())); 
+				//Adapter for the category gridview
+			}
+		});
+\end{source}
 When we want to change the color of a category we bush the "Change Category Color" button. 
-For this we also use a onClikListener which activates a popup screen where it is possible to choose the color. This popupscreen are described in section \autoref{colpic}.
+For this we also use a onClikListener which activates a pop up screen where it is possible to choose the color. This pop up screen are described in section \autoref{colpic}.
 Then we save the output from this into the category as its background color. 
 
 \subsection*{Result}
@@ -77,10 +186,10 @@ Change the categories icon and background color.
 
 
 \subsection*{Notes}
-The functionality of cahnging the categories icon was first designed to be a button. We changed this while coding becourse it seemed more intuitive. 
-Un fortunaltely there are some functionality that are not jet finished. And Althouhg the buttons are in the design they do not do anything. 
-These functionalities include the spinner which should have made it possible to change what profile was being modified, as well as the buttons making it possible to change the titel of categories, copy a category from another profile and copy the current category to another profile. 
+The functionality of changing the categories icon was first designed to be a button. We changed this while coding because it seemed more intuitive. 
+Unfortunately there are some functionality that are not jet finished. And Although the buttons are in the design they do not do anything. 
+These functionalities include the spinner which should have made it possible to change what profile was being modified, as well as the buttons making it possible to change the title of categories, copy a category from another profile and copy the current category to another profile. 
 
 
 \subsection*{Further Reading}
-Drag and drop are used in these functions. It can be found at section REFFER TO DRAGANDDROP.
+Drag and drop are used in these functions. It can be found at \autoref{dnd}.
