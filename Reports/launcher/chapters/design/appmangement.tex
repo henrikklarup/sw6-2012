@@ -53,16 +53,20 @@ Since the \giraf[] platform should be flexible and customizable, it must be poss
 \end{itemize}
 
 
-
-
-
-
 \subsubsection{The drawer}
 \label{sec:drawer}
-The drawer is a place to put functionality. As seen in \autoref{fig:appmanagement_design} everything that have to do with change app settings have to do with something in the drawer.
+The drawer was designed to hide functionallity when not needed in a convenient place. As seen in \autoref{fig:appmanagement_design} everything that have to do with changing app settings is placed in the drawer which the user have to open to get to it.
+Another thing the drawer did was to make a place for the widgets.
+The handle of the drawer was designed to have the same color as the inside of the drawer because it was important to make consistensy in the way that the user should feel when they saw the color of the handle the thought of the functionality inside of the drawer. It was also rounded to tell the user that this element was interactive.
+
 \paragraph{Widgets}
 \label{par:widgets}
 Widgets in the \giraf[] system should help the user request information. As seen in \autoref{fig:appmanagement_design} the user can take the action to request information. If the user chooses an information the information will be selected and shown to the user.
+The reason it was designed this way is that if all the information should be around the drawer handle it would probatly confuse the user more than it would help them.
+All widgets is designed so they need to be unique, meaning that there can never be two of the same widgets. This was done for making widgets more consistent so the user always would get the same information from the same widget. All widgets is also designed with round corners to seem interactive see \autoref{design:button_design}.
+The logout widget should be in the bottom of the drawer because it should not confuse the user while they are looking for information.
 
 \paragraph{Color picker}
 \label{par:colorpicker}
+All colors in the color picker is rounded because they are an interactive element. They also have white sides because they should not fall into the background. The color picker consists of ten predefined colors.
+The reason for predefined colors in the color picker is to make contrast. If developers of \giraf[] apps made their app icons mono-colored in white the contrast would always be sufficient. This should help that all users will always see the icon no matter what icon background color was chosen.
