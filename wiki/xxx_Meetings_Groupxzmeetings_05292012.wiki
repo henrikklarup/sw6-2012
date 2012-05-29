@@ -1,13 +1,20 @@
-#summary One-sentence summary of this page.
+#summary Meeting Agenda 29/05-2012
+= Group meeting 29/05-2012 =
 
-= Introduction =
+Meeting takes place on 29/05-2012 @ 12:30 AM - 14:00 PM [TBD].
 
-Add your content here.
+room: 0.2.90
+
+Responsible: SW605
+
+Notary: SW601
+
+== Agenda ==
+  * Release
+
+  * Usability test - section in common report
+
+  * Div.
 
 
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+Referat:
