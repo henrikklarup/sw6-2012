@@ -1,4 +1,5 @@
 \section{Usability Testing}
+\label{sec:usability_test}
 This section describes the usability testing that has been performed, and the results obtained. 
 
 \subsection{Test Circumstances/Something}
@@ -10,3 +11,55 @@ The test was set up to test for both discoverability and usability.
 Discoverability was tested as the customers had mentioned the high costs associated with certified learning courses during interviews (see \autoref{interviews}) as a disadvantage of current systems, and making functionality easy to discover would help reduce the need for such courses.
 
 \subsection{Test Results}
+The issues found in the launcher have been classified by the time it took the user to complete a given task, and can be seen in \autoref{table:usability_results}. 
+Cosmetic issues only held the user back very briefly, serious issues had the user confused and trying to complete the task for a few minutes before succeeding, and critical issues were the ones where the user was stuck. 
+
+\begin{table}[ht]
+\caption{Results from the usability test} % title of Table
+\centering  % used for centering table
+\begin{tabular}{| l | l | p{3in} |}
+\hline
+\textbf{ID} & \textbf{Criticalness} & \textbf{Issue Description} \\ [0.5ex] % inserts table 
+%heading
+\hline                  % inserts single horizontal line
+\#{}001 & Cosmetic & Log out button not obvious. \\ \hline 
+\#{}002 & Cosmetic & QR code obscured by fingers. \\ \hline 
+\#{}003 & Cosmetic & Wrong camera usage when logging in. \\ \hline
+\#{}004 & Serious & Unresponsive controls after opening an app with a profile. \\ \hline
+\#{}005 & Serious & Calendar widget not intuitive. \\ \hline
+\#{}006 & Serious & Connectivity widget not understood. \\ \hline
+\#{}007 & Critical & Drawer functionality not discoverable. \\ [1ex]      % [1ex] adds vertical space
+\hline %inserts single line
+\end{tabular}
+\label{table:usability_results} % is used to refer this table in the text
+\end{table}
+
+\subsubsection{Dissection of results}
+This section details the different issues presented in \autoref{table:usability_results}. \newline
+
+In issue \#{}001, users were asked to log out, and a common pattern was for users to press their profile pictures to find log out information, rather than pressing the log out button. 
+After the profile picture was pressed and nothing happened, users tried the log out button and succeeded. 
+This issue could be alleviated by making it clearer what the log out button does. \newline
+
+Issue \#{}002 was a matter of users covering a part of the QR code with their fingers, not realizing this was an issue at first. 
+This is an issue we deem to be best solvable through user education. \newline
+
+With issue \#{}003, it was not clear to users how to use the QR scanner, as there was some confusion about whether the camera used for scanning was the frontal facing or backwards facing camera. 
+This could be improved through communication on the authentication screen, better guiding the user on how to use the scanner. \newline
+
+Whether issue \#{}004 belongs in the launcher is not clear, as the issue is tied to the system taking a long time to load apps when they are opened. 
+The issue could therefore belong to the individual apps, but it would also be possible to create a universal loading screen in the launcher, to signify to the user that the system is working. 
+Using faster hardware would also improve load times, though this is not considered a sustainable solution, as slower loading apps can always be created. \newline
+
+Issue \#{}005 relates to the calendar widget, as in the current system, there is a conflict between the calendar widget in the \giraf[] launcher and the native system clock, which provides similar functionality. 
+This confused the test subjects, as most tried to use the system clock to complete the task regarding the calendar widget using the system clock. 
+The issue could be alleviated by removing either of the two conflicting components, or making it clearer to the user what the calendar widget does. 
+There is however reasons for keeping the calendar widget, see more details in \autoref{par:widgets} \newline
+
+In issue \#{}006, the users had trouble finding the connectivity widget, but also understanding just what it did. 
+Some tried to look under the native system clock, as it also holds information regarding Wi-Fi connectivity. 
+We believe this issue stems from a lack of knowledge in users, as they did not know what they were checking for, when asked to check the connection status with the server. 
+User education could 
+
+\subsubsection{Feedback}
+Furthermore, users answered a questionnaire about the test after they had completed it, where the launcher was rated as being of medium usability by the test subjects. 
