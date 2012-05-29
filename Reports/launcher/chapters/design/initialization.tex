@@ -2,7 +2,7 @@
 \label{design:initialization}
 
 \subsection*{Requirements}
-It might be cumbersome to authenticate every time the \giraf[] launcher is executed, if the user is switching between multiple launchers.
+It might be cumbersome to authenticate every time the \giraf[] launcher is executed, if the user is switching between multiple launchers. Therefore, the launcher must be accessible in a sufficiently fast manner, such that the launcher is not perceived to be cumbersome.
 
 \subsection*{Solution}
 In order to speed up the process of switching between different android launchers -- should more than one be installed -- we choose to allow users to access the launcher with the last logged in user, if authorization happened within the last eight hours.
