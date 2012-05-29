@@ -13,7 +13,7 @@ The \code{<AuthUsers>..content..</AuthUsers>} element identify the table on whic
 define what row and what kind of action, through the \code{action="foo"} xml attribute, should be done on the row. 
 
 \begin{Code}
-\begin{lstlisting}[label=code:sw6mlExample01,caption=Example of sw6ml syntax]
+\begin{lstlisting}[label=code:sw6mlExample01,language=XML,caption=Example of sw6ml syntax]
  <AuthUsers>
     <Entry action="create">
       <certificate type="string">This is a certificate</certificate>
@@ -33,7 +33,7 @@ Contained in the  \code{<Entry action="crud_type`">..content..</Entry>} element 
 It takes zero or more of the table attributes in a row, since not all table attributes are needed for all actions, as an example delete only requires the unique identifier of the table and
 updates will only need the unique identifier and the table attribute being updated.
 \begin{figure}[H]
-\begin{lstlisting}[label=code:sw6mlCrud,caption=sw6ml crud simple type]
+\begin{lstlisting}[label=code:sw6mlCrud,language=XML,caption=sw6ml crud simple type]
  <xs:simpleType name="crud">
   <xs:restriction base="xs:string">
     <xs:enumeration value="create"/>
@@ -53,7 +53,7 @@ this is however all that is needed, with a few assertions on the format server s
 
 \autoref{code:sw6mlformal} show the formal structure of a sw6ml document.
 \begin{Code}
-\begin{lstlisting}[label=code:sw6mlformal,caption=root and table elements]
+\begin{lstlisting}[label=code:sw6mlformal,language=XML,caption=root and table elements]
 <sw6ml> 
   <table_element_1>
     <Entry action="crud_type">
@@ -87,7 +87,7 @@ Notice the \code{<row_attribute type="bar">..</..>} xml attribute, legal types a
 in a sql query, use \code{string}, for anything else use \code{int}.
 
 \begin{Code}
-\begin{lstlisting}[label=code:sw6mlExample02,caption="sw6ml Update syntax example]
+\begin{lstlisting}[label=code:sw6mlExample02,language=XML,caption="sw6ml Update syntax example]
  <Entry action="update">
    <unique_identifier type="bar">foo</unique_identifier>
    <attribute_to_be_updated type="bar">newValue</attribute_to_be_updated>
