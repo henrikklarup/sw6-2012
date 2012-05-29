@@ -31,7 +31,7 @@ A diagram has been made to get a overview of the different tables and their rela
 Although the diagram in \autoref{fig:DiaDesign} does not meet the standard of database diagrams, it does provide a good view of the different tables, and the relations: Foreign keys points to where the value is fetched form. This crude diagram shows that be having the ``idUser'' from the ``AuthUsers'' one is able to access all other information for that specific user.
 
 \subsubsection{Normal form}
-To prevent modification anomalies in the database, it can be normalized. This is generally to split the a table into more, but simpler tables. An example of this is shown in \autoref{tab:nonNormalizedExample} and \autoref{tab:NormalizedDatabaseExample}.
+To prevent modification anomalies in the database, it can be normalized. This becomes important when a table is dealing with functional dependencies. The solution is to remove the dependicies form the table to another (e.g. split a table into two). An example of this is shown in \autoref{tab:nonNormalizedExample} and \autoref{tab:NormalizedDatabaseExample}.
 
 \begin{table}[htbp]
 	\centering
