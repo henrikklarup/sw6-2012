@@ -50,6 +50,7 @@ Table of contents
        * [xxx_Meetings_Groupxzmeetings_05072012 07/05-2012]
        * [xxx_Meetings_Groupxzmeetings_05142012 14/05-2012]
        * [xxx_Meetings_Groupxzmeetings_05212012 21/05-2012]
+       * [xxx_Meetings_Groupxzmeetings_05292012 29/05-2012]
        * [xxx_Meetings_Groupxzmeetings_14032012 03/14-2012]
        * [xxx_Meetings_Groupxzmeetings_21032012 03/21-2012]
     * Specification meetings
