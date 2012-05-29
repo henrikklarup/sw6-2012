@@ -4,7 +4,9 @@
 \subsection{Requirements}
 \label{sec:appman_requirements}
 
-As shown in \autoref{fig:state_diagram} in \autoref{sec:design_overview}, the ``no app selected''-state and the ``no child selected''-state are the states which the launcher is in when the user is about to launch a \giraf[] app. \\
+In \autoref{fig:state_diagram}, the ``no app selected''-state and the ``no child selected''-state, and the actions inbetween, show the transitions taken, when the user launches a \giraf[] app. \\
+
+%As shown in \autoref{fig:state_diagram}, the ``no app selected''-state and the ``no child selected''-state are the states which the launcher is in when the user is about to launch a \giraf[] app. \\
 
 \noindent Three pieces of information are needed in order to launch an app:
 
@@ -16,7 +18,7 @@ As shown in \autoref{fig:state_diagram} in \autoref{sec:design_overview}, the ``
 
 The first requirement is already given, since the launcher cannot be in any of the two states without the user already being authenticated.
 The second requirement is straightforward, as it is not possible to launch an app without knowing which app to launch.
-The first and third requirements are needed in order to fulfill the services which the launcher needs to have in order to be a functional part of the \giraf[] platform, as shown in \autoref{fig:external_architecture}.
+The first and third requirements are needed in order to fulfill the services which the launcher needs to have in order to be a functional part of the \giraf[] platform, as shown in the component diagram, \autoref{fig:external_architecture}.
 
 Furthermore, additional pieces of information must be known to the user:
 
