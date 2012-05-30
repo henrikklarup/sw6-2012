@@ -10,7 +10,7 @@ import android.widget.ImageView;
 
 /**
  * 
- * @Rasmus
+ * @PARROT
  * The Pictogram class contains the pictures used in PARROT, as well as associated sounds and text.
  *
  */
