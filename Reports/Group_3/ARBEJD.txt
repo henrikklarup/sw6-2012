@@ -1,0 +1,7 @@
+Projekt Backlog: TN+SL
+Requirements: Sikkerhed : MF
+Database: Alle tables NF = Database = NF: JB
+Web Interface: Impl: JB
+Webinterface: Test af side, ikke usability (Databasetet): SL
+Serverside: Test: TN+MF
+Serverside: ½ impl:MF
