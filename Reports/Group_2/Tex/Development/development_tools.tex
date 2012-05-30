@@ -1,42 +1,13 @@
 \chapter{Development Tools}
 	\label{cha:development_tools}
-Beskrivelse af miniprojektet fra SOE kurset (om udviklings metoder etc)
-Hvilke værktøjer har vi brugt fra SOE kurset
-- Beskrivelse af disse!
+	As part of a mini project in the course \textit{Software Engineering} we analyzed the project situation, when we had started the development process, by listing strengths, weaknesses, threats, and opportunities of the project, and discussed if some of the threats and weaknesses could be eliminated, or some strengths or opportunities could be exploited at a low cost. We here list the development tools we decided to use, and the reason for choosing them.
+	
+	\section*{Pair Programming}
+		We implemented this technique because we had done some single person programming in the start of the development process, and there was a growing need for explanation when using methods the other project members had written. Also we wanted to enhance the quality of the code we wrote, and thereby minimize the time we had to spend on debugging.
 
-Fra soe...
+The cost of this technique was, in this case, moderate, since the project group is very small, and it makes a difference when one person is not writing code. On the other hand, the code written in pairs is not likely to be re-written, because of the higher quality, which makes the benefit high.
+	
+	\section*{Refactoring}
+	The reason refactoring was a usable technique for our project, is that we were suffering from code cluttering and code generally being difficult to understand. When debugging the system it could sometimes be difficult to know where the bug had evolved from. Since refactoring can give a better overview it would make debugging an easier task. Also this project is going to be continued by another project group next year, which requires our code to be easy to understand for the next project group to be able to smoothly proceed the development.
 
-%\chapter{Project management}
-%This project is a multi-group project, and five groups of three to four people are working together to develop one combined product. For this to work out, it is necessary to have a development method which suits this kind of multi-group development. Through the course \textit{Software Engineering}, a part of our study regulation, we learned about SCRUM, and we chose to adopt this technique.\\
-%Section \ref{sec:mod_of_scrum} is based on a mini-project written in the course \textit{Software Engineering}, and it explains the modifications we have applied to the SCRUM method.
-%
-%\section{Modification of SCRUM}
-	%\label{sec:mod_of_scrum}
-%Even if we decided that SCRUM would best suit our situation, we had to modify the method to make it fit better. The modifications are as follows:
-	%\begin{itemize}
-		%\item Daily SCRUM is substituted with weekly SCRUM.
-		%\item We have no SCRUM master. The group is together responsible for the SCRUM master's tasks.
-		%\item Extensive documentation is done, since the bachelor project next year is going to be based on the results of this project.
-		%\item Instead of a project owner we have a democracy between all groups. This is because everyone has to learn from this project and therefore everyone has to be engaged all phases of the development.
-		%\item We are limited in time, so we are probably only going to do three 2-week sprints in total.
-	%\end{itemize}
-%
-%\paragraph{Arguments for Chosen Method}
-%Since this project requires the entire android group to be split into smaller groups of 3-4 people, we are going to use a development method which supports small groups working together.
-   %It is important that we develop prototypes, showing the project concepts in progress, to make sure we reach a usable final product.
-   %Since everyone involved in the project is novices in the field, students being new to working with autistic children and educators being new to working with software developing, an agile method would be suitable, as changes in demands to the product might occur often.\\
-%
-%Agile development meets that the software is developed as part of a learning process.
-%
-%\section{Versioning}
-%For versioning the code and documentation, we use a SVN-server at \textit{Google Code}\cite{web:googlecode}.\\
-%
-%There several folders on the server, which help the groups to keep track of working code, reports, etc.. The structure is as follows:
-	%\begin{itemize}
-		%\item \textit{trunk} - contains iteration releases of the code.
-		%\item \textit{branches} - contains code under development.
-		%\item \textit{tags} - contains the newest final release of the code.
-		%\item \textit{common\_report} - contains the common part of the report.
-		%\item \textit{Reports} - contains all group reports.
-		%\item \textit{wiki} - contains summaries from all group- and supervisor meetings, and guides/agreements.
-	%\end{itemize}
+The cost of this technique is low, and the benefit is, for ourselves, moderate. The benefit is much higher for the project groups next year.
