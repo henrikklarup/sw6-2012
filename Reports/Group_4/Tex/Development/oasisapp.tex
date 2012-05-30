@@ -181,7 +181,7 @@ public class FragParentTab extends Activity {
 }
 \end{Java}
 
-the way in which the activity controls which fragment it must show is done in two ways. First, when created, the activity decides which fragment to show, by using the integer it gets from the MainActivity. This integer represents a fragment class of every view, called TabManager[keyword].
+The way in which the activity controls which fragment it must show is done in two ways. First, when created, the activity decides which fragment to show, by using the integer it gets from the MainActivity. This integer represents a fragment class of every view, called TabManager[keyword]. This fragment is then added to the fragment stack. The other way is when a fragment wants to replace itself with another fragment. Then the fragment calls the switchTab method, in the FragParentTab activity, with the replacing view integer as parameter.
 
 \section{Implementation}
 \label{sec:AppImp}
