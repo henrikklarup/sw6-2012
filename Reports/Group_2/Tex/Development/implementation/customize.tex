@@ -3,47 +3,70 @@
 %\textit{Introduktion til customize fragmentet.\\
 %Beskrivelse af arkitekturen i fragmentet\\
 %Beskrivelse (med eksempler) af implementationen af de forskellige elementer (knapper osv.) i customize fragmentet}
-The customize fragment is the heart of the application, this is where everything is generated and configured.
-The fragment can both create new and modify already existing timers, this is the key functionality of the customize fragment.\\
+The customize fragment is where the configurations are generated and altered.\\
 \\
-The timers that the guardians already use at the institutions comes in many different colors and timespans.
-Therefor is it possible to modify the look, time, and color of the individual timers in the customize fragment.
-Furthermore did the guardians state that a good feature would be if either pictograms or other timers were attachable to the timers.\\
-\\
-Combined with the general idea of the application with a child and timer overview, is the requirements of the features in the customize fragment as follows:\\
+As stated in \autoref{cha:analysis} the timers our contact person use has different sizes and colors, these customization options are essential for the timer application.
+The list of customization features are as follows:
 
 \begin{itemize}
-	\item Change style of the timer
-	\item Change the timespan of the timer
-	\item Change the color of the timer and background
-	\item Change the color of the timer to be changing gradiently
-	\item Attach a pictogram or a timer to the timer
-	\item Change the done picture of the timer
-	\item Save the timer
-	\item Start the timer
+	\item Change style of the timer.
+	\item Change the timespan of the timer.
+	\item Change the color of the timer and background.
+	\item Change the color of the timer to be changing gradiently.
+	\item Attach one or two pictograms, or a timer.
+	\item Change the default done pictogram to one or two pictograms.
+	\item Save the timer.
+	\item Start the timer.
 \end{itemize}
-
-\color[rgb]{1,0,0} Det hører næsten mere til et design afsnit \color[rgb]{0,0,0}
 
 \subsection{Architecture of Customize}
 The customize fragment consists of four main elements, the first element is the style picker where the user can change the style of the timer.
 The second element is the time wheels where the user can change the timespan of the timer.
-The third is the color pickers where the user can change the colors of the time left, the frame, and the background of the timer.
-The last element is the advanced element where the modifications like attachment can be found.
-Figure \ref{fig:customize:layout} show how the fragment has been outlined.
+The third element is the color pickers where the user can change the colors of the time left, the frame, and the background of the timer.
+The fourth element is the menu where the modifications like attachment is found.
+Figure \ref{fig:customize:layout} show architecture of the fragment.
 
 \begin{figure}[H]
 	\centering
 		\includegraphics[width=\textwidth]{Images/Implementation/customize_layout.png}
-	\caption{An outline of the elements of the customize fragment.}
+	\caption{An outline of the architecture of the customize fragment.}
 	\label{fig:customize:layout}
 \end{figure}
 
-In the actual customize class has all buttons been initialized as global objects for quick reference.
-Since everyone on the WOMBAT project were new to Android programming when the structure of the class were stablished, is all functionality of the items in the customize fragment in this class.
-For further development would a refactoring of the entire class be adviced such that all buttons in WOMBAT is handled like the WDialog.\\
-To be able to get an overview of the items in the customize fragment has all items been assigned a method which initializes the item e.g. the style chooser in figure \ref{code:customize:style_choser}.
-These methods are then referenced from the onCreate method in figure \ref{code:customize:oncreate}.
+All functionality of the items in the customize fragment in placed in the customize class.
+For further development a refactoring of the entire class is advised such that all buttons in WOMBAT is handled like the \textt{WDialog}, which can be found in \autoref{subsubsec:attach}.
+
+To be able to get an overview of the items in the customize fragment all items are assigned a method, these methods are then referenced from the \texttt{onCreate} method in \autpref{code:customize:oncreate}. An example of one of these methods is the style chooser in \autoref{code:customize:style_choser}.
+
+\begin{figure}[H]
+\begin{lstlisting}
+public void onActivityCreated(Bundle savedInstanceState) {
+	super.onActivityCreated(savedInstanceState);
+	currSubP = new SubProfile("", "", 0xff3D3D3D, 0xffFF0000, 0xffB8B8B8,
+			0xff000000, 600, false);
+	currSubP.save = false;
+	currSubP.saveAs = false;
+
+	/********* TIME CHOSER *********/
+	initStyleChoser();
+
+	/********* TIMEPICKER *********/
+	initTimePicker();
+
+	/********* COLORPICKER *********/
+	initColorButtons();
+
+	/********* ATTACHMENT PICKER *********/
+	initAttachmentButton();
+
+	/******** BOTTOM MENU ***********/
+	initBottomMenu();
+}
+\end{lstlisting}
+\caption{The \texttt{onCreate} method, which calls the button initializers in the same order as they are shown in the layout.}%
+\label{code:customize:oncreate}%
+\end{figure}
+
 
 \begin{figure}[H]
 \begin{lstlisting}
@@ -84,54 +107,23 @@ private void initStyleChoser() {
 	});
 }
 \end{lstlisting}
-\caption{The style choser initialization method, which utilizes the selectStyle that changes the style of the timer and highlights the button.}%
+\caption{The style chooser initialization method, which utilize the \texttt{selectStyle} that changes the style of the timer and highlights the button.}%
 \label{code:customize:style_choser}%
 \end{figure}
 
-\begin{figure}[H]
-\begin{lstlisting}
-public void onActivityCreated(Bundle savedInstanceState) {
-	super.onActivityCreated(savedInstanceState);
-	currSubP = new SubProfile("", "", 0xff3D3D3D, 0xffFF0000, 0xffB8B8B8,
-			0xff000000, 600, false);
-	currSubP.save = false;
-	currSubP.saveAs = false;
-
-	/********* TIME CHOSER *********/
-	initStyleChoser();
-
-	/********* TIMEPICKER *********/
-	initTimePicker();
-
-	/********* COLORPICKER *********/
-	initColorButtons();
-
-	/********* ATTACHMENT PICKER *********/
-	initAttachmentButton();
-
-	/******** BOTTOM MENU ***********/
-	initBottomMenu();
-}
-\end{lstlisting}
-\caption{The onCreate method, which calls the button initializers in the same order as they are shown in the layout.}%
-\label{code:customize:oncreate}%
-\end{figure}
-
-For successors on the WOMBAT project does Eclipse have a keyboard shortcut (F3) which jumps to the method your cursor is at, that can be used to quickly find e.g. the color buttons in the customize class.
-
-\subsection{Buttons in Customize}
-There is roughly four kinds of buttons in the customize fragment:
+\subsection*{Buttons in Customize}
+There is four kinds of buttons in the customize fragment:
 
 \begin{itemize}
-	\item Start, Save, and style buttons
-	\item Time picker wheels
-	\item Color picker
-	\item Attachment and Done picture button
+	\item Start, save, and style buttons.
+	\item Time picker wheels.
+	\item Color picker.
+	\item Attachment and done pictogram button.
 \end{itemize}
 
 \subsubsection*{Start Button}
-The style, save, start, and attachment buttons are ordinary Android buttons with a picture attached to the top side.
-The differences of these buttons is the onclick event handler which is slightly different from button to button, figure \ref{code:customize:start_button} is the source code of the start button.
+The style, save, start, and attachment buttons are default Android buttons with a picture attached on top.
+The differences of these buttons is the \texttt{onClick} event handler, figure \ref{code:customize:start_button} is the source code of the start button.
 
 \begin{figure}[H]
 \begin{lstlisting}
@@ -163,14 +155,15 @@ private void initStartButton() {
  .setCompoundDrawablesWithIntrinsicBounds(null, d, null, null);
 }
 \end{lstlisting}
-\caption{The source code of the start button, which sets the top image of the button to the drawable \tt thumbnail\_start\_gray}%
+\caption{The source code of the start button, which sets the top image of the button to the drawable \texttt{thumbnail\_start\_gray}}%
 \label{code:customize:start_button}%
 \end{figure}
 
 \subsubsection*{Time Picker Wheels}
-The time picker wheels is a wheel widget created by \url{yuri.kanivets@gmail.com} \cite{web:android:customize:wheel}, these wheels can be customized to mimic the time pickers from the iPhone.
-All functionality of the wheel widget is handled by the widget itself and only requires the widget to be imported to Eclipse and added as a library, which is a built in feature in the Android development environment.
-To avoid a situation where the user would try to set the time to more than 60 minutes, did we implement a functionality which sets the seconds wheel to zero whenever the minutes wheel is set to 60, this can be seen in figure \ref{code:customize:time_picker_wheels}.
+The time picker is a widget\cite{web:android:customize:wheel}.
+All functionality of the wheel widget is handled by the widget itself and only requires the widget to be imported to Eclipse and added as a project library, which is a built-in feature in the Android development environment.
+
+WOMBAT is limited to timers on 60 minutes, therefore we implement a functionality which sets the seconds wheel to zero whenever the minutes wheel is set to 60, this can be seen in figure \ref{code:customize:time_picker_wheels}.
 
 \begin{figure}[H]
 \begin{lstlisting}
@@ -208,14 +201,14 @@ private void initTimePicker() {
 	});
 }
 \end{lstlisting}
-\caption{The time picker wheels, with the functionality which ensures the time is never set to more than 60 minutes}%
+\caption{The time picker wheels.}%
 \label{code:customize:time_picker_wheels}%
 \end{figure}
 
 
 \subsubsection*{Color Picker}
-Just like the time picker wheels did we utilize the widget functionality in Android to implement a widget called AmbilWarna (means Take Color in Indonesian), created by Yuku Sugianto \cite{web:android:customize:color}, to handle the color picker.
-The color picker widget is a custom dialog which returns the color picked by the user in the widget, the implementation of the color picker widget can be found in figure \ref{code:customize:color_picker}.
+Just like the time picker wheels we utilize the widget functionality in Android to implement a widget called AmbilWarna\footnote{AmbilWarna means "Take Color" in Indonesian}, to handle the color picker\cite{web:android:customize:color}.
+The color picker widget is a custom dialog which returns the color picked by the user in the widget, the implementation of the color picker widget can be found in \autoref{code:customize:color_picker}.
 \begin{figure}[H]
 \begin{lstlisting}
 colorGradientButton2 = (Button) getActivity().findViewById(
@@ -238,15 +231,16 @@ colorGradientButton2.setOnClickListener(new OnClickListener() {
 	}
 });
 \end{lstlisting}
-\caption{The color picker widget implement on the second "Time Left" button}%
+\caption{The color picker widget implemented on the second "Time Left" color button}%
 \label{code:customize:color_picker}%
 \end{figure}
 
 \subsubsection*{Attachment Button}
-The attachment buttons are implemented like the other buttons, but they make use of a custom dialog in WOMBAT.
-We created this dialog, because the standard dialogs in Android were very different from the rest of the WOMBAT design.
-Also were we unable to define exactly what kind of buttons we wanted in our dialogs.\\
-Therefor did we implement the custom dialog which would match the rest of our WOMBAT design and give the ability to control exactly what the buttons on the dialog should look like and what they should do when clicked.
+\label{subsubsec:attach}
+The attachment buttons are implemented like the start button, the difference is that they make use of a custom dialog in WOMBAT.
+This custom dialog, \texttt{WDialog}, is created because the standard dialogs in Android are very different from the rest of the WOMBAT design.
+Also the standard dialogs limit the programmer to use exactly the buttons defined in the dialog API.\\
+The custom dialog is implemented because the standard dialogs are inconsistent with the WOMBAT design and the custom dialogs are much more versatile when adding buttons.
 Figure \ref{code:customize:wdialog} is an example of how a dialog could be specified.
 
 \begin{figure}[H]
@@ -267,6 +261,6 @@ attachment1.addButton(R.string.cancel, 1,
 	}
 });
 \end{lstlisting}
-\caption{Initialization of the dialog, that appears when the attachment button is clicked, the onItemClickListener is not shown here because of lack of space on the page.}%
+\caption{Initialization of the dialog, that appears when the attachment button is clicked, the \texttt{OnItemClickListener} is not shown here because of lack of space on the page.}%
 \label{code:customize:wdialog}%
 \end{figure}

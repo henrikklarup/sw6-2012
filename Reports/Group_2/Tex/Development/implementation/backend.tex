@@ -3,26 +3,23 @@
 %TimerLib
 %\textit{Introduktion til hvorfor det er smart at bruge biblioteker frem for at udvikle på ét workspace\\
 %(Man kan nemmere teste på et bibliotek hvor man kan lave en test app, frem for at være afhængig af at "main" appen virker)}
-The two libraries in WOMBAT each control a key functionality of the application, storage and drawing.
-These functionalities could have been implemented in the WOMBAT project, thereby avoiding situations where the project is compiled with an old library.\\
-A problem with external libraries is that debugging can be difficult in Eclipse if the developer want to change directly in the library. This is because they require the external library to be imported in Eclipse and set as an external library in the Android properties of the project.\\
-The benefits of using external libraries, is that they can be tested and debugged on an external test project instead of depending on a working main project.
-External libraries can be modelled by dummy functionalities in the main project untill they have been tested.
-Further, it becomes possible to change the library operation and thereby shifting entire modules in the application.
-Fx could the canvas drawings be changed to OpenGL drawings just by changing the canvas DrawLib in WOMBAT with a DrawLib that runs on OpenGL.
+The libraries in WOMBAT each control the storage and drawing functionality of the application.
+These functionalities have been imported as Android project libraries, because this gives the developer the ability to create an external project and test the library, without being dependent on a working main project.
+
+Furthermore is a benefit that the libraries works like modules which can be changed to handle e.g. OpenGL instead of canvas in the \texttt{DrawLib}.
 
 
 \subsection{TimerLib}
 %\textit{Beskrivelse af timerlib, hvad indeholder timerlib, services\\
 %Beskrivelse af implementationen af timerlib med kode eksempler}
-TimerLib containts the functionality that store and manage all the different objects that WOMBAT uses. The main goal behind TimerLib was the provide a set of simple methods and objects which the rest of WOMBAT could use without great knowledge how TimerLib works. This goal was achieved by being strict about visibility of attributes and methods. The public attributes and methods are designed so they can be used outside TimerLib without having knowledge of how TimerLib works.
+\texttt{TimerLib} containts the functionality that store and manage all the different objects that WOMBAT uses. The main goal behind \texttt{TimerLib} was the provide a set of simple methods and objects which the rest of WOMBAT could use without great knowledge how \texttt{TimerLib} works. This goal was achieved by being strict about visibility of attributes and methods. The public attributes and methods are designed so they can be used outside \texttt{TimerLib} without having knowledge of how \texttt{TimerLib} works.
 
 \subsubsection{Classes}
-Below is all the TimerLib classes described.
+Below is all the \texttt{TimerLib} classes described.
 
 \begin{description}
   \item[Guardian] \hfill \\
-  The guardian class is an object that represent the guardian in our system. The idea behind the Giraf system is that only one guardian can be logged in at a given time, that is why the guardian class uses a singleton pattern to enforce WOMBAT never have more than one guardian logged into the application. When initiating the guardian class for the first time it is important to use the proper method. The method can be seen in code snippet: \ref{code:guardianinit}. No matter how many times you class this method, it will always return the same guardian due to the singleton pattern.
+  The guardian class is an object that represent the guardian in our system. The idea behind the GIRAF system is that only one guardian can be logged in at a given time, that is why the guardian class uses a singleton pattern to enforce WOMBAT never have more than one guardian logged into the application. When initiating the guardian class for the first time it is important to use the proper method. The method can be seen in code snippet: \ref{code:guardianinit}. No matter how many times you class this method, it will always return the same guardian due to the singleton pattern.
 	
 	\begin{figure}[H]
 \begin{lstlisting}
