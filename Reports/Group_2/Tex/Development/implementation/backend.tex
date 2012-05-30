@@ -15,6 +15,442 @@ Fx could the canvas drawings be changed to OpenGL drawings just by changing the 
 \subsection{TimerLib}
 %\textit{Beskrivelse af timerlib, hvad indeholder timerlib, services\\
 %Beskrivelse af implementationen af timerlib med kode eksempler}
+TimerLib containts the functionality that store and manage all the different objects that WOMBAT uses. The main goal behind TimerLib was the provide a set of simple methods and objects which the rest of WOMBAT could use without great knowledge how TimerLib works. This goal was achieved by being strict about visibility of attributes and methods. The public attributes and methods are designed so they can be used outside TimerLib without having knowledge of how TimerLib works.
+
+\subsubsection{Classes}
+Below is all the TimerLib classes described.
+
+\begin{description}
+  \item[Guardian] \hfill \\
+  The guardian class is an object that represent the guardian in our system. The idea behind the Giraf system is that only one guardian can be logged in at a given time, that is why the guardian class uses a singleton pattern to enforce WOMBAT never have more than one guardian logged into the application. When initiating the guardian class for the first time it is important to use the proper method. The method can be seen in code snippet: \ref{code:guardianinit}. No matter how many times you class this method, it will always return the same guardian due to the singleton pattern.
+	
+	\begin{figure}[H]
+\begin{lstlisting}
+private static Guardian _instance = null;
+
+public static Guardian getInstance(long m_childId, long m_guardianId, Context c, ArrayList<Art> artList){
+		if(_instance == null){
+			_instance = new Guardian();
+			_instance.ArtList = artList;
+			TimerHelper help = new TimerHelper();
+			_instance.profileID = m_childId;
+			_instance.guardianId = m_guardianId;
+			_instance.m_context = c;
+			_instance.oHelp = new Helper(c);
+			long appId = _instance.findAppId();
+			_instance.guardianId = _instance.findGuardianId();
+			_instance.createChildren();
+			_instance.crud = new CRUD(appId, c);
+			_instance.crud.loadGuardian(_instance.guardianId);
+			help.loadPredef();
+			//_instance.crud.initLastUsed(_instance.m_oGuard.getId());
+			_instance.publishList();			
+			//crud.retrieveLastUsed(m_guardianId);
+		}
+			return _instance;
+	}
+\end{lstlisting}
+\caption{Code snippet how to initiate the guardian class.}%
+\label{code:guardianinit}%
+\end{figure}
+
+Whenever the back button is pressed while WOMBAT is active, WOMBAT will call the reset method which will reset the guardian and exit the application. The reset method can be seen in code snippet: \ref{code:guardianreset}. The reset method only sets the guardian instance to null, so next time the getInstance method is called it will create a new guardian object, we are doing so because java has a garbage collector and we can therefore not manually destroy an object.
+	
+\begin{figure}[H]
+\begin{lstlisting}
+public void reset(){
+		_instance = null;
+	}
+\end{lstlisting}
+\caption{Code snippet how to reset the guardian class.}%
+\label{code:guardianreset}%
+\end{figure}
+
+The guardian class will create a guardian if WOMBAT does not receive a valid guardian Id. This is to ensure that WOMBAT can run no matter what. In code snippet: \ref{code:createGuardian} you can see the method which checks and creates a new guardian.
+
+\begin{figure}[H]
+\begin{lstlisting}
+	private long findGuardianId() {
+		if(guardianId != -1){
+			// Does the original guard exist
+			m_oGuard = oHelp.profilesHelper.getProfileById(guardianId);
+		} else {
+			m_oGuard = null;
+		}
+		// If not, try the default guard
+		if(m_oGuard == null){
+			for (Profile p : oHelp.profilesHelper.getProfiles()) {
+				if(p.getFirstname().equals("Mette") && p.getSurname().equals("Als")){
+					m_oGuard = p;
+					break;
+				}
+			}
+			// If thats not valid either, make the default guard
+			if(m_oGuard == null){
+				m_oGuard = new Profile("Mette", "Als", null, 1, 88888888, null, null);				
+				m_oGuard.setId(oHelp.profilesHelper.insertProfile(m_oGuard));
+				oHelp.appsHelper.attachAppToProfile(m_app, m_oGuard);
+				oHelp.profilesHelper.setCertificate("jkkxlagqyrztlrexhzofekyzrnppajeobqxcmunkqhsbrgpxdtqgygnmbhrgnpphaxsjshlpupgakmirhpyfaivvtpynqarxsghhilhkqvpelpreevykxurtppcggkzfaepihlodgznrmbrzgqucstflhmndibuymmvwauvdlyqnnlxkurinuypmqypspmkqavuhfwsh", m_oGuard);
+			}
+		} 
+		return m_oGuard.getId();
+	}
+\end{lstlisting}
+\caption{Code snippet how to reset the guardian class.}%
+\label{code:createGuardian}%
+\end{figure}
+
+The Guardian class will also create a set of children if the current guardian does not contain any children. The code snippet: \ref{createChildren} shows how this is done.
+	
+	\begin{figure}[H]
+\begin{lstlisting}
+	private void createChildren() {		
+		if(oHelp.profilesHelper.getChildrenByGuardian(m_oGuard).isEmpty()){
+			List<String> names = new ArrayList<String>();
+			names.add("Sigurd");
+			names.add("Marcus");
+			names.add("Emil");
+			names.add("Lukas");
+			names.add("Mads");
+			names.add("Nikolaj");
+			
+			for (String s : names) {
+				Profile newProf = new Profile(s, " ", null, 3, 99999999, null, null);
+				newProf.setId(oHelp.profilesHelper.insertProfile(newProf));
+				oHelp.profilesHelper.attachChildToGuardian(newProf, m_oGuard);
+				oHelp.appsHelper.attachAppToProfile(m_app, newProf);
+			}
+		}
+	}
+\end{lstlisting}
+\caption{Code snippet how to reset the guardian class.}%
+\label{code:createChildren}%
+\end{figure}
+
+The guardian class generates an ArrayList of the object type Child. the ArrayList contains last used, predefined, and all the children that belong to the guardian. In code snippet: \ref{code:publishList} you can see how this ArrayList is generated. It is important to know that any changes performed on this ArrayList will not be saved, the ArrayList is generated based on three other ArrayLists; lastUsed, predefined, and all the children. Last used is always in the top of the list and right after is the predefined and the children is then added alphabetically.
+	
+		\begin{figure}[H]
+\begin{lstlisting}
+		public ArrayList<Child> publishList(){
+		if(_sortedList == null){
+			_sortedList = new ArrayList<Child>();
+		}
+		_sortedList.clear();
+		Child lastUsedChild = new Child("Last Used");
+		lastUsedChild.setProfileId(-3);
+		lastUsedChild.SubProfiles().addAll(reverse(lastUsed()));
+		lastUsedChild.setLock();
+		lastUsedChild.lockDelete();
+		_sortedList.add(lastUsedChild);
+		
+		Child predefChild = new Child("Predefined Profiles");
+		predefChild.setProfileId(-2);
+		Collections.sort(predefined());
+		predefChild.SubProfiles().addAll(predefined());
+		predefChild.setLock();
+		predefChild.lockDelete();
+		_sortedList.add(predefChild);
+		if(_guard != null){
+			Collections.sort(_guard);
+			for(Child p : _guard){
+				Collections.sort(p.SubProfiles());
+			}
+			_sortedList.addAll(_guard);
+		}
+		return _sortedList;
+	}
+\end{lstlisting}
+\caption{Code snippet how to reset the guardian class.}%
+\label{code:publishList}%
+\end{figure}
+	
+  \item[Child] \hfill \\
+The child class is an object that represent the either; last used, predefined, or a child. The child object no matter what it represent has a collection of SubProfiles, which is the variety of timers. You are not allowed to save or delete from the last used and predefined list, the child class therefore provides two kind of locks, a save lock and a delete lock. When the save lock is true, you cannot save the SubProfiles on the child object. When the delete lock is false, you cannot delete SubProfiles from the child object. Both delete and save lock is read only for projects outside TimerLib, this is because the WOMBAT should never lock any child objects that is loaded from the OasisLocalDatabase. The lock methods can be seen in code snippet: \ref{code:TimerLibLocks}.
+
+		\begin{figure}[H]
+\begin{lstlisting}
+	/**
+	 * Used to check if you can save on a specific Child
+	 * @return boolean, if true, you cannot save on the child. if false you can save.
+	 */
+	public boolean getLock(){
+		return _lock;
+	}
+	/**
+	 * Enables the lock
+	 */
+	void setLock(){
+		this._lock = true;
+	}
+	/**
+	 * Enable delete lock, so you cannot delete from a certain child.
+	 * This will always be used on lastUsed and predefined.
+	 */
+	void lockDelete(){
+		_deleteCheck = false;
+	}
+	/**
+	 * Used to check if you can delete a subprofiles on a specific child
+	 * @return boolean, true = you can delete: false = you cannot delete.
+	 */
+	public boolean deleteCheck(){
+		return _deleteCheck;
+	}
+	
+\end{lstlisting}
+\caption{Code snippet how to reset the guardian class.}%
+\label{code:TimerLibLocks}%
+\end{figure}
+	
+The child class contains a select method that selects a certain child so it can be called reused later on. The select method is called whenever you highlight a child, last used or predefined in the WOMBAT application. whenever you want to pick the selected child you simply call getChild from the guardian class. The idea behind this method is to make it easier to work with the same object across multiple projects that uses the same child object.
+
+The child class provides methods for saving and removing. The save method saves a certain SubProfile either as a new SubProfile or overrides a old SubProfile, the save method calls saveChild from guardian to make sure it is saved in the OasisLocalDatabase. The remove method removes a certain SubProfile from the child and calls removeSubprofileFromProfileId from guardian to delete the SubProfile from the OasisLocalDatabase. You can see save and remove method in code snippet: 
+	
+			\begin{figure}[H]
+\begin{lstlisting}
+	public SubProfile save(SubProfile p, boolean override){
+
+		if(!override){
+			p.setDB_id(getNewId());
+			p.setId(guard.getId());
+		}
+			this.SubProfiles().add(p);
+			guard.saveChild(this, p);
+			
+		return p;
+	}
+
+	public void remove(SubProfile p) {
+			_profileList.remove(p);
+			guard.crud.removeSubprofileFromProfileId(p, this.getProfileId());
+}
+	
+\end{lstlisting}
+\caption{Code snippet how to reset the guardian class.}%
+\label{code:TimerLibLocks}%
+\end{figure}
+
+  \item[SubProfile] \hfill \\
+  The SubProfile class is a super class for all the different kind of timer which WOMBAT supports. The idea behind having a super class that represent the timers is so you can have a collection of all types of timers, without having to worry. It was original meant for the SubProfile and the classes which inherits from this class to have methods that should draw the timers, you can read more about it in this section: \ref{sec:Architecture}. Check code snippet: \ref{code:subprofileexample} for an example how SubProfile and classes which inherits from it was meant to work.
+	
+\begin{figure}[H]
+\begin{lstlisting}
+Hourglass hourglass = new Hourglass("Timeglas - 30 sek", "Timeglas - (0:30)", 0xff3D3D3D, 0xffffffff, 0xffB8B8B8, 0xff000000, 30, false);
+		ProgressBar progressbar = new ProgressBar("ProgressBar - 30 sek", "ProgressBar - (0:30)", 0xff3D3D3D, 0xffffffff, 0xffB8B8B8, 0xff000000, 30, false);
+		DigitalClock digitalclock = new DigitalClock("DigitalClock - 30 sek", "DigitalClock - (0:30)", 0xff3D3D3D, 0xffffffff, 0xffB8B8B8, 0xff000000, 30, false);
+		TimeTimer timetimer = new TimeTimer("Ur - 30 sek", "Ur - (0:30)", 0xff3D3D3D, 0xffffffff, 0xffB8B8B8, 0xff000000, 30, false);
+		ArrayList<SubProfile> timers = new ArrayList<SubProfile>();
+		timers.add(hourglass);
+		timers.add(progressbar);
+		timers.add(digitalclock);
+		timers.add(timetimer);
+		for(SubProfile sp : timers){
+			View v = sp.draw();
+		}
+\end{lstlisting}
+\caption{Code snippet how to reset the guardian class.}%
+\label{code:subprofileexample}%
+\end{figure}
+	
+	All SubProfiles got two different id's. The first id is used internal in the TimerLib, this id is used to check if the SubProfile already exists in the last used list and check if the SubProfile already exist on a certain child object and thereby overriding that SubProfile. The internal id is provided by the guardian class. The other id matches the SubProfile's id in the OasisLocalDatabase, the id is used for deleting a SubProfile in the OasisLocalDatabase.
+	
+	WOMBAT never loads an original SubProfile into the customize fragment, WOMBAT instead uses the copy method which simply return a copy of the SubProfile. The idea behind using a copy is because, we want to allow the user to change options on a SubProfile and start the timer without saving the data. If the user saves the SubProfile, it will be replaced with the copy, and if the user use save as it will save it as a new SubProfile.
+	
+	It is possible to convert a SubProfile into any other kind of SubProfile by using the four kind of convert methods. You can see these four methods in code snippet: \ref{code:convert}.
+	
+	\begin{figure}[H]
+\begin{lstlisting}
+	public SubProfile toHourglass() {
+		Hourglass form = new Hourglass(this.name, this.desc, this.bgcolor, this.timeLeftColor, this.timeSpentColor, this.frameColor, this._totalTime, this.gradient);
+		form.setId(this.getId());		
+			form.setAttachment(this._attachment);
+			form.setDoneArt(this._doneArt);
+		return form;
+	}
+
+	public SubProfile toProgressBar() {
+		ProgressBar form = new ProgressBar(this.name, this.desc, this.bgcolor, this.timeLeftColor, this.timeSpentColor, this.frameColor, this._totalTime, this.gradient);
+		form.setId(this.getId());
+			form.setAttachment(this._attachment);
+			form.setDoneArt(this._doneArt);
+		return form;
+	}
+
+	public SubProfile toTimeTimer() {
+		TimeTimer form = new TimeTimer(this.name, this.desc, this.bgcolor, this.timeLeftColor, this.timeSpentColor, this.frameColor, this._totalTime, this.gradient);
+		form.setId(this.getId());
+			form.setAttachment(this._attachment);
+			form.setDoneArt(this._doneArt);
+		return form;
+	}
+
+	public SubProfile toDigitalClock() {
+		DigitalClock form = new DigitalClock(this.name, this.desc, this.bgcolor, this.timeLeftColor, this.timeSpentColor, this.frameColor, this._totalTime, this.gradient);
+		form.setId(this.getId());
+			form.setAttachment(this._attachment);
+			form.setDoneArt(this._doneArt);
+		return form;
+	}
+\end{lstlisting}
+\caption{Code snippet how to reset the guardian class.}%
+\label{code:convert}%
+\end{figure}
+	
+	Whenever a SubProfile is started it will be added to the last used list, if the SubProfile already exists on the SubProfile it will be removed and added again, that way we ensure that the SubProfile on the last used is the new version of the SubProfile and it is on top of the last used list. You can see the method for adding a SubProfile in code snippet: \ref{code.addlastused}.
+	
+\begin{figure}[H]
+\begin{lstlisting}
+	public void addLastUsed(SubProfile oldProfile){
+		if(oldProfile == null){
+			guard.addLastUsed(this);
+		} else {
+		this._id = oldProfile._id;
+		this.refPro = oldProfile.DB_id;
+		long ref = 0;
+		for(Child c : guard.Children()){
+			for(SubProfile p : c.SubProfiles()){
+				if(p.getId() == this.getId()){
+					ref = c.getProfileId();
+				}
+			}
+		}
+		for(SubProfile p : guard.predefined()){
+			if(p.getId() == this.getId()){
+				ref = -2;
+			}
+		}
+		this.refChild = ref;
+		guard.addLastUsed(this);
+		}
+	}
+\end{lstlisting}
+\caption{Code snippet how to reset the guardian class.}%
+\label{code:addlastused}%
+\end{figure}
+	
+	A SubProfile may contain two kind of attachments; an attachment which will be placed next to the running timer and an attachment which changes the done screen pictograms. You can read more about the Attachment class in this section.
+	
+	OasisLocalDatabase saves the SubProfile as a hashmap, for that cause does SubProfile provide a method for generating a hashmap with all the needed attributes. You can see this method in code snippet: \ref{code:subprofilehashmap}.
+	
+	\begin{figure}[H]
+\begin{lstlisting}
+	public HashMap<String, String> getHashMap(){
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("db_id", String.valueOf(this.getDB_id()));
+		map.put("type", this.formType().toString());		
+		map.put("Attachment", String.valueOf(this._AttaBool));		
+		map.put("Name", this.name);		
+		map.put("desc", this.desc);		
+		map.put("bgcolor", String.valueOf(this.bgcolor));		
+		map.put("timeLeftColor", String.valueOf(this.timeLeftColor));		
+		map.put("timeSpentColor", String.valueOf(this.timeSpentColor));		
+		map.put("frameColor", String.valueOf(this.frameColor));
+		map.put("totalTime", String.valueOf(this.get_totalTime()));		
+		map.put("gradient", String.valueOf(this.gradient));		
+		map.put("save", String.valueOf(this.save));		
+		map.put("saveAs", String.valueOf(this.saveAs));
+		map.put("refChild", String.valueOf(this.refChild));		
+		map.put("refPro", String.valueOf(this.refPro));
+		map.put("timeKey", String.valueOf(this.timeKey));
+		if(this._doneArt != null){
+			map.put("doneArtType", String.valueOf(this._doneArt.getForm()));
+			switch(this._doneArt.getForm()){
+			case SingleImg:
+				map.put("doneArtPic", String.valueOf(this._doneArt.getImg().getId()));
+				map.put("doneArtLeftPic", String.valueOf(-1));
+				map.put("doneArtRightPic", String.valueOf(-1));
+				break;
+			case SplitImg:
+				map.put("doneArtPic", String.valueOf(-1));
+				map.put("doneArtLeftPic", String.valueOf(this._doneArt.getLeftImg().getId()));
+				map.put("doneArtRightPic", String.valueOf(this._doneArt.getRightImg().getId()));
+				break;
+			}
+		} else {
+			map.put("doneArtType", String.valueOf(formFactor.undefined));
+			map.put("doneArtPic", String.valueOf(-1));
+			map.put("doneArtLeftPic", String.valueOf(-1));
+			map.put("doneArtRightPic", String.valueOf(-1));
+		}
+		// TODO: Attachment this needs some testing and remember to add it to the crud!!!!
+		if(this._AttaBool){
+			map = this._attachment.getHashMap(map);				
+		}	else {
+			Attachment tempAttachment = new Attachment();
+			map = tempAttachment.getHashMap(map);
+		}
+		return map;
+	}
+\end{lstlisting}
+\caption{Code snippet how to reset the guardian class.}%
+\label{code:subprofilehashmap}%
+\end{figure}
+	
+	\item[TimeTimer - Hourglass - ProgressBar - DigitalClock] \hfill \\
+  These four classes inherit from SubProfile, and it currently the only kind of timers WOMBAT supports.
+ 
+	\item[Attachment] \hfill \\
+  The attachment class is a super class and does only contain the base methods of the inherited classes. The idea behind having a super class is for making TimerLib more dynamic.
+	
+  \item[Timer] \hfill \\
+  The timer class inherits from the attachment class. The timer class represent a SubProfile as an attachment, the timer class were made to simplify the attachment methods and only display those other projects might need. The timer class support all kind of SubProfile objects. The timer class contains a method which returns a hashmap, that is used when saving an SubProfile with an attachment into the OasisLocalDatabase. You can see the method in code snippet: \ref{code:timerhash}. The timer class can only be set as an attachment next to a SubProfile timer.
+	
+		\begin{figure}[H]
+\begin{lstlisting}
+	public HashMap getHashMap(HashMap map){
+		//Defines what kind of attachment it is
+		map.put("AttachmentForm", String.valueOf(this.getForm()));
+		
+		//Timer
+		map.put("timerForm", String.valueOf(this._form));
+		map.put("_bgColor", String.valueOf(this._bgColor));
+		map.put("_frameColor", String.valueOf(this._frameColor));
+		map.put("_timeLeftColor", String.valueOf(this._timeLeftColor));
+		map.put("_timeSpentColor", String.valueOf(this._timeSpentColor));
+		map.put("_gradient", String.valueOf(this._gradient));
+		
+		//SingleImg
+		map.put("singleImgId", String.valueOf(-1));
+		
+		//SplitImg
+		map.put("leftImgId", String.valueOf(-1));
+		map.put("rightImgId", String.valueOf(-1));
+		
+		return map;
+	}
+\end{lstlisting}
+\caption{Code snippet how to reset the guardian class.}%
+\label{code:timerhash}%
+\end{figure}
+	
+  \item[SingleImg] \hfill \\
+  The SingleImg class inherit from Attachment, this class represent one object of the type Art, you can read more about the Art class later in this section. The SingleImg object can be set either as an attachment next to a SubProfile timer or as a pictogram for the done screen. SingleImg contains the a hashmap method with same structure as the Timer class has.
+	
+	\item[SplitImg] \hfill \\
+    The SplitImg class inherit from Attachment, this class represent two object of the type Art, you can read more about the Art class later in this section. The SingleImg object can be set either as an attachment next to a SubProfile timer or as pictograms for the done screen. SplitImg contains the a hashmap method with same structure as the Timer class has.
+
+  \item[Art] \hfill \\
+  The art class is used for generating pictograms as objects in TimerLib. The art class constructor takes three arguments; The first argument is the path to the pictogram, the path is an int that basically is the id from the Resource class in Android. The second argument is a caption which is a string. The caption is used to add text to a pictogram. The last argument is an id as int, this an ad hoc solution and not meant to be working like it does. The id need to be the position it got in the ArtList from guardian. In future development, this id should be set by the TimerLib and not by the WOMBAT project. If one was to implement sounds into WOMBAT, the art class would be the place to do it.
+	
+  \item[formFactor] \hfill \\
+	The formFactor class is a enum class which is used to manage object types. It contains nine enums which are; undefined, SubProfile, Hourglass, TimeTimer, ProgressBar, DigitalClock, Timer, SingleImg, and SplitImg. They all represent their own kind of object. The "`undefined"' enum is used by the super classes which should never be used.
+	
+	\item[TimeHelper] \hfill \\
+  The TimerHelper class is contains two functions; the first function is its main function, to generate the predefined SubProfiles. The second function is a method which generates test data.	
+	
+  \item[CRUD] \hfill \\
+	The CRUD class responsibility is to create, retrieve, update, and delete guardian, child and SubProfile objects in the OasisLocalDatabase. The crud class is only called from within the guardian class, this is done so it is easy to change the way WOMBAT create, retrieve, update, and delete objects if WOMBAT was ever to be released as a fully independent application.
+	\end{description}
+
+\subsubsection{Class diagram}
+You can see a simplified class diagram on figure: \ref{fig:classdiagram}.
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.3]{Images/Implementation/classdiagram.png}
+	\caption{Dependecy diagram of WOMBAT projects}
+	\label{fig:classdiagram}
+\end{figure}
 
 \subsection{DrawLib}
 %\textit{Beskrivelse af DrawLib, hvad indeholder DrawLib, services\\
