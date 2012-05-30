@@ -19,6 +19,12 @@ import android.widget.ImageView;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
 
+/**
+ * Fragment, which is used for listing all medias in the system
+ * 
+ * @author Oasis
+ *
+ */
 public class AllMediaFrag extends ListFragment {
 
 	Helper helper;

@@ -15,6 +15,12 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.App;
 
+/**
+ * Fragment which is used for listing all applications of the logged in guardian
+ * 
+ * @author Oasis
+ *
+ */
 public class MyAppsFrag extends ListFragment {
 
 	Helper helper;

@@ -10,6 +10,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+/**
+ * Adapter, which is used when simple string lists is created in the system
+ * 
+ * @author Oasis
+ *
+ */
 public class tmpListAdapter extends ArrayAdapter<String> {
 
 	ViewHolder holder;

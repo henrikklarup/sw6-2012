@@ -11,6 +11,12 @@ import android.widget.Toast;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
+/**
+ * This class is called upon startup
+ * 
+ * @author Oasis
+ *
+ */
 public class MainActivity extends Activity implements OnClickListener {
 
 	private Button bMyProfile, bAllProfiles, bAllDepartments, bAddDummyData;

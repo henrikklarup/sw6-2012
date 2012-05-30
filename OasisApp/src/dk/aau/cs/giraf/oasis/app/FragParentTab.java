@@ -6,6 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 
+/**
+ * Manages all the TabManager fragments
+ * 
+ * @author Oasis
+ *
+ */
 public class FragParentTab extends Activity {
 
 	private int tabView;

@@ -19,6 +19,12 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
 
+/**
+ * Fragment which is used for showing the childs profile information
+ * 
+ * @author Oasis
+ *
+ */
 public class ChildPrivateMediaFrag extends ListFragment {
 
 	Helper helper;

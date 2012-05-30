@@ -18,6 +18,12 @@ import android.widget.Button;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Department;
 
+/**
+ * Fragment which is used for listing all departments of a child in the system
+ * 
+ * @author Oasis
+ *
+ */
 public class ChildDepartmentsFrag extends ListFragment {
 
 	Helper helper;

@@ -19,6 +19,12 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
 
+/**
+ * Fragment which is used for listing private media of the logged in guardian
+ * 
+ * @author Oasis
+ *
+ */
 public class MyPrivateMediaFrag extends ListFragment {
 
 	Helper helper;

@@ -20,6 +20,12 @@ import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Department;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
+/**
+ * Fragment which is used for listing all the children of the logged in guardians departments
+ * 
+ * @author Oasis
+ *
+ */
 public class MyDepChildrenFrag extends ExpandableListFragment {
 
 	Helper helper;

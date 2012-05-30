@@ -12,6 +12,12 @@ import android.widget.TextView;
 import dk.aau.cs.giraf.oasis.lib.models.Department;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
+/**
+ * Adapter, which is used for creating profile lists in the system
+ * 
+ * @author Oasis
+ *
+ */
 public class ChildListAdapter extends BaseExpandableListAdapter {
 
 

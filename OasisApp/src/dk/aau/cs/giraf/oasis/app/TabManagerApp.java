@@ -14,6 +14,12 @@ import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 
+/**
+ * Fragment which is used for managing: MyAppsFrag, and AllAppsFrag
+ * 
+ * @author Oasis
+ *
+ */
 public class TabManagerApp extends Fragment implements OnTabChangeListener {
 
 	public static final String TAB_MYAPPS = "MyApps";
