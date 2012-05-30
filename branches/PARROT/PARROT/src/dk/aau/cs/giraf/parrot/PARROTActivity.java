@@ -73,11 +73,11 @@ public class PARROTActivity extends Activity {
 					.setTabListener(new TabListener<OptionsFragment>(this,"options",OptionsFragment.class));
 			actionBar.addTab(tab);
 		}
-//		if (parrotUser.getRights(2) == true)//TODO put me back in
+//		if (parrotUser.getRights(2) == true)//TODO put me back in when there's something for me to do.
 //		{
 //			tab = actionBar.newTab()
 //					.setText(R.string.fourthTab)
-//					.setTabListener(new TabListener<OptionsFragment>(this,"camera",OptionsFragment.class));
+//					.setTabListener(new TabListener<OptionsFragment>(this,"camera",OptionsFragment.class)); TODO: Find new Fragments to attach to.
 //			actionBar.addTab(tab);
 //		}
 
