@@ -1,29 +1,33 @@
 \section{Unimplemented features}
 \label{backlog_unimplemented}
 
-\subsection{Child mode}
+\subsection{Child Mode}
 \label{backlog:child_mode}
-There should be implemented another mode of the launcher which is called child mode. This mode is only for children and is minded on them using it alone without a gardian. In this mode all settings and such is removed and everytime an app is clicked it launches directly with the childs preferences instead of showing the select profile screen.
+Another mode to implement in the launcher is called "`child mode"'. 
+This mode is only for \autists[] and is minded on them using it alone without a guardian. 
+In this mode, all settings are removed and everytime an app is clicked, it launches directly with the child's preferences instead of showing the profile selection screen.
 
 \subsection{Custom Icons}
 \label{backlog:custom_icons}
-This feature can change the icon of an app in the app grid. The reason it is important as a feature is seen in \autoref{Preanalysis:Usability_for_children}. 
-Recognition is important for children and if they associates an app with another thing e.g. PARROT with a picture well known from their everyday it should be possible for them or their guardian to choose.
+This feature can change the icon of an app in the app grid. 
+This is important, as it allows \autists[] to use familiar icons, which was deemed important in \autoref{Preanalysis:Usability_for_children}. 
+Recognition is important for children, and if they associate an app with another thing e.g. PARROT with a picture they know from their everyday, it should be possible for them to use the same in \giraf[].
 
-\subsection{Hide apps}
+\subsection{Add and Remove Apps}
 \label{backlog:hide_apps}
-This feature was meant to be an integration in the drawer \autoref{GUI:drawer} where it should be placed just under the colorpicker. The functionality of this app board is that when an app is unused or should not be acessable for either a child or a guardian it could be put into the drawer and if there was an app in the drawer which the user needed it could be dragged back to the app grid.
+This feature was meant to be integrated in the drawer \autoref{GUI:drawer}. 
+It should allow guardians to customize what apps are accessible in the home screen, both for them or for a child (when \nameref{backlog:child_mode} has been implemented). 
 
-\subsection{Home screen modes}
+\subsection{Home Screen Modes}
 \label{backlog:home_screen_modes}
 The home screen should work in both portrait and landscape mode.
 
 \subsection{Lock screen}
 \label{backlog:lock_screen}
-The lock screen was a feature that WOMBAT needed for when a timer was up and the tablet could not be used any more. The lock screen should be a screen that tells the user that the tablet is now locked and needs to be unlocked.
+The lock screen was a feature that WOMBAT needed for when a timer ran out and the tablet should not be usable any more. 
+Currently, the authentication screen is available for this, but no functionality has been implemented to actually make it lock the device. 
 
-\subsection{Logo screen loading}
+\subsection{Logo Screen Loading}
 \label{backlog:logo_screen_loading}
-There needs to be implemented a way of showing if the logo screen have crashed. The reason is that the logo screen only should run in two seconds and if it takes longer the launcher is probably crashed. 
-A possible solution is to implement an loading bar or other form for loading animation.
-
+The logo screen is currently static, with no indication that the launcher is loading. 
+This can make users unsure of whether they need to wait or do something else, something that might be fixed by implementing a loading animation on the logo screen.
