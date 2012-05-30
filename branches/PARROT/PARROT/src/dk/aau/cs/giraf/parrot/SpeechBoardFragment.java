@@ -36,14 +36,8 @@ public class SpeechBoardFragment extends Fragment
 	public static Category displayedCat = new Category(PARROTActivity.getUser().getCategoryAt(0).getCategoryColour(),null);			//This category contains the pictograms displayed on the big board
 	private PARROTProfile user = null;
 	
-	/*//Not in use anymore
-	//Use asset manager to convert resource path into string path.
-	AssetManager asset = parrent.getResources().getAssets();
-	InputStream pictureBuffer =asset.open("drawable/usynlige.png");
-	String picturePath = pictureBuffer.toString();
-	*/
-	
-	private Pictogram empty;  //FIXME find the right path to the picture "usynlig", or find a way to use the picture directly
+
+	private Pictogram empty;  
 	
 	public void onAttach(Activity activity) {
 		// TODO Auto-generated method stub
@@ -98,7 +92,7 @@ public class SpeechBoardFragment extends Fragment
 
 				public boolean onItemLongClick(AdapterView<?> arg0, View view, int position, long id)
 				{
-					draggedPictogramIndex = position; //TODO make sure that position is the index of the pictogram
+					draggedPictogramIndex = position; 
 					dragOwnerID = R.id.pictogramgrid;
 					ClipData data = ClipData.newPlainText("label", "text"); //TODO Dummy. Pictogram information can be placed here instead.
 					DragShadowBuilder shadowBuilder = new DragShadowBuilder(view);
@@ -120,9 +114,8 @@ public class SpeechBoardFragment extends Fragment
 
 				public boolean onItemLongClick(AdapterView<?> arg0, View view, int position, long id)
 				{
-					draggedPictogramIndex = position; //TODO make sure that position is the index of the pictogram
-					dragOwnerID = R.id.sentenceboard;
-//					speechBoardCategory.removePictogram(draggedPictogramIndex);					
+					draggedPictogramIndex = position; 
+					dragOwnerID = R.id.sentenceboard;			
 					ClipData data = ClipData.newPlainText("label", "text"); //TODO Dummy. Pictogram information can be placed here instead.
 					DragShadowBuilder shadowBuilder = new DragShadowBuilder(view);
 					view.startDrag(data, shadowBuilder, view, 0);
@@ -141,7 +134,6 @@ public class SpeechBoardFragment extends Fragment
 					GridView pictogramGrid = (GridView) parrent.findViewById(R.id.pictogramgrid);
 					pictogramGrid.setAdapter(new PictogramAdapter(displayedCat, parrent));
 					setColours(parrent);
-					//pictogramGrid.invalidate();
 					
 				}
 			});
@@ -153,12 +145,6 @@ public class SpeechBoardFragment extends Fragment
 
 
 	}
-//	@Override
-//	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//			Bundle savedInstanceState) {
-//		// TODO Auto-generated method stub
-//		return inflater.inflate(R.layout.speechboard_layout, container,false);
-//	}
 
 	
 	public void setColours(Activity invoker)
