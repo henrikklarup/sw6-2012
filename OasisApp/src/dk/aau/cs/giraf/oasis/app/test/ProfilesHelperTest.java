@@ -420,7 +420,7 @@ public class ProfilesHelperTest extends ActivityInstrumentationTestCase2<MainAct
 	}
 	
 	public void testGetProfileByInvalidId() {
-		Profile foundProfile = mActivity.helper.profilesHelper.getProfileById(1000000);
+		Profile foundProfile = mActivity.helper.profilesHelper.getProfileById(Long.MAX_VALUE);
 
 		assertNull("Should return null", foundProfile);
 	}
