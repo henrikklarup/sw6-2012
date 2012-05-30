@@ -40,7 +40,6 @@ public class SpeechBoardFragment extends Fragment
 	private Pictogram empty;  
 	
 	public void onAttach(Activity activity) {
-		// TODO Auto-generated method stub
 		super.onAttach(activity);
 		this.parrent = activity;
 	}
@@ -48,12 +47,10 @@ public class SpeechBoardFragment extends Fragment
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 	}
 	@Override
 	public void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		parrent.setContentView(R.layout.speechboard_layout);
 		empty = new Pictogram("#usynlig#", null, null, null, parrent);
@@ -150,7 +147,6 @@ public class SpeechBoardFragment extends Fragment
 	public void setColours(Activity invoker)
 	{
 		LinearLayout sentenceBoardLayout = (LinearLayout) invoker.findViewById(R.id.sentenceboardlinearhelper);
-		//sentenceBoardLayout.setBackgroundColor(PARROTActivity.getUser().getSentenceBoardColor());
 		Drawable draw = parrent.getResources().getDrawable(R.drawable.sentenceboardlayout);
 		draw.setColorFilter(PARROTActivity.getUser().getSentenceBoardColor(), PorterDuff.Mode.OVERLAY);
 		sentenceBoardLayout.setBackgroundDrawable(draw);
