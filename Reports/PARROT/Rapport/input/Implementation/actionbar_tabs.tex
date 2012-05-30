@@ -42,6 +42,10 @@ The Application can successfully flip between several major features using tabs,
 
 \subsection*{Notes:}
 Note that in our application, we use ``IF'' Statements to check if an User has the right to see a Tab.
-The Order of the Tabs should therefore match up with the order in the Rights Array.
+The Order of the Tabs should therefore match up with the order in the Rights Array.\\
+Guides will suggest that you use an override ``onCreateView'' method to change between Tabs with the actionbar.
+However, we have concluded that using the override methods ``onCreate'' and ``onResume'' was sufficient in our case.
 
 \subsection*{Further Reading:}
+http://developer.android.com/guide/topics/ui/actionbar.html \\
+http://developer.android.com/guide/topics/fundamentals/fragments.html
