@@ -23,14 +23,14 @@ The first and third requirements are needed in order to fulfill the services whi
 Furthermore, additional pieces of information must be known to the user:
 
 \begin{enumerate}
-	\item Date, including week number
+	\item Date related data
 	\item Network status 
 \end{enumerate}
 
-As the \giraf[] platform is thought to be the primary electronic tool of guardians, the current date and weeknumber is provided.
-Since the \giraf[] platform uses both local and remove storage, there might be latency in synchronizing these storages, and therefore it is important for the user to know if the both storages are synchronized or not.
+As the \giraf[] platform is thought to be the primary electronic tool of guardians, date related data is provided. Date related data is thought to be the day in characters the day in number, the month in characters and the week number. Later date related data can be a calendar app if such app gets into the \giraf[] platform.
+Since the \giraf[] platform uses both local and remote storage, there might be latency in synchronizing and keeping the data up-to-date in these storages, and therefore it is important for the user to know if both storages are synchronized, up-to-date or not.
 
-Since the \giraf[] platform should be flexible and customizable, it must be possible to change color of the \giraf[] icons.
+\todo{check for system vs. platform}
 
 \subsection{Solution}
 \label{sec:appman_solution}
