@@ -1,5 +1,5 @@
-\chapter{Overview}
-\todo{find bedre overskrift, p.t. er alt i design bare 'overview'}
+%\chapter{Overview}
+%\todo{find bedre overskrift, p.t. er alt i design bare 'overview' - kan evt loeses ved at gore design til et chapter og kalde parten 'product' ligesom foer}
 \label{sec:design_overview}
 As part of a greater platform, the launcher is required to provide services to other components of the \giraf[] system, and may also depend on others.
 %This section presents an overview of the design work done on the overall product, and the following sections present details on specific features in the launcher. \newline
@@ -8,6 +8,9 @@ The required services and dependencies are outlined below.
 \autoref{fig:external_architecture} illustrates the \giraf[] launcher component. The component provides one service and have one dependency.
 The services it provides is based on demands from the surrounding components of the \giraf[] platform, which can be seen in \autoref{fig:Giraf_comp_pic}.
 The illustrated service provides a way for launched \girafapp[]s to determine which guardian launched the app in question, with which child profile, together with color data of the specific app.
+
+Knowing which child profile the app in question was launched with is required, as the \giraf[] platform as of writing, is designed for \emph{guardian mode} -- described in \autoref{backlog:guardian_mode} -- instead of \emph{child mode} -- described in \autoref{backlog:child_mode} -- or a combination hereof.
+
 The illustrated dependency represents the need for being able to read and update profile data. The service which fulfill this dependency is provided by the Oasis lib. 
 
 As seen on \autoref{fig:Giraf_comp_pic}, Oasis is available for the launcher to use. Oasis stores the modulated data, including the guardian and child profiles on the device in a local database.
