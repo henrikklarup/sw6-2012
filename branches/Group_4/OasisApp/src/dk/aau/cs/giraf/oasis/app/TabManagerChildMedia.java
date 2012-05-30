@@ -14,6 +14,12 @@ import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 
+/**
+ * Fragment which is used for managing: ChildMediaFrag, ChildAllMediaFrag, and ChildPrivateMediaFrag
+ * 
+ * @author Oasis
+ *
+ */
 public class TabManagerChildMedia extends Fragment implements OnTabChangeListener {
 
 	public static final String TAB_CHILDMEDIA = "ChildMedia";

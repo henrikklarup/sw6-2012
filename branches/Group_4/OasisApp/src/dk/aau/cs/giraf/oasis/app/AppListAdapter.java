@@ -10,6 +10,12 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import dk.aau.cs.giraf.oasis.lib.models.App;
 
+/**
+ * Adapter, which is used for create application lists in the system
+ * 
+ * @author Oasis
+ *
+ */
 public class AppListAdapter extends BaseAdapter {
 
 	private static List<App> values;

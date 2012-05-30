@@ -30,6 +30,12 @@ import dk.aau.cs.giraf.oasis.lib.models.Department;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
+/**
+ * Fragment which is used for listing all the Guardians in the system
+ * 
+ * @author Oasis
+ *
+ */
 public class GuardiansFrag extends ExpandableListFragment {
 
 	private Helper helper;

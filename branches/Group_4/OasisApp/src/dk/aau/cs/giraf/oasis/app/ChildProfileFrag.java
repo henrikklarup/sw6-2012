@@ -21,6 +21,12 @@ import android.widget.TextView;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
 
+/**
+ * Fragment which is used for listing all applications in the system
+ * 
+ * @author Oasis
+ *
+ */
 public class ChildProfileFrag extends Fragment {
 
 	private Button bMedia, bApps, bSettings;

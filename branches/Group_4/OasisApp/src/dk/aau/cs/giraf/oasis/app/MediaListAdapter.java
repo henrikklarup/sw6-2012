@@ -12,6 +12,12 @@ import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
+/**
+ * Adapter, which is used for creating media lists in the system
+ * 
+ * @author Oasis
+ *
+ */
 public class MediaListAdapter extends BaseAdapter {
 
 	private List<Media> values;

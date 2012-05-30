@@ -21,6 +21,12 @@ import android.widget.TextView;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
 
+/**
+ * Fragment which is used for showing the profile information of the logged in guardian
+ * 
+ * @author Oasis
+ *
+ */
 public class MyProfileFrag extends Fragment {
 
 	private Button bMedia, bApps, bSettings;

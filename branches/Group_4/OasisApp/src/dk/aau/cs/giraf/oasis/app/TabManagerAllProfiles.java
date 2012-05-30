@@ -14,6 +14,12 @@ import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 
+/**
+ * Fragment which is used for managing: ChildrenFrag, GuardianFrag, and PeopleFrag
+ * 
+ * @author Oasis
+ *
+ */
 public class TabManagerAllProfiles extends Fragment implements OnTabChangeListener {
 
 	public static final String TAB_PROFILES = "Profiles";

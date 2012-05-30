@@ -24,6 +24,12 @@ import android.widget.TextView;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Department;
 
+/**
+ * Fragment which is used for listing all the departments in the system
+ * 
+ * @author Oasis
+ *
+ */
 public class DepartmentsFrag extends ListFragment {
 
 	Helper helper;
