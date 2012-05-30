@@ -1,7 +1,7 @@
 \chapter{Overview}
 \label{sec:design_overview}
 As part of a greater platform, the launcher is required to provide services to other components of the \giraf[] system, and may also depend on others.
-\todo{HUSK, introducere de requirements som vi selv har sat for os selv}
+%This section presents an overview of the design work done on the overall product, and the following sections present details on specific features in the launcher. \newline
 The required services and dependencies are outlined below.
 
 \autoref{fig:external_architecture} illustrates the \giraf[] launcher component. The component provides one service and have one dependency.
@@ -19,16 +19,12 @@ As seen on \autoref{fig:Giraf_comp_pic}, Oasis is available for the launcher to 
 	\label{fig:external_architecture}
 \end{figure}
 
-
 Being able to launch an \girafapp[] as a specific guardian requires the user to interact such that the launcher knows which guardian the user represents.
 
 Authentication was chosen, as each modulated child and guardian contains private data and therefore needs to be protected.
 
-%This section presents an overview of the design work done on the overall product, and the following sections present details on specific features in the launcher. \newline
-
 %The design of the \giraf[] launcher is centered around high usability and specific functionality requirements. 
 %These functionality requirements come from both the customers of the project, and other \localgroup[]s in the multi project, and include only the requirements that are within the scope of this project. \newline
-
 
 %The requirements are as follows:
 %\begin{itemize}
@@ -42,7 +38,15 @@ Authentication was chosen, as each modulated child and guardian contains private
 
 %The above requirements have resulted in an overall interaction design, which can be seen in \autoref{fig:state_diagram}, in the form of a state diagram.
 
-\autoref{fig:state_diagram} shows all possible states and transitions, which the launcher can be in.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1\textwidth]{gfx/statediagram.pdf}
+	\caption{State diagram}
+	\label{fig:state_diagram}
+\end{figure}
+
+
+\autoref{fig:state_diagram} shows all possible states and transitions, which the launcher can be in. 
 The states of the state diagram represent four functionalities of the launcher:
 
 \begin{enumerate}
@@ -52,14 +56,9 @@ The states of the state diagram represent four functionalities of the launcher:
 	\item Profile selection
 \end{enumerate}
 
+
 These functionalities are shown in \autoref{fig:design_diagram}, along with the states of which they represent, and the transitions between them.
 
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=1\textwidth]{gfx/statediagram.pdf}
-	\caption{State diagram}
-	\label{fig:state_diagram}
-\end{figure}
 
 %To make the design easier to approach, the system is split into four distinct features: Authentication, app management, profile selection, and resumption. 
 %This split is illustrated in \autoref{fig:design_diagram}, which groups the states and actions of \autoref{fig:state_diagram} according to their to the feature they belong to. 
@@ -70,3 +69,7 @@ These functionalities are shown in \autoref{fig:design_diagram}, along with the 
 	\caption{Functionality diagram}
 	\label{fig:design_diagram}
 \end{figure}
+
+All transitions shown in the state diagram, are explained below in their appropriate section.
+
+In order to highten usability which was requested during the interviews, found in \autoref{interviews}, it is decided to standardize elements in the GUI. This standardization is called \emph{design language}.
