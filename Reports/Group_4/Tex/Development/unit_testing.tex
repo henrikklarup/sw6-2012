@@ -1,9 +1,9 @@
 \section{Dynamic White Box Testing}
 \label{sec:DynamicWhiteBoxTesting}
-To ensure the correctness of the Oasis Library we enforce dynamic white box testing through unit tests. kilde: http://aulas.carlosserrao.net/lib/exe/fetch.php?media=0910:1008-1987_ieee_standard_for_software_unit_testing.pdf
+To ensure the correctness of the Oasis Library we enforce dynamic white box testing(side 106 - 107, Software Testing - af Ron Patton) through unit tests. 
+kilde: %http://aulas.carlosserrao.net/lib/exe/fetch.php?media=0910:1008-1987_ieee_standard_for_software_unit_testing.pdf
 The library is used by all GIRAF applications this means that if a bug exists in the library there is a potential bug in all GIRAF application.
-Therefore the library must be thoroughly tested to make sure that little or no bugs exists.
-A test plan has been derived for this project in order to make it easier to create the test suite.
+Therefore the library must be thoroughly tested to make sure that few or no bugs exists.
 
 % Formål
 % Opsætning
@@ -11,10 +11,98 @@ A test plan has been derived for this project in order to make it easier to crea
 % Del konklusion
 
 \subsection{Test Plan}
+As this project have been developed using the agile development methods Scrum we have not devised a full test plan(side 263 - 275, Software Testing - af Ron Patton) as this is not needed.
+As a part of Scrum we have been testing the code snippets before they have been marked as completed.
+A decision has been made \autoref{sec:somewhereInTheLibSection} to make a full functioning library for this semester.
+This decision means that the development time has to be prioritized and therefore the focus will be on test-to-pass tests.
+This ensures that the library will function as intended, though there is no guarantee that the library will work if bad parameters are used.
 
-\subsubsection{Test Design Specifications}
+\subsubsection{Test Design}
+A test design(side 281 - 282, Software testing - af Ron Patton) have been elaborated for each method in the helper classes of the Oasis Library.
+This way the library methods will be tested along with the database thus saving some time.
+This means that the tests will be more efficient as more code will be tested in every test, but it has the drawback that if a bug is found more code will have to be investigated in order to locate the bug.
+
+\begin{table}[htbp]
+	\centering
+		\begin{tabular}{| p{4.5cm} | m{9cm} |}
+			\hline
+			Identifier: 				& TD00001 \\ \hline
+			Feature to be tested:		& Authenticate profile. \\ \hline
+			Approach:					& An automated test will be made to authenticate the profile certificate. \\
+										&	\begin{enumerate}
+												\item Enter a profile with a specific certificate in the database.
+												\item Authenticate the profile certificate against the certificate in the database.
+											\end{enumerate} \\ \hline
+			Test case identification: 	& Check valid certificate Test Case ID\# 00001 \\
+										& Check too long certificates Test Case ID\# 00002 \\
+										& Check too short certificates Test Case ID\# 00003 \\
+										& Check invalid certificates Test Case ID\# 00004 \\ \hline
+			Pass/fail criteria:			& All valid profile certificates that matches the certificate in the database must be accepted as well as all invalid certificates must be rejected. \\ \hline
+		\end{tabular}
+	\caption{Test Design for authenticating a profile.}
+	\label{tab:TestDesign_AuthenticateProfile}
+\end{table}
+
+\begin{table}[htbp]
+	\centering
+		\begin{tabular}{| p{4.5cm} | m{9cm} |}
+			\hline
+			Identifier: 				& TD00002 \\ \hline
+			Feature to be tested:		& Get single profile by id. \\ \hline
+			Approach:					& An automated test will be made in order to ensure that the Oasis Library supports getting a single profile by its id from the database. \\
+										&	\begin{enumerate}
+												\item Profiles should be added to the database.
+												\item Get single profile by id should be called and the output verified.
+											\end{enumerate} \\ \hline
+			Test case identification: 	& Check valid id present in the database Test Case ID\# 00005 \\
+										& Check id not in the database Test Case ID\# 00006 \\
+										& Check negative id Test Case ID\# 00007 \\ \hline
+			Pass/fail criteria:			& The profile matching the id should be returned else null should be returned. \\ \hline
+		\end{tabular}
+	\caption{Test Design for get profile by id.}
+	\label{tab:TestDesign_GetProfileById}
+\end{table}
+
+\begin{table}[htbp]
+	\centering
+		\begin{tabular}{| p{4.5cm} | m{9cm} |}
+			\hline
+			Identifier: 				& TD00003 \\ \hline
+			Feature to be tested:		& Get children by guardian. \\ \hline
+			Approach:					& An automated test will be made to ensure that the Oasis Library supports getting all children associated with one guardian. \\
+										&	\begin{enumerate}
+												\item Children and guardians should be added to the database.
+												\item Associations between some children and guardians should be made.
+												\item Get children by guardian should be called and the output verified.
+											\end{enumerate} \\ \hline
+			Test case identification: 	& Check valid guardian with children associated Test Case ID\# 00006 \\ \hline
+			Pass/fail criteria:			& The list of children should match the children associated with the guardian. \\ \hline
+		\end{tabular}
+	\caption{Test Design for get children by guardian.}
+	\label{tab:TestDesign_GetChildrenByGuardian}
+\end{table}
+
 
 \subsubsection{Test Cases}
+
+\begin{table}[htbp]
+	\centering
+		\begin{tabular}{| p{4.5cm} | m{9cm} |}
+			\hline
+			Identifier: 				& TD00003 \\ \hline
+			Feature to be tested:		& Get children by guardian. \\ \hline
+			Approach:					& An automated test will be made to ensure that the Oasis Library supports getting all children associated with one guardian. \\
+										&	\begin{enumerate}
+												\item Children and guardians should be added to the database.
+												\item Associations between some children and guardians should be made.
+												\item Get children by guardian should be called and the output verified.
+											\end{enumerate} \\ \hline
+			Test case identification: 	& Check valid guardian with children associated Test Case ID\# 00006 \\ \hline
+			Pass/fail criteria:			& The list of children should match the children associated with the guardian. \\ \hline
+		\end{tabular}
+	\caption{Test Design for get children by guardian.}
+	\label{tab:TestDesign_GetChildrenByGuardian}
+\end{table}
 
 \subsubsection{Test Results}
 
