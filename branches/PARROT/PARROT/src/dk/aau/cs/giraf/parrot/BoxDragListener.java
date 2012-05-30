@@ -7,7 +7,13 @@ import android.view.View;
 import android.view.View.OnDragListener;
 import android.widget.GridView;
 
-
+/**
+ * 
+ * @author PARROT
+ * This is the BoxDragListener class.
+ * It handles drag and drop functionality with objects in the SpeechboardFragment.
+ *
+ */
 public class BoxDragListener implements OnDragListener 
 {
 	private Activity parrent;
@@ -136,7 +142,7 @@ public class BoxDragListener implements OnDragListener
 					{
 						SpeechBoardFragment.speechBoardCategory.removePictogram(SpeechBoardFragment.speechBoardCategory.getPictograms().size()-1);
 					}
-					
+
 				}
 				if(self.getId() != R.id.sentenceboard && SpeechBoardFragment.dragOwnerID == R.id.sentenceboard) //If we drag something from the sentenceboard to somewhere else
 				{
@@ -156,11 +162,11 @@ public class BoxDragListener implements OnDragListener
 					int x = (int)event.getX();
 					int y = (int)event.getY();
 					int index = gridCat.pointToPosition(x, y);
-					
+
 					Category categoryDroppedIn = profile.getCategoryAt(index);
 					categoryDroppedIn.addPictogram(draggedPictogram);
 				}
-				*/
+				 */
 
 
 			}
