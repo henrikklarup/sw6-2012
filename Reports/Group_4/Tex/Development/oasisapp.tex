@@ -1,0 +1,187 @@
+\chapter{Oasis App}
+\label{ch:App}
+In this chapter we describe the application of the administration module, called Oasis App. The Oasis App is an application, which demonstrates some of the utilities the Oasis Lib offers. The idea behind the Oasis App is that we want to make a tool, for the guardians, to manage data of the profiles, by giving them CRUD (Create, Read, Update, and Delete) options. First the structure of the Oasis App is described in section \vref{sec:AppStructure}. After that the implementation of the Oasis Lib is described in section \vref{sec:AppImp}.
+
+\section{Structure}
+\label{sec:AppStructure}
+The Oasis Application is build upon two activities; MainActivity and FragParentTab.
+
+\subsection{MainActivity}
+The MainActivity is the activity that starts on application startup. It uses the main.xml as its layout file, which is a layout file containing three buttons, which can be seen on figure \textcolor{red}{INDSÆT SCREEN CAP AF MAINACTIVITY}. A snap of the MainActivity's code can be seen in listing \vref{lst:mainactivity}.
+
+\begin{Java}{The MainActivity class}{lst:mainactivity}
+.
+.
+.
+public class MainActivity extends Activity implements OnClickListener {
+
+	private Button bMyProfile, bAllProfiles, bAllDepartments, bAddDummyData;
+	private Intent direct;
+	private long guardianId;
+	public Helper helper;
+	public static Profile guardian;
+	public static Profile child;
+	public static int color;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState){
+		super.onCreate(savedInstanceState);
+
+		.
+		.
+		.
+
+		helper = new Helper(this);
+
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {        	   
+			guardianId = extras.getLong("currentGuardianID");
+			color = extras.getInt("appBackgroundColor");
+			guardian = helper.profilesHelper.getProfileById(guardianId);
+		}
+
+		setContentView(R.layout.main);
+		
+		initializeViews();
+	}
+
+	private void initializeViews() {
+		findViewById(R.id.UpperLayout).setBackgroundColor(color);
+		
+		bMyProfile = (Button) findViewById(R.id.bMyProfile);
+		bMyProfile.setOnClickListener(this);
+		bAllProfiles = (Button) findViewById(R.id.bAllProfiles);
+		bAllProfiles.setOnClickListener(this);
+		bAllDepartments = (Button) findViewById(R.id.bAllDepartments);
+		bAllDepartments.setOnClickListener(this);
+		bAddDummyData = (Button) findViewById(R.id.bAddDummyData);
+		if (guardian == null) {
+			bAddDummyData.setOnClickListener(this);
+		} else {
+			bAddDummyData.setVisibility(View.GONE);
+		}
+	}
+
+	@Override
+	public void onClick(View v) {
+		direct = new Intent(this, FragParentTab.class);
+
+		switch (v.getId()) {
+		case R.id.bMyProfile:
+			if (guardian != null) {
+				direct.putExtra("tabView", FragParentTab.TABPROFILE);
+				startActivity(direct);
+			} else {
+				Toast.makeText(this, R.string.noprofile, Toast.LENGTH_SHORT).show();
+			}
+			break;
+		case R.id.bAllProfiles:
+			direct.putExtra("tabView", FragParentTab.TABALLPROFILES);
+			startActivity(direct);
+			break;
+		case R.id.bAllDepartments:
+			direct.putExtra("tabView", FragParentTab.TABALLDEPARTMENTS);
+			startActivity(direct);
+			break;
+		.
+		.
+		.
+		}
+	}
+}
+\end{Java}
+
+When the activity starts it gets the information of which guardian that is currently logged in to the GIRAF system and what background color the Oasis App is currently set to by the Launcher application. When one of the buttons is clicked the mainactivity will start the FragParentTab activity, but depending on which button is clicked, the mainactivity will put an integer in the itent's extra data.
+
+\subsection{FragParentTab}
+The FragParentTab is the activity, which, as stated above, is started by the MainActivity activity. The activity has the responsibillity of managing what view to show, by using fragments. The reason for choosing fragments instead of making new activities is that the layout we want is a tab layout. The layout can be seen in figure \textcolor{red}{Indsæt FIGUR REF}. The FragParentTab activity can be seen in listing \vref{lst:fragparenttag}.
+
+\begin{Java}{The FragParentTab class}{lst:fragparenttab}
+.
+.
+.
+public class FragParentTab extends Activity {
+
+	private int tabView;
+	public final static int TABPROFILE = 0;
+	public final static int TABAPP = 1;
+	public final static int TABMEDIA = 2;
+	public final static int TABALLPROFILES = 3;
+	public final static int TABALLDEPARTMENTS = 4;
+	public final static int TABCHILD = 5;
+	public final static int TABCHILDAPP = 6;
+	public final static int TABCHILDMEDIA = 7;
+	static FragmentManager t;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		.
+		.
+		.
+
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+			tabView = extras.getInt("tabView");
+		} else {
+			tabView = -1;
+		}
+
+		setContentView(R.layout.fragments_view);
+		
+		findViewById(R.id.fragUpperLayout).setBackgroundColor(MainActivity.color);
+
+		t = getFragmentManager();
+
+		switch(tabView) {
+		case TABPROFILE:
+			t.beginTransaction().add(R.id.fDetails, new TabManagerProfile()).commit();
+			break;
+		case TABALLPROFILES:
+			t.beginTransaction().add(R.id.fDetails, new TabManagerAllProfiles()).commit();
+			break;
+		case TABALLDEPARTMENTS:
+			t.beginTransaction().add(R.id.fDetails, new TabManagerAllDepartments()).commit();
+			break;
+		case TABCHILD:
+			t.beginTransaction().add(R.id.fDetails, new TabManagerChild()).commit();
+		}
+	}
+
+	public static void switchTab(int tabViewId) {
+
+		switch(tabViewId) {
+		case TABPROFILE:
+			t.beginTransaction().replace(R.id.fDetails, new TabManagerProfile()).commit();
+			break;
+		case TABMEDIA:
+			t.beginTransaction().replace(R.id.fDetails, new TabManagerMedia()).commit();
+			break;
+		case TABAPP:
+			t.beginTransaction().replace(R.id.fDetails, new TabManagerApp()).commit();
+			break;
+		case TABCHILD:
+			t.beginTransaction().replace(R.id.fDetails, new TabManagerChild()).commit();
+			break;
+		case TABCHILDMEDIA:
+			t.beginTransaction().replace(R.id.fDetails, new TabManagerChildMedia()).commit();
+			break;
+		case TABCHILDAPP:
+			t.beginTransaction().replace(R.id.fDetails, new TabManagerChildApp()).commit();
+			break;
+		}
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		t = getFragmentManager();
+	}
+}
+\end{Java}
+
+The way the activity 
+
+\section{Implementation}
+\label{sec:AppImp}
