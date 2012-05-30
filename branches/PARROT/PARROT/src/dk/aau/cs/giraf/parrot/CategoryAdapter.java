@@ -9,6 +9,13 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+/**
+ * 
+ * @author PARROT
+ *This is the CategoryAdapter class. 
+ * This class takes a list of categories and loads them into a GridView.
+ */
+
 public class CategoryAdapter extends BaseAdapter{
 
 	private ArrayList<Category> catList;
@@ -48,7 +55,7 @@ public class CategoryAdapter extends BaseAdapter{
 
 		}
 
-
+		//we then set the imageview to the icon of the category
 		imageView.setImageBitmap(pct.getBitmap());
 		return imageView;
 	}

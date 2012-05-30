@@ -15,14 +15,14 @@ public class Category {
 	private boolean changed;
 	private String categoryName;
 	//This is the constructor method.
-	public Category(int colour, Pictogram icon)
+	public Category(int colour, Pictogram icon) //this is a constructer method that takes icon and color as input
 	{
 		pictograms = new ArrayList<Pictogram>();
 		setCategoryColour(colour);
 		setIcon(icon);
 	}
 	
-	public Category(String categoryName,int colour,Pictogram icon)
+	public Category(String categoryName,int colour,Pictogram icon)  //this is a constructer method that takes name, icon and color as input
 	{
 		pictograms = new ArrayList<Pictogram>();
 		setCategoryColour(colour);
@@ -30,7 +30,7 @@ public class Category {
 		setCategoryName(categoryName);
 	}
 
-	public ArrayList<Pictogram> getPictograms() {
+	public ArrayList<Pictogram> getPictograms() { 
 		return pictograms;
 	}
 	
