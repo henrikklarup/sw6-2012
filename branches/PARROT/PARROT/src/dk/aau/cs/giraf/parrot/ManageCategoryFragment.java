@@ -23,7 +23,12 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 
-
+/**
+ * 
+ * @PARROT
+ * This is the ManageCategoryFragment class. It is used to manage category settings.
+ *
+ */
 public class ManageCategoryFragment extends Fragment {
 
 	private Activity parrent;
@@ -52,7 +57,7 @@ public class ManageCategoryFragment extends Fragment {
 
 		super.onResume();
 		parrent.setContentView(R.layout.managecategory_layout);
-
+		//We start by instantiating the views
 		Spinner profiles = (Spinner) parrent.findViewById(R.id.profiles);
 		ListView categories = (ListView) parrent.findViewById(R.id.categories);
 		GridView pictograms = (GridView) parrent.findViewById(R.id.pictograms);
@@ -61,24 +66,14 @@ public class ManageCategoryFragment extends Fragment {
 		EditText categoryInfo = (EditText) parrent.findViewById(R.id.categoryinfo);
 		PARROTDataLoader dummyLoader = new PARROTDataLoader(parrent);
 		ImageView categoryPic = (ImageView) parrent.findViewById(R.id.categorypic);
-		//createNewCategory, changeCategoryPic, changeCategoryColor, changeCategoryName, copyThisCategoryToOtherProfile, copyThisCategoryToOtherProfileCategory  
 		Button createNewCategory = (Button) parrent.findViewById(R.id.createnewcategorybutton);
 		Button changeCategoryColor = (Button) parrent.findViewById(R.id.changecategorycolorbutton);
 		Button changeCategoryName = (Button) parrent.findViewById(R.id.changecategorynamebutton);
 		Button copyThisCategoryToOtherProfile = (Button) parrent.findViewById(R.id.copythiscategorytootherprofilebutton);
 		Button copyThisCategoryToOtherProfileCategory = (Button) parrent.findViewById(R.id.copythiscategorytootherprofilecategorybutton);
 
-		/*
-		ArrayAdapter<String> categoriesArray = new ArrayAdap; //FIXME not sure which constructor to use...
 
-		setListAdapter();
-		 */			
-
-		//		ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(parrent, dummyLoader.getChildrenFromCurrentGuardian(), android.R.layout.simple_spinner_item); //Adapter for the spinner //FIXME
-		//		spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		//		profiles.setAdapter(spinnerAdapter);
-
-		categoryPic.setImageBitmap(profileBeingModified.getCategoryAt(currentCategoryId).getIcon().getBitmap()); //Loads the categorys icon
+		categoryPic.setImageBitmap(profileBeingModified.getCategoryAt(currentCategoryId).getIcon().getBitmap()); //Loads the category's icon
 		categoryInfo.setText(profileBeingModified.getCategoryAt(currentCategoryId).getCategoryName());
 		setPictogramsColour(profileBeingModified.getCategoryAt(currentCategoryId).getCategoryColour());
 		
@@ -86,13 +81,14 @@ public class ManageCategoryFragment extends Fragment {
 		
 		pictograms.setAdapter(new PictogramAdapter(profileBeingModified.getCategoryAt(currentCategoryId), parrent));
 
+		//We set the onDragListeners for the views that implement drag and drop functionality
 		parrent.findViewById(R.id.trash).setOnDragListener(new ManagementBoxDragListener(parrent));
 		parrent.findViewById(R.id.categories).setOnDragListener(new ManagementBoxDragListener(parrent));
 		parrent.findViewById(R.id.pictograms).setOnDragListener(new ManagementBoxDragListener(parrent));
 		parrent.findViewById(R.id.categorypic).setOnDragListener(new ManagementBoxDragListener(parrent));
 
 
-		profiles.setOnItemSelectedListener(new OnItemSelectedListener() //Here we chose what profile to show 
+		profiles.setOnItemSelectedListener(new OnItemSelectedListener() //Here we chose what profile to show //TODO this method has yet to be implemented
 		{
 
 			public void onItemSelected(AdapterView<?> arg0, View view, int position, long id) 
@@ -114,13 +110,18 @@ public class ManageCategoryFragment extends Fragment {
 
 			public void onItemClick(AdapterView<?> arg0, View view, int position, long id) 
 			{	
+				//We save the position of the selected category in a public variable for outside access
 				currentCategoryId = position;
+				//We change the icon in the information view to that of the selected profile
 				ImageView categoryPic = (ImageView) parrent.findViewById(R.id.categorypic);
 				categoryPic.setImageBitmap(ManageCategoryFragment.profileBeingModified.getCategoryAt(currentCategoryId).getIcon().getBitmap());
+				//We update the pictogram grid to show the pictograms of the selected category.
 				GridView pictograms = (GridView) parrent.findViewById(R.id.pictograms);
 				pictograms.setAdapter(new PictogramAdapter(profileBeingModified.getCategoryAt(currentCategoryId), parrent));
+				//We show the name of the category.
 				EditText categoryInfo = (EditText) parrent.findViewById(R.id.categoryinfo);
 				categoryInfo.setText(profileBeingModified.getCategoryAt(currentCategoryId).getCategoryName());
+				//We set the colour of the pictogram grid.
 				setPictogramsColour(profileBeingModified.getCategoryAt(currentCategoryId).getCategoryColour());
 			}
 		});
@@ -132,6 +133,7 @@ public class ManageCategoryFragment extends Fragment {
 				draggedItemIndex = position;
 				catDragOwnerID = R.id.categories;
 				ClipData data = ClipData.newPlainText("label", "text"); //TODO Dummy. Pictogram information can be placed here instead.
+				//This gives the dragged pictogram a transparrent, shadowy look.
 				DragShadowBuilder shadowBuilder = new DragShadowBuilder(view);
 				view.startDrag(data, shadowBuilder, view, 0);
 				return true;
@@ -139,7 +141,7 @@ public class ManageCategoryFragment extends Fragment {
 		});
 
 
-		pictograms.setOnItemLongClickListener(new OnItemLongClickListener()
+		pictograms.setOnItemLongClickListener(new OnItemLongClickListener()	//We want to drag a pictogram from the pictogram grid
 		{
 
 			public boolean onItemLongClick(AdapterView<?> arg0, View view, int position, long id)
@@ -166,7 +168,7 @@ public class ManageCategoryFragment extends Fragment {
 			}
 		});
 
-
+		//We want to change the colour of the selected category
 		changeCategoryColor.setOnClickListener(new OnClickListener() 
 		{
 			public void onClick(View v) 
@@ -228,20 +230,22 @@ public class ManageCategoryFragment extends Fragment {
 
 
 
-
 	}
 
+	//TODO implement me
 	//	public void onPause() 
 	//	{
 	//		saveProfileChanges(parrent, profileBeingModified);
 	//	}
 
+	//FIXME currently this causes the program to crash, fix this.
 	public void saveProfileChanges(Activity parrent, PARROTProfile profileBeingModified)
 	{
 		PARROTDataLoader dataLoader = new PARROTDataLoader(parrent);
 		dataLoader.saveProfile(profileBeingModified);
 	}
 	
+	//This method sets the colour of the pictogram grid to the input colour
 	private void setPictogramsColour(int colour)
 	{
 		GridView pictograms = (GridView) parrent.findViewById(R.id.pictograms);

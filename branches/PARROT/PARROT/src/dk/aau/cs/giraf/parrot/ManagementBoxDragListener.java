@@ -7,7 +7,11 @@ import android.view.View.OnDragListener;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
-
+/**
+ * 
+ * @PARROT
+ * This is the ManagementBoxDragListener, like the BoxDragListener, but for the ManageCategoryFragment instead.
+ */
 public class ManagementBoxDragListener implements OnDragListener
 {
 
