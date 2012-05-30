@@ -6,16 +6,17 @@
 \begin{document}
 \maketitle
 \tableofcontents
-
-	\chapter{Introduction}
+	
 	\input{input/introduction.tex}
 		
-\chapter{Agile development/Development method} %TODO temp title
- \section{Theory}
-	\input{chapters/DevelopementMethod.tex}
- \section{Scrum implementation}
-	\input{chapters/ChosenMethod.tex}
- 
+\chapter{Development methods}
+ %\section{Theory}
+%	\input{chapters/DevelopementMethod.tex}
+    \input{chapters/ChosenMethod.tex}
+  \section{Project Backlog}
+    \label{sect:pback}
+    \input{chapters/proBacklog.tex}
+
 \chapter{Savannah} %TODO temp title
   \section{Requirements} %Martin
 	\input{chapters/reqs} %incomplete 
@@ -27,9 +28,9 @@
     	\input{chapters/databaseimpl.tex}
     \subsection{Test}
 
-  \section{Webinterface}
+  \section{Web Interface}
    \label{sect:webInterface}
-     \subsection{Programming language (Jesper)}
+     \subsection{Programming language}
       \input{chapters/programminglanguage.tex}
      \subsection{Implementation}
      \subsection{Test}
@@ -60,15 +61,15 @@
 
 \appendix
 	\chapter{Appendix}
-	\section{MySQL code}
+	\section{MySQL Code}
 	\label{MySQLcode}
 		\input{chapters/appendixCreateSQL.tex}
-	\section{ERR diagram}
+	\section{ER Diagram}
 	\label{errDiagram}
 		\input{chapters/workbenchERRdiagram.tex}
-	\section{Class-diagrams}
+	\section{Class Diagrams}
 	\label{app:Class-diagrams}
-		%\input{chapters/appendixClassdiagrams.tex}
+		\input{chapters/appendixClassdiagrams.tex}
         \input{input/appendices.tex}
 \bibliographystyle{plainnat}
 \bibliography{bib}
