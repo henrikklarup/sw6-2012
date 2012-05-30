@@ -36,20 +36,16 @@ public class MainActivity extends Activity implements OnClickListener {
 			guardianId = extras.getLong("currentGuardianID");
 			color = extras.getInt("appBackgroundColor");
 			guardian = helper.profilesHelper.getProfileById(guardianId);
-		} else {
-			//			guardianId = -1;
-		}
+		}			
 
 		setContentView(R.layout.main);
-		
-		
-		
+
 		initializeViews();
 	}
 
 	private void initializeViews() {
 		findViewById(R.id.UpperLayout).setBackgroundColor(color);
-		
+
 		bMyProfile = (Button) findViewById(R.id.bMyProfile);
 		bMyProfile.setOnClickListener(this);
 		bAllProfiles = (Button) findViewById(R.id.bAllProfiles);
