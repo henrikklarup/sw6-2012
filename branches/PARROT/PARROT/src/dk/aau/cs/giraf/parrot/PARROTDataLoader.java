@@ -11,7 +11,7 @@ import dk.aau.cs.giraf.oasis.lib.models.Setting;
 
 /**
  * 
- * @Rasmus
+ * @PARROT
  * The PARROT Data Loader is used for interacting with the admin functionality of the GIRAF Project.
  *
  */
@@ -149,7 +149,7 @@ public class PARROTDataLoader {
 
 		return parrotUser;
 	}
-
+	//This method loads category
 	public Category loadCategory(String catName, String pictureIDs,int colour,String iconString)
 	{
 		Long iconId = Long.valueOf(iconString);
@@ -167,7 +167,7 @@ public class PARROTDataLoader {
 		Pictogram pic = null;
 		Media media=help.mediaHelper.getSingleMediaById(id); //This is the image media //TODO check type
 
-		List<Media> subMedias =	help.mediaHelper.getSubMediaByMedia(media); //TODO find out if this is ok, or if it needs to be an ArrayList
+		List<Media> subMedias =	help.mediaHelper.getSubMediaByMedia(media); 
 		Media investigatedMedia;
 		String soundPath = null;
 		String wordPath = null;
@@ -273,31 +273,18 @@ public class PARROTDataLoader {
 
 		//START TEMP LINES
 		Pictogram tempPic= new Pictogram("Koala","/sdcard/Pictures/005.jpg", null, null);
-		//		Category tempCat = new Category(0,tempPic);
-		//		tempCat.addPictogram(tempPic);
-		//		tempCat.addPictogram(tempPic);
+	
 		Pictogram tempPic2 = new Pictogram("Meg", "/sdcard/Pictures/meg.png", null, null);
-		//		tempCat.addPictogram(tempPic2);
+		
 
 		PARROTProfile testProfile = new PARROTProfile("Niels", tempPic);
 		testProfile.setProfileID(profileId);
 
-		//		for (int i=0;i<6;i++)
-		//		{
-		//			tempCat.addPictogram(tempPic);
-		//			tempCat.addPictogram(tempPic2);
-		//		}
-
-		//		Category tempCat2 = new Category(2, tempPic2);
+		
 		tempPic = new Pictogram("Bob", "/sdcard/Pictures/007.jpg", null, null);
 		tempPic2= new Pictogram("Madeline", "/sdcard/Pictures/003.jpg", null, null);
 
-		//		for (int i=0;i<6;i++)
-		//		{
-		//			tempCat2.addPictogram(tempPic);
-		//			tempCat2.addPictogram(tempPic2);
-		//		}
-		//		
+		
 
 		Pictogram badePic = new Pictogram("Bade", "/sdcard/Pictogram/Bade.png", null, "/sdcard/Pictogram/bade.wma");
 		badePic.setNewPictogram(true);
@@ -371,9 +358,7 @@ public class PARROTDataLoader {
 		tempCat3.addPictogram(taleSammenPic);
 		tempCat3.addPictogram(tørstigPic);
 		tempCat3.addPictogram(væreStillePic);
-		//		
-		//		testProfile.addCategory(tempCat);
-		//		testProfile.addCategory(tempCat2);
+	
 		testProfile.addCategory(tempCat3);
 
 		Category tempCat4 = new Category("Kategori 2", 0xffff0000, duPic);
@@ -392,7 +377,7 @@ public class PARROTDataLoader {
 			profileSetting = saveCategory(testProfile.getCategoryAt(i), i, profileSetting);
 		}
 		profileSetting = saveSettings(profileSetting, testProfile);
-		app.setSettings(profileSetting);	//FIXME figure out if settings works as intended, or if addValue replaces ALL previous values
+		app.setSettings(profileSetting);	
 		long appID=app.getId();
 		PARROTProfile parrot =loadProfile(profileId, appID);
 		PARROTActivity.setUser(parrot);
@@ -430,7 +415,8 @@ public class PARROTDataLoader {
 
 	/**
 	 * 
-	 * @Rasmus This method is used to save completely new pictograms to the database, as well as modify existing ones.
+	 * @PARROT
+	 *This method is used to save completely new pictograms to the database, as well as modify existing ones.
 	 */
 	private Pictogram savePictogram(Pictogram pic)
 	{
