@@ -42,15 +42,7 @@ public class OptionsFragment extends Fragment
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		parrent.setContentView(R.layout.options_layout);
-//		initColorButtons();
 	}
-//	@Override
-//	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//			Bundle savedInstanceState) {
-//		// TODO Auto-generated method stub
-//		initColorButtons();
-//		return inflater.inflate(R.layout.options_layout, container,false);
-//	}
 
 	private void initColorButtons() {
 
