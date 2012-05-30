@@ -1,18 +1,14 @@
 package dk.aau.cs.giraf.parrot;
 
 
-import android.R.integer;
 import android.app.Activity;
 import android.view.DragEvent;
-import android.view.MotionEvent;
-import android.view.MotionEvent.PointerCoords;
 import android.view.View;
 import android.view.View.OnDragListener;
 import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
-public class BoxDragListener implements OnDragListener
+
+public class BoxDragListener implements OnDragListener 
 {
 	private Activity parrent;
 	private Pictogram draggedPictogram = null;
@@ -89,19 +85,6 @@ public class BoxDragListener implements OnDragListener
 							}
 						}
 
-
-
-						/*//old code by Dalhoff
-					if(index <0)
-					{
-						SpeechBoardFragment.speechBoardCategory.addPictogram(pic);//Add the references pictogram to the back-end list
-					}
-					else
-					{
-						SpeechBoardFragment.speechBoardCategory.removePictogram(index); //Removes the pictogram at the specific index
-						SpeechBoardFragment.speechBoardCategory.addPictogramAtIndex(pic, index); //add the pictogram at the specific position
-					}
-						 */
 
 						speech.setAdapter(new PictogramAdapter(SpeechBoardFragment.speechBoardCategory, parrent));
 						speech.invalidate();
