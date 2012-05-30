@@ -1,7 +1,21 @@
 \section{Design Language}
 \label{design:design_language}
 
-\subsection{\giraf[] colors}
+\subsection{Status icons}
+\label{design:state_icons}
+
+In the \giraf[] system there are different status icons for showing the user what an action will do or is doing. All these icons can be seen in \autoref{fig:status_icons}. If an action accepts the left most icon will be used and if a window is loading the 4th left most icon will be shown maybe with an animation so that the user knows for sure that the window is not crashed.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{gfx/status_icons}
+	\caption{Status icons in the \giraf[] system}
+	\label{fig:status_icons}
+\end{figure}
+
+The icons in \autoref{fig:status_icons} includes: Accept, reject, synchronizing, loading and not found, seen from the left.
+
+\subsection{Colors}
 \label{design:giraf_colors}
 
 Colors where chosen for the \giraf[] system these can be seen in \autoref{fig:colortheme}. These colors is designed for use in two different cases. The first four yellow and brown colors is made for use together and the last four colors white and grey is made for use together. These color groups is chosen such that they have contrast and can make gradients.
@@ -24,7 +38,7 @@ This section will use buttons as an example of an interactive element but the in
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.6]{gfx/buttons.pdf}
+	\includegraphics[width=\textwidth]{gfx/buttons.pdf}
 	\caption{Interactive elements: Buttons illustrations}
 	\label{fig:buttons}
 \end{figure}
