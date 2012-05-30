@@ -7,7 +7,7 @@ In this chapter we describe the application of the administration module, called
 The Oasis Application is build upon two activities; MainActivity and FragParentTab.
 
 \subsection{MainActivity}
-The MainActivity is the activity that starts on application startup. It uses the main.xml as its layout file, which is a layout file containing three buttons, which can be seen on figure \textcolor{red}{INDSÆT SCREEN CAP AF MAINACTIVITY}. A snap of the MainActivity's code can be seen in listing \vref{lst:mainactivity}.
+The MainActivity is the activity that starts on application startup. It uses the main.xml as its layout file, which is a layout file containing three buttons, which can be seen on figure \textcolor{red}{INDS\AE{}T SCREEN CAP AF MAINACTIVITY}. A snap of the MainActivity's code can be seen in listing \vref{lst:mainactivity}.
 
 \begin{Java}{The MainActivity class}{lst:mainactivity}
 .
@@ -94,7 +94,7 @@ public class MainActivity extends Activity implements OnClickListener {
 When the activity starts it gets the information of which guardian that is currently logged in to the GIRAF system and what background color the Oasis App is currently set to by the Launcher application. When one of the buttons is clicked the mainactivity will start the FragParentTab activity, but depending on which button is clicked, the mainactivity will put an integer in the itent's extra data.
 
 \subsection{FragParentTab}
-The FragParentTab is the activity, which, as stated above, is started by the MainActivity activity. The activity has the responsibillity of managing what view to show, by using fragments. The reason for choosing fragments instead of making new activities is that the layout we want is a tab layout. The layout can be seen in figure \textcolor{red}{Indsæt FIGUR REF}. The FragParentTab activity can be seen in listing \vref{lst:fragparenttag}.
+The FragParentTab is the activity, which, as stated above, is started by the MainActivity activity. The activity has the responsibillity of managing what view to show, by using fragments. The reason for choosing fragments instead of making new activities is that the layout we want is a tab layout. The layout can be seen in figure \textcolor{red}{Inds\ae{}t FIGUR REF}. The FragParentTab activity can be seen in listing \vref{lst:fragparenttag}.
 
 \begin{Java}{The FragParentTab class}{lst:fragparenttab}
 .
