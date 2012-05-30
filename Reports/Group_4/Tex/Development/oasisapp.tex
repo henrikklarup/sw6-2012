@@ -181,7 +181,19 @@ public class FragParentTab extends Activity {
 }
 \end{Java}
 
-The way the activity 
+the way in which the activity controls which fragment it must show is done in two ways. First, when created, the activity decides which fragment to show, by using the integer it gets from the MainActivity. This integer represents a fragment class of every view, called TabManager[keyword].
 
 \section{Implementation}
 \label{sec:AppImp}
+When using the Oasis Lib it is necessary to do a few things. First it is needed to import the Oasis Lib as a library project. This can be done by either including a jar file we made for the purpose or by telling Eclipse that the Oasis Lib project is a library project. Then Eclipse will automatically include the needed files at compile time.
+When the Oasis Lib is included to be able to call the methods inside the library it is necessary to initialize a helper object. When initializing the object it is needed to put the current activity's context as a parameter. This is needed to give the Oasis Lib the information about where it is called from. An example of how to initialize the helper object can be seen in listing \vref{lst:initHelper}.
+
+\begin{Java}{Example of Initializing a Helper}{lst:initHelper}
+Helper helper = new Helper(getActivity().getApplicationContext());
+\end{Java}
+
+Now it is possible to call all the methods in the library. An example of calling a method can be seen in listing \vref{lst:callLib}
+
+\begin{Java}{Call method from Oasis Lib}{lst:callLib}
+guardian = helper.profilesHelper.getProfileById(guardianId);
+\end{Java}
