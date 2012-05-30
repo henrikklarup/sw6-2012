@@ -96,6 +96,8 @@ public class AddPictureNotLoggedin extends HttpServlet {
 
 		//String searchCriteria = (String) request.getAttribute("CRITERIA");
 		//String searchString = (String) request.getAttribute("SEARCHSTRING");
+		tags.clear();
+		searchTags.clear();
 		searchTags.clear();
 
 		if (searchCriteria != null && searchString != null && !searchString.equals(""))
@@ -315,7 +317,7 @@ public class AddPictureNotLoggedin extends HttpServlet {
 		out.println("</head>");
 		out.println("<body>");
 		out.println("<div id='MainBackground'>");
-		out.println("<center><h2>Tilføj billede"+searchCriteria+"</h2></center>");
+		out.println("<center><h2>Tilføj billede</h2></center>");
 		out.println("<hr>");
 		out.println("<div id='generic_wrapper'>");
 		out.println("<center>");
@@ -509,7 +511,7 @@ public class AddPictureNotLoggedin extends HttpServlet {
 							}
 							writeFile = false;
 							response.sendRedirect("AddPictureNotLoggedin");
-							break;
+							return;
 						}
 						else
 							writeFile = true;

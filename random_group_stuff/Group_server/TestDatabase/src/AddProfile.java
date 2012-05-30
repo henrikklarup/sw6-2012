@@ -300,6 +300,8 @@ public class AddProfile extends HttpServlet {
 		String qrToken = getNewCertificate();
 		HttpSession session = request.getSession();
 
+		String dept = request.getParameter("dept");
+		
 		String firstname = request.getParameter("firstname");
 		if (firstname == null)
 			firstname = "";
@@ -363,6 +365,8 @@ public class AddProfile extends HttpServlet {
 				 */
 				if (item.isFormField()) {
 
+					if (item.getFieldName().equals("dept"))
+						dept = item.getString();
 					if (item.getFieldName().equals("firstname"))
 						firstname = item.getString();
 					if (item.getFieldName().equals("middlename"))
@@ -502,6 +506,17 @@ public class AddProfile extends HttpServlet {
 				
 
 				int i1 = pst1.executeUpdate();
+				
+				PreparedStatement pst11 = con
+						.prepareStatement("insert into HasDepartment values(?,?);");
+
+				pst11.setInt(1, tempId);
+				pst11.setString(2, dept);
+		
+
+				
+
+				int i11 = pst11.executeUpdate();
 
 				PreparedStatement pst2 = con
 						.prepareStatement("insert into ListOfApps values(?,?,?,?)");

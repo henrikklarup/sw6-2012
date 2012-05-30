@@ -118,7 +118,7 @@ footer {
 #boxOfTags {
 	width: auto;
 	height: 100px;
-	background-color: red;
+	
 	
 	overflow: scroll;
 	overflow-x: hidden;

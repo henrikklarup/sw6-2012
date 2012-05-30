@@ -265,7 +265,7 @@ public class TestDatabase extends HttpServlet {
 				+ "<center><h3>"
 				+ "Rediger:"
 				+ "</h3>"
-				+ "<a href=\"SelectProfileToEdit\"><u>P</u>rofil</a>  -  Billede  -  Lyd  -  Animation/film"
+				+ "<a href=\"SelectProfileToEdit\"><u>P</u>rofil</a>  -  <a href=\"SelectProfileToLink\">Billede</a> - <a href=\"EditTags\"><u>T</u>ags</a>"
 				+ "</center>" + "</div>");
 
 
@@ -275,7 +275,7 @@ public class TestDatabase extends HttpServlet {
 				+ "<center><h3>"
 				+ "Tilføj:"
 				+ "</h3>"
-				+ "<a href=\"AddProfile\"><u>P</u>rofil</a>  -  <a href=\"SelectProfileToPicture\">Billede</a>  -  <a href=\"SelectProfileToAudio\">Lyd</a>  -  Animation/film"
+				+ "<a href=\"AddProfile\"><u>P</u>rofil</a>  -  <a href=\"SelectProfileToPicture\">Billede</a>  -  <a href=\"SelectProfileToAudio\">Lyd</a>"
 				+ "</center>" + "</div>");
 
 		aOutput.println("<div id=\"blanket\" style=\"display:none;\"></div>"
@@ -284,7 +284,7 @@ public class TestDatabase extends HttpServlet {
 				+ "<center><h3>"
 				+ "Tilføj:"
 				+ "</h3>"
-				+ "<a href=\"SelectProfileToDelete\"><u>P</u>rofil</a>  -  <a href=\"SelectProfileToDeletePic\"><u>B</u>illede</a>  -  Lyd  -  Animation/film"
+				+ "<a href=\"SelectProfileToDelete\"><u>P</u>rofil</a>  -  <a href=\"SelectProfileToDeletePic\"><u>B</u>illede</a>  -  <a href=\"DeleteTags\"><u>T</u>ags</a>"
 				+ "</center>" + "</div>");
 
 

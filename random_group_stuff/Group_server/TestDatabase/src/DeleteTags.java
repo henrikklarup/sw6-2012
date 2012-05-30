@@ -11,6 +11,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +22,7 @@ import com.mysql.jdbc.PreparedStatement;
 /**
  * Servlet implementation class DeleteTags
  */
+@WebServlet("/DeleteTags")
 public class DeleteTags extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	int idTag;
@@ -222,11 +224,12 @@ public class DeleteTags extends HttpServlet {
 		out.println("<div id=\"mainBackground\">");
 		out.println("<center><h2> Vælg de tags du ønsker at slette </h2>");
 		out.println("<hr>");
+		out.println("<div id=\"simple_wrapper\">"+
+		"<div id=\"edit_wrapper\">");
 		out.println("<center><form method='POST' name='deleteTag' action='DeleteTags'>");
 		out.println("<table>");
 		out.println("<tr>");
 		out.println("<td>");
-		out.println("<div id='boxOfTags'>");
 		out.println("<table>");
 		out.println("<tr>");
 		if(!doSearch)
@@ -234,7 +237,7 @@ public class DeleteTags extends HttpServlet {
 			for (int i=0; i<tags.size();i++)
 			{
 
-				if(i % 3 ==0)
+				if(i > 0 &&  i % 7 ==0)
 					out.println("</tr><tr>");
 
 				if (tags.get(i).getSelected())
@@ -248,7 +251,7 @@ public class DeleteTags extends HttpServlet {
 			for (int i=0; i<searchTags.size();i++)
 			{
 
-				if(i % 3 ==0)
+				if(i > 0 && i % 7 ==0)
 					out.println("</tr><tr>");
 
 				if (searchTags.get(i).getSelected())
@@ -262,7 +265,7 @@ public class DeleteTags extends HttpServlet {
 					out.println("<input type=hidden name='selectedTags' value='"+tags.get(i).getID()+"'></td>");
 			}
 		}
-		out.println("</tr></table></div>");
+		out.println("</tr></table>");
 		//out.println("<tr><td></td><td align=center><a href='#' onClick=\"errorMessage(); popup('popUpSearch')\" >Søg</a></td></tr>");
 		out.println("<tr><td><input type='button' name='Delete' onClick=\"deleteTag11()\" value='Slet' /></td></tr>");
 
@@ -282,7 +285,8 @@ public class DeleteTags extends HttpServlet {
 				+ "<input type=button name='clearsearch' value='Slet' onClick=\"clearSearch();\">"
 				+ "</h3>"
 				+ "</form></div>");*/
-		out.println("</table>");
+		out.println("</table></div>"
+				+"<div id=\"my_wrapper\"></div></div>");
 		out.println("<hr>");
 		out.println("<footer>Savannah v. 1.0.0 <a href='http://en.wikipedia.org/wiki/Copyleft'>(C)opyleft</a> under Freedom 3 me!</footer> </div>");
 		out.println("</form></center>");

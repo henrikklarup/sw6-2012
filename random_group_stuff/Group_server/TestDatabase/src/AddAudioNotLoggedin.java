@@ -283,10 +283,12 @@ public class AddAudioNotLoggedin extends HttpServlet {
 		out.println("<script src=\"javascript/popup.js\">"
 				+ "</script>");
 		out.println("<link rel='stylesheet' type='text/css' href='CSS/SavannahStyle.css' />");
-		out.println("<SCRIPT language = JavaScript>" +
+		out.println("<SCRIPT language = JavaScript>"+
 				"var reader = new FileReader();"+
 				"reader.onload = function(e) {"+
-				"document.billedet.src  = e.target.result;"+
+				"var audioElement = document.getElementById('billedet');"+
+				"alert(audioElement);"+
+				"audioElement.setAttribute('src', e.target.result);"+
 				"var picName = addForm1.file1.value;"+
 				"var picName1 = picName.replace(\"C:\\\\fakepath\\\\\",\"\");" +
 				"var picName2 = picName1.replace(\".jpg\",\"\");"+
@@ -299,7 +301,6 @@ public class AddAudioNotLoggedin extends HttpServlet {
 "}"+
 "else {"+
 "document.billedet.src = input.value || \"No file selected\";"+
-"alert(input.value);"+
 "}"+
 "}" +
 "function clearSearch()" +
@@ -315,7 +316,7 @@ public class AddAudioNotLoggedin extends HttpServlet {
 		out.println("</head>");
 		out.println("<body>");
 		out.println("<div id='MainBackground'>");
-		out.println("<center><h2>Tilføj billede"+searchCriteria+"</h2></center>");
+		out.println("<center><h2>Tilføj lyd</h2></center>");
 		out.println("<hr>");
 		out.println("<div id='generic_wrapper'>");
 		out.println("<center>");
@@ -324,11 +325,13 @@ public class AddAudioNotLoggedin extends HttpServlet {
 			out.println(session.getAttribute("PICTUREMESSAGE")+"<br>");
 			session.removeAttribute("PICTUREMESSAGE");
 		}
-		out.println("<form method='POST' name='addForm1' enctype='multipart/form-data' action='AddPictureNotLoggedin'>");
+		out.println("<form method='POST' name='addForm1' enctype='multipart/form-data' action='AddAudioNotLoggedin'>");
 		out.println("<table>");
 
 		out.println("<tr>"
-				+ "<td align='center' colspan='2'><embed name='billedet' height=\"50px\" width=\"100px\" src=\"\" /></td>"
+				+ "<td align='center' colspan='2'><audio controls=\"controls\" src=\"\" id='billedet' name=\"billedet\"/>"
++"Your browser does not support this audio"
++"</audio></td>"
 				+ "</tr>");
 		out.println("<tr>" +
 				"<td colspan='2' align=center><input name='file1' type='file' accept='audio/*' onChange=\"readURL(this);\"/></td>"
@@ -508,7 +511,7 @@ public class AddAudioNotLoggedin extends HttpServlet {
 								searchCriteria = null;
 							}
 							writeFile = false;
-							response.sendRedirect("AddPictureNotLoggedin");
+							response.sendRedirect("AddAudioNotLoggedin");
 							break;
 						}
 						else
@@ -536,8 +539,8 @@ public class AddAudioNotLoggedin extends HttpServlet {
 		if (temp.getName() == null || temp.getName().equals(""))
 		{
 			writeFile = false;
-			session.setAttribute("PICTUREMESSAGE", "<font color='red'>Ingen billede valgt</font>");
-			response.sendRedirect("AddPictureNotLoggedin");
+			session.setAttribute("PICTUREMESSAGE", "<font color='red'>Ingen lyd valgt</font>");
+			response.sendRedirect("AddAudioNotLoggedin");
 		}
 		
 		if (writeFile)
@@ -565,7 +568,7 @@ public class AddAudioNotLoggedin extends HttpServlet {
 				PreparedStatement pst = con
 						.prepareStatement("insert into Media values(?,?,?,?,?,?)");
 				pst.setString(1, null);
-				pst.setString(2, "/images/appImages/"+token);
+				pst.setString(2, "/audio/appAudio/"+token);
 				pst.setString(3, name);
 				pst.setString(4, mPublic);
 				pst.setString(5, mType);
@@ -576,7 +579,7 @@ public class AddAudioNotLoggedin extends HttpServlet {
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt
 						.executeQuery("select * from Media where mPath = '"
-								+ "/images/appImages/"+token + "';");
+								+ "/audio/appAudio/"+token + "';");
 
 				while (rs.next()) {
 					mediaID = rs.getInt("idMedia");
@@ -618,8 +621,8 @@ public class AddAudioNotLoggedin extends HttpServlet {
 			searchTags.clear();
 			selectedTags.clear();
 
-			session.setAttribute("PICTUREMESSAGE","<font color='green'>Billedet tilføjet</font>");
-			response.sendRedirect("AddPictureNotLoggedin");
+			session.setAttribute("PICTUREMESSAGE","<font color='green'>Lyd tilføjet</font>");
+			response.sendRedirect("AddAudioNotLoggedin");
 
 		}
 

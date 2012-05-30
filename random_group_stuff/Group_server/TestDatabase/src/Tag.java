@@ -17,6 +17,11 @@ public class Tag {
 		this.caption = caption;
 	}
 	
+	public Tag(String caption)
+	{
+		this.caption = caption;
+	}
+	
 	public int getIdMedia()
 	{
 		return idMedia;

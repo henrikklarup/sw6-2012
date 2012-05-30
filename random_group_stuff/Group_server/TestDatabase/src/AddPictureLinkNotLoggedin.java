@@ -24,13 +24,15 @@ import org.apache.catalina.Session;
 /**
  * Servlet implementation class EditPictureAccess
  */
-@WebServlet("/EditPictureAccess")
-public class EditPictureAccess extends HttpServlet {
+@WebServlet("/AddPictureLinkNotLoggedin")
+public class AddPictureLinkNotLoggedin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Profile currentProfile;
 
 	ArrayList<Media> publicMedia = new ArrayList<Media>();
 	ArrayList<Media> currentMedia = new ArrayList<Media>();
+
+	ArrayList<Media> publicSound = new ArrayList<Media>();
 	ArrayList<Tag> tags = new ArrayList<Tag>();
 	boolean search = false;
 	String userID;
@@ -38,7 +40,7 @@ public class EditPictureAccess extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public EditPictureAccess() {
+	public AddPictureLinkNotLoggedin() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -61,6 +63,7 @@ public class EditPictureAccess extends HttpServlet {
 
 		publicMedia.clear();
 		currentMedia.clear();
+		publicSound.clear();
 
 
 
@@ -115,6 +118,22 @@ public class EditPictureAccess extends HttpServlet {
 
 
 					publicMedia.add(new Media(rs1.getInt("idMedia"), request.getContextPath()+rs1.getString("mPath"), rs1.getString("name"), mPublic, rs1.getInt("mType"), rs1.getInt("ownerID")));
+				}
+				Statement stmt0 = con.createStatement();
+				ResultSet rs0 = stmt0
+						.executeQuery("SELECT * from Media where mPublic = 1 and mType=1;");
+
+				// displaying records
+				while (rs0.next()) {
+					int temp = rs0.getInt("mPublic");
+					Boolean mPublic = false;
+					if (temp == 1)
+						mPublic = true;
+					else
+						mPublic = false;
+
+
+					publicSound.add(new Media(rs0.getInt("idMedia"), request.getContextPath()+rs0.getString("mPath"), rs0.getString("name"), mPublic, rs0.getInt("mType"), rs0.getInt("ownerID")));
 				}
 			}
 			else
@@ -251,13 +270,13 @@ public class EditPictureAccess extends HttpServlet {
 				+ "<body>"
 				+ "<div id=\"mainBackground\">"
 				+ "<center>"
-				+ "<h2>Billede stuff</h2>"
+				+ "<h2>Rediger billede</h2>"
 				+ "</center>"
 				+"<hr>");
 		out.println("<div id=\"simple_wrapper\">");
 		out.println("<div id=\"edit_wrapper\">");
-		out.println("<center>");
-		out.println("<form method='POST' action='EditPictureAccess' name='PicForm'>");
+		out.println("<center>Tilføj link til billede<hr>");
+		out.println("<form method='POST' action='AddPictureLinkNotLoggedin' name='PicForm'>");
 		if (message != null && !message.equals(""))
 			out.println(message + "<br>");
 		out.println("Bruger: <input type=text name='name' disabled=true value='"+currentProfile.getName()+"'>");
@@ -273,13 +292,8 @@ public class EditPictureAccess extends HttpServlet {
 				out.println("</td></tr><tr><td>");
 
 			out.println("<table>");
-			if (currentMedia.get(i).getOwnerID() == Integer.parseInt(userID))
-			{
-				out.println("<tr><td align=\"center\"><img src='"+currentMedia.get(i).getMPath()+"' width=50 height=50></td></tr><tr><td align=\"center\"><input type=checkbox checked='yes' disabled='disabled' name='selectedPic' value='"+currentMedia.get(i).getIdMedia()+"'>"+currentMedia.get(i).getName()+"</td></tr>");
-				out.println("<input type=hidden value='"+currentMedia.get(i).getIdMedia()+"' name='selectedPic' />");
-			}
-			else
-				out.println("<tr><td align=\"center\"><img src='"+currentMedia.get(i).getMPath()+"' width=50 height=50></td></tr><tr><td align=\"center\"><input type=checkbox checked='yes' name='selectedPic' value='"+currentMedia.get(i).getIdMedia()+"'>"+currentMedia.get(i).getName()+"</td></tr>");
+
+			out.println("<tr><td align=\"center\"><img src='"+currentMedia.get(i).getMPath()+"' width=50 height=50></td></tr><tr><td align=\"center\"><input type=radio name='selectedPic' value='"+currentMedia.get(i).getIdMedia()+"'>"+currentMedia.get(i).getName()+"</td></tr>");
 			out.println("</table></td><td>");
 
 
@@ -292,8 +306,8 @@ public class EditPictureAccess extends HttpServlet {
 		for (int i=0; i<publicMedia.size(); i++)
 		{
 			boolean alreadyAdded = false;
-			
-			
+
+
 			if (added > 1 && added % 4 == 0)
 				out.println("</td></tr><tr><td>");
 
@@ -311,7 +325,7 @@ public class EditPictureAccess extends HttpServlet {
 			{
 				added++;
 				out.println("<table>");
-				out.println("<tr><td align=\"center\"><img src='"+publicMedia.get(i).getMPath()+"' width=50 height=50></td></tr><tr><td align=\"center\"><input type=checkbox name='selectedPic' value='"+publicMedia.get(i).getIdMedia()+"'>"+publicMedia.get(i).getName()+"</td></tr>");
+				out.println("<tr><td align=\"center\"><img src='"+publicMedia.get(i).getMPath()+"' width=50 height=50></td></tr><tr><td align=\"center\"><input type=radio name='selectedPic' value='"+publicMedia.get(i).getIdMedia()+"'>"+publicMedia.get(i).getName()+"</td></tr>");
 				out.println("</table></td><td>");
 			}
 
@@ -323,6 +337,14 @@ public class EditPictureAccess extends HttpServlet {
 
 		out.println("</td></tr>" +
 				"</table>");
+		out.println("Link til lyd: ");
+		out.println("<select name='selectedSound'>");
+		out.println("<option value='-2'>Fjen alle link</option>"); 
+		for (Media sound : publicSound) {
+			out.println("<option  value='"+sound.getIdMedia()+"'>"+sound.getName()+"</option>");
+		}
+		out.println("<option value='-1'>Fjen alle link</option>"); 
+		out.println("</select>");
 		out.println("</form>");
 		out.println("</center>");
 		out.println("</div>");
@@ -344,7 +366,7 @@ public class EditPictureAccess extends HttpServlet {
 				+ "<center>"+
 				"<h3>Søg:</h3>" +
 				"<hr>" +
-				"<form method='GET' action='EditPictureAccess' name='SearchForm'>"+
+				"<form method='GET' action='AddPictureLinkNotLoggedin' name='SearchForm'>"+
 				"<input type=hidden name='search' value='yes'>"+
 				"<table>" +
 				"<tr><td>Navn:</td><td><input type=text name='searchName'></td></tr></table>"
@@ -373,114 +395,111 @@ public class EditPictureAccess extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
-		String selectedPics[] = request.getParameterValues("selectedPic");
-		ArrayList<Integer> newMedias = new ArrayList<Integer>();
-		ArrayList<Media> removeMedias = new ArrayList<Media>();
-
-		if (selectedPics != null &&  selectedPics.length > 0)
-		{
-			for(int i=0; i < selectedPics.length; i++)
-			{
-				boolean newAdd = true;
-				for (Media media : currentMedia) {
-					if (media.getIdMedia() == Integer.parseInt(selectedPics[i]))
-					{
-						newAdd = false;
-						break;
-					}
-				}
-				if (newAdd)
-					newMedias.add(Integer.parseInt(selectedPics[i]));
-			}
-
-			for (Media media : currentMedia) {
-				boolean remove = false;
-				for(int i=0; i < selectedPics.length; i++)
-				{
-					if (media.getIdMedia() == Integer.parseInt(selectedPics[i]))
-					{
-						remove = false;
-						break;
-					}
-					else
-						remove = true;
-				}
-				if (remove)
-					removeMedias.add(media);
-
-			}
-		}
-
-
-		out.println("To add:");
-		for (Integer integer : newMedias) {
-			out.println(integer);
-		}
-		out.println("To Remove:");
-		for (Media m : removeMedias) {
-			out.println(m.getIdMedia());
-		}
-
-
-
-		Connection con = null;
-		Statement stmt = null;
-		ResultSet rs = null;
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection(
-					"jdbc:mysql://172.25.11.65:3306/04", "eder", "123456");
-
-			for (Integer media : newMedias) {
-
-				PreparedStatement pst = con.prepareStatement("insert into MediaProfileAccess values(?,?)");
-				pst.setInt(1, Integer.parseInt(userID));
-				pst.setInt(2, media);
-
-
-				pst.executeUpdate();
-			}
-
-
-			Statement pst=con.createStatement();
-			for (Media media2 : removeMedias) {
-
-
-				pst.execute("DELETE FROM MediaProfileAccess WHERE idMedia="+media2.getIdMedia()+";");
-			}
-			if (selectedPics == null ||  selectedPics.length <= 0)
-			{
-				pst.execute("DELETE FROM MediaProfileAccess WHERE idProfile="+userID+";");
-			}
-
-
-		} catch (SQLException e) {
-			throw new ServletException(e.getMessage()
-					+ " Servlet Could not display records. ", e);
-		} catch (ClassNotFoundException e) {
-			throw new ServletException("JDBC Driver not found.", e);
-		} finally {
-			try {
-				if (rs != null) {
-					rs.close();
-					rs = null;
-				}
-				if (stmt != null) {
-					stmt.close();
-					stmt = null;
-				}
-				if (con != null) {
-					con.close();
-					con = null;
-				}
-			} catch (SQLException e) {
-
-			}
-		}
-
+		String pictureID = request.getParameter("selectedPic");
+		String soundID = request.getParameter("selectedSound");
 		HttpSession session = request.getSession();
-		session.setAttribute("PICTURERESPONSE", "<font color='green'>Billede adgang ændret</font>");
-		response.sendRedirect("EditPictureAccess");
+		String hasBeenAdded = null;
+
+		if (pictureID == null || pictureID.equals(""))
+		{
+			session.setAttribute("PICTURERESPONSE", "<font color='red'>Intet billede valgt</font>");
+			response.sendRedirect("AddPictureLinkNotLoggedin");
+			return;
+		}
+
+		boolean delete = false;
+		boolean noSoundSelected = false;
+		if (soundID.equals("-1"))
+			delete = true;
+		if (soundID.equals("-2"))
+		{
+			noSoundSelected = true;
+			session.setAttribute("PICTURERESPONSE", "<font color='red'>Ingen ændreinger foretaget</font>");
+		}
+
+
+
+
+		if (!noSoundSelected)
+		{
+			Connection con = null;
+			Statement stmt = null;
+			ResultSet rs = null;
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+				con = DriverManager.getConnection(
+						"jdbc:mysql://172.25.11.65:3306/04", "eder", "123456");
+
+
+
+
+				if (delete)
+				{
+
+
+					PreparedStatement pst = con.prepareStatement("DELETE FROM HasLink WHERE idMedia="+pictureID+";");
+					pst.executeUpdate();
+					session.setAttribute("PICTURERESPONSE", "<font color='green'>Alle links slettet</font>");
+					response.sendRedirect("AddPictureLinkNotLoggedin");
+					return;
+
+				}
+				else
+				{
+					stmt = con.createStatement();
+					rs = stmt.executeQuery("SELECT * from HasLink where idMedia = " + pictureID + " and idSubMedia = " + soundID+";");
+
+					// displaying records
+					while (rs.next()) {
+						hasBeenAdded = "" + rs.getInt("idMedia");
+					}
+
+					if (hasBeenAdded != null)
+					{
+						session.setAttribute("PICTURERESPONSE", "<font color='red'>Link findes allerede</font>");
+						response.sendRedirect("AddPictureLinkNotLoggedin");
+						hasBeenAdded = null;
+						return;
+					}
+
+					PreparedStatement pst = con.prepareStatement("insert into HasLink values(?,?)");
+					pst.setInt(1, Integer.parseInt(pictureID));
+					pst.setInt(2, Integer.parseInt(soundID));
+
+
+					pst.executeUpdate();
+					session.setAttribute("PICTURERESPONSE", "<font color='green'>Billede og lyd linket</font>");
+				}
+
+
+			} catch (SQLException e) {
+				throw new ServletException(e.getMessage()
+						+ " Servlet Could not display records. ", e);
+			} catch (ClassNotFoundException e) {
+				throw new ServletException("JDBC Driver not found.", e);
+			} finally {
+				try {
+					if (rs != null) {
+						rs.close();
+						rs = null;
+					}
+					if (stmt != null) {
+						stmt.close();
+						stmt = null;
+					}
+					if (con != null) {
+						con.close();
+						con = null;
+					}
+				} catch (SQLException e) {
+
+				}
+			}
+		}
+
+
+
+		response.sendRedirect("AddPictureLinkNotLoggedin");
 
 	}
 

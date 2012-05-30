@@ -473,9 +473,13 @@ public class EditProfileNotLoggedin extends HttpServlet {
 				+ "SelectedKidsSelectAll();" + "}" +
 
 				"if (document.getElementById('SelectedParents') != null)" + "{"
-				+ "SelectedParSelectAll()" + "}" + "}" +
+				+ "SelectedParSelectAll()" + "}" + 
+				"if (document.getElementById('SelectedGuards') != null)" + "{"
+				+ "SelectedGuarSelectAll()" + "}" +
+				"}"
 
-				"function SelectedDepSelectAll()" + "{"
+
+				+"function SelectedDepSelectAll()" + "{"
 				+ "var select = document.getElementById('SelectedDep');"
 				+ "for(var count=0; count < select.options.length; count++) "
 				+ "{" + "select.options[count].selected = 'true';" + "}"
@@ -487,17 +491,17 @@ public class EditProfileNotLoggedin extends HttpServlet {
 
 "var reader = new FileReader();"+
 "reader.onload = function(e) {"+
-  "document.billedet.src  = e.target.result;"+ 
+"document.billedet.src  = e.target.result;"+ 
 "};"+
 
 "function readURL(input){"+ 
-   "if(input.files && input.files[0]){"+
-      "reader.readAsDataURL(input.files[0]);"+
-   "}"+
-   "else {"+
-     "document.billedet.src = input.value || \"No file selected\";"+
-     "alert(input.value);"+
-   "}"+
+"if(input.files && input.files[0]){"+
+"reader.readAsDataURL(input.files[0]);"+
+"}"+
+"else {"+
+"document.billedet.src = input.value || \"No file selected\";"+
+"alert(input.value);"+
+"}"+
 "}"+
 
 				"function SelectedParSelectAll()" + "{" +
@@ -507,6 +511,19 @@ public class EditProfileNotLoggedin extends HttpServlet {
 				+ "{" + "select.options[count].selected = 'true';" + "}" +
 
 				"var select = document.getElementById('AllParents');"
+				+ "for(var count=0; count < select.options.length; count++) "
+				+ "{" + "select.options[count].selected = 'true';" + "}" +
+
+				"}" +
+
+
+				"function SelectedGuarSelectAll()" + "{" +
+
+				"var select = document.getElementById('SelectedGuards');"
+				+ "for(var count=0; count < select.options.length; count++) "
+				+ "{" + "select.options[count].selected = 'true';" + "}" +
+
+				"var select = document.getElementById('AllGuards');"
 				+ "for(var count=0; count < select.options.length; count++) "
 				+ "{" + "select.options[count].selected = 'true';" + "}" +
 
@@ -1037,10 +1054,17 @@ public class EditProfileNotLoggedin extends HttpServlet {
 			if (isChild) {
 				if (selectedGuards != null) {
 					ArrayList<Profile> guardToDelete = findKidLists();
-					for (int i = 0; i < selectedGuards.length; i++) {
-						if (!selectedGuards[i].equals("-1"))
-							stmt.executeUpdate("INSERT into HasGuardian values("
-									+ selectedGuards[i] + "," + userID + ");");
+					try {
+
+
+						for (int i = 0; i < selectedGuards.length; i++) {
+							if (!selectedGuards[i].equals("-1"))
+								stmt.executeUpdate("INSERT into HasGuardian values("
+										+ selectedGuards[i] + "," + userID + ");");
+						}
+					}
+					catch (Exception e) {
+
 					}
 					// Delete kid relation
 					out.println("To delete");
@@ -1058,10 +1082,14 @@ public class EditProfileNotLoggedin extends HttpServlet {
 
 				if (selectedParents != null) {
 					ArrayList<Profile> guardToDelete = findKidLists();
-					for (int i = 0; i < selectedParents.length; i++) {
-						if (!selectedParents[i].equals("-1"))
-							stmt.executeUpdate("INSERT into HasGuardian values("
-									+ selectedParents[i] + "," + userID + ");");
+					try {
+						for (int i = 0; i < selectedParents.length; i++) {
+							if (!selectedParents[i].equals("-1"))
+								stmt.executeUpdate("INSERT into HasGuardian values("
+										+ selectedParents[i] + "," + userID + ");");
+						}
+					} catch (Exception e) {
+						// TODO: handle exception
 					}
 					// Delete kid relation
 					out.println("PARENTS!");
@@ -1196,7 +1224,6 @@ public class EditProfileNotLoggedin extends HttpServlet {
 	 * code
 	 */
 	public ArrayList<Profile> findKidLists() {
-		out.println("LARM");
 		// To add:
 		if (selectedKids != null) {
 			for (int j = 0; j < selectedKids.length; j++) {

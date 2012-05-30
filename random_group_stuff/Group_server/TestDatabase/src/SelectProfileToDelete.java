@@ -48,6 +48,7 @@ public class SelectProfileToDelete extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String context = request.getContextPath();
 			HttpSession session = request.getSession();
 			PrintWriter out = response.getWriter();
 			profiles.clear();
@@ -94,15 +95,22 @@ public class SelectProfileToDelete extends HttpServlet {
 				con =DriverManager.getConnection 
 						("jdbc:mysql://172.25.11.65:3306/04","eder","123456");
 				stmt = con.createStatement();
-				rs = stmt.executeQuery("SELECT idUser, username, idProfile, firstname, middlename, surname from AuthUsers, Profile " +
+				rs = stmt.executeQuery("SELECT idUser, username, picture, idProfile, firstname, middlename, surname from AuthUsers, Profile " +
 						"where idUser = idProfile;");
 				// displaying records
 				while(rs.next()){
 					id = rs.getInt("idUser");
 					name = rs.getString("firstname") + " " +rs.getString("middlename") + " " + rs.getString("surname");
 					username = rs.getString("username");
+					
+					String picture = rs.getString("picture");
 
-					Profile p = new Profile(rs.getInt("idProfile"),rs.getString("firstname"),rs.getString("surname"), rs.getString("middlename"),  1, -1, null, username);
+					if (picture == null || picture.equals("null"))
+						picture = context + "/images/i.jpg";
+					else
+						picture = context + "/"+picture;
+
+					Profile p = new Profile(rs.getInt("idProfile"),rs.getString("firstname"),rs.getString("surname"), rs.getString("middlename"),  1, -1, picture, username);
 
 					profiles.add(p);
 				}
@@ -262,8 +270,9 @@ public class SelectProfileToDelete extends HttpServlet {
 					"</script>");
 			out.println("<div id=\"mainBackground\">");
 			out.println("<center><h2> Vælg profil til at slette:</h2>");
-			out.println("<br>");
 			out.println("<hr>");
+			out.println("<div id=\"simple_wrapper\">"+
+			"<div id=\"edit_wrapper\">");
 			out.println("<table>");
 			out.println("<tr>");
 			out.println("<th>Billede</th>");
@@ -281,7 +290,10 @@ public class SelectProfileToDelete extends HttpServlet {
 
 			}
 			out.println("</table>");
+			out.println("</div>"+
+			"<div id=\"my_wrapper\">");
 			out.println("<hr>");
+			
 			out.println("<center>");
 			out.println("<form method='POST' action='SelectProfileToDelete' name='quickForm'>");
 			out.println("<input type='text' name='quickSelect' onkeypress='if (window.event.keyCode == 13) {setLogin(); setID(document.quickForm.quickSelect.value); submitform();}'>");
@@ -295,16 +307,17 @@ public class SelectProfileToDelete extends HttpServlet {
 			}
 			out.println("</center>");
 			out.println("<p>");
+			out.println("</div>	</div>");
 			//out.println("<hr>");
 			out.println("<footer>Savannah v. 1.0.0 <a href='http://en.wikipedia.org/wiki/Copyleft'>(C)opyleft</a> under Freedom 3 me!</footer>");
-			out.println("</div>");
+			
 
 			out.println("<form method='POST' action='SelectProfileToDelete' name='DasForm'>\n" +
 					"<input type='hidden' name='myId' value=''>"+
 					"<input type='hidden' name='triedLogin' value=0>"+
 					"</form>");
 		
-			
+			out.println("</div>");
 			out.println("</body>");
 			out.println("</html>");
 	}
