@@ -2,49 +2,7 @@
 
 \begin{document}
 
-\begin{titlepage}
-
-\begin{center}
-
-% Upper part of the page
-\includegraphics[width=\textwidth]{Images/aau_logo_en.pdf}\\[1cm]    
-
-\textsc{\LARGE Group SW604F12}\\[1.5cm]
-
-\textsc{\Large Bachelor Project}\\[0.5cm]
-
-
-% Title
-\HRule \\[0.4cm]
-{ \huge \bfseries Oasis Administration for GIRAF}\\[0.4cm]
-
-\HRule \\[1.5cm]
-
-% Author and supervisor
-\begin{minipage}{0.4\textwidth}
-\begin{flushleft} \large
-\vspace{1.25cm}
-\emph{Authors:}\\
-Henrik \textsc{Klarup} \\
-Jens Mohr \textsc{Mortensen} \\
-Dan Stenholt \textsc{M\o{}ller}
-\end{flushleft}
-\end{minipage}
-\begin{minipage}{0.4\textwidth}
-\begin{flushright} \large
-\emph{Supervisor:} \\
-Ulrik \textsc{Nyman}
-\end{flushright}
-\end{minipage}
-
-\vfill
-
-% Bottom of the page
-{\large \today}
-
-\end{center}
-
-\end{titlepage}
+\input{Frontpage/frontpage}
 
 % Remove page number and add blank page.
 \thispagestyle{empty}
@@ -66,31 +24,27 @@ Ulrik \textsc{Nyman}
 
 % Report contents.
 % Split at sections.
-\chapter{Common Introduction}
+\part{Common Introduction}
 \label{chap:common_introduction}
-%\input{Introduction/introduction}
+\input{input/introduction}
 
 
-\chapter{Introduction}
+\part{Introduction}
 \input{Introduction/head}
-% 
-% common report
-% 
 \input{Introduction/analysis}
 \input{Introduction/system_definition}
 \include{Introduction/tail}
 
-\chapter{Development}
+\part{Development}
 \input{Development/head}
-\input{Development/design}
-\input{Development/development_process}
-\input{Development/implementation}
-\input{Development/test_cases}
+\input{Development/oasislocaldb}
+\input{Development/oasislib}
+\input{Development/oasisapp}
 \input{Development/unit_testing}
 \input{Development/test_usability}
 \include{Development/tail}
 
-\chapter{Discussion}
+\part{Discussion}
 \input{Discussion/head}
 \input{Discussion/reflexion_evaluate}
 \input{Discussion/conclusion}
@@ -101,7 +55,7 @@ Ulrik \textsc{Nyman}
 \clearpage{\thispagestyle{empty}\cleardoublepage}
 
 % Appendix
-\chapter{Appendix}
+\part{Appendix}
 \input{Appendix/appendix}
 
 % Bibliography.
@@ -116,7 +70,5 @@ Ulrik \textsc{Nyman}
 \vspace*{4cm}
 \label{cd}
 {\centering This page is left blank for the purpose of containing the attached CD-ROM.}
-
-\listoffixmes
 
 \end{document}

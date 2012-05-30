@@ -1,0 +1,89 @@
+% Dette er LaTeX-versionen af titelbladet for tek-nat-basis-rapporter 2004 efterår
+% Filen kr¾ver:
+% Universitetets logo:  aau-logo.png (for LaTeX) eller aau-logo.ps (for LaTeX)
+% Synopsis: En fil ved navn synopsis.tex
+
+%\documentclass[11pt]{article}
+%\ifx\pdfoutput\undefined 
+%\usepackage[dvips]{graphicx}
+%\else
+%\usepackage[pdftex]{graphicx} 
+%\usepackage{type1cm} \fi
+    %\usepackage[ansinew]{inputenc}
+    %\usepackage{a4}
+
+%\begin{document} 
+\thispagestyle{empty}
+%\begin{titlepage}
+\begin{nopagebreak}
+{\samepage 
+\begin{tabular}{r}
+\parbox{\textwidth}{  \raisebox{11mm}{\includegraphics[height=1.2cm]{images/aau-logo}}
+\hfill \parbox{4.9cm}{\begin{tabular}{l}
+{\sffamily\small \textbf{Aalborg University }}\\
+{\sffamily\small  \textbf{Department of Computer Science}} \\
+{\sffamily\small Selma Lagerlöfs Vej 300} \\
+{\sffamily\small 9220 Aalborg East} \\
+{\sffamily\small http://www.cs.aau.dk}
+\end{tabular}}}
+\\
+\parbox{\textwidth}{ \vspace{-41.7mm}{\sffamily\small Student report}}
+\end{tabular}
+
+\begin{tabular}{cc}
+\parbox{7cm}{
+\begin{description}
+
+\item {\bfseries Title:} 
+
+Project title
+  
+\item {\bfseries Theme:} 
+
+Theme
+
+\end{description}
+
+\parbox{8cm}{
+
+\begin{description}
+\item {\bfseries Project Term:}\\
+   P6, spring 2012 \\
+  \hspace{4cm}
+\item {\bfseries Project Group:}\\
+  sw60xf12 \\
+  \hspace{3cm}
+\item {\bfseries Students:}\\
+Name name\\
+Name name\\
+Name name\\
+Name name\\
+
+  \hspace{1cm}
+\item {\bfseries Supervisor:}\\
+ 	Ulrik Nyman
+\end{description}
+}
+\begin{description}
+\item {\bfseries Copies:} 6
+\item {\bfseries Pages:} \pageref{LastPage}
+\item {\bfseries Finished:} December 19th, 2011.
+\end{description}
+\vfill } &
+\parbox{7cm}{
+  \vspace{.15cm}
+  \hfill 
+  \begin{tabular}{l}
+  {\bfseries Synopsis:}\bigskip \\
+  \fbox{
+    \parbox{6.5cm}{\bigskip
+     {\vfill{\small \input{input/formalities/synopsis}
+     \bigskip}}
+     }}
+   \end{tabular}}
+\end{tabular}}
+\\
+\noindent{\footnotesize\emph{This rapport and its content is freely available, but publication (with source) may only be made by agreement with the authors.}}
+\end{nopagebreak}
+%\end{titlepage}
+%\end{document}
