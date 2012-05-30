@@ -18,7 +18,7 @@ public class PARROTProfile {
 	private int categoryColor = 0;
 	private int sentenceBoardColor = 0;
 	
-	//TODO add settings such as colour specification and others...
+	//TODO add all applicable settings here.
 	
 	public PARROTProfile(String name, Pictogram icon)
 	{

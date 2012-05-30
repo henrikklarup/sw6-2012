@@ -32,14 +32,14 @@ public class OptionsFragment extends Fragment
 	}
 	@Override
 	public void onResume() {
-		// TODO Auto-generated method stub
+		
 		super.onResume();
 		parrent.setContentView(R.layout.options_layout);
 		initColorButtons();
 	}
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
+		
 		super.onCreate(savedInstanceState);
 		parrent.setContentView(R.layout.options_layout);
 	}
@@ -50,8 +50,6 @@ public class OptionsFragment extends Fragment
 
 		Button csc = (Button) parrent.findViewById(R.id.changesentencecolor);
 
-		//FIXME after clicking OK on any of the colour picker dialogs, it is nolonger possible to click the buttons.
-		//This is fixed by removing the  lines that interact the views of another fragment.
 
 		ccc.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {

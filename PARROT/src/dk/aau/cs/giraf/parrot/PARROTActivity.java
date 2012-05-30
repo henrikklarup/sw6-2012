@@ -84,7 +84,6 @@ public class PARROTActivity extends Activity {
 	}
 	@Override
 	protected void onPause() {
-		// TODO Auto-generated method stub
 		AudioPlayer.close();
 		dataLoader.saveProfile(getUser());
 		super.onPause();
@@ -92,7 +91,6 @@ public class PARROTActivity extends Activity {
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		AudioPlayer.open();
 		super.onResume();
 	}
