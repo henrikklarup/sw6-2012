@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 /**
  * 
- * @author Rasmus
+ * @PARROT
  * This is the Pictogram Adapter class. It is used to import the pictograms into a gridview.
  */
 public class PictogramAdapter extends BaseAdapter {
