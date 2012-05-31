@@ -1,32 +1,32 @@
 private void listen() {
-	try {
-		//Initiates a ServerSocket
-		System.out.println("Initiating serversocket !");
-		this.serverSocket = new ServerSocket(Configuration.PORT);
-		System.out.println("Initiation complete");
+  try {
+    //Initiates a ServerSocket
+    System.out.println("Initiating serversocket !");
+    this.serverSocket = new ServerSocket(Configuration.PORT);
+    System.out.println("Initiation complete");
 
-	}	catch (IOException io) {
-		System.err.println("Could not create ServerSocket -_-");
-	}
-	System.out.println("Starting to listen !");
-	//Loop that continues to look & accept connections
-	//on the ServerSocket
-	while (true) {
-		try {
-			//Making a connections
-			Socket con = this.serverSocket.accept();
-			System.out.println("Connection accepted - Socket: " + con);
+  }  catch (IOException io) {
+     System.err.println("Could not create ServerSocket -_-");
+  }
+  System.out.println("Starting to listen !");
+  //Loop that continues to look & accept connections
+  //on the ServerSocket
+  while (true) {
+    try {
+      //Making a connections
+      Socket con = this.serverSocket.accept();
+      System.out.println("Connection accepted - Socket: " + con);
 
-			//Saving the connections and a corresponding
-			//DataOutputStream for later use
-			this.connections.put(con, new DataOutputStream(con.getOutputStream()));
-			
-			//Starts a new Thread used for communication
-			Thread comThread = new CommunicationThread(con, this.folder);
-			comThread.start();
-			
-		}	catch (IOException e) {
-			System.out.println("Could not accept connection !");
-		}
-	}
+      //Saving the connections and a corresponding
+      //DataOutputStream for later use
+      this.connections.put(con, new DataOutputStream(con.getOutputStream()));
+
+      //Starts a new Thread used for communication
+      Thread comThread = new CommunicationThread(con, this.folder);
+      comThread.start();
+
+      }  catch (IOException e) {
+         System.out.println("Could not accept connection !");
+      }
+  }
 }
