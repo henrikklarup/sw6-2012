@@ -1,0 +1,58 @@
+To test the web interface we have made some use cases that reflects how the system will be used, and tested if it works as intended. 
+
+Case 1:
+\begin{enumerate}[(a)]
+\item Karen Tailor Smith is an educator on Egebakken. She wants to create her own profile in the system. She wants her user name to be KTS and her password to be oliver (the name of her son)
+
+\item She then wants to create a profile for one of the children that also is in Egebakken. The child's name is Eric Carter and she chooses his user name to be Eric C with the password EC, He should also have access to TestAppe1 which is an app on the GIRAF system. She then adds herself as his guardian.
+
+\item Karen realize that she wrote the wrong phone number for Eric and wants to change it.
+
+\item When the summer comes Eric is done going to Egebakken so Karen wants to delete his profile. 
+\end{enumerate}
+Case 2:
+\begin{enumerate}[(a)]
+\item John Glenn is an educator on Birken and wants to add a picture to his profile. The picture is of dog and he wants the picture to have following tags: Dog, Animal, and Brown. The tags Animal and Brown are not in the existing tag set. He wants to add these to the tag set and add them to his picture.
+
+\item John Glenn has a child that he is guardian for and he wants this child to also be able to see the picture.
+
+\item He also wants to add a new tag, mammal, to his picture but this is not in the tag set yet. 
+
+\item He realize that he spelled mammal wrong so he has to edit it
+
+\item The next day he finds a better picture of a dog and want to delete the old one.
+\end{enumerate}
+Case 3:
+\begin{enumerate}[(a)]
+\item Gabriel Ryder is a parent to Mike who goes in Birken. Gabriel wants to add a picture of a cat for her son, she wants the picture to have the tags ``cat'' and ``small''. Small is not in the tag set so she has to add it
+
+\item she also want to add the sound of a cat to the picture, she want this sound to have the tags ``loud'' and ``cat''. Loud is not in the tag set so she has to add it.
+
+\item She finds out that cats scare Mike so she want to remove it again.
+\end{enumerate}
+
+The results of the test cases are shown in \autoref{tab:resultcases}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|p{7cm}|}
+		\hline
+		Case.assignment & Result & Note \\ \hline \hline
+		1.a & Success & \\ \hline
+		1.b & Success &\\ \hline
+		1.c & Success&\\ \hline
+		1.d & Success &\\ \hline
+		2.a & Success &\\ \hline
+		2.b & Success &\\ \hline
+		2.c & Failed & You are not able to add a tag to an existing picture, a workaround is to delete the picture and add it again with the desired tags\\ \hline
+		2.d & Success &\\ \hline
+		2.e & Success &\\ \hline
+		3.a & Success &\\ \hline
+		3.b & Success & The link is made but there are no way to use it in our current version of the web interface\\ \hline
+		3.c & Success &\\ \hline
+	\end{tabular}
+	\caption{Results of our web interface test cases}
+	\label{tab:resultcases}
+\end{table}
+
+There were only one of our test cases that did not succeed and the reason is that we have not implemented the feature. There is a workaround but in the final implementation it would be desirable if this was implemented.
