@@ -456,10 +456,10 @@ You can see a simplified class diagram on figure: \ref{fig:classdiagram}.
 %\textit{Beskrivelse af DrawLib, hvad indeholder DrawLib, services\\
 %Beskrivelse af implementationen af DrawLib med kode eksempler\\
 %Hvad er fordele ulemper for canvas frem for openGL}
-DrawLib contains the functionality that draws timers according to the settings set in the main activity.
-The main functionality in the DrawLib is that it can be either full screen, if there is no timer or pictogram attached, or it can be split screen if there is a timer or pictogram attached.
+\texttt{DrawLib} contains the functionality that draws timers according to the configuration selected in the main activity.
+The main functionality in the \texttt{DrawLib} is that it can be either full screen, if there is no timer or pictogram(s) attached, or it can be split screen if there is a timer or pictogram(s) attached.
 This is done by creating the view layout programmatically instead of a static layout, figure \ref{code:backend_drawlib_singletimer} is an example of this functionality with a full screen timer, figure \ref{code:backend_drawlib_splittimer} is an example of the functionality with a split screen timer.
-In both figures the method genDrawView is a method which returns the draw view, that matches the timer specified in customization, figure \ref{code:backend_drawlib_gendrawview} is a code example of genDrawView.
+In both figures the method \texttt{genDrawView} is a method which returns the draw view, that matches the timer specified in customization, figure \ref{code:backend_drawlib_gendrawview} is a code example of \texttt{genDrawView}.
 
 \begin{figure}[H]
 \begin{lstlisting}
@@ -486,7 +486,7 @@ public void onCreate(Bundle savedInstanceState) {
 ...
 }
 \end{lstlisting}
-\caption{Example of how DrawLib sets just one timer view.}%
+\caption{Code snippet of how \texttt{DrawLib} sets just one time \texttt{View}.}%
 \label{code:backend_drawlib_singletimer}%
 \end{figure}
 
@@ -516,7 +516,7 @@ case SplitImg:
 
 setContentView(frame);
 \end{lstlisting}
-\caption{Example of how DrawLib sets two timers in one view}%
+\caption{Code snippet of how \texttt{DrawLib} sets two timers in one \texttt{View}}%
 \label{code:backend_drawlib_splittimer}%
 \end{figure}
 
@@ -537,25 +537,24 @@ private View genDrawView(SubProfile sub, int frameWidth) {
 	}
 }
 \end{lstlisting}
-\caption{The genDrawView, which generates the draw view matching the timer}%
+\caption{Code snippet of the \texttt{genDrawView}, which generates the draw \texttt{View} matching the timer}%
 \label{code:backend_drawlib_gendrawview}%
 \end{figure}
 
 \subsubsection*{Canvas and OpenGL comparision}
 \label{subsection:compare}
 %\textit{Hvad er fordelen ved at vælge canvas frem for openGL og hvorfor har vi valgt canvas?}
-The timers in DrawLib are drawed with the Android canvas object, this could also have been done by creating and modelling an object in OpenGL.
-The major difference between the two approaches is that OpenGL is used to draw three dimensional objects and Android canvas can only draw in two dimensions.
-Drawing on a canvas is like drawing on coordinates, while drawing in OpenGL varies in the way that one will be drawing in triangles.
-Drawing in OpenGL is therefor much different from the way one would normally draw, thereby more time consuming.
-Since all timers in WOMBAT can be modelled in two dimensions, the only benefits of OpenGL compared to canvas is that one would be able to move the camera around or change the lighting in OpenGL.\\
+The timers in \texttt{DrawLib} are drawed with the Android \texttt{Canvas} object, this could have been done by creating and modelling an object in OpenGL.
+The major difference between the two approaches is that OpenGL is used to draw three dimensional objects and Android \texttt{Canvas} draws in two dimensions.
+Drawing on a canvas is like drawing on coordinates, while drawing in OpenGL varies in the way that it will be drawn in triangles.
+Since all timers in WOMBAT can be modelled in two dimensions, the benefits of OpenGL compared to \texttt{Canvas} is that one would be able to move the camera around, change the zoom, or change the lighting in OpenGL.\\
 \\
 
 %The timers
 %\textit{Introduktion til tegninger med canvas i Android\\
 %Beskrivelse af implementationen af timere og hvordan bevægelser er udregnet\\
-All timers are classes which inherits the view class, the view class draws in a method called onDraw which is called the first time it is opened and whenever the method \texttt{invalidate()} is invoked.
-The timers draw inside the onDraw method, as seen in figure \ref{code:backend_drawlib_onDraw}.
+All timers are classes which inherits the \texttt{View} class, this class draw in a method called \texttt{onDraw}, \texttt{onDraw} is called when the class is initialized and afterwords when the method \texttt{invalidate()} is invoked.
+The timers draw inside the \texttt{onDraw} method, as seen in figure \ref{code:backend_drawlib_onDraw}.
 
 \begin{figure}[H]%
 \begin{lstlisting}
@@ -596,15 +595,36 @@ protected void onDraw(Canvas c) {
 	}
 }
 \end{lstlisting}
-\caption{The onDraw method of the progress bar.}%
+\caption{Code snippet of the \texttt{onDraw} method of the progress bar.}%
 \label{code:backend_drawlib_onDraw}%
 \end{figure}
 
-The progress bar and the hourglass both draws according to how many percent of the total time is left, while the digital watch and the time timer draws according to the exact time left.
-All timers evaluates the time left according to the number of milliseconds elapsed, which is provided by the system timer.\\
-
-
 %Optimering af timere og de problemer vi løb ind i under vejs (canvas til bitmap og systemtimer)}
-Drawing can be time consuming and to optimize the timers, the background and frame is painted and stored as a bitmap file at the initialization of the view.
-The stored bitmap can then be redrawed on the canvas without having to be recalculated, this was especially useful when drawing the digital watch since all numbers has to be redrawn every time the view is reevaluated.
-With the bitmap it is possible to draw the numbers once and then blank out the lines not needed when reevaluating.
+Drawing can be time consuming, to optimize the timers, the background and frame is painted and stored as a bitmap file at the initialization of the drawing, seen in \autoref{code:drcode:drawlib_bitmap}.
+The stored bitmap can then be redrawed on the canvas without having to be recalculated, this is specially useful when drawing the digital watch since all numbers has to be redrawn every time the view is evaluated.
+With the bitmap it is possible to draw the numbers once and then blank out the lines not needed when evaluating.
+
+\begin{figure}%
+\begin{lstlisting}
+/* Initialize a bitmap with the "standard" drawings */
+bitmap = Bitmap.createBitmap(frameWidth, frameHeight, Bitmap.Config.ARGB_8888);
+Canvas c = new Canvas(bitmap);
+
+/* Fill the canvas with the background color */
+...
+
+y = (frameHeight - numHeight) / 2;
+
+/* Draw first number */
+x = numWidth/2 + numWidth;
+c.drawPath(drawNumberPath(8, x, y), paint);
+
+/* Draw second number */
+x = numWidth/2 + numWidth * 2 + (numSpace);
+c.drawPath(drawNumberPath(8, x, y), paint);
+
+...
+\end{lstlisting}
+\caption{Code snippet of how the background and frame is stored as a bitmap.}%
+\label{code:drawlib_bitmap}%
+\end{figure}
