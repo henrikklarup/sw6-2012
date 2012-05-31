@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{ScrumOfScrums}
 Scrum Alliance.
@@ -27,6 +27,18 @@ Samsung.
 \bibitem{AndroidVersion}
 Android~Development Team.
 \newblock Android 4.0.3 platform, 2012.
+
+\bibitem{othertypes}
+Android~Development Team.
+\newblock Android actionbar, 2012.
+
+\bibitem{actionbarguide}
+Android~Development Team.
+\newblock Android actionbar, 2012.
+
+\bibitem{fragmentguide}
+Android~Development Team.
+\newblock Android actionbar, 2012.
 
 \bibitem{studyreg}
 Aalborg University.

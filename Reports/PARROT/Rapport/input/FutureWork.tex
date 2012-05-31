@@ -1,0 +1,75 @@
+\chapter{Future Work}
+
+After production of the application PARROT based on the design mention in \autoref{} and the test of the application by ourself and in a usability test we have a list of bug and unimplemented features. so in this chapter we want to go through all the bug and unimplemented features for the sake of further development of this application.
+
+All the bugs, unimplemented features and other deficiencies, can be split op into three groups:
+
+First group contains the bugs found in the tests and features that are necessary for the application to work properly with the other parts of GIRAF.\newline 
+
+They are:
+
+\begin{itemize}
+	\item Fix the bug that causes the system to crash when the user has no categories: In the application the user can delete categories in the managing the categories but in 			  		the tests a bug occurs when the user deletes all the categories this error make the application crash so this is a bug that needs to be fixed so if the user deletes 		        all the categories the application does not crash.
+	
+	\item Fix the bug that causes the system to crash when a category is copied into itself. In the system it is possible to copy a pictogram form one category in to another 				 		category and copy a hole category into another category but if the user tried to copy a category into it self the system crashes and this bug needs to be fixed so if           the user by accident makes this mistake the application wont do anything and wont crash. 
+	
+	\item Finish connecting the application to the launcher. When opening the PARROT application the application should get a profile from the launcher so the application knows 					which pictogram the profiles has and other options but this was not finish in time so in our test the profile we are using are a ``dummy profile '' so for the 									application to work the connection between the launcher and the PARROT application need to be fixed.  
+\end{itemize}
+  
+The second group contains the unfinished features, meaning features that has been begun implementing but but finish due to time.   
+
+These features are:
+
+\begin{itemize}
+	\item Make the Spinner on the management fragment work, so that it contains all the children profiles for the active guardian.
+	\item Show and Edit Category names.
+	\item Add guardian mode in child mode.
+	\item Note that the name of the root folder might not be sdcard/ on add Android units.
+		\subitem consider using Enviroment.get(...) to make the paths hardware independant.
+	
+	
+\end{itemize}
+
+
+The third group contains the features that not has not yet been implemented or talk about.
+
+These features are: 
+
+\begin{itemize}
+	\item Add camera functionality.
+	\item Suggest to the Admin group that Pictograms and Categories are made part of the database.
+	\item Expand the options fragment, so that the children can be more individualized.		
+		\subitem For instance, add functionality to limit the access to the individual tabs.
+		
+	\item Check with customers/experts if the drag drop functionality with sentences are handled correctly.
+		\subitem Or make it possible to change how the sentenceboard functionality should work for the individual child.
+	\item Consider changing the Category class, so that categories can contain categories.
+\end{itemize}  
+
+\begin{itemize}
+	
+	
+	
+	\item Create a busy animation
+		\item This one could be common for all apps for the GIRAF platform.
+	\item Handle color from launcher and make those standard colors in PARROT.
+	
+	\item Write search functionality for pictograms, and use tags.
+	\item Expand the Options fragment.
+		\subitem Remember to save all changes to the PARROTProfile.
+	
+	
+	
+	\item Move all save calls to the PARROT dataloader to the onpausemethod of PARROT activity 
+	\item refactor boxgraglistner to speechdraglistner 
+	\item Create a startup screen while loading. 
+	\item Add Profile icon to design.
+	\item Remove the DragShadow when dragging an empty Pictogram.
+	
+	\item Add mute functionality.
+	\item write the functionality for the unimplemented buttons on the management fragment.
+\end{itemize}
+
+%Colored edge on the categories 
+%Option of displaying the categories in speechboard the same way as those in the management tab
+
