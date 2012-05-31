@@ -1,26 +1,22 @@
 \section{Authentication}
 \label{design:authentication}
-%\subsection{Requirements}
 \label{design:authentication:requirements}
+\label{design:authentication:solution}
 
 \noindent Authentication consists of two steps:
 \begin{enumerate}
 	\item Validating
 	\item Confirmation
 \end{enumerate}
-These steps are required to have in order to make authentication successful. The need for validation is to ensure privacy. Confirmation is a requirement as error prevention, incase of validation with wrong identity.
-%\subsection{Solution}
-\label{design:authentication:solution}
-Being able to launch a \girafapp[] as a specific guardian requires the user to interact such that the launcher knows which guardian the user represents.
-
-As stated in \autoref{design:authentication:requirements}, privacy is required since: each modulated child and guardian contains private data and therefore needs to be protected.
-QR-codes was chosen as means of authentication, as they provide a level of security.
-An alternative to QR-codes could be a \emph{username-password} method, where each user have their own username, with an private password.
-The launcher is developed towards being a tool usable by both guardians and children e.g. the ``child mode'' feature, described in \autoref{backlog:child_mode}.
-A username-password combination requires the user to remember their credentials, whereas some \autists[] have problems with it.
+Validation is needed to ensure privacy. Confirmation is a requirement as error prevention, in case validation with a wrong identity is performed.
+As stated, being able to launch a \girafapp[] as a specific guardian requires the user to interact such that the launcher knows which guardian the user represents.
+As stated in \autoref{design:authentication:requirements}, privacy is required since each modelled child and guardian contains private data and therefore needs to be protected.
+QR-codes were chosen as the means of authentication, as they provide some level of security.
+An alternative to QR-codes could be a \emph{username-password} combination, where each user has their own username, with a private password.
+As the launcher is developed towards being a tool usable by both guardians and children, a username-password combination can diminish usability for children, as it requires the user to remember their credentials, and some \autists[] have problems with this.
 
 \begin{quotation}
-Some \autists[] can have problems remembering a username and password\\ 
+``Some \autists[] can have problems remembering a username and password''\\ 
 	\begin{flushright}
 		- Drazenko Banjak, educator at Egebakken.
 	\end{flushright}
