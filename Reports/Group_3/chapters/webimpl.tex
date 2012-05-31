@@ -151,7 +151,7 @@ To be able to retrieve the data sent by the form the \code{request.getParameter(
 \subsubsection{Current limitatio}
 When uploading a picture, a \code{file} type is used to select the local file on the hard disk. The \code{file} has a security restricting, which makes it impossible to set a default value for the field. This is due to the fact, that if it was possible, it could be used to send a file from the visitor of a web page's hard disk, without the visitor has any knowledge of it\cite{noFile}. Futhermore it was not straight forward to get the path of a selected file, again due to security restrictions, but this turned out to be possible by the use of JavaScript, the code is seen in \autoref{code:myHack}, and adding parameter \code{onChange="readURL(this);"} to the \code{file} field.
 
-\begin{lstlisting}[language=HTML,label=code:myHack,caption=Hack to load file from \code{file} box
+\begin{lstlisting}[language=HTML,label=code:myHack,caption=Hack to load file from \code{file} box]
 var reader = new FileReader();+
 reader.onload = function(e) 
    {
