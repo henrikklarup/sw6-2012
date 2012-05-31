@@ -1,47 +1,29 @@
-%\chapter{Overview}
 \label{design:overview}
-%\todo{find bedre overskrift, p.t. er alt i design bare 'overview' - kan evt loeses ved at gore design til et chapter og kalde parten 'product' ligesom foer}
 \label{sec:design_overview}
 As part of a greater platform, the launcher is required to provide services to other components of the \giraf[] system, and may also depend on others.
-%This section presents an overview of the design work done on the overall product, and the following sections present details on specific features in the launcher. \newline
 The required services and dependencies are outlined below.
 
-\autoref{fig:external_architecture} illustrates the \giraf[] launcher component. The component provides one service and have one dependency.
-The services it provides is based on demands from the surrounding components of the \giraf[] platform, which can be seen in \autoref{fig:Giraf_comp_pic}.
+\autoref{fig:external_architecture} illustrates the \giraf[] launcher component. The component provides one service and has one dependency.
+The service it provides is based on demands from the surrounding components of the \giraf[] platform, which can be seen in \autoref{fig:Giraf_comp_pic}.
 The illustrated service provides a way for launched \girafapp[]s to determine which guardian launched the app in question, with which child profile, together with color data of the specific app.
 
-Knowing which child profile the app in question was launched with is required, as the \giraf[] platform as of writing, is designed for \emph{guardian mode} -- described in \autoref{backlog:guardian_mode} -- instead of \emph{child mode} -- described in \autoref{backlog:child_mode} -- or a combination hereof.
+Knowing which child profile the app in question was launched with is required, as the \giraf[] platform, as of writing, is designed for \emph{guardian mode} -- described in \autoref{backlog:guardian_mode} -- instead of \emph{child mode} -- described in \autoref{backlog:child_mode} -- or a combination hereof.
 
-The illustrated dependency represents the need for being able to read and update profile data. The service which fulfill this dependency is provided by the Oasis lib. 
+The illustrated dependency represents the need for being able to read and update profile data. The service which fulfills this dependency is provided by the Oasis lib. 
 
-As seen on \autoref{fig:Giraf_comp_pic}, Oasis is available for the launcher to use. Oasis stores the modulated data, including the guardian and child profiles on the device in a local database.
+As seen on \autoref{fig:Giraf_comp_pic}, Oasis is available for the launcher to use. Oasis stores the modelled data, including the guardian and child profiles on the device in a local database.
 
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.5\textwidth]{gfx/external_launcher_architecture.pdf}
-	\caption{The  \giraf[] launcher component.}
+	\caption{The \giraf[] launcher component.}
 	\label{fig:external_architecture}
 \end{figure}
 
-Being able to launch an \girafapp[] as a specific guardian requires the user to interact such that the launcher knows which guardian the user represents.
+Being able to launch a \girafapp[] as a specific guardian requires the user to interact such that the launcher knows which guardian the user represents.
 
-Authentication was chosen, as each modulated child and guardian contains private data and therefore needs to be protected.
-
-%The design of the \giraf[] launcher is centered around high usability and specific functionality requirements. 
-%These functionality requirements come from both the customers of the project, and other \localgroup[]s in the multi project, and include only the requirements that are within the scope of this project. \newline
-
-%The requirements are as follows:
-%\begin{itemize}
-%\item Allow \guardian[]s to launch apps.
-%\item Allow each \guardian[] to customize their experience with the launcher. 
-%\item Allow apps to work for a specific \autist[].
-%\end{itemize}
-
-%High usability has been prioritized, both because it was requested by the customer, but also because the launcher is planned to be expanded and usable by \autists[] later on.
-%See \autoref{Preanalysis:Usability_for_children} for more information on the usability requirements of children. \newline
-
-%The above requirements have resulted in an overall interaction design, which can be seen in \autoref{fig:state_diagram}, in the form of a state diagram.
+Authentication was chosen, as each modulated child and guardian contains private data and therefore need to be protected.
 
 \begin{figure}[h]
 	\centering
@@ -52,30 +34,25 @@ Authentication was chosen, as each modulated child and guardian contains private
 
 
 \autoref{fig:state_diagram} shows all possible states and transitions, which the launcher can be in. 
-The states of the state diagram represent four functionalities of the launcher:
+These states grouped together represent four functionalities of the launcher:
 
 \begin{enumerate}
 	\item Initialization
 	\item Authentication
-	\item App selection
+	\item App management
 	\item Profile selection
 \end{enumerate}
 
+These functionalities are shown in \autoref{fig:design_diagram}, along with the states they represent, and the transitions between them.
 
-These functionalities are shown in \autoref{fig:design_diagram}, along with the states of which they represent, and the transitions between them.
-
-
-%To make the design easier to approach, the system is split into four distinct features: Authentication, app management, profile selection, and resumption. 
-%This split is illustrated in \autoref{fig:design_diagram}, which groups the states and actions of \autoref{fig:state_diagram} according to their to the feature they belong to. 
-
-\begin{figure}[h]
+\begin{figure}[h!]
 	\centering
 	\includegraphics[width=1\textwidth]{gfx/design_diagram.pdf}
 	\caption{Functionality diagram}
 	\label{fig:design_diagram}
 \end{figure}
 
-The states, transitions and functionalities, are explained below in their appropriate section.
+The states, transitions and functionalities, are explained below in their appropriate sections.
 
-In order to highten usability which was requested during the interviews, found in \autoref{interviews}, it is decided to standardize elements in the GUI. This standardization is called \emph{design language}.
-Furthermore, it is decided that the concrete elements are to be shared such that other \giraf[] components can utilize the standardization.
+In order to highten usability, as requested by the customers in \autoref{interviews}, it is decided to standardize elements in the GUI. These standards together are referred to as the \emph{design language}.
+Furthermore, it is decided that the concrete elements are to be shared, such that other \giraf[] components can utilize the standards.

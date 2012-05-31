@@ -1,37 +1,34 @@
-\section{Working Process}
-The working process of this project is based on agile development methods, mainly Scrum and XP. 
-There are two work forms used by us in this project, the one used by the entire \globalgroup{} and the one used by our \localgroup{}. 
+In this chapter, the choice of XP and Scrum as the work process is explained, how informal integration testing was conducted, how the customer domain was understood through interviews and field observations, and some usability considerations that were born from that understanding.
+Finally, the role of prototyping is explained.
 
-\subsection{Multiproject work form}
-The work form of the \globalgroup{} is designed around Scrum of Scrums. 
-With it, the work for all the \localgroup{}s is split into sprints, and each \localgroup{} works in synchronization with the other \localgroup{}s. 
-Each sprint is started with a meeting, where each \localgroup{} presents their progress so far and what they are going to accomplish in the coming sprint. 
-These meetings are also used to vote on the length of the coming sprint, knowledge sharing and decision making for decisions that affect the entire \globalgroup{}. \newline
-Each sprint is ended with an evaluation meeting, used to briefly sum up and evaluate on the sprint, such that each \localgroup{} recieves feedback on how they might improve their next sprint, before that sprint is planned. 
+\section{Work Process}
+\label{launcher_work_form}
+The work form used in our \localgroup{} is based on XP. 
+XP is built around having a customer available at all times, but this has not been the case for this project. 
+Occasional meetings were used in the project, and found adequate. 
+One of the requirements from the customers, was that it should be ``easy to use'', which we interpret as requiring high usability. 
+We believe the occasional meetings were sufficient as the project was focused mainly on the usability of the product. 
+This allowed us to spend time refining designs, and only needing occasional feedback from the customer to evaluate the current ideas and design. 
+The requirements gathering, in the form of interviews, is explained later.
+The usability focus also made it easier to fill out the backlog without the customer, and planning poker, a Scrum practice, was used to determine the size of each task.
+
+Other XP conventions did make it into the work form, e.g. pair programming. 
+Pair programming has been a great tool in keeping the development pace, as assisting each other in this manner makes it easier to discover problems and solutions early, while also reducing overhead in communicating code to the rest of the team. \\
+
+Another XP convention that helped reduce this overhead was refactoring. 
+This involves going through existing code to rewrite parts that are complex from a readability point of view, in order to simplify the code and make it easier to understand. 
+This is essential, as the project will be handed over to a new team later on, and high readability helps ensure that the project is more understandable to them. 
+
+The \textquotedblleft{}whole team\textquotedblright{} and \textquotedblleft{}sustainable pace\textquotedblright{} conventions were used as well. \citep{XP2}
+This was to ensure that our work remained high in quality, and led to fairly stringent work rules, where the team agreed to work through the day together, but not work at home. 
+Exceptions were made in case of illness. 
+Lastly, \textquotedblleft{}collective code ownership\textquotedblright{} was also employed. 
+However, this is a demand from the study regulation, and not something that was deployed based on personal judgement.
+
+One final note is that test driven development was considered as a possible convention to use as well. 
+We found that GUI programming does not lend itself well to writing tests ahead of the actual code, therefore test driven development was not included. 
+
+In addition to our own conventions, there is also a meeting convention used by all \localgroup[]s.
 When two or more \localgroup{}s need to work on something not related to the \globalgroup{}, no formal meeting is required, and open discussion amongst the \localgroup{}s is encouraged through an open door policy. 
 This has been important, as many \localgroup{}s rely on each other to provide services. 
 This has also led to continuous, informal integration testing of the system, as each \localgroup{} increased their reliance on the others. 
-\todo{Flet sammen med common report. Meget af det der staar her burde egentlig staa i common report}
-
-\subsection{Launcher work form}
-\label{launcher_work_form}
-\todo{Find god overskrift}
-The work form used in our \localgroup{} is primarily based on XP. 
-XP is built around having a customer available at all times, but this has not been the case for this project. 
-We found it unnecessary to compensate for this however. 
-This was due to the nature of the project, which, in the case of the launcher, was focused mainly on the GUI. 
-The only requirements made by the customers in relation to the GUI, was that it should have high usability. 
-This allowed us to spend time refining designs, and only needing occasional feedback from the customer to evaluate the current ideas and design. 
-The GUI focus also made it easier to fill out the backlog without the customer, and planning poker, a Scrum practice, was used to determine the size of each task. \newline
-Other XP conventions did make it into the work form though, e.g. pair programming. 
-Pair programming has been a great tool in keeping the development pace up, as assisting each other in this manner makes it easier to discover problems and solutions early, while also reducing overhead in communicating code to the rest of the team. \newline
-Another XP convention that helped reduce this overhead was refactoring. 
-This involves going through existing code to rewrite parts that are complex from a readability point of view, in order to simplify the code and make it easier to understand. 
-This is essential, as the project will be handed over to a new team later on, and high readability helps ensure that the project is useful to them. \newline
-The \textquotedblleft{}whole team\textquotedblright{} and \textquotedblleft{}sustainable pace\textquotedblright{} conventions were used as well. 
-The reason for this was to ensure that our work remained high in quality, and led to fairly stringent work rules, where the team agreed to work through the day together, but not work at home. 
-Exceptions were made in case of illness. 
-Lastly, \textquotedblleft{}collective code ownership\textquotedblright{} was also employed. 
-However, this is a demand from the study regulation, and not something that was deployed based on personal judgement. \newline
-One final note is that test driven development was considered as a possible convention to use as well. 
-We found that GUI programming does not lend itself well to writing tests ahead of the actual code however, and so this convention was not included. 
