@@ -1,6 +1,6 @@
 \chapter{Oasis Lib}
 \label{ch:Lib}
-In this chapter we describe the library of the administration module, called Oasis Lib. The Oasis Lib is the library, which works as a connection between the Oasis Local Db (\vref{ch:Db} and the applications, which runs on the GIRAF system, by providing an API, which the GIRAF applications can use. First the structure of Oasis Lib is described in section \vref{sec:Structure}. Then how the Oasis Lib is implemented is described in section \vref{sec:LibImp}. Then at last how to use the library is described in section \vref{sec:HowTo}. \textcolor{red}{WHAT ELSE THAT IS GOING TO BE DESCRIBED}
+In this chapter we describe the library of the administration module, called Oasis Lib. The Oasis Lib is the library, which works as a connection between the Oasis Local Db (\vref{ch:Db} and the applications, which runs on the GIRAF system, by providing an API, which the GIRAF applications can use. First the structure of Oasis Lib is described in section \vref{sec:Structure}. Then how the Oasis Lib is implemented is described in section \vref{sec:LibImp}.
 
 \section{Structure}
 \label{sec:Structure}
@@ -8,7 +8,15 @@ In the structure of Oasis Lib, we have taken inspiration of the MVC pattern, whe
 
 \section{Implementation}
 \label{sec:LibImp}
-The implementation of Oasis Lib
+The Oasis Library's controllers is what make up the main part of the library. It is devided into a number of different sub controllers, the public ones seen in figure \vref{controllers}.
 
-\section{How To Use}
-\label{sec:HowTo}
+\begin{figure}
+	\centering
+		\includegraphics[width=\textwidth]{images/controllers.png}
+	\caption{The different controlers in Oasis library}
+	\label{fig:controllers}
+\end{figure}
+
+
+There are a number of other sub controllers as well, but they are only for internal use within the Oasis library.
+For futher information on how the Oasis library's methods work, see JavaDoc REF!.
