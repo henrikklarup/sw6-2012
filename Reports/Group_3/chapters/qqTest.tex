@@ -3,7 +3,7 @@ In the \code{server} package there is a total of 10 classes which has been subje
 
 \begin{table}[H]
   \begin{center}
-  \begin{tabular}{c|c|c}
+  \begin{tabular}{l|c|c}
     Class          & JUnit test cases & System test\\
 \hline
     Event          & -                &Yes\\
@@ -43,4 +43,10 @@ public void testCreateIntValue() throws Exception
 }
 \end{lstlisting}
 \end{Code}
+
+All classe in the \code{server} package has one or more corresponding ad hoc testing classes as well. Many of these classes are similiar in nature to the Unit tests.
+They are however not automated and mostly rely on \code{System.out.println()} debuggin output requiring a human reader. 
+They also include trial and error implementation of unfamiliary technology.
+In total these ad hoc testing classes total 614 lines of code
+
 
