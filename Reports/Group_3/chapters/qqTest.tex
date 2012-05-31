@@ -1,5 +1,5 @@
-\subsubsection{Queue and query test}
-In the \code{server} package there is a total of 10 classes which has been subjected to testing: 
+In the \code{server} package there is a total of 10 classes which has been subjected to testing, an overview is shown in \autoref{table:qqOverview}.
+The JUnit test cases column shows how many JUnit unit tests has been written for the class.
 
 \begin{table}[H]
   \begin{center}
@@ -17,6 +17,8 @@ In the \code{server} package there is a total of 10 classes which has been subje
     CommitHandler  & -                &Yes\\
     XMLBuilder     & -                &Yes\\
   \end{tabular}
+  \caption{Queue and query test overview}
+  \label{table:qqOverview}
   \end{center}
 \end{table}
 
@@ -25,8 +27,8 @@ a \code{ResultSet} object,the easists way to build this is to get it from the \c
 It was decided that it would be most efficient to test many of the classes during a system test. JUnit has been used to test the building of SQL queries, singleton implementation,
 and that the queue is in fact Fifo. 
 
-The code in \autoref{code:testCase} shows a JUnit test case for \code{QueryBuilder}. It checks that the \code{QueryBuilder} properly creates an SQL query for inserting an integer value
-in the \code{Media} table. Similiar test cases for exists for string values and for SQL queries that update and delete attributes in tables.
+The code in \autoref{code:testCase} shows a JUnit test case for \code{QueryBuilder}. It verifies that the \code{QueryBuilder} properly creates an SQL query for inserting an integer value
+in the \code{Media} table. Similiar test cases exists for string values and for SQL queries that update or delete rows.
 Due to the implementation of \code{Querybuilder} we can cover all values and SQL query types with 9 unit tests. The remaining 11 test cases are for request queries.
 
 \begin{Code}
