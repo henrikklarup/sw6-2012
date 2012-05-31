@@ -1329,3 +1329,9 @@ public class CustomizeFragment extends Fragment {
 		 setDonePicture(currSubP.getDoneArt());
 	 }
 }
+/* GOING FOR LEET */
+/* GOING FOR LEET */
+/* GOING FOR LEET */
+/* GOING FOR LEET */
+/* GOING FOR LEET */
+/* GOING FOR LEET */
