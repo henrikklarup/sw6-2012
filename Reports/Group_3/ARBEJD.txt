@@ -1,7 +1,7 @@
 Projekt Backlog: TN+SL
-Requirements: Sikkerhed : MF
+Requirements: Sikkerhed : MF ehh..kan ikke lige huske hvad det var vi aftale her..><
 Database: Alle tables NF = Database = NF: JB
 Web Interface: Impl: JB
 Webinterface: Test af side, ikke usability (Databasetet): SL
-Serverside: Test: TN+MF
-Serverside: ½ impl:MF
+Serverside: Test: TN+MF done'ish(mf part)
+Serverside: ½ impl:MF done'ish

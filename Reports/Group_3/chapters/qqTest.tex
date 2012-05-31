@@ -23,7 +23,7 @@ The JUnit test cases column shows how many JUnit unit tests has been written for
 \end{table}
 
 Unit testing was not found suitable for classes all due the interdependency of other classes in the project. As en example testing the \code{XMLBuilder} with a unit test would require
-a \code{ResultSet} object,the easists way to build this is to get it from the \code{QueryHandler}, which in turn require well formed SQL queries from the \code{QueryBuilder}.
+a \code{ResultSet} object,the easiest way to build this is to get it from the \code{QueryHandler}, which in turn require well formed SQL queries from the \code{QueryBuilder}.
 It was decided that it would be most efficient to test many of the classes during a system test. JUnit has been used to test the building of SQL queries, singleton implementation,
 and that the queue is in fact Fifo. 
 
@@ -46,9 +46,9 @@ public void testCreateIntValue() throws Exception
 \end{lstlisting}
 \end{Code}
 
-All classe in the \code{server} package has one or more corresponding ad hoc testing classes as well. Many of these classes are similiar in nature to the Unit tests.
-They are however not automated and mostly rely on \code{System.out.println()} debuggin output requiring a human reader. 
-They also include trial and error implementation of unfamiliary technology.
+All classes in the \code{server} package has one or more corresponding ad hoc testing classes as well. Many of these classes are similiar in nature to the Unit tests.
+They are however not automated and mostly rely on \code{System.out.println()} debuggin output, requiring a human reader. 
+They also include trial and error implementation of unfamiliar technology.
 In total these ad hoc testing classes total 614 lines of code
 
 

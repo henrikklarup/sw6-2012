@@ -1,8 +1,8 @@
 \subsubsection{Queue}
 
-As mentioned in \autoref{sect:ssArchAndDesign} Savannah is designed around a producer-consumer pattern centered on a fifo queue, implemented in the \code{EventQueue} class.
+As mentioned in \autoref{sect:ssArchAndDesign} Savannah is designed around a producer-consumer pattern centered on a FIFO queue, implemented in the \code{EventQueue} class.
 The UML diagram in \autoref{figure:EventUML} show the event queue implementation- and closely related classes.
-The event queue is a \code{LinkedList<Event>} object instantiated as a \code{Queue<Event>}, this instantiation defaults a fifo queue through
+The event queue is a \code{LinkedList<Event>} object instantiated as a \code{Queue<Event>}, this instantiation defaults a FIFO queue through
 the \code{queue.add(event)} and \code{queue.remove()} methods. \code{EventQueue} is implemented as a singleton to ensure that Savannah never has access to more than one queue.
 Events are implemented through the \code{Event} interface that \code{RequestEvent} and \code{CommitEvent} implements.
 Finally the \code{EventHandler} class is responsible for removing events from the queue and make sure they are processed by the server. It is started as a thread and
@@ -11,7 +11,7 @@ continuously probes the queue for content. All queue access is synchronized, thr
 \begin{figure}[H]
  \centering
   \includegraphics[scale=0.65]{images/EventQueue}
-  \caption{EventQueue UML}
+  \caption{EventQueue UML diagram.}
   \label{figure:EventUML}
 \end{figure}
 
@@ -27,7 +27,7 @@ in string form, that can be returned to the requesting party.
 \begin{figure}[H]
  \centering
   \includegraphics[scale=0.65]{images/queryhandling}
-  \caption{Query handling UML}
+  \caption{Query handling UML diagram.}
   \label{figure:queryUML}
 \end{figure}
 
