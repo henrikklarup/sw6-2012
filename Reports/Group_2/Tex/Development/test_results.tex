@@ -6,21 +6,21 @@
 				\hline
 				\textbf{Test Case ID} & \textbf{Pass} & \textbf{Fail} & \textbf{Notes} \\
 				\hline
-				\textit{saveAs\#1} & X &  &  \\
+				\textit{saveAs\#1} & \checkmark &  &  \\
 				\hline
-				\textit{save\#1} & X &  &  \\
+				\textit{save\#1} & \checkmark &  &  \\
 				\hline
-				\textit{checkLastUsed\#1} &  & X & When tablet memory is cleared, the last used timers disappears. \\
+				\textit{checkLastUsed\#1} &  & \checkmark & When tablet memory is cleared, the last used timers disappears. \\
 				\hline
-				\textit{hOnClick\#1} & X &  &  \\
+				\textit{hOnClick\#1} & \checkmark &  &  \\
 				\hline
-				\textit{stillHAfterSave\#1} & X &  &  \\
+				\textit{stillHAfterSave\#1} & \checkmark &  &  \\
 				\hline
-				\textit{hChildOnLaunch\#1} & X &  &  \\
+				\textit{hChildOnLaunch\#1} & \checkmark &  &  \\
 				\hline
-				\textit{checkTimerTime\#1} & X &  &  \\
+				\textit{checkTimerTime\#1} & \checkmark &  &  \\
 				\hline
-				\textit{checkDoneFunc\#1} & X &  &  \\
+				\textit{checkDoneFunc\#1} & \checkmark &  &  \\
 				\hline
 			\end{tabular}
 			\caption{Test results of the black box testing of the WOMBAT application.}
@@ -29,8 +29,10 @@
 	\end{table}
 
 \subsection{Reflections}
-We did not outsource the test, so we did the testing ourselves. This is not the best way to do testing, because we wrote the program, and the test design and test cases, and thereby have a deeper knowledge about the features we want to test, and therefore we may have done things different than persons with no knowledge about the application would have done.
+We did not outsource the tests, therefore did we conduct the tests ourselves, this is not the proper way to perform black box testing. 
+This means that the testers also developed the application, the test design, and the test cases, and thereby have knowledge of how the features are implemented.
+Therefore may a test person without knowledge of the code have another approach to the tests than what we have.
 
-The only test that did not pass was known beforehand (\textit{checkLastUsed\#1}). We had trouble implementing the "Last Used" together with the features of the database developed by the admin-group. This resulted in sporadic system failure, so we decided to only use the tablet memory to save the last used timers, and save the correct implementation of this feature to future development.\\
-
-During the test we stumbled upon a few vague formulations, which could have lead to misunderstandings and different testing method, if the tests had been outsourced. We learned that it is a good idea to run the test ourselves at first, so that we could correct any formulation errors we found, and then the test could be outsourced. This would require even more time, and is not likely to be done in large scale projects, but could have been done in our case.
+We already knew that \textit{checkLastUsed\#1} would not pass before conducting the tests. 
+We had trouble implementing the "Last Used" feature with the OasisLocalDatabase, this resulted in sporadic system failure.
+We decided to use the tablet memory to save the last used configurations.

@@ -1,11 +1,22 @@
 \chapter{Test}
 \label{cha:test}
-The WOMBAT application is tested through dynamic black box testing, which means that we run the application, and test the functionality through the user interface, without viewing the code. We have made test design and test cases for some of the most important functionality, so that we could outsource the test to one of the other project groups, if they had time to help us. This was not the case, so we did the testing ourselves.
+The WOMBAT application is tested through dynamic black box testing, which means that the application is executed and the functionality is tested through the user interface, without knowledge of the code. 
+The test design is conducted on the multi-projects plans to outsource test to each other. 
+Since the multi-project groups agreed on not having the spare time to familiarize themselves with unknown tests, did we execute the tests ourselves.
+%We have made test design and test cases for some of the most important functionality, so that we could outsource the test to one of the other project groups, if they had time to help us. 
+%This was not the case, so we did the testing ourselves.
 
 \section{Test Design}
 \label{sec:test_design}
-The test designs are split into four schemes, which are listed in this section.
+The test designs are split into four schemes, which are listed in this section:
+\begin{itemize}
+	\item Save and Load
+	\item Last used is updated correct
+	\item Highlight is working
+	\item Deviation in time on done activity
+\end{itemize}
 
+\pagebreak
 \begin{center}
 	\line(1,0){384}
 \end{center}
@@ -14,7 +25,7 @@ The test designs are split into four schemes, which are listed in this section.
 \paragraph{Feature}
 	Saving and loading configurations.
 \paragraph{Approach}
-	NB! Check if the configuration has changed in the database by closing the application and resetting the memory (RAM).
+	NB! Check if the configuration has changed in the database by closing the application and resetting the memory.
 		\begin{itemize} 
 			\item Create a configuration in three ways:
 				\begin{itemize}
@@ -51,7 +62,7 @@ The test designs are split into four schemes, which are listed in this section.
 		\item When saving another configuration is being altered.
 	\end{itemize}
 
-
+\pagebreak
 \begin{center}
 	\line(1,0){384}
 \end{center}
@@ -85,6 +96,10 @@ The test designs are split into four schemes, which are listed in this section.
 	\line(1,0){384}
 \end{center}
 
+\pagebreak
+\begin{center}
+	\line(1,0){384}
+\end{center}
 \paragraph{Identifier}
 	Highlight is working
 \paragraph{Feature}
@@ -113,8 +128,11 @@ The test designs are split into four schemes, which are listed in this section.
 		\item If a configuration is selected and it is not highlighted.
 		\item If nothing is highlighted when starting Wombat from the GIRAF Launcher
 	\end{itemize}
+	\begin{center}
+	\line(1,0){384}
+	\end{center}
 
-
+\pagebreak
 \begin{center}
 	\line(1,0){384}
 \end{center}

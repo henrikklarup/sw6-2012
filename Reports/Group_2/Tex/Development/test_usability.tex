@@ -6,15 +6,16 @@ In this section we explore the results of the usability test, which was describe
 \subsection{Results and Observations}
 Through the IDA method, we found six problems with the application, and they are categorized in table \ref{IDA_table}.
 
-\begin{table}[width=\textwidth][H]
+\begin{table}[width=\textwidth]
 		\begin{center}
 			\begin{tabular}{|c|p{10cm}|}
 				\hline
 				\textbf{Category} & \textbf{Notes} \\
 				\hline
-				\textit{Cosmetic} & 1: the users were not sure whether the attachments were selected, when they had chosen the attachments. 2: the user had difficulties finding the "Start"-button. \\
+				\vbox{\hbox{\strut  \textit{Cosmetic}}\hbox{\strut }\hbox{\strut }} & \vbox{\hbox{\strut  1: the users were not sure whether the attachments were selected, }\hbox{\strut when they had chosen the attachments.}\hbox{\strut 2: the user had difficulties finding the "Start"-button.}}
+				 \\
 				\hline
-				\textit{Serious} & 1: the user had difficulties using the imported Android color palette. 2: deletion by long-click is not intuitive. 3: the "Last Used" list was difficult to find. \\
+				\vbox{\hbox{\strut  \textit{Serious}}\hbox{\strut }\hbox{\strut }} & \vbox{\hbox{\strut 1: the user had difficulties using the imported Android color palette.}\hbox{\strut 2: deletion by long-click is not intuitive.}\hbox{\strut 3: the "Last Used" list was difficult to find.}}  \\
 				\hline
 				\textit{Critical} & 1: when the background of the Timer application had a certain color, the "Gradient"-button was invisible. \\
 				\hline
@@ -24,6 +25,4 @@ Through the IDA method, we found six problems with the application, and they are
 		\end{center}
 	\end{table}
 	
-All the problems found, besides the color palette, are design related, and can be corrected without changing any of the implemented functionality. They could be solved by slightly changing the design of buttons and adding more confirmation messages. 
-	
-To solve the color palette problem, a custom palette could be implemented instead of the imported Android palette, or there could be a number of predefined colors the user can choose from.
+The problems found, besides the color palette, are design related, and can be corrected without changing any of the implemented functionality. They could be solved by slightly changing the design of buttons and adding more confirmation messages.
