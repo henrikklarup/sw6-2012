@@ -11,7 +11,7 @@ A decision has been made \autoref{sec:somewhereInTheLibSection} to make a full f
 This decision means that the development time has to be prioritized and therefore the focus will be on test-to-pass tests (side 66, Software Testing - af Ron Patton).
 This ensures that the library will function as intended, though there is no guarantee that the library will work if bad parameters are used.
 
-\subsection{Test Design}
+\subsection{The Test Design}
 A test design (side 281 - 282, Software testing - af Ron Patton) have been elaborated for each method in the helper classes of the Oasis Library.
 This way the library methods will be tested along with the database thus saving some time.
 This means that the tests will be more efficient as more code will be tested in every test, but it has the drawback that if a bug is found more code will have to be investigated in order to locate the bug.
@@ -91,7 +91,7 @@ This is done with a single test-to-pass test, which tests if children associated
 More test designs have been elaborated but have not be entered in the report due to the similarities and the large amount.
 Those test designs look similar to the test design for the \texttt{getChildrenByGuardian} method.
 
-\subsection{Test Cases}
+\subsection{The Test Cases}
 One or more test case are created for each test design (side 283 - 285, Software testing - af Ron Patton).
 Every test case is created in order to test a part of a method to ensure that the method performs as intended in the tested situation.
 
@@ -233,9 +233,19 @@ and \autoref{tab:TestCase_ValidGuardianWithChildrenAssociatedHandling}.
 	\label{tab:TestCase_ValidGuardianWithChildrenAssociatedHandling}
 \end{table}
 
-\subsection{Test Results}
-All the tests cases have led to the construction of 89 unit tests which have helped in the development of the library.
+
+\subsection{The Unit Tests}
+All the tests cases have been used to construct the 89 unit tests, which have helped in the development of the library.
 The tests have been split up into three parts: Initialization, execution, and assertion.
+
+The unit test for the \texttt{testAuthenticateProfileWithValidCertificate()} method can be seen in \autoref{lst:testAuthenticateProfileWithValidCertificate}.
+The method starts by initializing the environment.
+This means that a random valid certificate is created and a profile -- the expected profile -- is entered in the database and the certificate for the profile is set to the newly created certificate.
+
+After the initiliazation the method is executed and the retrieved profile is stored as the actual profile in order to have some data for the assertion.
+At the end an \texttt{assertEquals} is called to ensure that the expected profile is the same as the actual profile.
+If this is the case the test passes, otherwise the test fails the two profiles are printed in the test log. 
+
 
 \begin{Java}{The \texttt{testAuthenticateProfileWithValidCertificate()} method.}{lst:testAuthenticateProfileWithValidCertificate}
 public void testAuthenticateProfileWithValidCertificate() {
@@ -259,21 +269,52 @@ public void testAuthenticateProfileWithValidCertificate() {
 }
 \end{Java}
 
+The unit test for the \texttt{testAuthenticateProfileWithInvalidCertificate()} method can be seen in \autoref{lst:testAuthenticateProfileWithInvalidCertificate}.
+This method also starts by initializing its environment but in this method the created certificate is different.
+The created certificate consists of chars in the range from 65 - 91 while a valid certificate hahas a range from 97 - 123.
+The rest of the initialization is the same as in the valid test and the execution is the same as well.
+But in this test \texttt{assertNull} is used to confirm that there is not retrived a profile from the database due to an invalid certificate.
+
+\begin{Java}{The \texttt{testAuthenticateProfileWithInvalidCertificate()} method.}{lst:testAuthenticateProfileWithInvalidCertificate}
+public void testAuthenticateProfileWithInvalidCertificate() {
+	Random rnd = new Random();
+	StringBuilder cert = new StringBuilder();
+	for (int i = 0; i < 200; i++)
+	{
+		cert.append((char)(rnd.nextInt(26) + 65));
+	}
+	String certificate = cert.toString();
+	Profile expectedProfile = new Profile("Test", "Profile", null, Profile.pRoles.GUARDIAN.ordinal(), 12345678, null, null);
+
+	long id = mActivity.helper.profilesHelper.insertProfile(expectedProfile);
+	expectedProfile.setId(id);
+	
+	mActivity.helper.profilesHelper.setCertificate(certificate, expectedProfile);
+			
+	Profile actualProfile = mActivity.helper.profilesHelper.authenticateProfile(certificate);
+
+	assertNull("Should return null", actualProfile);
+}
+\end{Java}
+
+The remaining tests from the test suite have been created in the same manor with an initialization face, an execution face and one or more assertions and the can be seen in the source code of the Oasis App.
+
+\subsection{The Test Results}
+The overall result for the unit tests are 88 out of 89 tests passed and it can be seen in \autoref{fig:all_tests}.
 
 \begin{figure}[htbp]
 	\centering
 		\includegraphics[width=\textwidth]{Images/unit_testing/profile_helper_tests.PNG}
-	\caption{The result of the \texttt{profilesHelper} tests.}
+	\caption{The result from the \texttt{profilesHelper} tests.}
 	\label{fig:profile_helper_tests}
 \end{figure}
 
-
-
+The test that failed is \texttt{testGetChildrenByDepartmentAndSubDepartments()} and the result can be seen in \autoref{fig:profile_helper_tests}.
 
 \begin{figure}[htbp]
 	\centering
 		\includegraphics[width=\textwidth]{Images/unit_testing/all_tests.PNG}
-	\caption{The result of all the performed unit tests.}
+	\caption{The result from all the performed unit tests.}
 	\label{fig:all_tests}
 \end{figure}
 
@@ -282,29 +323,27 @@ public void testAuthenticateProfileWithValidCertificate() {
 \begin{figure}[htbp]
 	\centering
 		\includegraphics[width=\textwidth]{Images/unit_testing/app_helper_tests.PNG}
-	\caption{The result of the \texttt{appsHelper} tests.}
+	\caption{The result from the \texttt{appsHelper} tests.}
 	\label{fig:app_helper_tests}
 \end{figure}
 
 \begin{figure}[htbp]
 	\centering
 		\includegraphics[width=\textwidth]{Images/unit_testing/department_helper_tests.PNG}
-	\caption{The result of the \texttt{departmentHelper} tests.}
+	\caption{The result from the \texttt{departmentHelper} tests.}
 	\label{fig:department_helper_tests}
 \end{figure}
 
 \begin{figure}[htbp]
 	\centering
 		\includegraphics[width=\textwidth]{Images/unit_testing/media_helper_tests.PNG}
-	\caption{The result of the \texttt{mediaHelper} tests.}
+	\caption{The result from the \texttt{mediaHelper} tests.}
 	\label{fig:media_helper_tests}
 \end{figure}
-
-
 
 \begin{figure}[htbp]
 	\centering
 		\includegraphics[width=\textwidth]{Images/unit_testing/tag_helper_tests.PNG}
-	\caption{The result of the \texttt{tagsHelper} tests.}
+	\caption{The result from the \texttt{tagsHelper} tests.}
 	\label{fig:tag_helper_tests}
 \end{figure}
