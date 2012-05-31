@@ -126,12 +126,8 @@ public class ProfilesHelperTest extends ActivityInstrumentationTestCase2<MainAct
 		long id = mActivity.helper.profilesHelper.insertProfile(expectedProfile);
 		expectedProfile.setId(id);
 		
-		int intermediateResult = mActivity.helper.profilesHelper.setCertificate(certificate, expectedProfile);
-		assertEquals("Should return -1", -1, intermediateResult);
-		
-		intermediateResult = mActivity.helper.profilesHelper.setCertificate(certificate.toLowerCase(), expectedProfile);
-		assertNotSame("Should return -1", -1, intermediateResult);
-		
+		mActivity.helper.profilesHelper.setCertificate(certificate, expectedProfile);
+				
 		Profile actualProfile = mActivity.helper.profilesHelper.authenticateProfile(certificate);
 
 		assertNull("Should return null", actualProfile);
@@ -150,8 +146,7 @@ public class ProfilesHelperTest extends ActivityInstrumentationTestCase2<MainAct
 		long id = mActivity.helper.profilesHelper.insertProfile(expectedProfile);
 		expectedProfile.setId(id);
 		
-		int intermediateResult = mActivity.helper.profilesHelper.setCertificate(certificate, expectedProfile);
-		assertEquals("Should return -1", -1, intermediateResult);
+		mActivity.helper.profilesHelper.setCertificate(certificate, expectedProfile);
 
 		Profile actualProfile = mActivity.helper.profilesHelper.authenticateProfile(certificate);
 
@@ -171,8 +166,7 @@ public class ProfilesHelperTest extends ActivityInstrumentationTestCase2<MainAct
 		long id = mActivity.helper.profilesHelper.insertProfile(expectedProfile);
 		expectedProfile.setId(id);
 		
-		int intermediateResult = mActivity.helper.profilesHelper.setCertificate(certificate, expectedProfile);
-		assertEquals("Should return -1", -1, intermediateResult);
+		mActivity.helper.profilesHelper.setCertificate(certificate, expectedProfile);
 
 		Profile actualProfile = mActivity.helper.profilesHelper.authenticateProfile(certificate);
 
