@@ -98,7 +98,7 @@ The \texttt{Guardian} class creates a \texttt{Guardian} if WOMBAT does not recei
 \label{code:createGuardian}%
 \end{figure}
 
-The \texttt{Guardian} class also creates a list of profiles if the current \texttt{Guardian} has no relation to any profiles. The code snippet \ref{createChildren} shows how this is done.
+The \texttt{Guardian} class also creates a list of profiles if the current \texttt{Guardian} has no relation to any profiles. The code snippet \ref{code:createChildren} shows how this is done.
 	
 	\begin{figure}[H]
 \begin{lstlisting}
@@ -582,8 +582,8 @@ protected void onDraw(Canvas c) {
 \end{figure}
 
 %Optimering af timere og de problemer vi løb ind i under vejs (canvas til bitmap og systemtimer)}
-Drawing can be time consuming, to optimize the timers, the background and frame is painted and stored as a bitmap file at the initialization of the drawing, seen in \autoref{code:drcode:drawlib_bitmap}.
-The stored bitmap can then be redrawed on the canvas without having to be recalculated, this is specially useful when drawing the digital watch since all numbers has to be redrawn every time the view is evaluated.
+Drawing can be time consuming, so to optimize the timers, the background and frame is painted and stored as a bitmap file at the initialization of the drawing, seen in \autoref{code:drcode:drawlib_bitmap}.
+The stored bitmap can then be redrawn on the canvas without having to be recalculated, this is specially useful when drawing the digital watch since all numbers has to be redrawn every time the view is evaluated.
 With the bitmap it is possible to draw the numbers once and then blank out the lines not needed when evaluating.
 
 \begin{figure}%
@@ -608,5 +608,5 @@ c.drawPath(drawNumberPath(8, x, y), paint);
 ...
 \end{lstlisting}
 \caption{Code snippet of how the background and frame is stored as a bitmap.}%
-\label{code:drawlib_bitmap}%
+\label{code:drcode:drawlib_bitmap}%
 \end{figure}
