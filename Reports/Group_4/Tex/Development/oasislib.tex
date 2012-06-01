@@ -35,7 +35,22 @@ This is because the individual applications in the GIRAF system is seen as a vie
 
 \section{Implementation}
 \label{sec:LibImp}
-The Oasis Library's controllers is what make up the main part of the library. It is divided into a number of different sub controllers, the public ones seen in figure \vref{controllers}.
+Many methods have been inplemented in the library in order to ease the access to the database to as few method calls as possible.
+Therefore the code for all the implemented methods will not be show in this section.
+The code not shown in this section can be seen in the source code on the attached CD-Rom.
+
+
+As an example on the implementation of the library the methods \texttt{autenticateProfile} and \texttt{getProfileById} will be presented.
+
+The method \texttt{autenticateProfile} is used to authenticate a profile in order to decide what informations the user should be allowed access to.
+
+First the method verifies that input is not \texttt{null} and that the certificate conformes to the rules for the certificates, if the certificate is rejected \texttt{null} is returned to indicate this.
+
+After the certificate has been verified the profile id will be retrived from the database, if and only if a profile exists with that certificate.
+In case a profile exist with the certificate the id will be returned and the profile model will be retrieved from the database.
+If no profile with the certificate exists \texttt{-1} will be returned and no profile model will be retrieved.
+
+The code for \texttt{autenticateProfile} can be seen in \autoref{lst:authenticateProfile_implementation}.
 
 \begin{Java}{This is the code for the \texttt{authenticateProfile} method.}{lst:authenticateProfile_implementation}
 public Profile authenticateProfile(String certificate) {
@@ -53,6 +68,17 @@ public Profile authenticateProfile(String certificate) {
 	return profile;
 }
 \end{Java}
+
+The method \texttt{getProfileById} is used the retrieve a profile model from the database.
+The model is retrived useing the profile id as a key to get the model by.
+
+First it must be ensured that the id is above zero, as the database can not handle zero or negative values.
+After this check the database is queried to retrive the profile model.
+A conversion is needed as the database returns a Cursor obejct and this object must be converted into a profile model. kilde: http://developer.android.com/reference/android/database/Cursor.html
+This conversion is done in the auxiliry method \texttt{cursorToProfile}, which maps values in the Cursor to values in the profile model.
+If the Cursor from the database is null or empty no profile was found in the database.
+
+The code for \texttt{getProfileById} method can be seen in \autoref{lst:getProfileById_implementation}.
 
 \begin{Java}{This is the code for the \texttt{getProfileById} method.}{lst:getProfileById_implementation}
 public Profile getProfileById(long id) {
@@ -76,7 +102,4 @@ public Profile getProfileById(long id) {
 }
 \end{Java}
 
-
-
-There are a number of other sub controllers as well, but they are only for internal use within the Oasis library.
 For further information on how the Oasis library's methods work, see the JavaDoc which is place on the appended CD-Rom.
