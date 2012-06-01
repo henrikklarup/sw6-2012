@@ -29,27 +29,6 @@ public class CRUD {
 
 	void removeLastUsed(Child c, SubProfile p, long profileId){
 		removeSubprofileFromProfileId(p,profileId);
-
-		// Find the profile by Id
-		Profile prof = oHelp.profilesHelper.getProfileById(profileId);
-
-		// Find the Wombat App
-		App app = oHelp.appsHelper.getAppByIds(appId, profileId);
-
-		// Get the settings from the profile and update
-		Setting<String, String, String> settings = app.getSettings();
-
-		String count = settings.get(_lastUsed).get("count");
-		int iCount = Integer.valueOf(count);
-		iCount = iCount -1;
-		settings.get(_lastUsed).remove("count");
-		settings.get(_lastUsed).put("count", iCount+"");
-
-		app.setSettings(settings);
-
-		// Update the app
-		oHelp.appsHelper.modifyAppByProfile(app, prof);
-
 	}
 
 	void addLastUsed(Child c, SubProfile p, long profileId){
@@ -63,30 +42,9 @@ public class CRUD {
 
 		String timeKey = year+""+day+""+hour+""+min+""+sec;
 
-		p.timeKey = Integer.valueOf(timeKey);
+		p.timeKey = Long.valueOf(timeKey);
 
 		saveChild(c,p);
-
-		// Find the profile by Id
-		Profile prof = oHelp.profilesHelper.getProfileById(profileId);
-
-		// Find the Wombat App
-		App app = oHelp.appsHelper.getAppByIds(appId, profileId);
-
-		// Get the settings from the profile and update
-		Setting<String, String, String> settings = app.getSettings();
-
-		String count = settings.get(_lastUsed).get("count");
-		int iCount = Integer.valueOf(count);
-		iCount = iCount +1;
-		settings.get(_lastUsed).remove("count");
-		settings.get(_lastUsed).put("count", iCount+"");
-
-		app.setSettings(settings);
-
-		// Update the app
-		oHelp.appsHelper.modifyAppByProfile(app, prof);
-
 	}
 
 	SubProfile retrieveLastUsed(HashMap<String, String> token){
@@ -104,34 +62,21 @@ public class CRUD {
 		//Retrieve the settings
 		Setting<String,String,String> settings = app.getSettings();
 
-		//Retrieve HashMap from _lastUsed
-		boolean map = settings.containsKey(_lastUsed);
+		if(settings != null){
+			Set<String> keys = settings.keySet();
+			List<SubProfile> mSubPs = findProfileSettings(profileId);	
 
-		//Checks if map exists
-		if(!map){
-			//lastUsed settings does not exists, therefore we will create it now.
-			HashMap newMap = new HashMap();
-			newMap.put("count", 0+"");
-			settings.put(_lastUsed, newMap);
+			if(mSubPs.size() != 0){
+				
+				SubProfile[] sortList = new SubProfile[mSubPs.size()];
+				
+				mSubPs.toArray(sortList);
 
-			app.setSettings(settings);
-
-			oHelp.appsHelper.modifyAppByProfile(app, prof);
-
-		} else {
-			//lastUsed settings exists and we will therefore read them
-			String count1 = settings.get(_lastUsed).get("count");
-			int count = Integer.valueOf(count1);
-			SubProfile[] sortList = null;
-			for(int i = 1; i <= count; i++){
-				SubProfile sp = getSubProfile(settings.get(_lastUsed + "i"));
-				sortList[i-1] = sp;
-			}
-
-			sortList = lastUsedSort(sortList);
-			//The last used list is now sorted.
-			for(SubProfile p : sortList){
-				guard.addLastUsed(p);
+				sortList = lastUsedSort(sortList);
+				//The last used list is now sorted.
+				for(SubProfile p : sortList){
+					guard.addLastUsed(p);
+				}
 			}
 		}
 	}
@@ -326,7 +271,7 @@ public class CRUD {
 		formFactor factor = formFactor.convert(hm.get("type"));
 		p.refChild = Long.valueOf(hm.get("refChild"));
 		p.refPro = Long.valueOf(hm.get("refPro"));
-		p.timeKey = Integer.valueOf(hm.get("timeKey"));
+		p.timeKey = Long.valueOf(hm.get("timeKey"));
 
 
 		/* Change the subprofile to the correct type */

@@ -154,7 +154,10 @@ public class Child implements Comparable<Child>{
 	    }
 
 		public void remove(SubProfile p) {
-			_profileList.remove(p);
-			guard.crud.removeSubprofileFromProfileId(p, this.getProfileId());
+			//This is the propper way of removing
+			guard.delete(this, p);
+			//The below code is agaist the WOMBAT architecture.
+//			_profileList.remove(p);
+//			guard.crud.removeSubprofileFromProfileId(p, this.getProfileId());
 		}
 }
