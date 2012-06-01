@@ -8,27 +8,75 @@ The structure of the Oasis Lib, have been inspired of the MVC pattern, where the
 
 In Oasis Lib the Model part is a package containing model objects. Each model object represent a table in the Oasis Local Db.
 The model objects is used to encapsulate the data, which is to be saved and loaded from the Oasis Local Db.
-The reason that we use model objects is to ease it for the users of the library and to make a uniform way of saving and loading data. 
-
-The controller part is the package containing all the methods, which the developers can use to interact with Oasis Local Db.
-The controller methods have been devided into several classes.
-They are devided by the models that manipulate, this means that for each table in the db there is a model and a controller.
-This gives a good overview that helps the programmers that use the library.
-
-In the library there are no direct reference to the views from the MVC pattern.
-This is becuase the indivual apps in the GIRAF system is seen as a view and they have the same function as a view.
-
-\section{Implementation}
-\label{sec:LibImp}
-The Oasis Library's controllers is what make up the main part of the library. It is devided into a number of different sub controllers, the public ones seen in figure \vref{controllers}.
-
+The reason that we use model objects is to ease it for the users of the library and to make a uniform way of saving and loading data.
+The models can be seen in \autoref{fig:models}.
 \begin{figure}
 	\centering
-		\includegraphics[width=\textwidth]{images/controllers.png}
-	\caption{The different controlers in Oasis library}
+		\includegraphics[width=\textwidth]{images/models.png}
+	\caption{The models in the Oasis library}
 	\label{fig:controllers}
 \end{figure}
 
+The controller part is the package containing all the methods, which the developers can use to interact with Oasis Local Db.
+The controller methods have been divided into several classes.
+The division can be seen in \autoref{fig:controllers}
+\begin{figure}
+	\centering
+		\includegraphics[width=\textwidth]{images/controllers.png}
+	\caption{The controllers in the Oasis library}
+	\label{fig:controllers}
+\end{figure}
+
+They are divided by the models that manipulate, this means that for each table in the db there is a model and a controller.
+This gives a good overview that helps the programmers that use the library.
+
+In the library there are no direct reference to the views from the MVC pattern.
+This is because the individual applications in the GIRAF system is seen as a view and they have the same function as a view.
+
+\section{Implementation}
+\label{sec:LibImp}
+The Oasis Library's controllers is what make up the main part of the library. It is divided into a number of different sub controllers, the public ones seen in figure \vref{controllers}.
+
+\begin{Java}{This is the code for the \texttt{authenticateProfile} method.}{lst:authenticateProfile_implementation}
+public Profile authenticateProfile(String certificate) {
+	if (certificate == null || !certificate.matches("[a-z]{200}")) {
+		return null;
+	}
+
+	Profile profile = null;
+	long id = au.getIdByCertificate(certificate);
+
+	if (id != -1) {
+		profile = getProfileById(id);
+	}
+
+	return profile;
+}
+\end{Java}
+
+\begin{Java}{This is the code for the \texttt{getProfileById} method.}{lst:getProfileById_implementation}
+public Profile getProfileById(long id) {
+	Profile profile = null;
+	
+	if (id <= 0) {
+		return null;
+	}
+	
+	Uri uri = ContentUris.withAppendedId(ProfilesMetaData.CONTENT_URI, id);
+	Cursor c = _context.getContentResolver().query(uri, columns, null, null, null);
+
+	if (c != null) {
+		if (c.moveToFirst()) {
+			profile = cursorToProfile(c);
+		}
+		c.close();
+	}
+
+	return profile;
+}
+\end{Java}
+
+
 
 There are a number of other sub controllers as well, but they are only for internal use within the Oasis library.
-For futher information on how the Oasis library's methods work, see JavaDoc REF!.
+For further information on how the Oasis library's methods work, see the JavaDoc which is place on the appended CD-Rom.
