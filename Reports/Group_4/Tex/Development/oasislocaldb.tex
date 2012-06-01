@@ -4,9 +4,16 @@ In this chapter we describe the local database, called Oasis Local Db. Oasis Loc
 
 \section{Structure}
 \label{sec:dbStruc}
-The structure of Oasis Local Db is developed in cooperation with the savannah server group. The reason for that is to alleviate the complexities that could occur during a synchronization of the tablet and the savannah server. The database schema can be seen in figure \textcolor{red}{INSERT FIGURE REF}. There are a few differences between our database schema and the savannah server's. The reason for that is that there only is SQLite, which is embedded into the Android system. SQLite is an open source database. It supports three kinds of data types; TEXT, which is similar to String type in Java, INTEGER, which is similar to long type in java, and REAL, which is similar to double type in java. SQLite does not validate if the types written to the columns actually are of the defined type. This means that it for instance is possible to write an integer into a TEXT column. On the positive site SQLite only requires a little portion of memory at runtime (~250 KByte).
+The structure of Oasis Local Db is developed in cooperation with the savannah server group. The reason for that is to alleviate the complexities that could occur during a synchronization of the tablet and the savannah server. The database schema can be seen in figure \autoref{fig:localDatabaseDesign}. There are a few differences between our database schema and the savannah server's. The reason for that is that there only is SQLite, which is embedded into the Android system. SQLite is an open source database. It supports three kinds of data types; TEXT, which is similar to String type in Java, INTEGER, which is similar to long type in java, and REAL, which is similar to double type in java. SQLite does not validate if the types written to the columns actually are of the defined type. This means that it for instance is possible to write an integer into a TEXT column. On the positive site SQLite only requires a little portion of memory at runtime (~250 KByte).
 
 When making a SQLite Database on an Android device it is only needed to define the SQL statements for creating and updating the database. After that the Android system will manage it. An example of how we implemented a table in the database can be seen in section \vref{dbImp}.
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=\textwidth]{Images/LocalDatabaseDesign}
+	\caption{The database schema for the local database.}
+	\label{fig:localDatabaseDesign}
+\end{figure}
 
 \section{Implementation}
 \label{sec:dbImp}
