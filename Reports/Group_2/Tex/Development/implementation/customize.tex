@@ -29,7 +29,7 @@ Figure \ref{fig:customize:layout} show architecture of the fragment.
 
 \begin{figure}[H]
 	\centering
-		\includegraphics[width=\textwidth]{Images/Implementation/customize_layout.png}
+		\includegraphics[width=0.5\textwidth]{Images/Implementation/customize_layout.png}
 	\caption{An outline of the architecture of the customize fragment.}
 	\label{fig:customize:layout}
 \end{figure}
@@ -51,14 +51,7 @@ public void onActivityCreated(Bundle savedInstanceState) {
 	/********* TIME CHOSER *********/
 	initStyleChoser();
 
-	/********* TIMEPICKER *********/
-	initTimePicker();
-
-	/********* COLORPICKER *********/
-	initColorButtons();
-
-	/********* ATTACHMENT PICKER *********/
-	initAttachmentButton();
+...
 
 	/******** BOTTOM MENU ***********/
 	initBottomMenu();
@@ -92,21 +85,7 @@ private void initStyleChoser() {
 
 	progressbarButton = (Button) getActivity().findViewById(
 			R.id.progressbarButton);
-	progressbarButton.setOnClickListener(new OnClickListener() {
-
-		public void onClick(View v) {
-			selectStyle(formFactor.ProgressBar);
-		}
-	});
-
-	digitalButton = (Button) getActivity().findViewById(R.id.digitalButton);
-	digitalButton.setOnClickListener(new OnClickListener() {
-
-		public void onClick(View v) {
-			selectStyle(formFactor.DigitalClock);
-		}
-	});
-}
+...
 \end{lstlisting}
 \caption{The style chooser initialization method, which utilize the \texttt{selectStyle} that changes the style of the timer and highlights the button.}%
 \label{code:customize:style_choser}%
