@@ -4,10 +4,23 @@
 Our database designed in close with the Oasis group, which was a great success, and is functional and well tested. We have made a lot of small adjustments throughout the project based on requirements from the other groups, but after the third sprint we froze it, as this was necessary to be able to start implementing the synchronization and web interface.
 
 \subsubsection*{The Web Interface}
-The web interface is not completely implemented. We have had to down prioritize the ``core'' of the system. The following parts are implemented, tested, and functional:
+The web interface is not completely implemented. We have had to down prioritize the ``main'' part of the system. The following parts are implemented, tested, and functional:
 \begin{description}
-	\item[Add Profile] This is the most important part of the system, as the possibility to add new users are essential. 
+	\item[Add profile] This is the most important part of the system, as the possibility to add new users are essential
+	\item[Add pictures and sound] This was a high prioritized requirement from the PARROT group
+	\item[Add tags] Important for sorting pictures and sound
+	\item[Profile control] Allow setting of guardians and parents to a child. A high prioritized requirement from the Launcher group
+	\item[Edit profile] If the user need to change something in their profile, this is important
+	\item[Delete profile] Allowing the removal of profiles from the system
 \end{description}
+All this are handled without any user authentication, and can be access directly from the welcome screen. This is an security issue, but we decided this implementation, as we found it important to provide the requested functionality, and agreed, that the security can be added later on.
+
+We have implemented the possibility to login, but after this, the user is met by a ``main'' screen with very limited possibilities, and the few available are for testing possibilities.
+
+The Servlet code for the different pages could benefit a great deal form refactoring. This is a result of working in a previously unknown technology, and thus learning while doing.
+
+When we started implementing
+	
 Our web interface was quite a challenge because we had no experience in java servlet. This resultet in a slow start because we had to learn how to use it. This was not accounted in the sprints resulting in delay in the beginning. Once we started getting more confident with java servlet the process sped up and we started to finish features during sprints.
 We have used a lot of redundant code in the classes since we are still inexperienced and this code should be refactored in some way. At the end of sprint 5 we decided that we were done programming. There are still features that has not been implemented, these are described in our design.
 In Retrospect we should have chosen a smaller part of the system to implement so that we would have time to learn java servlet and refactored the code. We have been successful with testing of the web interface both in the form of a mock up test, test cases, and usability test.
