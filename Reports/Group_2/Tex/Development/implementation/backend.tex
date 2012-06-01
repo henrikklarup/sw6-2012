@@ -68,31 +68,26 @@ The \texttt{Guardian} class creates a \texttt{Guardian} if WOMBAT does not recei
 
 \begin{figure}[H]
 \begin{lstlisting}
-	private long findGuardianId() {
-		if(guardianId != -1){
-			// Does the original guard exist
-			m_oGuard = oHelp.profilesHelper.getProfileById(guardianId);
-		} else {
-			m_oGuard = null;
-		}
-		// If not, try the default guard
-		if(m_oGuard == null){
-			for (Profile p : oHelp.profilesHelper.getProfiles()) {
-				if(p.getFirstname().equals("John") && p.getSurname().equals("Doe")){
-					m_oGuard = p;
-					break;
-				}
-			}
-			// If thats not valid either, make the default guard
-			if(m_oGuard == null){
-				m_oGuard = new Profile("John", "Doe", null, 1, 88888888, null, null);				
-				m_oGuard.setId(oHelp.profilesHelper.insertProfile(m_oGuard));
-				oHelp.appsHelper.attachAppToProfile(m_app, m_oGuard);
-				oHelp.profilesHelper.setCertificate("jkkxla ... hfwsh", m_oGuard);
-			}
-		} 
+private long findGuardianId() {
+if(guardianId != -1){
+m_oGuard = oHelp.profilesHelper.getProfileById(guardianId);
+} else {
+m_oGuard = null;
+}
+if(m_oGuard == null){
+for (Profile p : oHelp.profilesHelper.getProfiles()) {
+if(p.getFirstname().equals("John") && p.getSurname().equals("Doe")){
+m_oGuard = p;
+break;
+}}
+if(m_oGuard == null){
+m_oGuard = new Profile("John", "Doe", null, 1, 88888888, null, null);				
+m_oGuard.setId(oHelp.profilesHelper.insertProfile(m_oGuard));
+oHelp.appsHelper.attachAppToProfile(m_app, m_oGuard);
+oHelp.profilesHelper.setCertificate("jkkxla ... hfwsh", m_oGuard);
+}} 
 		return m_oGuard.getId();
-	}
+}
 \end{lstlisting}
 \caption{Code snippet to create a default \texttt{Guardian}.}%
 \label{code:createGuardian}%
@@ -319,40 +314,23 @@ Hourglass hourglass = new Hourglass("Timeglas - 30 sek", "Timeglas - (0:30)", 0x
 	public HashMap<String, String> getHashMap(){
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("db_id", String.valueOf(this.getDB_id()));
-		map.put("type", this.formType().toString());		
-		map.put("Attachment", String.valueOf(this._AttaBool));		
-		map.put("Name", this.name);		
-		map.put("desc", this.desc);		
-		map.put("bgcolor", String.valueOf(this.bgcolor));		
-		map.put("timeLeftColor", String.valueOf(this.timeLeftColor));		
-		map.put("timeSpentColor", String.valueOf(this.timeSpentColor));		
-		map.put("frameColor", String.valueOf(this.frameColor));
-		map.put("totalTime", String.valueOf(this.get_totalTime()));		
-		map.put("gradient", String.valueOf(this.gradient));		
-		map.put("save", String.valueOf(this.save));		
-		map.put("saveAs", String.valueOf(this.saveAs));
-		map.put("refChild", String.valueOf(this.refChild));		
-		map.put("refPro", String.valueOf(this.refPro));
+    ...
 		map.put("timeKey", String.valueOf(this.timeKey));
 		if(this._doneArt != null){
 			map.put("doneArtType", String.valueOf(this._doneArt.getForm()));
 			switch(this._doneArt.getForm()){
 			case SingleImg:
 				map.put("doneArtPic", String.valueOf(this._doneArt.getImg().getId()));
-				map.put("doneArtLeftPic", String.valueOf(-1));
-				map.put("doneArtRightPic", String.valueOf(-1));
+				...
 				break;
 			case SplitImg:
 				map.put("doneArtPic", String.valueOf(-1));
-				map.put("doneArtLeftPic", String.valueOf(this._doneArt.getLeftImg().getId()));
-				map.put("doneArtRightPic", String.valueOf(this._doneArt.getRightImg().getId()));
+				...
 				break;
 			}
 		} else {
 			map.put("doneArtType", String.valueOf(formFactor.undefined));
-			map.put("doneArtPic", String.valueOf(-1));
-			map.put("doneArtLeftPic", String.valueOf(-1));
-			map.put("doneArtRightPic", String.valueOf(-1));
+			...
 		}
 		if(this._AttaBool){
 			map = this._attachment.getHashMap(map);				
