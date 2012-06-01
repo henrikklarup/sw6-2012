@@ -1,0 +1,17 @@
+lego-nxt-servo-motor-image:     
+http://www.1000steine.com/brickset/images/9842-1.jpg
+
+lego-nxt-image:
+http://www.1000steine.com/brickset/images/9841-1.jpg
+
+lego-nxt-sonar-sensor-image:
+http://www.1000steine.com/brickset/images/9846-1.jpg
+
+lego-nxt-servo-motor-data-sheet
+http://www.philohome.com/nxtmotor/nxtmotor.htm
+
+lego-nxt-datasheet:
+http://web.mac.com/ryo_watanabe/iWeb/Ryo's%20Holiday/NXTway-G_files/nxtway-g-1.pdf
+
+lego-nxt-ir-seeker-image:
+http://www.rapidonline.com/catalogueimages/module/M080804P01WL.jpg

@@ -1,0 +1,401 @@
+\documentclass[a4paper,11pt,fleqn,twoside,openright,titlepage]{memoir} % Brug openright hvis chapters skal starte p hjresider; openany, oneside
+
+%%%%%%%%%%%%%%% Qoutations %%%%%%%%%%%%
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
+
+\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
+\let\endchangemargin=\endlist
+\newcommand{\myQuoteA}[2]{
+\begin{changemargin}{.7in}{.7in}
+\textbf{``}
+#1
+\textbf{''}
+\ifthenelse{\isempty{#2}}%  If there is nothing stated here just print the shit. 
+{}% if #1 true
+{\vspace{-3mm}\begin{changemargin}{.9in}{.7in}\raggedleft{{\footnotesize--- #2}}\end{changemargin}}% if #1 false
+\end{changemargin}
+}
+
+\newcommand{\myQuote}[1]{\myQuoteA{#1}{}}
+
+%%%% FIXME macro %%%%
+\newcommand{\todo}[1]{\fxnote{#1}}
+\newcommand{\todoV}[1]{\fxfatal{#1}}
+\newcommand{\todov}[1]{\fxfatal{#1}}
+
+%%%% PACKAGES %%%%
+
+% indsat af Magnus, Hvor skal denne placers? (verbatim)
+\usepackage{verbatim}
+\usepackage{casecontrol}
+\usepackage{ifthen}
+\usepackage{xifthen}
+
+% Commands fra P4 indsat via andre filer
+\input{functions/wordlist}
+
+% Til regex %
+\usepackage{algorithm}
+
+%  Oversttelse og tegnstning  %
+\usepackage[ansinew]{inputenc}					% Gr det muligt at bruge ,  og  i sine .tex-filer
+\usepackage[english]{babel}							% Dansk sporg, f.eks. tabel, figur og kapitel
+\usepackage[T1]{fontenc}								% Hjlper med orddeling ved ,  og . Stter fontene til at vre ps-fonte, i stedet for bmp					
+\usepackage{latexsym}										% LaTeX symboler
+\usepackage{xcolor,ragged2e,fix-cm}			% Justering af elementer
+\usepackage{pdfpages}										% Gr det muligt at inkludere pdf-dokumenter med kommandoen \includepdf[pages={x-y}]{fil.pdf}	
+\pretolerance=2500 											% Gr det muligt at justre afstanden med ord (hjt tal, mindre orddeling og mere space mellem ord)
+\usepackage{ulem}                       % Gennemstregning af ord med koden \sout{}
+\usepackage{fixltx2e}										% Retter forskellige bugs i LaTeX-kernen
+\usepackage{listings}
+																			
+%  Figurer og tabeller  floats   %
+\usepackage{flafter}										% Srger for at dine floats ikke optrder i teksten fr de er sat ind.
+\usepackage{multirow}                		% Fletning af rkker
+\usepackage{hhline}                   	% Dobbelte horisontale linier
+\usepackage{multicol}         	        % Fletning af kolonner
+\usepackage{colortbl} 									% Muligre farver i tabeller
+%\usepackage{float}												% Gr det muligt at placere figurer hvor du vil.   \begin{figure}[!h] % Will not be floating.
+\usepackage{wrapfig}										% Indsttelse af figurer omsvbt af tekst. \begin{wrapfigure}{Placering}{Strrelse}
+\usepackage{graphicx} 									% Pakke til jpeg/png billeder
+\pdfoptionpdfminorversion=6							% Muliggr inkludering af pdf dokumenter, af version 1.6 og hjere
+	
+%  Matematiske formler og maskinkode 
+\usepackage{amsmath,amssymb,stmaryrd} 	% Bedre matematik og ekstra fonte
+\usepackage{textcomp}                 	% Adgang til tekstsymboler
+\usepackage{mathtools}									% Udvidelse af amsmath-pakken. 
+\usepackage{eso-pic}										% Tilfj billedekommandoer p hver side
+\usepackage{lipsum}											% Dummy text \lipsum[..]
+\usepackage{rsphrase}										% Kemi-pakke til RS-stninger
+\usepackage[version=3]{mhchem} 					% Kemi-pakke til lettere notation af formler
+
+%  Referencer, bibtex og url'er  %
+\usepackage{url}												% Til at stte urler op med. Virker sammen med hyperref
+\usepackage[english]{varioref}						% Giver flere bedre mulighed for at lave krydshenvisninger
+\usepackage{natbib}											% Litteraturliste med forfatter-r og nummerede referencer
+\usepackage{xr}													% Referencer til eksternt dokument med \externaldocument{<NAVN>}
+
+%  Floats  %
+\let\newfloat\relax 										% Memoir har allerede defineret denne, men det gr float pakken ogs
+\usepackage{float}
+
+% ANDET SJOV %
+\usepackage{lastpage}							% Automatisk tæl antal sider
+
+
+\usepackage[footnote,draft,english,silent,nomargin]{fixme}		% Indst rettelser og lignende med \fixme{...} Med final i stedet for draft, udlses en error 																															for hver fixme, der ikke er slettet, nr rapporten bygges.
+
+%%%% CUSTOM SETTINGS %%%%
+
+%  Marginer  %
+\setlrmarginsandblock{3.5cm}{2.5cm}{*}	% \setlrmarginsandblock{Indbinding}{Kant}{Ratio}
+\setulmarginsandblock{2.5cm}{3.0cm}{*}	% \setulmarginsandblock{Top}{Bund}{Ratio}
+\checkandfixthelayout 									% Laver forskellige beregninger og stter de almindelige lngder op til brug ikke memoir pakker
+
+%	 Afsnitsformatering  %
+\setlength{\parindent}{0mm}           	% Strrelse af indryk
+\setlength{\parskip}{4mm}          			% Afstand mellem afsnit ved brug af double Enter
+\linespread{1,1}												% Linie afstand
+
+%  Litteraturlisten  %
+\bibpunct[, ]{[}{]}{;}{n}{,}{,} 					% Definerer de 6 parametre ved Harvard henvisning (bl.a. parantestype og seperatortegn)
+\bibliographystyle{plain}			% Udseende af litteraturlisten. Ligner dk-apali - mvh Klein
+
+%  Indholdsfortegnelse  %
+\usepackage{tocloft}
+
+\makeatletter
+\def\@part[#1]#2{%
+    \ifnum \c@secnumdepth >-2\relax
+      \refstepcounter{part}%
+      \addcontentsline{toc}{part}{\protect\numberline{\thepart}#1}%NEW
+    \else
+      \addcontentsline{toc}{part}{#1}%
+    \fi
+    \markboth{}{}%
+    {\centering
+     \interlinepenalty \@M
+     \normalfont
+     \ifnum \c@secnumdepth >-2\relax
+       \huge\bfseries \partname\nobreakspace\thepart
+       \par
+       \vskip 20\p@
+     \fi
+     \Huge \bfseries #2\par}%
+    \@endpart}
+\renewcommand*\l@part[2]{%
+  \ifnum \c@tocdepth >\m@ne
+    \addpenalty{-\@highpenalty}%
+    \vskip 1.0em \@plus\p@
+    \setlength\@tempdima{2.0em}%NEW: indentation for lines 2,3,... change according to your needs
+    \begingroup
+      \parindent \z@ \rightskip \@pnumwidth
+      \parfillskip -\@pnumwidth
+      \leavevmode\large\bfseries
+      \advance\leftskip\@tempdima% NEW: comment out if no indentation required for lines 2,3,...
+      \hskip -\leftskip
+      #1\nobreak\hfil \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
+      \penalty\@highpenalty
+    \endgroup
+  \fi}
+\makeatother
+
+\setsecnumdepth{subsection}		 					% Dybden af nummerede overkrifter (part/chapter/section/subsection)
+\maxsecnumdepth{subsection}							% ndring af dokumentklassens grnse for nummereringsdybde
+\settocdepth{section} 								% Dybden af indholdsfortegnelsen
+
+
+%  Visuelle referencer  %
+\usepackage[colorlinks]{hyperref}			 	% Giver mulighed for at ens referencer bliver til klikbare hyperlinks. .. [colorlinks]{..}
+\hypersetup{pdfborder = 0}							% Fjerner ramme omkring links i fx indholsfotegnelsen og ved kildehenvisninger 
+\hypersetup{														%	Opstning af farvede hyperlinks
+    colorlinks = false,
+    linkcolor = black,
+    anchorcolor = black,
+    citecolor = black
+}
+
+\definecolor{gray}{gray}{0.80}					% Definerer farven gr
+
+%Noget med PDF.
+\usepackage{pdfpages} 
+
+
+%  Opstning af figur- og tabeltekst  %
+ 	\captionnamefont{
+ 		\small\bfseries\itshape}						% Opstning af tekstdelen ("Figur" eller "Tabel")
+  \captiontitlefont{\small}							% Opstning af nummerering
+  \captiondelim{. }											% Seperator mellem nummerering og figurtekst
+  \hangcaption													%	Venstrejusterer flere-liniers figurtekst under hinanden
+  \captionwidth{\linewidth}							% Bredden af figurteksten
+	\setlength{\belowcaptionskip}{10pt}		% Afstand under figurteksten
+		
+%  Navngivning  %
+%\addto\captionsdanish{
+%	\renewcommand\appendixname{Appendix}
+%	\renewcommand\contentsname{Contents}	
+%	\renewcommand\appendixpagename{Appendix}
+%	\renewcommand\cftchaptername{\chaptername~}				% Skriver "Kapitel" foran kapitlerne i indholdsfortegnelsen
+%	\renewcommand\cftappendixname{\appendixname~}			% Skriver "Bilag" foran bilagene i indholdsfortegnelsen
+%	\renewcommand\appendixtocname{Appendix}
+%}
+
+
+
+%  Kapiteludssende  %
+\definecolor{numbercolor}{gray}{0.7}			% Definerer en farve til brug til kapiteludseende
+\newif\ifchapternonum
+
+\makechapterstyle{jenor}{									% Definerer kapiteludseende -->
+  \renewcommand\printchaptername{}
+  \renewcommand\printchapternum{}
+  \renewcommand\printchapternonum{\chapternonumtrue}
+  \renewcommand\chaptitlefont{\fontfamily{pbk}\fontseries{db}\fontshape{n}\fontsize{25}{35}\selectfont\raggedleft}
+  \renewcommand\chapnumfont{\fontfamily{pbk}\fontseries{m}\fontshape{n}\fontsize{1in}{0in}\selectfont\color{numbercolor}}
+  \renewcommand\printchaptertitle[1]{%
+    \noindent
+    \ifchapternonum
+    \begin{tabularx}{\textwidth}{X}
+    {\let\\\newline\chaptitlefont ##1\par} 
+    \end{tabularx}
+    \par\vskip-2.5mm\hrule
+    \else
+    \begin{tabularx}{\textwidth}{Xl}
+    {\parbox[b]{\linewidth}{\chaptitlefont ##1}} & \raisebox{-15pt}{\chapnumfont \thechapter}
+    \end{tabularx}
+    \par\vskip2mm\hrule
+    \fi
+  }
+}																						% <--
+
+\chapterstyle{jenor}												% Valg af kapiteludseende - dette kan udskiftes efter nske
+\pagestyle{plain}																							% Valg af sidehoved og sidefod
+
+
+%  Fjerner den vertikale afstand mellem listeopstillinger og punktopstillinger  %
+\let\olditemize=\itemize							
+\def\itemize{\olditemize\setlength{\itemsep}{-1ex}}
+\let\oldenumerate=\enumerate						
+\def\enumerate{\oldenumerate\setlength{\itemsep}{-1ex}}
+
+
+%%%% CUSTOM COMMANDS %%%%
+
+\newcommand{\method}[1]{\texttt{#1}}						%%Do change
+\newcommand{\function}[1]{\method{#1}}				%%Do change
+\newcommand{\fu}[1]{\function{#1}}						%%Don't change
+\newcommand{\degree}{\ensuremath{^\circ}}
+
+%  Billede hack  %
+\newcommand{\figur}[4]{
+		\begin{figure}[H] \centering
+			\includegraphics[width=#1\textwidth]{billeder/#2}
+			\caption{#3}\label{#4}
+		\end{figure} 
+}
+
+%  Specielle tegn  %
+\newcommand{\grader}{^{\circ}C}
+\newcommand{\gr}{^{\circ}}
+\newcommand{\g}{\cdot}
+
+%  Promille-hack (\promille)  %
+\newcommand{\promille}{%
+  \relax\ifmmode\promillezeichen
+        \else\leavevmode\(\mathsurround=0pt\promillezeichen\)\fi}
+\newcommand{\promillezeichen}{%
+  \kern-.05em%
+  \raise.5ex\hbox{\the\scriptfont0 0}%
+  \kern-.15em/\kern-.15em%
+  \lower.25ex\hbox{\the\scriptfont0 00}}
+
+
+\renewcommand{\emph}[1]{\textit{#1}}
+
+%%%% ORDDELING %%%%
+\hyphenation{hvad hvem hvor hvis MPa kon-se-kvens-klas-se bjl-ken byg-ning-er e-le-ment brud-li-ni-er frem-lbs-tem-pe-ra-tur-en Bjl-ker-ne ind-bls-nings-strm-ning-er-ne tem-pera-tur-gra-di-en-ten fjer-nes fjer-ner var-me-pum-pe-kreds-lb gen-nem Byg-nings-reg-le-men-tet Dan-vak Sys-tem-air kanal-sys-te-mer b-rings-af-stand-en}	
+
+
+%%%%%%%%% List Environments %%%%%%%%%%%
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{gray95}{gray}{.95}
+\definecolor{gray92}{gray}{.92}
+\definecolor{gray75}{gray}{.75}
+\definecolor{gray45}{gray}{.45}
+
+%\lstset{frame=shadowbox, rulesepcolor=\color{gray}, basicstyle=\footnotesize, numbers=left, numberstyle=\footnotesize, numbersep=5pt}
+\lstdefinestyle{sourceC}
+{ 
+	numbers=left,
+	numbersep=5pt, 
+	stepnumber=1,
+	captionpos=b,  %bottom
+	keywordstyle=\color[rgb]{0,0,1},
+	commentstyle=\color[rgb]{0.133,0.545,0.133},
+	stringstyle=\color[rgb]{0.627,0.126,0.941},
+	backgroundcolor=\color{gray95},
+	frame=lrtb,
+	framerule=0.5pt,
+	linewidth=1.00\textwidth,
+	tabsize=4,
+	numberbychapter=true,
+	basicstyle=\ttfamily\footnotesize,
+	language=C,
+	breaklines=true,
+	showstringspaces=false,
+	emph=[1]{endregion,region,get,set,enum,TASK},%%%%%%%%%%% Add new keywords here
+	emph=[2]{TerminateTask,ecrobot_get_sonar_sensor,nxt_motor_set_speed,nxt_motor_get_count,systick_get_ms,display_clear,display_goto_xy,display_string,display_int,display_update,systick_wait_ms}, %%Functions specific to nxtOSEK and such.
+	emphstyle=[1]{\color[rgb]{0,0,1}},
+	emphstyle=[1]{\color[rgb]{0,0,1}},
+	emphstyle=[2]{\color[rgb]{0.1,0.5,0.5}},
+	float=htb,
+	breakindent=20pt
+}
+
+\lstdefinestyle{sourceCode}
+{ 
+	numbers=left,
+	numbersep=5pt, 
+	stepnumber=1,
+	captionpos=b,  %bottom
+	keywordstyle=\color[rgb]{0,0,1},
+	commentstyle=\color[rgb]{0.133,0.545,0.133},
+	stringstyle=\color[rgb]{0.627,0.126,0.941},
+	backgroundcolor=\color{gray95},
+	frame=lrtb,
+	framerule=0.5pt,
+	linewidth=1.00\textwidth,
+	tabsize=4,
+	numberbychapter=true,
+	basicstyle=\ttfamily\footnotesize,
+	language=[Sharp]C,
+	breaklines=true,
+	showstringspaces=false,
+	emph=[1]{value,endregion,region,get,set,then,terminateIf},%%%%%%%%%%% Add new keywords here
+	emph=[2]{Tag,Problem,Person,List,NotSupportedException,TestMethod,ProblemSearch,Assert,
+	EntityCollection,Department,IEnumerable,TimeSpan,DateTime},%%Classes
+	emphstyle=[1]{\color[rgb]{0,0,1}},
+	emphstyle=[2]{\color[rgb]{0.1,0.5,0.5}},
+	float=htb,
+	breakindent=20pt
+}
+
+
+\lstdefinelanguage{waldo}
+{morekeywords={openMain,openFrame,terminateFrame,terminateMain,openFrameLoop,terminateFrameLoop,if,do,else,terminateIf,while,terminateWhile,function,
+return,terminateFunction,void,rotate,collision,Agent,agent,addAgentToScene,removeAgentFromScene,moveForward,getSceneAgent,getSceneAgentlistLength,
+getAgentX,getAgentY,getSceneWidth,getSceneHeight,setAgentSpectrum,setAgentX,setAgentY,canAgentSeeAgent,random,getAgentAngle,setAgentAngle},
+sensitive=false,
+morestring=[b]{"}
+}
+
+\lstdefinestyle{waldo}
+{ 
+	numbers=left,
+	numbersep=5pt, 
+	stepnumber=1,
+	captionpos=b,  %bottom
+	keywordstyle=\color[rgb]{0,0,1},
+	commentstyle=\color[rgb]{0.133,0.545,0.133},
+	stringstyle=\color[rgb]{0.627,0.126,0.941},
+	backgroundcolor=\color{gray95},
+	frame=lrtb,
+	framerule=0.5pt,
+	linewidth=1.00\textwidth,
+	tabsize=4,
+	numberbychapter=true,
+	basicstyle=\ttfamily\footnotesize,
+	language=waldo,
+	breaklines=true,
+	showstringspaces=false,
+	emph=[1]{red,blue,green,yellow,black,white,darkGray,lightGray,grey,cyan,orange,pink,magenta,+,-,*,/,==,!,<=,>=,>,<,++,--,&&},%%Colours and Operators
+	emph=[2]{int,string,double,bool,agent,Scene,Color,scene,color},
+	%emphstyle=[1]{\color[rgb]{0,0,1}},
+	emphstyle=[1]{\color[rgb]{0.6,0.2,0.2}},
+	emphstyle=[2]{\color[rgb]{0.1,0.5,0.5}},
+	float=htb,
+	breakindent=20pt
+}
+
+\lstdefinestyle{grammar}
+{ 
+	numbers=left,
+	numbersep=5pt, 
+	stepnumber=1,
+	captionpos=b,  %bottom
+	keywordstyle=\color[rgb]{0,0,1},
+	commentstyle=\color[rgb]{0.133,0.545,0.133},
+	stringstyle=\color[rgb]{0.627,0.126,0.941},
+	backgroundcolor=\color{gray95},
+	frame=lrtb,
+	framerule=0.5pt,
+	linewidth=1.00\textwidth,
+	tabsize=4,
+	numberbychapter=true,
+	basicstyle=\ttfamily\footnotesize,
+	breaklines=true,
+	showstringspaces=false,
+	emph=[1]{value,endregion,region,get,set},%%%%%%%%%%% Add new keywords here
+	emph=[2]{Tag,Problem,Person,List,NotSupportedException,TestMethod,ProblemSearch,Assert,
+	EntityCollection,Department,IEnumerable,TimeSpan,DateTime},%%Classes
+	emphstyle=[1]{\color[rgb]{0,0,1}},
+	emphstyle=[2]{\color[rgb]{0.1,0.5,0.5}},
+	float=htb,
+	breakindent=20pt
+}
+
+\renewcommand{\lstlistingname}{Code snippet}%%Changing the caption to read ``Code snippet''
+\renewcommand{\lstlistlistingname}{List of Code Snippets}
+\lstset{escapeinside={(*}{*)}}%%Defines the escape and unescape chars
+
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+
+
+\newcommand{\hiddensubsection}[1]{
+\stepcounter{subsection}
+%\subsection*{\arabic{section}.\arabic{subsection}\hspace{1em}{#1}}}
+\subsection*{{#1}}}
