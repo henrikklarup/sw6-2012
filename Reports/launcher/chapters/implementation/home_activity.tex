@@ -14,18 +14,18 @@ A consequence hereof is that even if a user has permission to access an app, it 
 
 \subsection{Drawer}
 The drawer is implemented as described in \autoref{sec:drawer}.
-The final 
+The implemented design can be seen in \autoref{fig:home-activity_closed} and \autoref{fig:home-activity}.
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.2]{gfx/home-activity_closed.pdf}
+	\includegraphics[width=0.7\textwidth]{gfx/implementation-home-drawerclosed}
 	\caption{Shows the launcher with the drawer closed}
 	\label{fig:home-activity_closed}
 \end{figure}
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.2]{gfx/home-activity_open.pdf}
+	\includegraphics[width=0.7\textwidth]{gfx/implementation-home-draweropen}
 	\caption{Shows the launcher with the drawer opened}
 	\label{fig:home-activity}
 \end{figure}
@@ -43,7 +43,3 @@ The color picker can be seen in \autoref{fig:home-activity}
 The widgets which is described in \autoref{par:widgets} and can be seen in \autoref{fig:home-activity}is between the app board and the drawer, this is called the \textit{home bar}. Here it is also possible to see a picture of the user curretly logged in. The user can logout with the orange button in the button of the home bar. There are two widgets: One that shows the connectivity to the Savanah server. This widget has three states: Connected and updated, connected and synchronising and not connected. Connected and updated tells the user that all data is synchronized with the server and they are good to go. Connected and synchronising means that either the tablet needs data from the server or to push some changes to the server. Not connected tells the user that they are not connected to the server and therefore can not update or synchronize with the server.
 If the user clicks on the connectivity widget they will get a description to the currently showing status telling them what this icon means.
 The second widget is a calendar widget which tells the user what day it is in the month in a numeric format. If the user clicks this widget they will get a description with day, d. dd, month, week. This is done so the user easily can access and see what day it is.
-
-
-\begin{lstlisting}[style=sourceCode, language=JAVA, caption=This is code, label=lst:homeActivity] 
-\end{lstlisting}
