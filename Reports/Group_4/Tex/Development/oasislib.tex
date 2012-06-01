@@ -1,10 +1,22 @@
 \chapter{Oasis Lib}
 \label{ch:Lib}
-In this chapter we describe the library of the administration module, called Oasis Lib. The Oasis Lib is the library, which works as a connection between the Oasis Local Db (\vref{ch:Db} and the applications, which runs on the GIRAF system, by providing an API, which the GIRAF applications can use. First the structure of Oasis Lib is described in section \vref{sec:Structure}. Then how the Oasis Lib is implemented is described in section \vref{sec:LibImp}.
+In this chapter we describe the library of the administration module, called Oasis Lib. The Oasis Lib is the library, which works as a connection between the Oasis Local Db (see \autoref{ch:Db}) and the applications, which runs on the GIRAF system, by providing an API, which the GIRAF applications can use. First the structure of Oasis Lib is described in section \vref{sec:Structure}. Then the implementation of the Oasis Lib is described in \autoref{sec:LibImp}.
 
 \section{Structure}
 \label{sec:Structure}
-In the structure of Oasis Lib, we have taken inspiration of the MVC pattern, where the system is divided into three parts; Model, View, and Controller. In Oasis Lib the Model part is a package containing model objects. Each model object represent a table in the local db. The model objects is used to encapsulate the data, which is supposed to be saved and loaded from the Oasis Local Db. The reason that we use model objects is to ease it for the users and to make a uniform way of saving and loading data. The controller part is the package containing all the methods, which the developers can use to interact with Oasis Local Db. We do not have any view part. This is missing because we see it as a part of the GIRAF applications.
+The structure of the Oasis Lib, have been inspired of the MVC pattern, where the system is divided into three parts; Model, View, and Controller. 
+
+In Oasis Lib the Model part is a package containing model objects. Each model object represent a table in the Oasis Local Db.
+The model objects is used to encapsulate the data, which is to be saved and loaded from the Oasis Local Db.
+The reason that we use model objects is to ease it for the users of the library and to make a uniform way of saving and loading data. 
+
+The controller part is the package containing all the methods, which the developers can use to interact with Oasis Local Db.
+The controller methods have been devided into several classes.
+They are devided by the models that manipulate, this means that for each table in the db there is a model and a controller.
+This gives a good overview that helps the programmers that use the library.
+
+In the library there are no direct reference to the views from the MVC pattern.
+This is becuase the indivual apps in the GIRAF system is seen as a view and they have the same function as a view.
 
 \section{Implementation}
 \label{sec:LibImp}
