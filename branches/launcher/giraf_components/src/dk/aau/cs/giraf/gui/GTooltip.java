@@ -1,15 +1,10 @@
 package dk.aau.cs.giraf.gui;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.util.Log;
 import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 
@@ -39,7 +34,6 @@ public class GTooltip extends Dialog {
 		super(context, theme);
 		mContext = context;
 		this.setStyle();
-		// TODO Auto-generated constructor stub
 	}
 
 	private GTooltip(Context context, boolean cancelable,
@@ -47,7 +41,6 @@ public class GTooltip extends Dialog {
 		super(context, cancelable, cancelListener);
 		mContext = context;
 		this.setStyle();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public void setStyle() {
@@ -57,6 +50,7 @@ public class GTooltip extends Dialog {
 	
 	public void setRightOf(View v) {
 		View target = this.findViewById(R.id.gtooltip_arrow_view);
+		
 		int parentMarginLeft = ((RelativeLayout.LayoutParams) ((ViewGroup) v.getParent()).getLayoutParams()).leftMargin;
 		int newLeft = intToDP(v.getLeft() + v.getWidth() + padding) + parentMarginLeft;
 		int newTop = intToDP(v.getTop() + (v.getHeight()/2) - 12); 
