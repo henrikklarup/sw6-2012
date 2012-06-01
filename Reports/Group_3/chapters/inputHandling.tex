@@ -2,7 +2,7 @@ When the server starts, it will execute a method called \code{listen()} that lis
 Whenever a connection is made to the server, the \code{listen()} method will create a new \code{CommunicationThread}.
 This thread will read the information in the \code{Socket}'s \code{InputStream} and depending on the connection type\footnote{commit event, request event, or ping} it will deal with it appropriately.
 
-\lstinputlisting[language=Java,label=code:listen,caption=The \code{listen()}method]{code/IOHandler-listen.txt}
+\lstinputlisting[style=sw6Java,label=code:listen,caption=The \code{listen()}method]{code/IOHandler-listen.txt}
 
 In the following we will explain how the different types of connections are processed by the system.
 
