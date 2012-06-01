@@ -1,46 +1,39 @@
-\section{App selection}
+\section{App management}
 \label{sec:app_management}
-
-%\subsection{Requirements}
+\label{sec:appman_solution}
 \label{sec:appman_requirements}
 
-In \autoref{fig:state_diagram}, the ``no app selected''-state and the ``no child selected''-state, and the actions inbetween, show the transitions taken, when the user launches a \giraf[] app. \\
-
-%As shown in \autoref{fig:state_diagram}, the ``no app selected''-state and the ``no child selected''-state are the states which the launcher is in when the user is about to launch a \giraf[] app. \\
+When the user launches a \giraf[] app, the transitions between \emph{No app selected} and \emph{No child selected}, are taken, as seen in \autoref{fig:state_diagram}.\\
 
 \noindent Three pieces of information are needed in order to launch an app:
 
 \begin{enumerate}
 	\item Current authenticated guardian
 	\item App to launch
-	\item Selected child to launch the app with
+	\item Selected child profile to launch the app for
 \end{enumerate}
 
 The first requirement is already given, since the launcher cannot be in any of the two states without the user already being authenticated.
-The second requirement is straightforward, as it is not possible to launch an app without knowing which app to launch.
-The first and third requirements are needed in order to fulfill the services which the launcher needs to have in order to be a functional part of the \giraf[] platform, as shown in the component diagram, \autoref{fig:external_architecture}.
+The second requirement is given, as it is not possible to launch an app without knowing which app to launch.
+The first and third requirements are needed in order to fulfill the services which the launcher needs to have in order to be a functional part of the \giraf[] platform, as shown in \autoref{fig:external_architecture}.
 
-Furthermore, additional pieces of information must be known to the user:
+Furthermore, additional pieces of information are available:
 
 \begin{enumerate}
 	\item Date related data
 	\item Network status 
 \end{enumerate}
 
-As the \giraf[] platform is thought to be the primary electronic tool of guardians, date related data is provided. Date related data is thought to be the day in characters the day in number, the month in characters and the week number. Later date related data can be a calendar app if such app gets into the \giraf[] platform.
-Since the \giraf[] platform uses both local and remote storage, there might be latency in synchronizing and keeping the data up-to-date in these storages, and therefore it is important for the user to know if both storages are synchronized, up-to-date or not.
+As the \giraf[] platform is thought to be the primary electronic tool of guardians, date related data is provided. Date related data is thought to be the day in characters the day in number, the month in characters and the week number. Later date related data can be a calendar app if such an app is installed on a device running \giraf[].
+Since the \giraf[] platform uses both local and remote storage, there might be latency in synchronizing these storages.
+It is therefore important for the user to know if both storages are synchronized.
 
-\todo{check for system vs. platform}
+\autoref{fig:appmanagement_design} shows a flow chart of the interactions the user can perform, and the actions the launcher takes upon the interactions, in order to fulfill the requirements listed earlier.
 
-%\subsection{Solution}
-\label{sec:appman_solution}
-
-\autoref{fig:appmanagement_design} shows the flowchart over the interactions the user can perform, and the actions the launcher takes upon the interactions, in order to fullfill the requirements listed in \autoref{sec:appman_requirements}.
-
-\begin{figure}[h]
+\begin{figure}[!h]
 	\centering
 	\includegraphics[width=1\textwidth]{gfx/appmanagement.pdf}
-	\caption{Flowchart over the app management functionality}
+	\caption{Flow chart over the app management functionality}
 	\label{fig:appmanagement_design}
 \end{figure}
 
@@ -53,11 +46,11 @@ Since the \giraf[] platform uses both local and remote storage, there might be l
 \end{itemize}
 
 
-\subsubsection{The drawer}
+\subsection{The drawer}
 \label{sec:drawer}
-The drawer was designed to hide functionallity when not needed in a convenient place. As seen in \autoref{fig:appmanagement_design} everything that have to do with changing app settings is placed in the drawer which the user have to open to get to it.
-Another thing the drawer did was to make a place for the widgets.
-The handle of the drawer was designed to have the same color as the inside of the drawer because it was important to make consistensy in the way that the user should feel when they saw the color of the handle the thought of the functionality inside of the drawer. It was also rounded to tell the user that this element was interactive.
+The drawer was designed to hide functionallity that is not always needed in a convenient place. As seen in \autoref{fig:appmanagement_design} everything that has to do with changing app settings is placed in the drawer which the user has to open to get to it.
+The handle of the drawer was designed to have the same color as the inside of the drawer because it was important to create consistensy. 
+It was also rounded, see \autoref{design:button_design}, to tell the user that this element was interactive.
 
 \paragraph{Widgets}
 \label{par:widgets}
