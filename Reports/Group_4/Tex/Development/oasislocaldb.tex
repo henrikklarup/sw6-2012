@@ -4,7 +4,29 @@ In this chapter we describe the local database, called Oasis Local Db. Oasis Loc
 
 \section{Structure}
 \label{sec:dbStruc}
-The structure of Oasis Local Db is developed in cooperation with the savannah server group. The reason for that is to alleviate the complexities that could occur during a synchronization of the tablet and the savannah server. The database schema can be seen in figure \autoref{fig:localDatabaseDesign}. There are a few differences between our database schema and the savannah server's. The reason for that is that there only is SQLite, which is embedded into the Android system. SQLite is an open source database. It supports three kinds of data types; TEXT, which is similar to String type in Java, INTEGER, which is similar to long type in java, and REAL, which is similar to double type in java. SQLite does not validate if the types written to the columns actually are of the defined type. This means that it for instance is possible to write an integer into a TEXT column. On the positive site SQLite only requires a little portion of memory at runtime (~250 KByte).
+The structure of Oasis Local Db is developed in cooperation with the savannah server group. The reason for that is to alleviate the complexities that could occur during a synchronization of the tablet and the savannah server. 
+
+The central point of the database schema is the AuthUsers table.
+This table contains all the user id's and their certificates.
+A user in the database can be either a profile or a department and therefore a role is stored as well to differetiate the two.
+
+The database schema for the profiles and departments are a simple model representing a kindergarden like Birken or Egebakken.
+This means that a profile can either be a child, a pedagouge, or a parent.
+The database supports the possibility to associate profiles to each other in order to allow a child to guardian relation.
+The profiles can be attached to one or more departments, and a department can be related to one or more sub departments.
+
+An important part of the system for the guardians is the ability to access different kinds of media on the tablets.
+Therefore media can be stored in the database along with information about who has access to them.
+A media can be owned by either a profile or a department, and the owner has the ability to decide who should have access to the media.
+The database schema also allows the user to adds tags to media, these tags can be used to identify the media.
+
+Another important part of the system is the ability to control appplications.
+From the users viewpoint it consists of deciding which applications should be accessible and from the developers viewpoint it is a way of saving application settings for a profile.
+
+The database schema can be seen in figure \autoref{fig:localDatabaseDesign}.
+
+
+There are a few differences between our database schema and the savannah database schema. The reason for that is that there only is SQLite, which is embedded into the Android system. SQLite is an open source database. It supports three kinds of data types; TEXT, which is similar to String type in Java, INTEGER, which is similar to long type in java, and REAL, which is similar to double type in java. SQLite does not validate if the types written to the columns actually are of the defined type. This means that it for instance is possible to write an integer into a TEXT column. On the positive site SQLite only requires a little portion of memory at runtime (~250 KByte). Kilde:
 
 When making a SQLite Database on an Android device it is only needed to define the SQL statements for creating and updating the database. After that the Android system will manage it. An example of how we implemented a table in the database can be seen in section \vref{dbImp}.
 
