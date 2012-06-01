@@ -1,0 +1,66 @@
+\section{System architecture}
+In the following section we will discuss the system architecture for Oasis, as described in section \vref{blalalba}.
+
+When designing the architecture, there are multiple ways we could do it. We will list the options we have, their pros and cons, and make a reasoning for why we choose the one we did.
+
+\subsection{Oasis lib with direct connection to an external database and with a local database}
+\begin{table}[htbp]
+	\centering
+		\begin{tabular}{| p{9cm} | m{9cm} |}
+			\hline
+			Pros: & Cons: \\ \hline
+			- Reduced development time, as you only have to develop one software layer & - It is not recommended to have direct access to the external database, due to the loss of security and the maintainability will be more complex \\ \hline
+			- Access to data in offline mode & - If more applications wants to access the external database, then a lot of connections will be made\\ \hline
+			& - If a change is made in the external database structure, one has to update the tablet to use it. \\ \hline
+		\end{tabular}
+	\caption{SKRIV NOGET HENNE!}
+	\label{tab:procon1}
+\end{table}
+
+\subsection{Oasis lib with direct connection to an external database and without a local database}
+\begin{table}[htbp]
+	\centering
+		\begin{tabular}{| p{9cm} | m{9cm} |}
+			\hline
+			Pros: & Cons: \\ \hline
+			- Data are always synchronized & - No access to data, if the external database is offline \\ \hline
+			- Reduced development time, as you only have to develop one software layer & - If a change is made in the external database structure, one has to update the tablet to use it. \\ \hline
+			& - It is not recommended to have direct access to the external database, due to the loss of security and the maintainability will be more complex \\ \hline
+			& - If more applications wants to access the external database, then a lot of connections will be made. \\ \hline
+		\end{tabular}
+	\caption{SKRIV NOGET HENNE!}
+	\label{tab:procon2}
+\end{table}
+	
+\subsection{Oasis lib with connection to software layer on the server and with a local database}
+\begin{table}[htbp]
+	\centering
+		\begin{tabular}{| p{9cm} | m{9cm} |}
+			\hline
+			Pros: & Cons: \\ \hline
+			- The external database can be changed without updating the tablet. & - Increased development time, as you have to develop two software layers. \\ \hline
+			- Access to data, if the external database is offline & - Increased development time, as you have to setup two databases \\ \hline
+			& - Data is not always synchronized \\ \hline
+		\end{tabular}
+	\caption{SKRIV NOGET HENNE!}
+	\label{tab:procon3}
+\end{table}
+
+\subsection{Oasis lib with connection to software layer on the server and without a local dbdatabase}
+\begin{table}[htbp]
+	\centering
+		\begin{tabular}{| p{9cm} | m{9cm} |}
+			\hline
+			Pros: & Cons: \\ \hline
+			- The external database can be changed without updating the tablet & - No access to data if the external database is offline \\ \hline
+			- Data is always synchronized & - No access to data if the external database is offline \\ \hline
+			& - Increased development time, as you have to develop two software layers \\ \hline
+		\end{tabular}
+	\caption{SKRIV NOGET HENNE!}
+	\label{tab:procon4}
+\end{table}
+
+\subsection{Choosing the architecture}
+As one of the requirements for the system was that, data should be accessible in offline mode, it rules out two of the options.
+The main difference between the two solutions left, is that one requires more development time, and the other forces the tablet to be updated everytime the external database changes.
+Seeing that we could manage the increased development time, from developing two software layers, this solution seems like the more optimal one. And therefore we choose the one described in section \vref{sec:OasisLibWithTwo}.
