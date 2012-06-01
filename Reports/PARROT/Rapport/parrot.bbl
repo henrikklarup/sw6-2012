@@ -8,9 +8,20 @@ Scrum Alliance.
 Scrum Alliance.
 \newblock Scrum alliance, 2011.
 
+\bibitem{aip}
+Matthisa~K�ppler Charlie~Collins, Michael D.~Galpin.
+\newblock {\em Android in Practice}.
+\newblock Last viewed: 2012-05-30.
+
 \bibitem{autism.com}
 Temple Grandin.
 \newblock Teaching tips for children and adults with autism, December 2002.
+
+\bibitem{LastYearsArchitecture}
+Steffan Bo~Pallesen Jacob~Bang, Lasse Linnerup~Christiansen.
+\newblock Administration module for giraf.
+\newblock {\em \url{http://people.cs.aau.dk/~ulrik/Giraf/Admin.pdf}}.
+\newblock Last viewed: May 2012.
 
 \bibitem{usability:ida}
 Jan~Stage Jesper~Kjeldskov, Mikael B.~Skov.
@@ -28,21 +39,21 @@ Samsung.
 Android~Development Team.
 \newblock Android 4.0.3 platform, 2012.
 
-\bibitem{othertypes}
-Android~Development Team.
-\newblock Android actionbar, 2012.
-
-\bibitem{declayout}
-Android~Development Team.
-\newblock Android actionbar, 2012.
-
 \bibitem{actionbarguide}
 Android~Development Team.
-\newblock Android actionbar, 2012.
+\newblock Android actionbar guide, 2012.
 
 \bibitem{fragmentguide}
 Android~Development Team.
-\newblock Android actionbar, 2012.
+\newblock Android fragment guide, 2012.
+
+\bibitem{declayout}
+Android~Development Team.
+\newblock Android layout declaration, 2012.
+
+\bibitem{othertypes}
+Android~Development Team.
+\newblock Android type guide, 2012.
 
 \bibitem{studyreg}
 Aalborg University.

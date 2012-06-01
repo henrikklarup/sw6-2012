@@ -5,15 +5,15 @@ This is also an important way of avoiding clutter by having too many different f
 At the same time we also needed an easy way to isolate features for users who are not supposed to have access to them, as we do not wish for them to be aware of functions they cannot access.
 
 \subsection*{Solution}
-The Action Bar with its Tab navigation mode turned out to be the perfect solution, it allowed us to create a Tab for each major feature in the parent view.
-Each major feature has its own fragment, and each fragment is tied to a view, clicking on the matching tab will prompt the attached fragment to display its view.\\
-The action Bar is initialized with the parent activity, as are the Tabs.
-This gives us control over what Tabs are going to be present when the application starts, so that a user will never know about the features he is not allowed to use.
+The action bar with its tab navigation mode, turned out to be the perfect solution. It allowed us to create a tab for each major feature in the parent view.
+Each major feature has its own fragment, and each fragment is tied to a view. Clicking on the matching tab will prompt the attached fragment to display its view.\\
+The action bar is initialized with the parent activity, as are the tabs.
+This gives us control over what tabs are going to be present when the application starts, so that a user will never know about the features he is not allowed to use.
 
 \subsection*{Execution}
-Implementing an Action Bar first of all means including a Tab Listener.
-In this project we did so in a separate class file, using an existing Tab Listener from (Insert Book Reference here).
-Using the Tab listener you can instantiate an Action Bar as you can see in the following code example see Source Code \ref{actionbar}.
+Implementing an action bar first of all means including a TabListener.
+In this project we did so in a separate class file, using an existing TabListener from (website \cite{actionbarguide}).
+Using the TabListener you can instantiate an ActionBar as you can see in Source Code \ref{actionbar}.
 
 \begin{source}[{actionbar}]{How to create an action bar and a tab i the android}
 ActionBar actionBar = getActionBar();
@@ -28,24 +28,24 @@ actionBar.addTab(tab);
 
 \noindent In order of lines of code:
 \begin{enumerate}
-\item Get the activities Action bar through reference.
-\item Establishing that the action bar is to be used for Tabs by setting its Navigation Mode.
-\item \textbf{Something.}
-\item Creating a New Tab.
-\item Setting the Text that should be seen on the Tab.
-\item Constructing a Tab listener so that when you click on this Tab or others, the system know what to do.
-\item Finally, Add the Tab to the Action Bar.
+\item Get the activity's ActionBar through reference.
+\item Establish that the action bar is to be used for tabs by setting its Navigation Mode.
+\item Determines if an activity should display its title/subtitle.
+\item Creating a new tab.
+\item Setting the text that should be seen on the tab.
+\item Constructing a TabListener so that when you click on this tab or others, the system knows what to do.
+\item Finally, add the tab to the ActionBar.
 \end{enumerate}
 
 \subsection*{Result}
-The Application can successfully flip between several major features using tabs, as well as hide major features on startup if the user profile does not have permission to use them.
+The application can successfully flip between several major features using tabs, as well as hide major features on startup if the user profile does not have permission to use them.
 
 \subsection*{Notes:}
-Note that in our application, we use ``IF'' Statements to check if an User has the right to see a Tab.
-The Order of the Tabs should therefore match up with the order in the Rights Array.\\
-Guides will suggest that you use an override ``onCreateView'' method to change between Tabs with the actionbar.
+Note that in our application, we use ``IF'' Statements to check if a user has the right to see a tab.
+The order of the tabs should therefore match up with the order in the Rights Array.\\
+Guides will suggest that you use an override ``onCreateView'' method to change between tabs with the ActionBar.
 However, we have concluded that using the override methods ``onCreate'' and ``onResume'' was sufficient in our case.
 
 \subsection*{Further Reading:}
-We used two Android Developer guides which I recommend reading for further development on the app.
-The first, on ActionBar and its various uses (Tab and otherwise), can be found on the homepage \cite{actionbarguide} as can the second, which covers the fragments that get changed between.\cite{fragmentguide}
+We used two Android Developer guides which I recommend reading for further development on the application.
+The first, on ActionBar and its various uses (tab and otherwise), can be found on the homepage \cite{actionbarguide} as can the second, which covers the fragments that get changed between.\cite{fragmentguide}

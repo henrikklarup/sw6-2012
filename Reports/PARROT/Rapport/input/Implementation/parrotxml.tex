@@ -1,16 +1,16 @@
 \section{XML Layouts} %%Name of Feature.
 \subsection*{Problem}
-We need to establish the layout of our application, so that the user can navigate and manipulate it.
+We need to establish the layout of our application, so that the user has something to interact with.
 \subsection*{Solution}
-The Android SDK allows you to utilize an XML based method of creating the visual layouts or views that is seen in the application.
-GridView, LinearLayout, and ImageView are all examples of Layout Elements used in the XML documents.
+The Android SDK allows you to utilize an XML based method of creating the visual layouts and views that are seen in the application.
+GridView, LinearLayout, and ImageView are all examples of Layout elements used in the XML documents.
 It should also be noted that all attributes and layout parameters of an element are written within the start-tags.
-Eclipse with the Android Development Tools installed also allows for a drag and drop approach to setting up the XML document, by moving elements on a visual representation of it.
+Eclipse with the Android Development Tools installed allows for a drag and drop approach to setting up an XML document, by moving elements on a visual representation of it.
 
 \subsection*{Execution}
 The following is an example of XML code taken from the ``categoriesitem.xml'' file.
 
-\begin{xml}{skriv noget her}
+\begin{xml}[{xml}]{The categoriesitem.xml file}
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -34,24 +34,24 @@ The following is an example of XML code taken from the ``categoriesitem.xml'' fi
 </LinearLayout>
 \end{xml}
 
-In this case the Root Element is a Horizontally oriented LinearLayout, as the attributes state.
-The Root element contains two other elements, a TextView and an ImageView, which will be shown in order from left to right because this is a horizontal Linear Layout.
-Id's are attached to Elements, for reference both within the Java code and the XML document, they are declared by using ``@+id/name'' and referenced to by using ``@id/name'' 
-In the example you can see the Layout Parameters determining the size of the Views inside the root, fill/match\_parent and wrap\_content are two examples of context sensitive sizes, while we also use defined sizes in dp(see Note, for other definable sizes, see further reading.). \\
+In XML Code \ref{xml} the root element is a horizontally oriented LinearLayout, as the attributes state.
+The root element contains two other elements, a TextView and an ImageView, which will be shown in order from left to right because this is a horizontal LinearLayout.
+Id's are attached to elements, for reference both within the Java code and the XML document. They are declared by using ``@+id/name'' and referenced to by using ``@id/name''.\newline 
+In the example, you can see the layout parameters(any ) determining the size of the views inside the root, fill/match\_parent and wrap\_content are two examples of context sensitive sizes, while we also use defined sizes in dp(see Notes. For other definable sizes, see Further Reading.). \\
 
 Another important layout is the RelativeLayout. 
 This layout does not focus on the order of child elements, rather it allows for attributes such as ``android:layout\_above'' for positioning.
 
 \subsection*{Result}
 
-Using XML we have manage to get a functional and viable layout for our Application.
+Using XML we have manage to get a functional and viable layout for our application.
 
 \subsection*{Notes}
 The names of XML documents cannot contain capital letters.\\
-Can be Manipulated in Activity classes with Java Code.
+Can be manipulated in activity classes with Java code.
 See section \ref{disppict} on displaying pictograms, as it contains an example where a view is used by a method.\\
-Unique id's have to be declared the first time they are used in the document, which not necessarily when they are attached to an Element.\\
-``dp'' stands for Density-independent Pixels, its size depends physical density of of the screen.
+Unique id's have to be declared the first time they are used in the document, which is not necessarily when they are attached to an Element.\\
+``dp'' stands for Density-independent Pixels. Their size depends physical density of the screen.
 
 \subsection*{Further Reading}
-The guide for various size types can be found on the development website\cite{othertypes}, as can the guide on Declaring layout \cite{declayout}.
+The guide for various size types can be found on the development website\cite{othertypes}, as can the guide on declaring layouts \cite{declayout}.
