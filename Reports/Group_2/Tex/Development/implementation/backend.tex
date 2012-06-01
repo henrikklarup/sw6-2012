@@ -187,7 +187,7 @@ The \texttt{Child} class is an object that represent either last used, predefine
 	
 The \texttt{Child} class contains a select method that selects a certain profile so it can be reused later. The \texttt{select} method is called whenever the user highlights a profile in the WOMBAT application. To use a selected profile, a method, \texttt{getChild}, is called from the \texttt{Guardian} object. The idea of this method is to make it easier to work with the same \texttt{Child} object across multiple projects.
 
-The \texttt{Child} class provides methods for saving and removing. The \texttt{save} method saves a certain \texttt{SubProfile} either as a new \texttt{SubProfile} or overrides a old \texttt{SubProfile}, the \texttt{save} method calls \texttt{saveChild} from \texttt{Guardian} to make sure it is saved in the \texttt{OasisLocalDatabase}. The \texttt{remove} method removes a certain \texttt{SubProfile} from the \texttt{Child} and calls \texttt{removeSubprofileFromProfileId} from \texttt{Guardian} to delete the \texttt{SubProfile} from the \texttt{OasisLocalDatabase}. You can see \texttt{save} and \texttt{remove} method in code snippet \ref{code:TimerLibSaveRemove}. 
+The \texttt{Child} class provides methods for saving and removing. The \texttt{save} method saves a certain \texttt{SubProfile} either as a new \texttt{SubProfile} or overrides a old \texttt{SubProfile}, the \texttt{save} method calls \texttt{saveChild} from \texttt{Guardian} to make sure it is saved in the \texttt{OasisLocalDatabase}. The \texttt{remove} method removes a certain \texttt{SubProfile} from the \texttt{Child} and calls \texttt{delete} from \texttt{Guardian} to delete the \texttt{SubProfile} from the \texttt{OasisLocalDatabase}. You can see \texttt{save} and \texttt{remove} method in code snippet \ref{code:TimerLibSaveRemove}. 
 	
 			\begin{figure}[H]
 \begin{lstlisting}
@@ -204,8 +204,7 @@ The \texttt{Child} class provides methods for saving and removing. The \texttt{s
 	}
 
 	public void remove(SubProfile p) {
-			_profileList.remove(p);
-			guard.crud.removeSubprofileFromProfileId(p, this.getProfileId());
+			guard.delete(this, p);
 }
 	
 \end{lstlisting}
@@ -417,8 +416,8 @@ Hourglass hourglass = new Hourglass("Timeglas - 30 sek", "Timeglas - (0:30)", 0x
   \item[formFactor] \hfill \\
 	The \texttt{formFactor} class is a \texttt{enum} class which is used to manage object types. It contains nine \texttt{enum}s which are; \texttt{undefined}, \texttt{SubProfile}, \texttt{Hourglass}, \texttt{TimeTimer}, \texttt{ProgressBar}, \texttt{DigitalClock}, \texttt{Timer}, \texttt{SingleImg}, and \texttt{SplitImg}. They all represent their own kind of object.
 	
-	\item[TimeHelper] \hfill \\
-  The \texttt{TimeHelper} class contains two functions; the first function is its main function, to generate the predefined configurations. The second function is a method which generates test data.	
+	\item[TimerHelper] \hfill \\
+  The \texttt{TimerHelper} class contains two functions; the first function is its main function, to generate the predefined configurations. The second function is a method which generates test data.	
 	
   \item[CRUD] \hfill \\
 	The \texttt{CRUD} class responsibility is to create, retrieve, update, and delete \texttt{Guardian}, \texttt{Child}, and \texttt{SubProfile} objects in the \texttt{OasisLocalDatabase}. The \texttt{CRUD} class is only called from within the \texttt{Guardian} class. This is done to make it easy to change the way WOMBAT create, retrieve, update, and delete objects, if WOMBAT was ever to be released as a fully independent application.
