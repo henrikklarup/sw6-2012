@@ -23,7 +23,7 @@ public class SubProfile implements Comparable<SubProfile>{
 	int lastUsedTime = -1;
 	long refChild = -1;
 	long refPro = -1;
-	int timeKey = 0;
+	long timeKey = 0;
 
 	//constructor
 	public SubProfile(String name, String description, int bgcolor, int timeLeftColor, int timeSpentColor, int frameColor, int totalTime, boolean changeColor){
