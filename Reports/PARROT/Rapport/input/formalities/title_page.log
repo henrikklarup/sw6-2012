@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2012.2.5)  25 MAY 2012 23:55
+This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2012.2.5)  1 JUN 2012 13:51
 entering extended mode
 **D:/Aalborg*universitet/P6/Project/Reports/PARROT/Rapport/input/formalities/ti
 tle_page.tex
@@ -372,12 +372,12 @@ Missing character: There is no 1 in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no s in font nullfont!
 Missing character: There is no w in font nullfont!
-Missing character: There is no 5 in font nullfont!
+Missing character: There is no 6 in font nullfont!
 Missing character: There is no 0 in font nullfont!
 Missing character: There is no 1 in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no 1 in font nullfont!
-Missing character: There is no 1 in font nullfont!
+Missing character: There is no 2 in font nullfont!
 Missing character: There is no R in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no s in font nullfont!
@@ -408,8 +408,6 @@ Missing character: There is no k in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no b in font nullfont!
 Missing character: There is no J in font nullfont!
-Missing character: There is no Ã in font nullfont!
-Missing character: There is no ¸ in font nullfont!
 Missing character: There is no r in font nullfont!
 Missing character: There is no g in font nullfont!
 Missing character: There is no e in font nullfont!
@@ -428,6 +426,9 @@ Missing character: There is no f in font nullfont!
 Missing character: There is no f in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no r in font nullfont!
+Missing character: There is no I in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no s in font nullfont!
 Missing character: There is no V in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no n in font nullfont!
@@ -455,16 +456,6 @@ Missing character: There is no ? in font nullfont!
 Missing character: There is no ? in font nullfont!
 Missing character: There is no ? in font nullfont!
 Missing character: There is no ? in font nullfont!
-
-Underfull \hbox (badness 10000) in paragraph at lines 40--40
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 40--40
-
- []
-
 
 Underfull \hbox (badness 10000) in paragraph at lines 40--40
 
@@ -751,10 +742,10 @@ Overfull \hbox (20.69986pt too wide) in paragraph at lines 55--56
 
  
 Here is how much of TeX's memory you used:
- 21 strings out of 495285
- 482 string characters out of 3180538
+ 22 strings out of 495285
+ 484 string characters out of 3180538
  48043 words of memory out of 3000000
- 3319 multiletter control sequences out of 15000+200000
+ 3320 multiletter control sequences out of 15000+200000
  4599 words of font info for 17 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
  19i,19n,25p,260b,315s stack positions out of 5000i,500n,10000p,200000b,50000s
