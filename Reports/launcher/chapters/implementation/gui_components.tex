@@ -18,7 +18,7 @@ The library consists of extensions to standard android classes:
 %The extensions consists of overriden appearence and behavior, such that 
 
 
-
+%\Tree [.S This [.VP [.V is ] \qroof{a simple tree}.NP ] ]
 \begin{figure}[h]
 	\centering
 	\Tree [.Button [.GButton [.GIconButton [.GVerifyButton ] GCancelButton ] ] ]
@@ -26,5 +26,13 @@ The library consists of extensions to standard android classes:
 	\label{fig:gbuttoninheritance}
 \end{figure}
 
+\autoref{fig:gbuttoninheritance} shows the following classes, which directly or indirectly implement extensions to \verb+android.widget.Button+.
 
-\Tree [.S This [.VP [.V is ] \qroof{a simple tree}.NP ] ]
+\paragraph{GButton} implements coloring, according to the the design language, presented in \autoref{design:design_language}.
+
+\paragraph{GIconButton} implements functionality which allows for the use of a icon inside the button. An icon could be a status icon, as described in \autoref{design:state_icons}.
+
+\paragraph{GVerifyButton} simply uses functionality from \verb+GIconButton+ to set the icon to the \emph{accept} status icon, from 
+\autoref{design:state_icons}.
+
+\paragraph{GCancelButton} also sets the icon to the \emph{reject} status icon from \autoref{design:state_icons}, by using functionality from \verb+GIconButton+.
