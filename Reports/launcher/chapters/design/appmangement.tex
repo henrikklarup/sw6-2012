@@ -56,9 +56,16 @@ If the user does not choose a widget, the action is cancelled.
 
 \subsection{Drawer}
 \label{sec:drawer}
-As stated, the drawer was designed to hide functionallity that is not always needed in a convenient place. 
-As seen in \autoref{fig:appmanagement_design} everything that has to do with changing app settings is placed in the drawer which the user has to open to get to it.
-This design can be seen in \autoref{fig:gui_appmanagement_design}.
+As stated, the drawer was designed to hide functionality, that is not always needed, in a convenient place. 
+As seen in \autoref{fig:appmanagement_design} everything that has to do with changing app settings is placed in the drawer, and the user has to open the drawer to get to this functionality.
+The drawer is shown in \autoref{fig:design_prototype} in context.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=1\textwidth]{gfx/design_prototype.pdf}
+	\caption{Illustration of the app management components}
+	\label{fig:design_prototype}
+\end{figure}
 
 \begin{figure}[!h]
 	\centering
@@ -69,7 +76,7 @@ This design can be seen in \autoref{fig:gui_appmanagement_design}.
 
 To highten consistency, the handle and the inside of the drawer have the same color.
 The handle has rounded corners, see \autoref{design:button_design}, to tell the user that this element is interactive.
-A design with the drawer closed can be seen in \autoref{fig:gui_appmanagement_closed_design}.
+An illustration with the drawer closed can be seen in \autoref{fig:gui_appmanagement_closed_design}, and one with the drawer open in \autoref{fig:gui_appmanagement_design}.
 
 \begin{figure}[!h]
 	\centering
@@ -82,6 +89,7 @@ A design with the drawer closed can be seen in \autoref{fig:gui_appmanagement_cl
 \label{par:widgets}
 Widgets in the \giraf[] system are used to display information to the user, and might let the user take an action.  
 An action can e.g. be to present additional information to the user, or to produce a side effect in the system. 
+\autoref{fig:design_prototype} shows the placement of the widgets in context.
 
 All widgets are designed with round corners to signal interactivity, in accordance with \autoref{design:button_design}.
 The widget \emph{logout} is kept seperately from the other widgets, as it allows the user to change the state of the launcher to \emph{No credentials provided}, as seen in \autoref{fig:state_diagram}, while the other widgets keep the launcher \emph{No app selected}.
@@ -94,4 +102,6 @@ They have white edges to keep them distinguishable from the background.
 The color picker consists of ten predefined colors. 
 The reason for using predefined colors in the color picker is to ensure contrast. 
 If developers of \giraf[] apps make their app icons mono-colored white, the contrast would always be sufficient. 
-This should ensure that users will be able to see the icon, no matter what icon background color was chosen
+This should ensure that users will be able to see the icon, no matter what icon background color was chosen.
+
+\autoref{fig:design_prototype} shows the placement of the color picker in context, and \autoref{fig:gui_appmanagement_design} shows the complete graphical design.

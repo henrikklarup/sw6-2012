@@ -40,17 +40,25 @@ Upon scanning a QR-code, there are two possible outcomes: The QR-code is invalid
 In case the QR-code is valid, the device vibrates to notify the user, and the process enters its second step. The second step is the confirmation of the identity, or rejection if the identity represented on the system does not match the user's desired identity.
 
 \subsection{GUI}
-The GUI components of the authentication design can be seen in \autoref{fig:authentication_gui_design_init}.
+The GUI components of the authentication design can be seen in \autoref{fig:authentication_gui_illustration}.
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.7\textwidth]{gfx/authentication_gui_design_init.pdf}
-	\caption{Graphical User Interface of the authentication functionality}
-	\label{fig:authentication_gui_design_init}
+	\includegraphics[width=0.7\textwidth]{gfx/authentication_bw_gui.pdf}
+	\caption{Illustration of the authentication components}
+	\label{fig:authentication_gui_illustration}
 \end{figure}
 
 The camera border helps distinct the camera feed from the rest of the layout, but it also provides feedback upon scanning by changing colors --- this can be seen in \autoref{app:design:authentication}. 
 The backwards facing camera feed is surrounded by the camera border. 
 A scanner guide is overlaid on top of the camera feed to remind the user of scanners in general and the behavior that is expected of them.
+\autoref{fig:authentication_gui_design_init} shows the complete graphical design.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{gfx/authentication_gui_design_init.pdf}
+	\caption{GUI of the authentication functionality}
+	\label{fig:authentication_gui_design_init}
+\end{figure}
 
 On the left hand side an animation is shown, to guide the user through the scanning process. 
