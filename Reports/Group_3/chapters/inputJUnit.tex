@@ -1,0 +1,32 @@
+\subsubsection*{JUnit for the \code{IOHandler}}
+JUnit tests for the \code{IOHandler} have been done in a series of 18 tests. %where the first 9 tests covers methods that perform conversions and calculations
+\begin{description}
+	\item[Tests $1-9$] tests the different methods used for calculations and conversions.
+	\item[Tests $10-14$] tests the different methods used for generating transmissions.
+	\item[Tests $15-18$] tests the different methods used for sending generated transmissions.
+\end{description}
+Testing these methods is not a trivial matter since they all have the access modifier \lstinline[style=sw6Java]{private}. However, thanks to Ross Burton's article\footnote{\textit{Subverting Java Access Protection for Unit Testing}\cite{onJava}}, a method for testing this methods has been devised. The way these method will be tested is by the use of reflection in Java, which gives us the ability to manipulate a methods accessibility, thereby exposing it and allowing us to test it. 
+
+There is only one problem with this method, this is that it cannot handle overloaded methods. However, each time the test is run it does somehow, seemingly per random, chose one of the overloaded methods. This means that if you have to test an overloaded method, you may have to run the test several times to get the actual "correct" result.
+
+For tests $1-9$ and tests $11-18$ the yielded results were as expected. However, for test number $10$ there was one of the three results that were not as expected, the results can be seen in \autoref{tab:test10}. 
+Below is a description of how the method tested in test number $10$ should work.
+\begin{description}
+	\item[makePing(builder, pingSize)] \hfill \\
+	This method generates a ping with the specified size of $1\leq pingSize \leq 4096$, and adds it to the builder.
+\end{description}
+\begin{table}[H]
+	\centering
+	\begin{tabular}{ l | r | r | r }
+		Case & Input & Expected result & Actual result \\
+		\hline
+		1 & 32 & 32 & 32 \\
+		\hline
+		2 & 12 & 12 & 12 \\
+		\hline
+		3 & 4096 & 4096 & 12 \\
+	\end{tabular}
+	\caption{Test10 -- Method: \code{makePing(builder, pingSize)}}
+	\label{tab:test10}
+\end{table}
+This error was not hard to isolate and correct, since it was an error in the logic determining the size of the ping, more specifically -- there was a missing '$=$' operator. So instead of actually checking for '$\leq$' it was actually checking for '$<$'. Therefore in case 3, it evaluated $4096<4096$ to a case which yielded the value $12$, instead of the value $4096$.
