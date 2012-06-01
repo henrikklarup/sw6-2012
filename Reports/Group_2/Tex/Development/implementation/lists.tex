@@ -21,29 +21,29 @@ This is done by making an adapter with the changes the developer want to make to
 	\centering
 	\begin{lstlisting}
 View v = list_item_view;
-	if (v == null) {
-		LayoutInflater li = (LayoutInflater) getContext().getSystemService(
-				Context.LAYOUT_INFLATER_SERVICE);
-		v = li.inflate(R.layout.profile_list, null);
-	}
-	Child c = items.get(position);
-	if (c != null) {
-		ImageView iv = (ImageView) v.findViewById(R.id.profilePic);
-		TextView tv = (TextView) v.findViewById(R.id.profileName);
+if (v == null) {
+	LayoutInflater li = (LayoutInflater) getContext().getSystemService(
+			Context.LAYOUT_INFLATER_SERVICE);
+	v = li.inflate(R.layout.profile_list, null);
+}
+Child c = items.get(position);
+if (c != null) {
+ImageView iv = (ImageView) v.findViewById(R.id.profilePic);
+TextView tv = (TextView) v.findViewById(R.id.profileName);
 
-		if (iv != null) {
-			iv.setImageResource(R.drawable.default_profile);
-		}
-		if (tv != null) {
-			if (c.name == "Last Used") {
-				tv.setText(R.string.last_used);
-			} else if (c.name == "Predefined Profiles") {
-				tv.setText(R.string.predefined);
-			} else {
-				tv.setText(c.name);
-			}
-		}
+if (iv != null) {
+	iv.setImageResource(R.drawable.default_profile);
+}
+if (tv != null) {
+	if (c.name == "Last Used") {
+		tv.setText(R.string.last_used);
+	} else if (c.name == "Predefined Profiles") {
+		tv.setText(R.string.predefined);
+	} else {
+		tv.setText(c.name);
 	}
+}
+}
 \end{lstlisting}
 	\caption{The WOMBAT implementation of a \texttt{ListView} \texttt{ArrayAdapter} modified to use a list of profiles.}
 	\label{code:listview_adapter_example}
@@ -62,21 +62,21 @@ The \texttt{OnItemClickListener} of the child fragment ensures that the configur
 
 \begin{figure}[H]%
 		\begin{lstlisting}
-			public void onListItemClick(ListView lv, View view, int position, long id) {
-				// Update the fragments
-				SubProfileFragment detf = (SubProfileFragment) getFragmentManager()
-						.findFragmentById(R.id.subprofileFragment);
-				CustomizeFragment custF = (CustomizeFragment)getFragmentManager().findFragmentById(R.id.customizeFragment);
-				custF.setDefaultProfile();
-				
-				if (detf != null) {
-					// Marks the selected profile in the guard singleton
-					guard.profilePosition = position; 
-					guard.publishList().get(position).select();
-					guard.profileID = guard.publishList().get(position).getProfileId();
-					detf.loadSubProfiles();
-				}
-			}
+public void onListItemClick(ListView lv, View view, int position, long id) {
+	// Update the fragments
+	SubProfileFragment detf = (SubProfileFragment) getFragmentManager()
+			.findFragmentById(R.id.subprofileFragment);
+	CustomizeFragment custF = (CustomizeFragment)getFragmentManager().findFragmentById(R.id.customizeFragment);
+	custF.setDefaultProfile();
+	
+	if (detf != null) {
+		// Marks the selected profile in the guard singleton
+		guard.profilePosition = position; 
+		guard.publishList().get(position).select();
+		guard.profileID = guard.publishList().get(position).getProfileId();
+		detf.loadSubProfiles();
+	}
+}
 		\end{lstlisting}
 	\caption{Example of the \texttt{OnClickListener} of the child fragment.}
 	\label{code:listview_onclick_example}%
