@@ -61,7 +61,7 @@ Secnario 3, has almost the same code as \autoref{code:getRedirectSelf} and \auto
 In generalt the \code{form} is build as \code{<form method='POST/GET' name='NameOfForm' action='WhichPageToExecuteCodeFrom>}.
 
 \subsubsection{Database access}
-The read data from the database is handled by Java code in each of the Servlets, the code is shown in \autoref{readDatabase}. To update attributes in the database, the \code{stmt.executeQuery} is used, with the appropriate SQL script.  To delete data, instead of \code{stmt.executeQuery} a \code{PreparedStatement} is created, this is executed with by calling \code{int i = ps.executeUpdate();} which will give either a OK code (0) or and error code. 
+The read data from the database is handled by Java code in each of the Servlets, the code is shown in \autoref{code:readDatabase}. To update attributes in the database, the \code{stmt.executeQuery} is used, with the appropriate SQL script.  To delete data, instead of \code{stmt.executeQuery} a \code{PreparedStatement} is created, this is executed with by calling \code{int i = ps.executeUpdate();} which will give either a OK code (0) or and error code. 
 
 \begin{lstlisting}[language=Java,label=code:readDatabase,caption=Code to read data from the database]
 public void readData()
@@ -175,7 +175,7 @@ A navigation diagram of the web site is shown in \autoref{fig:WebNav}, and shows
 
 \begin{figure}
 	\centering
-		\includegraphics{images/WebNav.png}
+		\includegraphics[width=1.00\textwidth]{images/WebNav.png}
 	\caption{Navigation diagram for the web site}
 	\label{fig:WebNav}
 \end{figure}
