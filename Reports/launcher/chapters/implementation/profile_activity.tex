@@ -1,30 +1,10 @@
 \section{Profile Select Activity}
 
-The \activity{ProfileSelectActivity} activity implements the behavior described in \autoref{design:profile_selection}, and takes care of providing the profile service, described in \autoref{external_architecture}, to the launched \girafapp[].
+The \activity{ProfileSelectActivity} activity implements the behavior described in \autoref{design:profile_selection}, and takes care of providing the profile service, described in \autoref{external_architecture}.
 
-As explained in \autoref{external_architecture}, the \guardian[] should be able to launch apps with all profiles which is attached to the \guardian[]. \autoref{lst:snipgetprofiles} shows how all profiles are found, including those in attached departments and their subdepartments.
+The profile service is implemented using intents, as shown in \autoref{lst:snipprovideprofile}.
 
-\begin{lstlisting}[style=sourceCode, language=JAVA, caption=Snippet of the \method{loadApplications} method, label=lst:snipgetprofiles]
-		...
-		mChildren = new ArrayList<Profile>();
-		Profile guardianProfile = helper.profilesHelper.getProfileById(mGuardianID);
-		List<Profile> guardianChildren = helper.profilesHelper.getChildrenByGuardian(guardianProfile);
-		List<Department> guardianDepartments = helper.departmentsHelper.getDepartmentsByProfile(guardianProfile);
-		List<Profile> totalChildren = new ArrayList<Profile>();
-		totalChildren.addAll(guardianChildren);
-		
-		for (Department department : guardianDepartments) {
-			List<Profile> childrenFromDepartments = helper.profilesHelper.getChildrenByDepartmentAndSubDepartments(department);
-			
-			totalChildren.addAll(childrenFromDepartments);
-		}
-		
-		...
-\end{lstlisting}
-
-The profile service is provided with intents, as shown in \autoref{lst:snipprovideprofile}.
-
-\begin{lstlisting}[style=sourceCode, language=JAVA, caption=Snippet of the \method{loadApplications} method, label=lst:snipprovideprofile]
+\begin{lstlisting}[style=sourceCode, language=JAVA, caption=Code snippet showing the provision of profile data, label=lst:snipprovideprofile]
 		// When a child is selected, launch the app that was chosen with the correct data in the extras.
 		listOfChildren.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -45,4 +25,4 @@ The profile service is provided with intents, as shown in \autoref{lst:snipprovi
 		});
 \end{lstlisting}
 
-The launched \girafapp[] can retrieve the chosen profile, by following our specification, as seen in \todo{indsaet ref til vores speficikation af, hvordan man laeser hvilken profile der er valgt}.
+The launched \girafapp[] can retrieve the information by following the ``Launcher Services'' guidelines, see \autoref{appendix:launcherservices}, provided to the \localgroup[]s.

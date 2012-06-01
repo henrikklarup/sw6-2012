@@ -1,73 +1,75 @@
-\section{Product Quality}
+\chapter{Product Qualities}
 \label{product_quality}
+This chapter explains why, amongst others, usability was highly prioritized, and why e.g. performance was not.\\
+
 As seen in \autoref{interviews}, the customers wished for the product to have high usability and flexibility. 
-These are the only explicit user requirements that were procurred, but there are other quality aspects to take into account. 
-As the project is meant to be continued by other students later, static software qualities like having maintainable and structured code are very important as well. 
-And there are also plans to make the product usable by \autists[] later on, which puts heavy demands on dynamic software qualities such as reliability and consistency. \newline
+These are the only explicit user requirements that were procured, but there are other quality aspects to take into account. 
+As the product is meant to be developed on by other students later, static software qualities like having maintainable and structured code are very important as well. 
+There are also plans to make the product usable by \autists[] later on, which puts heavy demands on dynamic software qualities such as reliability and consistency. 
+Static qualities refers to qualities that are observable without using the product e.g. looking at the code, while dynamic qualities are only observable while using the product.\newline
 
 Because there is limited time for development however, not all relevant qualities can be prioritized equally, while still building a functioning product. 
-To this end, the different quality aspects have been split into two pools; those that needed to be achieved within the development time, and those that did not. 
+Therefore, the different quality aspects have been split into two pools; those that needed to be achieved within the development time, and those that did not. 
 Each aspect is described, detailing why it is or is not important to achieve within the given time frame, and how we sought to achieve it. 
 
-\subsection{High Priority Quality Aspects}
-These quality aspects are described in a prioritized list, with a descending priority. 
+\section{High Priority Quality Aspects}
+These quality aspects are described in a prioritized list, with descending priority. 
 
-\subsubsection{Usability}
+\subsection*{Usability}
 Usability refers to the ease of use of the product, which was a key concern for the customer.
 Usability was thus promoted to the highest priority concern in development. 
 To achieve high usability, all design work was centered around usability, seeking to simplify user interaction. 
-Some relevant usability concerns for the product can be seen in \autoref{Preanalysis:Usability_for_children}.
 
-\subsubsection{Consistency}
-Concistency refers to consistent design and component use, which helps simplify the user experience, increasing usability\citep[page 90]{dieb-book}. 
-This aspect was promoted to a high priority, as it has a impact on the usability of the system. 
-To achieve consistency, the \guicomponents[] library was created, not only to create consistency in the launcher, but to allow consistency throughout the system. 
+\subsection*{Consistency}
+Concistency refers to consistent design and component use, which helps simplify the user experience, increasing usability \citep[p. 90]{dieb-book}. 
+This aspect was promoted to a high priority, as it has an impact on the usability of the system. 
+To achieve consistency, the \guicomponents[] library, as mentioned earlier, was created, not only to create consistency in the launcher, but to allow consistency throughout the system. 
 
-\subsubsection{Reliability}
+\subsection*{Reliability}
 Reliability refers to failure free operation, and is important in making the user feel confident about the system. 
 If the user knows the system occasionally crashes, they may prefer an inferior, but reliable, tool to get the job done. 
-This is important as \autists[] are especially sensitive to change, and so unreliable operation can be even more disruptive to them than to regular users. 
-To achieve reliability, the system has been recurringly, albeit informally as well, tested and we have been pragmatic about fixing bugs.
+This is important as \autists[] are especially sensitive to change, and so unreliable operation can be even more disruptive to them than to guardian users. 
+To achieve reliability, the system has been recurringly, albeit informally, tested and we have been pragmatic about fixing bugs.
 
-\subsubsection{Structured Code}
-Having structured code, refers to one's code being structured in an intuitive fashion that makes it easy to find desired parts of the code. 
-Structured code helps make code more readable and understandable, which is crucial when handing the code over to a new team of programmers. 
+\subsection*{Structured Code}
+Structured code aims to help increase code readability and understandability, which we believe is crucial when handing the code over to a new team of programmers. 
 To ensure that the code of the launcher is structured, the code has been continuously refactored, with deprecated code being removed, and functionality moved to the correct parts of the program. 
-Classes have been created to accomodate functionality that is reused across the system, such that the functionality is available globally, to avoid code duplication. 
+Classes have been created to accomodate functionality that is reused across the system, such that the functionality is available globally, to reduce code duplication. 
 
-\subsubsection{Maintainable Code}
-Having maintainable code, refers to one's code being structured in a fashion that makes it easy to replace or add code to the program. 
+\subsection*{Maintainable Code}
+Having maintainable code, refers to code being structured in a fashion that makes it easy to replace or add code to the program. 
 Maintainable code is important when a new team is supposed to take over the project, and allowing them to easily make changes, makes it easier for them to be effective. 
 To make sure the code of the launcher is maintainable, the refactoring process of the project has, among other things, focused on reducing functionality into smaller functions. 
 This makes the code more modular, allowing components in the code to more easily be replaced, while also reducing code duplication. 
 
-\subsubsection{Code Documentation}
+\subsection*{Code Documentation}
 Code documentation refers to having documented code, for example in the form of comments in the code, or models or charts describing the behavior of the code. 
 This is important for helping a new team understand the code, and help them be efficient in their work when they take over the project. 
 To make sure the code documentation was adequate, the refactoring process has also dealt with commenting code, and breaking the code into more understandable pieces. 
 
-\subsection{Low Priority Quality Aspects}
-These quality aspects have not been prioritized relative to each other, and are not described in any particular order. 
+\section{Low Priority Quality Aspects}
+These quality aspects have not been prioritized relative to each other, and in opposition to the previous section, are not described in any particular order. 
 
-\subsubsection{Testable Code}
+\subsection*{Testable Code}
 Having testable code refers to tests being easy to set up and run for the code. 
 This was not deemed important enough for the product, as much of the focus of this product is on the GUI, rather than functionality. 
 As GUI creation is a key component of Android, we decided it was not necessary to make the GUI code testable, as the system would already have been tested extensively, formally or informally, at this point in time. 
-Having informal testing of the GUI through use of the product was deemed necessary.
 
-\subsubsection{Completeness}
+\subsection*{Completeness}
 Completeness refers to how many features made it into the product, compared to those specified in the product specification. 
-Due to the short development time available, and the inexperience of the team with Android, it was decided early on to work in a way that would let features be implemented as time permitted, rather than creating a specification that had to be implemented in the time available.
+Due to the short development time available, it was decided early on to work in a way that would let features be implemented as time permitted, rather than creating a specification that had to be implemented in the time available.
 
-\subsubsection{Performance}
+\subsection*{Performance}
 Performance refers to the program responding to user input in a timely manner. 
-While performance was deemed important due its impact on the user experience, it was found that the launcher did not tax the system in any meaningful way, and optimizing for performance was therefore deemed unnecessary.
+Even though performance was deemed important due to its impact on the user experience, it was found that the launcher did not tax the system in any meaningful way.
+Optimizing for performance was therefore deemed unnecessary.
 
-\subsubsection{Correctness}
+\subsection*{Correctness}
 The correctness aspect refers to comparing the product with the requirement specification and determining if the product meets the specification. 
 This was considered a low priority, as the project does not include focus on creating a comprehensive requirement specification and developing with that in mind, but rather on developing features as time permits with the customer requirements in mind.
 
-\subsubsection{Flexibility}
+\subsection*{Flexibility}
 While flexibility is not considered an aspect of software quality, it was requested by the customer. 
 It was decided to focus on the other customer requirement, usability, to create a solid foundation for the product, and with the short development time, having flexible functionality was deemed unnecessary for the launcher in this semester. 
-It was important to focus only on either flexbility or usability, as adding features to a product (as flexibility does) can make the product more complex and less user friendly. 
+There is a dilemma between usability and flexibility, as usability improves by heightened concistency.
+Flexibility works against concistency, and achieving both flexibility and usability requires, in our opinion, significant effort.

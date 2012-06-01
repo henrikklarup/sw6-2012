@@ -31,15 +31,46 @@ The implemented design can be seen in \autoref{fig:home-activity_closed} and \au
 \end{figure}
 
 \subsection{Color picker}
-\label{home:colorpicker}
-To show the functionality of the drawer a color picker for apps were implemented and hidden in the drawer. The color picker can be seen in \autoref{fig:home-activity} as mentioned in \autoref{backlog:homebar_drawer} and explained in \autoref{design:app_manangement}.
-The \textit{color picker} is a tool that was made to change colors on apps, this have been extended so far that if the logo of e.g. WOMBAT is choosen to be red then the background in WOMBAT will also be set to red when the application is loaded.
+\label{home:colorpicker}	
+We believe that usability of the color picker can be heightened by further development on the class shown in \autoref{lst:draganddrop}.
+The drag cases can be further developed to improve usability, as they can e.g. be used to indicate that the apps are able to recieve the dragged view, e.g. a color.
 
-The color picker is implemented with a color board with ten predefined \giraf[] colors. These colors can be assigned to any app that are in the launcher and there is no limit on how many times the user can use one color. This means that if the user want they can make every app e.g. red.
-The color picker is made with drag and drop functionality as described in \autoref{par:colorpicker}. When the user have choosen a color and assigned it the app icon will change to this color and the color is saved in the local database so that if the user restarts the launcher the apps will still have the colors the users have assigned for them. 
-The color picker can be seen in \autoref{fig:home-activity}
+\begin{lstlisting}[style=sourceCode, language=JAVA, caption=The GAppdragger class, label=lst:draganddrop] 
+public class GAppDragger implements OnDragListener {
+	@Override
+	public boolean onDrag(View view, DragEvent drawEvent) {
+		switch(drawEvent.getAction()){
+		case DragEvent.ACTION_DRAG_STARTED:
+			break;
+		case DragEvent.ACTION_DRAG_ENTERED:
+			/*
+			 * Future todo: implement highlighting
+			 */
+			break;
+		case DragEvent.ACTION_DRAG_EXITED:
+			/*
+			 * Future todo: implement dehighlighting
+			 */
+			break;
+		case DragEvent.ACTION_DROP:
+			long id = Long.parseLong((String)view.getTag());
+			int color = (int) Integer.parseInt(drawEvent.getClipData().getItemAt(0).getText().toString());
+			
+			AppAdapter.saveAppBackground(view.getContext(), view, color, id);
+			break;
+		case DragEvent.ACTION_DRAG_ENDED:
+			/*
+			 * Future todo: implement dehighlighting
+			 */
+			break;
+		}
+		return true;
+	}
+}
+\end{lstlisting}
 
 \subsection{Widgets}
-The widgets which is described in \autoref{par:widgets} and can be seen in \autoref{fig:home-activity}is between the app board and the drawer, this is called the \textit{home bar}. Here it is also possible to see a picture of the user curretly logged in. The user can logout with the orange button in the button of the home bar. There are two widgets: One that shows the connectivity to the Savanah server. This widget has three states: Connected and updated, connected and synchronising and not connected. Connected and updated tells the user that all data is synchronized with the server and they are good to go. Connected and synchronising means that either the tablet needs data from the server or to push some changes to the server. Not connected tells the user that they are not connected to the server and therefore can not update or synchronize with the server.
-If the user clicks on the connectivity widget they will get a description to the currently showing status telling them what this icon means.
-The second widget is a calendar widget which tells the user what day it is in the month in a numeric format. If the user clicks this widget they will get a description with day, d. dd, month, week. This is done so the user easily can access and see what day it is.
+The widgets are implemented in the \guicomponents[] library, and built as isolated classes such that they can be utilized in differents contexts. 
+As widgets might need updates, we have implemented a periodic update mechanism, that updates \giraf[] widgets in a uniform manner.
+This manner refers to all widgets being updated by a central updater, instead of running multiple clocks to update widgets seperately.
+This behavior is enforced by having all widgets in \giraf[] implement the IGWidget-interface, and any widget to be updated should be added to the central updater.
