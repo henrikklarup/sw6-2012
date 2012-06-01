@@ -16,6 +16,7 @@
 \usepackage{float}
 \usepackage[Conny]{fncychap}
 \usepackage[usenames,dvipsnames]{color}
+\usepackage{color, colortbl}
 \usepackage{longtable}
 \usepackage{multirow}
 \usepackage{algorithmic}
@@ -26,7 +27,6 @@
 \usepackage{hyperref}
 \usepackage{rotating}
 \hypersetup{pdfborder={0 0 0}}
-\definecolor{light-gray}{gray}{0.95}
 \usepackage[absolute]{textpos}
 \usepackage[rounded]{syntax}
 \usepackage{appendix}
@@ -39,6 +39,12 @@
 
 \newfloat{Code}{H}{myc}
 \allowdisplaybreaks
+
+
+% Color definitions
+\definecolor{light-gray}{gray}{0.95}
+% Color definitions
+
 
 %EPS images snask
 
@@ -96,7 +102,35 @@
   }  \newenvironment{program}
 
 
+% Code environment definition --- Java
+% Usage 1: \lstinputlisting[style=sw6Java,label=something,caption=Tove]{someFile or someActualCode}   --- is shown in \listoflistings
+% Usage 2: \lstinline[style=sw6Java]{someCode}   --- is not shown in \listoflistings
+\lstdefinestyle{sw6Java} {
+  language=Java,
+  basicstyle=\ttfamily\footnotesize\bfseries,
+  float,
+  columns=flexible,
+  morekeywords=[1]{TmdbAPI,TmdbMovie},
+  %keywordstyle=[1]\sffamily,
+  backgroundcolor=\color{light-gray},
+  captionpos=b,
+  frame=single,
+  breaklines=true, 
+  keywordstyle=\color{Blue},
+  commentstyle=\color{Green},
+  stringstyle=\color{Mahogany},
+  showspaces=false,
+  showstringspaces=false,
+  numbers=left,                   % where to put the line-numbers
+  numberstyle=\footnotesize,      % the size of the fonts that are used for the line-numbers
+  stepnumber=1
+}
+% Code environment definition --- Java
+
+\usepackage{url}
+
 \definecolor{javared}{rgb}{0.6,0,0} % for strings
+
 
 \definecolor{javagreen}{rgb}{0.25,0.5,0.35} % comments
 
