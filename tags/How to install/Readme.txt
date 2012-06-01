@@ -52,7 +52,7 @@ GIRAFGIRAFGIRAFGIRAFGIRAFGIRAFGIRAFGIRAFGIRAFGIRAFGIRAFGIRAFGIRAFGIRAFGIRAFGIRAF
 
 5.	On the device navigate to the "GIRAF Installer" folder and install the APK file.
 
-6.	Click "Istaller" and Accept all five applications.
+6.	Click "Installer" and accept all five applications.
 
 7. 	On the device open OasisApp to insert Test Data - With "Tilføj Test Data".
 
