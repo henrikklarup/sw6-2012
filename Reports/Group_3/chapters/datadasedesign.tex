@@ -18,7 +18,16 @@ The requirements for the database has been provided by the other project groups,
 	\item A department must be able to have a subdepartment\footnote{Example: Birken has two departments, at two different addresses, both these subdepartments needs to be linked with Birken as a superdepartment}
 \end{itemize}
 
-\subsubsection*{Diagram} %TODO fix overskrift
+\subsubsection*{Early Diagrams}
+The database has had several redesigns, due to new demands and new ideas.
+\begin{description}
+	\item[First draft (0.2)] The first draft of the database can be seen in \autoref{fig:draft02}. There were several missing fields in this draft: username and password is missing form the \code{AuthUsers}, and department has no access to \code{Media}, 
+	\item[Second draft (0.3)] The second draft of the database can be seen in \autoref{fig:draft03}. This handles the problem of a department's access to medias.
+	\item[Third draft (0.4.1)] Several tables has been renamed to ease understanding.
+	\item[Final draft] The final database can be seen in \autoref{fig:DiaDesign}. This handles the problem with username and password in the \code{AuthUsers}, departments access to medias, and proper naming of both tables and attributes.
+\end{description}
+
+\subsubsection*{Current Database} %TODO fix overskrift
 A diagram has been made to get a overview of the different tables and their relations. This diagram is designed in DIA\cite{Dia}, and can be seen in \autoref{fig:DiaDesign}.
 
 \begin{figure}[htbp]
