@@ -1,10 +1,25 @@
 
 \input{preamble}
-\title{insert title here} %TODO
-\author{os} %TODO
 
 \begin{document}
-\maketitle
+\begin{titlepage}
+\input{chapters/frontpage.tex}
+% Remove page number and add blank page.
+
+\newpage
+\thispagestyle{empty}
+\mbox{}
+
+\newpage
+\thispagestyle{empty}
+\mbox{}
+
+\input{chapters/titlepage.tex}
+\end{titlepage}
+\newpage
+\thispagestyle{empty}
+\mbox{}
+
 \tableofcontents
   \input{input/introduction.tex}
 %\chapter{Development methods}
