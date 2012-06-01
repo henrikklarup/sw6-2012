@@ -28,8 +28,16 @@ The usability test of the web interface, showed a few critical, and several seri
 %We have not been able to correct the mistakes but have documented them for use by next year's project.
 
 \subsubsection*{The Server Software}
+Implementing the server software has been an interesting challenge. All development was stopped at the end of the 5th sprint, no matter what condition the software was in. While we have generally attempted to polish the implementation, some errors and unimplemented features still exists. following is a list of known issue and shortcomings of Savannah at the end of the project.
 \begin{description}
- \item[No Synchronization done] One of the goals of the project was to synchronize data with the local database, and a api package 
+ \item[Server file structure] Files retrieved by the server will be stored in the single folder, meaning that the files with identical names will overwrite older files.
+
+ \item[Known error in query building] database testing showed us that there had been a misunderstanding in the project group, which means that query building is erroneous. The problem lies in that rows in the \code{Department} and \code{Profile} can not have identical unique identifiers as they both have foreign key constraints to the \code{AuthUsers} table. The query builder however, builds a query that extracts information where \code{Department} and \code{Profile} are merged, ultimately resulting in the query always returning the empty set.
+
+ \item[No Synchronization done] One of the goals of the project was to synchronize data with the local database, and a jar has been created, and tested on a laptop computer, for this purpose. However, Oasis, who was, due to a still unknown error, unable to include the jar file in the Oasis library.
+
+ \item[Communication on in SSL] Communication to and from the server is not in SSL, which at this point is not an issue. SSL communication is only required upon a product release, and Savannah is not ready for release..
+ 
 \end{description}
 
 
