@@ -1,4 +1,4 @@
-\section{App management}
+\section{App Management}
 \label{sec:app_management}
 \label{sec:appman_solution}
 \label{sec:appman_requirements}
@@ -39,31 +39,32 @@ It is therefore important for the user to know if both storages are synchronized
 
 \autoref{fig:appmanagement_design} shows three branches of interactions and actions:
 
-\begin{itemize}
-	\item Change app settings
-	\item Launch app
-	\item Request information
-\end{itemize}
+\paragraph{Change app settings} For a user to change app settings, he or she must open the drawer, a component explained below. 
+In the drawer, there is a color picker, also explained later, from which the user chooses a color and drags it to the desired app. 
+The user can ``cancel'' the color change at any point, either by not choosing a color, or releasing the color over something that is not an app. 
 
-To change app settings the drawer, explained later, must be used. Inside the drawer there is a color picker, explained later, which can be used to change the color of an app icon. The user drags the chosen color from the color picker onto the app which the user wants to assign this color to.
+\paragraph{Launch app} When launching an app, the user chooses an app to launch and clicks it. 
+This brings the launcher out of \emph{App Management}, and into \emph{Profile Selection}, explained later. 
+The user can ``cancel'' the action by not choosing an app, or by coming back to \emph{App Management} after it has been left.
 
-If the user want to launch an app they need to click the app icon and appmanagement will stop.
+\paragraph{Request information} Finally, the user can request information, which happens through widgets, explained below. 
+There are different widgets in the system, and every widget contains unique information.
+The user chooses which one to recieve information from, and clicks the widget containing the desired information to have it shown. 
+If the user does not choose a widget, the action is cancelled. 
 
-To request information the user must click a widget, explained later. Depending on the widget chosen the user will get different information.
-
-\subsection{The drawer}
+\subsection{The Drawer}
 \label{sec:drawer}
 The drawer was designed to hide functionallity that is not always needed in a convenient place. As seen in \autoref{fig:appmanagement_design} everything that has to do with changing app settings is placed in the drawer which the user has to open to get to it.
 The handle of the drawer was designed to have the same color as the inside of the drawer because it was important to create consistensy. 
 It was also rounded, see \autoref{design:button_design}, to tell the user that this element was interactive.
 
-\paragraph{Widgets}
+\subsubsection{Widgets}
 \label{par:widgets}
 Widgets in the \giraf[] system should help the user request information. As seen in \autoref{fig:appmanagement_design} the user can take the action to request information. If the user chooses an information the information will be selected and shown to the user.
 The reason it was designed this way is that if all the information should be around the drawer handle it would probatly confuse the user more than it would help them.
 All widgets is designed so they need to be unique, meaning that there can never be two of the same widgets. This was done for making widgets more consistent so the user always would get the same information from the same widget. All widgets is also designed with round corners to seem interactive see \autoref{design:button_design}.
 The logout widget should be in the bottom of the drawer because it should not confuse the user while they are looking for information.
 
-\paragraph{Color picker}
+\subsubsection{Color picker}
 \label{par:colorpicker}
 All colors in the color picker is rounded because they are an interactive element. They also have white sides so they not fall into one with the background. The color picker consists of ten predefined colors. The reason for predefined colors in the color picker is to make contrast. If developers of \giraf[] apps made their app icons mono-colored in white the contrast would always be sufficient. This should help that all users will always see the icon no matter what icon background color was chosen.
