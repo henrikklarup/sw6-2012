@@ -105,13 +105,7 @@ The \texttt{Guardian} class also creates a list of profiles if the current \text
 	private void createChildren() {		
 		if(oHelp.profilesHelper.getChildrenByGuardian(m_oGuard).isEmpty()){
 			List<String> names = new ArrayList<String>();
-			names.add("Sigurd");
-			names.add("Marcus");
-			names.add("Emil");
-			names.add("Lukas");
-			names.add("Mads");
-			names.add("Nikolaj");
-			
+			... // Add names			
 			for (String s : names) {
 				Profile newProf = new Profile(s, " ", null, 3, 99999999, null, null);
 				newProf.setId(oHelp.profilesHelper.insertProfile(newProf));
@@ -125,75 +119,63 @@ The \texttt{Guardian} class also creates a list of profiles if the current \text
 \label{code:createChildren}%
 \end{figure}
 
-The \texttt{Guardian} class generates an list, of the object type \texttt{Child}, from three lists; last used, predefined, and the profiles related to the \texttt{Guardian}.
-In code snippet \ref{code:publishList} you can see how this list is generated.
-It is important to know that any changes made on this list will not be saved.
-Last used is always in the top of the list and right after is the predefined and after that the profiles are listed alphabetically.
-	
 		\begin{figure}[H]
 \begin{lstlisting}
-		public ArrayList<Child> publishList(){
-		if(_sortedList == null){
-			_sortedList = new ArrayList<Child>();
-		}
-		_sortedList.clear();
-		Child lastUsedChild = new Child("Last Used");
-		lastUsedChild.setProfileId(-3);
-		lastUsedChild.SubProfiles().addAll(reverse(lastUsed()));
-		lastUsedChild.setLock();
-		lastUsedChild.lockDelete();
-		_sortedList.add(lastUsedChild);
-		
-		Child predefChild = new Child("Predefined Profiles");
-		predefChild.setProfileId(-2);
-		Collections.sort(predefined());
-		predefChild.SubProfiles().addAll(predefined());
-		predefChild.setLock();
-		predefChild.lockDelete();
-		_sortedList.add(predefChild);
-		if(_guard != null){
-			Collections.sort(_guard);
-			for(Child p : _guard){
-				Collections.sort(p.SubProfiles());
-			}
-			_sortedList.addAll(_guard);
-		}
-		return _sortedList;
+public ArrayList<Child> publishList(){
+	if(_sortedList == null){
+		_sortedList = new ArrayList<Child>();
 	}
+	_sortedList.clear();
+	Child lastUsedChild = new Child("Last Used");
+	lastUsedChild.setProfileId(-3);
+	lastUsedChild.SubProfiles().addAll(reverse(lastUsed()));
+	...
+	_sortedList.add(lastUsedChild);
+	
+	Child predefChild = new Child("Predefined Profiles");
+	predefChild.setProfileId(-2);
+	Collections.sort(predefined());
+	predefChild.SubProfiles().addAll(predefined());
+	...
+	_sortedList.add(predefChild);
+	if(_guard != null){
+		Collections.sort(_guard);
+		for(Child p : _guard){
+			Collections.sort(p.SubProfiles());
+		}
+		_sortedList.addAll(_guard);
+	}
+	return _sortedList;
+}
 \end{lstlisting}
 \caption{Code snippet to generate the list containing last used, predefined, and the profiles related to the \texttt{Guardian}.}%
 \label{code:publishList}%
 \end{figure}
+
+The \texttt{Guardian} class generates an list, of the object type \texttt{Child}, from three lists; last used, predefined, and the profiles related to the \texttt{Guardian}.
+In code snippet \ref{code:publishList} you can see how this list is generated.
+It is important to know that any changes made on this list will not be saved.
+Last used is always in the top of the list and right after is the predefined and after that the profiles are listed alphabetically.
 	
   \item[Child] \hfill \\
 The \texttt{Child} class is an object that represent either last used, predefined, or a profile. The \texttt{Child} object, no matter what it represents, has a collection of \texttt{SubProfiles}, which is a list of configurations. The user is not allowed to save or delete from the last used and predefined list, the \texttt{Child} class therefore provides two kinds of locks, a save lock and a delete lock. When the save lock is true, you cannot save a configuration on the \texttt{Child} object. When the delete lock is false, you cannot delete configurations from the \texttt{Child} object. Both delete and save lock is read only for projects outside \texttt{TimerLib}, this is because the WOMBAT should never lock any \texttt{Child} objects that are loaded from the \texttt{OasisLocalDatabase}. The lock methods can be seen in code snippet \ref{code:TimerLibLocks}.
 
 		\begin{figure}[H]
 \begin{lstlisting}
-	/**
-	 * Used to check if you can save on a specific Child
-	 * @return boolean, if true, you cannot save on the child. if false you can save.
-	 */
+	// Used to check if you can save on a specific Child
 	public boolean getLock(){
 		return _lock;
 	}
-	/**
-	 * Enables the lock
-	 */
+	// Enables the lock
 	void setLock(){
 		this._lock = true;
 	}
-	/**
-	 * Enable delete lock, so you cannot delete from a certain child.
-	 * This will always be used on lastUsed and predefined.
-	 */
+	/* Enable delete lock, so you cannot delete from a certain child.
+	 * This will always be used on lastUsed and predefined. */
 	void lockDelete(){
 		_deleteCheck = false;
 	}
-	/**
-	 * Used to check if you can delete a subprofiles on a specific child
-	 * @return boolean, true = you can delete: false = you cannot delete.
-	 */
+	// Used to check if you can delete a subprofiles on a specific child
 	public boolean deleteCheck(){
 		return _deleteCheck;
 	}
