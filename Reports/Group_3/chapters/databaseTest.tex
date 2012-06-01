@@ -1,6 +1,6 @@
 Database testing is performed in a dynamic white-box manner. The tests are white-box as it is not the MySQL server we are testing, but that the database design
-correspond to functionally that are expecting.A total of 16 test cases have been designed, \autoref{fig:dbtest01-12} show the test design for test cases \#00 to \#11.
-The identifier TD0001 points \autoref{fig:dbtd0001}, which explains each step to be performed for the test cases in \autoref{fig:dbtest01-12}.
+correspond to functionally that are expected.A total of 16 test cases have been designed, \autoref{fig:dbtest01-12} show the test design for test cases \#00 to \#11.
+The identifier \code{TD0001} points to \autoref{fig:dbtd0001}, which explains each step to be performed for the test cases in \autoref{fig:dbtest01-12}.
 
 
 \begin{figure}[H]
@@ -15,11 +15,12 @@ The identifier TD0001 points \autoref{fig:dbtd0001}, which explains each step to
   \label{fig:dbtd0001}
 \end{figure}
 
-All the database tests are done manually through a terminal and thus require human interpretation \autoref{hej}
+All the database tests are done manually through a terminal and thus require human interpretation. \autoref{hej} shows an example of the test output, in this particular case attempting
+to insert a user name longer than the allowed 45 characters. 
 
 
 \begin{Code}
-\begin{lstlisting}[label=hej,caption=ninja]
+\begin{lstlisting}[label=hej,caption=Test case output]
 --------------
 INSERT INTO AuthUsers
 values('tolongstring',null,1,
@@ -28,10 +29,6 @@ values('tolongstring',null,1,
 --------------
 
 ERROR 1406 (22001): Data too long for column 'username' at row 1
-ERROR 1064 (42000): You have an error in your SQL syntax;
-                    check the manual that corresponds
-                    to your MySQL server version for the right 
-                    syntax to use near 'INT(2))' at line 1
 \end{lstlisting}
 \end{Code}
 
