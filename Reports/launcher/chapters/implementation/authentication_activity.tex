@@ -1,12 +1,17 @@
 \section{Authentication Activity}
 
-This activity implements the design described in \autoref{design:authentication} and is the first activity the user will face when using the \giraf[] system. It is also the current lock screen which is used by WOMBAT \autoref{backlog:lock_screen}.
+This activity implements the authentication functionality described in \autoref{design:authentication}. 
+It is also used, as a proof of concept, as the current lock screen by WOMBAT, as presented in \autoref{backlog:lock_screen}.
 
-This activity was implemented using ZXing \citep{web:ZXing}, pronouced Zebra crossing, which is a libaray under Apache 2.0. This library is made for use with Android for scanning 1D and 2D QR codes. There have been made changes to the original ZXing library to make it fit into the implementation of this activity.
+An open source QR-code scanning library released under \emph{Apache License 2.0}, called ZXing \citep{web:ZXing}, is used for the QR-code scanning functionality.
+Changes are made to the original ZXing library to make it suit our needs, in accordance with the license.
 
-There is implemented instructions and illustrations as mentioned in \autoref{design:authentication}. There is also implemented a gesture, a 500ms vibration, for showing the user that the QR code was scanned correct because some of the users had trouble seeing the login button when it appeard.
+There is also implemented vibration, and an animation has been implemented to guide users through using the scanner, as mentioned in \autoref{design:authentication}.\\
 
-\begin{lstlisting}[style=sourceCode, language=JAVA, caption=This is code, label=lst:authenticationAcitivity] 
+The \activity{AuthenticationActivity} currently contains a work around for an administration issue that has not been solved yet.
+The snippet showing this can be seen in \autoref{lst:authenticationActivity}, and needs further explanation:
+
+\begin{lstlisting}[style=sourceCode, language=JAVA, caption=Code snippet from the AuthenticationActivity, label=lst:authenticationActivity] 
 				// If the authentication activity was not launched by the launcher...
 				if (!getIntent().hasCategory("dk.aau.cs.giraf.launcher.GIRAF")) {
 					Tools.attachLauncher(mContext); // should not be called
@@ -16,4 +21,6 @@ There is implemented instructions and illustrations as mentioned in \autoref{des
 					finish();
 				}
 \end{lstlisting}
-\todo{Forklaring til lstlisting}
+
+When a \giraf[] component saves settings regarding a user, the component needs to be attached to the user in question.
+During the development, this has not always been the case, and therefore, a workaround has been introduced, which is shown on line three in \autoref{lst:authenticationActivity}.

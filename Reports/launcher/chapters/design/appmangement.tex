@@ -28,7 +28,7 @@ As the \giraf[] platform is thought to be the primary electronic tool of guardia
 Since the \giraf[] platform uses both local and remote storage, there might be latency in synchronizing these storages.
 It is therefore important for the user to know if both storages are synchronized.
 
-\autoref{fig:appmanagement_design} shows a flow chart of the interactions the user can perform, and the actions the launcher takes upon the interactions, in order to fulfill the requirements listed earlier.
+\autoref{fig:appmanagement_design} shows a flow chart of the interactions the user can perform, and the actions the launcher takes upon the interactions, in order to fulfill the requirements listed earlier.\\
 
 \begin{figure}[!h]
 	\centering
@@ -37,7 +37,9 @@ It is therefore important for the user to know if both storages are synchronized
 	\label{fig:appmanagement_design}
 \end{figure}
 
-\autoref{fig:appmanagement_design} shows three branches of interactions and actions:
+\autoref{fig:appmanagement_design} shows three branches of user interactions and system actions:
+
+\todo{Ret med nyt diagram}
 
 \paragraph{Change app settings} For a user to change app settings, he or she must open the drawer, a component explained below. 
 In the drawer, there is a color picker, also explained later, from which the user chooses a color and drags it to the desired app. 
@@ -52,19 +54,44 @@ There are different widgets in the system, and every widget contains unique info
 The user chooses which one to recieve information from, and clicks the widget containing the desired information to have it shown. 
 If the user does not choose a widget, the action is cancelled. 
 
-\subsection{The Drawer}
+\subsection{Drawer}
 \label{sec:drawer}
-The drawer was designed to hide functionallity that is not always needed in a convenient place. As seen in \autoref{fig:appmanagement_design} everything that has to do with changing app settings is placed in the drawer which the user has to open to get to it.
-The handle of the drawer was designed to have the same color as the inside of the drawer because it was important to create consistensy. 
-It was also rounded, see \autoref{design:button_design}, to tell the user that this element was interactive.
+As stated, the drawer was designed to hide functionallity that is not always needed in a convenient place. 
+As seen in \autoref{fig:appmanagement_design} everything that has to do with changing app settings is placed in the drawer which the user has to open to get to it.
+This design can be seen in \autoref{fig:gui_appmanagement_design}.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=1\textwidth]{gfx/gui_appmanagement_open.pdf}
+	\caption{Design of app management, with drawer opened}
+	\label{fig:gui_appmanagement_design}
+\end{figure}
+
+To highten consistency, the handle and the inside of the drawer have the same color.
+The handle has rounded corners, see \autoref{design:button_design}, to tell the user that this element is interactive.
+A design with the drawer closed can be seen in \autoref{fig:gui_appmanagement_closed_design}.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=1\textwidth]{gfx/gui_appmanagement_closed.pdf}
+	\caption{Design of app management, with drawer closed}
+	\label{fig:gui_appmanagement_closed_design}
+\end{figure}
 
 \subsubsection{Widgets}
 \label{par:widgets}
-Widgets in the \giraf[] system should help the user request information. As seen in \autoref{fig:appmanagement_design} the user can take the action to request information. If the user chooses an information the information will be selected and shown to the user.
-The reason it was designed this way is that if all the information should be around the drawer handle it would probatly confuse the user more than it would help them.
-All widgets is designed so they need to be unique, meaning that there can never be two of the same widgets. This was done for making widgets more consistent so the user always would get the same information from the same widget. All widgets is also designed with round corners to seem interactive see \autoref{design:button_design}.
-The logout widget should be in the bottom of the drawer because it should not confuse the user while they are looking for information.
+Widgets in the \giraf[] system are used to display information to the user, and might let the user take an action.  
+An action can e.g. be to present additional information to the user, or to produce a side effect in the system. 
+
+All widgets are designed with round corners to signal interactivity, in accordance with \autoref{design:button_design}.
+The widget \emph{logout} is kept seperately from the other widgets, as it allows the user to change the state of the launcher to \emph{No credentials provided}, as seen in \autoref{fig:state_diagram}, while the other widgets keep the launcher \emph{No app selected}.
+The widgets can be seen in \autoref{fig:gui_appmanagement_design}.
 
 \subsubsection{Color picker}
 \label{par:colorpicker}
-All colors in the color picker is rounded because they are an interactive element. They also have white sides so they not fall into one with the background. The color picker consists of ten predefined colors. The reason for predefined colors in the color picker is to make contrast. If developers of \giraf[] apps made their app icons mono-colored in white the contrast would always be sufficient. This should help that all users will always see the icon no matter what icon background color was chosen.
+All colors in the color picker have rounded corners as they are interactive.
+They have white edges to keep them distinguishable from the background.
+The color picker consists of ten predefined colors. 
+The reason for using predefined colors in the color picker is to ensure contrast. 
+If developers of \giraf[] apps make their app icons mono-colored white, the contrast would always be sufficient. 
+This should ensure that users will be able to see the icon, no matter what icon background color was chosen

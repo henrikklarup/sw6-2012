@@ -1,11 +1,13 @@
 \section{Logo Activity}
-The \activity{LogoActivity} is a splash screen, which shows the \giraf[] logo while the system is loading. \\
-This activity is justified by the possibility that the device running the launcher might spend more than a reasonable amount of time to load the \activity{AuthenticationActivity}, and therefore might give the impression that the system has crashed or is not responding. The goal is to increase responsiveness.
+The \activity{LogoActivity} is a splash screen, which shows the \giraf[] logo while the system is loading. 
+When the \activity{LogoActivity} is running, when looking at \autoref{fig:state_diagram}, the launcher is in \emph{Uninitialized}. 
 
-However, \activity{LogoActivity} does not indicate whether or not the activity itself has crashed. This is a feature which is on the backlog \autoref{backlog:logo_screen_loading}.
+As the launcher might spend more than a reasonable amount of time to load the \activity{AuthenticationActivity}, and thus might give the impression that the system has crashed or is not responding. 
+The \activity{LogoActivity} is implemented to let the user know the launcher is loading.
+Having a loading animation could improve the \activity{LogoActivity} further, as the user would not be in doubt about whether the system had frozen or was simply taking a while to load, as seen in \autoref{backlog:logo_screen_loading}.
 
-The logo activity implements auto login -- explained in \autoref{backlog:autologin} -- by using the \method{sessionExpired} method, found in \class{Tools} class, seen in \autoref{lst:sessionexpired}.
-The usage of the \method{sessionExpired} method can be seen in \autoref{lst:sessionexpiredusage}
+The \activity{LogoActivity} implements the autologin feature, explained in \autoref{design:initialization}, by using the \method{sessionExpired} method, found in the \class{Tools} class, seen in \autoref{lst:sessionexpired}.
+The usage of the \method{sessionExpired} method can be seen in \autoref{lst:sessionexpiredusage}.
 
 \begin{lstlisting}[style=sourceCode, language=JAVA, caption=Snippet of LogoActivity.java, label=lst:sessionexpiredusage] 
 if (Tools.sessionExpired(mContext)) {

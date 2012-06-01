@@ -29,7 +29,7 @@ They can be copied, by e.g. a copy machine, and therefore must be kept away from
 To sum up, QR-codes are chosen because they improve usability, despite of their ability to be copied. 
 
 A flow chart of the authentication functionality can seen in \autoref{fig:authentication_design}.
-\begin{figure}[h]
+\begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.5\textwidth]{gfx/authentication_design.pdf}
 	\caption{Flow chart of the authentication functionality}
@@ -37,12 +37,12 @@ A flow chart of the authentication functionality can seen in \autoref{fig:authen
 \end{figure}
 
 Upon scanning a QR-code, there are two possible outcomes: The QR-code is invalid, as the credentials are not recognized, or the QR-code contains credentials which are recognized.
-In case the QR-code is valid, the process enters its second step. The second step is the confirmation of the identity, or rejection if the identity represented on the system does not match the user's desired identity.
+In case the QR-code is valid, the device vibrates to notify the user, and the process enters its second step. The second step is the confirmation of the identity, or rejection if the identity represented on the system does not match the user's desired identity.
 
 \subsection{GUI}
 The GUI components of the authentication design can be seen in \autoref{fig:authentication_gui_design_init}.
 
-\begin{figure}[h]
+\begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.7\textwidth]{gfx/authentication_gui_design_init.pdf}
 	\caption{Graphical User Interface of the authentication functionality}

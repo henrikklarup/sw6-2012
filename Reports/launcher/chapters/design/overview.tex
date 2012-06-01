@@ -43,7 +43,8 @@ These states grouped together represent four functionalities of the launcher:
 	\item Profile selection
 \end{enumerate}
 
-These functionalities are shown in \autoref{fig:design_diagram}, along with the states they represent, and the transitions between them.
+These functionalities are shown in \autoref{fig:design_diagram}, along with the states they represent, and the arrows between them.
+The arrows represent dependencies between each functionality, e.g. to reach the app management functionality, the launcher must have been through the initialization and authentication functionalities.
 
 \begin{figure}[h!]
 	\centering
