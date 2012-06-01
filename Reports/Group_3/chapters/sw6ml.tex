@@ -1,7 +1,7 @@
 %Introduction
 In order to facilitate consistent data transfer between the global database and localDB, we have designed an XML language which mimics
 the schema of the database. We have chosen to use XML as it is a recognized standard, with a wide array of tools available, in particular JDOM\cite{www.jdom.org}.
-JDOM is a light weight implementation of SAX and the Data Object Model(DOM) for j
+JDOM is a light weight implementation of Simple Api for XML(SAX)\cite{SAX} and the Data Object Model(DOM) for j
 Java, which allows seamless integration of XML, with support for XPath and XSLT.
 In \autoref{sw6mlusage} a short usage documentation for sw6ml is provided. sw6ml is defined with XML schema.
 
@@ -100,4 +100,3 @@ in a SQL query, use \code{string}, for anything else use \code{int}.
 The sw6ml schema can be found on the project repository together with a valid sw6ml document,
 Full path: \url{http://code.google.com/p/sw6-2012/source/browse/random_group_stuff/Group_server/xml/sw6_schema.xsd}
 and \url{http://code.google.com/p/sw6-2012/source/browse/random_group_stuff/Group_server/xml/sw6_example.xml} %TODO fix this document before handin;-)
-

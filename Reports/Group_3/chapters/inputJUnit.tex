@@ -1,11 +1,10 @@
-\subsubsection*{JUnit for the \code{IOHandler}}
 JUnit tests for the \code{IOHandler} have been done in a series of 18 tests. %where the first 9 tests covers methods that perform conversions and calculations
 \begin{description}
 	\item[Tests $1-9$] tests the different methods used for calculations and conversions.
 	\item[Tests $10-14$] tests the different methods used for generating transmissions.
 	\item[Tests $15-18$] tests the different methods used for sending generated transmissions.
 \end{description}
-Testing these methods is not a trivial matter since they all have the access modifier \lstinline[style=sw6Java]{private}. However, thanks to Ross Burton's article\footnote{\textit{Subverting Java Access Protection for Unit Testing}\cite{onJava}}, a method for testing this methods has been devised. The way these method will be tested is by the use of reflection in Java, which gives us the ability to manipulate a methods accessibility, thereby exposing it and allowing us to test it. 
+Testing these methods is not a trivial matter since they all have the access modifier \code{private}. However, thanks to Ross Burton's article\footnote{\textit{Subverting Java Access Protection for Unit Testing}\cite{onJava}}, a method for testing this methods has been devised. The way these method will be tested is by the use of reflection in Java, which gives us the ability to manipulate a methods accessibility, thereby exposing it and allowing us to test it. 
 
 There is only one problem with this method, this is that it cannot handle overloaded methods. However, each time the test is run it does somehow, seemingly per random, chose one of the overloaded methods. This means that if you have to test an overloaded method, you may have to run the test several times to get the actual "correct" result.
 

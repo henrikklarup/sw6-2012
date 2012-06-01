@@ -6,9 +6,7 @@
 \begin{document}
 \maketitle
 \tableofcontents
-	
-	\input{input/introduction.tex}
-		
+  \input{input/introduction.tex}
 \chapter{Development methods}
  %\section{Theory}
 %	\input{chapters/DevelopementMethod.tex}
@@ -20,25 +18,26 @@
     \input{chapters/backlog.tex}
 
   \section{Requirements} %Martin
-	\input{chapters/reqs} %incomplete 
+    \input{chapters/reqs} %incomplete 
   \section{Database}
-  	\input{chapters/databaseintro.tex}
+      \input{chapters/databaseintro.tex}
     \subsection{Design}
-    	\input{chapters/datadasedesign.tex}
+      \input{chapters/datadasedesign.tex}
     \subsection{Implementation}
-    	\input{chapters/databaseimpl.tex}
+      \input{chapters/databaseimpl.tex}
     \subsection{Test}
-
+     \includepdfmerge{chapters/output.pdf,1}
+  
   \section{Web Interface}
-   \label{sect:webInterface}
-     \subsection{Programming language}
-      \input{chapters/programminglanguage.tex}
-     \subsection{Implementation}
-     	\input{chapters/webimpl.tex}
-     \subsection{Test}
-     \subsubsection{Usability test}
-			\input{chapters/Usability.tex}
-		\subsubsection{Test cases}
+    \label{sect:webInterface}
+      \subsection{Programming language}
+	\input{chapters/programminglanguage.tex}
+      \subsection{Implementation}
+	\input{chapters/webimpl.tex}
+      \subsection{Test}
+      \subsubsection{Usability test}
+      \input{chapters/Usability.tex}
+      \subsubsection{Test cases}
 		\input{chapters/winterfaceTest.tex}
 
   \section{serverside} %TODO temp title
@@ -52,17 +51,19 @@
 	  
     \subsection{Implementation}
       \subsubsection{Input handling} %Thorbjørn
-		\input{chapters/inputHandling.tex}
+	\input{chapters/inputHandling.tex}
       \subsubsection{Queue and Query handling} %Martin
-	  \label{QQHandling}
-	    \input{chapters/qqHandling.tex}
+	\label{QQHandling}
+	  \input{chapters/qqHandling.tex}
     \subsection{Test}
 	\input{chapters/testIntro.tex}
-        \subsubsection{Queue and query test}
+	\subsubsection{IOHandler Test}
+	\input{chapters/inputJUnit.tex}
+        \subsubsection{Queue and Query Test}
 	\input{chapters/qqTest.tex}
-	\subsubsection{Savannah server system test}
+	\subsubsection{Savannah Server System Test}
 	\input{chapters/systemtest.tex}
-	\subsubsection{Other test}
+	\subsubsection{O}
 
 \chapter{Recapitulation}
   \section{Conclusion}
