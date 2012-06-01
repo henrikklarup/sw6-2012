@@ -6,7 +6,6 @@ package dk.aau.cs.giraf.gui;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.graphics.Color;
 import dk.aau.cs.giraf.gui.R;
 

@@ -1,6 +1,5 @@
 package dk.aau.cs.giraf.gui;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.Timer;
@@ -9,7 +8,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -38,21 +36,18 @@ public class GWidgetCalendar extends TextView implements IGWidget {
 		super(context);
 		mContext = context;
 		this.setStyle();
-		// TODO Auto-generated constructor stub
 	}
 
 	public GWidgetCalendar(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		mContext = context;
 		this.setStyle();
-		// TODO Auto-generated constructor stub
 	}
 
 	public GWidgetCalendar(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		mContext = context;
 		this.setStyle();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public final void showTooltip(){
@@ -64,21 +59,20 @@ public class GWidgetCalendar extends TextView implements IGWidget {
 		GTip.setView(mTooltipTextview);
 		GTip.setRightOf(this);
 		GTip.show();
-		
-		
 	}
 	
 	private String generateTooltipString(){
-		return day_of_week+" den "+day_of_month+". "+month+", Uge "+week_num;
+		return day_of_week + " den " + day_of_month + ". " + month + ", Uge " + week_num;
 	}
 	
 	public void updateDisplay(){
 		Calendar cal = Calendar.getInstance(Locale.getDefault());
 		day_of_month = Integer.toString(cal.get(Calendar.DAY_OF_MONTH));
+		
 		int weekday = cal.get(Calendar.DAY_OF_WEEK);
+		
 		String[] weekdays_strings = mContext.getResources().getStringArray(R.array.week_days);
 		day_of_week = weekdays_strings[weekday-1];
-		
 		week_num = Integer.toString(cal.get(Calendar.WEEK_OF_YEAR));
 		
 		String[] month_strings = mContext.getResources().getStringArray(R.array.months);

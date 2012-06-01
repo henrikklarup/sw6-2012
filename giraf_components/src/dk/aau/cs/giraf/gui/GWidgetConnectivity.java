@@ -1,12 +1,9 @@
 package dk.aau.cs.giraf.gui;
 
-import java.util.Random;
-
 import dk.aau.cs.giraf.oasis.lib.Helper;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
@@ -51,6 +48,7 @@ public class GWidgetConnectivity extends ImageView implements IGWidget {
 	public GWidgetConnectivity(Context context) {
 		super(context);
 		this.setInitialStyle();
+		
 		mContext = context;
 		mPreString = mContext.getResources().getString(R.string.mPreString);
 		mOnlineString = mContext.getResources().getString(R.string.mOnlineString);
@@ -95,12 +93,10 @@ public class GWidgetConnectivity extends ImageView implements IGWidget {
 			break;
 		}
 		
-		if(mTooltipTextview != null){
-		mTooltipTextview.setText(generateTooltipString());
-		
-		GTip.setView(mTooltipTextview);
+		if (mTooltipTextview != null) {
+			mTooltipTextview.setText(generateTooltipString());
+			GTip.setView(mTooltipTextview);
 		}
-		
 	}
 	
 	private void showTooltip(){
@@ -124,7 +120,6 @@ public class GWidgetConnectivity extends ImageView implements IGWidget {
 	}
 
 
-	
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
 		this.setOnClickListener(new View.OnClickListener() {
