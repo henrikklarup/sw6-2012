@@ -25,10 +25,10 @@ The JUnit test cases column shows how many JUnit unit tests has been written for
 Unit testing was not found suitable for classes all due the interdependency of other classes in the project. As en example testing the \code{XMLBuilder} with a unit test would require
 a \code{ResultSet} object,the easiest way to build this is to get it from the \code{QueryHandler}, which in turn require well formed SQL queries from the \code{QueryBuilder}.
 It was decided that it would be most efficient to test many of the classes during a system test. JUnit has been used to test the building of SQL queries, singleton implementation,
-and that the queue is in fact Fifo. 
+and that the queue is in fact FIFO. 
 
 The code in \autoref{code:testCase} shows a JUnit test case for \code{QueryBuilder}. It verifies that the \code{QueryBuilder} properly creates an SQL query for inserting an integer value
-in the \code{Media} table. Similiar test cases exists for string values and for SQL queries that update or delete rows.
+in the \code{Media} table. Similar test cases exists for string values and for SQL queries that update or delete rows.
 Due to the implementation of \code{Querybuilder} we can cover all values and SQL query types with 9 unit tests. The remaining 11 test cases are for request queries.
 
 \begin{Code}
