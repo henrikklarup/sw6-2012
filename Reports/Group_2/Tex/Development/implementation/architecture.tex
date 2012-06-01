@@ -1,9 +1,8 @@
 \section{Architecture}
 \label{sec:Architecture}
-\subsection{Activity(android)}
 
 \subsection{Architecture model}
-The WOMBAT application depends on the Launcher project and Oasis project, but WOMBAT is designed to function as an independent application with minor modifications to cooperate with the GIRAF Launcher and Oasis.
+The WOMBAT application depends on the Launcher project and Oasis project, but WOMBAT is designed to function as an independent application with minor modifications to cooperate with the GIRAF launcher and Oasis.
 We choose to design WOMBAT as an independent application, because it was easier to modify features in the application when they were ready, instead of waiting for the features to be implemented in the GIRAF Launcher or Oasis. 
 The dependency diagram of the WOMBAT architecture can be found in \autoref{fig:WombatDependency}.
 The WOMBAT architecture is a five layer architecture which enhances how you can perform testing and do collaborative work. 
@@ -26,7 +25,7 @@ The five layers consists of:
 
 \subsubsection{Library}
 
-The original idea was to split the layers into two projects, that way it would be able to conduct tests outside the main layer. The first project would be an Android project with a main activity, WOMBAT. The second project would be an Android library which should contain all the backend functionality, TimerLib. This is how the two projects would look like:
+The original idea was to split the layers into two projects, that way it would be able to conduct tests outside the main layer. The first project would be an Android project with a main activity, WOMBAT. The second project would be an Android library which should contain all the back-end functionality, \texttt{TimerLib}. This is how the two projects would look like:
 
 \begin{description}
   \item[WOMBAT] \hfill \\\begin{itemize}  \item Main layer  \item Layout layer
@@ -35,7 +34,7 @@ The original idea was to split the layers into two projects, that way it would b
 \end{itemize}
 \end{description}
 
-We later decided to redesign, and make three projects instead of two projects. We choose the redesign because that we are three developers in our project whom all want to conduct independent testing. The first project, WOMBAT, will stay as it originally was. The Second project is split into two projects, TimerLib and DrawLib. TimerLib contains the Tools layer and the CRUD layer. The DrawLib contains the Draw layer.
+We later decided to redesign, and make three projects instead of two projects. We choose the redesign because that we are three developers in our project whom all want to conduct independent testing. The first project, WOMBAT, will stay as it originally was. The Second project is split into two projects, \texttt{TimerLib} and \textt{DrawLib}. \texttt{TimerLib} contains the Tools layer and the CRUD layer. The \texttt{DrawLib} contains the draw layer.
 
 \begin{description}
   \item[WOMBAT] \hfill \\\begin{itemize}  \item Main layer  \item Layout layer\end{itemize}
@@ -44,7 +43,7 @@ We later decided to redesign, and make three projects instead of two projects. W
   \item[DrawLib] \hfill \\\begin{itemize}  \item Draw layer\end{itemize}
 \end{description}
 
-The dependency diagram of the WOMBAT projects can be found in figure: \ref{fig:LibraryDependency}.
+The dependency diagram of the WOMBAT projects can be found in figure \ref{fig:LibraryDependency}.
 
 \begin{figure}[H]
 	\centering
@@ -54,7 +53,7 @@ The dependency diagram of the WOMBAT projects can be found in figure: \ref{fig:L
 \end{figure}
 
 \subsubsection{Wombat lifecycle}
-You can see a detailed flowchart over the WOMBAT life cycle on figure:\ref{fig:wombatLifeCycle}. The flowchart describes whatever that can occur while the WOMBAT application is running. The flowchart can help debug and understand the application if somebody chooses to develop further on WOMBAT.
+You can see a detailed flowchart over the WOMBAT life cycle on figure \ref{fig:wombatLifeCycle}. The flowchart describes whatever that can occur while the WOMBAT application is running. The flowchart can help debug and understand the application if somebody chooses to develop further on WOMBAT.
 
 \begin{figure}[H]
 	\centering
