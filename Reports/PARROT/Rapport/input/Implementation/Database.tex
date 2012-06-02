@@ -174,7 +174,7 @@ After having described how we load a category into the system, we will described
 	}
 
 \end{source}
-The job of the method loadPictogram is to return a pictogram, given its input. The input is the ID of a Media object of the type IMAGE.\\
+The responsibility of the method loadPictogram is to return a pictogram, given its input. The input is the ID of a Media object of the type IMAGE.\\
 We start by instantiating an empty Pictogram object ``pic''.\newline
 Then, we use the admin funtionality given by OasisLib to get the Media object ``media'', which is the image part of the pictogram.
 Then, we use the newly loaded object media to get a list of Medias called ``subMedias''.
@@ -187,20 +187,20 @@ We look at ``investigatedMedia'', and determine if its type is SOUND, or if it i
 If the type is SOUND, we set ``soundPath'' to the path of the media, and set ``soundID'' to the ID of the media.
 If the type is WORD, we do the same but for ``wordPath'' and ``wordID'' instead.\\
 Note that it is possible that the type of ``investigatedMedia'' is a completely different type. In this case, the association is made by one of the other applications, and we simply ignore the media and continue through the list.\\
-When we have gone through the list, we initialize ``pic'' as a new Pictogram from the name of media, the path of ``media'', ``wordPath'' and ``soundPath''.
+When we have gone through the list, we initialize ``pic'' as a new Pictogram from the name of media, the path of ``media'', ``wordPath'', and ``soundPath''.
 Finally, we set the IDs of ``pic'' to those of the different medias and return ``pic''.\newline
 Note that if an ID is -1 at this point, or a path is null, it simply means that the pictogram in question does not contain either a word or a sound.
 
 \subsection*{Result}
 The PARROTDataLoader class provides PARROT with objects that can interact with the local database, either to read from the database, or write to it.
 
-\subsection*{Notes:}
+\subsection*{Notes}
 In the current version of PARROT, the connection to GIRAF launcher is not yet fully made, so instead of loading the category chosen by the launcher, PARROT instead starts by creating a profile, saving it to the database, and then loading it again.
-The functions in the PARROTDataLoader should be able these changes, but will need to be improved to handle more chances of null pointers.\newline
+The functions in the PARROTDataLoader should be able to handle these changes, but will need to be improved to handle more chances of null pointers.\newline
 If changes are made to the database, PARROTDataLoader needs to be changed accordingly, so that it will continue to work.\newline
 Finally, PARROT does not contain any save functionality in its user interface.
 This should be added at a later date.
 Also, adding a \textbf{saveProfile} call to PARROT's \textbf{onPause} method is a way of improving data security.
 
-\subsection*{Further Reading:}
+\subsection*{Further Reading}
 If a greater understanding of PARROTDataLoader is needed, we suggest reading the Oasis report, as it describes how the database is constructed, which is what the methods found in PARROTDataLoader is based on.
