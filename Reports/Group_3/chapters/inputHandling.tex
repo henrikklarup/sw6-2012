@@ -1,10 +1,10 @@
 When the server starts, it will execute a method called \code{listen()} that listens for any connections, see \autoref{code:listen}.
 Whenever a connection is made to the server, the \code{listen()} method will create a new \code{CommunicationThread}.
-This thread will read the information in the \code{Socket}'s \code{InputStream} and depending on the connection type\footnote{commit event, request event, or ping} it will deal with it appropriately.
+This thread will read the information in the \code{Socket}'s \code{InputStream} and depending on the connection type\footnote{Commit event, request event, or ping} it will deal with it appropriately.
 
-\lstinputlisting[style=sw6Java,label=code:listen,caption=The \code{listen()}method]{code/IOHandler-listen.txt}
+\lstinputlisting[style=sw6Java,label=code:listen,caption=The \code{listen()} method]{code/IOHandler-listen.txt}
 
-In the following we will explain how the different types of connections are processed by the system.
+In the following sections we will explain how the different types of connections are processed by the system.
 
 \subsubsection*{Ping}
 \begin{comment}
@@ -21,8 +21,8 @@ The uppermost port is used to indicate input and the lowermost port is used to i
 %	The \newlines are to prevent the words from "running" out of the page - don't know why this happens :(
 % This has been tested with   \texttt{arg} and \code{arg}
 \autoref{fig:IOPing} is a model of how a ping is processed by the server. The \code{Connection} component sends output, in this case a ping event, to the server. In the server this is received by the \code{IOHandler}, which creates a new \newline \code{CommunicationThread}.
-The \code{CommunicationThread} will then use the \newline \code{TransmissionHandler} to determine if the input is of the type commit, request or ping.
-In this case the input is of the type ping, and it will just directly respond to the caller (connection). 
+The \code{CommunicationThread} will then use the \newline \code{TransmissionHandler} to determine if the input is of the type commit, request, or ping.
+In this case the input is of the type ping, and it will directly respond to the connection. 
 More information on these classes can be found in \autoref{fig:app:IOHandler}, \autoref{fig:app:Connection}, and \autoref{fig:app:TransmissionHandler}.
 \begin{figure}[htbp]
 	\centering
@@ -34,12 +34,11 @@ More information on these classes can be found in \autoref{fig:app:IOHandler}, \
 %	The \newlines are to prevent the words from "running" out of the page - don't know why this happens :(
 % This has been tested with   \texttt{arg} and \code{arg}
 The reason for this implementation is that Java only supports two types of sockets: stream based\footnote{TCP -- \code{java.net.Socket} and \code{java.net.ServerSocket}} and datagram based\footnote{UDP -- \code{java.net.DatagramSocket} and \code{java.net.MulticastSocket}}\cite{javaNET}.
-However an implementation of ping would require the use of ICMP(Internet Control Message Protocol) ping, and since this is not possible we have implemted our own ping-like function\cite{ICMP}.
+However, an implementation of ping would require the use of ICMP\footnote{Internet Control Message Protocol} ping, and since this is not possible we have implemented our own ping function\cite{ICMP}.
 %chose to implement a ping at a software level, rather than as a protocol.
 
-
 \subsubsection*{Commit and Request}
-For a connection of type commit or request, the procedure is almost the same. However, when the \code{CommunicationThread} has been created and its \code{TransmissionHandler} has determined the type of the connection, it will opposite to the ping, create a new event corresponding to the type and send it to the \code{EventHandler}, see \autoref{fig:IOCR}.
+For a connection of type commit or request, the procedure is almost the same. However, when the \code{CommunicationThread} has been created and its \code{TransmissionHandler} has determined the type of the connection, it will as opposed to the ping, create a new event corresponding to the type and send it to the \code{EventQueue}, see \autoref{fig:IOCR}.
 When the \code{EventHandler} is done processing the event, the server responds to the connector.
 To see how the \code{EventHandler} processes the given queries see \autoref{QQHandling}.
 

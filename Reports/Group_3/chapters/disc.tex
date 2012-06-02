@@ -1,28 +1,28 @@
-In this section we discuss what we have implemented, and what we did not manage to due in time.
+In this section we discuss what we have implemented, and what we did not manage in time.
 
 \subsubsection*{Agile Development}
-Implementation of Scrum in our project have been successful. We have modified the method to better suit our needs for the project. We skipped the scrum meeting because we did not feel that we got enough benefit out of it, we already had sufficient communication. In the start we had sprint backlogs every sprint but slowly started to phase it out as we stopped adding things to our project backlog and started to wrap up what we had. Our project has been requirement driven so we have had meetings with our contact persons to find out what they need. In the beginning we tried to gather information on how they worked and what it was like working with children with ASD, later we become more system specific. 
+Implementation of Scrum in our project has been successful. We have modified the method to better suit our needs for the project. We skipped the daily scrum meeting because we did not feel that we got enough benefit out of it, we already had sufficient communication. In the beginning, we had sprint backlogs every sprint, but slowly started to phase it out, as we stopped adding assignments to our project backlog, and began to wrap up our work. Our project has been requirement driven, so we have had meetings with our contacts to find out what they need. In the beginning we tried to gather information on how they worked and what it was like working with children with ASD, later the meetings became more focused on the system. 
 
 \subsubsection*{The database}
-Our database designed in close with the Oasis group, which was a great success, and is functional and well tested. We have made a lot of small adjustments throughout the project based on requirements from the other groups, but after the third sprint we froze it, as this was necessary to be able to start implementing the synchronization and web interface.
+Our database was designed in close cooperation with the Oasis group, which was a great success. It is functional and tested. We have made a lot of small adjustments throughout the project, based on requirements from the other groups, but after the third sprint we froze the database design, as this was necessary to be able to start implementing the synchronization and web interface.
 
 \subsubsection*{The Web Interface}
-The web interface is not completely implemented. We have had to down prioritize the ``main'' part of the system. The following parts are implemented, tested, and functional:
+The web interface is not completely implemented. We have had to change the priority of the features to implement. The following parts are implemented, tested, and functional:
 \begin{description}
-	\item[Add profile] This is the most important part of the system, as the possibility to add new users are essential
-	\item[Add pictures and sound] This was a high prioritized requirement from the PARROT group
-	\item[Add tags] Important for sorting pictures and sound
-	\item[Profile control] Allow setting of guardians and parents to a child. A high prioritized requirement from the Launcher group
-	\item[Edit profile] If the user need to change something in their profile, this is important
-	\item[Delete profile] Allowing the removal of profiles from the system
+	\item[Add profile] This is the most important part of the system, as the capability of adding new users is essential.
+	\item[Add pictures and sound] This was a high priority requirement from the PARROT group.
+	\item[Add tags] Important for sorting pictures and sound.
+	\item[Profile management] Allow assigning of guardians and parents to children. A high priority requirement from the Launcher group.
+	\item[Edit profile] The users need to be able to edit their profile, which is an important feature for a functional system.
+	\item[Delete profile] Allowing the deletion of profiles from the system.
 \end{description}
-All this are handled without any user authentication, and can be access directly from the welcome screen. This is an security issue, but we decided this implementation, as we found it important to provide the requested functionality, and agreed, that the security can be added later on.
+All this is handled without any user authentication, and can be accessed directly from the welcome screen. This is a security issue, but we decided on to focus on features, and postpone security until we are ready for deployment.
 
-We have implemented the possibility to login, but after this, the user is met by a ``main'' screen with very limited possibilities, and the few available are for testing possibilities. This also results in the settings and stats are not implemented, as it needs a proper user login.
+We have implemented the possibility to login, but after this, the user is met by a main screen with limited capabilities, and the few available are for testing purposes.
 
-The Servlet code for the different pages could benefit a great deal form refactoring. This is a result of working in a previously unknown technology, and thus learning while doing.
+The Servlet code for the different pages could benefit a great deal from refactoring. This is a result of working with a technology in which we had no prior knowledge, and thus learning while doing.
 
-The usability test of the web interface, showed a few critical, and several serious and cosmetic errors. Unfortunately we did this test very late in the process, and thus we did not manage to correct this.
+The usability test of the web interface, showed a few critical, and several serious and cosmetic errors. Unfortunately we did this test very late in the process, and we did not manage to correct this.
 	
 %Our web interface was quite a challenge because we had no experience in java servlet. This resultet in a slow start because we had to learn how to use it. This was not accounted in the sprints resulting in delay in the beginning. Once we started getting more confident with java servlet the process sped up and we started to finish features during sprints.
 %We have used a lot of redundant code in the classes since we are still inexperienced and this code should be refactored in some way. At the end of sprint 5 we decided that we were done programming. There are still features that has not been implemented, these are described in our design.
@@ -30,16 +30,15 @@ The usability test of the web interface, showed a few critical, and several seri
 %We have not been able to correct the mistakes but have documented them for use by next year's project.
 
 \subsubsection*{The Server Software}
-Implementing the server software has been an interesting challenge. All development was stopped at the end of the 5th sprint, no matter what condition the software was in. While we have generally attempted to polish the implementation, some errors and unimplemented features still exists. following is a list of known issue and shortcomings of Savannah at the end of the project.
+All development was stopped at the end of the $5^{th}$ sprint, no matter what condition the software was in. While we have generally attempted to polish the implementation, some errors still exists. Following is a list of known issues and shortcomings of Savannah at the end of the project.
 \begin{description}
- \item[Server file structure] Files retrieved by the server will be stored in the single folder, meaning that the files with identical names will overwrite older files.
+ \item[Server file structure] Files retrieved by the server will be stored in a single folder, meaning that new files name identical names to existing files, will overwrite the existing files.
 
- \item[Known error in query building] database testing showed us that there had been a misunderstanding in the project group, which means that query building is erroneous. The problem lies in that rows in the \code{Department} and \code{Profile} can not have identical unique identifiers as they both have foreign key constraints to the \code{AuthUsers} table. The query builder however, builds a query that extracts information where \code{Department} and \code{Profile} are merged, ultimately resulting in the query always returning the empty set.
+ \item[Known error in query building] Database testing showed us that there had been a misunderstanding in the project group, which means that query building is erroneous. The problem lies in that rows in the \code{Department} and \code{Profile} cannot have identical unique identifiers, as they both have foreign key constraints to the \code{AuthUsers} table. The query builder however, builds a query that extracts information where \code{Department} and \code{Profile} are joined, ultimately resulting in the query always returning the empty set.
 
- \item[No Synchronization done] One of the goals of the project was to synchronize data with the local database, and a jar has been created, and tested on a laptop computer, for this purpose. However, Oasis, who was, due to a still unknown error, unable to include the jar file in the Oasis library.
+ \item[No synchronization done] One of the goals of the project was to synchronize data with the local database, and a .jar file\footnote{a Java archive} has been created, and tested on a laptop computer, for this purpose. However, Oasis was, due to a still unknown error, unable to include the .jar file in the Oasis library.
 
- \item[SSL Communication] Communication to and from the server is not in SSL, which at this point is not an issue. SSL communication is only required upon a product release, and Savannah is not ready for release..
+ \item[SSL communication] Communication to and from the server is not in SSL, which at this point is not an issue. SSL communication is only required upon a product release, and Savannah is not ready for release.
  
 \end{description}
-
 

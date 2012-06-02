@@ -1,13 +1,12 @@
 %Introduction
-In order to facilitate consistent data transfer between the global database and localDB, we have designed an XML language which mimics
-the schema of the database. We have chosen to use XML as it is a recognized standard, with a wide array of tools available, in particular JDOM\cite{www.jdom.org}.
-JDOM is a light weight implementation of Simple Api for XML(SAX)\cite{SAX} and the Data Object Model(DOM) for j
-Java, which allows seamless integration of XML, with support for XPath and XSLT.
+In order to facilitate consistent data transfers between the global database and localDB, we have designed an XML language which resembles
+the schema of the database. We have chosen to use XML, as it is a recognized standard with a wide array of tools available, in particular JDOM\cite{www.jdom.org}.
+JDOM is a light weight implementation of SAX\footnote{Simple API for XML\cite{SAX}} and DOM\footnote{Data Object Model} for Java, which allows seamless integration of XML, with support for XPath\footnote{Language for navigating XML documents\cite{xPath}} and XSLT\footnote{etensible Stylesheet Language Transformations\cite{xslt}}.
 In \autoref{sw6mlusage} a short usage documentation for sw6ml is provided. sw6ml is defined with XML schema.
 
 \subsubsection{Language Design}
 
-The sw6ml language consists of a number of primary elements, which reflect the tables in the database. Each of these elements accepts any number of \code{Entry} elements that tells
+The sw6ml language consists of a number of primary elements, which reflect the tables in the database. Each of these elements accepts any number of \code{Entry} elements, that tells
 the server which action it should take with the incoming data.
 In \autoref{code:sw6mlExample01} a short example of legitimate sw6ml syntax for adding a row to the \code{AuthUsers} table, and deleting a row with the \code{idUser} table attribute equal to 2, is shown.
 
@@ -30,8 +29,9 @@ define which row and what kind of action, through the \code{action="foo"} XML at
   </AuthUsers>
 \end{lstlisting}
 \end{Code}
-The \code{action="foo"} XML attribute has four legal types corresponding to the CRUD profile actions: Create, read, update, and delete, this is shown in \autoref{code:sw6mlCrud}.
-Contained in the  \code{<Entry action="crud_type`">..content..</Entry>} element is a series of 0 or more elements corresponding to the table schema of, in this case, the \code{AuthUsers} table.
+
+The \code{action="foo"} XML attribute has four legal types corresponding to the CRUD profile actions: Create, Read, Update, and Delete, this is shown in \autoref{code:sw6mlCrud}.
+Contained in the \code{<Entry action="crud_type">..content..</Entry>} element is a series of 0 or more elements corresponding to the table schema of, in this case, the \code{AuthUsers} table.
 It takes zero or more of the table attributes in a row, since not all table attributes are needed for all actions. As an example delete only requires the unique identifier of the table, and
 updates will only need the unique identifier and the table attribute being updated.
 \begin{figure}[H]
@@ -49,7 +49,7 @@ updates will only need the unique identifier and the table attribute being updat
 
 \subsubsection{Documentation}
 \label{sw6mlusage}
-To use the current version of sw6ml and Savannah together it is essential to know the elements required from the different crud types.
+To use the current version of sw6ml, it is essential to know the elements required from the different crud types.
 While XML schema provides advanced features for dynamic languages, sw6ml in its current version, is a primitive language consisting of simple types and sequences.
 This is however all that is needed, with a few assertions on the format server side.
 
@@ -85,8 +85,8 @@ Following is a short description of the setup of the \code{<Entry>} element for 
  \item[read]   Read is only used in XML documents which are sent back from a request to the server, and thus requires no special formatting.
 \end{description}
 
-Notice the \code{<row_attribute type="bar">..</..>} XML attribute: Legal types are \code{string} or \code{int}, if the data type of the row attribute is a string or any other type requiring apostrophes
-in a SQL query, use \code{string}, for anything else use \code{int}.
+Notice the \code{<row_attribute type="bar">..</..>} XML attribute: Legitimate types are \code{string} or \code{int}, if the data type of the row attribute is a \code{string} or any other type requiring apostrophes
+in an SQL query, use \code{string}, for anything else use \code{int}.
 
 \begin{Code}
 \begin{lstlisting}[label=code:sw6mlExample02,language=XML,caption=sw6ml update syntax example]
@@ -97,6 +97,6 @@ in a SQL query, use \code{string}, for anything else use \code{int}.
 \end{lstlisting}
 \end{Code}
 
-The sw6ml schema can be found on the project repository together with a valid sw6ml document,
+The sw6ml schema can be found in the project repository together with a valid sw6ml document,
 Full path: \url{http://code.google.com/p/sw6-2012/source/browse/random_group_stuff/Group_server/xml/sw6_schema.xsd}
 and \url{http://code.google.com/p/sw6-2012/source/browse/random_group_stuff/Group_server/xml/sw6_example.xml} %TODO fix this document before handin;-)

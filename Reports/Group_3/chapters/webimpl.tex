@@ -146,8 +146,8 @@ To access the data from the \code{form}, the elements in the \code{form} needs a
 http://www.xoxoxoxox.com/servlet/ServletName?var1=value&var2=value&var3=value
 \end{lstlisting}
 
-To be able to retrieve the data sent by the form the \code{request.getParameter()} method is used. An example of this is shown in \autoref{code:getDataInPost}.
-
+To be able to retrieve the data sent by the \code{form}, the \code{request.getParameter()} method is used. An example of this is shown in \autoref{code:getDataInPost}.
+\begin{Code}
 \begin{lstlisting}[language=Java,label=code:getDataInPost,caption=How to read parameters]
 	@WebServlet("/PseudoClass")
 	/**
@@ -158,10 +158,12 @@ To be able to retrieve the data sent by the form the \code{request.getParameter(
 		String[] myVarArray = request.getParameterValues("FieldName") //Get string array
 	}
 \end{lstlisting}
+\end{Code}
 
-\subsubsection{Current limitatio}
-When uploading a picture, a \code{file} type is used to select the local file on the hard disk. The \code{file} has a security restricting, which makes it impossible to set a default value for the field. This is due to the fact, that if it was possible, it could be used to send a file from the visitor of a web page's hard disk, without the visitor has any knowledge of it\cite{noFile}. Futhermore it was not straight forward to get the path of a selected file, again due to security restrictions, but this turned out to be possible by the use of JavaScript, the code is seen in \autoref{code:myHack}, and adding parameter \code{onChange="readURL(this);"} to the \code{file} field.
+\subsubsection{Current Limitations}
+When uploading a picture, a \code{<input type=file .../>} is used to select the local file on the hard disk. The \code{file} tag has a security restriction, which makes it impossible to set a default value for the field. This is due to the fact, that if it was possible, it could be used to send a file from the visitor of a web page's hard disk, without the visitor having any knowledge of it\cite{noFile}. Futhermore it was not straight forward to get the path of a selected file, again due to security restrictions, but this turned out to be possible by the use of JavaScript, see \autoref{code:myHack}, and adding the attribute \code{onChange="readURL(this);"} to the \code{file} tag.
 
+\begin{Code}
 \begin{lstlisting}[language=HTML,label=code:myHack,caption=Hack to load file from \code{file} box]
 var reader = new FileReader();+
 reader.onload = function(e) 
@@ -181,6 +183,7 @@ function readURL(input)
       }
    }
 \end{lstlisting}
+\end{Code}
 
 A navigation diagram of the web site is shown in \autoref{fig:WebNav}, and shows that all pages and information can be accessed within three clicks.
 
