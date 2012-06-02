@@ -2,20 +2,20 @@
 
 \bibitem{ScrumOfScrums}
 Scrum Alliance.
-\newblock Advice on conducting the scrum of scrums meeting, 2011.
+\newblock Advice on conducting the scrum of scrums meeting.
+\newblock
+  \url{http://www.scrumalliance.org/articles/46-advice-on-conducting-the-scrum%
+-of-scrums-meeting}, 2011.
 
 \bibitem{SCRUM}
 Scrum Alliance.
-\newblock Scrum alliance, 2011.
+\newblock Scrum alliance.
+\newblock \url{http://www.scrumalliance.org/}, 2011.
 
 \bibitem{aip}
-Matthisa~K�ppler Charlie~Collins, Michael D.~Galpin.
+Matthias~Kaeppler Charlie~Collins, Michael D.~Galpin.
 \newblock {\em Android in Practice}.
 \newblock Last viewed: 2012-05-30.
-
-\bibitem{autism.com}
-Temple Grandin.
-\newblock Teaching tips for children and adults with autism, December 2002.
 
 \bibitem{LastYearsArchitecture}
 Steffan Bo~Pallesen Jacob~Bang, Lasse Linnerup~Christiansen.
@@ -37,23 +37,29 @@ Samsung.
 
 \bibitem{AndroidVersion}
 Android~Development Team.
-\newblock Android 4.0.3 platform, 2012.
+\newblock Android 4.0.3 platform.
+\newblock \url{http://developer.android.com/sdk/android-4.0.3.html#relnotes},
+  2012.
 
 \bibitem{actionbarguide}
 Android~Development Team.
-\newblock Android actionbar guide, 2012.
+\newblock Android actionbar guide.
+\newblock \url{http://developer.android.com/guide/topics/ui/actionbar.html},
+  2012.
 
 \bibitem{fragmentguide}
 Android~Development Team.
-\newblock Android fragment guide, 2012.
-
-\bibitem{declayout}
-Android~Development Team.
-\newblock Android layout declaration, 2012.
+\newblock Android fragment guide.
+\newblock
+  \url{http://developer.android.com/guide/topics/fundamentals/fragments.html},
+  2012.
 
 \bibitem{othertypes}
 Android~Development Team.
-\newblock Android type guide, 2012.
+\newblock Android type guide.
+\newblock
+  \url{http://developer.android.com/guide/topics/resources/more-resources.html%
+}, March 2012.
 
 \bibitem{studyreg}
 Aalborg University.
