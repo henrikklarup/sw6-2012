@@ -1,14 +1,15 @@
 \section{Data management}
 \subsection*{Problem}
-In PARROT, we uses a lot of classes specifically designed for the given situation, such as the Pictogram class, the Category class, and the PARROTProfile class.
-These classes contain the exact amount of information needed in the application, and have been tailored to make it easier for the developpers to understand the flow of the program. However, since all the data used in PARROT is provided by the local database through the Admin functionality, there are some things to take into account.
+In PARROT, we uses a lot of classes specifically designed for any given situation, such as the Pictogram class, the Category class, and the PARROTProfile class.
+These classes contain the exact amount of information needed in the application, and have been tailored to make it easier for the developpers to understand the flow of the program.\newline
+However, since all the data used in PARROT is provided by the local database through the Admin functionality, there are some things to take into account.
 The primary problem is that the data classes provided by the admin does not match the ones used in PARROT, and therefore needs to be transformed into PARROT objects before they can be used.
 
 \subsection*{Solution}
 In PARROT, we have solved the problem of data transformation by writing a class called PARROTDataLoader. The purpose of this class is to handle all interaction between the PARROT application and the Admin interface. An object of this class is used whenever it is necessary to transfer information between PARROT and the database. For instance, whenever the application is started, all information about the current user is loaded from the database.
 
 \subsection*{Execution}
-In order to demonstrate the functionality of PARROTDataLoader, a few pieces of the code will be shown. However, since the class is fairly long, not all will be shown. To get an idea of how the system works, we will show the code for how categories and pictograms are handled.\newline
+To get an idea of how the system works, we will show the code for how categories and pictograms are handled.\newline
 The first piece of code to be shown is \textbf{loadProfile} see Source Code \ref{lPf}.
 
 \begin{source}[{lPf}]{The loadProfile method from the PARROTDataLoader}
@@ -51,7 +52,8 @@ public PARROTProfile loadProfile(Long childId,Long appId)
 					int col=Integer.valueOf(colourString);
 					String iconString = specialSettings.get("category"+number).get("icon");
 					String catName = specialSettings.get("category"+number).get("name");
-					parrotUser.addCategory(loadCategory(catName,categoryString,col,iconString));
+					parrotUser.addCategory(loadCategory(catName,categoryString,
+						col,iconString));
 					number++;
 				}
 
@@ -72,23 +74,26 @@ public PARROTProfile loadProfile(Long childId,Long appId)
 \end{source}
 
 First, we check if the ID's have a value different from null. If they do not, an error has happened, and we abort the operation.
-If they do, we continue and load a profile from the database corresponding to the child currently using PARROT.
+If they do, we continue and load a profile from the database corresponding to the child currently using PARROT.\newline
 Then, we begin the the conversion.
-First, a Pictogram object is made, which is fed with the first name of the child, as well as the path to the picture of the child.
+First a Pictogram object is made, which is fed with the first name of the child, as well as the path to the picture of the child.
 This pictogram will serve as the child's identity icon.
-Then, a PARROTProfile is instantiated with the name of the child, as well as its Pictogram icon.
+Then, a PARROTProfile is instantiated with the name of the child, as well as its Pictogram icon.\newline
 In order to go on, we load a Setting object from the database. We will not go in depth with this object, as that is the topic of another report REF TIL ADMIN, but suffice to say that it is a wrapper class for a hash table %or is it hash map?
-which we use to store data.
-The Setting object specialSettings returned from admin contains information unique to the current child user of the PARROT application, such as visual settings, and pictogram categories.
-Now, supposing specialSettings is not null (in which case we would abort and return null), we load the user specific settings with \textbf{loadSettings}, and goes on to load the categories.
+which we use to store data.\newline
+The Setting object ``specialSettings'' returned from admin contains information unique to the current child user of the PARROT application, such as visual settings, and pictogram categories.
+Now, supposing ``specialSettings'' is not null (in which case we would abort and return null), we load the user specific settings with \textbf{loadSettings}, and goes on to load the categories.\newline
 The way we load categories is special, so it will be described in detail.
-First of, categories are stored in the specialSettings hash-table in the format category\_number | category\_property | value.
-So, what we do is iterate our way through the specialSettings object.
+First of, categories are stored in the specialSettings hash-table in the format: \newline 
+\\
+$category\_number | category\_property | value$ \newline
+\\
+So what we do is iterate our way through the ``specialSettings'' object.
 We start by trying to get the pictograms corresponding to category number 0, which will be the first category in the list.
 If the category exists, we will get a string containing information about the pictograms.
-If not, we have already found all the categories (in this case none) belonging to the current user.
+If not, we have already found all the categories (in this case none) belonging to the current user.\newline
 After that, we use the same procedure to get the category's color, icon and category name.
-With this information now at hand, we call the \textbf{loadCategory} method, and adds the resulting category to the PARROTPRofile parrotUser, which is the object representing the current user.
+With this information now at hand, we call the \textbf{loadCategory} method, and adds the resulting category to the PARROTProfile parrotUser, which is the object representing the current user.\newline
 After this, we will increment the number, so that we will look for category number 1.
 We will continue to increment the number until we have found all the categories, and after that, we will return the parrotUser object.\newline
 \\
@@ -108,26 +113,26 @@ Following the description of the loadProfile method, we will describe \textbf{lo
 	}
 \end{source}
 
-The purpose of loadCategory is to instantiate a Category object, fill it with pictograms, and return it to the system.
-The method starts by converting the iconString into a Long, which is the ID of a Media object in the database.
-After that, we construct a new Category object cat from the name and color given by inputs of loadCategory, as well as the icon of the category.
-Then comes the part where we transform the string \textbf{pictureIDs} into a list of numbers.
+The purpose of \textbf{loadCategory} is to instantiate a Category object, fill it with pictograms, and return it to the system.
+The method starts by converting the ``iconString'' into a Long, which is the ID of a Media object in the database.\newline
+After that, we construct a new Category object ``cat'' from the name and color given by inputs of \textbf{loadCategory}, as well as the icon of the category.
+Then comes the part where we transform the string ``pictureIDs'' into a list of numbers.
 This is done by a method called \textbf{getIDsFromString}.
-To explain what it is doing, here is an example:
+The functionality of this method is described with an example:
 Suppose a category is going to contain the items 5, 23, 12, and 18. Then the string pictureIDs will look like this:\newline
 
 5\#23\#12\#18\$\\
 
-The method getIDsFromString will then return the list\newline
+The method \textbf{getIDsFromString} will then return the list\newline
 \begin{math}
 	\{5,23,12,18\}
 \end{math}
 \\
-which corresponds to the IDs.
+which corresponds to the IDs.\newline
 When we have all the IDs, the method will go through the list, and return the pictogram corresponding to the given ID.
-Finally, the Category object \textbf{cat} is returned.\newline
+Finally, the Category object ``cat'' is returned.\newline
 \\
-After having described how we load a category into the system, we will described how the \textbf{loadPictogram} method works see Source Code \ref{lp}.
+After having described how we load a category into the system, we will described how the \textbf{loadPictogram} method works, see Source Code \ref{lp}.
 
 \begin{source}[{lp}]{The loadPictogram method from the PARROTDataLoader}
 	public Pictogram loadPictogram(long id)
@@ -170,20 +175,20 @@ After having described how we load a category into the system, we will described
 
 \end{source}
 The job of the method loadPictogram is to return a pictogram, given its input. The input is the ID of a Media object of the type IMAGE.\\
-We start by instantiating an empty Pictogram object pic.\newline
-Then, we use the admin funtionality given by OasisLib to get the Media object media, which is the image part of the pictogram.
-Then, we use the newly loaded object media to get a list of Medias called subMedias.
-This list, contains the sound and word parts of the pictogram.
+We start by instantiating an empty Pictogram object ``pic''.\newline
+Then, we use the admin funtionality given by OasisLib to get the Media object ``media'', which is the image part of the pictogram.
+Then, we use the newly loaded object media to get a list of Medias called ``subMedias''.
+This list contains the sound and word parts of the pictogram.
 Note that this list can be empty.\newline
-Now we create 5 new objects, a Media called investigatedMedia, two String objects called soundPath and wordPath, and Long values soundID and wordID, which are both set to -1.
-If the list subMedias is not empty, we will iterate our way through it.\\
-We set the value of investigatedMedia to that of the Media object at the current position in investigatedMedia, and prepare to determine what kind of object it is.
-We look at investigatedMedia, and determine if its type is SOUND, or if it is WORD.
-If the type is SOUND, we set soundPath to the path of the media, and set soundID to the ID of the media.
-If the type is WORD, we do the same but for wordPath and wordID instead.\\
-Note that it is possible that the type of investigatedMedia is a completely different type. In this case, the asociation is made by one of the other applications, and we simply ignore the media and continue through the list.\\
-When we have gone through the list, we initialise pic as a new Pictogram from the name of media, the path of media, wordPath and soundPath.
-Finally, we set the IDs of pic to those of the different medias and return pic.\newline
+Now we create 5 new objects, a Media called ``investigatedMedia'', two String objects called ``soundPath'' and ``wordPath'', and Long values ``soundID'' and ``wordID'', which are both set to -1.
+If the list ``subMedias'' is not empty, we will iterate our way through it.\\
+We set the value of ``investigatedMedia'' to that of the Media object at the current position in ``investigatedMedia'', and prepare to determine what kind of object it is.
+We look at ``investigatedMedia'', and determine if its type is SOUND, or if it is WORD.
+If the type is SOUND, we set ``soundPath'' to the path of the media, and set ``soundID'' to the ID of the media.
+If the type is WORD, we do the same but for ``wordPath'' and ``wordID'' instead.\\
+Note that it is possible that the type of ``investigatedMedia'' is a completely different type. In this case, the association is made by one of the other applications, and we simply ignore the media and continue through the list.\\
+When we have gone through the list, we initialize ``pic'' as a new Pictogram from the name of media, the path of ``media'', ``wordPath'' and ``soundPath''.
+Finally, we set the IDs of ``pic'' to those of the different medias and return ``pic''.\newline
 Note that if an ID is -1 at this point, or a path is null, it simply means that the pictogram in question does not contain either a word or a sound.
 
 \subsection*{Result}
