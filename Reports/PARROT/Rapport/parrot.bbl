@@ -17,6 +17,11 @@ Matthias~Kaeppler Charlie~Collins, Michael D.~Galpin.
 \newblock {\em Android in Practice}.
 \newblock Last viewed: 2012-05-30.
 
+\bibitem{autism.com}
+Temple Grandin.
+\newblock Teaching tips for children and adults with autism.
+\newblock \url{http://www.autism.com/ind_teaching_tips.asp}, December 2002.
+
 \bibitem{LastYearsArchitecture}
 Steffan Bo~Pallesen Jacob~Bang, Lasse Linnerup~Christiansen.
 \newblock Administration module for giraf.
@@ -52,6 +57,13 @@ Android~Development Team.
 \newblock Android fragment guide.
 \newblock
   \url{http://developer.android.com/guide/topics/fundamentals/fragments.html},
+  2012.
+
+\bibitem{declayout}
+Android~Development Team.
+\newblock Android layout declaration.
+\newblock
+  \url{http://developer.android.com/guide/topics/ui/declaring-layout.html},
   2012.
 
 \bibitem{othertypes}
