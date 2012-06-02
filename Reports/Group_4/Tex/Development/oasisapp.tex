@@ -1,13 +1,13 @@
 \chapter{Oasis App}
 \label{ch:App}
-In this chapter we describe the application of the administration module, called Oasis App. The Oasis App is an application, which demonstrates some of the utilities the Oasis Lib offers. The idea behind the Oasis App is that we want to make a tool, for the guardians, to manage data of the profiles, by giving them CRUD (Create, Read, Update, and Delete) options. First the structure of the Oasis App is described in section \vref{sec:AppStructure}. After that the implementation of the Oasis Lib is described in section \vref{sec:AppImp}.
+In this chapter we describe the Oasis App. The Oasis App is an application, which demonstrates some of the utilities the Oasis Lib offers. The idea behind the Oasis App is that we want to make a tool, for the guardians, to manage the profile data, by giving them CRUD (Create, Read, Update, and Delete) options. First the structure of the Oasis App is described in Section \vref{sec:AppStructure}. After that the implementation of the Oasis Lib in the Oasis App is described in Section \vref{sec:AppImp}.
 
 \section{Structure}
 \label{sec:AppStructure}
-The Oasis Application is build upon two activities; MainActivity and FragParentTab.
+The Oasis App is build upon two activities; \texttt{MainActivity} and \texttt{FragParentTab}.
 
 \subsection{MainActivity}
-The MainActivity is the activity that starts on application startup. It uses the main.xml as its layout file, which is a layout file containing three buttons, which can be seen on figure \textcolor{red}{INDS\AE{}T SCREEN CAP AF MAINACTIVITY}. A snap of the MainActivity's code can be seen in listing \vref{lst:mainactivity}.
+The MainActivity is the activity that starts at application startup. It uses the main.xml as its layout file, which is a layout file containing three buttons, which can be seen on figure \textcolor{red}{INDS\AE{}T SCREEN CAP AF HOMESCREEN}. A code snippet of the MainActivity's code can be seen in Listing \vref{lst:mainactivity}.
 
 \begin{Java}{The MainActivity class}{lst:mainactivity}
 .
@@ -91,10 +91,15 @@ public class MainActivity extends Activity implements OnClickListener {
 }
 \end{Java}
 
-When the activity starts it gets the information of which guardian that is currently logged in to the GIRAF system and what background color the Oasis App is currently set to by the Launcher application. When one of the buttons is clicked the mainactivity will start the FragParentTab activity, but depending on which button is clicked, the mainactivity will put an integer in the itent's extra data.
+As the activity starts it gets the information of which guardian who is currently logged in to the GIRAF system and what background color the Oasis App is currently set to by the Launcher.
+When one of the buttons is clicked, the \texttt{MainActivity} will start the \texttt{FragParentTab} activity and put the corresponding integer in the intent's extra data.
 
 \subsection{FragParentTab}
-The FragParentTab is the activity, which, as stated above, is started by the MainActivity activity. The activity has the responsibillity of managing what view to show, by using fragments. The reason for choosing fragments instead of making new activities is that the layout we want is a tab layout. The layout can be seen in figure \textcolor{red}{Inds\ae{}t FIGUR REF}. The FragParentTab activity can be seen in listing \vref{lst:fragparenttag}.
+The FragParentTab is the activity, which is started by the \texttt{MainActivity} activity.
+The activity has the responsibillity of managing what view to show, by using fragments.
+We chose fragments because we wanted a tab layout.
+An example of the tab layout view can be seen in Figure \textcolor{red}{Inds\ae{}t FIGUR MY PROFILE}
+The FragParentTab activity can be seen in Listing \vref{lst:fragparenttab}.
 
 \begin{Java}{The FragParentTab class}{lst:fragparenttab}
 .
@@ -181,19 +186,29 @@ public class FragParentTab extends Activity {
 }
 \end{Java}
 
-The way in which the activity controls which fragment it must show is done in two ways. First, when created, the activity decides which fragment to show, by using the integer it gets from the MainActivity. This integer represents a fragment class of every view, called TabManager[keyword]. This fragment is then added to the fragment stack. The other way is when a fragment wants to replace itself with another fragment. Then the fragment calls the switchTab method, in the FragParentTab activity, with the replacing view integer as parameter.
+The activity controls which fragment it must show and this is done in two ways.
+The first way is when the activity is created, it decides which fragment to show, by using the integer it gets from the \texttt{MainActivity}.
+This integer represents a fragment class of every tab layout view.
+This fragment is then added to the fragment stack.
+
+The other way is when a fragment wants to replace itself with another fragment.
+Here the fragment calls the switchTab method, in the \texttt{FragParentTab} activity, with the replacing view integer as a parameter.
 
 \section{Implementation}
 \label{sec:AppImp}
-When using the Oasis Lib it is necessary to do a few things. First it is needed to import the Oasis Lib as a library project. This can be done by either including a jar file we made for the purpose or by telling Eclipse that the Oasis Lib project is a library project. Then Eclipse will automatically include the needed files at compile time.
-When the Oasis Lib is included to be able to call the methods inside the library it is necessary to initialize a helper object. When initializing the object it is needed to put the current activity's context as a parameter. This is needed to give the Oasis Lib the information about where it is called from. An example of how to initialize the helper object can be seen in listing \vref{lst:initHelper}.
+Before utilizing the methods within the Oasis Lib, the developer must include the library.
+It is also necassary to instantiate a helper object before it can be used.
+When instantiating the object it is necassary to input the current activity's context as a parameter.
+This is needed to give the Oasis Lib the information about where it is called from.
+An example of how to instantiate the helper object, can be seen in Listing \vref{lst:initHelper}.
 
-\begin{Java}{Example of Initializing a Helper}{lst:initHelper}
+\begin{Java}{Example of Instantiating a helper object.}{lst:initHelper}
 Helper helper = new Helper(getActivity().getApplicationContext());
 \end{Java}
 
-Now it is possible to call all the methods in the library. An example of calling a method can be seen in listing \vref{lst:callLib}
+After the instantiation it is possible to call all the methods within the Oasis Lib.
+An example of calling a method can be seen in Listing \vref{lst:callLib}.
 
-\begin{Java}{Call method from Oasis Lib}{lst:callLib}
+\begin{Java}{Call method from the Oasis Lib.}{lst:callLib}
 guardian = helper.profilesHelper.getProfileById(guardianId);
 \end{Java}

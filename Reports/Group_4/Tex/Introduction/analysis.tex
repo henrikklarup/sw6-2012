@@ -1,16 +1,21 @@
-\chapter{Analysis}
-As a part of the multi project, we are not directly solving the problem ourselves, but providing a part such that the other project groups can perform that task easier.
-As we did not solve the problem directly we have made our own problem definition:
-	\textit{How can we provide a set of tools which can help develop application for the GIRAF-system?}
-As a way to solve this we have chosen to make 3 projects, a library providing methods and classes, a database to save information and an application to control the content of the database. 
+\chapter{Initial Process}
+In this chapter the problem definition for Oasis is described.
+An analysis of the requirements, received from the other groups in the multi project, are performed and from the analysis the Oasis system architecture has been derived.
+
+\section{Problem Definition}
+In the multiproject a common problem definition have been stated, see Section \vref{sec:pdef}. The common problem definition is -- as stated -- to vouge for the individuel groups. Therefore we have devised a problem definition for Oasis.
+It is as follows:
+
+\begin{quotation}
+	\textit{How can we provide a set of tools, which can help develop applications for the GIRAF system?}
+\end{quotation}
 
 \section{Requirements}
 Before the development can begin the requirements for the software must be analysed.
-The requirements stem from several places because we are to develop a database with a library, which are to be used by GIRAF applications.
-Therefore both application specific and general requirements have been devised.
+The requirements stem from the multiproject groups and the contact persons.
+Examples of the requirements received can be seen in Appendix \vref{sec:timerreq} and \vref{sec:customerReq}.
 
-The informal requirements are:
-
+The derived informal requirements are:
 \begin{itemize}
 	\item Child profile handling
 	\item Guardian profile handling
@@ -25,26 +30,23 @@ The informal requirements are:
 	\item Profile to department relation handling
 \end{itemize}
 
-As an example for the requirements received from the other groups, see appendix \vref{sec:timerreq}.
+We have decided to develop a database and a library, which are to be used by GIRAF applications.
+As an example of a GIRAF application, that uses the library and database, we will develop an administration application.
 
 \section{System architecture}
-\subsection{In the multi project}
-The way Oasis fit into the multi project, is by being a middle layer between the Apps and the server, as seen in figure \vref{fig:bigPic}. Oasis will handle the communication from the apps to save in the local database, as well as synchronizing the local database, with the server.
+Oasis consists of three parts: The Oasis Local Db, the Oasis Lib, and the Oasis App. This is shown in Figure \vref{fig:systemArchitecture}.
+
+The Oasis Lib handles application interaction with the Oasis Local Db, and every GIRAF application should be utilizing this library.
+Another feature the Oasis Lib offers is the ability to handle synchronization between the Oasis Local Db and Savannah.
+
+The last part is the Oasis App.
+This application allows interaction with the Oasis Local Db through the Oasis Lib. 
+Some of the features of the Oasis App are creation and removal of profiles and departments.
+It also enables the user to handle relations between specific elements.
 
 \begin{figure}
 	\centering
-		\includegraphics[width=\textwidth]{images/BigPicture.jpg}
-	\caption{The multi project architecture}
-	\label{fig:bigpic}
-\end{figure}
-
-\subsection{Each part}
-Oasis consists of 3 parts, the oasis library which is the core of the project, the administration app, and the local database, as shown in figure \vref{fig:smallPic}. The Oasis library will handle applications interaction with the local database, and every giraf app should be utilizing this library. The Oasis library will also make sure that the local database is synchronized with the server's database.
-The administration application is an app from which the user can interact with the database directly, creating or deleting users and departments, and making sure these are connected.
-
-\begin{figure}
-	\centering
-		\includegraphics[width=\textwidth]{images/smallPicture.png}
-	\caption{The project part architecture}
-	\label{fig:smallpic}
+		\includegraphics[width=\textwidth]{Images/Giraf_comp_pic_fixed}
+	\caption{The GIRAF sytem architecture.}
+	\label{fig:systemArchitecture}
 \end{figure}

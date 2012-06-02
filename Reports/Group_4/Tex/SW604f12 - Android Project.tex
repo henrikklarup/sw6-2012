@@ -9,10 +9,10 @@
 % Remove page number and add blank page.
 \thispagestyle{empty}
 \input{Title_page/title_page}
-\cleardoublepage
 
 % Use roman numbers in the beginning of the report.
 \pagenumbering{Roman}
+\cleardoublepage
 
 % Preface.
 \chapter*{Preface}
@@ -26,32 +26,25 @@
 
 % Report contents.
 % Split at sections.
-\part{Common Introduction}
+\part{GIRAF Introduction}
 \label{chap:common_introduction}
 \input{input/introduction}
 
-
-\part{Introduction}
-\input{Introduction/head}
+\part{Oasis Introduction}
 \input{Introduction/analysis}
 \input{Introduction/sprintprocess}
-\include{Introduction/tail}
 
-\part{Development}
-\input{Development/head}
+\part{Design and Implementation}
 \input{Development/oasislocaldb}
 \input{Development/oasislib}
 \input{Development/oasisapp}
 \input{Development/unit_testing}
 \input{Development/test_usability}
-\include{Development/tail}
 
-\part{Discussion}
-\input{Discussion/head}
+\part{Epilogue}
 \input{Discussion/discussion}
 \input{Discussion/conclusion}
 \input{Discussion/future_work}
-\include{Discussion/tail}
 
 \clearpage{\thispagestyle{empty}\cleardoublepage}
 
