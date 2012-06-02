@@ -1,18 +1,18 @@
 %webimpl.tex
-This section describs the work of implementing the web interface in Servlets.
+This section describes the work of implementing the web interface in Servlets.
 
 \subsubsection{Requirements}
 \label{subsec:webReq}
-The requirements for the web interface has been collected from the other app groups, and are as follows:
+The requirements for the web interface have been gathered from the other project groups, and are as follows:
 \begin{description}
-	\item[Profile control] It must be possible to add, edit and remove users to/from the system.
-	\item[Media control] It must be possible to add, edit and remove pictures and sound to/from the system, add proper tags, and link pictures and sound
-	\item[Settings] It must be possible to add and change the settings for a specific user
+	\item[Profile management] It must be possible to add, edit and remove users.
+	\item[Media management] It must be possible to add, edit and remove media, add tags, and link pictures and sound.
+	\item[Settings] It must be possible to add and change the settings for a specific user.
 	\item[Stats] It must be possible to generate stats of the use of various apps.
 \end{description}
 
 \subsubsection{Mockups}
-To get startet at series of mockups was created, to get an idea of the geneal look and feel of the website. An example of this is shown in \autoref{fig:mockSelectProfile}, the rest can be found in \autoref{app:Mock}.
+To get started, a series of mockups were created to get an idea of the general look and feel of the website. An example of this is shown in \autoref{fig:mockSelectProfile}, the rest can be found in \autoref{app:Mock}.
 
 \begin{figure}[htbp]
 	\centering
@@ -22,10 +22,10 @@ To get startet at series of mockups was created, to get an idea of the geneal lo
 \end{figure}
 
 \subsubsection{Programming languages}
-The web interface uses four different languages: Servlets, HTML, JavaScript, and Cascading Style Sheets (CSS). The Servlets are used responisble for database access, and generation of both the HTML code and JavaScript, and the CSS is used for for the graphic on each page. The HTML is used for making the elements on the webpages, and the JavaScript is sued to add some dynamic to a generated HTML side.
+The web interface uses four different languages: Servlets, HTML, JavaScript, and Cascading Style Sheets (CSS). The Servlets are responsible for database access, and generation of both the HTML code and JavaScript, and the CSS is used for the layout on each page. The HTML is used for making the elements on the webpages, and the JavaScript is used to add functionality to a generated HTML page.
 
 \subsubsection{Structure}
-The structure of each Servlets page is seen in \autoref{fig:webStruct}
+The structure of each Servlet is seen in \autoref{fig:webStruct}
 \begin{figure}
 	\centering
 		\includegraphics{images/webStruct.png}
@@ -33,16 +33,16 @@ The structure of each Servlets page is seen in \autoref{fig:webStruct}
 	\label{fig:webStruct}
 \end{figure}
 
-When a webpage is first loaded, it access the \code{doGet} code, and executes the code within. After this there are three scenarios:
+When a webpage is first loaded, it execute the \code{doGet(...)} method. After this there are three scenarios:
 \begin{description}
-	\item[Scenario 1] The user click a link, and is sent to a new page.
-	\item[Scenario 2] The user submits a \code{form} with \code{doGet} method. 
-	\item[Scenario 3] The user submits a \code{form} with \code{doPost} method.
+	\item[Scenario 1] The user clicks a link, and is sent to a new page.
+	\item[Scenario 2] The user submits a \code{form} with the \code{doGet(...)} method. 
+	\item[Scenario 3] The user submits a \code{form} with the \code{doPost(...)} method.
 \end{description}
 
-In scenario 1, the current pages do not do anything else but send the user to the new page, which executes the code in its \code{doGet} code. In scenario 2 the \code{form} structure dictates what happens: It can either redirect to itself, and execute the \code{doGet} method again \autoref{code:getRedirectSelf}, or redirect to a new page and execute the \code{doGet} method on that, see \autoref{code:getRedirectNew}.
+In scenario 1, the current page does not do anything else but send the user to the new page, which executes the code in its \code{doGet(...)} method. In scenario 2, the \code{form} structure dictates what happens: It can either redirect to itself, and execute the \code{doGet(...)} method again, see \autoref{code:getRedirectSelf}, or redirect to a new page and execute the \code{doGet(...)} method on that page, see \autoref{code:getRedirectNew}.
 
-\begin{lstlisting}[language=Java,label=code:getRedirectSelf,caption=A form which redirect to its own get method]
+\begin{lstlisting}[language=Java,label=code:getRedirectSelf,caption=A \code{form} which redirect to its own get method]
 	@WebServlet("/DeleteTags")
 	
 	/**
@@ -54,7 +54,7 @@ In scenario 1, the current pages do not do anything else but send the user to th
 	}
 \end{lstlisting}
 
-\begin{lstlisting}[language=Java,label=code:getRedirectNew,caption=A form which redirect to its own get method]
+\begin{lstlisting}[language=Java,label=code:getRedirectNew,caption=A \code{form} which redirect to another page]
 	@WebServlet("/DeleteTags")
 	
 	/**
@@ -66,12 +66,14 @@ In scenario 1, the current pages do not do anything else but send the user to th
 	}
 \end{lstlisting}
 
-Secnario 3, has almost the same code as \autoref{code:getRedirectSelf} and \autoref{code:getRedirectNew}, with the excpetion that the \code{method='POST'}.
+Scenario 3, has almost the same code as \autoref{code:getRedirectSelf} and \autoref{code:getRedirectNew}, with the exception that the \code{method='POST'}.
 
-In generalt the \code{form} is build as \code{<form method='POST/GET' name='NameOfForm' action='WhichPageToExecuteCodeFrom>}.
+In general the \code{form} is build as \code{<form method='POST/GET' name='NameOfForm' action='WhichPageToExecuteCodeFrom>}.
 
-\subsubsection{Database access}
-The read data from the database is handled by Java code in each of the Servlets, the code is shown in \autoref{code:readDatabase}. To update attributes in the database, the \code{stmt.executeQuery} is used, with the appropriate SQL script.  To delete data, instead of \code{stmt.executeQuery} a \code{PreparedStatement} is created, this is executed with by calling \code{int i = ps.executeUpdate();} which will give either a OK code (0) or and error code. 
+\subsubsection{Database Access}
+Reading data from the database is handled by Java code in each of the Servlets, shown in \autoref{code:readDatabase}.
+To update attributes in the database, the \code{stmt.executeQuery(``SQL query'')} method is used, with the appropriate SQL script.
+To delete data, instead of \code{stmt.executeQuery(``SQL query'')} a \code{PreparedStatement} is created, this is executed with by calling \code{int i = ps.executeUpdate()} which will return a response code. 
 
 \begin{lstlisting}[language=Java,label=code:readDatabase,caption=Code to read data from the database]
 public void readData()
@@ -122,23 +124,22 @@ catch (SQLException e)
 
 \end{lstlisting}
 
-\subsubsection{Generation of the web page}
-The generation of the web page, is done within the servlet, using a \code{PrintWriter}. This is instansiated by cy calling \code{PrintWriter out = response.getWriter();}, and used to write the HTML code by calling \code{out.println("HtmlCode");} which will generate a web page, with only THAT code visible. \code{out} can furthermore be used to write both JavaScript and CSS.
+\subsubsection{Generation of a Web Page}
+The generation of a web page, is done within the Servlet, using a \code{PrintWriter}. This is used to write the HTML code by calling \code{out.println("HtmlCode")} which appends the argument to the page. Furthermore, \code{out} can be used to write both JavaScript and CSS.
 
-The CSS however is not written within any of the Servlets, instead is i located in a seperate file \verb+/WebContent/CSS/SavannahStyle.css+ and is included in the HTML by \code{ "<link rel='stylesheet' type='text/css' href='CSS/SavannahStyle.css' />"}
+The CSS is not written within any of the Servlets, instead it is located in a separate file and is included in the HTML by \code{ out.println("<link rel='stylesheet' type='text/css' href='CSS/SavannahStyle.css' />")}.
 
+\subsubsection{Exchange of Data}
+When a Servlet submits a form, the data is sent differently depending on the \code{<form method='...'/>}. A \code{GET} will send the data as a part of the URL, thus making it visible for the user, as seen in \autoref{code:URLLINK}, whereas the \code{POST} method does not make it visible.
 
-\subsubsection{Exchange of data}
-When a Servlet submits a form, the data is sent differently depending on the \code{form} method. A \code{GET} method will send the data as a part of the URL thus make it visible for the user, as seen in\autoref{code:URLLINK}, where as the \code{POST} method does not make it visible.
-
-\subsubsection{\code{Form} data}
-To access the data from the \code{form}, this needs a name. The name it set by the \code{name} attribute in the \code{input} element. The type of data sent from the \code{form} depends on the type of element.
+\subsubsection{Form Data}
+To access the data from the \code{form}, the elements in the \code{form} needs a name. The name is set by the \code{name} attribute in the input element. The type of data sent from the \code{form} depends on the type of element.
 \begin{description}
-	\item[\code{Text},\code{Password} and \code{TextField}] The value of these fields are of the type string, and contains the value entered
-	\item[\code{RadioButton}] All \code{RadioButton}s with the same name, sends the value of the selected \code{RadioButton}
-	\item[\code{CheckBox}] All \code{CheckBox}es with the same name sends the value of each checked box.
-	\item[\code{DropdownBox}] Sends the value of the selected item
-	\item[\code{ListBox}] Send the value of all the selected items as a string array
+	\item[\code{<input type=Text/Password/TextField/>}] The value of these fields are of the type string, and contains the value entered into the text field on the page.
+	\item[\code{<input type=RadioButton value=``some_value''/>}] All \code{RadioButton}s with the same name, sends \code{some_value} of the selected \code{RadioButton}.
+	\item[\code{<input type=CheckBox value=``some_value''/>}] All \code{CheckBox}es with the same name sends \code{some_value} of each checked box.
+	\item[\code{<select ...><option value=``some_value''>caption</ ... >}] Sends \code{some_value} of the selected item.
+	\item[\code{<select ... multiple=``multiple''><option value=``some_value''>caption</ ...>}] Sends \code{some_value} of all the selected items as a string array.
 \end{description}
 
 \begin{lstlisting}[language=Java,label=code:URLLINK,caption=URL with visible parameters]
