@@ -39,11 +39,11 @@ To make the deletion of data easy, many of the attributes in the tables has the 
 \end{quotation}
 What will happen is:
 \begin{enumerate}
-	\item A deletion of the ``userID'' in ``AuthUsers'' is executed
-	\item The relation between ``AuthUsers'' and ``Profiles'' will delete the profile
-	\item The relation between ``Profiles'' and ``HasGuardian'' will delete all fields where the ``userID'' is either ``idGuardian'' or ``idChild''
-	\item The relation between ``AuthUsers'' and ``Media'' will delete all fields where ``idUser'' is the owner
-	\item The relation between ``Media'' and ``HasTag'' will delete all fields where ``HasTags''.``idMedia'' equals ``idMedia''
-	\item The relation between ``Media'' and ``HasLink'' will delete all fields where ``HasLink''.''idMedia'' or ``HasLink''.''idSubMedia'' equals ``idMedia''
+	\item A deletion of the \code{userID} in \code{AuthUsers} is executed
+	\item The relation between \code{AuthUsers} and \code{Profiles} will delete the profile
+	\item The relation between \code{Profiles} and \code{HasGuardian} will delete all fields where the \code{userID} is either \code{idGuardian} or \code{idChild}
+	\item The relation between \code{AuthUsers} and \code{Media} will delete all fields where \code{idUser} is the owner
+	\item The relation between \code{Media} and \code{HasTag} will delete all fields where \code{HasTags.idMedia} equals \code{idMedia}
+	\item The relation between \code{Media} and \code{HasLink} will delete all fields where \code{HasLink.idMedia} or \code{HasLink.idSubMedia} equals \code{idMedia}
 \end{enumerate}
 
