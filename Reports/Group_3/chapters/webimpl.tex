@@ -135,11 +135,11 @@ When a Servlet submits a form, the data is sent differently depending on the \co
 \subsubsection{Form Data}
 To access the data from the \code{form}, the elements in the \code{form} needs a name. The name is set by the \code{name} attribute in the input element. The type of data sent from the \code{form} depends on the type of element.
 \begin{description}
-	\item[\code{<input type=Text/Password/TextField/>}] The value of these fields are of the type string, and contains the value entered into the text field on the page.
-	\item[\code{<input type=RadioButton value=``some_value''/>}] All \code{RadioButton}s with the same name, sends \code{some_value} of the selected \code{RadioButton}.
-	\item[\code{<input type=CheckBox value=``some_value''/>}] All \code{CheckBox}es with the same name sends \code{some_value} of each checked box.
-	\item[\code{<select ...><option value=``some_value''>caption</ ... >}] Sends \code{some_value} of the selected item.
-	\item[\code{<select ... multiple=``multiple''><option value=``some_value''>caption</ ...>}] Sends \code{some_value} of all the selected items as a string array.
+	\item[Text/Password] seen in \autoref{code:HTMLTxt}. The value of these fields are of the type string, and contains the value entered into the text field on the page.
+	\item[RadioButton] seen in \autoref{code:HTMLradi}. All \code{RadioButton}s with the same name, sends \code{some_value} of the selected \code{RadioButton}.
+	\item[CheckBox] seen in \autoref{code:HTMLcheck}. All \code{CheckBox}es with the same name sends \code{some_value} of each checked box.
+	\item[DropDown menu] seen in \autoref{code:HTMLdrop}. Sends \code{some_value} of the selected item.
+	\item[Multiple Select] seen in \autoref{code:HTMLmulSel}. Sends \code{some_value} of all the selected items as a string array.
 \end{description}
 
 \begin{lstlisting}[language=Java,label=code:URLLINK,caption=URL with visible parameters]
