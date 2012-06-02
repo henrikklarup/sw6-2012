@@ -1,26 +1,24 @@
 \chapter{Future Work}
 
-\textit{This chapter will provide the reader with a description of the shortcomings of the application, as well a ideas for further development. }\\
-\\
-After the production of the application PARROT based on the design mentioned in \autoref{appd} has stopped, and the test of the application by and the usability test have been performed, we have a list of bugs and unimplemented features.\newline
+After the production of the application PARROT based on the design mentioned in \autoref{appd} has stopped, and the test of the application and the usability test have been performed, we have a list of bugs and unimplemented features.\newline
 In this chapter we want to go through the list of bugs and unimplemented features for the sake of further development of this application.\\
 \\
-All the bugs, unimplemented features and other deficiencies, can be split up into three groups:\\
+All tasks involving the bugs, unimplemented features, and other deficiencies, can be split up into three groups:\\
 \\
 First group contains the bugs found in the tests and features that are necessary for the application to work properly with the other parts of GIRAF.\newline 
 
 These are:
 
 \begin{itemize}
-	\item \textbf{Fix the bug that causes the system to crash when the user has no categories:} In the application the user can delete 						categories in the Administration tab, but in the tests a bug occurs when the user deletes all the categories. This error makes 					the application crash, so this is a bug that needs to be fixed so that if the user deletes all the categories, the application 					does not crash.
+	\item \textbf{Fix the bug that causes the system to crash when the user has no categories:} In the application the user can delete categories in the Administration tab, but in the tests a bug occurs when the user deletes all the categories. This error makes the application crash, so this is a bug that needs to be fixed so that if the user deletes all the categories, the application does not crash.
 	
-	\item \textbf{Fix the bug that causes the system to crash when a category is copied into itself:} In the system it is possible to 						copy a pictogram form one category in to another	category, and copy a whole category into another category. But if the user 						tries to copy a category into itself, the system crashes. This bug needs to be fixed so that if the user by accident makes this 				mistake, the application will not do anything, and will not crash. 
+	\item \textbf{Fix the bug that causes the system to crash when a category is copied into itself:} In the system it is possible to copy a pictogram form one category into another category, and copy a whole category into another category. But if the user tries to copy a category into itself, the system crashes. This bug needs to be fixed so that if the user by accident makes this mistake the application will not not crash. 
 	
-	\item \textbf{Finish connecting the application to the launcher:} When opening the PARROT application the application should get a 						profile from the launcher so the application knows which pictogram the profiles has and other options but this was not finish 					in time so in our test the profile we are using are a ``dummy profile '' so for the application to work the connection between 					the launcher and the PARROT application need to be fixed. 
+	\item \textbf{Finish connecting the application to the launcher:} When opening the PARROT application, the application should get a profile from the launcher, so that the application knows which pictograms the profiles has, and other options. This was not finished in time, so in our test the profile we are using is a ``dummy profile '' so for the application to work, the connection between the launcher and the PARROT application needs to be fixed. 
 	
-	\item \textbf{Remove the DragShadow when dragging an empty Pictogram:} Currently if the user drags one of the empty pictograms in the 				sentence board the shadow will be shown. This shadow must been removed to prevent confusion.
+	\item \textbf{Remove the DragShadow when dragging an empty Pictogram:} Currently if the user drags one of the empty pictograms in the sentence board, the shadow will be shown. This shadow must be removed to prevent confusion.
 	
-	\item \textbf{Move all save calls to the PARROTDataLoader to the onPause method of PARROTActivity:} In the current version of PARROT there are save call in both onPause of PARROTActivity and ManageCategoryFragment. This should be fixed, so that only PARROTActivity has a save method in its onPause method. Not that the individual tabs should still be able to make save calls, they should just not do it automatically.
+	\item \textbf{Move all save calls to the PARROTDataLoader to the onPause method of PARROTActivity:} In the current version of PARROT there are save call in both onPause of PARROTActivity and ManageCategoryFragment. This should be fixed, so that only PARROTActivity has a save method in its onPause method. Note that the individual tabs should still be able to make save calls, they should just not do it automatically.
 \end{itemize}
   
 The second group contains the unfinished features, meaning features that we have commenced implementing but not finish due to a lack of time.   
@@ -28,50 +26,48 @@ The second group contains the unfinished features, meaning features that we have
 These features are:
 
 \begin{itemize}
-	\item \textbf{Make the Spinner on the management fragment work, so that it contains all the children profiles for the active 									guardian:} The spinner(android equivalent to drop down menus) is not finished, so is does not show all the profiles that the 						guardian have access to when the guardian is in the administration tab.  
-	\item \textbf{Show and Edit Category names:} In the application we are not yet done implementing the categories' names in the user 						interface. Also we are not able to edit the names in the current state. 
+	\item \textbf{Make the Spinner in the administrations tab work, so that it contains all the child profiles for the active guardian:} The spinner( android equivalent to drop down menus) is not finished, so is does not show all the profiles that the guardian have access to when the guardian is in the administration tab.  
+	\item \textbf{Show and Edit Category names:} In the application we are not yet done implementing the category's name in the user interface. Also we are not able to edit the names in the current state. 
 	 
-	\item \textbf{Add guardian mode in child mode:} At the moment the user, children as well as guardians, of the application can access 					all the tabs in the application this is not the intention of the application. The meaning of the guardian mode is that the 							children can only access the speechboard tab and to access the others tabs the guardian needs to authorize with their QR-code.  
+	\item \textbf{Add guardian mode in child mode:} At the moment the users, children as well as guardians, can access all the tabs in the application. This is not the intention. The meaning of the guardian mode is that the children can only access the speech board tab and to access the others tabs the guardian needs to authorize with their QR-code.  
 	
 	\item \textbf{Note that the name of the root folder might not be sdcard/ on all Android units.}
 		\subitem \textbf{Consider using Enviroment.get(...) to make the paths hardware independent.}
-	\item \textbf{Add Profile icon to design.} The original design of the speech board had a pictogram of the child in the upper left 						corner. This has yet to be implemented. Our idea was this pictogram could be used in the sentence board just like the other 						pictograms.
-	\item \textbf{write the functionality for the unimplemented buttons on the ManageCategoryFragment:} In the administrations tab there 					are some buttons the yet has no function implemented due to the lack of time.
+	\item \textbf{Add Profile icon to design.} The original design of the speech board had a pictogram of the child in the upper left corner. This has yet to be implemented. Our idea was that this pictogram could be used in the sentence board just like the other pictograms.
+	\item \textbf{Write the functionality for the unimplemented buttons on the ManageCategoryFragment:} In the administrations tab there are some buttons that yet has no function implemented due to the lack of time.
 	 
-	\item \textbf{Colored edge on the categories:} in the application we want to have a colored edge around the categories' pictograms to 					show which category is connected to the displayed pictograms.
+	\item \textbf{Colored edge on the categories:} In the application we want to have a colored edge around the categories' pictograms to show which category is connected to the displayed pictograms.
 \end{itemize}
 
 
-The third group contains the features that not has not yet been implemented.
+The third group contains the features that have not yet been implemented.
 
 These features are: 
 
 \begin{itemize}
 	\item \textbf{Add camera functionality and the ability to add the pictures taken by the camera to the PARROT application.}
-	\item \textbf{Suggest to the Admin group that Pictograms and Categories are made part of the database:} We felt that this would be a 					good idea since pictogram is a important part of the GIRAF applications and making them a part of the database will make in 						easier to share between the applications. 
+	\item \textbf{Suggest to the Admin group that Pictograms and Categories are made part of the database:} We felt that this would be a good idea since pictogram is a important part of the GIRAF applications and making them a part of the database will make it easier to share among the applications. 
 	\item \textbf{Expand the options fragment, so that the children can be more individualized.}		
 		\subitem \textbf{For instance, add functionality to limit the access to the individual tabs.}
-		\subitem \textbf{Remember to save all changes to the PARROTProfile:} Remember to update the PARROTProfile class to handle the 										settings.
+		\subitem \textbf{Remember to save all changes to the PARROTProfile:} Remember to update the PARROTProfile class to handle the settings.
  		
-	\item \textbf{Check with customers/experts if the drag drop functionality with sentences are handled correctly.}
+	\item \textbf{Check with customers/experts if the drag and drop functionality with sentences are handled correctly.}
 		\subitem \textbf{Or make it possible to change how the sentence board functionality should work for the individual child.}
 	\item \textbf{Consider changing the Category class, so that categories can contain categories.}
 	
 	\item \textbf{Refactor BoxDragListner to SpeechDragListner:} This serves the purpose of organizing the code in a better way.
-	\item \textbf{Create a startup screen while loading:} In the current state the application takes a while to startup and this confused 				and annoyed the test subjects. Adding a startup screen would a inform the user that the application has started.
+	\item \textbf{Create a startup screen while loading:} In the current state the application takes a while to startup and this confused	and annoyed the test subjects. Adding a startup screen would inform the user that the application has started.
 	
 	\item \textbf{Create a busy animation:} This would be just like the hour glass in Windows. 
 		\subitem \textbf{This one could be common for all applications for the GIRAF platform.}
-	\item \textbf{Handle color from the launcher and make those standard colors in PARROT.}
-	\item \textbf{Write search functionality for pictograms, and use tags:} This well be needed when the application well get the full 						database of pictogram and the guardian need to find a specific pictogram. 
+	\item \textbf{Handle colors from the launcher and make those standard colors in PARROT.}
+	\item \textbf{Write search functionality for pictograms, and use tags:} This will be needed when the application will get the full database of pictograms and the guardians need to find a specific pictogram. 
 
-	\item \textbf{Add mute functionality:} Some of the children users does not respond well to sound.
+	\item \textbf{Add mute functionality:} Some of the children do not respond well to sound.
 	
 	\item \textbf{Option of displaying the categories in speechboard the same way as those in the management tab.}
 	
 \end{itemize}  
 
-We hope that this chapter have provided future developers with idea where to starts when continuing on the PARROT project. 
-We feel that we have presented the problems and shortcomings that we have found within the PARROT application which has to be resolved in order to ensure a fully functional application to fit the current needs of the costumer.\\
-\\
-\textit{This chapter has provided a description of problems and ideas for future work.}
+We hope that this chapter have provided future developers with the idea of where to starts when continuing on the PARROT project. 
+We feel that we have presented the problems and shortcomings that we have found within the PARROT application, which has to be resolved in order to ensure a fully functional application to fit the current needs of the costumer.\\

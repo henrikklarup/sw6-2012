@@ -1,5 +1,11 @@
 \begin{thebibliography}{10}
 
+\bibitem{gridview}
+Hello gridview.
+\newblock
+  \url{http://developer.android.com/resources/tutorials/views/hello-gridview.h%
+tml}.
+
 \bibitem{ScrumOfScrums}
 Scrum Alliance.
 \newblock Advice on conducting the scrum of scrums meeting.
@@ -34,11 +40,21 @@ Jan~Stage Jesper~Kjeldskov, Mikael B.~Skov.
   Day}.
 \newblock Last viewed: 2012-05-24.
 
+\bibitem{softtest}
+Ron Patton.
+\newblock {\em Software Testing}.
+
 \bibitem{tablet}
 Samsung.
 \newblock Samsung tablet.
 \newblock test
   \url{http://www.samsung.com/global/microsite/galaxytab/10.1/index.html}.
+
+\bibitem{ambilw}
+Yuku Sugianto.
+\newblock Ambilwarna.
+\newblock \url{http://code.google.com/p/android-color-picker/}, 2011.
+\newblock Last viewed: 2-6-2012.
 
 \bibitem{AndroidVersion}
 Android~Development Team.
