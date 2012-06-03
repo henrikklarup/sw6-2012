@@ -10,9 +10,17 @@ The pros and cons can be seen in the following tables; Table \vref{procon1}, Tab
 		\begin{tabular}{| p{6cm} | m{6cm} |}
 			\hline
 			\textbf{Pros:} & \textbf{Cons:} \\ \hline
-			- Reduced development time, as you only have to develop one software layer & - It is not recommended to have direct access to the external database, due to the loss of security and the maintainability will be more complex \\ \hline
-			- Access to data in offline mode & - If more applications wants to access the external database, then a lot of connections will be made\\ \hline
-			& - If a change is made in the external database structure, one has to update the tablet to use it. \\ \hline
+\begin{itemize}
+	\item Reduced development time, as you only have to develop one software layer
+	\item Access to data in offline mode
+\end{itemize}
+&
+\begin{itemize}
+	\item It is not recommended to have direct access to the external database, due to the loss of security and the maintainability will be more complex
+	\item If more applications wants to access the external database, then a lot of connections will be made
+	\item If a change is made in the external database structure, one has to update the tablet to use it
+\end{itemize}
+\\ \hline
 		\end{tabular}
 	\caption{Oasis Lib with direct connection to an external database and with a local database}
 	\label{tab:procon1}
@@ -22,11 +30,19 @@ The pros and cons can be seen in the following tables; Table \vref{procon1}, Tab
 	\centering
 		\begin{tabular}{| p{6cm} | m{6cm} |}
 			\hline
-			Pros: & Cons: \\ \hline
-			- Data are always synchronized & - No access to data, if the external database is offline \\ \hline
-			- Reduced development time, as you only have to develop one software layer & - If a change is made in the external database structure, one has to update the tablet to use it. \\ \hline
-			& - It is not recommended to have direct access to the external database, due to the loss of security and the maintainability will be more complex \\ \hline
-			& - If more applications wants to access the external database, then a lot of connections will be made. \\ \hline
+			\textbf{Pros:} & \textbf{Cons:} \\ \hline
+\begin{itemize}
+	\item Data are always synchronized
+	\item Reduced development time, as you only have to develop one software layer
+\end{itemize}
+&
+\begin{itemize}
+	\item No access to data, if the external database is offline
+	\item If a change is made in the external database structure, one has to update the tablet to use it
+	\item It is not recommended to have direct access to the external database, due to the loss of security and the maintainability will be more complex
+	\item If more applications wants to access the external database, then a lot of connections will be made
+\end{itemize}
+\\ \hline
 		\end{tabular}
 	\caption{Oasis Lib with direct connection to an external database and without a local database}
 	\label{tab:procon2}
@@ -36,10 +52,18 @@ The pros and cons can be seen in the following tables; Table \vref{procon1}, Tab
 	\centering
 		\begin{tabular}{| p{6cm} | m{6cm} |}
 			\hline
-			Pros: & Cons: \\ \hline
-			- The external database can be changed without updating the tablet. & - Increased development time, as you have to develop two software layers. \\ \hline
-			- Access to data, if the external database is offline & - Increased development time, as you have to setup two databases \\ \hline
-			& - Data is not always synchronized \\ \hline
+			\textbf{Pros:} & \textbf{Cons:} \\ \hline
+\begin{itemize}
+	\item The external database can be changed without updating the tablet
+	\item Access to data, if the external database is offline
+\end{itemize}
+&
+\begin{itemize}
+	\item Increased development time, as you have to develop two software layers
+	\item Increased development time, as you have to setup two databases
+	\item Data is not always synchronized
+\end{itemize}
+\\ \hline
 		\end{tabular}
 	\caption{Oasis Lib with connection to software layer on the server and with a local database}
 	\label{tab:procon3}
@@ -49,10 +73,18 @@ The pros and cons can be seen in the following tables; Table \vref{procon1}, Tab
 	\centering
 		\begin{tabular}{| p{6cm} | m{6cm} |}
 			\hline
-			Pros: & Cons: \\ \hline
-			- The external database can be changed without updating the tablet & - No access to data if the external database is offline \\ \hline
-			- Data is always synchronized & - No access to data if the external database is offline \\ \hline
-			& - Increased development time, as you have to develop two software layers \\ \hline
+			\textbf{Pros:} & \textbf{Cons:} \\ \hline
+\begin{itemize}
+	\item The external database can be changed without updating the tablet
+	\item Data is always synchronized
+\end{itemize}
+&
+\begin{itemize}
+	\item No access to data if the external database is offline
+	\item Increased development time, as you have to develop two software layers
+	\item Data is not always synchronized
+\end{itemize}
+\\ \hline
 		\end{tabular}
 	\caption{Oasis Lib with connection to software layer on the server and without a local database}
 	\label{tab:procon4}
@@ -61,5 +93,5 @@ The pros and cons can be seen in the following tables; Table \vref{procon1}, Tab
 \subsection{Choosing the architecture}
 One of the requirements for the system was accessibility of data in offline mode.
 This requirement rules out the two options without a local database.
-The main difference between the two solutions left, is that one requires more development time, and the other forces the tablets to be updated everytime the external database changes.
+The main difference between the two solutions left, is that one requires more development time, and the other forces the tablets to be updated every time the external database changes.
 Seeing that we could manage the increased development time, from developing two software layers, this solution seems like the more optimal one. Therefore we choose the one described in Table \vref{tab:procon3}.
