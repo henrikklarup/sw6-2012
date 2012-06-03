@@ -62,6 +62,13 @@ Yuku Sugianto.
 \newblock \url{http://code.google.com/p/android-color-picker/}, 2011.
 \newblock Last viewed: 2-6-2012.
 
+\bibitem{androidlife}
+Android~Development Team.
+\newblock Activity life cycle.
+\newblock
+  \url{http://developer.android.com/guide/topics/fundamentals/activities.html},
+  2012.
+
 \bibitem{actionbarguide}
 Android~Development Team.
 \newblock Android actionbar guide.
