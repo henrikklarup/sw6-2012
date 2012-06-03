@@ -3,16 +3,16 @@
 \begin{document}
 
 \input{Frontpage/frontpage}
-
-\cleardoublepage
+\clearpage{\thispagestyle{empty}\cleardoublepage}
 
 % Remove page number and add blank page.
 \thispagestyle{empty}
 \input{Title_page/title_page}
+\clearpage{\thispagestyle{empty}\cleardoublepage}
 
 % Use roman numbers in the beginning of the report.
 \pagenumbering{Roman}
-\cleardoublepage
+
 
 % Preface.
 \chapter*{Preface}
