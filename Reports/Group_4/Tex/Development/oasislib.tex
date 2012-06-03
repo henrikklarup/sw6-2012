@@ -16,7 +16,7 @@ The reason that we use model classes is to ease it for the users of the library 
 The model classes can be seen in Figure \vref{fig:models}.
 \begin{figure}[H]
 	\centering
-		\includegraphics[width=0.5\textwidth]{images/models.png}
+		\includegraphics[width=0.6\textwidth]{images/models.png}
 	\caption{The models in the Oasis Lib}
 	\label{fig:models}
 \end{figure}
@@ -79,6 +79,7 @@ A conversion is needed as the database returns a Cursor object and this object m
 This conversion is done in the auxiliary method \texttt{cursorToProfile}, which maps values in the Cursor to values in the profile model.
 If the Cursor from the database is null or empty, no profile was found in the database.
 
+\newpage
 The code for \texttt{getProfileById} method can be seen in Listing \vref{lst:getProfileById_implementation}.
 
 \begin{Java}{The \texttt{getProfileById} method.}{lst:getProfileById_implementation}
