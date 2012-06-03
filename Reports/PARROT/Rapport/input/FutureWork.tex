@@ -1,11 +1,11 @@
 \chapter{Future Work}
 
-After the production of the application PARROT based on the design mentioned in \autoref{appd} has stopped, and the test of the application and the usability test have been performed, we have a list of bugs and unimplemented features.\newline
+After the implementation of the application PARROT based on the design mentioned in \autoref{appd} has stopped, and the test of the application and the usability test have been performed, we have a list of bugs and unimplemented features.\newline
 In this chapter we want to go through the list of bugs and unimplemented features for the sake of further development of this application.\\
 \\
 All tasks involving the bugs, unimplemented features, and other deficiencies, can be split up into three groups:\\
 \\
-First group contains the bugs found in the tests and features that are necessary for the application to work properly with the other parts of GIRAF.\newline 
+The first group contains the bugs found in the tests and features that are necessary for the application to work properly with the other parts of GIRAF.\newline 
 
 These are:
 
@@ -32,7 +32,9 @@ These features are:
 	\item \textbf{Add guardian mode in child mode:} At the moment the users, children as well as guardians, can access all the tabs in the application. This is not the intention. The meaning of the guardian mode is that the children can only access the speech board tab and to access the others tabs the guardian needs to authorize with their QR-code.  
 	
 	\item \textbf{Note that the name of the root folder might not be sdcard/ on all Android units.}
-		\subitem \textbf{Consider using Enviroment.get(...) to make the paths hardware independent.}
+	\begin{itemize}
+		\item \textbf{Consider using Enviroment.get(...) to make the paths hardware independent.}
+	\end{itemize}
 	\item \textbf{Add Profile icon to design.} The original design of the speech board had a pictogram of the child in the upper left corner. This has yet to be implemented. Our idea was that this pictogram could be used in the sentence board just like the other pictograms.
 	\item \textbf{Write the functionality for the unimplemented buttons on the ManageCategoryFragment:} In the administrations tab there are some buttons that yet has no function implemented due to the lack of time.
 	 
@@ -47,19 +49,24 @@ These features are:
 \begin{itemize}
 	\item \textbf{Add camera functionality and the ability to add the pictures taken by the camera to the PARROT application.}
 	\item \textbf{Suggest to the Admin group that Pictograms and Categories are made part of the database:} We felt that this would be a good idea since pictogram is a important part of the GIRAF applications and making them a part of the database will make it easier to share among the applications. 
-	\item \textbf{Expand the options fragment, so that the children can be more individualized.}		
-		\subitem \textbf{For instance, add functionality to limit the access to the individual tabs.}
-		\subitem \textbf{Remember to save all changes to the PARROTProfile:} Remember to update the PARROTProfile class to handle the settings.
- 		
+	\item \textbf{Expand the options fragment, so that the children can be more individualized.}
+	\begin{itemize}		
+		\item \textbf{For instance, add functionality to limit the access to the individual tabs.}
+		\item \textbf{Remember to save all changes to the PARROTProfile:} Remember to update the PARROTProfile class to handle the settings.
+ 	\end{itemize}	
 	\item \textbf{Check with customers/experts if the drag and drop functionality with sentences are handled correctly.}
-		\subitem \textbf{Or make it possible to change how the sentence board functionality should work for the individual child.}
+	\begin{itemize}
+		\item \textbf{Or make it possible to change how the sentence board functionality should work for the individual child.}
+	\end{itemize}	
 	\item \textbf{Consider changing the Category class, so that categories can contain categories.}
 	
 	\item \textbf{Refactor BoxDragListner to SpeechDragListner:} This serves the purpose of organizing the code in a better way.
 	\item \textbf{Create a startup screen while loading:} In the current state the application takes a while to startup and this confused	and annoyed the test subjects. Adding a startup screen would inform the user that the application has started.
 	
 	\item \textbf{Create a busy animation:} This would be just like the hour glass in Windows. 
-		\subitem \textbf{This one could be common for all applications for the GIRAF platform.}
+		\begin{itemize}
+		\item \textbf{This one could be common for all applications for the GIRAF platform.}
+		\end{itemize}
 	\item \textbf{Handle colors from the launcher and make those standard colors in PARROT.}
 	\item \textbf{Write search functionality for pictograms, and use tags:} This will be needed when the application will get the full database of pictograms and the guardians need to find a specific pictogram. 
 
