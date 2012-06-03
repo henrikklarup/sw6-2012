@@ -127,14 +127,14 @@ and Table \vref{tab:TestCase_ValidGuardianWithChildrenAssociatedHandling}.
 		\begin{tabular}{| p{4.5cm} | m{9cm} |}
 			\hline
 			\textbf{Identifier:} 					& TC00002 \\ \hline
-			\textbf{Test item:}						& Certificate lenght too short handling of the \texttt{authenticateProfile()} method. \\ \hline
-			\textbf{Input specification:}			& A certificate shorther than 200 chars. \\ \hline
+			\textbf{Test item:}						& Certificate length too short handling of the \texttt{authenticateProfile()} method. \\ \hline
+			\textbf{Input specification:}			& A certificate shorter than 200 chars. \\ \hline
 			\textbf{Output specification:} 			& Null. \\ \hline
 			\textbf{Environmental needs:}			& A database is needed and the profile model. \\ \hline
 			\textbf{Special procedural requirements}	& None. \\ \hline
 			\textbf{Intercase dependencies:}			& None. \\ \hline
 		\end{tabular}
-	\caption{Test Case for certificate lenght too short handling of the \texttt{authenticateProfile()} method.}
+	\caption{Test Case for certificate length too short handling of the \texttt{authenticateProfile()} method.}
 	\label{tab:TestCase_CertificateToShortHandling}
 \end{table}
 
@@ -143,14 +143,14 @@ and Table \vref{tab:TestCase_ValidGuardianWithChildrenAssociatedHandling}.
 		\begin{tabular}{| p{4.5cm} | m{9cm} |}
 			\hline
 			\textbf{Identifier:} 					& TC00003 \\ \hline
-			\textbf{Test item:}						& Certificate lenght too long handling of the \texttt{authenticateProfile()} method. \\ \hline
+			\textbf{Test item:}						& Certificate length too long handling of the \texttt{authenticateProfile()} method. \\ \hline
 			\textbf{Input specification:}			& A certificate longer than 200 chars. \\ \hline
 			\textbf{Output specification:} 			& Null. \\ \hline
 			\textbf{Environmental needs:}			& A database is needed and the profile model. \\ \hline
 			\textbf{Special procedural requirements:}	& None. \\ \hline
 			\textbf{Intercase dependencies:}			& None. \\ \hline
 		\end{tabular}
-	\caption{Test Case for certificate lenght too long handling of the \texttt{authenticateProfile()} method.}
+	\caption{Test Case for certificate length too long handling of the \texttt{authenticateProfile()} method.}
 	\label{tab:TestCase_CertificateToLongHandling}
 \end{table}
 
@@ -273,7 +273,7 @@ public void testAuthenticateProfileWithValidCertificate() {
 The unit test for the \texttt{testAuthenticateProfileWithInvalidCertificate()} method can be seen in Listing \vref{lst:testAuthenticateProfileWithInvalidCertificate}.
 This method also starts by initializing its environment but in this method the created certificate is invalid.
 The rest of the initialization is the same as in the valid test and the execution is the same as well.
-In this test \texttt{assertNull} is used to confirm that there is not retrived a profile from the database due to an invalid certificate.
+In this test \texttt{assertNull} is used to confirm that there is not retrieved a profile from the database due to an invalid certificate.
 
 \begin{Java}{The \texttt{testAuthenticateProfileWithInvalidCertificate()} method.}{lst:testAuthenticateProfileWithInvalidCertificate}
 public void testAuthenticateProfileWithInvalidCertificate() {
@@ -297,7 +297,7 @@ public void testAuthenticateProfileWithInvalidCertificate() {
 }
 \end{Java}
 
-The remaining tests from the test suite have been created using the same structure; an initialization face, an execution face, and one or more assertions.
+The remaining tests from the test suite have been created using the same structure; an initialization phase, an execution  phase, and one or more assertions.
 These tests can be seen in the source code of the Oasis App.
 
 \subsection{The Test Results}
