@@ -1,20 +1,39 @@
-\section{Future Work}
+\chapter{Future Work}
+A number of tasks did not get completed in this semester. As this project is going to be continued by others students, we will provide an overview of some of the changes we did not complete. 
 
-A number of tasks did not get completed in this semester. As this project is properly going to be continued by others students, it is not that big of a problem. 
+\section{Server Synchronization}
+One of the main things which did not get completed was the synchronization with Savannah.
+This was due to components not being ready at the time the task was scheduled.
+In the continuation of the project, this can be implemented by using the components which Savannah provides.
+Completing this task will make the sync status component in the launcher work properly.
+Another improvement which can be implemented in a future continuation of the project, is the ability to synchronize images on the device, and update the paths dynamically.
 
-\subsection{Server synchronization}
-One of the main things which did not get completed, due to when the component we needed was available, we did not have more time to implement it, was the synchronization with the server. This can be implemented by using the components which the server group made. This would also make the sync status component in the launcher work.
-Another improvement which could be implemented in a future continuation of the project, is the ability to synchronize images on the device, and update the paths dynamically.
+\section{Unit Tests}
+Unit testing is an essential part of the project.
+We created unit test for all the helper classes in the Oasis Lib, but for a major part it was only test-to-pass tests.
+Therefore the Oasis Lib can be made more robust by implemting test-to-fail tests.
+In the future it can be beneficial to make unit tests for the Oasis Local Db and the Oasis App.
+This would make the administration module more robust, because every ``part'' of the module is tested.
 
-\subsection{Unit tests}
-Unit testing is an essential part of the project. We did manage to unit test all the helper classes in the Oasis Lib, but for future work it could be nice to make unit tests for the Oasis Local Db and the Oasis App. This would make the administration module more robust, because every "`part"' of the module is tested.
+\section{Certificates}
+Certificates is one of the core elements in the Launcher, and this is reflected in the Oasis Lib.
 
-\subsection{Certificates}
-Certificates is one of the core elements in the launcher, and therefore it is also reflected in the Oasis library. A couple of features where not completed for the certificates. The first one, was the possibility to set a time limit on the certificate, so it would have to renew itself after for instance. 7 days. This would make the system more secure, but would rely on the users printing out new QR-codes each week, and the Oasis library to generate new QR-codes each week as well.
-Another feature which certificates could have made use of, is the possibility to have multiple certificates per user, this would make it possible to have a QR-code for each department a person is in, and thereby only have access to the children in the department in question.
+A feature that can be implemented for the certificates, is the possibility to set a time limit on the certificate, thereby enforcing a renewal of the certificate after the time limit has been exceeded.
+This would make the system more secure, but would rely on the users printing out new QR-codes, and the Oasis Lib to generate new QR-codes.
 
-\subsection{Media Table}
-As seen in the database scheme in \textcolor{red}{ref Database scheme}, we can see that media should have the possibility of having either a department or a profile at its owner id, but in the Oasis Lib it is only the profile part that is supported. This should be added in future work, to make the Oasis system fully  represent the database scheme.
+\section{Media Table}
+As seen in the database schema in \vref{sec:OasisSchema}, a media should be capable of having either a department or a profile as its owner id.
+The Oasis Lib only supports a profile as the owner of a media.
+The option for departments to be owners should be added, to make the Oasis Lib fully represent the database schema.
 
-\subsection{Oasis App}
-The Oasis App shows how the Oasis Lib can be utilized. A couple of changes and improvements could be done. One thing is that the code could use a round of refactoring. This refactoring would lower the amount of classes, because some the class has the same purpose, but only for a different profile. Besides that the Oasis App is still missing some functionality. The functionality that is missing is: View other guardians profiles, Create new media, Create new apps, and Create and manage settings of the apps and profiles. At last the usability test showed that the Oasis app could use a better visual design to give at better overview of the application.
+\section{Oasis App}
+The Oasis App shows how the Oasis Lib can be utilized.
+A couple of changes and improvements can be done.
+
+One thing which can be done is refactoring of the code.
+This refactoring would lower the amount of classes, increase the readability, and help with the understanding of the Oasis App source code.
+
+Besides that the Oasis App is still missing some functionality.
+The functionality that is missing is; view other guardians profiles, create new media, create new applications, and create and manage settings of the applications and profiles.
+
+The usability test showed that the Oasis App can use a better visual design to give a better overview of the application.

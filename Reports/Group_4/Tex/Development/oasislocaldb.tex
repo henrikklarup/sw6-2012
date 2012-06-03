@@ -15,7 +15,7 @@ The central point of the Oasis Local Db schema is the AuthUsers table.
 This table contains all the user id's and their certificates.
 A user in the Oasis Local Db can be either a profile or a department and therefore a role is stored as well to differetiate the two.
 
-The Oasis Local Db schema for the profiles and departments are a simple model representing a kindergarden like Birken or Egebakken.
+The Oasis Local Db schema for the profiles and departments are a simple model representing a kindergarden like Birken or a school like Egebakken.
 This means that a profile can either be a child or guardian.
 The Oasis Local Db supports the possibility to associate profiles to each other in order to allow a child to guardian relation.
 The profiles can be attached to one or more departments, and a department can be related to one or more sub departments.
@@ -278,3 +278,5 @@ The content provider must implement several methods. These methods are presented
 			}
 		\end{Java}
 \end{itemize}
+
+All these implemented methods can be utilized in the implementaion of the Oasis Lib.

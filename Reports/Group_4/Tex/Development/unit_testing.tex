@@ -1,49 +1,51 @@
+\chapter{Testing}
+In the chapter aspects of dynamic white box testing will be explained in Section \vref{sec:DynamicWhiteBoxTesting}. Furthermore the results of the usability test will be presented in Section \{sec:usability_results}.
+
 \section{Dynamic White Box Testing}
 \label{sec:DynamicWhiteBoxTesting}
-To ensure the correctness of the Oasis Library we enforce dynamic white box testing (side 106 - 107, Software Testing - af Ron Patton) through unit tests. 
-kilde: %http://aulas.carlosserrao.net/lib/exe/fetch.php?media=0910:1008-1987_ieee_standard_for_software_unit_testing.pdf
-The library is used by all GIRAF applications this means that if a bug exists in the library there is a potential bug in all GIRAF application.
-Therefore the library must be thoroughly tested to make sure that few or no bugs exists.
+To ensure the correctness of the Oasis Library we enforced dynamic white box testing through unit tests \cite[pp106]{Testing, UnitTesting}.
+The Oasis Lib is used by all GIRAF applications this means that if a bug exists in the Oasis Lib there is a potential bug in all GIRAF applications.
+Therefore the Oasis Lib must be thoroughly tested to make sure that few or no bugs exists.
 
-As this project have been developed using the agile development methods Scrum we have not devised a full test plan (side 263 - 275, Software Testing - af Ron Patton) as this is not needed.
-As a part of Scrum we have been testing the code snippets before they have been marked as completed.
-A decision has been made \autoref{sec:somewhereInTheLibSection} to make a full functioning library for this semester.
-This decision means that the development time has to be prioritized and therefore the focus will be on test-to-pass tests (side 66, Software Testing - af Ron Patton).
-This ensures that the library will function as intended, though there is no guarantee that the library will work if bad parameters are used.
+The Oasis Local Db will be tested along with the Oasis Lib, this is more efficient as more code will be tested in every test, but it has the drawback that if a bug appears more code will have to be investigated in order to locate the bug.
 
-\subsection{The Test Design}
-A test design (side 281 - 282, Software testing - af Ron Patton) have been elaborated for each method in the helper classes of the Oasis Library.
-This way the library methods will be tested along with the database thus saving some time.
-This means that the tests will be more efficient as more code will be tested in every test, but it has the drawback that if a bug is found more code will have to be investigated in order to locate the bug.
+As this project have been developed using the agile development method Scrum we have not devised a full test plan as this is not needed \cite[pp263]{Testing}. 
+The focus of the tests will be on test-to-pass \cite[pp66]{Testing}.
+This ensures that the Oasis Lib will function as intended, though there is no guarantee that the Oasis Lib will work if invalid parameters are used.
 
-The test design in \autoref{tab:TestDesign_AuthenticateProfile} is for the \texttt{authenticateProfile()} method.
+\subsection{The Test Designs}
+\label{sec:testDesign}
+A test design have been elaborated for each method in the helper classes of the Oasis Lib \cite[pp281]{Testing}.
+Examples of the test designs are presented in the following tables.
+
+The test design in Table \vref{tab:TestDesign_AuthenticateProfile} is for the \texttt{authenticateProfile()} method.
 This test design tests if a profile can be authenticated.
-This is an essential method for the whole GIRAF platform, and therefore it is tested both using test-to-pass and test-to-fail tests to ensure that this method is particular robust.
+This is an essential method for the GIRAF platform, and therefore it is tested both using test-to-pass and test-to-fail tests to ensure that this method is particular robust.
 
 \begin{table}[htbp]
 	\centering
 		\begin{tabular}{| p{4.5cm} | m{9cm} |}
 			\hline
-			Identifier: 				& TD00001 \\ \hline
-			Feature to be tested:		& Authenticate profile. \\ \hline
-			Approach:					& An automated test will be made to authenticate a profile by its certificate. \\
-										&	\begin{enumerate}
-												\item Enter a profile with a specific certificate in the database.
-												\item Authenticate the profile by its certificate.
-											\end{enumerate} \\ \hline
-			Test case identification: 	& Check valid certificate Test Case ID\# 00001 \\
-										& Check too long certificates Test Case ID\# 00002 \\
-										& Check too short certificates Test Case ID\# 00003 \\
-										& Check invalid certificates Test Case ID\# 00004 \\ \hline
-			Pass/fail criteria:			& All valid profile certificates that matches the certificate in the database must be accepted as well as all invalid certificates must be rejected. \\ \hline
+			\texbf{Identifier:} 				& TD00001 \\ \hline
+			\texbf{Feature to be tested:}		& Authenticate profile. \\ \hline
+			\texbf{Approach:}					& An automated test will be made to authenticate a profile by its certificate. \\
+												&	\begin{enumerate}
+														\item Enter a profile with a specific certificate in the database.
+														\item Authenticate the profile by its certificate.
+													\end{enumerate} \\ \hline
+			\texbf{Test case identification:} 	& Check valid certificate Test Case ID\# 00001 \\
+												& Check too long certificates Test Case ID\# 00002 \\
+												& Check too short certificates Test Case ID\# 00003 \\
+												& Check invalid certificates Test Case ID\# 00004 \\ \hline
+			\texbf{Pass/fail criteria:}			& All valid profile certificates that matches the certificate in the database must be accepted as well as all invalid certificates must be rejected. \\ \hline
 		\end{tabular}
 	\caption{Test Design for \texttt{authenticatingProfile()}.}
 	\label{tab:TestDesign_AuthenticateProfile}
 \end{table}
 
-The test design in \autoref{tab:TestDesign_GetProfileById} is for the \texttt{getProfileById} method.
-This is also a very important method for the whole GIRAF platform therefore it is tested with the same mix of test-to-pass and test-to-fail tests.
-The test make sure that a profile can be found by its id and that negative id's and id's not in the database will not make it crash.
+The test design in Table \vref{tab:TestDesign_GetProfileById} is for the \texttt{getProfileById()} method.
+This is also an important method for the GIRAF system, therefore it is tested with the same mix of test-to-pass and test-to-fail tests.
+The tests ensures the robustness of the method.
 
 \begin{table}[htbp]
 	\centering
@@ -65,8 +67,8 @@ The test make sure that a profile can be found by its id and that negative id's 
 	\label{tab:TestDesign_GetProfileById}
 \end{table}
 
-The test design in \autoref{tab:TestDesign_GetChildrenByGuardian} is for the \texttt{getChildrenByGuardian} method.
-This test ensures that the method performs as intended under normal operation.
+The test design in Table \vref{tab:TestDesign_GetChildrenByGuardian} is for the \texttt{getChildrenByGuardian()} method.
+The test ensures the method performs as intended under normal operation.
 This is done with a single test-to-pass test, which tests if children associated to a guardian can be retrieved from the database.
 
 \begin{table}[htbp]
@@ -84,26 +86,24 @@ This is done with a single test-to-pass test, which tests if children associated
 			Test case identification: 	& Check valid guardian with children associated Test Case ID\# 00008 \\ \hline
 			Pass/fail criteria:			& The list of children should match the children associated with the guardian. \\ \hline
 		\end{tabular}
-	\caption{Test Design for get children by guardian.}
+	\caption{Test Design for \texttt{getChildrenByGuardian}.}
 	\label{tab:TestDesign_GetChildrenByGuardian}
 \end{table}
 
-More test designs have been elaborated but have not be entered in the report due to the similarities and the large amount.
-Those test designs look similar to the test design for the \texttt{getChildrenByGuardian} method.
+
 
 \subsection{The Test Cases}
-One or more test case are created for each test design (side 283 - 285, Software testing - af Ron Patton).
-Every test case is created in order to test a part of a method to ensure that the method performs as intended in the tested situation.
-
-The test cases for the test designs in the prior Section can be seen in 
-\autoref{tab:TestCase_ValidCertificateHandling}, 
-\autoref{tab:TestCase_CertificateToShortHandling},
-\autoref{tab:TestCase_CertificateToLongHandling},
-\autoref{tab:TestCase_InvalidCertificateHandling},
-\autoref{tab:TestCase_ValidIdHandling},
-\autoref{tab:TestCase_InvalidIdHandling},
-\autoref{tab:TestCase_NegativeIdHandling}, 
-and \autoref{tab:TestCase_ValidGuardianWithChildrenAssociatedHandling}.
+For each test design in Section \vref{sec:testDesign}, one or more test cases has been created \cite[pp283]{Testing}.
+Each test case ensures a part of the tested method performs as intended in the test situation.
+The test cases for the test designs presented in Section \vref{sec:testDesign} will be shown in the following tables:
+Table \vref{tab:TestCase_ValidCertificateHandling}, 
+Table \vref{tab:TestCase_CertificateToShortHandling},
+Table \vref{tab:TestCase_CertificateToLongHandling},
+Table \vref{tab:TestCase_InvalidCertificateHandling},
+Table \vref{tab:TestCase_ValidIdHandling},
+Table \vref{tab:TestCase_InvalidIdHandling},
+Table \vref{tab:TestCase_NegativeIdHandling}, 
+and Table \vref{tab:TestCase_ValidGuardianWithChildrenAssociatedHandling}.
 
 \begin{table}[htbp]
 	\centering
@@ -133,7 +133,7 @@ and \autoref{tab:TestCase_ValidGuardianWithChildrenAssociatedHandling}.
 			Special procedural requirements	& None. \\ \hline
 			Intercase dependencies:			& None. \\ \hline
 		\end{tabular}
-	\caption{Test Case for certificate lenght too long handling of the \texttt{authenticateProfile()} method.}
+	\caption{Test Case for certificate lenght too short handling of the \texttt{authenticateProfile()} method.}
 	\label{tab:TestCase_CertificateToShortHandling}
 \end{table}
 
@@ -190,7 +190,7 @@ and \autoref{tab:TestCase_ValidGuardianWithChildrenAssociatedHandling}.
 		\begin{tabular}{| p{4.5cm} | m{9cm} |}
 			\hline
 			Identifier: 					& TC00006 \\ \hline
-			Test item:						& Invalid id present not present in the database handling of the \texttt{getProfileById()} method. \\ \hline
+			Test item:						& Invalid id not present in the database handling of the \texttt{getProfileById()} method. \\ \hline
 			Input specification:			& An invalid id. \\ \hline
 			Output specification: 			& Null. \\ \hline
 			Environmental needs:			& A database is needed and the profile model. \\ \hline
@@ -234,17 +234,17 @@ and \autoref{tab:TestCase_ValidGuardianWithChildrenAssociatedHandling}.
 \end{table}
 
 
-\subsection{The Unit Tests}
-All the tests cases have been used to construct the 89 unit tests, which have helped in the development of the library.
-The tests have been split up into three parts: Initialization, execution, and assertion.
+\subsection{Unit Test Implementation}
+All the tests cases have been used to construct the 89 unit tests, which have helped in the development of the Oasis Lib.
+The tests have been split up into three parts; initialization, execution, and assertion.
 
-The unit test for the \texttt{testAuthenticateProfileWithValidCertificate()} method can be seen in \autoref{lst:testAuthenticateProfileWithValidCertificate}.
+The unit test for the \texttt{testAuthenticateProfileWithValidCertificate()} method can be seen in Listing \vref{lst:testAuthenticateProfileWithValidCertificate}.
 The method starts by initializing the environment.
 This means that a random valid certificate is created and a profile -- the expected profile -- is entered in the database and the certificate for the profile is set to the newly created certificate.
 
-After the initiliazation the method is executed and the retrieved profile is stored as the actual profile in order to have some data for the assertion.
+After the initialization the method is executed and the retrieved profile is stored as the actual profile in order to have some data for the assertion.
 At the end an \texttt{assertEquals} is called to ensure that the expected profile is the same as the actual profile.
-If this is the case the test passes, otherwise the test fails the two profiles are printed in the test log. 
+If this is the case the test passes, otherwise the test fails and the two profiles are printed in the test log. 
 
 
 \begin{Java}{The \texttt{testAuthenticateProfileWithValidCertificate()} method.}{lst:testAuthenticateProfileWithValidCertificate}
@@ -269,11 +269,10 @@ public void testAuthenticateProfileWithValidCertificate() {
 }
 \end{Java}
 
-The unit test for the \texttt{testAuthenticateProfileWithInvalidCertificate()} method can be seen in \autoref{lst:testAuthenticateProfileWithInvalidCertificate}.
-This method also starts by initializing its environment but in this method the created certificate is different.
-The created certificate consists of chars in the range from 65 - 91 while a valid certificate hahas a range from 97 - 123.
+The unit test for the \texttt{testAuthenticateProfileWithInvalidCertificate()} method can be seen in Listing \vref{lst:testAuthenticateProfileWithInvalidCertificate}.
+This method also starts by initializing its environment but in this method the created certificate is invalid.
 The rest of the initialization is the same as in the valid test and the execution is the same as well.
-But in this test \texttt{assertNull} is used to confirm that there is not retrived a profile from the database due to an invalid certificate.
+In this test \texttt{assertNull} is used to confirm that there is not retrived a profile from the database due to an invalid certificate.
 
 \begin{Java}{The \texttt{testAuthenticateProfileWithInvalidCertificate()} method.}{lst:testAuthenticateProfileWithInvalidCertificate}
 public void testAuthenticateProfileWithInvalidCertificate() {
@@ -297,19 +296,11 @@ public void testAuthenticateProfileWithInvalidCertificate() {
 }
 \end{Java}
 
-The remaining tests from the test suite have been created in the same manor with an initialization face, an execution face and one or more assertions and the can be seen in the source code of the Oasis App.
+The remaining tests from the test suite have been created using the same structure; an initialization face, an execution face, and one or more assertions.
+These tests can be seen in the source code of the Oasis App.
 
 \subsection{The Test Results}
-The overall result for the unit tests are 88 out of 89 tests passed and it can be seen in \autoref{fig:all_tests}.
-
-\begin{figure}[htbp]
-	\centering
-		\includegraphics[width=\textwidth]{Images/unit_testing/profile_helper_tests.PNG}
-	\caption{The result from the \texttt{profilesHelper} tests.}
-	\label{fig:profile_helper_tests}
-\end{figure}
-
-The test that failed is \texttt{testGetChildrenByDepartmentAndSubDepartments()} and the result can be seen in \autoref{fig:profile_helper_tests}.
+The result for the unit tests are 88 out of 89 tests passed and this can be seen in Figure \vref{fig:all_tests}.
 
 \begin{figure}[htbp]
 	\centering
@@ -318,32 +309,13 @@ The test that failed is \texttt{testGetChildrenByDepartmentAndSubDepartments()} 
 	\label{fig:all_tests}
 \end{figure}
 
-\textcolor{red}{Thinks that last pictures could be put into the appendix}
+The test that failed is \texttt{testGetChildrenByDepartmentAndSubDepartments()} and the result can be seen in Figure \vref{fig:profile_helper_tests}.
 
 \begin{figure}[htbp]
 	\centering
-		\includegraphics[width=\textwidth]{Images/unit_testing/app_helper_tests.PNG}
-	\caption{The result from the \texttt{appsHelper} tests.}
-	\label{fig:app_helper_tests}
+		\includegraphics[width=\textwidth]{Images/unit_testing/profile_helper_tests.PNG}
+	\caption{The result from the \texttt{profilesHelper} tests.}
+	\label{fig:profile_helper_tests}
 \end{figure}
 
-\begin{figure}[htbp]
-	\centering
-		\includegraphics[width=\textwidth]{Images/unit_testing/department_helper_tests.PNG}
-	\caption{The result from the \texttt{departmentHelper} tests.}
-	\label{fig:department_helper_tests}
-\end{figure}
-
-\begin{figure}[htbp]
-	\centering
-		\includegraphics[width=\textwidth]{Images/unit_testing/media_helper_tests.PNG}
-	\caption{The result from the \texttt{mediaHelper} tests.}
-	\label{fig:media_helper_tests}
-\end{figure}
-
-\begin{figure}[htbp]
-	\centering
-		\includegraphics[width=\textwidth]{Images/unit_testing/tag_helper_tests.PNG}
-	\caption{The result from the \texttt{tagsHelper} tests.}
-	\label{fig:tag_helper_tests}
-\end{figure}
+The individual results for the rest of the test suite can be seen in Appendix \vref{app:unitTestResults}.

@@ -3,6 +3,7 @@ In this chapter the problem definition for Oasis is described.
 An analysis of the requirements, received from the other groups in the multi project, are performed and from the analysis the Oasis system architecture has been derived.
 
 \section{Problem Definition}
+\label{sec:OasisProblemDefinition}
 In the multiproject a common problem definition have been stated, see Section \vref{sec:pdef}. The common problem definition is -- as stated -- to vouge for the individuel groups. Therefore we have devised a problem definition for Oasis.
 It is as follows:
 
@@ -34,7 +35,8 @@ We have decided to develop a database and a library, which are to be used by GIR
 As an example of a GIRAF application, that uses the library and database, we will develop an administration application.
 
 \section{System architecture}
-Oasis consists of three parts: The Oasis Local Db, the Oasis Lib, and the Oasis App. This is shown in Figure \vref{fig:systemArchitecture}.
+\label{sec:OasisSystemArchitecture}
+Oasis consists of three parts; The Oasis Local Db, the Oasis Lib, and the Oasis App. This is shown in Figure \vref{fig:systemArchitecture}.
 
 The Oasis Lib handles application interaction with the Oasis Local Db, and every GIRAF application should be utilizing this library.
 Another feature the Oasis Lib offers is the ability to handle synchronization between the Oasis Local Db and Savannah.
