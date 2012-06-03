@@ -1,13 +1,48 @@
 \chapter{Oasis App}
 \label{ch:App}
-In this chapter we describe the Oasis App. The Oasis App is an application, which demonstrates some of the utilities the Oasis Lib offers. The idea behind the Oasis App is that we want to make a tool, for the guardians, to manage the profile data, by giving them CRUD (Create, Read, Update, and Delete) options. First the structure of the Oasis App is described in Section \vref{sec:AppStructure}. After that the implementation of the Oasis Lib in the Oasis App is described in Section \vref{sec:AppImp}.
+In this chapter we describe the Oasis App. The Oasis App is an application, which demonstrates some of the utilities the Oasis Lib offers. First the design of the Oasis App is described in Section \vref{sec:AppDesign}. After that the implementation of the Oasis Lib in the Oasis App is described in Section \vref{sec:AppImp}.
 
-\section{Structure}
-\label{sec:AppStructure}
+\section{Design}
+\label{sec:AppDesign}
+The idea behind the Oasis App is that we want to make a tool, for the guardians, to manage the profile data, by giving them CRUD (Create, Read, Update, and Delete) options.
+
+The application design should be revolving around the database structure with the key functionality being profile handling.
+The application design has been divided into two parts: the home screen of the application and an overview screen showing relevant data.
+
+Paper prototypes of the GUI has been created and evalutated.
+Several prototypes have been made and the chosen prototype for the app can be seen in Figure \vref{fig:homeScreenProto} and Figure \vref{fig:overviewScreenProto}.
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=\textwidth]{Images/homeScreenPrototype}
+	\caption{The prototype for the home screen.}
+	\label{fig:homeScreenProto}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=\textwidth]{Images/overviewScreenPrototype}
+	\caption{The prototype for the overview screen.}
+	\label{fig:overviewScreenProto}
+\end{figure}
+
+The final prototypes have been implemented as the GUI in the Oasis App.
+
+\section{Implementation}
+\label{sec:AppImp}
 The Oasis App is split into two activities; \texttt{MainActivity} and \texttt{FragParentTab}.
 
 \subsection{MainActivity}
-The MainActivity is the activity that starts at application startup. It uses the main.xml as its layout file, which is a layout file containing three buttons, which can be seen on figure \textcolor{red}{INDS\AE{}T SCREEN CAP AF HOMESCREEN}. A code snippet of the MainActivity's code can be seen in Listing \vref{lst:mainactivity}.
+The MainActivity is the activity that starts at application startup. It uses the main.xml as its layout file, which is a layout file containing three buttons, which can be seen on Figure \vref{fig:homeScreen}. 
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=\textwidth]{Images/homeScreen}
+	\caption{An image of the \texttt{MainActivity} layout.}
+	\label{fig:homeScreen}
+\end{figure}
+
+A code snippet of the MainActivity's code can be seen in Listing \vref{lst:mainactivity}.
 
 \begin{Java}{The MainActivity class}{lst:mainactivity}
 .
@@ -98,7 +133,15 @@ When one of the buttons is clicked, the \texttt{MainActivity} will start the \te
 The FragParentTab is the activity, which is started by the \texttt{MainActivity} activity.
 The activity has the responsibillity of managing what view to show, by using fragments.
 We chose fragments because we wanted a tab layout.
-An example of the tab layout view can be seen in Figure \textcolor{red}{Inds\ae{}t FIGUR MY PROFILE}
+An example of the tab layout view can be seen in Figure \vref{fig:overviewScreen}.
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=\textwidth]{Images/overviewScreen}
+	\caption{An image of the \texttt{FragParentTab} layout.}
+	\label{fig:overviewScreen}
+\end{figure}
+
 The FragParentTab activity can be seen in Listing \vref{lst:fragparenttab}.
 
 \begin{Java}{The FragParentTab class}{lst:fragparenttab}
@@ -194,8 +237,7 @@ This fragment is then added to the fragment stack.
 The other way is when a fragment wants to replace itself with another fragment.
 Here the fragment calls the switchTab method, in the \texttt{FragParentTab} activity, with the replacing view integer as a parameter.
 
-\section{Implementation}
-\label{sec:AppImp}
+\subsection{Utilizing the Oasis Lib}
 Before utilizing the methods within the Oasis Lib, the developer must include the library.
 It is also necassary to instantiate a helper object before it can be used.
 When instantiating the object it is necassary to input the current activity's context as a parameter.
