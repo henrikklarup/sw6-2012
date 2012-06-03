@@ -22,7 +22,9 @@ needed to query profiles from the database.
 \subsubsection{Query creation and handling}
 
 The UML diagram in \autoref{figure:queryUML} shows the \code{EventHandler} and related classes for building SQL queries, querying the database, and building XML documents.
-The \code{Eventhandler} instantiates a \code{RequestHandler} and a \code{CommitHandler}, which are responsible for handling request- or commit events.
+The \code{Eventhandler} instantiates a \code{RequestHandler} and a 
+
+\noindent \code{CommitHandler}, which are responsible for handling request- or commit events.
 Each of the handlers instatiate a \code{QueryBuilder} and a \code{QueryHandler}. The \code{QueryBuilder} creates SQL queries based on the event content. The queries are forwarded to the \code{QueryHandler}
 that interacts with the database and, if the event is a \code{RequestEvent}, returns a \code{ResultSet} object. Finally the \code{Resultset} object is forwarded to the \code{XMLBuilder} that builds an sw6ml document,
 in \code{String} form, that can be returned to the requesting party. 
