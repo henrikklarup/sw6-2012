@@ -28,7 +28,7 @@ public class Pictogram {
 	private Activity parrent;
 	private Bitmap bitmap;
 
-	//This are the constructor for the Pictogram class
+	//This is the constructor for the Pictogram class
 	public Pictogram(String name, String imagePath, String soundPath, String wordPath)
 	{
 		this.setName(name);
@@ -37,6 +37,7 @@ public class Pictogram {
 		this.setWordPath(wordPath);
 	}
 	
+	//This specific Constructor is for the "Empty Pictogram"
 	public Pictogram(String name, String imagePath, String soundPath, String wordPath, Activity parrent)
 	{
 		this.setName(name);
