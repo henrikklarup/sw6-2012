@@ -1,9 +1,9 @@
 \section{GIRAF GUI Components}
 \label{implementation:gui_components}
 
-\emph{\guicomponents[]} is the name of the library, which is the implementation of the concrete standardized components, as explained in \autoref{design:overview}.
+\emph{\guicomponents[]} is the name of the library, which is the implementation of extensions to Android components, such that they satisfy the standards explained in \autoref{design:overview}. \\
 
-The library consists of extensions of standard Android classes:
+\noindent The library consists of extensions of standard Android classes:
 
 \begin{itemize}
 	\item android.widget.Button
@@ -27,11 +27,11 @@ The library consists of extensions of standard Android classes:
 
 \paragraph{GButton} implements coloring, according to the the design language, presented in \autoref{design:design_language}.
 
-\paragraph{GIconButton} implements functionality which allows for the use of a icon inside the button. An icon could be a status icon, as described in \autoref{design:state_icons}.
+\paragraph{GIconButton} implements functionality which allows for the use of an icon inside the button. An icon could be a status icon, as described in \autoref{design:state_icons}.
 
 \paragraph{GVerifyButton} simply uses functionality from \verb+GIconButton+ to set the icon to the \emph{accept} status icon, from 
 \autoref{design:state_icons}.
 
-\paragraph{GCancelButton} also sets the icon to the \emph{reject} status icon from \autoref{design:state_icons}, by using functionality from \verb+GIconButton+.
+\paragraph{GCancelButton} sets the icon to the \emph{reject} status icon from \autoref{design:state_icons}, by using functionality from \verb+GIconButton+. \\
 
-The principle of extending android classes is applied to all the classes listed earlier in the itemize, and the the inheritance for all components in the library are shown in \autoref{appendix:guiinheritance}.
+\noindent The principle of extending android classes is applied to all the classes listed earlier in the itemize, and the the inheritance for all components in the library are shown in \autoref{appendix:guiinheritance}.
