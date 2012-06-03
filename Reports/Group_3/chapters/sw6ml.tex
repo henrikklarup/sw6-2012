@@ -1,7 +1,7 @@
 %Introduction
 In order to facilitate consistent data transfers between the global database and localDB, we have designed an XML language which resembles
 the schema of the database. We have chosen to use XML, as it is a recognized standard with a wide array of tools available, in particular JDOM\cite{www.jdom.org}.
-JDOM is a light weight implementation of SAX\footnote{Simple API for XML\cite{SAX}} and DOM\footnote{Data Object Model} for Java, which allows seamless integration of XML, with support for XPath\footnote{Language for navigating XML documents\cite{xPath}} and XSLT\footnote{etensible Stylesheet Language Transformations\cite{xslt}}.
+JDOM is a light weight implementation of SAX\footnote{Simple API for XML\cite{SAX}} and DOM\footnote{Data Object Model} for Java, which allows seamless integration of XML, with support for XPath\footnote{Language for navigating XML documents\cite{xPath}} and XSLT\footnote{extensible Stylesheet Language Transformations\cite{xslt}}.
 In \autoref{sw6mlusage} a short usage documentation for sw6ml is provided. sw6ml is defined with XML schema.
 
 \subsubsection{Language Design}
@@ -10,7 +10,7 @@ The sw6ml language consists of a number of primary elements, which reflect the t
 the server which action it should take with the incoming data.
 In \autoref{code:sw6mlExample01} a short example of legitimate sw6ml syntax for adding a row to the \code{AuthUsers} table, and deleting a row with the \code{idUser} table attribute equal to 2, is shown.
 
-The \code{<AuthUsers>..content..</AuthUsers>} element identifies the table on which we want to make changes, the following \code{<Entry>..content..</Entry>} elements
+The \code{<AuthUsers>..content..} \code{</AuthUsers>} element identifies the table on which we want to make changes, the following \code{<Entry>..content..</Entry>} elements
 define which row and what kind of action, through the \code{action="foo"} XML attribute, should be done on the row. 
 
 \begin{Code}
@@ -31,7 +31,7 @@ define which row and what kind of action, through the \code{action="foo"} XML at
 \end{Code}
 
 The \code{action="foo"} XML attribute has four legal types corresponding to the CRUD profile actions: Create, Read, Update, and Delete, this is shown in \autoref{code:sw6mlCrud}.
-Contained in the \code{<Entry action="crud_type">..content..</Entry>} element is a series of 0 or more elements corresponding to the table schema of, in this case, the \code{AuthUsers} table.
+Contained in the \code{<Entry action="crud_type">..content..} \code{</Entry>} element is a series of 0 or more elements corresponding to the table schema of, in this case, the \code{AuthUsers} table.
 It takes zero or more of the table attributes in a row, since not all table attributes are needed for all actions. As an example delete only requires the unique identifier of the table, and
 updates will only need the unique identifier and the table attribute being updated.
 \begin{figure}[H]

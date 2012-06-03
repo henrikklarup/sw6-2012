@@ -127,7 +127,7 @@ catch (SQLException e)
 \subsubsection{Generation of a Web Page}
 The generation of a web page, is done within the Servlet, using a \code{PrintWriter}. This is used to write the HTML code by calling \code{out.println("HtmlCode")} which appends the argument to the page. Furthermore, \code{out} can be used to write both JavaScript and CSS.
 
-The CSS is not written within any of the Servlets, instead it is located in a separate file and is included in the HTML by \code{ out.println("<link rel='stylesheet' type='text/css' href='CSS/SavannahStyle.css' />")}.
+The CSS is not written within any of the Servlets, instead it is located in a separate file and is included in the HTML by \code{ out.println} \code{("<link rel='stylesheet' type='text/css' href='CSS/SavannahStyle.css' />")}.
 
 \subsubsection{Exchange of Data}
 When a Servlet submits a form, the data is sent differently depending on the \code{<form method='...'/>}. A \code{GET} will send the data as a part of the URL, thus making it visible for the user, as seen in \autoref{code:URLLINK}, whereas the \code{POST} method does not make it visible.
