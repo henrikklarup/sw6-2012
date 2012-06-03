@@ -13,9 +13,9 @@ The reason for this is to alleviate the complexities that could occur during a s
 
 The central point of the Oasis Local Db schema is the AuthUsers table.
 This table contains all the user id's and their certificates.
-A user in the Oasis Local Db can be either a profile or a department and therefore a role is stored as well to differetiate the two.
+A user in the Oasis Local Db can be either a profile or a department and therefore a role is stored as well to differentiate the two.
 
-The Oasis Local Db schema for the profiles and departments are a simple model representing a kindergarden like Birken or a school like Egebakken.
+The Oasis Local Db schema for the profiles and departments are a simple model representing a kindergarten like Birken or a school like Egebakken.
 This means that a profile can either be a child or guardian.
 The Oasis Local Db supports the possibility to associate profiles to each other in order to allow a child to guardian relation.
 The profiles can be attached to one or more departments, and a department can be related to one or more sub departments.
@@ -25,12 +25,12 @@ Therefore media can be stored in the Oasis Local Db along with information about
 A media can be owned by either a profile or a department, and the owner has the ability to decide who should have access to the media.
 The Oasis Local Db schema also allows the user to adds tags to media, these tags can be used to identify the media.
 
-Another important part of the system is the ability to control appplications.
+Another important part of the system is the ability to control applications.
 From the users viewpoint it consists of deciding which applications should be accessible and from the developers viewpoint it is a way of storing application settings for a profile.
 
 The Oasis Local Db schema can be seen in figure \autoref{fig:localDatabaseDesign}.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 	\centering
 		\includegraphics[width=\textwidth]{Images/LocalDatabaseDesign}
 	\caption{The schema for the Oasis Local Db.}
