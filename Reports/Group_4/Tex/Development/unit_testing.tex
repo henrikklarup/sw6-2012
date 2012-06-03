@@ -4,7 +4,7 @@ Furthermore the results of the usability test will be presented in Section \vref
 
 \section{Dynamic White Box Testing}
 \label{sec:DynamicWhiteBoxTesting}
-To ensure the correctness of the Oasis Lib we enforced dynamic white box testing through unit tests \cite[pp106]{Testing, UnitTesting}.
+To ensure the correctness of the Oasis Lib we enforced dynamic white box testing through unit tests \cite[pp106]{Testing} \cite{UnitTesting}.
 The Oasis Lib is used by all GIRAF applications this means that if a bug exists in the Oasis Lib there is a potential bug in all GIRAF applications.
 Therefore the Oasis Lib must be thoroughly tested to make sure that few or no bugs exists.
 
@@ -303,7 +303,7 @@ These tests can be seen in the source code of the Oasis App.
 \subsection{The Test Results}
 The result for the unit tests are 88 out of 89 tests passed and this can be seen in Figure \vref{fig:all_tests}.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 	\centering
 		\includegraphics[width=\textwidth]{Images/unit_testing/all_tests.PNG}
 	\caption{The result from all the performed unit tests.}
@@ -312,7 +312,7 @@ The result for the unit tests are 88 out of 89 tests passed and this can be seen
 
 The test that failed is \texttt{testGetChildrenByDepartmentAndSubDepartments()} and the result can be seen in Figure \vref{fig:profile_helper_tests}.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 	\centering
 		\includegraphics[width=\textwidth]{Images/unit_testing/profile_helper_tests.PNG}
 	\caption{The result from the \texttt{profilesHelper} tests.}
