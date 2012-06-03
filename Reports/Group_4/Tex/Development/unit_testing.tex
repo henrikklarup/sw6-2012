@@ -1,5 +1,6 @@
 \chapter{Testing}
-In the chapter aspects of dynamic white box testing will be explained in Section \vref{sec:DynamicWhiteBoxTesting}. Furthermore the results of the usability test will be presented in Section \{sec:usability_results}.
+In the chapter aspects of dynamic white box testing will be explained in Section \vref{sec:DynamicWhiteBoxTesting}.
+Furthermore the results of the usability test will be presented in Section \vref{sec:usability_results}.
 
 \section{Dynamic White Box Testing}
 \label{sec:DynamicWhiteBoxTesting}
@@ -26,18 +27,18 @@ This is an essential method for the GIRAF platform, and therefore it is tested b
 	\centering
 		\begin{tabular}{| p{4.5cm} | m{9cm} |}
 			\hline
-			\texbf{Identifier:} 				& TD00001 \\ \hline
-			\texbf{Feature to be tested:}		& Authenticate profile. \\ \hline
-			\texbf{Approach:}					& An automated test will be made to authenticate a profile by its certificate. \\
+			\textbf{Identifier:} 				& TD00001 \\ \hline
+			\textbf{Feature to be tested:}		& Authenticate profile. \\ \hline
+			\textbf{Approach:}					& An automated test will be made to authenticate a profile by its certificate. \\
 												&	\begin{enumerate}
 														\item Enter a profile with a specific certificate in the database.
 														\item Authenticate the profile by its certificate.
 													\end{enumerate} \\ \hline
-			\texbf{Test case identification:} 	& Check valid certificate Test Case ID\# 00001 \\
+			\textbf{Test case identification:} 	& Check valid certificate Test Case ID\# 00001 \\
 												& Check too long certificates Test Case ID\# 00002 \\
 												& Check too short certificates Test Case ID\# 00003 \\
 												& Check invalid certificates Test Case ID\# 00004 \\ \hline
-			\texbf{Pass/fail criteria:}			& All valid profile certificates that matches the certificate in the database must be accepted as well as all invalid certificates must be rejected. \\ \hline
+			\textbf{Pass/fail criteria:}			& All valid profile certificates that matches the certificate in the database must be accepted as well as all invalid certificates must be rejected. \\ \hline
 		\end{tabular}
 	\caption{Test Design for \texttt{authenticatingProfile()}.}
 	\label{tab:TestDesign_AuthenticateProfile}
