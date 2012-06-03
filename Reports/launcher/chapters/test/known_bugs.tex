@@ -2,7 +2,7 @@
 \label{test:known_bugs}
 This chapter describes all bugs confirmed to exist. 
 
-\section*{Apps not updated}
+\section{Apps not updated}
 This bug is that the home screen is not automatically updated when a new app is added to a user. 
 To make the app appear, the launcher must either be restarted or the user must log in again. 
 This bug is not critical at this point, as it is not currently explicitly supported that a user can add new apps, though the bug can manifest itself in the following scenario.\newline
@@ -16,13 +16,13 @@ For the scenario, the following conditions are true.
 
 The bug occurs when app Z is then installed on device Y, as app Z will not show in the home screen until steps have been taken to show it, as described before. 
 
-\section*{Incorrect color data sent to apps}
+\section{Incorrect color data sent to apps}
 The launcher will currently send data about the color chosen for the app in the launcher to each app. 
 This data is however not changed immediatly when the user chooses a new color for the app, as the data is only brought up to date either when the launcher is restarted or a user logs in. 
 This is because the color data is only inserted into the database when the user changes a color, whereas the data held in memory by the launcher is not. 
 This bug is important to fix, as it creates inconcistency for the user, but the bug was not discovered until after the development period had ended for us. 
 
-\section*{Camera feed is too big}
+\section{Camera feed is too big}
 Authentication takes place on a single screen, where the camera feed used for QR-scanning is an important element. 
 The camera feed is however a bit too big to fit in properly with the rest of the elements on the screen. 
 As such, there is currently some overlap with the camera feed and the animation on the left side of the screen, and the camera feed is also closer to the edge of the screen than the design calls for.
