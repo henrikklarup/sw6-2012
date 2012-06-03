@@ -27,7 +27,7 @@
 %----------------------------------------------------------------------------------------
 
 \documentclass[
-		twoside,openright,titlepage,numbers=noenddot,headinclude,%1headlines,
+		twoside,openright,titlepage,numbers=noenddot,headinclude,%1headlines, %%%%%%%%%, openright
                 footinclude=true,cleardoublepage=empty,
                 BCOR=5mm,paper=a4,fontsize=11pt, % Binding correction, paper type and font size
                 ngerman,american, % Languages
@@ -122,8 +122,12 @@
 
 %\cleardoublepage\include{FrontBackmatter/Publication} % Publications from the thesis page
 
-\pagestyle{scrheadings} % Show chapter titles as headings
-
+% \pagestyle{scrheadings} % Show chapter titles as headings
+% \newpage
+% \thispagestyle{empty}
+% \mbox{}
+% \clearpage
+\mainmatter
 \input{chapters/formalities/index}
 
 
