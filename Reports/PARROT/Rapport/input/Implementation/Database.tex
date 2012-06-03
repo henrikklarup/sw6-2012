@@ -79,7 +79,7 @@ Then, we begin the the conversion.
 First a Pictogram object is made, which is fed with the first name of the child, as well as the path to the picture of the child.
 This pictogram will serve as the child's identity icon.
 Then, a PARROTProfile is instantiated with the name of the child, as well as its Pictogram icon.\newline
-In order to go on, we load a Setting object from the database. We will not go in depth with this object, as that is the topic of another report REF TIL ADMIN, but suffice to say that it is a wrapper class for a hash table %or is it hash map?
+In order to go on, we load a Setting object from the database. We will not go in depth with this object, as that is the topic of another report (the OASIS report -- not yet published), but suffice to say that it is a wrapper class for a hash table %or is it hash map?
 which we use to store data.\newline
 The Setting object ``specialSettings'' returned from admin contains information unique to the current child user of the PARROT application, such as visual settings, and pictogram categories.
 Now, supposing ``specialSettings'' is not null (in which case we would abort and return null), we load the user specific settings with \textbf{loadSettings}, and goes on to load the categories.\newline
@@ -89,12 +89,12 @@ First of, categories are stored in the specialSettings hash-table in the format:
 $category\_number | category\_property | value$ \newline
 \\
 So what we do is iterate our way through the ``specialSettings'' object.
-We start by trying to get the pictograms corresponding to category number 0, which will be the first category in the list.
-If the category exists, we will get a string containing information about the pictograms.
+We start by trying to get the pictograms corresponding to Category number 0, which will be the first Category in the list.
+If the Category exists, we will get a string containing information about the pictograms.
 If not, we have already found all the categories (in this case none) belonging to the current user.\newline
-After that, we use the same procedure to get the category's color, icon and category name.
-With this information now at hand, we call the \textbf{loadCategory} method, and adds the resulting category to the PARROTProfile parrotUser, which is the object representing the current user.\newline
-After this, we will increment the number, so that we will look for category number 1.
+After that, we use the same procedure to get the Category's color, icon and category name.
+With this information now at hand, we call the \textbf{loadCategory} method, and adds the resulting Category to the PARROTProfile ``parrotUser'', which is the object representing the current user.\newline
+After this, we will increment the number, so that we will look for Category number 1.
 We will continue to increment the number until we have found all the categories, and after that, we will return the parrotUser object.\newline
 \\
 Following the description of the loadProfile method, we will describe \textbf{loadCategory} see Source Code \ref{lc}.
@@ -115,11 +115,11 @@ Following the description of the loadProfile method, we will describe \textbf{lo
 
 The purpose of \textbf{loadCategory} is to instantiate a Category object, fill it with pictograms, and return it to the system.
 The method starts by converting the ``iconString'' into a Long, which is the ID of a Media object in the database.\newline
-After that, we construct a new Category object ``cat'' from the name and color given by inputs of \textbf{loadCategory}, as well as the icon of the category.
+After that, we construct a new Category object ``cat'' from the name and color given by inputs of \textbf{loadCategory}, as well as the icon of the Category.
 Then comes the part where we transform the string ``pictureIDs'' into a list of numbers.
 This is done by a method called \textbf{getIDsFromString}.
 The functionality of this method is described with an example:
-Suppose a category is going to contain the items 5, 23, 12, and 18. Then the string pictureIDs will look like this:\newline
+Suppose a Category is going to contain the items 5, 23, 12, and 18. Then the string pictureIDs will look like this:\newline
 
 5\#23\#12\#18\$\\
 
@@ -132,7 +132,7 @@ which corresponds to the IDs.\newline
 When we have all the IDs, the method will go through the list, and return the pictogram corresponding to the given ID.
 Finally, the Category object ``cat'' is returned.\newline
 \\
-After having described how we load a category into the system, we will described how the \textbf{loadPictogram} method works, see Source Code \ref{lp}.
+After having described how we load a Category into the system, we will described how the \textbf{loadPictogram} method works, see Source Code \ref{lp}.
 
 \begin{source}[{lp}]{The loadPictogram method from the PARROTDataLoader}
 	public Pictogram loadPictogram(long id)
@@ -195,7 +195,7 @@ Note that if an ID is -1 at this point, or a path is null, it simply means that 
 The PARROTDataLoader class provides PARROT with objects that can interact with the local database, either to read from the database, or write to it.
 
 \subsection*{Notes}
-In the current version of PARROT, the connection to GIRAF launcher is not yet fully made, so instead of loading the category chosen by the launcher, PARROT instead starts by creating a profile, saving it to the database, and then loading it again.
+In the current version of PARROT, the connection to GIRAF launcher is not yet fully made, so instead of loading the Category chosen by the launcher, PARROT instead starts by creating a profile, saving it to the database, and then loading it again.
 The functions in the PARROTDataLoader should be able to handle these changes, but will need to be improved to handle more chances of null pointers.\newline
 If changes are made to the database, PARROTDataLoader needs to be changed accordingly, so that it will continue to work.\newline
 Finally, PARROT does not contain any save functionality in its user interface.

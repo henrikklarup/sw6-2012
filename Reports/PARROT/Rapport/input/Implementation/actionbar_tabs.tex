@@ -15,7 +15,7 @@ Implementing an action bar first of all means including a TabListener.
 In this project we did so in a separate class file, using an existing TabListener from (website \cite{actionbarguide}).
 Using the TabListener you can instantiate an ActionBar as you can see in Source Code \ref{actionbar}.
 
-\begin{source}[{actionbar}]{How to create an action bar and a tab i the android}
+\begin{source}[{actionbar}]{How to create an action bar and a tab in Android}
 ActionBar actionBar = getActionBar();
 actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS); 
 actionBar.setDisplayShowTitleEnabled(false);
@@ -41,7 +41,7 @@ actionBar.addTab(tab);
 The application can successfully flip between several major features using tabs, as well as hide major features on startup if the user profile does not have permission to use them.
 
 \subsection*{Notes:}
-Note that in our application, we use ``IF'' Statements to check if a user has the right to see a tab.
+Note that in our application, we use if-statements to check if a user has the right to see a tab.
 The order of the tabs should therefore match up with the order in the Rights Array.\\
 Guides will suggest that you use an override ``onCreateView'' method to change between tabs with the ActionBar.
 However, we have concluded that using the override methods ``onCreate'' and ``onResume'' was sufficient in our case.

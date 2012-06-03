@@ -1,4 +1,4 @@
-\section{Displaying Pictograms in GridView} %%Name of Feature.
+\section{Displaying Pictograms in a GridView} %%Name of Feature.
 \label{disppict}
 
 \subsection*{Problem}
@@ -12,7 +12,7 @@ Rather than having the GridView display pictograms as ImageViews, we can display
 This layout contains an ImageView with a pictogram and a TextView with the associated text.
 In that way we are able to show images with text, without having to imprint the text into the image.\\
 
-In order to prepare the pictograms for display, we have to convert them to bitmaps before our Pictogram Adapter class can convert them into views.
+In order to prepare the pictograms for display, we have to convert them to Bitmaps before our Pictogram Adapter class can convert them into views.
 
 \subsection*{Execution}
 In order to determine what to show in a GridView, an adapter is needed. Therefore we constructed the PictogramAdapter in our project, by extending the ``BaseAdapter'' class.
@@ -55,11 +55,11 @@ The Category, in short, is an object containing both information about itself an
 This is followed by creating a ``LayoutInflater'' which prepares a view for the application.
 In this case the pictogramview, found through id reference is used to re-initialize the ``View'' we plan on returning.\\
 The ImageView and TextView are supplied with the data they are to show through method calls. 
-As long as the Pictogram is not an ``Empty'' pictogram, ``Empty'' being our placeholder for pictograms, the View will be given an Pictogram and its name before being returned.\\
+As long as the Pictogram is not an ``Empty'' Pictogram, ``Empty'' being our placeholder for pictograms, the View will be given an Pictogram and its name before being returned.\\
 
 The Source Code \ref{gbm} shows our \textbf{getBitmap} method from the pictogram class.
-This method is important for several reasons. It checks for existing bitmaps, making sure that the application do not waste time reconverting image files to bitmaps.
-It retrieves information from resources and converts it to bitmaps if the pictogram is supposed to be ``Empty'', or creates the bitmap from the image on the tablet storage.
+This method is important for several reasons. It checks for existing Bitmaps, making sure that the application do not waste time reconverting image files to Bitmaps.
+It retrieves information from resources and converts it to Bitmaps if the pictogram is supposed to be ``Empty'', or creates the Bitmap from the image on the tablet storage.
 
 \begin{source}[{gbm}]{The getBitmap method fra the Pictogram class}
 	public Bitmap getBitmap()
@@ -92,4 +92,4 @@ The input view ``convertView'' in the getView method is an leftover from a earli
 
 \subsection*{Further Reading}
 
-The pictogram adapter is based on the adapter shown on the android developer website \cite{gridview}.
+The PictogramAdapter is based on the adapter shown on the Android developer website \cite{gridview}.

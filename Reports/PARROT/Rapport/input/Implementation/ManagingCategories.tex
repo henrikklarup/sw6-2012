@@ -1,8 +1,8 @@
 \section{Managing Categories} %%Name of Feature.
 \label{mc}
 \subsection*{Problem}
-When more and more pictograms are added to PARROT, the categories can help manage and organize these pictograms. 
-The categories help manage the different users's needs, so for every user, the categories can differ. 
+When more and more pictograms are added to PARROT, categories can help manage and organize these pictograms. 
+Categories help manage the different users's needs, so for every user, the categories can differ. 
 We therefore need to be able to configure categories to suit the different users's needs, as well as createing new categories. 
 There is also the need to remove unwanted categories from a user's profile.
 
@@ -15,8 +15,8 @@ Creating new categories and changing information about the categories is done us
 
 \subsection*{Execution}
 We will first describe the drag and drop functionalities. 
-When we want to delete a specific pictogram from a category, we choose the pictogram from the gridview, and drag it to the trashcan. 
-In the DROP part of the listener, we check if the drop zone are the trashcan, and that the dragged object is from the gridview.
+When we want to delete a specific pictogram from a category, we choose the pictogram from the gridview, and drag it to the trashbin. 
+In the DROP part of the listener, we check if the drop zone is the trashbin, and that the dragged object is from the GridView.
 When we know this, we create a temporary category, where we save the information of the category we are currently modifying. We then remove the pictogram, and overwrite the old category with this new information.
 This can be seen in Source Code \ref{mc1}.
 
@@ -37,7 +37,7 @@ if(self.getId()==R.id.trash && ManageCategoryFragment.catDragOwnerID == R.id.pic
 \end{source}
 
 When we want to copy a picogram from one category into another category, we choose the category we want to copy from, and drag the chosen pictogram onto the category that we want to copy the pictogram to. 
-Still in the DROP part of the listener, we check if the drop zone is the categories, and if the dragged object is from the gridview showing the pictograms.
+Still in the DROP part of the listener, we check if the drop zone is the categories, and if the dragged object is from the GridView showing the pictograms.
 To know what category we are dropping the pictogram into, we need to know the index of the category, which we do by coordinates of the drop, and referencing to the index of the list.
 We then add the pictogram to the category at the index.
 This can be seen in Source Code \ref{mc2}.
@@ -66,11 +66,11 @@ else if(self.getId()==R.id.categories && ManageCategoryFragment.catDragOwnerID =
 				}
 \end{source}
 When we want to copy all pictograms from one category into another category, we first choose the category which we want to copy to. 
-Then we drag the category into the gridview showing the pictograms. 
-Also in the DROP part of the listener, we check if the drop zone is the gridview showing the pictograms, and that the dragged object is from the categories.
+Then we drag the category into the GridView showing the pictograms. 
+Also in the DROP part of the listener, we check if the drop zone is the GridView showing the pictograms, and that the dragged object is from the categories.
 We then initialize two category objects. 
-One containing the category from which we want to copy, which we call categoryCopiedFrom, and one containing the category we want to copy to ,which we call temp. 
-We then go through the pictograms in categoryCopiedFrom, and add these pictograms to temp. 
+One containing the category from which we want to copy, which we call ``categoryCopiedFrom'', and one containing the category we want to copy to ,which we call temp. 
+We then go through the pictograms in ``categoryCopiedFrom'', and add these pictograms to temp. 
 When all pictograms are copied, we overwrite the old category we wanted to copy from with the new temp category. 
 This can be seen in Source Code \ref{mc3}.
 
@@ -114,8 +114,8 @@ else if(self.getId()==R.id.trash && ManageCategoryFragment.catDragOwnerID == R.i
 						ManageCategoryFragment.profileBeingModified.getCategories()));
 				}
 \end{source}
-When we want to change the icon of a category, we choose a pictogram from the gridview and drag into the space for the icon, which replaces the current icon. 
-In the DROP part of the listener, we check if the drop zone is the Icon ImageView, and the dragged object is from the gridview showing the pictograms. 
+When we want to change the icon of a category, we choose a pictogram from the GridView and drag into the space for the icon, which replaces the current icon. 
+In the DROP part of the listener, we check if the drop zone is the Icon ImageView, and the dragged object is from the GridView showing the pictograms. 
 If so, we notice what index the dragged object has, and create a temporary category. 
 In this category we set its icon to be that of the dragged object.  
 We then overwrites the old category with the temporary category.
@@ -172,7 +172,7 @@ createNewCategory.setOnClickListener(new OnClickListener()
 				ListView categories = (ListView) parrent.findViewById(R.id.categories); //Redrawing the categories
 				
 				categories.setAdapter(new ListViewAdapter(parrent, R.layout.categoriesitem, profileBeingModified.getCategories())); 
-				//Adapter for the category gridview
+				//Adapter for the category GridView
 			}
 		});
 \end{source}

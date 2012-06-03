@@ -47,7 +47,7 @@ For instance, suppose we want to play the word of a pictogram (The word is a sou
 The first thing we do is call the \textbf{playWord} method form the Pictogram in question. 
 This method checks if the pictogram has a word, and if the path of that word corresponds to an existing sound file. 
 If this is correct, it will call the \textbf{playItem} with its path as the input.\newline 
-The playItem then starts a new thread in which it makes the AudioPlayer play the corresponding sound. 
+The \textbf{playItem} then starts a new thread in which it makes the AudioPlayer play the corresponding sound. 
 The reason for starting a new thread is that the user interface would become unresponsive while the sound was playing otherwise.\newline
 The actual functionality that plays the sound is found in the AudioPlayer class, more specifically  in the static \textbf{play} method.\newline
 
@@ -76,7 +76,7 @@ The actual functionality that plays the sound is found in the AudioPlayer class,
 	}
 \end{source}
 
-What happens here is that the internal MediaPlayer object (A native android class) is reset, fed with data, and prepared for playing the sound. The MediaPlayer object is then started with the \textbf{start} method, which causes it to play the sound. If an error occurs, it will be caught, no sound will be played, and the error will be written to the log.\newline
+What happens here is that the internal MediaPlayer object (a native Android class) is reset, fed with data, and prepared for playing the sound. The MediaPlayer object is then started with the \textbf{start} method, which causes it to play the sound. If an error occurs, it will be caught, no sound will be played, and the error will be written to the log.\newline
 
 \subsection*{Result}
 The PARROT application can play sounds for its pictograms as long as they have associated sound files, and will just ignore the request if a pictogram does not have any sound.
