@@ -34,6 +34,12 @@ Steffan Bo~Pallesen Jacob~Bang, Lasse Linnerup~Christiansen.
 \newblock {\em \url{http://people.cs.aau.dk/~ulrik/Giraf/Admin.pdf}}.
 \newblock Last viewed: May 2012.
 
+\bibitem{digipecs}
+Steffan Bo~Pallesen Jacob~Bang, Lasse Linnerup~Christiansen.
+\newblock Administration module for giraf.
+\newblock {\em \url{http://people.cs.aau.dk/~ulrik/Giraf/DigiPECS.pdf}}.
+\newblock Last viewed: May 2012.
+
 \bibitem{usability:ida}
 Jan~Stage Jesper~Kjeldskov, Mikael B.~Skov.
 \newblock {\em Instant Data Analysis: Conducting Usability Evaluations in a
@@ -55,12 +61,6 @@ Yuku Sugianto.
 \newblock Ambilwarna.
 \newblock \url{http://code.google.com/p/android-color-picker/}, 2011.
 \newblock Last viewed: 2-6-2012.
-
-\bibitem{AndroidVersion}
-Android~Development Team.
-\newblock Android 4.0.3 platform.
-\newblock \url{http://developer.android.com/sdk/android-4.0.3.html#relnotes},
-  2012.
 
 \bibitem{actionbarguide}
 Android~Development Team.
