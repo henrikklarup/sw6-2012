@@ -51,17 +51,17 @@ The tests ensures the robustness of the method.
 	\centering
 		\begin{tabular}{| p{4.5cm} | m{9cm} |}
 			\hline
-			Identifier: 				& TD00002 \\ \hline
-			Feature to be tested:		& Get profile by id. \\ \hline
-			Approach:					& An automated test will be made in order to ensure that the Oasis Library supports getting a profile by its id from the database. \\
-										&	\begin{enumerate}
-												\item Add Profiles to the database.
-												\item Get profile by id and verify the output.
-											\end{enumerate} \\ \hline
-			Test case identification: 	& Check valid id present in the database Test Case ID\# 00005 \\
-										& Check id not in the database Test Case ID\# 00006 \\
-										& Check negative id Test Case ID\# 00007 \\ \hline
-			Pass/fail criteria:			& The profile matching the id should be returned else null should be returned. \\ \hline
+			\textbf{Identifier:}				& TD00002 \\ \hline
+			\textbf{Feature to be tested:}		& Get profile by id. \\ \hline
+			\textbf{Approach:}					& An automated test will be made in order to ensure that the Oasis Library supports getting a profile by its id from the database. \\
+												&	\begin{enumerate}
+														\item Add Profiles to the database.
+														\item Get profile by id and verify the output.
+												\end{enumerate} \\ \hline
+			\textbf{Test case identification:}	& Check valid id present in the database Test Case ID\# 00005 \\
+												& Check id not in the database Test Case ID\# 00006 \\
+												& Check negative id Test Case ID\# 00007 \\ \hline
+			\textbf{Pass/fail criteria:}		& The profile matching the id should be returned else null should be returned. \\ \hline
 		\end{tabular}
 	\caption{Test Design for \texttt{getProfileById()}.}
 	\label{tab:TestDesign_GetProfileById}
@@ -75,16 +75,16 @@ This is done with a single test-to-pass test, which tests if children associated
 	\centering
 		\begin{tabular}{| p{4.5cm} | m{9cm} |}
 			\hline
-			Identifier: 				& TD00003 \\ \hline
-			Feature to be tested:		& Get children by guardian. \\ \hline
-			Approach:					& An automated test will be made to ensure that the Oasis Library supports getting all children associated with one guardian. \\
+			\textbf{Identifier:} 				& TD00003 \\ \hline
+			\textbf{Feature to be tested:}		& Get children by guardian. \\ \hline
+			\textbf{Approach:}					& An automated test will be made to ensure that the Oasis Library supports getting all children associated with one guardian. \\
 										&	\begin{enumerate}
 												\item Children and guardians should be added to the database.
 												\item Associations between some children and guardians should be made.
 												\item Get children by guardian should be called and the output verified.
 											\end{enumerate} \\ \hline
-			Test case identification: 	& Check valid guardian with children associated Test Case ID\# 00008 \\ \hline
-			Pass/fail criteria:			& The list of children should match the children associated with the guardian. \\ \hline
+			\textbf{Test case identification:} 	& Check valid guardian with children associated Test Case ID\# 00008 \\ \hline
+			\textbf{Pass/fail criteria:}			& The list of children should match the children associated with the guardian. \\ \hline
 		\end{tabular}
 	\caption{Test Design for \texttt{getChildrenByGuardian}.}
 	\label{tab:TestDesign_GetChildrenByGuardian}
@@ -109,13 +109,13 @@ and Table \vref{tab:TestCase_ValidGuardianWithChildrenAssociatedHandling}.
 	\centering
 		\begin{tabular}{| p{4.5cm} | m{9cm} |}
 			\hline
-			Identifier: 					& TC00001 \\ \hline
-			Test item:						& Valid Certificate handling of the \texttt{authenticateProfile()} method. \\ \hline
-			Input specification:			& A valid certificate. \\ \hline
-			Output specification: 			& The model of the authenticated profile. \\ \hline
-			Environmental needs:			& A database is needed and the profile model. \\ \hline
-			Special procedural requirements	& None. \\ \hline
-			Intercase dependencies:			& None. \\ \hline
+			\textbf{Identifier:} 					& TC00001 \\ \hline
+			\textbf{Test item:}						& Valid Certificate handling of the \texttt{authenticateProfile()} method. \\ \hline
+			\textbf{Input specification:}			& A valid certificate. \\ \hline
+			\textbf{Output specification:} 			& The model of the authenticated profile. \\ \hline
+			\textbf{Environmental needs:}			& A database is needed and the profile model. \\ \hline
+			\textbf{Special procedural requirements:}	& None. \\ \hline
+			\textbf{Intercase dependencies:}			& None. \\ \hline
 		\end{tabular}
 	\caption{Test Case for valid certificate handling of the \texttt{authenticateProfile()} method.}
 	\label{tab:TestCase_ValidCertificateHandling}
@@ -125,13 +125,13 @@ and Table \vref{tab:TestCase_ValidGuardianWithChildrenAssociatedHandling}.
 	\centering
 		\begin{tabular}{| p{4.5cm} | m{9cm} |}
 			\hline
-			Identifier: 					& TC00002 \\ \hline
-			Test item:						& Certificate lenght too short handling of the \texttt{authenticateProfile()} method. \\ \hline
-			Input specification:			& A certificate shorther than 200 chars. \\ \hline
-			Output specification: 			& Null. \\ \hline
-			Environmental needs:			& A database is needed and the profile model. \\ \hline
-			Special procedural requirements	& None. \\ \hline
-			Intercase dependencies:			& None. \\ \hline
+			\textbf{Identifier:} 					& TC00002 \\ \hline
+			\textbf{Test item:}						& Certificate lenght too short handling of the \texttt{authenticateProfile()} method. \\ \hline
+			\textbf{Input specification:}			& A certificate shorther than 200 chars. \\ \hline
+			\textbf{Output specification:} 			& Null. \\ \hline
+			\textbf{Environmental needs:}			& A database is needed and the profile model. \\ \hline
+			\textbf{Special procedural requirements}	& None. \\ \hline
+			\textbf{Intercase dependencies:}			& None. \\ \hline
 		\end{tabular}
 	\caption{Test Case for certificate lenght too short handling of the \texttt{authenticateProfile()} method.}
 	\label{tab:TestCase_CertificateToShortHandling}
@@ -141,13 +141,13 @@ and Table \vref{tab:TestCase_ValidGuardianWithChildrenAssociatedHandling}.
 	\centering
 		\begin{tabular}{| p{4.5cm} | m{9cm} |}
 			\hline
-			Identifier: 					& TC00003 \\ \hline
-			Test item:						& Certificate lenght too long handling of the \texttt{authenticateProfile()} method. \\ \hline
-			Input specification:			& A certificate longer than 200 chars. \\ \hline
-			Output specification: 			& Null. \\ \hline
-			Environmental needs:			& A database is needed and the profile model. \\ \hline
-			Special procedural requirements	& None. \\ \hline
-			Intercase dependencies:			& None. \\ \hline
+			\textbf{Identifier:} 					& TC00003 \\ \hline
+			\textbf{Test item:}						& Certificate lenght too long handling of the \texttt{authenticateProfile()} method. \\ \hline
+			\textbf{Input specification:}			& A certificate longer than 200 chars. \\ \hline
+			\textbf{Output specification:} 			& Null. \\ \hline
+			\textbf{Environmental needs:}			& A database is needed and the profile model. \\ \hline
+			\textbf{Special procedural requirements:}	& None. \\ \hline
+			\textbf{Intercase dependencies:}			& None. \\ \hline
 		\end{tabular}
 	\caption{Test Case for certificate lenght too long handling of the \texttt{authenticateProfile()} method.}
 	\label{tab:TestCase_CertificateToLongHandling}
@@ -157,13 +157,13 @@ and Table \vref{tab:TestCase_ValidGuardianWithChildrenAssociatedHandling}.
 	\centering
 		\begin{tabular}{| p{4.5cm} | m{9cm} |}
 			\hline
-			Identifier: 					& TC00004 \\ \hline
-			Test item:						& Invalid Certificate handling of the \texttt{authenticateProfile()} method. \\ \hline
-			Input specification:			& An invalid certificate. \\ \hline
-			Output specification: 			& Null. \\ \hline
-			Environmental needs:			& A database is needed and the profile model. \\ \hline
-			Special procedural requirements	& None. \\ \hline
-			Intercase dependencies:			& None. \\ \hline
+			\textbf{Identifier:} 					& TC00004 \\ \hline
+			\textbf{Test item:}						& Invalid Certificate handling of the \texttt{authenticateProfile()} method. \\ \hline
+			\textbf{Input specification:}			& An invalid certificate. \\ \hline
+			\textbf{Output specification:} 			& Null. \\ \hline
+			\textbf{Environmental needs:}			& A database is needed and the profile model. \\ \hline
+			\textbf{Special procedural requirements:}	& None. \\ \hline
+			\textbf{Intercase dependencies:}			& None. \\ \hline
 		\end{tabular}
 	\caption{Test Case for invalid certificate handling of the \texttt{authenticateProfile()} method.}
 	\label{tab:TestCase_InvalidCertificateHandling}
@@ -173,13 +173,13 @@ and Table \vref{tab:TestCase_ValidGuardianWithChildrenAssociatedHandling}.
 	\centering
 		\begin{tabular}{| p{4.5cm} | m{9cm} |}
 			\hline
-			Identifier: 					& TC00005 \\ \hline
-			Test item:						& Valid id present in the database handling of the \texttt{getProfileById()} method. \\ \hline
-			Input specification:			& A valid id. \\ \hline
-			Output specification: 			& The profile matching the id. \\ \hline
-			Environmental needs:			& A database is needed and the profile model. \\ \hline
-			Special procedural requirements	& None. \\ \hline
-			Intercase dependencies:			& None. \\ \hline
+			\textbf{Identifier:} 					& TC00005 \\ \hline
+			\textbf{Test item:}						& Valid id present in the database handling of the \texttt{getProfileById()} method. \\ \hline
+			\textbf{Input specification:}			& A valid id. \\ \hline
+			\textbf{Output specification:} 			& The profile matching the id. \\ \hline
+			\textbf{Environmental needs:}			& A database is needed and the profile model. \\ \hline
+			\textbf{Special procedural requirements:}	& None. \\ \hline
+			\textbf{Intercase dependencies:}			& None. \\ \hline
 		\end{tabular}
 	\caption{Test Case for valid id handling of the \texttt{getProfileById()} method.}
 	\label{tab:TestCase_ValidIdHandling}
@@ -189,13 +189,13 @@ and Table \vref{tab:TestCase_ValidGuardianWithChildrenAssociatedHandling}.
 	\centering
 		\begin{tabular}{| p{4.5cm} | m{9cm} |}
 			\hline
-			Identifier: 					& TC00006 \\ \hline
-			Test item:						& Invalid id not present in the database handling of the \texttt{getProfileById()} method. \\ \hline
-			Input specification:			& An invalid id. \\ \hline
-			Output specification: 			& Null. \\ \hline
-			Environmental needs:			& A database is needed and the profile model. \\ \hline
-			Special procedural requirements	& None. \\ \hline
-			Intercase dependencies:			& None. \\ \hline
+			\textbf{Identifier:} 					& TC00006 \\ \hline
+			\textbf{Test item:}						& Invalid id not present in the database handling of the \texttt{getProfileById()} method. \\ \hline
+			\textbf{Input specification:}			& An invalid id. \\ \hline
+			\textbf{Output specification:} 			& Null. \\ \hline
+			\textbf{Environmental needs:}			& A database is needed and the profile model. \\ \hline
+			\textbf{Special procedural requirements:}	& None. \\ \hline
+			\textbf{Intercase dependencies:}			& None. \\ \hline
 		\end{tabular}
 	\caption{Test Case for invalid id handling of the \texttt{getProfileById()} method.}
 	\label{tab:TestCase_InvalidIdHandling}
@@ -205,13 +205,13 @@ and Table \vref{tab:TestCase_ValidGuardianWithChildrenAssociatedHandling}.
 	\centering
 		\begin{tabular}{| p{4.5cm} | m{9cm} |}
 			\hline
-			Identifier: 					& TC00007 \\ \hline
-			Test item:						& Negative id handling of the \texttt{getProfileById()} method. \\ \hline
-			Input specification:			& A negative id. \\ \hline
-			Output specification: 			& Null. \\ \hline
-			Environmental needs:			& A database is needed and the profile model. \\ \hline
-			Special procedural requirements	& None. \\ \hline
-			Intercase dependencies:			& None. \\ \hline
+			\textbf{Identifier:} 					& TC00007 \\ \hline
+			\textbf{Test item:}						& Negative id handling of the \texttt{getProfileById()} method. \\ \hline
+			\textbf{Input specification:}			& A negative id. \\ \hline
+			\textbf{Output specification:} 			& Null. \\ \hline
+			\textbf{Environmental needs:}			& A database is needed and the profile model. \\ \hline
+			\textbf{Special procedural requirements:}	& None. \\ \hline
+			\textbf{Intercase dependencies:}			& None. \\ \hline
 		\end{tabular}
 	\caption{Test Case for negative id handling of the \texttt{getProfileById()} method.}
 	\label{tab:TestCase_NegativeIdHandling}
@@ -221,13 +221,13 @@ and Table \vref{tab:TestCase_ValidGuardianWithChildrenAssociatedHandling}.
 	\centering
 		\begin{tabular}{| p{4.5cm} | m{9cm} |}
 			\hline
-			Identifier: 					& TC00008 \\ \hline
-			Test item:						& Valid guardian with children associated handling of the \texttt{getChildrenByGuardian()} method. \\ \hline
-			Input specification:			& A valid guardian. \\ \hline
-			Output specification: 			& A list of associated children. \\ \hline
-			Environmental needs:			& A database is needed and the profile model. \\ \hline
-			Special procedural requirements	& None. \\ \hline
-			Intercase dependencies:			& None. \\ \hline
+			\textbf{Identifier:} 					& TC00008 \\ \hline
+			\textbf{Test item:}						& Valid guardian with children associated handling of the \texttt{getChildrenByGuardian()} method. \\ \hline
+			\textbf{Input specification:}			& A valid guardian. \\ \hline
+			\textbf{Output specification:} 			& A list of associated children. \\ \hline
+			\textbf{Environmental needs:}			& A database is needed and the profile model. \\ \hline
+			\textbf{Special procedural requirements:}	& None. \\ \hline
+			\textbf{Intercase dependencies:}			& None. \\ \hline
 		\end{tabular}
 	\caption{Test Case for valid guardian with children associated handling of the \texttt{getChildrenByGuardian()} method.}
 	\label{tab:TestCase_ValidGuardianWithChildrenAssociatedHandling}
