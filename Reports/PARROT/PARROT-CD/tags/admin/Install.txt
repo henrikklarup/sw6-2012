@@ -1,0 +1,15 @@
+Oasis Setup-Guide
+
+Oasis Local Database
+
+The Oasis Local Database is a stand-alone database which can be used by applications that implement the Oasis Library. Since the Oasis Local Database is stand-alone it has no dependencies and can be installed by running the appropriate apk file.
+
+Oasis Library
+
+The Oasis Library has no dependecies but when used it needs a present installation of the Oasis Local Database to function correctly. All applications for the GIRAF platform can use the library since there are no special dependencies. 
+
+In order to use the library, it must first be imported into the working project (Import guide to eclipse could be supplied here). When it has been imported it is ready for use. The library has a single point of access through a helper class. This helper contains several helpers that are used to perform different query actions on the local database. The different helpers yields access to different tables in the database; e.g. the profilesHelper provides methods for manipulating the profiles table.
+
+Oasis App
+
+The Oasis App is a part of the GIRAF platform and therefore it uses the Oasis Library to manipulate data in the database. The Oasis App can be installed with an apk file on will operate if the Oasis Local Database is installed. The Oasis App will even work as a stand-alone application without the GIRAF platform though the Oasis Local Database is always needed.
