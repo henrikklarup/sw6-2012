@@ -9,7 +9,7 @@ Writing the Pictogram class so that it includes functionality for playing its as
 \subsection*{Execution}
 To use the sound of a pictogram, the application needs to include an audio player so that the sound can be played. Fortunately for the development team, the group who previously worked on the project have already written a functional audio player, which have been easily included in the PARROT application.\newline
 In PARROT, the playing of sounds is handled in two different places in cooperation, the Pictogram class (see Source Code \ref{pictoplay}) and the AudioPlayer class (see Source Code \ref{audioplay}).\newline
-The Pictogram class handles the data, and starts up the AudioPlayer wheneven it is needed.\newline
+The Pictogram class handles the data, and starts up the AudioPlayer wheneven it is needed.
 
 %Replace the with a code box instead?
 \begin{source}[{pictoplay}]{The play methods from the Pictogram class}{}
@@ -49,7 +49,7 @@ This method checks if the pictogram has a word, and if the path of that word cor
 If this is correct, it will call the \textbf{playItem} with its path as the input.\newline 
 The \textbf{playItem} then starts a new thread in which it makes the AudioPlayer play the corresponding sound. 
 The reason for starting a new thread is that the user interface would become unresponsive while the sound was playing otherwise.\newline
-The actual functionality that plays the sound is found in the AudioPlayer class, more specifically  in the static \textbf{play} method.\newline
+The actual functionality that plays the sound is found in the AudioPlayer class, more specifically  in the static \textbf{play} method.
 
 \begin{source}[{audioplay}]{The play method from the AudioPlayer class}
 	public static void play(String path, final OnCompletionListener listener)
@@ -76,7 +76,7 @@ The actual functionality that plays the sound is found in the AudioPlayer class,
 	}
 \end{source}
 
-What happens here is that the internal MediaPlayer object (a native Android class) is reset, fed with data, and prepared for playing the sound. The MediaPlayer object is then started with the \textbf{start} method, which causes it to play the sound. If an error occurs, it will be caught, no sound will be played, and the error will be written to the log.\newline
+What happens here is that the internal MediaPlayer object (a native Android class) is reset, fed with data, and prepared for playing the sound. The MediaPlayer object is then started with the \textbf{start} method, which causes it to play the sound. If an error occurs, it will be caught, no sound will be played, and the error will be written to the log.
 
 \subsection*{Result}
 The PARROT application can play sounds for its pictograms as long as they have associated sound files, and will just ignore the request if a pictogram does not have any sound.
@@ -86,5 +86,4 @@ At the current state of the program, the only place in which the functionality f
 Currently, the pictograms in the system only have a word-sound associated with them, rather than a sound effect. As such, a new idea will be needed instead of a simple click if both a sound and a word should be able to be played.
 
 \subsection*{Further Reading}
-
 For further information about the AudioPlayer class see last year's project \cite{digipecs}.

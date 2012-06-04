@@ -19,7 +19,6 @@ In order to determine what to show in a GridView, an adapter is needed. Therefor
 In Source Code \ref{gridviewm} you can see the getView Method. Its functionality is to return a view for every index in a GridView.
 These views are the image and text that you see in the application.\\
 
-
 \begin{source}[{gridviewm}]{The GridView method}
 	public View getView(int position, View convertView, ViewGroup parent) 
 	{
@@ -76,8 +75,7 @@ It retrieves information from resources and converts it to Bitmaps if the pictog
 				bitmap = BitmapFactory.decodeFile(imagePath);
 			}
 		}
-		return bitmap;
-	
+		return bitmap;	
 	}
 \end{source}
 
@@ -85,7 +83,6 @@ It retrieves information from resources and converts it to Bitmaps if the pictog
 \subsection*{Result}
 The result of this is that we are able to use our adapter to show pictograms in GridViews wherever we need them.
 By storing the bitmap, we can change between views much faster than we could otherwise.
-
 
 \subsection*{Notes}
 The input view ``convertView'' in the getView method is an leftover from a earlier iteration of the method. It no longer serves a purpose but ``BaseAdapter'' requires that the function exists with its current inputs.\\
