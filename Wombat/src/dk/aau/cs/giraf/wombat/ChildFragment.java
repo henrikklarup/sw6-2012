@@ -24,7 +24,6 @@ public class ChildFragment extends android.app.ListFragment {
 
 	@Override
 	public void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		loadChildren();
 		int i = 0;
