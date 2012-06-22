@@ -1,0 +1,6 @@
+Groups and their names:
+Group 1 = PARROT
+Group 2 = Timer/WOMBAT
+Group 3 = Admin/Oasis
+Group 4 = Server/Savannah
+Group 5 = Launcher
