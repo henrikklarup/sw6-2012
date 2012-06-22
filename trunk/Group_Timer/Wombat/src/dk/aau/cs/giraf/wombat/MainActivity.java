@@ -6,8 +6,11 @@ import android.app.Activity;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import dk.aau.cs.giraf.TimerLib.Art;
+import dk.aau.cs.giraf.TimerLib.Child;
 import dk.aau.cs.giraf.TimerLib.Guardian;
+import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
 public class MainActivity extends Activity {
 	Guardian guard = null;
@@ -19,6 +22,7 @@ public class MainActivity extends Activity {
 		long childId;
 		int color;	
 
+		/* Get the data sent from the launcher (if there is any) */
 		Bundle extras = getIntent().getExtras();
         if (extras != null) {        	
         	guardianId = extras.getLong("currentGuardianID");
@@ -32,6 +36,7 @@ public class MainActivity extends Activity {
         
         ArrayList<Art> artList = new ArrayList<Art>();
         
+        /* Insert hard coded pictograms */
         Art p_done = new Art(R.drawable.p_done,"Færdig", 0);
 		Art p_skema = new Art(R.drawable.p_gaa_til_skema,"Gå til skema", 1);
 		Art p_taxa = new Art(R.drawable.p_gaa_til_taxa,"Gå til taxa", 2);
@@ -42,8 +47,8 @@ public class MainActivity extends Activity {
 		artList.add(p_taxa);
 		artList.add(p_ryd_op);
 
-    	guard = Guardian.getInstance(childId, guardianId, getApplicationContext(), artList);
-    	
+		/* Initialize the guardian object */
+    	guard = Guardian.getInstance(childId, guardianId, getApplicationContext(), artList);    	
     	guard.backgroundColor = color;
     	
 		// Set content view according to main, which implements two fragments
@@ -54,6 +59,9 @@ public class MainActivity extends Activity {
 		findViewById(R.id.mainLayout).setBackgroundDrawable(d);
 	}
 	
+	/**
+	 * Clear everything in case the user is going to log out
+	 */
 	public void onBackPressed() {
 		guard.reset();
 		finish();
