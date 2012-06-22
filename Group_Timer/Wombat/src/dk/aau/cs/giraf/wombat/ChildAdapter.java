@@ -31,15 +31,20 @@ public class ChildAdapter extends ArrayAdapter<Child> {
 					Context.LAYOUT_INFLATER_SERVICE);
 			v = li.inflate(R.layout.profile_list, null);
 		}
-		// FIXME: Insert pictures from admin here
+		// TODO: Insert pictures from admin
 		Child c = items.get(position);
 		if (c != null) {
+			/* Find all the views */
 			ImageView iv = (ImageView) v.findViewById(R.id.profilePic);
 			TextView tv = (TextView) v.findViewById(R.id.profileName);
 
+			/* Set the picture */
 			if (iv != null) {
+				//TODO: Insert pictures here
 				iv.setImageResource(R.drawable.default_profile);
 			}
+			
+			/* If this is either last used or predefined, change the name */
 			if (tv != null) {
 				if (c.name == "Last Used") {
 					tv.setText(R.string.last_used);
@@ -52,6 +57,7 @@ public class ChildAdapter extends ArrayAdapter<Child> {
 
 		}
 		
+			/* Is this profile selected, then highlight */
 			if(c.getProfileId() == guard.profileID){
 				v.setBackgroundResource(R.drawable.list_selected);
 				guard.profileFirstClick = true;
