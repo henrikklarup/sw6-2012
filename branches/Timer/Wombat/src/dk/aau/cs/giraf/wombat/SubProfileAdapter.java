@@ -31,11 +31,13 @@ public class SubProfileAdapter extends ArrayAdapter<SubProfile> {
 		}
 		SubProfile sp = items.get(position);
 		if( sp != null ){
+			/* Find all the views */
 			ImageView iv = (ImageView)v.findViewById(R.id.subProfilePic);
 			ImageView ivBG = (ImageView)v.findViewById(R.id.subProfilePicBackground);
 			TextView tvName = (TextView)v.findViewById(R.id.subProfileName);
 			TextView tvDesc = (TextView)v.findViewById(R.id.subProfileDesc);
 			
+			/* Add a picture corresponding to the content */
 			if(iv != null){
 				switch(sp.formType()){
 				case Hourglass:
@@ -60,15 +62,19 @@ public class SubProfileAdapter extends ArrayAdapter<SubProfile> {
 				ivBG.setBackgroundColor(sp.timeLeftColor);
 				
 			}
+			
+			/* Set the name and description */
 			if(tvName != null){
 				tvName.setText(sp.name);
-				tvName.setText("id: " + sp.getId() + " db id: " + sp.getDB_id());
+//				tvName.setText("id: " + sp.getId() + " db id: " + sp.getDB_id());
 			}
 			if(tvDesc != null){
 				tvDesc.setText(sp.desc);
 			}
 			
 		}
+		
+		/* Highlight this profile if it is the chosen one*/
 		if(sp.getId() == guard.subProfileID){
 			v.setBackgroundResource(R.drawable.list_selected);
 			guard.subProfileFirstClick = true;
