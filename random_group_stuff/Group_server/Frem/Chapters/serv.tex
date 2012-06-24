@@ -7,9 +7,27 @@
 \end{frame}
 
 \section{- Solution}
-\begin{frame}{Input Handling}
+\begin{frame}[fragile]{Input Handling}
 	\begin{block}{Transmissions}
-		Random stuff !!!
+		\begin{lstlisting}[keywordstyle=\color{black}]
+			Ping: TYPE[int]PING[size]="randomBytes"
+			 int  = int, CRUD value
+			 size = int, how many random bytes
+			 
+			Request: TYPE[int1]MXML[length,int2]="xmlData"[ACCEPT]
+			 int1    = int, CRUD value
+			 length  = int, length of xmlData
+			 int2    = boolean, more files comming ? False for Request
+			 
+			COMMIT: TYPE[int1]MXML[length,int2]="xmlData"
+			            FILE[length2,name.ext,int3]="fileData"[ACCEPT]
+			 int1     = int, CRUD value
+			 length   = int, length of xmlData
+			 int2     = boolean, any files comming ? False if no file(s)
+			 length2  = long, size of file
+			 name.ext = String, name and extension of file
+			 int3     = boolean, more files comming ?
+		\end{lstlisting}
 	\end{block}
 \end{frame}
 
