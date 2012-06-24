@@ -11,7 +11,11 @@ import android.graphics.Shader;
 import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
-
+/**
+ * This class is used to generate a view for hourglass
+ * Layer: Draw
+ *
+ */
 public class DrawHourglass extends View {
 	SubProfile sp;
 

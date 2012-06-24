@@ -13,7 +13,11 @@ import android.graphics.Shader;
 import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
-
+/**
+ * This class is used to generate a view for Digital watch
+ * Layer: Draw
+ *
+ */
 public class DrawDigital extends View {
 	SubProfile sp;
 

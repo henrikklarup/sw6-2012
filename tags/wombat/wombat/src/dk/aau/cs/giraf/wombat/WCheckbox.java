@@ -4,7 +4,11 @@ import android.content.Context;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
-
+/**
+ * This class is a custom button which is used for the gradient button
+ * Layer: Layout
+ *
+ */
 public class WCheckbox extends Button{
 
 	private boolean mChecked;

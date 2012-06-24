@@ -40,7 +40,11 @@ import dk.aau.cs.giraf.TimerLib.SubProfile;
 import dk.aau.cs.giraf.TimerLib.Timer;
 import dk.aau.cs.giraf.TimerLib.formFactor;
 import dk.aau.cs.giraf.wombat.drawlib.DrawLibActivity;
-
+/**
+ * This class is a Fragment which which is used to customize SubProfiles
+ * Layer: Layout
+ *
+ */
 public class CustomizeFragment extends Fragment {
 	private SubProfile preSubP;
 	private SubProfile currSubP;

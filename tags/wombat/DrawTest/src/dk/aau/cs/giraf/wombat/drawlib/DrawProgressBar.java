@@ -11,7 +11,11 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.view.View;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
-
+/**
+ * This class is used to generate a view for progressbar
+ * Layer: Draw
+ *
+ */
 public class DrawProgressBar extends View {
 	SubProfile sp;
 
