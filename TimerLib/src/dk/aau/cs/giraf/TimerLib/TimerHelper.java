@@ -1,27 +1,41 @@
 package dk.aau.cs.giraf.TimerLib;
 
+import java.util.ArrayList;
+
 import android.content.Context;
 
+/**
+ * 
+ * This class represent misc methods for the TimerLib, which doesnt into any other classes.
+ * 
+ * Layer: Tools
+ *
+ */
 
 public class TimerHelper {
 
+	/**
+	 * Default constructor
+	 */
 	public TimerHelper(){
 	}
-	
+	//Not used
 	public void init()
 	{
 		//Admin call
 		populateList();
 	}
-	
+	//Not used
 	public void populateList(){
 		
 	}
-	
+	//Not used
 	public void load(Context c){
-
+				
 	}
-
+	/**
+	 * This method loads the predefined SubProfiles
+	 */
 	public void loadPredef(){
 		
 		long profileId = -2;
@@ -113,6 +127,9 @@ public class TimerHelper {
 		guard.predefined().add(TimeTimer30min);
 	}
 	
+	/**
+	 * This method loads test children
+	 */
 	public void LoadTestDatas(){
 		//Data
 		

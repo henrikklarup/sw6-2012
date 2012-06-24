@@ -1,5 +1,11 @@
 package dk.aau.cs.giraf.TimerLib;
-
+/**
+ * 
+ * This class represent a digital clock
+ * 
+ * Layer: Tools
+ *
+ */
 public class DigitalClock extends SubProfile {
 /**
  * Default constructor

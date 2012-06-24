@@ -9,7 +9,14 @@ import android.util.Log;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.App;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
-
+/**
+ * 
+ * This class represent either; educator, parent, or similar.
+ * This class uses the singleton pattern, to enforce there only exists one object, and you always work with this one object.
+ * This class contains all "super" methods e.g. remove and save.
+ * Layer: CRUD
+ *
+ */
 public class Guardian {
 	
 	private static Guardian _instance = null;
@@ -52,16 +59,26 @@ public class Guardian {
 	public int backgroundColor;
 	
 	private ArrayList<formFactor> _mode = null;
-	
+	/**
+	 * Generate id for the art class
+	 * @return int id
+	 */
 	int getArtId(){
 		this._artId++;
 		return this._artId;
 	}
 	
+	/**
+	 * Used to reset the guardian class, if the guardian object need to represent another educator, parent, etc.
+	 */
 	public void reset(){
 		_instance = null;
 	}
-	
+	/**
+	 * ArrayList with three formFactors, Timer, SingleImg, SplitImg.
+	 * This is used for the ModeAdapter in WOMBAT
+	 * @return
+	 */
 	public ArrayList<formFactor> getMode(){
 		if(_mode == null){
 			_mode = new ArrayList<formFactor>();
@@ -75,7 +92,7 @@ public class Guardian {
 	}
 	
 	/**
-	 * Default constructor for Guardian
+	 * Default constructor for Guardian, may only be used within the guardian class.
 	 */
 	private Guardian(){	
 	}
@@ -130,13 +147,17 @@ public class Guardian {
 			return _instance;
 	}
 	
+	/**
+	 * Used to retrieve the guardian object
+	 * @return Guardian object
+	 */
 	public static Guardian getInstance(){
 			return _instance;
 	}
 	
 	/**
 	 * Find the app specified by the mainActivity, if non is avalible a default one is created
-	 * @return
+	 * @return app id
 	 */
 	private long findAppId() {
 		// Find the app which has the same package name as this one
@@ -159,7 +180,7 @@ public class Guardian {
 	
 	/**
 	 * Search for the guard specified by the mainActivity, if non is existing a default one is created
-	 * @return
+	 * @return guardian id
 	 */
 	private long findGuardianId() {
 		
@@ -192,7 +213,9 @@ public class Guardian {
 		return m_oGuard.getId();
 	}
 	
-	
+	/**
+	 * Used to generate default children, if non are found in the database.
+	 */
 	private void createChildren() {		
 		if(oHelp.profilesHelper.getChildrenByGuardian(m_oGuard).isEmpty()){
 			List<String> names = new ArrayList<String>();
@@ -418,6 +441,11 @@ public class Guardian {
 		return _sortedList;
 	}
 
+	/**
+	 * Used to delete a certains SubProfile from the OasisLocalDatabase
+	 * @param c The child who contains the SubProfile
+	 * @param subProfile The SubProfile which you want to delete
+	 */
 	public void delete(Child c, SubProfile subProfile) {
 		c.SubProfiles().remove(subProfile);
 		crud.removeSubprofileFromProfileId(subProfile, c.getProfileId());

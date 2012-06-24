@@ -1,5 +1,11 @@
 package dk.aau.cs.giraf.TimerLib;
-
+/**
+ * 
+ * This class represent an Hourglass
+ * 
+ * Layer: Tools
+ *
+ */
 
 public class Hourglass extends SubProfile {
 	

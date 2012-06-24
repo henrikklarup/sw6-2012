@@ -1,5 +1,11 @@
 package dk.aau.cs.giraf.TimerLib;
-
+/**
+ * 
+ * The art class handles pictograms and their captions. 
+ * If one was to implement sound, this would be the class to extent.
+ *
+ * Layer: Tools
+ */
 public class Art {
 	
 	private int _path;

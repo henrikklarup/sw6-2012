@@ -1,8 +1,14 @@
 package dk.aau.cs.giraf.TimerLib;
-
+/**
+ * 
+ * This class represent a ProgressBar
+ * 
+ * Layer: Tools
+ *
+ */
 
 public class ProgressBar extends SubProfile {
-	
+	//_direction is not used
 	public String _direction;
 	
 	public ProgressBar(String name, String description, int bgcolor, int timeLeftColor, int timeSpentColor, int frameColor, int totalTime, boolean changeColor){
