@@ -12,7 +12,11 @@ import android.widget.Toast;
 import dk.aau.cs.giraf.TimerLib.Guardian;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
 import dk.aau.cs.giraf.oasis.lib.Helper;
-
+/**
+ * This class is a ListFragment which fit the SubProfile object
+ * Layer: Layout
+ *
+ */
 public class SubProfileFragment extends android.app.ListFragment {
 	Guardian guard = Guardian.getInstance();
 	ListView thisListView;

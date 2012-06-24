@@ -11,7 +11,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import dk.aau.cs.giraf.TimerLib.Child;
 import dk.aau.cs.giraf.TimerLib.Guardian;
-
+/**
+ * This class is an ArrayAdapter which fit the Child Object
+ * Layer: Layout
+ *
+ */
 public class ChildAdapter extends ArrayAdapter<Child> {
 
 	private ArrayList<Child> items;

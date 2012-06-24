@@ -11,7 +11,11 @@ import dk.aau.cs.giraf.TimerLib.Art;
 import dk.aau.cs.giraf.TimerLib.Child;
 import dk.aau.cs.giraf.TimerLib.Guardian;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
-
+/**
+ * This class is an MainActivity used to initiate WOMBAT
+ * Layer: Main
+ *
+ */
 public class MainActivity extends Activity {
 	Guardian guard = null;
 	@Override

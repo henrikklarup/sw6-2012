@@ -18,7 +18,11 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import dk.aau.cs.giraf.TimerLib.Guardian;
-
+/**
+ * This class is a custom dialog which is used for all dialogs in WOMBAT
+ * Layer: Layout
+ *
+ */
 public class WDialog extends Dialog{
 	
 	private int layoutId = 1337;

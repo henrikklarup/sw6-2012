@@ -14,7 +14,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import dk.aau.cs.giraf.TimerLib.Guardian;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
-
+/**
+ * This class is the activity which initiate the timer
+ * Layer: Draw
+ *
+ */
 
 public class DrawLibActivity extends Activity {
 

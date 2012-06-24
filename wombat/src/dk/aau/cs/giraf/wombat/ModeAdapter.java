@@ -10,7 +10,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import dk.aau.cs.giraf.TimerLib.formFactor;
-
+/**
+ * This class is an ArrayAdapter which is used for the Attachment function
+ * Layer: Layout
+ *
+ */
 public class ModeAdapter extends ArrayAdapter<formFactor> {
 
 	private ArrayList<formFactor> items;

@@ -10,7 +10,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import dk.aau.cs.giraf.TimerLib.Art;
-
+/**
+ * This class is an ArrayAdapter which fit the Art Object
+ * Layer: Layout
+ *
+ */
 public class ArtAdapter extends ArrayAdapter<Art> {
 
 	private ArrayList<Art> items;
@@ -32,12 +36,13 @@ public class ArtAdapter extends ArrayAdapter<Art> {
 		// TODO: Pictures
 		Art c = items.get(position);
 		if (c != null) {
+			//Create the views
 			ImageView iv = (ImageView) v.findViewById(R.id.profilePic);
 			TextView tv = (TextView) v.findViewById(R.id.profileName);
-
+			//Set pictogram
 			if (iv != null) {
 				iv.setImageResource(c.getPath());
-			}
+			}//Set the caption
 			if (tv != null) {
 				tv.setText(c.getName());
 			}

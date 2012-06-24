@@ -16,7 +16,11 @@ import dk.aau.cs.giraf.TimerLib.Attachment;
 import dk.aau.cs.giraf.TimerLib.Guardian;
 import dk.aau.cs.giraf.TimerLib.SplitImg;
 import dk.aau.cs.giraf.TimerLib.SubProfile;
-
+/**
+ * This class is the activity which creates the done screen view.
+ * Layer: Draw
+ *
+ */
 public class DoneScreenActivity extends Activity {
 	/** Called when the activity is first created. */
 	private final String imageInSD = "/sdcard/Pictures/faerdig.png";
@@ -41,7 +45,9 @@ public class DoneScreenActivity extends Activity {
 		ImageView i2 = null;
 		SubProfile sub = guard.getSubProfile();
 
+		//Check if there is any done screen attachment
 		if(sub.getDoneArt() != null){
+			//Check which form it is and generate a view according to it
 			switch(sub.getDoneArt().getForm()){
 			case SingleImg:
 				i = new ImageView(this);
@@ -63,6 +69,7 @@ public class DoneScreenActivity extends Activity {
 				break;
 			}
 		} else {
+			//If there are no done screen attachment, it will use default
         	i = new ImageView(this);
 			i.setImageResource(guard.ArtList.get(0).getPath());
 			i.setBackgroundColor(000);
