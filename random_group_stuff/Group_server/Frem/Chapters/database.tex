@@ -34,12 +34,6 @@
 		\includegraphics{Img/DatabaseQR.png}
 \end{figure}
 
-\small \textcolor{dgreen}{CREATE  TABLE} \textcolor{blue}{'AuthUsers'} ( \\
-\small \textcolor{blue}{'certificate'} \textcolor{dgreen}{VARCHAR(512) NOT NULL} \\
-\small .. \\
-\small \textcolor{dgreen}{PRIMARY KEY} (\textcolor{blue}{'certificate'}), \\
-\small \textcolor{dgreen}{UNIQUE INDEX} \textcolor{blue}{'idUser\_UNIQUE'} (\textcolor{blue}{'idUser'} \textcolor{dgreen}{ASC}));
-
     \end{block}
 \end{frame}
 
@@ -53,4 +47,104 @@
 	\label{fig:DatabaseDept}
 \end{figure}
    \end{block}
+\end{frame}
+
+\begin{frame}{Database - Requirements}
+    \begin{block}{Solution}
+					All users must be linked to at least one department
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1.00\textwidth]{Img/DatabaseProfileDeptRelation.png}
+\end{figure}
+
+   \end{block}
+\end{frame}
+
+\begin{frame}{Database - Requirements}
+    \begin{block}{Solution}
+					All guardians must be able to be linked to at least one child\\
+					All parents must be able to be linked to at least one child
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1.00\textwidth]{Img/DatabaseProfileRoleLink.png}
+\end{figure}
+
+   \end{block}
+\end{frame}
+
+
+\begin{frame}{Database - Requirements}
+    \begin{block}{Solution}
+	All users must be able to access their selected apps
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1.00\textwidth]{Img/DatabaseProfileAppRelation.png}
+\end{figure}
+
+   \end{block}
+\end{frame}
+
+\begin{frame}{Database - Requirements}
+    \begin{block}{Solution}
+	All users must be able to access their own pictures, and all public pictures
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=1.00\textwidth]{Img/DatabaseProfileMediaRelation.png}
+	\label{fig:DatabaseProfileMediaRelation}
+\end{figure}
+
+   \end{block}
+\end{frame}
+
+\begin{frame}{Database - Requirements}
+    \begin{block}{Solution}
+	All pictures needs to be able to be linked with tags.
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=1.00\textwidth]{Img/DatabaseMediaTagRelation.png}
+	\label{fig:DatabaseMediaTagRelation}
+\end{figure}
+
+   \end{block}
+\end{frame}
+
+\begin{frame}{Database - Requirements}
+    \begin{block}{Solution}
+	All pictures must be able to be linked with audio and vice versa
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=1.00\textwidth]{Img/DatabaseMediaMediaRelation.png}
+	\label{fig:DatabaseMediaMediaRelation}
+\end{figure}
+
+   \end{block}
+\end{frame}
+
+\begin{frame}{Database - Requirements}
+    \begin{block}{Solution}
+	All department must be able to have a subdepartment
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics{Img/DatabaseDeptDeptRelation.png}
+	\label{fig:DatabaseDeptDeptRelation}
+\end{figure}
+
+   \end{block}
+\end{frame}
+
+\section{ - Final design}
+\begin{frame}{Database - Final design}
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=1.00\textwidth]{Img/DiaDesign.png}
+	\label{fig:DiaDesign}
+\end{figure}
+
+
 \end{frame}
