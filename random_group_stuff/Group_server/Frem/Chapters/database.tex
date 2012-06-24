@@ -23,3 +23,34 @@
 				\end{itemize}
     \end{block}
 \end{frame}
+
+\section{ - Solutions}
+\begin{frame}{Database - Requirements}
+    \begin{block}{Solution}
+					All departments must be able to access all public pictures
+					
+\begin{figure}[h]
+	\centering
+		\includegraphics{Img/DatabaseQR.png}
+\end{figure}
+
+\small \textcolor{dgreen}{CREATE  TABLE} \textcolor{blue}{'AuthUsers'} ( \\
+\small \textcolor{blue}{'certificate'} \textcolor{dgreen}{VARCHAR(512) NOT NULL} \\
+\small .. \\
+\small \textcolor{dgreen}{PRIMARY KEY} (\textcolor{blue}{'certificate'}), \\
+\small \textcolor{dgreen}{UNIQUE INDEX} \textcolor{blue}{'idUser\_UNIQUE'} (\textcolor{blue}{'idUser'} \textcolor{dgreen}{ASC}));
+
+    \end{block}
+\end{frame}
+
+\begin{frame}{Database - Requirements}
+    \begin{block}{Solution}
+					All departments must be able to login
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1.00\textwidth]{Img/DatabaseDept.png}
+	\label{fig:DatabaseDept}
+\end{figure}
+   \end{block}
+\end{frame}
