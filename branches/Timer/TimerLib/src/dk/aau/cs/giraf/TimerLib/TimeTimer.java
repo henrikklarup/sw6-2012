@@ -1,4 +1,11 @@
 package dk.aau.cs.giraf.TimerLib;
+/**
+ * 
+ * This class represent a TimeTimer
+ * 
+ * Layer: Tools
+ *
+ */
 
 
 public class TimeTimer extends SubProfile {

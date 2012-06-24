@@ -6,6 +6,7 @@ import java.util.HashMap;
  * Attachment is a super class, and is used for attaching an extra timer, a pictogram next to a timer, or 
  * replacing the default pictogram on done screen
  *
+ * Layer: Tools 
  */
 public class Attachment {
 	

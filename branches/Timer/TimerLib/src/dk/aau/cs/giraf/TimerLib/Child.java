@@ -2,7 +2,12 @@ package dk.aau.cs.giraf.TimerLib;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
+/**
+ * 
+ * The Child class is used for making profiles such as Children, last used, predefined which is currently in WOMBAT
+ *
+ * Layer: Tools
+ */
 public class Child implements Comparable<Child>{
 	private ArrayList<SubProfile> _profileList;
 	Guardian guard = Guardian.getInstance();
@@ -21,22 +26,36 @@ public class Child implements Comparable<Child>{
 		this._profileList = new ArrayList<SubProfile>();
 		this.name = name;
 	}
-	
+	/**
+	 * Used to store the OasisLocalDatabase id for later use.
+	 * This id is used to save the SubProfiles
+	 * @param id id from the OasisLocalDatabase
+	 */
 	void setSubProfileId(long id){
 		this._subProfileId = id;
 	}
-	
+	/**
+	 * Generate a new id for the OasisLocalDatabase
+	 * This id is used to save the SubProfiles
+	 * @return id
+	 */
 	long getNewId(){
 		this._subProfileId++;
 		return this._subProfileId;
 	}
-	
+	/**
+	 * OasisLocalDatabase id for the child
+	 * @param id OasisLocalDatabase id
+	 */
 	void setProfileId(long id){
 		if(this._ProfileId == -2){
 			this._ProfileId = id;
 		}
 	}
-	
+	/**
+	 * Used to retrieve the OasisLocalDatabase id for this child
+	 * @return OasisLocalDatabase child id
+	 */
 	public long getProfileId(){
 		return this._ProfileId;
 	}
@@ -153,6 +172,10 @@ public class Child implements Comparable<Child>{
 	        return (lastCmp != 0 ? lastCmp : name.compareTo(n.name));
 	    }
 
+	    /**
+	     * Used to remove a SubProfile from a child
+	     * @param p The SubProfile you wish to remove
+	     */
 		public void remove(SubProfile p) {
 			//This is the propper way of removing
 			guard.delete(this, p);
