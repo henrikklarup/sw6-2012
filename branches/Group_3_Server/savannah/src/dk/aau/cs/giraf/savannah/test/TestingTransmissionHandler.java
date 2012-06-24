@@ -108,6 +108,14 @@ public class TestingTransmissionHandler {
 		String tempp = "XMLSchema.xsd";
 		String result = fileName(tempp);
 		System.out.println(fileName(tempp));
+		
+		System.out.println("MAX INT: " + Integer.MAX_VALUE);
+		String test = "" + Integer.MAX_VALUE;
+		System.out.println("Length: " + test.length());
+		
+		System.out.println("MAX LONG: " + Long.MAX_VALUE);
+		test = "" + Long.MAX_VALUE;
+		System.out.println("Length: " + test.length());
 	}
 	public static byte[] messageToBytes(char[] c) {
 		byte[] buf = new byte[c.length];
