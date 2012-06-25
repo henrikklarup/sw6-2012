@@ -103,6 +103,7 @@
 	\begin{itemize}
 		\item Problem Definition
 		\item Krav
+		\item Valg af Database Model
 		\item Systemet
 		\item Local Db
 		\item Library
@@ -132,9 +133,26 @@
 			\item Profiler
 			\item Afdelinger
 			\item Medier
+			\item Tags
 			\item Apps
 		\end{itemize}
 	\end{itemize}
+\end{frame}
+
+\subsection{Valg af Database Model}
+
+\begin{frame}
+	\frametitle{Valg af Database Model}
+	\begin{figure}[!h]
+		\centering
+			\includegraphics[width=0.7\textwidth]{kunekstern}
+		\label{fig:DatabaseModel1}
+	\end{figure}
+	\begin{figure}[!h]
+		\centering
+			\includegraphics[width=0.7\textwidth]{localogekstern}
+		\label{fig:DatabaseModel2}
+	\end{figure}
 \end{frame}
 
 \subsection{Systemet}
@@ -151,12 +169,86 @@
 \subsection{Local Db}
 
 \begin{frame}
+	\frametitle{Profiler}
+	
+	\begin{figure}[!h]
+		\centering
+			\includegraphics[width=0.5\textwidth]{dbProfiler}
+		\label{fig:profiler}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Afdelinger}
+	
+	\begin{figure}[!h]
+		\centering
+			\includegraphics[width=0.5\textwidth]{dbAfdelinger}
+		\label{fig:Afdelinger}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Profiler/Afdelinger}
+	
+	\begin{figure}[!h]
+		\centering
+			\includegraphics[width=0.5\textwidth]{dbProfil-Afdeling}
+		\label{fig:ProfilerAfdelinger}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Certifikater}
+	
+	\begin{figure}[!h]
+		\centering
+			\includegraphics[width=0.5\textwidth]{dbCertificate}
+		\label{fig:Certifikater}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Applikationer}
+	
+	\begin{figure}[!h]
+		\centering
+			\includegraphics[width=0.5\textwidth]{dbApps}
+		\label{fig:Applikationer}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Medier}
+	
+	\begin{figure}[!h]
+		\centering
+			\includegraphics[width=0.5\textwidth]{dbMedia}
+		\label{fig:Medier}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Tags}
+	
+	\begin{figure}[!h]
+		\centering
+			\includegraphics[width=0.5\textwidth]{dbTags}
+		\label{fig:Tags}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
 	\frametitle{Local Db}
 	
 	\begin{itemize}
-		\item Offline adgang til data
-		\item Opfylder de stillede krav
-		\item Stand-alone app
+		\item Vedligeholder r\ae{}kker i tabellerne
+		\begin{itemize}
+			\item Opret
+			\item L\ae{}s
+			\item Modificer
+			\item Slet
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
@@ -169,6 +261,10 @@
 		\item Tilbyder hj\ae{}lpefunktioner
 		\item MVC struktur
 		\item Skal distribueres med hver app
+		\item Synkroniser med Savannah
+		\begin{itemize}
+			\item Ikke implementeret
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
